@@ -2,7 +2,7 @@
 name: Content Request
 about: Suggest new content or topics to add to the project
 title: "[CONTENT REQUEST] Title of the requested content"
-labels: content, enhancement
+labels: content, request
 assignees: ''
 
 ---
