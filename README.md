@@ -34,7 +34,7 @@ You’ll find everything you need to know about contributing, reporting issues, 
 
 We’ve also set up a **Discord server** where members of the community can discuss topics, share ideas, and collaborate in real time. Whether you want to ask a question, brainstorm new ideas, or just connect with others interested in cybersecurity, the Discord server is the place to be.
 
-**[Join our Discord](https://discord.gg/DWfu64dY)**
+**[Join our Discord](https://discord.gg/a9XwRKxdHf)**
 
 ## ✨ Let's Build Together!
 
@@ -45,6 +45,6 @@ This project thrives on the contributions of people like you. We invite you to:
 
 ## 📧 Contact
 
-If you have any questions, feel free to open an issue or reach out via the [Wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki) or our [Discord server](https://discord.gg/DWfu64dY).
+If you have any questions, feel free to open an issue or reach out via the [Wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki) or our [Discord server](https://discord.gg/a9XwRKxdHf).
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
