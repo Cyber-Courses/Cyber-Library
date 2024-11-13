@@ -1,0 +1,209 @@
+# macOS IPC - Inter Process Communication
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Inter Process Communication (IPC) on macOS is an essential aspect of any operating system. It refers to a set of methods allowing processes to communicate with each other and synchronize their actions. Processes can be independent or cooperating, with cooperating processes needing IPC to allow users to share data across different processes.
+> 
+
+### 🧐 Why ?
+
+> Understanding IPC on macOS is critical because it allows developers to create applications that can interact with each other in a secure and efficient manner. IPC mechanisms are designed to solve problems such as synchronization, shared memory, and message passing. These communication methods help in building robust and efficient software systems.
+> 
+
+### ⛏️ How ?
+
+> IPC on macOS can be implemented through various techniques such as pipes, named pipes, semaphores, message queues, shared memory, and sockets. For example, one can use pipes to create a communication channel between parent and child processes. Named pipes can be used for communication between unrelated processes. Semaphores can be used for synchronizing processes, and shared memory can be used for direct communication between processes.
+> 
+
+### ⏳ When ?
+
+> IPC has been an integral part of operating systems since their inception. Apple's macOS, being a Unix-based system, has been using IPC mechanisms from its early versions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of Inter-Process Communication (IPC) on macOS
+
+Inter-Process Communication (IPC) on macOS is a crucial feature that allows different software processes to communicate and coordinate with each other. At a technical level, macOS implements IPC through several mechanisms, each suited to different types of communication and coordination tasks.
+
+## IPC Mechanisms on macOS
+
+### Pipes
+
+Pipes provide a unidirectional communication method between two processes, allowing data to flow from the writing process to the reading process. This method is particularly useful for parent-child process communication where the parent process creates a child process and needs to send data to it or receive data from it.
+
+**Example:**
+
+```c
+int pipefd[2];
+pipe(pipefd);
+
+if (fork() == 0) {
+    // Child process
+    close(pipefd[1]); // Close unused write end
+    char buffer[100];
+    read(pipefd[0], buffer, 100);
+    printf("Received: %s\\n", buffer);
+    close(pipefd[0]);
+} else {
+    // Parent process
+    close(pipefd[0]); // Close unused read end
+    write(pipefd[1], "Hello, Child!", 13);
+    close(pipefd[1]);
+}
+
+```
+
+### Named Pipes (FIFOs)
+
+Named Pipes, also known as FIFOs (First In, First Out), function similarly to pipes but can facilitate communication between unrelated processes. They allow unrelated processes to communicate in a manner that the first message sent is the first message received.
+
+**Example:**
+
+1. **Create a named pipe:**
+
+```bash
+mkfifo /tmp/myPipe
+
+```
+
+1. **Write to the named pipe:**
+
+```bash
+echo "Hello, IPC!" > /tmp/myPipe
+
+```
+
+1. **Read from the named pipe:**
+
+```bash
+cat /tmp/myPipe
+
+```
+
+### Semaphores
+
+Semaphores are synchronization tools used to control access to a common resource by multiple processes. They help avoid inconsistencies and collisions that can occur when multiple processes access the same resource simultaneously.
+
+**Example:**
+
+```c
+#include <semaphore.h>
+
+sem_t sem;
+sem_init(&sem, 0, 1); // Initialize semaphore
+
+if (fork() == 0) {
+    // Child process
+    sem_wait(&sem); // Wait for semaphore
+    // Critical section
+    sem_post(&sem); // Signal semaphore
+} else {
+    // Parent process
+    sem_wait(&sem); // Wait for semaphore
+    // Critical section
+    sem_post(&sem); // Signal semaphore
+}
+
+```
+
+### Message Queues
+
+Message queues allow processes to exchange data in the form of messages. This mechanism is beneficial when there's a need to maintain the order of messages.
+
+**Example:**
+
+```c
+#include <sys/msg.h>
+#include <stdio.h>
+#include <string.h>
+
+struct message {
+    long msg_type;
+    char msg_text[100];
+};
+
+int main() {
+    key_t key = ftok("progfile", 65);
+    int msgid = msgget(key, 0666 | IPC_CREAT);
+    struct message msg;
+    msg.msg_type = 1;
+    strcpy(msg.msg_text, "Hello, IPC!");
+    msgsnd(msgid, &msg, sizeof(msg), 0);
+    msgrcv(msgid, &msg, sizeof(msg), 1, 0);
+    printf("Received: %s\\n", msg.msg_text);
+    msgctl(msgid, IPC_RMID, NULL);
+    return 0;
+}
+
+```
+
+### Shared Memory
+
+Shared memory allows multiple processes to access the same memory segment for direct communication, avoiding the need for context switching or data copying.
+
+**Example:**
+
+```c
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <stdio.h>
+
+int main() {
+    key_t key = ftok("shmfile", 65);
+    int shmid = shmget(key, 1024, 0666 | IPC_CREAT);
+    char *str = (char*) shmat(shmid, (void*)0, 0);
+    printf("Write Data: ");
+    gets(str);
+    printf("Data written in memory: %s\\n", str);
+    shmdt(str);
+    shmctl(shmid, IPC_RMID, NULL);
+    return 0;
+}
+
+```
+
+### Sockets
+
+Sockets provide network communication between processes running on different machines, facilitating data sharing over a network.
+
+**Example:**
+
+```c
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <string.h>
+#include <stdio.h>
+
+int main() {
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct sockaddr_in serverAddr;
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(7891);
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    connect(sockfd, (struct sockaddr *) &serverAddr, sizeof(serverAddr));
+    char buffer[1024];
+    strcpy(buffer, "Hello, Server!");
+    send(sockfd, buffer, strlen(buffer), 0);
+    recv(sockfd, buffer, 1024, 0);
+    printf("Received from server: %s\\n", buffer);
+    close(sockfd);
+    return 0;
+}
+
+```
+
+## Conclusion
+
+Each IPC method on macOS serves a unique purpose and is used based on the specific requirements of the communication between processes. Understanding these methods and their applications allows developers to design efficient and robust inter-process communication strategies, enhancing the performance and security of macOS applications.
+
+# 🖇️ Références
+
+---

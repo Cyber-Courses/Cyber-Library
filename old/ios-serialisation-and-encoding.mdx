@@ -1,0 +1,92 @@
+# iOS Serialisation and Encoding
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS serialization and encoding is a process that assists in converting complex data structures into a format that can be easily stored or transmitted and then reconstructed later. In the context of iOS development, serialization is crucial for data persistence, interprocess communication, and for sending data over a network.
+> 
+
+### 🧐 Why ?
+
+> Understanding iOS serialization and encoding is essential because it allows developers to save the state of their applications, share data between applications, or communicate with web services. It also plays an important role in ensuring the security of an application. Poorly implemented serialization can lead to several security issues such as information disclosure or data exfiltration.
+> 
+
+### ⛏️ How ?
+
+> iOS provides several ways to perform serialization and encoding. You can use 'NSCoding', a simple and efficient way to encode and decode data. 'NSKeyedArchiver', a concrete subclass of NSCoder, provides a way to encode objects (and scalar values) into an architecture-independent format that can be stored in a file. When it's time to retrieve this data, you can use 'NSKeyedUnarchiver' to decode the data. You can also use 'Codable', a type alias for the 'Decodable' and 'Encodable' protocols, introduced in Swift 4. This protocol can be used to save data to disk as well as to send and receive data from a server in JSON format.
+> 
+
+### ⏳ When ?
+
+> The use of serialization and encoding in iOS started with the introduction of the NSCoding protocol in iOS 2.0. The Codable protocol was introduced later in Swift 4 to simplify the process.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+iOS serialization and encoding processes are fundamental in managing data within iOS applications. These processes consist of transforming in-memory objects into a byte stream - a process known as serialization - and converting this byte stream back into in-memory objects, known as deserialization.
+
+This conversion allows for the state of an object to be saved in a storage medium like a file or database, or transmitted over a network to a different process or device - a critical aspect in scenarios such as data persistence, interprocess communication, or when sending and receiving data from a server.
+
+There are several methods provided by iOS for serialization and encoding. The 'NSCoding' protocol is a simple and efficient way to encode and decode data. 'NSKeyedArchiver', a concrete subclass of NSCoder, encodes objects and scalar values into an architecture-independent format. 'NSKeyedUnarchiver' is used to decode the data.
+
+Swift 4 introduced 'Codable', a type alias for the 'Decodable' and 'Encodable' protocols. This can be used to save data to disk and to send and receive data from a server in JSON format.
+
+Importantly, proper serialization and encoding are key to ensuring application security. Poorly implemented serialization can lead to security issues like information disclosure or data exfiltration. Therefore, it's crucial to implement proper error handling and validation during the deserialization process to prevent potential security issues.
+
+The use of serialization and encoding in iOS began with the introduction of the NSCoding protocol in iOS 2.0, and has since evolved with the introduction of the Codable protocol in Swift 4.
+
+Here's an example of using the `Codable` protocol for serialization and encoding in Swift:
+
+1. Define a `Person` struct that conforms to the `Codable` protocol:
+
+```swift
+struct Person: Codable {
+    var name: String
+    var age: Int
+}
+
+```
+
+1. Create an instance of `Person`:
+
+```swift
+let person = Person(name: "John Doe", age: 30)
+
+```
+
+1. Use `JSONEncoder` to encode the `Person` instance into JSON data:
+
+```swift
+let jsonEncoder = JSONEncoder()
+let jsonData = try jsonEncoder.encode(person)
+
+```
+
+At this point, `jsonData` is a `Data` object containing the JSON representation of the `Person` instance.
+
+1. You can then convert this `Data` object to a JSON string for easy readability:
+
+```swift
+let jsonString = String(data: jsonData, encoding: .utf8)
+
+```
+
+This will output a JSON string like `{"name":"John Doe","age":30}`.
+
+1. To decode the JSON data back into a `Person` instance, use `JSONDecoder`:
+
+```swift
+let jsonDecoder = JSONDecoder()
+let decodedPerson = try jsonDecoder.decode(Person.self, from: jsonData)
+
+```
+
+`decodedPerson` is now a `Person` instance with the same values as the original `person` instance.
+
+Remember, when dealing with the `try` keyword in Swift, you need to use a `do-catch` block to handle any thrown errors. This is part of the error handling process that can help prevent potential security issues.

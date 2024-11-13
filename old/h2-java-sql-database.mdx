@@ -1,0 +1,89 @@
+# H2 - Java SQL database
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> H2 is an open-source relational database management system written in Java. It can be embedded in Java applications or run in the client-server mode. The main features of H2 are that it is very fast, open source, JDBC API, small footprint: around 2 MB jar file size.
+> 
+
+### 🧐 Why ?
+
+> H2 database is important because it's a lightweight, efficient and feature-rich option for application developers who require a database system that can be embedded within the application itself. It's especially useful in scenarios where deploying and managing a separate, standalone database server might be overkill. The speed and small footprint of H2 makes it a good choice for testing and prototyping applications.
+> 
+
+### ⛏️ How ?
+
+> To use H2 database in your advantage, you can include it in your project as a Maven dependency or download and add the H2 jar file to your project. Once the H2 database is in your project, you can create a new instance of the database, create tables, insert data and query data using SQL commands in your Java code. It also provides a web console for managing the database.
+> 
+
+### ⏳ When ?
+
+> The use of H2 database became popular in the mid-2000s as developers looked for lightweight, easy-to-use database systems that could be embedded in applications and distributed with them. It's especially popular in Java development due to its compatibility and ease of integration with the Java programming language.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+H2 is a relational database management system (RDBMS) that is written in Java. This RDBMS conforms to the Java Database Connectivity (JDBC) API, which is a standard Java API for establishing database-independent connections between Java applications and various databases. This compatibility allows for seamless integration within any Java application.
+
+H2 supports the use of standard SQL, JDBC, and ODBC, offering developers a range of options to interact with the database. This flexibility is one of the reasons that H2 is a popular choice for developers.
+
+The H2 database system is dual-licensed. It is available under the Modified BSD License, a permissive free software license, and the Eclipse Public License, which is an open-source software license. This licensing model provides users with the freedom to use, modify, and distribute the software under the terms of these licenses.
+
+In terms of data storage, H2 uses the MVStore, or MultiVersion Concurrency Control (MVCC) Store. This is an append-only storage engine, which means that it writes new data to disk, without altering or deleting existing data. This approach ensures data integrity and allows for improved performance and concurrency.
+
+Garbage collection is used to clean up old and unused data, ensuring efficient use of storage space.
+
+Beyond these core features, H2 also supports full transaction support, meaning it can handle multiple transactions concurrently, managing conflicts and ensuring data consistency. It also supports database encryption, allowing for secure storage of data.
+
+H2's functionality can be extended with the use of user-defined functions and stored procedures. User-defined functions allow users to create their own functions in SQL or Java, while stored procedures enable the packaging of code and reusable logic within the database itself.
+
+In summary, H2 is a robust, flexible, and efficient RDBMS that is well-suited for embedding within Java applications. Its range of features, ease of use, and compatibility with Java make it a popular choice among developers.
+
+Let's consider an example of creating a new H2 database, adding a table, and inserting some data using Java:
+
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class H2Example {
+    public static void main(String[] args) throws Exception {
+        // Step 1: Load the H2 Database Driver
+        Class.forName("org.h2.Driver");
+
+        // Step 2: Establish a connection
+        Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+
+        // Step 3: Create a Statement
+        Statement stmt = conn.createStatement();
+
+        // Step 4: Execute a SQL Query to create a table
+        stmt.executeUpdate("CREATE TABLE student(id INT PRIMARY KEY, name VARCHAR(255));");
+
+        // Step 5: Execute a SQL Query to insert data
+        stmt.executeUpdate("INSERT INTO student VALUES(1, 'John Doe');");
+
+        // Step 6: Clean up the resources
+        stmt.close();
+        conn.close();
+    }
+}
+
+```
+
+In this example:
+
+- Step 1: We load the H2 Database Driver using the Class.forName() method. This step is necessary to register the driver with DriverManager, which is used in the next step to establish a connection to the database.
+- Step 2: We establish a connection to the H2 database using the DriverManager.getConnection() method. The string `jdbc:h2:~/test` is the database URL, `sa` is the username (default is `sa`), and the empty string is the password (default is empty).
+- Step 3: We create a Statement object using the Connection.createStatement() method. This object is used to execute SQL queries.
+- Step 4: We execute a SQL query to create a new table `student` in the database. The table has two columns: `id` (integer type) and `name` (string type). The executeUpdate() method of the Statement object is used to execute the query.
+- Step 5: We execute another SQL query to insert a row of data into the `student` table.
+- Step 6: Finally, we close the Statement and Connection objects to free up resources.
+
+Remember to replace the database URL, username, and password with your actual database credentials.

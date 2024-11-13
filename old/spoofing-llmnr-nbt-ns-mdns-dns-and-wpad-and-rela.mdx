@@ -1,0 +1,121 @@
+# Spoofing LLMNR, NBT-NS, mDNS/DNS and WPAD and Relay Attacks
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Spoofing LLMNR, NBT-NS, mDNS/DNS and WPAD and Relay Attacks are network attacks that involve tricking a computer into sending sensitive data to an attacker's machine, instead of a legitimate server or service. These attacks exploit the way certain networking protocols work, specifically Link-Local Multicast Name Resolution (LLMNR), NetBIOS Name Service (NBT-NS), Multicast DNS (mDNS), DNS and Web Proxy Auto-Discovery (WPAD).
+> 
+
+### 🧐 Why ?
+
+> These types of attacks are significant because they can lead to unauthorized access to sensitive data, such as login credentials, personal details or confidential business information. They are particularly pertinent to network administrators and cybersecurity professionals, as they highlight vulnerabilities in commonly used networking protocols.
+> 
+
+### ⛏️ How ?
+
+> To mitigate the risk of these attacks, it is advised to disable LLMNR, NBT-NS and WPAD where they are not needed. For DNS, consider using DNSSEC or another secure alternative. Regular patching and updates are also important, as they can fix known vulnerabilities in these protocols. Monitoring network traffic for unusual activity can also help detect any potential attacks.
+> 
+
+### ⏳ When ?
+
+> These types of attacks have been around for as long as the protocols themselves have been in use, which in some cases is several decades. However, they have gained more attention in recent years due to the increasing focus on cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+LLMNR (Link-Local Multicast Name Resolution), NBT-NS (NetBIOS Name Service), mDNS (Multicast DNS), and WPAD (Web Proxy Auto-Discovery) are all network protocols that facilitate the resolution of network names into IP addresses. They provide critical functionality for network communication. However, they can be exploited in spoofing and relay attacks.
+
+In a spoofing attack, an attacker masquerades as a legitimate service by sending false responses to network requests. For instance, when a computer sends a request to resolve a network name, instead of the legitimate service responding, the attacker sends a false response. This causes the requesting computer to mistakenly send data meant for the legitimate service to the attacker's machine.
+
+A relay attack adds another layer of deception. In this scenario, the attacker intercepts the request to the legitimate service and forwards it on, essentially acting as a middleman. When the legitimate service sends back the resolution response, the attacker intercepts it again and forwards it back to the requesting computer. The attacker is thus able to see and potentially modify all communication between the two parties, all while remaining largely undetected because, from the perspective of both the requesting computer and the legitimate service, everything appears normal.
+
+These types of attacks are particularly damaging as they can lead to unauthorized access to sensitive data and allow the attacker to masquerade as a trusted service. Hence, it's important to implement security measures such as disabling protocols where they aren't needed, using secure alternatives, staying updated with patches and monitoring network traffic.
+
+Let's take a real-world example of a spoofing attack utilizing the LLMNR protocol.
+
+Step 1: The user on a networked computer tries to connect to a server with a particular hostname, say `example-server`, but mistypes it as `exmaple-server`.
+
+Step 2: The computer sends a query over the network, asking "Who is `exmaple-server`?" using the LLMNR protocol.
+
+Step 3: Since there is no `exmaple-server`, no legitimate system responds.
+
+Step 4: But an attacker's system, also on the network, is listening for such queries and immediately responds, "I am `exmaple-server`! Here's my IP address."
+
+For this demonstration, the attacker machine uses the tool Responder to listen for LLMNR queries and respond to them. Here is a command the attacker might use:
+
+```
+sudo python Responder.py -I eth0 -rPv
+
+```
+
+This command starts Responder on the eth0 interface, with `-rPv` enabling LLMNR spoofing (among other things) and verbose logging.
+
+Step 5: The user's computer, having received a response to its query, sends the data intended for `example-server` to the attacker's IP address.
+
+Step 6: The attacker's machine receives the data, which may include sensitive information like usernames, hashes of passwords, etc.
+
+In this way, by exploiting the LLMNR protocol's lack of authentication, an attacker can perform a spoofing attack. To mitigate such attacks, network administrators should disable LLMNR where it's not needed, or use secure alternatives like DNSSEC.
+
+Let's consider a real-world example of a spoofing attack utilizing the mDNS protocol.
+
+Step 1: A user on a networked computer tries to connect to a server with a hostname, say `example-server`.
+
+Step 2: The computer sends a query over the network, asking "Who is `example-server`?" using the mDNS protocol.
+
+Step 3: Now, there's an attacker's machine on the same network, listening for such queries. The attacker uses a tool, like `mdns-spoof`, to listen for mDNS queries and respond to them.
+
+For this demonstration, the attacker might use the following command:
+
+```
+sudo mdns-spoof -i eth0 -r example-server -a attacker-ip
+
+```
+
+This command starts `mdns-spoof` on the eth0 interface, with `-r` designating the record to spoof (`example-server` in this case), and `-a` setting the attacker's IP address as the response.
+
+Step 4: The attacker's machine, listening for such queries, immediately responds, "I am `example-server`! Here's my IP address."
+
+Step 5: The user's computer, having received a response to its query, sends the data intended for `example-server` to the attacker's IP address.
+
+Step 6: The attacker's machine receives the data, which may include sensitive information like usernames, passwords, etc.
+
+By exploiting the mDNS protocol's lack of authentication, an attacker can perform a spoofing attack. To mitigate such attacks, network administrators should disable mDNS where it's not needed, or use secure alternatives like DNSSEC.
+
+Let's consider a real-world example of a relay attack using the NBT-NS protocol.
+
+Step 1: A user on a networked computer tries to connect to a server with a hostname, say `example-server`.
+
+Step 2: The computer sends a request over the network, asking "Who is `example-server`?" using the NBT-NS protocol.
+
+Step 3: There's an attacker's machine on the same network, listening for such requests. The attacker uses a tool, like `Responder`, to listen for NBT-NS requests and relay them.
+
+For this demonstration, the attacker might use the following command:
+
+```
+sudo python Responder.py -I eth0 -rFv
+
+```
+
+This command starts Responder on the eth0 interface, with `-rFv` enabling NBT-NS spoofing and relay, among other things, and verbose logging.
+
+Step 4: The attacker's machine, listening for such requests, immediately relays the request to the real `example-server`.
+
+Step 5: The real `example-server` responds with its IP address. The attacker's machine intercepts this response.
+
+Step 6: The attacker's machine then sends the response back to the user's computer, pretending to be `example-server`.
+
+Step 7: The user's computer, having received a response to its request, sends the data intended for `example-server` to the attacker's IP address first.
+
+Step 8: The attacker's machine receives the data, which may include sensitive information like usernames, passwords, etc. The attacker can choose to modify this data before relaying it to the real `example-server`.
+
+In this way, by exploiting the NBT-NS protocol's lack of security, an attacker can perform a relay attack, acting as a man-in-the-middle and potentially gaining unauthorized access to sensitive information. To mitigate such attacks, network administrators should disable NBT-NS where it's not needed, or use secure alternatives like DNSSEC.
+
+# 🖇️ Références
+
+---

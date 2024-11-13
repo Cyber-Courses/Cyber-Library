@@ -1,0 +1,121 @@
+# Detecting Phishing
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Phishing is a type of cyber attack where malicious actors trick users into revealing sensitive information, such as login credentials, credit card numbers, or social security numbers. This is usually done through deceptive emails or websites that appear to be legitimate.
+> 
+
+### 🧐 Why ?
+
+> Detecting phishing is crucial to cybersecurity because it is one of the most common methods of attack and can lead to significant financial loss and data breaches. It is also a starting point for more sophisticated attacks, such as spear phishing or whaling, which target specific individuals or companies.
+> 
+
+### ⛏️ How ?
+
+> Phishing can be detected through various methods. One approach is to use machine learning algorithms to analyze emails and websites for suspicious characteristics, such as mismatched URLs, poor spelling and grammar, or requests for personal information. Another method is to maintain and check against a database of known phishing sites. User education is also key, as many phishing attempts can be thwarted by a vigilant and informed user.
+> 
+
+### ⏳ When ?
+
+> Phishing detection techniques have been implemented since the early 2000s, following the rapid increase in phishing attacks.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, phishing detection involves a multifaceted approach that integrates various technologies and methodologies to identify and mitigate phishing attempts. Here's a detailed and comprehensive overview:
+
+## Components of Phishing Detection
+
+1. **Email Filters**:
+    - **Configuration**: Email filters can be set up to flag or block emails from known malicious domains or those that contain suspicious content. This involves maintaining a blacklist of domains and using heuristic algorithms to evaluate the content of the email.
+    - **Examples**: SpamAssassin, a popular spam filter, uses a variety of rules and machine learning to detect spam and phishing emails.
+2. **Web Browsers**:
+    - **Warnings**: Modern web browsers like Chrome, Firefox, and Edge have built-in phishing protection that warns users when they attempt to visit known phishing sites. This is achieved by maintaining a constantly updated list of such sites.
+    - **Examples**: Google Safe Browsing is a service that provides lists of URLs for web resources that contain malware or phishing content.
+3. **Machine Learning Algorithms**:
+    - **Analysis**: Machine learning algorithms can analyze the content, metadata, and behavior of emails and websites to detect patterns indicative of phishing. This includes looking for mismatched URLs, poor spelling and grammar, unusual sender addresses, and requests for personal information.
+    - **Examples**: A machine learning model trained on features like sender reputation, email content, and historical data can predict whether an email is phishing.
+4. **User Education**:
+    - **Awareness**: Educating users about the characteristics of phishing emails and websites is crucial. Users should be taught to be skeptical of unsolicited communications and to verify the authenticity of requests for sensitive information.
+    - **Examples**: Regular training sessions and phishing simulations can help users recognize and avoid phishing attempts.
+
+## Real-World Example
+
+Let's consider a real-world example of a phishing attempt and how the detection mechanisms work to prevent it.
+
+### Scenario
+
+An attacker sends an email that appears to be from a legitimate bank, requesting the recipient to update their account information by clicking on a provided link.
+
+### Email Filter Detection
+
+1. **Sender Reputation**: The filter checks the sender's domain against a blacklist of known malicious domains.
+2. **Content Analysis**: The filter analyzes the email content for common phishing characteristics, such as urgent language and requests for personal information.
+3. **Heuristic Analysis**: The filter uses heuristic rules to detect anomalies such as mismatched URLs (e.g., the link text shows the bank's URL, but the actual hyperlink points to a different domain).
+
+### Machine Learning Detection
+
+1. **Feature Extraction**: The machine learning model extracts features like the sender's email address, the email's subject line, and the body content.
+2. **Model Prediction**: The model uses these features to predict whether the email is phishing. For example, it might assign a high probability to the email being phishing if it detects a mismatched URL and urgent language.
+
+### Web Browser Warning
+
+1. **URL Check**: When the user clicks on the link, the browser checks the URL against a list of known phishing sites.
+2. **Warning Display**: If the URL is on the list, the browser displays a warning to the user, advising them not to proceed.
+
+### User Education
+
+1. **Training**: The user has previously attended a training session where they learned to recognize phishing attempts. They remember to hover over the link to check the actual URL before clicking.
+2. **Verification**: The user decides to verify the request by contacting the bank directly through a known legitimate phone number or website.
+
+## Example Code
+
+Here is an example of how a simple email filter might be implemented using Python and a machine learning model:
+
+```python
+import re
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Sample email data
+emails = [
+    "Your account has been compromised. Click here to update your information.",
+    "Reminder: Your monthly bank statement is ready.",
+    "Urgent: Verify your account to avoid suspension.",
+]
+
+# Corresponding labels (1 for phishing, 0 for legitimate)
+labels = [1, 0, 1]
+
+# Vectorize email content
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(emails)
+
+# Train a Naive Bayes classifier
+model = MultinomialNB()
+model.fit(X, labels)
+
+# New email to classify
+new_email = ["Update your payment information to avoid late fees."]
+X_new = vectorizer.transform(new_email)
+prediction = model.predict(X_new)
+
+print("Phishing" if prediction[0] == 1 else "Legitimate")
+
+```
+
+### Steps Explained
+
+1. **Data Preparation**: We prepare a list of sample emails and their corresponding labels (1 for phishing, 0 for legitimate).
+2. **Vectorization**: We use `CountVectorizer` to convert the email content into numerical features.
+3. **Model Training**: We train a Naive Bayes classifier using the vectorized email content and labels.
+4. **Prediction**: We vectorize a new email and use the trained model to predict whether it is phishing or legitimate.
+
+By integrating these components and continuously updating and refining them, organizations can effectively detect and prevent phishing attempts, thereby enhancing their cybersecurity posture.

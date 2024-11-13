@@ -1,0 +1,86 @@
+# IPv6 Basic theory
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> IPv6, or Internet Protocol Version 6, is the most recent version of the Internet Protocol (IP), the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet.
+> 
+
+### 🧐 Why ?
+
+> IPv6 is crucial for the continued growth and sustainability of the Internet. With IPv4 address exhaustion, IPv6 allows for a vastly larger number of unique addresses, supporting continued growth and innovation in the Internet. Understanding IPv6 is essential for anyone who works with internet technology, as it will increasingly become the standard protocol used.
+> 
+
+### ⛏️ How ?
+
+> To implement IPv6, you will need to ensure that your networking equipment and software are IPv6 compatible. Most modern operating systems and networking equipment already supports IPv6. You will then need to configure your network to use IPv6, which may involve configuring your DHCP server, firewalls, and routers. It's also recommended to use a dual stack approach, enabling both IPv4 and IPv6, to ensure compatibility during the transition period.
+> 
+
+### ⏳ When ?
+
+> IPv6 was first defined in December 1998 by the Internet Engineering Task Force (IETF) and its deployment has been ongoing since the mid-2000s.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+IPv6, the latest version of Internet Protocol, employs a 128-bit address in contrast to IPv4's 32-bit address. This enormous increase allows for approximately 3.4x10^38 unique addresses, essentially an unlimited supply, which is critical in accommodating the growing number of devices needing internet access.
+
+Beyond providing more addresses, IPv6 also improves upon several aspects of IPv4. For instance, it has a simplified header format for more efficient data routing and processing. It also offers improved support for options and extensions, meaning new network capabilities can be added without redesigning the protocol.
+
+Another noteworthy feature is its flow labeling capability. This allows packets belonging to the same flow (i.e., a series of packets between a source and destination sharing the same characteristics) to be handled similarly, improving Quality of Service (QoS) on high-demand networks.
+
+Furthermore, IPv6 includes built-in authentication and privacy measures. These improvements increase the security of data transmission, making the internet safer for all users.
+
+However, despite these enhancements, IPv6 isn't backward compatible with IPv4 due to its structural differences. As a result, transitioning from IPv4 to IPv6 can be a complex process, necessitating meticulous planning and execution. It's typically recommended to use a dual-stack approach that enables both IPv4 and IPv6 during the transition phase, ensuring uninterrupted internet service.
+
+Here is a practical example of configuring an IPv6 address on a Linux system:
+
+1. **Check the current IP configuration:** Use the `ip a` or `ifconfig` command to check the current IP configuration.
+    
+    ```
+    ip a
+    
+    ```
+    
+2. **Add an IPv6 address to the network interface:** We can use the `ip` command to add an IPv6 address. Suppose we want to add the IPv6 address `2001:db8::1` to the `eth0` interface. This is a temporary change and will not survive a reboot.
+    
+    ```
+    sudo ip -6 addr add 2001:db8::1/64 dev eth0
+    
+    ```
+    
+3. **Check the new configuration:** Run `ip a` again to verify the new address has been added.
+    
+    ```
+    ip a
+    
+    ```
+    
+4. **Make the change permanent:** To ensure the IPv6 configuration persists across reboots, we need to edit the network interface configuration file. This file's location varies depending on the Linux distribution. On Ubuntu, it's `/etc/network/interfaces`. Add these lines to the file:
+    
+    ```
+    iface eth0 inet6 static
+    address 2001:db8::1
+    netmask 64
+    
+    ```
+    
+5. **Restart the network service:** Finally, apply the changes by restarting the network service.
+    
+    ```
+    sudo service networking restart
+    
+    ```
+    
+
+Remember, before implementing IPv6 in a production environment, plan carefully and test extensively. Also, consider using a dual-stack approach to maintain IPv4 connectivity during the transition.
+
+# 🖇️ Références
+
+---

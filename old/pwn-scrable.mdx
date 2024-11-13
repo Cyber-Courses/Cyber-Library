@@ -1,0 +1,127 @@
+# Pwn scrable
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn scrabble is a method of attacking a system by exploiting its vulnerabilities. The fundamental concept of Pwn scrabble lies in finding and exploiting weaknesses in a system's security to gain unauthorized access.
+> 
+
+### 🧐 Why ?
+
+> Understanding Pwn scrabble is vital for both attackers and defenders in the cyberspace. For attackers, it provides a way to bypass security measures and gain access to secured areas. For defenders, understanding Pwn scrabble helps in identifying potential vulnerabilities and strengthening the security measures.
+> 
+
+### ⛏️ How ?
+
+> To implement Pwn scrabble, one needs to first identify the target system's vulnerabilities. This could be done through various methods like scanning, probing, or even social engineering. Once a vulnerability is identified, it can be exploited to gain unauthorized access. The exploitation can be done using various tools and techniques, depending on the nature of the vulnerability.
+> 
+
+### ⏳ When ?
+
+> Pwn scrabble started being used with the rise of internet and networked systems. As systems became more interconnected, the potential for exploiting vulnerabilities for unauthorized access also increased.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn Scrabble involves identifying and exploiting vulnerabilities in a system to manipulate its operations and gain unauthorized access or control. This process can include a variety of attack techniques such as buffer overflow attacks, injection attacks, and privilege escalation attacks. The effectiveness of these attacks relies on the attacker's deep understanding of the target system, the tools available, and the specific vulnerabilities being exploited.
+
+### Example 1: Buffer Overflow Attack
+
+### Vulnerable C Code
+
+Consider the following simple C program with a buffer overflow vulnerability:
+
+```c
+cCopy code
+#include <string.h>void foo(char *bar)
+{
+   char c[12];
+   strcpy(c, bar);  // No bounds checking
+}
+int main(int argc, char **argv)
+{
+   foo(argv[1]);
+}
+
+```
+
+This program copies the input string `bar` into a fixed-size buffer `c` without checking if the string's length exceeds the buffer's capacity. This lack of bounds checking makes it vulnerable to a buffer overflow attack.
+
+### Exploitation Process
+
+An attacker can exploit this vulnerability by providing an input string longer than 12 characters, causing the buffer to overflow and overwrite adjacent memory. This can potentially alter the execution flow of the program, allowing the attacker to execute arbitrary code.
+
+1. **Crafting the Exploit**:
+    - The attacker crafts a malicious input string containing both shellcode (malicious code to be executed) and a new return address to redirect the execution flow.
+2. **Example Exploit Input**:
+    - Let's assume the stack layout allows overwriting the return address after 16 bytes (12 bytes for the buffer and 4 bytes for the saved frame pointer). The attacker can create an input like:
+        
+        ```rust
+        rustCopy code
+        python -c 'print("A"*16 + "\xef\xbe\xad\xde")' | ./vulnerable_program
+        
+        ```
+        
+    - Here, `"\xef\xbe\xad\xde"` is the new return address in little-endian format.
+
+### Example 2: Return Oriented Programming (ROP) Attack
+
+Return Oriented Programming (ROP) is an advanced technique used to execute code by chaining together small sequences of instructions (gadgets) already present in the executable memory.
+
+### Vulnerable C Code
+
+```c
+cCopy code
+#include <stdio.h>#include <string.h>void usefulFunction() {
+    // This function has functionality the attacker wants to call
+    system("/bin/sh");
+}
+
+void vulnerableFunction(char* string) {
+    char buffer[100];
+    strcpy(buffer, string);
+}
+
+int main(int argc, char** argv) {
+    vulnerableFunction(argv[1]);
+    return 0;
+}
+
+```
+
+In this example, the `vulnerableFunction` has a buffer overflow vulnerability similar to the previous example. However, instead of injecting shellcode, an attacker can use ROP to execute existing functions like `usefulFunction`.
+
+### Exploitation Process
+
+1. **Identifying Gadgets**:
+    - Gadgets are small sequences of instructions ending in a `ret` instruction, which can be found using tools like `ROPgadget`.
+2. **Crafting the Exploit**:
+    - The attacker crafts an input string containing the address of `usefulFunction` and fills it into the buffer to overflow the return address.
+3. **Example Exploit Input**:
+    - Assuming the address of `usefulFunction` is `0x080484b6`, the attacker can create an input like:
+        
+        ```rust
+        rustCopy code
+        python -c 'print("A"*104 + "\xb6\x84\x04\x08")' | ./vulnerable_program
+        
+        ```
+        
+    - Here, `"A"*104` fills the buffer and the saved frame pointer, and `"\xb6\x84\x04\x08"` overwrites the return address with the address of `usefulFunction`.
+
+### Conclusion
+
+Pwn Scrabble is a sophisticated and nuanced aspect of cybersecurity that involves creatively exploiting system vulnerabilities. Through techniques like buffer overflow and ROP attacks, attackers can manipulate system behavior and gain unauthorized access. However, successfully executing these attacks requires significant expertise in programming, system architecture, and security principles.
+
+Understanding these techniques is crucial for both attackers (in the context of penetration testing and ethical hacking) and defenders (for developing robust security measures). The examples provided here illustrate the basic concepts and processes involved in exploiting common vulnerabilities, emphasizing the importance of rigorous security practices to mitigate such risks.
+
+# 🖇️ Références
+
+---

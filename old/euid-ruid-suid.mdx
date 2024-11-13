@@ -1,0 +1,78 @@
+# euid, ruid, suid
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Under the Linux operating system, euid, ruid, and suid are three user identifiers that play a crucial role in managing user permissions and ensuring system security. Euid refers to 'Effective User ID', ruid to 'Real User ID', and suid to 'Set User ID'.
+> 
+
+### 🧐 Why ?
+
+> Understanding these identifiers is crucial as they help in managing user permissions, ensuring that users can only access the resources and execute the commands that are necessary for their work. This concept is necessary for maintaining system security and preventing unauthorized access to sensitive data and system resources.
+> 
+
+### ⛏️ How ?
+
+> In a Linux system, when a user logs in, their ruid and euid are set to their user ID. The ruid indicates who the user actually is, while the euid determines what the user can do, especially in terms of access permissions. The suid is a special type of permission that allows a user to execute a file with the permissions of the file owner. This is typically used in programs that require higher privileges to run. In order to use these identifiers effectively, it's important to have a clear understanding of the Linux Permission Model and the principles of least privilege.
+> 
+
+### ⏳ When ?
+
+> The use of euid, ruid, and suid in the Linux OS was introduced with the Unix operating system in the 1970s and has been a part of the Linux security model since its inception.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In the Linux operating system, managing user permissions and ensuring system security is achieved through several user identifiers, namely Effective User ID (euid), Real User ID (ruid), and Set User ID (suid).
+
+The Real User ID (ruid) is assigned when a user logs into the system. This identifier represents the actual identity of the user and is used by the system to track the user's activities. If a process is initiated, it's the ruid that identifies the user who created the process.
+
+The Effective User ID (euid), on the other hand, is used by the system to determine what resources a process can access. When a user attempts to perform an action, the system checks the euid to decide if the user has the necessary permissions. If a user tries to access a file or a command, the system validates the euid, not the ruid. This makes the euid an essential component in the management of user permissions.
+
+The Set User ID (suid) is a special type of permission that allows a file to be executed with the permissions of the file owner, instead of the permissions of the user who ran the file. This is particularly useful for running programs that require higher privileges. For instance, the 'passwd' command, which is used to change a user's password, requires access to the shadow file that is typically only accessible by the root user. The suid permission allows this command to be executed with root user privileges.
+
+However, caution must be exercised with the suid permission. If the suid bit is set on a file that can be manipulated, it may allow an attacker to elevate their privileges and gain control of the system. Therefore, it's crucial to manage these identifiers carefully to avoid security vulnerabilities. Understanding the Linux Permission Model and the principles of least privilege can help in effective management of these identifiers.
+
+Let's consider a simple example to illustrate the usage of ruid, euid, and suid in Linux. Let's say we have a file named `example.txt` owned by a user named `root` and we have another user named `user1`.
+
+1. **Real User ID (ruid):** When `user1` logs into the system, their ruid is set to their user ID. If `user1` initiates a process, the ruid identifies `user1` as the user who created the process.
+
+```bash
+whoami
+
+```
+
+The output of this command will be `user1`, showing that the real user is `user1`.
+
+1. **Effective User ID (euid):** The euid is used to determine what resources a process can access. If `user1` tries to read `example.txt`, the system will check if the euid of `user1` has the necessary permissions.
+
+```bash
+cat example.txt
+
+```
+
+If `user1` doesn't have the necessary permissions to read `example.txt`, this command will result in a "Permission denied" error.
+
+1. **Set User ID (suid):** The suid is a special type of permission that allows a file to be executed with the permissions of the file owner. Let's say we have a script named `script.sh` that requires higher privileges to run.
+
+```bash
+chmod u+s script.sh
+
+```
+
+This command sets the suid bit on `script.sh`. Now, when `user1` runs `script.sh`, it will be executed with the permissions of the owner of `script.sh`.
+
+```bash
+./script.sh
+
+```
+
+If `script.sh` was owned by `root`, this script would run with root privileges, even though it was initiated by `user1`.
+
+However, it's important to note that the suid bit should only be used on trusted files. If a file with the suid bit set can be manipulated, it could allow an attacker to gain elevated privileges.

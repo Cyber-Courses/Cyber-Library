@@ -1,0 +1,64 @@
+# Brute force the host PID until the output path is created, or we run out of guesses
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Brute forcing the host PID is a cyber security technique where an attacker tries to guess the Process Identification number (PID) of a host system, and continues to do so until a specified output path is created or all potential PID guesses are exhausted.
+> 
+
+### 🧐 Why ?
+
+> This technique is important in the realm of cybersecurity as it can be used to gain unauthorized access to systems and data. It represents an attack vector that security professionals need to defend against, and that ethical hackers can use to identify vulnerabilities in a system.
+> 
+
+### ⛏️ How ?
+
+> To brute force a host PID, an attacker would typically use a script or a tool that systematically attempts all possible PID values, starting from 0 and going up to the maximum possible PID. In parallel, the attacker monitors the system for the creation of a specific output path which signifies successful access. The process is stopped either when this output path is detected, or when all PID possibilities have been exhausted.
+> 
+
+### ⏳ When ?
+
+> The practice of brute forcing PID started becoming popular with the advent of multi-user computer systems, where each process had a unique PID, and knowledge of this PID could be exploited for unauthorized access.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In computer systems, each process is assigned a unique Process Identification (PID) number, which is used by the system kernel to manage process-specific resources. This is crucial for the system to differentiate between and manage multiple processes. When an attacker tries to gain unauthorized access to a system, one method they can use is to guess a PID, hence the term 'brute force.'
+
+This involves systematically attempting all possible PID values, usually by using a script or a specialized tool. The method starts from 0 and proceeds up to the maximum possible PID. The objective is to manipulate the process associated with the correctly guessed PID and gain access to its resources, such as files, data, or network connections.
+
+The 'output path' is a term often used in this context. It typically refers to a file or a network socket that is created as a result of gaining successful access to the process. When the output path is created, it signifies that the attacker has successfully gained access. Therefore, the attacker usually scripts the brute force process to run in a loop until the output path is created.
+
+However, the brute force method isn't infallible. It's a game of probabilities and depends on the number of possible PIDs. If all PIDs have been attempted and none were successful, then the brute force attack fails.
+
+This technique is significant in cybersecurity. While it's an attack vector that malicious hackers can use, it's also a vulnerability that ethical hackers and security professionals need to identify and defend against. Understanding and defending against this technique contributes to the overall security of computer systems.
+
+Let's take an example of a simple brute force script that tries to guess the PID of an Apache web server process in a Linux system.
+
+```bash
+#!/bin/bash
+for pid in {1..32768}; do
+    if [ -d /proc/$pid ]; then
+        comm=$(cat /proc/$pid/comm)
+        if [ "$comm" == "apache2" ]; then
+            echo "Found Apache2 PID: $pid"
+            break
+        fi
+    fi
+done
+
+```
+
+This bash script starts a loop from 1 to 32768, which represents the typical range of PIDs in a Linux system. For each iteration, it checks if a directory exists in the `/proc` filesystem with the name of the current PID. The `/proc` filesystem is a virtual filesystem in Linux that provides process and system information.
+
+If such a directory exists, it means there is a process running with that PID. The script then reads the name of the command used to start the process from the `comm` file within the process's directory in `/proc`. If the command name matches "apache2", it prints the PID and stops the loop.
+
+This script is an example of PID brute forcing to find the PID of a specific process. In a real attack scenario, a similar method could be used to guess the PID and manipulate the process to gain unauthorized access. However, this would typically involve additional steps and more sophisticated techniques.
+
+Please note that this script is provided for educational purposes only. Unauthorized access to computer systems is illegal and unethical.

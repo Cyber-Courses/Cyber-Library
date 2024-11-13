@@ -1,0 +1,122 @@
+# malloc & sysmalloc
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Malloc and sysmalloc are two memory management functions in programming language C. Malloc stands for 'memory allocation', and it is a function that requests a block of memory from the heap. If the request is fulfilled, the operating system reserves a block of memory, and malloc returns a pointer to the start of the block. Sysmalloc, on the other hand, is the system call that is often used by malloc to request memory from the operating system.
+> 
+
+### 🧐 Why ?
+
+> Understanding how memory management works is crucial in programming, especially in languages like C where the programmer has direct control over memory allocation and deallocation. Mismanagement of memory can lead to various problems such as memory leaks, where memory that is no longer needed is not properly released back to the system, or segmentation faults, where the program tries to access a memory location that it's not allowed to.
+> 
+
+### ⛏️ How ?
+
+> To use malloc, you need to specify the size of the memory you want to allocate. For example, 'int *p = malloc(10 * sizeof(int));' allocates memory for an array of 10 integers. After you're done with the memory, you should free it using the free function to prevent memory leaks. Sysmalloc is usually not used directly by programmers, as it's a lower-level function that interacts directly with the operating system.
+> 
+
+### ⏳ When ?
+
+> Malloc and sysmalloc have been part of the C programming language since its inception in the early 1970s. They are still used today in many programs, although some newer languages handle memory management automatically to prevent common mistakes.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The `malloc` function in C is a fundamental tool for dynamic memory allocation. Understanding how it works, along with its interaction with `sysmalloc`, is crucial for effective memory management in C programming. Here's a comprehensive explanation, complete with detailed examples and code.
+
+### Overview
+
+`malloc` stands for "memory allocation". It is a standard library function in C that allocates a specified number of bytes of memory and returns a pointer to the first byte of the allocated space. It does not initialize the memory, meaning that the content of the allocated memory is indeterminate.
+
+`sysmalloc` is not a standard library function exposed to the user but is often used internally by `malloc` to request additional memory from the operating system when needed.
+
+### How `malloc` Works
+
+1. **Maintaining Free Blocks:**
+    - `malloc` maintains a list of free memory blocks.
+    - When a request for memory comes in, `malloc` searches this list for a block that is large enough to satisfy the request.
+2. **Allocating Memory:**
+    - If a suitable block is found, `malloc` updates the free list to reflect that part of the block is now in use.
+    - It then returns a pointer to the start of the allocated block.
+3. **Requesting More Memory:**
+    - If no suitable block is found, `malloc` uses `sysmalloc` to request more memory from the operating system.
+    - `sysmalloc` extends the program's data segment, effectively increasing the size of the heap.
+    - This new memory is then added to `malloc`'s list of free blocks.
+
+### Example Code
+
+Let's go through a detailed example to understand how `malloc` works:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // Request memory for an array of 10 integers
+    int *p = (int *)malloc(10 * sizeof(int));
+
+    // Check if malloc was successful
+    if (p == NULL) {
+        fprintf(stderr, "Memory allocation failed\\n");
+        return 1;
+    }
+
+    // Initialize the allocated memory
+    for (int i = 0; i < 10; i++) {
+        p[i] = i * i; // Store squares of integers
+    }
+
+    // Print the values to verify
+    for (int i = 0; i < 10; i++) {
+        printf("p[%d] = %d\\n", i, p[i]);
+    }
+
+    // Free the allocated memory
+    free(p);
+
+    return 0;
+}
+
+```
+
+### Explanation of the Example
+
+1. **Memory Allocation:**
+    - `int *p = (int *)malloc(10 * sizeof(int));`
+    - This line requests memory for an array of 10 integers. The `sizeof(int)` ensures that the correct amount of memory is allocated based on the size of an integer on the system.
+2. **Error Checking:**
+    - The code checks if `malloc` returns `NULL`, which indicates that the memory allocation failed. This is a good practice to prevent dereferencing a `NULL` pointer, which can lead to segmentation faults.
+3. **Initializing Memory:**
+    - A loop is used to initialize the allocated memory with the squares of their indices.
+4. **Using the Allocated Memory:**
+    - The values in the array are printed to verify that the memory was allocated and initialized correctly.
+5. **Freeing Memory:**
+    - `free(p);`
+    - This line releases the allocated memory back to the system, preventing memory leaks.
+
+### Internal Mechanisms
+
+When `malloc` cannot find a suitable block in its free list, it calls `sysmalloc` (or a similar system call like `sbrk` or `mmap`) to request more memory from the operating system.
+
+- **Sysmalloc:**
+    - Extends the program's data segment.
+    - The new memory is added to `malloc`'s list of free blocks.
+    - This process involves interacting with the operating system's memory manager, which is more complex and less transparent to the programmer.
+
+### Advanced Details
+
+- **Fragmentation:**
+    - Over time, as memory is allocated and freed, the free list can become fragmented with many small free blocks. This can lead to inefficient memory usage and increased overhead in searching the free list.
+- **Memory Pools:**
+    - Some advanced memory allocators use memory pools to manage memory more efficiently. These are pre-allocated blocks of memory that can be quickly allocated and freed without interacting directly with the operating system for each request.
+
+### Conclusion
+
+Understanding `malloc` and its internal workings, including how it interacts with `sysmalloc`, is essential for effective memory management in C. Proper usage of `malloc` and `free` can prevent common issues like memory leaks and segmentation faults, leading to more efficient and reliable programs.

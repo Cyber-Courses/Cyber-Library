@@ -1,0 +1,79 @@
+# Smali - Decompiling/Modifying/Compiling
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Smali is an assembler for the Dalvik virtual machine used by Android. Decompiling/Modifying/Compiling in Smali is a process in which an Android application (APK file) is decompiled into Smali code, modified for certain purposes, and then recompiled back into an APK file.
+> 
+
+### 🧐 Why ?
+
+> Smali Decompiling/Modifying/Compiling is crucial for reverse engineering Android applications. It allows security researchers to understand the inner workings of an application, detect any malicious activities, identify vulnerabilities for patching, or modify the application's behaviour for certain purposes. As Android is widely used globally, understanding Smali can aid in securing numerous devices and applications.
+> 
+
+### ⛏️ How ?
+
+> To decompile an APK file into Smali code, tools like 'apktool' can be used. Once decompiled, you can navigate through the Smali code to understand the application's functionality. After modifications (if any), you can recompile the code into an APK file using the same tool. This process requires a solid understanding of Android's architecture and the Smali language. To get started, researchers often look for key components such as Activities, Services, and Broadcast Receivers.
+> 
+
+### ⏳ When ?
+
+> Smali was introduced in 2010 as part of the Android project to facilitate the reverse engineering of Android applications. Since then, it has been widely used by security researchers and developers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Smali is a disassembled version of the Dex file format used by Dalvik, Android's Java VM. When an APK file is decompiled using tools like 'apktool', it is disassembled into Smali files. These files contain human-readable assembly code representing the Dalvik bytecode. Researchers can then go through this code to understand or modify the application's behaviour. The modification could be as simple as changing a variable's value or as complex as injecting new functionalities. The recompilation process involves converting the modified Smali code back into a Dex file, which is then packaged into an APK file. This approach allows researchers to dive deep into an application's code, bypassing any potential obfuscation methods used by the developers.
+
+Let's assume we have an APK file named 'sample.apk' and we want to change the behavior of a certain function in it. Here's a detailed step-by-step process to achieve this using Smali:
+
+**Step 1: Decompiling the APK file**
+First, we need to decompile the APK file into Smali code. This can be done using a tool like 'apktool'. Here's the command line to do this:
+
+```
+apktool d sample.apk
+
+```
+
+This command will create a new folder named 'sample' that contains the decompiled APK file, including the Smali code.
+
+**Step 2: Navigating the Smali Code**
+After decompiling the APK file, navigate into the 'sample' folder. Under the 'smali' directory, you'll find the Smali code organized according to your application's package structure. You can now look for the function you want to modify.
+
+**Step 3: Modifying the Smali code**
+Once you find the function you want to modify, you can change the Smali code accordingly. For example, if there's a function that returns a boolean and you want it to always return true, you can modify the function like this:
+
+```
+.method public isPremiumUser()Z
+    .locals 1
+
+    const/4 v0, 0x1
+
+    return v0
+.end method
+
+```
+
+In this example, the function 'isPremiumUser' always returns true, indicating that the user is a premium user.
+
+**Step 4: Recompiling the APK file**
+After modifying the Smali code, you can recompile the code into an APK file using 'apktool'. Here's the command line to do this:
+
+```
+apktool b sample
+
+```
+
+This command will create a new APK file named 'sample.apk' in the 'dist' folder under the 'sample' directory. This APK now contains your modifications.
+
+Remember that after recompiling, you will need to sign the APK before installing it on a device. This process requires a good understanding of Android's architecture and the Smali language, and should be done cautiously, respecting all relevant laws and guidelines.
+
+# 🖇️ Références
+
+---

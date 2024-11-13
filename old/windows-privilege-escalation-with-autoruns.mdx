@@ -1,0 +1,51 @@
+# Windows Privilege Escalation with Autoruns
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Privilege Escalation with Autoruns is a technique used by cybersecurity professionals, specifically penetration testers, to elevate their privileges within a Windows operating system by exploiting auto-run programs or services. Autoruns is a utility that shows which programs are configured to run during system bootup or login.
+> 
+
+### 🧐 Why ?
+
+> Understanding and using this technique is important for both offensive and defensive cybersecurity. Offensive teams, or red teams, can use this method to gain higher levels of access in a system, escalating their privileges and allowing them to access sensitive data or perform actions that were previously restricted. Defensive teams, or blue teams, need to understand these techniques to better protect their systems, detect potential security breaches, and mitigate the effects of an attack.
+> 
+
+### ⛏️ How ?
+
+> Using Autoruns for privilege escalation involves identifying programs or services that automatically start during system boot or user login and that are configured with weak permissions. An attacker can then manipulate these programs or services to execute malicious code with the same permissions as the program or service, potentially leading to privilege escalation. This process involves several steps: \n1. Download and run the Autoruns utility.\n2. Identify any auto-starting programs or services with weak permissions.\n3. Replace, modify, or otherwise exploit these programs or services to execute malicious code.\n4. Verify that the code executes with elevated privileges during system boot or user login.
+> 
+
+### ⏳ When ?
+
+> The use of Autoruns for privilege escalation has been a common practice in penetration testing and offensive cybersecurity since the utility's release by Microsoft Sysinternals in the early 2000s.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Autoruns is a powerful tool developed by Microsoft Sysinternals that allows users to view all the programs and services that are configured to start automatically on a Windows system. The utility scans and reports on various locations including the Run, RunOnce, and Start Menu directories in the Windows Registry, as well as the startup folder for each user account.
+
+This tool is crucial in the domain of cybersecurity, particularly in privilege escalation scenarios. Privilege escalation is a technique where an attacker, who already has some level of access to the system, increases their privileges to gain more control over the system. This can include actions such as accessing sensitive data, executing commands, or performing tasks that are usually restricted to higher-level users.
+
+With Autoruns, an attacker can identify programs or services that start automatically and are configured with weak permissions. These could be potential targets for privilege escalation. By modifying these vulnerable programs or services (for example, replacing the legitimate executable with a malicious one or modifying its command line arguments), an attacker can insert malicious code that will execute with the same permissions as the auto-starting program or service. If the program or service runs with high-level permissions, this could lead to a successful privilege escalation.
+
+However, it's important to note that the use of Autoruns for privilege escalation requires that the attacker already has some level of access to the system. This could be through an initial compromise or by exploiting a low-privileged user account. Once the attacker has this level of access, they can run the Autoruns utility, identify potential targets, and begin their privilege escalation attempts.
+
+In addition to its use in offensive cybersecurity, understanding and using this tool and technique is also important for defensive purposes. Knowledge of how Autoruns works and how it could potentially be exploited can help defenders better protect their systems, detect potential security breaches, and mitigate the effects of an attack.
+
+For example, a penetration tester might use the Autoruns utility to find potential privileges escalation targets. Here's a step-by-step guide on how this could work, for educational purposes:
+
+1. **Initial System Access**: The attacker has already gained initial access to the system, perhaps through a phishing attack that tricked a user into running a malicious script.
+2. **Running Autoruns**: The attacker runs the Autoruns tool with the command `autoruns.exe`. This lists all the auto-starting programs and services.
+3. **Identifying Targets**: The attacker notices an auto-starting program, `exampleProgram.exe`, which runs with administrator privileges but is located in a directory with weak permissions (any user can modify files).
+4. **Malicious Code Insertion**: The attacker replaces `exampleProgram.exe` with a malicious executable, also named `exampleProgram.exe`. This might be done with a simple copy command (`copy /Y C:\\path\\to\\malicious\\exampleProgram.exe C:\\path\\to\\weak\\directory\\exampleProgram.exe`).
+5. **Privilege Escalation**: The next time the system boots, the malicious `exampleProgram.exe` runs with administrator privileges, giving the attacker elevated access.
+6. **Cleanup**: To avoid detection, the attacker may remove their malicious executable and restore the original one after they've accomplished their goal.
+
+For defensive teams, it's important to regularly check the permissions of directories containing auto-starting programs or services, monitor for unusual system behavior, and keep all software up-to-date to minimize vulnerabilities.

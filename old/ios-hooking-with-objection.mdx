@@ -1,0 +1,99 @@
+# iOS Hooking With Objection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS hooking with Objection is the process of intercepting and altering the flow of data and instructions within an application on an iOS device using the Objection runtime mobile exploration toolkit.
+> 
+
+### 🧐 Why ?
+
+> This technique is important in cybersecurity as it allows security researchers and penetration testers to understand how an application works, identify potential vulnerabilities, and test the effectiveness of security measures. It is especially useful in assessing the security of iOS applications, as these are often used to handle sensitive data.
+> 
+
+### ⛏️ How ?
+
+> To use Objection for iOS hooking, you first need to install it on your machine. Then, you can connect your iOS device to your machine, launch the target application, and use Objection commands to interact with the application's runtime. This allows you to manipulate the application's data and functionality, revealing how it works and where it may be vulnerable.
+> 
+
+### ⏳ When ?
+
+> iOS hooking with Objection has been in use since the toolkit was first released in 2017. It is particularly relevant today, as mobile application security has become increasingly important in the face of growing cyber threats.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Objection is a powerful tool that utilizes Frida, a dynamic code instrumentation toolkit, to facilitate the process of hooking in iOS applications. The process begins with Objection attaching itself to the running process of the target iOS application. Once attached, Objection injects JavaScript code into the application's process.
+
+This injected code has the capability to intercept and modify function calls and data within the application. This means it can alter how the application operates and interacts with data. For example, it can change the way the application processes user input or how it handles certain tasks. This ability to manipulate function calls and data allows for comprehensive exploration of the application's functionalities.
+
+In addition, the injected code can also manipulate the application's files and databases. It can view, alter, delete, or even create new files and entries within the application's databases. This allows for an in-depth examination of the application's data storage and management mechanisms.
+
+Moreover, Objection can invoke hidden or non-public methods within the application. These are methods that are not typically accessible or visible to users or other external entities. By invoking these methods, Objection can reveal hidden functionalities or vulnerabilities of the application.
+
+Lastly, Objection can also alter runtime variables. Runtime variables are variables that are initialized and used while the application is running. By altering these variables, Objection can affect how the application behaves during its operation.
+
+In summary, Objection provides a comprehensive toolkit for iOS hooking, allowing for a wide range of exploration and manipulation capabilities, from intercepting and altering function calls and data, to manipulating files and databases, invoking hidden methods, and altering runtime variables.
+
+Let's take an example of how to use Objection for iOS hooking on a hypothetical iOS application named "SecureApp".
+
+1. **Installation and Setup**
+First, install Objection using pip:
+
+```
+pip install objection
+
+```
+
+Next, you need to have the Frida server running on your iOS device. This can be done by jailbreaking the device and installing Frida through Cydia.
+
+1. **Connecting to the Application**
+Once the setup is complete, connect your iOS device to your machine and launch "SecureApp". Then, use the following command to list the running processes:
+
+```
+objection -g SecureApp explore
+
+```
+
+1. **Injecting Code and Intercepting Function Calls**
+Let's say "SecureApp" has a function `verifyUserCredentials` which takes a username and password and returns true if they are correct. We can intercept this function and alter it to always return true, bypassing the authentication mechanism. To do this, use the `hooking watch` command with the class and method names:
+
+```
+(secureapp)> hooking watch class SecureApp.UserAuth method verifyUserCredentials
+
+```
+
+This will start monitoring calls to the `verifyUserCredentials` method. Then, to override the method to always return `true`, use the `hooking set return_value` command:
+
+```
+(secureapp)> hooking set return_value true
+
+```
+
+1. **Invoking Hidden Methods**
+If "SecureApp" has a hidden method `revealSecretData`, we can invoke it using the `run` command:
+
+```
+(secureapp)> run SecureApp.SecretMethod revealSecretData
+
+```
+
+This will execute the `revealSecretData` method and print the result.
+
+1. **Altering Runtime Variables**
+If "SecureApp" has a runtime variable `isLoggedIn` that it checks to determine if a user is logged in, we can change its value to `true`:
+
+```
+(secureapp)> ios ui set_pref isLoggedIn true
+
+```
+
+This will change the `isLoggedIn` variable to `true`, making the application believe that a user is logged in.
+
+In conclusion, Objection allows us to explore and manipulate an iOS application's data and functionality in a variety of ways, providing invaluable insight into its inner workings and potential vulnerabilities.

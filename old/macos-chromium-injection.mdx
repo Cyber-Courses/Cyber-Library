@@ -1,0 +1,66 @@
+# macOS Chromium Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Chromium Injection is a technique used to inject malicious code into the Chromium browser on a macOS system. Chromium is an open-source web browser that serves as the foundation for Google Chrome, Microsoft Edge, and other browsers. This malicious code can manipulate the browser's functionality, steal sensitive data or perform other malicious activities.
+> 
+
+### 🧐 Why ?
+
+> Chromium injection is significant due to its potential to compromise the privacy and security of macOS users. It allows attackers to manipulate browser behavior, steal sensitive information such as usernames, passwords, and credit card details, and even spread malware. Understanding this technique is crucial in developing effective protective measures and solutions to safeguard systems and data.
+> 
+
+### ⛏️ How ?
+
+> Chromium Injection is achieved by exploiting the dynamic library loading mechanism. Attackers create a malicious dynamic library and trick the OS into loading it instead of the legitimate one. Once loaded, the malicious library can intercept and manipulate the browser's activities. To protect against this, users should regularly update their browsers and operating systems, avoid visiting untrusted websites, and be cautious when downloading files from the internet.
+> 
+
+### ⏳ When ?
+
+> The technique of macOS Chromium Injection has been around for several years but has gained more attention recently due to the increasing reliance on web browsers for various online activities and the growing sophistication of cyber threats.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+macOS Chromium Injection is a malicious technique that takes advantage of the dynamic library loading mechanism in macOS. Dynamic libraries, which are files that contain code and can be loaded and executed by multiple applications as needed, become the vehicle for executing this technique.
+
+In a typical scenario, an attacker inserts malicious code into a dynamic library, then gives that library the same name as one that is legitimately used by Chromium, an open-source web browser that forms the base for other popular browsers like Google Chrome and Microsoft Edge. The macOS dynamic library loading mechanism, which uses a search path to find the dynamic libraries required by an application, is then deceived into loading this malicious library instead of the legitimate one.
+
+Once the malicious library is loaded, it has the ability to intercept and manipulate the functionality of the browser. This could allow the attacker to execute arbitrary code, steal sensitive data such as usernames, passwords, and credit card information, or carry out other harmful activities.
+
+This technique exploits the fact that macOS, like many other operating systems, relies on a search path to locate the dynamic libraries that an application needs. If an attacker can control this search path, they can manipulate the system into loading a malicious library instead of the intended one.
+
+To protect against this threat, users should regularly update their browsers and operating systems, as these updates often include patches for known vulnerabilities. Users should also approach with caution when visiting websites and downloading files from the internet, as they could potentially contain malicious code. Emails and messages that seem suspicious could be phishing attempts, designed to trick users into revealing their passwords or other sensitive information. Being aware of these risks and taking the necessary precautions can help mitigate the risk of falling victim to a macOS Chromium Injection attack.
+
+As an example, let's consider a simplified scenario where an attacker injects a malicious dynamic library into a macOS Chromium browser. The attacker first creates a malicious dynamic library named `libChromium.dylib` containing malicious code. This library is given the same name as a legitimate Chromium library to trick the macOS system.
+
+```bash
+# Attacker creates the malicious library
+gcc -dynamiclib -o /path/to/malicious/libChromium.dylib malicious_code.c
+
+```
+
+The `gcc` command compiles a malicious code file (`malicious_code.c`) into a dynamic library (`libChromium.dylib`).
+
+Next, the attacker places this malicious library in a directory that appears earlier in the library search path than the directory containing the genuine `libChromium.dylib`. This could be achieved via a phishing attack where the user is tricked into downloading and running a script.
+
+```bash
+# Attacker's script moves the malicious library
+mv /path/to/malicious/libChromium.dylib /path/to/fake/dir/
+
+```
+
+When the Chromium browser is launched next, the macOS dynamic library loader is tricked into loading the malicious `libChromium.dylib` instead of the legitimate one. The malicious library can now intercept and manipulate the browser's activities, such as stealing sensitive data or carrying out other harmful activities.
+
+To protect against this, users should regularly update their browsers and operating systems to patch vulnerabilities. Users should also use caution when visiting untrusted websites or downloading files from the internet. Awareness of these risks and taking necessary precautions can help mitigate the risk of falling victim to a macOS Chromium Injection attack.
+
+# 🖇️ Références
+
+---

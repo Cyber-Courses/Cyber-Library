@@ -1,0 +1,88 @@
+# PHP - Useful Functions & disable_functions/open_basedir bypass
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PHP is a popular server-side scripting language designed for web development. One of its powerful features is the built-in functions that perform specific tasks. Specifically, 'disable_functions' and 'open_basedir' are two directives that can be used to enhance the security of a PHP environment. However, they can also be bypassed under certain conditions, posing potential security risks.
+> 
+
+### 🧐 Why ?
+
+> Understanding PHP's useful functions, especially 'disable_functions' and 'open_basedir' is crucial for both developers and security professionals. For developers, these concepts can help design more secure applications. For security professionals, understanding these can help identify vulnerabilities and provide robust security solutions. Moreover, understanding bypass techniques is vital to anticipate potential security threats.
+> 
+
+### ⛏️ How ?
+
+> PHP functions are used by calling them in the code. For example, to disable certain functions for security reasons, you can use the 'disable_functions' directive in your PHP configuration file (php.ini) like so: \n\ndisable_functions = exec, shell_exec, system\n\nThe 'open_basedir' directive limits the files that can be opened by PHP to a specified directory. Here's how you can use it: \n\nopen_basedir = \
+> 
+
+### ⏳ When ?
+
+> PHP was first released in 1995, and over the years, it has evolved and added many built-in functions. The 'disable_functions' and 'open_basedir' directives have been part of PHP for many years, aiming to provide an extra layer of security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In PHP, 'disable_functions' and 'open_basedir' are two important security directives.
+
+'disable_functions' allows you to disable specific functions that might pose a security risk. Commonly disabled functions include 'exec', 'shell_exec', and 'system', which are used to execute external programs. This is critical in preventing unauthorized command execution within the server environment. However, this directive isn't foolproof. In certain conditions, it can be bypassed. For instance, using PHP's 'ini_restore' function, an attacker can restore the original value of a configuration option that was modified at runtime, thus circumventing the 'disable_functions' directive.
+
+On the other hand, 'open_basedir' is a directive that restricts the files that PHP can open to a specific directory. This is an effective security measure to stop PHP scripts from accessing sensitive files outside the specified directory, thereby limiting potential damage in case of a security breach. However, this directive also has its limitations and can be bypassed under certain conditions. For instance, an attacker might use symbolic links to access files outside the specified directory. Some PHP functions like 'glob' can also bypass 'open_basedir' restrictions.
+
+Understanding these directives, their uses, and potential bypass techniques is vital for both developing secure PHP applications and providing robust security solutions. It's also important to remember that these directives are just one layer of security and must be used in conjunction with other security practices for a comprehensive defense strategy.
+
+Here is a detailed example that will help to understand the concept better:
+
+**Example of 'disable_functions':**
+
+Let's imagine we have the following line in our `php.ini` configuration file:
+
+```
+disable_functions = exec, shell_exec, system
+
+```
+
+This line disables the `exec`, `shell_exec`, and `system` functions. These functions allow PHP to execute external programs, and disabling them can prevent unauthorized command execution within the server environment.
+
+However, this directive can be bypassed using PHP's `ini_restore` function. Here's an example:
+
+```php
+<?php
+ini_set('disable_functions', 'exec');
+echo ini_get('disable_functions'); // Outputs: exec
+
+ini_restore('disable_functions');
+echo ini_get('disable_functions'); // Outputs: nothing
+?>
+
+```
+
+In this example, we first set `disable_functions` to `exec` using `ini_set`, and then we print the value of `disable_functions` to the screen. After that, we call `ini_restore`, and if we print `disable_functions` again, it's empty. This is because `ini_restore` restored the original value of `disable_functions` (which was nothing), effectively bypassing the `disable_functions` directive.
+
+**Example of 'open_basedir':**
+
+Consider the following line in the `php.ini` file:
+
+```
+open_basedir = "/var/www/html/"
+
+```
+
+This directive restricts the files that PHP can open to the `/var/www/html/` directory. This prevents PHP scripts from accessing sensitive files outside the specified directory.
+
+However, this directive can be bypassed using symbolic links. For example:
+
+```bash
+ln -s /etc /var/www/html/etc
+
+```
+
+This command creates a symbolic link named `etc` in the `/var/www/html/` directory that points to the `/etc` directory. Now, a PHP script can read files in the `/etc` directory as if they were in the `/var/www/html/` directory, effectively bypassing the `open_basedir` restriction.
+
+Remember, these are just examples to illustrate the concepts and should not be used to compromise the security of a real system.

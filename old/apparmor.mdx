@@ -1,0 +1,94 @@
+# AppArmor
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> AppArmor (Application Armor) is a mandatory access control (MAC) system for Linux. It is a kernel (core of the operating system) enhancement to confine programs to a limited set of resources. AppArmor's security model is to bind access control attributes to programs rather than to users.
+> 
+
+### 🧐 Why ?
+
+> AppArmor is important as it provides a crucial layer of security for your system. It limits the potential damage from security vulnerabilities in applications by confining them to a set of predefined resources. This is particularly important for servers, where a single compromised application can potentially be used to attack other services and data.
+> 
+
+### ⛏️ How ?
+
+> AppArmor can be implemented by creating profiles for applications. These profiles define the system resources the application can access and the operations it can perform. To take advantage of AppArmor, you should first install it using your distribution's package manager. Then, you can use tools like aa-genprof and aa-logprof to generate and manage profiles.
+> 
+
+### ⏳ When ?
+
+> AppArmor was first included in the Linux kernel in 2007. It's now a standard part of many Linux distributions, including Ubuntu and openSUSE.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+AppArmor, or Application Armor, is a Mandatory Access Control (MAC) system for Linux, acting as a protective layer around applications by confining them to a predefined set of resources. This mechanism enhances the security of your system, as it can significantly limit the potential impact of security breaches in applications.
+
+The heart of AppArmor is a set of profiles for each application. These profiles define the system resources that an application can access and the operations it can perform. There are two modes for these profiles: 'enforce' mode, which blocks and logs any violations, and 'complain' mode, which merely logs violations. The 'complain' mode allows for testing new profiles without compromising system stability.
+
+Creating and maintaining AppArmor profiles is simpler than with other MAC systems, as they can be generated from log files. This eliminates the need for a detailed understanding of the system's security policy, making AppArmor more accessible for users.
+
+AppArmor was first included in the Linux kernel in 2007 and has since become a standard part of many Linux distributions, including Ubuntu and openSUSE. To utilize AppArmor, it should be installed through your distribution's package manager. After that, tools like aa-genprof and aa-logprof can be used to generate and manage the profiles.
+
+In summary, AppArmor is a vital part of system security on Linux, providing a robust framework that limits the potential damage of exploits by confining applications to the minimum necessary permissions.
+
+Here's a step-by-step guide on how to create and manage AppArmor profiles:
+
+1. **Install AppArmor**:
+First, you need to install AppArmor. For Ubuntu or Debian, the command would be:
+
+```
+sudo apt-get install apparmor
+
+```
+
+For other distributions, please refer to the specific package manager instructions.
+
+1. **Check AppArmor Status**:
+You can check the status of AppArmor with the command:
+
+```
+sudo aa-status
+
+```
+
+This will list all the profiles loaded and indicate which mode they're in (enforce or complain).
+
+1. **Create a New Profile**:
+To create a new profile, we'll use the `aa-genprof` command. For example, if we want to create a profile for the `/usr/bin/ping` command, we would use:
+
+```
+sudo aa-genprof /usr/bin/ping
+
+```
+
+This will start the profile in 'complain' mode, and monitor the application for behavior that would be denied under 'enforce' mode.
+
+1. **Update the Profile**:
+After running the application and exercising its various features, you can update the profile to include the necessary permissions. Use the same `aa-genprof` command again:
+
+```
+sudo aa-genprof /usr/bin/ping
+
+```
+
+You'll be presented with a series of prompts about specific actions the application tried to perform. You can allow or deny these, and they'll be added to the profile.
+
+1. **Switch to Enforce Mode**:
+Once you're satisfied with the profile, you can switch it to 'enforce' mode with:
+
+```
+sudo aa-enforce /usr/bin/ping
+
+```
+
+Now, the application will be confined by the permissions specified in the profile.
+
+This example showcases how AppArmor can be used to confine an application (in this case, the ping command) to a limited set of resources, enhancing the security of your system.

@@ -1,0 +1,70 @@
+# Ret2lib + Printf leak - arm64
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Ret2lib, also known as return-to-libc, is an attack technique used in exploiting security vulnerabilities caused by buffer overflows. Printf leak is one of the techniques used to get the memory addresses of specific locations in a program during runtime. The arm64, also known as AArch64, is a 64-bit execution state of the ARMv8-A architecture used in various computing systems.
+> 
+
+### 🧐 Why ?
+
+> Understanding Ret2lib and Printf leak is crucial for both cybersecurity professionals and software developers. These techniques are often used by hackers to bypass security measures and gain unauthorized access to systems. On the other hand, developers can understand these techniques to build more secure software. The arm64 architecture is widely used in modern computing devices, making it a common target for cyber-attacks.
+> 
+
+### ⛏️ How ?
+
+> To exploit a buffer overflow using Ret2lib, an attacker first needs to overwrite the return address of a function with the address of a system call in libc, such as system(), and then control its arguments to execute arbitrary commands. Printf leak can be used to leak memory addresses, which can help in bypassing ASLR (Address Space Layout Randomization). However, it requires a format string vulnerability in the program to be effective.
+> 
+
+### ⏳ When ?
+
+> The use of Ret2lib and Printf leak in exploitation began in the late 1990s and early 2000s, respectively, with the rise of buffer overflow vulnerabilities. The arm64 architecture was launched in 2011, and since then, it has been widely adopted in various computing systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Ret2lib, or return-to-libc, is a technique used in the exploitation of software vulnerabilities, predominantly those caused by buffer overflows. This technique leverages the fact that many applications link to a standard set of libraries (libc) that contain functions capable of performing system calls. In the event of a buffer overflow, an attacker can overwrite the return address of a function with the address of a system call within libc. This alters the program's execution flow and redirects it to the chosen libc function. This method allows the attacker to perform system-level operations, potentially leading to unauthorized system access.
+
+The Printf leak is another technique used in conjunction with Ret2lib. The Printf function and its variants do not require their format string to be a literal string, meaning an attacker with control over the format string can manipulate it to print the contents of the stack or other memory locations. This can be exploited to leak memory addresses. Leaking memory addresses aids in bypassing Address Space Layout Randomization (ASLR), a security measure present in modern Operating Systems designed to prevent buffer overflow attacks.
+
+ASLR randomizes the layout of the address space positions of key data areas, usually including the base of the executable and the positions of the stack, heap, and libraries. This makes exploiting a buffer overflow vulnerability more challenging, as the attacker cannot predict target addresses in memory and therefore cannot easily direct program execution flow.
+
+While using both Ret2lib and Printf leak techniques, an attacker could bypass ASLR, execute system-level operations, and gain unauthorized access to a system. These techniques highlight the importance of robust, secure coding practices and the need for regular software testing and updates.
+
+Let's consider a simple program written in C:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void insecure_func(char *input) {
+    char buffer[100];
+    strcpy(buffer, input);
+}
+
+int main(int argc, char **argv) {
+    insecure_func(argv[1]);
+    return 0;
+}
+
+```
+
+The `insecure_func` function in this program is vulnerable to a buffer overflow because it uses `strcpy`, a function that does not check the size of the input, to copy an input string into a buffer that can only hold 100 characters. If an input string longer than 100 characters is provided, it will overflow the buffer and overwrite the return address of `insecure_func`.
+
+1. **Exploiting Buffer Overflow with Ret2lib**: An attacker could exploit this by providing a string that is 100 characters long, followed by the address of a system call in libc, such as system(). This would overwrite the return address of `insecure_func` with the address of `system()`, changing the execution flow of the program to execute `system()` after `insecure_func` returns.
+2. **Using Printf Leak to Bypass ASLR**: ASLR can make it difficult to find the address of `system()`, as it randomizes the layout of the address space. However, if the program contains a format string vulnerability, the attacker could use Printf leak to bypass ASLR. A format string vulnerability exists if the attacker can control the format string of a printf function. For example:
+
+```c
+printf(input);
+
+```
+
+With control over the format string, the attacker could use format specifiers like `%p` to print the contents of the stack or other memory locations, leaking memory addresses that can be used to find the address of `system()`.
+
+Please note that exploiting buffer overflows and format string vulnerabilities in real-world systems involves more complexities due to various modern security measures beyond ASLR. This example is a simplified illustration of the concepts of Ret2lib and Printf leak.

@@ -1,0 +1,48 @@
+# Windows From High Integrity to SYSTEM with Name Pipes
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows From High Integrity to SYSTEM with Name Pipes refers to a specific process in Windows operating systems where a high integrity process is escalated to SYSTEM level privileges using named pipes. Named pipes are a method for interprocess communication in Windows, and in this context, are used as a means to elevate privileges.
+> 
+
+### 🧐 Why ?
+
+> Understanding this process is crucial for both cybersecurity professionals and system administrators. For cybersecurity professionals, it reveals a potential vulnerability that could be exploited by malicious actors to gain unauthorized access to sensitive systems or data. For system administrators, it provides insight into how to better secure their systems against such attacks.
+> 
+
+### ⛏️ How ?
+
+> To implement this process, the attacker first requires a high-integrity process. From there, they can create a named pipe and use it to send and receive data, essentially using it as a channel to execute arbitrary code or commands with SYSTEM level privileges. This process can be complex and requires a deep understanding of Windows OS internals.
+> 
+
+### ⏳ When ?
+
+> This process has been used in various forms for several years, but has become more prominent with the rise of advanced persistent threats (APTs) and targeted attacks on corporate and governmental infrastructure.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Named pipes in Windows are a form of shared memory that facilitates interprocess communication. By default, any process can create a named pipe, but only those with high integrity can connect to it. This is the crux of the potential for privilege escalation.
+
+An attacker, having control over a high-integrity process, can create a named pipe and employ it to channel data to a SYSTEM level process. This is because SYSTEM level processes inherently trust the named pipes. Consequently, the data sent through the pipe can be used to execute arbitrary code or commands with SYSTEM level privileges.
+
+Manipulating this process is multi-faceted and demands a profound understanding of the Windows Operating System's internals and the specific mechanisms of interprocess communication. It requires the attacker to first gain control of a high-integrity process, which in itself is a significant hurdle. Next, the attacker must successfully create the named pipe, send data through it, and ensure the data effectively exploits the SYSTEM level process to gain its privileges.
+
+This technique has been utilized for several years, gaining prominence with the rise of advanced persistent threats (APTs) and targeted attacks on corporate and governmental infrastructure. Understanding this process is essential for cybersecurity professionals to identify potential vulnerabilities and for system administrators to strengthen their systems' security.
+
+Here's a simplified example of how an attacker might use named pipes for privilege escalation, but remember, this is for educational purposes only:
+
+1. First, the attacker needs control over a high-integrity process. This could be achieved through a variety of methods such as exploiting a bug in a high-integrity software or social engineering. For our purposes, let's assume the attacker has control over a high-integrity process.
+2. The attacker creates a named pipe. In command line, this might look something like this: `CreateNamedPipe("\\\\\\\\.\\\\pipe\\\\mypipe", PIPE_ACCESS_DUPLEX, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, PIPE_UNLIMITED_INSTANCES, 1024, 1024, 0, NULL);`
+3. The attacker then sends data to a SYSTEM level process through the pipe. This could be done using a command like: `WriteFile(hPipe, szBuffer, cbWritten, &cbWritten, NULL);` where `hPipe` is the handle to the named pipe, `szBuffer` contains the data to be written, and `cbWritten` is the number of bytes written.
+4. SYSTEM level processes inherently trust the named pipes so they will execute the arbitrary code or commands sent through the pipe. If the attacker sends malicious code, they could gain SYSTEM level privileges.
+5. Finally, the attacker can use the SYSTEM level privileges to perform actions that would otherwise be restricted. This could range from accessing sensitive data to installing malicious software.
+
+Note: This is a simplified example and doesn't cover all the complexities involved in this process. Exploiting named pipes for privilege escalation requires a deep understanding of Windows internals and careful planning. Furthermore, it is illegal and unethical to perform such actions without the proper authorization.

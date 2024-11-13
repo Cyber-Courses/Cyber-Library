@@ -1,0 +1,72 @@
+# disable_functions bypass - dl function
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> A 'disable_functions bypass' refers to the process of bypassing restrictions placed by the 'disable_functions' directive in PHP. This directive is used to disable certain functions for security reasons. The 'dl' function is one of the functions that can be disabled. This function is used to load PHP extensions at runtime.
+> 
+
+### 🧐 Why ?
+
+> Understanding 'disable_functions bypass' is crucial for both web developers and penetration testers. For developers, it is essential to know how to secure their applications against such bypasses. For penetration testers, understanding this bypass method is valuable for identifying potential vulnerabilities in an application. Furthermore, being aware of how the 'dl' function can be exploited to load malicious extensions is crucial for maintaining the security of a PHP application.
+> 
+
+### ⛏️ How ?
+
+> Bypassing 'disable_functions' often involves exploiting weaknesses in other functions that are not disabled. For example, if the 'system' function is not disabled, it can be used to execute arbitrary system commands, effectively bypassing the intended restrictions. As for the 'dl' function, it can be abused by loading a malicious PHP extension that performs harmful actions. To prevent such bypasses, developers should keep their PHP version up-to-date and follow best security practices, such as disabling potentially dangerous functions and using appropriate file permissions. Penetration testers can use these bypass methods as part of their testing process to identify potential vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> The use of 'disable_functions bypass' became prominent as more PHP applications were developed and security became a significant concern. This trend likely started around the mid-2000s, as the growth of web applications led to increased attention to web security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'disable_functions' directive in PHP is a critical security feature that helps protect web applications by disabling specific functions that could be exploited for malicious purposes. However, it's important to understand that this feature isn't infallible. Skilled attackers may still find ways to bypass these restrictions by exploiting other functions that have not been disabled.
+
+An example of such a function is 'dl', which can be used to dynamically load PHP extensions at runtime. This function can become a security vulnerability if not managed correctly. If attackers can leverage this function to load a malicious PHP extension, they could execute arbitrary code on the server, leading to a severe security breach.
+
+Bypassing 'disable_functions' often involves exploiting weaknesses in other functions. For instance, if the 'system' function isn't disabled, it can be exploited to execute arbitrary system commands, effectively bypassing any restrictions set by 'disable_functions'. This is just one example - numerous other PHP functions could be manipulated in similar ways if left enabled.
+
+To mitigate this risk, it's crucial for developers to not only use 'disable_functions' but also to understand its limitations. Regularly updating the PHP version used is one important step, as updates often come with security patches for known vulnerabilities. Following best security practices is also essential. This includes disabling potentially dangerous functions, using appropriate file permissions, and regularly auditing your application's codebase for security vulnerabilities.
+
+For penetration testers, understanding 'disable_functions bypass' methods is valuable for identifying potential vulnerabilities in PHP applications. They should be familiar with the various ways in which disabled functions can be bypassed, including the potential misuse of the 'dl' function.
+
+In summary, the 'disable_functions' directive in PHP is a powerful tool for hardening the security of a web application, yet it's not a silver bullet. It should be used as part of a broader security strategy that includes regular updates, code audits, and a deep understanding of PHP's functionality and potential vulnerabilities.
+
+Let's illustrate this with a hypothetical example. Suppose there is a PHP web application that uses the 'disable_functions' directive to disable the 'exec' function, which can be used to execute arbitrary system commands. However, it leaves the 'system' function enabled.
+
+```php
+// php.ini
+disable_functions = exec
+
+```
+
+An attacker might exploit this oversight by using the 'system' function to execute arbitrary commands, effectively bypassing the restriction on the 'exec' function.
+
+```php
+// Attacker-controlled input
+system('ls');
+
+```
+
+In this case, the 'ls' command would be executed on the server, potentially exposing sensitive information.
+
+To mitigate this, the 'system' function should also be disabled, and ideally, all functions that can execute system commands should be disabled or controlled strictly.
+
+```php
+// php.ini
+disable_functions = exec, system, shell_exec, passthru
+
+```
+
+This example demonstrates how an attacker could bypass the 'disable_functions' directive by exploiting an enabled function. It underscores the importance of understanding all PHP functions that could potentially be exploited, their exact capabilities, and the risks associated with leaving them enabled.
+
+Remember, this is a simplified example for educational purposes. In a real-world scenario, an attacker would need to overcome several other security measures to exploit this vulnerability.

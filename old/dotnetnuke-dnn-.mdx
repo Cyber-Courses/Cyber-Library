@@ -1,0 +1,85 @@
+# DotNetNuke (DNN)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> DotNetNuke (DNN) is a free, open-source Content Management System (CMS) built on the Microsoft ASP.NET (VB.NET) framework. It is designed for managing and developing interactive and dynamic websites, web applications, and intranets.
+> 
+
+### 🧐 Why ?
+
+> The growing need for robust, scalable and customizable CMSs for web development has made DotNetNuke a go-to solution for many developers and organizations. It provides a powerful platform for managing websites, with features like multi-language localization, social media integration, and a rich-text editor, among others. Plus, being an open-source framework, it benefits from the contributions of a large community of developers worldwide.
+> 
+
+### ⛏️ How ?
+
+> To use DNN, one needs to first install it on a server with Microsoft IIS web server, .NET framework, and SQL Server database. Once installed, one can access the DNN framework through a web browser and start building or managing websites. The platform provides an intuitive interface for creating pages, adding content, and customizing the website's appearance. In addition, DNN supports third-party modules and skins, allowing further customization and functionality enhancement.
+> 
+
+### ⏳ When ?
+
+> DotNetNuke was first released in late 2002 as an open-source software. Since then, it has been widely adopted by developers and organizations around the world, and has seen several major updates and improvements. The latest version, DNN 9, was released in 2017.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+DotNetNuke (DNN) is a robust, open-source Content Management System (CMS) built on the Microsoft [ASP.NET](http://asp.net/) framework, primarily in [VB.NET](http://vb.net/). It is designed specifically for creating, deploying, and managing interactive and dynamic websites, web applications, and intranets.
+
+At the heart of DNN is a three-tier architecture model consisting of the data layer, the business logic layer, and the presentation layer. This type of structure is commonly used in software development to separate an application's data access, business logic, and user interface code, enabling independent development and maintenance of each layer.
+
+The data layer is responsible for managing the application's data and communicating with the database. In DNN's case, it primarily uses Microsoft SQL Server, but it also supports other databases.
+
+The business logic layer is where the core functionality of the application resides. It manipulates the data from the data layer and prepares it for presentation. This layer is built using server-side programming languages, [VB.NET](http://vb.net/), and C#.
+
+The presentation layer is responsible for displaying the processed data from the business logic layer to the user. DNN uses [ASP.NET](http://asp.net/)'s Web Forms for constructing the user interface.
+
+DNN also follows the Model-View-Controller (MVC) design pattern. This means that the application's data model, user interface, and control logic are separated, allowing for modular development. This decoupling makes DNN a highly modular system; each module, which can be seen as a mini application, can be developed and maintained independently.
+
+In terms of usage, DNN needs to be installed on a server equipped with Microsoft IIS web server, .NET framework, and SQL Server database. Once installed, you can access the DNN framework through a web browser and start constructing or managing your websites. The platform offers an intuitive interface for creating webpages, adding content, and customizing your website's appearance. To enhance customization and functionality, DNN supports third-party modules and skins.
+
+Since its initial release in 2002, DNN has seen widespread adoption and numerous updates, with DNN 9 being the latest version released in 2017.
+
+Let's assume we're creating a simple module in DNN to display a welcome message to the user. Here's a step-by-step guide:
+
+1. **Create a new Visual Studio Project**: We'll begin by launching Visual Studio and creating a new "Class Library" project. Let's name it "WelcomeModule".
+2. **Add references**: We'll need to add references to `DotNetNuke.dll` and `DotNetNuke.WebUtility.dll` which can be found in the `bin` directory of your DNN installation.
+3. **Create a new class**: In the "WelcomeModule" project, create a new class "View.ascx.cs". This will be the code-behind file for our user control. Your class should inherit from `DotNetNuke.Entities.Modules.PortalModuleBase`.
+
+```csharp
+using DotNetNuke.Entities.Modules;
+
+public partial class View : PortalModuleBase
+{
+  // Module logic goes here
+}
+
+```
+
+1. **Add code to display a welcome message**: In the `View` class, add a `Page_Load` method to display a welcome message to the user.
+
+```csharp
+protected void Page_Load(object sender, EventArgs e)
+{
+  lblMessage.Text = "Welcome to our DNN site, " + UserInfo.DisplayName + "!";
+}
+
+```
+
+1. **Create the View.ascx file**: This is the user control that will be displayed in the DNN site. It should contain a label to display our welcome message.
+
+```
+<%@ Control Language="C#" AutoEventWireup="true" CodeFile="View.ascx.cs" Inherits="WelcomeModule.View" %>
+<asp:Label ID="lblMessage" runat="server" />
+
+```
+
+1. **Build the project and Install the module**: After building the project, you'll get a DLL file which you need to copy to the `bin` directory of your DNN site. Then, in DNN, go to "Host" -> "Extensions", click on "Install Extension" and upload the ZIP file containing your module.
+2. **Add the module to a page**: Finally, add your new module to a page via the "Modules" -> "Add New Module" menu. You should see your welcome message displayed on the page.
+
+This is a very basic example but it illustrates the process of creating a new module in DNN. A real-world module would likely involve more complex logic and interact with the DNN API and the database.

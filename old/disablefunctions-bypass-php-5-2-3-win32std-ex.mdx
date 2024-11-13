@@ -1,0 +1,83 @@
+# disable_functions bypass - PHP 5.2.3 - Win32std ext Protections Bypass
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass is a technique used in PHP 5.2.3 for evading restrictions set by the disable_functions directive in php.ini file. The Win32std ext is a Windows extension for PHP that provides a set of functions for Windows-specific tasks like interacting with the operating system's underlying functionality. The bypass is usually used to execute system commands that are otherwise restricted.
+> 
+
+### 🧐 Why ?
+
+> Understanding disable_functions bypass in PHP is crucial for both developers and security professionals. For developers, it's important to understand this bypass to prevent introducing potential security vulnerabilities in their applications. For security professionals, knowing how this bypass works can help in penetration testing and vulnerability assessments. The use of this bypass can lead to unauthorized command execution, data leakage, and even full system control if not properly managed.
+> 
+
+### ⛏️ How ?
+
+> The bypass is achieved by leveraging the functionality of the Win32std extension. Here are the steps: 1. Ensure that the Win32std extension is enabled in the php.ini file. 2. Prepare a PHP script that uses the 'win_shell_execute' function from the Win32std extension to execute the desired system command. 3. Run the PHP script. The 'win_shell_execute' function will execute the system command, bypassing the disable_functions restriction.
+> 
+
+### ⏳ When ?
+
+> The use of disable_functions bypass started gaining popularity around the release of PHP 5.2.3, when developers started using the disable_functions directive more frequently to restrict potentially harmful functions in their applications. However, this led to the discovery of bypass techniques, including the one explained in this article.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'disable_functions' directive is a security feature in PHP that allows developers to disable specific functions that could potentially be harmful. This feature is typically used to prevent the execution of sensitive functions like 'exec()', 'shell_exec()', 'system()', and others that can interact with the system shell. The aim is to limit the potential damage that could be done if an attacker manages to inject malicious PHP code into an application.
+
+However, in PHP 5.2.3, a bypass method was discovered using the Win32std extension for Windows. This extension provides a suite of functions for handling Windows-specific tasks, one of which is 'win_shell_execute'. This function allows a PHP script to execute system commands, similar to the 'system()' function.
+
+The key to the bypass lies in how 'win_shell_execute' operates. Unlike the 'system()' function, which is a native PHP function and can be disabled using the 'disable_functions' directive, 'win_shell_execute' is part of the Win32std extension and isn't affected by the 'disable_functions' directive. This means that even if functions such as 'system()' are disabled in the php.ini file, a PHP script can still execute system commands using 'win_shell_execute'.
+
+To exploit this, an attacker would first need to ensure that the Win32std extension is enabled in the php.ini file. They would then craft a PHP script that uses 'win_shell_execute' to run the desired system command. When this script is run, it will execute the system command, bypassing the 'disable_functions' restriction.
+
+This bypass technique presents a significant security risk. It could allow an attacker to execute unauthorized commands, potentially leading to data leaks or even full control over the system. Therefore, it's crucial for developers and security professionals to be aware of this technique and take steps to mitigate its potential impact.
+
+These steps could include ensuring that untrusted user input is never used in a manner that could lead to the execution of arbitrary PHP code, using a language or runtime environment that doesn't allow for this type of bypass, or implementing additional security measures like a Web Application Firewall (WAF) to detect and block potential exploit attempts.
+
+Let's create an educational example of how this bypass could be exploited, but please remember this is only for educational purposes and should not be used to compromise any system's security.
+
+1. **Enable the Win32std extension in php.ini**
+    
+    First, we need to make sure the Win32std extension is enabled in the PHP configuration. This can be done by adding or uncommenting the following line in the php.ini file:
+    
+    ```
+    extension=php_win32std.dll
+    
+    ```
+    
+    Please note that the php.ini file is typically located in the PHP installation directory.
+    
+2. **Craft a PHP script**
+    
+    Next, we write a PHP script that uses the 'win_shell_execute' function to run a system command. For this example, let's consider we want to list all the files and directories in the current directory. In a Windows system, this can be done using the 'dir' command:
+    
+    ```php
+    <?php
+    $command = 'dir';
+    win_shell_execute($command);
+    ?>
+    
+    ```
+    
+    In this script, `$command` holds the system command that we want to execute, and `win_shell_execute` is the function that executes the command.
+    
+3. **Run the PHP script**
+    
+    Finally, we run the PHP script. This can be done by navigating to the location of the script in a web browser, or by using PHP's built-in web server from the command line:
+    
+    ```
+    php -S localhost:8000
+    
+    ```
+    
+    By visiting `http://localhost:8000/script.php` (if 'script.php' is the name of your file), the script will execute the 'dir' command, and the 'disable_functions' restriction will be bypassed.
+    
+
+This is just an example of how the bypass can be exploited. In a real-world scenario, the system command could be anything that the attacker finds useful. This highlights the importance of securing PHP applications against this type of exploit by sanitizing user input, using a language or runtime that doesn't allow for this type of bypass, or implementing additional security measures like a Web Application Firewall (WAF).

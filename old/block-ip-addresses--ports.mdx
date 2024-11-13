@@ -1,0 +1,75 @@
+# Block IP addresses & ports
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> IP blocking is a process that prevents a specific IP address or a range of IP addresses from accessing a network or a website. This can be done through the firewall settings of a network. Similarly, blocking ports can prevent certain types of traffic from entering or leaving the network. Ports are logical constructs that allow different types of network traffic to be directed to different parts of a system or network.
+> 
+
+### 🧐 Why ?
+
+> IP blocking is important for several reasons. First, it can be used to prevent specific IP addresses that are known to be malicious from accessing a network or website, thereby enhancing the security of the system. Second, it can also be used to prevent spam or unwanted traffic from specific IP addresses. Blocking ports, on the other hand, can be used to prevent certain types of traffic, such as file sharing or certain types of gaming traffic, from entering or leaving a network, thereby managing network traffic more effectively and ensuring network performance.
+> 
+
+### ⛏️ How ?
+
+> To block an IP address or a port, you need to access your network's or system's firewall settings. The specific steps can vary depending on the system or network you are using. Generally, you will need to go to the firewall settings, find the section for blocking IP addresses or ports, enter the IP address or port number you want to block, and save the changes. It's important to be careful when blocking IP addresses or ports, as incorrect settings can potentially disrupt normal network operations.
+> 
+
+### ⏳ When ?
+
+> IP and port blocking has been in use since the early days of networking, as an essential tool for network and system administrators to manage network traffic and enhance system security. Over time, as cyber threats have evolved, the need for effective IP and port blocking has become even more critical.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+IP blocking and port blocking are integral techniques in network security. IP blocking involves configuring your network's firewall to reject packets sent from or to specific IP addresses. This mechanism is vital to prevent malicious or unwanted traffic from accessing your system. Several methods can be used for IP blocking, including:
+
+1. IP filtering: A straightforward method where incoming or outgoing packets are filtered based on their source or destination IP addresses.
+2. Network Address Translation (NAT): This method can be used to hide an entire IP address space, usually consisting of private IP addresses, behind a single IP address in another, often public, address space.
+3. Stateful Inspection: Also known as dynamic packet filtering, this method keeps track of each network connection traversing it in a state table. From this state table, the firewall can identify packets as being part of an existing connection or new, and reject packets that don't match an existing connection.
+
+Similarly, port blocking involves rejecting packets sent through specific ports. Ports are identified by their port number, which is included in the packet's header information. By blocking a port, you can prevent certain types of network traffic, typically associated with that port number, from entering or leaving the network. This can be used to manage network traffic more effectively, ensuring network performance, and prevent potential security threats associated with certain types of traffic.
+
+It's important to note that while these methods can enhance network security, they should be used judiciously. Incorrect settings can disrupt normal network operations. Therefore, it's recommended to have a clear understanding of the implications and consult a network administrator or expert when unsure.
+
+For example, let's assume you are using a Linux system and want to block a specific IP address using IPTables, a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall.
+
+Here's an illustrative command-line example:
+
+```bash
+sudo iptables -A INPUT -s 192.0.2.0 -j DROP
+
+```
+
+In this command:
+
+- `sudo` is used to run the command with root privileges.
+- `iptables` is the command-line interface we're using to set up firewall rules.
+- `A INPUT` means we're appending (`A`) a rule to the `INPUT` chain.
+- `s 192.0.2.0` specifies the source IP address we want to block, which in this case is `192.0.2.0`.
+- `j DROP` is the action to be taken when the packet matches the rule; in this case, we're dropping the packet, which effectively blocks this IP address.
+
+To block a specific port, you could use the following command:
+
+```bash
+sudo iptables -A INPUT -p tcp --dport 80 -j DROP
+
+```
+
+- `p tcp` specifies the protocol, which is TCP in this case.
+- `-dport 80` specifies the destination port, which in this case is `80`.
+
+It's essential to understand that these commands only set up the rules until the next system reboot. To save these rules permanently, you would need to use the `iptables-save` command, or ensure these rules are applied at startup.
+
+These examples are fairly simple and are meant to illustrate the basic process of blocking IP addresses and ports. In reality, a network administrator would need to consider various factors and possibly set up more complex rules to effectively manage network traffic and enhance security.
+
+# 🖇️ Références
+
+---

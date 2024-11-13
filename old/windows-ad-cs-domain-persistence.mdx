@@ -1,0 +1,65 @@
+# Windows AD CS Domain Persistence
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows AD CS (Active Directory Certificate Services) Domain Persistence is a technique that attackers use to maintain their foothold on a network. Fundamentally, it involves the abuse of the Windows AD CS, which is a server role that allows organizations to issue and manage public key infrastructure (PKI) certificates. In the context of cybersecurity, domain persistence is the ability of an attacker to maintain access to a compromised network, even after initial detection and remediation efforts.
+> 
+
+### 🧐 Why ?
+
+> Understanding the concept of Windows AD CS Domain Persistence is crucial because it is a common method used by attackers to maintain unauthorized access to a network. This technique is often used in advanced persistent threat (APT) scenarios where the attacker seeks to maintain a long-term presence on the victim's network. For cybersecurity professionals and IT administrators, knowledge of such techniques can aid in early detection and effective remediation.
+> 
+
+### ⛏️ How ?
+
+> Windows AD CS Domain Persistence can be implemented in two main steps: issuance of a rogue certificate, and then its subsequent use for persistence. First, attackers must compromise a server running the AD CS role and then issue a rogue certificate. This certificate can then be used to authenticate as any user, allowing the attacker to maintain access to the network. It's important to note that this method requires significant privileges initially to compromise the Certificate Authority (CA), making it a post-exploitation technique. Regularly reviewing issued certificates and their use can help in detecting such attacks.
+> 
+
+### ⏳ When ?
+
+> Windows AD CS Domain Persistence as a technique has been in use since the introduction of Active Directory and the Certificate Services role. However, its use has become more prevalent in recent years with the rise in APT-style attacks where a long-term presence on the victim's network is desired.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows AD CS Domain Persistence is a technique used by attackers to maintain unauthorized, long-term access to a network. It involves exploiting the Active Directory Certificate Services (AD CS) - a server role in Windows that manages public key infrastructure (PKI) certificates.
+
+At a technical level, this method involves issuing a fraudulent certificate from a compromised server running the AD CS role. Given the significant permissions required to compromise a Certificate Authority (CA), this tactic is typically executed post-exploitation.
+
+Once the attacker has control of the server, they can issue a rogue certificate linked to any user in the domain, effectively allowing them to impersonate that user at will. This rogue certificate can be used for both authentication and encryption purposes, enabling the attacker to maintain a stealthy and persistent presence on the network.
+
+Given the high level of privileges needed to execute this technique, it is often used in advanced persistent threat (APT) scenarios where the attacker seeks to maintain access to the victim's network over a long period.
+
+Despite its potency, this method can be challenging to detect once in place, which emphasizes the need for a thorough understanding of the AD CS role and PKI certificates. Organizations must have robust monitoring systems and response strategies to identify and counter such attacks. Regularly reviewing issued certificates and their use can help detect these attacks early and initiate appropriate remediation measures.
+
+In conclusion, Windows AD CS Domain Persistence is a sophisticated technique that underscores the importance of robust security measures, continuous monitoring, and a deep understanding of network systems and their vulnerabilities.
+
+Let's walk through a hypothetical example of how an attacker might use Windows AD CS Domain Persistence for educational purposes:
+
+Step 1: Gain Access to the Network
+As this is a post-exploitation technique, we'll assume that the attacker has already gained access to the network. They may have done this through a variety of means, such as a successful phishing attack or exploiting a known vulnerability.
+
+Step 2: Compromise a Server Running AD CS
+Once inside the network, the attacker identifies a server running the Active Directory Certificate Services role. They might use a command like `net view /domain` to list all servers in the domain and then use a tool like nmap to identify which of these are running AD CS.
+
+Step 3: Issue a Rogue Certificate
+After compromising the AD CS server, the attacker can issue a rogue certificate. They might use the `certreq` command line tool to do this:
+
+```
+certreq -new request.inf rogue.cer
+
+```
+
+In this command, `request.inf` is a file containing the certificate request parameters, and `rogue.cer` is the file where the certificate will be saved.
+
+Step 4: Use the Rogue Certificate for Persistence
+With the rogue certificate issued, the attacker can now use it to authenticate as any user on the network. They can use this access to maintain a persistent presence on the network, even after initial detection and remediation efforts.
+
+This example highlights the importance of regular monitoring and robust security measures. By regularly reviewing issued certificates and their usage, organizations can detect and counter such attacks.

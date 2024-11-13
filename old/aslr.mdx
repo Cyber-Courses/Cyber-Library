@@ -1,0 +1,75 @@
+# ASLR
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Address Space Layout Randomization (ASLR) is a computer security technique that randomizes the location where system executables are loaded into memory. This unpredictability makes it more difficult for an attacker to predict target addresses, thus preventing many types of security attacks, including buffer overflow attacks.
+> 
+
+### 🧐 Why ?
+
+> ASLR is an important security feature because it makes it harder for attackers to execute malicious code on a system. Even if a vulnerability exists in a software, ASLR can prevent an attacker from reliably jumping to a specific exploited function in memory. This increases the difficulty of exploiting the system, making it less attractive to attackers.
+> 
+
+### ⛏️ How ?
+
+> ASLR is typically implemented at the operating system level. In Linux, for example, you can enable ASLR by setting the kernel parameter 'kernel.randomize_va_space' to 2. This can be done by adding the line 'kernel.randomize_va_space = 2' to '/etc/sysctl.conf' and then running 'sysctl -p' to apply the change. In Windows, ASLR is enabled by default and can be managed through the Windows Defender Security Center.
+> 
+
+### ⏳ When ?
+
+> ASLR was first implemented in the early 2000s as a response to the widespread problem of buffer overflow attacks. It was incorporated into Linux in 2005, into OpenBSD in 2003, and into Windows starting with Vista in 2007.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Address Space Layout Randomization (ASLR) is a security technique that increases the difficulty for an attacker to exploit a system. It operates by randomizing the locations in memory where system executables are loaded every time a process starts. This unpredictability creates a challenge for an attacker who wants to predict target addresses for executing malicious actions, such as buffer overflow attacks.
+
+The primary components that ASLR randomizes are the base addresses of the stack, heap, and libraries. The stack is a region of memory that stores temporary data created by each function (including the function's return address and local variables), and it grows and shrinks automatically when the function calls another, or when a function exits. The heap is a region of memory used for dynamic memory allocation. Both the stack and heap spaces are unique to each process. Libraries, on the other hand, can be shared between processes.
+
+Given this randomization, if an attacker can find a vulnerability in a program, they cannot predict where in memory the exploited code will reside, nor can they simply jump to a known address, as that address changes every time the program runs.
+
+To overcome ASLR, an attacker would need to find a separate vulnerability that allows them to leak memory addresses or, less likely, guess the addresses, which is statistically improbable.
+
+ASLR has been an important security feature since the early 2000s when it was introduced as a response to the widespread problem of buffer overflow attacks. It was incorporated into Linux in 2005, OpenBSD in 2003, and Windows starting with Vista in 2007. On most modern operating systems, ASLR is enabled by default.
+
+For example, consider a simple C program that has a buffer overflow vulnerability. The code might look something like this:
+
+```c
+#include <string.h>
+
+void vulnerable_function(char* string){
+    char buffer[100];
+    strcpy(buffer, string);
+}
+
+int main(int argc, char** argv){
+    vulnerable_function(argv[1]);
+    return 0;
+}
+
+```
+
+In this program, the `vulnerable_function` function copies an input string into a buffer without checking its size, which can cause a buffer overflow if the input string is longer than the buffer.
+
+When compiled and run on a system with ASLR enabled, the memory addresses for the stack, heap, and libraries will be randomized each time the program is run. This means that if an attacker tries to exploit the buffer overflow to run malicious code, they would need to know the exact memory address of the buffer, which is unpredictable due to ASLR.
+
+To demonstrate, let's say the attacker wants to run the command `/bin/sh` (which starts a shell) by exploiting the buffer overflow. They would first need to write the malicious code (in assembly language), compile it, and then get its hexadecimal representation. This could be done using tools like `nasm` (a assembler) and `xxd` (a hex dump utility):
+
+```bash
+$ echo -e "section .text\\n   global _start\\n_start:\\n   xor eax, eax\\n   push eax\\n   push 0x68732f2f\\n   push 0x6e69622f\\n   mov ebx, esp\\n   mov ecx, eax\\n   mov edx, eax\\n   mov al, 11\\n   int 0x80" > shellcode.asm
+$ nasm -f elf32 shellcode.asm
+$ ld -m elf_i386 -o shellcode shellcode.o
+$ objdump -d ./shellcode | grep '[0-9a-f]:' | grep -v 'file' | cut -f2 -d: | cut -f1-6 -d' ' | tr -s ' ' | tr '\\t' ' ' | sed 's/ $//g' | sed 's/ /\\\\x/g' | paste -d '' -s | sed 's/^/"/' | sed 's/$/"/g'
+
+```
+
+The output of the above commands is the hexadecimal representation of the malicious code that starts a shell. However, to actually exploit the buffer overflow, the attacker needs to know the exact memory address of the buffer in the `vulnerable_function` function, which is randomized by ASLR.
+
+Therefore, even if the attacker manages to overflow the buffer and overwrite the return address of the `vulnerable_function` function (which normally points to the next instruction in the `main` function) to point to their malicious code, they cannot know where their code will be in memory, making the exploit unreliable.

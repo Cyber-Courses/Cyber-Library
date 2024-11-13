@@ -1,0 +1,123 @@
+# macOS TCC Bypasses
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS TCC Bypasses refer to techniques that exploit vulnerabilities in Apple's Transparency, Consent, and Control (TCC) system to gain unauthorized access to protected resources on a Mac device without the user's explicit consent.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS TCC Bypasses is important as it helps in identifying and addressing potential security threats in Mac devices. This knowledge is useful for both developers, seeking to build more secure applications, as well as users, striving to maintain their privacy and data security.
+> 
+
+### ⛏️ How ?
+
+> To protect against macOS TCC Bypasses, users should keep their OS and applications updated, avoid downloading software from untrusted sources, and be wary of granting access permissions to unknown applications. Developers, on the other hand, should follow best practices for secure coding, regularly audit their code for vulnerabilities, and promptly patch any discovered security flaws.
+> 
+
+### ⏳ When ?
+
+> The practice of exploiting macOS TCC Bypasses began to emerge shortly after the introduction of the TCC system in macOS Mojave in 2018. It has since become a notable concern in the realm of cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview
+
+The Transparency, Consent, and Control (TCC) system is a critical part of Apple's privacy framework on macOS. Its primary function is to regulate application access to protected resources such as the camera, microphone, and user data. A TCC Bypass refers to techniques or methods used to circumvent these controls, allowing unauthorized access to these protected resources.
+
+## Detailed Explanation
+
+### How the TCC System Works
+
+The TCC system maintains a database that tracks which applications have been granted permissions to access various protected resources. When an application requests access to a resource, the TCC framework checks this database to determine if the application has the necessary permissions. If it does, access is granted; otherwise, the user is prompted to grant or deny access.
+
+### Techniques for TCC Bypass
+
+1. **Exploiting Known Vulnerabilities**: One method to bypass TCC controls is by exploiting known vulnerabilities within the TCC system. These vulnerabilities might exist due to bugs in the macOS operating system that fail to enforce TCC policies correctly.
+2. **Mimicking User Interactions**: Another technique involves mimicking legitimate user interactions. This can trick the TCC system into believing that the user has granted permission when they have not.
+3. **Manipulating TCC Database**: A more direct approach is to manipulate the TCC database (`TCC.db`) where permissions are stored. By inserting or modifying entries in this database, a malicious application can gain unauthorized access to protected resources.
+4. **Exploiting Misconfigurations**: Misconfigurations in system settings can also be exploited to bypass TCC controls. This includes improper setup of user permissions and access controls that leave gaps in the system's security.
+
+### Detailed Example: TCC Bypass Vulnerability Exploitation
+
+### Background
+
+In 2019, security researcher Csaba Fitzl discovered a vulnerability in the TCC system that allowed an application to gain unauthorized access to protected resources, such as user contacts. This vulnerability involved direct manipulation of the TCC database.
+
+### Step-by-Step Walkthrough
+
+**1. Exploit Preparation**
+
+The malicious application needs a valid Apple Developer ID to notarize itself and avoid Gatekeeper, Apple's security mechanism that blocks untrusted software.
+
+```bash
+codesign -s "Developer ID" -v malicious.app
+
+```
+
+This command signs the malicious application with a valid Developer ID, making it appear as a legitimate app.
+
+**2. TCC Database Manipulation**
+
+The macOS maintains the TCC permissions database at `~/Library/Application Support/com.apple.TCC/TCC.db`. By accessing and manipulating this database, the malicious application can grant itself permissions.
+
+First, access the database using the `sqlite3` command-line utility:
+
+```bash
+sqlite3 ~/Library/Application\\ Support/com.apple.TCC/TCC.db
+
+```
+
+Then, insert a new record granting the malicious application access to the desired protected resource, such as contacts:
+
+```sql
+INSERT INTO access VALUES('kTCCServiceContacts','com.malicious.app',0,1,1,NULL,NULL,NULL,'UNUSED',NULL,0,1541440109);
+
+```
+
+In this SQL command:
+
+- `kTCCServiceContacts` specifies the service (Contacts) to which access is being granted.
+- `com.malicious.app` is the bundle ID of the malicious application.
+- The other values define various parameters, including the timestamp and access levels.
+
+**3. Executing the Bypass**
+
+Once the database has been modified, the malicious application can access the user's contacts without triggering any TCC prompts.
+
+```bash
+./malicious.app
+
+```
+
+Executing the application now allows it to read the contacts due to the unauthorized entry in the TCC database.
+
+### Implications
+
+Successful exploitation of TCC vulnerabilities can lead to significant security breaches, including unauthorized access to sensitive data and potential system compromise. Attackers can leverage elevated privileges to access user data, execute malicious code, or manipulate system settings.
+
+### Countermeasures
+
+To defend against TCC bypass attacks, consider the following measures:
+
+1. **Regular System Updates**: Ensure that macOS and all installed applications are up to date with the latest security patches.
+2. **Secure Coding Practices**: Developers should follow best practices for secure coding to minimize vulnerabilities.
+3. **User Education**: Educate users about the importance of granting permissions only to trusted applications.
+4. **Monitor System Logs**: Regularly review system logs for any unauthorized access attempts or suspicious activity.
+5. **Use Security Tools**: Implement additional security tools to monitor and protect against unauthorized database modifications and other exploits.
+
+## Conclusion
+
+The TCC framework is essential for maintaining privacy and security on macOS by regulating application access to sensitive resources. Understanding the potential methods for bypassing TCC controls, such as exploiting vulnerabilities or manipulating the TCC database, highlights the importance of robust security practices. Regular system updates, secure coding, user education, and vigilant monitoring are crucial for protecting against TCC bypass exploits and maintaining a secure macOS environment.
+
+# 🖇️ Références
+
+---

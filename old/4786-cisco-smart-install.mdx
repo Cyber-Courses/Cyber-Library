@@ -1,0 +1,96 @@
+# 4786 - Cisco Smart Install
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Cisco Smart Install, identified by CVE-2018-0171, is a plug-and-play configuration and image-management feature that provides zero-touch deployment for new switches. Essentially, it's a part of a Cisco's networking protocol which allows network administrators to implement new switches onto the network remotely.
+> 
+
+### 🧐 Why ?
+
+> The main problem Cisco Smart Install is designed to solve is the time-consuming and resource-heavy process of manually configuring new switches on a network. It's important because it simplifies network administration and reduces the risk of errors that can occur during manual configuration. Understanding how to secure it is crucial as misconfigurations can lead to security vulnerabilities, allowing attackers to modify the TFTP server settings, exfiltrate configuration files or run arbitrary IOS commands.
+> 
+
+### ⛏️ How ?
+
+> To implement Cisco Smart Install, network administrators need to configure a switch with a base configuration, then connect the Smart Install director (typically a router or switch functioning as a TFTP server) to the client switch and enable the Smart Install client. Once the client switch is added to the director's client database, configurations and IOS images can be loaded onto the client switch remotely. To secure it, administrators should use the 'no vstack' command to disable Smart Install if it's not needed, implement ACLs to control access to the Smart Install client, and regularly update and patch their systems.
+> 
+
+### ⏳ When ?
+
+> Cisco Smart Install has been in use since it was introduced in Cisco IOS Software Release 12.2(52)SE. However, it has been the subject of security concerns since the discovery of vulnerabilities in 2018.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Cisco Smart Install operates on TCP port 4786. It uses a director-client model where the director pushes configuration updates or IOS images to the client switches. The director holds a client database that includes information about all the client switches. During the initial configuration process, the client switch sends a discovery message to the director. The director replies with an offer message containing configuration information. The client switch then requests the configuration and the director sends the configuration file via TFTP. Misconfigurations can expose the Smart Install client to unauthorized access, as there is no authentication or authorization controls between the client and director.
+
+Cisco Smart Install is a technology that facilitates the deployment and configuration of Cisco switches in a network. It operates on TCP port 4786, utilizing a director-client model. In this model, the director, often a router or another switch functioning as a TFTP server, pushes configuration updates or IOS images to the client switches.
+
+The director maintains a client database that stores information about all connected switches. This allows the director to manage multiple switches simultaneously and keep track of their configurations.
+
+During the initial configuration process, the client switch sends a discovery message to the director. The director responds with an offer message that contains the necessary configuration information. Once the client switch requests this configuration, the director sends the configuration file via TFTP, a protocol used for simple file transfers.
+
+This process simplifies network management by automating configuration tasks that would otherwise need to be performed manually on each switch. However, it also presents potential security risks if not properly configured.
+
+Misconfigurations can expose the Smart Install client to unauthorized access, due to a lack of built-in authentication or authorization controls between the client and director. This means that if an attacker gains access to the director, they could potentially manipulate switch configurations or even run arbitrary IOS commands.
+
+To mitigate these risks, network administrators should take several precautions. They should disable the Smart Install feature using the 'no vstack' command if it's not required. They should also implement Access Control Lists (ACLs) to regulate who can access the Smart Install client. Regular system updates and patches are also crucial to maintain network security.
+
+For instance, let's consider a scenario where a network administrator is setting up a new Cisco switch in the network using Cisco Smart Install.
+
+1. **Configuring the Director**: First, the network administrator needs to configure the director. This could be another switch or a router that acts as a TFTP server. The configuration might look something like this:
+
+```bash
+# Enter the global configuration mode
+Router> enable
+Router# configure terminal
+
+# Enable TFTP server and specify the directory
+Router(config)# tftp-server flash:
+
+# Define the director role for Smart Install
+Router(config)# vstack director
+
+```
+
+1. **Adding the Client**: Next, the client switch is added. This is typically done by connecting the client switch to the director and enabling the Smart Install client. Here's a simple example:
+
+```bash
+# Enter the global configuration mode
+Switch> enable
+Switch# configure terminal
+
+# Enable the Smart Install client
+Switch(config)# vstack
+
+```
+
+1. **Pushing Configurations**: Once the client switch is added to the director's client database, the director can push configurations and IOS images to the client switch. This is done using the 'vstack' commands on the director.
+
+```bash
+# Push the configuration to the client
+Router(config)# vstack config filename [filename]
+Router(config)# vstack download-image
+
+```
+
+1. **Securing the Setup**: Lastly, to secure the setup, the 'no vstack' command can be used to disable Smart Install if it's not needed. Access Control Lists (ACLs) can also be implemented to control access to the Smart Install client.
+
+```bash
+# Disable Smart Install
+Switch(config)# no vstack
+
+# Configure an ACL
+Switch(config)# ip access-list standard SMART-INSTALL-ACL
+Switch(config-std-nacl)# permit host [director IP address]
+
+```
+
+Remember, these are simplified examples and the actual commands and configurations might vary depending on the specific requirements and the Cisco IOS version.

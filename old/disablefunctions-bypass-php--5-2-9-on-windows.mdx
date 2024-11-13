@@ -1,0 +1,75 @@
+# disable_functions bypass - PHP <= 5.2.9 on windows
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass is a security issue in PHP, specifically in versions 5.2.9 or earlier running on Windows. The 'disable_functions' directive in PHP is used to disable certain functions for security reasons. However, in these specific versions of PHP, it's possible to bypass this directive and execute the disabled functions.
+> 
+
+### 🧐 Why ?
+
+> Understanding disable_functions bypass is important because it exposes a serious security vulnerability. If an attacker is able to bypass the disable_functions directive, they can execute functions that the system administrator has explicitly disabled for security reasons. This could lead to unauthorized access, data breaches, or other security incidents.
+> 
+
+### ⛏️ How ?
+
+> To exploit this vulnerability, an attacker would need to inject malicious code into a PHP script running on the vulnerable system. The code would take advantage of the bypass to execute a disabled function. To protect against this vulnerability, you should update PHP to a more recent version. If updating is not an option, consider using other security measures, such as restricting access to the PHP system or using a web application firewall.
+> 
+
+### ⏳ When ?
+
+> Disable_functions bypass became a known issue in PHP versions 5.2.9 and earlier. However, it has been addressed in more recent versions of PHP.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'disable_functions' directive in PHP is a crucial security feature. It allows system administrators to disable certain functions that could be exploited for malicious purposes. However, in PHP versions 5.2.9 or earlier running on Windows, this security feature can be bypassed due to the way these versions handle case sensitivity.
+
+In the Windows operating system, file names are case-insensitive. This means that 'FunctionName' and 'functionname' would be treated as the same. This characteristic is exploited in the bypass of the 'disable_functions' directive. An attacker could simply change the case of the function name to bypass the directive. For instance, if a function 'exec' is listed in the 'disable_functions', an attacker could use 'EXEC' or 'Exec' to bypass the restriction.
+
+The potential security risk here is considerable. If an attacker can bypass the 'disable_functions' directive, they could execute functions that have been explicitly disabled due to their potential for abuse. This could lead to unauthorized system access, data breaches, or other serious security incidents.
+
+Thankfully, this vulnerability has been addressed in later versions of PHP. Therefore, the best way to protect against this vulnerability is to update PHP to a more recent version. If updating isn't possible, other security measures should be implemented. These could include restricting access to the PHP system, using a web application firewall, or applying least privilege principles to limit potential attack vectors.
+
+For illustration purposes, let's consider a hypothetical PHP application running on a Windows server with PHP version 5.2.9. Let's say that the 'exec' function, which can execute an external program, is listed in 'disable_functions' in the PHP.ini file for security reasons.
+
+```php
+<?php
+// This function is disabled for security reasons
+exec('rm -rf /');
+?>
+
+```
+
+An attacker aware of the 'disable_functions' bypass vulnerability could exploit it by injecting malicious code that changes the case of 'exec', bypassing the restriction.
+
+```php
+<?php
+// The 'exec' function is bypassed by changing the case
+Exec('rm -rf /');
+?>
+
+```
+
+In this code, 'Exec' is not recognized as equivalent to the disabled 'exec' due to case sensitivity, allowing it to execute. The command 'rm -rf /' is a dangerous command that deletes all files in the system.
+
+To mitigate this vulnerability, it's crucial to update PHP to a later version that has addressed this issue. If updating isn't possible, consider other security measures. For instance, restrict access to the PHP system, use a web application firewall, or apply a principle of least privilege.
+
+```php
+<?php
+// Restrict access to critical functions
+if (!isAdmin($user)) {
+    die('Access denied');
+}
+Exec('rm -rf /');
+?>
+
+```
+
+In this modified code, the 'Exec' function can only be executed if the user is an administrator. This doesn't completely solve the problem, but it reduces the potential attack surface.

@@ -1,0 +1,52 @@
+# Time Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The Linux Time Namespace is a feature of the Linux operating system that allows each process to have its own view of time. This is particularly useful in scenarios where processes need to run in a controlled or virtualized environment, where they may need to have a different view of time than the host system.
+> 
+
+### 🧐 Why ?
+
+> The Linux Time Namespace is important as it allows for the isolation of system time. This is particularly useful in virtualization and containerization where multiple processes run in their own isolated environments. By giving each process its own view of time, it allows for more control and predictability, especially in testing or debugging scenarios where manipulating the time can help reproduce certain conditions or behaviors.
+> 
+
+### ⛏️ How ?
+
+> To leverage Linux Time Namespace, you can use the 'unshare' command with the '--time' option to create a new time namespace. You can then use the 'date' command to set the system time within this namespace, without affecting the system time of the host or other namespaces. Remember that you will need the appropriate permissions to create a new namespace and change the system time.
+> 
+
+### ⏳ When ?
+
+> The Linux Time Namespace has been available since Linux kernel version 5.6, which was released in March 2020.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Linux Time Namespace is a powerful feature of the Linux operating system that enables each process to have its own unique perspective of time. This is achieved by encapsulating a global system resource, in this case, time, in such a way that each process within a namespace believes it has its own isolated instance of that resource.
+
+The Linux operating system accomplishes this by maintaining a distinct offset for each namespace. This offset is either added to or subtracted from the system time whenever a process within the namespace requests or sets the time. This way, any alterations made to the time within a namespace do not influence the time in other namespaces or the host system.
+
+This feature is especially beneficial in scenarios involving virtualization or containerization. In these contexts, multiple processes run in their own isolated environments. By providing each process with its own perception of time, the Linux Time Namespace allows for greater control and predictability. This is particularly useful in testing or debugging situations where manipulating time can aid in recreating certain conditions or behaviors.
+
+To utilize the Linux Time Namespace, one can use the 'unshare' command followed by the '--time' option to create a new time namespace. Following this, the 'date' command can be used to set the system time within this namespace. It is important to note that the appropriate permissions are required to create a new namespace and change the system time.
+
+The Linux Time Namespace has been part of the Linux operating system since the release of Linux kernel version 5.6 in March 2020.
+
+Here's a detailed, educational example of how to use the Linux Time Namespace:
+
+1. First, open your terminal.
+2. To create a new Linux Time Namespace, you'll need to use the 'unshare' command with the '--time' option. Type `unshare --time /bin/bash`. This command creates a new bash shell in a new time namespace.
+3. Now, let's set the system time within this new namespace. Type `date -s "2022-01-01 00:00:00"`. This command sets the system time to midnight on January 1, 2022, within the namespace.
+4. To verify the time change, you can simply use the 'date' command by typing `date`. This will display the current system time within the namespace, which should reflect the time you just set.
+5. Now, if you switch back to your original shell or open a new terminal window and type `date`, you'll see the system time of the host, which remains unaffected by the changes within the new namespace.
+
+Remember that you'll need appropriate permissions to execute these commands. If you encounter permission errors, you may need to prepend 'sudo' to these commands.
+
+This example illustrates how the Linux Time Namespace allows each process (in this case, each shell) to have its own view of time. The changes within the new namespace did not affect the host system's time, demonstrating the isolation provided by the Linux Time Namespace.

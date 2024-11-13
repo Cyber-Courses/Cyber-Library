@@ -1,0 +1,66 @@
+# Heap Overflow
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Heap Overflow is a type of buffer overflow that occurs when more data is written into a block of memory, or buffer, than it can hold, causing the excess data to overflow into adjacent memory locations, potentially overwriting valuable data or leading to malfunctioning or insecure program behavior.
+> 
+
+### 🧐 Why ?
+
+> Understanding Heap Overflow is crucial for both developers and cybersecurity professionals. For developers, understanding Heap Overflow can help in writing secure code and developing software free of such vulnerabilities. For cybersecurity professionals, understanding Heap Overflow can aid in penetration testing and vulnerability assessment activities, helping to identify and mitigate potential security risks.
+> 
+
+### ⛏️ How ?
+
+> Implementing good coding practices is the best way to prevent Heap Overflow. This includes validating input to ensure that an application is handling the type, length, format, and range of data that it is supposed to. Additionally, developers can use languages that offer automatic memory management, and use security features like address space layout randomization and non-executable stacks. Cybersecurity professionals can use specialized tools to identify heap overflows, and recommend patches and other remediation strategies.
+> 
+
+### ⏳ When ?
+
+> Heap Overflow has been a known issue since the early days of programming but gained significant attention in the late 1990s and early 2000s with the rise of the internet and the increasing importance of software security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Heap Overflow is a type of Buffer Overflow, a common software vulnerability, that specifically occurs in the heap data area. The heap is a region of a computer's dynamic memory space used for dynamic memory allocation by programs running in the system. Blocks of memory are allocated and deallocated in this space as needed by the program.
+
+Heap Overflow happens when a program writes more data into a block of memory, or buffer, than it was originally allocated for. As a result, the excess data overflows into adjacent memory locations in the heap, potentially overwriting valuable data. This can lead to unexpected behavior, such as program crashes, incorrect data manipulation, or even the creation of security vulnerabilities.
+
+The latter is particularly concerning as it creates an opportunity for malicious actors to exploit. By carefully crafting the overflow, an attacker may be able to control the execution flow of the program, leading to Arbitrary Code Execution. This means they could potentially run any command or code of their choosing, making Heap Overflow a serious security risk.
+
+Preventing Heap Overflow involves implementing secure coding practices. Developers should always validate input data to ensure it matches the expected type, length, format, and range. Using programming languages that provide automatic memory management can also help prevent such vulnerabilities. Furthermore, security features like Address Space Layout Randomization (ASLR) and Non-Executable Stacks can be utilized to make it more difficult for an attacker to exploit a potential Heap Overflow.
+
+In the realm of cybersecurity, professionals use specialized tools to identify Heap Overflow vulnerabilities in software systems. Upon identification, they can recommend patches and other remediation strategies to mitigate the potential security risks. Understanding Heap Overflow is crucial for both developers, for writing secure code, and cybersecurity professionals, for identifying and mitigating potential security risks.
+
+Consider a simple C program that uses dynamic memory allocation:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+   char *buffer = malloc(10 * sizeof(char)); // allocating 10 bytes of memory
+   strcpy(buffer, "HeapOverflowExample"); // copying more than 10 bytes into buffer
+   free(buffer); // freeing the memory
+   return 0;
+}
+
+```
+
+In this program, we're allocating 10 bytes of memory for a character buffer. However, when we're copying the string "HeapOverflowExample" into the buffer, we're copying more data than the buffer was originally allocated for.
+
+1. First, we allocate 10 bytes of memory in the heap for a character buffer. This is a region of memory that our program can use to store data.
+2. Next, we attempt to copy the string "HeapOverflowExample" into our buffer. This string is 20 characters long, not including the null terminator, which is significantly more than the 10 bytes of memory we allocated for our buffer.
+3. As a result, the excess characters in our string overflow into adjacent memory locations in the heap. This is the heap overflow.
+4. Depending on what data was stored in those adjacent memory locations, this could lead to a variety of problems. For example, it could cause our program to crash, manipulate data incorrectly, or create a security vulnerability that a malicious actor could exploit.
+5. Finally, we free the memory we allocated for our buffer. However, because we already overwrote adjacent memory locations, the damage (if any) would already be done.
+
+The best way to prevent this type of heap overflow is by ensuring our program never attempts to write more data to a buffer than it was allocated for. In this case, that could mean checking the length of the string before we try to copy it into our buffer, and resizing our buffer if necessary.

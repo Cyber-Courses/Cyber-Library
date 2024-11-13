@@ -1,0 +1,84 @@
+# PwnTools
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PwnTools is a Python library that provides a powerful set of tools to aid in the process of exploit development and security research. It is designed to facilitate rapid prototyping and development, and encourages ad-hoc programming with a strong focus on interactivity.
+> 
+
+### 🧐 Why ?
+
+> In the realm of cybersecurity, especially in penetration testing and exploit development, it's essential to have a toolkit that can ease the process of identifying, exploiting, and documenting vulnerabilities. PwnTools is such a toolkit. It reduces the complexity and time required to craft reliable exploits, enabling security researchers to focus more on their target and less on the intricacies of exploit construction.
+> 
+
+### ⛏️ How ?
+
+> To utilize PwnTools, one must have a basic understanding of Python programming and exploit development. After installing the library, you can import it into your Python scripts and start using the various modules and functions it provides. These include functions for network connections, shellcode generation, binary packing/unpacking, and more. The simplicity and interactivity of PwnTools make it a powerful tool for both novice and experienced security researchers.
+> 
+
+### ⏳ When ?
+
+> PwnTools has been used by security researchers and penetration testers since its initial release in 2013. Its features and ease of use have made it a go-to tool for many cybersecurity professionals.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+PwnTools is a powerful Python library that serves as an essential toolkit for exploit development and security research. Its foundation on the Python programming language allows it to take advantage of Python's simplicity and its wide-ranging libraries. This makes PwnTools a versatile tool that can adapt to various exploit development scenarios.
+
+One of the key features of PwnTools is its interactive REPL (Read-Eval-Print Loop) environment. This environment provides a user-friendly interface where users can execute one command at a time. This characteristic is particularly useful in debugging and exploit development, where the ability to execute and evaluate commands individually can make these complex tasks significantly more manageable. The REPL environment encourages interactive programming, fostering a hands-on approach to exploit development.
+
+PwnTools also offers a vast array of modules designed to handle common tasks in exploit development. These modules cover a range of functions, including creating network connections, generating and executing shellcode, manipulating binary data, and many more. These modules are designed to simplify and streamline the exploit development process, enabling researchers to craft reliable exploits more efficiently and with less effort.
+
+An exceptional feature of PwnTools is its seamless integration with the GNU Debugger (GDB). This integration allows researchers to debug their exploits within the same environment where they develop them, providing a unified and streamlined workflow. This feature simplifies the debugging process, making it easier for researchers to identify and address issues in their exploits, thereby increasing the reliability and effectiveness of their exploits.
+
+Furthermore, PwnTools provides the capability to interact with binaries directly. It can read, write, and execute binary data, which is an essential feature when working with exploits. This ability allows researchers to test their exploits on different binaries without the need for additional tools or steps, making the testing process more convenient and efficient.
+
+In summary, PwnTools is an invaluable tool in the field of cybersecurity, particularly in exploit development and security research. Its simplicity, versatility, and comprehensive feature set make it a go-to tool for both novice and experienced security researchers. Whether you're just starting in exploit development or an experienced professional, PwnTools is a tool that can help you streamline your workflow, increase your efficiency, and enhance the reliability and effectiveness of your exploits.
+
+Consider a scenario where we want to exploit a buffer overflow vulnerability in a remote server. The server, located at '[example.com](http://example.com/)' on port 1234, expects to receive a string of a certain length and crashes when it receives a longer string. Our goal is to craft a payload that includes some shellcode, send it to the server, and gain control of the server's execution flow. Here's how you might do this with PwnTools:
+
+```python
+from pwn import *
+
+# Establish a connection to the remote server
+conn = remote('example.com', 1234)
+
+# Craft the payload
+buffer_size = 128
+nop_sled_length = 90
+shellcode = asm(shellcraft.sh()) # Create simple shellcode with a /bin/sh payload
+
+nop_sled = asm('nop') * nop_sled_length # Create a NOP sled
+payload = nop_sled + shellcode # Combine the NOP sled and shellcode
+payload += 'A' * (buffer_size - len(payload)) # Add padding to reach the buffer size
+
+# Send the payload
+conn.sendline(payload)
+
+# Interact with the shell
+conn.interactive()
+
+# Close the connection when we're done
+conn.close()
+
+```
+
+Here's what each part of this code does:
+
+1. We first import the `pwn` module, which gives us access to all the functionality provided by PwnTools.
+2. We establish a connection to the remote server using the `remote` function.
+3. We create a payload that will overflow the server's buffer. The payload includes a NOP sled, some shellcode, and some padding to fill the rest of the buffer.
+    - The NOP sled is a sequence of 'no operation' (NOP) instructions that serves as a landing zone for the server's instruction pointer after the buffer overflow.
+    - The shellcode is a sequence of machine instructions that will be executed when the instruction pointer lands on it. In this case, we use PwnTools' `asm` and `shellcraft` functions to create simple shellcode that spawns a shell (`/bin/sh`).
+    - The padding is used to fill the rest of the buffer and trigger the overflow.
+4. We send the payload to the server using the `sendline` function. This function sends the payload and automatically appends a newline character (`\\n`) to indicate the end of the data.
+5. We switch to interactive mode using the `interactive` function. This allows us to interact with the server's shell directly from our terminal.
+6. Finally, we close the connection using the `close` function to free up system resources.
+
+This script exploits a simple buffer overflow vulnerability, but PwnTools provides the tools to exploit much more complex vulnerabilities as well. Its clean, high-level API makes it easy to build, send, and interact with payloads, and its comprehensive feature set allows you to handle almost any exploit development scenario.

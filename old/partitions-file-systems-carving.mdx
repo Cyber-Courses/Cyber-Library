@@ -1,0 +1,126 @@
+# Partitions/File Systems/Carving
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Partitions, File Systems, and Carving are fundamental concepts in computer storage. A partition is a region of a hard disk that can be managed separately. File systems are ways of organizing data on a storage device like a hard disk or an SSD. Carving is a digital forensics technique that involves recovering files and fragments of files that are not linked to the file system's index.
+> 
+
+### 🧐 Why ?
+
+> Understanding partitions, file systems, and carving is crucial because they form the basis of how data is stored, organized, and recovered in a computer system. In cybersecurity, these concepts are important for data recovery, digital forensics, and incident response. For instance, carving can be used to recover deleted files or fragments of files that could provide valuable evidence in a digital forensics investigation.
+> 
+
+### ⛏️ How ?
+
+> To use or implement these concepts, you need to understand the basics of computer storage. For instance, you can create, delete, resize, and manage partitions using tools like fdisk on Linux or Disk Management on Windows. To work with file systems, you can use commands like mount, umount, and df on Linux, or Disk Management on Windows. For carving, there are digital forensics tools like Foremost and Scalpel that can recover files based on their headers, footers, and internal data structures.
+> 
+
+### ⏳ When ?
+
+> These concepts have been in use since the early days of computing, with the partitioning and file systems being a fundamental part of operating system design, and carving becoming more prevalent with the rise of digital forensics in the late 20th century.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At the heart of these concepts is the understanding of how data is stored on a computer. A hard disk is divided into partitions, which can each have a different file system. The file system is responsible for organizing files and directories, and keeping track of which sectors belong to which files and which are free. Carving comes into play when the file system's index is damaged or deleted - it allows for the recovery of files by searching for specific patterns that identify the start and end of a file. This can be a complex process, as it requires understanding of how different file types are structured.
+
+## Detailed Explanation
+
+### Partitions
+
+Partitions are sections of a storage device that are treated as separate entities. They allow you to divide a physical disk into multiple logical disks, each of which can be managed independently. Common partitioning schemes include MBR (Master Boot Record) and GPT (GUID Partition Table).
+
+### Example:
+
+Using `fdisk` on Linux to create a partition:
+
+1. Open a terminal and run `sudo fdisk /dev/sda` (replace `/dev/sda` with your target disk).
+2. Enter `n` to create a new partition.
+3. Select the partition type (primary or extended).
+4. Define the partition size.
+5. Write the partition table by entering `w`.
+
+### File Systems
+
+A file system is a method used by an operating system to control how data is stored and retrieved. Without a file system, stored information would be one large body of data with no way to tell where one piece of information stops and the next begins. Examples of file systems include NTFS, FAT32, ext4, and HFS+.
+
+### Example:
+
+Using `mkfs` to create an ext4 file system on a new partition:
+
+1. After creating a partition `/dev/sda1`, format it using the command: `sudo mkfs.ext4 /dev/sda1`.
+2. Mount the new file system: `sudo mount /dev/sda1 /mnt`.
+
+### Carving
+
+Carving is a data recovery method that involves searching for file signatures to recover data without the help of file system metadata. This is particularly useful in digital forensics when the file system structure has been corrupted or deleted.
+
+### Example:
+
+Using `Foremost` to carve files:
+
+1. Install Foremost: `sudo apt-get install foremost`.
+2. Create a directory for recovered files: `mkdir /home/user/recovered`.
+3. Run Foremost on the target disk or image file: `sudo foremost -i /dev/sda1 -o /home/user/recovered`.
+
+### Step-by-step Process
+
+1. **Partitioning**:
+    - Use `fdisk` (Linux) or Disk Management (Windows) to create partitions.
+    - Example command: `sudo fdisk /dev/sda` and follow the prompts.
+2. **Creating File Systems**:
+    - Format the partitions with a file system.
+    - Example command: `sudo mkfs.ext4 /dev/sda1`.
+3. **Mounting File Systems**:
+    - Mount the file system to use it.
+    - Example command: `sudo mount /dev/sda1 /mnt`.
+4. **Carving Data**:
+    - Use tools like Foremost to recover lost files.
+    - Example command: `sudo foremost -i /dev/sda1 -o /home/user/recovered`.
+
+### Example Scenario
+
+Suppose you have a 500GB hard drive, `/dev/sda`, and you want to set up two partitions, format one with ext4, and the other with NTFS, then carve data from a corrupted NTFS partition.
+
+1. **Partitioning**:
+    
+    ```bash
+    sudo fdisk /dev/sda
+    
+    ```
+    
+    - Create two new partitions.
+2. **Creating File Systems**:
+    
+    ```bash
+    sudo mkfs.ext4 /dev/sda1
+    sudo mkfs.ntfs /dev/sda2
+    
+    ```
+    
+3. **Mounting File Systems**:
+    
+    ```bash
+    sudo mount /dev/sda1 /mnt/ext4
+    sudo mount /dev/sda2 /mnt/ntfs
+    
+    ```
+    
+4. **Carving Data**:
+    
+    If `/dev/sda2` becomes corrupted, use Foremost to recover data:
+    
+    ```bash
+    sudo foremost -i /dev/sda2 -o /home/user/recovered
+    
+    ```
+    
+
+This process outlines how to manage partitions and file systems and how to use carving techniques to recover lost data. Understanding these steps and the tools involved is crucial for effective data management and recovery.

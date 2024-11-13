@@ -1,0 +1,55 @@
+# Windows PsExec/Winexec/ScExec
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows PsExec, Winexec, and ScExec are utility programs that allow administrators to execute commands on a remote computer. PsExec is part of the Sysinternals Suite, a set of utilities designed to manage, diagnose, troubleshoot, and monitor Windows systems. Winexec and ScExec, on the other hand, are built-in Windows functions for executing applications.
+> 
+
+### 🧐 Why ?
+
+> These utilities are essential for managing and maintaining a network of computers, especially in enterprise environments. They allow administrators to remotely install software, run diagnostic scripts, and perform other administrative tasks without physically accessing each computer. However, they can also be exploited by malicious actors to execute remote commands and spread malware across a network.
+> 
+
+### ⛏️ How ?
+
+> To use these utilities, an administrator needs to first establish a remote session with the target computer. This typically involves authenticating with a valid user account and ensuring that the necessary ports are open on the target machine's firewall. Once a session is established, the administrator can execute commands as if they were physically present at the machine.
+> 
+
+### ⏳ When ?
+
+> These utilities have been part of Windows OS since its early versions. PsExec was first released in 2001 as part of the Sysinternals Suite, while Winexec and ScExec are built-in functions of the Windows API.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+PsExec, Winexec, and ScExec are utility programs that administrators use to execute commands remotely on another computer. These utilities work by creating a named pipe, a section of shared memory that processes use for communication, between the source and target computers. Commands are sent over this pipe and carried out on the target machine. The command's output is then sent back over the pipe to the source machine. This process facilitates efficient remote system management, enabling tasks such as software installation, running diagnostic scripts, and other administrative activities without the need for physical access to each machine.
+
+However, the same functionality that makes these utilities so useful can also be exploited for malicious purposes. Attackers can use these tools to execute harmful commands on a target machine remotely. This could include installing malware, stealing data, or spreading the attack to other machines on the same network, a tactic known as lateral movement.
+
+By exploiting these utilities, an attacker could potentially gain control over an entire network. This is why it's crucial to secure remote sessions with strong authentication mechanisms and continually monitor network activity for any unusual behavior that might indicate an attack.
+
+To mitigate such threats, organizations need to apply several security measures. Strong authentication mechanisms can help ensure that only authorized individuals can establish a remote session. Implementation of least privilege policies, where users are given the minimum levels of access necessary to perform their tasks, can also limit the potential damage from an attack. Furthermore, organizations should monitor network activity regularly and have an incident response plan ready to handle any detected security breaches promptly and effectively.
+
+Here's a simple example of using PsExec for educational purposes:
+
+1. **Download PsExec**: First, you need to download the PsExec utility from the Microsoft Sysinternals website. After downloading, extract the contents of the ZIP file.
+2. **Open Command Prompt**: Open the command prompt as an administrator. Navigate to the directory where you extracted PsExec.
+3. **Run a command on a remote computer**: Let's say you want to run the `ipconfig` command on a remote computer with the IP address 192.168.1.105. To do this, you would use the following command:
+
+```
+psexec \\\\192.168.1.105 -u admin -p password ipconfig
+
+```
+
+In this command, `\\\\192.168.1.105` specifies the target computer's IP address, `-u admin` specifies the username to log in with, `-p password` specifies the user's password, and `ipconfig` is the command you want to run on the remote computer. When you run this command, PsExec will establish a remote session with the target computer and execute the `ipconfig` command.
+
+1. **Understand the output**: The `ipconfig` command displays all current TCP/IP network configuration values, including IP addresses, subnet mask, and default gateway for all network adapters. This information is then sent back to your machine and displayed in your command prompt window.
+
+Remember, while this is a simple and benign use of PsExec, the same functionality can be exploited to execute harmful commands on a remote machine. Therefore, it's crucial to use strong authentication mechanisms, monitor network activity, and limit user privileges to enhance your network's security.

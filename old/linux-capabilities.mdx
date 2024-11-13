@@ -1,0 +1,70 @@
+# Linux Capabilities
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. They allow fine-grained control over superuser permissions, reducing the potential for privilege escalation attacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Capabilities is crucial for system administrators and security professionals. They provide a way to delegate certain superuser powers to unprivileged users in a controlled manner, mitigating the risks associated with granting full superuser access. Furthermore, they are key to hardening Linux systems against privilege escalation attacks.
+> 
+
+### ⛏️ How ?
+
+> Linux Capabilities can be managed using the 'setcap' and 'getcap' commands. For instance, to grant a user the ability to bind to network ports below 1024, you can use 'setcap cap_net_bind_service=+ep /path/to/program'. To view the capabilities of a program, use 'getcap /path/to/program'.
+> 
+
+### ⏳ When ?
+
+> Linux Capabilities were introduced in the Linux kernel in version 2.2 (1999) as a means to divide the power of the root user into smaller, assignable units.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux Capabilities are a feature of the Linux kernel which provide a finer granularity of privileged operations than the traditional root/non-root privilege model. They are designed to allow specific processes to carry out privileged operations, reducing the need for processes to run with root privileges and hence enhancing system security.
+
+Capabilities are implemented at the kernel level. When a process makes a system call that requires elevated privileges, the kernel checks the process's capabilities to determine if it has the necessary permissions. Each capability is a bit in a bitmask, representing a specific privilege. There are a number of different capabilities, each corresponding to a specific operation that would traditionally require root privileges.
+
+Each process has three sets of these capabilities: the effective set, the inheritable set, and the permitted set. The effective set determines the capabilities used by the kernel when performing permission checks. The inheritable set includes capabilities that can be passed on to child processes through the exec system call. The permitted set represents the maximum capabilities the process can have; these capabilities can be added to the effective set, but cannot be used directly.
+
+The 'setcap' and 'getcap' commands are used to manage capabilities. For example, the command 'setcap cap_net_bind_service=+ep /path/to/program' grants a program the ability to bind to network ports below 1024, a privilege usually reserved for root processes. The 'getcap' command can be used to view the capabilities of a program.
+
+Linux Capabilities were introduced in the Linux kernel in version 2.2 (1999) as a means to divide the power of the root user into smaller, assignable units. They are an important tool for system administrators and security professionals, allowing specific superuser powers to be delegated to unprivileged users in a controlled manner, mitigating the risks associated with granting full superuser access, and hardening Linux systems against privilege escalation attacks.
+
+For example, let's consider a situation where we want to allow a certain user to run the `ping` command, which normally requires root privileges, without granting the user full superuser access.
+
+1. First, we need to find out which capability is associated with the `ping` command. In this case, it's `cap_net_raw`.
+2. Next, we use the `setcap` command to grant the `ping` command the `cap_net_raw` capability. We execute the following command as the root user:
+
+```bash
+sudo setcap cap_net_raw+ep /bin/ping
+
+```
+
+This command gives the `ping` program the ability to use raw sockets, a privilege usually reserved for root processes. The `+ep` part means that we're adding (`+`) this capability to the effective (`e`) and permitted (`p`) sets.
+
+1. Now, if we want to check what capabilities the `ping` command has, we can use the `getcap` command:
+
+```bash
+getcap /bin/ping
+
+```
+
+The output might look something like this:
+
+```bash
+/bin/ping = cap_net_raw+ep
+
+```
+
+This shows that the `ping` command has the `cap_net_raw` capability in its effective and permitted sets.
+
+In this way, Linux Capabilities allow us to give a specific program the ability to perform a specific privileged operation, rather than having to run the program as root. This reduces the risk of privilege escalation attacks and enhances system security.

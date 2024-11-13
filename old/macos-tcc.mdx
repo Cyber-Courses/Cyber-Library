@@ -1,0 +1,76 @@
+# macOS TCC
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS TCC, or Transparency Consent and Control, is a privacy feature introduced by Apple in macOS Mojave. This system-level feature works to control the access that each app has to sensitive user data. It ensures that applications must request and receive user consent before accessing specific types of data, such as contacts, calendars, reminders, and photos.
+> 
+
+### 🧐 Why ?
+
+> With increasing concerns about data privacy and security, it's important to know how your operating system is protecting your sensitive information. macOS TCC works to provide an extra layer of protection by ensuring that apps cannot access certain types of data without your explicit consent. This feature not only enhances user privacy but also gives you greater control over your data and how it's used.
+> 
+
+### ⛏️ How ?
+
+> When an app attempts to access a protected resource for the first time, macOS prompts the user with a dialog box asking for consent. If the user grants permission, the app will be able to access the resource; if the user denies permission, the app will not be able to access the resource. You can manage these permissions later by going to System Preferences > Security & Privacy > Privacy.
+> 
+
+### ⏳ When ?
+
+> macOS TCC was first introduced with the release of macOS Mojave in 2018. Since then, it has become a vital part of the macOS system, providing users with increased control over their data and contributing to improved system-wide privacy.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+macOS TCC (Transparency Consent and Control) is a robust privacy feature by Apple. It operates at the system level, governing the access that applications have to sensitive user data.
+
+The TCC system maintains a database that records the access status of every app for each protected resource. When an application attempts to access a secured resource, the TCC system checks this database to determine if the app holds the necessary access permissions.
+
+If the app has not been granted access, the system initiates a dialog box to ask for the user's consent. If the user approves, the app gets access to the resource. Conversely, if the user denies the request or if the app was previously denied access, the system will block the access attempt.
+
+TCC extends its functionality to developers as well, via an API. This API allows developers to request access to secured resources. This ensures that their applications can handle scenarios where access to a protected resource is denied, thereby improving the overall user experience.
+
+The introduction of TCC showcases Apple's commitment to data privacy and security. It gives users more control over their data, enhances user privacy, and ensures that users have the ultimate say in how and when their data is accessed.
+
+For example, let's consider a scenario where a third-party note-taking app "NoteMaster" wants to access the user's calendar on a macOS system to add reminders. Here's how the TCC process would work:
+
+1. **Requesting Access:** When the user tries to use the reminder feature for the first time, NoteMaster will call the Apple Event APIs to request access to the user's Calendar.
+
+```swift
+import EventKit
+
+let eventStore = EKEventStore()
+
+switch EKEventStore.authorizationStatus(for: .event) {
+    case .authorized: insertEvent(store: eventStore)
+    case .denied: print("Access to calendar is denied")
+    case .notDetermined:
+        eventStore.requestAccess(to: .event, completion:
+            {[weak self] (granted: Bool, error: Error?) -> Void in
+                if granted {
+                    self?.insertEvent(store: eventStore)
+                } else {
+                    print("Access to calendar is denied")
+                }
+            })
+    default: print("Access to calendar is not determined")
+}
+
+```
+
+1. **User Consent:** The system will then show a dialog box to the user asking for permission to allow NoteMaster to access the Calendar. The user has the choice to either allow or deny this request.
+2. **Access or Denial:** If the user grants permission, NoteMaster will be able to add reminders to the user's calendar. If the user denies the request, then NoteMaster will not be able to access the calendar and the system will block all future access attempts unless the user changes this setting manually.
+3. **Managing Permissions:** If the user wants to change these permissions at a later stage, they can go to System Preferences > Security & Privacy > Privacy > Calendars. Here, they can see a list of all the apps that have requested access to the Calendar and can change the permissions as needed.
+
+This is how macOS TCC ensures that applications do not have access to sensitive user data without explicit user consent, enhancing data security and user privacy.
+
+# 🖇️ Références
+
+---

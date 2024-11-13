@@ -1,0 +1,72 @@
+# iOS Frida Configuration
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Frida is a dynamic instrumentation toolkit for developers, reverse-engineers, and security researchers. It helps to hook and trace the execution of code in iOS applications, effectively altering their run-time behavior for testing purposes.
+> 
+
+### 🧐 Why ?
+
+> Understanding how to configure and use Frida is crucial for anyone involved in iOS application security. It allows for the identification of potential vulnerabilities and the testing of security measures within the application. Furthermore, Frida's ability to modify the behavior of applications in real-time can greatly assist in debugging and development.
+> 
+
+### ⛏️ How ?
+
+> To use Frida, one must first have it installed on their machine and the target iOS device. The iOS device needs to be jailbroken to allow Frida to inject JavaScript into the running processes. From there, you can write your Frida scripts in JavaScript to interact with the iOS device's applications and processes. A typical Frida script might involve hooking into specific methods within an application, manipulating the data they return, and monitoring their behavior.
+> 
+
+### ⏳ When ?
+
+> Frida has been widely used in the cybersecurity community since its initial release in 2012. However, it has become particularly popular in recent years due to the increasing interest in mobile application security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Frida functions by injecting a JavaScript engine, either Duktape or V8, into the process you're targeting. This process is part of a technique known as 'function hooking.' Function hooking is a powerful method that intercepts, alters, and controls the flow of function calls, method calls, or messages within software code, making it possible to change the behavior of the software in real-time.
+
+Frida's API is a key part of its functionality. It allows users to write scripts that define what behavior to modify within the target application. These scripts are written in JavaScript, a widely-used and well-supported programming language which adds to the ease of using Frida. Once written, these scripts are then injected into the running process of the application.
+
+Once inside the process, the scripts can access and manipulate the application's memory. This includes reading from and writing to the memory, which can reveal how data is handled and stored within the application. The scripts can also call functions inside the process, providing insights into the internal workings of the application and revealing potential points of vulnerability.
+
+Furthermore, Frida's capabilities extend to dynamic analysis, debugging, and reverse engineering. Dynamic analysis involves examining the system when it is running, as opposed to static analysis which examines the system's code without running it. This enables users to understand how the application behaves in real-time and can reveal vulnerabilities that might not be visible in static analysis.
+
+Debugging with Frida is also enhanced by its dynamic nature, as it allows users to change the behavior of the application on the fly, making it easier to pinpoint and fix issues. Frida's capabilities in reverse engineering, the process of deconstructing a software system, are also substantial. It can help uncover how an application works, which can aid in identifying security vulnerabilities, intellectual property violations, or simply understanding an undocumented legacy system.
+
+All these features make Frida a versatile and powerful tool for anyone involved in software testing, cybersecurity, and development.
+
+An example of using Frida in software testing might be to analyze how a certain mobile app handles user login. Imagine an iOS app where you suspect that user credentials are stored insecurely in memory after login.
+
+1. **Installation**: First, ensure Frida is installed on both your machine and the jailbroken iOS device. You can install Frida on your machine using Python's package manager pip: `pip install frida-tools`.
+2. **Writing a script**: Now, you'll need to write a Frida script that will hook into the login function of the app. In JavaScript, such a script might look like this:
+
+```jsx
+    // frida_script.js
+
+    // Get a reference to the login function
+    var loginFunction = ObjC.classes.LoginController["- loginWithUsername:password:"];
+
+    // Intercept the login function
+    Interceptor.attach(loginFunction.implementation, {
+
+      // When the function is called
+      onEnter: function(args) {
+        // Log the username and password arguments
+        console.log("Username: " + ObjC.Object(args[2]).toString());
+        console.log("Password: " + ObjC.Object(args[3]).toString());
+      }
+    });
+
+```
+
+In the above script, we're getting a reference to the `loginWithUsername:password:` function of the `LoginController` class (assuming this function exists in the app). We then attach an interceptor to this function, which logs the username and password arguments whenever the function is called.
+
+1. **Running the script**: To run the script, you'll need to know the process id (pid) or the name of the app on your iOS device. You can get this by running `frida-ps -U` on your machine. Once you have the pid or name, you can inject your Frida script into the app's process with: `frida -U -l frida_script.js -n [pid or name]`.
+
+With this setup, every time the login function is called in the app, Frida will log the inputted username and password. This could help reveal if user credentials are stored in plaintext or if they're handled insecurely.

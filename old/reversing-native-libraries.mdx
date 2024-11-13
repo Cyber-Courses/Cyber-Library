@@ -1,0 +1,88 @@
+# Reversing Native Libraries
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Reversing native libraries refers to the process of dissecting and analyzing compiled libraries which are written in a native programming language like C or C++. This process is fundamental in cyber security as it aids in understanding the functionality of a program, detecting potential vulnerabilities, and developing exploits.
+> 
+
+### 🧐 Why ?
+
+> Reversing native libraries is crucial for several reasons. Firstly, it aids in vulnerability research by allowing researchers to uncover and understand hidden software vulnerabilities. Secondly, it aids in exploit development by providing insight into the internal workings of a target program. Lastly, it can also play a role in software testing, helping to ensure that a program is functioning as expected.
+> 
+
+### ⛏️ How ?
+
+> Reversing native libraries involves several steps. Firstly, the appropriate tools, such as disassemblers and decompilers, are required. These tools break down the binary code into human-readable format. Secondly, the reversed code needs to be analyzed to understand the program's functionality, identify potential vulnerabilities, and develop exploits. The process often requires a deep understanding of the programming language in which the library is written, as well as the operating system on which it runs.
+> 
+
+### ⏳ When ?
+
+> Reversing of native libraries is an ongoing process that typically begins once a software is released. It is a continuous practice in the world of cyber security, especially in vulnerability research and exploit development.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Reversing native libraries is a complex process that involves dissecting a compiled library to understand its internal workings. This often requires specialized tools such as disassemblers, which convert binary code into assembly language, and decompilers, which attempt to revert the assembly language code back into the original source code. The process involves understanding the control flow, data structures, and algorithms used by the program. It also requires a deep understanding of the native programming language and the operating system's APIs and services. The reversed code can then be analyzed to understand the program's functionality, identify potential vulnerabilities, and develop exploits. This process requires significant technical expertise and is often time-consuming due to the complexity of modern software.
+
+For instance, let's take an example of reversing a simple C program compiled into a library, using the GNU Debugger (GDB) on a Linux operating system.
+
+Firstly, we will consider a simple C program:
+
+```c
+#include <stdio.h>
+
+void printMessage() {
+    printf("This is a secret message!\\n");
+}
+
+int main() {
+    printMessage();
+    return 0;
+}
+
+```
+
+We compile this program into a binary with the gcc compiler:
+
+```bash
+gcc -o program program.c
+
+```
+
+Now we have a binary named 'program' that we can start to reverse.
+
+We begin by using the 'objdump' command to disassemble the binary:
+
+```bash
+objdump -d program
+
+```
+
+This command will output the assembly code of the program. Here, we are particularly interested in the 'printMessage' function. The output might look something like this:
+
+```
+0000000000400526 <printMessage>:
+  400526:	55                   	push   %rbp
+  400527:	48 89 e5             	mov    %rsp,%rbp
+  40052a:	bf 94 06 40 00       	mov    $0x400694,%edi
+  40052f:	e8 dc fe ff ff       	callq  400410 <puts@plt>
+  400534:	90                   	nop
+  400535:	5d                   	pop    %rbp
+  400536:	c3                   	retq
+
+```
+
+This is the disassembled version of our 'printMessage' function. From this, we can see the function prologue (pushing the base pointer onto the stack and moving the stack pointer to the base pointer), the loading of our string's memory address into the %edi register, the call to 'puts' function to print our string, and the function epilogue (popping the base pointer from the stack and returning from the function).
+
+By analyzing the disassembled code, we can understand what the program is doing at a low level, potentially identify vulnerabilities (e.g., buffer overflows, format string vulnerabilities), and develop exploits accordingly. This is a simple example, and real-world software would be significantly more complex, but it illustrates the basic process of reversing a native library.
+
+# 🖇️ Références
+
+---

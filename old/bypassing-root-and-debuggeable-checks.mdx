@@ -1,0 +1,86 @@
+# Bypassing root and debuggeable checks
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Bypassing root and debuggable checks refers to a technique used in penetration testing and hacking where the attacker circumvents security measures put in place to prevent unauthorized access to root privileges or debugging features.
+> 
+
+### 🧐 Why ?
+
+> Understanding this technique is essential for both attackers and defenders. For attackers, it's a potent tool for gaining escalated privileges and access to sensitive data. For defenders, understanding how this technique works allows them to design and implement better security measures to protect their systems.
+> 
+
+### ⛏️ How ?
+
+> To bypass root and debuggable checks, one would need to identify where the checks are implemented in the application code. Once identified, the next step would be to manipulate the code, typically through patching or modification, to ignore or bypass the checks. This often involves reverse engineering and a deep knowledge of the targeted operating system or application.
+> 
+
+### ⏳ When ?
+
+> The practice of bypassing root and debuggable checks has been around as long as the concept of user privileges and debug modes have existed in computing systems. It's become more prevalent with the rise of mobile computing, where apps often include checks to prevent running on rooted or jailbroken devices.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, bypassing root and debuggable checks involves deep understanding of the operating system's architecture and the targeted application's code. It often involves reverse engineering the application to identify where the checks are implemented, then modifying the application's bytecode or native code to bypass the checks. The specifics of the technique will vary depending on the application and the platform it's running on. For example, on Android, one might use tools like Apktool to decompile the application, then modify the Smali code to bypass the checks. On iOS, one might use tools like Cycript or Frida to dynamically hook into the running application and manipulate its behavior.
+
+Here's a simplified example of bypassing root checks on an Android application. This example is for educational purposes only.
+
+1. **Decompile the application**: First, we need to decompile the APK file to access the source code. We can use a tool like Apktool for this. The command might look like this:
+    
+    ```
+    apktool d MyApp.apk
+    
+    ```
+    
+    After running this command, we should have a folder named `MyApp` containing the decompiled source code.
+    
+2. **Identify the root check**: Next, we need to find where the root check is being performed in the code. It might be in a function that checks for the existence of certain files that are only present on rooted devices, like `/system/bin/su`. We can use the grep command to help find where this check is done:
+    
+    ```
+    grep -rnw 'MyApp/' -e '/system/bin/su'
+    
+    ```
+    
+    This command will return the file and line number where it finds a match.
+    
+3. **Modify the code**: Once we've found the check, we can modify the code to bypass it. For example, if we found a check like this:
+    
+    ```java
+    if (new File("/system/bin/su").exists()) {
+        // The device is rooted, exit the app
+        finish();
+    }
+    
+    ```
+    
+    We could modify it to always return false:
+    
+    ```java
+    if (false) {
+        // The device is rooted, exit the app
+        finish();
+    }
+    
+    ```
+    
+4. **Recompile the application**: After the code is modified, we need to recompile the APK. We can use Apktool again for this:
+    
+    ```
+    apktool b MyApp
+    
+    ```
+    
+    Now, we should have a new APK file that bypasses the root check when run. Remember, this is a simplified example and real-world applications may implement more complex checks and protections.
+    
+
+# 🖇️ Références
+
+---

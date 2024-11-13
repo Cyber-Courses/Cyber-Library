@@ -1,0 +1,283 @@
+# Namespaces
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Namespaces are a feature of the Linux kernel that isolates and virtualizes system resources for a collection of processes. They provide a layer of abstraction that makes a group of processes and their children believe they have their own isolated instance of the global system resources.
+> 
+
+### 🧐 Why ?
+
+> Namespaces are crucial because they provide a way to isolate processes, enabling system administrators to run applications in isolation, thereby mitigating potential security threats and ensuring system stability. They allow for a more efficient use of system resources and a reduction in potential conflicts between applications.
+> 
+
+### ⛏️ How ?
+
+> To implement namespaces, one must utilize the 'unshare' or 'clone' commands provided by the Linux kernel. These commands create new namespaces, and processes can then be added to these namespaces, isolating them from the rest of the system. It's important to note that a process can be a part of multiple namespaces.
+> 
+
+### ⏳ When ?
+
+> Namespaces have been a part of the Linux kernel since version 2.6.24, which was released in 2008.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### In-depth Understanding of Linux Namespaces
+
+Namespaces are a powerful and fundamental feature of the Linux kernel that allow for the compartmentalization and isolation of system resources for processes. This isolation is achieved by creating separate instances, or 'namespaces', for different groups of processes. When a process attempts to access a system resource, the kernel directs the request to the appropriate namespace instance, ensuring that each process can only see and interact with the resources within its own namespace. This mechanism enhances security and system stability by preventing processes from interfering with each other.
+
+### Types of Namespaces
+
+### 1. PID Namespaces
+
+PID namespaces isolate the process ID (PID) number space, which means that processes in different PID namespaces can have the same PID. This is particularly useful for containers as it allows each container to have its own set of PIDs starting from 1.
+
+**Example:**
+
+- **Creating a new PID namespace:**
+    
+    ```bash
+    sudo unshare -p -f --mount-proc bash
+    
+    ```
+    
+- **Verify PID within the new namespace:**
+    
+    ```bash
+    echo $$  # Outputs 1 in the new namespace
+    
+    ```
+    
+
+### 2. Network Namespaces
+
+Network namespaces provide isolation of the network stack, meaning each namespace can have its own network devices, IP addresses, IP routing tables, port numbers, etc. This is crucial for creating isolated network environments for containers.
+
+**Example:**
+
+- **Create a new network namespace:**
+    
+    ```bash
+    sudo ip netns add netns1
+    
+    ```
+    
+- **Verify the namespace:**
+    
+    ```bash
+    sudo ip netns list
+    
+    ```
+    
+- **Create a virtual network interface pair:**
+    
+    ```bash
+    sudo ip link add veth1 type veth peer name veth1_peer
+    
+    ```
+    
+- **Move `veth1_peer` to `netns1`:**
+    
+    ```bash
+    sudo ip link set veth1_peer netns netns1
+    
+    ```
+    
+- **Bring up the interfaces and assign IP addresses:**
+    
+    ```bash
+    sudo ip link set veth1 up
+    sudo ip netns exec netns1 ip link set veth1_peer up
+    sudo ip addr add 10.0.0.1/24 dev veth1
+    sudo ip netns exec netns1 ip addr add 10.0.0.2/24 dev veth1_peer
+    
+    ```
+    
+
+### 3. Mount Namespaces
+
+Mount namespaces isolate the set of filesystem mount points seen by a group of processes. Processes in different mount namespaces can have different views of the filesystem hierarchy, allowing for customized file system environments.
+
+**Example:**
+
+- **Create a new mount namespace:**
+    
+    ```bash
+    sudo unshare -m /bin/bash
+    
+    ```
+    
+- **Mount a new filesystem in the new namespace:**
+    
+    ```bash
+    mount --bind /new-root /mnt
+    
+    ```
+    
+
+### 4. User Namespaces
+
+User namespaces isolate the user and group ID number spaces. This allows processes to have different user and group IDs inside and outside a user namespace, enhancing security by limiting the privileges of processes.
+
+**Example:**
+
+- **Create a new user namespace:**
+    
+    ```bash
+    sudo unshare -U /bin/bash
+    
+    ```
+    
+- **Check user ID within the new namespace:**
+    
+    ```bash
+    id -u  # Typically shows 0 (root) inside the namespace
+    
+    ```
+    
+
+### 5. IPC Namespaces
+
+IPC namespaces isolate certain interprocess communication (IPC) resources, such as message queues, shared memory, and semaphores. This ensures IPC objects are shared between processes within the same namespace but isolated from other namespaces.
+
+**Example:**
+
+- **Create a new IPC namespace:**
+    
+    ```bash
+    sudo unshare -i /bin/bash
+    
+    ```
+    
+- **Create and manage IPC resources within the namespace:**
+    
+    ```bash
+    ipcmk -Q  # Create a new message queue
+    
+    ```
+    
+
+### 6. CGroup Namespaces
+
+CGroup namespaces isolate the cgroup root directory view of a process, allowing different views of the cgroup hierarchy for different namespaces.
+
+**Example:**
+
+- **Create a new cgroup namespace:**
+    
+    ```bash
+    sudo cgcreate -g cpu,memory:/my_cgroup
+    
+    ```
+    
+- **Set resource limits and execute a process within the cgroup:**
+    
+    ```bash
+    sudo cgset -r cpu.shares=512 my_cgroup
+    sudo cgexec -g cpu,memory:my_cgroup /bin/bash
+    
+    ```
+    
+
+### 7. Time Namespaces
+
+Time namespaces isolate the system clock, enabling different processes to perceive different system times, which is useful for testing and simulation.
+
+**Example:**
+
+- **Create a new time namespace:**
+    
+    ```bash
+    sudo unshare -T /bin/bash
+    
+    ```
+    
+- **Set a different time within the namespace:**
+    
+    ```bash
+    sudo date -s '+2 hours'
+    
+    ```
+    
+
+### Detailed Example Using Network Namespaces
+
+To provide a comprehensive example, let's explore creating and configuring a network namespace in more detail.
+
+1. **Create a new network namespace:**
+    
+    ```bash
+    sudo ip netns add netns1
+    
+    ```
+    
+    This command creates a new network namespace called `netns1`.
+    
+2. **Verify the namespace:**
+    
+    ```bash
+    sudo ip netns list
+    
+    ```
+    
+    This command lists all the existing network namespaces. You should see `netns1` listed.
+    
+3. **Create a virtual ethernet pair:**
+    
+    ```bash
+    sudo ip link add veth1 type veth peer name veth1_peer
+    
+    ```
+    
+    This command creates a pair of virtual ethernet interfaces, `veth1` and `veth1_peer`.
+    
+4. **Move `veth1_peer` to `netns1`:**
+    
+    ```bash
+    sudo ip link set veth1_peer netns netns1
+    
+    ```
+    
+    This command moves `veth1_peer` into the `netns1` namespace.
+    
+5. **Bring up the interfaces:**
+    
+    ```bash
+    sudo ip link set veth1 up
+    sudo ip netns exec netns1 ip link set veth1_peer up
+    
+    ```
+    
+    These commands bring up both ends of the virtual ethernet pair.
+    
+6. **Assign IP addresses:**
+    
+    ```bash
+    sudo ip addr add 10.0.0.1/24 dev veth1
+    sudo ip netns exec netns1 ip addr add 10.0.0.2/24 dev veth1_peer
+    
+    ```
+    
+    These commands assign IP addresses to both ends of the virtual ethernet pair.
+    
+7. **Test the connectivity:**
+    
+    ```bash
+    ping -c 3 10.0.0.2
+    sudo ip netns exec netns1 ping -c 3 10.0.0.1
+    
+    ```
+    
+    These commands test the network connectivity between the global namespace and the new network namespace.
+    
+
+### Conclusion
+
+Namespaces in Linux are a powerful feature for isolating system resources, enhancing security, and managing complex environments. Each type of namespace—PID, Network, Mount, User, IPC, CGroup, and Time—provides a specific kind of isolation, making it possible to create highly secure and efficient system architectures. Understanding and effectively utilizing namespaces can significantly improve system administration, container management, and application development.

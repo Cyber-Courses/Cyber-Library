@@ -1,0 +1,88 @@
+# Android Intent Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android Intent Injection is a type of security vulnerability found in Android operating systems, where malicious apps can misuse the communication between Android components (i.e., activities, services, and broadcast receivers) by injecting malicious data or commands.
+> 
+
+### 🧐 Why ?
+
+> This vulnerability is critical as it could allow an attacker to manipulate the normal flow of an application, steal sensitive information, or execute malicious actions, compromising the overall security of the device. Understanding this issue is crucial for both app developers to build secure apps and users to stay aware of potential threats.
+> 
+
+### ⛏️ How ?
+
+> To prevent Android Intent Injection, developers should validate and sanitize all incoming data before using it. They should also enforce access controls using permissions, and use explicit intents whenever possible. Users should only download apps from trusted sources and regularly update their apps and device software.
+> 
+
+### ⏳ When ?
+
+> Android Intent Injection became a significant concern with the growth of Android ecosystem and the increased complexity of Android apps, which often involve communication between multiple components.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Android Intent Injection is a type of security vulnerability that can be found in Android operating systems. This particular vulnerability is closely tied to the way Android components communicate with each other. In Android, activities, services, and broadcast receivers (collectively known as 'components') use a messaging object known as an 'Intent' to communicate and pass data to each other.
+
+An Intent can carry various types of data and commands from one component to another. An Intent is essentially a data container that facilitates inter-component communication. It works like a messenger that carries requests and sometimes data from one component to another.
+
+The issue arises when a malicious app takes advantage of this communication system. In an Intent Injection attack, a malicious app sends an intent infused with harmful data or commands to a target app. The target app, if it does not properly validate or sanitize the incoming data, may execute the harmful commands or process the malicious data.
+
+This exploitation can result in a series of harmful consequences. For instance, the malicious app could make the target app perform unauthorized actions that it is not supposed to do. This could range from minor disruptions to major alterations that can seriously harm the app's functionality.
+
+Moreover, the attack can lead to data leakage. If the malicious intent carries commands that force the target app to reveal sensitive user data, the attacker can gain access to this information. This is particularly concerning if the app handles sensitive data such as personal details, payment information, or confidential business data.
+
+Lastly, the attack can also result in a denial of service. The malicious app may send intents that force the target app into a state where it can no longer function, denying the service to the user.
+
+To mitigate the risk of Android Intent Injection, it is crucial for developers to validate and sanitize all incoming data before using it in their apps. Developers should enforce strict access controls using permissions and use explicit intents whenever possible, which can specify the app component to start and can prevent intent interception. Meanwhile, users should only download apps from trusted sources and perform regular updates to their apps and device software, which may include patches for known vulnerabilities.
+
+Here's an illustrative example of Android Intent Injection:
+
+Consider two apps: a legitimate app `App A`, and a malicious app `App B`. `App A` has a feature that allows sharing data with other apps using an intent.
+
+```java
+Intent shareIntent = new Intent();
+shareIntent.setAction(Intent.ACTION_SEND);
+shareIntent.putExtra(Intent.EXTRA_TEXT, someSensitiveData);
+shareIntent.setType("text/plain");
+startActivity(shareIntent);
+
+```
+
+In the code above, `App A` creates an intent to share some sensitive data. This intent is a broadcast, meaning any app can receive it.
+
+On the other side, `App B` has a broadcast receiver set up to intercept these intents.
+
+```java
+public class MaliciousReceiver extends BroadcastReceiver {
+   @Override
+   public void onReceive(Context context, Intent intent) {
+      String receivedData = intent.getStringExtra(Intent.EXTRA_TEXT);
+      // Now the malicious app has the sensitive data
+      // It can send it to a remote server, store it locally, etc.
+   }
+}
+
+```
+
+In this code, `App B` captures the intent sent by `App A` and extracts the sensitive data.
+
+To prevent this, `App A` should use explicit intents to share data, specifying the exact component that should handle the intent.
+
+```java
+Intent shareIntent = new Intent(this, TrustedReceiver.class);
+shareIntent.setAction(Intent.ACTION_SEND);
+shareIntent.putExtra(Intent.EXTRA_TEXT, someSensitiveData);
+shareIntent.setType("text/plain");
+startActivity(shareIntent);
+
+```
+
+Now, only `TrustedReceiver.class` can handle the intent, preventing `App B` from intercepting it. This is a simple example, but it demonstrates the basic process of an Android Intent Injection attack and how to prevent it.

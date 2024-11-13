@@ -1,0 +1,80 @@
+# Use After Free
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Use After Free refers to a class of vulnerabilities that occur when a program continues to use a pointer after it has been freed.
+> 
+
+### 🧐 Why ?
+
+> Understanding Use After Free is important because such vulnerabilities could lead to serious security breaches, including unauthorized access and control over a system. It is crucial for programmers, system designers, and cybersecurity specialists to understand how to identify and prevent these vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> To prevent Use After Free, programmers should ensure that once a free function is used on a pointer, the pointer is immediately set to NULL. This way, even if the pointer is used afterward, it will not point to a meaningful location that could potentially be exploited. Additionally, using tools like AddressSanitizer can help detect such vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> Use After Free vulnerabilities have been known and exploited since the early 2000s. They continue to be a concern in modern day programming, particularly in applications written in languages like C and C++ that allow direct manipulation of memory.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Use After Free is a critical concept in programming and cybersecurity, specifically in the realm of memory management. It refers to a class of vulnerabilities that occur when a program continues to use a memory location (via a pointer) after it has been freed or released.
+
+Memory management in programming involves allocating and releasing memory as needed. When an application needs to store data, it requests memory from the operating system, which then allocates a block of memory for the application to use. This block of memory is accessed through a pointer. Once the application is done with this memory, it should release it back to the system using a 'free' function.
+
+The problem arises when the application continues to use (dereference) the pointer after the memory has been freed. This is problematic because once the memory is released, the operating system can reallocate that block of memory to another application. If the original application continues to use the pointer, it can accidentally modify data in that memory location, potentially affecting the other application.
+
+This vulnerability can also be exploited by attackers for arbitrary code execution. After the memory is freed, an attacker could potentially control the data that gets written into that location next. If the original program continues to use the pointer, thinking it points to its own data, it could unknowingly execute malicious code placed there by the attacker.
+
+Preventing Use After Free vulnerabilities involves careful memory management. Programmers should ensure that pointers are set to NULL after the memory they point to is freed. This way, if the pointer is dereferenced afterward, it will not point to a potentially unsafe location. Tools like AddressSanitizer can also be used to automatically detect Use After Free and other memory-related vulnerabilities during development.
+
+Here is a simple example of a Use After Free vulnerability in a C program:
+
+```c
+#include <stdlib.h>
+
+int main() {
+    char *ptr = malloc(10 * sizeof(char));
+    free(ptr);
+    *ptr = 'a';  // Use after free!
+    return 0;
+}
+
+```
+
+In this program:
+
+1. Memory is allocated for a `char` pointer `ptr` using `malloc()`. The pointer `ptr` now points to a block of memory that can hold 10 characters.
+2. The memory pointed to by `ptr` is then freed with `free(ptr)`. At this point, `ptr` should not be used again, because it doesn't point to a valid block of memory anymore.
+3. However, the program tries to assign the character 'a' to the location pointed to by `ptr`. This is a Use After Free! The pointer is being used after the memory it pointed to has been freed.
+
+This situation can lead to unexpected behavior, because after `free(ptr)`, the block of memory that `ptr` used to point to can be allocated to another pointer. When `*ptr = 'a';` is executed, it might be overwriting memory that is now used by something else. This could lead to data corruption or, in the worst case scenario, execution of arbitrary code if an attacker can control what gets written into the freed memory.
+
+To prevent this kind of vulnerability, you should set pointers to `NULL` after freeing them:
+
+```c
+#include <stdlib.h>
+
+int main() {
+    char *ptr = malloc(10 * sizeof(char));
+    free(ptr);
+    ptr = NULL;  // Set pointer to NULL after freeing it
+    // Now, any attempt to use ptr will cause a program crash, which is better than a silent vulnerability:
+    // *ptr = 'a';  // This would crash the program, alerting you to a bug
+    return 0;
+}
+
+```
+
+Here, after freeing `ptr`, we set `ptr` to `NULL`. Now, `ptr` no longer points to an arbitrary memory location. Any attempt to use `ptr` after this will cause the program to crash, signaling that something is wrong.

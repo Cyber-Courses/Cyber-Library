@@ -1,0 +1,94 @@
+# iOS Universal Links
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS Universal Links are a facility provided by the Apple iOS platform to allow an app to handle URLs that would typically be handled by the Safari browser, or another app on the system. Universal links give your app the ability to handle links directly, eliminating the need for a user to confirm they want to leave the browser and open your app if they click on a link that your app can handle.
+> 
+
+### 🧐 Why ?
+
+> Universal Links are a powerful tool for developers and businesses alike. They enable a seamless user experience by connecting web content with its corresponding app content. For example, a user reading a restaurant review on a website can tap a link to open the restaurant’s details directly in a restaurant review app, if it's installed. This can greatly enhance the user experience and increase user engagement with apps. For businesses, this can boost app usage and create more opportunities for user interaction and conversion.
+> 
+
+### ⛏️ How ?
+
+> Implementing iOS Universal Links involves a few steps: 1. Enable associated domains on your app ID. 2. Enable associated domains on the app. 3. Add the associated domain to your app. 4. Prepare your app to handle universal links. 5. Create an Apple App Site Association file and upload it to your HTTPS web server.
+> 
+
+### ⏳ When ?
+
+> Apple introduced Universal Links in iOS 9 as a part of their deep linking APIs. They have since become a standard part of iOS development, and are widely used in a variety of apps to create a seamless user experience between web and app content.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Universal Links in iOS is a deep linking technique which allows developers to link their web content with the corresponding content inside their app. This provides a seamless, integrated user experience.
+
+The technical implementation of Universal Links involves associating your app ID with certain domains. When a user taps on a link that leads to a domain associated with your app, iOS performs a check. It looks for a file hosted on the website at a specified URL: /apple-app-site-association. This file is in JSON format and outlines the types of URLs that the app can handle.
+
+If the tapped link matches any of the patterns mentioned in the file, iOS opens the app and passes it an NSUserActivity object to notify it about the link. This object contains information about the link, such as the webpage title and URL. The app can use this information to display the corresponding content.
+
+However, if the app is not installed, is unable to handle the link, or if the user has previously chosen to open the website in Safari, the link will open in Safari as per usual. This provides a fallback mechanism to ensure the link is always accessible to the user.
+
+Furthermore, the implementation of Universal Links requires collaboration between web and app developers. They need to work together to set up the association file and handle the incoming links appropriately in the app. This ensures a smooth, integrated user experience.
+
+Since their introduction in iOS 9, Universal Links have become a standard part of iOS development. They are widely used across many apps to bridge the gap between web content and app content, enhancing the user experience and boosting user engagement.
+
+Here is a detailed example of how Universal Links are implemented, using a hypothetical app called "MyApp" and its associated website "[myapp.com](http://myapp.com/)".
+
+1. **Enable Associated Domains** on your app ID via the Apple Developer account. This is done by checking the "Associated Domains" checkbox in the Capabilities tab of the Target settings in Xcode.
+2. **Enable Associated Domains on the app**. In Xcode, go to your Target, then in the Signing & Capabilities tab, click on "+ Capability" and add "Associated Domains".
+3. **Add the Associated Domain to your app**. This is done by adding an entry to the Associated Domains field in Xcode in the format `applinks:myapp.com`.
+4. **Prepare your app to handle Universal Links**. In your AppDelegate.swift file, implement the function `application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool` to handle incoming links.
+
+The implementation might look like this:
+
+```swift
+func application(_ application: UIApplication,
+                 continue userActivity: NSUserActivity,
+                 restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          let incomingURL = userActivity.webpageURL,
+          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+        return false
+    }
+
+    if let path = components.path {
+        // Handle the path from the URL
+    }
+    return true
+}
+
+```
+
+1. **Create an Apple App Site Association file** and upload it to your HTTPS web server. The file should be in the root of your server and accessible at `https://myapp.com/apple-app-site-association`. It should be in JSON format and outline the types of URLs the app can handle. For instance:
+
+```json
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "9JA89QQLNQ.com.apple.wwdc",
+                "paths": [ "/wwdc/news/", "/videos/wwdc/2020/*"]
+            },
+            {
+                "appID": "TeamID.BundleID",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}
+
+```
+
+In this example, `"/wwdc/news/"` and `"/videos/wwdc/2020/*"` are the URL paths that the app can handle. If a user taps a link with these paths, the app will open and handle the link.
+
+Remember, collaboration between web developers and app developers is crucial to ensure the association file is correctly placed and the app is ready to handle the incoming URLs.

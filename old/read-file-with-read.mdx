@@ -1,0 +1,79 @@
+# Read file with read
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Reading a file using the 'read' function is a common operation in many programming languages. The 'read' function allows a program to access and process data stored in external files, which can be text files, binary files, image files, etc.
+> 
+
+### 🧐 Why ?
+
+> Reading files is fundamental to many applications. It allows programs to access large amounts of data, configurations, or user-generated content that is stored externally. Without the ability to read files, programs would be limited to only using data that is hard-coded into the program or input directly from the user.
+> 
+
+### ⛏️ How ?
+
+> To read a file, you must first open it. This is usually done using a 'open' function, which returns a file object. Then, you can use the 'read' function on the file object to read the file's contents. Depending on the language, the 'read' function may return the entire contents of the file as a single string, or it may return a list of lines. Once you're done with the file, you should always close it using the 'close' function to free up system resources.
+> 
+
+### ⏳ When ?
+
+> File reading operations are used whenever a program needs to access external data. This could be when the program starts up, when the user performs certain actions, or at regular intervals. The timing depends on the specific needs of the program.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'read' function is a critical component in file handling across many programming languages. It works in tandem with the operating system's file handling Application Programming Interfaces (APIs).
+
+To read a file, the process is initiated by opening the file with an 'open' function that returns a file object. This file object contains a file descriptor, which is a unique identifier used by the operating system to track open files.
+
+The 'read' function uses this file descriptor to request data from the operating system. Along with the file descriptor, the 'read' function also requires a buffer, which is a block of memory allocated by the program to store the data read from the file.
+
+When the 'read' function is invoked, it interacts with the operating system's file handling APIs. The operating system then fills the buffer with data from the file. Once the buffer is filled, the 'read' function returns this data to the program.
+
+The program can then process the data in whatever way it needs to - for instance, it might parse the data, analyze it, or display it to the user.
+
+It's important to note that reading files is a relatively slow operation because it involves disk Input/Output (I/O). Disk I/O is the process of reading data from and writing data to a disk, and it's slower than other types of I/O because it involves mechanical parts.
+
+To mitigate this, many programs use techniques like buffering or asynchronous I/O. Buffering involves reading larger amounts of data at once to reduce the number of disk I/O operations, while asynchronous I/O allows the program to continue doing other work while the file reading operation is in progress.
+
+After the 'read' operation is complete, it is crucial to close the file using the 'close' function. This function informs the operating system that the program is done with the file, allowing the operating system to free up resources that were allocated for the file reading operation.
+
+Below is an example of reading a file in Python:
+
+```python
+# Step 1: Open the file
+file = open('example.txt', 'r')
+
+# Step 2: Read the file
+data = file.read()
+
+# Step 3: Close the file
+file.close()
+
+```
+
+Explanation:
+
+1. The `open` function is called with two arguments: the name of the file we want to open (`example.txt`), and the mode in which we want to open the file (`r` for reading). This function returns a file object, which is stored in the `file` variable.
+2. The `read` function is called on the `file` object. This function reads the entire contents of the file and returns it as a string, which is stored in the `data` variable.
+3. Finally, the `close` function is called on the `file` object. This function closes the file, freeing up any system resources used during the file reading operation.
+
+Note: It's good practice to always close files after you're done with them. In Python, you can ensure that files are always closed properly by using the `with` statement:
+
+```python
+# Open the file
+with open('example.txt', 'r') as file:
+    # Read the file
+    data = file.read()
+    # The file is automatically closed at the end of the `with` block
+
+```
+
+In this version of the code, the `file.close()` line is not necessary. The file is automatically closed when the `with` block is exited, even if an error occurs within the block. This makes the `with` statement a safer way to handle files.

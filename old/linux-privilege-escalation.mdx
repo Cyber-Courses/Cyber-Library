@@ -1,0 +1,131 @@
+# Linux Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Privilege Escalation is the act of exploiting a Linux system to gain access to resources that are normally restricted to privileged users. The fundamental concepts underlying this are the Linux user privilege system, system vulnerabilities, and exploitation techniques.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Privilege Escalation is crucial for both system administrators and attackers. For administrators, it's about securing their systems against potential attacks. For attackers, it's about exploiting system vulnerabilities to gain unauthorized access. Hence, understanding this topic is important for anyone interested in cybersecurity.
+> 
+
+### ⛏️ How ?
+
+> Linux Privilege Escalation can be achieved through various means such as exploiting system vulnerabilities, misconfigurations, or weak permissions. This can involve steps like identifying potential vulnerabilities, developing or using existing exploits, and executing the exploit on the target system. However, this process requires technical knowledge and understanding of Linux systems.
+> 
+
+### ⏳ When ?
+
+> Linux Privilege Escalation has been a common practice in the cybersecurity world since the inception of Linux itself. It is an ongoing issue as new vulnerabilities are discovered regularly.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Privilege escalation in Linux refers to the process of gaining elevated access to a system by exploiting vulnerabilities or misconfigurations. The ultimate goal is often to gain root access, which provides unrestricted control over the system. Understanding privilege escalation techniques is crucial for both attackers and system administrators aiming to secure their systems.
+
+### Key Concepts
+
+1. **Privilege Levels**:
+    - **Root User**: The superuser with unrestricted access to all system operations.
+    - **Regular Users**: Users with limited access based on their assigned permissions.
+2. **Types of Privilege Escalation**:
+    - **Vertical Escalation**: Gaining higher privileges than currently assigned (e.g., regular user to root).
+    - **Horizontal Escalation**: Gaining access to the privileges of another user with the same privilege level.
+
+### Methods of Privilege Escalation
+
+1. **Exploiting Vulnerable Programs**:
+    - Programs running with elevated privileges can have vulnerabilities that allow users to escalate their privileges.
+    - For example, a program with a buffer overflow vulnerability running with root privileges can be exploited to execute arbitrary code as root.
+2. **Misconfigurations**:
+    - Incorrect file permissions or settings can provide unintended access to sensitive files or operations.
+    - World-writable or executable files owned by root can be modified or exploited by regular users.
+
+### Practical Example: Exploiting a Vulnerable Program
+
+### Scenario
+
+Assume there is a vulnerable program `/usr/bin/program` running with root privileges. This program has a buffer overflow vulnerability that can be exploited.
+
+### Step-by-Step Process
+
+1. **Identifying the Vulnerability**:
+    
+    Check if the program runs with root privileges by listing its permissions using the `ls` command:
+    
+    ```bash
+    ls -l /usr/bin/program
+    
+    ```
+    
+    Example output:
+    
+    ```bash
+    -rwsr-xr-x 1 root root 20480 Oct  1 12:34 /usr/bin/program
+    
+    ```
+    
+    The `s` in the user permission section indicates that this program runs with the privileges of its owner, which is root in this case.
+    
+2. **Exploiting the Vulnerability**:
+    
+    Suppose `/usr/bin/program` is vulnerable to a buffer overflow attack. We will use a simple example to demonstrate the exploitation.
+    
+    Create a string that overflows the buffer and overwrites the return address with the address of our shellcode. This can be done using a Python script:
+    
+    ```bash
+    /usr/bin/program $(python -c 'print "A"*200 + "\\xef\\xbe\\xad\\xde"')
+    
+    ```
+    
+    In this command:
+    
+    - `"A"*200` creates a string with 200 'A' characters.
+    - `"\\xef\\xbe\\xad\\xde"` is the hexadecimal representation of the address of our shellcode.
+3. **Gaining Root Access**:
+    
+    If the exploit is successful, it will execute the shellcode with root privileges. Verify by checking the user ID:
+    
+    ```bash
+    id
+    
+    ```
+    
+    Successful output:
+    
+    ```bash
+    uid=0(root) gid=0(root) groups=0(root)
+    
+    ```
+    
+
+### Preventive Measures
+
+1. **Regular Audits**:
+    - Regularly audit system programs and configurations to identify and rectify vulnerabilities.
+    - Use tools like `ls` and `find` to check for programs with the SUID bit set.
+2. **Apply Updates and Patches**:
+    - Keep the system and all installed software up to date with the latest security patches.
+    - Use package managers and repositories to ensure timely updates.
+3. **Limit SUID Programs**:
+    - Minimize the use of SUID programs and restrict them to essential utilities only.
+    - Regularly review and restrict file permissions using `chmod`, `chown`, and `chgrp`.
+4. **Implement Security Tools**:
+    - Use security tools like SELinux or AppArmor to enforce strict access controls and limit the potential impact of compromised processes.
+5. **User Education**:
+    - Educate users about secure coding practices and the importance of keeping systems secure.
+    - Encourage the use of secure authentication methods and regular password updates.
+
+### Conclusion
+
+Understanding Linux privilege escalation is essential for both attackers and system administrators. For attackers, it represents a method to gain complete control over a system. For administrators, it highlights potential vulnerabilities and misconfigurations that need to be addressed. By implementing regular audits, applying updates, limiting SUID programs, and using security tools, administrators can significantly reduce the risk of privilege escalation attacks.

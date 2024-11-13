@@ -1,0 +1,69 @@
+# smbutil (using pcap capture)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Smbutil is a command-line interface (CLI) utility in Windows that allows users to perform various operations on SMB (Server Message Block) protocol. SMB is a network protocol mainly used for providing shared access to files, printers, and serial ports and miscellaneous communications between nodes on a network.
+> 
+
+### 🧐 Why ?
+
+> Understanding and utilizing smbutil is crucial as it provides the ability to interact with and manage SMB resources, a common protocol in many corporate networks. It can be used to test the availability of SMB servers, view shared resources, and even mount SMB shares. For cybersecurity professionals, smbutil can be a powerful tool in network enumeration and vulnerability assessment, as it can expose information about a target system or network.
+> 
+
+### ⛏️ How ?
+
+> To use smbutil, you first need to open a command prompt on your Windows machine. The basic syntax of smbutil is 'smbutil [subcommand] [options]'. For instance, 'smbutil view //[server]' will list the available shares on the specified SMB server. 'smbutil statshares -a' will display all active SMB shares, including those that are hidden.
+> 
+
+### ⏳ When ?
+
+> Smbutil has been a part of Windows operating systems since Windows Vista and is commonly used in network administration and cybersecurity assessments. Its usage has increased over the years with the increasing reliance on network sharing in corporate environments.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Smbutil is a utility that is integral to network operations on Windows systems. It functions by sending Server Message Block (SMB) requests to a specified server. These requests are then processed by the server, and the responses are interpreted and displayed by smbutil. The utility is compatible with various SMB versions, including SMB1, SMB2, and SMB3, enabling it to communicate with a wide array of SMB servers.
+
+One of the primary commands of smbutil is 'view'. When executed, this command sends an SMB_COM_TREE_CONNECT_ANDX request to the server. This request prompts the server to initiate a 'tree connect', which is a session that allows access to shared resources. The server's response includes details about these shared resources, which are then presented by smbutil in a readable format.
+
+Furthermore, smbutil provides options for more advanced operations. These include mounting SMB shares, which involves establishing a connection that allows the user to access a shared directory as if it were a local one, and performing SMB packet captures for subsequent analysis. The latter operation enables the user to monitor and record SMB traffic for debugging or security auditing purposes.
+
+Understanding how smbutil and the underlying SMB protocol function requires a comprehensive knowledge of network protocols and the architecture of the Windows operating system. This understanding can greatly enhance one's ability to effectively manage and troubleshoot network operations, particularly in environments where resource sharing is prevalent.
+
+For example, if you want to view the shared resources on a specific SMB server, you would use the 'view' subcommand in smbutil. Assuming the server's IP address is 192.168.1.5, the command would look like this:
+
+```bash
+smbutil view //192.168.1.5
+
+```
+
+This command sends an SMB_COM_TREE_CONNECT_ANDX request to the server at IP address 192.168.1.5 and the server's response, which includes details about the shared resources, is then displayed in a readable format.
+
+Another common operation is mounting an SMB share to access a shared directory as if it were a local one. This operation requires the 'mount' subcommand and the path of the SMB share you want to mount. The command might look like this:
+
+```bash
+smbutil mount //192.168.1.5/shared_directory /local/directory/path
+
+```
+
+Here, '192.168.1.5/shared_directory' is the path of the SMB share and '/local/directory/path' is the location on your local system where you want to mount the share.
+
+Lastly, if you need to capture SMB packets for debugging or security auditing, you can use the 'capture' subcommand. This operation requires the name of the network interface and a file to save the capture. The command would look like:
+
+```bash
+smbutil capture -i eth0 -o smb_capture.pcap
+
+```
+
+Here, 'eth0' is the network interface and 'smb_capture.pcap' is the file where the capture will be saved. This command will start recording all SMB traffic on the 'eth0' interface and save it to the 'smb_capture.pcap' file for further analysis.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,156 @@
+# Python Internal Read Gadgets
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Python Internal Read Gadgets refer to the built-in methods or functions in Python that allow reading of internal data structures. They are often used for debugging or testing purposes. Being able to read internal data structures can help in understanding how the program works, and also in identifying any potential issues or bugs.
+> 
+
+### 🧐 Why ?
+
+> Understanding Python Internal Read Gadgets is important for several reasons. For developers and programmers, it helps in debugging and improving the efficiency of their code. For cybersecurity professionals, understanding these gadgets can help in identifying potential security vulnerabilities. For instance, if a malicious actor gains access to these read gadgets, they could potentially read sensitive data.
+> 
+
+### ⛏️ How ?
+
+> Using Python Internal Read Gadgets involves calling the specific built-in methods or functions that allow reading of internal data structures. For example, the built-in function `dir()` can be used to return a list of names in the current local scope. Another example is the `vars()` function, which returns a dictionary of the current namespace. It's important to note that inappropriate use of these gadgets could lead to data leaks or other security issues, so they should be used with caution.
+> 
+
+### ⏳ When ?
+
+> The use of Python Internal Read Gadgets started since the inception of Python language itself. However, their potential security implications have only been realized more recently, with the increasing importance of cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Python Internal Read Gadgets, such as the `dir()` and `vars()` functions, work by accessing the internal data structures of the Python interpreter. These data structures hold information about the current state of the program, including the values of variables, the call stack, and more. When called, these functions return a representation of these internal data structures, which can then be read and analyzed. However, if not used properly, these gadgets could potentially be used to read sensitive data, leading to data leaks or other security issues.
+
+### Detailed Explanation:
+
+### dir() Function
+
+The `dir()` function is used to list the names in the current local scope. This includes variables, functions, classes, and modules that are currently defined. Here's an example:
+
+```python
+# Define a few variables and a function
+a = 10
+b = 20
+def my_function():
+    pass
+
+# Use dir() to list the names in the current local scope
+print(dir())
+
+```
+
+Output:
+
+```
+['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__', 'a', 'b', 'my_function']
+
+```
+
+In this example, `dir()` lists the default special names and the user-defined names `a`, `b`, and `my_function`.
+
+### vars() Function
+
+The `vars()` function returns the `__dict__` attribute of a module, class, instance, or any other object with a `__dict__` attribute. It essentially returns a dictionary representing the current namespace. Here's an example:
+
+```python
+class MyClass:
+    def __init__(self):
+        self.x = 10
+        self.y = 20
+
+# Create an instance of MyClass
+obj = MyClass()
+
+# Use vars() to get the __dict__ attribute of the instance
+print(vars(obj))
+
+```
+
+Output:
+
+```
+{'x': 10, 'y': 20}
+
+```
+
+In this example, `vars(obj)` returns a dictionary representing the instance variables `x` and `y` of the `obj` object.
+
+### Using `dir()` and `vars()` Together
+
+You can use both `dir()` and `vars()` together to get a more comprehensive view of the internal state of an object. For example:
+
+```python
+class AnotherClass:
+    def __init__(self):
+        self.a = 30
+        self.b = 40
+
+    def method(self):
+        print("This is a method.")
+
+# Create an instance of AnotherClass
+obj = AnotherClass()
+
+# Use dir() to list all names in the object's scope
+print(dir(obj))
+
+# Use vars() to get the __dict__ attribute of the instance
+print(vars(obj))
+
+```
+
+Output:
+
+```
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'a', 'b', 'method']
+{'a': 30, 'b': 40}
+
+```
+
+In this example, `dir(obj)` lists all the names in the object’s scope, including special methods and the instance variables `a` and `b`. On the other hand, `vars(obj)` returns a dictionary of the instance variables.
+
+### Security Implications
+
+While these functions are extremely useful for debugging and understanding the state of a program, they can also pose security risks if not used properly. For instance, if a malicious actor gains access to these functions, they could potentially read sensitive data stored in the internal data structures.
+
+### Example of a Security Risk
+
+Suppose you have a web application that stores sensitive user information in a global variable:
+
+```python
+user_data = {
+    "username": "user1",
+    "password": "secretpassword"
+}
+
+def get_user_data():
+    return user_data
+
+# Potentially dangerous use of dir() and vars()
+def insecure_function():
+    print(dir())
+    print(vars())
+
+```
+
+If an attacker can call `insecure_function()`, they could gain access to the `user_data` dictionary, including the sensitive `password` information.
+
+### Best Practices
+
+To mitigate these risks, consider the following best practices:
+
+- Limit the use of `dir()` and `vars()` to debugging and development environments.
+- Avoid storing sensitive information in places where these functions can easily access them.
+- Use proper access controls to ensure that only authorized code can call these functions.
+
+By understanding and using Python Internal Read Gadgets cautiously, you can leverage their power for debugging and development while minimizing potential security risks.

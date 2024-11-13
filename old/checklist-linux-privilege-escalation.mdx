@@ -1,0 +1,70 @@
+# Checklist - Linux Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Privilege Escalation is a process where a user gains more access rights or privileges than what they were initially granted. A checklist is a guide or a list of procedures used to exploit common Linux vulnerabilities to escalate privileges.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Privilege Escalation is crucial for both system administrators and penetration testers. For system administrators, it helps to secure a system by patching known vulnerabilities that could be exploited. For penetration testers, it enables them to identify and exploit these vulnerabilities providing a realistic assessment of the system's security.
+> 
+
+### ⛏️ How ?
+
+> Linux Privilege Escalation generally involves the following steps: enumeration, identifying potential vulnerabilities, exploiting vulnerabilities, and maintaining access. The checklist provides a comprehensive list of potential vulnerabilities to check and methods for exploiting them.
+> 
+
+### ⏳ When ?
+
+> Linux Privilege Escalation techniques have been used since the inception of Linux. However, the techniques and processes have evolved over time as new vulnerabilities are discovered and older ones are patched.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux systems regulate access through a privilege model, where each user is allocated certain privileges based on their role. For instance, the root user possesses near-unlimited privileges, granting them broad access to system functions and files. In contrast, other users are typically given a more limited set of privileges, curbing their access to sensitive areas of the system.
+
+However, the system is not infallible. Vulnerabilities may exist that allow a user with limited privileges to gain more access than intended, a process known as privilege escalation. These vulnerabilities can stem from a variety of sources, including software bugs, misconfigurations, or weak passwords.
+
+The Checklist - Linux Privilege Escalation serves as a tool that delineates common Linux vulnerabilities and methods to exploit them for privilege escalation. This step-by-step guide assists users in identifying potential vulnerabilities in their system. The methods detailed in the guide are designed to exploit these vulnerabilities, granting the user increased privileges.
+
+For example, the checklist may direct users to check for outdated software versions, which can be exploited if they contain known vulnerabilities. Alternatively, the checklist might guide users to look for misconfigured files or services that grant undue access to certain users.
+
+Furthermore, the checklist also provides methods to maintain escalated privileges, which is crucial for penetration testers who need persistent access for a thorough assessment.
+
+This checklist is regularly updated to incorporate newly discovered vulnerabilities and their associated exploitation methods, ensuring it remains a relevant and comprehensive tool for understanding and mitigating the risk of Linux privilege escalation.
+
+One of the common methods for privilege escalation on a Linux system is through exploiting a misconfigured sudo permission. Sudo (short for SuperUser DO) is a program designed to allow trusted users to run commands as an administrator (or another user). If not configured correctly, it can provide an easy way for a user to escalate their privileges.
+
+Here's a step-by-step guide to exploit such a vulnerability:
+
+1. **Enumeration**: The first step is to identify if there are any misconfigured sudo permissions. You can list all the commands that your user can run as sudo by typing `sudo -l` in the terminal. This might output something like:
+
+```
+User john may run the following commands on localhost:
+    (ALL : ALL) ALL
+    (root) NOPASSWD: /usr/bin/vim
+
+```
+
+This means that the user 'john' can run the Vim text editor as root without needing a password.
+
+1. **Exploiting the Vulnerability**: Since Vim can be run as root without a password, you can exploit this to get a shell with root privileges. You can do this by typing `sudo vim -c ':shell'` in the terminal. This command opens Vim and immediately runs the 'shell' command, giving you a new shell with root privileges.
+2. **Maintaining Access**: Now that you have a shell with root privileges, you can create a new user with root access to maintain your access. To do this, you can type the following commands:
+
+```bash
+useradd -ou 0 -g 0 -M -d /root -s /bin/bash newroot
+passwd newroot
+
+```
+
+This creates a new user called 'newroot' with the same user and group ID as the root user (0), sets their home directory to '/root', their shell to '/bin/bash', and sets a new password for them.
+
+Remember, this is an example for educational purposes and should not be used for unauthorized activities. Always get proper permission before testing any penetration techniques.

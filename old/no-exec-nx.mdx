@@ -1,0 +1,79 @@
+# No-exec / NX
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The 'No-Execute' (NX) bit, also known as the 'Execution Protection Bit', is a technology used in CPUs to segregate areas of memory for use by either storage of processor instructions (code) or for storage of data. In other words, it distinguishes where a program should be able to execute code (the execution bit set) and where it should not (the execution bit not set).
+> 
+
+### 🧐 Why ?
+
+> The NX bit is a critical security feature of many modern operating systems, including Windows. It helps to prevent certain types of malicious software from taking over computers by inserting their code into another program's data storage area and then forcing it to run. Without the NX bit, the boundary between code and data memory is unclear, making it easier for hackers to trick the system into executing malicious code.
+> 
+
+### ⛏️ How ?
+
+> To use NX effectively, both your operating system and your processor must support it. Most modern CPUs from Intel and AMD include support for this technology, but it’s also a matter of the operating system to appropriately set and manage it. In Windows, you can check if your CPU supports the NX feature by opening the 'System Information' app and checking the 'System Summary'. If you see 'NX Protection: Yes', your system is configured correctly.
+> 
+
+### ⏳ When ?
+
+> The NX technology has been around for a while. It was introduced in 2004 by AMD with the launch of the Athlon 64 processor. Intel introduced a similar feature, called XD (eXecute Disable), with its Prescott revision of the Pentium 4 CPU in that same year.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The NX (No-Execute) bit, also known as the Execution Protection Bit, is a technology used in CPUs to segregate memory areas for either storing processor instructions (code) or for storing data. This technology is significant because it helps differentiate where a program should be able to execute code and where it should not.
+
+In more technical terms, the NX bit works by setting a specific flag in the page table entry of a process. A page table is a data structure used by a virtual memory system in a computer operating system to store the mapping between virtual addresses and physical addresses. Each process has its own page table, and each entry in the table represents a page.
+
+When the NX flag is set for a specific memory page, the CPU will refuse to execute any code residing in that page. This feature is particularly utilized by the operating system's kernel when it assigns memory pages to processes. The kernel sets the NX bit for pages intended to hold data and leaves it unset for pages that are intended to hold executable code.
+
+This mechanism provides a robust security measure. Even if a malicious software manages to inject its code into a data page, it won't be able to execute because the CPU will refuse to run any code from that page. This helps prevent certain types of malicious software from taking over computers by inserting their code into another program's data storage area and coercing it to run.
+
+The NX bit is a critical security feature of many modern operating systems, including Windows. To use NX effectively, both your operating system and your processor must support it. Most modern CPUs from Intel and AMD include support for this technology. However, it’s also a matter of the operating system to appropriately set and manage it.
+
+The NX technology has been around since 2004. It was introduced by AMD with the launch of the Athlon 64 processor. Intel introduced a similar feature, called XD (eXecute Disable), with its Prescott revision of the Pentium 4 CPU in the same year.
+
+While the specifics of setting the NX bit are handled at the operating system level, you can understand the concept better by observing it in the context of a Linux system.
+
+In Linux, you can check the status of the NX bit using the `dmesg` command. First, open a terminal and type:
+
+```
+dmesg | grep NX
+
+```
+
+The system will return a message indicating whether your CPU supports the NX bit. If your CPU does support it, the message will be "NX (Execute Disable) protection: active".
+
+To see the NX bit in action, let's consider a simple C program:
+
+```c
+#include <stdio.h>
+int main() {
+    char code[] = {
+        0x48, 0xc7, 0xc0, 0x01, 0x00, 0x00, 0x00, // mov    $0x1,%rax
+        0x48, 0xc7, 0xc7, 0x01, 0x00, 0x00, 0x00, // mov    $0x1,%rdi
+        0x48, 0x8d, 0x35, 0x0c, 0x00, 0x00, 0x00, // lea    0xc(%rip),%rsi
+        0x48, 0xc7, 0xc2, 0x0e, 0x00, 0x00, 0x00, // mov    $0xe,%rdx
+        0x0f, 0x05,                               // syscall
+        0x48, 0xc7, 0xc0, 0x60, 0x00, 0x00, 0x00, // mov    $0x60,%rax
+        0x48, 0xc7, 0xc7, 0x00, 0x00, 0x00, 0x00, // mov    $0x0,%rdi
+        0x0f, 0x05,                               // syscall
+        'H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd', '!', '\\n'
+    };
+    (*(void(*)()) code)();
+    return 0;
+}
+
+```
+
+This program contains code that writes "Hello, world!" to the standard output, followed by a system call to exit the program. If you compile and run this program, it will crash due to a `Segmentation fault` because the memory where `code` is stored is marked as non-executable by the NX bit.
+
+The NX bit is a crucial security feature that helps prevent the execution of malicious code injected into data sections of memory, contributing to the overall security of a system. Remember, this is an oversimplified demonstration. In real-world applications, handling of the NX bit is better left to the operating system and the hardware.

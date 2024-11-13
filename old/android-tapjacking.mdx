@@ -1,0 +1,74 @@
+# Android Tapjacking
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android Tapjacking is a type of UI redressing attack where malicious apps trick users into clicking on a seemingly harmless popup, which in reality is overlaying a critical system function.
+> 
+
+### 🧐 Why ?
+
+> Understanding Android Tapjacking is important because it is a common method used by attackers to trick users into giving away sensitive permissions or data without their knowledge. It is a problem that is still prevalent on Android devices, despite the various security measures put in place by Google.
+> 
+
+### ⛏️ How ?
+
+> To avoid falling prey to Tapjacking attacks, users should be cautious about the apps they install and the permissions they grant. They should also keep their devices updated, as newer versions of Android have additional safeguards against this type of attack.
+> 
+
+### ⏳ When ?
+
+> Tapjacking has been a known issue in Android since around 2010. It gained more attention in 2015 when researchers demonstrated a proof of concept at the Black Hat conference.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Android Tapjacking is a sophisticated type of UI redressing attack, where malicious apps deceive users into interacting with a disguised overlay, which is in reality covering a critical system function. The malicious app exploits the 'SYSTEM_ALERT_WINDOW' permission available on Android, which allows an app to display its own user interface on top of other applications.
+
+In a Tapjacking attack, the malicious app creates a transparent 'clickjacking' layer over a legitimate app. The user, believing they are interacting with the legitimate app, is unknowingly interacting with the hidden malicious layer. This interaction can trigger unwanted actions such as granting permissions, making purchases, or even installing malware.
+
+Google has taken steps to counteract Tapjacking by implementing various measures. One of these measures includes restricting the use of the 'SYSTEM_ALERT_WINDOW' permission, which has been a key enabler of Tapjacking attacks. Additionally, a security feature called the 'clickable' attribute has been introduced. This attribute is designed to prevent users from interacting with overlays, providing an additional layer of protection.
+
+However, despite these countermeasures, Tapjacking remains a threat, particularly on older versions of Android where these safeguards may not be present or effective. It's important for users to be vigilant about the apps they install, the permissions they grant, and to keep their devices updated to the latest version of Android for maximum security against such attacks.
+
+For an educational purpose, let's look at a hypothetical example of how a Tapjacking attack could occur:
+
+1. A user downloads a seemingly innocent flashlight app called "BrightLight". In the permissions request, the app asks for the 'SYSTEM_ALERT_WINDOW' permission. This permission allows an app to create windows that overlay on top of all other apps. The user grants it, thinking it's necessary for the flashlight app to function properly.
+
+```java
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+```
+
+1. After the app is installed and opened, it creates a transparent overlay over the entire display. This overlay has been designed to mimic the look of a popular game, "FunGame". The code might look something like this:
+
+```java
+WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+    PixelFormat.TRANSLUCENT);
+
+params.gravity = Gravity.TOP | Gravity.START;
+params.setTitle("Overlay Button");
+WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+View myView = inflater.inflate(R.layout.overlay_layout, null);
+
+wm.addView(myView, params);
+
+```
+
+1. The user now sees a prompt from "FunGame" asking if they would like to purchase an in-game item. In reality, this prompt is part of the overlay created by "BrightLight". The user clicks on the "purchase" button, believing they are making an in-game purchase.
+2. Behind the scenes, the "purchase" button on the overlay is placed exactly where the "grant permission" button is on a system dialog asking for sensitive permissions (e.g. access to contacts or messages). So, when the user thinks they are making a purchase in "FunGame", they are actually granting "BrightLight" access to their sensitive data.
+
+This example highlights the importance of being vigilant about the permissions you grant to apps and keeping your Android device updated with the latest security patches.

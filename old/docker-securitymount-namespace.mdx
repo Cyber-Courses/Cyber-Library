@@ -1,0 +1,85 @@
+# Docker SecurityMount Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Docker SecurityMount Namespace is a feature in Docker, a popular open-source platform used to automate the deployment, scaling, and management of applications. This feature provides an additional layer of security by isolating file system mount points.
+> 
+
+### 🧐 Why ?
+
+> Docker SecurityMount Namespace is important because it helps increase the security of Docker containers by preventing unauthorized access to the host system's mount points. Without this feature, malicious applications running within the container could potentially access or modify the host system's files and directories, leading to serious security risks.
+> 
+
+### ⛏️ How ?
+
+> To use Docker SecurityMount Namespace, you need to enable it in the Docker daemon configuration file. Once enabled, each container will have its own mount namespace, isolated from the host and other containers. This means that any changes to the mount points within a container will not affect the host or other containers.
+> 
+
+### ⏳ When ?
+
+> Docker introduced the SecurityMount Namespace feature as a part of their ongoing efforts to improve container security, which has become increasingly important with the widespread adoption of containerization technologies.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Docker's SecurityMount Namespace is a critical security feature that leverages the Linux kernel's namespace functionality. When a new Docker container is inaugurated, a unique mount namespace is created for it. This namespace consists of its own set of mount points, which are entirely separate from the host system's mount points. This separation forms a robust isolation layer, preventing applications within the container from interacting with the host system's files and directories, hence bolstering security.
+
+Enforced by the Linux kernel, this isolation is difficult to bypass, thereby providing a robust defence against potential malicious attacks. It's worth noting that the isolation only pertains to the view of the file system; it doesn't imply separate filesystems. Hence, while the containers may have a different perspective of the system, they are still working on the same files and directories as the host.
+
+Moreover, Docker provides additional controls over the visibility and permissions of mount points within a container. This means that you can adjust the degree of access that a container has to its mount points, providing even greater security customization. Such options allow for the tailoring of security measures to the specific needs of your applications, enhancing the overall security of your Docker environment.
+
+The SecurityMount Namespace feature is a testament to Docker's commitment to securing containerized applications. By isolating each container's file system view, Docker ensures that a breach in one container doesn't expose the entire system to risk.
+
+Here's a detailed example of how to use the Docker SecurityMount Namespace feature:
+
+1. **Enable the feature:** First, you need to enable the SecurityMount Namespace feature in the Docker daemon configuration file. This file is usually located at `/etc/docker/daemon.json`. If the file doesn't exist, create it. Here's an example of how the file might look:
+
+```json
+{
+  "security-opt": ["namespace"]
+}
+
+```
+
+Save and close the file. Then, restart the Docker daemon to apply the changes:
+
+```bash
+sudo systemctl restart docker
+
+```
+
+1. **Create a container with isolation:** Once you've enabled the feature, you can create a new container. Docker will automatically create a unique mount namespace for this container. Here's an example command to create a new container:
+
+```bash
+docker run -it ubuntu bash
+
+```
+
+In this command, `docker run` creates a new container, `-it` allows you to interact with the container, `ubuntu` is the base image for the container, and `bash` is the command you want to run inside the container.
+
+1. **Check the isolation:** Once you're inside the container, you can check the isolation by looking at the mount points. Run the following command:
+
+```bash
+mount
+
+```
+
+This will display a list of mount points, which should be different from the host's mount points.
+
+1. **Adjust the access:** Docker also allows you to adjust the visibility and permissions of mount points within a container. For example, you can make a directory read-only within the container by using the `v` option with `docker run`:
+
+```bash
+docker run -it -v /path/to/directory:/container/directory:ro ubuntu bash
+
+```
+
+In this command, `-v` specifies a volume to mount, `/path/to/directory` is the directory on the host, `/container/directory` is where it will be mounted in the container, and `ro` makes it read-only.
+
+This way, Docker's SecurityMount Namespace feature provides robust isolation and security customization for your containers.

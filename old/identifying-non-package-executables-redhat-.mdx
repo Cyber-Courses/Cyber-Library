@@ -1,0 +1,84 @@
+# Identifying non-package executables (RedHat)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Identifying non-package executables in RedHat is the process of finding and distinguishing executables that are not part of any installed software package. These could be standalone applications, scripts, or even malicious programs.
+> 
+
+### 🧐 Why ?
+
+> Identifying non-package executables is crucial for understanding what is running on your system. It helps in system auditing, optimizing system performance, and enhancing security by detecting potentially malicious executables. It's also a common requirement in many regulatory and compliance standards.
+> 
+
+### ⛏️ How ?
+
+> To identify non-package executables, you can use the 'rpm' command-line tool in RedHat. The 'rpm -qf' command can query the package that a particular file belongs to. By looping through all executable files and checking if they belong to any package, we can identify non-package executables. However, this can be a time-consuming process. Scripts or tools like 'rpmorphan' can help automate this process.
+> 
+
+### ⏳ When ?
+
+> The practice of identifying non-package executables has been around as long as software packaging itself. It became especially relevant with the rise of Linux distributions like RedHat, which utilize software packages for efficient software management.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Identifying non-package executables in Unix-like systems, such as RedHat, involves understanding two key principles: file permissions and software packaging.
+
+File permissions dictate who can read, write, and execute a file. In Unix-like systems, you can check these permissions using the 'ls -l' command. Executable files have the 'execute' permission set, flagged by an 'x' in the permission string (e.g., -rwxr-xr-x). The presence of this 'x' indicates that the file is executable.
+
+Software packaging, on the other hand, is the process of bundling software and its dependencies into a single distributable file. This makes the software easier to install, update, and remove. RedHat uses the RPM Package Manager (RPM) for this purpose. Each installed package owns a set of files on the system, and you can query which package a file belongs to using the 'rpm -qf' command.
+
+To identify non-package executables, you would loop over all executable files on the system and check if they belong to any installed package using the 'rpm -qf' command. Any file not associated with a package is a non-package executable. This could be a standalone application, a script, or potentially a malicious program.
+
+However, this method may not identify executables running purely in memory or hidden using advanced techniques such as rootkits. These cases require more sophisticated tools and techniques for detection. Additionally, the process of checking each executable file can be time-consuming, so automation tools like 'rpmorphan' can be used to streamline the process.
+
+Understanding and identifying non-package executables is crucial for system auditing, performance optimization, and enhancing security. It also helps meet certain regulatory and compliance standards.
+
+Here's a detailed example of how to identify non-package executables in a RedHat system:
+
+1. **Find Executable Files:** Use the `find` command to locate all executable files on your system. This command searches your system for files with the execute permission set. Here's a basic example:
+
+```bash
+find / -perm /a=x
+
+```
+
+This command says, "find all files in the root directory (`/`) that have the execute (`x`) permission set for any (`a`) user".
+
+1. **Check Package Ownership:** Now that you have a list of executable files, you need to check if they belong to a package. You can do this using the `rpm -qf` command. Here's an example using the `/usr/bin/ls` executable:
+
+```bash
+rpm -qf /usr/bin/ls
+
+```
+
+This command will output the name of the package that owns the `/usr/bin/ls` executable. If the file is not owned by any package, it will output `file /usr/bin/ls is not owned by any package`.
+
+1. **Automate the Process:** Manually checking each file is time-consuming. You can automate the process using a simple bash script. Here's an example:
+
+```bash
+#!/bin/bash
+for file in $(find / -perm /a=x); do
+  if rpm -qf "$file" &> /dev/null; then
+    echo "$file is owned by a package"
+  else
+    echo "$file is NOT owned by any package"
+  fi
+done
+
+```
+
+This script loops over each executable file on your system and checks if it's owned by a package. If the file is not owned by any package, it prints a message saying so. Else, it indicates that the file is owned by a package.
+
+Please note that this is a basic example and might not catch all non-package executables, especially those that are intentionally hidden using advanced techniques. For a more comprehensive analysis, consider using specialized tools or consulting with a security expert.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,83 @@
+# Format Strings - Arbitrary Read Example
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Format String Attacks are vulnerabilities that occur when the submitted data of an input string is evaluated as a command by the application. In this context, an Arbitrary Read Example refers to the potential for a malicious user to leverage format string vulnerabilities to read arbitrary data from the program.
+> 
+
+### 🧐 Why ?
+
+> Understanding Format String Attacks, especially Arbitrary Read Examples, is crucial as it represents a severe security risk. Attackers can exploit these vulnerabilities to read sensitive information from the memory, manipulate data, or execute arbitrary code. This can lead to serious consequences such as data breaches, system crashes, and unauthorized access.
+> 
+
+### ⛏️ How ?
+
+> Exploiting a format string vulnerability involves submitting format specifiers as input. For an Arbitrary Read Example, the attacker might use '%s' to read string data or '%x' to read hexadecimal values from the stack. The attacker needs to carefully craft the input to extract the desired information.
+> 
+
+### ⏳ When ?
+
+> Format String Attacks have been a known issue since the late 90s, but continue to be a common vulnerability, especially in programs written in languages like C and C++, which do not perform automatic bounds checking.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A Format String Attack is a type of software vulnerability that arises when an application interprets user input as a format string for a function that supports variable argument substitution. These functions, often found in C and C++ programming languages, include 'printf', 'sprintf', 'fprintf', etc. These functions treat their arguments as a variable-length list and use the provided format string to determine the expected number and types of arguments.
+
+The vulnerability occurs when an attacker can influence the format string parameter and control the arguments to the format string. This control allows the attacker to manipulate the program's memory operations. Specifically, they can read arbitrary memory from the process, write arbitrary data to memory, and even execute arbitrary code.
+
+To exploit this vulnerability, the attacker crafts a specific input that includes format specifiers - sequences of characters that define how the function formats and displays the data. Some common format specifiers include '%s' for string data and '%x' for hexadecimal values. By manipulating these specifiers, the attacker can control how the program reads data from the stack memory.
+
+Format String Attacks pose a significant security risk as they can lead to severe consequences. For example, sensitive information can be read from the memory, data can be manipulated, and arbitrary code can be executed, leading to potential system crashes or unauthorized access.
+
+Despite being a known issue since the late 90s, Format String Attacks remain a common vulnerability, particularly in programs written in languages like C and C++ which do not perform automatic bounds checking. Therefore, understanding and mitigating these types of attacks is crucial for maintaining system security.
+
+Let's consider a simple C program that has a format string vulnerability:
+
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    char buffer[100];
+    strncpy(buffer, argv[1], 99);
+    printf(buffer);
+    return 0;
+}
+
+```
+
+This program copies the first command-line argument into a buffer and then prints the buffer using `printf()`. Here, `printf()` is used incorrectly because it expects a format string as its first argument, but the user can control the contents of the buffer.
+
+Let's assume that this program is named `vulnerable_program` and is executed with the command `./vulnerable_program %p %p %p`. The `%p` format specifier prints the argument as a pointer. The output might look like this:
+
+```
+0x7ffeefbff5a0 0x7f4a5d8b0b97 0x7ffeefbff600
+
+```
+
+These are the hexadecimal representations of values from the stack memory. The attacker has successfully read arbitrary memory from the process.
+
+If the attacker uses the `%n` format specifier, they can write to arbitrary memory locations. Here's an example:
+
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    int var = 0;
+    printf(argv[1], &var);
+    printf("Var: %d\\n", var);
+    return 0;
+}
+
+```
+
+If this program is executed with the command `./vulnerable_program %n`, the value of `var` is set to the number of characters written so far, which can be controlled by the input string. This demonstrates how an attacker can manipulate the program's memory operations.
+
+To mitigate format string vulnerabilities, developers need to avoid using uncontrolled format strings. They can use `printf("%s", buffer)` instead of `printf(buffer)`, ensuring that `buffer` is treated as a simple string, not a format string.

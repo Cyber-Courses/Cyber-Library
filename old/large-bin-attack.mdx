@@ -1,0 +1,128 @@
+# Large Bin Attack
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Large Bin Attack is a type of cybersecurity attack that targets the memory management of a computer system. It's a method used by hackers to exploit the way a system allocates and manages memory spaces, particularly large memory blocks or 'bins'.
+> 
+
+### 🧐 Why ?
+
+> Understanding Large Bin Attack is crucial as it exposes vulnerabilities in a system's memory management, potentially leading to unauthorized access, data theft, and system crashes. Addressing these vulnerabilities is a critical step towards enhancing system security and protecting sensitive information.
+> 
+
+### ⛏️ How ?
+
+> Preventing Large Bin Attacks involves regularly patching and updating system software, implementing proper memory management strategies, and using intrusion detection systems to identify and stop potential threats. Also, regular system audits and monitoring can help identify any abnormal behavior indicative of a Large Bin Attack.
+> 
+
+### ⏳ When ?
+
+> The use of Large Bin Attacks started becoming more prevalent with the growth of complex computer systems and networks, which have more potential points of vulnerability. It's especially common in systems that have not been properly updated or patched.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, a Large Bin Attack works by taking advantage of how an operating system allocates large blocks of memory, known as 'bins'. This attack exploits the memory management mechanisms of systems, particularly focusing on the dynamic memory allocation routines in libraries like `malloc` in C.
+
+### Detailed Explanation
+
+### Memory Allocation
+
+When a program requests a large block of memory, the operating system allocates a bin that can hold the requested memory. Often, more memory than needed is allocated to optimize future memory requests, resulting in excess free memory.
+
+### Exploitation Process
+
+1. **Memory Request**: An attacker first requests a large chunk of memory. This is done using functions like `malloc` in C, which dynamically allocates memory.
+    
+    ```c
+    // Requesting a large memory block
+    char *ptr = (char *) malloc(1024 * 1024); // Requesting 1 MB
+    
+    ```
+    
+2. **Manipulating Free Memory**: The operating system allocates slightly more than 1 MB to optimize future allocations. The excess memory is put in a 'free' state.
+    - Example: The system might allocate 1.1 MB, with 0.1 MB remaining free.
+3. **Releasing Memory**: The attacker frees the allocated memory, which goes into the free list of the memory allocator.
+    
+    ```c
+    // Freeing the allocated memory
+    free(ptr);
+    
+    ```
+    
+4. **Hijacking the Free List**: The attacker then manipulates this 'free' memory. They can do this by creating a fake memory block and linking it to the free list, altering the system’s perception of the memory layout.
+    
+    ```c
+    // Example pseudo-code to manipulate free list
+    fake_chunk = (chunk *) malloc(sizeof(chunk));
+    fake_chunk->size = adjusted_size;
+    fake_chunk->fd = point_to_next_chunk;
+    fake_chunk->bk = point_to_previous_chunk;
+    
+    ```
+    
+5. **Injecting Malicious Code**: By manipulating the free list, the attacker can overwrite adjacent memory areas, potentially injecting malicious code.
+    
+    ```c
+    // Injecting shellcode
+    strcpy(ptr, "\\x90\\x90\\x90\\x90..."); // NOP slide followed by shellcode
+    
+    ```
+    
+6. **Triggering Malicious Code**: Finally, the attacker triggers the execution of the malicious code by exploiting the overwritten memory region.
+    
+    ```c
+    // Trigger the execution
+    ((void(*)())ptr)();
+    
+    ```
+    
+
+### Real-World Example (Educational Purpose)
+
+Consider a vulnerable application that uses dynamic memory allocation without proper checks:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char *ptr1 = (char *) malloc(1024);
+    char *ptr2 = (char *) malloc(1024);
+
+    strcpy(ptr1, "Safe input");
+    strcpy(ptr2, "Exploit");
+
+    free(ptr1);
+    free(ptr2);
+
+    // Reallocate memory
+    char *ptr3 = (char *) malloc(2048);
+    strcpy(ptr3, "Overwriting past free list boundary");
+
+    printf("Memory content: %s\\n", ptr3);
+
+    return 0;
+}
+
+```
+
+In this example, the attacker could manipulate `ptr1` and `ptr2` to overwrite memory regions outside their allocated bounds, potentially leading to code injection or system crashes.
+
+### Mitigation Strategies
+
+1. **Regular Patching**: Ensure all software and libraries are up-to-date with the latest security patches.
+2. **Memory Management**: Use secure memory management functions that include boundary checks.
+3. **Intrusion Detection Systems (IDS)**: Deploy IDS to monitor and detect abnormal memory allocation patterns.
+4. **Regular Audits**: Conduct regular system audits to identify vulnerabilities.
+5. **Address Space Layout Randomization (ASLR)**: Implement ASLR to randomize memory addresses, making it harder for attackers to predict memory locations.
+
+By understanding and implementing these techniques, systems can be better protected against Large Bin Attacks and similar memory exploitation techniques.

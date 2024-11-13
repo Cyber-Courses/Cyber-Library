@@ -1,0 +1,104 @@
+# Abusing Docker Socket for Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Abusing Docker Socket for Privilege Escalation is a security vulnerability where an attacker with access to a Docker daemon can escalate their privileges to root on the host system. Docker is an open-source platform that automates the deployment, scaling, and management of applications within containers, providing a layer of abstraction over the system's operating system. The Docker daemon runs with root privileges, and any user with access to it effectively has root access. This can be abused to escalate privileges if not properly secured.
+> 
+
+### 🧐 Why ?
+
+> This issue is critical because if an attacker gains access to the Docker daemon, they can gain full control over the host system, potentially leading to data theft, disruption of services, or further attacks on the network. Understanding this vulnerability is crucial for system administrators and security professionals to secure their Docker environments properly.
+> 
+
+### ⛏️ How ?
+
+> Securing Docker daemon involves several steps. First, it's crucial not to expose Docker daemon to the internet without proper authentication. Second, it's recommended to use user namespaces, which map the container's root user to a non-root user on the host. Finally, it's advised to use Docker's built-in role-based access control (RBAC) to limit the permissions of users and processes accessing the Docker daemon.
+> 
+
+### ⏳ When ?
+
+> The issue of Docker socket abuse for privilege escalation has been known since Docker's early days, around 2013-2014. As Docker's popularity grew, so did the awareness of this vulnerability.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Docker daemon runs with root privileges because it needs to interact with various system resources like network interfaces, file systems, and other processes. When users interact with Docker, they do so by communicating with this Docker daemon, not the containers directly. This forms the basis of the security vulnerability we're discussing.
+
+The problem arises when a user gains access to the Docker daemon. With this access, they can execute commands as if they were the root user. Specifically, they can create a new Docker container and mount the host's root file system to this container. Once this is done, they have effectively gained root access to the entire host system, bypassing any usual restrictions or permissions. This is a significant security concern as it can lead to unauthorized data access, tampering, and potential system damage.
+
+However, there are several ways to mitigate this risk. One of them is by using a feature called 'user namespaces'. User namespaces isolate the user IDs and group IDs between the host and the container. This means that the root user inside the container is different and separate from the root user on the host. This effectively prevents the container's root user from having actual root privileges on the host system.
+
+Another way to secure the Docker daemon is by using Docker's built-in Role-Based Access Control (RBAC). RBAC allows you to specify which users or processes have what kind of access to the Docker daemon. This can be used to restrict who can create or modify Docker containers, preventing unauthorized or potentially harmful actions.
+
+In summary, while the Docker daemon running as root can lead to privilege escalation if abused, there are effective measures in place to mitigate this risk, namely user namespaces and Docker's built-in Role-Based Access Control. Understanding these mechanisms is crucial for anyone working with Docker to ensure their systems' security.
+
+Here's a detailed example of how a user could abuse Docker socket for privilege escalation and how to mitigate this risk with user namespaces and RBAC.
+
+Suppose a user, Alice, has access to the Docker daemon. She can execute commands as if she were the root user:
+
+```bash
+docker run -v /:/hostOS -it ubuntu bash
+
+```
+
+In this command, Alice is starting a new Docker container based on the Ubuntu image. She mounts the host's root file system (`/`) to the directory `/hostOS` inside the container. The `-it` flag starts the container in interactive mode with a bash shell.
+
+Once inside the container, Alice can access the host's file system:
+
+```bash
+cd /hostOS
+ls
+
+```
+
+She would see the host's file system and can perform actions as the root user, leading to potential security risks.
+
+To mitigate this, we can use user namespaces. Here's how to enable user namespaces in Docker:
+
+Edit the Docker daemon configuration file(`daemon.json`):
+
+```bash
+sudo nano /etc/docker/daemon.json
+
+```
+
+Add the following configuration:
+
+```json
+{
+  "userns-remap": "default"
+}
+
+```
+
+Restart Docker:
+
+```bash
+sudo systemctl restart docker
+
+```
+
+Now, Docker will map the container's root user to a non-root user on the host, preventing privilege escalation.
+
+Additionally, Docker's built-in RBAC can be used to restrict access to the Docker daemon. For example, you might limit Docker commands only to users in the `docker-users` group:
+
+```bash
+# Add the docker group if it doesn't already exist
+sudo groupadd docker-users
+
+# Add the desired user to the docker group
+sudo usermod -aG docker-users alice
+
+# Change the Docker socket's group to docker-users
+sudo chown root:docker-users /var/run/docker.sock
+
+```
+
+With these steps, only users in the `docker-users` group can communicate with the Docker daemon, preventing unauthorized access and potential abuse of the Docker socket.

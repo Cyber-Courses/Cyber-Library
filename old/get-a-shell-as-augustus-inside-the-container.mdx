@@ -1,0 +1,110 @@
+# Get a shell as augustus inside the container
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Getting a shell as a user named 'Augustus' in a container refers to the process of gaining command line access to a container environment using the permissions of a specific user, in this case, 'Augustus'. This is commonly used in Docker, a popular open-source platform that automates the deployment, scaling, and management of applications within containers.
+> 
+
+### 🧐 Why ?
+
+> Gaining shell access as a specific user is crucial for developers and system administrators for a variety of reasons. It allows them to execute commands, install software, change system configurations, and perform troubleshooting within the isolated environment of a container. This is particularly important in multi-user systems where different users have different permissions and access levels. Moreover, by using a non-root user such as 'Augustus', it adds an extra layer of security as it restricts what can be done inside the container, thus reducing the impact of potential security breaches.
+> 
+
+### ⛏️ How ?
+
+> To get a shell as 'Augustus' in a container, you need to follow several steps: 1. Create a Dockerfile with a non-root user named 'Augustus'. 2. Build an image from this Dockerfile. 3. Run a container from this image. 4. Use the 'docker exec' command followed by the '-u' option and the username to gain shell access as 'Augustus'. Note: Always ensure that you follow the principle of least privilege by only granting 'Augustus' the necessary permissions.
+> 
+
+### ⏳ When ?
+
+> The technique of getting a shell as a specific user inside a container has been used since the advent of containerization technology, which dates back to the early 2000s. Its usage has become more prevalent with the rise of Docker in 2013, which popularized the use of containers in software development and deployment.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Accessing a shell as a specific user, such as 'Augustus', within a Docker container is a vital practice in containerization. This practice enhances security by ensuring that operations within the container are executed with the permissions of the specified user, adhering to the principle of least privilege. Here is a detailed example of how to achieve this:
+
+### Step-by-Step Process
+
+### Step 1: Create a Dockerfile
+
+The Dockerfile is a text file that contains all the commands to assemble an image. Here, we create a Dockerfile to add a user named 'Augustus' and set it as the default user.
+
+```
+# Use the latest Ubuntu base image
+FROM ubuntu:latest
+
+# Add a new user 'Augustus' with a home directory and default shell
+RUN useradd -ms /bin/bash Augustus
+
+# Set the working directory to 'Augustus' home directory
+WORKDIR /home/Augustus
+
+# Set 'Augustus' as the default user for subsequent commands
+USER Augustus
+
+```
+
+In this Dockerfile:
+
+- `FROM ubuntu:latest` specifies the base image.
+- `RUN useradd -ms /bin/bash Augustus` creates a new user named 'Augustus'.
+- `WORKDIR /home/Augustus` sets the working directory to the home directory of 'Augustus'.
+- `USER Augustus` specifies that 'Augustus' will be the default user for subsequent commands.
+
+### Step 2: Build the Docker Image
+
+Build the Docker image from the Dockerfile using the `docker build` command.
+
+```bash
+docker build -t augustus_image .
+
+```
+
+- `t augustus_image` tags the image with the name 'augustus_image'.
+- `.` indicates that the Dockerfile is in the current directory.
+
+### Step 3: Run a Docker Container
+
+Run a container from the newly built image using the `docker run` command.
+
+```bash
+docker run -d --name augustus_container augustus_image
+
+```
+
+- `d` runs the container in detached mode (in the background).
+- `-name augustus_container` names the container 'augustus_container'.
+- `augustus_image` is the name of the image to use.
+
+### Step 4: Access the Shell as 'Augustus'
+
+Finally, access a shell in the running container as the user 'Augustus' using the `docker exec` command.
+
+```bash
+docker exec -it -u Augustus augustus_container /bin/bash
+
+```
+
+- `it` attaches an interactive terminal to the container.
+- `u Augustus` specifies the user 'Augustus'.
+- `/bin/bash` starts a bash shell.
+
+### Explanation
+
+- **Isolation and Security**: By accessing the shell as 'Augustus', operations are restricted to the permissions of the 'Augustus' user, preventing unauthorized actions.
+- **Principle of Least Privilege**: This principle ensures that the user (Augustus) has only the minimum necessary permissions to perform required tasks.
+- **Flexibility in Container Management**: Allows developers and administrators to manage containers more securely by controlling the permissions of users within containers.
+
+### Conclusion
+
+Getting a shell as a specific user in a Docker container is a best practice for maintaining security and managing permissions. By following the steps outlined above, you can ensure that your Docker containers are more secure and adhere to the principle of least privilege. This approach minimizes potential security risks by restricting the actions that can be performed within the container based on the user's permissions.

@@ -1,0 +1,80 @@
+# Android Task Hijacking
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android Task Hijacking is a type of attack where an attacker exploits the way Android handles its multitasking system. The attacker creates a malicious application that mimics a legitimate app's user interface to trick the user into interacting with it, providing sensitive data like passwords or credit card numbers.
+> 
+
+### 🧐 Why ?
+
+> Understanding Android Task Hijacking is crucial as it poses a significant risk to Android users. As Android dominates the mobile operating system market, many users could potentially fall victim to this kind of attack, leading to severe loss of personal and financial data. Awareness and understanding of this threat can help users take protective measures and developers design more secure apps.
+> 
+
+### ⛏️ How ?
+
+> To protect yourself from Android Task Hijacking, always install apps from trusted sources like Google Play Store, regularly update your apps and OS, and be wary of any suspicious behavior from your apps. Developers should follow secure coding practices, like using the FLAG_ACTIVITY_NEW_TASK flag only when necessary and implementing proper session management.
+> 
+
+### ⏳ When ?
+
+> Android Task Hijacking became a known issue around 2015, with the increasing popularity of Android devices and the growing sophistication of cyber threats. Despite the ongoing efforts to mitigate this threat, it remains a concern due to the inherent complexity of Android's task management system.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Android Task Hijacking is a security threat that targets Android's multitasking system, specifically its 'task' management. In Android, a 'task' is a collection of activities that users engage with to perform a certain operation. Activities within a task are arranged in a stack-like structure, with the most recently started activity at the top of the stack.
+
+When a user switches from one activity to another, the system doesn't terminate the paused activity but retains its state and task affiliation in the system's memory. This feature is designed to provide a seamless user experience, allowing users to return to paused activities with their previous state intact.
+
+However, this very feature can be exploited in an Android Task Hijacking attack. In this type of attack, a malicious application is developed to mimic the interface of a legitimate application. The malicious app initiates an activity that looks identical to a legitimate one and places it on top of the stack. As a result, users are tricked into interacting with the malicious app, believing it to be the authentic one.
+
+During this interaction, users could potentially input sensitive data, such as login credentials or credit card information, which the attacker can capture. This method of attack poses a significant risk, as it can lead to substantial personal and financial data loss.
+
+To protect against Android Task Hijacking, users are advised to only download apps from trusted sources like Google Play Store, update apps and the OS regularly, and maintain a sense of vigilance for any suspicious app behavior. Developers, on the other hand, can play their part by following secure coding practices, employing the FLAG_ACTIVITY_NEW_TASK flag sparingly and only when necessary, and implementing robust session management.
+
+Let's consider a hypothetical example to illustrate how an Android Task Hijacking attack might occur:
+
+1. **Creation of the Malicious App:** An attacker designs a malicious app that mimics the login screen of a popular banking app. The app's code might look something like this:
+
+```java
+public class FakeBankingApp extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fake_banking_app);
+    }
+}
+
+```
+
+In this code snippet, `FakeBankingApp` is the malicious activity that mimics the legitimate banking app's login screen. The `setContentView` method sets the user interface layout for this activity to `activity_fake_banking_app`, which is designed to look like the real banking app's login screen.
+
+1. **Launching the Malicious App:** The malicious app waits until it detects that the user has opened the real banking app. When this happens, it immediately launches its own fake login screen on top of the stack. This might be achieved with code like this:
+
+```java
+public class AppLauncher extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if ("com.real.bankingapp".equals(intent.getPackage())) {
+            Intent fakeIntent = new Intent(context, FakeBankingApp.class);
+            fakeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(fakeIntent);
+        }
+    }
+}
+
+```
+
+Here, `AppLauncher` is a broadcast receiver that listens for the launch of the real banking app (`com.real.bankingapp`). When it detects this, it creates a new intent for `FakeBankingApp` and starts that activity, placing it on top of the stack.
+
+1. **User Interaction:** The user, believing they're interacting with the real banking app, enters their login credentials into the fake app.
+2. **Data Capture:** The malicious app captures the user's login credentials and sends them to the attacker. The attacker now has unauthorized access to the user's bank account.
+
+To protect against such attacks, users should be cautious, only download apps from trusted sources, and update their apps and OS regularly. Developers should follow secure coding practices, use the `FLAG_ACTIVITY_NEW_TASK` flag sparingly, and implement robust session management.

@@ -1,0 +1,160 @@
+# Pwn phd
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn PhD is a cybersecurity concept that refers to the process of exploiting vulnerabilities in systems, networks or applications to gain unauthorized access. The term 'pwn' is derived from the word 'own', suggesting the taking over or control of a system.
+> 
+
+### 🧐 Why ?
+
+> Understanding Pwn PhD is crucial for cybersecurity professionals as it helps them identify and mitigate potential vulnerabilities in their systems. It is also a valuable skill for ethical hackers, who use these techniques to help organizations improve their security measures.
+> 
+
+### ⛏️ How ?
+
+> Implementing Pwn PhD involves identifying potential vulnerabilities in a system, which could range from weak passwords to software bugs. Once a vulnerability is identified, various techniques can be used to exploit it and gain unauthorized access. This may involve writing custom code, using hacking tools, or even social engineering techniques. After gaining access, steps are taken to maintain control over the system, such as installing backdoors or other malicious software.
+> 
+
+### ⏳ When ?
+
+> The practice of Pwn PhD has been in existence as long as there have been systems to exploit, but has become increasingly prevalent with the rise of the internet and digital technology. It has been practiced both by malicious hackers looking to cause damage or steal information, and by ethical hackers aiming to improve system security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn PhD involves exploiting system vulnerabilities that often arise from poor system design or implementation flaws. Attackers can use various techniques to exploit these vulnerabilities, such as buffer overflow attacks, injection attacks, and privilege escalation. Each technique leverages a specific type of vulnerability to manipulate the system’s behavior and gain unauthorized access.
+
+### Techniques and Processes
+
+### Buffer Overflow Attacks
+
+A buffer overflow occurs when more data is written to a buffer than it can hold, causing adjacent memory to be overwritten. This can lead to application crashes or arbitrary code execution.
+
+1. **Example Vulnerable C Code**:
+    
+    ```c
+    cCopy code
+    #include <stdio.h>#include <string.h>void vulnerableFunction(char *input) {
+        char buffer[10];
+        strcpy(buffer, input);  // No bounds checking
+    }
+    
+    int main(int argc, char **argv) {
+        if (argc > 1) {
+            vulnerableFunction(argv[1]);
+        }
+        return 0;
+    }
+    
+    ```
+    
+2. **Exploit**:
+    - An attacker can provide an input string longer than 10 characters, overflowing the buffer and potentially overwriting the return address to execute arbitrary code.
+
+### Injection Attacks
+
+Injection attacks involve inserting malicious data into a system. SQL injection and command injection are common types.
+
+1. **Example Vulnerable Python Code**:
+    
+    ```python
+    pythonCopy code
+    import os
+    
+    def execute_command(user_input):
+        os.system(f'echo {user_input}')
+    
+    if __name__ == "__main__":
+        user_input = input("Enter your command: ")
+        execute_command(user_input)
+    
+    ```
+    
+2. **Exploit**:
+    - An attacker can input a command like `"; rm -rf /"` to execute destructive actions.
+
+### Privilege Escalation
+
+Privilege escalation occurs when a user gains higher-level privileges than they are supposed to have.
+
+1. **Example Vulnerable Shell Script**:
+    
+    ```
+    shCopy code
+    #!/bin/bash
+    if [ "$USER" == "admin" ]; then
+        echo "You have root privileges"
+        # Some privileged operations
+    else
+        echo "You are a regular user"
+    fi
+    
+    ```
+    
+2. **Exploit**:
+    - If the script is setuid root and executable by any user, a regular user can trick the script into thinking they are "admin".
+
+### Example: Brute Force Attack on a Password Check
+
+Consider a simple Python application that checks a password for granting access:
+
+1. **Vulnerable Python Code**:
+    
+    ```python
+    pythonCopy code
+    def check_password(input_password):
+        correct_password = 'password123'
+        if input_password == correct_password:
+            return 'Access granted'
+        else:
+            return 'Access denied'
+    
+    ```
+    
+2. **Brute Force Attack**:
+    - An attacker could write a script to try all possible combinations of passwords until the correct one is found.
+3. **Example Brute Force Script**:
+    
+    ```python
+    pythonCopy code
+    import itertools
+    
+    def brute_force_attack():
+        password_found = False
+        for length in range(1, 10):  # Assuming password length is less than 10
+            for guess in itertools.product('abcdefghijklmnopqrstuvwxyz0123456789', repeat=length):
+                guess = ''.join(guess)
+                if check_password(guess) == 'Access granted':
+                    password_found = True
+                    print('Password is:', guess)
+                    break
+            if password_found:
+                break
+    
+    brute_force_attack()
+    
+    ```
+    
+4. **Explanation**:
+    - The script generates all possible combinations of passwords up to a certain length and checks each one until the correct password is found.
+
+### Conclusion
+
+Pwn PhD encompasses a range of sophisticated techniques for exploiting system vulnerabilities. By understanding these techniques and how to defend against them, security professionals can better protect systems from potential attacks. The provided examples illustrate the basics of common exploitation methods, highlighting the importance of robust security practices to mitigate these risks.
+
+# 🖇️ Références
+
+---
+
+- [https://en.wikipedia.org/wiki/Exploit_(computer_security)](https://en.wikipedia.org/wiki/Exploit_(computer_security))
+- [https://www.kaspersky.com/resource-center/definitions/what-is-cybersecurity](https://www.kaspersky.com/resource-center/definitions/what-is-cybersecurity)
+- [https://www.csoonline.com/article/3254983/what-is-an-ethical-hacker.html](https://www.csoonline.com/article/3254983/what-is-an-ethical-hacker.html)

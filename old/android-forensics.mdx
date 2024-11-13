@@ -1,0 +1,71 @@
+# Android Forensics
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android forensics is the process of collecting, analyzing, and reporting on digital evidence present on Android devices like smartphones, smart TVs, tablets, and other devices running on the Android operating system. This process is often used in legal or cybercrime investigations.
+> 
+
+### 🧐 Why ?
+
+> Android forensics is crucial in today's digital world where Android devices are omnipresent. They hold a wealth of information that can be vital evidence in criminal investigations, corporate litigation, and privacy breach cases. Any misuse or mishandling of data can lead to severe consequences. Understanding Android Forensics can help in mitigating these risks.
+> 
+
+### ⛏️ How ?
+
+> Android forensics involves a step-by-step process. First, the device is seized and isolated to prevent any data alteration or remote wiping. Then, the device is carefully documented, including its physical condition. This is followed by a logical extraction of user data and system files. After extraction, data is analyzed to find patterns, messages, call logs, etc. Finally, a comprehensive report is prepared about the findings. It's crucial to follow the correct legal and ethical guidelines throughout this process.
+> 
+
+### ⏳ When ?
+
+> The practice of Android forensics began to develop in the mid-2000s with the rise of smartphones. Over the years, as Android devices became more complex and prevalent, the need for specialized Android forensics skills has grown exponentially.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Android forensics is a complex field that involves understanding and manipulating the Android file system, which is typically a variant of the Linux file system. The primary areas of focus usually include the /data partition, which holds user data, the /system partition, which contains the operating system, and the /sdcard partition, which holds external storage.
+
+Data extraction in Android forensics can be performed in a variety of ways, each with its own benefits and drawbacks. Physical acquisition involves creating a bit-by-bit copy of the device's data, which can provide a comprehensive picture of the information contained on the device. However, this method can be time-consuming and may not always be possible depending on the device's settings and security features.
+
+Logical acquisition, on the other hand, involves copying logical data structures, such as files and directories. This method is typically faster and easier than physical acquisition but may not capture all the data present on the device, especially if some areas of the memory are inaccessible or if data has been deleted.
+
+File system acquisition is a more targeted method of data extraction, focusing on specific areas of the file system. This method can be useful when investigators know exactly what type of data they are looking for.
+
+Following the data extraction, an analysis is performed using specialized software. This can involve a wide range of activities, including searching for specific keywords, recovering deleted files, or analyzing SQLite databases, which often store much of the user's data.
+
+Maintaining a chain of custody is a crucial aspect of Android forensics. This involves documenting every step of the process to ensure that the integrity of the data is preserved, and the extracted data can be admitted as evidence in court. This includes recording when the device was seized, when and how the data was extracted, who handled the device, and any actions taken during the investigation. This ensures that there are no gaps in the record that could call the validity of the data into question.
+
+For example, let's consider a case where an investigator is trying to recover a deleted text message from an Android device.
+
+1. **Device Isolation**: The first step would be to isolate the device. This can be done by putting the device in airplane mode to prevent remote data alteration or wiping.
+2. **Data Acquisition**: The investigator can then connect the device to a computer using a USB cable and use a tool like `dd` on Linux to create a bit-by-bit copy of the device's data. This is known as physical acquisition.
+    
+    The command might look like this:
+    
+    ```
+    dd if=/dev/block/mmcblk0 of=/home/investigator/Desktop/android_image.img bs=4096
+    
+    ```
+    
+    This command tells `dd` to read from the input file (`if`) `/dev/block/mmcblk0` (which represents the device's internal memory), and write to the output file (`of`) `android_image.img` on the desktop of the investigator's computer. The `bs=4096` option sets the block size to 4096 bytes.
+    
+3. **Data Analysis**: After the data is acquired, it can be analyzed using specialized software. For instance, `Autopsy` can be used to search for specific keywords, recover deleted files, or analyze SQLite databases. To recover the deleted text message, the investigator might look at the `mmssms.db` SQLite database, which often stores text messages.
+    
+    The command to analyze this database could look like:
+    
+    ```
+    sqlite3 mmssms.db 'SELECT * FROM sms WHERE type = "1";'
+    
+    ```
+    
+    This command tells `sqlite3` to select all records from the `sms` table where the type is "1", which typically represents received messages.
+    
+4. **Documentation and Reporting**: Throughout this process, the investigator would document each step, noting down the time, method used, and any other relevant information. This documentation would then be compiled into a comprehensive report detailing the findings of the investigation.
+
+Remember, these are just examples and the actual commands or steps can vary depending on the specific device, its configuration, and the nature of the data being sought.

@@ -1,0 +1,32 @@
+# GCP - BigQuery Privesc
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> GCP BigQuery Privesc is a method to escalate privileges within the Google Cloud Platform, specifically using BigQuery. BigQuery is a fully-managed, serverless data warehouse that enables super-fast SQL queries using the processing power of Google's infrastructure. Privilege escalation (Privesc) refers to the act of exploiting a bug, feature, or configuration oversight in an operating system or software application to gain elevated access to resources that are normally protected from an application or user.
+> 
+
+### 🧐 Why ?
+
+> Understanding GCP BigQuery Privesc is important because it helps to identify potential vulnerabilities in the system, which might be exploited by malicious users to gain unauthorized access or elevated privileges. It is also essential for those in charge of security within an organization to understand this topic so they can better secure their systems. In the era of big data, where organizations store and process vast amounts of data, ensuring the security of these data is crucial.
+> 
+
+### ⛏️ How ?
+
+> To implement GCP BigQuery Privesc, you need to have a valid user account on the Google Cloud Platform and have access to BigQuery. The first step would be to identify a service account which has more privileges than your current user account. Once you have identified such a service account, you can use BigQuery to create a new dataset and table, and then insert a row into the table with the service account's email. You can then grant the 'bigquery.dataViewer' role to this service account on the dataset. This allows the service account to view the data in the dataset, which includes the inserted row containing the service account's email. You can then use the 'bigquery.jobs.create' permission to create a new BigQuery job that runs as the service account, effectively escalating your privileges.
+> 
+
+### ⏳ When ?
+
+> The use of BigQuery for privilege escalation has been a known issue since the inception of the Google Cloud Platform. It is a risk that all organizations using GCP should be aware of and actively manage.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+On a deeper technical level, the process of using BigQuery for privilege escalation involves exploiting the permissions model of GCP. When a BigQuery job is created, it can be configured to run as any user, provided the creator has the 'bigquery.jobs.create' permission. By creating a job that runs as a more privileged service account, a malicious user can escalate their privileges. This is made possible by the fact that the 'bigquery.jobs.create' permission does not check whether the user has the right to access the resources that the job will access. This is a misconfiguration in the permission model and can lead to unauthorized access and data leakage.

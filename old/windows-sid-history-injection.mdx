@@ -1,0 +1,76 @@
+# Windows SID-History Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows SID-History Injection is a technique often used by attackers to gain unauthorized access to Windows systems. The Security Identifier (SID) is a unique value that identifies a user or group in Windows. The SID-History attribute of an account in Active Directory holds the SIDs of the account's former security groups, which allows access to resources even after moving the account to a new group. By injecting values into this attribute, attackers can impersonate any user and gain their access rights.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows SID-History Injection is vital due to its prevalent use in sophisticated cyber-attacks. The technique allows attackers to stealthily escalate privileges and gain unauthorized access to resources. This can lead to data breaches, system disruptions, and even full system compromise if not detected and mitigated in time.
+> 
+
+### ⛏️ How ?
+
+> To use SID-History Injection, attackers first need to gain initial access to the system, usually through methods like phishing or exploiting vulnerabilities. Once inside, they can use various tools to inject a SID into the SID-History attribute of an account. This allows them to impersonate the user associated with the injected SID and gain their access rights. Defending against this requires a combination of strong access controls, regular system monitoring, and employee awareness training.
+> 
+
+### ⏳ When ?
+
+> The concept of SID-History Injection has been known and used by attackers for many years. It's especially common in attacks against large, complex organizations with many users and groups in their Active Directory systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+SID-History Injection is a sophisticated technique used by cyber attackers to gain unauthorized access to resources on a Windows system. The method involves manipulating the Security Identifier (SID) of an Active Directory account. In Windows, every user or group is assigned a unique SID, which is used to manage access rights. The SID-History attribute of an Active Directory account holds the SIDs of previous security groups of the account, thereby enabling the account to access resources even after being moved to a new group.
+
+The SID-History Injection technique involves the modification of the SID-History attribute stored in the NTDS.dit file on the domain controller. Attackers, using tools like Mimikatz, inject a SID into this attribute. This action requires a high level of system access, as it involves directly modifying a critical system file.
+
+Once the SID is successfully injected, the Active Directory account inherits the access rights of the user or group associated with the injected SID. This aspect implies that the attacker could potentially impersonate any user or group within the system, thereby gaining a wide range of access rights.
+
+This technique is stealthy and challenging to detect as it involves monitoring changes to the NTDS.dit file, which is a complex task. With the injected SID, an attacker can escalate privileges and gain unauthorized access to resources, leading to potential data breaches, system disruptions, or even full system compromise.
+
+To defend against this technique, organizations need to implement several strategies. These include limiting system access to only trusted and necessary personnel, using strong authentication methods to prevent unauthorized access, regularly monitoring system activity to detect any suspicious behavior, and conducting employee awareness training programs to equip staff with the knowledge to recognize potential threats and respond appropriately. By putting these practices into place, organizations can reduce the risks associated with SID-History Injection.
+
+Here's a simplified, educational example of how an attacker might use the SID-History Injection technique.
+
+**Step 0: Initial Access**
+Let's assume the attacker has already gained initial access to the system through a phishing attack and has obtained the credentials of a low-privileged user.
+
+**Step 1: Escalate Privileges**
+The attacker needs to escalate their privileges to have the necessary access to modify the NTDS.dit file. They might do this using a known privilege escalation vulnerability or by exploiting misconfigured permissions. This step is beyond the scope of this example but is a crucial part of the process.
+
+**Step 2: Extract the SID**
+The attacker first needs to know the SID of the account they want to impersonate. They can use Windows commands to do this:
+
+```
+whoami /user
+
+```
+
+This command returns the SID of the current user.
+
+**Step 3: Inject the SID**
+Next, the attacker uses a tool like Mimikatz to inject the SID into the SID-History attribute of their own account. The command might look something like this:
+
+```
+mimikatz # misc::sid "S-1-5-21-..."
+
+```
+
+In this command, "S-1-5-21-..." is the SID of the account the attacker wants to impersonate.
+
+**Step 4: Impersonate the User**
+With the SID injected, the attacker can now act as the impersonated user. They have the same access rights and can access the same resources.
+
+**Step 5: Exploit the Access**
+The attacker can now perform their malicious activities, such as accessing sensitive data, modifying system configurations, or disrupting operations.
+
+Remember, this is a simplified example and a real attack would likely be more complex and harder to detect. Defending against this requires a combination of strong access controls, regular system monitoring, and employee awareness training.

@@ -1,0 +1,69 @@
+# Windows Skeleton Key
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Skeleton Key is a malware attack that creates a master key in a Windows Active Directory domain controller, which bypasses the normal authentication process. This master key can be used to authenticate as any user without the need of their password.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows Skeleton Key is important because it poses a significant threat to network security. It allows attackers to gain unauthorized access to resources on the network by impersonating any user. This can lead to data theft, disruption of services, and other harmful consequences.
+> 
+
+### ⛏️ How ?
+
+> To protect against Windows Skeleton Key attacks, it's important to keep systems patched and updated, monitor network activity for abnormal behavior, and use strong, unique passwords for all accounts. It's also crucial to limit the use of domain admin credentials to prevent attackers from gaining high-level access.
+> 
+
+### ⏳ When ?
+
+> The use of Windows Skeleton Key attacks has been observed since 2015.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Windows Skeleton Key is a malicious attack exploiting a vulnerability in the Windows NT LAN Manager (NTLM), an authentication protocol used by Active Directory. In this attack, the perpetrator injects a harmful dynamic-link library (DLL) into the 'lsass.exe' process that runs on a domain controller. This DLL intercepts NTLM authentication requests, creating a 'master key' that can authenticate as any user in the system, bypassing the need for individual passwords.
+
+This attack is particularly insidious because it doesn't involve traditional methods like password cracking or altering account settings, making it difficult to detect. Furthermore, the malicious DLL is automatically removed upon system reboot, leaving little trace of the intrusion.
+
+The primary defense against Windows Skeleton Key attacks is to ensure systems are regularly patched and updated. Anomalies in network activity should be closely monitored as they may indicate an ongoing attack. It's also essential to use strong, unique passwords for all accounts and limit the use of domain admin credentials.
+
+Windows Skeleton Key attacks have been observed since 2015, posing a significant threat to network security by allowing unauthorized access to network resources, potentially leading to data theft, service disruption, and other harmful outcomes.
+
+**Example: Detecting a Windows Skeleton Key Attack**
+
+Here's an example of how you might detect a Windows Skeleton Key attack. While this is a simplified version and actual attacks can be more complex, it's a good starting point for understanding the process.
+
+1. **Monitoring Network Activity:** Use a network monitoring tool to analyze network traffic. Unusual login activity, such as multiple successful logins from different accounts from the same IP address, could indicate a Skeleton Key attack.
+
+```bash
+sudo tcpdump -i eth0 -w output.pcap
+
+```
+
+1. **Checking for DLL Injections:** Check the 'lsass.exe' process for injected DLLs. You might use a tool like Process Explorer for this. In Process Explorer, find the 'lsass.exe' process, open its properties, and navigate to the DLLs tab. An unknown or suspicious DLL could indicate an injection.
+2. **Checking Security Logs:** Review the security logs in Event Viewer. Look for Event ID 4624 (logon) events. A Skeleton Key attack may cause an increase in these events due to the attacker authenticating as multiple users.
+
+```bash
+wevtutil qe Security /f:text > SecurityLogs.txt
+
+```
+
+1. **System Updates and Patching:** Regularly updating and patching systems is a crucial preventive measure.
+
+```bash
+# Windows Update command
+wuauclt.exe /updatenow
+
+```
+
+1. **Strong, Unique Passwords:** Encourage users to use strong, unique passwords. This won't prevent a Skeleton Key attack but could help protect against other attacks that may be used in conjunction.
+
+Remember, these are just examples. Actual detection and prevention require a comprehensive security strategy.

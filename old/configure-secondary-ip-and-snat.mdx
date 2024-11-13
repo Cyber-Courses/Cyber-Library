@@ -1,0 +1,61 @@
+# Configure secondary IP and SNAT
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Secondary IP and Source Network Address Translation (SNAT) are networking concepts that can be used to configure network interfaces and manage internet connectivity in a variety of scenarios. A secondary IP is an additional IP address assigned to a network interface, while SNAT is a technique used to allow multiple devices to share a single public IP address by translating their private IP addresses.
+> 
+
+### 🧐 Why ?
+
+> These concepts are important for managing network resources and ensuring efficient use of IP addresses. They are particularly useful in situations where IP addresses are limited or where network traffic needs to be distributed across multiple devices. Understanding how to configure secondary IP addresses and SNAT can help network administrators to ensure that their networks operate efficiently and securely.
+> 
+
+### ⛏️ How ?
+
+> To configure a secondary IP address, you first need to identify the network interface that you want to configure. You can then assign an additional IP address to this interface using the appropriate command for your operating system. For SNAT, you typically need to configure your network router or firewall to translate private IP addresses into a single public IP address. This involves setting up a translation table that maps each private IP address to the public IP address. Both of these tasks require a good understanding of network protocols and operating system commands.
+> 
+
+### ⏳ When ?
+
+> Secondary IP addresses and SNAT can be used in a variety of situations. For example, you might use a secondary IP address if you have multiple services that need to run on the same server but need to use different IP addresses. SNAT is typically used in situations where multiple devices need to share a single internet connection, such as in a home or small office network.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In more detail, configuring a secondary IP address means assigning an extra IP address to a specific network interface. This is achieved either by using the 'ip' command in a Linux environment or the 'netsh' command in Windows. The purpose is to allow the same network interface to be used for different processes or applications that require separate IP addresses.
+
+As for Source Network Address Translation (SNAT), it's a technique typically implemented on your network router or firewall. The process involves creating a translation table that maps each private IP address to a single public IP address. This mapping allows multiple devices in your private network to access the internet using a single shared public IP, which is crucial in situations where public IPs are scarce or when you want to hide the identity of devices in your local network.
+
+The actual methods of implementing SNAT can differ depending on the specific model of your network device and the firmware it uses. Some devices might have user-friendly interfaces for setting up SNAT, while others might require more technical command-line configurations. Understanding how to properly set up SNAT is important for network administrators to ensure efficient and secure internet access for all devices in the network.
+
+A detailed real-world example might involve setting up a secondary IP on a Linux server and implementing SNAT on a home router.
+
+**Setting up a secondary IP:**
+Suppose you have a Linux server with a network interface named `eth0` and its primary IP address is `192.168.1.10`. You want to add a secondary IP address `192.168.1.20` to this interface. Here's how you can do it:
+
+1. Open a terminal and run the following command to add a secondary IP: `sudo ip addr add 192.168.1.20/24 dev eth0`
+2. Verify the new IP address was added: `ip addr show eth0`
+
+The `/24` after the IP address in the first command is a subnet mask indicating that the IP address belongs to the `192.168.1.0` network. The `dev eth0` part specifies the network interface to which the IP address is to be assigned.
+
+**Setting up SNAT:**
+Setting up SNAT can vary depending on the router model and firmware, but here's a generalized example using iptables, a command-line firewall that can perform SNAT:
+
+1. Suppose your router's public IP address is `203.0.113.0`, and you have a private network of devices with IP addresses in the `192.168.1.0/24` range. Here's how you can set up SNAT:
+2. Open a terminal on the router (you may need special access to do this) and run the following command to set up SNAT: `sudo iptables -t nat -A POSTROUTING -o eth0 -s 192.168.1.0/24 -j SNAT --to-source 203.0.113.0`
+3. Verify the SNAT rule has been added: `sudo iptables -t nat -L -v -n`
+
+In the command to set up SNAT, `-t nat` specifies the 'nat' table, `-A POSTROUTING` appends a rule to the 'POSTROUTING' chain, `-o eth0` specifies the outgoing network interface, `-s 192.168.1.0/24` specifies the source IP addresses to match, `-j SNAT` jumps to the 'SNAT' target, and `--to-source 203.0.113.0` sets the new source IP address for matched packets.
+
+Remember, always be careful when modifying network settings and consult the relevant documentation for your specific environment and requirements.
+
+# 🖇️ Références
+
+---

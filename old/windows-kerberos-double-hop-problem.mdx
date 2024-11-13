@@ -1,0 +1,82 @@
+# Windows Kerberos Double Hop Problem
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The Windows Kerberos Double Hop Problem is a security measure in Microsoft Windows networks that restricts the ability of a service to use a client's delegated credentials to connect to a second service on behalf of the client. This is a default behaviour in Active Directory.
+> 
+
+### 🧐 Why ?
+
+> Understanding the Windows Kerberos Double Hop Problem is crucial for network administrators and cybersecurity professionals. It presents a challenge when trying to access resources in a Windows network due to its restriction on credential delegation. This problem can hinder the smooth operation of certain applications that require access to resources located on different servers.
+> 
+
+### ⛏️ How ?
+
+> To address the double hop problem, one must configure the system to allow for delegation of credentials. This involves setting up Kerberos delegation on the specific service account, enabling the service to impersonate the client when connecting to the second service. It is crucial to understand that this can potentially open up avenues for exploitation if not properly managed, hence the need for cautious implementation.
+> 
+
+### ⏳ When ?
+
+> The issue started with the introduction of Kerberos as the default authentication protocol in Windows 2000. Since then, it has been a persistent challenge in Windows networks that require resource sharing across servers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Windows Kerberos Double Hop Problem arises due to the features of the Kerberos authentication protocol used in Windows networks. In a typical scenario, a client connects to a server (the first "hop"), and their credentials are delegated to the service running on that server. This allows the service to perform actions on behalf of the client.
+
+However, when this service tries to connect to a second service on another server (the second "hop"), it cannot use the client's delegated credentials. The reason is that, by default, Windows has a security measure that prevents credentials from being forwarded, or 'hopped', more than once. This measure is designed to stop a potentially compromised service from using a client's credentials to access other services across the network, thus preventing a cascade of unauthorized accesses.
+
+This restriction, however, can cause difficulties for certain applications that need to access resources located on different servers. For instance, a web application may retrieve data from a database server on behalf of a user, which would be a second "hop". In such cases, the application would face the double hop problem.
+
+Addressing this problem requires careful network configuration to allow for credential delegation. Specifically, Kerberos delegation must be set up on the service account that needs to make the second hop. This would enable the service to impersonate the client when connecting to the second service. However, it's crucial to understand that this process can potentially create security risks if not managed properly. For example, if a service account with delegation enabled is compromised, it could be used to gain unauthorized access to other systems. Therefore, enabling delegation should be done judiciously, and security measures should be in place to monitor and control the use of such service accounts.
+
+Let's consider a real-world example where a web application retrieves data from a database on behalf of a user, which is a typical scenario where the Windows Kerberos Double Hop problem arises.
+
+**Step 1: User Authentication:** A user logs into a web application using their credentials.
+
+```powershell
+# User logging into the web application
+Login-WebApp -Username "User1" -Password "Password123"
+
+```
+
+**Step 2: First Hop:** The web application, running on Server A, uses the user's delegated credentials to connect to Server B. This is the first 'hop'.
+
+```powershell
+# Web application using User1's credentials to connect to Server B
+Connect-Server -ServerName "Server B" -Credentials $User1Credentials
+
+```
+
+**Step 3: Double Hop Problem:** The web application on Server B attempts to retrieve data from a database on Server C. It tries to use User1's delegated credentials, but due to the Windows Kerberos Double Hop problem, this is not possible.
+
+```powershell
+# Attempt to retrieve data from Server C fails due to the double hop problem
+Get-DatabaseData -ServerName "Server C" -Credentials $User1Credentials
+
+```
+
+**Step 4: Configuration for Delegation:** To resolve this issue, Kerberos delegation needs to be set up on the web application's service account. This allows the service to impersonate the client when connecting to Server C.
+
+```powershell
+# Configuring Kerberos delegation for the web application's service account
+Set-ADUser -Identity WebAppServiceAccount -PrincipalsAllowedToDelegateToAccount $User1
+
+```
+
+**Step 5: Successful Second Hop:** Now, the web application can successfully retrieve data from the database on Server C using User1's delegated credentials.
+
+```powershell
+# Retrieving data from Server C is now successful after enabling delegation
+Get-DatabaseData -ServerName "Server C" -Credentials $User1Credentials
+
+```
+
+Remember, it's essential to monitor the use of service accounts with delegation enabled because if such an account is compromised, it could be used for unauthorized accesses.

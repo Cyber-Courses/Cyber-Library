@@ -1,0 +1,77 @@
+# Windows Silver Ticket
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> A Silver Ticket in Windows Active Directory (AD) is a type of Kerberos ticket which is used for authenticating services on a specific server within an AD environment. It is issued by the Key Distribution Center (KDC) and contains encrypted data which proves the user's identity to the target service.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows Silver Ticket is crucial as it is a known attack vector in AD environments. An attacker who has compromised an account with sufficient privileges can forge a Silver Ticket and use it to impersonate any user on the network to the target service. This can lead to unauthorized access to sensitive data and systems.
+> 
+
+### ⛏️ How ?
+
+> To protect against Silver Ticket attacks, organizations should follow best practices for securing AD environments. This includes using strong passwords, limiting privileges of service accounts, regularly auditing AD for suspicious activities, and implementing measures to detect and respond to Kerberos ticket anomalies.
+> 
+
+### ⏳ When ?
+
+> The use of Silver Tickets in Windows AD environments has been a known issue since the release of Windows 2000, but it has gained more attention in recent years due to the increased focus on AD security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A Silver Ticket is an integral component of the Kerberos authentication protocol used in Windows Active Directory (AD) environments. This ticket is issued by the Ticket Granting Service (TGS), which is part of the Key Distribution Center (KDC), after a client presents a valid Ticket Granting Ticket (TGT).
+
+The Silver Ticket, also known as a Service Ticket (ST), carries encrypted data that includes the identity of the client and the service, the ticket's validity period, and a session key for secure communication between the client and the service. The encryption of the Silver Ticket is done using the secret key of the target service.
+
+The process works in the following way: when a user wants to access a service, they first authenticate with the KDC and receive a TGT. The user then sends this TGT to the TGS, which verifies the TGT and issues a Silver Ticket. The user presents this Silver Ticket to the target service, which confirms the user's identity and grants access.
+
+However, this process can be exploited by an attacker through what is known as a Silver Ticket attack. If an attacker can gain access to the secret key of a service, they can forge a Silver Ticket. This forged ticket can be used to access the service as any user, without needing to authenticate with the KDC. This could potentially result in unauthorized access to sensitive data and systems.
+
+To mitigate the risk of Silver Ticket attacks, organizations need to follow best practices for securing AD environments. These include using strong passwords, limiting the privileges of service accounts, regularly auditing AD for suspicious activities, and implementing measures to detect and respond to any anomalies in the issuance and use of Kerberos tickets.
+
+Example:
+
+1. A user, Alice, logged into her computer. Her computer, being part of the Windows AD environment, automatically requests a Ticket Granting Ticket (TGT) from the Key Distribution Center (KDC) to authenticate Alice.
+
+```bash
+# Alice's computer sends a TGT request
+kinit alice@AD.EXAMPLE.COM
+
+```
+
+1. The KDC verifies Alice's credentials and issues a TGT. The TGT is encrypted with a secret key known only to the KDC.
+
+```bash
+# The KDC issues a TGT
+ktadd -k /tmp/alice.keytab alice@AD.EXAMPLE.COM
+
+```
+
+1. Alice wants to access a specific service, say a File Server. Her computer sends the valid TGT to the Ticket Granting Service (TGS), requesting a Silver Ticket for the File Server.
+
+```bash
+# Alice's computer sends a Silver Ticket request
+kvno fileserver@AD.EXAMPLE.COM
+
+```
+
+1. The TGS verifies the TGT, and if valid, issues a Silver Ticket for the File Server. This ticket is encrypted with the secret key of the File Server.
+2. Alice's computer presents the Silver Ticket to the File Server. The File Server decrypts the ticket, confirms Alice's identity, and grants access.
+
+```bash
+# Alice's computer presents the Silver Ticket to the File Server
+klist
+
+```
+
+In a Silver Ticket attack scenario, an attacker with access to the File Server's secret key could forge a Silver Ticket, impersonate any user (not just Alice), and gain unauthorized access to the File Server. This highlights the importance of securing service keys and regularly auditing for suspicious activities.

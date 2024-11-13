@@ -1,0 +1,71 @@
+# ssh-keyscan, help to find if 2 ssh ports are from the same host comparing keys
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SSH-keyscan is a utility for collecting public SSH host keys from a number of hosts. It is useful in scenarios where a user wants to compare if two SSH ports are from the same host by comparing the keys.
+> 
+
+### 🧐 Why ?
+
+> Understanding how to use SSH-keyscan is important as it provides a method for detecting possible Man-in-the-Middle attacks by comparing SSH keys. If two SSH ports have different keys, it may indicate that one of the hosts is an imposter, trying to intercept the communication. Thus, our readers, especially those concerned with network security, would find this topic highly relevant.
+> 
+
+### ⛏️ How ?
+
+> To use SSH-keyscan to compare keys from two different SSH ports, follow these steps:\n1. Run the command 'ssh-keyscan host' for each host. This will print the public keys for each host.\n2. Compare the keys. If they match, it is likely that the ports are from the same host. If they don't, further investigation is needed.
+> 
+
+### ⏳ When ?
+
+> SSH-keyscan has been a part of the OpenSSH package since its inception, and its use has become a standard practice in network security over the years.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+SSH-keyscan is a utility included in the OpenSSH package that collects public SSH host keys from specified hosts. It sends protocol requests to these hosts and then prints their public keys, in the order they are received. This functionality can be employed to determine if a host has multiple keys, as SSH-keyscan will print all keys if a host has more than one.
+
+The comparison of keys is rooted in the principle that the SSH protocol uses public-key cryptography for authentication. Hence, each host should have a unique key pair. If two hosts have the same key, it's likely they are the same host or one host has copied the key of the other, which could indicate a potential security risk.
+
+Utilizing SSH-keyscan is crucial in cybersecurity as it provides a method for detecting possible Man-in-the-Middle (MitM) attacks by comparing SSH keys. A MitM attack occurs when a malicious actor intercepts and possibly alters the communication between two parties who believe they are directly communicating with each other. If two SSH ports have different keys, it may indicate that one of the hosts is an imposter, attempting to intercept the communication.
+
+To use SSH-keyscan to compare keys from two different SSH ports, one would need to run the command 'ssh-keyscan host' for each host, which will print the public keys for each host. These keys can then be compared. If the keys match, it suggests that the ports are from the same host. If they don't match, further investigation is necessary.
+
+Overall, understanding and using SSH-keyscan is a standard practice in network security and is especially relevant for professionals and enthusiasts in this field.
+
+For instance, let's say we have two servers, `server1.example.com` and `server2.example.com`, and we suspect they might be the same host. We can use SSH-keyscan to collect the keys and compare them.
+
+First, we run SSH-keyscan on the first server:
+
+```bash
+ssh-keyscan server1.example.com > server1.key
+
+```
+
+This command connects to `server1.example.com` and writes the public key to a file named `server1.key`.
+
+Next, we do the same for the second server:
+
+```bash
+ssh-keyscan server2.example.com > server2.key
+
+```
+
+Now we have two files, `server1.key` and `server2.key`, each containing the public key of one server.
+
+We can compare these keys using the `diff` command:
+
+```bash
+diff server1.key server2.key
+
+```
+
+The `diff` command compares the content of the two files. If the command outputs nothing, it means the keys are identical, suggesting that `server1.example.com` and `server2.example.com` are likely the same host. If the command shows differences, it indicates the hosts are different or there's a potential security risk, and further investigation would be necessary.
+
+This example demonstrates how SSH-keyscan can be used to compare keys from two different SSH ports. This method is a valuable tool in network security, useful for detecting potential Man-in-the-Middle attacks.

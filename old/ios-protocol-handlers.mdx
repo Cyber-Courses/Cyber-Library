@@ -1,0 +1,85 @@
+# iOS Protocol Handlers
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS Protocol Handlers are mechanisms in the iOS operating system that allow apps to communicate with each other and with system components. They are used to handle specific types of URLs, enabling the iOS app to open and interact with the content of the URLs.
+> 
+
+### 🧐 Why ?
+
+> Understanding iOS Protocol Handlers is important because they are an integral part of how apps interact with each other on iOS devices. They facilitate the sharing of data and functionality between apps, making it possible for apps to offer more diverse and integrated user experiences. Moreover, understanding how they work can help in identifying security vulnerabilities, as improper implementation can lead to data leak or unauthorized actions.
+> 
+
+### ⛏️ How ?
+
+> To use iOS Protocol Handlers, you need to register a custom URL scheme for your app in the app's Info.plist file. This scheme is then used to form the URL that other apps can use to communicate with your app. When another app requests a URL with your app's custom scheme, iOS launches your app and passes the URL to it. Your app then processes the URL and performs the appropriate action.
+> 
+
+### ⏳ When ?
+
+> iOS Protocol Handlers have been a part of the iOS architecture since its early versions. However, their usage has grown more complex and sophisticated over time as iOS has evolved and more inter-app communication features have been introduced.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+iOS Protocol Handlers are crucial components in the iOS operating system that enable app-to-app and app-to-system communication. They are essentially functions registered within the operating system designed to manage URLs with specific schemes.
+
+The process begins when an application or system component requests a URL with a registered scheme. The operating system then triggers the corresponding handler function. This function's role is to process the URL, which may involve dissecting the URL's path and query parameters.
+
+Based on the extracted information, the function performs an appropriate action. This could involve launching a particular part of the application, executing a specific operation, or returning data to the entity that made the request.
+
+The implementation of iOS Protocol Handlers is done through the registration of a custom URL scheme for your app in the Info.plist file. The custom URL scheme forms the base of the URL that other apps will use to interact with your app. Whenever a URL containing your app's custom scheme is requested, iOS initiates your app and hands over the URL for processing.
+
+This mechanism is a cornerstone of the iOS architecture, allowing for the seamless sharing of data and functionality between apps. It enriches the user experience by enabling diverse and integrated app interactions. However, attention to security is crucial, as improper implementation could expose the system to data breaches or unauthorized activities.
+
+Understanding iOS Protocol Handlers, therefore, is not only key to leveraging the potential of app interactions on iOS devices but also to ensuring the security and integrity of the data and functionalities shared.
+
+For example, let's say you have an app called "MyApp" and you want to allow other apps to open "MyApp" and display a specific screen.
+
+1. **Register a custom URL scheme**: You will first need to define a custom URL scheme for your app. This is done by adding the following to your `Info.plist` file:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>myapp</string>
+    </array>
+  </dict>
+</array>
+
+```
+
+In this case, `myapp` is the custom URL scheme. This means that any URL that starts with `myapp://` can be handled by your app.
+
+1. **Handle incoming URLs**: Next, you will need to implement the `application(_:open:options:)` method in your app's `AppDelegate`. This method is called when another app requests a URL with your app's custom URL scheme.
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    // Parse the URL and perform the appropriate action
+    return true
+}
+
+```
+
+Inside this method, you can parse the URL and perform the appropriate action. For example, you could check the URL's path and display a specific screen based on the path.
+
+1. **Request a URL from another app**: Now, let's say another app wants to open "MyApp" and display a specific screen. They can do this by requesting a URL with your app's custom URL scheme. In Swift, this would look something like:
+
+```swift
+let url = URL(string: "myapp://screen1")!
+UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+```
+
+In this case, `myapp://screen1` is the URL being requested. When this URL is requested, iOS will launch "MyApp" and call the `application(_:open:options:)` method in "MyApp"'s `AppDelegate`. "MyApp" can then parse the URL and display the appropriate screen.
+
+Remember, while this mechanism facilitates the sharing of data and functionality between apps, attention to security is crucial. An improper implementation could expose the system to data breaches or unauthorized activities.

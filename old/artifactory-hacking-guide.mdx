@@ -1,0 +1,60 @@
+# Artifactory Hacking guide
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Artifactory is a binary repository manager for use by software developers. It allows developers to create, publish, and retrieve artifacts in a secure environment. Artifactory hacking refers to the act of exploiting vulnerabilities in Artifactory to gain unauthorized access, manipulate data, or disrupt services.
+> 
+
+### 🧐 Why ?
+
+> Understanding Artifactory hacking is important to both developers and cybersecurity professionals. For developers, it helps to understand the potential vulnerabilities in the tools they use, allowing them to better secure their software. For cybersecurity professionals, understanding Artifactory hacking can aid in the detection and prevention of attacks.
+> 
+
+### ⛏️ How ?
+
+> Exploiting Artifactory can be done through various methods, including but not limited to: unauthorized access, injection attacks, and man-in-the-middle attacks. Unauthorized access can be achieved by exploiting weak or default credentials. Injection attacks involve inserting malicious code or commands into the Artifactory system. Man-in-the-middle attacks involve intercepting and altering communications between Artifactory components.
+> 
+
+### ⏳ When ?
+
+> Artifactory hacking has been a topic of interest ever since the tool gained popularity among software developers. As the tool continues to evolve, new vulnerabilities are discovered and exploited by attackers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Artifactory is a binary repository manager widely used by software developers. It functions as a database where developers can publish, store, and retrieve different software components, often referred to as 'artifacts'. These artifacts can range from libraries and modules to packages and containers, serving as essential building blocks in the software development process. When a user needs a specific artifact, they'll make a request to Artifactory. The system then retrieves the artifact from its storage and delivers it to the user.
+
+To ensure security, this retrieval process involves user authentication and permission checks. Artifactory must confirm that the user is who they claim to be (authentication) and that they have the rights to access the requested artifact (authorization). This is crucial to prevent unauthorized access and maintain the integrity of the artifacts.
+
+However, like any system, Artifactory can have vulnerabilities. These could potentially allow unauthorized users to bypass these security measures. For instance, weak or default credentials could be exploited for unauthorized access. Injection attacks could occur, where attackers insert malicious code or commands into the system, potentially leading to data manipulation or service disruption. Man-in-the-middle attacks could also be a threat, where communications between Artifactory components are intercepted and altered.
+
+Understanding these potential vulnerabilities and ways to exploit them is critical for both developers and cybersecurity professionals. It allows developers to better secure their software and enables cybersecurity professionals to more effectively detect and prevent potential attacks.
+
+For instance, let's consider an example of a potential vulnerability in Artifactory, where weak or default credentials are exploited for unauthorized access.
+
+1. **Scanning for default credentials**: An attacker may first scan for Artifactory instances that have default credentials. This is often done using automated scripts or tools. For example, the attacker might use the curl command to attempt to access Artifactory with default credentials like so:
+
+```bash
+curl -u admin:password http://<artifactory-instance>:8081/artifactory/api/system/ping
+
+```
+
+If the Artifactory instance is using default credentials, the above command would return a successful response, indicating potential vulnerability.
+
+1. **Exploiting weak credentials**: Once an instance with default credentials is found, the attacker can then access Artifactory and manipulate it as they please. For example, they could upload a malicious artifact:
+
+```bash
+curl -u admin:password -T evil.jar http://<artifactory-instance>:8081/artifactory/libs-snapshot-local/com/acme/
+
+```
+
+1. **Exploiting the system**: This malicious artifact could then be downloaded and executed by unsuspecting developers, leading to potential system compromise.
+
+It's important to note that this example is simplified and real-world attacks would likely involve more complex steps and obfuscation techniques. Furthermore, exploiting such vulnerabilities is illegal and against the terms of service of most software. This example is provided strictly for educational purposes, to help developers and cybersecurity professionals better understand potential vulnerabilities and ways to secure their systems.

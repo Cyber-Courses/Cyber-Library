@@ -1,0 +1,69 @@
+# Windows Diamond Ticket
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Diamond Ticket is a security concept related to Microsoft's Active Directory (AD). It refers to a Kerberos ticket-granting-ticket (TGT) that has a lifetime of 10 years and is renewable. The Diamond Ticket is not a built-in feature, but rather a theoretical concept of a Kerberos ticket with unusually powerful properties.
+> 
+
+### 🧐 Why ?
+
+> Understanding the concept of Windows Diamond Ticket is crucial because it helps in understanding the depth of security risks associated with the misuse of Kerberos tickets in Active Directory environments. If such a ticket would fall into the wrong hands, it could allow an attacker to maintain persistence in an enterprise network for a very long period, leading to severe security breaches.
+> 
+
+### ⛏️ How ?
+
+> The concept of the Windows Diamond Ticket is not something to be implemented or used, rather it is a security risk to be mitigated. Secure practices should be followed to protect your Active Directory environment, such as limiting the number of high-privileged accounts, using secure passwords, monitoring unusual activity, and regularly reviewing and revoking unnecessary Kerberos tickets.
+> 
+
+### ⏳ When ?
+
+> The concept of the Windows Diamond Ticket has been discussed in the cybersecurity community for several years, but it gained more attention with the rise of advanced persistent threats and sophisticated cyber attacks targeting Active Directory.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Windows Diamond Ticket is a theoretical concept in Microsoft's Active Directory (AD) security that refers to a Kerberos ticket-granting-ticket (TGT) with unusually powerful properties - a lifetime of 10 years and renewable.
+
+This concept is based on Microsoft's implementation of the Kerberos authentication protocol in AD. In this protocol, a client receives a TGT from the Key Distribution Center (KDC). This TGT is like a master key that the client can use to request service tickets for accessing various resources within the network. Under normal circumstances, these TGTs have a limited lifetime and need to be periodically renewed.
+
+However, the Diamond Ticket concept refers to a TGT that is not just limited in lifetime but has a lifespan of 10 years and is renewable. This means that theoretically, it could be used to request service tickets indefinitely.
+
+This presents a severe security risk because if such a ticket were to be obtained by an attacker, they could gain and maintain access to the network for a very long time, leading to persistent threats and potentially catastrophic security breaches.
+
+Therefore, the understanding and awareness of this concept is crucial for IT professionals managing AD environments. It is not something to be implemented but a risk to be mitigated. Secure practices such as limiting the number of high-privileged accounts, using strong passwords, monitoring for unusual activity, and regularly reviewing and revoking unnecessary Kerberos tickets can help protect against this theoretical threat.
+
+Let's consider an example scenario for educational purposes. Suppose an attacker gains access to a high-privileged account in an Active Directory environment.
+
+First, the attacker initiates a Kerberos authentication process by sending a request to the Key Distribution Center (KDC). This can be done using the following command:
+
+```bash
+kinit Administrator
+
+```
+
+The attacker then enters the password for the Administrator account when prompted. If the password is correct, the KDC issues a Ticket-Granting Ticket (TGT). This TGT is stored in the Kerberos ticket cache.
+
+Next, the attacker uses the `kvno` command to request a service ticket for the domain controller (DC) service:
+
+```bash
+kvno cifs/dc.domain.com
+
+```
+
+At this point, the attacker has both a TGT and a service ticket. With these, they can access resources on the network as if they were the Administrator.
+
+The above example illustrates a normal Kerberos authentication flow. However, the Diamond Ticket concept refers to a TGT that doesn't expire for 10 years and is renewable. This means that if an attacker were to obtain such a ticket, they could potentially maintain access to the network for a very long time.
+
+To mitigate this theoretical risk, IT professionals managing Active Directory environments should adhere to secure practices such as:
+
+1. Limiting the number of high-privileged accounts: This reduces the number of potential targets for an attacker.
+2. Using strong passwords: This makes it more difficult for an attacker to gain access to a high-privileged account.
+3. Monitoring for unusual activity: This can help detect an attacker who has gained access to the network.
+4. Regularly reviewing and revoking unnecessary Kerberos tickets: This prevents an attacker from using a stolen ticket indefinitely.

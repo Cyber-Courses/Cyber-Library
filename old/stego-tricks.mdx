@@ -1,0 +1,83 @@
+# Stego Tricks
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Stego Tricks refers to the use of steganography techniques to hide data or information within other data or information. The purpose is to prevent unauthorized access or detection of the hidden data. It is a form of security through obscurity.
+> 
+
+### 🧐 Why ?
+
+> Stego Tricks is important in cybersecurity because it can be used for both protective and malicious purposes. On the one hand, it can be used to protect sensitive data from unauthorized access or detection. On the other hand, it can be used by attackers to hide malicious code or data within benign data to evade detection by security systems.
+> 
+
+### ⛏️ How ?
+
+> To use Stego Tricks to your advantage, you can use a variety of steganography tools and techniques. For example, you can hide data within images, audio files, video files, or even text files. The hidden data can be encrypted for additional security. However, be aware that the use of steganography can raise suspicion and may be detected by advanced security systems.
+> 
+
+### ⏳ When ?
+
+> The use of steganography techniques, or Stego Tricks, has been prevalent since the ancient times when secret messages were embedded in wax tablets or tattooed onto slaves' heads. However, in the context of cybersecurity, it has become increasingly popular with the rise of digital media and the internet.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Steganography is an art of concealing data or information within other data, making it unnoticeable to an observer. This technique is widely used in the field of cybersecurity for both defensive and offensive purposes. The primary method of data hiding in steganography involves manipulation of the least significant bits (LSBs) of data.
+
+Let's delve deeper into the process using a real-world scenario. Consider an image file - for the sake of this example, let's call it "image.jpg". Each pixel in this image is represented by three bytes, with each byte denoting one of the color channels: red, green, and blue. By subtly tweaking the LSB of each byte, it's possible to hide up to three bits of data within each pixel. This alteration is so minute that it doesn't cause any noticeable change to the image.
+
+Suppose we have a text file named "secret.txt" that contains sensitive information. We want to hide this information within "image.jpg". To accomplish this, we can use Python, a popular programming language, and a library called stegano.
+
+Firstly, we need to install the stegano library, which can be done using pip, a package installer for Python:
+
+```
+pip install stegano
+
+```
+
+Once we have the necessary library, we can write a Python script to embed "secret.txt" within "image.jpg":
+
+```python
+from stegano import lsb
+
+# Read the secret text from the file
+with open("secret.txt", "r") as file:
+    secret_text = file.read()
+
+# Hide the secret text within the image
+secret = lsb.hide("image.jpg", secret_text)
+
+# Save the new image with the hidden text
+secret.save("image_with_secret.jpg")
+
+```
+
+In this script, the `lsb.hide` function takes as inputs the original image and the secret message. It then returns a new image with the secret message hidden inside. The `save` function is used to store the new image.
+
+To retrieve the hidden data from "image_with_secret.jpg" at a later time, we can use the following script:
+
+```python
+from stegano import lsb
+
+# Reveal the secret text from the image
+hidden_text = lsb.reveal("image_with_secret.jpg")
+
+# Print the revealed text
+print(hidden_text)
+
+```
+
+The `lsb.reveal` function takes the image with the hidden message as input and returns the hidden message.
+
+While the LSB method is simple and generally effective, it has its limitations. The use of statistical analysis can potentially reveal the alterations in the LSBs, thereby exposing the hidden data. To combat this, more advanced techniques have been developed. One such method is adaptive steganography, which changes the number of bits used for hiding data based on the image content. Frequency domain steganography is another method that hides data in the frequency representation of the image. These more sophisticated methods help to further obfuscate the hidden data and make detection even more challenging.
+
+# 🖇️ Références
+
+---

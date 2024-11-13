@@ -1,0 +1,159 @@
+# Containerd (ctr) Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Containerd is an open-source runtime that manages the complete container lifecycle of its host system, from image transfer and storage to container execution and supervision. Privilege escalation is a critical security issue where a user gets access to more resources or functionality than they are normally allowed, and in some cases, even full administrative access.
+> 
+
+### 🧐 Why ?
+
+> Understanding Containerd privilege escalation is crucial as it can lead to unauthorized access and control over sensitive information and systems. This can further lead to data theft, disruption of services, or even use the system as a launchpad for further attacks. It is especially important for our readers who are in the fields of cybersecurity, system administration, or those who use containerized environments in their applications.
+> 
+
+### ⛏️ How ?
+
+> To use Containerd to your advantage, it's vital to understand how it works and how to secure it. First, always run services with the least privileges necessary. Monitor container activities, and use intrusion detection systems to detect any unusual activities. Regularly update and patch your systems, and follow the principle of least privilege. Use strong, unique credentials and change them regularly. Enable logging and monitor logs regularly. Finally, educate yourself and stay informed about new vulnerabilities and attack strategies.
+> 
+
+### ⏳ When ?
+
+> Containerd started becoming more prominent in the tech industry around 2017 when it was accepted into the Cloud Native Computing Foundation (CNCF). The need to understand and prevent privilege escalation has been a key cybersecurity focus for as long as computing systems have existed.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of Containerd
+
+Containerd is an essential component in containerized environments, acting as a bridge between container orchestration systems (such as Docker and Kubernetes) and the host operating system's kernel. It handles various tasks crucial for container management, including:
+
+- **Image Management**: Downloading, storing, and managing container images.
+- **Container Execution**: Starting, stopping, and managing the lifecycle of containers.
+- **Storage**: Managing container file systems.
+- **Network**: Configuring and managing container networking.
+
+Given its central role in managing containers, ensuring the security of Containerd is paramount. Misconfigurations or vulnerabilities within Containerd can lead to severe security risks, including privilege escalation.
+
+## Understanding Privilege Escalation
+
+Privilege escalation occurs when an attacker exploits a vulnerability to gain higher access rights than intended. This can result in:
+
+- **Access to Sensitive Data**: An attacker gaining unauthorized access to confidential information.
+- **System Compromise**: Full administrative control over the host system.
+- **Lateral Movement**: An attacker moving laterally within a network to compromise additional systems.
+
+## Securing Containerd
+
+### 1. **Least Privilege Principle**
+
+Always run containers with the minimal privileges necessary. This limits the potential impact if a container is compromised. For example, use the `--user` flag to run a container as a non-root user:
+
+```bash
+docker run --user 1000:1000 my-container
+
+```
+
+### 2. **Regular Updates and Patching**
+
+Keep both the container images and the host system updated to ensure that all known vulnerabilities are patched. This includes updating the container runtime, such as Containerd.
+
+### 3. **Monitoring and Intrusion Detection**
+
+Implement continuous monitoring and intrusion detection systems (IDS) to detect unusual behavior within containers. Tools like Falco can help monitor container activities and alert on suspicious behavior.
+
+### 4. **Log Monitoring**
+
+Regularly monitor and analyze system and application logs to detect potential security threats. This includes logs from Containerd, Docker, and the host system.
+
+### 5. **Strong, Unique Credentials**
+
+Use strong and unique credentials for accessing containers and the host system. Avoid default passwords and regularly rotate credentials.
+
+### 6. **Network Security**
+
+Implement network segmentation and firewalls to limit communication between containers and the host system. Use network policies to control the traffic flow within containerized environments.
+
+### 7. **Security Scanning**
+
+Use security scanning tools to scan container images for vulnerabilities before deployment. Tools like Clair or Trivy can help identify and mitigate security issues in container images.
+
+## Example: Secure Docker Container
+
+Let's take an example of a Docker container running a web application. This container is managed by Containerd. We will illustrate best practices for securing the container.
+
+### Dockerfile for the Web Application
+
+```
+FROM python:3.7
+WORKDIR /app
+COPY . /app
+RUN pip install -r requirements.txt
+USER 1000:1000  # Run as non-root user
+CMD ["python", "app.py"]
+
+```
+
+### Running the Container with Limited Privileges
+
+```bash
+docker run --user 1000:1000 -p 8080:8080 my-web-app
+
+```
+
+### Example of Exploitation and Prevention
+
+Assume the web application has a vulnerability that allows remote code execution. If the container runs as root, an attacker could potentially gain root access to the host system.
+
+**Exploit Command**:
+
+```bash
+curl -X POST -d "cmd=id" http://<container-ip>:<app-port>/exploit
+
+```
+
+**Prevention**:
+
+- **Running as Non-Root**: As shown in the Dockerfile, the application runs as a non-root user (`USER 1000:1000`), limiting the potential damage.
+- **Using Security Profiles**: Apply security profiles like AppArmor or SELinux to further restrict container capabilities.
+
+**AppArmor Example**:
+
+Create an AppArmor profile (`/etc/apparmor.d/docker-profile`):
+
+```
+#include <tunables/global>
+
+/usr/bin/docker-container-default {
+  ...
+  deny /bin/sh rm,
+  deny /bin/bash rm,
+  ...
+}
+
+```
+
+Apply the profile when running the container:
+
+```bash
+docker run --security-opt apparmor=docker-profile -p 8080:8080 my-web-app
+
+```
+
+### Monitoring and Logging
+
+Set up logging and monitoring tools to keep track of container activities. For instance, using Falco for monitoring:
+
+```bash
+falco -r /etc/falco/falco_rules.yaml -o json_output=true
+
+```
+
+### Conclusion
+
+By following best practices for securing Containerd and containers, such as running services with the least privileges, regular updates, monitoring activities, and strong credentials, you can significantly mitigate the risks associated with privilege escalation and other security threats. Understanding and implementing these measures is critical for maintaining a secure and robust containerized environment.

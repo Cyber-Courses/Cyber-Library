@@ -1,0 +1,124 @@
+# CGroup Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> CGroup Namespace is a Linux kernel feature that provides the ability to isolate, prioritize, account, and control the distribution of system resources (CPU, memory, disk I/O, etc.) among user-defined groups of processes. It is a fundamental part of Linux container technologies like Docker and Kubernetes.
+> 
+
+### 🧐 Why ?
+
+> The importance of CGroup Namespace lies in its ability to solve resource allocation and isolation issues in a system running multiple processes. It allows system administrators to group processes and assign them specific shares of system resources, preventing a single process from monopolizing the system. This is particularly important in cloud computing and containerization, where multiple isolated tasks need to run concurrently on the same physical machine.
+> 
+
+### ⛏️ How ?
+
+> To use CGroup Namespace, you start by installing the 'cgroup-tools' package. You then define a control group (cgroup) and assign processes to it using the 'cgcreate' and 'cgexec' commands respectively. You can set resource limits for a cgroup using the 'cgset' command. For example, to limit CPU usage of a cgroup to 20%, you'd use 'cgset -r cpu.shares=512 my_cgroup'.
+> 
+
+### ⏳ When ?
+
+> The concept of control groups was introduced in the Linux kernel version 2.6.24, which was released in 2008. However, the CGroup Namespace feature has been added in the later versions and is now an integral part of modern Linux distributions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Understanding and Using CGroup Namespace in Linux
+
+CGroup (Control Groups) Namespace is a feature in the Linux kernel that provides a mechanism for managing and isolating system resources among different sets of processes. This allows system administrators to allocate CPU time, memory, disk I/O, and other resources to specific tasks or users, ensuring efficient and controlled usage of system resources.
+
+### How CGroup Namespace Works
+
+CGroup Namespace operates by grouping processes into hierarchical groups, known as cgroups. Each cgroup can have specific resource limits and constraints applied to it. These groups can be nested, creating a hierarchical structure where child groups inherit the properties of their parent groups but can also have additional restrictions applied.
+
+### Key Controllers in CGroup Namespace
+
+- **CPU Controller**: Manages CPU usage by setting limits on the CPU time that a group of processes can use.
+- **Memory Controller**: Controls the memory usage of processes within a cgroup, including both physical memory and swap space.
+- **Blkio Controller**: Regulates the input/output operations on block devices (e.g., hard drives) for processes within a cgroup.
+
+### Benefits of Using CGroup Namespace
+
+1. **Resource Quotas**: Set limits on the amount of CPU, memory, and I/O resources a group can use.
+2. **Prioritization**: Ensure that critical processes get more resources compared to less critical ones.
+3. **Accounting**: Track resource usage to understand how resources are consumed by different processes.
+4. **Isolation**: Prevent processes in one cgroup from affecting those in another, enhancing system stability and security.
+
+### Practical Example: Using CGroup Namespace with `cgroup-tools`
+
+Here's a step-by-step example of how to create and manage cgroups using `cgroup-tools` on a Linux system.
+
+### Step 1: Install `cgroup-tools`
+
+Install the necessary package to manage cgroups:
+
+```bash
+sudo apt-get install cgroup-tools
+
+```
+
+### Step 2: Create a CGroup
+
+Create a new cgroup named `my_cgroup` in the `cpu` and `memory` subsystems:
+
+```bash
+sudo cgcreate -g cpu,memory:/my_cgroup
+
+```
+
+### Step 3: Set Resource Limits
+
+Set the CPU and memory limits for the cgroup. For example, limit the CPU usage to 20%:
+
+```bash
+sudo cgset -r cpu.shares=512 my_cgroup
+
+```
+
+And set a memory limit of 500MB:
+
+```bash
+sudo cgset -r memory.limit_in_bytes=500M my_cgroup
+
+```
+
+### Step 4: Assign a Process to the CGroup
+
+Start a new process (e.g., a bash shell) within the cgroup:
+
+```bash
+sudo cgexec -g cpu,memory:my_cgroup /bin/bash
+
+```
+
+Now, any commands you run within this bash shell will be subject to the resource limits set for `my_cgroup`.
+
+### Step 5: Monitor Resource Usage
+
+Check the resource usage of the cgroup:
+
+```bash
+sudo cgget -g cpu,memory:/my_cgroup
+
+```
+
+This command displays the current CPU and memory usage for the processes within `my_cgroup`.
+
+### Step 6: Remove the CGroup
+
+When you no longer need the cgroup, remove it to free up resources:
+
+```bash
+sudo cgrm cpu,memory:/my_cgroup
+
+```
+
+### Conclusion
+
+CGroup Namespace is a powerful feature in Linux that allows fine-grained control over system resources. By grouping processes and setting resource limits, administrators can ensure efficient and stable operation of the system, especially in environments with multiple concurrent tasks, such as cloud computing and containerization. Understanding and effectively using cgroups can significantly enhance system performance and security.

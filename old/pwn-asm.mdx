@@ -1,0 +1,94 @@
+# Pwn asm
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn asm is a tool used in cybersecurity to compile or disassemble shellcodes, a small piece of code used as the payload in the exploitation of a software vulnerability. It is part of the pwntools, a Python library that aids in the process of writing exploits and solving Capture the Flag (CTF) challenges.
+> 
+
+### 🧐 Why ?
+
+> Understanding Pwn asm is crucial for cybersecurity professionals, especially penetration testers, as it provides them with a way of creating or analyzing shellcodes. This enables them to exploit software vulnerabilities more effectively, helping to identify potential security threats and improve system defenses.
+> 
+
+### ⛏️ How ?
+
+> To use Pwn asm, you first need to install pwntools. Once installed, you can use the asm() function to compile assembly instructions into byte string representation of machine code, and the disasm() function to disassemble byte string representation of machine code back into assembly instructions. These functions are powerful tools for creating and analyzing shellcodes.
+> 
+
+### ⏳ When ?
+
+> Pwn asm started to be used widely in the cybersecurity field with the rise of pwntools, which was first released in 2013. Its simplicity and effectiveness made it a popular choice among cybersecurity professionals, especially those involved in penetration testing and CTF challenges.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Pwn asm is a tool central to the field of cybersecurity, specifically in the tasks of compiling and disassembling shellcodes. These shellcodes are small pieces of code that are used as payloads in the exploitation of software vulnerabilities. The tool is a part of the pwntools library, a Python library designed to assist in writing exploits and solving Capture the Flag (CTF) challenges.
+
+The Pwn asm operates through the use of the GNU assembler and disassembler. When the asm() function is run, it takes your assembly instructions as input. These instructions are then passed to the GNU assembler, which in turn returns the machine code as a byte string. This machine code is the compiled form of your original assembly instructions.
+
+On the other hand, the disasm() function works in reverse. It accepts a byte string that represents machine code as its input, passes it to the GNU disassembler, and returns the original assembly instructions.
+
+In order to use Pwn asm effectively, a solid understanding of computer architecture principles and specific machine code instruction sets for the target system is necessary. These principles and specifics form the foundation upon which the asm() and disasm() functions operate. A deep comprehension of these subjects allows for the creation of efficient and effective shellcodes.
+
+Since Pwn asm is a part of the broader pwntools library, it is also beneficial to understand the other tools and functions within this library. This can provide additional resources and methods for creating and analyzing shellcodes, further enhancing your ability to identify potential security threats and improve system defenses.
+
+Pwn asm has become widely used in the cybersecurity field since the release of the pwntools library in 2013. Its simplicity and effectiveness have made it a go-to choice for cybersecurity professionals, particularly those involved in penetration testing and CTF challenges.
+
+Let's take an example of creating a shellcode using Pwn asm:
+
+First, you will need to import the required module from pwntools:
+
+```python
+from pwn import *
+
+```
+
+Now, let's write some assembly instructions. For example, we could write a shellcode to start a shell:
+
+```python
+shellcode = '''
+    /* push '/bin///sh' into the stack */
+    push 0x68
+    mov rax, 0x732f2f2f6e69622f
+    push rax
+
+    /* call execve('rsp', 0, 0) */
+    mov rdi, rsp
+    xor rsi, rsi
+    xor rdx, rdx
+    mov rax, 0x3b
+    syscall
+'''
+
+```
+
+Now, we can use the asm() function to compile this assembly code into machine code:
+
+```python
+machine_code = asm(shellcode)
+
+```
+
+This will return the machine code as a byte string.
+
+If you want to reverse this process and convert machine code back into assembly instructions, you can use the disasm() function:
+
+```python
+assembly_code = disasm(machine_code)
+
+```
+
+This will give you back the original assembly instructions.
+
+It's important to note that understanding assembly language and system architecture is crucial to write effective shellcodes. With this knowledge, you can create shellcodes that exploit specific vulnerabilities in a system. Furthermore, by understanding the other tools in the pwntools library, you can enhance your ability to create and analyze shellcodes, further improving your abilities as a cybersecurity professional.
+
+# 🖇️ Références
+
+---

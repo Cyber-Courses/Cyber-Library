@@ -1,0 +1,108 @@
+# VMWare (ESX, VCenter...)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> VMware is a leading virtualization and cloud computing software provider. Its core product is ESXi, a type-1 hypervisor that runs directly on hardware without the need for an operating system. VCenter Server, on the other hand, is a centralized management tool for VMware vSphere environments. It provides functionality for VM (virtual machine) management, migration, and configuration, as well as tools for disaster recovery, application deployment, and even automated operations.
+> 
+
+### 🧐 Why ?
+
+> Virtualization is a significant aspect of modern computing. It enables the running of multiple operating systems simultaneously on a single physical machine, thereby maximizing resource utilization, promoting scalability, and reducing costs. VMware's products, ESXi and vCenter, are widely used in the industry due to their robustness, extensive feature set, and broad compatibility with various hardware and operating systems.
+> 
+
+### ⛏️ How ?
+
+> To leverage VMware's products, one would first need to install the ESXi hypervisor on a physical machine. This involves downloading the ESXi ISO from VMware's website, burning it to a CD or creating a bootable USB, and then following the installation prompts. Once ESXi is installed, VMs can be created and managed directly on the machine using vSphere Client. For more complex environments, vCenter Server can be deployed on a separate machine. This allows for centralized management of multiple ESXi hosts and VMs.
+> 
+
+### ⏳ When ?
+
+> VMware's products, particularly ESXi and vCenter, have been widely used in the industry since the early 2000s. Their adoption has grown steadily as businesses and organizations continue to realize the benefits of virtualization.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+ESXi, a core product of VMware, is a type-1 hypervisor, which means it directly interfaces with the physical server's hardware. This is unlike a type-2 hypervisor, which would require an underlying operating system to function. ESXi's primary function is to manage and allocate the server's resources such as CPU, memory, storage, and network capabilities among the virtual machines (VMs) running on it.
+
+The technique ESXi uses to accomplish this is called hardware abstraction. It creates a layer between the physical hardware and the VMs that tricks each VM into thinking it has exclusive access to the server's resources. However, in reality, ESXi dynamically allocates and de-allocates these resources based on each VM's demand and the overall resource availability. This efficient resource management allows for greater server density, reducing the number of physical servers required and thereby saving costs.
+
+vCenter Server, another key product of VMware, is essentially a management tool for ESXi hosts and their VMs. It uses APIs provided by ESXi to manage these resources, enabling you to control multiple ESXi hosts and VMs from a single location. It provides a graphical user interface that offers administrators a comprehensive overview of their virtual environment, making it easier to manage and configure settings.
+
+In addition to manual management, vCenter Server also offers a robust set of APIs for automation. These APIs can be used to automate repetitive tasks, such as VM creation, configuration, and migration, saving administrators significant time. Furthermore, these APIs also allow for integration with other systems, making vCenter Server a versatile tool that can adapt to various IT environments.
+
+In summary, VMware's ESXi and vCenter Server form a powerful combination, enabling efficient resource management, centralized control, and automation in a virtualized environment.
+
+Let's consider an example where we have a physical server, and we want to install ESXi and manage it using vCenter Server.
+
+1. **Installing ESXi**: The first step is to download the ESXi installer ISO from the VMware website. Once downloaded, you burn this ISO to a bootable USB or CD. Plug the USB or insert the CD into your server and reboot it. The server should boot into the ESXi installer. Follow the prompts to install ESXi. Once the installation is complete, you can access the ESXi host directly via its IP address using a web browser.
+
+```
+# For example, if your ESXi host IP is 192.168.1.10, you would enter the following in your web browser:
+<https://192.168.1.10>
+
+```
+
+1. **Creating a VM on ESXi**: Once you have logged into your ESXi host, you can create a new VM by selecting `Create / Register VM` from the main menu. Follow the wizard to select your operating system, allocate resources, and attach any necessary storage.
+
+```
+# For example, to create a VM with 2GB of RAM, 2 CPU cores, and a 20GB hard drive, you would select these options in the wizard.
+
+```
+
+1. **Installing vCenter Server**: vCenter Server typically runs on a separate VM within your ESXi environment. To install it, you first need to download the vCenter Server Appliance (VCSA) ISO from the VMware website. Mount this ISO on your local machine, and run the installer which will guide you through deploying vCenter Server on your ESXi host.
+
+```
+# For example, if you're running the installer on a Windows machine, you would navigate to the mounted ISO and run:
+Installer.exe
+
+```
+
+1. **Managing ESXi with vCenter Server**: Once vCenter Server is installed, you can access it via its IP address using a web browser. From the vCenter Server dashboard, you can add your ESXi host to the inventory, allowing you to manage it and its VMs centrally.
+
+```
+# For example, to add your ESXi host to vCenter Server, you would navigate to:
+Menu > Hosts and Clusters > Right click > Add Host
+# Then enter your ESXi host's IP address and credentials.
+
+```
+
+1. **Automating Tasks with vCenter Server APIs**: vCenter Server provides a comprehensive set of APIs that allows for automation of common tasks. For example, you could use the APIs to automatically create and configure VMs based on specific criteria.
+
+```
+# For example, to create a new VM using the vCenter Server API, you could use a POST request like the following:
+POST /rest/vcenter/vm
+{
+  "spec": {
+    "name": "my-new-vm",
+    "guest_OS": "WINDOWS_10_64",
+    "cpu": {
+      "count": 2
+    },
+    "memory": {
+      "size_MiB": 2048
+    },
+    "boot": {
+      "type": "EFI"
+    },
+    "storage": {
+      "disks": [
+        {
+          "new_vmdk": {
+            "capacity": 20971520
+          }
+        }
+      ]
+    }
+  }
+}
+
+```
+
+In this example, we've installed ESXi on a physical server, created a VM, installed vCenter Server, and used it to manage our ESXi host and automate tasks. Each step of the process has been detailed with explanatory commands or steps.

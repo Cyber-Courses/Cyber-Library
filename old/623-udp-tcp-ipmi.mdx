@@ -1,0 +1,70 @@
+# 623/UDP/TCP - IPMI
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> 623/UDP/TCP represents the network port number 623, typically used by the Intelligent Platform Management Interface (IPMI). IPMI is a hardware-level interface specification that allows the management of a computer system from remote locations.
+> 
+
+### 🧐 Why ?
+
+> Understanding 623/UDP/TCP - IPMI is crucial because it is widely used in data centers and by system administrators for remote management of computer systems. It helps to maintain, monitor, and troubleshoot servers and other network-attached devices. Misconfigured or insecure IPMI can lead to severe security vulnerabilities, making it a critical topic for cybersecurity.
+> 
+
+### ⛏️ How ?
+
+> To leverage IPMI, you would need a system that supports it. Once confirmed, you can access the IPMI interface through the network port 623 using either UDP or TCP protocols. From there, you can monitor system health, manage system power, and perform other administrative tasks. It is crucial to secure IPMI by using strong passwords, encrypting IPMI sessions, and restricting IPMI access to trusted networks.
+> 
+
+### ⏳ When ?
+
+> IPMI was first introduced in 1998 by Intel, Hewlett-Packard, NEC, and Dell. The use of IPMI became more widespread with the advent of cloud computing and the need for remote management of servers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Intelligent Platform Management Interface (IPMI) is a hardware-level specification that allows remote management of computer systems. It operates on network port number 623, using either UDP or TCP protocols. IPMI functions independently from the operating system (OS), enabling administrators to manage a system remotely even if the OS fails.
+
+IPMI communicates directly with the system's hardware, bypassing the need for the OS or system software. This direct communication is facilitated by the system's Baseboard Management Controller (BMC), a microcontroller typically embedded on the motherboard. When a request is sent to port 623, the BMC interprets the request and performs the required action, handling IPMI commands.
+
+Established by Intel, Hewlett-Packard, NEC, and Dell in 1998, IPMI's usage has increased with the rise of cloud computing and the need for remote server management. It's commonly used in data centers and by system administrators to maintain, monitor, and troubleshoot servers and other network-attached devices.
+
+However, it is crucial to secure IPMI to prevent security vulnerabilities. This can be achieved by using strong passwords, encrypting IPMI sessions, and restricting IPMI access to trusted networks. Misconfigured or insecure IPMI can lead to severe security issues, emphasizing the importance of understanding and properly implementing this interface.
+
+Let's assume you're an administrator managing a remote server that supports IPMI. Here's an example of how to use IPMI with the `ipmitool` utility, which is a command-line interface for IPMI-enabled devices.
+
+1. **Establish a Session**: First, you need to establish a session with the remote server. You can do this by running the following command:
+    
+    ```bash
+    ipmitool -I lanplus -H <remote-server-ip> -U <username> -P <password> session info all
+    
+    ```
+    
+    Replace `<remote-server-ip>`, `<username>`, and `<password>` with the IP address of your remote server, your IPMI username, and password, respectively. This command will establish a session and display information about all active sessions.
+    
+2. **Check System Health**: Use the `sdr` command to check the system health:
+    
+    ```bash
+    ipmitool -I lanplus -H <remote-server-ip> -U <username> -P <password> sdr
+    
+    ```
+    
+    This command will return the Sensor Data Record (SDR) repository information, providing details about temperature, fan speed, voltage, and other health indicators.
+    
+3. **Power Control**: If you need to power cycle the server, you can do so with the `power cycle` command:
+    
+    ```bash
+    ipmitool -I lanplus -H <remote-server-ip> -U <username> -P <password> power cycle
+    
+    ```
+    
+    This command will turn off the server and then turn it back on.
+    
+
+Remember, while using these commands, all communication with the IPMI interface should be encrypted, and access should be restricted to trusted networks. Misconfiguration or insecure usage of IPMI can lead to severe security vulnerabilities.

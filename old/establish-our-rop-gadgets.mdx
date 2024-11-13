@@ -1,0 +1,82 @@
+# Establish our ROP Gadgets
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> ROP (Return Oriented Programming) Gadgets are sequences of instructions, usually ending in a return instruction, that can be found in the existing binary code of a program. They are used by an attacker to control the execution flow of a program, bypassing traditional protections such as non-executable stack or heap.
+> 
+
+### 🧐 Why ?
+
+> ROP Gadgets are important because they are a fundamental concept in modern exploit development. They are used to bypass security mechanisms such as Data Execution Prevention (DEP), which aims to prevent an attacker from executing arbitrary code on the target system. Understanding how ROP Gadgets work is essential for both offensive and defensive cybersecurity professionals.
+> 
+
+### ⛏️ How ?
+
+> ROP Gadgets can be identified using a variety of tools such as ROPgadget, which scans a binary file for potential gadgets. Once identified, these gadgets can be chained together in a specific way to form a payload that can perform arbitrary operations. This technique is called 'building a ROP chain'. The ROP chain can then be injected into a vulnerable program to hijack its execution flow.
+> 
+
+### ⏳ When ?
+
+> The concept of ROP Gadgets began to be used in the mid-2000s, as a response to the increasing implementation of security measures such as non-executable stack and heap in modern operating systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Return Oriented Programming (ROP) is an advanced technique used to circumvent security measures such as non-executable memory and code signing. This method involves an attacker manipulating the flow of a program's execution by utilizing existing code snippets, known as 'gadgets', within the program's binary code.
+
+The process begins with the attacker exploring the binary code of a program in search of 'gadgets'. These gadgets are sequences of instructions that typically end with a return instruction. They are not deliberately placed in the code by the program's developers but are incidental to the structure of the compiled code.
+
+Once these useful gadgets are identified, the attacker can then proceed to build what is known as a 'ROP chain'. This involves arranging the gadgets in a specific sequence that, when executed, will perform the actions desired by the attacker.
+
+To implement the ROP chain, the attacker injects data into the program's memory, which overwrites the program's control data. This overwritten data is specifically designed to alter the program's flow of execution, causing it to jump to the gadgets specified in the ROP chain instead of following its original instructions.
+
+The power of this technique lies in its ability to reuse the program's existing code to perform arbitrary operations, all while avoiding the security measures in place. This makes it a complex but potent tool in the realm of cybersecurity and exploit development.
+
+Understanding and identifying ROP techniques is pivotal for both offensive and defensive cybersecurity professionals. It allows for the development of more secure systems and the discovery of potential vulnerabilities before they can be exploited.
+
+For example, consider a simple program written in C that has a buffer overflow vulnerability:
+
+```c
+#include <string.h>
+
+void vulnerable_function(char* string) {
+    char buffer[100];
+    strcpy(buffer, string);
+}
+
+int main(int argc, char** argv) {
+    vulnerable_function(argv[1]);
+    return 0;
+}
+
+```
+
+In this program, the `vulnerable_function` copies the input string into a buffer that can only hold 100 characters without checking the size of the input. This allows an attacker to provide a string that is longer than 100 characters and overwrite the return address saved on the stack.
+
+```bash
+$ gcc -o vulnerable vulnerable.c
+$ python -c 'print "A"*112 + "\\xbe\\xba\\xfe\\xca"' | ./vulnerable
+
+```
+
+In the above command line, an attacker provides a 112-character string followed by the address of the gadget they wish to jump to (represented as `\\xbe\\xba\\xfe\\xca`).
+
+Once an attacker has control over the program counter, they can chain together the addresses of various gadgets to perform arbitrary operations. For example:
+
+```bash
+$ python -c 'print "A"*112 + "\\x01\\x02\\x03\\x04" + "\\x05\\x06\\x07\\x08" + "\\x09\\x0a\\x0b\\x0c"' | ./vulnerable
+
+```
+
+In this command line, the attacker provides the addresses of three gadgets (`\\x01\\x02\\x03\\x04`, `\\x05\\x06\\x07\\x08`, and `\\x09\\x0a\\x0b\\x0c`). When the `vulnerable_function` returns, it will first jump to the gadget at `\\x01\\x02\\x03\\x04`. When that gadget returns, it will jump to `\\x05\\x06\\x07\\x08`, and so on.
+
+Each gadget performs a small operation, such as loading a value into a register or performing an arithmetic operation. By carefully selecting and ordering these gadgets, an attacker can perform arbitrary operations, such as calling system functions.
+
+Please note that the addresses used in the examples are placeholders - in a real exploit, they would be replaced with the addresses of actual gadgets in the program's binary.

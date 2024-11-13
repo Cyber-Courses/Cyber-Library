@@ -1,0 +1,77 @@
+# Suricata & Iptables cheatsheet
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Suricata is an open-source network threat detection engine that serves as an intrusion detection (IDS), intrusion prevention (IPS), and network security monitoring (NSM) system. Iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall.
+> 
+
+### 🧐 Why ?
+
+> In the current era of increasing cyber threats, it is crucial to have robust network security measures. Suricata and Iptables provide powerful tools to monitor network traffic and block suspicious activities, thereby enhancing the security posture of any network.
+> 
+
+### ⛏️ How ?
+
+> Suricata can be used to analyze network traffic in real-time, detect anomalies and report them to the system administrator. Iptables, on the other hand, can be used to set up, maintain, and inspect the tables of IP packet filter rules in the Linux kernel. With the right set of rules, Iptables can serve as an effective firewall.
+> 
+
+### ⏳ When ?
+
+> Suricata and Iptables started gaining popularity around the mid-2000s as open-source solutions for network security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Suricata is an open-source network threat detection engine that serves multiple purposes including intrusion detection (IDS), intrusion prevention (IPS), and network security monitoring (NSM). It is highly effective due to its powerful rules and signature language, which allows it to identify a wide range of anomalies and potential security threats in network traffic.
+
+Its robust thresholding and reporting system further enhance its effectiveness, enabling it to classify and prioritize alerts based on their severity. This helps system administrators in focusing their attention on the most critical threats.
+
+In addition to this, Suricata utilizes multi-threading very efficiently, allowing it to process thousands of packets per second. This makes it highly scalable and capable of handling large volumes of network traffic without missing out on potential threats.
+
+On the other hand, Iptables is a user-space utility program that allows a system administrator to configure the IP packet filter rules of the Linux kernel firewall. It is used to set up, maintain, and inspect the tables of IP packet filter rules in the Linux kernel.
+
+Iptables supports several sets of tables, each designed for a specific kind of packet filtering and handling. These include 'filter' tables for basic packet filtering, 'nat' tables for network address translation, and 'mangle' tables for specialized packet alteration. By configuring these tables effectively, Iptables can serve as an effective firewall that protects the network from various types of cyber threats.
+
+Example of using Suricata:
+
+Let's say you want to monitor HTTP traffic on your network. You could use Suricata with a rule like this:
+
+```bash
+alert http any any -> any any (msg:"HTTP traffic detected"; sid:1000001; rev:1;)
+
+```
+
+In this rule, `alert` means we want Suricata to alert us when it matches the rule. `http` is the protocol we're looking for (HTTP traffic). `any any -> any any` says that we want to match any source IP and port going to any destination IP and port. The `msg` part is the message that will be displayed when the rule matches. `sid` is the unique identifier for the rule and `rev` is the rule's revision number.
+
+To run Suricata with this rule, you would save it to a file (e.g., `http.rules`), and then run Suricata with this command:
+
+```bash
+suricata -c /etc/suricata/suricata.yaml -r http.rules
+
+```
+
+Suricata would then start monitoring network traffic, and alert you whenever it detects HTTP traffic.
+
+Example of using Iptables:
+
+Let's say you want to block all incoming connections to your server on port 80 (the standard HTTP port). You could do this with Iptables using this command:
+
+```bash
+iptables -A INPUT -p tcp --dport 80 -j DROP
+
+```
+
+In this command, `-A INPUT` adds a new rule to the INPUT chain (which handles incoming connections). `-p tcp` says we're looking for TCP traffic. `--dport 80` says we're looking for traffic destined for port 80. `-j DROP` says we want to drop (block) this traffic.
+
+After running this command, your server would start blocking all incoming connections on port 80.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,102 @@
+# Android Frida Tutorial
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Frida is a dynamic code instrumentation toolkit, primarily used for reverse engineering and dynamic analysis of applications. In the context of Android, Frida allows us to inject snippets of JavaScript or our own library into running processes. This can be used to alter the application's behavior, inspect the application's state, or even manipulate its data.
+> 
+
+### 🧐 Why ?
+
+> Understanding how an application works internally is crucial for various reasons. For a penetration tester, understanding the inner workings of an application can reveal vulnerabilities that can be exploited. For a developer, it can help in debugging and optimizing the application. Frida is a powerful tool that aids in these tasks by allowing dynamic analysis, which is the ability to inspect an application as it runs in a live environment.
+> 
+
+### ⛏️ How ?
+
+> Getting started with Frida involves several steps: 1) Install Frida server on your Android device/emulator. 2) Install Frida client on your host machine. 3) Connect the Frida client to the server. 4) Now, you can start analyzing applications by injecting scripts into them. Remember, the application must be running for Frida to be able to hook into it.
+> 
+
+### ⏳ When ?
+
+> Frida has been in use for several years by security researchers, developers, and testers. Its use has increased significantly with the rise of mobile applications and the need to ensure their security.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Frida has been a valuable tool for security researchers, developers, and testers for several years. With the rise of mobile applications and the ever-increasing need for their security, Frida's use has grown significantly.
+
+In the context of Android, getting started with Frida involves several steps. First, the Frida server must be installed on the Android device or emulator. Next, the Frida client is installed on the tester's machine. Once both components are installed, the client can connect to the server, and the tester can begin analyzing applications by injecting scripts into them.
+
+An important thing to note is that for Frida to work, the application must be running. This is because Frida hooks into the running processes of the application, and if the application isn't running, there are no processes for Frida to hook into.
+
+On the other hand, the client component runs on the tester's machine. It establishes and manages communication with the server, enabling the tester to inject and execute custom JavaScript scripts into the running application. These scripts are immensely powerful and versatile. They can invoke native functions within the application, manipulate its memory, and even spawn new native threads. This gives the tester a high degree of control over the application, allowing for in-depth analysis and debugging.
+
+Frida is a powerful tool for dynamic code analysis, consisting of two parts: a server and a client. The server component runs as a daemon on the device or emulator where the application you wish to analyze resides. It has the crucial task of injecting the Frida agent, which is essentially a JavaScript runtime, into the running processes of the application. This allows for real-time, dynamic analysis of the application's behavior.
+
+Here is a simplified example of how to use Frida for dynamic analysis of an Android application:
+
+1. **Set Up the Server:** First, you need to install Frida server on your Android device. This can be done by downloading the latest Frida server for Android from the official website and pushing it to the device using ADB (Android Debug Bridge). For example:
+
+```
+# Download the latest Frida server
+wget <https://github.com/frida/frida/releases/download/{version}/frida-server-{version}-android-x86_64.xz>
+
+# Use ADB to push the server to your device
+adb push frida-server /data/local/tmp/
+
+# Set execute permissions
+adb shell "chmod 755 /data/local/tmp/frida-server"
+
+# Run the server
+adb shell "/data/local/tmp/frida-server &"
+
+```
+
+1. **Install the Client:** On your host machine, you need to install the Frida client. This can be done using pip:
+
+```
+pip install frida-tools
+
+```
+
+1. **Connect the Client to the Server:** Once both components are installed, you can connect the Frida client to the server:
+
+```
+frida-ps -U
+
+```
+
+This command lists the processes available to Frida on the connected device. If you see your target application in the list, you are ready to proceed.
+
+1. **Inject a Script:** Now, you can start analyzing the application by injecting a script. Here's a simple script that prints a message when a specific method is called:
+
+```python
+import frida
+
+def on_message(message, data):
+    print(message)
+
+session = frida.get_usb_device().attach('your.target.app')
+script = session.create_script("""
+    Java.perform(function () {
+        var YourClass = Java.use('com.example.yourapp.YourClass');
+        YourClass.yourMethod.implementation = function () {
+            console.log('YourMethod was called');
+            return this.yourMethod.apply(this, arguments);
+        };
+    });
+""")
+script.on('message', on_message)
+script.load()
+
+```
+
+In this script, we attach to the target app, hook into the `yourMethod` of `YourClass`, and print a message whenever the method is called.
+
+1. **Analyze the Output:** The output from running this script will give you valuable insights into when and how `yourMethod` is being used by the application.

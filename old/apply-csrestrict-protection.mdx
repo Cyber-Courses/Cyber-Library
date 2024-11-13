@@ -1,0 +1,67 @@
+# Apply CS_RESTRICT protection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Apply CS_RESTRICT protection is a security feature in computer systems that restricts certain actions of a process on a computer system, particularly those actions that could potentially lead to a security breach. It's a measure that is often implemented in operating systems and software applications.
+> 
+
+### 🧐 Why ?
+
+> Apply CS_RESTRICT protection is important as it reduces the risk of security attacks, such as unauthorized access, data leakage, and system crashes. It can limit the actions of a program that has been compromised, preventing it from causing further damage.
+> 
+
+### ⛏️ How ?
+
+> To implement Apply CS_RESTRICT protection, you would typically need to change the settings in the operating system or application software. However, the specifics would depend on the system or application in question. For example, in a Windows environment, you might need to adjust the User Account Control settings or modify the properties of a specific program.
+> 
+
+### ⏳ When ?
+
+> Apply CS_RESTRICT protection started becoming a common practice in the late 1990s, with the rise of the internet and the increasing need for enhanced security measures.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+CS_RESTRICT protection is a security feature that controls the system calls a process can make. A system call is essentially a request from a process to the operating system to carry out a specific operation, such as reading data from a file or transmitting data across a network. These system calls are fundamental for a process to function. However, they can also be exploited for malicious purposes if a process is compromised.
+
+That's where CS_RESTRICT protection comes into play. It restricts the system calls a process can make, effectively limiting what the process can do. This is particularly valuable if a process is compromised as it prevents it from carrying out potentially harmful actions. For instance, if a process has been infiltrated by a malicious actor, CS_RESTRICT protection could prevent it from deleting files or transmitting sensitive data across the network.
+
+The specifics of the restrictions imposed by CS_RESTRICT protection can differ based on the system or application. However, the common principle is to minimize the potential damage a compromised process can inflict. It's worth noting that implementing CS_RESTRICT protection requires alterations in the settings of the operating system or application software, with the specifics varying based on the unique environment.
+
+To sum up, CS_RESTRICT protection is an important security feature that helps safeguard against unauthorized access, data leakage, and system crashes by limiting the actions a compromised program can execute.
+
+For instance, consider a scenario where we are running a process in a Linux environment. We will apply CS_RESTRICT protection using the `prctl` function, which allows us to control the properties of a process during its execution.
+
+Here's an example of how you could use `prctl` to apply CS_RESTRICT protection:
+
+```
+#include <sys/prctl.h>
+
+int main() {
+    // Apply CS_RESTRICT protection
+    if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_STRICT) == -1) {
+        perror("prctl");
+        return 1;
+    }
+
+    // Rest of the program
+}
+
+```
+
+In this code, `PR_SET_SECCOMP` is the option we pass to `prctl` to indicate that we want to turn on secure computing (seccomp) mode. `SECCOMP_MODE_STRICT` is the argument that enables CS_RESTRICT protection.
+
+Once this program is run, the process is restricted to only four system calls: `read()`, `write()`, `exit()`, and `sigreturn()`. Any other system calls from this process will result in the process being terminated, limiting potential damage from a security breach.
+
+It's important to note that, while this example is specific to a Linux environment, the principles of CS_RESTRICT protection apply across operating systems. The specific method of implementation would depend on the system or application in question.
+
+# 🖇️ Références
+
+---

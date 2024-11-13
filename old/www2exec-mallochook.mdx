@@ -1,0 +1,152 @@
+# WWW2Exec - __malloc_hook
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> __malloc_hook is a variable in GNU Libc that allows programmers to specify a function to be called when the 'malloc' function is called to allocate memory. This can be used to track memory allocation or inject code.
+> 
+
+### 🧐 Why ?
+
+> Understanding __malloc_hook is important because it can be used for both good and bad purposes. On one hand, it can be used by developers to debug memory leaks or other memory-related issues. On the other hand, it can also be exploited by malicious actors to inject code and compromise system security.
+> 
+
+### ⛏️ How ?
+
+> To use __malloc_hook, you need to define a function that matches the expected prototype and then assign the address of this function to __malloc_hook. However, this should be done with caution as incorrect use can lead to unpredictable behavior or system crashes. It's also important to know that this variable is part of the GNU Libc library and may not be available in other C libraries.
+> 
+
+### ⏳ When ?
+
+> __malloc_hook has been available since the GNU Libc library was first introduced. However, its use has been discouraged in recent versions due to the potential for misuse and the introduction of more secure alternatives.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+__malloc_hook is a powerful but potentially dangerous feature in the GNU Libc library. It allows developers to intercept calls to the `malloc` function, which is used to allocate memory dynamically. Understanding and using __malloc_hook requires a thorough grasp of memory management and careful coding practices to avoid common pitfalls that can lead to security vulnerabilities or system crashes.
+
+### Detailed Explanation
+
+### 1. What is __malloc_hook?
+
+__malloc_hook is a global variable in the GNU Libc library that holds a pointer to a custom memory allocation function. When `malloc` is called to allocate memory, if __malloc_hook is not NULL, the function it points to is invoked instead of the default `malloc` function. This allows developers to implement custom memory allocation strategies, track memory usage, or debug memory-related issues.
+
+### 2. Why use __malloc_hook?
+
+__malloc_hook can be useful for various purposes, such as:
+
+- **Debugging**: Developers can use it to log memory allocation calls, helping to identify memory leaks and other issues.
+- **Custom Allocation**: It allows the implementation of custom memory allocation strategies, which can be optimized for specific use cases.
+- **Security**: In some cases, it can be used to enforce security policies related to memory allocation.
+
+However, __malloc_hook should be used with caution. Incorrect usage can lead to unpredictable behavior, system crashes, or security vulnerabilities.
+
+### 3. How to Use __malloc_hook?
+
+To use __malloc_hook, you need to define a custom allocation function that matches the required prototype and then assign its address to __malloc_hook. Here is a step-by-step guide:
+
+1. **Define the custom allocation function**:
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+void* my_malloc_hook(size_t size, const void *caller) {
+    void *result;
+    // Unhook the custom malloc to prevent recursion
+    __malloc_hook = NULL;
+
+    // Allocate memory using the original malloc
+    result = malloc(size);
+
+    // Log the allocation
+    printf("malloc(%zu) called from %p, returned %p\\n", size, caller, result);
+
+    // Re-hook the custom malloc
+    __malloc_hook = my_malloc_hook;
+
+    return result;
+}
+
+```
+
+1. **Assign the custom function to __malloc_hook**:
+
+```c
+void (*old_malloc_hook)(size_t, const void *) = __malloc_hook;
+__malloc_hook = my_malloc_hook;
+
+```
+
+1. **Restore the original __malloc_hook when done**:
+
+```c
+__malloc_hook = old_malloc_hook;
+
+```
+
+### 4. Example Usage
+
+Here is a complete example that demonstrates how to use __malloc_hook to log memory allocations:
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+// Custom malloc hook function
+void* my_malloc_hook(size_t size, const void *caller) {
+    void *result;
+    // Unhook the custom malloc to prevent recursion
+    __malloc_hook = NULL;
+
+    // Allocate memory using the original malloc
+    result = malloc(size);
+
+    // Log the allocation
+    printf("malloc(%zu) called from %p, returned %p\\n", size, caller, result);
+
+    // Re-hook the custom malloc
+    __malloc_hook = my_malloc_hook;
+
+    return result;
+}
+
+// Main function
+int main() {
+    // Save the old malloc hook
+    void (*old_malloc_hook)(size_t, const void *) = __malloc_hook;
+
+    // Assign the custom malloc hook
+    __malloc_hook = my_malloc_hook;
+
+    // Allocate some memory
+    void *ptr1 = malloc(10);
+    void *ptr2 = malloc(20);
+
+    // Restore the original malloc hook
+    __malloc_hook = old_malloc_hook;
+
+    // Free the allocated memory
+    free(ptr1);
+    free(ptr2);
+
+    return 0;
+}
+
+```
+
+### 5. Considerations
+
+- **Thread Safety**: __malloc_hook is a global variable, so changes to it affect all threads. This can introduce complexity in multithreaded programs.
+- **Compatibility**: __malloc_hook is specific to the GNU Libc library and may not be available or work the same way in other C libraries.
+- **Deprecation**: The use of __malloc_hook has been discouraged in recent versions of GNU Libc due to the potential for misuse. Alternative methods, such as `malloc_usable_size` and `malloc_info`, are recommended for tracking memory usage.
+
+### Conclusion
+
+While __malloc_hook can be a valuable tool for debugging and custom memory allocation, it must be used with caution. Understanding its behavior, limitations, and potential risks is crucial for using it effectively and safely. The provided example demonstrates a basic use case for educational purposes, highlighting the importance of careful implementation to avoid common issues.

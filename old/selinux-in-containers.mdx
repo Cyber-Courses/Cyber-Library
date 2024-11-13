@@ -1,0 +1,159 @@
+# SELinux in Containers
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SELinux, or Security-Enhanced Linux, is a security module that provides a means to enforce access control security policies. When combined with containers, it offers additional layers of security to your containerized applications.
+> 
+
+### 🧐 Why ?
+
+> The relevance of SELinux in containers is essential because it provides a robust framework for managing access control policies. It helps in mitigating or preventing the impact of security breaches by restricting the capabilities of a compromised container. This is crucial, especially in today's age where cyber threats are evolving at an alarming rate.
+> 
+
+### ⛏️ How ?
+
+> To leverage the benefits of SELinux in containers, you first need to understand the SELinux policy and labeling system. You can implement SELinux by enabling it in your Linux distribution, and then assigning the appropriate SELinux context to your containers. This context defines the set of rules that control the actions that the container can perform. Make sure to test the policies in a non-production environment before applying them to your production systems.
+> 
+
+### ⏳ When ?
+
+> The usage of SELinux in containers started becoming mainstream with the rise of container technologies like Docker and Kubernetes around the mid-2010s. While SELinux itself was introduced by the National Security Agency (NSA) in the early 2000s, its applicability to containers has gained prominence recently due to the widespread adoption of containerization.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview of SELinux
+
+SELinux (Security-Enhanced Linux) is a security module integrated into the Linux kernel that enforces access control policies to enhance the security of the system. It operates on the principle of 'least privilege,' ensuring that processes and system objects have only the minimum privileges necessary to function, which limits the potential damage if a process is compromised.
+
+### SELinux and Container Security
+
+In the context of containerized applications, SELinux assigns a unique context to each container. This context defines a set of rules that control what actions processes within the container can perform. By isolating containers from each other and the host system, SELinux significantly enhances security by preventing compromised containers from affecting the rest of the system.
+
+### Practical Example: Deploying a Web Server with Docker and SELinux
+
+Let's walk through a real-world example of deploying an Apache web server within a Docker container and securing it with SELinux.
+
+### Step 1: Enable SELinux
+
+1. **Edit SELinux Configuration**:
+Open the SELinux configuration file located at `/etc/selinux/config`.
+    
+    ```bash
+    sudo nano /etc/selinux/config
+    
+    ```
+    
+2. **Set SELINUX to Enforcing**:
+Change the line `SELINUX=` to `enforcing` to enable SELinux.
+    
+    ```
+    SELINUX=enforcing
+    
+    ```
+    
+3. **Reboot the System**:
+Reboot your system to apply the changes.
+    
+    ```bash
+    sudo reboot
+    
+    ```
+    
+
+### Step 2: Create a Docker Container
+
+1. **Run an Apache Web Server Container**:
+Use Docker to run a container with the Apache web server.
+    
+    ```bash
+    docker run -d --name myApacheServer httpd:latest
+    
+    ```
+    
+    This command runs a Docker container in detached mode, names it "myApacheServer", and uses the latest version of the Apache image.
+    
+
+### Step 3: Check the SELinux Context of the Container
+
+1. **Inspect the Container**:
+Check the SELinux context of the running container.
+    
+    ```bash
+    docker inspect --format '{{ .ProcessLabel }}' myApacheServer
+    
+    ```
+    
+    The output will show the SELinux context applied to the container, which is crucial for understanding the security policies in effect.
+    
+
+### Step 4: Apply Custom SELinux Policies
+
+1. **Create a Policy Module**:
+Create a custom SELinux policy module to define specific permissions for the Apache process. First, create a policy file named `httpd_custom.te`.
+    
+    ```bash
+    nano httpd_custom.te
+    
+    ```
+    
+2. **Define the Policy**:
+Add the following content to the `httpd_custom.te` file:
+    
+    ```
+    module httpd_custom 1.0;
+    
+    require {
+        type httpd_t;
+        class dir { getattr search open read };
+        class file { getattr open read };
+    }
+    
+    #============= httpd_t ==============
+    allow httpd_t self:dir { getattr search open read };
+    allow httpd_t self:file { getattr open read };
+    
+    ```
+    
+3. **Compile the Policy**:
+Compile the policy into a module.
+    
+    ```bash
+    checkmodule -M -m -o httpd_custom.mod httpd_custom.te
+    
+    ```
+    
+4. **Package the Module**:
+Package the compiled module.
+    
+    ```bash
+    semodule_package -o httpd_custom.pp -m httpd_custom.mod
+    
+    ```
+    
+5. **Install the Module**:
+Install the policy module using `semodule`.
+    
+    ```bash
+    semodule -i httpd_custom.pp
+    
+    ```
+    
+
+### Step 5: Test the Container
+
+1. **Test in a Non-Production Environment**:
+After applying the custom policy, test your container to ensure it functions correctly and that the SELinux policies are properly enforced.
+
+### Conclusion
+
+SELinux provides robust security enhancements for containerized applications by enforcing strict access control policies. By assigning unique contexts to each container, SELinux ensures that processes within containers have limited privileges, preventing them from affecting other containers or the host system. This isolation is crucial for maintaining the security of systems running multiple containerized applications.
+
+Implementing SELinux with containers involves enabling SELinux, creating and managing containers, inspecting SELinux contexts, and applying custom policies as needed. Regular testing and validation are essential to ensure that security policies do not interfere with the expected operation of containerized applications. By following these practices, administrators can leverage SELinux to enhance the security of their containerized environments.

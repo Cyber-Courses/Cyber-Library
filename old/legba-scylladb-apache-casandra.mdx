@@ -1,0 +1,94 @@
+# legba ScyllaDB / Apache Casandra
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> ScyllaDB and Apache Cassandra are both distributed NoSQL databases designed to manage large amounts of structured data across many commodity servers. ScyllaDB is an open-source drop-in replacement for Apache Cassandra. Both provide high availability with no single point of failure and are highly scalable, allowing for incremental addition of servers or nodes in a cluster to increase data capacity and throughput.
+> 
+
+### 🧐 Why ?
+
+> ScyllaDB and Apache Cassandra are important because they offer a solution to the challenges of managing vast amounts of data in a distributed environment. They are particularly useful in applications where high data write and read speeds, data replication, and fault-tolerance are essential. These databases are used by many large companies, including Apple, Netflix, and Uber, to handle their massive data workloads.
+> 
+
+### ⛏️ How ?
+
+> To use ScyllaDB or Apache Cassandra, you first need to install the database on multiple nodes, which will form a cluster. Data is then distributed across these nodes. You can interact with the databases through their native query language, CQL, which is similar to SQL. To scale up, simply add more nodes to the cluster. Both databases also provide mechanisms for replicating data across different data centers to ensure data safety and availability.
+> 
+
+### ⏳ When ?
+
+> Apache Cassandra was first released in 2008 by Facebook, and has since become one of the most popular NoSQL databases. ScyllaDB was released in 2015 as a more performant and scalable alternative to Cassandra.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+ScyllaDB and Apache Cassandra are NoSQL databases that operate on a distributed hash table principle. This means that they hash the partition key of the data to determine its placement in the cluster. Essentially, each piece of data is assigned a hash value, and this value determines which node in the cluster the data belongs to. The nodes in the cluster each hold a specific range of these hash values, so the data is evenly and predictably distributed across the cluster.
+
+This partitioning scheme enables what is known as horizontal scaling. As data volumes grow, new nodes can be added to the cluster to accommodate the increasing data. This is in contrast to vertical scaling, which would require increasing the capacity of individual nodes. Horizontal scaling is a more cost-effective and flexible approach to handling large amounts of data.
+
+In addition to this, ScyllaDB and Apache Cassandra handle data replication by creating copies of the data on multiple nodes. This can be configured to take place within the same data center or across different data centers. The latter configuration provides fault tolerance against data center failures.
+
+ScyllaDB and Apache Cassandra both utilize a query language known as CQL (Cassandra Query Language). CQL is akin to SQL in terms of its syntax and usability. However, it's specifically designed to handle the querying of large amounts of distributed data, which is a common requirement in big data applications.
+
+Here is an example of how to use Apache Cassandra with the Cassandra Query Language (CQL):
+
+1. **Install Apache Cassandra**: The first step would be to install Apache Cassandra on your system. You can do this by downloading the appropriate version from the official website and following the installation instructions.
+2. **Start the Cassandra server**: Once installed, you can start the Cassandra server by running the command `cassandra -f` in your terminal.
+3. **Access the Cassandra shell**: Next, you can access the Cassandra shell, `cqlsh`, by running the command `cqlsh` in your terminal.
+4. **Create a keyspace**: In Cassandra, a keyspace is a namespace that defines data replication on nodes. A cluster contains one keyspace per node. You can create a keyspace with the command:
+    
+    ```
+    CREATE KEYSPACE my_keyspace
+    WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };
+    
+    ```
+    
+    This command creates a keyspace named `my_keyspace` with a replication factor of 3, meaning the data is copied onto 3 nodes.
+    
+5. **Create a table**: Now, let's create a table in our keyspace:
+    
+    ```
+    USE my_keyspace;
+    CREATE TABLE employees (
+        id INT PRIMARY KEY,
+        name TEXT,
+        age INT,
+        address TEXT
+    );
+    
+    ```
+    
+    This command creates a table named `employees` with columns `id`, `name`, `age`, and `address`.
+    
+6. **Insert data**: Now, we can insert some data into our table:
+    
+    ```
+    INSERT INTO employees (id, name, age, address)
+    VALUES (1, 'John Doe', 30, '123 Elm St');
+    
+    ```
+    
+    This command inserts a new row into the `employees` table.
+    
+7. **Query data**: Finally, you can query the data in the table:
+    
+    ```
+    SELECT * FROM employees;
+    
+    ```
+    
+    This command will return all rows from the `employees` table.
+    
+
+Remember that Apache Cassandra is designed for scalability and distributed operation. In a real-world scenario, you would likely have multiple nodes running on different servers, and your data would be distributed across those nodes according to the keyspaces and tables you define.
+
+# 🖇️ Références
+
+---

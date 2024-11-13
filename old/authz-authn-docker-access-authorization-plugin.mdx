@@ -1,0 +1,81 @@
+# AuthZ& AuthN - Docker Access Authorization Plugin
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux AuthZ&AuthN and Docker Access Authorization Plugin are two interconnected concepts in the realm of cybersecurity. AuthZ represents Authorization, which is the process of determining what a user is allowed to do after they have been authenticated. AuthN stands for Authentication, which is the process of verifying the identity of a user. On the other hand, Docker Access Authorization Plugin is a security feature in Docker (an open-source platform used to automate the deployment, scaling, and management of applications) that restricts the Docker API's access based on the user's role and permissions.
+> 
+
+### 🧐 Why ?
+
+> Understanding these concepts is crucial for maintaining the security of any system that uses Docker. Without proper authentication and authorization, a system is vulnerable to unauthorized access and potential malicious activities. Furthermore, Docker's widespread use in modern software development and deployment makes understanding its security measures, like the Access Authorization Plugin, pivotal for those working in the field.
+> 
+
+### ⛏️ How ?
+
+> To implement the Docker Access Authorization Plugin, one must first enable it in the Docker daemon configuration file. This is done by adding an 'authz-plugin' option followed by the name of the plugin. Once the plugin is enabled, it will intercept all Docker API requests and allow or deny them based on the user's permissions. As for Linux AuthZ&AuthN, it can be managed through various tools and configurations, such as PAM (Pluggable Authentication Modules), Access Control Lists, and user and group permissions.
+> 
+
+### ⏳ When ?
+
+> The use of these concepts has become more prevalent with the rise of Docker and the growing need for robust security measures in software development and deployment.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Docker Access Authorization Plugin and Linux AuthZ&AuthN are integral parts of maintaining a secure environment in software development and deployment.
+
+The Docker Access Authorization Plugin works at the application level. It acts as an intermediary, intercepting all Docker API requests. Whenever a user makes a request, the plugin receives the full details, including the body of the request. It then reviews the request against a set of predefined rules and policies. Depending on this review, the plugin either approves or denies the request. If approved, the request is forwarded to the Docker daemon for processing. If denied, the user receives an error message indicating that they don't have the needed permissions. This plugin is crucial to ensure that users can't perform actions that could potentially harm the system or access sensitive data.
+
+On the other hand, Linux AuthZ&AuthN operates at the system level. 'AuthN', or Authentication, is the process of verifying a user's identity. This usually happens during login, where users provide credentials such as a username and password. Once a user's identity is verified, 'AuthZ', or Authorization, comes into play. This process determines what actions the authenticated user is allowed to perform in the system. This is usually controlled by user and group permissions that are set by the system administrator. Tools like PAM (Pluggable Authentication Modules) and Access Control Lists can be used to manage these permissions.
+
+Together, the Docker Access Authorization Plugin and Linux AuthZ&AuthN provide a two-tiered security measure. They ensure that users are who they claim to be and can only perform actions that they have the explicit permission to do. This minimizes the risk of unauthorized access and potential malicious activities, thereby maintaining the integrity and security of the system.
+
+Let's consider an example for both Docker Access Authorization Plugin and Linux AuthZ&AuthN:
+
+**Docker Access Authorization Plugin**
+
+Suppose you have a Docker plugin called 'example_plugin'. Here's how you can enable it:
+
+1. Open the Docker daemon configuration file. This is usually located at `/etc/docker/daemon.json`.
+2. Add the 'authz-plugin' option followed by the name of the plugin. The configuration file should look something like this:
+
+```json
+{
+  "authz-plugins": ["example_plugin"]
+}
+
+```
+
+1. Restart Docker daemon to apply changes: `systemctl restart docker`
+
+Now, whenever a Docker API request is made, the 'example_plugin' will review the request. For instance, if a user tries to run `docker run hello-world`, the plugin will evaluate if the user has the necessary permissions to execute this command. If the user does, the command will run. If not, they will receive an error message.
+
+**Linux AuthZ&AuthN**
+
+Suppose you have a user named 'example_user'. Here's how you can manage their permissions:
+
+1. Authentication: The user provides their username and password to log in. This verifies their identity.
+
+```bash
+login: example_user
+password: ******
+
+```
+
+1. Authorization: Once the user is authenticated, their permissions determine what they can do. For instance, if 'example_user' tries to edit a file that they don't have write access to, they'll be denied. You can manage these permissions using the `chmod` command or by modifying Access Control Lists.
+
+```bash
+chmod u+w example_file
+
+```
+
+This command gives 'example_user' write access to 'example_file'. If they try to edit the file now, they will be allowed to do so.
+
+Remember, these are simplified examples. Real-world usage would involve more complex rules and policies, and additional security measures.

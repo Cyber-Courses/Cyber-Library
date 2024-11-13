@@ -1,0 +1,78 @@
+# Android ADB Commands
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android Debug Bridge (ADB) is a versatile command-line tool that enables communication between a computer and an Android device. It facilitates a variety of device actions, such as installing and debugging apps, and provides access to a Unix shell to run various commands on an Android device.
+> 
+
+### 🧐 Why ?
+
+> Understanding ADB commands is essential for Android developers, testers, and security professionals. It allows for efficient debugging, app installation, file transfer, and overall device management. Furthermore, it aids in performing various tasks that are not possible with the standard user interface.
+> 
+
+### ⛏️ How ?
+
+> To use ADB, you first need to install Android SDK on your computer. Then, enable 'USB debugging' on your Android device in the 'Developer Options' section. Connect your device to the computer and navigate to the 'platform-tools' directory in the SDK folder. Open the command prompt here and type 'adb' to start using the commands. Some common ADB commands include 'adb devices' to list all connected devices, 'adb install' to install an app, and 'adb push' to copy files to the device.
+> 
+
+### ⏳ When ?
+
+> ADB commands have been in use since the early days of Android. They are continuously updated and expanded with each new Android version to address evolving needs and challenges.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+ADB (Android Debug Bridge) operates in a client-server architecture. The client sends commands, the server manages communications, and the daemon (adbd) executes commands on the Android device.
+
+When you initiate an adb client, it checks for an existing adb server process. If there's none, it launches the server process. The server, upon starting, binds to local TCP port 5037 and awaits commands from adb clients. All adb clients use this port to communicate with the server.
+
+The server establishes connections to all active devices. It locates emulators by scanning odd-numbered ports ranging from 5555 to 5585, the range designated for emulators/devices. When the server locates an adb daemon, it establishes a connection to that port.
+
+Each emulator/device instance possesses a pair of sequential ports—one even-numbered for console connections and one odd-numbered for adb connections. For instance, an emulator using ports 5554 and 5555 would be identified by adb as emulator-5554.
+
+To ensure that the emulator/device instances operate on an IP address and port number accessible to adb, the instances consistently send an announcement to a specific multicast address (224.0.0.1).
+
+This model allows for efficient communication between the computer and Android device or emulator, enabling developers to install and debug apps, transfer files, and execute a myriad of other commands. Familiarity with ADB commands is hence crucial for Android developers, testers, and security professionals.
+
+For example, let's say you want to install an app on your connected Android device using ADB. Here's how you might do it:
+
+1. **Start the ADB server**: Open your command prompt and navigate to the 'platform-tools' directory in the Android SDK folder. Type `adb start-server`. This will start the ADB server if it's not already running.
+
+```
+$ cd /path/to/your/platform-tools
+$ adb start-server
+
+```
+
+1. **Check your connected devices**: To ensure your device is connected and recognized by ADB, type `adb devices`. This should list out all connected devices.
+
+```
+$ adb devices
+
+```
+
+You should see something like this:
+
+```
+List of devices attached
+emulator-5554	device
+
+```
+
+1. **Install the app**: Now, let's say you have an APK file named `myapp.apk` that you want to install. You would use the `adb install` command followed by the path to your APK file.
+
+```
+$ adb install /path/to/your/myapp.apk
+
+```
+
+Once the process completes, you should see a "Success" message in the console.
+
+Each step in this process involves using ADB commands to communicate with your Android device. Understanding these commands is crucial for efficiently installing apps, debugging, and managing your device.

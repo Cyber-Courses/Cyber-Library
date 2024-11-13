@@ -1,0 +1,79 @@
+# Logstash
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Logstash is an open-source data collection pipeline tool. It ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash' like Elasticsearch. Logstash is part of the Elastic Stack along with Beats, Elasticsearch, and Kibana.
+> 
+
+### 🧐 Why ?
+
+> The importance of Logstash lies in its ability to simplify the process of managing, analyzing, and visualizing large volumes of data. It allows for efficient data processing and enrichment, and can be used to create a centralized logging system, crucial for system monitoring, troubleshooting, and operational intelligence. Its compatibility with numerous data types and sources makes it an essential tool for every system administrator and data analyst.
+> 
+
+### ⛏️ How ?
+
+> To start using Logstash, you first need to install it on your Linux system. It can be installed and run on the terminal using package managers like YUM or APT. Once installed, you can configure Logstash to ingest data by creating a configuration file that specifies the input, filter, and output plugins. You then run Logstash with this configuration file, and it will start ingesting and processing data as specified. Logstash's flexibility allows you to customize your data processing pipeline to suit your needs.
+> 
+
+### ⏳ When ?
+
+> Logstash was first released by Jordan Sissel in 2009 as a standalone project, before being later incorporated into the Elastic Stack.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Logstash is a powerful open-source data processing pipeline tool. It ingests data from various sources simultaneously, transforms it, and sends it to the desired storage. One of the key features of Logstash is its event processing pipeline. Data, when entering Logstash, is converted into an internal JSON format. This data is then subjected to a series of transformations, also known as filters. These transformations can range from simple tasks, such as field renaming, to more complex operations like data enrichment through external API calls.
+
+The processed data is then ready to be sent to a chosen destination. This is known as the output stage. Logstash's robustness lies in its ability to support a wide range of input and output plugins, which allows it to pull and push data from and to various sources and destinations. This versatility makes it an indispensable tool for data processing and management.
+
+Moreover, Logstash can process large volumes of data in various formats. This feature, coupled with an extensive range of available plugins, makes Logstash a powerful tool in the field of data management. Its ability to effectively handle and manage data makes it a go-to tool for system administrators and data analysts. It's essential to note that Logstash is a part of the Elastic Stack, along with Beats, Elasticsearch, and Kibana, further enhancing its functionality and integration capabilities.
+
+Here's a detailed example of how to use Logstash for data processing.
+
+Let's assume you have a web server and you want to use Logstash to process your web server's logs.
+
+1. **Install Logstash**: You can install Logstash on your Linux server using package manager commands like `sudo apt-get install logstash` for Debian-based systems or `sudo yum install logstash` for RPM-based systems.
+2. **Create a Configuration file**: You need to create a configuration file that tells Logstash where to get the data (input), how to transform it (filter), and where to send it (output). Save the following content in a file called `logstash.conf`.
+
+```bash
+input {
+  file {
+    path => "/var/log/apache2/access.log"
+    start_position => "beginning"
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "%{COMBINEDAPACHELOG}" }
+  }
+  date {
+    match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["localhost:9200"]
+  }
+  stdout { codec => rubydebug }
+}
+
+```
+
+In this configuration file:
+
+- The `input` block specifies the log file's path from which Logstash will read.
+- The `filter` block uses the `grok` plugin to parse the log data based on the Apache Combined Log format. The `date` plugin is used to parse the timestamp from the log data.
+- The `output` block sends the processed data to Elasticsearch running on the same machine (`localhost:9200`) and also outputs it to the console (`stdout`) for debugging.
+1. **Run Logstash**: You can run Logstash with the configuration file using the command `bin/logstash -f logstash.conf`. Logstash will start processing the logs as per the configuration file.
+2. **View Processed Data**: Once Logstash processes the data, you can view it in Elasticsearch (if you have it set up). You can also use Kibana, which is a visualization tool that works with Elasticsearch to create dashboards.
+
+This example gives you a basic understanding of how Logstash works. Depending on your use case, you can experiment with different input sources, transformation filters, and output destinations.

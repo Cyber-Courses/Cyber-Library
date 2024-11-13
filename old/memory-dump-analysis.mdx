@@ -1,0 +1,89 @@
+# Memory dump analysis
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Memory dump analysis is the process of examining the contents of a computer's memory, usually captured during a crash or a specific point in time, to diagnose the cause of a problem or understand the state of the system at that time.
+> 
+
+### 🧐 Why ?
+
+> This process is important because it can help to troubleshoot and debug problems with software, or even uncover malicious activities, such as malware infections or unauthorized access. For cybersecurity professionals, understanding memory dump analysis can provide invaluable insights into the inner workings of a system and the activities taking place on it.
+> 
+
+### ⛏️ How ?
+
+> To perform a memory dump analysis, you first need to obtain the memory dump file. This can be done using built-in tools on most operating systems, or third-party software. Once you have the file, you can use a tool such as WinDbg or Volatility to analyze it. These tools can help you to interpret the raw data and identify patterns or anomalies that may indicate a problem or a security breach.
+> 
+
+### ⏳ When ?
+
+> Memory dump analysis started to be used widely in the late 90s with the advent of more sophisticated operating systems and debugging tools. It is now a common practice in both software development and cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Memory dump analysis is a comprehensive process that involves reading and interpreting the contents of a computer's Random Access Memory (RAM). When a memory dump is taken, it captures a snapshot of all the data held in the RAM at that particular point in time. This data often includes information about currently running processes, loaded modules (which could be operating system components or software), open files, network connections, and other crucial system data.
+
+Performing a memory dump analysis allows experts to reconstruct the state of the system during the time of the memory dump. By doing this, it's possible to gain valuable insights into what was happening on the system when the dump was taken. For instance, this could help in identifying any software bugs, system inconsistencies, or even signs of a security breach.
+
+In the context of cybersecurity, memory dump analysis is particularly valuable. By examining the data within the memory dump, cybersecurity professionals can potentially identify tactics, techniques, and procedures (TTPs) used by an attacker. This can include spotting signs of malware, observing unauthorized access patterns, or identifying suspicious network connections.
+
+To carry out a memory dump analysis, professionals typically use specialized tools. These include built-in operating system tools or third-party software such as WinDbg or Volatility. These tools help interpret the raw data, making it easier to identify patterns, anomalies, or specific data points that can aid in diagnosing the problem or spotting a security incident.
+
+In summary, memory dump analysis is a powerful technique used in both software debugging and cybersecurity. It allows for a deep dive into a system's operation at a specific point in time, offering a wealth of information that can be crucial in identifying and resolving issues.
+
+Here's a simplified example of memory dump analysis using the Volatility tool:
+
+1. **Obtain the memory dump**: First, you'll need to obtain a memory dump. In this case, let's assume we're working with a Windows system and using a built-in utility called Windows Task Manager. You can simply select the process you're interested in, right-click, and select "Create dump file." This will create a .dmp file containing the contents of the process's memory.
+
+```
+C:\\Users\\User\\Process.dmp
+
+```
+
+This path indicates where the dump file is located.
+
+1. **Install and set up Volatility**: Volatility is a popular open-source memory forensics tool. Install it on your system using the following command:
+
+```
+pip install volatility
+
+```
+
+1. **Identify the profile**: Volatility needs to know the exact version of Windows that the dump came from (known as the profile) to analyze it correctly. Use the `imageinfo` plugin to identify the profile:
+
+```
+volatility -f /path/to/dump.dmp imageinfo
+
+```
+
+The output will suggest the most likely profiles.
+
+1. **Analyze the dump**: Now, you can use Volatility's plugins to analyze the dump. For instance, the `pslist` plugin lists the running processes at the time the dump was taken:
+
+```
+volatility -f /path/to/dump.dmp --profile=Win7SP1x64 pslist
+
+```
+
+This command will output a list of processes, including their IDs, parent IDs, creation times, and more.
+
+1. **Further analysis**: From here, you can perform more specific analyses. For example, use the `netscan` plugin to view active network connections:
+
+```
+volatility -f /path/to/dump.dmp --profile=Win7SP1x64 netscan
+
+```
+
+Through each step, you're examining different aspects of the system's state at the time of the dump, providing valuable insights for debugging or cybersecurity investigations.
+
+# 🖇️ Références
+
+---

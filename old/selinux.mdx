@@ -1,0 +1,95 @@
+# SELinux
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SELinux (Security-Enhanced Linux) is a Linux kernel security module that provides a mechanism for supporting access control security policies. It is a flexible and robust system for managing access control policies, including mandatory access control (MAC).
+> 
+
+### 🧐 Why ?
+
+> SELinux is important as it provides an additional layer of system security. Traditional Linux systems use discretionary access control (DAC), which is based on user ownership and permissions. However, DAC can be bypassed by processes running as root. SELinux implements MAC, which restricts processes based on policy rules, regardless of the user's permissions. This helps to limit the potential damage that can be caused by a compromised system.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of SELinux, you first need to ensure it is installed and enabled on your Linux system. You can check this by running the command 'sestatus'. If SELinux is running, you will see the current status and policy being used. SELinux policies are complex and can be difficult to configure correctly. It is recommended to start with a pre-existing policy, such as the targeted policy provided by most Linux distributions, and modify it to suit your needs. Tools such as 'semanage' and 'setsebool' can be used to manage SELinux policies and booleans.
+> 
+
+### ⏳ When ?
+
+> SELinux was first introduced by the NSA (National Security Agency) and became part of the Linux kernel in version 2.6, released in December 2003. It has been a standard part of most Linux distributions since then.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+SELinux, or Security-Enhanced Linux, is a vital security feature of the Linux operating system. This feature provides a mechanism for enforcing access control security policies in the Linux kernel. It operates on the principle of Mandatory Access Control (MAC), a step beyond the traditional Discretionary Access Control (DAC) used by Linux. DAC operates based on user permissions and ownership, which can be overridden by processes running as root. In contrast, MAC restricts processes based on policy rules, irrespective of user permissions, thereby reducing the potential damage from a compromised system.
+
+The operation of SELinux involves a set of predefined policy rules that dictate the operations allowed on a system. When a process tries to perform an operation, the Linux kernel verifies these policy rules to determine if the action is permissible. If the operation doesn't comply with the rules, it's blocked, and a log message is generated. This enforcement by the system, not the user, signifies the mandatory nature of the access control.
+
+SELinux policies are comprehensive and highly flexible, providing granular control over system operations. They can be tailored to restrict a process's access to specific files, limit the capabilities a process can leverage, and even control the network ports a process can bind to. However, these policies can be complex and challenging to configure correctly. Hence, it's often suggested to start with a pre-existing policy, such as the targeted policy provided by most Linux distributions, and modify it as required.
+
+SELinux was first introduced by the National Security Agency (NSA) and integrated into the Linux kernel in its version 2.6, released in December 2003. Since then, it has become a standard part of most Linux distributions, forming an essential layer of system security.
+
+An example of using SELinux might be restricting a server process, such as an HTTP server, from accessing unnecessary and sensitive parts of the system.
+
+Let's say you have an HTTP server process that should only have access to the `/var/www/html` directory, the standard location for web content on many Linux distributions.
+
+1. First, you can check the current SELinux context for this directory using the `ls` command with the `Z` option:
+    
+    ```
+    ls -Z /var/www/html
+    
+    ```
+    
+    This command might return something like:
+    
+    ```
+    system_u:object_r:httpd_sys_content_t:s0 /var/www/html
+    
+    ```
+    
+    This output shows that the directory has the `httpd_sys_content_t` context, which is typically used for web content.
+    
+2. Next, you can confirm that your HTTP server process (e.g., `httpd`) is running in the correct context with the `ps` command. Here's how you might do this:
+    
+    ```
+    ps -eZ | grep httpd
+    
+    ```
+    
+    This command might return something like:
+    
+    ```
+    system_u:system_r:httpd_t:s0    12345 ?     00:00:00 httpd
+    
+    ```
+    
+    This output shows that the HTTP server is running in the `httpd_t` context.
+    
+3. Now, you can test your policy. Assuming you've configured your web server correctly, it should be able to serve files from `/var/www/html`, but it should not be able to access other directories, such as `/etc`. You can test this by attempting to read the `/etc/passwd` file:
+    
+    ```
+    wget <http://localhost/passwd>
+    
+    ```
+    
+    This command should fail, since the HTTP server process does not have the necessary permissions to read this file.
+    
+4. If the command fails, that's actually a good thing—it means your policy is working as expected! You can check the SELinux audit logs to confirm this:
+    
+    ```
+    grep httpd /var/log/audit/audit.log
+    
+    ```
+    
+    This command will show log entries related to the HTTP server, including any access denials.
+    
+
+Each of these steps demonstrates how SELinux provides an additional layer of security by enforcing access control policies at the system level, regardless of user permissions. It's important to note that these are just example commands—the specific commands you use may vary depending on your system's configuration and the specific access control policies you wish to enforce.

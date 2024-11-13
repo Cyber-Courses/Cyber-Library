@@ -1,0 +1,84 @@
+# macOS Default Sandbox Debug
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Default Sandbox Debug is a security feature that is part of the macOS operating system. It is designed to prevent unauthorized access to sensitive data and protect the system against potential security threats. The feature works by isolating certain processes and limiting their access to system resources, thus creating a 'sandbox' within which they operate.
+> 
+
+### 🧐 Why ?
+
+> macOS Default Sandbox Debug is important because it helps to enhance the overall security of the macOS operating system. By isolating processes and limiting their access to system resources, it helps to prevent unauthorized access to sensitive data. This can be particularly useful in preventing potential security threats, such as malware and other forms of cyber attacks. Furthermore, understanding how this feature works can be beneficial for both macOS users and developers, as it can aid in the development of more secure software and applications.
+> 
+
+### ⛏️ How ?
+
+> To use macOS Default Sandbox Debug, you need to have a basic understanding of how macOS operates. The feature is typically enabled by default, and operates in the background without requiring any user intervention. However, if you're a developer looking to utilize this feature in your applications, you might need to delve into the macOS API and understand how to properly implement sandboxing in your code. It's also worth noting that while this feature can significantly enhance security, it's not a silver bullet and should be used in conjunction with other security measures.
+> 
+
+### ⏳ When ?
+
+> The macOS Default Sandbox Debug feature has been a part of the macOS operating system since its early versions. Its implementation and effectiveness have been improved with each new release of the operating system.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The macOS Default Sandbox Debug is a security mechanism in the macOS operating system designed to safeguard sensitive data and protect against potential security threats. It achieves this by creating an isolated environment, known as a 'sandbox', within which selected processes operate. This sandbox is a restricted part of the system that provides limited access to system resources for those processes.
+
+The sandbox is established through several security measures including access control lists (ACLs), which govern permissions and prevent unauthorized access, and process isolation techniques, which segregate the processes to prevent cross-contamination. The primary objective of these measures is to minimize the potential harm if a process is compromised, by inhibiting its access to sensitive data or system resources.
+
+This feature is especially crucial in defending against threats such as malware, which typically aim to gain unauthorized access to system resources or sensitive data. The sandbox restricts such threats by limiting their possible sphere of influence to the isolated environment, thereby preventing them from compromising the entire system.
+
+Furthermore, the sandbox provides a controlled environment for developers to debug their applications. This aids in the identification and rectification of potential security vulnerabilities since any anomalies or issues are contained within the sandbox, making them easier to isolate and address.
+
+Although this feature significantly bolsters security, it's not a standalone solution and should be used alongside other security measures for comprehensive protection. Also, developers wishing to utilize this feature in their applications need to familiarize themselves with the macOS API and understand how to correctly implement sandboxing in their code.
+
+The macOS Default Sandbox Debug has been a part of the macOS operating system from its early versions, with its functionality and effectiveness being enhanced with each successive release.
+
+Here's an example of how a developer might implement the macOS Default Sandbox Debug in their application:
+
+1. **Define Sandbox Rules**: The first step is to define the rules for the sandbox. This is done using a sandbox profile, written in the Sandbox Profile Language. A simple sandbox profile might look like this:
+
+```bash
+(version 1)
+(deny default)
+(allow file-read* (subpath "/path/to/my/application"))
+
+```
+
+This profile denies all actions by default, but allows reading of files within the specified path.
+
+1. **Apply the Sandbox**: Once the rules are defined, they can be applied to your application using the `sandbox_init` function, which is part of the macOS sandbox API. Here's a basic example of how you might do this in C:
+
+```c
+#include <sandbox.h>
+
+int main() {
+    char *error;
+    if (sandbox_init("path/to/my/sandbox/profile", SANDBOX_NAMED, &error) != 0) {
+        fprintf(stderr, "sandbox_init failed: %s\\n", error);
+        sandbox_free_error(error);
+    } else {
+        // Your application code goes here
+    }
+    return 0;
+}
+
+```
+
+In this code, the `sandbox_init` function is called with the path to the sandbox profile. If the sandbox initialization fails, it prints an error message and frees the allocated error string. Otherwise, it runs the application code.
+
+1. **Debugging in the Sandbox**: Now that you have your sandboxed application, you can debug it just like any other application. If there are any anomalies or issues, they'll be contained within the sandbox, making them easier to isolate and address.
+2. **Testing Security**: To test the security of your sandboxed application, you could try to carry out actions that are disallowed by your sandbox profile (such as attempting to write to a file outside the allowed path). If the sandbox is working correctly, these actions should fail.
+
+Remember, despite the additional security provided by the sandbox, it should not be relied upon as the only security measure. Always use it in conjunction with other security best practices.
+
+# 🖇️ Références
+
+---

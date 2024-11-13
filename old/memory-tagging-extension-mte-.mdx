@@ -1,0 +1,74 @@
+# Memory Tagging Extension (MTE)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Memory Tagging Extension (MTE) is a hardware feature aimed at detecting memory safety issues, such as buffer overflow and use-after-free errors. The fundamental concept behind MTE is the association of a tag, a small piece of metadata, with each memory allocation. This tag is checked whenever the memory is accessed, and if there's a mismatch, a fault is raised, helping to identify and prevent potential vulnerabilities.
+> 
+
+### 🧐 Why ?
+
+> Memory safety issues are among the most common and critical vulnerabilities in software, often leading to serious security breaches. MTE provides a practical solution to this issue by detecting such vulnerabilities at runtime. It's an important topic for anyone involved in software development, cybersecurity, or system administration, as understanding and implementing MTE can significantly enhance the security of a system.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of MTE, you need to have a processor that supports this feature. Once you have such a processor, you can enable MTE in your software using the appropriate compiler options. You also need to ensure that your operating system and any relevant libraries support MTE. Remember, MTE is a tool to help detect memory safety issues, but it doesn't replace good coding practices. You still need to write your software in a way that avoids these issues in the first place.
+> 
+
+### ⏳ When ?
+
+> The concept of memory tagging has been around for some time, but it's only in recent years that it's started to be implemented in commercial hardware. ARM announced its support for MTE in 2019, and it's expected that other manufacturers will follow suit in the near future.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Memory Tagging Extension (MTE) is an innovative hardware feature designed to tackle memory safety issues, such as buffer overflow and use-after-free errors, which are among the most significant vulnerabilities in software, often resulting in serious security breaches.
+
+MTE operates by assigning a small tag, typically a few bits, to each memory allocation. This tag is stored separately from the memory itself, in a dedicated memory area. When a memory access operation occurs, the processor verifies if the tag associated with the accessed memory matches the expected tag. If a discrepancy is detected, a fault is raised. This mechanism can help identify a variety of memory safety issues.
+
+In the case of buffer overflows, the tag for adjacent memory would not match, triggering a fault. Similarly, in use-after-free errors, the memory would have been re-tagged after being freed, so any subsequent access would cause a mismatch and raise a fault.
+
+However, it's important to note that MTE is not a panacea for all memory safety issues. There are still potential vulnerabilities that MTE might not detect. Furthermore, the use of MTE can introduce some performance overhead due to the additional memory checks.
+
+To utilize MTE, your processor needs to support this feature. Once you have a compatible processor, you can enable MTE in your software using specific compiler options. It's also crucial to ensure your operating system and any relevant libraries support MTE. Despite its utility, MTE is not a replacement for good coding practices. Developers still need to write their software in a way that prevents these issues from occurring initially.
+
+The concept of memory tagging has existed for some time, but it's only in recent years that it's started to be implemented in commercial hardware. ARM announced its support for MTE in 2019, and it's anticipated that other manufacturers will follow suit in the near future.
+
+Overall, even though MTE is not a complete solution for all memory safety issues, it's a critical tool in bolstering software security, making it a vital subject for software developers, cybersecurity professionals, and system administrators.
+
+Let's consider a simple example of a buffer overflow to understand how MTE might work:
+
+```c
+#include <string.h>
+
+void func() {
+    char buffer1[5];
+    char buffer2[10];
+
+    strcpy(buffer1, "Overflow");
+}
+
+```
+
+In this code, `buffer1` is allocated with 5 bytes of memory. However, the `strcpy` function is used to copy the string "Overflow", which is 9 bytes long, into `buffer1`. This results in a buffer overflow, as data is written past the end of `buffer1` and into `buffer2`.
+
+With MTE enabled, each memory allocation — in this case, `buffer1` and `buffer2` — would be assigned a unique tag. When the `strcpy` function tries to write past the end of `buffer1`, it would encounter the tag for `buffer2`, which would not match the tag for `buffer1`. This tag mismatch would trigger a fault, alerting you to the buffer overflow.
+
+Keep in mind that this is a simplified example and actual use of MTE would involve more complex code and additional considerations, such as compiler options and operating system support.
+
+Here's a general process to employ MTE:
+
+1. **Check Processor Support**: Ensure your CPU supports MTE. This information can usually be found in the processor's technical documentation.
+2. **Enable MTE in Your Compiler**: If you're using a compiler that supports MTE, like GCC or Clang, you can enable MTE using the appropriate compiler flags. For instance, in GCC, you might use the `march=armv8.5-a+mte` flag.
+3. **Check OS and Library Support**: Verify that your operating system and any libraries you're using support MTE. This may involve checking documentation or reaching out to the maintainers.
+4. **Write and Test Your Code**: Write your code as usual, but keep in mind that MTE is there to help identify memory safety issues. It's not a substitute for good coding practices. Test your code thoroughly to ensure it behaves as expected with MTE enabled.
+5. **Analyze Faults**: If MTE flags a fault, analyze the fault to understand what caused the tag mismatch. This might involve debugging your code or examining core dumps.
+
+Remember, while MTE can help catch some memory safety issues, it's not capable of catching all potential vulnerabilities, and it doesn't absolve developers from writing safe, secure code.

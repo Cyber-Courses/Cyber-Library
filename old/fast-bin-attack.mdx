@@ -1,0 +1,93 @@
+# Fast Bin Attack
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Fast Bin Attack is a technique used in the exploitation of memory corruption vulnerabilities. It specifically targets the fast bins in glibc's malloc implementation, allowing the attacker to overwrite arbitrary memory locations.
+> 
+
+### 🧐 Why ?
+
+> Fast Bin Attack is important because it's a powerful technique that can bypass certain security protections, such as address space layout randomization (ASLR). It also allows an attacker to execute arbitrary code, which can lead to system compromise. Readers should be interested in this topic to understand how these attacks work, which can help in developing effective countermeasures.
+> 
+
+### ⛏️ How ?
+
+> To perform a Fast Bin Attack, an attacker first needs to trigger a buffer overflow in a fast bin chunk. The overflow is used to overwrite the forward pointer of a free chunk in a fast bin, which will then point to an arbitrary memory location. When the next allocation request is made for a chunk of the same size, the arbitrary location will be returned instead.
+> 
+
+### ⏳ When ?
+
+> Fast Bin Attacks have been used for several years, but they've gained more attention recently due to the increasing use of security protections that they can bypass.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Fast bins are singly-linked lists of recently freed chunks of memory, which are intended to be reused quickly. An attacker can exploit this by overwriting a forward pointer in a free chunk to point to an arbitrary memory location. This can lead to arbitrary write capabilities, which can, in turn, lead to code execution. It's a complex attack that requires a deep understanding of memory management and the specifics of glibc's malloc implementation.
+
+## Detailed Explanation
+
+### What are Fast Bins?
+
+Fast bins are part of the memory allocator in glibc, specifically designed for quick allocation and deallocation of small memory chunks. When a chunk is freed, it is added to the appropriate fast bin list based on its size. These bins are intended to optimize performance by reducing the time spent in allocation and deallocation operations.
+
+### How Fast Bin Attack Works
+
+1. **Trigger a Buffer Overflow**: The attacker needs to find a buffer overflow vulnerability in the application. This vulnerability allows the attacker to write beyond the allocated memory bounds.
+2. **Manipulate Fast Bin Chunks**: The attacker targets a chunk that has been freed and placed into a fast bin. By exploiting the buffer overflow, the attacker can overwrite the forward pointer of this free chunk.
+3. **Point to Arbitrary Memory Location**: The overwritten forward pointer is set to point to an arbitrary memory location chosen by the attacker.
+4. **Allocate New Chunk**: When a new chunk of the same size as the manipulated chunk is requested, the memory allocator will return the arbitrary memory location instead of a legitimate free chunk. This allows the attacker to write data to this arbitrary location, potentially overwriting critical data structures or code pointers.
+
+### Example: Exploiting a Fast Bin Attack
+
+Below is a simplified and educational example to demonstrate the concept of a Fast Bin Attack. This example does not include all the necessary security checks and is intended for educational purposes only.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void exploit() {
+    printf("Arbitrary Code Execution!\\n");
+}
+
+int main() {
+    // Allocate two chunks of memory
+    char *chunk1 = (char *)malloc(32);
+    char *chunk2 = (char *)malloc(32);
+
+    // Free the first chunk
+    free(chunk1);
+
+    // Simulate a buffer overflow by overwriting the forward pointer of chunk1
+    strcpy(chunk1, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    *(unsigned long *)(chunk1 + 32) = (unsigned long)&exploit;
+
+    // Allocate a new chunk of the same size
+    char *chunk3 = (char *)malloc(32);
+
+    // Write data to the new chunk, which is actually the address of the exploit function
+    strcpy(chunk3, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+    return 0;
+}
+
+```
+
+### Step-by-Step Breakdown
+
+1. **Allocation of Chunks**: Two chunks of 32 bytes each are allocated using `malloc`.
+2. **Freeing a Chunk**: The first chunk (`chunk1`) is freed and placed into the fast bin.
+3. **Simulated Buffer Overflow**: The forward pointer of the free chunk (`chunk1`) is overwritten using a buffer overflow. The forward pointer is set to the address of the `exploit` function.
+4. **New Allocation**: A new chunk of the same size as the manipulated chunk is allocated. The allocator returns the address of the `exploit` function instead of a legitimate free chunk.
+5. **Data Writing**: Data is written to the new chunk, which actually points to the `exploit` function. This leads to the execution of the `exploit` function, demonstrating arbitrary code execution.
+
+### Conclusion
+
+The Fast Bin Attack is a powerful technique that exploits memory corruption vulnerabilities to achieve arbitrary code execution. By understanding the mechanics of fast bins and the memory allocator in glibc, attackers can manipulate memory to bypass security protections like ASLR. Defenders must be aware of these attack vectors to develop effective countermeasures and secure their applications against such exploits.

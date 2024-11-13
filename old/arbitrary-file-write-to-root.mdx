@@ -1,0 +1,48 @@
+# Arbitrary File Write to Root
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Arbitrary File Write to Root is a critical security vulnerability that allows an attacker with local access to write files anywhere on the system, including the root directory. This can lead to serious security breaches such as unauthorized access, data leakage, and system corruption.
+> 
+
+### 🧐 Why ?
+
+> Understanding and mitigating this vulnerability is crucial because it threatens the integrity, confidentiality, and availability of your Linux system. If exploited, an attacker could gain root privileges, modify system files, install malicious software, or exfiltrate sensitive data.
+> 
+
+### ⛏️ How ?
+
+> Firstly, keep your system up-to-date with the latest security patches which often fix known vulnerabilities. Secondly, apply the principle of least privilege by giving users only the permissions they need to perform their tasks. This can limit the extent of potential damage. Lastly, consider using security tools like SELinux or AppArmor to enforce access control policies at the kernel level.
+> 
+
+### ⏳ When ?
+
+> The Linux Arbitrary File Write to Root vulnerability has been known for several years, but it still poses a threat to systems that are unpatched or misconfigured. Therefore, it's crucial to continually monitor for and address this vulnerability.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Linux Arbitrary File Write to Root vulnerability primarily originates from a lack of appropriate access control. Each file and directory in a Linux system is associated with a specific set of permissions. These permissions dictate who can read, write, or execute the files. When these permissions are not correctly enforced, it opens up a potential security loophole.
+
+In essence, this vulnerability allows an attacker with local access to write files anywhere on the system, even in areas that should be restricted, such as the root directory. This is particularly dangerous as the root directory is the highest level in the filesystem hierarchy, and it contains all other directories and files.
+
+If an attacker successfully exploits this vulnerability, they can overwrite crucial system files or create new ones, leading to a variety of critical security issues. For instance, they could modify essential system files, delete data, install malicious software, or gain root privileges, which would give them complete control over the system.
+
+Furthermore, this vulnerability could also be used for privilege escalation—an attacker with limited permissions could potentially gain higher-level permissions, thereby accessing sensitive data or causing more damage to the system.
+
+To mitigate this vulnerability, it's crucial to keep the system updated with the latest security patches, as these often fix known vulnerabilities. It's also important to apply the principle of least privilege—users should only be granted the permissions they need to carry out their tasks. This can limit the potential damage if the system is compromised. Finally, consider using security tools such as SELinux or AppArmor, which enforce access control policies at the kernel level, providing an additional layer of security.
+
+For example, suppose that a Linux system has a misconfigured file permission that allows any user to write to the `/etc/passwd` file, a critical system file that stores local user account information.
+
+1. An attacker with local access could open a terminal and check the permissions of the `/etc/passwd` file with the command: `ls -l /etc/passwd`. If the file is misconfigured, the output might look like this: `rw-rw-rw- 1 root root 1768 Jan 1 12:00 /etc/passwd`, indicating that all users (owner, group, and others) have read and write permissions.
+2. The attacker could then add a new root user to the system by appending a new line to the `/etc/passwd` file. They might use the `echo` command combined with `>>` to append the data: `echo 'eviluser:x:0:0:eviluser:/root:/bin/bash' >> /etc/passwd`. This line creates a new user named 'eviluser' with root (`0`) user and group IDs, giving them full administrative privileges.
+3. Now, the attacker could log in or switch to the new 'eviluser' account using the `su` command: `su eviluser`. They would now have root access and could perform any action on the system, such as modifying system files, installing malicious software, or exfiltrating sensitive data.
+
+This detailed example demonstrates how a simple misconfiguration can lead to a serious security vulnerability. It's crucial to ensure that file permissions are correctly set, especially for critical system files, and to regularly check and update system security settings.

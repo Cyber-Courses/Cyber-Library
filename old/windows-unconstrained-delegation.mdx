@@ -1,0 +1,62 @@
+# Windows Unconstrained Delegation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Unconstrained Delegation is a feature provided by Microsoft's Active Directory that allows a service to impersonate a user to other services. This means that the service has the ability to authenticate on behalf of the user to any other service in the network.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows Unconstrained Delegation is essential because it can potentially lead to security risks if not configured correctly. A misconfiguration may allow an attacker to impersonate any user in the network and gain unauthorized access to sensitive resources.
+> 
+
+### ⛏️ How ?
+
+> To use Windows Unconstrained Delegation, you first need to enable the delegation on the service's account in Active Directory. This can be done through the 'Delegation' tab in the account's properties. However, it's important to only use this feature when necessary and to understand the potential security implications.
+> 
+
+### ⏳ When ?
+
+> Windows Unconstrained Delegation has been a feature in Active Directory since Windows 2000. It's often used in scenarios where a service needs to access resources on behalf of a user, such as a web server accessing a database.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows Unconstrained Delegation is a feature provided by Microsoft's Active Directory, which allows one service to impersonate a user to other services across a network. This is accomplished using the Kerberos network authentication protocol.
+
+When a user authenticates to a service that has unconstrained delegation enabled, the service receives a special ticket known as a Ticket Granting Ticket (TGT) from the Kerberos Key Distribution Center (KDC). The TGT is a type of credential that allows the service to request service tickets on behalf of the user. This ability to request tickets allows the service to effectively impersonate the user to other services, and thereby access resources as if it were the user.
+
+While this can be beneficial in scenarios where a service needs to access resources on behalf of a user, it also presents significant security risks. For instance, if an attacker gains control of a service with unconstrained delegation enabled, they could impersonate any user who authenticates to that service, potentially gaining unauthorized access to sensitive resources.
+
+Therefore, it's crucial to configure Windows Unconstrained Delegation correctly. This involves enabling delegation on the service's account in Active Directory via the 'Delegation' tab in the account's properties. However, it's recommended to only use this feature when necessary and to have a deep understanding of its potential security implications.
+
+Windows Unconstrained Delegation has been a feature in Active Directory since Windows 2000 and continues to be a powerful tool for services that need to access resources on behalf of users. Nevertheless, it must be used judiciously and with a comprehensive understanding of its capabilities and risks.
+
+Let's consider a scenario where we have an active directory with a web service that needs to access a database on behalf of the user. This is a common scenario where Windows Unconstrained Delegation could be used.
+
+1. **Step One: Enable Delegation in Active Directory**
+In the Active Directory Users and Computers tool, navigate to the account properties of the web service. Under the 'Delegation' tab, select the option 'Trust this user for delegation to any service (Kerberos only)'.
+    
+    Note: This should be done by an administrator with the necessary permissions.
+    
+2. **Step Two: User Authentication**
+When a user logs in to the web service, the service will request a Ticket Granting Ticket (TGT) from the Kerberos Key Distribution Center (KDC) on behalf of the user. This is done using Kerberos authentication protocol. The TGT is then stored by the service.
+    
+    Example command: `kinit user@DOMAIN`
+    
+3. **Step Three: Accessing the database**
+When the web service needs to access the database, it will use the stored TGT to request a service ticket from the KDC for the database service. The service ticket is then used to authenticate to the database as the user.
+    
+    Example command: `kvno MSSQLSvc/dbserver.domain.com`
+    
+4. **Step Four: Impersonating the user**
+The web service can now access the database as if it were the user. It can perform operations based on the permissions of that user.
+
+Remember: This feature presents significant security risks if not used correctly, as an attacker gaining control of the web service could impersonate any user who authenticates to that service. It is crucial to understand these risks and use this feature judiciously.

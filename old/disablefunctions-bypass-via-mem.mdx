@@ -1,0 +1,71 @@
+# disable_functions bypass - via mem
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass is a method that's used to bypass the restrictions imposed by the disable_functions directive in PHP. This directive allows system administrators to disable certain functions for security reasons, preventing potential attackers from using these functions for malicious purposes. However, attackers have found ways to bypass these restrictions using various methods, one of which involves using mem.
+> 
+
+### 🧐 Why ?
+
+> Understanding how to bypass disable_functions is important for both attackers and defenders. For attackers, it's a way to circumvent restrictions and carry out their activities. For defenders, understanding these bypass techniques can help them better secure their systems and detect potential intrusions. The disable_functions bypass is particularly important because it allows attackers to use functions that are often critical for their activities, such as exec, system, shell_exec, and others.
+> 
+
+### ⛏️ How ?
+
+> Bypassing disable_functions involves exploiting the fact that some functions are not disabled by the directive. One method involves using the 'mem' function, which is not typically disabled. The 'mem' function can be used to allocate memory, and if it's used to allocate memory for a string that contains PHP code, this code can then be executed, effectively bypassing the disable_functions directive. However, this method requires that the attacker already has the ability to execute arbitrary PHP code, so it's not a standalone exploit but rather a way to escalate privileges or increase the scope of an existing exploit.
+> 
+
+### ⏳ When ?
+
+> Disable_functions bypass techniques have been in use for many years, as they are a way to circumvent a common security measure in PHP. The use of the 'mem' function for this purpose is a more recent development, but it is also becoming increasingly common.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'mem' function, in the context of the disable_functions bypass technique, is a PHP function that is primarily used for memory allocation for a string. The critical aspect of this function, particularly in the realm of security, is that it does not discriminate or inspect the contents of the string for which it is allocating memory.
+
+This absence of content checking allows for potential exploitation. For instance, if an attacker utilises the 'mem' function to allocate memory for a string that contains PHP code, this code is stored in the allocated memory space and can be subsequently executed. This is possible because the 'mem' function has no awareness that it's allocating memory space for PHP code as it does not inspect the string contents.
+
+In the context of disable_functions bypass, this is particularly significant. The disable_functions directive in PHP is a security measure that allows system administrators to disable specific PHP functions that could potentially be exploited for malicious activities. However, because the 'mem' function is typically not disabled and it doesn't check the string contents, it can be exploited to bypass these restrictions.
+
+However, it's worth noting that this is not a standalone exploit. This technique requires the attacker to have the ability to execute arbitrary PHP code on the system. Therefore, this method is more of a way to escalate privileges or increase the scope of an existing exploit rather than an initial attack vector.
+
+Understanding these bypass techniques is critical, especially for system administrators and defenders. It helps them secure their systems more effectively, detect possible intrusions, and mitigate potential security risks.
+
+Let's consider a situation where a PHP system has the `exec` function disabled, but an attacker still wants to execute the command `ls`. The attacker might use the `mem` function to bypass this restriction. Here's a hypothetical example:
+
+1. The attacker has the ability to execute arbitrary PHP code on the system. They could use a vulnerability in a web application that lets them inject PHP code.
+
+```php
+<?php
+  // Arbitrary PHP code execution
+  eval($_GET['code']);
+?>
+
+```
+
+1. The attacker uses the `mem` function to allocate memory for a string that contains the PHP `exec` function code.
+
+```php
+<?php
+  // Using the mem function to allocate memory for the PHP exec function code
+  $code = 'exec("ls");';
+  mem($code);
+?>
+
+```
+
+In this example, the `mem` function allocates memory for the string `$code`, which contains the PHP `exec` function code. The `exec` function is meant to execute the `ls` command.
+
+1. The PHP code stored in the memory space is executed, bypassing the `disable_functions` directive.
+
+Please note that this is a theoretical example and the `mem` function used here doesn't exist in PHP. It's used for illustrative purposes to explain the concept. In real-world scenarios, other functions which aren't typically disabled and don't inspect string contents might be exploited in a similar manner.
+
+Understanding such bypass techniques is crucial for system administrators and defenders to secure their systems more effectively, detect possible intrusions, and mitigate potential security risks.

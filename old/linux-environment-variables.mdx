@@ -1,0 +1,78 @@
+# Linux Environment Variables
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Environment variables in Linux are dynamic named values that are stored within the system and used by applications launched in shells or subshells. They can be created, edited, saved, and deleted, and provide a simple way to share configuration settings between multiple applications and processes in Linux. They are part of the environment in which a process runs.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux environment variables is crucial as they control the behavior of the system and the applications that run within it. These variables help reduce the need for users to manually specify the path to executable files. They also allow customization of the system according to user's needs. For example, by setting the HOME environment variable, the system knows where the user's home directory is located.
+> 
+
+### ⛏️ How ?
+
+> To view all environment variables, use the 'printenv' command. To create a new environment variable, use the 'export' command followed by the variable name and its value. For example 'export VARNAME=\
+> 
+
+### ⏳ When ?
+
+> Linux environment variables have been in use since the inception of the Linux operating system. They are an integral part of Linux and Unix-like operating systems and are used on a daily basis by both system administrators and regular users.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux environment variables are named objects that hold data used by one or more applications. They follow a specific naming convention with names being uppercase and words separated by underscores. These variables can hold a variety of information that an application might need to run such as names of files or file paths.
+
+When a shell command is entered into the system, and the system needs to know the location of a binary file, it checks these environment variables. This is crucial for the system's operation as it reduces the need for the user to manually specify the location of these files every time.
+
+Furthermore, the system uses these variables to manage data about the shell session. This can include the default shell to use or the history size to keep. This makes environment variables integral to customizing the user's interaction with the system.
+
+Manipulating these variables is a crucial skill for managing Linux systems. This can be done using various commands such as 'printenv' to view all variables, or 'export' to create a new variable. For example, 'export VARNAME=value' would create a new variable called VARNAME with the value of 'value'.
+
+In summary, Linux environment variables are dynamic named values stored in the system that reduce the need for manual input, allow customization, and are essential for the overall operation of the system. Understanding and manipulating these variables is a crucial skill when working with Linux systems.
+
+Let's take a look at a practical example of using Linux environment variables.
+
+Suppose you have a script, `myscript.sh`, that you want to run from anywhere in the system without specifying its full path. You can achieve this by adding its location to the PATH environment variable, which holds a list of directories where Linux looks for executable files.
+
+Here is a step-by-step process:
+
+1. **Locate the script:** Suppose the script is located in the directory `/home/user/scripts/`.
+2. **View the current PATH variable:** Before modifying the PATH variable, it's good practice to view its current value. This can be done using the `echo` command:
+    
+    ```
+    echo $PATH
+    
+    ```
+    
+    This will print out something like: `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`.
+    
+3. **Add the new directory to the PATH variable:** To add the new directory, we use the `export` command. The colon (:) is used to separate directory paths.
+    
+    ```
+    export PATH=$PATH:/home/user/scripts/
+    
+    ```
+    
+    This command takes the current value of PATH (`$PATH`), appends the new directory to it, and saves the result back to PATH.
+    
+4. **Make the change permanent:** The change we made is temporary and will be lost when the current session ends. To make it permanent, we need to add the `export` command to the `.bashrc` file in the home directory. This file is run whenever a new shell session is started.
+    
+    ```
+    echo "export PATH=$PATH:/home/user/scripts/" >> ~/.bashrc
+    
+    ```
+    
+    This command appends the `export` line to the end of the `.bashrc` file.
+    
+5. **Check the updated PATH variable:** You can check the updated PATH variable by opening a new shell session and running `echo $PATH` again. The new directory should be included at the end.
+
+Now, `myscript.sh` can be run from anywhere in the system by simply typing its name, without needing to specify the full path.

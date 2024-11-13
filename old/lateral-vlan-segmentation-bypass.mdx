@@ -1,0 +1,69 @@
+# Lateral VLAN Segmentation Bypass
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Lateral VLAN Segmentation Bypass is a network security vulnerability that can be exploited to bypass the security measures put in place within a network. It involves exploiting the way VLANs (Virtual Local Area Networks) are configured in a network, which can allow an attacker to gain unauthorized access to restricted areas of the network.
+> 
+
+### 🧐 Why ?
+
+> VLANs are often used in network design to segment different parts of a network for security and management purposes. However, if the VLAN configuration is not properly secured, it can be exploited by an attacker to bypass network segmentation. This can potentially give them access to sensitive resources and data. Understanding this vulnerability is important for both network administrators seeking to secure their networks and cybersecurity professionals looking to identify and mitigate vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> To exploit this vulnerability, an attacker would first need to gain access to a device within the network. This could be done through various means, such as social engineering, malware infection, or exploiting another vulnerability. Once inside, they could then use various techniques to bypass the VLAN segmentation, such as VLAN hopping, spoofing, or double tagging. To protect against this, network administrators should ensure that all VLANs are properly secured and that unnecessary inter-VLAN routing is disabled.
+> 
+
+### ⏳ When ?
+
+> The exploitation of VLAN segmentation vulnerabilities has been a known issue in network security for many years. However, it has become more prevalent with the rise of advanced persistent threats (APTs) and targeted attacks on corporate and government networks.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Exploiting a VLAN segmentation vulnerability is a technically complex process that involves manipulating network traffic to bypass security measures. Essentially, this involves navigating around the access control lists (ACLs) that are normally in place to keep certain areas of the network off-limits. This can be achieved through a number of methods.
+
+One such method could involve changing the VLAN ID in the Ethernet frame. Every Ethernet frame that is part of a VLAN has a specific ID that identifies which VLAN it belongs to. By changing this ID, an attacker could trick the network into thinking the frame belongs to a different VLAN, and thus gain access to areas of the network they should not be able to reach.
+
+Another method could involve spoofing the MAC address. This is a form of masquerading where an attacker pretends to be a different device by using that device's MAC address. This can allow an attacker to bypass ACLs that are set up to only allow certain devices to access certain VLANs.
+
+Yet another method could involve exploiting weaknesses in the VLAN Trunking Protocol (VTP). VTP is a protocol that automates the process of configuring VLANs across multiple switches. If an attacker can exploit a weakness in this protocol, they might be able to manipulate the VLAN configuration to their advantage.
+
+The specific method used, and the level of access required to exploit a VLAN segmentation vulnerability, will depend heavily on the specific network configuration and the security measures that are in place. Therefore, robust network security practices are crucial to prevent such an exploit.
+
+For example, consider a hypothetical corporate network where the Finance department's VLAN (let's say VLAN 10) is separate from the general staff VLAN (VLAN 20) for security and data privacy reasons.
+
+1. **Changing the VLAN ID in the Ethernet Frame**: Each Ethernet frame in a VLAN has a specific ID that identifies its VLAN. If an attacker, who initially has access to VLAN 20, changes this ID to 10, the network might be tricked into thinking the frame belongs to VLAN 10, granting the attacker unauthorized access. This is often referred to as VLAN hopping. Here's a simplified command example on a Linux system with vconfig tool installed:
+    
+    ```
+    vconfig add eth0 10
+    ifconfig eth0.10 up
+    
+    ```
+    
+    This sets up a new VLAN interface with ID 10 on `eth0`.
+    
+2. **Spoofing the MAC Address**: This involves the attacker masquerading as a different device by using its MAC address. If the network ACLs are configured to allow certain MAC addresses to access VLAN 10, the attacker could bypass these controls. On a Linux system, you can change the MAC address with the following command:
+    
+    ```
+    ifconfig eth0 hw ether 00:11:22:33:44:55
+    
+    ```
+    
+    This changes the MAC address of `eth0` to `00:11:22:33:44:55`.
+    
+3. **Exploiting VLAN Trunking Protocol (VTP)**: VTP is a protocol that automates the process of configuring VLANs across multiple switches. If an attacker can find a weakness in this protocol, they could potentially manipulate the VLAN configuration. This requires sophisticated knowledge of the network architecture and VTP setup.
+
+The exact method and level of access required to exploit a VLAN segmentation vulnerability heavily depend on the specific network configuration and the implemented security measures. Therefore, robust network security practices, such as secure VLAN setup, MAC address filtering, and secure VTP configurations, are crucial to prevent such an exploit.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,86 @@
+# Source code Review / SAST Tools
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Source code review or Static Application Security Testing (SAST) tools are software-based solutions that analyze source code or compiled versions of code to help identify security flaws. The fundamental concept behind SAST tools is the detection of vulnerabilities in a software system that could be exploited to compromise the system's security. SAST tools work by inspecting the source code at rest (i.e., non-runtime environment) to detect and report weaknesses that can lead to security vulnerabilities.
+> 
+
+### 🧐 Why ?
+
+> The increasing reliance on software systems in every aspect of our daily lives has made securing these systems paramount. SAST tools help developers find and fix security vulnerabilities early in the development process, reducing the likelihood of security breaches and the associated costs. For our readers, understanding and utilizing SAST tools can help in maintaining a robust security posture by detecting security vulnerabilities before they can be exploited.
+> 
+
+### ⛏️ How ?
+
+> To use SAST tools, typically you would first choose a tool that suits your needs (considering factors like the programming languages supported, cost, usability, etc.). Next, you would configure the tool according to your project requirements and then run the tool against your source code. The tool would then analyze the source code and generate a report detailing any security vulnerabilities found, often with advice on how to remediate them. Following the report, you would fix the detected vulnerabilities and then re-run the tool to ensure the vulnerabilities have been appropriately addressed.
+> 
+
+### ⏳ When ?
+
+> SAST tools started gaining traction in the early 2000s as part of the shift towards more proactive approaches to software security. They are now widely used in modern software development processes, especially those following the DevSecOps model, where security is integrated into every stage of development.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Static Application Security Testing (SAST) tools, also known as source code review tools, are software solutions designed to analyze either source code or compiled versions of code to identify potential security flaws. These tools work by inspecting static code (i.e., code at rest or non-runtime environment) and detecting vulnerabilities that may compromise the security of a software system.
+
+SAST tools operate at a technical level by examining the source code, searching for patterns or signatures that are indicative of security vulnerabilities. They employ various analysis techniques to understand the behavior of the software, which include:
+
+1. **Data Flow Analysis:** This technique tracks the flow of data through the software from its input points to its output points. It helps identify potential vulnerabilities where data is improperly validated, leading to such issues as SQL injection or cross-site scripting.
+2. **Control Flow Analysis:** Through this technique, SAST tools understand the order in which operations execute in a program. It can help spot issues like unvalidated redirects or possible instances where attackers could manipulate the control flow.
+3. **Semantic Analysis:** This technique involves understanding the meaning of the code. It can help detect more complex vulnerabilities that require an understanding of the code's purpose, like business logic flaws.
+
+The effectiveness of a SAST tool is dependent on several factors. The first is the comprehensiveness of its vulnerability database, which determines the range of security flaws the tool can detect. The second factor is the sophistication of its analysis techniques, which affects the tool's ability to accurately understand the behavior of the software and identify vulnerabilities. The third factor is the tool's ability to minimize false positives (benign behaviors incorrectly flagged as vulnerabilities) and false negatives (actual vulnerabilities missed by the tool).
+
+While SAST tools are powerful instruments for maintaining secure code, they should not be viewed as a complete solution. They are most effective when used as part of a comprehensive software security strategy that includes other practices like Dynamic Application Security Testing (DAST), manual code review, secure coding practices, and security training for developers. This comprehensive approach ensures that security is integrated at every stage of software development, thus reducing the risk of security breaches.
+
+Consider an example of a Python application with a SQL injection vulnerability:
+
+```python
+import sqlite3
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/user')
+def user_profile():
+    user_id = request.args.get('user_id')
+    conn = sqlite3.connect('my_database.db')
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM users WHERE id = {user_id}")
+    user = cursor.fetchone()
+    return str(user)
+
+```
+
+In this code, the user input from the URL parameter 'user_id' is directly used in a SQL query without any validation or sanitization, leading to a SQL injection vulnerability.
+
+1. **Data Flow Analysis:** A SAST tool would track the `user_id` from its input point (the `request.args.get` function) to its output point (the `cursor.execute` function). It would detect that the `user_id` is not validated before being used in a SQL query, leading to a potential SQL injection vulnerability.
+2. **Control Flow Analysis:** The SAST tool would understand that the `cursor.execute` function is called after the `user_id` is received, without any security controls in between. This could allow an attacker to manipulate the control flow by injecting malicious SQL commands.
+3. **Semantic Analysis:** The SAST tool would understand that the purpose of this code is to retrieve a user's information from a database using a user-provided ID. Understanding this purpose, the tool could detect that the lack of input validation constitutes a business logic flaw.
+
+A SAST tool would generate a report pointing out this vulnerability, often suggesting remediation steps such as adding input validation:
+
+```python
+@app.route('/user')
+def user_profile():
+    user_id = request.args.get('user_id')
+    # Validate that user_id is a number
+    if not user_id.isnumeric():
+        return "Invalid user ID"
+    conn = sqlite3.connect('my_database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+    return str(user)
+
+```
+
+In this corrected code, the `user_id` is checked to ensure it is numeric before it is used in a SQL query, mitigating the SQL injection vulnerability.

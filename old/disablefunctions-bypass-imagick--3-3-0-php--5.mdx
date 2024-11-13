@@ -1,0 +1,81 @@
+# disable_functions bypass - Imagick <= 3.3.0 PHP >= 5.4 Exploit
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The 'disable_functions bypass - Imagick <= 3.3.0 PHP >= 5.4 Exploit' is a cybersecurity vulnerability that allows an attacker to bypass disabled functions in PHP through the Imagick extension. The flaw resides in versions of Imagick up to 3.3.0 and PHP versions 5.4 and above.
+> 
+
+### 🧐 Why ?
+
+> Understanding this exploit is crucial as it could potentially allow an attacker to execute arbitrary code or commands on affected systems, leading to unauthorized access, data breaches, or even system crashes. It's particularly important for developers and system administrators who need to ensure the security of their PHP applications and servers.
+> 
+
+### ⛏️ How ?
+
+> To exploit this vulnerability, an attacker would first need to identify a target system running the vulnerable versions of Imagick and PHP. They would then craft a malicious request designed to bypass the 'disable_functions' directive in PHP, enabling them to execute the disabled functions. To protect against this exploit, users should update their PHP and Imagick to the latest versions where this vulnerability has been patched. Additionally, it's also recommended to restrict the permissions of the PHP process and limit the exposure of the application to the internet.
+> 
+
+### ⏳ When ?
+
+> The exploitation of this vulnerability began to be noticed in the cybersecurity community around late 2015, after the release of Imagick 3.3.0.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'disable_functions bypass - Imagick <= 3.3.0 PHP >= 5.4 Exploit' is a cybersecurity vulnerability that impacts certain versions of PHP and the Imagick extension. It specifically targets the 'disable_functions' directive in PHP, a security feature developed to deactivate particular sensitive functions that could be manipulated maliciously.
+
+In the versions of Imagick susceptible to this exploit, up to 3.3.0, one particular function, 'Imagick::readImage', did not correctly adhere to this directive. This non-compliance allowed a potential attacker to bypass the directive and execute the disabled functions.
+
+The vulnerability lies in the way the 'Imagick::readImage' function handles protocol handlers. In a protocol handler abuse attack, the attacker uses a data protocol handler, for example, data://, to execute arbitrary shell commands. This exploit demonstrates the significance of thorough input validation and restrictions on function usage in the development of applications and extensions.
+
+To carry out this exploit, the attacker needs to identify a system running the vulnerable versions of Imagick and PHP. They then need to craft a malicious request that's designed to bypass the 'disable_functions' directive. The successful execution of this request would allow them to execute the disabled functions.
+
+The implications of this vulnerability are severe. It could potentially enable an attacker to execute arbitrary code or commands on affected systems, leading to unauthorized access, data breaches, or even system crashes.
+
+To protect against this exploit, users are advised to update their PHP and Imagick to the latest versions where this vulnerability has been patched. Additional preventative measures include restricting the permissions of the PHP process and minimizing the application's exposure to the internet.
+
+This vulnerability was first noticed in the cybersecurity community around late 2015, after the release of Imagick 3.3.0. The understanding and awareness of such exploits are crucial for developers and system administrators to ensure the security of their PHP applications and servers.
+
+As an example of this exploit, let's consider a hypothetical PHP application running Imagick 3.3.0 and PHP 5.4. The application has the 'exec' function disabled using the 'disable_functions' directive in PHP for security reasons.
+
+**Step 1: Identifying the Target**
+
+An attacker finds out that the application uses vulnerable versions of PHP and Imagick by running a scan or by examining the HTTP headers.
+
+**Step 2: Crafting a Malicious Request**
+
+The attacker crafts a malicious request that includes a data protocol handler in the 'Imagick::readImage' function, like so:
+
+```php
+<?php
+$image = new Imagick();
+$image->readImage('data://text/plain;base64,'.base64_encode('<?php system($_GET["cmd"]); ?>'));
+$image->writeImage('/var/www/html/shell.php');
+?>
+
+```
+
+In the above code, 'system($_GET["cmd"]);' is the command that the attacker wishes to execute.
+
+**Step 3: Sending the Malicious Request**
+
+The attacker sends this malicious request to the server. If the exploit is successful, a PHP file named 'shell.php' is written to the webroot.
+
+**Step 4: Executing the Command**
+
+The attacker navigates to '[www.targetwebsite.com/shell.php?cmd=ls](http://www.targetwebsite.com/shell.php?cmd=ls)', executing the 'ls' command on the server, which lists all files in the current directory. This allows the attacker to view sensitive files.
+
+**Step 5: Unauthorized Actions**
+
+After gaining access, the attacker could potentially perform unauthorized actions, such as modifying application files, stealing sensitive data, or causing system crashes.
+
+**Protective Measures**
+
+To protect against this exploit, users should update their PHP and Imagick to versions where this vulnerability has been patched. Also, they could restrict the permissions of the PHP process and limit the exposure of the application to the internet. As a developer, it's crucial to sanitize inputs and restrict the usage of potentially dangerous functions to prevent such exploits.

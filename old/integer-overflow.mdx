@@ -1,0 +1,88 @@
+# Integer Overflow
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Integer overflow is a type of computer programming error where the result of an arithmetic operation exceeds the maximum size of the integer type used to store it. This can lead to unexpected behavior, including program crashes, incorrect calculations, and, in some cases, security vulnerabilities.
+> 
+
+### 🧐 Why ?
+
+> Understanding integer overflow is crucial because it can be exploited to bypass security checks and execute arbitrary code, potentially leading to serious security breaches. It's also a common source of bugs in programs, leading to incorrect behavior and potential crashes.
+> 
+
+### ⛏️ How ?
+
+> Avoiding integer overflow requires careful programming practices. Before performing arithmetic operations, you should check the values to ensure they won't result in an overflow. Alternatively, you can use programming languages or libraries that automatically check for overflow. In some cases, you may also need to use a larger integer type to store the result.
+> 
+
+### ⏳ When ?
+
+> Integer overflow has been a known issue since the early days of programming, but it's become more prominent with the rise of cybersecurity and the increasing complexity of software. It's particularly relevant in the context of low-level programming languages like C and C++, which allow direct manipulation of memory and don't automatically check for overflow.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Integer overflow is a common issue in computer programming where the outcome of an arithmetic operation surpasses the maximum capacity of the integer type used to hold it. It can occur with any programming language that performs arithmetic operations on integers, but is especially relevant in low-level programming languages like C and C++, which directly manipulate memory and do not automatically check for overflow.
+
+The overflow happens when the sum, subtraction, multiplication or division of integers exceeds the maximum (or drops below the minimum) value an integer type can store. For instance, consider a 32-bit integer type where the maximum value is 2^31 - 1 (or 2147483647). If you add 1 to this value, the result will wrap around to -2^31 (or -2147483648), the minimum value for a 32-bit signed integer. This wrapping around is referred to as 'overflow'.
+
+The implications of integer overflow can be significant, leading to unexpected behavior such as incorrect calculations, program crashes, and at times, security vulnerabilities. For example, if the result of an operation is used to allocate memory or determine the size of an array, an overflow can cause far less memory than expected to be allocated. This could lead to buffer overflows or other errors.
+
+In terms of security, an attacker could exploit integer overflow to bypass security checks, execute arbitrary code, or even cause a denial of service. It's crucial for developers to understand integer overflow and take measures to prevent it. This could involve doing value checks before arithmetic operations to confirm they won't result in an overflow, using programming languages or libraries that automatically check for overflow, or using larger integer types to store the result of operations.
+
+Here's an example of an integer overflow in the C programming language, which doesn't automatically check for overflow:
+
+```c
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+    int a = INT_MAX;
+    printf("Before overflow, a = %d\\n", a);
+    a = a + 1;
+    printf("After overflow, a = %d\\n", a);
+    return 0;
+}
+
+```
+
+In this example, `INT_MAX` is the maximum value a signed integer can hold in C. When we add 1 to `a` (which is set to `INT_MAX`), it results in an integer overflow. The outcome is that `a` wraps around to the minimum value a signed integer can hold, as shown by the output:
+
+```
+Before overflow, a = 2147483647
+After overflow, a = -2147483648
+
+```
+
+Now let's consider a security implication:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    unsigned int a = 4294967295;  // Maximum value for an unsigned int
+    unsigned int b = 1;
+    unsigned int c = a + b;  // This will overflow
+    char *buffer = malloc(c);  // Allocates far less memory than expected
+
+    if (buffer == NULL) {
+        printf("Memory allocation failed\\n");
+        return 1;
+    }
+
+    // Buffer is smaller than expected, so this will overflow
+    buffer[c] = 'A';
+    return 0;
+}
+
+```
+
+In this example, an unsigned integer overflows when we add 1 to the maximum value it can hold. The result is used to allocate memory for a buffer. However, because of the overflow, less memory than expected is allocated. If we then try to access an element beyond the allocated memory (like `buffer[c]`), it could lead to a buffer overflow, which is a serious security vulnerability.

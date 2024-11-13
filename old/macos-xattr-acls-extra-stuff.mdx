@@ -1,0 +1,101 @@
+# macOS xattr-acls extra stuff
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS xattr-acls extra stuff refers to the extended attributes and access control lists (ACLs) in macOS, which are additional layers of metadata and permissions available for files and directories. Extended attributes (xattr) can be used to store arbitrary data about files, while ACLs provide a more granular permission model than traditional UNIX permissions.
+> 
+
+### 🧐 Why ?
+
+> Understanding and properly utilizing xattr-acls extra stuff in macOS is crucial due to its role in file system security. It offers a more complex and refined control over access to files and directories, thus enhancing the security of the system. Misconfiguration or lack of knowledge about these features can lead to potential security vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> Extended attributes can be managed using the 'xattr' command line tool in macOS. For instance, to list all extended attributes for a file, use 'xattr -l filename'. To remove an attribute, use 'xattr -d attrname filename'. ACLs can be managed using the 'chmod' command. For instance, to add a read permission for a user on a directory, use 'chmod +a 'user:allow:read' directory'. It's important to understand the implications of these commands before using them, as improper use can compromise system security.
+> 
+
+### ⏳ When ?
+
+> Extended attributes and ACLs have been part of macOS since the release of Mac OS X 10.4 Tiger in 2005. However, they are often underutilized due to the complexity and potential security implications.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Extended attributes and Access Control Lists (ACLs) in macOS are additional layers of metadata and permissions for files and directories that allow for more complex and granular control.
+
+Extended attributes are key-value pairs associated with files and directories. They enable developers and system administrators to store extra metadata that doesn't fit into the standard set of file attributes such as size, creation date, etc. This feature is implemented at the file system level and is supported by many modern file systems, including HFS+ and APFS, commonly used by macOS. For example, extended attributes can store information about the source of a downloaded file, or the encoding of a text file. They can be managed using the 'xattr' command-line tool in macOS.
+
+Access Control Lists (ACLs) in macOS provide a more sophisticated model of permissions than traditional UNIX permissions. UNIX permissions offer Read, Write, and Execute permissions for the User, Group, and Others. In contrast, ACLs allow specific permissions to be set for any user or group, providing a more refined control over access to files and directories. ACLs are processed in order, and the first matching entry for the current user or group determines whether access is granted or denied, which allows for complex permission models to meet various security needs. These can be managed using the 'chmod' command in macOS.
+
+Both extended attributes and ACLs play a crucial role in file system security. Misconfiguration or lack of understanding of these features can lead to potential security vulnerabilities. Therefore, it's essential for users, especially developers and system administrators, to understand and utilize these features properly.
+
+Here are some detailed examples:
+
+1. **Managing Extended Attributes**
+
+Let's say you download a file from the internet, and you want to see if macOS has stored any extended attributes related to this file. You can use the `xattr` command:
+
+```bash
+xattr -l downloaded_file.txt
+
+```
+
+This command lists all the extended attributes of the file. An output might look like this:
+
+```bash
+com.apple.quarantine: 0081;5aabba70;Chrome;ABC123...
+
+```
+
+This indicates that the file was downloaded from the internet (quarantined) using Chrome.
+
+Now let's say you want to remove this attribute:
+
+```bash
+xattr -d com.apple.quarantine downloaded_file.txt
+
+```
+
+This command deletes the `com.apple.quarantine` attribute from the file, removing the quarantine status.
+
+1. **Managing Access Control Lists (ACLs)**
+
+Let's say you have a directory named `project` and you want to give the user `john` read and write access to it. Here's how you can do it:
+
+```bash
+chmod +a "john allow read,write" project
+
+```
+
+This command adds (`+a`) an ACL entry that allows `john` to `read` and `write` to the `project` directory.
+
+To view the ACLs of a directory or file, you can use the `-e` option with `ls`:
+
+```bash
+ls -le project
+
+```
+
+This will display something like:
+
+```bash
+drwxr-xr-x+ 2 root  wheel  64 Apr 26 12:34 project
+ 0: user:john allow read,write
+
+```
+
+This output shows that user `john` has `read,write` permissions on the `project` directory.
+
+Understanding and appropriately using these commands is essential to maintaining system security and control over file and directory access.
+
+# 🖇️ Références
+
+---

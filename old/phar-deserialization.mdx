@@ -1,0 +1,32 @@
+# phar:// deserialization
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Phar:// deserialization is a method used to convert a stream of bytes back into a copy of the original object structure in PHP programming. Phar, which stands for PHP Archive, is a package format in PHP that enables whole PHP applications to be archived into a single file for purposes of installation and distribution. The phar:// wrapper allows access to files within a .phar archive using PHP's stream functionality. Deserialization, on the other hand, is the process of converting a serialized object back into its original form.
+> 
+
+### 🧐 Why ?
+
+> Understanding phar:// deserialization is crucial because it has been widely exploited for launching arbitrary code execution attacks, leading to severe security implications. When a system uses untrusted data to deserialize an object without proper validation, an attacker can manipulate the serialized data to pass arbitrary PHP objects, leading to an attack called 'object injection'. They can then leverage this to execute arbitrary PHP code or to launch further attacks such as SQL injection, path traversal attacks, or Denial of Service (DoS).
+> 
+
+### ⛏️ How ?
+
+> To exploit a phar:// deserialization vulnerability, an attacker would typically follow these steps: 1. Identify a function that interacts with user-supplied data and performs object deserialization. 2. Craft a malicious serialized object that, when deserialized, will result in harmful action. 3. Deliver the serialized object to the application, which will then deserialize it and perform the harmful action. To protect your system from such attacks, avoid deserializing untrusted data. If that's not possible, use PHP's built-in serialization functions such as json_encode() and json_decode() instead of serialize() and unserialize(). Also, regularly update your PHP version to the latest, as each update comes with security patches.
+> 
+
+### ⏳ When ?
+
+> Object injection attacks exploiting phar:// deserialization have been known since PHP 5.6.0 was released in 2014. However, they gained popularity in the cybersecurity community around 2018 when a security researcher demonstrated a PHP object injection exploit via phar:// deserialization in the popular CMS WordPress.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In PHP, objects can be serialized to make them storable and transportable. The serialized string contains the class name and the values of all its properties. When this string is deserialized, an exact copy of the original object is created. However, an attacker can manipulate the serialized string to inject their own objects with malicious property values. The phar:// wrapper in PHP allows for the execution of serialized objects stored within a .phar file when they are deserialized. An attacker can therefore use it to trigger the deserialization of a malicious object, leading to arbitrary code execution.

