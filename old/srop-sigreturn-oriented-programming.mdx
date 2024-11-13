@@ -1,0 +1,76 @@
+# SROP - Sigreturn-Oriented Programming
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Sigreturn-Oriented Programming (SROP) is a computer security exploit technique that allows an attacker to execute arbitrary code in the presence of security defenses such as non-executable memory and address space layout randomization (ASLR). The technique involves manipulating the stack and register states of a program via crafted signal frames, which are data structures used by the operating system to save and restore the state of a software interrupt.
+> 
+
+### 🧐 Why ?
+
+> SROP is important because it's a sophisticated attack vector that can be used to bypass modern security measures. Understanding SROP is crucial for both attackers and defenders. For one, cyber attackers may utilize SROP to gain unauthorized access or escalate privileges in a system. On the other hand, understanding SROP can equip security professionals with the knowledge to develop effective countermeasures and mitigation strategies.
+> 
+
+### ⛏️ How ?
+
+> Implementing a SROP attack involves several steps. Firstly, an attacker needs to locate a suitable gadget in the target binary. A gadget in this context is a small piece of code ending in a sigreturn system call. Then, the attacker needs to craft a signal frame that, when used by sigreturn, sets the register states to values that cause the gadget to do what the attacker wants. The attacker then triggers a software interrupt, causing the program to jump to the gadget with the register states set by the crafted signal frame.
+> 
+
+### ⏳ When ?
+
+> The concept of SROP was first presented in a paper titled 'The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls (on the x86)' by Hovav Shacham in 2007. Since then, it has been used and studied in the field of cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Sigreturn-Oriented Programming (SROP) is an advanced exploit technique in computer security that manipulates the Unix signal mechanism. When a software interrupt happens, the operating system saves the state of the process in a structure known as a signal frame, which is stored on the stack. This signal frame holds the values of all the registers at the moment of the interrupt. Once the interrupt handler finishes its operation, the operating system restores the process state from the signal frame using a system call named 'sigreturn'.
+
+An attacker, leveraging this mechanism, can craft a malicious signal frame that, when used by sigreturn, sets the register state in such a way that it alters the control flow of the program. The attacker then triggers a software interrupt, causing the program to jump to a piece of code, referred to as a 'gadget', with the register states defined by the crafted signal frame.
+
+The concept of SROP emerged from a study titled 'The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls (on the x86)' by Hovav Shacham in 2007. It's a sophisticated attack vector that can bypass modern security measures like non-executable memory and address space layout randomization (ASLR).
+
+For a successful SROP attack, an attacker needs to locate a suitable gadget in the target binary. This gadget is a small piece of code ending in a sigreturn system call. The crafted signal frame, when used by sigreturn, sets the register states to values that cause the gadget to perform the actions desired by the attacker.
+
+Understanding SROP is crucial for both cybersecurity professionals and attackers. While attackers may utilize SROP to gain unauthorized access or escalate privileges in a system, knowing about SROP enables security professionals to develop effective countermeasures and mitigation strategies against such attacks.
+
+While it's challenging to provide a real-world example due to the complexity and potential misuse of such information, below is a simplified and hypothetical example to illustrate how a SROP attack might occur.
+
+Step 1: Locating a Gadget
+The attacker scans the binary code of the target program, looking for a piece of code (a gadget) that ends in a `sigreturn` system call. This searching process might look like:
+
+```bash
+$ objdump -d target_binary | grep -B 5 sigreturn
+
+```
+
+Step 2: Crafting a Signal Frame
+The attacker crafts a signal frame. This is a data structure that will be populated with register values the attacker controls. It might look like this in memory:
+
+```
+|   return address   |   RSP   |   RIP   |
+|:------------------:|:-------:|:-------:|
+| 0x00007ffeefbffa98 |   ...   |   ...   |
+
+```
+
+Step 3: Triggering a Software Interrupt
+After the signal frame is ready, the attacker needs to cause a software interrupt. This could be done by exploiting a buffer overflow vulnerability in the target program. The code might look like:
+
+```c
+void vulnerable_function(char *str) {
+    char buffer[128];
+    strcpy(buffer, str);  // if str is too long, a buffer overflow occurs
+}
+
+```
+
+Step 4: Executing the Gadget
+With the interrupt triggered and the signal frame in place, the `sigreturn` system call is executed, restoring the register states from the crafted signal frame. With the program's control flow altered, execution jumps to the gadget, executing the attacker's desired actions.
+
+Remember, this is a simplified example and the actual process of a SROP attack would involve deeper knowledge and understanding of operating systems, binary exploitation, and low-level programming. Furthermore, such techniques should only be used ethically and responsibly, for purposes such as improving system security or conducting authorized penetration testing.

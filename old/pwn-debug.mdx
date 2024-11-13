@@ -1,0 +1,168 @@
+# Pwn debug
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn debug is an advanced Python library used in the field of cybersecurity. It is primarily used for developing, testing, and executing exploits. This library simplifies the process of connecting to remote servers, sending and receiving data, and manipulating binary data.
+> 
+
+### 🧐 Why ?
+
+> Pwn debug is crucial in the field of cybersecurity as it aids in the discovery and exploitation of vulnerabilities. It is often used in penetration testing, a critical task to identify potential security weaknesses. Understanding and using Pwn debug can greatly enhance the capabilities of a cybersecurity professional. It is essential for those interested in cybersecurity, specifically in the areas of exploit development and penetration testing.
+> 
+
+### ⛏️ How ?
+
+> To utilize Pwn debug, one must first install the pwntools library in Python. This can be done by using pip install pwntools. Once installed, you can import the library in your Python script using the command from pwn import *. To connect to a remote server, use the command remote(server_ip, port_number). To send data, use the command send(data). To receive data, use the command recv().
+> 
+
+### ⏳ When ?
+
+> The use of Pwn debug began to gain popularity in the cybersecurity field around the mid-2010s. It was developed as a part of the pwntools library, which was designed to streamline and automate many of the tasks involved in writing exploits.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn debug is a tool that facilitates exploit development and penetration testing by allowing you to interact with remote servers and manipulate data. It leverages the pwntools library, which provides functions for packing and unpacking data, creating and parsing network protocols, and automating the exploitation process. It also integrates with gdb (GNU Debugger) for debugging and analyzing the behavior of vulnerable programs.
+
+### Steps to Exploit a Vulnerable Program Using Pwn Debug and GDB
+
+### Step 1: Install and Configure Pwn Debug and GDB
+
+1. **Install pwntools**:
+    
+    ```bash
+    pip install pwntools
+    
+    ```
+    
+2. **Install gdb**:
+    
+    ```bash
+    sudo apt-get install gdb
+    
+    ```
+    
+
+### Step 2: Write the Exploitation Script
+
+Create a Python script that uses pwntools to interact with the vulnerable program.
+
+```python
+from pwn import *
+
+# Start the vulnerable program
+p = process('./vulnerable_program')  # Replace with the name of the vulnerable program
+
+# Attach gdb to the process for debugging
+gdb.attach(p)
+
+# Interact with the program
+p.recv()  # Receive data from the program
+p.send('some data')  # Send data to the program
+
+# Switch to interactive mode to manually interact with the program
+p.interactive()
+
+```
+
+### Step 3: Exploit the Vulnerability
+
+The specific data sent to the program in step 2 will depend on the nature of the vulnerability. Here, 'some data' is a placeholder. For a buffer overflow, you might send a specially crafted payload.
+
+```python
+# Example payload for a buffer overflow exploit
+payload = b'A' * 64  # Adjust the size based on the buffer length
+payload += b'\\xef\\xbe\\xad\\xde'  # Example return address in little-endian format
+
+p.send(payload)
+
+```
+
+### Step 4: Use GDB to Debug the Program
+
+Once gdb is attached, you can control the execution and observe the behavior of the program.
+
+1. **Set a breakpoint**:
+    
+    ```
+    break *main  # Set a breakpoint at the start of the main function
+    
+    ```
+    
+2. **Run the program**:
+    
+    ```
+    run  # Run the program until it hits the breakpoint
+    
+    ```
+    
+3. **Step through the code**:
+    
+    ```
+    step  # Step through the code line by line
+    
+    ```
+    
+4. **Examine memory and registers**:
+    
+    ```
+    info registers  # Display the current state of the CPU registers
+    x/20xw $esp  # Examine 20 words of memory at the stack pointer
+    
+    ```
+    
+
+### Step 5: Analyze the Results
+
+After sending the payload and observing the program's behavior, you can gather information to refine your exploit. Use gdb to inspect memory and registers, understand how your payload affects the program, and adjust your approach as needed.
+
+### Full Exploitation Script Example
+
+Here’s a more detailed example script that includes an actual buffer overflow attempt:
+
+```python
+from pwn import *
+
+# Start the vulnerable program
+p = process('./vulnerable_program')
+
+# Attach gdb to the process
+gdb.attach(p, gdbscript="""
+break *main
+continue
+""")
+
+# Receive initial output from the program (if any)
+print(p.recv())
+
+# Craft a payload for buffer overflow
+buffer_size = 64  # Example buffer size
+return_address = p32(0xdeadbeef)  # Example return address in little-endian
+payload = b'A' * buffer_size + return_address
+
+# Send the payload
+p.send(payload)
+
+# Switch to interactive mode to manually interact
+p.interactive()
+
+```
+
+### Conclusion
+
+Pwn debug, in conjunction with pwntools and gdb, provides a powerful toolkit for exploit development and penetration testing. By following the outlined steps, you can interact with a vulnerable program, manipulate data, and use gdb to debug and analyze the program’s behavior. This process is crucial for understanding and developing effective exploits, and it should always be conducted in a controlled and ethical manner.
+
+# 🖇️ Références
+
+---
+
+- [https://docs.pwntools.com/en/stable/](https://docs.pwntools.com/en/stable/)

@@ -1,0 +1,67 @@
+# GLBP & HSRP Attacks
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> GLBP (Gateway Load Balancing Protocol) and HSRP (Hot Standby Router Protocol) are protocols used for automatic selection and failover to a standby router in a group, when the active router fails. GLBP and HSRP attacks are attempts to exploit vulnerabilities in these protocols, potentially causing failures in network communication or unauthorized access to network traffic.
+> 
+
+### 🧐 Why ?
+
+> Understanding GLBP and HSRP attacks is crucial for network administrators and cybersecurity professionals. These attacks can lead to significant network disruption if not properly mitigated. They also pose a serious security risk as they can be used to intercept and alter network traffic, potentially leading to data loss or theft.
+> 
+
+### ⛏️ How ?
+
+> Mitigating these attacks involves a combination of strategies, including regular patching and updates, using secure versions of the protocols, and implementing strong authentication methods. Network monitoring tools can also be used to detect unusual activity that could signal an attack.
+> 
+
+### ⏳ When ?
+
+> GLBP and HSRP attacks have been a concern since the protocols were first introduced in the late 1990s and early 2000s, respectively. Despite advancements in network security, these attacks remain a threat due to the widespread use of the protocols and their inherent vulnerabilities.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+GLBP (Gateway Load Balancing Protocol) and HSRP (Hot Standby Router Protocol) attacks primarily involve an external party sending harmful packets to a network with the intention of disturbing the regular functionality of the protocols.
+
+In the case of a GLBP attack, the objective of the attacker is often to position themselves as the Active Virtual Gateway (AVG) within a GLBP group. The AVG is responsible for determining which router within a GLBP group will handle the initial packet that a host sends. By positioning themselves as the AVG, the attacker is able to control and manipulate the routing of traffic across the network, leading to potential disruptions and unauthorized access to sensitive information.
+
+Similar to GLBP attacks, HSRP attacks involve the attacker attempting to position themselves as the active router within a group. HSRP is a protocol used to provide redundancy for IP networks. Its aim is to establish a fault-tolerant default gateway, and it does this by grouping routers into a cluster and making one of these routers responsible for forwarding the traffic that hosts send to the virtual router. If the attacker successfully becomes the active router, they can intercept all the traffic going through that network.
+
+Both GLBP and HSRP attacks can cause significant disturbances to network communication and potentially lead to data theft. The attacker can gain unauthorized access to sensitive data, manipulate it, or even cause the system to fail. It's crucial that network administrators and cybersecurity professionals be aware of these potential attacks and take preventative measures to secure their networks.
+
+A real-world example of an HSRP attack could involve a hacker sending an HSRP hello packet with a higher priority to take over as the active router in a network. This can be done using tools like Scapy, a packet manipulation tool in Python. Here's a step-by-step breakdown:
+
+1. **Identify the target network:** The attacker would first need to identify a network that is using HSRP.
+2. **Create a malicious packet:** Next, the attacker would use Scapy to create an HSRP hello packet with a higher priority. Here's a sample Scapy command to do this:
+
+```python
+from scapy.all import *
+packet = Ether(dst="01:00:5e:00:00:02")/IP(dst="224.0.0.2")/UDP(sport=1985, dport=1985)/HSRP(priority=255, virtualIP="192.168.1.1")
+
+```
+
+This command creates an HSRP packet with the maximum priority (255) and a virtual IP address of "192.168.1.1".
+
+1. **Send the packet:** The attacker would then send this packet to the target network. This can be done using the `sendp` function in Scapy:
+
+```python
+sendp(packet)
+
+```
+
+1. **Take control:** If the network is vulnerable and does not have proper security measures in place, the attacker's packet would be accepted and they would become the active router. This would allow them to intercept and manipulate network traffic.
+2. **Maintain access:** The attacker would need to continue sending these packets periodically to maintain their status as the active router. If they stop, the network will eventually fail over to a legitimate router.
+
+This example illustrates why it's crucial to secure networks using HSRP and other similar protocols. Regularly updating software, implementing strong authentication methods, and using secure versions of these protocols can help mitigate such attacks.
+
+# 🖇️ Références
+
+---

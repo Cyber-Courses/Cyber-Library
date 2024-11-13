@@ -1,0 +1,32 @@
+# LFI2RCE via PHP_SESSION_UPLOAD_PROGRESS
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PHP_SESSION_UPLOAD_PROGRESS is a feature in PHP that provides tracking information about the progress of file uploads. In a context of Local File Inclusion (LFI) to Remote Code Execution (RCE), it is used as a method to elevate the impact of a LFI vulnerability to a RCE.
+> 
+
+### 🧐 Why ?
+
+> Understanding LFI2RCE via PHP_SESSION_UPLOAD_PROGRESS is vital for both developers and security professionals. For developers, it helps in writing secure code and avoiding common pitfalls that can lead to serious vulnerabilities. For security professionals, it provides a method to exploit such vulnerabilities during penetration testing or when assessing the security of an application.
+> 
+
+### ⛏️ How ?
+
+> At a high level, the process involves initiating a file upload with a PHP_SESSION_UPLOAD_PROGRESS parameter in the POST request. While the upload is in progress, an LFI vulnerability can be exploited to include the file, which can lead to execution of arbitrary code.
+> 
+
+### ⏳ When ?
+
+> The PHP_SESSION_UPLOAD_PROGRESS feature was introduced in PHP 5.4.0, making applications using versions from this release and onwards potentially vulnerable to LFI to RCE attacks if they have an LFI vulnerability and use this feature for handling file uploads.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The PHP_SESSION_UPLOAD_PROGRESS feature works by storing information about the file upload in the $_SESSION superglobal array. The information is stored under a key that is derived from the POST parameter specified by the PHP_SESSION_UPLOAD_PROGRESS setting. If an attacker can control the contents of the file being uploaded, they can potentially influence the contents of the $_SESSION array. By exploiting an LFI vulnerability, the attacker can include the file where $_SESSION data is stored (usually the session file), leading to the execution of the code contained in the uploaded file. To mitigate this, developers should ensure that user input is properly sanitized, and that the PHP_SESSION_UPLOAD_PROGRESS feature is used securely.

@@ -1,0 +1,73 @@
+# Relro
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Relro, which stands for Relocation Read-Only, is a security feature in the GNU Linker that protects certain sections of an executable from being overwritten. It specifically guards the Global Offset Table (GOT), a section of an executable that is vulnerable to overwrite attacks. Relro provides a method to harden the binary against such attacks.
+> 
+
+### 🧐 Why ?
+
+> Relro is important because it enhances the security of a system by mitigating the risks associated with binary exploitation. Binary exploitation is a common technique used by attackers to gain unauthorized access to a system. By preventing an attacker from overwriting certain sections of the executable, Relro significantly reduces the avenues available to an attacker.
+> 
+
+### ⛏️ How ?
+
+> To implement Relro, one needs to pass certain flags during the compilation of a binary. The '-z relro' flag will enable partial Relro, and the '-z now' flag will enable full Relro. Partial Relro marks the GOT as read-only after relocation, but the procedure linkage table (PLT) still remains writable. Full Relro, on the other hand, makes both the GOT and PLT read-only after relocation, offering a higher level of security.
+> 
+
+### ⏳ When ?
+
+> Relro has been utilized in Linux systems since the mid-2000s, as developers and system administrators became increasingly aware of the security risks associated with binary exploitation.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Relro, or Relocation Read-Only, is a critical security feature utilized in the GNU Linker. Its primary function is to enhance the security of systems by protecting specific sections of an executable from being overwritten, specifically the Global Offset Table (GOT). The GOT is a section of an executable that holds addresses of functions that are dynamically linked during runtime. This section is particularly vulnerable to overwrite attacks, a type of binary exploitation. Binary exploitation is a common technique used by attackers to gain unauthorized access to a system. The attacker can overwrite the GOT entry of a function with the address of their malicious code. When the function is subsequently called, it executes the attacker's code instead of the intended one.
+
+Relro mitigates this security risk by making the GOT read-only after the initial relocation, effectively preventing any further modifications. This is achieved by passing the '-z relro' flag during the compilation of a binary, enabling what is known as partial Relro. In partial Relro, the GOT is marked as read-only, but the procedure linkage table (PLT), another section used to resolve dynamic function calls, still remains writable.
+
+For an even higher level of security, full Relro can be enabled by passing the '-z now' flag. In full Relro, both the GOT and PLT are made read-only after relocation. This significantly reduces the attack surface, leaving fewer avenues for an attacker to exploit.
+
+Relro has been in use in Linux systems since the mid-2000s, reflecting the growing awareness among developers and system administrators of the security risks associated with binary exploitation. With the continual advancement and sophistication of cyber threats, security features like Relro remain vital components in safeguarding systems against unauthorized access and exploitation.
+
+For example, let's say we're compiling a C program with gcc, a popular compiler for Linux systems.
+
+1. **Without Relro:**
+First, we compile the program without any security flags:
+    
+    ```bash
+    gcc program.c -o program
+    
+    ```
+    
+    In this case, the GOT and PLT remain writable, leaving the binary vulnerable to overwrite attacks.
+    
+2. **With Partial Relro:**
+To enable Partial Relro, we use the '-z relro' flag:
+    
+    ```bash
+    gcc program.c -o program -Wl,-z,relro
+    
+    ```
+    
+    Now, the GOT is read-only after relocation, but the PLT is still writable. This already provides a significant security improvement.
+    
+3. **With Full Relro:**
+Lastly, to enable Full Relro, we use both '-z relro' and '-z now' flags:
+    
+    ```bash
+    gcc program.c -o program -Wl,-z,relro,-z,now
+    
+    ```
+    
+    In this case, both the GOT and PLT are read-only after relocation, providing the highest level of security and leaving fewer avenues for an attacker to exploit.
+    
+
+Each step enhances the security of the binary and reduces the chances of a successful overwrite attack. By making the GOT and PLT read-only, Relro protects important sections of the binary from being overwritten with malicious code.

@@ -1,0 +1,79 @@
+# Windows LAPS
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Local Administrator Password Solution (LAPS) is a Microsoft tool that helps organizations manage local administrator passwords for domain-joined computers, reducing the risk of pass-the-hash attacks.
+> 
+
+### 🧐 Why ?
+
+> The importance of Windows LAPS lies in its potential to enhance security. Without it, organizations risk using the same local admin password across multiple devices, which is a significant security risk. If a hacker gains access to the password, they can potentially compromise every computer that uses it. LAPS addresses this issue by ensuring that every computer has a unique password.
+> 
+
+### ⛏️ How ?
+
+> To use Windows LAPS, a system administrator first needs to download and install the LAPS software, then extend the Active Directory schema to store the password and its expiration date. The LAPS client-side extension, installed on each computer, then changes the local admin password and saves the new password and its expiration date in Active Directory. The password is protected in Active Directory by Access Control Lists and can only be read by authorized users.
+> 
+
+### ⏳ When ?
+
+> The implementation and usage of Windows LAPS began around 2015 when Microsoft announced the availability of this tool as a part of their security best practices.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows Local Administrator Password Solution (LAPS) is a Microsoft tool developed to enhance organizational security by managing local administrator passwords on domain-joined computers. The principle on which LAPS operates is password randomization. It automatically generates and applies a new, unique password to the local admin account on each domain-connected computer at a set interval.
+
+Each newly generated password is stored securely within a confidential attribute in the corresponding Active Directory object of each computer. This means that the passwords are not only randomized but also securely stored in a way that minimizes the risk of unauthorized access.
+
+One of the key features of LAPS is its restriction on who can access these stored passwords. Only users who have been specifically granted the necessary permissions can read and reset the passwords, adding an extra layer of security.
+
+The LAPS client-side extension is another crucial component of this system. It not only changes the local admin password but also reports the age of the current password back to Active Directory. This feature ensures that passwords are regularly changed, reducing the chance of a password being discovered or broken over time.
+
+However, implementing LAPS can present some challenges. The initial setup requires extending the Active Directory schema and configuring permissions appropriately, a task that requires careful consideration and planning. Despite these challenges, once properly set up, Windows LAPS provides a robust and secure solution for managing local admin passwords across an organization, significantly reducing the risk of pass-the-hash attacks.
+
+Let's consider a scenario where a system administrator is implementing LAPS in their organization.
+
+1. **Download and Install LAPS**: First, they would download the LAPS software from the Microsoft website and install it. This would generally be done on the system that manages Active Directory.
+
+```bash
+# Example command for installation in PowerShell
+Install-WindowsFeature RSAT-AD-PowerShell
+
+```
+
+1. **Extend Active Directory Schema**: The next step would be to extend the Active Directory schema to store the password and its expiration date. This is done using PowerShell.
+
+```bash
+# Example command for schema extension in PowerShell
+Import-module AdmPwd.PS
+Update-AdmPwdADSchema
+
+```
+
+1. **Set Permissions**: The system administrator would then need to set permissions to specify who can read and reset the passwords.
+
+```bash
+# Example command for setting permissions in PowerShell
+Set-AdmPwdComputerSelfPermission -OrgUnit "OU=Workstations,DC=domain,DC=com"
+
+```
+
+1. **Install LAPS on Clients**: The LAPS client-side extension would then need to be installed on each computer in the domain.
+
+```bash
+# Example command for installation in PowerShell
+msiexec /i LAPS.x64.msi
+
+```
+
+1. **Password Management**: Once LAPS is installed, it will automatically generate and apply a new password to the local admin account at a set interval. It will also store the password and its expiration date in Active Directory, and report the age of the current password back to Active Directory.
+
+Remember, these are example commands and steps, the exact process could vary based on the specific setup and requirements of your organization.

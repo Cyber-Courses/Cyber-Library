@@ -1,0 +1,68 @@
+# SROP - ARM64
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SROP, or Sigreturn-oriented Programming, is an advanced exploitation technique that allows an attacker to bypass various security defenses. Specifically, in this article, we'll discuss SROP on the ARM64 architecture, which powers many modern mobile devices and servers.
+> 
+
+### 🧐 Why ?
+
+> Understanding SROP and its implications for ARM64 systems is crucial for both attackers and defenders. For attackers, it's a potent weapon in their arsenal that can bypass security measures and gain control over a system. For defenders, understanding SROP is key to developing effective countermeasures and securing their systems against this type of attack.
+> 
+
+### ⛏️ How ?
+
+> Exploiting a system using SROP involves several steps. First, an attacker needs to find a vulnerable function that they can exploit. Then, they need to craft a special payload that, when executed, will trigger a sigreturn system call and alter the execution flow of the program. This is a complex process that requires a deep understanding of the system's internals and the ARM64 architecture.
+> 
+
+### ⏳ When ?
+
+> SROP was first described in a 2010 paper by Hovav Shacham. However, it has gained popularity in recent years due to the increasing use of ARM64 devices.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Sigreturn-oriented Programming (SROP) is an exploitation technique that takes advantage of a mechanism in Unix-like operating systems called the signal handler. When a program receives a signal (an asynchronous notification sent to a process), the operating system saves its current state and initiates a signal handler function. This function is designed to deal with the signal appropriately, before the original state of the program is restored using the sigreturn system call.
+
+The critical aspect of this process, from an attacker's perspective, is the saved state, also known as the context. This context includes details such as the program's stack pointer, instruction pointer, and processor flags. By manipulating this context, an attacker can influence the program's execution flow upon return from the signal handler, leading to potential system exploit.
+
+In the case of ARM64 architecture, the context also includes a large number of registers. Registers are small storage areas that the processor uses for calculations, storing values that control execution flow, and temporary storage of information that will be used soon. The fact that ARM64 has more registers than some other architectures provides the attacker with even more control over the program's execution.
+
+Therefore, effectively exploiting a system using SROP requires advanced knowledge and understanding of the target system's internals, including its operating system and architecture. The attacker needs to find a vulnerable function, craft a payload that triggers a sigreturn system call, and carefully manipulate the saved context to alter the program's execution flow.
+
+Such a complex process underscores the importance of robust system security measures and the need for continuous learning and adaptation in the cybersecurity field.
+
+Let's consider a hypothetical example of an SROP attack on an ARM64 system. Suppose we have a vulnerable function in a program that does not correctly check the size of user input, leading to a buffer overflow. Here's the general flow of the attack:
+
+1. **Find a Vulnerable Function:** In our case, the function could be something like this:
+
+```c
+void vulnerable_function(char *user_input) {
+    char buffer[128];
+    strcpy(buffer, user_input);
+}
+
+```
+
+This function is vulnerable because it does not check the size of `user_input` before copying it to `buffer`, which can only hold 128 characters.
+
+1. **Craft a Payload:** Next, the attacker creates a payload that is larger than the buffer size. This payload would include a specific saved state or context that the attacker wants to inject into the program. An example payload might look something like this:
+
+```python
+payload = 'A' * 140 + '\\x00' + 'B' * 8 + '\\x00' + 'C' * 8 + '\\x00'
+
+```
+
+In this payload, the 'A' * 140 overflows the buffer, while the 'B' * 8 and 'C' * 8 represent manipulated versions of the stack pointer and instruction pointer, respectively. The '\x00' represents null bytes used to pad the payload.
+
+1. **Trigger the Exploit:** The attacker then inputs this payload into the vulnerable function, causing a buffer overflow that overwrites the saved context.
+2. **Manipulate the Context:** As the program attempts to restore the saved context using the sigreturn system call, it instead uses the manipulated context provided by the attacker, changing the program's execution flow.
+
+This example simplifies the process and omits many details, but it provides a basic understanding of how an SROP attack might occur on an ARM64 system. Actual exploitation would likely involve more complex manipulations and require a deeper understanding of the system's internals.

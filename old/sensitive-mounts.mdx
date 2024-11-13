@@ -1,0 +1,91 @@
+# Sensitive Mounts
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Sensitive Mounts refer to the specific areas in the directory structure of a Linux file system that are sensitive in terms of security. These areas may contain sensitive data or critical system files, and are therefore potential targets for unauthorized access or cyber attacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Sensitive Mounts is important for both system administrators and cybersecurity professionals. For system administrators, managing these sensitive areas properly can help maintain system stability and performance. For cybersecurity professionals, knowledge about Linux Sensitive Mounts can aid in the identification of potential vulnerabilities, hence contributing to the overall security posture of the system.
+> 
+
+### ⛏️ How ?
+
+> To manage Linux Sensitive Mounts, one should first identify the sensitive areas. These often include directories like /etc, /usr, /var, and /home. Once these areas are identified, apply appropriate permissions to limit access and protect them from unauthorized modifications. Regular audits and monitoring can also help detect and respond to potential security incidents in a timely manner.
+> 
+
+### ⏳ When ?
+
+> The concept of sensitive mounts in Linux has been in practice since the early days of Unix, the predecessor of Linux. However, with the increasing emphasis on cybersecurity, the importance of properly managing these sensitive mounts has become more pronounced in recent years.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In the Linux operating system, a 'mount' refers to a specific point in the directory tree where an additional file system is attached. The term 'Sensitive Mounts' is used to describe those mount points that contain critical system files or sensitive data.
+
+These areas are deemed sensitive due to the nature of the information they store. For instance, directories like /etc, /usr, /var, and /home are typically considered sensitive mounts. The /etc directory contains important system-wide configuration files that control the functioning of the Linux system. The /usr directory holds all the user binaries, their documentation, libraries, header files, and other data. The /var directory is intended for system variables files, which are expected to grow over time. The /home directory, on the other hand, is used for users' home directories and can contain personal and sensitive data.
+
+A key aspect of managing these sensitive mounts is the proper configuration of permissions. Permissions in Linux dictate who can read, write, or execute a file or directory. Misconfigured permissions, such as overly permissive settings, can lead to potential security issues. For example, if a malicious user gains write access to the /etc directory, they could modify system configuration files to disrupt operations or gain unauthorized access.
+
+Additionally, regular audits and monitoring of these sensitive areas are crucial. This involves checking the integrity of the files and directories, monitoring for unauthorized access, and tracking changes. Various tools can be used for this purpose, including file integrity checkers and log monitoring tools.
+
+In conclusion, the concept of sensitive mounts in Linux is an essential aspect of system administration and cybersecurity. Proper understanding and management of these areas can significantly enhance the stability and security of a Linux system.
+
+Let's consider an example where we want to configure permissions for the `/etc` directory, a sensitive mount in Linux.
+
+Step 1: Check the current permissions
+You can use the `ls -ld` command to check the current permissions.
+
+```bash
+ls -ld /etc
+
+```
+
+This will provide output similar to:
+
+```bash
+drwxr-xr-x 142 root root 12288 Jan 22 10:50 /etc
+
+```
+
+Here, `drwxr-xr-x` represents the permissions: directories (`d`), owner `root` has read (`r`), write (`w`), and execute (`x`) permissions, the group `root` has read and execute permissions, and others have read and execute permissions.
+
+Step 2: Changing permissions
+If you want to change the permissions, for example, to remove the write and execute permissions for others, you can use the `chmod` command.
+
+```bash
+sudo chmod o-rx /etc
+
+```
+
+This command removes read and execute permissions (`rx`) for others (`o`) on the `/etc` directory.
+
+Step 3: Verify the changes
+
+Again, use the `ls -ld` command to check the updated permissions.
+
+```bash
+ls -ld /etc
+
+```
+
+You should now see the updated permissions:
+
+```bash
+drwxr-x--- 142 root root 12288 Jan 22 10:50 /etc
+
+```
+
+Here, we can see that others no longer have read and execute permissions.
+
+Regular auditing and monitoring of these sensitive mounts can be done using tools like AIDE (Advanced Intrusion Detection Environment). AIDE can be used to check file and directory integrity, monitor unauthorized access, and track changes.
+
+Remember, these steps must be done carefully and only by an experienced system administrator, as incorrect permissions can lead to system instability or security vulnerabilities.

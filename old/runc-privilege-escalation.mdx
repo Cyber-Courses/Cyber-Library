@@ -1,0 +1,77 @@
+# RunC Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux RunC Privilege Escalation is a security vulnerability that exists in RunC, a lightweight container runtime for Linux. This flaw allows an attacker to gain root-level access on the host system, thus escalating their privileges.
+> 
+
+### 🧐 Why ?
+
+> Understanding this vulnerability is essential as it poses a serious threat to system security. An attacker can gain complete control over the host system and can perform any action, including data theft, system disruption, and launching further attacks.
+> 
+
+### ⛏️ How ?
+
+> The exploitation of this vulnerability starts by creating a malicious container with special settings that allow it to interact with the host's RunC binary. The attacker then executes the container, which takes over the RunC binary and escalates its privileges to root level.
+> 
+
+### ⏳ When ?
+
+> The Linux RunC Privilege Escalation vulnerability was first reported in 2019. It was found in RunC versions below 1.0-rc6.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Linux RunC Privilege Escalation vulnerability, identified in 2019, is a critical security flaw in the Linux container runtime, RunC, specifically affecting versions below 1.0-rc6. It allows an attacker to escalate their privileges to root level, thereby gaining full control over the host system.
+
+The vulnerability originates from how RunC manages file descriptors. In the process of starting a container, RunC opens a file descriptor to /proc/self/exe, which is actually the path to the RunC binary itself. This is meant to be used later during the container setup.
+
+The security flaw arises from the time window between when the file descriptor is opened and when it's used in the setup process. An attacker can exploit this period to overwrite the RunC binary. This is done by creating a malicious container with special settings that allow interaction with the host's RunC binary.
+
+When the container is executed, the overwritten RunC binary is activated, running arbitrary code with root privileges. This privilege escalation gives the attacker complete control over the host system, enabling potential data theft, system disruption, or the initiation of further attacks.
+
+Given the severity and potential impacts of this vulnerability, understanding and addressing it is crucial to maintaining system security in environments where RunC is used.
+
+For educational purposes, let's consider an example of how the Linux RunC Privilege Escalation vulnerability might be exploited.
+
+1. **Create a malicious container image:** An attacker first needs to create a malicious container image that will be used to exploit the vulnerability. In this example, let's assume the attacker creates a Docker image `malicious_image` with a payload script `exploit.sh`, that would replace the RunC binary.
+
+```bash
+FROM ubuntu:18.04
+COPY exploit.sh /exploit.sh
+CMD ["/bin/bash", "/exploit.sh"]
+
+```
+
+In `exploit.sh`, the attacker might include commands to replace the RunC binary:
+
+```bash
+#!/bin/bash
+echo "Overwriting RunC binary..."
+cp /malicious_runc /proc/self/exe
+
+```
+
+1. **Deploy the malicious container:** Once the malicious image is ready, the attacker can create and run a container from it:
+
+```bash
+docker run -d --name malicious_container malicious_image
+
+```
+
+1. **Execute the malicious payload:** When the container is executed, the `exploit.sh` script runs, overwriting the RunC binary with the malicious one. The next time a new container is started, it will use the malicious RunC binary, executing any code the attacker has included with root privileges.
+2. **Attain root-level access:** With root access, the attacker can perform any action on the host system, such as copying sensitive data, disrupting system operations, or launching further attacks.
+
+```bash
+echo "Executing further attacks with root privileges..."
+
+```
+
+This example is a simplified representation of the exploitation process. In a real scenario, the attacker would likely use a more sophisticated and less detectable method. However, this example illustrates the core concept of how the Linux RunC Privilege Escalation vulnerability could potentially be exploited.

@@ -1,0 +1,86 @@
+# Windows External Forest Domain - One-Way (Outbound)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows External Forest Domain - One-Way (Outbound) is a type of trust relationship configuration in Microsoft Active Directory. It allows resources in a domain (trustee) to be accessed by users in another domain (trusted) within the same forest. The trust flow is one-way and outbound, meaning that users in the trusted domain can access resources in the trustee domain, but not vice versa.
+> 
+
+### 🧐 Why ?
+
+> This setup is crucial in large organizations with multiple domains within the same forest. It simplifies resource management by allowing selective access based on user needs and roles. It also enhances security by limiting resource access to specific domains, reducing potential attack surfaces.
+> 
+
+### ⛏️ How ?
+
+> To implement this, you need to have administrator rights in both the trusted and trustee domains. Open Active Directory Domains and Trusts in the trustee domain. Right-click the domain name, select 'Properties', and click the 'Trusts' tab. Click 'New Trust' and follow the wizard steps, specifying the trusted domain name, trust type (forest), and direction (one-way: outgoing). Verify the trust to ensure it's working correctly.
+> 
+
+### ⏳ When ?
+
+> Windows External Forest Domain - One-Way (Outbound) became a common practice with the introduction of Microsoft Windows 2000 Server, which first introduced the concept of trusts between domains in a forest.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The implementation of the Windows External Forest Domain - One-Way (Outbound) trust relationship is primarily based on the Kerberos protocol for authentication. This protocol is a network authentication protocol that allows nodes communicating over a non-secure network to prove their identity to one another in a secure manner.
+
+The Key Distribution Center (KDC) plays a critical role in this setup. It resides in the trustee domain (the domain providing resources), and it's responsible for issuing Ticket-Granting Tickets (TGTs) to users in the trusted domain (the domain accessing resources). A TGT is essentially a "pass" that a user presents to prove their identity and gain access to services.
+
+When a user in the trusted domain wants to access a resource in the trustee domain, they first request a TGT from the KDC in the trustee domain. Once the user has the TGT, they can use it to request service tickets for specific resources in the trustee domain.
+
+The service ticket is an encrypted data packet that includes the user's ID and a copy of the session key. The user sends this ticket to the server hosting the desired resource. The server decrypts the ticket, verifies the user's identity, and if the user is authorized, grants access to the resource.
+
+The one-way nature of this trust relationship means that while the KDC in the trustee domain can issue TGTs to users in the trusted domain, the opposite is not true. The KDC in the trusted domain cannot issue TGTs to users in the trustee domain. This feature enhances security by controlling access and limiting potential attack surfaces.
+
+Let's consider an example scenario:
+
+We have two domains within the same forest: `DomainA` (trusted) and `DomainB` (trustee). We aim to allow a user, `User1` from `DomainA`, to access a file server `FileServer` in `DomainB` using the Windows External Forest Domain - One-Way (Outbound) trust relationship.
+
+1. **Starting the Trust Wizard:** As an administrator, you would go to `DomainB`, open Active Directory Domains and Trusts. Right-click on `DomainB`, select 'Properties', and click the 'Trusts' tab.
+
+```powershell
+# Open Active Directory Domains and Trusts
+dsa.msc
+
+```
+
+1. **Creating New Trust:** Click 'New Trust' and follow the wizard steps.
+
+```powershell
+# Specify the trusted domain name
+Trusted domain: DomainA
+
+# Trust type
+Trust Type: Forest
+
+# Trust direction
+Trust Direction: One-way: Outgoing
+
+```
+
+1. **Verifying Trust:** After setting up, make sure to verify the trust to ensure it's working correctly.
+
+```powershell
+# Open Command Prompt
+cmd
+
+# Run the following command:
+nltest /sc_query:DomainA
+
+```
+
+This command should return `Trust Verification Status = 0 0x0 NERR_Success`, indicating a successful trust relationship.
+
+1. **Accessing Resources:** When `User1` from `DomainA` wants to access `FileServer` in `DomainB`, they will send a request to the KDC in `DomainB` for a TGT.
+2. **Granting TGT:** The KDC in `DomainB` verifies `User1`'s credentials and issues a TGT.
+3. **Requesting Service Tickets:** `User1` then presents the TGT to the KDC in `DomainB` and requests a service ticket for `FileServer`.
+4. **Access Granted:** `FileServer` decrypts the service ticket, verifies `User1`'s identity, and if `User1` is authorized, grants access to the resources.
+
+Remember, `DomainA` cannot issue TGTs to `DomainB` due to the one-way nature of this trust relationship, enhancing security by controlling access and limiting potential attack surfaces.

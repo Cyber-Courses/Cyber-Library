@@ -1,0 +1,155 @@
+# Class Pollution (Python's Prototype Pollution)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Class Pollution, also known as Prototype Pollution, is a type of vulnerability in Python where an attacker can manipulate or 'pollute' the prototype (class) properties of an object. This can lead to various issues such as unauthorized access, data manipulation and even execution of arbitrary code.
+> 
+
+### 🧐 Why ?
+
+> Understanding Class Pollution is important because it is a common security vulnerability in Python, a widely used programming language for web development, data science, and many other fields. It can lead to serious security issues if not properly addressed. Developers, cybersecurity professionals, and anyone who uses or creates Python applications should be aware of this vulnerability and know how to prevent it.
+> 
+
+### ⛏️ How ?
+
+> To prevent Class Pollution, avoid using directly user input to modify class or prototype properties. Always validate and sanitize user input before using it in your application. Make use of Python's built-in features for handling user input, such as form validation and error handling. Additionally, keep your Python dependencies up-to-date to protect against known vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> Class Pollution has been a known issue in Python and other languages that use prototypes, like JavaScript, for several years. It is especially relevant in today's world of web applications and APIs, where user input is often used to interact with backend systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In Python, classes define the properties and methods for objects. When an object is created, it inherits these properties and methods from its class. Class Pollution, also known as Prototype Pollution, occurs when an attacker manipulates these properties or methods by providing malicious input. This can lead to various security issues, including data leakage, unauthorized access, or even code execution. Let's delve deeper into this issue, its implications, and how to prevent it, with a detailed example.
+
+### What is Class Pollution?
+
+Class Pollution is a security vulnerability where an attacker can manipulate the prototype (class) properties of an object. This manipulation can lead to unauthorized access, data manipulation, and even execution of arbitrary code. This vulnerability is not unique to Python and is also present in other languages like JavaScript, where the concept of prototypes is more prevalent.
+
+### Why is Class Pollution Important?
+
+Understanding Class Pollution is crucial because Python is widely used in various domains, including web development, data science, and scripting. If not properly addressed, this vulnerability can lead to significant security breaches. For instance, an attacker could exploit this vulnerability to gain unauthorized access to sensitive data or execute malicious code on a server.
+
+### How Does Class Pollution Work?
+
+To understand Class Pollution, let's consider a simple example:
+
+```python
+class User:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+# Normal instantiation of a User object
+user1 = User("Alice", 30)
+
+# Malicious input example
+malicious_input = {"__class__": "Admin", "name": "Bob", "age": 25}
+
+# Attempting to create a User object with malicious input
+try:
+    user2 = User(**malicious_input)
+except TypeError as e:
+    print(f"Error: {e}")
+
+```
+
+In the above example, if an attacker can control the input data, they might try to inject malicious properties such as `__class__`. This could potentially alter the behavior of the class instantiation process.
+
+### Detailed Example with Code
+
+Let's take a more detailed example to illustrate how Class Pollution can be exploited and how to prevent it.
+
+### Step-by-Step Example
+
+1. **Define a Class:**
+    
+    ```python
+    class Product:
+        def __init__(self, name, price):
+            self.name = name
+            self.price = price
+    
+        def apply_discount(self, discount):
+            self.price -= self.price * discount
+    
+    # Normal product instance
+    product1 = Product("Laptop", 1000)
+    print(f"Product: {product1.name}, Price: {product1.price}")
+    
+    ```
+    
+2. **Simulate Malicious Input:**
+    
+    ```python
+    malicious_input = {"name": "Smartphone", "price": 500, "__class__": "DiscountedProduct"}
+    
+    # Attempt to create a Product instance with malicious input
+    try:
+        product2 = Product(**malicious_input)
+    except TypeError as e:
+        print(f"Error: {e}")
+    
+    ```
+    
+3. **Effect of Malicious Input:**
+    
+    ```python
+    class DiscountedProduct(Product):
+        def __init__(self, name, price, discount):
+            super().__init__(name, price)
+            self.apply_discount(discount)
+    
+    # If the malicious input were successful, it could lead to unexpected behavior
+    # For demonstration, let's create an instance of DiscountedProduct
+    discounted_product = DiscountedProduct("Smartphone", 500, 0.2)
+    print(f"Product: {discounted_product.name}, Price: {discounted_product.price}")
+    
+    ```
+    
+    If the input were not properly validated, an attacker could potentially create an instance of a different class (`DiscountedProduct`), altering the expected behavior of the program.
+    
+
+### Preventing Class Pollution
+
+To prevent Class Pollution, follow these best practices:
+
+1. **Validate and Sanitize Input:**
+    
+    Always validate and sanitize user input before using it in your application. This can be done using built-in validation functions or libraries designed for this purpose.
+    
+    ```python
+    def sanitize_input(data):
+        if "__class__" in data:
+            raise ValueError("Invalid input: '__class__' modification is not allowed.")
+        return data
+    
+    try:
+        sanitized_input = sanitize_input(malicious_input)
+        product2 = Product(**sanitized_input)
+    except ValueError as e:
+        print(f"Sanitization Error: {e}")
+    
+    ```
+    
+2. **Avoid Using User Input Directly:**
+    
+    Avoid using user input to directly modify class properties or instantiate objects without proper validation.
+    
+3. **Keep Dependencies Up-to-Date:**
+    
+    Regularly update your Python packages and dependencies to ensure that you are protected against known vulnerabilities.
+    
+
+### Conclusion
+
+Class Pollution is a serious security vulnerability that can lead to significant issues if not properly addressed. By validating and sanitizing user input, avoiding direct modification of class properties, and keeping dependencies up-to-date, developers can mitigate the risks associated with this vulnerability. Understanding and implementing these best practices is essential for maintaining the security and integrity of Python applications.

@@ -1,0 +1,65 @@
+# /etc/crontab
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> /etc/crontab is a configuration file in Unix and Unix-like operating systems which allows users to schedule jobs (commands or scripts) to run periodically at fixed times, dates, or intervals. It is a part of the cron package, which is a time-based job scheduler.
+> 
+
+### 🧐 Why ?
+
+> Understanding /etc/crontab is important as it provides an efficient way to automate system maintenance or administration tasks that would otherwise have to be performed manually, such as backing up databases or clearing temporary directories. This not only saves time and reduces the likelihood of human error, but also ensures that important tasks are performed even when system administrators are not present.
+> 
+
+### ⛏️ How ?
+
+> To use /etc/crontab, you write instructions for the cron daemon to execute by adding entries to the /etc/crontab file. Each line of the file represents a single job and follows a particular syntax: minute (0-59), hour (0-23, 0 = midnight), day (1-31), month (1-12), weekday (0-7, 0 or 7 = Sunday), user, and the command to be executed.
+> 
+
+### ⏳ When ?
+
+> Cron has been a feature of Unix-like operating systems since Version 7 Unix in 1979. The crontab command, used to install, remove, or list cron jobs, was introduced in BSD Unix in 1981.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The cron daemon, an intrinsic utility in Linux, is responsible for executing processes on your system at pre-set intervals. It achieves this by reading various configuration files that list jobs to be executed, one of which is the /etc/crontab file.
+
+This /etc/crontab file is editable using text editors like vi or nano. Each line within this file corresponds to an individual job and follows a specific syntax, allowing for a broad spectrum of scheduling options. The syntax defines the minute, hour, day, month, weekday, user, and the command to be executed.
+
+For instance, a line could read '30 2 * * 1 root [backup.sh](http://backup.sh/)', meaning that the '[backup.sh](http://backup.sh/)' command will be executed as the root user at 2:30 AM every Monday.
+
+It's important to note that while direct editing of the /etc/crontab file is possible, it's generally advised to manage individual user's crontabs using the crontab command. This approach helps to avoid syntax errors that could disrupt the scheduling of tasks. The crontab command provides a safety net against common human errors by validating the syntax of the crontab entries before applying the changes.
+
+Let's take an example where we want to schedule a job that backs up a directory to a remote server every Sunday at 3:00 AM. Here are the detailed steps:
+
+1. Open the crontab file for editing by using the command `crontab -e`. This command opens the crontab file of the current logged-in user in the default text editor.
+2. Let's say the backup script is located at `/home/user/scripts/backup.sh`. Add the following line to the crontab file:
+    
+    ```
+    0 3 * * 0 /home/user/scripts/backup.sh
+    
+    ```
+    
+    This line can be broken down as follows:
+    
+    - `0` indicates the minute of the hour when the task should be executed.
+    - `3` indicates the hour of the day (in 24-hour format) when the task should be executed.
+    - The first `` represents the day of the month. By using ``, we're saying the task can run on any day of the month.
+    - The second `` represents the month. By using ``, we're saying the task can run in any month.
+    - The third `` represents the day of the week. `0` stands for Sunday.
+    - `/home/user/scripts/backup.sh` is the command or script to be executed.
+3. Save and exit the editor. The crontab command will automatically install the new crontab and validate the syntax.
+4. You can confirm that the job has been correctly scheduled by listing the current user's crontab entries with the command `crontab -l`.
+
+In this example, the `backup.sh` script will be executed as the current user at 3:00 AM every Sunday.
+
+# 🖇️ Références
+
+---

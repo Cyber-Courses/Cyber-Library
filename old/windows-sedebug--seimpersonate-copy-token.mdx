@@ -1,0 +1,52 @@
+# Windows SeDebug + SeImpersonate copy token
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows SeDebug + SeImpersonate token duplication is a security mechanism that allows a process to duplicate the token of another process. This is often used in privilege escalation attacks where an attacker gains access to a system and then uses token duplication to elevate their privileges to that of an administrative user.
+> 
+
+### 🧐 Why ?
+
+> Understanding the concept of Windows SeDebug + SeImpersonate token duplication is important because it is a common technique used in cyber-attacks. Cybersecurity professionals need to understand how it works in order to properly defend systems and networks against it. It is also crucial for IT administrators to understand this concept in order to implement appropriate security measures to prevent such attacks.
+> 
+
+### ⛏️ How ?
+
+> In order to use Windows SeDebug + SeImpersonate token duplication, an attacker would first need to gain access to a system. They can then use a tool such as Mimikatz to dump the memory of the lsass.exe process, which is responsible for handling Windows security. This dump can then be analyzed to extract the token of an administrative user. Once the token is obtained, it can be used to launch new processes with administrative privileges.
+> 
+
+### ⏳ When ?
+
+> The use of Windows SeDebug + SeImpersonate token duplication has been a common technique in cyber-attacks for many years. It is particularly common in targeted attacks where the attacker has a specific goal in mind, such as stealing sensitive data or disrupting operations.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The SeDebug and SeImpersonate privileges in Windows operating systems serve specific functions. The SeDebug privilege allows one process to debug another process. In practical terms, this means it can read and write to that process's memory. It provides a level of control over other processes that can be exploited if it falls into the wrong hands.
+
+On the other hand, the SeImpersonate privilege permits a process to impersonate another user, essentially performing actions as if it were that user. This can be particularly useful in a variety of situations, but from a security perspective, it can be a significant risk if it is used maliciously.
+
+When these two privileges are combined, they allow an attacker to duplicate the token of another process. The token is a digital representation of a user's identity and their corresponding privileges on a system. By duplicating this token, the attacker effectively gains the same privileges as the original process. This can be a powerful tool for an attacker aiming to elevate their level of access on a system.
+
+This technique is often used in conjunction with other malicious techniques such as process injection or DLL (Dynamic-Link Library) hijacking. Process injection involves inserting code into an existing process, while DLL hijacking exploits the libraries that programs need to operate.
+
+In the context of a cyber attack, an attacker who has already gained initial access to a system can use a tool like Mimikatz to dump the memory of a critical Windows process, such as lsass.exe, responsible for enforcing security policy in the system. They can then analyze this dump to extract a token belonging to an administrative user. Once they have this token, they can duplicate it using the SeDebug and SeImpersonate privileges and launch new processes with administrative privileges. This gives them a high level of control over the system, allowing them to carry out their objectives, whether that be data theft, disruption of operations, or something else.
+
+The use of Windows SeDebug + SeImpersonate token duplication has been a recurring technique in cyber attacks. As such, understanding it is crucial for cybersecurity professionals and IT administrators alike, who need to be able to both anticipate and defend against such attacks.
+
+As an example, consider a scenario where an attacker has gained initial access to a system and wants to elevate their privileges. Let's say the attacker has initial access through a low-privileged user account.
+
+1. First, the attacker needs to find a process running under a higher privileged account. This could be done using a command like `tasklist /v` in the command line to view all running processes and their respective user names.
+2. Once the attacker identifies a higher privileged process, they can use a tool like Mimikatz, which is often used in real-world attacks. The command to dump the memory of a process would look something like this: `privilege::debug sekurlsa::minidump lsass.dmp exit`.
+3. The output from this command is a memory dump of the lsass.exe process, which can be analyzed to extract tokens. This could be done with another Mimikatz command: `sekurlsa::minidump lsass.dmp sekurlsa::logonPasswords`.
+4. Now the attacker has the token of the higher privileged user. They can use this token to launch new processes with the same privileges: `token::elevate`. Now the attacker can create a new process with administrative privileges using the command: `process::create cmd`.
+5. The new command prompt that opens will have the same privileges as the original higher privileged process, allowing the attacker to perform actions they previously couldn't.
+
+Please note that this is a simplified example and real-world attacks may involve more complex and stealthy techniques. This example is for educational purposes only and should not be used for malicious activities.

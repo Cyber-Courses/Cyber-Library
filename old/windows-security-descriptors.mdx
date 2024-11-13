@@ -1,0 +1,67 @@
+# Windows Security Descriptors
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Security Descriptors are a data structure in Microsoft Windows that contains the security information associated with a securable object, which can be any object that supports security, such as files, folders, pipes, and processes. The security descriptor for an object provides information about who owns the object, who can access it and in what way, and what types of access are audited.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows Security Descriptors is critical to managing and securing resources in a Windows environment. Security Descriptors control who has what type of access to resources and are essential for implementing effective access control and auditing policies. They are also important for troubleshooting access issues and for understanding how Windows security works.
+> 
+
+### ⛏️ How ?
+
+> A Windows Security Descriptor includes several components: the owner SID, which identifies who owns the object; the group SID, which identifies a group that the object belongs to; the DACL, or Discretionary Access Control List, which specifies who can access the object and what they can do with it; and the SACL, or System Access Control List, which specifies what types of access are audited. To view or modify the Security Descriptor of an object, you can use the Security tab in the object’s properties dialog box in Windows Explorer, or use command-line tools such as icacls.
+> 
+
+### ⏳ When ?
+
+> Windows Security Descriptors have been a fundamental part of Windows security since the release of Windows NT in 1993. They continue to be used in all versions of Windows, including Windows 10 and Windows Server 2019.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Security Descriptors in Windows are integral for managing security attributes associated with securable objects. These securable objects range from files, folders, and processes to pipes. The Security Descriptor is a binary data structure that encapsulates key pieces of security information for the object.
+
+The Security Descriptor contains a Security Identifier (SID) for the owner and group. The owner SID pinpoints the user or entity that owns the object, giving them certain privileges over it, such as the ability to modify the permissions. The group SID denotes a group that the object is part of, often used in a POSIX context.
+
+A crucial part of the Security Descriptor is the Discretionary Access Control List (DACL). The DACL is a list of Access Control Entries (ACEs) that determine who has what kind of access to the object. Each ACE carries a set of access rights and a SID that identifies a user or a group of users. If a DACL is not present or if it is empty, it implies different levels of access. No DACL means the object is unprotected and can be accessed by anyone. An empty DACL means no access to the object is granted to anyone.
+
+The Security Descriptor also includes a System Access Control List (SACL). The SACL, like the DACL, is a list of ACEs but focuses on auditing rather than access control. These ACEs specify the types of access attempts (either successful or failed) that should be reported in the security event log.
+
+Security Descriptors are automatically created by the system when a securable object is made. They can be modified by the object's owner or by any user with the correct permissions. The Security Descriptor can be viewed or changed using the Security tab in the object’s properties dialog box in Windows Explorer, or command-line tools such as icacls can be used.
+
+Understanding and managing Security Descriptors is vital for maintaining secure resource access and effective auditing policies in a Windows environment.
+
+A practical example of working with Security Descriptors in a Windows environment could be changing the permissions of a file using the `icacls` command-line tool. Let's say we have a text file named `example.txt` and we want to grant the user `John` full control of this file.
+
+Here are the steps:
+
+1. Open the Command Prompt with administrative privileges. This is necessary because changing permissions requires administrator rights.
+2. Navigate to the directory where the `example.txt` file is located. Use the `cd` command to change directories. For instance, if the file is in the `Documents` folder, you might type:
+    
+    ```
+    cd C:\\Users\\YourUsername\\Documents
+    
+    ```
+    
+3. Use the `icacls` tool to change the permissions. The syntax for `icacls` is `icacls FileName /grant UserName:(Permission)`. So to grant `John` full control of `example.txt`, we would type:
+    
+    ```
+    icacls example.txt /grant John:(F)
+    
+    ```
+    
+    Here, `(F)` stands for 'Full Control'.
+    
+4. Press `Enter`. If the command is successful, you should see a message saying that the file was processed.
+
+In this example, we used the `icacls` tool to modify the Discretionary Access Control List (DACL) of the `example.txt` file's Security Descriptor. The DACL now includes an Access Control Entry (ACE) that grants `John` full control of the file.

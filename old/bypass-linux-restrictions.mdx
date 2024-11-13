@@ -1,0 +1,89 @@
+# Bypass Linux Restrictions
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Bypassing Linux restrictions is a method used by users or malicious actors to gain unauthorized access to a Linux system or to escalate their privileges within the system. This often involves exploiting vulnerabilities in the system or using misconfigured permissions.
+> 
+
+### 🧐 Why ?
+
+> Understanding this topic is critical for both system administrators and security professionals. For system administrators, knowledge of how these bypasses work can help in setting up more secure systems. For security professionals, this knowledge can assist in penetration testing and vulnerability assessments. It can also be of interest to any Linux user who values their system's security.
+> 
+
+### ⛏️ How ?
+
+> To bypass Linux restrictions, one might use methods such as exploiting SUID binaries, manipulating file permissions, or taking advantage of misconfigured sudo rights. It's important to note that these actions can damage a system and violate user agreements, and should only be used ethically, for purposes like improving system security or conducting authorized penetration testing.
+> 
+
+### ⏳ When ?
+
+> Bypassing Linux restrictions has been a factor in computer security since the inception of multi-user operating systems. As Linux systems have become more popular and widespread, the techniques for bypassing restrictions have evolved and become more sophisticated.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Bypassing Linux restrictions is a complex topic that involves taking advantage of various features and configurations of the Linux operating system. One common method is manipulating the SUID bit. In Linux, every file has an associated user ID and group ID, which determine the file's owner and group, respectively. The SUID bit is a special permission bit that, when set, allows a file to be executed with the permissions of the file's owner, as opposed to the permissions of the user executing the file. This can be exploited to perform actions that would normally be outside the user's permissions.
+
+Another method is to exploit vulnerabilities in software running on the system. For example, buffer overflows or race conditions can be used to gain unauthorized access or escalate privileges within the system. Buffer overflows occur when a program writes more data to a buffer than it can hold, which can lead to arbitrary code execution. Race conditions occur when the outcome of an operation depends on the relative timing of certain events and can be exploited to perform unauthorized actions.
+
+Misconfigured sudo rights can also be bypassed to gain elevated privileges. The sudo command in Linux allows a permitted user to execute a command as the superuser or another user, as specified in the sudoers file. If this file is misconfigured, it can allow unauthorized users to execute commands with elevated privileges.
+
+Manipulating file permissions is another way to bypass restrictions. In Linux, files have permissions that determine who can read, write, and execute them. If these permissions are set incorrectly, they can be exploited to gain access to restricted files or directories.
+
+Exploiting poorly secured network services can also lead to bypassing restrictions. For instance, if a network service does not properly authenticate users or does not encrypt communication, it can be exploited to gain unauthorized access to the system.
+
+To mitigate these risks, system administrators should regularly update and patch their systems to fix any known vulnerabilities. They should also limit the use of privileged accounts and follow best practices for system configuration and security. This includes properly configuring file permissions, using strong passwords, enabling firewalls, and regularly monitoring system logs for any suspicious activity.
+
+Let's provide an example using the SUID bit and a misconfigured sudoers file:
+
+1. **Manipulating the SUID bit:**
+
+Let's say there is a binary file in the system with the SUID bit set, like /usr/bin/passwd. This binary changes your password and needs to write to the /etc/shadow file, which normal users don't have access to. But with the SUID bit set, when a user executes /usr/bin/passwd, it runs with the permissions of the file's owner (root) and can write to /etc/shadow.
+
+To see if a binary has the SUID bit set, you can run this command:
+
+```bash
+ls -l /usr/bin/passwd
+
+```
+
+If the SUID bit is set, you will see an 's' in the permission section, like this:
+
+```bash
+-rwsr-xr-x 1 root root 68208 Feb 15  2021 /usr/bin/passwd
+
+```
+
+1. **Misconfigured sudoers file:**
+
+The sudoers file, located at /etc/sudoers, defines who can run what commands as which user. If a user is granted ALL=(ALL:ALL) ALL permissions, they can perform any command as any user, including root.
+
+To view the sudoers file, use:
+
+```bash
+sudo visudo
+
+```
+
+A misconfigured line might look something like this:
+
+```bash
+username ALL=(ALL:ALL) NOPASSWD:ALL
+
+```
+
+This allows the 'username' user to run any command as any user, without needing a password. The user could then escalate to root with:
+
+```bash
+sudo su
+
+```
+
+These examples illustrate how a system's security can be compromised. To mitigate these risks, using the SUID bit should be minimized and carefully managed, and sudoers file should be properly configured to limit user's sudo rights.

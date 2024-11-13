@@ -1,0 +1,73 @@
+# macOS Perl Applications Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Perl Applications Injection refers to a form of cyber attack where a malicious user inputs or 'injects' Perl code into a macOS application, potentially leading to unauthorized data access, modification or control over the entire system.
+> 
+
+### 🧐 Why ?
+
+> This topic is important as it poses a significant security risk to macOS systems. macOS systems are widely used in many sectors, including businesses and educational institutions, and an injection attack can lead to data breaches, loss of sensitive information, or even system failure. Understanding this topic can help system administrators and security professionals protect their systems effectively.
+> 
+
+### ⛏️ How ?
+
+> To mitigate the risk of macOS Perl Applications Injection, ensure that all inputs are properly sanitized and validated to prevent the execution of malicious code. Regularly update your system and applications to the latest versions, as they often include patches for known vulnerabilities. Conduct regular security audits to identify potential risks. Always follow the principle of least privilege, i.e., only grant necessary permissions to applications and users.
+> 
+
+### ⏳ When ?
+
+> The use and practice of macOS Perl Applications Injection started gaining attention as the use of macOS systems increased and as adversaries began to target these systems due to their popularity and widespread usage.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+MacOS Perl Applications Injection is a type of cyber attack where an attacker inputs malicious Perl code into a macOS application. The injected code can then be executed by the application, potentially leading to unauthorized access to system resources, data manipulation, or even full system control. This type of attack is often possible due to insufficient input validation or sanitization within the application code.
+
+When the malicious code is executed, it can perform a variety of tasks depending on the attacker's objectives. These tasks can include data exfiltration, where the code extracts and sends data from the system to the attacker. It can also create a backdoor, a hidden access point that allows the attacker to return and gain access to the system at a later time. Furthermore, the code could launch additional attacks on the system, potentially causing further harm.
+
+To guard against such attacks, several protective measures should be put in place. One crucial defense is robust input validation and sanitization. This means checking and cleaning all inputs to an application to ensure they cannot be used to inject malicious code. Regularly updating systems and applications can also help protect against these attacks, as updates often include patches for known vulnerabilities that attackers could exploit.
+
+Adhering to the principle of least privilege is another important protective measure. This principle involves only granting necessary permissions to applications and users, reducing the potential damage if an attack does occur. Regular security audits can also aid in early detection of potential risks and help mitigate them before an attack happens. These audits involve systematically examining a system's security measures and identifying any weaknesses that need to be addressed.
+
+It's crucial to understand and implement these measures to guard against macOS Perl Applications Injection attacks, given the widespread use of macOS systems in various sectors and the significant damage these attacks can cause.
+
+Let's consider a real-world scenario where an unsanitized input opens a potential for a Perl Applications Injection attack.
+
+Suppose there is a macOS application where user input is incorporated into Perl commands without sanitization. For example, the application may have a feature that allows users to change their password.
+
+```perl
+my $username = <input from user>;
+my $newPassword = <input from user>;
+system("chpasswd $username:$newPassword");
+
+```
+
+In this scenario, an attacker could exploit the lack of input sanitization by injecting malicious Perl code into their password. For instance, they could use a string like `";rm -rf ~/*;"` as their password, resulting in the following command:
+
+```perl
+system("chpasswd attacker:;rm -rf ~/*;");
+
+```
+
+This command first changes the password and then executes `rm -rf ~/*`, which deletes all files in the home directory.
+
+To prevent this, it's crucial to validate and sanitize user input. For instance, the application should ensure that the password does not contain characters that could be used to inject malicious code. In Perl, this could be done using regular expressions:
+
+```perl
+$newPassword =~ s/[^a-zA-Z0-9]//g;
+
+```
+
+This command removes all non-alphanumeric characters from the password. Additionally, to guard against Perl Applications Injection, it's essential to follow the principle of least privilege and regularly update systems and applications. Regular security audits can also help identify potential vulnerabilities.
+
+# 🖇️ Références
+
+---

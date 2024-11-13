@@ -1,0 +1,85 @@
+# disable_functions bypass - PHP 7.0-7.4 (*nix only)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass in PHP 7.0-7.4 is a cybersecurity concept that involves circumventing the disable_functions directive in PHP, which is a security feature designed to disable certain functions for security reasons. The bypass is usually performed in *nix environments and primarily concerns versions 7.0 to 7.4 of PHP.
+> 
+
+### 🧐 Why ?
+
+> Understanding disable_functions bypass is important because it presents a potential security vulnerability in PHP applications. If a malicious user discovers a way to bypass disable_functions, they can potentially execute forbidden commands, which can lead to unauthorized access, data leaks, or even complete takeover of the system. Therefore, it's crucial for developers and system administrators to understand this concept and how to mitigate the risks associated with it.
+> 
+
+### ⛏️ How ?
+
+> To bypass disable_functions in PHP 7.0-7.4, it's common to use 'LD_PRELOAD', an environmental variable in Unix-like operating systems that can be used to load a shared library before any others when a program is run. By preloading a custom library that redefines certain system functions (like 'system()', 'exec()', etc.), you can effectively bypass the disable_functions directive. However, this method requires certain conditions to be met, such as the ability to write files on the server and the absence of security modules like Suhosin or open_basedir restrictions.
+> 
+
+### ⏳ When ?
+
+> The practice of bypassing disable_functions in PHP has been around since the introduction of the disable_functions directive, which was included in PHP as a security measure. However, the specific methods for bypassing it in PHP 7.0-7.4 have become more widely known and discussed in the cybersecurity community in recent years. It's important to note that these methods are often used by attackers exploiting vulnerabilities, so they should not be used lightly.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The concept of 'disable_functions bypass' in PHP 7.0 to 7.4 involves taking advantage of the dynamic linking process in Unix-like operating systems to circumvent the 'disable_functions' directive in PHP. This directive is a security measure designed to prevent the direct use of certain functions that might pose security risks.
+
+The bypass is often accomplished using the 'LD_PRELOAD' environment variable, which can be set to load a custom shared library before any other libraries when a program is run. This custom library can contain redefined versions of system functions, which will be used instead of the original functions when the program is run.
+
+The key to this bypass is that the 'disable_functions' directive in PHP only prevents the direct use of certain functions. It does not prevent these functions from being used indirectly via system calls. So, by preloading a custom library that redefines these system calls, it's possible to bypass the 'disable_functions' directive.
+
+However, it's important to note that this method requires specific conditions and has its limitations. For instance, it requires the ability to write files on the server, and it may not work if certain security modules like Suhosin or open_basedir restrictions are in place. It also requires a good understanding of how the dynamic linking process works in Unix-like operating systems, as well as knowledge of PHP and its security features.
+
+This technique is often discussed in the context of cybersecurity, as it represents a potential vulnerability in PHP applications. If a malicious user were able to bypass the 'disable_functions' directive, they could potentially execute forbidden commands, leading to unauthorized access, data leaks, or even a complete takeover of the system. As such, it's critical for developers and system administrators to be aware of this concept, understand how it works, and know how to mitigate the associated risks.
+
+Here's an illustrative example to better understand the concept of 'disable_functions bypass' in PHP 7.0-7.4:
+
+Assume you have the ability to write files on the server. You could start by defining a library in C with the redefined 'system' function, which is typically disabled by the 'disable_functions' directive:
+
+```c
+// mylib.c
+#include <stdio.h>
+void system(const char *cmd) {
+    printf("Bypassed!\\n");
+}
+
+```
+
+Next, compile this code into a shared library using the gcc compiler:
+
+```bash
+gcc -shared -o mylib.so mylib.c
+
+```
+
+This creates '[mylib.so](http://mylib.so/)', which contains the redefined 'system' function.
+
+Now, suppose you have a PHP script that attempts to use the 'system' function:
+
+```php
+<?php
+// test.php
+system('ls');
+?>
+
+```
+
+If 'system' is disabled by the 'disable_functions' directive in the PHP configuration, running this script would typically fail.
+
+But if you run this script with the 'LD_PRELOAD' environment variable set to your custom library, the redefined 'system' function will be used instead:
+
+```bash
+LD_PRELOAD=/path/to/mylib.so php test.php
+
+```
+
+The output will be 'Bypassed!', demonstrating that the 'disable_functions' directive was bypassed.
+
+Remember, this example is strictly for educational purposes. Misusing this knowledge can lead to serious security breaches. Always use this knowledge responsibly and for securing your applications.

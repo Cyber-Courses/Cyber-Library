@@ -1,0 +1,79 @@
+# Pcap Inspection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pcap Inspection refers to the process of analyzing network packet captures, commonly known as pcaps. These packet captures are essentially snapshots of network traffic, which can be analyzed for various purposes, including troubleshooting, network performance monitoring, and most importantly, cybersecurity investigations.
+> 
+
+### 🧐 Why ?
+
+> Pcap Inspection is vital because it offers a deep insight into what is happening within a network at a granular level. It enables cybersecurity professionals to detect anomalies, trace back cyber-attacks, understand attack patterns, and even prevent potential breaches. For anyone involved in network management or cybersecurity, understanding pcap inspection is crucial.
+> 
+
+### ⛏️ How ?
+
+> To implement pcap inspection, one can use various tools like Wireshark, tcpdump, and TShark. These tools capture the packets traversing the network, which can then be analyzed for various details like source, destination, protocols used, and payload content. The process involves capturing the packets, filtering relevant data, and then analyzing this data to understand the network behavior.
+> 
+
+### ⏳ When ?
+
+> Pcap Inspection has been in use since the early 2000s with the advent of tools like Wireshark. Its use has become more prevalent with the increase in cyber threats and the need for in-depth network analysis.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Pcap Inspection is a comprehensive process that involves the analysis of network packet captures, also known as pcaps. These are snapshots of network traffic, captured for detailed examination. The process begins with packet capture, usually done with tools such as Wireshark, tcpdump, or TShark, which use the libpcap library to intercept network traffic.
+
+The resulting pcap file is a binary file that stores the details of packets as they traverse the network. Each packet in the pcap file consists of a packet header and packet payload. The header contains information about the source and destination IP addresses, source and destination ports, timestamp, and protocol type. This information can help identify where the packet originated from, where it's going, and how it's getting there.
+
+The payload, meanwhile, contains the actual data carried by the packet. It's here that the real substance of the communication can be found, and careful analysis of payload data can reveal much about what's happening on a network.
+
+Analyzing the details from both the packet header and payload can help in identifying malicious packets, detecting unusual traffic patterns, and recognizing potential security threats. It can provide a detailed view of network activity, allowing cybersecurity professionals to detect anomalies, trace back cyber-attacks, understand attack patterns, and even prevent potential breaches.
+
+However, pcap inspection is not without its challenges. The sheer volume of data can be overwhelming, making it difficult to spot relevant information. Also, encrypted traffic poses a significant hurdle as it cannot be analyzed directly and requires additional steps for decryption. Despite these challenges, pcap inspection is a critical part of any network or cybersecurity professional's toolkit, providing unparalleled insight into network behavior and potential threats.
+
+For a detailed, real-world example of Pcap Inspection, let's consider a scenario where an unusual spike in network traffic was detected, and we need to investigate if it was a potential security threat like a DDoS attack.
+
+1. **Packet Capture:** We start by capturing packets using Wireshark. This is done by selecting the appropriate network interface and starting the capture with a simple click on the 'Start' button.
+
+```
+# Command line alternative using tcpdump
+tcpdump -i eth0 -w traffic.pcap
+
+```
+
+This command captures all packets traversing the 'eth0' network interface and writes them into 'traffic.pcap' file.
+
+1. **Pcap File Analysis:** After capturing for a sufficient amount of time, we stop the capture and start analyzing the pcap file. In Wireshark, we can see details of each packet, including the source and destination IP addresses, ports, and protocol.
+
+```
+# Command line alternative using tshark
+tshark -r traffic.pcap
+
+```
+
+This command reads the 'traffic.pcap' file and displays the packet details.
+
+1. **Identifying Unusual Traffic:** We notice a large number of packets with the same source IP and various destination IPs, indicative of a potential DDoS attack. We can filter these packets in Wireshark using the filter bar at the top or through the following command:
+
+```
+tshark -r traffic.pcap -Y "ip.src == 192.168.1.1"
+
+```
+
+This command filters out all packets originating from the IP '192.168.1.1'.
+
+1. **Investigating Payload:** For one of these packets, we delve into its payload by following the TCP stream in Wireshark. This reveals repeated requests to the same resource, confirming our suspicions of a DDoS attack.
+
+Remember, encrypted traffic cannot be analyzed directly, and decryption is a complex process beyond the scope of this example. Nonetheless, this example illustrates the utility of pcap inspection in identifying and investigating potential network threats.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,117 @@
+# Basic Tomcat Info
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Tomcat is an open-source web server and servlet container developed by the Apache Software Foundation. It implements several Java EE specifications including Java Servlet, JavaServer Pages (JSP), Java EL, and WebSocket, providing an environment for Java code to run in.
+> 
+
+### 🧐 Why ?
+
+> Tomcat is widely used because it is lightweight, flexible, and reliable. It is essential for running Java applications on a web server, making it a crucial component in numerous production environments. Understanding Tomcat's functionality helps in deploying, managing, and troubleshooting Java applications effectively.
+> 
+
+### ⛏️ How ?
+
+> Tomcat can be downloaded and installed from the Apache website. Once installed, it can be configured by editing its XML configuration files. Applications can then be deployed on Tomcat by placing their WAR files in the webapps directory. Tomcat's Manager application can be used to manage the applications deployed on it.
+> 
+
+### ⏳ When ?
+
+> Tomcat was first released in 1998 and has been widely used in production environments since the early 2000s.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Apache Tomcat is an open-source software implementation of Java Servlet, JavaServer Pages, Java Expression Language, and Java WebSocket technologies. Essentially, it is a web server that can run Java-based web applications.
+
+At its core, Tomcat is a Java class library that offers web server functionalities. It listens for HTTP requests on designated ports, processes these requests, and delivers responses. Tomcat does this by implementing the Servlet and JavaServer Pages (JSP) specifications from the Java Community Process (JCP).
+
+The Servlet container within Tomcat enables it to run Java Servlets. Servlets are Java classes that can respond to particular types of network requests, often used to extend the applications hosted by web servers. This makes it possible to generate dynamic content and interact with clients through a request-response programming model.
+
+Beyond its core functionality, Tomcat provides additional features such as session management and security authentication.
+
+Session management deals with maintaining state between client requests, a crucial aspect for web applications needing to track user interaction across multiple page visits.
+
+Security authentication ensures the identity of users interacting with the web applications and protects against unauthorized access. Tomcat supports a variety of methods to authenticate users, including basic, form, digest, and client certificate authentication.
+
+Furthermore, Tomcat is known for its lightweight nature, flexibility, and reliability, making it a preferred choice for running Java applications on web servers in production environments. It can be configured by editing its XML configuration files, and applications can be deployed on Tomcat by placing their Web Application Resource (WAR) files in the webapps directory. The inbuilt Manager application in Tomcat can be used to manage these deployed applications.
+
+Since its initial release in 1998, Tomcat has been widely adopted and remains a key player in many production environments around the globe.
+
+Here is an example of a simple Servlet that can be deployed on Tomcat:
+
+```java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class HelloWorld extends HttpServlet {
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        out.println("Hello, World!");
+    }
+}
+
+```
+
+Here are the steps involved in using this Servlet:
+
+1. **Coding the Servlet:** The above Java code defines a class `HelloWorld` which extends `HttpServlet`. It overrides the `doGet` method which is called for HTTP GET requests. This method writes "Hello, World!" to the HTTP response.
+2. **Compiling the Servlet:** You would need to compile this Servlet code using the Java compiler. Make sure you have the Servlet API library in your classpath during compilation. The command to compile might look like this:
+
+```bash
+javac -classpath /path/to/servlet-api.jar HelloWorld.java
+
+```
+
+Replace `/path/to/servlet-api.jar` with the actual path to your servlet API jar file.
+
+1. **Deploying the Servlet:** After successful compilation, you will get a `HelloWorld.class` file. To deploy this Servlet on Tomcat, you would need to create a new directory structure like this under the `webapps` directory of your Tomcat installation:
+
+```bash
+webapps/
+|-- HelloWorld/
+    |-- WEB-INF/
+        |-- classes/
+            |-- HelloWorld.class
+
+```
+
+You would also need to create a `web.xml` file under the `WEB-INF` directory with the following content:
+
+```xml
+<web-app>
+  <servlet>
+    <servlet-name>HelloWorld</servlet-name>
+    <servlet-class>HelloWorld</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloWorld</servlet-name>
+    <url-pattern>/HelloWorld</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+```
+
+This file tells Tomcat that requests to `/HelloWorld` should be handled by the `HelloWorld` Servlet.
+
+1. **Starting Tomcat:** If Tomcat is not already running, you can start it with the `startup.sh` (or `startup.bat` on Windows) script in the `bin` directory of your Tomcat installation.
+2. **Accessing the Servlet:** Finally, you can access the Servlet by opening the following URL in your web browser:
+
+```
+<http://localhost:8080/HelloWorld/HelloWorld>
+
+```
+
+Replace `localhost:8080` with the actual host and port of your Tomcat server.
+
+You should see "Hello, World!" displayed in your web browser.

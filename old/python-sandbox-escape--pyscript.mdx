@@ -1,0 +1,104 @@
+# Python Sandbox Escape & Pyscript
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Python Sandbox Escape is a security concern where a user manipulates a Python program running in a 'sandbox' environment to execute arbitrary code, which can lead to unauthorized access or data breaches. The Pyscript is a Python script that has been written to exploit vulnerabilities within a Python sandbox environment.
+> 
+
+### 🧐 Why ?
+
+> Understanding Python Sandbox Escape and Pyscript is crucial as it presents a security risk for applications running Python, especially in a sandboxed environment. Knowledge of this topic enables developers and security experts to create robust and secure Python applications by mitigating the risk of sandbox escapes.
+> 
+
+### ⛏️ How ?
+
+> To avoid Python Sandbox Escape, one should never run untrusted code in a sandboxed environment. Regular audits of the code, using static code analysis tools can help identify potential vulnerabilities. When using Pyscript, ensure that the script is designed with security in mind, implementing input validation and avoiding the use of insecure methods.
+> 
+
+### ⏳ When ?
+
+> The Python Sandbox Escape has been a security concern since the inception of sandbox environments. The use of Pyscript for exploiting Python environments has also been prevalent, especially in penetration testing and vulnerability assessments.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A Python Sandbox is a restricted environment designed to isolate the execution of untrusted code. It aims to prevent the code from performing harmful actions by limiting its access to the system's resources. However, a Python Sandbox Escape occurs when the sandboxing fails to restrict the code's execution properly, allowing it to perform actions outside the intended scope. This is typically achieved by exploiting weaknesses in the sandbox's restrictions.
+
+## What is a Python Sandbox Escape?
+
+A Python Sandbox Escape is a security vulnerability where a user manipulates a Python program running in a sandbox environment to execute arbitrary code. This can lead to unauthorized access or data breaches. A Pyscript is a Python script specifically crafted to exploit these vulnerabilities within a Python sandbox environment.
+
+### Why is it Important?
+
+Understanding Python Sandbox Escape and Pyscript is crucial because it presents a significant security risk for applications running Python in a sandboxed environment. Knowledge of this topic enables developers and security experts to create robust and secure Python applications by mitigating the risk of sandbox escapes.
+
+### How to Prevent Python Sandbox Escapes?
+
+To avoid Python Sandbox Escapes, one should:
+
+1. **Never run untrusted code in a sandboxed environment**: This is the most straightforward preventive measure.
+2. **Regularly audit the code**: Using static code analysis tools can help identify potential vulnerabilities.
+3. **Secure Pyscripts**: Ensure that the scripts are designed with security in mind, implementing input validation, and avoiding the use of insecure methods.
+
+### Technical Explanation
+
+A Python Sandbox is intended to prevent the code from performing harmful actions. However, sandboxing failures can occur, allowing the code to perform actions outside the intended scope. This is often achieved by exploiting weaknesses in the sandbox's restrictions. A Pyscript is a Python script crafted to exploit such vulnerabilities. The script typically includes commands that manipulate the sandbox environment, leading to the execution of arbitrary code. The danger lies in the potential for causing data breaches or unauthorized access.
+
+### Real-World Example: Exploiting a Sandbox
+
+Let's consider a hypothetical, educational example where a sandbox environment is weakly configured, allowing for a sandbox escape.
+
+```python
+import builtins
+
+# Restricted environment setup
+def sandboxed_exec(code):
+    restricted_globals = {
+        '__builtins__': {
+            'print': print,
+            'range': range,
+        }
+    }
+    exec(code, restricted_globals)
+
+# Potentially malicious code
+malicious_code = """
+print("Trying to escape the sandbox...")
+print("Accessing builtins:", __builtins__)
+print("Attempting to open a file...")
+file = open('secret_file.txt', 'r')
+print(file.read())
+"""
+
+# Running the malicious code in the sandbox
+sandboxed_exec(malicious_code)
+
+```
+
+### Explanation:
+
+1. **Setup Restricted Environment**: We define a `sandboxed_exec` function that limits the available built-ins to `print` and `range`.
+2. **Define Malicious Code**: The `malicious_code` script attempts to access the `__builtins__` dictionary and open a file named `secret_file.txt`.
+3. **Run Malicious Code in Sandbox**: The `sandboxed_exec` function runs the `malicious_code` in the restricted environment.
+
+### Step-by-Step Process:
+
+1. **Accessing Built-ins**: The malicious code accesses the `__builtins__` dictionary, which should be restricted.
+2. **Opening a File**: The code then tries to open a file named `secret_file.txt`. If the sandbox is weakly configured, this operation will succeed, leading to unauthorized data access.
+
+### Mitigation Steps:
+
+1. **Strict Built-ins Restriction**: Ensure the `__builtins__` dictionary is not accessible.
+2. **Sandbox Libraries**: Use well-tested sandboxing libraries such as `PyPy`'s sandbox or third-party solutions like `RestrictedPython`.
+3. **Code Reviews and Audits**: Regularly review and audit the code to identify potential escape routes.
+
+### Conclusion:
+
+Understanding and mitigating Python Sandbox Escapes is crucial for maintaining the security of applications running Python in sandboxed environments. By implementing robust security measures, regularly auditing the code, and using secure sandboxing libraries, developers can reduce the risk of sandbox escapes and protect against unauthorized access and data breaches.

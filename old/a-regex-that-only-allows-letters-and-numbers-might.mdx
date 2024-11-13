@@ -1,0 +1,89 @@
+# A regex that only allows letters and numbers might be vulnerable to new line characters
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> A regex that only allows letters and numbers might be vulnerable to newline characters.
+> 
+
+### 🧐 Why ?
+
+> This topic is significant because regex, or regular expressions, are used in almost every programming language for text pattern matching and manipulation. If not properly implemented, they can become a source of vulnerabilities, especially when it comes to handling newline characters. This can potentially lead to unwanted behavior of the system or even security breaches.
+> 
+
+### ⛏️ How ?
+
+> To prevent newline characters from causing issues, it's essential to include them in our regex patterns, or use a strict multi-line mode that treats newline characters as regular characters. In JavaScript, for instance, you could use the pattern /^[a-z0-9]+$/im to match alphanumeric characters across multiple lines.
+> 
+
+### ⏳ When ?
+
+> Regular expressions have been in use since the 1950s and have been incorporated into virtually all programming languages to some degree. The issue of newline characters not being properly handled has been known for many years, but it remains a common mistake.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Regular expressions (regex) are a powerful tool used in programming for manipulating and matching text patterns in strings. They are integral for tasks like validation of user inputs, splitting strings, and replacing text.
+
+A common use case for regex is to match patterns that only allow alphanumeric characters (letters and numbers). In regex notation, such a pattern might look like this: /^[a-z0-9]+$/i. This pattern should match any string that includes one or more alphanumeric characters. However, an important detail to consider in regex patterns is the handling of newline characters.
+
+Newline characters in regex are typically represented as '\n' or '\r\n'. These characters are used to denote the end of a line and the beginning of a new one. In the context of a regex pattern, newline characters are special characters and have different behavior compared to regular alphanumeric characters.
+
+If a regex pattern does not explicitly account for newline characters, it may lead to unexpected behavior. For example, a string that contains newline characters might be incorrectly matched or manipulated by the regex. This can result in bugs or vulnerabilities in the system, especially in scenarios where the input is user-supplied and not rigorously validated.
+
+To mitigate this issue, newline characters should be included in the regex pattern, or a multiline mode (denoted by 'm' in some languages) should be used. This mode treats newline characters as regular characters, which avoids the issues caused by their special behavior. For example, in JavaScript, you could use the pattern /^[a-z0-9]+$/im to match alphanumeric characters across multiple lines, including lines separated by newline characters.
+
+To summarize, while regex is a powerful tool for pattern matching and text manipulation, it is crucial to understand its intricacies, such as the handling of newline characters, to avoid potential bugs or vulnerabilities.
+
+Let's take a simple example of a JavaScript function that uses regex to validate a username:
+
+```jsx
+function isValidUsername(username) {
+  var pattern = /^[a-z0-9]+$/i;
+  return pattern.test(username);
+}
+
+```
+
+In this function, the regex pattern `/^[a-z0-9]+$/i` matches any string that only contains alphanumeric characters. The `^` and `$` anchors ensure that the entire string must match the pattern. The `i` flag makes the pattern case-insensitive, allowing both lowercase and uppercase letters.
+
+Now, suppose a user submits the following username:
+
+```jsx
+var username = "John\\nDoe";
+
+```
+
+Even though `\\n` is not a valid alphanumeric character, the `isValidUsername` function would still return `true`:
+
+```jsx
+console.log(isValidUsername(username)); // Outputs: true
+
+```
+
+This is because the regex pattern does not consider newline characters. As a result, it only matches up to the newline character and ignores anything beyond it.
+
+To fix this issue, we can include a multiline flag `m` in our regex pattern:
+
+```jsx
+function isValidUsername(username) {
+  var pattern = /^[a-z0-9]+$/im;
+  return pattern.test(username);
+}
+
+```
+
+Now, the function correctly validates the username:
+
+```jsx
+console.log(isValidUsername(username)); // Outputs: false
+
+```
+
+The function now correctly recognizes the newline character and rejects the invalid username. This is a simple example, but it illustrates the importance of correctly handling newline characters in regex patterns.

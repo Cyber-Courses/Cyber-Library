@@ -1,0 +1,78 @@
+# disable_functions bypass - PHP safe_mode bypass via proc_open() and custom environment Exploit
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> disable_functions bypass and PHP safe_mode bypass via proc_open() and custom environment exploit are methods used by attackers to run arbitrary commands on a server even when certain functions are disabled for security reasons in PHP.
+> 
+
+### 🧐 Why ?
+
+> Understanding this exploit is important as it can be used to run dangerous commands on a server, leading to loss of data, corruption of files, and other forms of damage. It is crucial for developers and system administrators to understand this exploit to effectively protect their systems against it.
+> 
+
+### ⛏️ How ?
+
+> The exploit works by calling the proc_open() function with a custom environment. The function proc_open() is used to execute a command and open file pointers for input/output in a child process. By providing a custom environment, an attacker can circumvent the disable_functions and safe_mode restrictions, allowing them to run arbitrary commands.
+> 
+
+### ⏳ When ?
+
+> This exploit began to gain attention in the mid-2000s when PHP's safe_mode and disable_functions were commonly used as security measures.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+PHP's safe_mode is a security measure that restricts the execution of certain functions that could potentially compromise the server's security. It's part of a larger strategy to limit the potential damage that could be caused by malicious scripts. However, attackers have found a way to bypass this protective measure using the proc_open() function in conjunction with a custom environment.
+
+The proc_open() function in PHP is designed to execute a command and open file pointers for input/output in a separate child process. This function becomes a loophole when used with a custom environment. The custom environment is created using the putenv() function, which allows the attacker to set their own environment variables.
+
+The most critical environment variable in this context is the PATH variable. The PATH variable is used by the operating system to locate executable files. By manipulating the PATH variable, an attacker can control which directories are searched when executing system commands. This effectively bypasses the restrictions imposed by safe_mode and the disabled functions.
+
+This exploit is particularly concerning because it allows attackers to execute arbitrary commands on the server, potentially leading to loss of data, corruption of files, unauthorized access to sensitive information, and other forms of damage.
+
+This exploit started gaining attention in the mid-2000s, when PHP's safe_mode and disable_functions were widely used security measures. It's a stark reminder that security is a dynamic field, and what was once considered a best practice can become an avenue for attack as technology and techniques evolve.
+
+In order to effectively protect their systems against this exploit, developers and system administrators need to stay updated on the latest security threats and understand how they work. Regularly reviewing and updating security measures, conducting security audits, and adopting a proactive approach to security are all crucial steps in this process.
+
+Here's an educational example of how the exploit might work:
+
+Let's say we have a PHP script that allows for some form of file manipulation. Normally, the script only allows for benign operations, but an attacker wants to execute the command `rm -rf /`, which would delete all files in the filesystem.
+
+In a secure setup, the PHP `exec()` function might be disabled to prevent command execution. However, the attacker notices that `proc_open()` is not disabled.
+
+First, the attacker sets up a custom environment with the `putenv()` function. In this case, they define a new PATH variable that points to a directory under their control:
+
+```php
+putenv("PATH=/home/attacker_directory");
+
+```
+
+In the attacker's directory, they create a script named `rm` with the following content:
+
+```bash
+#!/bin/bash
+/bin/rm -rf /
+
+```
+
+This script, when executed, will run the dangerous `rm -rf /` command, regardless of the input given to it.
+
+Next, the attacker calls the `proc_open()` function in the PHP script, attempting to execute a benign `rm` command:
+
+```php
+proc_open('rm test_file', array(), $foo);
+
+```
+
+Because of the custom PATH, the PHP script runs the attacker's `rm` script instead of the expected system command, executing the harmful `rm -rf /` command.
+
+In this way, the attacker has bypassed the `disable_functions` directive and executed a harmful command, even though `exec()` was disabled.
+
+Remember, this is a simplified example for educational purposes. Actual attacks might involve more complex and subtle techniques. The best defense is staying informed about potential vulnerabilities and following best security practices, including regular audits and updates.

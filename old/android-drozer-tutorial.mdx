@@ -1,0 +1,79 @@
+# Android Drozer Tutorial
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Drozer is an open-source, comprehensive security and attack framework for Android. It allows you to search for security vulnerabilities in apps and devices by assuming the role of an app and interacting with the Dalvik VM, other apps' IPC endpoints and the underlying OS.
+> 
+
+### 🧐 Why ?
+
+> Understanding how to use Drozer is important because Android is the most popular mobile operating system in the world, which makes it a prime target for cybercriminals. Drozer helps in identifying and understanding potential security vulnerabilities in Android applications and devices. Moreover, its use is not limited to security professionals. Developers can use Drozer to identify vulnerabilities in their apps before the launch.
+> 
+
+### ⛏️ How ?
+
+> To use Drozer, first, you need to install it on your system and the Android device or emulator. Then, a server is set up on the Android device, and the system connects to it. Once connected, you can execute various commands to interact with the Android system and the apps installed on it. For example, you can use Drozer to list all permissions an app has or send and receive broadcasts.
+> 
+
+### ⏳ When ?
+
+> Drozer has been in use since it was first released in 2012 by MWR InfoSecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Drozer is a comprehensive security and attack framework for Android. It functions by establishing an agent on the Android device, which serves as a server. The server is accessed via a client from the system running Drozer. This interaction is facilitated over a network socket, and commands are transmitted as serialized Java objects.
+
+The server on the Android device decodes these objects and executes the corresponding commands. This allows you to interact with the Android device just as any other app would, enabling a thorough examination of potential vulnerabilities.
+
+Drozer's initial setup on the device is done through the Android Debug Bridge (ADB), a versatile command-line tool that lets you communicate with an emulator instance or connected Android device.
+
+Once the server is set up, Drozer can interact not only with the underlying Linux operating system but also with the Dalvik Virtual Machine (VM) and other apps installed on the device. This wide range of possible interactions allows for various operations, including manipulating files, executing shell commands, and interacting with the Android's Inter-process communication (IPC) endpoints.
+
+The IPC endpoints are a set of methods that Android apps use to communicate with each other, and they can be a potential source of security vulnerabilities. By interacting with these endpoints, Drozer can help identify and understand these vulnerabilities.
+
+Moreover, understanding how to use Drozer is crucial due to Android's popularity as a mobile operating system, making it a significant target for cyber threats. Hence, Drozer is a vital tool for both security professionals looking to identify vulnerabilities and developers who want to ensure the security of their apps before launch.
+
+Here's a basic example of how you might use Drozer for educational purposes, focusing on listing the permissions of an app.
+
+1. **Setup:** First, install Drozer on both your system and the Android device or emulator. Use the Android Debug Bridge (ADB) to set up the Drozer server on your Android device.
+
+```bash
+adb install drozer-agent-2.3.4.apk
+
+```
+
+1. **Start the Server:** Start the Drozer agent on your Android device. You should see the Drozer Agent as an app on your device. Open it and click on the "ON" button to start the server.
+2. **Connect to the Device:** On your system, open a new terminal and use the following command to forward the required port and establish a connection.
+
+```bash
+adb forward tcp:31415 tcp:31415
+
+```
+
+1. **Start the Client:** Now, start the Drozer client on your system with the following command.
+
+```bash
+drozer console connect
+
+```
+
+You should now be connected to your Android device through Drozer.
+
+1. **List App Permissions:** Let's say we want to examine the permissions of an app with the package name `com.example.app`. We'd use the following command:
+
+```bash
+run app.package.attacksurface com.example.app
+
+```
+
+This command provides information about the attack surface of the app, including the permissions it has.
+
+Remember that this is just one small part of what Drozer can do. It can also manipulate files, execute shell commands, and interact with IPC endpoints, among other things. Always use tools like Drozer responsibly and only for legitimate purposes, such as improving your app's security or conducting authorized testing.

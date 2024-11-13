@@ -1,0 +1,96 @@
+# Special HTTP headers
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Special HTTP headers are unique fields within the Hypertext Transfer Protocol that are used to define specific parameters for data transmission between client and server. They play a key role in HTTP communication by providing information about the client, server, and the data being sent. Some common HTTP headers include 'User-Agent', 'Accept', 'Host', 'Cookie' among others.
+> 
+
+### 🧐 Why ?
+
+> Understanding special HTTP headers is crucial because they contain valuable information about the HTTP communication process and can influence how data is sent and received. They are often used in web development, network troubleshooting, and cybersecurity. In security, special HTTP headers can be used to prevent attacks, such as Cross-Site Scripting (XSS) and Clickjacking, by setting appropriate security-related headers.
+> 
+
+### ⛏️ How ?
+
+> To use special HTTP headers, one needs to understand the purpose of each header and how to properly define them. For instance, the 'User-Agent' header tells the server about the client's operating system, browser, and other details. The 'Accept' header informs the server about the types of data the client can handle. These headers can be set in the HTTP request using various programming languages, such as Python, JavaScript, or tools like curl.
+> 
+
+### ⏳ When ?
+
+> HTTP headers have been in use since the inception of the HTTP protocol in the early 1990s. Their use and importance have grown with the increasing reliance on web-based communication and data transfer.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+HTTP headers are integral to data communication on the web, as they carry essential information between the client and the server. These headers are formatted as key-value pairs separated by a colon. When a client (like your web browser) sends a request to a server (a website), it includes HTTP headers to provide additional information about the request, such as the type of browser being used or the types of data it can accept. The server, in turn, responds with its own set of headers, which can instruct the client how to handle the incoming data or provide other relevant metadata.
+
+HTTP headers offer control over several aspects of data communication:
+
+- **Caching**: Headers like 'Cache-Control' can instruct the client to store responses for reuse, improving performance.
+- **Managing Connections**: Headers like 'Keep-Alive' enable long-lived connections, reducing latency in subsequent requests.
+- **Content Types and Encoding**: Headers like 'Content-Type' and 'Content-Encoding' tell the client what the data type of the returned content is and how it's encoded.
+- **Security**: Special headers like 'X-Frame-Options', 'Content-Security-Policy', and 'Strict-Transport-Security' can enhance web security by controlling how content interacts with other sites, and enforcing secure connections.
+
+Misuse or incorrect configuration of these headers can lead to vulnerabilities. For instance, not setting proper security headers can leave a site open to cross-site scripting or clickjacking attacks. Understanding and using HTTP headers correctly is therefore crucial for the smooth and secure operation of web services.
+
+Let's consider an example where we are making a GET request in Python using the `requests` library, and we want to set the 'User-Agent' and 'Accept' headers.
+
+```python
+import requests
+
+url = '<http://example.com>'
+
+headers = {
+    'User-Agent': 'My User Agent 1.0',
+    'Accept': 'application/json',
+}
+
+response = requests.get(url, headers=headers)
+
+```
+
+In this code:
+
+1. We first import the `requests` library.
+2. Then, we define the URL we want to send a request to.
+3. We create a dictionary named 'headers' where we define our desired HTTP headers. In this case, we set 'User-Agent' to 'My User Agent 1.0' and 'Accept' to 'application/json', indicating that our client can handle JSON responses.
+4. Finally, we use `requests.get` to send a GET request to the specified URL, and we include our headers dictionary as an argument.
+
+This request would tell the server that the client is 'My User Agent 1.0' and that it wants to receive JSON data.
+
+Another example is setting security headers in an Express.js application to help protect against clickjacking attacks:
+
+```jsx
+const express = require('express');
+const app = express();
+
+app.use((req, res, next) => {
+    res.header('X-Frame-Options', 'DENY');
+    next();
+});
+
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
+
+```
+
+In this code:
+
+1. We import the `express` library and create an Express application.
+2. We add middleware to the application using `app.use`. This middleware function sets the 'X-Frame-Options' header to 'DENY' for all responses, which tells the browser not to allow this page to be rendered in an iframe, helping to prevent clickjacking attacks.
+3. We define a route handler for the root path ('/') that sends a simple text response.
+4. We start the server on port 3000.
+
+These examples demonstrate how HTTP headers can be used in practice to provide important information to the server and enhance the security of a web application.

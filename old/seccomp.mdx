@@ -1,0 +1,153 @@
+# Seccomp
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Seccomp, or Secure Computing Mode, is a security feature in the Linux kernel. Seccomp allows a process to make a one-way transition into a 'secure' state where it cannot make any system calls except exit(), sigreturn(), read() and write() to already-open file descriptors. If the process attempts any other system calls, the kernel will terminate the process with SIGKILL or SIGSYS.
+> 
+
+### 🧐 Why ?
+
+> In the context of cybersecurity, Seccomp is significant as it provides an additional layer of security in the Linux operating system. By limiting the system calls a process can make, Seccomp reduces the attack surface and the potential damage that can be done if a process is compromised. It's particularly valuable in environments where untrusted or user-supplied code is executed, such as web servers and virtual machines.
+> 
+
+### ⛏️ How ?
+
+> To use Seccomp in a Linux environment, you need to include the 'linux/seccomp.h' header file in your program, and then use the prctl() function with the PR_SET_SECCOMP argument to enable Seccomp. Once Seccomp is enabled for a process, it cannot be disabled, and the restrictions apply to all child processes created with fork() or clone().
+> 
+
+### ⏳ When ?
+
+> Seccomp was first introduced in Linux kernel 2.6.12, which was released in June 2005. It was initially implemented as a means of safely running untrusted bytecode in the Google Chrome web browser, but it has since been adopted by other projects and applications.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Seccomp (Secure Computing Mode) in Linux
+
+### Overview
+
+Seccomp (Secure Computing Mode) is a robust security feature in the Linux kernel designed to restrict the system calls a process can make, thereby reducing the attack surface and mitigating potential damage if a process is compromised. It is particularly useful in scenarios where untrusted or user-supplied code is executed, such as in web browsers, container environments, and other applications requiring high security.
+
+### How Seccomp Works
+
+Seccomp operates by placing a process into a restrictive mode where only a specific set of system calls are allowed. By default, these system calls are `exit()`, `sigreturn()`, `read()`, and `write()` to already-open file descriptors. Any attempt to make other system calls results in the process being terminated by the kernel, typically with `SIGKILL` or `SIGSYS`.
+
+Seccomp utilizes the Berkeley Packet Filter (BPF) to filter system calls. When a process enables Seccomp, it provides a BPF program that acts as a filter. The BPF program evaluates each system call and returns a value instructing the kernel on how to handle the call:
+
+1. **Allow the system call.**
+2. **Deny the system call with an error.**
+3. **Deny the system call and send a signal.**
+4. **Trace the system call for debugging purposes.**
+
+### Historical Context
+
+Seccomp was introduced in the Linux kernel 2.6.12, released in June 2005. It was initially developed to securely run untrusted bytecode in the Google Chrome web browser. Since then, it has been adopted by various projects and applications due to its valuable security contributions.
+
+### Example: Using Seccomp in a C Program
+
+Below is an example of how to use Seccomp in a C program to restrict system calls for a child process.
+
+### Step-by-Step Explanation
+
+1. **Include Necessary Headers:**
+    
+    ```c
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <sys/prctl.h>
+    #include <sys/wait.h>
+    #include <linux/seccomp.h>
+    #include <linux/filter.h>
+    #include <errno.h>
+    
+    ```
+    
+2. **Define Seccomp Filter:**
+    
+    ```c
+    struct sock_filter filter[] = {
+        /* Validate architecture. */
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, arch)),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, AUDIT_ARCH_X86_64, 1, 0),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+    
+        /* Load the syscall number for checking. */
+        BPF_STMT(BPF_LD + BPF_W + BPF_ABS, offsetof(struct seccomp_data, nr)),
+    
+        /* Allow exit, sigreturn, read, and write. */
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_exit, 3, 0),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_sigreturn, 2, 0),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_read, 1, 0),
+        BPF_JUMP(BPF_JMP + BPF_JEQ + BPF_K, __NR_write, 0, 1),
+    
+        /* Kill process for other syscalls. */
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_ALLOW),
+        BPF_STMT(BPF_RET + BPF_K, SECCOMP_RET_KILL),
+    };
+    
+    struct sock_fprog prog = {
+        .len = (unsigned short)(sizeof(filter)/sizeof(filter[0])),
+        .filter = filter,
+    };
+    
+    ```
+    
+3. **Main Function:**
+    
+    ```c
+    int main() {
+        pid_t pid = fork();
+    
+        if (pid == -1) {
+            perror("fork");
+            exit(EXIT_FAILURE);
+        }
+    
+        if (pid == 0) { // Child process
+            if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) == -1) {
+                perror("prctl(PR_SET_NO_NEW_PRIVS)");
+                exit(EXIT_FAILURE);
+            }
+    
+            if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) == -1) {
+                perror("prctl(PR_SET_SECCOMP)");
+                exit(EXIT_FAILURE);
+            }
+    
+            // Attempt to execute a forbidden system call
+            execl("/bin/sh", "/bin/sh", NULL);
+    
+            perror("execl");
+            exit(EXIT_FAILURE);
+        } else { // Parent process
+            wait(NULL);
+            printf("Child process finished.\\n");
+        }
+    
+        return 0;
+    }
+    
+    ```
+    
+
+### Explanation:
+
+1. **Include Necessary Headers:** The required headers for Seccomp, process control, and system calls are included.
+2. **Define Seccomp Filter:** The BPF program (filter) is defined to restrict the child process to only a few allowed system calls (`exit`, `sigreturn`, `read`, and `write`). All other system calls will result in process termination.
+3. **Main Function:**
+    - A child process is created using `fork()`.
+    - The child process enables Seccomp using `prctl()` with `PR_SET_SECCOMP` and applies the defined BPF filter.
+    - The child process attempts to execute `/bin/sh` using `execl()`, which is not allowed by the filter and should result in termination.
+    - The parent process waits for the child to finish.
+
+### Conclusion
+
+Seccomp is a critical security feature in Linux that limits the system calls a process can make, thereby reducing the attack surface. By using Seccomp, applications can be made significantly more secure, especially when running untrusted or user-supplied code. Understanding and implementing Seccomp effectively requires a good grasp of Linux system calls and the Berkeley Packet Filter (BPF).

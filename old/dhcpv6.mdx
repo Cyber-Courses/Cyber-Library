@@ -1,0 +1,108 @@
+# DHCPv6
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> DHCPv6, or Dynamic Host Configuration Protocol for IPv6, is a network protocol that allows hosts on an IPv6 network to be assigned IP addresses and other network configurations automatically. It's an essential part of any network that uses IPv6, as it eliminates the need for manual configuration.
+> 
+
+### 🧐 Why ?
+
+> The importance of DHCPv6 lies in its ability to streamline the process of connecting to a network. Without it, each device would need to be manually configured with an IP address, DNS servers, and other settings. This would not only be time-consuming, but it would also increase the likelihood of configuration errors. By automating this process, DHCPv6 significantly enhances network efficiency and reliability.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of DHCPv6, a network administrator would need to set up a DHCPv6 server on the network. This server would then be responsible for assigning IP addresses to devices as they connect to the network. The server can either assign static IP addresses, which remain the same for each device, or dynamic IP addresses, which can change each time a device connects to the network. The server can also provide other network configuration information, such as the addresses of DNS servers.
+> 
+
+### ⏳ When ?
+
+> The use of DHCPv6 became prevalent with the widespread adoption of IPv6, which began in the mid-2000s as the limitations of the previous version, IPv4, became apparent. As IPv6 adoption continues to increase, the importance of understanding and implementing DHCPv6 will only grow.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, DHCPv6 operates through a series of message exchanges between the client and server to assign IP addresses and other network configuration details. Here's a detailed explanation covering all the essential aspects, along with a real-world educational example and command-line instructions.
+
+### Detailed Explanation of DHCPv6
+
+### Message Exchange Process
+
+1. **Solicit Message:**
+    - When a device (client) joins the network, it sends a 'Solicit' message to locate DHCPv6 servers. This message is broadcasted to the network to find available servers.
+2. **Advertise Message:**
+    - DHCPv6 servers respond with an 'Advertise' message, offering their services. This message includes configuration information that the server can provide, such as IP addresses, DNS servers, and other network settings.
+3. **Request Message:**
+    - The client selects one of the DHCPv6 servers and sends a 'Request' message to it, asking for specific IP address assignments and other configuration details.
+4. **Reply Message:**
+    - The chosen DHCPv6 server responds with a 'Reply' message, confirming the assignment of the IP address and providing the requested configuration information. This completes the DHCPv6 'four-way handshake'.
+
+### DHCPv6 Configuration Example
+
+Let's consider an educational example where we configure a DHCPv6 server on a Linux-based system using `isc-dhcp-server`.
+
+### Step-by-Step Instructions
+
+1. **Install DHCP Server:**
+    - First, you need to install the DHCP server software. On a Debian-based system, you can use the following command:
+        
+        ```
+        sudo apt-get install isc-dhcp-server
+        
+        ```
+        
+2. **Configure DHCPv6 Server:**
+    - Edit the DHCPv6 configuration file, typically located at `/etc/dhcp/dhcpd6.conf`. Add the following configuration:
+        
+        ```
+        subnet6 2001:db8::/64 {
+            range6 2001:db8::1000 2001:db8::2000;
+            option dhcp6.name-servers 2001:db8::1;
+            option dhcp6.domain-search "example.com";
+        }
+        
+        ```
+        
+        - `subnet6 2001:db8::/64`: Specifies the IPv6 subnet.
+        - `range6 2001:db8::1000 2001:db8::2000`: Defines the range of IP addresses that can be assigned to clients.
+        - `option dhcp6.name-servers 2001:db8::1`: Sets the DNS server address.
+        - `option dhcp6.domain-search "example.com"`: Specifies the domain search list.
+3. **Start the DHCPv6 Server:**
+    - Enable and start the DHCP server service:
+        
+        ```
+        sudo systemctl enable isc-dhcp-server
+        sudo systemctl start isc-dhcp-server
+        
+        ```
+        
+4. **Client Configuration:**
+    - On a client machine, ensure that it is set to request an IP address via DHCPv6. This is typically done through the network manager or by editing the network configuration file.
+5. **Verify the Configuration:**
+    - On the client machine, you can verify the assigned IP address using:
+        
+        ```
+        ip -6 addr show
+        
+        ```
+        
+    - On the server, you can check the DHCP logs to see the exchange of DHCPv6 messages:
+        
+        ```
+        sudo tail -f /var/log/syslog
+        
+        ```
+        
+
+### Real-World Example
+
+In a university campus network, administrators might use DHCPv6 to automatically assign IP addresses to students' devices when they connect to the campus Wi-Fi. This ensures that each device receives a unique IP address, DNS server information, and other necessary configurations without manual intervention. For instance, when a student connects their laptop to the network, the laptop sends a 'Solicit' message, and the campus DHCPv6 server replies with an 'Advertise' message. The laptop then sends a 'Request' message, and the server finalizes the process with a 'Reply' message, assigning an IP address like `2001:db8::1234` and providing DNS server details.
+
+By following these steps and understanding the underlying message exchange process, network administrators can effectively configure and manage DHCPv6, ensuring seamless connectivity and efficient network operations.

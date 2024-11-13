@@ -1,0 +1,73 @@
+# disable_functions bypass - PHP 5.2.4 and 5.2.5 PHP cURL
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass in PHP 5.2.4 and 5.2.5 with PHP cURL refers to a security flaw that enables attackers to bypass the disable_functions directive in PHP configurations. This directive helps to disable certain sensitive functions that could be exploited by attackers to run arbitrary commands on the server.
+> 
+
+### 🧐 Why ?
+
+> This topic is important due to the potential security risks it poses. If attackers successfully exploit this flaw, they can gain unauthorized access to the server, manipulate data, or even take over the server completely. Understanding this vulnerability helps to implement necessary countermeasures to secure PHP applications.
+> 
+
+### ⛏️ How ?
+
+> To use this to your advantage, ensure that your servers are always updated to the latest PHP versions. If you must use PHP 5.2.4 or 5.2.5, avoid using the PHP cURL extension or ensure to monitor and limit its usage. Conduct regular security audits on your server to detect any potential vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> This vulnerability was first discovered and utilized by attackers in 2007, shortly after the release of PHP 5.2.4. It continued to pose a threat in PHP 5.2.5.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'disable_functions' directive is a security feature in PHP configurations, allowing server administrators to disable certain functions that could potentially be exploited by malicious parties. In PHP versions 5.2.4 and 5.2.5, however, this directive could be bypassed using the PHP cURL extension.
+
+The cURL extension in PHP allows scripts to send HTTP requests. This in itself is not an issue, but the problem arises when these requests can be manipulated in such a way that unauthorized commands can be executed on the server. Essentially, it bypasses the 'disable_functions' directive, giving the attacker the ability to run arbitrary commands.
+
+This vulnerability exists due to insufficient input validation in the cURL extension. Input validation is a method used in programming to ensure that only properly formatted data is entering the system. In the case of the cURL extension in PHP 5.2.4 and 5.2.5, the input validation was not robust enough to prevent this particular exploit.
+
+Fortunately, this vulnerability was addressed and patched in later versions of PHP. Nonetheless, servers that are still running PHP 5.2.4 or 5.2.5 with the cURL extension enabled remain vulnerable to this exploit.
+
+To mitigate this risk, it is recommended to always update your servers to the latest PHP versions. If you have to use PHP 5.2.4 or 5.2.5, avoid using the PHP cURL extension or at least carefully monitor and limit its usage. Additionally, regular security audits on your server can help detect any potential vulnerabilities and ensure that your system remains secure.
+
+Let's consider a hypothetical scenario to illustrate this security flaw. Suppose there is a PHP script on the server that uses the cURL extension to retrieve data from a URL specified by the user.
+
+```php
+<?php
+    // Get URL from user input
+    $url = $_GET['url'];
+    // Initialize cURL session
+    $ch = curl_init($url);
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    // Execute cURL session
+    $result = curl_exec($ch);
+    // Close cURL session
+    curl_close($ch);
+    // Output the result
+    echo $result;
+?>
+
+```
+
+In a safe scenario, the user would provide a legitimate URL for data retrieval, like `http://example.com/data.json`. Unfortunately, an attacker could manipulate this input to execute arbitrary commands.
+
+For instance, the attacker could use a `file://` URL to access local files on the server. They could provide a URL like `http://yourserver.com/script.php?url=file:///etc/passwd`, potentially gaining unauthorized access to the system's password file.
+
+Similarly, the attacker could use `php://` URLs to execute arbitrary PHP code. For instance, they might provide a URL like `http://yourserver.com/script.php?url=php://input`, and then POST some malicious PHP code, which gets executed by the cURL script.
+
+To mitigate this security flaw:
+
+1. **Update PHP version**: Always keep your PHP version updated to the latest stable release. The issue was patched in later versions of PHP after 5.2.5.
+2. **Limit cURL functionality**: If you absolutely need to use cURL, restrict its functionality to a controlled set of URLs or disable the use of certain protocols like `file://` and `php://`.
+3. **Input validation**: Implement robust input validation to ensure that the URL provided by the user is in the expected format and is safe to use. For example, you could verify that the URL starts with `http://` or `https://`.
+4. **Regular security audits**: Regularly conduct security audits to identify and address potential security vulnerabilities in your system. This includes checking for outdated software, testing for various security flaws, and ensuring the system is configured securely.

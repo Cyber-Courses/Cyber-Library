@@ -1,0 +1,80 @@
+# IPC Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux IPC (Inter-Process Communication) Namespace is a feature provided by the Linux kernel that allows processes in different IPC namespaces to communicate with each other.
+> 
+
+### 🧐 Why ?
+
+> The importance of the Linux IPC Namespace lies in its ability to isolate processes for security and modularity purposes. It provides a mechanism for processes to communicate with each other without interfering with other processes running on the same system. This is particularly useful in systems with multiple users or processes that need to run in isolation from each other.
+> 
+
+### ⛏️ How ?
+
+> The IPC Namespace can be utilized by creating a new namespace using the 'unshare' or 'clone' system calls with the 'CLONE_NEWIPC' flag. Once the new IPC namespace is created, processes can communicate with each other using the usual IPC mechanisms such as message queues, semaphore sets, and shared memory segments, knowing that their communication is isolated from other processes.
+> 
+
+### ⏳ When ?
+
+> The use of IPC Namespaces in Linux began with the introduction of namespace isolation features in the Linux kernel version 2.6.19, released in 2006.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In Linux, Inter-Process Communication (IPC) namespaces provide a layer of isolation for certain IPC resources, particularly System V IPC objects and POSIX message queues. This isolation is a fundamental aspect of the Linux kernel's security and modularity.
+
+Each IPC namespace has its own unique set of System V IPC identifiers and its own POSIX message queue filesystem. In practical terms, this means that when a process within a specific IPC namespace creates a System V IPC object or POSIX message queue, this object or queue becomes visible exclusively to all other processes within the same IPC namespace. Conversely, the object or queue remains invisible to processes operating within different IPC namespaces.
+
+This property of IPC namespaces is critical for maintaining system security and modularity. By isolating IPC resources in this way, processes in different IPC namespaces are prevented from influencing each other's IPC resources. For instance, this prevents a process in one IPC namespace from unintentionally or maliciously modifying or deleting IPC resources in another IPC namespace.
+
+This isolation of IPC resources is implemented through the use of the 'unshare' or 'clone' system calls with the 'CLONE_NEWIPC' flag. These system calls allow the creation of a new IPC namespace.
+
+The IPC namespace feature was introduced in Linux kernel version 2.6.19, which was released in 2006. Since then, it has become a key element of Linux's security and modularity features, particularly in systems with multiple users or processes that need to run in isolation from each other.
+
+Here is a simple example of creating and working with IPC namespaces in Linux.
+
+1. **Create a new IPC namespace.** We'll use the 'unshare' command to create a new IPC namespace:
+
+```bash
+unshare -i /bin/bash
+
+```
+
+This will launch a new bash shell that's running in a new IPC namespace. Any IPC resources created in this shell will be isolated from the rest of the system.
+
+1. **Create a new message queue.** Now, let's create a new message queue using the 'ipcmk' command:
+
+```bash
+ipcmk -Q
+
+```
+
+This will create a new message queue and print its identifier (key).
+
+1. **List IPC resources.** We can use the 'ipcs' command to list IPC resources:
+
+```bash
+ipcs
+
+```
+
+This should list the message queue we just created.
+
+1. **Leave the IPC namespace.** Now, let's exit the bash shell that's running in the new IPC namespace (by typing 'exit').
+
+```bash
+exit
+
+```
+
+After this, if we run 'ipcs' again in the original shell, we should see that the message queue we created is no longer listed. That's because it was created in the new IPC namespace, and is not visible from the original IPC namespace.
+
+This example illustrates the basic process of creating and working with IPC namespaces in Linux. It shows how IPC namespaces can be used to isolate IPC resources, enhancing system security and modularity.

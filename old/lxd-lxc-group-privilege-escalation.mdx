@@ -1,0 +1,46 @@
+# lxd/lxc Group - Privilege escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux LXD/LXC Group is a feature of Linux containerization that can potentially be used for privilege escalation. LXD (Linux container Daemon) is a hypervisor to manage LXC (Linux Containers), which are lightweight virtual machines. Privilege escalation is a type of security exploit where a user gains privileges that are normally reserved for system administrators or other powerful roles.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux LXD/LXC Group and the associated privilege escalation risks is vital for anyone responsible for maintaining the security of a Linux system. If an attacker manages to exploit this feature, they could gain unfettered access to the system, potentially resulting in data theft, system damage, or other malicious activities. As such, being able to identify and mitigate this potential security risk is crucial.
+> 
+
+### ⛏️ How ?
+
+> To use Linux LXD/LXC for privilege escalation, an attacker would first need to gain access to a system where they have permissions to use LXD/LXC. After this, they could create a new container with the LXD/LXC tools, mount the host file system to the container, and then access the system with root privileges. To prevent this, system administrators should limit who has access to LXD/LXC, monitor for suspicious activity, and apply patches and updates promptly.
+> 
+
+### ⏳ When ?
+
+> LXD/LXC has been a part of Linux since the 2.6.32 kernel, released in 2009. The potential for using it for privilege escalation has been known for several years, with various fixes and patches released to mitigate the risk.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+LXD/LXC (Linux container Daemon/Linux Containers) is a powerful feature of Linux systems that enables containerization, a kind of lightweight virtualization. At a technical level, LXD/LXC operates by creating a distinct namespace for each container, effectively creating a virtual environment that is isolated from the host system, akin to a sandbox.
+
+However, this isolation can potentially be circumvented, leading to a security risk known as privilege escalation. If a user has access to the LXD/LXC commands, they can create a new container and mount the host file system to it. This action effectively bypasses the namespace separation, allowing the user to interact with the host system as if they had root privileges. Hence, they could potentially access sensitive data, modify system settings, or perform other actions typically reserved for administrators.
+
+To mitigate this potential security risk, it's crucial that system administrators tightly control who has access to LXD/LXC. This control can be exerted through careful management of user permissions and monitoring for suspicious activity. Additionally, administrators must stay up-to-date with the latest security patches and updates, as these often include fixes for known vulnerabilities.
+
+Moreover, understanding the intricacies of LXD/LXC and the potential for privilege escalation is critical for anyone responsible for maintaining the security of a Linux system. An attacker exploiting this feature could gain unfettered access to the system, potentially resulting in data theft, system damage, or other malicious activities. Therefore, a comprehensive understanding of LXD/LXC and its associated risks can help in identifying and mitigating this potential security threat.
+
+For example, suppose an attacker has non-root access to a Linux system where they also have permission to use LXD/LXC. They could potentially exploit this for privilege escalation. Here's how it could happen:
+
+1. **Create a new LXC container**: The attacker would first create a new LXC container. This could be done with the command `lxc launch ubuntu:18.04 mycontainer`, where "ubuntu:18.04" is the image used for the container and "mycontainer" is the name of the container.
+2. **Mount the host file system to the container**: The attacker could then mount the host file system to the new container. This is done with the command `lxc config device add mycontainer mydevice disk source=/ path=/mnt/root recursive=true`. This command mounts the root directory of the host system ("/") to a directory in the container ("/mnt/root").
+3. **Access the container with root privileges**: After the host file system is mounted to the container, the attacker could access the container with the command `lxc exec mycontainer /bin/bash`. Now, they are inside the container with root privileges and can interact with the host file system as if they were root.
+
+This process of privilege escalation is a serious security risk, and system administrators should take steps to mitigate it. This includes limiting who has access to LXD/LXC, monitoring for suspicious activity, and applying patches and updates promptly.

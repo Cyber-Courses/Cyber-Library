@@ -1,0 +1,104 @@
+# User Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> User Namespace is a feature in Linux operating systems that allows for the isolation of users, groups, and other related identifiers. It's a type of namespace, a Linux feature that separates and isolates an application's view of the operating system's various aspects, such as process IDs, hostnames, or, in this case, user IDs and group IDs.
+> 
+
+### 🧐 Why ?
+
+> User Namespace is crucial for enhancing system security. By isolating users and groups, it effectively reduces the potential impact of a process or user obtaining unauthorized access. This isolation also enables users to operate with different user and group IDs, providing an additional layer of security and flexibility, which is particularly vital in a multi-user system or cloud environment.
+> 
+
+### ⛏️ How ?
+
+> To use User Namespace, you need to have a Linux system with a kernel version of 3.8 or later. You can create a new User Namespace using the 'unshare' or 'clone' system calls. Once created, processes within this namespace can have different user and group IDs from the parent system, effectively isolating them. It's also important to manage the mapping between the IDs in the namespace and those in the parent system, which can be done via the '/proc/[pid]/uid_map' and '/proc/[pid]/gid_map' files.
+> 
+
+### ⏳ When ?
+
+> User Namespace was introduced in the Linux kernel version 3.8, which was released in February 2013.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of User Namespace in Linux
+
+User Namespace is a key component of Linux's security and process isolation features, designed to create isolated environments for processes. It achieves this by creating separate mappings of user and group IDs for each namespace, allowing processes to have different user IDs within their namespace compared to the global system.
+
+## How User Namespace Works
+
+### Kernel and ID Mapping
+
+When a process makes a system call, the kernel translates the user or group IDs using the mapping established for that process's namespace. This means a process can have root privileges within its namespace without having the same privileges at the system level, providing an effective isolation mechanism.
+
+### Isolation Challenges
+
+A process with root privileges within its namespace doesn't have unrestricted access to the entire system. This distinction is crucial for maintaining system security. Managing the mapping of IDs between namespaces and the parent system is performed via the `/proc/[pid]/uid_map` and `/proc/[pid]/gid_map` files. These files control the mapping of user and group IDs between a User Namespace and its parent namespace. Mismanagement of these mappings can lead to security vulnerabilities.
+
+### Practical Implementation
+
+Here's an example of how to use User Namespace to create an isolated environment for a process:
+
+### Step-by-Step Example
+
+1. **Create a New User Namespace**
+    
+    Use the `unshare` command to create a new User Namespace and start a new `bash` shell within this namespace.
+    
+    ```bash
+    unshare -U bash
+    
+    ```
+    
+    The `-U` option specifies that a User Namespace should be created.
+    
+2. **Check the User ID within the New Namespace**
+    
+    Run the `id -u` command to show the user ID within the current namespace.
+    
+    ```bash
+    id -u
+    
+    ```
+    
+    Within the new User Namespace, this will return `0`, indicating that you are the root user within this namespace.
+    
+3. **Check the User ID from the Parent Namespace Perspective**
+    
+    The `/proc/self/uid_map` file shows the mapping of user IDs between the current User Namespace and the parent namespace.
+    
+    ```bash
+    cat /proc/self/uid_map
+    
+    ```
+    
+    This file will show that the user ID `0` within the User Namespace corresponds to your original user ID on the parent system.
+    
+4. **Perform a Task Requiring Root Privileges on the Parent System**
+    
+    Attempt to perform a task that requires root privileges on the parent system, such as creating a file in the `/root` directory.
+    
+    ```bash
+    touch /root/test
+    
+    ```
+    
+    This command will fail, even though you are root within the User Namespace. This failure demonstrates the isolation provided by User Namespaces, as you don't have root privileges on the parent system.
+    
+
+### Key Considerations
+
+- **Security and Isolation**: User Namespaces provide an additional layer of security by isolating processes within their own user ID space. This isolation prevents processes with root privileges within their namespace from affecting the parent system.
+- **Proper Management of UID/GID Mappings**: Mismanagement of the mappings between namespaces and the parent system can lead to security vulnerabilities. It's crucial to handle these mappings carefully and control permissions within each namespace properly.
+
+## Conclusion
+
+Understanding and properly implementing User Namespaces is essential for enhancing security and maintaining effective process isolation in Linux environments. By carefully managing user and group ID mappings and adhering to security best practices, administrators can mitigate the risks associated with process privilege escalation and ensure a more secure system architecture. This is particularly crucial in multi-user systems and cloud environments where process isolation is of paramount importance.

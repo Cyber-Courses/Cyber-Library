@@ -1,0 +1,90 @@
+# Windows Create MSI with WIX
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Installer XML (WiX) is a free toolset that builds Windows installation packages from XML source code. It supports a variety of Windows features including installation, modification, and removal of software applications.
+> 
+
+### 🧐 Why ?
+
+> Creating an MSI file is crucial for the systematic distribution and installation of Windows applications. With WiX, developers can create an installer package that ensures the correct installation of an application and its components, thus eliminating potential issues related to incorrect installation.
+> 
+
+### ⛏️ How ?
+
+> To create an MSI with WiX, follow these steps: \n1. Download and install WiX Toolset.\n2. Create a new WiX project in Visual Studio.\n3. Add references to your project.\n4. Create a Product.wxs file and define product details.\n5. Define the directory structure and components.\n6. Define the feature elements.\n7. Build the WiX project to generate the MSI file.
+> 
+
+### ⏳ When ?
+
+> The use of WiX became popular when Microsoft released it as an open-source project in 2004. It continues to be widely used due to its flexibility, control and the fact that it uses a declarative XML-based language to describe how to build an MSI package.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+WiX, or Windows Installer XML, is a toolset that allows developers to generate Windows Installer (MSI) packages from XML source code. This process begins with XML files that describe the structure of the software system, including details about files, directories, and components.
+
+The WiX toolset takes this system description, compiles the source code, and produces an MSI file. This file essentially serves as a database containing all the installation parameters for the software. When installing the software, the Windows Installer service reads this MSI package to ensure correct and accurate installation as per the developer's instructions. This method offers several benefits, including the prevention of potential issues that may arise from incorrect installation, and simplification of the software distribution and installation process.
+
+It's important to note that the MSI file is more than just an executable script. It contains a complete description of what should be installed, where it should be installed, and how it should interact with the system. This level of detail and control is one of the reasons why WiX is a popular tool among developers.
+
+Moreover, since WiX uses a declarative XML-based language to describe the installation process, it provides developers with a high degree of flexibility and control. It allows for a clear, human-readable description of the installation process, which can be especially beneficial for complex installations.
+
+To use WiX, developers typically follow these steps:
+
+1. Download and install the WiX Toolset.
+2. Create a new WiX project in Visual Studio.
+3. Add references to the project.
+4. Create a Product.wxs file and define the product details.
+5. Define the directory structure and components.
+6. Define the feature elements.
+7. Build the WiX project to generate the MSI file.
+
+In conclusion, WiX is a powerful and versatile tool that simplifies the process of creating Windows Installer packages, making it an essential asset for many developers.
+
+Here's an example of using WiX to create a simple MSI package that installs a text file to the user's desktop.
+
+1. **Download and Install the WiX Toolset**: Visit the WiX toolset website and download the latest version. Install it on your computer.
+2. **Create a New WiX Project in Visual Studio**: Open Visual Studio and create a new WiX Project. You can find this under File > New > Project. Select "WiX" from the list and click "Setup Project for WiX v3".
+3. **Add References to the Project**: Right-click on your project in Solution Explorer, select "Add Reference", and add the necessary references. For this example, no additional references are required.
+4. **Create a Product.wxs File and Define Product Details**: A Product.wxs file will be created automatically when you create a new WiX project. Open this file and fill out the product details. Here is an example:
+
+```xml
+<Product Id="*" Name="SampleProject" Language="1033" Version="1.0.0.0" Manufacturer="YourName">
+
+```
+
+1. **Define the Directory Structure and Components**: Within the Product tag, define where you want your application to be installed. For this example, we're installing the text file to the user's desktop. Also, specify the text file to be installed.
+
+```xml
+<Directory Id="TARGETDIR" Name="SourceDir">
+    <Directory Id="DesktopFolder">
+        <Component Id="ProductComponent" Guid="*">
+            <File Id="MyTextFile" Source="MyTextFile.txt" />
+        </Component>
+    </Directory>
+</Directory>
+
+```
+
+In this snippet, `DesktopFolder` is a special directory property that points to the user's desktop, and `MyTextFile.txt` is the file you want to install.
+
+1. **Define the Feature Elements**: Features represent the parts of the product that the user can choose to install. In this case, we only have one feature - the text file.
+
+```xml
+<Feature Id="ProductFeature" Title="Main Feature" Level="1">
+    <ComponentRef Id="ProductComponent" />
+</Feature>
+
+```
+
+1. **Build the WiX Project to Generate the MSI File**: Save your changes and build the project. If the build is successful, an MSI file will be generated in the project's output directory.
+
+This is a very basic example, but WiX is capable of creating much more complex installations. It's a versatile tool that gives developers a lot of control over the installation process.

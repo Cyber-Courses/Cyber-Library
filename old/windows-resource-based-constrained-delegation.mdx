@@ -1,0 +1,59 @@
+# Windows Resource-based Constrained Delegation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Resource-Based Constrained Delegation (RBCD) is a security feature in Windows Active Directory environments. It allows specific services to impersonate a user to other services without the need for the user's credentials.
+> 
+
+### 🧐 Why ?
+
+> RBCD is important because it mitigates the risk of credential theft and misuse in Active Directory environments. Credential theft is a common tactic used in cyber attacks, so any feature that can reduce this risk is valuable. However, if RBCD is misconfigured, it can itself become a security vulnerability. Therefore, understanding RBCD is important for both attackers (Red Team) and defenders (Blue Team).
+> 
+
+### ⛏️ How ?
+
+> To use RBCD, you need to configure it in the Active Directory. First, you need to choose which services can impersonate a user. Then, you need to choose which services they can impersonate the user to. These settings are configured in the service's account properties in the Active Directory.
+> 
+
+### ⏳ When ?
+
+> RBCD was introduced in Windows Server 2012 R2. However, it wasn't until the release of Windows Server 2016 that it became widely used, as the 2016 version made it easier to configure and manage RBCD.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Resource-Based Constrained Delegation (RBCD) is a security feature in Windows Active Directory environments that empowers specific services to impersonate a user to other services without requiring the user's credentials. The mechanism through which RBCD works involves a service obtaining a Kerberos ticket on behalf of a user, which is then used to authenticate the user to other services. Interestingly, the service does not need the user's password for this process. The service's own credentials are leveraged to acquire the ticket.
+
+RBCD serves as a potent tool in preventing credential theft, making it a valuable feature in mitigating the risk of credential theft and misuse in Active Directory environments, which are common tactics used in cyber attacks. The introduction of RBCD with Windows Server 2012 R2 and its subsequent popularization with Windows Server 2016, due to its easier configuration and management, has been of significant importance for both cybersecurity attackers (Red Team) and defenders (Blue Team).
+
+However, it's crucial to note that if RBCD is misconfigured, it could potentially become a security vulnerability itself. An attacker could exploit a misconfigured RBCD to impersonate any user to any service. Therefore, a comprehensive understanding of RBCD, along with proper configuration, is essential to ensure it serves as a security asset rather than a liability.
+
+Let's illustrate RBCD with a hypothetical scenario. Suppose we have an Active Directory environment with three entities: a web server (WebServer), a database server (DatabaseServer), and a user (User1).
+
+1. **Step 1: Configuration in Active Directory**: The first step is to configure RBCD in Active Directory. We allow WebServer to impersonate User1 to the DatabaseServer. This is done in the properties of the WebServer account in Active Directory.
+    
+    ```powershell
+    # PowerShell command to set RBCD in Active Directory
+    Set-ADUser WebServer -PrincipalsAllowedToDelegateToAccount (Get-ADUser DatabaseServer)
+    
+    ```
+    
+2. **Step 2: User1 authenticates to WebServer**: User1 logs into the web application hosted on WebServer. The WebServer now has a Kerberos ticket representing User1.
+3. **Step 3: WebServer impersonates User1 to DatabaseServer**: WebServer needs to fetch some data from DatabaseServer on behalf of User1. Using the Kerberos ticket from step 2, it authenticates to DatabaseServer as User1.
+    
+    ```powershell
+    # PowerShell command to use the Kerberos ticket
+    Invoke-Command -ComputerName DatabaseServer -ScriptBlock { # Database query script } -Authentication Kerberos -Credential User1
+    
+    ```
+    
+4. **Step 4: DatabaseServer authorizes User1**: DatabaseServer receives the request and sees it as coming from User1. It checks its access control policies to see if User1 is allowed to fetch the requested data. If the check passes, the data is sent to WebServer.
+
+In this way, WebServer can access data on DatabaseServer on behalf of User1 without ever needing User1's password. But remember that if RBCD is misconfigured, an attacker could abuse it to impersonate any user to any service, so always ensure proper configuration and understanding of RBCD.

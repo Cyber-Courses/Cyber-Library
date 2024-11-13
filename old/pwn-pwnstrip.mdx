@@ -1,0 +1,92 @@
+# Pwn pwnstrip
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwnstrip is a cybersecurity tool that is part of the Pwn tools suite. It is used for binary stripping, which is the process of removing non-essential components from binary files to reduce their size and potentially obfuscate their functionality.
+> 
+
+### 🧐 Why ?
+
+> Understanding pwnstrip is important for both cybersecurity professionals and software developers. For professionals tasked with securing systems, it makes it possible to understand what components of a binary are not necessary for its execution. This can help in the process of reverse engineering and malware analysis. For developers, it helps in creating binaries that are smaller and potentially more difficult to reverse engineer.
+> 
+
+### ⛏️ How ?
+
+> To use pwnstrip, you first need to install the Pwn tools suite. This can be done using pip, the Python package installer. Once installed, pwnstrip can be used on a binary file by calling `pwnstrip` followed by the name of the file. The stripped binary will be outputted to a new file.
+> 
+
+### ⏳ When ?
+
+> Pwnstrip and the Pwn tools suite have been in use since their development in 2006. However, the concept of binary stripping has been in use since the early days of computer programming.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwnstrip is a tool used in cybersecurity for analyzing and modifying binary files. Its primary function is to strip non-essential sections from binary files, such as debugging symbols and metadata, which are not required for execution. This process helps in reducing the file size and can also make reverse engineering more challenging. However, the use of pwnstrip requires careful handling, as removing critical sections can render the binary non-functional.
+
+### Technical Functionality
+
+1. **Binary Analysis**:
+    - Pwnstrip begins by analyzing the binary file to identify sections that are not essential for its execution. This includes debugging symbols, extra metadata, and other non-essential information.
+2. **Section Identification**:
+    - Common sections that are often stripped include:
+        - **.debug**: Contains debugging information.
+        - **.comment**: Stores version control or other comments.
+        - **.note**: May contain informational notes.
+        - **.symtab**: Symbol table, often not needed for execution.
+    - Pwnstrip uses knowledge of common binary formats (e.g., ELF, PE) to determine which sections can be safely removed.
+3. **Stripping Process**:
+    - After identifying the non-essential sections, pwnstrip removes these sections from the binary file. The tool ensures that the essential parts of the binary required for execution are preserved.
+
+### Example Usage
+
+To illustrate the use of pwnstrip, consider the following example where we have a binary file named "program":
+
+```bash
+bashCopy code
+$ pwnstrip program -o program_stripped
+
+```
+
+In this command:
+
+- `pwnstrip` is the tool being used.
+- `program` is the original binary file.
+- `o program_stripped` specifies the output file name for the stripped binary.
+
+This command strips the non-essential components from the "program" binary and saves the resulting binary as "program_stripped".
+
+### Benefits of Using Pwnstrip
+
+1. **Reduced File Size**:
+    - Stripping non-essential sections reduces the size of the binary, which can be beneficial in environments with limited storage capacity.
+    - Example: Embedded systems or IoT devices where storage is a premium.
+2. **Increased Security**:
+    - Removing debugging symbols and other metadata can make reverse engineering more difficult. This can help protect intellectual property and sensitive algorithms embedded within the binary.
+    - Example: Protecting proprietary software from being easily analyzed and copied.
+
+### Caution in Usage
+
+- **Potential Execution Problems**:
+    - If essential sections are mistakenly removed, the binary may fail to execute or exhibit unexpected behavior.
+    - Pwnstrip mitigates this risk by using detailed knowledge of binary formats to ensure that only non-essential sections are stripped.
+
+### Conclusion
+
+Pwnstrip is a valuable tool in cybersecurity for optimizing binary files and enhancing their security. By carefully analyzing and removing non-essential sections, it helps in reducing file sizes and complicating reverse engineering efforts. However, its use requires caution to avoid removing critical parts of the binary, which could compromise its functionality.
+
+# 🖇️ Références
+
+---
+
+- [ELF Binary Format](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
+- [PE Binary Format](https://en.wikipedia.org/wiki/Portable_Executable)

@@ -1,0 +1,126 @@
+# PID Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PID Namespace is an important feature in Linux. It provides process isolation by making processes in different PID namespaces unable to see or signal each other, unless explicitly allowed. This isolation is crucial in many applications, such as containers, where it's necessary to keep processes separate and secure.
+> 
+
+### 🧐 Why ?
+
+> Understanding PID Namespace is essential for anyone working with Linux, especially in fields like cybersecurity or system administration. It's a fundamental concept in Linux that allows for process isolation, which is vital for system security and stability. Without process isolation, a rogue or malicious process could potentially disrupt or take control of other processes, leading to system instability or security breaches.
+> 
+
+### ⛏️ How ?
+
+> Creating a new PID Namespace in Linux is relatively straightforward. You can use the 'unshare' command with the '-p' option to create a new PID Namespace and then use the 'fork' system call to create a new process in that namespace. It's also possible to use the 'clone' system call with the 'CLONE_NEWPID' flag to create a new process in a new PID Namespace. However, it's important to note that only privileged users (usually root) can create new PID namespaces for security reasons.
+> 
+
+### ⏳ When ?
+
+> The concept of namespaces in Linux, including PID Namespace, was introduced in kernel version 2.4.19, released in 2002. However, it was not until kernel version 3.8, released in 2013, that unprivileged users were allowed to create new namespaces, albeit with some restrictions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## PID Namespace in Linux: Detailed Overview
+
+PID Namespace in Linux is a feature that creates a separate space for process identifiers (PIDs). Each PID Namespace maintains its own unique set of PID numbers, which are independent of those in other namespaces. This feature provides a crucial layer of process isolation by ensuring that processes in one namespace cannot see or interact with processes in another, unless explicitly allowed. This isolation enhances system security and stability, particularly in containerized environments.
+
+### Creating a PID Namespace
+
+Creating a new PID Namespace can be achieved using the `unshare` command with the `-p` option, or by using the `clone` system call with the `CLONE_NEWPID` flag. However, creating new PID namespaces is restricted to privileged users due to security reasons.
+
+### Using `unshare` Command
+
+The `unshare` command allows you to run a program with new namespaces. The `-p` option is used to create a new PID namespace.
+
+```bash
+sudo unshare -p -f bash
+
+```
+
+- `sudo` is used to run the command with superuser privileges.
+- `unshare` is the command to create new namespaces.
+- `p` specifies the creation of a new PID namespace.
+- `f` forks a new child process.
+- `bash` launches a new bash shell within this new namespace.
+
+### Verifying the New Namespace
+
+Once inside the new namespace, verify the creation by checking the PID of the current process:
+
+```bash
+echo $$
+
+```
+
+In the new PID namespace, the PID of the first process (the bash shell in this case) should be `1`, indicating that you are indeed in a new namespace.
+
+### Process Isolation Example
+
+To illustrate process isolation, start a background process in the new bash shell:
+
+```bash
+sleep 1000 &
+
+```
+
+This command starts a `sleep` process that will run in the background for 1000 seconds. List the running processes with `ps` to see only the bash shell and the sleep process:
+
+```bash
+ps
+
+```
+
+This should display something similar to:
+
+```
+  PID TTY          TIME CMD
+    1 pts/0    00:00:00 bash
+   10 pts/0    00:00:00 sleep
+   11 pts/0    00:00:00 ps
+
+```
+
+Here, you can see the bash shell (`PID 1`), the sleep process (`PID 10`), and the `ps` command itself (`PID 11`).
+
+### Exiting the Namespace
+
+Exit the bash shell and return to the original shell (outside the PID namespace):
+
+```bash
+exit
+
+```
+
+In the original shell, you won’t see the `sleep` process running:
+
+```bash
+ps -ef | grep sleep
+
+```
+
+This demonstrates that processes in different PID namespaces are isolated from each other.
+
+### Role of PID 1 in PID Namespace
+
+The first process in each PID namespace, designated as PID 1, has a special role. It is responsible for reaping orphaned processes, which are processes that have been abandoned by their parent processes. This function is critical for maintaining system stability and preventing resource leakage.
+
+### Applications in Containerization
+
+PID namespaces are particularly beneficial in container technology. Containers use PID namespaces to ensure that processes within them are isolated from the host system and other containers. This isolation enhances security by ensuring that even if a container is compromised, the attacker cannot access processes in other containers or the host system.
+
+### Historical Context
+
+PID Namespaces were introduced in Linux kernel version 2.4.19 in 2002. However, it wasn’t until the release of kernel version 3.8 in 2013 that unprivileged users were granted the ability to create new namespaces, albeit with some limitations.
+
+## Conclusion
+
+PID Namespaces provide effective process isolation by maintaining separate PID spaces for different sets of processes. This feature is particularly useful in containerization, ensuring that processes within a container are isolated from the host system and other containers. Understanding and using PID namespaces involves using commands like `unshare` and system calls like `clone` with appropriate flags. Properly managing these namespaces is crucial for system security and stability.

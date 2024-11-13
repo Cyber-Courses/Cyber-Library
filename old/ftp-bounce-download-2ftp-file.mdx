@@ -1,0 +1,81 @@
+# FTP Bounce - Download 2ºFTP file
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> FTP Bounce is a known vulnerability in the File Transfer Protocol (FTP) that allows an attacker to use the PORT command to request access to ports indirectly through the use of the victim's machine as a middle man for the request. This vulnerability was first discovered in 1995 and is still present in many FTP servers today. The 2ºFTP file download refers to the second step in the FTP Bounce attack where the attacker downloads files from a remote server to their local machine.
+> 
+
+### 🧐 Why ?
+
+> Understanding the FTP Bounce attack and the process of 2ºFTP file download is important because this vulnerability is still present in many FTP servers today. It poses a serious security risk as it allows an attacker to bypass network security measures and gain unauthorized access to network systems and sensitive data. Furthermore, it can be used to perform anonymous or untraceable attacks.
+> 
+
+### ⛏️ How ?
+
+> To perform a FTP Bounce attack, the attacker first needs to identify a vulnerable FTP server. Then, the attacker would use the PORT command to request the server to send data to a specific port on a third-party machine (the victim). Once the data is sent to the victim's machine, the attacker can then use the RETR command to download the data. It is important to note that this is a high-level overview and the actual steps may vary depending on the specific FTP server and network settings.
+> 
+
+### ⏳ When ?
+
+> FTP Bounce attacks have been known since 1995 when the vulnerability was first discovered. Despite various security measures and patches, this vulnerability is still present in many FTP servers today, making it a prevalent issue in the field of cybersecurity.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The FTP Bounce attack is a type of security vulnerability that exploits the nature of the File Transfer Protocol (FTP). FTP is a standard network protocol used for the transfer of files between a client and server on a network. However, FTP does not have a built-in mechanism to verify that the data it sends on command is being sent to the correct client. This leaves it open to the FTP Bounce attack.
+
+In a typical FTP session, the client uses the PORT command to instruct the server where to send data. The client specifies an IP address and port number, and the server sends the data to that location. However, the FTP protocol doesn't enforce the rule that the data must be sent back to the client that originally made the request. This oversight is what makes the FTP Bounce attack possible.
+
+In an FTP Bounce attack, an attacker manipulates the PORT command to instruct the server to send data to a different machine altogether. The data is effectively "bounced" off of this third-party machine, hence the term "FTP Bounce". This attack can be used to penetrate firewalls and other network security measures, as data seems to be coming from a trusted source (the victim's machine) rather than the actual source (the attacker).
+
+The 2ºFTP file download is the second step in the FTP Bounce attack. After bouncing data off of the victim's machine, the attacker uses the RETR command to download the data. The RETR command is an FTP command used to retrieve a copy of a file from a server. When the attacker uses this command, the server sends the requested file to the specified port on the victim's machine, and the attacker is able to download it.
+
+In summary, the FTP Bounce attack is a serious security risk and understanding its mechanisms is crucial for implementing effective network security measures. The attack exploits the FTP's lack of verification mechanisms in the use of the PORT command, allowing an attacker to bounce data off a third-party machine and then download it using the RETR command. This not only allows unauthorized access to sensitive data, but also allows the attacker to bypass network security measures by appearing to be a trusted source.
+
+Here's a simplified example of how the FTP Bounce Attack could look like:
+
+Let's say we have three entities: the attacker (IP: 1.1.1.1), an FTP server (IP: 2.2.2.2) that is vulnerable to FTP Bounce, and a target machine (IP: 3.3.3.3).
+
+1. **Step 1 - Establishing the Connection:**
+The attacker first establishes a connection to the FTP server. This can be done using a simple FTP command line client.
+    
+    ```bash
+    ftp 2.2.2.2
+    
+    ```
+    
+2. **Step 2 - Using the PORT Command:**
+The attacker then uses the PORT command to instruct the server to send data to the target machine (3.3.3.3) on a specific port (say, 20). It's important to note that the port number needs to be broken down into two bytes for the command. So, for port 20, the breakdown would be 0 and 20.
+    
+    ```bash
+    PORT 3,3,3,3,0,20
+    
+    ```
+    
+3. **Step 3 - Requesting Data:**
+The attacker then requests a file from the FTP server. This can be done using the RETR command. Let's say the file is called "file.txt".
+    
+    ```bash
+    RETR file.txt
+    
+    ```
+    
+    At this point, the FTP server will send "file.txt" to port 20 on the target machine (3.3.3.3), effectively bouncing the data off this machine.
+    
+4. **Step 4 - Retrieving Data:**
+The attacker then needs to retrieve the bounced data. This can be done using a packet sniffer on the attacker's machine that's set to listen for incoming data on port 20.
+    
+    ```bash
+    tcpdump -i eth0 'tcp port 20'
+    
+    ```
+    
+
+Each of these steps is part of the FTP Bounce attack, which allows an attacker to bypass network security measures and gain unauthorized access to sensitive data.

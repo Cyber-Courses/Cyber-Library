@@ -1,0 +1,67 @@
+# Windows JuicyPotato
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows JuicyPotato is an attack technique that allows local privilege escalation on a Windows system. It exploits the SeImpersonate privilege that a service running as SYSTEM may have. This privilege allows a service to impersonate security tokens of other users and potentially elevate its privileges.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows JuicyPotato is crucial as it poses a significant threat to the security of Windows systems. It allows attackers to gain unauthorized access and escalate their privileges on the targeted system which can lead to the compromise of sensitive data or even total system takeover.
+> 
+
+### ⛏️ How ?
+
+> To use JuicyPotato, you need to have valid credentials and be able to execute code on the system. The attack involves creating a fake server on the local system, making a request to a legitimate service asking it to authenticate to the fake server. When the service attempts to authenticate, it provides a NTLM authentication token which is then captured by the attacker.
+> 
+
+### ⏳ When ?
+
+> The use of JuicyPotato in real-world attacks has been documented as early as 2016 and it remains an effective attack technique due to the continued existence of the SeImpersonate privilege in Windows services.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+JuicyPotato is an advanced attack technique that targets the DCOM activation service in Windows. Here's a more detailed explanation of how it operates:
+
+When a COM object is activated on a Windows system, this action is carried out in the security context of the user who initiated the request. If this user holds the SeImpersonate privilege, they can impersonate the security token of another user. This privilege is incredibly powerful, as it essentially allows a user to take on the identity of another user, potentially giving them access to resources and privileges they would not normally have.
+
+Microsoft, recognizing the potential security risk, introduced a mitigation strategy in Windows Server 2012. This mitigation restricts the ability to impersonate security tokens to local system accounts only, significantly limiting the potential for abuse.
+
+However, JuicyPotato circumvents this mitigation by creating a fake server on the local system. The COM object is tricked into authenticating to this fake server. During this authentication process, the COM object provides an NTLM authentication token. This token, which represents the system's identity, is then captured by the attacker. Because the NTLM token is linked to the system account, which has broad privileges, the attacker can use it to escalate their own privileges and gain unauthorized access to resources.
+
+This attack technique has been documented in real-world attacks since 2016. Despite Microsoft's mitigation efforts, it continues to be effective due to the continued existence of the SeImpersonate privilege in Windows services. Understanding and defending against JuicyPotato is crucial for maintaining the security of Windows systems.
+
+Here is a simplified, educational example of how an attacker might use the JuicyPotato technique.
+
+Imagine a scenario where an attacker has gained some level of access to a Windows system, but they're operating with low-privilege user rights. They want to escalate their privileges to gain more control over the system. They decide to use JuicyPotato for this task.
+
+1. **Establish a foothold:** The attacker first needs to execute code on the system. This could be accomplished through a variety of means, such as convincing a user to download and run a malicious file. For our educational example, let's say they execute a simple command to verify their current privileges:
+
+```
+whoami
+
+```
+
+This command will display the username of the current user, which would show they have low-privilege access.
+
+1. **Create a fake server:** The attacker then uses the JuicyPotato tool to create a fake server on the system. This is done using the following command:
+
+```
+JuicyPotato.exe -l 1337 -p C:\\Windows\\System32\\cmd.exe -t *
+
+```
+
+In this command, `-l` specifies the listening TCP port for the fake server, `-p` specifies the program to run with escalated privileges, and `-t` specifies the target for the attack. In this case, `*` means any available CLSID will be used.
+
+1. **Trigger the attack:** With the fake server set up, the attacker then triggers a legitimate service to authenticate to this fake server. This is done by sending an HTTP request to a vulnerable web application running on the system, which is set up to authenticate incoming requests. When the service attempts to authenticate, it provides an NTML authentication token.
+2. **Capture and use the token:** The JuicyPotato tool captures the NTLM authentication token, which is linked to a system account with broad privileges. The attacker can then use this token to escalate their own privileges and gain unauthorized access to resources.
+
+Please note that this is a simplified example and real-world attacks would involve additional steps and complexities. Further, this example should only be used for educational purposes and not be replicated in a real-world environment without appropriate permissions.

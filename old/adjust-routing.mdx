@@ -1,0 +1,66 @@
+# Adjust routing
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Adjust routing is the process of altering the path that data packets take to reach their destination within a network. It's a crucial aspect of network management and optimization, and it involves several fundamental concepts, such as routing tables, routing protocols, and network topologies.
+> 
+
+### 🧐 Why ?
+
+> Adjust routing is critical for the efficient and reliable transmission of data within a network. It ensures that data packets reach their intended destination in the least amount of time, thereby reducing latency and improving the overall performance of the network. Furthermore, adjust routing can provide redundancy, thus enhancing the robustness of the network and reducing the risk of data loss.
+> 
+
+### ⛏️ How ?
+
+> To implement adjust routing, network administrators typically use routing protocols, such as Open Shortest Path First (OSPF) or Border Gateway Protocol (BGP). These protocols automatically adjust the routing tables in routers based on network conditions, thereby optimizing the path of data packets. It's also common to manually adjust routing for specific network scenarios, like traffic engineering or disaster recovery.
+> 
+
+### ⏳ When ?
+
+> Adjust routing has been in use since the inception of networking. However, its importance has grown with the increasing complexity and scale of networks, particularly with the advent of the internet and cloud computing.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Adjust routing is centered around the routing table, a database that holds the optimal paths to reach various destinations within a network. These paths are determined based on network metrics such as distance or cost. Routing protocols, like Open Shortest Path First (OSPF) or Border Gateway Protocol (BGP), are utilized to update these tables. OSPF, for instance, uses a shortest path tree algorithm to find the most efficient path for data packets. On the other hand, BGP uses defined policies and rule sets to determine the best path.
+
+These routing protocols can dynamically update routing tables in real-time as network conditions change. This means that if a route becomes unavailable or congested, the routing protocol can find an alternative path, ensuring data packets reach their destination without significant delay. This dynamic nature of adjust routing contributes to the robustness and resilience of a network.
+
+However, there is also the concept of static routing where routes are manually defined by network administrators and do not change unless manually adjusted. While this method can provide more control, it lacks the flexibility offered by dynamic routing.
+
+A crucial point to note is the need for careful management and monitoring of adjust routing. Misconfigurations can lead to issues like routing loops or black holes. In a routing loop, data packets are endlessly circulated within the network without reaching their destination. In a black hole, data packets are discarded, leading to data loss. Hence, proactive network monitoring and the correct implementation of routing protocols are vital for effective adjust routing.
+
+Consider a simple network with three routers, R1, R2, and R3. R1 is connected to R2, and R2 is connected to R3. The goal is to adjust the routing so that traffic from R1 to R3 doesn't go directly but instead goes via R2.
+
+In the case of static routing, a network administrator could manually set this route on R1 with a command such as (Cisco IOS command):
+
+```
+R1(config)#ip route 192.0.2.0 255.255.255.0 203.0.113.2
+
+```
+
+In this command, `192.0.2.0 255.255.255.0` represents the network and subnet mask of R3's network. `203.0.113.2` is the IP address of R2's interface connected to R1. This command tells R1 to send all traffic destined for R3's network to R2.
+
+If using a routing protocol like OSPF, the routers would automatically find the shortest path based on the cost of the links. If R1 to R3 direct link has a higher cost (due to lower bandwidth or higher delay), OSPF would automatically adjust the routing to send traffic via R2. Network administrators can influence this by manually adjusting the cost of the links.
+
+For instance, to increase the cost of the direct link from R1 to R3 (Cisco IOS command):
+
+```
+R1(config-if)#ip ospf cost 100
+
+```
+
+This command increases the cost of the OSPF link, making it less likely to be chosen as the best path.
+
+Remember, each step of the process must be tested and confirmed. Misconfigurations can lead to routing loops or black holes. Network monitoring tools can help identify these issues and ensure data packets are reaching their intended destination.
+
+# 🖇️ Références
+
+---

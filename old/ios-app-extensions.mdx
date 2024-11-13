@@ -1,0 +1,79 @@
+# iOS App Extensions
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS App Extensions are tools that allow third-party applications to provide functionality within other applications. They are designed to provide a smooth and seamless user experience by interacting with the host application in a limited capacity, without having access to the host's data and user interface.
+> 
+
+### 🧐 Why ?
+
+> App Extensions are crucial for a more integrated and efficient user experience. They allow apps to interact and share functionality, promoting app interoperability and reducing app switching. For developers, App Extensions provide a way to extend their app's functionality and presence across the iOS ecosystem.
+> 
+
+### ⛏️ How ?
+
+> App Extensions can be implemented by adding a new target to an existing iOS project in Xcode. The new target should be of type 'App Extension'. Once created, the extension can be coded to provide the specific functionality intended. The extension's life cycle is managed by iOS, and its interaction with the host app is handled using the NSExtensionContext object.
+> 
+
+### ⏳ When ?
+
+> Apple introduced App Extensions with the release of iOS 8 in 2014. Since then, they have become a key tool for iOS developers and are widely used across a wide range of popular apps.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+An iOS App Extension is essentially a separate binary that is packaged within an application's bundle. This means it operates independently, running in its own process and having its own designated memory space, separate from the host app. This design ensures that the host application cannot directly access the extension's data or interface, providing a robust mechanism for data privacy and security.
+
+The only means for an extension to interact with the host application is through the NSExtensionContext object. This object is pivotal in passing data back and forth between the host app and the extension. Consequently, the NSExtensionContext object becomes an essential player in the extension's life cycle.
+
+The life cycle of an App Extension is strictly managed by iOS. When the extension is initiated, certain methods are invoked to signal the start of the extension. Likewise, specific methods are triggered when the extension finishes its operation. Additionally, when the extension is asked to perform a specific function, corresponding methods are activated. This strict life cycle management ensures that the extension operates efficiently and does not interfere with the host application's functioning.
+
+In essence, iOS App Extensions are powerful tools that allow third-party applications to extend their functionality within other applications, all while ensuring a seamless user experience and maintaining a high level of data privacy and security.
+
+Let's say you're developing a note-taking app and you want to allow users to save web content directly from Safari into your app using an Action Extension.
+
+1. **Create the extension:** In Xcode, select File > New > Target, then select 'Action Extension' from the template list. Give it a name, like 'SaveToMyApp'.
+2. **Design the interface:** Edit the `MainInterface.storyboard` file in the extension's directory. This is where you design the user interface that will be displayed when your extension is activated.
+3. **Write the code:** In your extension's `ActionViewController.swift` file, implement the `prepareForAction(completionHandler:)` function. This function is called when your extension is activated, and it's where your extension's main code goes. Here's an example of how you might implement it to save the URL of the current webpage:
+
+```swift
+override func prepareForAction(completionHandler: @escaping ((Bool) -> Void)) {
+    // Get the current URL from the extension context
+    if let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
+       let itemProvider = inputItem.attachments?.first as? NSItemProvider,
+       itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
+
+        // Load the URL and save it to your app
+        itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { (url, error) in
+            if let url = url as? URL {
+                // Save the URL to your app
+                saveURLToMyApp(url)
+                completionHandler(true)
+            } else {
+                completionHandler(false)
+            }
+        }
+    } else {
+        completionHandler(false)
+    }
+}
+
+```
+
+1. **Handle the response:** After your extension finishes, it should call the `completeRequest(returningItems:completionHandler:)` method on its `NSExtensionContext` to pass data back to the host app and exit. Here's an example:
+
+```swift
+extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+
+```
+
+1. **Test the extension:** Now you can run your app, switch to Safari, and activate your extension through the share sheet. If everything is working correctly, you should be able to save URLs directly to your app from Safari.
+
+Remember, this is a simplified example. Real-world app extensions may need to handle more complex situations and take into account various edge cases.

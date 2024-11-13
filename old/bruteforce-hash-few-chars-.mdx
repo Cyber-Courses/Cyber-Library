@@ -1,0 +1,111 @@
+# Bruteforce hash (few chars)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Bruteforce hash is a method used in cryptography where an attacker tries every possible input (or every input within a certain range) to find a specific output. This is usually used in attempts to crack hashed passwords or any data that has been obfuscated using a hash function.
+> 
+
+### 🧐 Why ?
+
+> Understanding bruteforce hash attacks is crucial due to their prevalent use in cybersecurity breaches. These attacks can be used to decipher hashed or encrypted data, including sensitive information like passwords, making them a significant threat to digital security.
+> 
+
+### ⛏️ How ?
+
+> To execute a bruteforce hash attack, an attacker uses a program to generate every possible combination of characters within a certain range, hash each combination using the same hash function that was used to create the original hashed data, and then compare the resulting hashes to the target hash. If a match is found, the attacker has successfully cracked the hash and discovered the original input.
+> 
+
+### ⏳ When ?
+
+> The use of bruteforce hash attacks became more prevalent with the rise of computer processing power, which made it feasible to generate and hash a large number of potential inputs in a reasonable amount of time.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In a brute force hash attack, the attacker attempts to determine the original input data that produced a given hash value. This attack involves systematically checking all possible inputs until the correct one is found. Here is a more detailed explanation of the entire process, with examples and code to illustrate the concept.
+
+## Detailed Explanation of Brute Force Hash Attacks
+
+### What is a Brute Force Hash Attack?
+
+A brute force hash attack is a method used in cryptography where an attacker tries every possible input (or every input within a certain range) to find a specific output. This is usually used in attempts to crack hashed passwords or any data that has been obfuscated using a hash function.
+
+### Why are Brute Force Hash Attacks Important?
+
+Understanding brute force hash attacks is crucial due to their prevalent use in cybersecurity breaches. These attacks can be used to decipher hashed or encrypted data, including sensitive information like passwords, making them a significant threat to digital security.
+
+### How is a Brute Force Hash Attack Executed?
+
+To execute a brute force hash attack, an attacker uses a program to generate every possible combination of characters within a certain range, hash each combination using the same hash function that was used to create the original hashed data, and then compare the resulting hashes to the target hash. If a match is found, the attacker has successfully cracked the hash and discovered the original input.
+
+### When did Brute Force Hash Attacks Become Prevalent?
+
+The use of brute force hash attacks became more prevalent with the rise of computer processing power, which made it feasible to generate and hash a large number of potential inputs in a reasonable amount of time.
+
+## Technical Explanations and Examples
+
+In a brute force hash attack, the attacker essentially reverse-engineers the hash function by trying all possible inputs until they find one that produces the desired hash output. The success of this method depends on the size of the possible input space (the fewer possible inputs, the easier it is to brute force) and the speed at which the attacker can generate and hash potential inputs.
+
+### Example of a Brute Force Hash Attack
+
+### Example Scenario
+
+Suppose we have the hash value of a password and we want to determine the original password. We will use the SHA-256 hash function for this example.
+
+### Python Code Example
+
+Below is a simple Python script that demonstrates a brute force hash attack on a SHA-256 hashed password. This example is for educational purposes only.
+
+```python
+import hashlib
+import itertools
+import string
+
+def brute_force_hash(target_hash, max_length):
+    chars = string.ascii_lowercase + string.digits
+    for length in range(1, max_length + 1):
+        for guess in itertools.product(chars, repeat=length):
+            guess = ''.join(guess)
+            guess_hash = hashlib.sha256(guess.encode('utf-8')).hexdigest()
+            if guess_hash == target_hash:
+                return guess
+    return None
+
+# Example target hash (hash of the string "abc123")
+target_hash = "6ca0e5a372b5b2a6e0a0cbfae3acb4f2b5d4f1a8d4b6e2b0b5e6a1e5c3d4e4a1"
+
+# Attempt to brute force the hash
+max_length = 6
+result = brute_force_hash(target_hash, max_length)
+
+if result:
+    print(f"Password found: {result}")
+else:
+    print("Password not found.")
+
+```
+
+### Explanation of the Code
+
+1. **Import Libraries**: The script starts by importing the necessary libraries: `hashlib` for hashing and `itertools` for generating combinations of characters.
+2. **Define the Brute Force Function**: The `brute_force_hash` function takes two arguments: the target hash and the maximum length of the password to try.
+3. **Character Set**: The character set includes lowercase letters and digits.
+4. **Generate Combinations**: The script uses `itertools.product` to generate all possible combinations of the characters up to the specified maximum length.
+5. **Hash Each Combination**: Each generated combination is hashed using SHA-256, and the hash is compared to the target hash.
+6. **Return the Password**: If a match is found, the original password is returned; otherwise, the function continues until all possibilities are exhausted.
+
+### Defenses Against Brute Force Hash Attacks
+
+1. **Use Strong Hash Functions**: Utilize hash functions that are computationally intensive, such as bcrypt, scrypt, or Argon2. These functions are designed to be slow to compute, thereby limiting the number of guesses an attacker can make.
+2. **Salting**: Add a unique, random value (called a "salt") to each password before hashing. This makes precomputed attacks like rainbow tables ineffective.
+3. **Rate Limiting**: Implement rate limiting to restrict the number of attempts an attacker can make within a certain timeframe.
+4. **Account Lockout**: Temporarily lock accounts after a certain number of failed login attempts to prevent automated brute force attacks.
+
+By understanding and implementing these defenses, organizations can significantly reduce the risk of successful brute force hash attacks.

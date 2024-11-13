@@ -1,0 +1,131 @@
+# Pwn disasm
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn disasm is a Python module that is part of the Pwntools suite. It is used for disassembling binary files. Disassembly, in the context of computer science, is the process of translating machine language into assembly language, which is more human-readable. Pwn disasm is particularly useful in the field of reverse engineering and binary exploitation, where it aids in understanding the functionality and vulnerabilities of a binary file.
+> 
+
+### 🧐 Why ?
+
+> Understanding binary files is crucial for security professionals, particularly those engaged in penetration testing and reverse engineering. Binary files often contain critical functionalities of an application and any vulnerabilities in them can be exploited for malicious purposes. Pwn disasm helps in decoding these binary files into assembly language, providing a way to study their workings in detail. Furthermore, it aids in the process of locating and exploiting vulnerabilities in the binaries, which is crucial in both offensive and defensive cybersecurity.
+> 
+
+### ⛏️ How ?
+
+> To use Pwn disasm, you will first need to install the Pwntools suite. This can be done with the command `pip install pwntools`. Once installed, you can import the disasm module in your Python script with `from pwn import disasm`. To disassemble a binary file, pass the binary data as an argument to the `disasm()` function. For example, `print(disasm(binary_data))` would print the disassembled code of the binary data. Remember that Pwn disasm can only disassemble binary files, not source code files.
+> 
+
+### ⏳ When ?
+
+> Pwn disasm started to get used broadly in the cybersecurity community after the release of the Pwntools suite in 2013. Since then, it has been a valuable tool for both learning and practicing binary exploitation and reverse engineering.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn disasm is a tool used to convert machine code into assembly language. Machine code is the lowest level of code that a processor directly executes. It consists of binary instructions specific to a particular architecture, such as x86, ARM, or MIPS. Assembly language, while still low-level and architecture-specific, is more human-readable than machine code. Pwn disasm leverages the Capstone disassembly framework for disassembling machine code and includes additional features like symbol resolution and instruction annotation to make the disassembled code easier to understand.
+
+### Technical Functionality
+
+1. **Machine Code and Assembly Language**:
+    - **Machine Code**: Binary instructions executed by the processor. Examples include `b8 04 00 00 00` (x86 instruction to move 4 into the EAX register).
+    - **Assembly Language**: Human-readable representation of machine code. Example: `mov eax, 4`.
+2. **Capstone Disassembly Framework**:
+    - Capstone is a lightweight and fast disassembly framework that supports multiple architectures and platforms. It converts machine code to assembly language.
+3. **Additional Features**:
+    - **Symbol Resolution**: Converts addresses and offsets to meaningful symbols if available.
+    - **Instruction Annotation**: Provides additional information about instructions to enhance understanding.
+
+### Example Usage of Pwn disasm
+
+1. **Create a Binary File**:
+    - First, create a simple x86 assembly program and compile it into a binary file.
+
+```
+section .text
+global _start
+_start:
+    mov eax, 4
+    int 0x80
+
+```
+
+- Save this code to a file named `example.asm` and compile it using `nasm` and `ld`:
+
+```bash
+nasm -f elf32 -o example.o example.asm
+ld -m elf_i386 -o example.bin example.o
+
+```
+
+1. **Install Pwntools and Import disasm**:
+    - Install Pwntools and import the `disasm` module.
+
+```bash
+pip install pwntools
+
+```
+
+```python
+from pwn import disasm
+
+```
+
+1. **Read the Binary File and Disassemble It**:
+    - Read the compiled binary file and disassemble it using Pwn disasm.
+
+```python
+# Read the binary file
+binary_data = open('example.bin', 'rb').read()
+
+# Disassemble the binary data
+disassembled_code = disasm(binary_data)
+
+# Print the disassembled code
+print(disassembled_code)
+
+```
+
+### Expected Output
+
+When you run the above Python code, the disassembled output should look like this:
+
+```
+   0:   b8 04 00 00 00          mov    eax,0x4
+   5:   cd 80                   int    0x80
+
+```
+
+This output indicates that the binary file contains two instructions:
+
+1. `mov eax,0x4` (Move the value 4 into the EAX register).
+2. `int 0x80` (Interrupt the processor, typically used for system calls in Linux).
+
+### Detailed Steps and Explanation
+
+1. **Assembling the Code**:
+    - The assembly code is assembled into machine code using `nasm`, and then linked into a binary executable using `ld`.
+2. **Reading the Binary File**:
+    - The binary file is read into a byte array in Python. This raw machine code is what will be disassembled.
+3. **Disassembling the Code**:
+    - The `disasm` function from Pwntools uses Capstone to convert the machine code into human-readable assembly instructions.
+    - The disassembly process involves decoding the binary instructions and mapping them to their assembly language equivalents.
+
+### Conclusion
+
+Pwn disasm is a powerful tool for converting machine code to assembly language, making it easier to understand and analyze binary executables. By using the Capstone disassembly framework, Pwn disasm supports multiple architectures and provides additional features like symbol resolution and instruction annotation. This tool is essential for reverse engineering, debugging, and understanding the inner workings of compiled programs.
+
+# 🖇️ Références
+
+---
+
+- [http://docs.pwntools.com/en/stable/intro.html](http://docs.pwntools.com/en/stable/intro.html)
+- [https://www.capstone-engine.org/](https://www.capstone-engine.org/)

@@ -1,0 +1,75 @@
+# FTP Bounce attack - Scan
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> FTP Bounce Attack is an exploit of the FTP protocol whereby an attacker is able to use the PORT command to request access to ports indirectly through the use of the victim machine as a middle man for the request. This attack can be used to port scan hosts behind a firewall and exploit services on those hosts.
+> 
+
+### 🧐 Why ?
+
+> Understanding FTP Bounce Attack is essential because it demonstrates a critical vulnerability in the FTP protocol that could be exploited to gain unauthorized access to a network or system. It is a type of Denial of Service (DoS) attack that could potentially cause significant damage to a system or network. Therefore, it is crucial for any network administrator or cybersecurity professional to understand how FTP Bounce Attacks work, and how they can be mitigated.
+> 
+
+### ⛏️ How ?
+
+> To carry out an FTP Bounce Attack, an attacker connects to an FTP server and issues a PORT command, requesting data to be sent to a third-party server. The third-party server, believing the request to be legitimate, sends the data, allowing the attacker to access it. To protect against FTP Bounce Attacks, it's essential to use up-to-date software that includes protection against this type of attack. Additionally, firewall rules should be in place to block outgoing connections from FTP servers to unexpected locations.
+> 
+
+### ⏳ When ?
+
+> FTP Bounce Attacks were first identified in 1995 and continue to pose a threat today due to the continued use of the FTP protocol.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+FTP Bounce Attacks are a type of cybersecurity threat that exploit the File Transfer Protocol (FTP). FTP, a standard network protocol, is used for the transfer of computer files between a client and server on a computer network. It operates on two main ports: one for commands (typically port 21) and another for data transfer. The vulnerability that FTP Bounce Attacks exploit lies in the fact that the client can specify the data transfer port.
+
+In an FTP Bounce Attack, the attacker manipulates the PORT command to tell the FTP server to send data to a different third-party server. The attacker connects to an FTP server, then issues a PORT command directing the server to send data to a third-party server. Because the FTP server believes this request to be legitimate, it sends the data to the specified server, potentially allowing the attacker to access protected information.
+
+The repercussions of such an attack can be severe as the attacker might gain unauthorized access to sensitive data or use the victim machine to carry out additional attacks. One common use of FTP Bounce Attacks is to scan ports of hosts situated behind a firewall. Since the hosts see the incoming connection request as coming from the FTP server and not the attacker, they might allow the connection, giving the attacker information about open ports.
+
+To mitigate the risk of FTP Bounce Attacks, several strategies can be employed. One is to use updated software that includes protective measures against this type of attack. Another is the implementation of egress filtering on firewalls. This involves setting up firewall rules to block unexpected outbound connections from FTP servers, preventing the server from sending data to unauthorized third-party servers. Regular security audits, network monitoring, and promptly addressing identified vulnerabilities also contribute to protecting against such attacks.
+
+FTP Bounce Attacks, while first identified in 1995, continue to pose a threat due to the ongoing use of the FTP protocol. Therefore, understanding such attacks and taking measures to prevent them is crucial in maintaining network security.
+
+Consider this hypothetical example of an FTP Bounce Attack:
+
+Step 1: **Connecting to a Vulnerable FTP Server**
+The attacker starts by identifying an FTP server that is vulnerable to this type of attack. They can do this by sending a `PORT` command and checking if the server responds positively. Here is an example of a command that the attacker might use:
+
+```bash
+ftp> open vulnerableftpserver.com
+
+```
+
+Step 2: **Manipulating the PORT Command**
+Once connected, the attacker uses the `PORT` command to instruct the FTP server to send data to a different server. For instance, they might use the following command:
+
+```bash
+ftp> PORT 127,0,0,1,4,1
+
+```
+
+The numbers in this command are the IP address and port number in a format called 'h1,h2,h3,h4,p1,p2'. Here '127,0,0,1' represents the localhost IP (127.0.0.1) and '4,1' represents the port number (1025). So, this command tells the FTP server to send data to port 1025 on the localhost.
+
+Step 3: **FTP Server Sends Data**
+The FTP server, believing this request to be legitimate, sends the data to the specified server. This could potentially allow the attacker to access protected information.
+
+Step 4: **Gathering Information**
+The attacker can now potentially gather information about the open ports on the third-party server, or even gain unauthorized access to sensitive data.
+
+To protect against such attacks, it's crucial to keep all software and systems up to date, implement egress filtering on firewalls, and conduct regular security audits. For example, to block unexpected outbound connections from FTP servers, a network administrator might set up a firewall rule like this:
+
+```bash
+iptables -A OUTPUT -p tcp --sport 21 -j DROP
+
+```
+
+This command tells the firewall to drop all outbound traffic that originates from port 21, which is the default command port for FTP.

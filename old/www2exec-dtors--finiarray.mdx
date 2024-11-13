@@ -1,0 +1,111 @@
+# WWW2Exec - .dtors & .fini_array
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> WWW2Exec is a security feature in Microsoft Windows operating systems that controls the execution of scripts on web servers. It is commonly used to prevent unauthorized access and execution of potentially malicious scripts. The .dtors and .fini_array are special sections of a program's memory in Linux environments that hold pointers to functions that are executed when a program is terminated.
+> 
+
+### 🧐 Why ?
+
+> Understanding WWW2Exec and .dtors & .fini_array is crucial for cybersecurity professionals. WWW2Exec helps to secure web servers running on Windows OS from unauthorized access and potential cyber threats. On the other hand, .dtors and .fini_array can be targeted by attackers to execute malicious code upon program termination. Therefore, understanding these concepts can help in building secure systems and identifying potential vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> WWW2Exec can be configured through the Internet Services Manager in Microsoft Windows. The permissions can be set to restrict execution of scripts to authorized users only. As for .dtors and .fini_array, these sections are automatically managed by the system. However, certain compiler flags can be used to control their behavior, and system security measures should be in place to prevent unauthorized access to these sections.
+> 
+
+### ⏳ When ?
+
+> The concept of WWW2Exec was introduced with the advent of Internet Information Services (IIS) in Windows NT 4.0. The use of .dtors and .fini_array sections is inherent in the design of the Linux operating system and its handling of program termination.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Detailed Explanation of WWW2Exec, .dtors & .fini_array
+
+### WWW2Exec Overview
+
+WWW2Exec is a security feature integrated into Microsoft Windows operating systems, specifically within the Internet Information Services (IIS). This feature is crucial as it controls the execution of scripts on web servers, thereby preventing unauthorized access and execution of potentially malicious scripts.
+
+### Example Scenario:
+
+Imagine you have a web server running on IIS, and you want to ensure that only authorized scripts are executed. You can configure WWW2Exec to permit script execution only for specific users or specific scripts.
+
+### Configuration Steps:
+
+1. **Open Internet Services Manager**:
+    - Navigate to `Start` -> `Control Panel` -> `Administrative Tools` -> `Internet Information Services (IIS) Manager`.
+2. **Select the Site**:
+    - In the left pane, expand the server node, and then select the website where you want to configure WWW2Exec.
+3. **Configure Script Permissions**:
+    - Right-click on the site and select `Properties`.
+    - Go to the `Home Directory` tab.
+    - Under `Configuration`, click `Add`.
+    - Specify the executable path (e.g., `C:\\Path\\To\\Script.exe`).
+    - Set the permissions appropriately to restrict execution to authorized users only.
+4. **Apply and Restart IIS**:
+    - Click `OK` to apply the changes.
+    - Restart IIS to ensure the new settings are applied.
+
+### .dtors & .fini_array Overview
+
+The `.dtors` and `.fini_array` sections are specific to Linux environments. These sections are part of the binary layout of a program and hold pointers to functions that are executed when a program terminates.
+
+### Example Scenario:
+
+Consider a Linux program that needs to clean up resources or save state information when it exits. The functions to perform these tasks can be placed in the `.dtors` or `.fini_array` sections, ensuring they are called automatically upon program termination.
+
+### Example Code:
+
+Here's a simple example written in C to demonstrate the use of `.dtors` and `.fini_array`.
+
+```c
+#include <stdio.h>
+
+void cleanup1() {
+    printf("Cleanup function 1 executed.\\n");
+}
+
+void cleanup2() {
+    printf("Cleanup function 2 executed.\\n");
+}
+
+__attribute__((destructor)) void cleanup3() {
+    printf("Cleanup function 3 executed (fini_array).\\n");
+}
+
+int main() {
+    printf("Main function executed.\\n");
+    return 0;
+}
+
+```
+
+### Explanation:
+
+- **cleanup1 and cleanup2**: These functions are registered as destructors using the `__attribute__((destructor))` attribute. They will be placed in the `.dtors` section.
+- **cleanup3**: This function will be placed in the `.fini_array` section.
+- **main**: The main function executes, and upon termination, the registered cleanup functions are automatically called.
+
+### Security Considerations:
+
+Both `.dtors` and `.fini_array` can be exploited by attackers to execute malicious code upon program termination. Here are some security measures to prevent this:
+
+1. **Compiler Flags**:
+    - Use compiler flags to control the behavior of these sections. For example, using `fno-use-cxa-atexit` can help manage destructor functions.
+2. **Memory Protection**:
+    - Ensure that the memory regions containing `.dtors` and `.fini_array` are protected. Use security mechanisms like Address Space Layout Randomization (ASLR) and Data Execution Prevention (DEP).
+3. **Code Audits**:
+    - Regularly audit your code and binaries to ensure that no unauthorized functions are registered in these sections.
+4. **System Security Measures**:
+    - Implement system-level security measures to restrict access to these sections of memory. Use tools like SELinux or AppArmor to enforce strict access controls.
+
+By understanding and properly configuring WWW2Exec and securing the `.dtors` and `.fini_array` sections, you can significantly enhance the security posture of your systems against potential cyber threats and vulnerabilities.

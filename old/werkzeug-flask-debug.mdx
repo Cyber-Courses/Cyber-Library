@@ -1,0 +1,69 @@
+# Werkzeug / Flask Debug
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Werkzeug is a comprehensive WSGI web application library. It is one of the foundations upon which the Flask web framework is built. One of its features is an interactive debugger, which provides detailed error pages when an unhandled exception occurs in your web application.
+> 
+
+### 🧐 Why ?
+
+> The Werkzeug debugger is an essential tool for Flask developers. It allows them to quickly identify and fix errors in their web applications. With the Werkzeug debugger, developers can explore the stack trace of an error, interact with the Python interpreter at the point of error, and even execute arbitrary Python code in the context of the error.
+> 
+
+### ⛏️ How ?
+
+> To use the Werkzeug debugger, you need to set the 'debug' configuration option of your Flask application to 'True'. This can be done in your application's configuration file or directly in your code. However, please note that the Werkzeug debugger should not be used in a production environment, as it allows the execution of arbitrary code, which can lead to serious security vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> The Werkzeug library, including its debugger, has been a part of Flask since its inception. It is typically used during the development phase of a web application, to identify and fix errors before the application is deployed to a production environment.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Werkzeug debugger is a feature of the Werkzeug library, which is a key component in the Flask web framework. When an unhandled exception occurs within a Flask application, the debugger intercepts it and presents a detailed error page. This page includes the stack trace of the error, which is essentially the sequence of function calls that led to the error. This can be incredibly useful in understanding why and where an error occurred.
+
+In addition to the stack trace, the Werkzeug debugger provides a Python shell at the point of the error. This means you can interact with the Python interpreter exactly as it was at the moment the exception occurred. This allows you to inspect the values of variables at that point, which can greatly aid in diagnosing the cause of the error.
+
+The debugger also allows you to execute any Python code in the context of the error. This is especially useful for testing potential fixes. You can try out different solutions directly in the debugger, and immediately see their effect.
+
+While these features make the Werkzeug debugger an extremely valuable tool for development, they also pose a significant security risk if exposed in a production environment. The ability to execute arbitrary Python code means that, if the debugger were accessible in a live environment, an attacker could potentially execute malicious code on your server.
+
+For this reason, the Werkzeug debugger should only be used in a secure, development environment. When deploying your application to production, you should ensure that the 'debug' configuration option is set to 'False', thereby disabling the debugger. It's also a good idea to have additional error logging and monitoring in place in your production environment, so that you can still be alerted to any errors that occur.
+
+Imagine we're developing a Flask web application and have the following code in our `app.py` file:
+
+```python
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/divide')
+def divide():
+    result = 10 / 0  # This will raise a ZeroDivisionError
+    return str(result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+```
+
+Here's a step-by-step breakdown of how the Werkzeug debugger could be used with this code:
+
+1. When you visit the '/divide' route in your web browser while running this application locally, a ZeroDivisionError is raised. Because the 'debug' configuration option is set to 'True', the Werkzeug debugger intercepts this unhandled exception.
+2. Instead of seeing a generic server error message, you're presented with a detailed error page. This page includes a stack trace, showing the sequence of function calls that led to the error. In our case, the stack trace would clearly show that the error occurred in the 'divide' route when we tried to divide by zero.
+3. The error page also provides an interactive Python shell at the point where the exception occurred. You can use this shell to inspect the values of variables at the time of the error. For instance, you could check the values of the numerator and denominator we were trying to divide.
+4. You can also execute arbitrary Python code in this shell, in the context of the error. For instance, you could test what happens if you divide by a non-zero number instead.
+
+Remember, while the Werkzeug debugger is a powerful tool during development, it can pose a significant security risk in a production environment. In your production settings, you must ensure that the 'debug' option is set to 'False', disabling the debugger. Additionally, it would be prudent to establish other error monitoring and logging mechanisms in your production environment.

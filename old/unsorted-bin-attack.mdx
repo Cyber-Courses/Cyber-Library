@@ -1,0 +1,95 @@
+# Unsorted Bin Attack
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Unsorted Bin Attack is a type of heap exploitation technique used in cybersecurity. It manipulates the data structures in the heap memory of a computer program to bypass security measures and potentially execute arbitrary code.
+> 
+
+### 🧐 Why ?
+
+> Understanding Unsorted Bin Attack is crucial for both attackers and defenders in the realm of cybersecurity. For attackers, it provides a method to exploit vulnerabilities in a system's memory management. For defenders, understanding this technique allows them to better protect their systems and applications against such attacks.
+> 
+
+### ⛏️ How ?
+
+> Unsorted Bin Attack is executed by corrupting the memory in the unsorted bin of a heap to create a scenario where an attacker can write a controlled value into an arbitrary location. The steps typically involve: 1) Allocating a chunk of memory, 2) Freeing that chunk so it goes to the unsorted bin, 3) Overwriting the bk (back) pointer of that chunk to point to a target arbitrary location, and 4) Triggering a malloc that leads to removal of the chunk from the unsorted bin, subsequently writing the controlled value to the arbitrary location.
+> 
+
+### ⏳ When ?
+
+> Unsorted Bin Attacks have been in use since heap management systems were implemented in computer programs. They continue to be relevant as long as such systems are used, especially in languages like C and C++ that do not automatically manage memory.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a deeper level, the Unsorted Bin Attack exploits the inner workings of the heap data structure. The heap is a region of a process's memory used for dynamic memory allocation. When a chunk of memory is freed, the memory allocator places it into 'bins' based on its size. The unsorted bin is the initial bin where all freed chunks are placed before they are categorized into more specific bins based on their size.
+
+### How It Works
+
+1. **Heap Memory Layout**: When a chunk of memory is allocated and then freed, it goes into the unsorted bin. Each chunk in the unsorted bin has two pointers: `fd` (forward) and `bk` (backward), which link it to other chunks in the same bin.
+2. **Manipulating Pointers**: In an Unsorted Bin Attack, the attacker manipulates these pointers to achieve an arbitrary write. This involves the following steps:
+    - **Allocate a Chunk**: The attacker allocates a chunk of memory.
+    - **Free the Chunk**: The chunk is then freed, placing it into the unsorted bin.
+    - **Overwrite the bk Pointer**: The attacker overwrites the `bk` pointer of this chunk to point to a target arbitrary location.
+    - **Trigger a Malloc**: The attacker triggers a `malloc` to remove the chunk from the unsorted bin, causing the allocator to write a controlled value to the arbitrary location.
+3. **Achieving Arbitrary Write**: When the chunk is allocated again, the allocator updates the `bk` pointer to remove it from the bin. If the attacker controls the `bk` pointer, they can trick the allocator into writing to an arbitrary location.
+
+### Example Scenario
+
+Let's consider a practical example with a hypothetical vulnerable program written in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char *chunk1 = (char *)malloc(128);
+    char *chunk2 = (char *)malloc(128);
+
+    strcpy(chunk1, "This is a normal chunk.");
+
+    // Free the first chunk, placing it in the unsorted bin
+    free(chunk1);
+
+    // Overwrite the bk pointer of the freed chunk
+    unsigned long *chunk1_bk = (unsigned long *)(chunk1 + 8);
+    *chunk1_bk = (unsigned long) &chunk2 - 16;
+
+    // Allocate another chunk to trigger the attack
+    char *chunk3 = (char *)malloc(128);
+
+    // If successful, chunk2 gets corrupted
+    strcpy(chunk2, "Arbitrary write achieved!");
+
+    printf("Chunk2: %s\\n", chunk2);
+
+    return 0;
+}
+
+```
+
+### Breakdown of the Example
+
+1. **Allocate Chunks**: `chunk1` and `chunk2` are allocated with `malloc(128)`.
+2. **Free Chunk1**: `chunk1` is freed, placing it into the unsorted bin.
+3. **Manipulate bk Pointer**: The `bk` pointer of `chunk1` is overwritten to point to the memory location just before `chunk2`.
+4. **Trigger malloc**: Allocating `chunk3` triggers the removal of `chunk1` from the unsorted bin, causing the allocator to update the `bk` pointer. This results in writing to an arbitrary location.
+5. **Arbitrary Write**: The string "Arbitrary write achieved!" is written into `chunk2`.
+
+### Conclusion
+
+The Unsorted Bin Attack takes advantage of the way memory allocators manage freed chunks in the heap. By manipulating the pointers within these chunks, attackers can achieve an arbitrary write, leading to potential exploitation opportunities such as overwriting function pointers or other critical data structures. Understanding this attack is crucial for both attackers and defenders in the realm of cybersecurity. For attackers, it provides a method to exploit system vulnerabilities, while for defenders, it highlights the importance of securing memory management systems to protect against such attacks.
+
+### Defense Mechanisms
+
+- **Heap Integrity Checks**: Implementing checks within the memory allocator to ensure the integrity of the heap and its bins.
+- **Pointer Encryption**: Encrypting pointers to prevent direct manipulation.
+- **Randomization**: Randomizing the placement of chunks within the heap to make it harder for attackers to predict memory layout.

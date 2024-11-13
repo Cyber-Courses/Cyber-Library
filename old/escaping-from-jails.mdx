@@ -1,0 +1,78 @@
+# Escaping from Jails
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Jails, also known as chroot jails, are a method of isolating a process and its children from the rest of the system. It is a basic form of operating system-level virtualization that allows the administrator to partition the system into several independent environments, each with its own set of processes, files, and user privileges. Escaping from a Linux jail refers to the act of breaking out from these confined environments, gaining access to the rest of the system.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Jails and how to escape from them is crucial for cybersecurity professionals for two main reasons. First, it helps system administrators to enhance the security of their systems by creating a fortified environment that a potential intruder cannot easily escape. Second, it equips penetration testers with the knowledge to test the robustness of these jails, identify potential vulnerabilities, and suggest improvements.
+> 
+
+### ⛏️ How ?
+
+> Escaping from a Linux jail involves exploiting vulnerabilities in the chroot environment. These vulnerabilities may arise from misconfigurations, weak user privileges, or software flaws. Once inside the jail, an attacker may attempt to elevate their privileges, execute forbidden commands, or access restricted files. This can be done using various tools and techniques, such as buffer overflow, symlink attacks, or kernel exploits.
+> 
+
+### ⏳ When ?
+
+> The concept of chroot was first introduced in Version 7 Unix in 1979, and has since been widely adopted in various Unix-like operating systems, including Linux. However, its security implications and the techniques to escape from a Linux jail have evolved over time, with advancements in technology and the ever-changing cybersecurity landscape.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux Jails, also known as chroot jails, provide a mechanism to isolate a process and its children from the rest of the system, essentially creating a "fenced" environment. This is achieved using the chroot system call. When this call is made, the root directory changes for the current process and its offspring. This gives the illusion that the process operates in a separate filesystem, segregated from the rest of the system.
+
+However, this isolation is not entirely secure. For example, if a process inside the jail acquires root privileges, it could potentially escape the jail by reversing the chroot call. This is because the chroot jail only changes the perceived root directory for the jailed process and does not restrict the process's access to the real root directory or other parts of the filesystem. Thus, if the process can find a way to reach the real root directory, it can escape the jail.
+
+Furthermore, not all system calls are 'jailed', meaning some can access files outside of the jail. This is another potential vulnerability that can be exploited to escape the jail.
+
+To enhance the security of chroot jails, additional measures are typically implemented. These can include mandatory access controls and user privilege restrictions. Mandatory access control is a security strategy that restricts the ability of users and processes to access files and system resources. This can prevent a process from accessing certain parts of the filesystem, effectively strengthening the jail's walls. User privilege restrictions can control what a process can do, limiting its ability to exploit system vulnerabilities.
+
+Understanding the strengths and weaknesses of Linux jails is crucial for cybersecurity. For system administrators, it can guide them in creating more secure environments. For penetration testers, it provides knowledge of potential vulnerabilities to test for and suggests improvements. As technology evolves and the cybersecurity landscape changes, the strategies for securing and testing Linux jails will also need to adapt.
+
+Suppose we have a simple chroot jail set up on a Linux system. The following command creates a new directory `/jail` and copies the `/bin/bash` shell into it:
+
+```bash
+mkdir /jail
+cp /bin/bash /jail/
+
+```
+
+We can then move into this jail with the `chroot` command:
+
+```bash
+chroot /jail /bash
+
+```
+
+Now, any command we try to run will only have access to files and directories within `/jail`. For instance, if we run `ls /`, we will see an empty directory because `/` now refers to `/jail` on the original filesystem, which only contains the copied `bash` binary.
+
+However, this jail is not truly secure. For instance, if an attacker manages to bring a setuid binary into the jail, they can potentially elevate their privileges to root and escape the jail.
+
+```bash
+cp /bin/su /jail/
+chroot /jail /su
+
+```
+
+In this example, we copied the `su` binary, which is typically setuid root, into the jail. Running this binary inside the jail may allow the attacker to gain root privileges and break out of the jail.
+
+To prevent this, administrators should secure the jail by implementing measures such as mandatory access controls and user privilege restrictions. For example, they might use the `chmod` command to remove the setuid bit from any binaries copied into the jail:
+
+```bash
+chmod u-s /jail/*
+
+```
+
+In this command, `u-s` removes the setuid bit from all files in the jail, preventing any processes in the jail from gaining additional privileges.
+
+This is a simplified example, but it illustrates some of the basic concepts and potential vulnerabilities associated with chroot jails. Remember, the best way to secure a jail is to provide the minimum necessary functionality, restrict user privileges as much as possible, and regularly audit the jail for potential vulnerabilities.

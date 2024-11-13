@@ -1,0 +1,91 @@
+# Print Stack Canary
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> A Stack Canary is a security mechanism used in computer programming to prevent buffer overflow attacks. It is a small randomized value placed on the stack to monitor any buffer overflow instances. If a buffer overflow occurs, the canary value changes, alerting the system to a potential attack. It's called a 'canary' because it is similar to the canary in a coal mine, which was used to alert miners to toxic gases.
+> 
+
+### 🧐 Why ?
+
+> Buffer overflow is a common exploit where an attacker writes more data into a buffer than it can hold. This may overwrite other important data or can lead to execution of malicious code, leading to unauthorized access or system crashes. Stack Canaries are crucial in preventing such attacks, safeguarding the integrity and security of a system.
+> 
+
+### ⛏️ How ?
+
+> To implement Stack Canaries, a random value (the canary) is placed on the stack just after the local variables. If a buffer overflow occurs, it will have to overwrite this canary value before it can reach other important data. The system checks the canary value regularly. If it has changed, the system knows a buffer overflow has occurred and can halt execution, preventing the attack.
+> 
+
+### ⏳ When ?
+
+> Stack canaries became popular in the late 1990s and early 2000s, as a countermeasure against growing instances of buffer overflow attacks.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A Stack Canary is a fundamental security measure used in the realm of computer programming to mitigate buffer overflow attacks. When a function is invoked during the execution of a program, the compiler generates a small, random value known as a stack canary. This value is strategically placed on the stack, specifically after the local variables.
+
+The purpose of this stack canary is to work as a sentinel, monitoring for any changes that would indicate a buffer overflow. Buffer overflow, a common exploitation technique, involves an attacker inputting more data into a buffer than the buffer can handle, effectively overwriting nearby memory locations. The overwritten data could include critical program data or control information, leading to unpredictable program behavior, system crashes, or even unauthorized access to system resources.
+
+The stack canary serves as an early warning system in such a scenario. If a buffer overflow were to occur, the overflow would have to overwrite the canary value before it could reach and tamper with important control data. As the system routinely checks the canary value for changes, a changed value would alert the system to a potential buffer overflow attack. This allows the system to halt execution of the program, thwarting the attack and preserving system integrity.
+
+What gives stack canaries their strength is their unpredictability. The canary value is randomized for each function invocation, making it extremely challenging for an attacker to correctly guess the value and successfully execute an overflow attack.
+
+However, while stack canaries add a significant layer of security, they are not infallible. Sophisticated and advanced attacks can sometimes bypass this measure. As such, stack canaries are usually part of a more comprehensive, multifaceted security strategy, working in conjunction with other techniques to provide robust protection for systems.
+
+Let's illustrate how stack canaries work with a hypothetical example:
+
+Consider this simple C function:
+
+```c
+void function(char *str) {
+  char buffer[10];
+  strcpy(buffer, str);
+}
+
+int main() {
+  char large_string[30];
+  int i;
+  for (i = 0; i < 30; i++)
+    large_string[i] = 'A';
+  function(large_string);
+  return 0;
+}
+
+```
+
+In this function, `strcpy()` does not perform any bounds checking, so the `large_string` will overflow the `buffer`.
+
+Now, if we compile this program with Stack Canaries enabled (typically by using the `-fstack-protector` option in GCC), the program will look something like this:
+
+```c
+void function(char *str) {
+  char buffer[10];
+  unsigned long canary = random();
+  strcpy(buffer, str);
+  if (canary != random()) {
+    printf("Buffer overflow detected!");
+    exit(1);
+  }
+}
+
+int main() {
+  char large_string[30];
+  int i;
+  for (i = 0; i < 30; i++)
+    large_string[i] = 'A';
+  function(large_string);
+  return 0;
+}
+
+```
+
+The random canary is placed on the stack after the buffer. If a buffer overflow occurs, the canary value will change as it will be overwritten by the overflow. The function then checks the canary value against its original value. If the values do not match, the program knows a buffer overflow has occurred and halts execution.
+
+In this example, the buffer overflow occurs when the string of 'A's is copied into the buffer. The overflow overwrites the canary value, causing the check to fail and the program to halt with the "Buffer overflow detected!" message. This prevents the overflow from reaching and corrupting other important data on the stack.

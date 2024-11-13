@@ -1,0 +1,72 @@
+# D-Bus Enumeration & Command Injection Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux D-Bus Enumeration & Command Injection Privilege Escalation is a method attackers use to gain unauthorized access to a Linux system. D-Bus is an inter-process communication (IPC) system, providing a mechanism for processes to communicate with each other. Enumeration is the process of extracting user names, services, resources, shares, and other attributes from a system. Command Injection is a form of shell injection, where an attacker injects malicious commands into a vulnerable application or system. Privilege escalation occurs when a user gets access to more resources or functionality than they are normally allowed, and such escalations can be exploited by attackers to compromise a system.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux D-Bus Enumeration & Command Injection Privilege Escalation is crucial for cybersecurity professionals as it presents a serious security risk. An attacker with the ability to exploit a privilege escalation vulnerability can effectively gain control over an entire system. D-Bus, being a common IPC system in Linux, is a potential target for such attacks. Therefore, it's important to understand this threat to protect systems against it.
+> 
+
+### ⛏️ How ?
+
+> To leverage D-Bus Enumeration & Command Injection for Privilege Escalation, an attacker typically follows these steps: 1) Enumerate the system to find a vulnerable D-Bus service. 2) Inject malicious commands into the service. 3) Use the service's permissions to perform unauthorized actions. To protect against this, system administrators should: 1) Regularly update and patch their systems. 2) Limit the permissions of D-Bus services. 3) Monitor system activity for unusual behavior.
+> 
+
+### ⏳ When ?
+
+> Linux D-Bus Enumeration & Command Injection Privilege Escalation has been a potential attack vector since D-Bus was first included in Linux distributions. As with many attack techniques, it has evolved over time to exploit new vulnerabilities and avoid updated security measures.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+D-Bus is an inter-process communication (IPC) system used in Linux. It allows different software processes to communicate with each other by passing messages. Each message targets a specific object path, which is linked to a specific interface defining the methods that can be invoked.
+
+This IPC mechanism can become an attack vector for malicious actors. They can enumerate, or list, the available D-Bus services to identify potential vulnerabilities. Enumeration is a technique used to gather information about a system, like user names, services, resources, and other attributes. In the context of D-Bus, enumeration allows an attacker to identify which services are running and what permissions they have.
+
+After identifying a vulnerable D-Bus service, an attacker can then perform a Command Injection. This is a type of attack where the perpetrator injects malicious commands into the service. These injected commands are then executed with the same privileges as the compromised service.
+
+This method can lead to Privilege Escalation, which is when a user gains access to more resources or functionalities than usually permitted. In this case, the attacker, by exploiting the privileges of the compromised D-Bus service, can perform unauthorized actions, potentially gaining full control over the system.
+
+Defending against this type of attack involves regularly updating and patching systems to fix any known vulnerabilities. Also, limiting the permissions of D-Bus services and monitoring system activity for unusual behavior can help protect against such threats.
+
+Let's consider a hypothetical (and simplified) example to illustrate this type of attack:
+
+Suppose a Linux system has a D-Bus service called `com.example.service`. This service has an object path `/com/example/service/Object` and an exposed method `RunCommand` that executes a shell command. It's running with root privileges, which is a bad practice but unfortunately not uncommon.
+
+Step 1: Enumeration
+
+An attacker can use the `dbus-send` tool to list the available services:
+
+```bash
+dbus-send --print-reply --session --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames
+
+```
+
+This command returns a list of all active services. The attacker spots `com.example.service`.
+
+Step 2: Command Injection
+
+The attacker can then inject a malicious command. For example, they could create a new root user:
+
+```bash
+dbus-send --session --dest=com.example.service /com/example/service/Object com.example.service.RunCommand string:"useradd -ou 0 -g 0 attacker"
+
+```
+
+This command tells `com.example.service` to execute `useradd -ou 0 -g 0 attacker`, which creates a new root user named 'attacker'.
+
+Step 3: Privilege Escalation
+
+Now the attacker can login as the 'attacker' user and has root access to the system, completing the privilege escalation.
+
+To prevent such an attack, system administrators should limit the permissions of D-Bus services, avoid running them with root privileges, regularly update and patch their systems, and monitor for unusual activity.

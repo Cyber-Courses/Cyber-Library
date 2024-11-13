@@ -1,0 +1,134 @@
+# macOS Dyld Hijacking & DYLD_INSERT_LIBRARIES
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Dyld Hijacking is a technique used for injecting code into a running process on macOS. The DYLD_INSERT_LIBRARIES is an environment variable that can be used to load and execute arbitrary code when a program is run, making it a potential target for such hijacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS Dyld Hijacking and DYLD_INSERT_LIBRARIES is important as it is a common technique used by attackers to gain unauthorized access to systems and data. It's crucial for system administrators and cybersecurity professionals to understand how this technique works in order to effectively protect against it.
+> 
+
+### ⛏️ How ?
+
+> To protect against macOS Dyld Hijacking, it's essential to regularly update and patch your systems, restrict access rights to critical system files and monitor for suspicious activity. Never run untrusted code and always verify the source of any software you install.
+> 
+
+### ⏳ When ?
+
+> The usage of macOS Dyld Hijacking and DYLD_INSERT_LIBRARIES has been prevalent since the inception of macOS due to its inherent nature of being a Unix-based OS. It's always been a popular technique among attackers due to its effectiveness and stealth.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of DYLD_INSERT_LIBRARIES and Its Security Implications
+
+**DYLD_INSERT_LIBRARIES** is an environment variable within macOS that interacts with the dynamic linker (dyld). The dynamic linker is responsible for loading necessary dynamic libraries when a process starts. When the DYLD_INSERT_LIBRARIES environment variable is set, it instructs dyld to load the specified libraries before any others. This behavior can be exploited by attackers to inject malicious code into processes, thereby gaining unauthorized access or manipulating the system.
+
+## Technical Details of DYLD_INSERT_LIBRARIES
+
+### 1. Dynamic Linker (dyld)
+
+The macOS dynamic linker, dyld, loads shared libraries into the memory space of a process at runtime. It resolves the symbols required by the executable, linking the necessary libraries dynamically.
+
+### 2. Environment Variable
+
+DYLD_INSERT_LIBRARIES is an environment variable that specifies a list of libraries to be loaded before any other libraries. This allows for preloading specific code that can alter the behavior of the application.
+
+### 3. Exploitation
+
+Attackers can exploit this mechanism by setting DYLD_INSERT_LIBRARIES to point to a library containing malicious code. This library gets loaded into the process space and executed with the same privileges as the process, potentially leading to a variety of malicious activities such as privilege escalation, data theft, or system manipulation.
+
+## Example of DYLD_INSERT_LIBRARIES Exploitation
+
+### Step 1: Create a Malicious Dynamic Library
+
+First, an attacker creates a malicious dynamic library that contains code to be executed when loaded. Here's an example written in C:
+
+```c
+#include <stdio.h>
+
+// This function is executed when the library is loaded
+__attribute__((constructor))
+void malicious_code() {
+    printf("Malicious code executed!\\\\n");
+    // Add more malicious actions here, e.g., creating a backdoor
+}
+
+```
+
+This code uses the `__attribute__((constructor))` attribute to specify that the `malicious_code` function should run when the library is loaded.
+
+### Step 2: Compile the Malicious Library
+
+The attacker compiles the C code into a dynamic library:
+
+```bash
+gcc -dynamiclib -o malicious.dylib malicious.c
+
+```
+
+This command produces a dynamic library named `malicious.dylib`.
+
+### Step 3: Set the DYLD_INSERT_LIBRARIES Environment Variable
+
+The attacker sets the DYLD_INSERT_LIBRARIES environment variable to point to the malicious library:
+
+```bash
+export DYLD_INSERT_LIBRARIES=/path/to/malicious.dylib
+
+```
+
+### Step 4: Execute a Target Process
+
+When a target process is executed, dyld loads the specified malicious library first:
+
+```bash
+open /Applications/Calculator.app
+
+```
+
+Upon opening the Calculator application, the malicious code in `malicious.dylib` executes, printing "Malicious code executed!" to the console.
+
+## Mitigation Strategies
+
+### 1. Secure Coding Practices
+
+- **Input Validation:** Ensure all user inputs are properly validated to prevent the injection of malicious environment variables.
+- **Use of Secure Functions:** Avoid using functions that rely on environment variables in sensitive contexts.
+
+### 2. System Configuration
+
+- **Environment Variable Filtering:** Implement filtering of environment variables for critical applications.
+- **Restricted Permissions:** Limit the ability of non-privileged users to set environment variables that affect sensitive processes.
+
+### 3. Monitoring and Auditing
+
+- **Regular Audits:** Conduct regular system audits to detect any unauthorized setting of environment variables.
+- **System Activity Monitoring:** Use monitoring tools to detect unusual activity that could indicate exploitation of DYLD_INSERT_LIBRARIES.
+
+### 4. Regular Updates and Patches
+
+- **Keep Software Updated:** Regularly update the operating system and applications to include the latest security patches.
+- **Apply Security Patches:** Ensure all security patches are promptly applied to mitigate known vulnerabilities.
+
+### 5. User Awareness
+
+- **Educate Users:** Train users about the risks of running untrusted code and the importance of maintaining secure settings.
+- **Software Verification:** Encourage the use of software from verified and trusted sources only.
+
+## Conclusion
+
+DYLD_INSERT_LIBRARIES is a powerful feature of macOS's dynamic linker, but it can be exploited for malicious purposes if not properly managed. Understanding how this environment variable works and implementing robust security practices are essential for protecting macOS systems from potential abuse. By following secure coding practices, configuring the system securely, monitoring for suspicious activity, keeping software updated, and educating users, system administrators and cybersecurity professionals can significantly reduce the risk of such attacks.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,94 @@
+# Android Smali - Decompiling/[Modifying]/Compiling
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Android Smali is a representation of Android DEX (Dalvik Executable), which can be used to modify and recompile Android applications. Smali provides a human-readable form of DEX files, enabling developers to understand and modify the underlying code of Android applications.
+> 
+
+### 🧐 Why ?
+
+> Understanding and utilizing Smali is important for several reasons. Firstly, it allows developers to understand the inner workings of Android applications. This can be invaluable when it comes to debugging and testing apps. Secondly, it opens up the possibility of modifying and customizing apps. For instance, a developer might want to modify an app to change its functionality or appearance. Lastly, understanding Smali can be useful for security purposes. By decompiling an app, one can inspect its code for vulnerabilities or malicious behavior.
+> 
+
+### ⛏️ How ?
+
+> To use Smali, one first needs to decompile an Android application, converting its APK (Android Package) file into DEX files. This can be done using tools like Apktool. The DEX files are then disassembled into Smali code, which can be read and modified using a text editor. Finally, the Smali code is reassembled into DEX files, and these are recompiled into an APK file that can be installed onto an Android device. This entire process requires a good understanding of Android's file structure and programming.
+> 
+
+### ⏳ When ?
+
+> The use of Smali for decompiling, modifying, and recompiling Android apps has been common practice since the early days of Android development, around the late 2000s. It was introduced as a part of the Android Open Source Project (AOSP).
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Smali is a disassembler for Android's DEX (Dalvik Executable) format, providing an essential toolset for Android developers. DEX files contain the compiled code that is run by the Dalvik Virtual Machine or Android Runtime. During the compilation of an Android app, the Java compiler transforms its .java files into .class files. The dx tool then converts these .class files into .dex files. An Android app's APK (Android Package) file contains these DEX files, among other components.
+
+What makes Smali unique is its capability to disassemble these DEX files into Smali code, which is a human-readable version of the app's code. This feature enables developers to easily understand and modify the underlying code of Android applications, something that would be significantly more difficult by just looking at the DEX files.
+
+After the modifications have been made to the Smali code, it can be reassembled into DEX files, which are then recompiled into an APK file. This new APK file can be installed onto an Android device.
+
+The process of decompiling and recompiling Android apps using Smali can be complex and requires a good understanding of Android's file structure and programming. However, the benefits it offers are substantial. It opens up possibilities for understanding the inner workings of Android applications, customizing apps, and even enhancing app security by inspecting the code for vulnerabilities or malicious behavior.
+
+Smali has been a part of the Android development ecosystem since the late 2000s, introduced as a part of the Android Open Source Project (AOSP). It continues to be an essential tool for Android developers, offering a unique insight into the structure and functionality of Android applications.
+
+Let's say we want to modify an app to change its background color. Here's a simple example of how to use Smali for this purpose:
+
+1. **Decompile the APK file**
+First, we need to decompile the app. We can use Apktool for this. In the command line, you would type:
+    
+    ```
+    apktool d myApp.apk
+    
+    ```
+    
+    This command will create a new folder named 'myApp' containing the decompiled files.
+    
+2. **Find the relevant Smali file**
+Next, we need to find the Smali file that corresponds to the part of the app we want to modify (in this case, the background color). Let's assume this is in 'myApp.smali'. This file will be in the 'smali' folder created by Apktool.
+3. **Modify the Smali code**
+Open 'myApp.smali' in a text editor. You might see a line like this:
+    
+    ```
+    const v0, 0xFF000000
+    
+    ```
+    
+    This line sets the background color to black. To change the color to white, we'd replace it with:
+    
+    ```
+    const v0, 0xFFFFFFFF
+    
+    ```
+    
+4. **Recompile the APK file**
+After saving 'myApp.smali', we need to recompile the APK file. Back in the command line, you'd type:
+    
+    ```
+    apktool b myApp
+    
+    ```
+    
+    This will create a new APK file with your changes in the 'dist' folder inside 'myApp'.
+    
+5. **Sign the APK file**
+Before you can install the new APK file on an Android device, you need to sign it. You can use jarsigner for this:
+    
+    ```
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore myApp.apk alias_name
+    
+    ```
+    
+    This signs 'myApp.apk' using a keystore named 'my-release-key.keystore'. 'alias_name' is the alias of the key you want to use from the keystore.
+    
+6. **Install the APK file on the device**
+Finally, you can install the new APK file on your Android device. This can be done in various ways, such as by emailing the APK file to yourself and opening it on your device.
+
+Remember, this is a simplified example. Real-world applications may be more complex, and modifying them might require a more in-depth understanding of Smali and Android's file structure and programming.

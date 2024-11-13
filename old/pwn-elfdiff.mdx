@@ -1,0 +1,121 @@
+# Pwn elfdiff
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn elfdiff is a cybersecurity tool used to compare two binary executable files, specifically those in ELF format, which is common in Unix and Unix-like operating systems. By comparing the binaries, Pwn elfdiff can identify the differences between the two, which can be useful in various cybersecurity applications.
+> 
+
+### 🧐 Why ?
+
+> Understanding the differences between two binaries can be critical in a cybersecurity context. For instance, if a suspected malicious binary is compared with a known safe version, the differences identified might include the malicious payload or other changes the attacker has made. This helps to understand the nature of the threat and devise appropriate defenses. Hence, Pwn elfdiff can be a valuable tool in a cybersecurity professional's toolkit.
+> 
+
+### ⛏️ How ?
+
+> To use Pwn elfdiff, you need to have two ELF binaries that you want to compare. You simply pass the paths of these two binaries as command-line arguments to the Pwn elfdiff tool. The tool then analyses the binaries and outputs a report detailing the differences between them. You can then use this report to identify any changes or anomalies that might indicate a security threat.
+> 
+
+### ⏳ When ?
+
+> Pwn elfdiff can be used whenever a comparison of two ELF binaries is needed. This might be when a potential security threat has been identified, and you need to understand how a suspected malicious binary differs from a safe version. Or it might be used as part of routine security auditing, to ensure that your binaries haven't been tampered with.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Pwn elfdiff is a tool designed to compare ELF (Executable and Linkable Format) binaries at a detailed level. It parses the binaries and examines various aspects, such as headers, sections, segments, and symbols. By comparing these elements, Pwn elfdiff can identify differences that may indicate changes in the code, data, or other components, which might be subtle and not easily noticeable.
+
+### Technical Functionality
+
+1. **ELF Binary Parsing**:
+    - Pwn elfdiff begins by parsing the ELF binaries to extract data structures. This involves reading and interpreting the ELF header, program headers, section headers, and symbol tables.
+2. **Comparative Analysis**:
+    - Once the binaries are parsed, the tool performs a detailed comparison of the extracted elements, including:
+        - **Headers**: Compares ELF headers, program headers, and section headers.
+        - **Sections**: Compares the content and properties of different sections (e.g., .text, .data, .bss).
+        - **Segments**: Compares the segments defined in the program headers.
+        - **Symbols**: Compares the symbol tables, looking for differences in symbol names, addresses, and types.
+3. **Difference Reporting**:
+    - Pwn elfdiff generates a report highlighting the differences between the binaries. This report details the discrepancies in headers, sections, segments, and symbols, providing a clear indication of how the binaries differ.
+
+### Example Usage
+
+Suppose you have two ELF binary files, `binary1` and `binary2`, and you want to compare these two files. You can use Pwn elfdiff with the following command:
+
+```bash
+$ pwn-elfdiff /path/to/binary1 /path/to/binary2
+
+```
+
+### Example Comparison Report
+
+When the command is executed, Pwn elfdiff analyzes the binaries and generates a comparison report. Here’s a hypothetical example of what this report might look like:
+
+```
+Differences between /path/to/binary1 and /path/to/binary2:
+
+Headers:
+- ELF Header: identical
+- Program Header: different
+  - binary1: 0x12345678
+  - binary2: 0x9abcdef0
+
+Sections:
+- .text: identical
+- .data: different
+  - binary1: "data1"
+  - binary2: "data2"
+- .bss: identical
+
+Segments:
+- Segment 1: identical
+- Segment 2: different
+  - binary1: "segment_data1"
+  - binary2: "segment_data2"
+
+Symbols:
+- main: identical
+- function1: different
+  - binary1: "0x80483f0"
+  - binary2: "0x8048410"
+- variable1: identical
+- variable2: different
+  - binary1: "0x0804a020"
+  - binary2: "0x0804a040"
+
+```
+
+### Interpretation of the Report
+
+- **Headers**:
+    - The program header differs between the two binaries, indicating that there may be differences in how the program is loaded into memory.
+- **Sections**:
+    - The `.data` section has different contents, which could suggest modifications in the initialized data used by the program.
+- **Segments**:
+    - Differences in segments suggest variations in the memory regions allocated or the data loaded into these regions.
+- **Symbols**:
+    - Differences in symbols like `function1` and `variable2` indicate that the memory addresses or possibly the implementations of these functions/variables have changed.
+
+### Implications
+
+The differences highlighted by Pwn elfdiff can have several implications:
+
+- **Malicious Modifications**: Changes in the binaries could indicate that one of the binaries has been tampered with, potentially introducing malicious code.
+- **Version Changes**: Differences might also result from legitimate updates or patches to the software.
+- **Debugging and Analysis**: Identifying discrepancies can aid in debugging and understanding the evolution of the binary over different versions.
+
+### Conclusion
+
+Pwn elfdiff is a powerful tool for comparing ELF binaries at a granular level. By parsing and analyzing various components of the binaries, it can detect subtle differences that might indicate modifications or vulnerabilities. This tool is invaluable for security analysts and developers who need to ensure the integrity and consistency of their binary files.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,67 @@
+# Windows Kerberos Authentication
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Kerberos Authentication is a network authentication protocol that allows nodes communicating across a non-secure network to prove their identity to each other in a secure manner. It uses symmetric key cryptography and requires a trusted third party, typically in the form of a Key Distribution Center (KDC).
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows Kerberos Authentication is vital because it is one of the primary security mechanisms used in Windows domains. It plays a critical role in securing inter-machine communications, ensuring that sensitive data remains protected from unauthorized access. Kerberos Authentication is especially important for administrators managing Windows-based networks, as it impacts user authentication, authorization and auditing.
+> 
+
+### ⛏️ How ?
+
+> To implement Windows Kerberos Authentication, you need to have an Active Directory domain set up. The KDC is a part of the domain controller and the Active Directory takes care of maintaining the user credentials. When a user tries to log on, the system sends a request to the KDC. The KDC then issues a ticket granting ticket (TGT), which is encrypted and sent back to the client machine. This TGT is then used to request service tickets for various resources across the network.
+> 
+
+### ⏳ When ?
+
+> Kerberos was developed in the mid-1980s as part of the Athena Project at the Massachusetts Institute of Technology. It has been adopted by Windows and other operating systems as the default authentication protocol.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Kerberos is a network authentication protocol developed by MIT, and is widely used in Windows environments. It works on the basis of 'tickets' which grant access to services available across the network.
+
+When a client wants to access a particular service, it first communicates with the Key Distribution Center (KDC), which maintains all the security credentials for the domain. The client requests an Authentication Service (AS) ticket from the KDC. The KDC verifies the client's identity and issues a Ticket Granting Ticket (TGT).
+
+The TGT, which is encrypted and can only be decrypted by the KDC, is then stored on the client's machine. When the client needs to access a particular service, it presents this TGT to the Ticket Granting Service (TGS) which is a part of the KDC.
+
+The TGS validates the TGT and, if it's valid, issues a service-specific ticket. This service ticket is then presented to the desired server. The server verifies the ticket and, if it's valid, grants access to the service.
+
+A key feature of Kerberos is that after the initial interaction with the KDC to obtain the TGT, the client doesn't need to re-authenticate each time it needs to access a service. This is because the TGT and the service tickets are stored locally.
+
+Furthermore, all communication in this process is encrypted, providing a secure mechanism for authentication over non-secure networks. This methodology ensures the integrity and confidentiality of the data, preventing eavesdropping or tampering.
+
+Overall, Kerberos is an essential security component in Windows environments, playing a vital role in user authentication, authorization, and auditing. Understanding its workings is crucial for network administrators, particularly in domains that require robust security mechanisms.
+
+Let's consider an example of how Kerberos authentication works in a Windows environment:
+
+1. **Initial Login**: A user, let's call him Bob, inputs his username and password on his workstation. The workstation then sends a request to the Key Distribution Center (KDC), asking for an Authentication Ticket (TGT). This request is often done using the `kinit` command.
+    
+    ```
+    kinit bob
+    
+    ```
+    
+2. **TGT Issuance**: The KDC verifies Bob's credentials. If they are valid, it creates a TGT, encrypts it with the KDC's secret key, and sends it back to Bob's workstation.
+3. **Service Access**: Later, Bob wants to access a printer on the network. His workstation sends the TGT to the KDC (specifically, the Ticket-Granting Service), asking for a service ticket for the printer. This can be done using the `kvno` command.
+    
+    ```
+    kvno printer
+    
+    ```
+    
+4. **Service Ticket Issuance**: The KDC validates the TGT, and if it's valid, it creates a service ticket, encrypts it with the printer's secret key, and sends it back to Bob's workstation.
+5. **Service Use**: Bob's workstation then sends the service ticket to the printer. The printer decrypts the ticket, verifies it, and if it's valid, grants Bob access to the printer.
+6. **Further Service Access**: If Bob later wants to access another service, like a file server, his workstation can use the TGT to request another service ticket, this time for the file server. The entire process repeats, but Bob never needs to input his username and password again.
+
+This entire process is transparent to Bob. He only provides his credentials at the initial login, and the rest is handled automatically. This is a simplified example, but it reflects the basic process of how Kerberos works in a Windows environment.

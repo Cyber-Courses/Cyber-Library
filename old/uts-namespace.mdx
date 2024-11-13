@@ -1,0 +1,91 @@
+# UTS Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux UTS (Unix Time Sharing) Namespace is a feature of the Linux operating system (OS) that allows each process to have its own hostname and domain name. It is one of the many namespaces in Linux, each providing a certain level of isolation and making processes believe that they have their own instance of a global resource.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux UTS Namespace is crucial for system administrators, software engineers, and anyone dealing with Linux containers. The usage of namespaces (including UTS) forms the basis of container technologies like Docker. It helps in isolating processes, improving security and system organization by providing separate instances of global resources.
+> 
+
+### ⛏️ How ?
+
+> To use the Linux UTS Namespace, you must have root privileges. You can create a new UTS namespace using the 'unshare' command and then change the hostname within the new namespace. For instance, 'unshare --uts /bin/bash' creates a new shell with its own UTS namespace, and 'hostname new_host' changes the hostname within the new namespace.
+> 
+
+### ⏳ When ?
+
+> Namespaces, including UTS, were introduced in Linux kernel version 2.4.19, released in 2002, as part of the wider development of containerization technologies. They have been in use since then and have seen significant improvements and updates.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux UTS (Unix Time Sharing) Namespace is a crucial feature of the Linux operating system, designed to provide isolation for two key system identifiers: the hostname and the NIS domain name. Essentially, these identifiers are system-wide parameters that influence every process running on the system. The UTS Namespace, however, allows each process or a group of processes to have its own unique view of these parameters. This functionality is named after the Unix Time-Sharing System, the system that first introduced the concept of hostnames to the Unix operating system.
+
+In a broader perspective, the UTS Namespace plays a critical role in the realm of container technologies. It is utilized to assign each container its own distinct hostname, thereby providing an additional layer of isolation from the host system and other containers running on the same host. This isolation of system identifiers is fundamental in ensuring that processes do not interfere with each other, leading to a more secure and organized system.
+
+To leverage the Linux UTS Namespace, one must have root privileges. A new UTS namespace can be created using the 'unshare' command and the hostname within this new namespace can be altered as needed. For instance, executing 'unshare --uts /bin/bash' in the command line creates a new shell with its own UTS namespace, and 'hostname new_host' changes the hostname within this new namespace.
+
+It is important to note that the concept of namespaces, including UTS, has been a part of the Linux ecosystem since the release of Linux kernel version 2.4.19 in 2002. This was a part of the larger initiative towards developing containerization technologies. Ever since their introduction, namespaces have been continuously improved and updated to cater to evolving needs and use-cases.
+
+Let's consider a practical example to understand the use of Linux UTS Namespace. We will create a new UTS namespace and modify the hostname within it.
+
+**Step 1:** Open your terminal.
+
+**Step 2:** First, check your current hostname by typing the following command:
+
+```
+hostname
+
+```
+
+This command will display the current hostname of your system.
+
+**Step 3:** Now, let's create a new shell with its own UTS namespace. You have to use the 'unshare' command with '--uts' option and '/bin/bash' as arguments. Remember, you must have root privileges to execute this command:
+
+```
+sudo unshare --uts /bin/bash
+
+```
+
+This command will create a new shell with its own UTS namespace.
+
+**Step 4:** Now, you are inside the new UTS namespace. You can modify the hostname within this namespace without affecting the original system's hostname. Let's change the hostname to 'new_host' by typing:
+
+```
+hostname new_host
+
+```
+
+Now, the hostname within your new UTS namespace is 'new_host'.
+
+**Step 5:** To verify, you can check the hostname within the new UTS namespace:
+
+```
+hostname
+
+```
+
+This will return 'new_host', confirming that the hostname has been changed within the new UTS namespace.
+
+**Step 6:** Exit the new UTS namespace by typing 'exit'.
+
+**Step 7:** Back in your original shell, check your hostname again:
+
+```
+hostname
+
+```
+
+This will return your original hostname, confirming that the hostname change in the new UTS namespace did not affect your system's hostname.
+
+This process shows how Linux UTS Namespace can isolate system identifiers (like hostname) within a new namespace, keeping the original system's identifiers unaffected. This isolation is fundamental for container technologies in maintaining system security and organization.

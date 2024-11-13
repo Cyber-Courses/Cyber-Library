@@ -1,0 +1,77 @@
+# Windows ACLs - DACLs/SACLs/ACEs
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Access Control Lists (ACLs) are a crucial part of Windows security that manage permissions for users and groups on a system. Windows ACLs consist of Discretionary Access Control Lists (DACLs), System Access Control Lists (SACLs), and Access Control Entries (ACEs). DACLs specify who can access an object and what they can do with it. SACLs, on the other hand, specify which operations on an object should be audited. ACEs are individual entries in a DACL or SACL that define the privileges of a single user or group.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows ACLs is critical to maintaining robust security on a Windows system. Misconfigured ACLs can lead to unauthorized access, data loss, or even a system compromise. Therefore, it's essential to understand these concepts to mitigate potential security risks.
+> 
+
+### ⛏️ How ?
+
+> To use Windows ACLs to your advantage, start by accessing the security tab in the properties of a file or folder. Here, you can view and modify the DACL. To view or modify the SACL, you must first enable object access auditing through the Local Security Policy. After enabling it, you can find the SACL in the same location as the DACL. Be sure to always follow the principle of least privilege when assigning permissions and regularly review your ACL configurations.
+> 
+
+### ⏳ When ?
+
+> Windows ACLs have been in use since the introduction of Windows NT, and continue to be a core part of Windows security in all subsequent versions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows Access Control Lists (ACLs) are a critical part of the security architecture of Microsoft Windows operating systems. They are designed to provide a robust and flexible method of assigning permissions to users and groups for accessing various system resources.
+
+ACLs are comprised of Discretionary Access Control Lists (DACLs), System Access Control Lists (SACLs), and Access Control Entries (ACEs). DACLs and SACLs are lists of ACEs which define the permissions and auditing settings for an object, respectively.
+
+An ACE is a single entry in an ACL and it determines the access rights or auditing actions for a specific user or group. Each ACE consists of a Security Identifier (SID), an access mask, and flags.
+
+A SID is a unique value that identifies a user or group within the Windows security model. It is used in ACEs to specify who (or what) the ACE applies to.
+
+The access mask is a set of bits that define the specific rights that are allowed or denied by the ACE. It can specify a variety of permissions, such as the ability to read, write, or execute a file.
+
+The flags in an ACE control the inheritance of the ACE to child objects and the propagation of the ACE to existing child objects. They can also control whether the ACE is used for access allowed, access denied, system audit, or alarm messages.
+
+When a user or process attempts to access a securable object, the system checks the DACL of the object. The system grants or denies access based on the permissions specified in the DACL. If the user's SID or a group that the user is a part of is listed in the DACL, the system grants the user the access rights defined in the access mask of the ACE. If the user's SID is not found in the DACL, the system denies the user access to the object.
+
+The SACL specifies which operations performed by the user on the object should be logged in the security event log. This is an important feature for auditing and tracking access to sensitive data and resources.
+
+In summary, understanding and properly configuring Windows ACLs, DACLs, SACLs, and ACEs is crucial for maintaining a secure Windows environment. Regularly reviewing and updating these configurations can help prevent unauthorized access, data loss, or system compromise.
+
+Consider a scenario where you have a folder named "ProjectData" on a Windows system. You want to grant read and write access to a user named "John" and audit any changes made by a user named "Admin". Here’s how you might use Windows ACLs, DACLs, SACLs, and ACEs to accomplish this:
+
+1. Open the properties of the "ProjectData" folder: Right-click on the folder and select 'Properties'. Navigate to the 'Security' tab.
+2. Add an entry to the DACL: Click on 'Edit' to modify the DACL. This opens the 'Permissions for ProjectData' dialog. Click on 'Add' and enter the username "John". Select 'OK'. You will return to the 'Permissions for ProjectData' dialog where you will see "John" listed in the 'Group or user names' section. With "John" selected, in the 'Permissions' section, check the boxes for 'Read' and 'Write' under 'Allow'. Click 'OK' to close all dialogs. This adds an ACE to the DACL of the 'ProjectData' folder, granting "John" read and write access.
+
+Command equivalent in PowerShell:
+
+```powershell
+$Acl = Get-Acl -Path "C:\\ProjectData"
+$Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("John", "Read, Write", "Allow")
+$Acl.SetAccessRule($Ar)
+Set-Acl -Path "C:\\ProjectData" -AclObject $Acl
+
+```
+
+1. Add an entry to the SACL: First, ensure that object access auditing is enabled in your system's Local Security Policy. Navigate to the 'Security' tab of the 'ProjectData' folder properties again. Click on 'Advanced', then the 'Auditing' tab. Click on 'Add' and enter the username "Admin". Select 'OK'. You'll return to the 'Auditing Entries for ProjectData' dialog where you will see "Admin" listed. With "Admin" selected, in the 'Auditing' section, check the boxes for 'Write' under 'Successful'. Click 'OK' to close all dialogs. This adds an ACE to the SACL of the 'ProjectData' folder, enabling auditing of write operations performed by "Admin".
+
+Command equivalent in PowerShell:
+
+```powershell
+$Acl = Get-Acl -Path "C:\\ProjectData"
+$Ar = New-Object System.Security.AccessControl.FileSystemAuditRule("Admin", "Write", "Success")
+$Acl.AddAuditRule($Ar)
+Set-Acl -Path "C:\\ProjectData" -AclObject $Acl
+
+```
+
+Remember to replace "C:\ProjectData" with the actual path to your folder. This is a simplified example, actual ACL management involves a deeper understanding of Windows security architecture.

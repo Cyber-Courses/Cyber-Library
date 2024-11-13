@@ -1,0 +1,63 @@
+# disable_functions bypass - PHP 4 >= 4.2.0, PHP 5 pcntl_exec
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> disable_functions bypass in PHP is a technique used to execute commands on a server, even when certain PHP functions have been disabled for security reasons. The pcntl_exec function, available in PHP 4.2.0 and onwards, is one function that can be used for this purpose.
+> 
+
+### 🧐 Why ?
+
+> Understanding disable_functions bypass is crucial for developers and cybersecurity professionals alike. Developers need to be aware of it to ensure that they are not inadvertently creating security vulnerabilities in their PHP applications. Cybersecurity professionals need to understand it to protect systems from attacks that use this technique.
+> 
+
+### ⛏️ How ?
+
+> A disable_functions bypass can be performed using the pcntl_exec function in PHP. The function takes two arguments: the program to be executed and an array of arguments to pass to the program. By calling this function, one can execute a command on the server, even if the 'exec' function (or other similar functions) have been disabled in the PHP configuration.
+> 
+
+### ⏳ When ?
+
+> The pcntl_exec function was introduced in PHP version 4.2.0, released in April 2002, and has been available in all subsequent versions of PHP. Its potential for use in disable_functions bypasses was not widely recognized until much later.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The disable_functions directive in PHP offers a way for system administrators to add an extra layer of security on their servers. This directive, found in the PHP configuration file, or php.ini, allows administrators to disable specific PHP functions that have the potential to execute commands on the server. This is particularly useful in preventing command injection attacks.
+
+Command injection attacks are a type of security vulnerability where an attacker is able to execute arbitrary commands on a host operating system via a vulnerable application. By disabling certain PHP functions that can execute commands, system administrators can reduce the risk of such attacks.
+
+However, the disable_functions directive is not foolproof. One notable bypass method involves the use of the pcntl_exec function. This function is typically not included in the disable_functions list and can be used as a workaround to execute commands.
+
+The pcntl_exec function, introduced in PHP version 4.2.0, is capable of executing a program in a new process. This effectively allows it to run commands on the server. However, there are certain conditions for its use. The function is only available when PHP is compiled with the '--enable-pcntl' configuration option. Furthermore, it's worth noting that the pcntl_exec function is not available on Windows platforms, limiting its potential for misuse on those systems.
+
+In understanding the capabilities and potential misuse of the pcntl_exec function, both developers and cybersecurity professionals can better protect their PHP applications and systems. Developers can avoid inadvertently creating security vulnerabilities, and cybersecurity professionals can safeguard systems against attacks utilizing this bypass technique.
+
+Here's an example of how the pcntl_exec function could be used to bypass the disable_functions directive in PHP:
+
+```php
+<?php
+// Define the command to be executed and its arguments
+$command = '/bin/cat';
+$args = array('/etc/passwd');
+
+// Use pcntl_exec to execute the command
+pcntl_exec($command, $args);
+?>
+
+```
+
+In this example, the script is attempting to use the `cat` command to display the contents of the `/etc/passwd` file, which contains user account information on a Unix-like system. Even if the 'exec' function is disabled in the PHP configuration, this script can still execute the command because it's using pcntl_exec instead.
+
+Here are the steps in the process:
+
+1. The command to be executed and its arguments are defined. In this case, the command is `/bin/cat`, and the argument is `/etc/passwd`.
+2. The `pcntl_exec` function is called with the command and the arguments. This function attempts to execute the specified command in a new process.
+
+Note: This is an educational example and should not be used for malicious purposes. Additionally, it's worth noting that the `pcntl_exec` function is only available when PHP is compiled with the '--enable-pcntl' configuration option and is not available on Windows platforms.

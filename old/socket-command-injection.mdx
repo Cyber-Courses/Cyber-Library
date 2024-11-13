@@ -1,0 +1,117 @@
+# Socket Command Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Socket Command Injection is a type of security vulnerability that occurs when an attacker is able to inject malicious commands into a system's socket interface. The socket interface is a key component of the Linux operating system that enables communication between different processes.
+> 
+
+### 🧐 Why ?
+
+> Understanding Linux Socket Command Injection is important because it can lead to serious security breaches. An attacker who successfully exploits this vulnerability can execute arbitrary commands on a system, potentially gaining full control over it. This could result in data loss, system downtime, and other significant impacts.
+> 
+
+### ⛏️ How ?
+
+> To protect against Linux Socket Command Injection, it's important to validate and sanitize all input data, limit the privileges of processes interacting with sockets, and use secure programming practices. Regularly updating and patching your systems can also help to protect against known vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> The use of sockets in Linux, and thus the potential for Socket Command Injection vulnerabilities, has been present since the early days of the operating system. However, awareness of these vulnerabilities has grown over time as attack techniques have become more sophisticated.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux Socket Command Injection vulnerabilities occur when a system fails to properly validate or sanitize input data before it's passed to a socket. This vulnerability can be exploited by an attacker who sends specially crafted data including malicious commands. The system, failing to distinguish between legitimate and malicious commands, executes them. The consequences can be severe, ranging from unauthorized access to data exfiltration.
+
+A socket in Linux is a special file used for inter-process communication, which means it allows different processes to communicate with each other. It's an integral part of the system's network communication infrastructure. The key to understanding this vulnerability is understanding how data is handled and processed within these sockets.
+
+When data is sent to a socket, it's assumed to be safe and is processed accordingly. If an attacker can inject malicious commands into this data, they can trick the system into executing those commands. This is the essence of a command injection vulnerability.
+
+To mitigate this risk, it's crucial to validate and sanitize all input data. Validation involves checking that the data is in the correct format and meets certain criteria before it's processed. Sanitization involves cleaning the data to remove any potentially harmful elements.
+
+It's also important to limit the privileges of processes interacting with sockets. This means ensuring that a process doesn't have more access rights than it needs to perform its function. If an attacker is able to exploit a process with high privileges, they could potentially gain control over the entire system.
+
+Secure programming practices, like using parameterized queries and prepared statements, can also help protect against command injection vulnerabilities. Regular system updates and patches can shield against known vulnerabilities.
+
+In conclusion, Linux Socket Command Injection is a serious security vulnerability that stems from poor input validation and sanitization. It's crucial to validate and sanitize all inputs, limit process privileges, follow secure programming practices, and regularly update systems to protect against this and other potential vulnerabilities.
+
+Here's a simplified, but real-world example of Linux Socket Command Injection:
+
+1. **Setup a simple server:** Let's say you have a basic echo server that uses a socket to receive a message from a client and echoes it back. The server code might look something like this:
+
+```python
+import socket
+
+s = socket.socket()
+s.bind(("localhost", 12345))
+s.listen(5)
+
+while True:
+    c, addr = s.accept()
+    print('Got connection from', addr)
+    echo_message = c.recv(1024)
+    c.send(echo_message)
+    c.close()
+
+```
+
+1. **Client sends a message:** A client connects to this server and sends a message:
+
+```python
+import socket
+
+s = socket.socket()
+s.connect(("localhost", 12345))
+s.send(b'Hello, Server!')
+print(s.recv(1024))
+s.close()
+
+```
+
+1. **Command Injection:** However, an attacker might send a malicious command instead of a simple message. If the server isn't validating and sanitizing inputs properly, it might execute this command:
+
+```python
+import socket
+
+s = socket.socket()
+s.connect(("localhost", 12345))
+s.send(b'; ls')  # List directory contents
+print(s.recv(1024))
+s.close()
+
+```
+
+In this example, the `; ls` command lists the contents of the current directory. If the server executes this command, it could reveal sensitive information to the attacker.
+
+1. **Mitigation:** To protect against this kind of attack, the server code should validate and sanitize all input data. For example, it could use a whitelist of allowed commands, and reject any command not on the list:
+
+```python
+import socket
+
+s = socket.socket()
+s.bind(("localhost", 12345))
+s.listen(5)
+
+allowed_commands = {b'Hello, Server!'}
+
+while True:
+    c, addr = s.accept()
+    print('Got connection from', addr)
+    echo_message = c.recv(1024)
+    if echo_message in allowed_commands:
+        c.send(echo_message)
+    else:
+        c.send(b'Invalid command.')
+    c.close()
+
+```
+
+This is a simple example that illustrates the concept. Real-world applications would require more robust validation and sanitization methods to protect against complex attack vectors.

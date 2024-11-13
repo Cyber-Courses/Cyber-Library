@@ -1,0 +1,91 @@
+# Docker Security
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Docker is an open-source platform that automates the deployment, scaling, and management of applications. It uses containerization technology to bundle and run applications and their dependencies in isolated environments called containers. Docker Security refers to the practices, tools, and strategies used to protect Docker containers and the applications running within them from threats and attacks.
+> 
+
+### 🧐 Why ?
+
+> Security is a critical aspect of any technology, and Docker is no exception. With the increasing adoption of Docker for deploying applications, securing these environments has become more important than ever. Docker Security aims to tackle various challenges such as isolating applications, securing sensitive data, managing user access, and protecting against threats such as container escape and kernel vulnerabilities. Understanding Docker Security is crucial for anyone using Docker to deploy applications, whether they are developers, system administrators, or security professionals.
+> 
+
+### ⛏️ How ?
+
+> Securing Docker involves various practices and strategies. These include minimizing the attack surface by using the least privilege principle, scanning images for vulnerabilities, using secure base images, managing secrets securely, limiting system calls with seccomp profiles, and regularly updating Docker to the latest version. Implementing these practices can significantly enhance the security of Docker environments.
+> 
+
+### ⏳ When ?
+
+> Docker was first released in 2013, and since then, it has seen widespread adoption in various industries. The need for Docker Security became apparent as organizations started to use Docker for critical applications, and security incidents involving Docker became more frequent. Today, Docker Security is an integral part of the Docker ecosystem and is continually evolving to address new threats and challenges.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Docker is built on the concept of containerization which isolates applications and their dependencies in separate user spaces, referred to as containers. These containers share the kernel of the host system, but are otherwise separated from each other, providing a secure environment for each application.
+
+This isolation is achieved through several Linux features. Namespaces, for example, create a layer of isolation by ensuring that a process in one container cannot see or influence processes in other containers. This prevents any potential interference or conflict between processes in different containers.
+
+Cgroups, or control groups, limit the resources that a container can use, such as CPU time, system memory, network bandwidth, or any combination of these resources. By limiting resources, cgroups prevent a single container from consuming excessive system resources, ensuring system stability and preventing resource starvation of other containers.
+
+Seccomp, or Secure Computing Mode, is another key feature in Docker security. It restricts the system calls a container can make to the kernel, which reduces the attack surface of the container. Limiting the system calls a container can make can prevent certain types of attacks, such as privilege escalation attacks, where an attacker attempts to gain higher privileges on the system.
+
+Docker security also involves other practices and strategies, such as minimizing the attack surface by following the principle of least privilege, scanning images for vulnerabilities, using secure base images, managing secrets securely, and regular updates of Docker to the latest version. Other best practices include using Docker Bench for Security, a script that checks for common best-practices around deploying Docker containers in production, and implementing proper logging and monitoring to detect any abnormal activities.
+
+In summary, Docker Security is a comprehensive approach that involves leveraging Linux features, implementing secure practices, and using tools to protect Docker environments from threats and attacks.
+
+Let's consider a real-life example for educational purposes:
+
+A developer wants to create a Docker container for an application that only needs to run a web server. The principle of least privilege should be applied, meaning the container should only have access to resources and capabilities that are necessary for running the web server.
+
+1. **Creating a Dockerfile:** A Dockerfile is a text file that contains the instructions to build a Docker image. In this case, it might look something like this:
+
+```
+FROM ubuntu
+RUN apt-get update && apt-get install -y apache2
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+```
+
+This Dockerfile does the following:
+
+- Starts from the Ubuntu base image
+- Installs the Apache web server
+- Exposes port 80, the default port for HTTP traffic
+- Runs Apache in the foreground when a container is started from the image
+1. **Building the Docker image:** The Dockerfile can be used to build a Docker image with the `docker build` command:
+
+```bash
+docker build -t my-web-server .
+
+```
+
+The `-t` option sets a name and optionally a tag (`name:tag`) for the image. The `.` tells Docker to look for the Dockerfile in the current directory.
+
+1. **Scanning the image for vulnerabilities:** Docker images can be scanned for vulnerabilities using a tool like Clair or Docker's own `docker scan` command, which uses the Snyk engine:
+
+```bash
+docker scan my-web-server
+
+```
+
+This command will output a report of any known vulnerabilities found in the image.
+
+1. **Running the Docker container:** A Docker container can be started from the image using the `docker run` command:
+
+```bash
+docker run -d -p 80:80 my-web-server
+
+```
+
+The `-d` option runs the container in detached mode (in the background), and the `-p` option publishes the container's port 80 to the host's port 80.
+
+By following these steps, we've created a Docker container that follows the principle of least privilege, scanned it for vulnerabilities, and run it with only necessary resource access. We can further secure this process by using secure base images, managing secrets securely, and using tools like Docker Bench for Security for best practices.

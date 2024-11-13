@@ -1,0 +1,92 @@
+# BF Forked & Threaded Stack Canaries
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> BF Forked & Threaded Stack Canaries (henceforth referred to as BFS) is a security feature implemented in operating systems to prevent buffer overflow attacks. It works by placing a small, random value (the 'canary') on the stack right before the return pointer. If an overflow occurs, it should overwrite the canary before it gets to the return pointer. When the function returns, the operating system will check if the canary has been changed. If it has, the system will terminate the program, preventing the overflow from causing harm.
+> 
+
+### 🧐 Why ?
+
+> Buffer overflow attacks are a common method used by attackers to inject malicious code or cause a system to behave unpredictably. By exploiting a buffer overflow, an attacker can overwrite data on the stack, including the return pointer of a function. This could allow the attacker to take control of the execution flow of the program, potentially leading to serious security breaches. BFS canaries are important because they provide a way to detect and prevent such attacks.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of BFS canaries, an operating system must be configured to use them. This is usually done at the system level, and the exact process will depend on the specific operating system. Once enabled, BFS canaries work automatically to protect against buffer overflow attacks. It's also important to note that while canaries can significantly increase security, they're not a silver bullet. Other security measures, such as using secure coding practices to prevent buffer overflows in the first place, are also necessary.
+> 
+
+### ⏳ When ?
+
+> The concept of stack canaries was first introduced in the late 1990s as a way to mitigate buffer overflow attacks. BFS canaries, as a specific implementation of this concept, have been in use for many years across various operating systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+BF Forked & Threaded Stack Canaries (BFS) is a security measure employed by operating systems to thwart buffer overflow attacks, a common method where attackers overwrite data in a buffer to influence a program's control flow or inject malicious code.
+
+In a typical function call, the return address and local variables are stored on the stack. If user-supplied data is copied into a local variable (a buffer) without length verification, this can trigger a buffer overflow, potentially allowing an attacker to overwrite the return address and thus control the program execution flow.
+
+To prevent this, BFS canaries add a 'canary' value to the stack before the return address. This canary, a random value generated when the program starts, serves as a protective marker. If a buffer overflow occurs and the attacker attempts to overwrite the return address, they will first overwrite the canary.
+
+When the function concludes and is about to return, the system checks if the canary value has been altered. If it has, the system recognizes a buffer overflow has transpired and can react, typically by terminating the program to avoid further damage.
+
+It's important to note that while BFS canaries significantly bolster security, they're not a foolproof solution. They are most effective when integrated with other security measures, such as secure coding practices to prevent buffer overflows in the first place.
+
+Introduced in the late 1990s, the concept of stack canaries, with BFS canaries as a specific implementation, continues to be a vital defense strategy against buffer overflow attacks in various operating systems.
+
+For example, consider a simple C program:
+
+```c
+#include <string.h>
+
+void copyData(char *data) {
+    char buffer[10];
+    strcpy(buffer, data);
+    printf("%s\\n", buffer);
+}
+
+int main(int argc, char **argv) {
+    copyData(argv[1]);
+    return 0;
+}
+
+```
+
+In this program, the `copyData` function copies user-supplied data into a local buffer without checking its length, which could lead to a buffer overflow if the user supplies data longer than 10 characters.
+
+When BFS canaries are enabled, the system might place a canary value right before the return address on the stack. For example, if the stack looked like this before the `strcpy` call:
+
+```
+|             |
+|-------------|
+|  Return Addr|
+|   Canary    |
+|   Buffer    |
+|-------------|
+|             |
+
+```
+
+If a user supplies more than 10 characters, it might overwrite the canary and return address:
+
+```
+|             |
+|-------------|
+| Overwritten |
+| Overwritten |
+|   Buffer    |
+|-------------|
+|             |
+
+```
+
+When the function is about to return, the system checks the canary value. If it's been altered, it knows a buffer overflow has occurred and can terminate the program before it jumps to the overwritten return address.
+
+This is a simplified example. In practice, the process is more complex and the canary is usually a random value that changes every time the program runs. Also, the exact placement of the canary, the procedure for checking it, and the response to an altered canary all depend on the specific operating system and configuration.

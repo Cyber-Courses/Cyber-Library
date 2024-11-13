@@ -1,0 +1,96 @@
+# Mount Namespace
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Mount Namespace is a feature of the Linux operating system that provides processes with their own isolated filesystem view. This means that processes in different mount namespaces can have different views of the system's filesystem hierarchy, with different mount points and mount options.
+> 
+
+### 🧐 Why ?
+
+> The Linux Mount Namespace is crucial in providing process isolation, a key component of system security and stability. By isolating processes' views of the filesystem, it prevents processes from interfering with each other's files and directories, enhancing system stability and security. It is also important for containerization technologies, such as Docker, where each container needs its own isolated filesystem.
+> 
+
+### ⛏️ How ?
+
+> To use the Linux Mount Namespace, you can use the 'unshare' command to create a new namespace, and the 'mount' command to manipulate the filesystem in that namespace. For example, to mount a filesystem in a new namespace, you can run 'unshare -m' to create the namespace and 'mount /dev/sda1 /mnt' to mount the filesystem. Note that you need root privileges to do this.
+> 
+
+### ⏳ When ?
+
+> Linux Mount Namespace was introduced in Linux kernel 2.4.19, released in 2002. It has become increasingly important with the rise of containerization technologies in the last decade.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The Linux Mount Namespace is a fundamental feature of the Linux operating system that provides a level of isolation for processes. Each process is associated with a 'namespace' object which includes a 'mount point' data structure for each mount point in that namespace. When a process requests a filesystem-related operation, the kernel refers to the process's namespace to decide which mount point to use, allowing for individualized mount points and mount options per process.
+
+This feature is crucial for process isolation, which is a key aspect of system security and stability. By providing different filesystem views for each process, it prevents processes from interfering with each other's files and directories, which in turn enhances system stability and security.
+
+Additionally, any changes made to mount points are visible only to processes within the same namespace, further enhancing the isolation. This namespace isolation also introduces the possibility of 'bind mounts' and 'overlay mounts'. A bind mount allows a directory to be made visible at another location in the filesystem, while an overlay mount merges multiple directories into a single one.
+
+The Linux Mount Namespace was first introduced in the Linux kernel 2.4.19, which was released in 2002. With the rise of containerization technologies in recent years, this feature has become increasingly critical. This is because each container, such as those used in Docker, requires its own isolated filesystem.
+
+In practical terms, to utilize the Linux Mount Namespace, you would use the 'unshare' command to create a new namespace, and the 'mount' command to adjust the filesystem within that namespace. For instance, 'unshare -m' would create the namespace, and 'mount /dev/sda1 /mnt' would mount the filesystem. It's important to note that root privileges are required to perform these commands.
+
+Here's a detailed, educational example showing how to use the Linux Mount Namespace:
+
+1. **Create a new namespace**: To create a new mount namespace, you would use the `unshare` command with the `m` flag. This flag stands for 'mount' and indicates that a new mount namespace should be created. Here's the command:
+
+```bash
+sudo unshare -m
+
+```
+
+This command will start a new shell where the new namespace is active.
+
+1. **Verify the new namespace**: You can verify that the new namespace is active by comparing the mount points in the new shell and the original shell. In the new shell, run:
+
+```bash
+mount | wc -l
+
+```
+
+And in the original shell:
+
+```bash
+sudo nsenter --mount=/proc/$(pidof -s unshare)/ns/mnt mount | wc -l
+
+```
+
+The two commands should return different numbers, indicating that the mount points are different in the two namespaces.
+
+1. **Adjust the filesystem**: In the new namespace, you can use the `mount` command to adjust the filesystem as needed. For example, to mount the /dev/sda1 device to the /mnt directory, you would run:
+
+```bash
+mount /dev/sda1 /mnt
+
+```
+
+This command mounts the device to the specified location in the new namespace.
+
+1. **Unload the filesystem** (when done): When you're done with the namespace, you can unmount the filesystem with the `umount` command:
+
+```bash
+umount /mnt
+
+```
+
+This command unloads the device from the specified location.
+
+1. **Exit the namespace**: Finally, you can exit the namespace by simply exiting the shell:
+
+```bash
+exit
+
+```
+
+This will terminate the shell and the associated namespace.
+
+Remember that root privileges are required for these commands, hence the use of `sudo` in the first command.

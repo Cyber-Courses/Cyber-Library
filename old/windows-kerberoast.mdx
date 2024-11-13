@@ -1,0 +1,84 @@
+# Windows Kerberoast
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Kerberoast is a method employed by hackers to extract service account credentials from Windows servers without triggering any alarms.
+> 
+
+### 🧐 Why ?
+
+> The topic is significant as it reveals a potential vulnerability in Windows servers, which are widely used in the corporate world.
+> 
+
+### ⛏️ How ?
+
+> Kerberoasting involves several steps. First, the attacker must gain access to the network. They can then list all the Service Principal Names (SPNs) using a simple LDAP query. The attacker then requests a ticket for each SPN from the Kerberos service. The Kerberos service provides a ticket encrypted with the NTLM hash of the service account password. The attacker can then take these tickets and try to crack them offline.
+> 
+
+### ⏳ When ?
+
+> The Kerberoasting technique has been around for several years. It gained popularity in the cybersecurity community around 2014, following a presentation at the DerbyCon security conference.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows Kerberoast is a hacking technique that exploits the Kerberos protocol. The Kerberos protocol is an essential part of the authentication mechanism within a Windows domain environment. The way this protocol works is by using Service Principal Names (SPNs) to distinctly identify each instance of a Windows service.
+
+When a user or a service account wishes to connect to a particular service running on a server, it sends a request for a service ticket to the Kerberos service. This service ticket is encrypted with the NTLM hash of the service account password, providing a layer of security and authentication.
+
+However, this is where Kerberoast comes into play. In a Kerberoasting attack, the attacker first needs to gain access to the network. This is usually achieved via various methods such as phishing, exploiting known vulnerabilities, or using stolen credentials.
+
+Once inside the network, the attacker can list all available SPNs using a straightforward LDAP query. They then request a service ticket for each SPN from the Kerberos service. These tickets, while encrypted, can be taken by the attacker and cracked offline, away from the prying eyes of network security measures. This offline cracking is possible because the tickets are encrypted with the NTLM hash of the service account password, which can be brute-forced depending on the complexity of the password.
+
+The Kerberoasting technique has been known for several years, but it gained popularity around 2014 following a presentation at the DerbyCon security conference. Despite its age, it continues to be a relevant and potent threat to Windows servers globally.
+
+Therefore, it is crucial for system administrators to regularly review and update security measures, use complex service account passwords, and monitor service tickets to detect any unusual activity and mitigate the risk of a Kerberoasting attack.
+
+Let's consider a hypothetical scenario for educational purposes. Imagine you're a security professional testing the vulnerability of a Windows server network to a Kerberoasting attack.
+
+1. **Network Access**: To start, you would need to gain access to the network. For our example, we'll assume you have permission and already possess valid credentials.
+
+```bash
+# Log in to the network
+net use \\\\target.domain.com
+
+```
+
+1. **List SPNs**: Next, you would list all available Service Principal Names (SPNs) using an LDAP query. The command below uses the `setspn` command to list SPNs.
+
+```bash
+# List all SPNs
+setspn -T target.domain.com -Q */*
+
+```
+
+1. **Request Service Tickets**: Once you have the list of SPNs, you would request a service ticket for each SPN from the Kerberos service. This is done using the `kerberos::list` command in the Mimikatz tool.
+
+```bash
+# Load Mimikatz
+load mimikatz
+
+# List all Kerberos tickets
+kerberos::list
+
+```
+
+1. **Extract & Crack Tickets**: The tickets are encrypted with the NTLM hash of the service account password. You can extract them using the `kerberos::tgt` command, and then crack them offline.
+
+```bash
+# Export the Kerberos ticket
+kerberos::tgt
+
+# Use a tool like John the Ripper to crack the password
+john --format=krb5tgs --wordlist=password.lst hash.txt
+
+```
+
+In each step, you are exploiting the way the Kerberos protocol works to potentially expose service account credentials. This example underlines the importance of using complex passwords, regular password changes, and careful monitoring of service ticket requests.

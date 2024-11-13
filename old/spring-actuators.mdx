@@ -1,0 +1,77 @@
+# Spring Actuators
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Spring Boot Actuator is a sub-project of Spring Boot. It provides built-in endpoints that expose various information about your application, which are incredibly useful when you're writing a microservice architecture and you need to monitor your applications' health and metrics.
+> 
+
+### 🧐 Why ?
+
+> Monitoring is crucial in a microservices architecture, because you have several services running at the same time, and you need to ensure they are all up and running fine. Spring Actuator provides essential features like health check and metrics gathering, which help in monitoring and managing your application. It also provides audit and tracing services, which are important for debugging and issue resolution.
+> 
+
+### ⛏️ How ?
+
+> To use Spring Boot Actuator, you need to include its dependency in your project's build file. For Maven, add the spring-boot-starter-actuator dependency. Once the dependency is added, Actuator is enabled by default. You can access various endpoints provided by actuator by navigating to '/actuator' followed by the endpoint name. For instance, '/actuator/health' will give the health status of your application.
+> 
+
+### ⏳ When ?
+
+> Spring Boot Actuator has been in use since the release of Spring Boot version 1.5. It has since become an integral part of Spring Boot applications, especially for production readiness.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Spring Boot Actuator is a powerful tool that adds several production-grade services to your application with minimal effort. It primarily uses HTTP endpoints to let you monitor and interact with your application.
+
+Upon integration, it offers numerous built-in endpoints. For example, the 'health' endpoint supplies basic health information about your application. This includes disk space, DB, and other custom checks. This is beneficial as it helps to ensure the application is running smoothly and to identify any potential issues early.
+
+The 'info' endpoint can be used to return information about your application. This could be general information such as application name, version, or custom information that you define. This is especially useful for tracking versions across different environments.
+
+The 'metrics' endpoint provides several useful metrics about your application. This can include memory usage, garbage collection, web request analytics, and more. This data can play a crucial role in performance tuning and capacity planning.
+
+One of the remarkable features of Spring Boot Actuator is that it's highly customizable. You can tailor the information exposed by the endpoints to meet your specific needs. You can also add your own custom endpoints to expose information that's unique to your application.
+
+Moreover, it's worth noting that while these endpoints can provide a wealth of information, they can also expose sensitive information. Therefore, it's crucial to secure these endpoints, for instance, by ensuring that only authorized personnel can access them.
+
+In conclusion, Spring Boot Actuator is a robust tool that can significantly simplify the task of monitoring and managing your Spring Boot application, thereby improving the reliability and performance of your application.
+
+Let's consider an example of using Spring Boot Actuator in a simple Spring Boot application.
+
+Firstly, to add Spring Boot Actuator to your project, include the following dependency in your Maven `pom.xml` file:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+```
+
+Once the dependency is added, Spring Boot Actuator is enabled by default. For example, to check the health of your application, navigate to `http://localhost:8080/actuator/health`. This will return a response like:
+
+```json
+{
+    "status": "UP"
+}
+
+```
+
+This indicates that your application is running successfully.
+
+To retrieve the metrics of your application, navigate to `http://localhost:8080/actuator/metrics`. This will return a list of available metrics.
+
+To access a specific metric, append the metric name to the metrics endpoint. For instance, `http://localhost:8080/actuator/metrics/jvm.memory.used` will give the memory usage of your application.
+
+Remember, since these endpoints can expose sensitive information, they should be secured appropriately. For instance, you may restrict access to certain endpoints to admin users only.
+
+Spring Boot Actuator also allows you to create your own custom endpoints. For example, you can create an endpoint that returns the number of active users in your application. To do this, you'd define a new bean that extends from the `Endpoint` class and expose it as a `@Bean`. You could then access this information by navigating to `http://localhost:8080/actuator/activeUsers`.
+
+In conclusion, Spring Boot Actuator provides a powerful and customizable set of tools that make monitoring and managing your Spring Boot application easier.

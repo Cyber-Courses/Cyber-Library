@@ -1,0 +1,32 @@
+# LFI2RCE Via compress.zlib + PHP_STREAM_PREFER_STUDIO + Path Disclosure
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> LFI2RCE via compress.zlib + PHP_STREAM_PREFER_STUDIO + Path Disclosure is an exploitation technique used by attackers to escalate from Local File Inclusion (LFI) to Remote Code Execution (RCE). This is done by leveraging a vulnerability in PHP's zlib compression extension and the PHP_STREAM_PREFER_STUDIO option.
+> 
+
+### 🧐 Why ?
+
+> Understanding this exploitation technique is crucial for cybersecurity professionals as it can potentially allow an attacker to execute arbitrary code remotely on a vulnerable server. This can lead to unauthorized access to sensitive information, data breaches, and even complete system control. Awareness and understanding of this technique can aid in vulnerability assessment, penetration testing, and the development of effective security measures.
+> 
+
+### ⛏️ How ?
+
+> The exploitation process involves a few steps. Firstly, an attacker identifies a web application with a file inclusion vulnerability. Then, they use the zlib:// or compress.zlib:// wrappers in PHP to compress their malicious payload. By setting the PHP_STREAM_PREFER_STUDIO option, they force PHP to use the local file stream wrapper, which can lead to the execution of the compressed malicious code. Finally, the path disclosure vulnerability is exploited to locate the compressed file and execute the payload.
+> 
+
+### ⏳ When ?
+
+> The usage of this technique has been documented in various cybersecurity incidents since the mid-2010s, as PHP's popularity as a server-side scripting language and the prevalence of LFI vulnerabilities have made it a viable attack vector.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In PHP, zlib compression extension provides functions to compress and decompress data. PHP_STREAM_PREFER_STUDIO is an option that when set, forces PHP to use the local file stream wrapper, even if the file is remote. This can lead to unexpected behavior if the local file stream wrapper is not secure. Furthermore, a path disclosure vulnerability allows an attacker to find out the full path to the webroot on the server, which can be used to locate the compressed file. By combining these elements, an attacker can escalate from LFI to RCE, executing arbitrary code with the same permissions as the PHP process.

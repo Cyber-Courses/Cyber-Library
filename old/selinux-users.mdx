@@ -1,0 +1,173 @@
+# SELinux Users
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SELinux, or Security-Enhanced Linux, is a security architecture integrated into the Linux kernel. It is a feature that provides a mechanism for supporting access control security policies, including United States Department of Defense–style mandatory access controls (MAC). SELinux users are the mapping between Linux users and SELinux user identities.
+> 
+
+### 🧐 Why ?
+
+> SELinux is essential because it provides a finer grained control over system resources and processes. It helps to limit the potential damage that can be done by a malicious user or process, by controlling the actions that any particular process may take. SELinux users are important as they define what roles and domains a Linux user can transition into, effectively dictating what the user can and cannot do.
+> 
+
+### ⛏️ How ?
+
+> Using SELinux users requires understanding of the SELinux policy in use on your system. Each policy may define its own set of users. Here are some steps to use SELinux users: 1) Use `semanage user -l` to list the SELinux users defined in your policy. 2) Use `semanage login -l` to view the mapping between Linux usernames and SELinux users. 3) To modify the mapping, use `semanage login -m -s SELinux_user Linux_username`. Remember, changes to SELinux can have serious implications on your system's security, so it is critical to understand what you are doing.
+> 
+
+### ⏳ When ?
+
+> SELinux was first introduced in the Linux kernel 2.6, released in December 2003. It has since been integrated into many Linux distributions, with various levels of default enforcement.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview of SELinux
+
+SELinux (Security-Enhanced Linux) is a security architecture integrated into the Linux kernel, which enforces mandatory access controls (MAC). SELinux provides a mechanism for supporting access control security policies, including United States Department of Defense-style mandatory access controls (MAC).
+
+### Key Concepts
+
+1. **SELinux Users**: SELinux users are different from traditional Linux users. They are part of the SELinux security context and play a central role in determining access controls and permissions.
+2. **Roles**: Each SELinux user is associated with one or more roles. Roles define what domains a user can transition into.
+3. **Domains**: Domains define the permissions for processes. A domain is essentially a type of SELinux type enforcement, defining the allowed interactions with other types of objects (files, directories, devices, etc.).
+
+### User-Role-Domain Mapping
+
+The mapping system in SELinux follows this hierarchy:
+
+- **User**: Represents the SELinux user.
+- **Role**: Defines a set of permissions and the domains a user can access.
+- **Domain**: Specifies the permissions of a process or an object.
+
+### Managing SELinux Users
+
+### 1. Listing SELinux Users
+
+To list all SELinux users, use the `semanage user -l` command:
+
+```bash
+semanage user -l
+
+```
+
+Example output:
+
+```
+SELinux User         Roles
+system_u             system_r
+user_u               user_r
+staff_u              staff_r
+
+```
+
+This output shows SELinux users (`system_u`, `user_u`, `staff_u`) and their associated roles (`system_r`, `user_r`, `staff_r`).
+
+### 2. Mapping Linux Users to SELinux Users
+
+To see the current mapping of Linux users to SELinux users, use the `semanage login -l` command:
+
+```bash
+semanage login -l
+
+```
+
+Example output:
+
+```
+Login Name           SELinux User         MLS/MCS Range
+__default__          user_u               s0
+root                 system_u             s0-s0:c0.c1023
+
+```
+
+This shows that the Linux user `root` is mapped to the SELinux user `system_u`, while other users are mapped to `user_u` by default.
+
+### 3. Modifying the Mapping
+
+To change the mapping of a Linux user to a different SELinux user, use the `semanage login -m` command:
+
+```bash
+semanage login -m -s SELinux_user Linux_username
+
+```
+
+For example, to map the Linux user `test_user` to the SELinux user `user_u`, run:
+
+```bash
+sudo semanage login -m -s user_u test_user
+
+```
+
+After running this command, any sessions initiated by `test_user` will have the SELinux user `user_u`, and the corresponding roles and permissions.
+
+### Example Scenario
+
+### Step-by-Step Process
+
+1. **List SELinux Users**:
+
+```bash
+semanage user -l
+
+```
+
+1. **Check Mapping of Linux Users to SELinux Users**:
+
+```bash
+semanage login -l
+
+```
+
+1. **Modify the Mapping of a User**:
+
+Suppose you want to map the Linux user `alice` to the SELinux user `staff_u`:
+
+```bash
+sudo semanage login -m -s staff_u alice
+
+```
+
+1. **Verify the Mapping**:
+
+Re-check the mapping to ensure the change has been applied:
+
+```bash
+semanage login -l
+
+```
+
+Expected output:
+
+```
+Login Name           SELinux User         MLS/MCS Range
+alice                staff_u              s0
+__default__          user_u               s0
+root                 system_u             s0-s0:c0.c1023
+
+```
+
+This confirms that `alice` is now mapped to the SELinux user `staff_u`.
+
+### Implications of SELinux
+
+1. **Enhanced Security**:
+    - By mapping Linux users to SELinux users with specific roles and domains, you can enforce fine-grained access controls.
+    - This helps in compartmentalizing processes and reducing the risk of privilege escalation.
+2. **Access Control**:
+    - SELinux policies dictate what actions a user or process can perform, independent of traditional Linux permissions.
+    - This separation of access controls provides an additional layer of security.
+3. **Regular Audits**:
+    - Regularly audit SELinux policies and mappings to ensure they align with your security requirements.
+    - Use commands like `semanage` to view and modify user mappings and roles.
+
+### Conclusion
+
+SELinux users play a crucial role in the security model of an SELinux-enabled system. By understanding and properly managing the mapping of Linux users to SELinux users, roles, and domains, administrators can enforce strict access controls and enhance the overall security of the system. Proper configuration and regular audits are essential to maintaining a secure SELinux environment.

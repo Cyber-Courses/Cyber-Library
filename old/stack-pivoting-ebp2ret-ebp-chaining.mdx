@@ -1,0 +1,90 @@
+# Stack Pivoting - EBP2Ret - EBP chaining
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Stack Pivoting, EBP2Ret, and EBP chaining are techniques used in exploit development, particularly in buffer overflow attacks. Stack pivoting involves manipulating the stack pointer so that it points to an attacker-controlled area, allowing the execution of arbitrary code. EBP2Ret is a specific form of stack pivoting where the base pointer (EBP) is used to overwrite the return pointer with a new address, normally pointing to a shellcode. EBP chaining is a technique used to bypass certain security measures where multiple EBP-RET sequences are used.
+> 
+
+### 🧐 Why ?
+
+> Understanding these concepts is crucial for both cybersecurity professionals and hackers. For professionals, it aids them in developing effective security measures and understanding how certain attacks work. For hackers, these techniques can be used to exploit vulnerabilities in the system. The ability to control the execution flow of a program is a powerful tool, and these techniques give that control when exploiting buffer overflow vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> To use these techniques, one must first find a buffer overflow vulnerability in a program. Once found, the hacker can then use a technique like EBP chaining to bypass security measures and control the execution flow of the program. The specific steps to implement these techniques can vary greatly depending on the program and the specific vulnerability. It requires a deep understanding of assembly language and the inner workings of the program.
+> 
+
+### ⏳ When ?
+
+> These techniques have been in use since the late 1990s and early 2000s, when buffer overflow vulnerabilities were more common. They remain relevant today as they can still be used to exploit certain types of vulnerabilities.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Stack pivoting, EBP2Ret, and EBP chaining are advanced exploit development techniques, normally used in buffer overflow attacks.
+
+Stack pivoting involves manipulating the stack pointer to point towards a controlled area, usually achieved by overwriting a saved return address on the stack. This strategic overwrite redirects the execution flow when the function returns, leading the program to execute arbitrary code.
+
+EBP2Ret is a more specific form of stack pivoting. In this scenario, the base pointer (EBP) overwrites the return address. This technique is particularly useful when direct overwrite of the return address isn’t possible, often due to security measures. The new EBP value is manipulated to point to a new address, often a shellcode, altering the program's execution flow.
+
+EBP chaining is an even more sophisticated technique. It involves the manipulation of multiple EBP-RET sequences. This type of chaining is useful to bypass security measures such as stack canaries, which are designed to prevent buffer overflow attacks. When a direct overwrite of the return address isn't possible, EBP chaining provides an alternative pathway to manipulate the execution flow.
+
+These techniques require a deep understanding of assembly language and the inner workings of the program as their implementation can vary greatly depending on the specific vulnerability. While they have been in use since the late 1990s and early 2000s, they remain relevant today for exploiting certain types of vulnerabilities and are crucial knowledge for cybersecurity professionals and hackers alike.
+
+Let's consider an example of a buffer overflow using these techniques.
+
+Suppose we have a vulnerable program that takes user input without proper bounds checking:
+
+```
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *str) {
+    char buffer[100];
+    strcpy(buffer,str);
+}
+
+int main(int argc, char **argv) {
+    vulnerable_function(argv[1]);
+    return 0;
+}
+
+```
+
+In this program, the function `vulnerable_function` copies the input `str` into `buffer` without checking if `str` is larger than `buffer`. This can lead to a buffer overflow.
+
+1. **Stack Pivoting:**
+
+First, we can override the return address of `vulnerable_function` to point to our shellcode.
+
+```bash
+./vulnerable_program $(python -c 'print "A"*112 + "\\xbe\\xba\\xfe\\xca"')
+
+```
+
+In the above command, "A"*112 fills up the buffer and the saved EBP on the stack. "\xbe\xba\xfe\xca" is the return address overwritten in reverse order (due to little endian format) which would point to our shellcode.
+
+1. **EBP2Ret:**
+
+Now, let's assume there are security measures preventing direct overwrite of the return address. We can use EBP2Ret. We know that, after a function call, the next instruction to execute is at the address held by EBP + 4. So, we need to control the value of EBP to point it to our shellcode.
+
+```bash
+./vulnerable_program $(python -c 'print "A"*108 + "\\xbe\\xba\\xfe\\xca" + "BBBB" + "\\xde\\xc0\\xad\\xde"')
+
+```
+
+Here, "A"*108 fills the buffer. "\xbe\xba\xfe\xca" is the new EBP value which points to our shellcode. "BBBB" is the 4-byte padding. "\xde\xc0\xad\xde" is the overwritten return address.
+
+1. **EBP Chaining:**
+
+In cases where we need to bypass more robust security measures (like stack canaries), we can use EBP chaining. Here, we manipulate multiple EBP-RET sequences to control the execution flow indirectly. This requires in-depth knowledge of the program's memory layout and can't be explained with a simple code snippet.
+
+Remember, these examples are highly simplified. In reality, exploiting buffer overflow vulnerabilities require a deep understanding of both the target program and the system it's running on.

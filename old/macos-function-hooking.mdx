@@ -1,0 +1,148 @@
+# macOS Function Hooking
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Function Hooking is a technique used by developers and security researchers to intercept and potentially alter the flow of function calls in macOS. Function hooking is fundamental to many aspects of system-level programming, including debugging, reverse engineering, and security.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS Function Hooking is important for both developers and security professionals. For developers, it can aid in debugging and testing by allowing them to alter program behavior without changing source code. For security professionals, understanding function hooking can aid in detecting and analyzing malware, as many malicious programs use function hooking to hide their activities or gain unauthorized access to system resources.
+> 
+
+### ⛏️ How ?
+
+> Function hooking on macOS can be achieved through several methods, including patching binary code, manipulating function pointers, or using Apple's own dynamic method replacement capabilities. Each method comes with its own advantages and challenges, and the best approach often depends on the specific task at hand. It's also important to note that function hooking can potentially introduce instability or security vulnerabilities if not done carefully, so it should be used with caution.
+> 
+
+### ⏳ When ?
+
+> Function hooking has been a common practice in system-level programming for many years. Its use in macOS specifically has been prevalent since the early days of the operating system, as it provides powerful tools for both development and security research.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of macOS Function Hooking
+
+macOS Function Hooking is a sophisticated technique used to intercept and manipulate the flow of function calls within the macOS operating system. This method is widely used in various fields such as debugging, reverse engineering, and cybersecurity. The main goal of function hooking is to redirect the execution flow of a specific function to a different, user-defined function (known as a hook) before, during, or after its execution.
+
+## Mechanisms of Function Hooking
+
+Function hooking can be achieved through several methods, each with its own pros and cons:
+
+### 1. Binary Patching
+
+Binary patching involves modifying the binary code of a function to include a jump to a hook function. This method is relatively straightforward but can be easily detected by security measures.
+
+### 2. Function Pointer Manipulation
+
+Function pointer manipulation involves changing the pointer of a function to point to a hook function instead. This method is less detectable but can cause system instability if not handled properly.
+
+### 3. Dynamic Method Replacement
+
+Apple's dynamic method replacement capabilities allow for the replacement of methods at runtime. This method is powerful and flexible but also complex and challenging to use correctly.
+
+## Example: Hooking the `open` System Call
+
+Let's walk through an example of hooking the `open` system call using binary patching in C. The `open` function is widely used to open files, directories, and other resources on macOS. By hooking this function, we can log every time a specific file is opened.
+
+### Step-by-Step Example
+
+### Step 1: Define the Original Function Pointer
+
+First, define a pointer to the original `open` function.
+
+```c
+#include <stdio.h>
+#include <dlfcn.h>
+
+// Original function pointer
+int (*original_open)(const char *, int);
+
+```
+
+### Step 2: Define the Hook Function
+
+Next, define our hook function that logs the file being opened and then calls the original `open` function.
+
+```c
+// Our hook function
+int open(const char *path, int flags) {
+    printf("File opened: %s\\n", path);
+    // Call the original function
+    return original_open(path, flags);
+}
+
+```
+
+### Step 3: Set Up the Hook
+
+In the `setup` function, use `dlsym` to find the original `open` function and store its address in `original_open`. This function will be called automatically when our code is loaded.
+
+```c
+__attribute__((constructor)) void setup() {
+    // Replace the original function with our hook
+    original_open = dlsym(RTLD_NEXT, "open");
+}
+
+```
+
+With this setup, whenever the `open` function is called, our version will be called instead, allowing us to log the file being opened before the actual function is executed.
+
+### Complete Example Code
+
+Here is the complete code for hooking the `open` function:
+
+```c
+#include <stdio.h>
+#include <dlfcn.h>
+
+// Original function pointer
+int (*original_open)(const char *, int);
+
+// Our hook function
+int open(const char *path, int flags) {
+    printf("File opened: %s\\n", path);
+    // Call the original function
+    return original_open(path, flags);
+}
+
+__attribute__((constructor)) void setup() {
+    // Replace the original function with our hook
+    original_open = dlsym(RTLD_NEXT, "open");
+}
+
+```
+
+### Compilation and Usage
+
+To compile this code, you would typically save it to a file, say `hook_open.c`, and compile it with the following command:
+
+```bash
+gcc -shared -o hook_open.dylib -fPIC hook_open.c -ldl
+
+```
+
+You can then preload this shared library when running an application to hook the `open` function:
+
+```bash
+DYLD_INSERT_LIBRARIES=./hook_open.dylib some_application
+
+```
+
+This tells macOS to load `hook_open.dylib` before any other shared libraries, effectively hooking the `open` function for `some_application`.
+
+## Conclusion
+
+macOS Function Hooking is a powerful technique for intercepting and manipulating function calls. It has legitimate uses in debugging and testing but also poses significant security risks if used maliciously. Understanding how function hooking works and implementing robust security measures to detect and prevent unauthorized hooks is essential for maintaining the security and stability of macOS applications.
+
+# 🖇️ Références
+
+---

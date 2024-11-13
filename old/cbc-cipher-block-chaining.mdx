@@ -1,0 +1,69 @@
+# CBC - Cipher Block Chaining
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> CBC, Cipher Block Chaining, is a mode of operation for block cipher, where each block of plaintext is XORed (Exclusive OR) with the previous ciphertext block before being encrypted. This mode of operation ensures that each ciphertext block depends on all plaintext blocks processed up to that point, creating interdependence among the data blocks.
+> 
+
+### 🧐 Why ?
+
+> CBC is a vital topic in cryptography because it enhances the security of data by ensuring that identical blocks of plaintext do not result in identical blocks of ciphertext. This characteristic makes it more difficult for an attacker to predict the encryption pattern. Understanding CBC is fundamental for anyone involved in data security, network security, or cybersecurity in general.
+> 
+
+### ⛏️ How ?
+
+> To implement CBC mode in a block cipher, you start with an initialization vector (IV), which is XORed with the first block of plaintext. The result is then fed into the encryption algorithm with the secret key to produce the first block of ciphertext. This block of ciphertext is then XORed with the next block of plaintext to produce the next block of ciphertext, and the process continues until all plaintext blocks have been encrypted.
+> 
+
+### ⏳ When ?
+
+> CBC mode was first described publicly by IBM in 1976. Since then, it has been widely adopted in cryptographic systems to enhance the security of block ciphers.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The underlying principle of CBC is to create dependency among all blocks of data to prevent any patterns in the plaintext from being transferred to the ciphertext. This is achieved by XORing each block of plaintext with the previous ciphertext block before encryption. The first block, which has no preceding ciphertext block, is XORed with an IV. XOR operation, also known as binary addition, is used because it's reversible, which is essential for decryption. The IV is randomly chosen and doesn't require secrecy, but it should be different for any two messages encrypted with the same key. While CBC mode enhances the security of block ciphers, it also introduces the potential for error propagation; a single bit error in a ciphertext block affects the decryption of all subsequent blocks. To mitigate this, error detection codes can be used.
+
+Let's consider a detailed example of using the CBC mode with AES encryption in Python. PyCryptoDome, a Python package, provides the necessary tools for this implementation.
+
+```python
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+
+# Step 1: Generate a key and an initialization vector (IV)
+key = get_random_bytes(16) # AES-128
+iv = get_random_bytes(16) # Block size
+
+# Step 2: Create a cipher object using the key and the IV
+cipher = AES.new(key, AES.MODE_CBC, iv)
+
+# Step 3: Encrypt a block of plaintext
+plaintext = b'This is a test plaintext block.'
+ciphertext = cipher.encrypt(pad(plaintext, 16)) # Pad the plaintext to be a multiple of 16 bytes
+
+# Step 4: Decrypt the ciphertext
+cipher = AES.new(key, AES.MODE_CBC, iv)
+decrypted_text = unpad(cipher.decrypt(ciphertext), 16)
+
+print("Original text:", plaintext)
+print("Decrypted text:", decrypted_text)
+
+```
+
+In this example, a random key and IV are generated using `get_random_bytes()`. The cipher object is created with this key, the AES mode set to CBC, and the IV. The plaintext is encrypted using the `encrypt()` function after padding it to a multiple of 16 bytes, which is the block size for AES.
+
+The ciphertext could then be decrypted using the same key and IV. The `decrypt()` function is used to decrypt the ciphertext, and the result is unpadded using `unpad()` to get the original plaintext.
+
+Note: This example assumes that the plaintext is a single block of text. In a real-world scenario, the plaintext could be split into multiple blocks, each of which would be encrypted and linked to the previous block as per the CBC mode.
+
+# 🖇️ Références
+
+---

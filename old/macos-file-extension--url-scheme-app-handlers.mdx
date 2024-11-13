@@ -1,0 +1,135 @@
+# macOS File Extension & URL scheme app handlers
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS File Extension & URL scheme app handlers are methods used by macOS to determine which application will open a particular file or URL. File extensions are used to identify the type of file, and the associated app handler is the application that macOS will use to open the file. URL scheme app handlers are used to handle specific URL schemes.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS File Extension & URL scheme app handlers is essential because they are integral to how macOS operates. When a user double-clicks on a file, macOS uses the file extension to determine which application to open the file with. Similarly, when a URL is clicked, macOS uses the URL scheme to decide which application to handle the URL. Incorrect or malicious handling of these can lead to significant issues, including data loss, application errors, or security vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> To view or change the default file handler for a particular file extension, right-click on a file of that type, select 'Get Info', and then under 'Open with', select the app you want to use. To view or change the URL scheme handler, you need to delve into macOS’s internal database using a command-line tool. This can be complex and is not recommended without a solid understanding of macOS internals.
+> 
+
+### ⏳ When ?
+
+> macOS has used file extensions and URL scheme app handlers since its inception, as they are fundamental parts of how the operating system interacts with applications and files.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview
+
+In macOS, file handling and URL handling are managed through file extensions and URL scheme app handlers, respectively. These mechanisms ensure that files and URLs are opened with the appropriate applications, providing a seamless user experience.
+
+## File Extensions
+
+### Definition
+
+File extensions are sequences of characters that follow a period at the end of a file name. They indicate the file type and inform the operating system which application should be used to open the file. Common examples include:
+
+- `.txt` for text files
+- `.jpg` for JPEG image files
+- `.docx` for Microsoft Word documents
+
+### Functionality
+
+When a user double-clicks a file, macOS examines the file extension and uses it to determine the appropriate application to open the file. This is achieved through a mapping of file extensions to applications stored within the system.
+
+### Example
+
+When you double-click on `example.txt`, macOS recognizes the `.txt` extension and opens the file in the default text editor, such as TextEdit.
+
+```bash
+open example.txt
+
+```
+
+## URL Scheme App Handlers
+
+### Definition
+
+URL schemes are prefixes that specify the protocol used to access a resource on the Internet or within the operating system. Common URL schemes include:
+
+- `http:` and `https:` for web URLs
+- `mailto:` for email addresses
+
+URL scheme app handlers are applications designated to handle specific URL schemes. For instance, web browsers handle `http:` and `https:` URLs, while email clients handle `mailto:` URLs.
+
+### Functionality
+
+When a URL is clicked or otherwise accessed, macOS uses the URL scheme to determine which application should handle the request. This mapping is maintained in a database within the operating system.
+
+### Example
+
+Clicking on a `mailto:` link (e.g., `mailto:example@example.com`) will open the default email client, such as Mail, to compose a new email.
+
+```bash
+open "<mailto:example@example.com>"
+
+```
+
+## Altering Handlers
+
+### Potential Consequences
+
+Changing the default handler for a file extension or URL scheme can lead to unintended consequences. For example:
+
+- **File Extensions**: If the handler for `.jpg` files is changed to a text editor, double-clicking on a JPEG file will attempt to open it in the text editor, which cannot interpret image data correctly.
+- **URL Schemes**: If the handler for `http:` URLs is changed to a non-browser application, attempts to open web links will fail or result in errors.
+
+### Security Implications
+
+From a cybersecurity perspective, malicious applications might change these handlers to divert files or URLs to themselves. This can lead to data theft or other exploits, as the malicious application can intercept and manipulate the data.
+
+## Managing Handlers
+
+### Viewing and Changing File Extension Handlers
+
+To view or change the default application for a specific file extension:
+
+1. **Finder Method**:
+    - Right-click on a file and select "Get Info."
+    - In the "Open with" section, select the desired application.
+    - Click "Change All" to apply this change to all files with the same extension.
+2. **Terminal Method**:
+    
+    ```bash
+    duti -s com.apple.TextEdit .txt all
+    
+    ```
+    
+
+### Viewing and Changing URL Scheme Handlers
+
+To view or change the default application for a specific URL scheme:
+
+1. **System Preferences Method**:
+    - Open "System Preferences" and go to "General."
+    - Change the default web browser for `http:` and `https:` URLs.
+2. **Terminal Method**:
+    
+    ```bash
+    defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{"LSHandlerURLScheme"="mailto"; "LSHandlerRoleAll"="com.apple.mail";}'
+    
+    ```
+    
+
+## Conclusion
+
+Understanding and managing file extension and URL scheme handlers in macOS is crucial for maintaining a smooth and secure user experience. Properly configured handlers ensure that files and URLs are opened with the appropriate applications, reducing the risk of errors and security vulnerabilities. Users and administrators should regularly review and manage these settings to prevent potential exploits and ensure the correct functioning of the system.
+
+# 🖇️ Références
+
+---

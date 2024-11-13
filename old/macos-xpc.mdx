@@ -1,0 +1,121 @@
+# macOS XPC
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS XPC, or 'XPC services', is a lightweight, high-performance interprocess communication mechanism that allows for data exchange and service requests between processes on macOS. It acts as a bridge for communication and coordination between different applications and system services within the macOS operating system.
+> 
+
+### 🧐 Why ?
+
+> macOS XPC is crucial because it facilitates seamless and efficient communication between different processes or applications within the macOS environment. Without XPC, interprocess coordination would be more complex, potentially leading to performance issues or software bugs. It's vital for developers working on macOS or users who want to understand the inner workings of their operating system.
+> 
+
+### ⛏️ How ?
+
+> To utilize macOS XPC, developers need to have a solid understanding of Objective-C or Swift, as these are the primary languages used for macOS development. XPC services are typically implemented as bundles in an application's Contents/XPCServices directory. Developers should also be familiar with Apple's XPC API, which allows for the creation and management of XPC connections and service requests.
+> 
+
+### ⏳ When ?
+
+> XPC was introduced with the release of macOS 10.7 Lion in 2011. Since then, it has become a core part of the macOS system architecture, used extensively by Apple's own applications and system services.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of macOS XPC (XPC Services)
+
+macOS XPC (Cross Process Communication) is a highly efficient interprocess communication mechanism that facilitates data exchange and service requests between processes on macOS. It acts as a conduit for communication and coordination between different applications and system services, ensuring smooth and efficient interactions within the macOS operating system.
+
+## How macOS XPC Works
+
+macOS XPC operates by establishing an asynchronous, bidirectional communication channel between two processes: a client and a service. The client sends messages to the service, which can optionally send replies back. These messages are delivered in the order they were sent, and replies are ordered according to their corresponding requests.
+
+XPC services are implemented as separate processes, allowing an application to delegate certain tasks to an XPC service that can run on a different core or processor. This architecture provides significant advantages:
+
+- **Performance**: Distributing the workload across multiple cores or processors enhances the overall performance.
+- **Security**: Each service operates in its isolated environment with only the necessary permissions, improving security.
+
+Introduced in 2011 with macOS 10.7 Lion, XPC has since become a fundamental part of macOS system architecture, extensively used by Apple's applications and system services.
+
+## Technical Implementation
+
+To work with macOS XPC, developers typically use Objective-C or Swift. XPC services are usually implemented as bundles in an application's `Contents/XPCServices` directory. Developers need to be familiar with Apple's XPC API to create and manage XPC connections and service requests.
+
+### Example Scenario: Offloading Image Processing
+
+Consider a macOS application (`App`) that needs to perform resource-intensive image processing tasks. Instead of performing these tasks within the application, `App` delegates them to an XPC service (`ImageProcessor`).
+
+### Setting Up the XPC Connection in `App`
+
+First, `App` establishes a connection to the `ImageProcessor` service:
+
+```swift
+let connection = NSXPCConnection(serviceName: "com.example.ImageProcessor")
+
+```
+
+Next, `App` sets the remote object interface, defining the methods that `ImageProcessor` provides:
+
+```swift
+connection.remoteObjectInterface = NSXPCInterface(with: ImageProcessingProtocol.self)
+
+```
+
+The `ImageProcessingProtocol` might look like this:
+
+```swift
+@objc protocol ImageProcessingProtocol {
+    func processImage(_ image: NSImage, withReply reply: @escaping (NSImage?) -> Void)
+}
+
+```
+
+Now, `App` can call the `processImage` method on `ImageProcessor`:
+
+```swift
+let imageProcessor = connection.remoteObjectProxyWithErrorHandler { error in
+    print("Received error:", error)
+} as? ImageProcessingProtocol
+
+imageProcessor?.processImage(image) { processedImage in
+    // Use the processed image
+}
+
+```
+
+### Implementing the XPC Service (`ImageProcessor`)
+
+On the `ImageProcessor` side, the service implements the `ImageProcessingProtocol` and handles `processImage` requests:
+
+```swift
+class ImageProcessor: NSObject, ImageProcessingProtocol {
+    func processImage(_ image: NSImage, withReply reply: @escaping (NSImage?) -> Void) {
+        let processedImage = // Perform image processing
+        reply(processedImage)
+    }
+}
+
+```
+
+In this setup:
+
+- The `App` establishes a connection to the `ImageProcessor` service.
+- The `ImageProcessor` service performs the resource-intensive image processing task.
+- The result is returned to `App` via the reply block.
+
+This approach enhances performance by offloading the resource-intensive task to a separate service and improves security by isolating the task within its process.
+
+## Conclusion
+
+macOS XPC (XPC Services) is an integral part of the macOS environment, enabling seamless and efficient communication between different processes or applications. It simplifies interprocess coordination, preventing potential performance issues or software bugs. Understanding and utilizing XPC effectively is crucial for developers working on macOS applications to create secure, efficient, and robust software that leverages the full capabilities of the macOS system.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,73 @@
+# Windows SmbExec/ScExec
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> SmbExec/ScExec are Windows utilities that allow an attacker to execute commands on a remote machine using SMB protocol. The main difference between the two is that SmbExec uses an existing service to execute commands, while ScExec creates a new service for each command.
+> 
+
+### 🧐 Why ?
+
+> Understanding SmbExec and ScExec is crucial in cybersecurity because they can be used in attacks to execute commands remotely, especially in a Windows Active Directory environment. These tools can be used maliciously to exploit vulnerabilities, so understanding them can help in the development of effective defense strategies.
+> 
+
+### ⛏️ How ?
+
+> To use SmbExec or ScExec, an attacker would first need to gain access to valid Windows credentials. Then, they can use these tools to execute commands on any machine where the provided credentials have appropriate permissions. It's important to note that while these tools have legitimate uses, such as for remote administration, they can also be used maliciously.
+> 
+
+### ⏳ When ?
+
+> SmbExec and ScExec have been in use since the early versions of the Windows operating system. Their usage, especially in malicious contexts, has seen a rise with the increased adoption of Windows Active Directory environments.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+SmbExec and ScExec are utilities that operate under the Server Message Block (SMB) protocol, a standard Windows protocol for sharing files, printers, serial ports, and communications abstractions such as named pipes and mail slots between computers. These tools leverage the SMB protocol to connect to a remote machine and authenticate using provided credentials.
+
+Their functionality diverges in the way they handle command execution. SmbExec utilizes an existing service on the remote machine to execute commands. Conversely, ScExec creates a new service for each command it executes, which can leave a more noticeable footprint and may be more likely to trigger security alerts.
+
+The potential abuse of these utilities is significant. An attacker who has acquired valid Windows credentials can use these tools to execute commands on any machine where the provided credentials have the necessary permissions. This essentially allows an attacker to gain full control over a target machine, posing a serious security risk.
+
+In legitimate contexts, these tools can be used for remote administration tasks. However, in the hands of an attacker, they can be used in a variety of malicious activities, such as data exfiltration, lateral movement, privilege escalation, and persistence.
+
+Defending against such potential attacks requires a multifaceted approach. First, it's crucial to secure Windows credentials to prevent unauthorized access. This can be achieved through measures such as strong password policies, two-factor authentication, and regular audits of account activity.
+
+Second, monitoring for suspicious service creation or modification can help detect malicious activity. Security Information and Event Management (SIEM) systems can be employed to generate alerts when unusual activity is detected.
+
+Finally, restricting SMB access where possible can limit the potential attack surface. This can involve disabling SMB on machines that don't require it, using firewalls to block SMB traffic from untrusted networks, and implementing network segmentation to isolate sensitive systems.
+
+Let's consider a hypothetical example to show how these tools could be used.
+
+**Step 1: Acquiring Credentials**
+
+An attacker might use a phishing attack to acquire a user's Windows credentials. For instance, they might send an email that looks like it's from the IT department, asking the user to login to a fake website.
+
+**Step 2: Using SmbExec/ScExec**
+
+Once they have the credentials, the attacker could use SmbExec or ScExec to execute commands on a remote machine. The syntax for using these tools could look something like this:
+
+```bash
+# Using SmbExec
+smbexec.py -target-ip 192.168.1.10 -username user -password pass -domain domain -command "whoami"
+
+# Using ScExec
+scexec.py -target-ip 192.168.1.10 -username user -password pass -domain domain -command "whoami"
+
+```
+
+In these commands, `192.168.1.10` is the IP address of the remote machine, `user` is the username, `pass` is the password, `domain` is the domain, and `"whoami"` is the command to be executed. The `"whoami"` command is a simple command that returns the username that the command is being run as, which in this case would help the attacker confirm that they have the correct permissions.
+
+**Step 3: Malicious Activity**
+
+Once they have access, the attacker could perform malicious activities. For instance, they might use the command `net user /add [username] [password]` to create a new user on the remote machine. They could then add this user to the local administrators group using the command `net localgroup administrators [username] /add`, giving them full control over the machine.
+
+**Step 4: Defense**
+
+To defend against this type of attack, organizations should implement strong password policies, use two-factor authentication, and regularly audit account activity. They should also monitor for suspicious service creation or modification and restrict SMB access where possible.

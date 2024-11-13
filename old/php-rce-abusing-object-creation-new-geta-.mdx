@@ -1,0 +1,99 @@
+# PHP - RCE abusing object creation: new $_GET['a']($_GET['b'])
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PHP - RCE abusing object creation: new $_GET['a']($_GET['b']) is a technique used by attackers to exploit PHP applications. This involves manipulating GET parameters to create instances of arbitrary classes and invoke methods.
+> 
+
+### 🧐 Why ?
+
+> Understanding this technique is crucial for PHP developers and security professionals alike, as it can lead to serious vulnerabilities in an application. An attacker can use this technique to execute arbitrary code, potentially gaining unauthorized access or control over a system.
+> 
+
+### ⛏️ How ?
+
+> This technique exploits the flexibility of PHP's object-oriented programming. By using the 'new' keyword with a user-supplied class name, an attacker can create a new object and call a method within this object. This can be done by manipulating the GET parameters in a URL or HTTP request. For instance, an attacker might use a GET parameter like '?a=ExampleClass&b=executeMethod' to create an object of the 'ExampleClass' and invoke the 'executeMethod'.
+> 
+
+### ⏳ When ?
+
+> This technique has been used by attackers for many years, as it exploits the fundamental design of PHP's object-oriented programming. It is still relevant today, particularly in applications that do not properly sanitize user input.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In PHP, object creation uses the 'new' keyword followed by the class name. PHP's flexibility allows for dynamic class names, meaning that the class name can be stored in a variable. When a user supplies the class name via a GET parameter, it creates a potential vulnerability, which an attacker could exploit.
+
+The GET parameters in a URL or HTTP request can be manipulated by an attacker to provide the class name and the method to be invoked. For example, a GET parameter such as '?a=ExampleClass&b=executeMethod' could be used by an attacker to instantiate an 'ExampleClass' object and invoke the 'executeMethod' within that object. This potential for arbitrary object creation and method invocation allows an attacker to execute arbitrary code.
+
+This becomes particularly dangerous if the application includes files based on user input or if it allows for the autoloading of classes. If an attacker can control the input that determines which files to include or which classes to autoload, they could potentially cause the application to execute harmful code.
+
+To mitigate this vulnerability, it's crucial to sanitize user input and never include files or autoload classes based on user input. Sanitizing user input means cleaning or filtering the input to ensure that it does not contain harmful data. This can involve validating the input to ensure it matches expected formats, escaping the input to prevent it from being interpreted as code, or using prepared statements to prevent SQL injection.
+
+By implementing these precautions, developers can prevent attackers from exploiting the flexibility of PHP's object creation mechanism to execute arbitrary code.
+
+Here's a detailed example illustrating this concept. Let's assume a simple PHP script that uses GET parameters to create objects and call methods:
+
+```php
+<?php
+class ExampleClass {
+    public function executeMethod() {
+        echo "Method Executed.";
+    }
+}
+
+if (isset($_GET['a']) && isset($_GET['b'])) {
+    $className = $_GET['a'];
+    $methodName = $_GET['b'];
+    $obj = new $className();
+    $obj->$methodName();
+}
+?>
+
+```
+
+The script is designed to create an instance of `ExampleClass` and call the `executeMethod` when accessed with the following URL:
+
+```
+<http://localhost/test.php?a=ExampleClass&b=executeMethod>
+
+```
+
+In this case, the object creation and method call are harmless. However, if an attacker is aware of this script, they could potentially exploit it to create objects of different classes and execute their methods. This is particularly dangerous if any of those methods perform actions that could harm the system or reveal sensitive information.
+
+To mitigate this, you should never allow object creation or method invocation based on user-supplied input without proper sanitization and validation. Here's an improved version of the script:
+
+```php
+<?php
+class ExampleClass {
+    public function executeMethod() {
+        echo "Method Executed.";
+    }
+}
+
+if (isset($_GET['a']) && isset($_GET['b'])) {
+    $allowedClasses = ['ExampleClass'];
+    $allowedMethods = ['executeMethod'];
+
+    $className = $_GET['a'];
+    $methodName = $_GET['b'];
+
+    if (in_array($className, $allowedClasses) && in_array($methodName, $allowedMethods)) {
+        $obj = new $className();
+        $obj->$methodName();
+    } else {
+        echo "Invalid class or method.";
+    }
+}
+?>
+
+```
+
+In this improved script, only the predefined classes and methods can be invoked. Any attempt to use a different class or method will result in an error message, "Invalid class or method." This makes it much harder for an attacker to exploit the script.

@@ -1,0 +1,51 @@
+# Windows Dll Hijacking
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows DLL Hijacking is a technique used by attackers to inject malicious code into a legitimate Windows application by exploiting the way some applications search and load Dynamic Link Libraries (DLLs).
+> 
+
+### 🧐 Why ?
+
+> This technique is important as it can be used to gain unauthorized access, escalate privileges, or execute arbitrary code on a victim's machine. It is a common method used in advanced persistent threats (APTs) and can often evade traditional security defenses. Thus, it's crucial for cybersecurity professionals to understand and mitigate this threat.
+> 
+
+### ⛏️ How ?
+
+> An attacker can use Windows DLL Hijacking by placing a malicious DLL in a directory that the application searches before it reaches the legitimate DLL. This can be a directory from which the application is being run, or specified in the system's PATH environment variable. The application then loads the malicious DLL, thinking it is the legitimate one, resulting in the execution of the attacker's code.
+> 
+
+### ⏳ When ?
+
+> Windows DLL Hijacking has been used by attackers since the late 1990s, and it remains a prevalent technique today due to the way Windows operating systems handle DLL loading.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The DLL Hijacking attack is a potent technique that exploits the DLL search order used by Windows operating systems. When an application requires a DLL, it searches for it in a pre-defined order: first, it checks the application's directory, then the system directory, followed by the 16-bit system directory, the Windows directory, and finally the directories listed in the PATH environment variable.
+
+The danger lies in the fact that an attacker can place a malicious DLL in one of these directories such that it's found before the legitimate DLL. When this happens, the application unintentionally loads the malicious DLL, believing it to be the intended one. The result is the execution of the attacker's code with the same privileges as the application, potentially leading to unauthorized access, privilege escalation, or arbitrary code execution.
+
+This method has been a long-favored tool of attackers since the late 1990s and remains a significant threat due to the way Windows operating systems handle DLL loading. It's often used in advanced persistent threats (APTs), and owing to its subtlety, it can often bypass traditional security defenses.
+
+To mitigate this threat, several strategies can be implemented. Using fully-qualified paths for DLLs helps ensure that the application loads the correct DLL from the intended location. Implementing secure DLL search order can help prevent an attacker from placing a malicious DLL ahead of the legitimate one in the search order. Lastly, using code signing to validate the integrity of DLLs ensures that the DLLs have not been tampered with or replaced by malicious ones.
+
+Let's consider a hypothetical scenario for educational purposes. We have an application, MyApp.exe, that relies on a DLL named MyLib.dll. The application is located in `C:\\Program Files\\MyApp\\` and normally, the legitimate MyLib.dll is in `C:\\Windows\\System32\\`.
+
+1. **Step 1 - Preparing the malicious DLL:** Suppose an attacker has written a malicious DLL that also goes by the name MyLib.dll. This DLL, when loaded, opens a backdoor on the victim's system.
+2. **Step 2 - Placing the malicious DLL:** The attacker gains access to the victim's system and places the malicious MyLib.dll in `C:\\Program Files\\MyApp\\`.
+3. **Step 3 - Exploiting the DLL Search Order:** When MyApp.exe is run, it searches for MyLib.dll. Because the application's directory is searched first, the malicious MyLib.dll is found and loaded by the application.
+4. **Step 4 - Malicious Code Execution:** With the malicious DLL loaded, the attacker's code is executed, opening a backdoor.
+
+To mitigate such attacks:
+
+- Applications should use fully qualified paths when loading DLLs. For example, instead of `LoadLibrary("MyLib.dll");`, use `LoadLibrary("C:\\\\Windows\\\\System32\\\\MyLib.dll");`.
+- Implement a secure DLL search order. This can be done via the SetDllDirectory function in the application's code, which removes the current working directory from the default DLL search order.
+- Use code signing to ensure the integrity of DLLs. This way, even if an attacker attempts to replace a DLL, the application can verify the DLL's signature and refuse to load it if the signature doesn't match.

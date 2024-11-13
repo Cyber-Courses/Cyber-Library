@@ -1,0 +1,130 @@
+# macOS Universal binaries & Mach-O Format
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS Universal binaries & Mach-O Format are techniques used in Apple's macOS operating system to ensure software compatibility across different hardware architectures. Universal binaries allow a single executable file to contain code for multiple architectures, while the Mach-O format is a file format for executables, object code, shared libraries, dynamically-loaded code, and core dumps.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS Universal binaries and the Mach-O Format is crucial for anyone developing software for Apple's macOS operating system. This knowledge is also beneficial for cybersecurity professionals as it can help them understand how malicious software can be disguised or hidden within these file formats.
+> 
+
+### ⛏️ How ?
+
+> To benefit from macOS Universal binaries and the Mach-O Format, software developers need to compile their code using Apple's development tools, which will automatically create the necessary universal binary files. Cybersecurity professionals can use various tools and techniques to analyze these file types for potential security threats.
+> 
+
+### ⏳ When ?
+
+> The use of Universal binaries and the Mach-O Format began with the transition of Apple's Macintosh computers from PowerPC to Intel processors in 2005. It has continued to be relevant with the recent transition from Intel to Apple Silicon processors.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Universal binaries are a key feature in macOS that allow software to run on multiple hardware architectures, such as Intel and Apple Silicon (ARM64). These binaries incorporate executable code for different architectures, enabling seamless compatibility across various Mac hardware configurations. The Mach-O (Mach Object) format is the file format used for these executables, containing all necessary information for the operating system to correctly load and execute the code.
+
+### Key Components of a Universal Binary
+
+1. **Multi-architecture Support**: Universal binaries include code for multiple architectures, ensuring compatibility and efficient execution on different hardware.
+2. **Mach-O Format**: The Mach-O format is used to store the executable code within the binary, providing a structured way to organize and access the code and related data.
+
+### Mach-O File Structure
+
+1. **Header**: Contains metadata about the file, including the file type and the architectures supported.
+2. **Load Commands**: Provide information on the layout and behavior of the file in memory. One important load command is the segment command.
+3. **Segments and Sections**: Segments define large areas of memory, while sections within segments contain the actual code and data.
+
+### Creating and Managing Universal Binaries
+
+To create a Universal Binary for an application, developers compile the code for each target architecture and then merge these binaries into a single file. Here is a step-by-step guide using a hypothetical "HelloWorld" application.
+
+### Step-by-Step Example
+
+### Step 1: Compile for Multiple Architectures
+
+Using Xcode, developers can compile the application for both Intel and Apple Silicon architectures with the `xcodebuild` command.
+
+```bash
+xcodebuild -project HelloWorld.xcodeproj -scheme HelloWorld -destination 'generic/platform=macOS' -arch arm64 -arch x86_64
+
+```
+
+This command specifies the project and scheme to build, the target platform (macOS), and the architectures (arm64 and x86_64).
+
+### Step 2: Create the Universal Binary
+
+The `lipo` tool is used to combine the separate architecture-specific binaries into a single Universal Binary.
+
+```bash
+lipo -create -output HelloWorld HelloWorld-arm64 HelloWorld-x86_64
+
+```
+
+The `-create` flag merges the binaries, and `-output HelloWorld` specifies the name of the resulting Universal Binary.
+
+### Step 3: Verify the Universal Binary
+
+The `file` command can be used to verify that the Universal Binary contains the expected architectures.
+
+```bash
+file HelloWorld
+
+```
+
+The output should indicate that the binary includes both x86_64 and arm64 architectures.
+
+```
+HelloWorld: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64: Mach-O 64-bit executable arm64]
+
+```
+
+### Step 4: Examine the Mach-O Format
+
+The `otool` command provides detailed information about the Mach-O format of the binary.
+
+```bash
+otool -l HelloWorld
+
+```
+
+This command lists the load commands, segments, and sections within the Mach-O file, giving insight into the structure and contents of the binary.
+
+### Example: `Info.plist` for a Mach-O Bundle
+
+An `Info.plist` file typically includes metadata about the bundle, such as the bundle identifier, name, version, and executable. Here’s an example:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "<http://www.apple.com/DTDs/PropertyList-1.0.dtd>">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.mycompany.helloworld</string>
+    <key>CFBundleName</key>
+    <string>HelloWorld</string>
+    <key>CFBundleVersion</key>
+    <string>1.0</string>
+    <key>CFBundleExecutable</key>
+    <string>HelloWorld</string>
+</dict>
+</plist>
+
+```
+
+### Conclusion
+
+Understanding Universal binaries and the Mach-O format is crucial for macOS developers to ensure their applications run efficiently on different hardware architectures. This knowledge is also vital for cybersecurity professionals to analyze and secure these executables. By following the steps outlined above, developers can create, manage, and verify Universal binaries, ensuring broad compatibility and optimized performance across Mac systems.
+
+# 🖇️ Références
+
+---

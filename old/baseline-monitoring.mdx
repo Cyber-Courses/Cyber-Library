@@ -1,0 +1,166 @@
+# Baseline Monitoring
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Baseline monitoring refers to the process of collecting and analyzing data from an IT system in its steady state to establish a baseline. This baseline can then be used for comparison with future data to detect anomalies, assess system performance, and identify potential security threats.
+> 
+
+### 🧐 Why ?
+
+> Baseline monitoring is crucial because it helps organizations to understand the normal behavior of their systems. This understanding is essential in identifying unusual activities that could signal a security breach. Without a baseline, it would be difficult to distinguish normal from abnormal behavior, potentially leading to undetected security threats or false alarms. Furthermore, baseline monitoring can help in capacity planning and optimizing system performance.
+> 
+
+### ⛏️ How ?
+
+> To implement baseline monitoring, start by identifying the critical components of your IT system that need monitoring. This could be servers, routers, firewalls, etc. Next, decide on the metrics that will be monitored, such as CPU usage, memory usage, network traffic, etc. Then, collect and analyze this data over a period of time to establish the baseline. Ensure that the data is collected during a representative period, i.e., a time when the system is under normal load. Once the baseline is established, you can use it for continuous monitoring and comparison with future data.
+> 
+
+### ⏳ When ?
+
+> Baseline monitoring has been in use since the advent of computer networks. Its importance has grown with the increasing complexity of IT systems and the rise of cyber threats. Today, it is an integral part of any effective cybersecurity strategy.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, baseline monitoring involves the use of various tools, techniques, and methodologies for data collection and analysis to establish a performance baseline for IT systems. Here's a detailed explanation:
+
+## Data Collection Tools and Techniques
+
+### 1. SNMP (Simple Network Management Protocol)
+
+SNMP is widely used for collecting data from network devices like routers, switches, and firewalls. It allows network administrators to gather information about the health and performance of these devices.
+
+**Example Command:**
+
+```
+snmpwalk -v2c -c public 192.168.1.1
+
+```
+
+This command uses `snmpwalk` to retrieve a subtree of management values from a device at IP address `192.168.1.1` using SNMP version 2c and community string `public`.
+
+### 2. PerfMon (Performance Monitor) on Windows
+
+PerfMon is a system monitoring tool available in Windows that allows users to collect data on various performance metrics such as CPU usage, memory usage, and disk I/O.
+
+**Example Steps:**
+
+1. Open `Performance Monitor` from the Windows start menu.
+2. Click on the `Performance Monitor` in the left-hand pane.
+3. Click on the green `+` icon to add counters.
+4. Select the metrics you want to monitor (e.g., `% Processor Time`, `Available MBytes`).
+
+### 3. sar (System Activity Reporter) on Linux
+
+`sar` is a Linux command-line tool that collects, reports, and saves system activity information. It can provide data on CPU utilization, memory usage, I/O, and network statistics.
+
+**Example Command:**
+
+```
+sar -u 1 5
+
+```
+
+This command generates a report on CPU utilization every second for 5 intervals.
+
+## Data Analysis Techniques
+
+### Statistical Methods
+
+Once data is collected, it needs to be analyzed to establish a baseline. Statistical methods, such as mean, median, standard deviation, and percentiles, are often used to summarize the data.
+
+**Example in Python:**
+
+```python
+import pandas as pd
+
+# Sample data
+data = {
+    'CPU_Usage': [20, 30, 25, 35, 40, 38, 45, 50],
+    'Memory_Usage': [60, 65, 70, 75, 80, 85, 90, 95]
+}
+
+df = pd.DataFrame(data)
+
+# Calculate Statistical Metrics
+mean_cpu = df['CPU_Usage'].mean()
+std_cpu = df['CPU_Usage'].std()
+percentile_90_cpu = df['CPU_Usage'].quantile(0.9)
+
+print(f"Mean CPU Usage: {mean_cpu}")
+print(f"Standard Deviation CPU Usage: {std_cpu}")
+print(f"90th Percentile CPU Usage: {percentile_90_cpu}")
+
+```
+
+## Anomaly Detection
+
+Once a baseline is established, future data is continuously compared against this baseline to detect anomalies. Significant deviations from the baseline can indicate potential security threats or performance issues.
+
+### Example: Anomaly Detection Using Z-Score
+
+The Z-score can be used to identify anomalies by measuring the number of standard deviations a data point is from the mean.
+
+**Example in Python:**
+
+```python
+import numpy as np
+
+# Function to calculate Z-score
+def z_score(data, threshold=3):
+    mean = np.mean(data)
+    std = np.std(data)
+    anomalies = []
+
+    for i, value in enumerate(data):
+        z = (value - mean) / std
+        if np.abs(z) > threshold:
+            anomalies.append((i, value))
+
+    return anomalies
+
+# Sample future data
+future_data = [20, 30, 25, 35, 100, 38, 45, 50]
+
+# Detect Anomalies
+anomalies = z_score(future_data)
+print(f"Anomalies detected at: {anomalies}")
+
+```
+
+## Advanced Techniques: Machine Learning
+
+Machine learning algorithms can provide more accurate anomaly detection by learning from the data patterns.
+
+### Example: Using Isolation Forest for Anomaly Detection
+
+Isolation Forest is an unsupervised learning algorithm that isolates anomalies instead of profiling normal data points.
+
+**Example in Python:**
+
+```python
+from sklearn.ensemble import IsolationForest
+
+# Sample data including baseline and future data
+data = [[20], [30], [25], [35], [40], [38], [45], [50], [100]]
+
+# Fit Isolation Forest
+clf = IsolationForest(contamination=0.1)
+clf.fit(data)
+
+# Predict anomalies
+predictions = clf.predict(data)
+anomalies = [data[i] for i in range(len(data)) if predictions[i] == -1]
+
+print(f"Anomalies detected: {anomalies}")
+
+```
+
+By following these steps and using the provided examples, you can effectively implement baseline monitoring to ensure the health and security of your IT systems.

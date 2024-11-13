@@ -1,0 +1,78 @@
+# Disable ASLR
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Address Space Layout Randomization (ASLR) is a security technique used in operating systems to prevent exploitation of memory corruption vulnerabilities. It randomizes the address space locations of key data areas of a process, including the base of the executable and the positions of the stack, heap, and libraries. Disabling ASLR can make a system more vulnerable to attacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding ASLR and the implications of disabling it is crucial in the realm of cybersecurity. ASLR is a key defense mechanism that makes it difficult for an attacker to predict target address spaces. Disabling it can make a system more susceptible to attack, specifically to buffer overflow and return-oriented-programming (ROP) attacks.
+> 
+
+### ⛏️ How ?
+
+> To disable ASLR in a Windows OS, you can use the following steps: 1. Navigate to 'System Properties' in the Control Panel. 2. Click on the 'Advanced' tab. 3. Under 'Performance', click on 'Settings'. 4. In the 'Performance Options' window, click on the 'Data Execution Prevention' tab. 5. Click on 'Turn on DEP for essential Windows programs and services only'. 6. Click 'Apply' and then 'OK'. Note that this should be done with caution and typically only for testing purposes.
+> 
+
+### ⏳ When ?
+
+> ASLR was first implemented as a security feature in Linux in 2001, and later adopted by Windows, MacOS, and other operating systems. Disabling ASLR is generally discouraged unless absolutely necessary for specific testing or debugging purposes.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Address Space Layout Randomization (ASLR) is a crucial security feature in modern operating systems. It helps protect against certain types of malicious attacks by making it more challenging for an attacker to predict target address spaces. ASLR achieves this by randomizing the locations in an address space where key data areas of a process are loaded into memory, including the stack, heap, and libraries.
+
+For instance, if an attacker attempts to exploit a vulnerability in a program and inject malicious code, they would typically need to know the exact location in memory where their code will be executed. However, with ASLR enabled, the target memory locations are constantly changing, making it difficult for an attacker to predict where their malicious code should go.
+
+On the other hand, disabling ASLR causes these memory locations to become predictable, which increases the system's vulnerability to certain types of attacks. One such attack is a buffer overflow attack, where an attacker overflows a buffer with more data than it can hold. This can corrupt data, crash the program, or allow the attacker to execute arbitrary code.
+
+Another type of attack that can benefit from disabled ASLR is a return-oriented programming (ROP) attack. In a ROP attack, an attacker exploits a vulnerability in a program to take control of the call stack to execute arbitrary portions of its code that are already in memory (also known as "gadgets").
+
+While disabling ASLR can assist in software testing and debugging by making the system's behavior more predictable, it should not be done lightly due to the increased security risk. Typically, ASLR should only be disabled for specific testing and debugging scenarios and should be re-enabled as soon as possible to maintain system security.
+
+Let's take an example of a buffer overflow attack that could benefit from disabled ASLR. This example is illustrative and simplifies the real process for clarity.
+
+1. Assume we have a simple C program that reads input into a character array (buffer) without checking the size of the input:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void secretFunction() {
+    printf("You have accessed the secret function!\\n");
+}
+
+void vulnerableFunction(char* string) {
+    char buffer[100];
+    strcpy(buffer, string);
+}
+
+int main() {
+    char large_string[256];
+    for(int i = 0; i < 255; i++) {
+        large_string[i] = 'A';
+    }
+
+    vulnerableFunction(large_string);
+    return 0;
+}
+
+```
+
+In this program, `vulnerableFunction` copies the input string into a buffer that only has space for 100 characters, without checking the size of the input string.
+
+The `secretFunction` is a function that should not be accessible, but can be reached through buffer overflow.
+
+1. If this program is run with ASLR disabled, the addresses will always be the same every time the program is run. This predictability allows an attacker to craft the input in such a way to overwrite the return address of `vulnerableFunction` to the address of `secretFunction`.
+2. With ASLR enabled, the memory location of `secretFunction` would change each time the program is run. This randomization makes it much more difficult for an attacker to predict the address of `secretFunction`.
+
+This example is a simplification of a buffer overflow exploit. Real-world exploits would require more knowledge of the system, including specifics about the memory layout and the operating system.

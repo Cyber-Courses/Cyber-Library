@@ -1,0 +1,88 @@
+# NFS no_root_squash/no_all_squash misconfiguration PE
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The Linux NFS (Network File System) is a distributed file system protocol that allows a user on a client computer to access files over a network much like local storage is accessed. The 'no_root_squash' and 'no_all_squash' are NFS server exports options in Linux that control the mapping of user IDs between the client and the server. Misconfiguration of these options could result in Privilege Escalation (PE).
+> 
+
+### 🧐 Why ?
+
+> Understanding the Linux NFS and the implications of 'no_root_squash' and 'no_all_squash' misconfigurations is crucial because it affects the security of the file system. Misconfiguration could potentially allow unauthorized access to sensitive data or the execution of arbitrary codes, leading to privilege escalation, thus compromising the security of the entire system.
+> 
+
+### ⛏️ How ?
+
+> To avoid misconfigurations, it is recommended to use 'root_squash' and 'all_squash' instead of 'no_root_squash' and 'no_all_squash'. The 'root_squash' option maps root user requests as anonymous, while 'all_squash' maps all user and group IDs to anonymous. These options prevent the client's root users from having root-level access to the server.
+> 
+
+### ⏳ When ?
+
+> The NFS protocol has been in use since 1984, and the 'no_root_squash' and 'no_all_squash' options have been available since the introduction of NFSv4 in 2000. However, misconfigurations have been a persistent issue due to a lack of awareness or understanding of these options.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The `no_root_squash` and `no_all_squash` options belong to the Linux NFS (Network File System), a protocol that allows users on client computers to access files across a network as if they were on local storage. The `no_root_squash` option allows the client's root user to perform operations as the root user on the server. This can potentially lead to unauthorized access or changes to the server's file system since the root user has virtually unlimited privileges.
+
+Similarly, the `no_all_squash` option disables User ID and Group ID mapping for all users, not just root. This means that any user on the client system can potentially access and modify files on the server, even if they wouldn't normally have the necessary permissions. This could be an issue if an attacker gains access to the client system, as they could manipulate files on the server as they wish.
+
+A misconfiguration of these options can lead to privilege escalation, a security issue where a user gains more privileges than they should have. In this case, should an attacker gain access to the client system, they could perform operations as root, giving them an unusual amount of control over the server's file system.
+
+To avoid these potential security risks, it is recommended to use the `root_squash` and `all_squash` options instead. The `root_squash` option maps root user requests to anonymous, preventing the client's root users from having root-level access to the server. The `all_squash` option maps all user and group IDs to anonymous, further limiting the access of client users to the server. These options can help to maintain the integrity and security of the server's file system.
+
+Consider a scenario where an NFS server is configured with the `no_root_squash` and `no_all_squash` options. This configuration allows a root user on the client system to access and modify any file on the server. For instance, if a root user on the client creates a file on the server, it would look like this:
+
+1. On the client system, navigate to the directory where the NFS share is mounted.
+    
+    ```
+    cd /mnt/nfs_share
+    
+    ```
+    
+2. As the root user, create a new file.
+    
+    ```
+    sudo touch testfile
+    
+    ```
+    
+3. This file now exists on the server, but it appears to have been created by the root user (because of the `no_root_squash` option).
+
+To prevent this, the server should be configured with the `root_squash` and `all_squash` options. Here's how to change the configuration:
+
+1. On the server, open the NFS exports file.
+    
+    ```
+    sudo nano /etc/exports
+    
+    ```
+    
+2. Change the line that specifies the shared directory. For example, if the line was
+    
+    ```
+    /home/user *(rw,sync,no_root_squash,no_all_squash)
+    
+    ```
+    
+    change it to
+    
+    ```
+    /home/user *(rw,sync,root_squash,all_squash)
+    
+    ```
+    
+3. Save and close the file, then restart the NFS service.
+    
+    ```
+    sudo systemctl restart nfs-server
+    
+    ```
+    
+4. Now, if a root user on the client tries to create a file on the server, the server will treat it as if an anonymous user, not root, created it. This preserves the integrity and security of the server's file system.

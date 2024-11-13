@@ -1,0 +1,82 @@
+# Leaking libc - template
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Leaking libc is a method used in the field of cybersecurity to exploit a program’s dynamic memory allocation and deallocation functions. libc is the standard C library, an integral part of most UNIX and Linux systems. It contains many necessary routines that provide basic features for a C program, including dynamic memory allocation functions such as malloc() and free().
+> 
+
+### 🧐 Why ?
+
+> Understanding the process of leaking libc is crucial for both cybersecurity professionals and software developers. For cybersecurity professionals, it's a potent method for exploiting vulnerabilities in a system's memory management. For developers, understanding this exploit could assist in developing more secure software applications and systems by helping them identify and rectify potential vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> Leaking libc involves the exploitation of a program’s dynamic memory allocation and deallocation functions. The first step is to identify a vulnerability in the program that can be exploited. This is usually a buffer overflow vulnerability, which allows an attacker to overwrite data in memory. Once the vulnerability is identified, the attacker can manipulate the program's memory to execute arbitrary code or leak sensitive information. This is done by overwriting the return address on the stack, which can cause the program to execute a different function than intended.
+> 
+
+### ⏳ When ?
+
+> The practice of leaking libc started gaining traction with the rise of software systems based on UNIX and Linux. As these systems became more commonplace, so did the exploitation methods targeting them, including leaking libc.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Leaking libc is a technique primarily used in cybersecurity and software exploitation. It involves manipulating the dynamic memory allocation functions of the standard C library (libc), such as malloc() and free(). These functions are integral to most programs, as they allow for the dynamic allocation and deallocation of memory.
+
+In an attack scenario, a vulnerability within the program, often a buffer overflow vulnerability, is identified. Buffer overflow vulnerabilities occur when a buffer, which is a temporary storage space in memory, receives more data than it can handle. This can cause the excess data to overflow into adjacent memory spaces.
+
+An attacker can exploit this vulnerability to overwrite the memory addresses of libc functions. By doing so, the attacker can replace these functions with malicious code. This could lead to a range of outcomes including arbitrary code execution, where the attacker's code is executed by the program; information leakage, where sensitive data is exposed; or even a system crash.
+
+To prevent such attacks, it's important for developers to follow secure coding practices. This includes bounds checking, which is the practice of checking whether data will fit into its designated memory space before it's written. Implementing security measures such as Address Space Layout Randomization (ASLR) is also crucial. ASLR is a technique that randomizes the location of memory segments which makes it harder for an attacker to predict target addresses in memory.
+
+Understanding leaking libc and its implications is critical for both cybersecurity professionals and software developers. For cybersecurity professionals, it provides a powerful tool for exploiting system vulnerabilities. For software developers, understanding the technique can aid in the development of more secure software by helping them recognize and rectify potential vulnerabilities.
+
+Here is an illustrative example of leaking libc using a buffer overflow vulnerability in a simple C program.
+
+Consider the following C program:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void not_called() {
+    printf("You have accessed a function that was not supposed to be called!\\n");
+}
+
+void vulnerable_function(char* string) {
+    char buffer[100];
+    strcpy(buffer, string);
+}
+
+int main(int argc, char** argv) {
+    vulnerable_function(argv[1]);
+    return 0;
+}
+
+```
+
+In this program, the `vulnerable_function` does not check if the input string can fit in the buffer. This lack of bounds checking could lead to a buffer overflow if the input string is longer than the buffer.
+
+An attacker could exploit this vulnerability by passing a string to the program that is longer than the buffer. The excess characters would overflow into adjacent memory spaces. If the adjacent memory space contains the return address of a function, the attacker could overwrite it with the memory address of the `not_called` function.
+
+Here's an example of how an attacker might do this:
+
+```
+$ gcc -o program program.c
+$ ./program $(python -c 'print "A"*112 + "\\x07\\x06\\x05\\x04"')
+
+```
+
+In this example, the `"\\x07\\x06\\x05\\x04"` represents the memory address of the `not_called` function in little endian format. The `python -c 'print "A"*112 + "\\x07\\x06\\x05\\x04"'` command generates a string of 112 'A' characters followed by the memory address of the `not_called` function. When this string is passed to the program, it causes a buffer overflow that overwrites the return address with the memory address of the `not_called` function.
+
+This causes the `not_called` function to be executed, even though it was never explicitly called in the `main` function.
+
+This is a simple example and real-world scenarios can be much more complex. To prevent such attacks, developers should use functions that check the length of the input, like `strncpy` instead of `strcpy`. Furthermore, implementing security measures such as ASLR can make it harder for an attacker to predict target addresses in memory.

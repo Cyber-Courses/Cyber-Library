@@ -1,0 +1,80 @@
+# Disable special builtins chars so you can abuse them as scripts
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disabling special built-in characters in scripts is a concept in programming and scripting where certain characters, known for their special functionalities in a scripting language, are deactivated or neutralized. This allows these characters to be used in a manner that would typically be considered unconventional or even abusive.
+> 
+
+### 🧐 Why ?
+
+> The main reason to disable special built-in characters is to increase the versatility of scripts and to give programmers more freedom with their coding. However, this practice can also pose security risks as it can potentially be exploited by malicious entities to inject harmful scripts or commands. It's crucial for our readers to understand this concept to improve their script coding practices and enhance their system's security.
+> 
+
+### ⛏️ How ?
+
+> To disable special built-in characters, you typically use a specific command or function in your scripting or programming language of choice. For example, in PHP, you can use the addslashes() function to disable special characters. However, remember to use this with caution as it can make your system vulnerable to attacks if used improperly.
+> 
+
+### ⏳ When ?
+
+> The practice of disabling special built-in characters began with the advent of programming and scripting languages that incorporated special characters to perform specific tasks. As the languages evolved, so did the need for more flexibility in using these characters, leading to the ability to disable them.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In the world of coding, special built-in characters, such as the backslash, dollar sign, and others, carry distinct functionalities. In PHP, for instance, a dollar sign is utilized to declare a variable, while a backslash functions as an escape character. Disabling special characters means they lose their inherent functionalities and can be used as regular characters.
+
+However, this practice also opens up the possibility of these characters being used in unconventional or unexpected ways, leading to potential security vulnerabilities. If a script is designed to take user input and a special character like the backslash is disabled, it may allow a user to input harmful commands or scripts. This could compromise the system, leading to unintended data access, system disruption, or worse.
+
+Therefore, while disabling special built-in characters can provide programmers with more flexibility in their coding practices, it's crucial to consider the potential security risks. Programmers should use this technique judiciously and ensure that sufficient security measures, such as input validation and sanitization, are in place to prevent any potential exploits.
+
+Moreover, it's essential to stay updated on the best practices in coding and scripting languages. This will not only help in writing more efficient and flexible code but also in maintaining the security and integrity of the systems these scripts run on. Always remember, the more a system can do, the more potential vulnerabilities it may have. Therefore, striking a balance between functionality and security is key in the realm of coding.
+
+A realistic example of disabling special built-in characters can be seen in PHP.
+
+Let's say you have the following piece of code:
+
+```php
+<?php
+$user_input = $_POST['input'];
+$query = "SELECT * FROM users WHERE name = '$user_input'";
+?>
+
+```
+
+In this case, if a user inputted something like `John'; DROP TABLE users; --`, the query would become:
+
+```php
+"SELECT * FROM users WHERE name = 'John'; DROP TABLE users; --'"
+
+```
+
+This would effectively delete the `users` table from your database, a classic example of a SQL injection attack.
+
+To prevent this, we can disable the special characters in the user's input with the `addslashes()` function:
+
+```php
+<?php
+$user_input = addslashes($_POST['input']);
+$query = "SELECT * FROM users WHERE name = '$user_input'";
+?>
+
+```
+
+Now, if a user enters the same input, the `addslashes()` function will add backslashes before special characters:
+
+```php
+"SELECT * FROM users WHERE name = 'John\\'\\; DROP TABLE users\\; --'"
+
+```
+
+This way, the user's input is treated as a regular string and the SQL injection attack is prevented.
+
+While this technique can protect your system, it's crucial to be aware of the potential security risks and to use additional security measures as well. Disabling special characters should be done with caution, and it's always recommended to stay updated on the best practices in coding and scripting languages.

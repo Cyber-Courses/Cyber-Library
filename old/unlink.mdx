@@ -1,0 +1,123 @@
+# unlink
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Unlink is a system call in Unix and Unix-like operating systems that deletes a name from the file system and, possibly, the file it refers to. This action is also known as 'removing a file' or 'deleting a file'. It's a fundamental operation in file management and manipulation.
+> 
+
+### 🧐 Why ?
+
+> Understanding the unlink operation is crucial for any individual working with Unix or Unix-like systems. It allows users to manage their file systems effectively, deleting unnecessary files to free up space. Additionally, unlink plays a significant role in maintaining the integrity of file systems and preventing data corruption.
+> 
+
+### ⛏️ How ?
+
+> The unlink function can be used by calling 'unlink(path)', where 'path' is the path of the file you want to delete. If the operation is successful, it will return zero. If it fails, it will return -1, and the global variable 'errno' will be set to indicate the error. Before using unlink, it's important to make sure that the file is not being used by any process, as this could lead to data corruption or loss.
+> 
+
+### ⏳ When ?
+
+> The unlink function has been part of Unix-like systems since their inception in the 1970s. It's a basic function that is widely used in file management and manipulation.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The `unlink` function in Unix and Unix-like operating systems is a fundamental system call that plays a crucial role in file management. It removes a name from the file system, and if this name was the last link to the file, it deallocates the file's data blocks, effectively deleting the file. Understanding the `unlink` operation is essential for managing file systems effectively and preventing issues like data corruption.
+
+### Detailed Explanation
+
+### How `unlink` Works
+
+The `unlink` function operates by dissociating the file name from its corresponding inode. An inode is a data structure used in Unix-like file systems to store information about a file or a directory, such as metadata (permissions, ownership, size, etc.). The process of unlinking involves the following steps:
+
+1. **Identify the File**: The `unlink` function takes a file path as an argument. The operating system uses this path to locate the file's inode.
+2. **Remove the File Name**: The function removes the directory entry that associates the file name with the inode.
+3. **Check Links**: The system checks if this was the last link to the inode. If other links (file names) still point to this inode, the file's data blocks are not deallocated.
+4. **Deallocate Data Blocks**: If this was the last link and no process has the file open, the file's data blocks are deallocated. The space they occupied is returned to the system, making it available for other files.
+5. **Handle Open Files**: If any process still has the file open, the data blocks remain allocated until the last process closes the file. This allows processes to continue accessing the file even after it has been unlinked.
+
+### Usage Example
+
+Consider the following example where we create a file, write to it, and then unlink it:
+
+```bash
+# Create a file named example.txt
+echo "This is a temporary file." > example.txt
+
+# Verify the file's existence
+ls -l example.txt
+# Output: -rw-r--r-- 1 user user 25 Jul 2 07:02 example.txt
+
+# Unlink (delete) the file
+unlink example.txt
+
+# Verify the file's deletion
+ls -l example.txt
+# Output: ls: cannot access 'example.txt': No such file or directory
+
+```
+
+In this example:
+
+1. We create a file named `example.txt` and write some text into it.
+2. We use `ls -l` to list the file and verify its existence.
+3. We then use the `unlink` command to delete the file.
+4. Finally, we attempt to list the file again, confirming that it has been deleted.
+
+### Code Example in C
+
+Here is a C program that demonstrates the use of the `unlink` function:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    // Create a temporary file
+    FILE *fp = fopen("tempfile.txt", "w");
+    if (fp == NULL) {
+        perror("Failed to create file");
+        return 1;
+    }
+
+    fprintf(fp, "This is a temporary file.\\n");
+    fclose(fp);
+
+    // Unlink the file
+    if (unlink("tempfile.txt") == 0) {
+        printf("File unlinked successfully.\\n");
+    } else {
+        perror("Failed to unlink file");
+        return 1;
+    }
+
+    return 0;
+}
+
+```
+
+In this program:
+
+1. We create a file named `tempfile.txt` and write some text into it.
+2. We close the file to ensure all data is written to disk.
+3. We then use the `unlink` function to delete the file.
+4. If the `unlink` function succeeds, it returns 0, and we print a success message. If it fails, it returns -1, and we print an error message using `perror`.
+
+### Important Considerations
+
+1. **Permission**: The user must have write permission on the directory containing the file to unlink it.
+2. **Open Files**: If a file is open by any process, its data blocks are not deallocated until the file is closed.
+3. **Directories**: The `unlink` function cannot be used to delete directories. For directories, use the `rmdir` function.
+
+### Conclusion
+
+The `unlink` function is a powerful tool for file management in Unix-like systems. It allows users to efficiently remove files and manage disk space. Understanding its operation and implications is essential for system administrators and developers working in these environments.
+
+By following the detailed explanations and examples provided, you can effectively use the `unlink` function and avoid common pitfalls associated with file deletion in Unix-like operating systems.

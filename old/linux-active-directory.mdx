@@ -1,0 +1,96 @@
+# Linux Active Directory
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. However, it can also function on a Linux system. It is used in IT environments to manage and store information about digital identities and resources, and to facilitate networking.
+> 
+
+### 🧐 Why ?
+
+> Linux Active Directory is important because it allows Linux systems to join a Domain Controller (DC) and authenticate users against it. This centralizes the management of user credentials and permissions, which reduces the overhead of managing separate user accounts for each resource. It is useful for businesses that use Linux systems but want to take advantage of the benefits of AD, such as Group Policy, single sign-on (SSO), and ease of administration.
+> 
+
+### ⛏️ How ?
+
+> To use Linux Active Directory, you first need to install the necessary software, such as Samba, Winbind, and Kerberos. Then, you can join the Linux machine to the domain using the 'net ads join' command. You also need to configure the system to authenticate against the DC by editing the PAM and NSS configuration files.
+> 
+
+### ⏳ When ?
+
+> The use of Linux Active Directory became prevalent as businesses started to incorporate Linux systems into their existing Windows-based networks. This integration has been facilitated by the development of software like Samba, which provides a way for Linux systems to interact with Windows services like AD.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Linux Active Directory integration is primarily facilitated by two software applications: Samba and Winbind. Samba is a suite of programs that allows Linux to interact with Windows systems and provide services like file and print services to SMB/CIFS clients. In the context of Active Directory, Samba allows Linux machines to share files and printers with Windows machines on the same network.
+
+Winbind, on the other hand, is part of the Samba suite and it enables Linux systems to use the same login credentials as Windows systems in a networked environment. Winbind provides a bridge between the Unix system and Windows by using a Unix implementation of Microsoft RPC calls, Pluggable Authentication Modules (PAM), and the Name Service Switch (NSS). Essentially, it allows Windows domains to appear as Unix identity sources.
+
+Through Winbind, Linux systems can enumerate users and groups from Windows Active Directory, authenticate users against the Active Directory, and create a local mapping between Windows Security Identifiers (SIDs) and Unix user and group IDs (uid/gid).
+
+This integration of Linux with Active Directory allows for centralized management of user credentials and permissions, reducing the need for separate user accounts for each resource. It allows businesses that use Linux systems to take advantage of the benefits of Active Directory, such as Group Policy, single sign-on, and ease of administration.
+
+Here is a detailed example showing how to integrate a Linux system with Active Directory using Samba and Winbind.
+
+1. **Install Necessary Packages:** First, you must install Samba, Winbind, and Kerberos. On a Debian-based system, this can be done with the following command:
+
+```bash
+sudo apt-get install samba winbind krb5-user
+
+```
+
+1. **Configure Kerberos:** After installing, you need to configure Kerberos. Edit the krb5.conf file, typically located at /etc/krb5.conf, to resemble the following:
+
+```
+[libdefaults]
+    default_realm = YOURDOMAIN.COM
+    dns_lookup_realm = false
+    dns_lookup_kdc = true
+
+```
+
+Replace "[YOURDOMAIN.COM](http://yourdomain.com/)" with your actual domain.
+
+1. **Join the Domain:** You can now join your Linux machine to the domain using the 'net ads join' command. You will need to provide the username and password of a domain user with sufficient privileges:
+
+```bash
+sudo net ads join -U administrator@YOURDOMAIN.COM
+
+```
+
+1. **Configure Samba:** Next, you need to configure Samba. Edit the smb.conf file, typically located at /etc/samba/smb.conf, to resemble the following:
+
+```
+[global]
+    workgroup = YOURDOMAIN
+    security = ads
+    realm = YOURDOMAIN.COM
+    winbind use default domain = yes
+    winbind offline logon = false
+
+```
+
+1. **Configure NSS:** You also need to make sure that your system will use Winbind for user and group information. Edit the nsswitch.conf file, typically located at /etc/nsswitch.conf, to include 'winbind' in the 'passwd' and 'group' lines:
+
+```
+passwd:         compat winbind
+group:          compat winbind
+
+```
+
+1. **Restart Services:** Finally, restart the Samba and Winbind services to apply the changes:
+
+```bash
+sudo service smbd restart
+sudo service winbind restart
+
+```
+
+After completing these steps, you should be able to log in to your Linux system using your Active Directory credentials. You will be able to manage your users and permissions centrally through Active Directory, allowing for easier administration.

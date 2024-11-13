@@ -1,0 +1,91 @@
+# iOS Custom URI Handlers / Deeplinks / Custom Schemes
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS Custom URI Handlers, also known as Deeplinks or Custom Schemes, are a way for iOS applications to define custom URL schemes that other applications can use to interact with them. When a user taps on a URL with a custom scheme, iOS launches the corresponding application and passes the URL to it. This feature can be used to implement deep linking, which is the ability to navigate directly to a specific piece of content within an application.
+> 
+
+### 🧐 Why ?
+
+> Custom URI Handlers are important because they allow applications to interact with each other in a controlled and secure manner. They can be used to implement a variety of features, such as launching a specific application from a web page, sharing data between applications, or navigating directly to a specific piece of content within an application. Understanding how to use Custom URI Handlers is crucial for iOS developers, as they are a key tool for creating seamless user experiences and integrating applications with the wider iOS ecosystem.
+> 
+
+### ⛏️ How ?
+
+> To use a Custom URI Handler, an iOS developer needs to do two things. First, they need to define a custom URL scheme for their application. This is done by adding a CFBundleURLTypes key to the application's Info.plist file and specifying a unique URL scheme. Second, they need to implement the application(_:open:options:) method in their AppDelegate or SceneDelegate class. This method is called by iOS when a URL with the application's custom scheme is opened, and it's where the developer can put the code to handle the URL.
+> 
+
+### ⏳ When ?
+
+> Custom URI Handlers have been a feature of iOS since its earliest versions. However, they have become increasingly important as the iOS ecosystem has grown and the need for applications to interact with each other has increased.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Custom URI Handlers, also known as Deeplinks or Custom Schemes, are mechanisms on iOS that allow an app to interact with other apps or to be triggered by specific URLs. This feature can be leveraged to direct users to a specific part of an app, known as deep linking, or to trigger certain functionalities.
+
+To implement a Custom URI Handler in iOS, the app needs to register a unique URL scheme with the operating system. This is done by adding a CFBundleURLTypes key to the app's Info.plist file. The value of this key is an array of dictionaries, where each dictionary represents a URL type — i.e., a protocol that the app claims to handle. Within each dictionary, the URL scheme is specified with the CFBundleURLSchemes key.
+
+Once the app has registered its custom URL scheme, it can be launched by any URL that uses this scheme. When such a URL is opened, either from a web page or another app, iOS will launch the corresponding app and invoke the application(_:open:options:) method, passing the URL as a parameter.
+
+This method serves as the entry point for handling the URL. The developer can parse the URL to determine what action should be taken. For instance, the URL might represent a specific piece of content within the app, in which case the app can navigate to that content.
+
+It's important to note that the structure and interpretation of the URL is entirely up to the developer. Thus, it can be as simple or as complex as needed. The URL could contain a path that corresponds to the app's internal navigation structure, or it could contain parameters that specify what action should be taken.
+
+In summary, Custom URI Handlers are a powerful tool in iOS development, allowing for interaction between apps, deep linking, and more. However, they require careful implementation to ensure security and a good user experience. By understanding their technical underpinnings, iOS developers can use them effectively to enhance their apps.
+
+For example, suppose we have an app called "MyApp" and we want to add a Custom URI Handler to open a specific page within the app, say a "Profile" page. Here are the steps:
+
+**1. Register the URL Scheme:**
+In the app's Info.plist file, add the following code:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleURLName</key>
+        <string>com.mycompany.myapp</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>myapp</string>
+        </array>
+    </dict>
+</array>
+
+```
+
+Here, we have registered the URL scheme "myapp". Any URL that starts with "myapp://" can now launch "MyApp".
+
+**2. Implement the URL Handling Method:**
+In AppDelegate or SceneDelegate, implement the application(_:open:options:) method:
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    if url.scheme == "myapp" {
+        // Parse the URL to determine the action
+        let pathComponents = url.pathComponents
+        if pathComponents.count > 1 && pathComponents[1] == "profile" {
+            // Navigate to the "Profile" page
+            // Note: The actual navigation code will depend on your app's structure
+            print("Navigating to Profile page")
+            return true
+        }
+    }
+    return false
+}
+
+```
+
+In this code, we check if the URL scheme is "myapp". If so, we parse the URL's path components. If the second path component is "profile", we navigate to the "Profile" page.
+
+**3. Test the Custom URI Handler:**
+To test the custom URI handler, you can use the Safari browser on your iOS device or simulator. Enter a URL that uses your custom scheme, like "myapp://profile", and Safari should prompt to open your app.
+
+This example shows how to use a custom URI handler to navigate to a specific page. However, you can also use the passed URL to perform other actions, such as pre-filling form fields or triggering certain functionalities in the app.

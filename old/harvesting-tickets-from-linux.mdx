@@ -1,0 +1,92 @@
+# Harvesting tickets from Linux
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Ticket harvesting from Linux is a method of capturing Kerberos tickets from a Linux system, which can be used for later authentication or gaining unauthorized access to a network. Kerberos is a network authentication protocol that uses tickets to allow nodes to prove their identity over a non-secure network, without transmitting passwords. The underlying principle is the use of shared secrets and asymmetric encryption.
+> 
+
+### 🧐 Why ?
+
+> Understanding ticket harvesting from Linux is crucial for both security professionals and system administrators. For the former, it allows to identify potential vulnerabilities in a network's security and finding ways to mitigate them. For the latter, it helps in setting up and maintaining secure Linux systems. This topic is important because exploiting Kerberos tickets is a common attack vector in cyber security.
+> 
+
+### ⛏️ How ?
+
+> Ticket harvesting in Linux can be performed using tools such as Mimikatz, which can extract Kerberos tickets from memory. Another common method is Pass-the-Ticket, where an attacker captures a Kerberos ticket and then uses it to authenticate as that user on other systems. To protect against this, system administrators can enforce strong password policies, monitor for suspicious network activity, and regularly patch and update their systems.
+> 
+
+### ⏳ When ?
+
+> The practice of ticket harvesting has been around for as long as the Kerberos protocol itself, which was developed in the 1980s. However, with the advent of sophisticated toolsets and the increasing reliance on networked systems, it has become a more prevalent issue in recent years.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Kerberos is a network authentication protocol designed to provide strong authentication for client/server applications. The protocol's main component is the ticket, a package of encrypted data that proves the user's identity.
+
+When a user logs into the network, they first connect to an authentication server and present their login credentials. The server verifies these credentials and, if they are valid, issues a Ticket-Granting-Ticket (TGT). This TGT is akin to a passport—it doesn’t grant access to any particular service, but it is used to obtain such access tickets.
+
+When the user wants to access a certain service, they present the TGT to a Ticket-Granting-Service (TGS). The TGS verifies the TGT and issues a service ticket, which is specific to the requested service. The service ticket is then presented to the service server, which verifies it and grants access.
+
+All these tickets are stored in the system's memory and encrypted with a key derived from the user's password. This encryption is what secures the tickets—if an attacker manages to harvest a ticket, they would also need to crack this encryption to impersonate the user.
+
+However, the tickets being stored in memory also present a vulnerability. An attacker with the right tools and access to the system can extract these tickets from memory, a process known as ticket harvesting. Tools like Mimikatz are often used for this purpose. They can extract the encrypted tickets and, if the user's password is weak, crack the encryption and use the tickets for unauthorized access.
+
+To mitigate this risk, system administrators need to enforce strong password policies and monitor for suspicious network activity. Regularly updating and patching systems can also help to close any vulnerabilities that could be exploited for ticket harvesting.
+
+Consider a scenario where a system administrator wants to monitor ticket requests in a Kerberos setup to identify any suspicious activities. Here is a step by step process:
+
+1. **Setup the Kerberos environment**: The administrator would first setup the Kerberos environment with a Key Distribution Center (KDC) having an Authentication Server (AS) and a Ticket Granting Server (TGS).
+
+```bash
+sudo apt-get install krb5-kdc krb5-admin-server
+
+```
+
+1. **Create a realm**: Next, they would create a Kerberos realm, say `EXAMPLE.COM`, and add principals (users or services) to it.
+
+```bash
+sudo krb5_newrealm
+
+```
+
+1. **Add principals**: Next, the admin would add principals. For instance, adding a user 'john' and a service 'myservice' would look like this:
+
+```bash
+sudo kadmin.local
+addprinc john
+addprinc host/myservice.example.com
+
+```
+
+1. **Monitor Ticket Requests**: Now, to monitor ticket requests, the administrator could use the `klist` command. This command shows the tickets held by a user. Running `klist` as 'john' would show his TGT and service tickets.
+
+```bash
+klist
+
+```
+
+The output might show something similar to:
+
+```bash
+Ticket cache: FILE:/tmp/krb5cc_1000
+Default principal: john@EXAMPLE.COM
+
+Valid starting       Expires              Service principal
+09/12/2024 10:20:13  09/13/2024 10:20:10  krbtgt/EXAMPLE.COM@EXAMPLE.COM
+09/12/2024 10:24:19  09/13/2024 10:20:10  host/myservice.example.com@EXAMPLE.COM
+
+```
+
+This shows that 'john' has a TGT and a service ticket for 'myservice'. Any unusual tickets (e.g., for services 'john' should not be accessing) would indicate a potential security issue.
+
+1. **Mitigate potential risks**: In case of any suspicious activity, the administrator can revoke access to the compromised accounts, enforce stronger password policies, and patch any system vulnerabilities.
+
+This example is illustrative and may not cover all aspects of securing a Kerberos setup against ticket harvesting. Always follow best practices and guidelines for your specific environment.

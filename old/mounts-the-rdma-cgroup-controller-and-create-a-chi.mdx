@@ -1,0 +1,103 @@
+# Mounts the RDMA cgroup controller and create a child cgroup
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Mounting the RDMA cgroup controller and creating a child cgroup involves leveraging the Linux kernel's control group (cgroup) functionality to allocate and manage resources across processes. RDMA (Remote Direct Memory Access) is a method that allows data to be transferred from memory to memory without involving the processor. This process is crucial for high-performance computing and network functions.
+> 
+
+### 🧐 Why ?
+
+> The importance of this subject lies in its ability to optimize resource usage and enhance system performance. By creating a child cgroup under the RDMA cgroup controller, we can isolate and allocate specific resources to a subset of processes, improving efficiency and the overall system management. This topic is relevant to system administrators and developers who work with high-performance computing environments.
+> 
+
+### ⛏️ How ?
+
+> To mount the RDMA cgroup controller and create a child cgroup, you first need to mount the cgroup filesystem. This is usually done at boot time by adding an entry to the /etc/fstab file. Then, navigate to the mounted cgroup filesystem and create a new directory, which will be your child cgroup. Assign processes to this cgroup by writing their PIDs to the cgroup.procs file, and control their resource usage by writing to the relevant files under the cgroup directory. Always remember to thoroughly test your configuration to ensure it behaves as expected.
+> 
+
+### ⏳ When ?
+
+> The use of the RDMA cgroup controller and child cgroups became more prevalent with the rise of cloud computing and virtualization technologies, which require fine-grained control over system resources to ensure optimal performance. However, the cgroup functionality has been a part of the Linux kernel since version 2.6.24, released in 2008.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+RDMA (Remote Direct Memory Access) is a method that enables direct memory transfer from one computer to another, bypassing CPU, operating system, and I/O bus. This offloads the data copying operation from the CPU and operating system, reducing latency, and freeing up resources.
+
+The RDMA cgroup controller is a feature of the Linux kernel that manages and isolates the RDMA resources. It functions by setting limits on the amount of RDMA resources that processes within a control group (cgroup) can utilize. These resources include Protection Domains (PDs), Memory Regions (MRs), and Queue Pairs (QPs).
+
+PDs are objects that group resources and allow sharing between them. MRs are contiguous areas of memory registered with the RDMA subsystem, which are used to source or sink data for RDMA transactions. QPs are channels where RDMA commands are posted and completed.
+
+When a process within the cgroup attempts to allocate more resources than its limit, the kernel denies the request. This mechanism prevents resource exhaustion attacks or rogue applications from consuming excessive resources, ensuring resource availability, and system stability.
+
+To use the RDMA cgroup controller, you first mount the cgroup filesystem, typically done at boot time by adding an entry to the /etc/fstab file. Then, in the mounted cgroup filesystem, create a new directory, which becomes your child cgroup. Assign processes to this cgroup by writing their Process IDs (PIDs) to the cgroup.procs file and control their resource usage by writing to the relevant files under the cgroup directory. Ensure to test your configuration thoroughly for expected behavior.
+
+In conclusion, the RDMA cgroup controller provides a robust, efficient mechanism for managing and isolating resources in high-performance computing environments, particularly useful in cloud computing and virtualization contexts that require fine-tuned control over resources.
+
+Here is a detailed example of how to mount the RDMA cgroup controller and create a child cgroup:
+
+1. First, mount the cgroup filesystem. This is typically done at boot time by modifying the `/etc/fstab` file. You can add the following line to do so:
+
+```bash
+echo "cgroup /sys/fs/cgroup cgroup defaults 0 0" | sudo tee -a /etc/fstab
+
+```
+
+This command appends a line to your `/etc/fstab` file to mount the cgroup filesystem on boot.
+
+1. Next, mount the cgroup filesystem immediately so that you can start using it without rebooting:
+
+```bash
+sudo mount /sys/fs/cgroup
+
+```
+
+1. Then, navigate to the mounted cgroup filesystem:
+
+```bash
+cd /sys/fs/cgroup
+
+```
+
+1. Create a new directory in this location, which will act as your child cgroup. For instance, to create a child cgroup named `my_cgroup`, you would use:
+
+```bash
+sudo mkdir my_cgroup
+
+```
+
+1. Now, you can assign processes to this cgroup. Let's say we have a process with PID `1234`, you can assign it to the cgroup like so:
+
+```bash
+echo 1234 | sudo tee my_cgroup/cgroup.procs
+
+```
+
+This command writes the PID `1234` to the `cgroup.procs` file of your child cgroup, effectively assigning the process to the cgroup.
+
+1. You can control the resource usage of the processes in the cgroup by writing to the relevant files under the cgroup directory. For instance, to set the memory limit to 500 MB, you would use:
+
+```bash
+echo 500M | sudo tee my_cgroup/memory.limit_in_bytes
+
+```
+
+This sets a limit on the memory usage of the processes in the `my_cgroup` cgroup to 500 MB.
+
+1. Finally, it's crucial to test your configuration to ensure it behaves as expected. You can monitor the resource usage of your cgroup with the following command:
+
+```bash
+cat my_cgroup/memory.stat
+
+```
+
+This command displays the memory usage statistics of your child cgroup, allowing you to verify that the memory limit is being enforced correctly.
+
+Remember, the RDMA cgroup controller provides a robust, efficient mechanism for managing and isolating resources in high-performance computing environments. This example shows how to use it to control memory usage, but you can apply similar steps to manage other types of resources.

@@ -1,0 +1,76 @@
+# Windows Abusing Tokens
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Abusing Tokens is a technique used by attackers to manipulate or misuse tokens in a Windows environment. This technique takes advantage of the way Windows handles privilege escalation and user impersonation, allowing the attacker to execute actions with the same permissions as the owner of the token.
+> 
+
+### 🧐 Why ?
+
+> Understanding and detecting Windows Abusing Tokens is crucial for cybersecurity professionals. This technique is often used in advanced persistent threats (APTs) and insider attacks, where the attacker has already gained initial access to the system and is attempting to elevate their privileges or impersonate another user. The ability to detect and prevent this technique is vital for protecting sensitive data and maintaining the integrity of the system.
+> 
+
+### ⛏️ How ?
+
+> To take advantage of Windows Abusing Tokens, attackers typically follow these steps: \n1. Gain initial access to the system, often through phishing, exploiting vulnerabilities, or using stolen credentials. \n2. Once inside the system, the attacker locates a process with higher privileges. \n3. The attacker then duplicates the token of this process using specific API calls. \n4. Finally, the attacker uses the duplicated token to launch a new process with the same permissions as the original process.
+> 
+
+### ⏳ When ?
+
+> The abuse of tokens in Windows environments has been a known issue for many years. However, it has become more prevalent with the rise of sophisticated cyber threats and the widespread use of cloud services and virtualization technologies. These advancements have increased the number of potential entry points for attackers and made it easier for them to move laterally within networks.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows Abusing Tokens is a sophisticated technique attackers use to exploit Windows' security infrastructure, particularly the Windows Security Access Manager (SAM) and Local Security Authority Subsystem Service (LSASS). These components are integral to Windows' user authentication and access control mechanisms.
+
+The technique starts with the attacker gaining initial access to the system, often via phishing, vulnerability exploitation, or stolen credentials. Once inside, they search for a process with higher privileges than their current access level.
+
+The crux of the technique is the abuse of 'tokens', which are essentially objects representing the security context of a process or thread, including its privileges and access rights. The attacker duplicates the token from a higher-privilege process using API calls, such as DuplicateTokenEx. This duplicated token retains the access rights and permissions of the original process, thus allowing the attacker to 'impersonate' a user or process with higher privileges.
+
+Once the attacker has a duplicated token, they can use another API, CreateProcessWithTokenW, to launch a new process with the duplicated token. This new process has the same permissions as the original high-privilege process, allowing the attacker to perform actions that would otherwise be beyond their access level.
+
+Understanding this technique is crucial for cybersecurity professionals. It is commonly used in advanced persistent threats and insider attacks, where the attacker has initial system access and is looking to elevate their privileges or impersonate another user. Detecting and preventing Windows Token Abuse is vital for protecting sensitive data and maintaining the integrity of systems and networks. The technique's prevalence has increased with the rise of sophisticated cyber threats and the widespread use of cloud and virtualization technologies, which have provided more entry points for attackers and facilitated lateral movement within networks.
+
+Here is an educational example of how an attacker could use the Windows Abusing Tokens technique. This example is purely hypothetical and is provided for educational purposes only.
+
+1. **Initial Access**: The attacker first needs to gain initial access to the system. This could be achieved through a phishing email with a malicious attachment. The attacker could send an email to an unsuspecting user, tricking them into opening a document that contains embedded malware. The malware is designed to exploit a security vulnerability in the system and provide the attacker with initial access.
+
+```bash
+# A simple phishing email command might look like this:
+send-email --to victim@example.com --subject "Important Document" --attachment malicious.docx --message "Please review the attached document."
+
+```
+
+1. **Locate a process with higher privileges**: Once inside the system, the attacker needs to find a process that has higher privileges. They could use a command to list running processes and their associated privileges.
+
+```bash
+# A command to list running processes might look like this:
+get-process
+
+```
+
+1. **Duplicate the token**: After identifying a high-privilege process, the attacker can duplicate its token using an API call. This duplicated token will have the same access rights and permissions as the original process.
+
+```bash
+# A command to duplicate a token might look like this:
+DuplicateTokenEx(high_privilege_process_token)
+
+```
+
+1. **Launch a new process with the duplicated token**: Finally, the attacker can use another API call to launch a new process using the duplicated token. This new process will have the same permissions as the original high-privilege process, allowing the attacker to perform actions that would otherwise be beyond their access level.
+
+```bash
+# A command to launch a process with a duplicated token might look like this:
+CreateProcessWithTokenW(duplicated_token, "cmd.exe")
+
+```
+
+This example demonstrates how an attacker could abuse tokens in a Windows environment to escalate their privileges and impersonate other users. It's important for cybersecurity professionals to understand these techniques in order to detect and prevent potential security threats.

@@ -1,0 +1,98 @@
+# Stack Canaries
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Stack Canaries are a type of security mechanism used in computer programming to prevent buffer overflow attacks. Buffer overflow attacks occur when more data is written into a buffer than it can handle, causing the excess data to overflow into adjacent memory. This can lead to arbitrary code execution, which an attacker can exploit to take control of a system. Stack Canaries are named after the proverbial 'canary in a coal mine.' Like a canary that would alert miners to the presence of dangerous gases, a Stack Canary alerts the system when a buffer overflow is attempted, allowing it to terminate the offending process before any damage is done.
+> 
+
+### 🧐 Why ?
+
+> Buffer overflow attacks pose a significant threat to system security. They can allow an attacker to execute arbitrary code, potentially gaining unauthorized access to system resources, stealing sensitive data, or causing a system to crash. By using Stack Canaries, programmers can add an extra layer of protection against these types of attacks. For anyone involved in system security, understanding how Stack Canaries work is crucial.
+> 
+
+### ⛏️ How ?
+
+> A Stack Canary is a small random value that is placed on the stack right before the return pointer. When a function is called, the Stack Canary is generated and placed in memory. When the function returns, the system checks if the Stack Canary has been modified. If the Stack Canary has been altered, this signals a buffer overflow attempt and the system can react accordingly, typically by terminating the offending process.
+> 
+
+### ⏳ When ?
+
+> Stack Canaries were first introduced in the late 1990s as a means to combat the rising threat of buffer overflow attacks. They have been a common security feature in many operating systems and programming languages ever since.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Stack Canaries are a critical security measure designed to prevent buffer overflow attacks in computer systems. A buffer overflow occurs when more data is written to a buffer, or temporary data storage area, than it can hold. This excess data can then spill over into adjacent memory areas, potentially overwriting other data or even control information, which can lead to arbitrary code execution. This is a serious security concern, as an attacker could exploit such a situation to execute their own code and take control of a system.
+
+In response to this threat, Stack Canaries were introduced. Much like the canary in a coal mine that warned miners of the presence of dangerous gases, a Stack Canary warns a computer system of a buffer overflow attempt. The name "Stack Canary" comes from this analogy.
+
+In technical terms, a Stack Canary is a small, random value that is placed on the stack (a data structure used in programming to store information about active subroutines of a computer program) right before the return address. The return address is a critical piece of control information that tells the system where to continue execution when the current subroutine finishes. When a buffer overflow attempt occurs, the attacker will typically try to overwrite this return address with a malicious address of their own.
+
+However, to do so, they must also overwrite the Stack Canary. Because the Stack Canary is a random value that is regenerated for each function call, the attacker cannot accurately predict what it will be. Any alteration to the Stack Canary value is taken as a signal of a potential buffer overflow attack. The system can then react by terminating the offending process, preventing the buffer overflow attack from succeeding.
+
+Stack Canaries have been a common security feature in many operating systems and programming languages since their introduction in the late 1990s. They provide an effective, although not foolproof, defense against buffer overflow attacks. It's crucial for anyone involved in system security or programming to understand how Stack Canaries work and how to implement them effectively.
+
+Here's an example of how a Stack Canary works in a simple C program:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char* string) {
+    char buffer[100];
+    strcpy(buffer, string); // Vulnerable point
+}
+
+int main() {
+    char large_string[500];
+    memset(large_string, 'A', 499); // Fill the array with 'A's
+    large_string[499] = '\\0';       // Null terminate the string
+    vulnerable_function(large_string);
+    return 0;
+}
+
+```
+
+In this example, `vulnerable_function` is a function that is vulnerable to buffer overflow attacks because it uses the `strcpy` function to copy a string into a buffer without checking the size of the input string.
+
+If we run this program, it will likely crash as the large string overflows the buffer and overwrites the return address on the stack.
+
+Now, let's see how a Stack Canary can help:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char* string) {
+    char buffer[100];
+    unsigned long stack_canary = 0x0123456789ABCDEF; // Stack Canary value
+
+    strcpy(buffer, string);
+
+    // Check if the Stack Canary has been overwritten
+    if(stack_canary != 0x0123456789ABCDEF) {
+        printf("Buffer overflow attack detected!\\n");
+        exit(1);
+    }
+}
+
+int main() {
+    char large_string[500];
+    memset(large_string, 'A', 499);
+    large_string[499] = '\\0';
+    vulnerable_function(large_string);
+    return 0;
+}
+
+```
+
+In this version of the program, we've added a Stack Canary right before the return address in the stack. The Stack Canary is a random value that we've set to `0x0123456789ABCDEF`. After the `strcpy` function call, the program checks if the Stack Canary has been altered. If the Stack Canary has been overwritten, the program detects a buffer overflow attack and immediately terminates the process to prevent potential exploitation.
+
+This example demonstrates how Stack Canaries can provide an additional level of security to protect against buffer overflow attacks. However, it's important to remember that in real-world applications, the Stack Canary should be a random value that changes with each function call, and the check should happen automatically by the compiler or the operating system.

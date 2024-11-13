@@ -1,0 +1,102 @@
+# Leaking libc address with ROP
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Leaking libc address with ROP (Return-oriented programming) is a technique in exploit development. The libc (Standard C Library) is a core part of the Linux operating system that provides a wide range of functions. The libc address leak is a method to discover the base address of libc, which is essential for the success of many exploits.
+> 
+
+### 🧐 Why ?
+
+> Understanding and implementing this technique is crucial in the field of cybersecurity. It plays a critical role in modern exploit development and is a powerful tool for attackers to bypass security measures, such as ASLR (Address Space Layout Randomization). Therefore, it is vital for cybersecurity professionals to understand this technique to develop countermeasures and enhance the security of systems.
+> 
+
+### ⛏️ How ?
+
+> The process involves creating a vulnerable program and using a debugger to inspect the memory layout. This is followed by creating a ROP chain to leak the libc address. The key steps include: creating the vulnerability, exploiting the vulnerability, creating the ROP chain, and leaking the libc address.
+> 
+
+### ⏳ When ?
+
+> The concept of Return-oriented programming (ROP) and its role in leaking libc addresses has been in use from the early 2000s when PaX and Exec Shield security features were introduced in Linux. These features were designed to prevent code execution from the stack, leading to the development of techniques like ROP to bypass these protections.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Return-oriented programming (ROP) is a security exploit technique used to execute code in the presence of security defenses such as non-executable memory and code signing. In the context of leaking libc addresses, ROP is used to bypass these defenses and execute arbitrary code.
+
+Libc, the Standard C Library, is a fundamental part of the Linux operating system. It provides a wide array of system call interfaces that are used by many parts of an operating system. When an application is launched, libc is loaded into its memory space, and the location where it is loaded is randomized if Address Space Layout Randomization (ASLR) is enabled. ASLR is a security technique used in operating systems to prevent exploit code from reliably jumping to a specific location in memory to leverage system calls in libc.
+
+The key to bypassing ASLR is finding a way to leak the address of libc. This is where ROP comes into play. ROP repurposes existing code snippets, or "gadgets", that end in a return instruction. An attacker can use these gadgets to create a "ROP chain", which is a sequence of addresses each pointing to a gadget. When a vulnerable function returns, rather than jumping to a location specified by the attacker, it jumps to the first gadget in the ROP chain. Each gadget then does a small operation and returns to the next gadget in the chain.
+
+A well-crafted ROP chain can be designed to leak the address of libc. This is done by including gadgets that move the libc address into a register, and then another gadget to move the address from the register to a location that the attacker can read. Once the attacker has the libc address, they can calculate the location of system calls within libc, and create a new ROP chain to call those functions and exploit the system.
+
+Understanding and implementing these techniques is crucial in the field of cybersecurity. It not only allows for the development of exploits but also aids in the development of countermeasures and system hardening strategies.
+
+To illustrate the ROP technique for leaking libc addresses, consider a simple vulnerable program written in C:
+
+```c
+#include <stdio.h>
+
+void vuln() {
+  char buffer[50];
+  gets(buffer);
+}
+
+int main() {
+  vuln();
+  return 0;
+}
+
+```
+
+This program has a buffer overflow vulnerability in the `vuln()` function because it uses the unsafe `gets()` function.
+
+Now, our goal is to exploit this vulnerability using ROP to leak libc addresses. Here are the steps:
+
+1. **Compile the program**: Compile the program using gcc with the `no-pie` flag to disable position independent executable (PIE).
+    
+    ```bash
+    gcc -no-pie -o vuln vuln.c
+    
+    ```
+    
+2. **Identify Gadgets**: Use a tool like ROPgadget to identify useful ROP gadgets in the binary.
+    
+    ```bash
+    ROPgadget --binary vuln
+    
+    ```
+    
+    Look for gadgets that move values into registers and then return.
+    
+3. **Form the ROP Chain**: Create a ROP chain that overflows the buffer, overwrites the return address to point to the first gadget, and then includes the addresses of the other gadgets.
+4. **Execute the Exploit**: Run the program with the exploit as input. This can be done using a Python script with the `pwn` library.
+    
+    ```python
+    from pwn import *
+    
+    # Update these values with actual addresses
+    gadget1 = 0xdeadbeef
+    gadget2 = 0xcafebabe
+    
+    payload = "A" * 50 # overflow the buffer
+    payload += p32(gadget1) # first return address
+    payload += p32(gadget2) # second return address
+    
+    p = process('./vuln')
+    p.sendline(payload)
+    p.interactive()
+    
+    ```
+    
+5. **Leak libc Address**: One of the gadgets in your ROP chain should move the libc address into a register, and another gadget should move that address to a location you can read. After running the exploit, you should be able to see the libc address in your terminal.
+6. **Calculate System Call Addresses**: Once you have the libc address, you can calculate the addresses of system calls and other libc functions. These addresses can be used in another ROP chain to call those functions and further exploit the system.
+
+Remember, this is a simplified example. Real-world exploits would be more complex and may have to deal with additional security measures.

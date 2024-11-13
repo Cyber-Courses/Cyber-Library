@@ -1,0 +1,122 @@
+# macOS PID Reuse
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> macOS PID reuse is a mechanism in Apple's macOS operating system where a Process ID (PID) can be reused by the system after the process that was using it has ended.
+> 
+
+### 🧐 Why ?
+
+> Understanding macOS PID reuse is important for both developers and system administrators. It can help developers in debugging and performance tuning, while system administrators can use it to monitor and manage processes effectively. Misunderstanding PID reuse can lead to confusion when observing process behaviour.
+> 
+
+### ⛏️ How ?
+
+> On macOS, when a process ends, its PID is placed into a pool of available PIDs. When a new process is started, it is assigned a PID from this pool. Therefore, it is possible for a PID to be reused after the original process has ended. However, macOS tries to avoid PID reuse as much as possible to prevent confusion or potential issues with debugging tools.
+> 
+
+### ⏳ When ?
+
+> PID reuse in macOS has been a part of the system's design since its inception due to its roots in UNIX, which also employs PID reuse. However, the exact behaviour can vary between different versions of macOS.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of macOS Process IDs (PIDs)
+
+On macOS, each process is assigned a unique Process ID (PID). This integer value, ranging from 0 to 99999, serves as a crucial identifier for process management and tracking. The assignment, reuse, and management of PIDs play a vital role in the operating system's ability to manage processes efficiently.
+
+## How PIDs Are Managed and Reused
+
+### PID Assignment
+
+When a new process is created, macOS assigns it the next available PID from a pool of free PIDs. This assignment process is designed to ensure that each running process has a unique identifier, which is used by the system and applications to manage and interact with the process.
+
+### PID Reuse
+
+When a process terminates, its PID does not immediately become available for reuse. Instead, it is added to a pool of available PIDs that the system can recycle for future processes. This pool operates on a 'least recently used' (LRU) basis, meaning that the PIDs that have been unused for the longest time are the first to be reused. This method helps to reduce the likelihood of PID reuse causing confusion or issues in process management and monitoring.
+
+### Example of PID Reuse
+
+Let's consider a practical example of PID reuse:
+
+1. **Start a Bash Shell Process**: Open a terminal and check the PID of the `bash` shell process by using the `echo $$` command:
+    
+    ```bash
+    echo $$
+    
+    ```
+    
+    This might return a PID like `7854`.
+    
+2. **Start a New Process**: Run a Python script in the background:
+    
+    ```bash
+    python3 my_script.py &
+    
+    ```
+    
+    Check the PID of the new process using the `jobs -l` command:
+    
+    ```bash
+    jobs -l
+    
+    ```
+    
+    This might return something like `[1] 7855`.
+    
+3. **Terminate the Process**: Stop the Python script process by using the `kill` command:
+    
+    ```bash
+    kill 7855
+    
+    ```
+    
+4. **PID Reuse**: After some time, start another process:
+    
+    ```bash
+    python3 my_script2.py &
+    
+    ```
+    
+    This new process might be assigned the PID `7855`, demonstrating PID reuse.
+    
+
+## Implications of PID Reuse
+
+### Process Monitoring
+
+Frequent PID reuse can complicate process monitoring, especially in systems with many short-lived processes. Tools and scripts that track processes by PID need to account for the possibility that a PID might be reassigned to a different process.
+
+### Debugging
+
+PID reuse can also impact debugging. Debugging tools that attach to processes by PID might inadvertently attach to the wrong process if a PID is reused shortly after the original process terminates.
+
+### System Performance Tuning
+
+Understanding PID reuse is essential for performance tuning. Efficient management of processes and resources depends on accurate tracking and monitoring of PIDs. Misinterpretation of PID reuse can lead to incorrect conclusions about system performance and resource usage.
+
+## Historical Context and Version Specifics
+
+### UNIX Roots
+
+PID reuse has been an inherent part of macOS since its inception, due to its UNIX roots. UNIX systems have always used PIDs as unique identifiers for process management, and the practice of recycling PIDs is a longstanding tradition to maintain a finite range of identifiers.
+
+### Variations Among macOS Versions
+
+While the basic principles of PID management and reuse remain consistent, the specifics can vary among different macOS versions. It's important to understand the nuances of your specific system version when working with PIDs, as changes and improvements in the operating system might affect how PIDs are managed.
+
+## Conclusion
+
+In macOS, PIDs are essential for managing processes, and understanding how they are assigned, managed, and reused is crucial for effective system administration. While macOS strives to avoid PID reuse to prevent potential issues, it remains a part of the system that users need to be aware of. By comprehending the principles and implications of PID reuse, developers and system administrators can better manage processes, debug issues, and tune system performance, ensuring a more reliable and secure computing environment.
+
+# 🖇️ Références
+
+---

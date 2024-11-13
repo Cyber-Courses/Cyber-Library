@@ -1,0 +1,168 @@
+# Off by one overflow
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Off-by-one overflow is a programming error that occurs when an array, a data structure in programming that holds a sequence of elements, is written with one unit of data more than its allocated size. This extra data 'overflows' into adjacent memory spaces, causing an unintended alteration of data.
+> 
+
+### 🧐 Why ?
+
+> Understanding off-by-one overflow is crucial due to the multiple problems it can cause. These include crashing the program, producing incorrect results, or leading to serious security vulnerabilities such as buffer overflow attacks. As off-by-one errors are common and easy to overlook in programming, any coder, regardless of their field, can benefit from learning about this concept.
+> 
+
+### ⛏️ How ?
+
+> To avoid off-by-one overflow, developers need to ensure that they correctly calculate the size of the array. This includes considering whether the indexing of the array starts at 0 or 1. For example, in languages like C and Python, an array declared with a size of 5 has valid indices from 0 to 4, not 1 to 5. Tools like static code analyzers can also help identify potential off-by-one errors.
+> 
+
+### ⏳ When ?
+
+> The issue of off-by-one overflow has been around ever since the advent of programming languages that allow direct manipulation of memory, such as C and C++. These languages give developers a lot of power and flexibility, but they also make it easy to accidentally write past the end of an array, causing an off-by-one error.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In a typical off-by-one overflow, an element is written just past the end of an array. This often happens when a developer miscalculates the array's boundaries. The overflow can corrupt adjacent memory, which might contain other important data or control information. For instance, in a buffer overflow attack, an attacker can exploit an off-by-one error to overwrite a return address on the call stack. This can redirect the program's execution flow to an arbitrary location, potentially leading to the execution of malicious code.
+
+## Detailed Explanation
+
+### What is an Off-by-One Overflow?
+
+An off-by-one overflow is a subtle programming error that occurs when an extra element is written just past the end of an array. Arrays are contiguous memory locations that hold elements of the same type. When you write more elements than the array can hold, it overflows into adjacent memory spaces. This is particularly dangerous because it can overwrite other important data or control structures, leading to unpredictable behavior.
+
+### Why is it Important?
+
+Understanding off-by-one overflow is crucial for several reasons:
+
+- **Program Stability:** It can cause the program to crash due to corrupted memory.
+- **Data Integrity:** It can produce incorrect results by altering data unintentionally.
+- **Security Risks:** It can lead to severe security vulnerabilities such as buffer overflow attacks, which can be exploited to execute arbitrary code.
+
+### How to Avoid It?
+
+To prevent off-by-one overflow errors, developers need to:
+
+1. **Correctly Calculate Array Size:** Be aware of whether array indices start at 0 or 1. In languages like C and Python, an array declared with a size of 5 has valid indices from 0 to 4.
+2. **Use Safe Functions:** Use safer functions that check bounds automatically, such as `strncpy` instead of `strcpy` in C.
+3. **Static Code Analysis:** Utilize tools that can analyze code to find potential off-by-one errors before they become a problem.
+
+### When Has This Been an Issue?
+
+The issue has existed since the introduction of programming languages that allow direct memory manipulation, such as C and C++. These languages offer great power and flexibility but also make it easy to accidentally write past the end of an array.
+
+### Example with Code
+
+Let's consider a simple C program that demonstrates an off-by-one overflow:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *input) {
+    char buffer[10];
+
+    // Unsafe copying of input to buffer
+    strcpy(buffer, input);
+
+    printf("Buffer content: %s\\n", buffer);
+}
+
+int main() {
+    char input[15] = "Hello, World!";
+
+    // This will cause an overflow
+    vulnerable_function(input);
+
+    return 0;
+}
+
+```
+
+### Step-by-Step Explanation
+
+1. **Array Declaration:**
+    
+    ```c
+    char buffer[10];
+    
+    ```
+    
+    Here, `buffer` is declared to hold 10 characters.
+    
+2. **Unsafe Copying:**
+    
+    ```c
+    strcpy(buffer, input);
+    
+    ```
+    
+    The function `strcpy` does not check the bounds of `buffer`. It simply copies `input` into `buffer`, leading to an overflow if `input` is longer than 9 characters (plus the null terminator).
+    
+3. **Overflow Occurrence:**
+When `input` is `"Hello, World!"` (13 characters plus null terminator), it exceeds the buffer size, causing an overflow. This extra data overwrites adjacent memory locations, potentially corrupting other data or control information.
+
+### Real-World Example (Educational)
+
+Let's consider a more complex but educational example related to network buffers:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void process_data(char *data) {
+    char buffer[20];
+
+    // Vulnerable line: off-by-one error
+    for (int i = 0; i <= 20; i++) {
+        buffer[i] = data[i];
+    }
+
+    printf("Processed data: %s\\n", buffer);
+}
+
+int main() {
+    char data[25] = "This is a test input.";
+
+    // This will cause an overflow
+    process_data(data);
+
+    return 0;
+}
+
+```
+
+### Step-by-Step Explanation
+
+1. **Array Declaration:**
+    
+    ```c
+    char buffer[20];
+    
+    ```
+    
+    Here, `buffer` is declared to hold 20 characters.
+    
+2. **Off-by-One Error:**
+    
+    ```c
+    for (int i = 0; i <= 20; i++) {
+        buffer[i] = data[i];
+    }
+    
+    ```
+    
+    The loop condition `i <= 20` is incorrect. It should be `i < 20`. This causes the loop to write one extra character beyond the buffer's allocated size.
+    
+3. **Overflow Occurrence:**
+When `data` contains more than 20 characters, the loop writes past the end of `buffer`, corrupting adjacent memory.
+
+### Conclusion
+
+Off-by-one overflow errors are subtle but can have severe consequences. They can lead to program crashes, incorrect data, or even security vulnerabilities. By correctly calculating array sizes, using safe functions, and employing static code analysis, developers can mitigate these risks. Understanding these errors is crucial for writing robust and secure code.

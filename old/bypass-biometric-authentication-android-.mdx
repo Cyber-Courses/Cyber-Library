@@ -1,0 +1,84 @@
+# Bypass Biometric Authentication (Android)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Bypass Biometric Authentication on Android refers to the process of circumventing the biometric security measures in Android devices, which include fingerprint scanning, facial recognition, and iris scanning. This process is often executed to test the robustness of these security measures or to exploit potential vulnerabilities.
+> 
+
+### 🧐 Why ?
+
+> Understanding how to bypass biometric authentication is important for security professionals and Android users alike. For security professionals, it provides insights into potential vulnerabilities, helping them devise more robust security measures. For users, it raises awareness about the possible risks and encourages them to adopt safer practices. Moreover, with Android being one of the most popular operating systems worldwide, its security has broad implications.
+> 
+
+### ⛏️ How ?
+
+> Bypassing biometric authentication can be done by exploiting potential weaknesses in the system. One method involves the use of a fake fingerprint or face, which can be created using high-resolution photographs. Another method involves tricking the system using software exploits. As this involves a degree of technical knowledge and potential legal implications, it is not recommended for inexperienced users or illegal purposes.
+> 
+
+### ⏳ When ?
+
+> The practice of bypassing biometric authentication has been around since the advent of biometric security measures. It has become more prevalent with the increase in biometric technology use in modern smartphones.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In technical terms, bypassing biometric authentication involves either fooling the hardware used for biometric verification (fingerprint scanner, camera) or exploiting the software that processes and verifies the biometric data. Hardware-based exploits often involve the use of duplicate biometric data such as a silicone fingerprint or a printed photograph. Software-based exploits may involve manipulating the data being sent for verification, or exploiting vulnerabilities in how the software processes or verifies the biometric data. Both methods require a deep understanding of the technology involved and its potential weaknesses. They also pose significant legal and ethical considerations, and should not be attempted without proper authorization and for legitimate purposes.
+
+As an example of a hardware-based exploit, consider the use of a silicone fingerprint to bypass a fingerprint scanner.
+
+Step 1: First, a high-resolution photograph of the target's fingerprint is obtained, often from a surface that the target has touched.
+
+Step 2: This photograph is then used to create a mold, into which silicone is poured to create a duplicate of the fingerprint.
+
+Step 3: Once the silicone has hardened, it can be placed on the fingerprint scanner to trick the device into unlocking.
+
+Note: This process is illegal and unethical if done without proper authorization and for nefarious purposes. It is described here solely for the purpose of raising awareness about potential security vulnerabilities.
+
+As for a software-based exploit, it's more complex and requires a deeper understanding of the system. One could use a tool such as Frida, an open-source dynamic instrumentation toolkit, to manipulate the data being sent for verification.
+
+This might involve steps like:
+
+Step 1: Install Frida server on the target Android device (requires root access).
+
+```bash
+$ adb root # might be required
+$ adb push frida-server /data/local/tmp/
+$ adb shell "chmod 755 /data/local/tmp/frida-server"
+$ adb shell "/data/local/tmp/frida-server &"
+
+```
+
+Step 2: Write a Frida script to hook into the biometric authentication process and manipulate the data.
+
+```jsx
+Interceptor.attach(Module.findExportByName(null, 'biometric_auth_function'), {
+    onEnter: function(args) {
+        console.log('Biometric authentication initiated');
+    },
+    onLeave: function(retval) {
+        console.log('Biometric authentication bypassed');
+        retval.replace(0); // Modify the return value to indicate successful authentication
+    }
+});
+
+```
+
+Step 3: Run the Frida script on the target device.
+
+```bash
+$ frida -U -l bypass-auth.js -f com.target.app
+
+```
+
+Note: This is a simplified illustration and actual implementation may vary significantly. Exploiting software vulnerabilities in this manner is illegal without proper authorization and should only be attempted for legitimate purposes, such as during a professionally-conducted penetration test.
+
+# 🖇️ Références
+
+---

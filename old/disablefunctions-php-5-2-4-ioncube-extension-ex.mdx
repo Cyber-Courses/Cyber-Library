@@ -1,0 +1,78 @@
+# disable_functions - PHP 5.2.4 ionCube extension Exploit
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> PHP's disable_functions directive is a security feature that allows server administrators to disable certain functions that could expose the server to potential attacks. One such exploit was found in PHP 5.2.4 with the ionCube extension.
+> 
+
+### 🧐 Why ?
+
+> Understanding this exploit is important for both developers and server administrators. For developers, it's a reminder of the importance of validating and sanitizing inputs to prevent such exploits. For server administrators, it's a lesson in the importance of keeping server software and extensions up to date to avoid known vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> The exploit works by bypassing the disable_functions directive in the PHP configuration. The attacker uses the ionCube extension to execute arbitrary PHP code, even if the function is listed in disable_functions. To protect against this, it's essential to update PHP and its extensions regularly. Also, avoid using ionCube on untrusted code.
+> 
+
+### ⏳ When ?
+
+> This exploit started to be used after the release of PHP 5.2.4 with ionCube extension, and it became more prevalent as more systems adopted that version of PHP.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The ionCube extension for PHP is a utility that helps to encrypt and secure PHP scripts. It aims to prevent unauthorized reading and altering of PHP code. However, a security flaw was identified in PHP version 5.2.4, specifically in the interaction between PHP's disable_functions directive and the ionCube extension.
+
+The disable_functions directive is a feature in PHP that allows server administrators to disable certain functions that could potentially expose the server to security threats. Essentially, it's a preventative measure that restricts the execution of specified PHP functions.
+
+In the case of PHP 5.2.4 with the ionCube extension, an attacker could bypass this security measure. They could use ionCube to execute a script that uses a function listed in the disable_functions directive. This allows the attacker to execute arbitrary PHP code, which should have been disabled for security reasons, effectively bypassing this security directive.
+
+This vulnerability underscores the necessity of understanding and securing the interactions between server software and extensions. It is also a reminder of the importance of regularly updating server software and extensions to avoid known vulnerabilities. For developers, the exploit highlights the need to validate and sanitize inputs to prevent such vulnerabilities. For server administrators, it's a lesson in diligently maintaining server software to reduce exposure to known exploits.
+
+To protect against this kind of exploit, it's crucial to regularly update PHP and its extensions, including ionCube. Additionally, server administrators should exercise caution when using ionCube on untrusted code. By staying vigilant about potential vulnerabilities and keeping software up-to-date, the risk of such exploits can be greatly reduced.
+
+Consider a scenario where an attacker exploits the vulnerability in PHP 5.2.4 with the ionCube extension. For educational purposes, let's assume we have a function named `dangerousFunction()` that we have listed in the `disable_functions` directive to prevent its execution.
+
+```php
+function dangerousFunction() {
+    // Arbitrary PHP code that could potentially harm the server
+}
+
+```
+
+Now, let's say an attacker tries to execute the `dangerousFunction()` using the ionCube extension:
+
+```php
+ioncube_call_function('dangerousFunction');
+
+```
+
+Even though `dangerousFunction()` is listed in `disable_functions`, the ionCube extension allows the function to be executed, effectively bypassing the security directive.
+
+This scenario demonstrates why it's crucial to regularly update server software and extensions to avoid known vulnerabilities. The ionCube extension should be used with caution, especially with untrusted code. It's also a reminder of the importance of validating and sanitizing inputs to prevent such vulnerabilities.
+
+To protect against this kind of exploit, a server administrator should ensure they are running a version of PHP and ionCube that are not vulnerable to this exploit. This can be done by regularly updating the server software:
+
+```bash
+sudo apt update
+sudo apt upgrade php
+sudo apt upgrade ioncube-loader
+
+```
+
+Also, it's a good practice to review the PHP configuration to ensure the `disable_functions` directive is correctly set:
+
+```bash
+php -i | grep 'disable_functions'
+
+```
+
+This command will output the list of functions that are disabled. Make sure that potentially dangerous functions are included in this list.

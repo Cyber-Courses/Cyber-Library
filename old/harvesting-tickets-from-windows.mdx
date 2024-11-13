@@ -1,0 +1,56 @@
+# Harvesting tickets from Windows
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Harvesting tickets from Windows is a process used in cybersecurity to extract Kerberos tickets from a Windows system, typically with the aim of escalating privileges or gaining unauthorized access to resources.
+> 
+
+### 🧐 Why ?
+
+> Understanding the concept of ticket harvesting in Windows is significant as it forms a key part of many cyber attacks, particularly those involving lateral movement within a network. For IT professionals, being aware of how tickets can be harvested can help in designing and implementing effective security measures.
+> 
+
+### ⛏️ How ?
+
+> Ticket harvesting can be performed using various methods, such as using Mimikatz, a popular post-exploitation tool. This tool can extract plaintext passwords, hash, PIN code, and Kerberos tickets from memory. The attacker first needs to gain access to the system, either through a phishing attack or by exploiting a vulnerability. Once they have access, they can run Mimikatz or a similar tool to harvest tickets.
+> 
+
+### ⏳ When ?
+
+> The practice of harvesting tickets from Windows systems has been common since the release of Windows 2000, which introduced the Kerberos authentication protocol as the default authentication method.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Kerberos tickets are an integral part of Windows' authentication system, allowing for communication between various clients and services within a network. The process begins when a user logs on to a system. The system then issues a ticket-granting ticket (TGT), a sort of "master key" that can be used to obtain service tickets for a variety of resources within the network.
+
+These tickets are stored in memory, which unfortunately makes them a potential target for cyber attackers. A malicious actor might attempt to "harvest" these tickets, extracting them from the system for their own use. Once an attacker has successfully harvested a ticket, they can use it to impersonate the original user or service. This can effectively grant them unauthorized access to resources within the network, as the system believes them to be a legitimate user.
+
+Harvesting tickets is not an easy task and requires the attacker to first gain access to the system. This can be achieved through various methods such as phishing attacks or by exploiting vulnerabilities in the system.
+
+Once inside, they can use tools like Mimikatz, a well-known post-exploitation tool. Mimikatz is capable of extracting plaintext passwords, hash, PIN codes, and importantly, Kerberos tickets from the system's memory.
+
+Given the potential security risks posed by ticket harvesting, it's essential to implement measures to defend against it. This can include limiting administrative privileges to reduce the risk of a full system compromise in case an attacker gains access. Implementing the principle of least privilege, where users are given the minimum levels of access necessary to perform their duties, can also help.
+
+Monitoring for suspicious activity can help detect an intrusion early, and regular patching and updating of systems can fix known vulnerabilities, making it harder for attackers to gain access in the first place.
+
+Understanding the workings of ticket harvesting and how to defend against it is crucial for IT professionals and anyone involved in network security, as it is a common technique used in cyber attacks.
+
+For instance, to demonstrate ticket harvesting, let's simulate an environment where an attacker has already gained access to a system. We'll use Mimikatz as the tool for harvesting tickets.
+
+Please note that this is a simulated environment for educational purposes and should not be replicated for malicious intent.
+
+1. **Accessing the System**: Assume the attacker has gained access to a user's system through a phishing attack. They now have access to the user's terminal.
+2. **Running Mimikatz**: Once inside, the attacker can use Mimikatz to extract Kerberos tickets. Mimikatz is run from the command line. The command `mimikatz.exe "privilege::debug" "sekurlsa::tickets /export"` is used to extract all the tickets.
+3. **Understanding the Output**: The output from the command will include a list of all the current Kerberos tickets in memory, along with their associated user accounts and service accounts. The attacker can then use these tickets to impersonate users or services within the network.
+4. **Using the Tickets**: Once the attacker has the tickets, they can use the `kerberos::ptt` command in Mimikatz to "pass-the-ticket" and impersonate another user or service. For example, `kerberos::ptt c:\\temp\\ticket.kirbi` will use the ticket they've extracted.
+5. **Unauthorized Access**: With the ticket, the attacker can access resources within the network as if they were the impersonated user or service. They could access sensitive data, manipulate systems, or even escalate their privileges.
+
+To defend against such attacks, it's essential to limit administrative privileges, monitor for suspicious activity, and regularly patch and update systems to fix vulnerabilities. Also, understanding ticket harvesting techniques can help IT professionals design and implement effective security measures.

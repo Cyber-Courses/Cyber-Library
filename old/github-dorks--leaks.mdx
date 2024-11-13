@@ -1,0 +1,70 @@
+# Github Dorks & Leaks
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Github Dorks are search queries that can be used to identify sensitive data in the repositories, such as passwords, API keys, and tokens. Github Leaks refers to the unintentional exposure of such sensitive data on public Github repositories.
+> 
+
+### 🧐 Why ?
+
+> Users and organizations often inadvertently commit sensitive data to their public repositories, creating a significant security risk. Attackers can use Github Dorks to easily find and exploit these leaks. Understanding Github Dorks and Leaks is vital for both developers to prevent exposing sensitive data and for cybersecurity professionals to identify potential security vulnerabilities.
+> 
+
+### ⛏️ How ?
+
+> To use Github Dorks, simply enter the search query in the Github search bar. For instance, to find AWS secret keys, you might use: 'filename:aws_keys'. To prevent leaks, always ensure sensitive data is removed from files before committing and consider using 'git-secrets' or similar tools to automatically prevent committing passwords and secret keys.
+> 
+
+### ⏳ When ?
+
+> The use of Github Dorks and the occurrence of Github Leaks have been a prevalent issue ever since the inception of the platform. However, with the increasing awareness about cybersecurity, it is becoming more crucial to be mindful of such vulnerabilities now than ever before.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Github Dorks operate by utilizing Github's proprietary code indexing system. This system allows users to perform a search across all public repositories for specific lines or snippets of code. Attackers can exploit this feature by searching for patterns that typically indicate the presence of sensitive data.
+
+For example, API keys, tokens, and passwords often follow certain formats or are found in specific files. An attacker can create a precise Github Dork, a search query, to target these patterns. This presents a substantial security risk because any data committed to a public Github repository is, by default, publicly accessible.
+
+To address this risk, it's critical to always review code for sensitive data before making a commit. It's also advisable to use automated tools or pre-commit hooks, which are tests that run automatically before each commit is finalized, that can help prevent committing sensitive data.
+
+These tools can be configured to look for specific patterns, such as the format of an API key, and prevent a commit if they find a match. This adds an additional layer of security and can help protect against inadvertent data leaks.
+
+For instance, we can create a Python script using the `pyGithub` library to automate the process of finding sensitive data. Here's a simple example:
+
+```python
+from github import Github
+
+# First, we create a Github instance using an access token
+g = Github("<access_token>")
+
+# Now, we can use the search_code method to find specific patterns
+# For example, let's search for AWS secret keys in Python files
+# The query format is 'query language:language'
+query = 'aws_secret_access_key language:python'
+result = g.search_code(query)
+
+# We can then iterate over the results and print the file URL
+for file in result:
+    print(file.html_url)
+
+```
+
+In this script, we first import the `Github` class from the `pyGithub` library. We then create a `Github` instance by passing an access token, which can be generated in Github's settings.
+
+Next, we define a search query. In this example, we're looking for the string 'aws_secret_access_key' in Python files. We use the `search_code` method of the `Github` instance to perform the search.
+
+Finally, we iterate over the results and print out the URL of each file. Each result is a `ContentFile` object, and the `html_url` attribute gives us the URL of the file on Github.
+
+Note: This is a basic example, and real-world usage should implement more advanced features, such as rate limiting or error handling. Also, this script only finds the potentially sensitive data. It is the responsibility of the user to review and handle each case appropriately.
+
+# 🖇️ Références
+
+---

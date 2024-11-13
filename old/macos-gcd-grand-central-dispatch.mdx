@@ -1,0 +1,80 @@
+# macOS GCD - Grand Central Dispatch
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Grand Central Dispatch (GCD) is a technology developed by Apple to optimize application support for systems with multi-core processors and other symmetric multiprocessing systems. It is a concurrency library that provides and manages queues of tasks. GCD offers a unique approach to solving the problem of multi-threading by abstracting the process of managing the threads.
+> 
+
+### 🧐 Why ?
+
+> In a world where processor speeds are plateauing and developers are instead being provided with more cores, effective multi-threading is becoming increasingly important. However, managing threads directly can be a complex process prone to errors. GCD provides an easier-to-use alternative that can help developers make better use of multi-core processors.
+> 
+
+### ⛏️ How ?
+
+> To use GCD, you will need to understand its main components: dispatch queues and tasks. Dispatch queues are essentially FIFO queues to which your application can submit tasks. Tasks are blocks of work that GCD manages and runs in your application. You can create tasks by wrapping your code in a block and adding it to a dispatch queue. Once the task is in the queue, GCD takes over and manages the execution of the task for you.
+> 
+
+### ⏳ When ?
+
+> Apple introduced GCD with the release of macOS 10.6 Snow Leopard in 2009. It has since been integrated into all of Apple's operating systems, including iOS, watchOS, and tvOS.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Grand Central Dispatch (GCD), developed by Apple, is a sophisticated technology designed to optimize application performance on systems with multi-core processors and other symmetric multiprocessing systems. GCD is a concurrency library that manages and provides tasks queues, offering an innovative solution to multi-threading by abstracting the process of thread management.
+
+GCD essentially works by enabling developers to define tasks through blocks of code and then handles the scheduling of these tasks. It does this by maintaining a pool of threads and assigns tasks to these threads as they become available. This has several benefits. Firstly, it abstracts the complexity of thread management, allowing developers to focus on the tasks they want to execute rather than the intricacies of the threading system. This simplifies the coding process considerably.
+
+Secondly, GCD promotes more efficient use of system resources by allowing for the dynamic creation and destruction of threads based on system load. This means that GCD can adapt to the demands of the system in real-time, creating threads when necessary, and terminating them when they're no longer needed, optimizing system performance.
+
+Lastly, GCD provides a number of high-level features such as dispatch groups and semaphores. Dispatch groups are a way to block a thread until one or more tasks finish executing, while semaphores are used to control access to a resource or to limit the number of simultaneous operations in some part of your code. These features can further simplify the process of writing concurrent code.
+
+In a world where processor speeds are plateauing and developers are instead being provided with more cores, effective multi-threading is becoming increasingly important, and GCD is a powerful tool that can help developers make better use of multi-core processors.
+
+For example, suppose you have a photo editing app where the user can apply filters to a photo. Applying a filter might be a CPU-intensive task and if run on the main thread, it could freeze the user interface. With GCD, you can offload this task to a background thread.
+
+Here's how you might do this using Swift:
+
+```swift
+import UIKit
+
+// Assume you have a photo
+let photo = UIImage(named: "sample_photo")
+
+// Create a global queue for the background task
+let queue = DispatchQueue.global(qos: .userInitiated)
+
+// Use async to send a task to the background thread
+queue.async {
+    // This block of code will be run in the background
+    let filteredPhoto = applyFilter(to: photo)
+
+    // Once the filter has been applied, we want to update the user interface
+    // This needs to be done on the main thread
+    DispatchQueue.main.async {
+        // This block of code will be run on the main thread
+        imageView.image = filteredPhoto
+    }
+}
+
+```
+
+In this example, `DispatchQueue.global(qos: .userInitiated)` creates a global queue that runs tasks in the background. The `async` function is used to send a task to this queue.
+
+The task is defined by the code inside the braces `{}`. This task applies a filter to a photo, which could be a time-consuming operation.
+
+Once the filter has been applied, the code updates the UI to display the filtered photo. Because UI updates must be run on the main thread, it switches back to the main thread using `DispatchQueue.main.async`.
+
+This is a simple but powerful example of how GCD can be used to perform complex, CPU-intensive tasks without freezing the user interface.
+
+# 🖇️ Références
+
+---

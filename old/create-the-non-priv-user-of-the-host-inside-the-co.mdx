@@ -1,0 +1,81 @@
+# Create the non-priv user of the host inside the container
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The concept of creating a non-privileged user of the host inside the container is about isolating the processes running inside the container from the host. It is a fundamental concept in container security, which ensures that the container processes don't run with root privileges, thereby reducing the risk of host machine compromise in case the container is breached.
+> 
+
+### 🧐 Why ?
+
+> This concept is crucial in maintaining system security. Containers are isolated environments, but they share the same kernel as the host. If a process inside a container gains root privileges, it could potentially affect the host system, leading to serious security implications. By creating a non-privileged user inside the container, we limit the potential for damage.
+> 
+
+### ⛏️ How ?
+
+> To implement this, first, you need to create a non-root user inside your Dockerfile with the useradd command. After creating the user, switch to this user with the USER instruction. Your Dockerfile might look something like this: \n\n# Create a group and user \nRUN groupadd -g 999 appgroup && \n    useradd -r -u 999 -g appgroup appuser \n# Tell docker that all future commands should run as the appuser user\nUSER appuser
+> 
+
+### ⏳ When ?
+
+> The practice of creating non-privileged users inside containers is a best practice that has been adopted since containers became widely used in development and production environments. It became particularly important as containers started being used to isolate and run untrusted or third-party code.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The concept of running processes within a container as a non-root user is an essential aspect of container security. This is primarily due to the fact that containers, while isolated, still share the host system's kernel. When a process inside a container runs as root, it has the same privileges as the root user on the host system. This creates a potential risk where, if a malicious actor manages to compromise the container, they could gain root access to the host system and carry out harmful actions.
+
+To minimize this risk, we run processes as non-root users, thereby limiting their privileges. This approach ensures that, even if the container is compromised, the potential damage is contained within the limits of that non-privileged user. This strategy is grounded in the principle of least privilege (PoLP), a computer security concept that advocates for providing a user with the minimum levels of access necessary to perform their job functions.
+
+It is a standard best practice to create a non-root user inside your Dockerfile using the useradd command and then switch to this user with the USER instruction. By doing this, all subsequent operations within the Dockerfile are executed as the non-privileged user, limiting the potential for container breach to compromise the host system.
+
+This practice is crucial in maintaining system security across development and production environments, especially when containers are used to isolate and run untrusted or third-party code.
+
+We'll demonstrate the creation of a non-root user in a Dockerfile and how to switch to this user for all subsequent operations. Let's suppose we're creating a Docker image to run a simple web server application. Let's walk through each step.
+
+```
+# Use an existing docker image as a base
+FROM node:14
+
+# Create a group and user
+RUN groupadd -g 999 appgroup && \\
+    useradd -r -u 999 -g appgroup appuser
+
+# Make a directory for our app
+RUN mkdir /home/app && chown -R appuser:appgroup /home/app
+
+# Switch to our new user
+USER appuser
+
+# Change work directory
+WORKDIR /home/app
+
+# Copy package.json to the working directory
+COPY package.json .
+
+# Install dependencies
+RUN npm install
+
+# Copy other source code to working directory
+COPY . .
+
+# Set command for container to execute
+CMD ["npm", "start"]
+
+```
+
+In this Dockerfile:
+
+1. We start by specifying a base image using `FROM node:14`. This is a standard Node.js image.
+2. We then create a new group and user using `RUN groupadd -g 999 appgroup && useradd -r -u 999 -g appgroup appuser`. Here, `appgroup` is the name of the group, and `appuser` is the name of the user. `999` is the user and group ID.
+3. We make a directory for our app and change its ownership to our new user using `RUN mkdir /home/app && chown -R appuser:appgroup /home/app`.
+4. We switch to our new user using `USER appuser`. All subsequent commands in the Dockerfile will be run as this user.
+5. The rest of the Dockerfile sets up the application by copying in the application files, installing dependencies, and specifying the command to run when the container starts.
+
+By using this approach, we ensure that the processes within the Docker container run as a non-root user, enhancing the security of the host system.

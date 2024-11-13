@@ -1,0 +1,64 @@
+# Windows Over Pass the Hash/Pass the Key
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Over Pass the Hash/Pass the Key (PtH/PtK) is a hacking technique that allows an attacker to authenticate on a system using a stolen hash or key, rather than the associated plaintext password.
+> 
+
+### 🧐 Why ?
+
+> Understanding PtH/PtK is crucial for both attackers and defenders. For attackers, it provides a powerful technique to escalate privileges and move laterally across a network. For defenders, understanding PtH/PtK is essential to detect and mitigate such attacks.
+> 
+
+### ⛏️ How ?
+
+> To perform a PtH/PtK attack, an attacker first needs to obtain a valid user's hash or key. This can be done using various methods, such as sniffing network traffic or extracting hashes from a compromised system. Once the hash or key is obtained, the attacker can use it to authenticate on other systems within the network without knowing the actual password.
+> 
+
+### ⏳ When ?
+
+> The use of PtH/PtK attacks has been prevalent in the cybersecurity landscape since the early 2000s, with the advent of tools like Mimikatz that made it easier to extract and use hashes.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Pass the Hash/Pass the Key (PtH/PtK) attacks exploit the way Windows handles authentication. When a user logs into a Windows system, an access token is created. This token contains crucial information: the user's security identifiers (SIDs), user rights, and a hashed version of the user's password. This token is used to authenticate the user for local and network resources.
+
+The attacker's objective in a PtH/PtK attack is to get hold of this access token or at least the hashed password within it. The attacker does not need to know the plaintext password. They can merely use the hash or key to impersonate the user on the network.
+
+To initiate a PtH/PtK attack, an attacker first needs to acquire a legitimate user's hash or key. This acquisition can occur through various means such as sniffing network traffic or extracting hashes from an already compromised system. Once they obtain the hash or key, they can use it to authenticate on other systems within the network, allowing them to move laterally across the network and escalate their access privileges.
+
+The effectiveness and danger of PtH/PtK attacks lie in this ability to impersonate a user and access network resources without ever needing to know the actual password. This technique has been a significant threat in the cybersecurity landscape since the early 2000s, especially with the advent of tools like Mimikatz that facilitate the extraction and use of hashes.
+
+Example:
+Consider an attacker has gained access to a system and wants to escalate their privileges using the PtH technique. Here's a simplified example using Mimikatz, a powerful tool used to extract Windows credentials:
+
+1. **Extracting the password hash**: The attacker can use Mimikatz to dump the password hashes from memory. This is done using the `privilege::debug` and `sekurlsa::logonPasswords` commands in Mimikatz.
+
+```
+mimikatz # privilege::debug
+mimikatz # sekurlsa::logonPasswords
+
+```
+
+These commands make Mimikatz run with debug privileges and dump the logon passwords (actually, password hashes) of all currently logged on users.
+
+1. **Using the extracted hash**: Once the hash is obtained, the attacker can use it for lateral movement or privilege escalation. They could use another Mimikatz command, `sekurlsa::pth`, to start a new process with the stolen credentials.
+
+```
+mimikatz # sekurlsa::pth /user:Admin /domain:domain.local /ntlm:[NTLM Hash] /run:cmd.exe
+
+```
+
+In the above command, replace 'Admin', 'domain.local', and '[NTLM Hash]' with the username, domain, and NTLM hash obtained from the previous step. This command opens a new command prompt running under the context of the targeted user.
+
+This is a simplified example. Real-world scenarios would involve additional steps and considerations, such as bypassing antivirus software and evading detection.
+
+Please note: This information is for educational purposes only. Using these techniques for malicious purposes is illegal and unethical.

@@ -1,0 +1,131 @@
+# macOS MIG - Mach Interface Generator
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The Mach Interface Generator (MIG) is a system specific for macOS that facilitates the communication between tasks in a Mach-based operating system. It’s a part of the system's Inter-Process Communication (IPC) facilities and functions as a code generator.
+> 
+
+### 🧐 Why ?
+
+> MIG is important because it creates a bridge between different processes running on macOS. It provides a way for these processes to communicate and share data securely, making the overall system more efficient and robust. Without MIG, inter-process communication would be significantly harder and more prone to errors, affecting the performance and reliability of the system.
+> 
+
+### ⛏️ How ?
+
+> MIG is implemented as part of the macOS operating system. It works by defining messages, or 'interfaces', that processes can use to communicate. When a process wants to send a message to another process, it uses MIG to generate the necessary code. This code is tailor-made to handle the specific message and ensures that the message is correctly formatted and securely delivered. MIG also generates code for the receiving process, allowing it to interpret the message and respond accordingly.
+> 
+
+### ⏳ When ?
+
+> MIG has been a part of macOS since its inception. It is a fundamental component of the operating system's architecture and continues to be used in the latest versions.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+## Overview of MIG (Mach Interface Generator)
+
+The Mach Interface Generator (MIG) is a critical component of the macOS operating system, designed to facilitate Inter-Process Communication (IPC). It operates as a code generator, creating the necessary stub code for message exchanges between processes based on predefined interfaces. These interfaces are written in a proprietary language and outline the structure and type of messages that can be communicated.
+
+## Detailed Explanation of MIG Functionality
+
+### Defining the Interface
+
+The process starts with defining an interface file using MIG’s proprietary language. This file specifies the routines and the types of data that will be exchanged between processes. For instance, consider the following `example.defs` interface file:
+
+```cpp
+routine example_send_data
+(
+    sender: mach_port_t;
+    in data: array [1..10] of int;
+);
+
+```
+
+This interface defines a routine `example_send_data` which takes a Mach port (`mach_port_t`) and an array of 10 integers as input. This routine will be used to send data from one process to another.
+
+### Generating Stub Code
+
+After defining the interface, the next step involves using MIG to generate the necessary stub code. This is done through the command line in the Terminal:
+
+```bash
+mig example.defs
+
+```
+
+This command processes the `example.defs` file and generates the required client and server code. These generated files contain the functions and data structures needed for the processes to communicate effectively.
+
+### Implementing the Sender (Process A)
+
+Process A, the sender, includes the generated header file and uses the provided function to send data to Process B. Here’s an example implementation:
+
+```c
+#include "example.h" // Include the generated header file
+
+mach_port_t process_b_port = ... // Acquire the port for Process B
+
+int data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // Data to send
+
+// Send the data
+kern_return_t result = example_send_data(process_b_port, data);
+
+if (result != KERN_SUCCESS) {
+    fprintf(stderr, "Failed to send data: %d\\n", result);
+}
+
+```
+
+In this code, `process_b_port` is the Mach port of Process B. The `example_send_data` function is used to send the `data` array to Process B. Error checking is performed to ensure that the data is sent successfully.
+
+### Implementing the Receiver (Process B)
+
+Process B, the receiver, includes the generated header file and implements the server routine to handle incoming data:
+
+```c
+#include "example.h" // Include the generated header file
+
+// Implement the server routine
+kern_return_t example_send_data(mach_port_t sender, int data[10]) {
+    // Handle the received data
+    for (int i = 0; i < 10; i++) {
+        printf("Received data[%d]: %d\\n", i, data[i]);
+    }
+    return KERN_SUCCESS;
+}
+
+```
+
+In this code, `example_send_data` is implemented to process the received data. The server routine prints each element of the `data` array to the console.
+
+### Establishing the Mach Port
+
+For the communication to occur, both processes need to establish and manage their Mach ports. This involves creating ports and setting up the necessary environment for IPC. Here’s an example of setting up the Mach port for Process B:
+
+```c
+mach_port_t port;
+mach_port_allocate(mach_task_self(), MACH_PORT_RIGHT_RECEIVE, &port);
+mach_port_insert_right(mach_task_self(), port, port, MACH_MSG_TYPE_MAKE_SEND);
+
+// Register the port with a service name
+task_set_special_port(mach_task_self(), TASK_BOOTSTRAP_PORT, port);
+
+// Listen for incoming messages
+mach_msg_server(example_send_data, sizeof(union __RequestUnion__example_subsystem), port, 0);
+
+```
+
+This code snippet creates a Mach port, assigns it the receive right, and registers it. The `mach_msg_server` function listens for incoming messages and calls the appropriate handler (in this case, `example_send_data`).
+
+## Conclusion
+
+The Mach Interface Generator (MIG) is an essential tool for facilitating Inter-Process Communication (IPC) on macOS. By defining interfaces, generating stub code, and implementing the necessary client and server routines, developers can ensure secure and efficient communication between processes. Understanding and utilizing MIG is crucial for developing robust macOS applications that can leverage the full capabilities of IPC, enhancing both performance and security.
+
+# 🖇️ Références
+
+---

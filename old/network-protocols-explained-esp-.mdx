@@ -1,0 +1,172 @@
+# Network Protocols Explained (ESP)
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Network protocols are a set of rules or procedures for transmitting data between electronic devices, such as computers. They define how to format, transmit, and receive data so that the network devices — from servers and routers to endpoints — can communicate regardless of their underlying infrastructure, platform, or technology.
+> 
+
+### 🧐 Why ?
+
+> Network protocols are crucial for the seamless functioning of the internet and intranet. They ensure devices can effectively communicate with each other by providing a common language and rules for data transmission. Understanding network protocols can help in diagnosing network problems, designing and implementing networks, and ensuring secure and efficient data transmission.
+> 
+
+### ⛏️ How ?
+
+> To leverage network protocols effectively, one must understand the basic protocols such as HTTP for web traffic, SMTP for email, FTP for file transfer, and DNS for domain names. Each protocol has its specific purpose, rules, and procedures. For example, HTTP is a stateless protocol used for website loading, while SMTP is used for sending emails. To secure data transmission, protocols like HTTPS and SFTP can be used.
+> 
+
+### ⏳ When ?
+
+> The use of network protocols began with the advent of the internet in the late 1960s. The first protocols like NCP were introduced during the early days of ARPANET, the precursor to the internet. Over the years, these evolved into TCP/IP, which forms the basis of modern internet communication.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At the core of network protocols are several fundamental concepts, including 'handshaking', error checking, and data compression. These concepts are crucial for ensuring reliable and efficient data transmission across networks.
+
+### Handshaking
+
+'Handshaking' is the initial process where two network devices establish a connection and agree on communication parameters. This process involves a series of signals sent back and forth between the devices to agree on protocols, data rates, and other factors necessary for communication. A well-known example of handshaking is the TCP three-way handshake used in establishing a TCP connection.
+
+### TCP Three-Way Handshake
+
+1. **SYN**: The client sends a synchronization (SYN) packet to the server to initiate a connection.
+2. **SYN-ACK**: The server responds with a synchronization-acknowledgment (SYN-ACK) packet.
+3. **ACK**: The client sends an acknowledgment (ACK) packet back to the server, establishing the connection.
+
+```
+Client: SYN ---------> Server
+Server: <-------- SYN-ACK
+Client: ACK ---------> Server
+
+```
+
+### Error Checking
+
+Error checking is critical for verifying the integrity of the data being transmitted. Techniques like checksums, cyclic redundancy checks (CRC), and parity bits are employed to detect errors in the data.
+
+### Example: Checksum
+
+A checksum is a value derived from the data that is transmitted along with the data itself. The receiver calculates the checksum of the received data and compares it to the transmitted checksum. If they match, the data is considered intact.
+
+```python
+def calculate_checksum(data):
+    return sum(data) % 256
+
+data = [1, 2, 3, 4, 5]
+checksum = calculate_checksum(data)
+print("Checksum:", checksum)
+
+```
+
+### Data Compression
+
+Data compression reduces the size of the data to speed up transmission and reduce bandwidth usage. Compression can be either lossless or lossy, depending on whether the original data can be perfectly reconstructed from the compressed data.
+
+### Example: Gzip Compression
+
+Gzip is a widely used lossless compression tool.
+
+```bash
+# Compressing a file
+gzip example.txt
+
+# Decompressing the file
+gzip -d example.txt.gz
+
+```
+
+### Network Layers and Protocols
+
+Network protocols operate at different layers of the OSI (Open Systems Interconnection) model. Each layer has specific protocols that perform distinct functions.
+
+1. **Application Layer**: Protocols like HTTP, FTP, SMTP.
+2. **Transport Layer**: Protocols like TCP, UDP.
+3. **Network Layer**: Protocols like IP.
+
+### Example: HTTP Request
+
+HTTP (Hypertext Transfer Protocol) is an application layer protocol used for web traffic.
+
+```
+GET /index.html HTTP/1.1
+Host: www.example.com
+
+```
+
+- **GET**: Method to request data.
+- **/index.html**: The resource being requested.
+- **HTTP/1.1**: The HTTP version.
+
+### Real-World Example: Setting Up a Simple Web Server
+
+Let's set up a simple web server using Python's HTTP server module to illustrate how these protocols work together.
+
+1. **Create a Simple HTML File**: Create an `index.html` file with the following content:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Web Server</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+
+```
+
+1. **Start the Web Server**:
+
+```python
+import http.server
+import socketserver
+
+PORT = 8000
+
+Handler = http.server.SimpleHTTPRequestHandler
+
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("Serving at port", PORT)
+    httpd.serve_forever()
+
+```
+
+1. **Access the Web Server**: Open a web browser and go to `http://localhost:8000` to see the "Hello, World!" message.
+
+### Security Considerations
+
+To secure data transmission, protocols like HTTPS (HTTP Secure) and SFTP (Secure File Transfer Protocol) are used.
+
+### Example: Enabling HTTPS with Let's Encrypt
+
+1. **Install Certbot**:
+
+```bash
+sudo apt-get install certbot python3-certbot-nginx
+
+```
+
+1. **Obtain a Certificate**:
+
+```bash
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+
+```
+
+1. **Automatic Renewal**:
+
+```bash
+sudo certbot renew --dry-run
+
+```
+
+Understanding these protocols and their interactions is key for network design, troubleshooting, and cybersecurity. By diving into each layer and its protocols, one can grasp how complex networks operate and ensure secure and efficient data transmission.

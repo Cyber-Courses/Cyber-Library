@@ -1,0 +1,68 @@
+# Windows Pass the Ticket
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Windows Pass the Ticket (PtT) is a method of authentication used in Microsoft's Kerberos implementation, where a user's identity is verified by a ticket-granting ticket (TGT) obtained from the Key Distribution Center (KDC).
+> 
+
+### 🧐 Why ?
+
+> PtT is important because it allows users to authenticate to network resources without transmitting their password over the network, which could be intercepted by attackers. However, this also presents a challenge as attackers can steal valid TGTs and use them to impersonate legitimate users, leading to unauthorized access.
+> 
+
+### ⛏️ How ?
+
+> To implement PtT, a user first requests a TGT from the KDC by providing their username and password. The KDC verifies the credentials and returns a TGT, which is encrypted with the user's password. The user can then use this TGT to request service tickets for specific network resources. The service tickets are used to authenticate the user to the resources, without the need for the user's password. To mitigate PtT attacks, organizations can implement measures such as strict access controls, regular monitoring of authentication logs, and use of advanced threat detection tools.
+> 
+
+### ⏳ When ?
+
+> The concept of Pass the Ticket has been in use since the introduction of Kerberos in Windows 2000. However, it has become more relevant with the increased focus on cybersecurity and the rise of advanced persistent threats.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Pass the Ticket (PtT) is an authentication method used in Microsoft's Kerberos implementation. In this system, a user's identity is confirmed using a ticket-granting ticket (TGT) received from the Key Distribution Center (KDC). The user requests a TGT from the KDC by providing their username and password. The KDC verifies these credentials and returns a TGT, which is encrypted using the user's password. This TGT can then be used by the user to request service tickets for specific network resources. These service tickets authenticate the user to the resources without needing the user's password.
+
+However, this system can be exploited through a PtT attack. In such an attack, an intruder first compromises a user's system and extracts the TGT from the system's memory using specific tools, such as Mimikatz. With the stolen TGT, the attacker can request service tickets from the KDC, impersonating the legitimate user. As the service tickets are based on the TGT and not the user's password, the attacker can gain access to network resources as the user, regardless of whether the user changes their password.
+
+This makes PtT attacks challenging to detect and particularly dangerous due to the potential for unauthorized access and data breaches. To guard against PtT attacks, organizations can implement strict access controls, regularly monitor authentication logs, and use advanced threat detection tools. These measures can help detect unusual activity, such as an unusually high number of service ticket requests, which could indicate a PtT attack.
+
+Let's consider a hypothetical scenario where an attacker, Alice, wants to compromise the network resources of a user, Bob. Alice has already gained access to Bob's system.
+
+1. **Extracting the TGT**: Alice first uses a tool like Mimikatz to extract Bob's TGT from the system's memory. An example command may look like this:
+
+```bash
+mimikatz # privilege::debug
+mimikatz # sekurlsa::tickets /export
+
+```
+
+The first command runs Mimikatz with debug privileges, and the second command exports all the Kerberos tickets from the system's memory.
+
+1. **Using the TGT**: After obtaining Bob's TGT, Alice can use it to impersonate Bob and request service tickets from the KDC. Alice does this by injecting the TGT into her session using a command like this:
+
+```bash
+mimikatz # kerberos::ptt c:\\path\\to\\extracted\\ticket.kirbi
+
+```
+
+This command injects the TGT into Alice's session.
+
+1. **Accessing Network Resources**: Alice can now request service tickets for any network resources that Bob has access to, effectively impersonating Bob. She can do this with a command like this:
+
+```bash
+mimikatz # kerberos::list
+
+```
+
+This command lists all the service tickets in Alice's session, allowing her to see which resources she can access.
+
+The above scenario emphasizes the importance of implementing measures such as strict access controls, regular monitoring of authentication logs, and the use of advanced threat detection tools to detect and mitigate PtT attacks.

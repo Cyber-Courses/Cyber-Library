@@ -1,0 +1,84 @@
+# Sets release_agent to /path/payload
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> The 'set_release_agent' command is a Linux kernel feature that allows the system administrator to specify a program that the kernel will run whenever a cgroup no longer has any tasks in it. This is typically used in a file path format such as '/path/payload'.
+> 
+
+### 🧐 Why ?
+
+> Understanding the 'set_release_agent' command is crucial as it is frequently used in managing system resources. For system administrators, it's a valuable tool for keeping the system organized and efficient. For hackers, it could potentially be exploited to launch unauthorized programs or processes.
+> 
+
+### ⛏️ How ?
+
+> To use the 'set_release_agent' command, you would typically access the cgroup filesystem and echo the path of your intended program into the 'release_agent' file. For example: 'echo /path/payload > /sys/fs/cgroup/release_agent'. It is critical to ensure that the specified path is secure and the program it points to is authorized and safe to run.
+> 
+
+### ⏳ When ?
+
+> The 'set_release_agent' command has been available in Linux kernels since version 2.6.24, released in 2008. It's a feature that's commonly used in systems administration and can be a part of various scripts and programs.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The 'set_release_agent' command is a feature of the Linux kernel, specifically within the Linux Control Groups (cgroups) system. Cgroups are a way for the Linux kernel to allocate resources—such as CPU time, system memory, network bandwidth, or combinations of these resources—among user-defined processes running on a system.
+
+In essence, cgroups allow processes to be organized into hierarchical groups, where each group inherits the resource distribution of its parent group. By doing so, cgroups provide a mechanism for fine-grained resource management, improving overall system efficiency.
+
+The 'set_release_agent' command comes into play when a cgroup becomes empty, i.e., when it no longer has any running processes. In such a scenario, the kernel triggers the 'release_agent' as specified by the 'set_release_agent' command. The 'release_agent' is typically a program specified by the system administrator, and its execution is triggered automatically by the kernel.
+
+This automatic triggering allows for better resource management, as it can help clean up empty cgroups or repurpose system resources as needed. For instance, a release agent could be set to notify the administrator when a cgroup becomes empty, or it could be programmed to perform automatic cleanup tasks to free up system resources.
+
+However, it's crucial to note that the 'set_release_agent' command can pose security risks if not handled properly. Since it allows a program to be run automatically by the kernel, if the specified path where this program resides is insecure, it could potentially be exploited to run unauthorized programs. Therefore, when using the 'set_release_agent' command, it is of utmost importance to ensure that the specified path is secure and that the program it points to is trusted and authorized for execution.
+
+Let's walk through a hypothetical scenario where the 'set_release_agent' command is used.
+
+Imagine you're a system administrator for a Linux-based server, and you have a group of processes that you want to monitor. Specifically, you want to be notified when all processes in this group have finished running.
+
+First, you would set up a cgroup for these processes. This is done by creating a new directory in the cgroup filesystem:
+
+```
+mkdir /sys/fs/cgroup/cpu/my_cgroup
+
+```
+
+This command creates a new cgroup named 'my_cgroup' under the 'cpu' subsystem, which is responsible for managing CPU resources.
+
+Next, you would add processes to this cgroup. This can be done by writing the process ID (PID) of each process to the 'tasks' file in the cgroup directory:
+
+```
+echo 1234 > /sys/fs/cgroup/cpu/my_cgroup/tasks
+
+```
+
+In this command, '1234' would be the PID of the process you want to add to the cgroup.
+
+Now, let's say you have a script called '[notify.sh](http://notify.sh/)' that sends a notification when it's run. You want this script to be run whenever 'my_cgroup' becomes empty.
+
+To do this, you would use the 'set_release_agent' command:
+
+```
+echo /path/to/notify.sh > /sys/fs/cgroup/cpu/release_agent
+
+```
+
+This command sets the 'release_agent' of the 'cpu' subsystem to '[notify.sh](http://notify.sh/)'. Now, whenever a cgroup under the 'cpu' subsystem becomes empty, the '[notify.sh](http://notify.sh/)' script will be run.
+
+Finally, you would set the 'notify_on_release' flag of 'my_cgroup' to '1'. This tells the kernel to run the 'release_agent' when 'my_cgroup' becomes empty:
+
+```
+echo 1 > /sys/fs/cgroup/cpu/my_cgroup/notify_on_release
+
+```
+
+Now, whenever all processes in 'my_cgroup' have finished running, the '[notify.sh](http://notify.sh/)' script will be run, sending you a notification.
+
+Remember, it's crucial to ensure that '/path/to/notify.sh' is secure and that the '[notify.sh](http://notify.sh/)' script is safe to run. Otherwise, this could potentially be exploited to run unauthorized programs.

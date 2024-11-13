@@ -1,0 +1,84 @@
+# String based drop
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> String-based drop refers to a technique used in cyberattacks where malicious code or data is inserted or 'dropped' into a system through inputs that accept strings. Strings are sequences of characters, like words or sentences, and are common in most software applications. By manipulating these strings, attackers can exploit vulnerabilities in the software to execute attacks.
+> 
+
+### 🧐 Why ?
+
+> Understanding string-based drop is important because it can be used to infiltrate systems, inject malware, and exfiltrate sensitive data. This technique is often used in SQL Injection and Cross-site Scripting (XSS) attacks. It's crucial for developers and security professionals to understand this method to build secure applications and protect systems from such threats.
+> 
+
+### ⛏️ How ?
+
+> To protect against string-based drop attacks, regular input validation is crucial. Inputs should be checked against expected patterns and any deviations should be rejected. Employing secure coding practices, such as using parameterized queries instead of raw SQL statements, can also prevent SQL injection attacks. Regular security audits can help identify potential vulnerabilities in the system.
+> 
+
+### ⏳ When ?
+
+> String-based drop as an attack technique has been in use since the early days of the internet. As software grew more complex and interconnected, the risks and potential damage from these attacks also increased.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+String-based drop is a strategy employed by hackers where they insert or 'drop' malicious code or data into a system through fields that accept strings - sequences of characters, like words or sentences. Two common methods using this technique are SQL Injection and Cross-site Scripting (XSS).
+
+In SQL Injection, the attacker injects malicious SQL code into an input field. If the application fails to validate the input properly, the malicious code gets executed and often results in the attacker gaining access to the database. The impact can be severe, ranging from data theft, data manipulation to denial of service.
+
+Cross-site Scripting (XSS) involves inserting malicious scripts into input fields that are then reflected on the website and executed in the user's browser. This can lead to the theft of sensitive data like session cookies, enabling the attacker to impersonate the user. An XSS attack can lead to loss of data confidentiality and integrity, and can also disrupt the availability of a webpage.
+
+Defending against these attacks involves several strategies. One approach is proper input validation where inputs are checked against expected patterns, and any deviations are rejected. Moreover, secure coding practices should also be employed. For instance, in the case of SQL, using parameterized queries instead of raw SQL statements can prevent SQL injection attacks. Regular security audits are also vital as they can help identify potential vulnerabilities in the system.
+
+Understanding and preventing string-based drop attacks are crucial in today's digital world. As software continues to become more complex and interconnected, the potential damage from these kinds of attacks also increases. Hence, it's critical for developers and security professionals to stay updated on the latest threats and mitigation techniques.
+
+Let's say you have a login form on your website where users enter their username and password. The form data is used to build a SQL query that checks if the user exists in the database. The code might look like this:
+
+```python
+# Python code using raw SQL
+username = form.input('username')
+password = form.input('password')
+query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+database.execute(query)
+
+```
+
+In this case, if a user provides a username of `admin` and a password of `password`, the query becomes:
+
+```
+SELECT * FROM users WHERE username = 'admin' AND password = 'password'
+
+```
+
+This works well for valid inputs. However, if an attacker enters a string like `' OR '1'='1` as the username and leaves the password field blank, the resulting query becomes:
+
+```
+SELECT * FROM users WHERE username = '' OR '1'='1' AND password = ''
+
+```
+
+Because `'1'='1'` is always true, this query would return all users in the database, effectively bypassing the login.
+
+To prevent this, use parameterized queries which ensure inputs are treated as literal values and not part of the SQL command:
+
+```python
+# Python code using parameterized query
+username = form.input('username')
+password = form.input('password')
+query = "SELECT * FROM users WHERE username = %s AND password = %s"
+database.execute(query, (username, password,))
+
+```
+
+With this approach, even if the attacker tries to insert malicious code, it won't execute as part of the SQL command but will be treated as an input value, safeguarding your database from SQL Injection attack.
+
+# 🖇️ Références
+
+---

@@ -1,0 +1,73 @@
+# Stack Shellcode
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Stack shellcode is a type of exploit used to inject code into a program and take control of its execution flow. It involves overwriting the return pointer of a function causing the program to execute an attacker-controlled malicious payload.
+> 
+
+### 🧐 Why ?
+
+> Understanding stack shellcode is crucial for both cybersecurity professionals and software developers. For cybersecurity professionals, it provides insights into how attackers may exploit vulnerabilities in a system, while for developers, it highlights the importance of secure coding practices to prevent such attacks.
+> 
+
+### ⛏️ How ?
+
+> Stack shellcode is implemented by first finding a buffer overflow vulnerability in a program. The attacker then overflows this buffer with their malicious code and overwrites the return pointer of the function to point to their code instead of the original function. When the function returns, it executes the attacker's code instead of the intended code.
+> 
+
+### ⏳ When ?
+
+> The concept of stack shellcoding started to become prominent in the late 1980s and early 1990s as more vulnerabilities were discovered in software applications. It's still being used today, even though modern systems have implemented various defenses against it.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+A stack shellcode attack is a technique used in exploiting software vulnerabilities to gain unauthorized control over a system. This type of attack focuses on a common programming mistake - buffer overflow. When a program doesn't check the size of user input properly, more data than the buffer can hold might be entered, causing it to overflow into adjacent memory locations.
+
+The attacker uses this overflow to inject their malicious code into the program's stack, a region of memory used for storing temporary data. The code is designed to replace the return address of a function on the stack, which is supposed to direct the program back to the point in code where the function was initially called from. By overwriting this address, the attacker can redirect the execution flow of the program to their injected code instead.
+
+The injected code, often referred to as shellcode, is typically designed to spawn a shell - a user interface that allows for command-line input and output. This gives the attacker access to execute commands directly on the system, hence the name "stack shellcode".
+
+Modern operating systems have defenses against stack shellcode attacks. One of these is Address Space Layout Randomization (ASLR), which randomizes the memory addresses used by system files and libraries every time the system boots, making it more difficult for an attacker to predict the correct address to inject their code. Another defense is the Non-Executable stack (NX bit), which prevents any code in the stack memory region from being executed.
+
+Despite these defenses, sophisticated attackers have developed advanced techniques to circumvent them. Therefore, it's important for software developers to practice secure coding to prevent buffer overflow vulnerabilities in the first place, and for cybersecurity professionals to remain vigilant and up-to-date with the latest exploitation techniques and defense mechanisms.
+
+Here's an example of a simple stack shellcode attack on a vulnerable program in C:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+void vulnerable_function(char *str) {
+    char buffer[100];
+    strcpy(buffer,str);
+}
+
+int main(int argc, char **argv) {
+    vulnerable_function(argv[1]);
+    return 0;
+}
+
+```
+
+This example program takes an argument from the command line and copies it into a buffer in the `vulnerable_function` without checking its size, causing a buffer overflow if the input is larger than the buffer.
+
+An attacker could exploit this by providing a specially crafted input that includes their shellcode and an overwritten return address. Here's an overly simplified example:
+
+```bash
+$ ./program "$(python -c 'print "\\x90"*80 + "\\xcc"*20 + "\\x7f\\xff\\xff\\xff"')"
+
+```
+
+In this command, `\\x90` is a NOP instruction that does nothing, used to pad the input. `\\xcc` is a simple shellcode that triggers a software interrupt, used here as a stand-in for actual malicious code. `\\x7f\\xff\\xff\\xff` is the overwritten return address, pointing to the start of our shellcode.
+
+This would cause the program to execute the shellcode when the `vulnerable_function` returns.
+
+Please note that actual exploits are much more complex and require precise control over the memory layout, bypassing of modern security measures like ASLR and NX, and often involve shellcode that does something useful like spawning a shell or creating a backdoor.

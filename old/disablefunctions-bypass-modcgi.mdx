@@ -1,0 +1,61 @@
+# disable_functions bypass - mod_cgi
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Disable_functions bypass via mod_cgi is a method used by attackers to run system commands on a server even when certain functions are disabled in PHP's configuration. This is achieved by using the mod_cgi module present in the server.
+> 
+
+### 🧐 Why ?
+
+> PHP is a powerful scripting language often used for web development. However, it has certain commands that could be exploited by attackers to execute arbitrary system commands. To mitigate this, PHP has a 'disable_functions' directive that allows administrators to disable certain functions. Understanding how disable_functions bypass via mod_cgi works is vital for system administrators and cybersecurity professionals in order to harden the server against such attacks.
+> 
+
+### ⛏️ How ?
+
+> Generally, the mod_cgi module is used to run CGI scripts on a server. However, it can be exploited to bypass PHP's disable_functions directive. For example, an attacker can write a CGI script in any language such as bash or Perl, place it in the server's cgi-bin directory, and then run it using the server's mod_cgi. The script can contain system commands that are disabled in PHP's configuration, effectively bypassing the disable_functions directive.
+> 
+
+### ⏳ When ?
+
+> Disable_functions bypass via mod_cgi has been used for several years by attackers to exploit vulnerable servers. It became more prominent with the rise of PHP as a web development language.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+The "disable_functions bypass via mod_cgi" is a security vulnerability that exploits the functionality of the mod_cgi module. This module is a part of Apache, a widely used web server software, and its role is to enable the server to execute CGI (Common Gateway Interface) scripts. CGI is a standard protocol for web servers to execute scripts and generate dynamic content.
+
+The bypass works by exploiting the way mod_cgi runs scripts. Unlike PHP scripts, which are restricted by the 'disable_functions' directive in PHP's configuration, CGI scripts run with the server's privileges and are not subjected to these restrictions. This means that if an attacker can write a CGI script (using any language, such as bash or Perl) and place it in the server's cgi-bin directory (a common directory for storing CGI scripts), they can then use mod_cgi to execute this script.
+
+The significance here is that the script could contain system commands that are disabled in PHP's configuration – effectively bypassing the 'disable_functions' directive. This allows the attacker to run prohibited system commands, which can be used to exploit the server.
+
+This vulnerability has been used for several years by attackers to exploit servers, particularly those using PHP as a web development language. Understanding this bypass method is crucial for system administrators and cybersecurity professionals to properly secure their servers against such attacks. One mitigation strategy is to carefully manage permissions, ensuring that untrusted users cannot write scripts in the cgi-bin directory.
+
+For example, let's assume an attacker has gained access to a vulnerable server running Apache with the mod_cgi module enabled.
+
+1. First, the attacker may write a simple CGI script in bash:
+    
+    ```bash
+    #!/bin/bash
+    echo "Content-type: text/plain"
+    echo ""
+    echo "Here is a listing of /etc:"
+    ls /etc
+    
+    ```
+    
+    This script, when executed, will list the contents of the `/etc` directory on the server.
+    
+2. Next, the attacker places this script in the server's `cgi-bin` directory, which might be located at `/usr/lib/cgi-bin`. They might name the script `list.sh`.
+3. The attacker then navigates to `http://targetserver/cgi-bin/list.sh` in their web browser. The server's mod_cgi module will execute the script and return the output to the browser.
+4. Despite the PHP configuration disabling the `ls` command via the `disable_functions` directive, the attacker was able to bypass this restriction and execute the command by using a CGI script.
+
+The above example is a simple demonstration of how an attacker could exploit the mod_cgi module to bypass PHP's `disable_functions` directive. The potential for harm is much greater, as the attacker could run any system command not explicitly disallowed by the server's configuration or permissions.
+
+The primary mitigation strategy against this type of attack is to carefully manage permissions on the server. In the above example, if the attacker did not have write permissions to the `cgi-bin` directory, they would not have been able to place their script on the server to be run by mod_cgi. Regularly reviewing and minimizing permissions can greatly reduce the potential for such attacks.

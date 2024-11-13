@@ -1,0 +1,186 @@
+# Volatility - CheatSheet
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Volatility is an open-source memory forensics framework for incident response and malware analysis. It is used to extract digital artifacts from volatile memory (RAM) dumps. The fundamental concepts underpinning Volatility include memory forensics, digital forensics, and incident response.
+> 
+
+### 🧐 Why ?
+
+> Volatility is crucial in the cybersecurity landscape as it aids in the investigation of malware, hacker activities, and identification of inconsistencies in the system that could be due to a security incident. It is used to extract browser history, disk artifacts, cache files, and other valuable information. Understanding Volatility is essential for security enthusiasts and professionals to enhance their incident response and malware analysis capabilities.
+> 
+
+### ⛏️ How ?
+
+> To leverage Volatility, you first need a memory dump from the system you want to analyze. This can be obtained using tools like DumpIt. Once you have the memory dump, you can use various Volatility plugins to extract information. For instance, 'pslist' to list the processes, 'netscan' for network-related information, 'hivelist' to list registry hives, and many more. Remember, Volatility requires a deep understanding of the operating system internals and the format of different data structures.
+> 
+
+### ⏳ When ?
+
+> The use of Volatility in cybersecurity began around 2007 when it was developed by AAron Walters. Over the years, it has become a vital tool in memory forensics used by both cybersecurity professionals and malicious actors.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+Volatility works by parsing the memory dump of a system. It understands the layout of the kernel data structures in the memory and reads these structures to extract valuable information. It can handle memory dumps from Windows, Linux, Mac, and other OS. Understanding the layout of these data structures requires a deep understanding of the OS internals. Volatility also supports writing custom plugins, which means you can extend its capabilities as per your requirements.
+
+## Detailed Explanation
+
+### Memory Dump Acquisition
+
+To begin using Volatility, you must first capture a memory dump from the target system. This can be done using various tools, such as `DumpIt` for Windows or `lime` for Linux.
+
+**Example Command:**
+For Windows:
+
+```
+DumpIt.exe
+
+```
+
+For Linux:
+
+```
+sudo ./lime -f /path/to/dumpfile
+
+```
+
+These tools will create a raw memory image file that Volatility can analyze.
+
+### Loading the Memory Dump
+
+First, ensure you have Volatility installed. You can install it via pip:
+
+```
+pip install volatility3
+
+```
+
+To start analyzing a memory dump, use the `-f` flag to specify the file and the `-profile` flag to indicate the profile of the operating system.
+
+**Example Command:**
+
+```
+vol.py -f memory.dmp --profile=Win10x64_18362 pslist
+
+```
+
+This command lists all running processes in the memory dump using the `pslist` plugin.
+
+### Commonly Used Plugins
+
+1. **pslist** - Lists the active processes.
+    
+    ```
+    vol.py -f memory.dmp --profile=Win10x64_18362 pslist
+    
+    ```
+    
+2. **netscan** - Scans for network connections.
+    
+    ```
+    vol.py -f memory.dmp --profile=Win10x64_18362 netscan
+    
+    ```
+    
+3. **hivelist** - Lists registry hives.
+    
+    ```
+    vol.py -f memory.dmp --profile=Win10x64_18362 hivelist
+    
+    ```
+    
+4. **filescan** - Scans for file handles.
+    
+    ```
+    vol.py -f memory.dmp --profile=Win10x64_18362 filescan
+    
+    ```
+    
+
+### Custom Plugins
+
+Volatility allows for custom plugin creation to extend its capabilities. Here's a basic example of a custom plugin that lists loaded modules.
+
+**Custom Plugin Example:**
+
+```python
+from volatility3.framework.plugins.windows import modules
+from volatility3.framework import renderers, interfaces
+from volatility3.framework.configuration import requirements
+
+class CustomModules(modules.Modules):
+    @classmethod
+    def get_requirements(cls):
+        return [
+            requirements.TranslationLayerRequirement(name='primary',
+                                                     description='Memory layer for the kernel',
+                                                     architectures=["Intel32", "Intel64"]),
+            requirements.SymbolTableRequirement(name="nt_symbols", description="Windows kernel symbols"),
+        ]
+
+    def _generator(self):
+        for mod in self.list_modules(self.context, self.config['primary'], self.config['nt_symbols']):
+            yield (0, [hex(mod.DllBase), mod.FullDllName.get_string()])
+
+    def run(self):
+        return renderers.TreeGrid([("Base", str), ("Name", str)], self._generator())
+
+```
+
+To use this custom plugin, save it as `custom_modules.py` and run it with Volatility:
+
+```
+vol.py -f memory.dmp --profile=Win10x64_18362 custom_modules
+
+```
+
+### Step-by-Step Process
+
+1. **Acquire Memory Dump**: Use tools like DumpIt or lime to capture the system's memory.
+2. **Install Volatility**: Use pip to install Volatility.
+3. **Identify the Profile**: Determine the OS profile of the memory dump.
+4. **Run Plugins**: Use built-in plugins or custom plugins to analyze the memory dump.
+5. **Interpret Results**: Understand and interpret the output to gain insights.
+
+### Real-World Example
+
+Consider an incident where a system is suspected of being compromised. A memory dump is taken using DumpIt.
+
+```
+DumpIt.exe
+
+```
+
+Next, Volatility is used to list processes and identify any suspicious activity.
+
+```
+vol.py -f suspect_memory.dmp --profile=Win10x64_18362 pslist
+
+```
+
+The `pslist` output reveals an unknown process running with elevated privileges. Further analysis using `netscan` shows that this process has established connections to known malicious IP addresses.
+
+```
+vol.py -f suspect_memory.dmp --profile=Win10x64_18362 netscan
+
+```
+
+By using `hivelist` and `dumpregistry`, registry hives are examined for persistence mechanisms.
+
+```
+vol.py -f suspect_memory.dmp --profile=Win10x64_18362 hivelist
+vol.py -f suspect_memory.dmp --profile=Win10x64_18362 dumpregistry --dump-dir=./regdump
+
+```
+
+Finally, a custom plugin can be written to check for specific malware indicators that are unique to the organization's threat profile.
+
+This comprehensive approach allows for thorough incident response and malware analysis using Volatility.

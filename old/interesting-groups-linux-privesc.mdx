@@ -1,0 +1,146 @@
+# Interesting Groups - Linux Privesc
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Linux Privilege Escalation through Interesting Groups is a security concept that involves exploiting certain 'interesting' Linux groups to escalate privileges from a low privilege user to a high privilege user.
+> 
+
+### 🧐 Why ?
+
+> Understanding this concept is important as it provides insights into how system vulnerabilities can be exploited for privilege escalation, which is a common objective in many cyber attacks. It is critical for both ethical hackers, to identify and patch vulnerabilities, and for system administrators, to secure their systems.
+> 
+
+### ⛏️ How ?
+
+> To use this concept to your advantage, you should first understand what Linux groups are and how they can be exploited. Then, you should identify and join 'interesting' groups, use their special permissions to access sensitive information or functionalities, and finally escalate privileges to a higher level. Please note that this should only be done in a legal and ethical manner, such as during penetration testing.
+> 
+
+### ⏳ When ?
+
+> The practice of Linux Privilege Escalation through Interesting Groups has been in use since the inception of user groups in Unix-like operating systems, as it is based on inherent features of these systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Linux uses a group-based permission system to manage user access to files and directories. Each user belongs to a primary group by default and can also be part of multiple secondary groups. Permissions for each file or directory are defined for the owner, group, and others, with each entity having read, write, and execute permissions.
+
+### Types of Groups in Linux
+
+1. **Primary Group**:
+    - The default group associated with a user.
+    - Files created by the user are associated with this group.
+2. **Secondary Groups**:
+    - Additional groups a user can be a member of.
+    - Used for shared access to resources.
+
+### Permissions and Their Implications
+
+Each file and directory in Linux has three sets of permissions:
+
+- **User (Owner) Permissions**
+- **Group Permissions**
+- **Others Permissions**
+
+Permissions:
+
+- **Read (r)**: Allows viewing the contents of the file or directory.
+- **Write (w)**: Allows modifying the contents of the file or directory.
+- **Execute (x)**: Allows running the file as a program or accessing the directory.
+
+### Interesting Groups and Privilege Escalation
+
+Interesting groups are those that have elevated permissions or access to sensitive data or operations. By adding a low-privilege user to such a group, the user can gain elevated privileges, allowing them to perform actions or access data they would not normally have access to.
+
+### Practical Example: Privilege Escalation through the `admin` Group
+
+### Scenario
+
+Consider a user, `UserA`, who is part of the `users` group but not the `admin` group. The `admin` group has write permissions to a sensitive configuration file `/etc/config`.
+
+### Checking Group Memberships
+
+To check the group memberships of `UserA`:
+
+```bash
+groups UserA
+
+```
+
+Example output:
+
+```
+UserA : users
+
+```
+
+### Checking File Permissions
+
+To check the permissions of `/etc/config`:
+
+```bash
+ls -l /etc/config
+
+```
+
+Example output:
+
+```
+-rw-r----- 1 root admin 4096 Jan 1 12:34 /etc/config
+
+```
+
+- The file is owned by `root` and the group `admin`.
+- Only the owner and members of the `admin` group can read and write to the file.
+
+### Adding UserA to the Admin Group
+
+To add `UserA` to the `admin` group (requires root privileges):
+
+```bash
+sudo usermod -a -G admin UserA
+
+```
+
+### Verifying the Change
+
+After adding `UserA` to the `admin` group, verify the group memberships again:
+
+```bash
+groups UserA
+
+```
+
+Example output:
+
+```
+UserA : users admin
+
+```
+
+Now, `UserA` can modify `/etc/config`, effectively escalating their privileges.
+
+### Security Implications
+
+- **Privilege Escalation**: Adding a user to an interesting group can grant them elevated privileges, allowing unauthorized actions.
+- **Access Control**: Properly managing and auditing group memberships is crucial to maintaining system security.
+- **Sensitive Groups**: Groups like `admin`, `sudo`, `docker`, etc., should be closely monitored as they often have elevated permissions.
+
+### Best Practices for Managing Group Permissions
+
+1. **Least Privilege Principle**: Assign users the minimum permissions necessary for their roles.
+2. **Regular Audits**: Regularly review group memberships and file permissions to ensure they are correctly set.
+3. **Logging and Monitoring**: Enable logging and monitoring to detect unauthorized changes to group memberships and permissions.
+4. **User Education**: Educate users about the implications of group memberships and the importance of following security policies.
+
+### Conclusion
+
+Understanding and managing group-based permissions in Linux is crucial for maintaining system security. Privilege escalation through interesting groups demonstrates how improper group management can lead to security vulnerabilities. By following best practices and regularly auditing permissions, administrators can protect their systems from unauthorized access and potential security breaches.

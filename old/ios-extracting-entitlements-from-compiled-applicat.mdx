@@ -1,0 +1,65 @@
+# iOS Extracting Entitlements From Compiled Application
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> iOS Extracting Entitlements From Compiled Application is the process of obtaining entitlements, which are key-value pairs that grant executable files certain capabilities or permissions, from a compiled iOS application.
+> 
+
+### 🧐 Why ?
+
+> Extracting entitlements from a compiled application is significant in the field of cybersecurity as it can reveal a lot about an application's functionality and permissions. It can help in identifying potential security vulnerabilities, such as excessive permissions, that could be exploited by malicious actors. It is also important for developers to understand this process to ensure their applications are secure and function as intended.
+> 
+
+### ⛏️ How ?
+
+> To extract entitlements from a compiled iOS application, one needs to follow these steps: 1) Use a tool such as otool, jtool, or MachOView to disassemble the application's binary. 2) Look for a section named '__TEXT' and '__entitlements'. This section contains the entitlements in XML format. 3) Extract this section and parse the XML to obtain the entitlements. Note: This process requires a good understanding of iOS application architecture and binary formats.
+> 
+
+### ⏳ When ?
+
+> The practice of extracting entitlements from compiled applications became prevalent with the rise of mobile applications and the need for more robust security measures. It is especially relevant in today's context when cybersecurity threats are on the rise.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+In iOS, an entitlement is a right or privilege that an application requires to function optimally. They are essentially key-value pairs stored in an application's binary, set at the time of compiling the application. Entitlements are used to extend an app's permissions or capabilities beyond what is ordinarily available. For instance, they may grant permissions to access specific system resources, APIs, or data.
+
+To extract these entitlements from a compiled application, you would need to disassemble the application's binary. This disassembly process can be carried out using tools such as otool, jtool, or MachOView. During this process, you must look for a section named '__entitlements'. This section contains the entitlements in an XML format.
+
+Once you locate this section, you can extract and parse the XML to obtain the entitlements. This extraction process provides invaluable insights about an application's functionality and permissions. It can reveal potential security vulnerabilities, such as excessive permissions, which could be exploited by malicious actors. Therefore, understanding this process is crucial for developers to ensure their applications are secure and function as intended.
+
+It's worth noting that this process requires a comprehensive understanding of iOS application architecture and binary formats. Also, the practice of extracting entitlements from compiled applications has become more prevalent with the rise of mobile applications and an increased focus on robust security measures, especially in the current cybersecurity landscape where threats are ever-increasing.
+
+To illustrate the process of extracting entitlements from a compiled iOS application, let's consider a hypothetical app called 'MyApp'.
+
+Firstly, you need to have the compiled MyApp.ipa file. Unzip this file, and you will see a Payload directory containing MyApp.app.
+
+1. **Disassembling the binary**: Use the `otool` command-line tool that comes with Xcode. Navigate to the directory containing the MyApp.app file and use the following command to disassemble the binary:
+
+```bash
+otool -l MyApp.app/MyApp
+
+```
+
+This command lists the headers in the binary, including the entitlements section.
+
+1. **Locating the entitlements section**: Look for two sections named `__TEXT` and `__entitlements` in the output. These sections contain the entitlements in XML format.
+2. **Extracting the entitlements**: Use the `jtool` command to extract this section:
+
+```bash
+jtool -e __entitlements MyApp.app/MyApp
+
+```
+
+This command creates a file named `__entitlements.plist` containing the XML formatted entitlements.
+
+1. **Parsing the XML**: Open the `__entitlements.plist` file to view the entitlements. They will be in key-value pairs, indicating the permissions and capabilities the app has.
+
+Please note this is a simplified example and the real process can be more complex depending on app's configuration and security measures. Also, a deep understanding of iOS app architecture and binary formats is required to interpret the extracted data.

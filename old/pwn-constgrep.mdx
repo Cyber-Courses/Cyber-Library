@@ -1,0 +1,130 @@
+# Pwn constgrep
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Pwn constgrep is a tool that is used in binary files to identify constant strings. It is typically used in penetration testing and reverse engineering tasks.
+> 
+
+### 🧐 Why ?
+
+> Pwn constgrep is important because it allows security professionals to identify potential vulnerabilities in binary files. These vulnerabilities could potentially be exploited by malicious actors, so it is crucial that they are identified and addressed. Pwn constgrep is particularly useful because it provides an efficient and effective way to analyze binary files.
+> 
+
+### ⛏️ How ?
+
+> To use Pwn constgrep, you first need to install the tool on your system. Once installed, you can use the tool by passing the binary file you want to analyze as an argument. Pwn constgrep will then analyze the file and output any constant strings it finds. These strings can then be analyzed to identify potential vulnerabilities.
+> 
+
+### ⏳ When ?
+
+> Pwn constgrep has been in use since the early 2000s and is a common tool in the toolkit of many security professionals.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Detailed Technical Explanation of Pwn constgrep
+
+### Overview
+
+Pwn constgrep is a tool that analyzes binary code to identify constant strings embedded within the file. These strings are often hardcoded values used in the code, such as passwords, file paths, error messages, or configuration parameters. By identifying these strings, security professionals can gain insights into the inner workings of the binary file and identify potential vulnerabilities or sensitive information that should not be exposed.
+
+### Functionality of Pwn constgrep
+
+1. **Binary Analysis**:
+    - Pwn constgrep parses the binary file to locate sections of the code where strings are stored. This involves reading the binary data and interpreting it to extract human-readable strings.
+2. **String Extraction**:
+    - The tool searches for sequences of printable characters within the binary data. These sequences are likely to be strings used in the program.
+3. **String Identification**:
+    - Once potential strings are identified, Pwn constgrep lists them, allowing the user to review and analyze them. This helps in identifying hardcoded sensitive information like passwords, API keys, or configuration details.
+
+### Example Usage of Pwn constgrep
+
+Suppose you have a binary file named `example.bin` and you want to analyze it using Pwn constgrep to identify hardcoded strings.
+
+### Step-by-Step Process
+
+1. **Install Pwntools**:
+    - If you haven't already installed pwntools, you can do so using pip.
+    
+    ```bash
+    pip install pwntools
+    
+    ```
+    
+2. **Create a Simple Binary for Demonstration**:
+    - For demonstration purposes, let's create a simple C program with some hardcoded strings.
+    
+    ```c
+    #include <stdio.h>
+    #include <string.h>
+    
+    int main() {
+        char password[] = "secret123";
+        char errorMessage[] = "Error: Invalid input";
+        printf("Program started\\n");
+        return 0;
+    }
+    
+    ```
+    
+    - Save this code to a file named `example.c` and compile it.
+    
+    ```bash
+    gcc -o example.bin example.c
+    
+    ```
+    
+3. **Analyze the Binary with Pwn constgrep**:
+    - Create a Python script to use pwntools for extracting strings from the binary.
+    
+    ```python
+    from pwn import *
+    
+    # Read the binary file
+    binary_data = open('example.bin', 'rb').read()
+    
+    # Use pwntools to extract strings
+    strings = list(filter(lambda x: len(x) > 3, binary_data.decode('latin-1').split('\\x00')))
+    
+    # Print the identified strings
+    for s in strings:
+        print(s)
+    
+    ```
+    
+4. **Run the Script**:
+    - Run the Python script to extract and display the strings.
+    
+    ```bash
+    python constgrep_example.py
+    
+    ```
+    
+    - The output might look like this:
+    
+    ```
+    secret123
+    Error: Invalid input
+    Program started
+    
+    ```
+    
+    These are the hardcoded strings identified in the binary file.
+    
+
+### Conclusion
+
+Pwn constgrep is a valuable tool for binary analysis, allowing security professionals to uncover hardcoded strings within executable files. By identifying these strings, it's possible to gain insights into the program's behavior and potentially uncover sensitive information or vulnerabilities. This process is crucial for reverse engineering, security audits, and understanding how binaries operate.
+
+# 🖇️ Références
+
+---
+
+-

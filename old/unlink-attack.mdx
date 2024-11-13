@@ -1,0 +1,163 @@
+# Unlink Attack
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> An unlink attack is a type of cybersecurity attack where an attacker deletes or tampers with a user's files, typically through a series of malicious actions. The fundamental concepts underlying unlink attacks involve understanding file systems, permissions, and user actions. An understanding of the operating system's inner workings is also crucial as unlink attacks often exploit vulnerabilities in these systems.
+> 
+
+### 🧐 Why ?
+
+> Unlink attacks can cause significant harm. They can lead to loss of important data or compromise system integrity, allowing further attacks. Due to the potential damage they can cause, it is important to understand unlink attacks to effectively defend against them. Any system that stores or manages user data should consider unlink attacks as a potential threat.
+> 
+
+### ⛏️ How ?
+
+> To implement protection against unlink attacks, one should ensure appropriate file permissions are set, limiting the actions a malicious user can perform. Regularly updating and patching the operating system and installed software can help to reduce the number of vulnerabilities that an attacker could exploit. Monitoring systems for suspicious activities and having a robust backup system can also help to mitigate the impact of unlink attacks.
+> 
+
+### ⏳ When ?
+
+> Unlink attacks have been a potential risk since the inception of file systems and user operations. However, they became more prevalent with the increase in system complexity and the rise of distributed systems.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+At a technical level, unlink attacks exploit the 'unlink' system call in Unix-like operating systems. This system call removes the link to a file from a directory, making the file inaccessible. If an attacker has permission to execute the unlink system call on a user's file, they can cause data loss. More advanced forms of unlink attacks can also involve the exploitation of race conditions, where an attacker manipulates the timing of operations to achieve their goals. This can be particularly difficult to defend against, as it requires a deep understanding of the system's inner workings.
+
+### Detailed Explanation of Unlink Attacks
+
+### 1. File Systems and Permissions
+
+Unix-like operating systems such as Linux use file systems to manage data storage. Each file is associated with certain permissions that define what actions can be taken by users. The permissions include:
+
+- **Read (r)**: Allows viewing the content of the file.
+- **Write (w)**: Allows modifying the content of the file.
+- **Execute (x)**: Allows running the file as a program.
+
+Permissions can be set for the file owner, group, and others. The `chmod` command is used to modify these permissions.
+
+Example:
+
+```bash
+chmod 755 example.txt
+# This sets read, write, and execute permissions for the owner, and read and execute permissions for group and others.
+
+```
+
+### 2. The 'unlink' System Call
+
+The `unlink` system call removes a file's directory entry, effectively making the file inaccessible. If the file is open, it remains accessible until all file descriptors are closed.
+
+Example:
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    if (unlink("example.txt") == 0) {
+        printf("File unlinked successfully\\n");
+    } else {
+        perror("Unlink failed");
+    }
+    return 0;
+}
+
+```
+
+This C program attempts to unlink `example.txt`. If successful, the file is no longer accessible via the file system.
+
+### 3. Exploiting Unlink Attacks
+
+An attacker who gains sufficient permissions can exploit the `unlink` system call to delete crucial files. This can involve:
+
+1. **Gaining Permissions**: The attacker must first gain the necessary permissions, possibly through phishing, exploiting software vulnerabilities, or escalating privileges.
+2. **Executing Unlink**: Once permissions are obtained, the attacker can execute the `unlink` command or use a script to remove files.
+
+Example:
+
+```bash
+rm /home/user/important_file.txt
+# If the attacker has write permissions in /home/user, this command removes the file.
+
+```
+
+### 4. Race Conditions
+
+Race conditions occur when the system's behavior depends on the sequence or timing of uncontrollable events. An attacker can exploit this by manipulating the timing of operations to perform unauthorized actions.
+
+Example:
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+#include <pthread.h>
+
+void* delete_file(void* arg) {
+    sleep(1); // Simulate delay
+    unlink("temp_file.txt");
+    return NULL;
+}
+
+int main() {
+    pthread_t tid;
+    pthread_create(&tid, NULL, delete_file, NULL);
+    // Create the file
+    FILE* file = fopen("temp_file.txt", "w");
+    if (file) {
+        fprintf(file, "Important data\\n");
+        fclose(file);
+    }
+    pthread_join(tid, NULL);
+    return 0;
+}
+
+```
+
+In this example, a file is created and then unlinked almost simultaneously, demonstrating how timing can be exploited.
+
+### Defense Mechanisms
+
+1. **Setting Appropriate Permissions**:
+Ensure that only authorized users have permissions to modify or delete files.
+    
+    ```bash
+    chmod 700 sensitive_file.txt
+    # Only the owner has read, write, and execute permissions
+    
+    ```
+    
+2. **Regular Updates and Patches**:
+Keep the operating system and software up-to-date to reduce vulnerabilities.
+3. **Monitoring and Logging**:
+Use monitoring tools to detect suspicious activities.
+    
+    ```bash
+    auditctl -w /home/user/important_file.txt -p wa -k file_watch
+    ausearch -k file_watch
+    
+    ```
+    
+4. **Backup Systems**:
+Regularly back up important files to mitigate the impact of potential attacks.
+    
+    ```bash
+    rsync -av /home/user/important_data /backup/important_data
+    
+    ```
+    
+
+### Real-World Example
+
+One real-world example of an unlink attack was the attack on a Unix system where an attacker exploited a vulnerability in a setuid program. The attacker gained root privileges and used the `unlink` system call to delete critical system files, causing the system to become unstable.
+
+### Conclusion
+
+Understanding unlink attacks requires a deep knowledge of file systems, permissions, and operating system internals. By setting appropriate permissions, keeping systems updated, monitoring for suspicious activities, and maintaining robust backup systems, the impact of unlink attacks can be mitigated.

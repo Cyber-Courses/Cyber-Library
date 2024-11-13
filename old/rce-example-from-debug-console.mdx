@@ -1,0 +1,141 @@
+# RCE example from debug console
+
+
+# 👉 Overview
+
+---
+
+### 👀 What ?
+
+> Remote Code Execution (RCE) is a critical vulnerability that allows an attacker to execute arbitrary commands on a victim's system. The exploit occurs when an attacker can access the debug console of a system, often due to misconfigurations or lack of proper security measures.
+> 
+
+### 🧐 Why ?
+
+> Understanding RCE is crucial as it is one of the most serious vulnerabilities that can exist in a system. It gives the attacker complete control over the compromised system, allowing them to steal sensitive data, manipulate system settings, or even use the system as a launchpad for further attacks. It is therefore paramount to understand the fundamentals of RCE to be able to mitigate this threat effectively.
+> 
+
+### ⛏️ How ?
+
+> To leverage an RCE vulnerability, an attacker would first need to discover it. This can be done through techniques like fuzzing or penetration testing. Once the vulnerability is found, the attacker would then craft a special payload that, when processed by the vulnerable system, results in the execution of the attacker's chosen commands. It is important to note that exploiting RCE requires a high level of expertise in cyber security and should only be performed in a controlled, ethical manner.
+> 
+
+### ⏳ When ?
+
+> The exploitation of RCE vulnerabilities has been a common practice among cybercriminals for years. However, it gained more attention in the cybersecurity community after high-profile breaches where RCE was used as the primary attack vector.
+> 
+
+# ⚙️ Technical Explanations
+
+---
+
+### Overview
+
+Remote Code Execution (RCE) vulnerabilities occur when an application fails to properly validate inputs before processing them. This can lead to scenarios where an attacker can execute arbitrary code on the server, gaining unauthorized access or control over the system.
+
+### Key Scenarios Leading to RCE
+
+1. **Evaluating User Input as Code**:
+    - Applications with scripting capabilities might run user-supplied scripts. If these inputs aren't sanitized, attackers can inject and execute malicious code.
+2. **Passing User Input to a System Shell**:
+    - Applications that use user input to build system commands can be vulnerable if they don't validate the input properly. Attackers can manipulate the input to execute arbitrary commands.
+3. **Debug Console Exposure**:
+    - Debug consoles often allow execution of arbitrary commands and have high-level privileges. If exposed in an untrusted environment, attackers can use them to run malicious commands.
+
+### Example and Mitigation
+
+Let's consider a practical example in Python where user input is used to build a command.
+
+### Vulnerable Code
+
+```python
+import os
+user_input = input("Enter a filename: ")
+os.system("cat " + user_input)
+
+```
+
+- **Issue**: The program takes user input and concatenates it directly into a system command (`cat`), which is then executed by the system shell.
+- **Exploit**: An attacker can input `; rm -rf /`, which results in the execution of the command `cat ; rm -rf /`. This deletes the entire file system.
+
+### Secure Code
+
+```python
+import os
+import shlex
+user_input = input("Enter a filename: ")
+safe_input = shlex.quote(user_input)
+os.system("cat " + safe_input)
+
+```
+
+- **Mitigation**: Using `shlex.quote()` escapes the user input, ensuring that it is treated as a single safe argument, preventing command injection.
+
+### Detailed Mitigation Strategies
+
+1. **Input Validation and Sanitization**:
+    - Always validate and sanitize user inputs. Ensure inputs conform to expected formats and constraints.
+    - Use libraries and frameworks that provide built-in functions for escaping and sanitizing inputs.
+2. **Least Privilege Principle**:
+    - Run applications with the minimum necessary privileges. Avoid running applications with root or administrative privileges unless absolutely necessary.
+3. **Restrict Debug Console Access**:
+    - Restrict access to debug consoles using strong authentication measures.
+    - Ensure that debug consoles are not exposed in untrusted environments.
+    - Log and monitor activities in the debug console to detect any suspicious behavior.
+4. **Use Safe Functions and Libraries**:
+    - Prefer higher-level functions and libraries that provide safer abstractions over lower-level system calls.
+    - Avoid using functions that execute shell commands directly with user inputs.
+5. **Regular Security Audits and Updates**:
+    - Regularly audit code for security vulnerabilities.
+    - Keep software and libraries up-to-date with the latest security patches.
+
+### Example of Secure Coding Practices
+
+Here is another example demonstrating secure handling of user input in a web application context using Python and Flask.
+
+### Vulnerable Web Application Code
+
+```python
+from flask import Flask, request
+import subprocess
+
+app = Flask(__name__)
+
+@app.route('/run', methods=['POST'])
+def run_command():
+    command = request.form['command']
+    subprocess.run(command, shell=True)
+    return "Command executed"
+
+if __name__ == '__main__':
+    app.run()
+
+```
+
+- **Issue**: The application takes a command from user input and executes it using `subprocess.run()` with `shell=True`, making it vulnerable to command injection.
+
+### Secure Web Application Code
+
+```python
+from flask import Flask, request
+import subprocess
+
+app = Flask(__name__)
+
+@app.route('/run', methods=['POST'])
+def run_command():
+    command = request.form['command']
+    safe_command = shlex.split(command)  # Split the command safely
+    subprocess.run(safe_command)  # Run without shell=True
+    return "Command executed"
+
+if __name__ == '__main__':
+    app.run()
+
+```
+
+- **Mitigation**: Using `shlex.split()` to split the command into a list of arguments and running it without `shell=True` mitigates the risk of command injection.
+
+### Conclusion
+
+RCE vulnerabilities pose significant risks, allowing attackers to execute arbitrary code on target systems. Understanding the common scenarios and implementing robust input validation, privilege management, and secure coding practices are essential for protecting applications against these vulnerabilities. Regular audits, updates, and proper access control further enhance security and mitigate the potential impact of RCE attacks.
