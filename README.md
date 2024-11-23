@@ -6,14 +6,12 @@ Welcome to the **Cyber Library**, a community-driven repository that aims to bui
 
 The **Cyber Library** is organized into various categories covering different areas of cybersecurity, including:
 
-- **Governance**: Compliance, Risk Management, and Audits
-- **Infrastructure**: Network Security, Firewalls, Endpoint Protection, and Critical Infrastructure
-- **Application Security**: Web, Mobile, API, Cloud-Native Apps, Microservices, and Secure Coding
-- **Identity Management**: IAM, Zero Trust, Privileged Access Management (PAM)
-- **Offensive Security**: Pentesting, Social Engineering, Red Teaming, and Exploitation Techniques
-- **Defensive Security**: Incident Response, Threat Hunting, SIEM, EDR, and Blue Team Operations
-- **Cloud Security**: AWS, Azure, GCP, Serverless, Containers, and Cloud Monitoring
-- **Cryptography**: Encryption, Hashing, PKI, Quantum Cryptography, and Cryptographic Attacks
+- **Career**: Guidance for building and advancing a career in cybersecurity, including skills development, certifications, and industry insights.
+- **Concepts**: Core cybersecurity concepts such as risk management, threat modeling, encryption, and security fundamentals.
+- **Defensive**: Topics related to defending systems and networks, such as incident response, threat hunting, SIEM, EDR, and blue team operations.
+- **Governance**: Covers compliance, regulatory frameworks, audits, and risk management essential for cybersecurity governance.
+- **Offensive**: Offensive security topics including penetration testing, social engineering, red teaming, and exploitation techniques.
+- **Technology**: Covers tools, platforms, and technologies like cloud security, network infrastructure, endpoint security, and cryptography.
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
 
@@ -23,6 +21,28 @@ The goal of **Cyber Library** is to:
 - Provide a structured, up-to-date repository of cybersecurity knowledge.
 - Create a reference for professionals, learners, and enthusiasts in the cybersecurity field.
 - Encourage continuous learning and sharing of expertise across the global security community.
+
+## 🌐 Using Cyber Library Offline
+
+You can use Cyber Library offline by cloning the repository to your local machine:
+
+```bash
+git clone https://github.com/Cyber-Courses/Cyber-Library.git
+```
+
+## 📊 Content Development Dashboard
+
+To provide transparency and keep our community informed of ongoing work, we’ve set up a **[Content Development Dashboard](https://github.com/orgs/Cyber-Courses/projects/1)**. This project dashboard tracks the status of all content currently being developed, reviewed, or planned for future release. Here, you can see what’s in progress, what’s coming soon, and where you can contribute.
+
+### Project Workflow
+
+- **Backlog**: New content ideas or suggestions that are under consideration.
+- **To Do**: Approved content topics that are ready to be worked on.
+- **In Progress**: Content currently being developed by contributors.
+- **Review**: Drafted content that is undergoing review for quality and accuracy.
+- **Published**: Completed content that has been published to the Cyber Library.
+
+You can view the dashboard and see the current content roadmap here: [Cyber Library Project Dashboard](https://github.com/orgs/Cyber-Courses/projects/1)
 
 ## 📄 How to Contribute
 
