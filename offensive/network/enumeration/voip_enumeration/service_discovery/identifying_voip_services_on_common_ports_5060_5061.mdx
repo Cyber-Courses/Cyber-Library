@@ -1,0 +1,81 @@
+---
+title: Identifying VoIP Services on Ports 5060 and 5061
+description: Learn how to identify VoIP services on common ports (5060, 5061) using
+  scanning, fingerprinting, and automation techniques.
+keywords:
+- VoIP services
+- SIP
+- port scanning
+- service fingerprinting
+- network enumeration
+- VoIP security
+- '5060'
+- '5061'
+- SIPVicious
+- Wireshark
+---
+
+# Identifying VoIP Services on Common Ports (5060, 5061)
+
+Voice over IP (VoIP) services commonly communicate over ports 5060 and 5061 using Session Initiation Protocol (SIP). Identifying these services is crucial in offensive cybersecurity operations, as it allows penetration testers to map attack surfaces and assess vulnerabilities related to VoIP implementations. This article delves into the various techniques used for identifying VoIP services listening on these ports, along with best practices for successful service discovery.
+
+## Port Scanning Techniques for VoIP
+
+Port scanning remains a fundamental step in identifying VoIP services. Tools like Nmap enable testers to scan network ranges specifically targeting ports 5060 and 5061. For stealth scanning, options such as `-sS` (SYN scan) can be employed to reduce detection risk, while `-sV` helps attempt version detection:
+
+```Shell
+nmap -sS -p 5060,5061 --script=sip-methods,sip-brute <target-ip>
+```
+
+Aggressive scanning should employ `-A` to combine version detection, OS detection, and other diagnostics, useful when stealth is not a priority.
+
+Commercial scanners like Nessus offer enhanced reporting and detection capabilities, providing insights into not only open ports but also potential configuration weaknesses in detected services.
+
+## Fingerprinting VoIP Services
+
+Fingerprinting involves the precise identification of VoIP service versions and implementations on open ports. This is typically achieved through banner grabbing and specialized tools like SIPVicious, which utilizes the following command to enumerate SIP users:
+
+```Shell
+svmap -p 5060 <target-ip>
+```
+
+SIPsak, an open-source tool, can perform more focused enumeration by sending customized SIP requests to a server, interpreting the responses to understand which SIP implementation is in use. Cross-referencing these details with vulnerability databases aids in identifying known issues associated with specific service versions.
+
+## Enumerating Through Passive Analysis
+
+Passive analysis focuses on capturing and analyzing actual network traffic to understand VoIP service implementations. Utilizing tools like Wireshark, analysts can filter SIP traffic and inspect call setup packets (e.g., INVITE and OK messages). This approach provides insights into server responses and underlying protocol behavior without actively interacting with the server:
+
+```Shell
+display filter: "sip"
+```
+
+Identifying traffic patterns helps infer the presence and behavior of VoIP services, even when direct scanning results are inconclusive.
+
+## Exploiting Misconfigured VoIP Services
+
+Once VoIP services have been identified, examining configurations for exploitable weaknesses becomes critical. Utilizing previously gathered information about software versions and configurations, attackers can exploit defaults or weak settings. Scripts designed to automate the detection of configuration flaws can be deployed, facilitating rapid assessment and potential exploitation.
+
+## Service Banner Manipulation and Evasion Techniques
+
+Manipulating requests sent to VoIP services can provide further insights, especially when attempting to evade network defenses. Tools may craft non-standard SIP requests to elicit responses indicating the presence and configuration details of a service while avoiding detection thresholds configured within IDS systems.
+
+Understanding server responses to these modified headers can often confirm the presence of VoIP services not detectable by straightforward scanning.
+
+## Automation of VoIP Service Identification
+
+Automating VoIP discovery efforts improves efficiency and scalability in penetration tests. Combining Python scripting with libraries like Scapy allows for custom scanning tailored to specific engagement needs. Continuous integration systems can incorporate automated service discovery, ensuring real-time assessment and re-evaluation of VoIP landscapes:
+
+```Python
+from scapy.all import *
+
+pkt = IP(dst="target-ip")/UDP(dport=5060)/SIP()
+send(pkt)
+```
+
+Using containers or virtual machines to deploy these scripts allows for rapid scaling and reach across extensive target networks.
+
+## Avoiding Detection in VoIP Service Discovery
+
+Minimizing detection risk while scanning is crucial to maintaining an element of surprise. This involves using techniques that reduce scan footprints, such as spacing out requests, randomizing scan patterns, or leveraging spoofing tactics. Understanding IDS signature patterns and behaviors enables evasion, allowing service enumeration to continue unimpeded while staying below detection thresholds.
+
+Blending these reconnaissance methods into wider penetration test activities conceals scans within typical network traffic, further reducing the likelihood of triggering defensive mechanisms.
