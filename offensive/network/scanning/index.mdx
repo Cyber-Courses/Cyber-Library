@@ -1,0 +1,112 @@
+---
+title: Comprehensive Guide to Scanning in Cybersecurity
+description: Explore techniques, tools, and methods for effective network scanning
+  in offensive cybersecurity operations.
+keywords:
+- port scanning
+- network mapping
+- OS detection
+- Nmap
+- security reconnaissance
+- penetration testing
+- service enumeration
+- scanning techniques
+---
+
+# Scanning in Offensive Cybersecurity
+
+## Identifying Open Ports
+
+Port scanning is a critical aspect of network reconnaissance within offensive cybersecurity operations. It allows an attacker to identify services running on a target system, which can lead to further exploitation.
+
+**Port Scanning Methodologies**
+
+- **TCP Connect vs. SYN Scan Techniques**: TCP Connect scans involve establishing a full TCP connection with the target system to determine which ports are open. They are reliable but more detectable. SYN scanning, also known as half-open scanning, sends SYN packets and waits for SYN-ACK responses without completing the handshake. This technique is stealthier and commonly used due to its lower likelihood of detection by intrusion detection systems (IDS).
+
+- **UDP Scanning Strategies**: Unlike TCP, UDP is connectionless, making it challenging to scan. Attackers may use tools that send UDP packets to ports and analyze responses or lack thereof to infer open ports. False positives are common with UDP scanning.
+
+- **Stealth Scanning Approaches**: Techniques such as XMAS, FIN, and NULL scans manipulate TCP flags to probe target systems. These techniques are designed to bypass straightforward IDS/Firewall rule sets by sending uncommon packet configurations.
+
+**Tools for Port Scanning**
+
+- **Advanced Configuration of Nmap**: Nmap is the most widely used tool for port scanning. It supports various scan types, including SYN, TCP Connect, UDP, and more. Operators can use command-line options to customize scans:
+  ```shell
+  nmap -sS -p 1-65535 [target IP]
+  ```
+  This command performs a SYN scan on all TCP ports.
+
+- **Masscan and Zmap for High-speed Scanning**: These tools are designed for exceptionally fast scanning of large networks. Masscan can scan the entire Internet in under six minutes.
+  ```shell
+  masscan -p80,443 [target IP range]
+  ```
+  This scans the specified ports across a range of IP addresses very quickly.
+
+- **Scripting with Nmap's NSE**: Nmap Scripting Engine (NSE) allows custom scripts for more detailed reconnaissance. Scripts can detect specific vulnerabilities or gather certain types of information.
+
+**Evading Detection during Port Scanning**
+
+- **Scan Timing and Randomization**: Varying scan speed and order can help avoid detection by time-based IDS signatures. Tools provide options for scan timing.
+
+- **Decoy and Fragmentation Techniques**: Using decoys, an attacker can simulate scans from multiple IP addresses, masking the true origin. Packet fragmentation can break scans into smaller, irregular packets to bypass systems.
+
+- **Banner Grabbing Tactics and Techniques**: Open ports often respond with data that includes software versioning within banners. Tools can automate this process, providing valuable service information without prior login.
+
+## OS and Version Detection
+
+Assessing the operating system and versions of services running on a target is crucial for identifying vulnerabilities.
+
+**Fingerprinting Operating Systems**
+
+- **Active and Passive OS Fingerprinting**: Active scanning involves sending packets to elicit responses that reveal OS characteristics, while passive fingerprinting analyzes existing traffic. Tools like Nmap can deduce this using sophisticated techniques.
+
+- **Using Nmap and Xprobe2**: These tools employ various TCP/IP stack fingerprinting methods. For example:
+  ```shell
+  nmap -O [target IP]
+  ```
+  This option detects the operating system of the target.
+
+- **Identifying OS From Banner Information**: Exploiting service banners that divulge OS or software versions assists in pinpointing targets for exploitation.
+
+**Service Version Enumeration**
+
+- **Leveraging Nmap NSE**: NSE scripts extend Nmap’s functionality to fingerprint specific services accurately. Scripts like `http-enum` can identify running services:
+  ```shell
+  nmap --script http-enum [target IP]
+  ```
+
+- **Techniques for Detecting Uncommon Services**: Services that do not return standard banners require alternative methods, such as analyzing packet behavior or using specific NSE scripts.
+
+**Network Device Detection**
+
+- **Identifying Routers, Switches, and Firewalls**: Fingerprinting network devices helps in mapping the network and identifying potential pivot points.
+
+- **Recognizing Hosting Environments and Virtual Machines**: Techniques for recognizing distinctions between physical and virtual environments can help assess a target’s infrastructure.
+
+## Network Mapping
+
+Mapping out a target's network is an invaluable visualization component for offensive operations.
+
+**Topology Discovery Techniques**
+
+- **Using Nmap and Traceroute**: These tools help understand routing paths and network structures. Traceroute provides insights into the hops a packet takes, potentially identifying network segmentation or anomalies.
+
+- **Leveraging ARP Scans**: On local networks, ARP scanning discovers IP-MAC associations, crucial for identifying connected devices on a subnet.
+  ```shell
+  nmap -sn -PR [local IP range]
+  ```
+
+- **Utilizing SNMP**: SNMP can be queried for significant information about network configuration, especially if default or weak community strings are employed.
+
+**IP Range and Subnet Discovery**
+
+- **CIDR Notation and Subnetting**: Understanding subnets helps in dividing scans effectively, focusing on likely target IPs, and identifying reachable parts of a network.
+
+- **Identifying Public and Private Address Spaces**: Scanning differentiates between internal resources and those exposed to the Internet, guiding further actions in external vs. internal threat assessments.
+
+**Identifying Security Devices**
+
+- **Recognizing IDS/IPS and Firewalls**: Fingerprint techniques can discover these devices’ presence, while avoidance techniques modify scanning behaviors to go unobserved.
+
+- **Locating Proxy Servers and Load Balancers**: Discovering these devices helps predict traffic flows, essential for planning exploitation routes or lateral moves within a network.
+
+By delving into these subtopics with a structured scanning approach, operators can uncover critical information about target networks which serves as a foundation for subsequent offensive operations.
