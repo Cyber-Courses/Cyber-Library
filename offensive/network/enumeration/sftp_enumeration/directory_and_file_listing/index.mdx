@@ -1,0 +1,102 @@
+---
+title: SFTP Directory and File Listing Techniques Explained
+description: Learn advanced techniques for enumerating directories and analyzing permissions
+  in SFTP for enhanced cybersecurity strategy.
+keywords:
+- SFTP enumeration
+- directory listing
+- file permissions
+- automated scanning
+- cybersecurity techniques
+- SFTP security
+- access control
+- recursive directory walking
+- permission analysis
+---
+
+# Directory and File Listing
+
+## Enumerating Accessible Directories
+
+When approaching SFTP enumeration, the initial step typically involves identifying accessible directories. Using secure file transfer protocol (SFTP) as the core for this exploration, you will need to establish a connection to the target server. This is achieved through SFTP clients that can be utilized in either a GUI format or via the command line. Our focus will be on command-line tools due to their scriptability and flexibility in offensive operations.
+
+### Establishing SFTP Connections
+
+Begin the enumeration process by establishing a connection to the SFTP server. This involves using an SFTP client like `sftp` or `ssh` in command-line environments. For example, use:
+
+```bash
+sftp username@target_server.com
+```
+
+This command initiates a secure file transfer session by connecting to the target using your designated username. Ensure that key-based authentication or password authentication is appropriately configured to allow this connection. The key objective here is to ensure an uninterrupted and secure connection that supports following enumeration tasks.
+
+### Automated Directory Listing Techniques
+
+After successful connection establishment, the next critical task is automating directory listing techniques to gather information systematically. The `lftp` tool or custom scripts can be particularly effective. Automated directory scanning saves time and provides comprehensive insights across vast directory structures.
+
+Using `lftp` for automated directory listing, you can execute:
+
+```bash
+lftp sftp://username:password@target_server.com
+lftp> find . -type d
+```
+
+This command recursively traverses directories, outputting all available directories. `lftp` supports robust scripting capabilities, allowing offensive operators to automate deep enumeration processes effectively.
+
+### Recursive Directory Walking
+
+For uncovering more nested directories and files, recursive directory walking scripts are indispensable. Writing scripts in Python or Bash enables a methodical ascent through directory structures, essential for attackers aiming to fully comprehend the available file system.
+
+A basic bash script for walking directories recursively might look like this:
+
+```bash
+#!/bin/bash
+sftp username@target_server.com <<< $'
+lcd /local/directory
+cd /remote/directory
+ls -R'
+```
+
+This script systematically lists directories and subdirectories, providing a comprehensive directory architecture. The recursive detail aids in discovering potential areas of interest that might not be visible on a superficial scan.
+
+## Analyzing Permissions on SFTP Shares
+
+After establishing a full directory map, the logical subsequent step is to analyze permissions on SFTP shares. This involves understanding how file permissions can affect access and potential exploitation.
+
+### Understanding SFTP Permission Schemes
+
+File permissions in SFTP are inherited from the underlying file system, meaning your analysis must begin with understanding permission attributes such as owner, group, and others. SFTP uses standard UNIX permission schemes, which control read, write, and execute permissions.
+
+Use the `ls -l` command within your SFTP session to retrieve permissions:
+
+```bash
+sftp> ls -l
+-rwxr-xr--   1 user group size month day time filename
+```
+
+Here, decoding permissions, owner, group, and changing times provide insights into the access level of files and facilitate strategic enumeration and exploitation planning.
+
+### Identifying Weak Permission Configurations
+
+Assessing weak permissions involves identifying files and directories with overly permissive settings. Such configurations can inadvertently allow a broad range of users to read, write, or execute files.
+
+Look for permissions like `777` or `775` that denote public readability and/or writability, which could be exploited to modify or access sensitive data:
+
+```bash
+sftp> ls -la
+drwxrwxrwx   2 user group size month day time directory_name
+```
+
+File permissions that allow broad access should be flagged as potential weaknesses that can be leveraged for lateral movement or data exfiltration.
+
+### Advanced Permission Manipulation
+
+In offensive operations, manipulation of file permissions can be a powerful technique. Altering permissions might involve escalating privileges or changing ownership after gaining sufficient access to enable further exploitation.
+
+Use commands such as `chmod` and `chown` in your shell, once access is gained through SFTP, to modify file or directory permissions and ownership as needed for strategic benefit:
+
+```bash
+sftp> !chmod 777 /remote/file_or_directory
+```
+
+By employing these tools and techniques effectively, offensive operators can reinforce their access and control over the SFTP server, positioning themselves advantageously for subsequent exploit and lateral movement activities.
