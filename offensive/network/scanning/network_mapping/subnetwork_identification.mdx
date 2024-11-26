@@ -1,0 +1,116 @@
+---
+title: Subnetwork Identification Techniques for Network Mapping
+description: Explore effective techniques for identifying subnetworks, including scanning,
+  monitoring, and service probing methods.
+keywords:
+- subnetwork identification
+- network mapping
+- active scanning
+- passive monitoring
+- traceroute techniques
+- DNS enumeration
+- SNMP probing
+- ARP scanning
+- DHCP snooping
+- BGP hijacking
+---
+
+---
+
+### Subnetwork Identification
+
+Subnetwork Identification focuses on identifying smaller networks within a larger network infrastructure. Offensive operators leverage various methods, both active and passive, to discover and map these subnetworks. This process is critical for understanding the network topology and preparing for further offensive operations. 
+
+#### Active Subnet Scanning Techniques
+
+**Ping Sweeping**
+
+Ping sweeping is a technique that employs ICMP (Internet Control Message Protocol) Echo requests to identify active hosts within a subnet. This method involves sending ICMP packets to a range of IP addresses and waiting for replies. Live hosts respond with an ICMP Echo Reply, allowing operators to map active devices in the subnet.
+
+To bypass network filters and firewalls, attackers might modify packet attributes or use fragmented ICMP packets. Tools like `fping` and `Nmap` are commonly used for this technique. An example command using Nmap for ping sweeping is:
+
+```bash
+nmap -sn 192.168.1.0/24
+```
+
+**ARP Scanning**
+
+ARP (Address Resolution Protocol) scanning is used to map out subnet arrays at the Data Link Layer. This technique involves sending ARP requests and analyzing the replies to identify IP-to-MAC address mappings, allowing operators to map out devices within a subnet.
+
+`arp-scan` is a tool frequently used for ARP scanning, providing a quick and effective method of identifying devices. An example arp-scan command is:
+
+```bash
+arp-scan --interface=eth0 192.168.1.0/24
+```
+
+#### Passive Monitoring for Subnetwork Identification
+
+**Network Traffic Analysis**
+
+Passive monitoring involves capturing traffic on a network without directly interacting with the network components. By analyzing packet data, an attacker can infer the structure and active devices within a subnetwork. Tools like Wireshark enable in-depth analysis of captured packets to identify subnet properties and host interactions.
+
+Operators use packet filtering to focus on specific network protocols or devices of interest, allowing for detailed insight into the subnet's components.
+
+**DHCP Snooping**
+
+DHCP snooping capitalizes on observing DHCP traffic to identify networked devices and their associated subnets. By accessing DHCP lease logs or capturing DHCP handshake packets, attackers can establish mappings between IP addresses and devices within the subnet.
+
+This method can be performed using packet capturing tools like tcpdump or Wireshark to capture DHCP Discovery and Offer packets, revealing details about available subnets.
+
+#### Route Analysis
+
+**Traceroute and its Variants**
+
+Traceroute tools are used to discover network paths and intermediate devices between a source and target. By sending packets with incrementally increased TTL (Time-To-Live) values, attackers can map the route packets take through a network, identifying subnetworks and routers along the path.
+
+Advanced techniques involve using different protocols (UDP, TCP, ICMP) to evade detection or logging by firewalls and other security appliances. A basic traceroute command is:
+
+```bash
+traceroute 192.168.1.1
+```
+
+**BGP Hijacking**
+
+BGP (Border Gateway Protocol) Hijacking involves manipulating BGP announcements to redirect internet traffic. By altering routing tables, operators can potentially uncover internal subnets and gain insights into an organization's network.
+
+This approach is complex and requires ethical and controlled testing environments, as improper handling could lead to significant internet disruptions. Tools like ExaBGP facilitate controlled BGP experiments by providing flexibility in route announcements.
+
+#### DNS-based Subnetwork Enumeration
+
+**Reverse DNS Lookups**
+
+Reverse DNS lookups involve querying the DNS PTR (Pointer) records to map IP addresses to domain names. This technique can reveal hostnames within a subnet and is useful in mapping network infrastructure.
+
+Operators can utilize scripts to automate bulk reverse lookups, allowing for efficient enumeration of large IP ranges.
+
+**Zone Transfers**
+
+Zone transfers exploit misconfigured DNS servers to replicate an entire DNS zone. By performing this transfer, attackers can access all DNS records for a domain, providing insight into associated subnetwork configurations.
+
+Conducting zone transfers requires careful handling of DNS query types and extracting data efficiently. `dig` is a commonly used tool for initiating DNS zone transfers:
+
+```bash
+dig axfr @dns-server example.com
+```
+
+#### Infrastructure Service Probing
+
+**Service Discovery via SNMP**
+
+SNMP (Simple Network Management Protocol) is often used for managing and monitoring network devices. By querying SNMP, attackers can gather details about network topology and interconnections, revealing subnets. 
+
+Operators often probe for SNMP community strings, typically using tools like `snmpwalk` to enumerate SNMP-enabled devices.
+
+```bash
+snmpwalk -v 2c -c public 192.168.1.1
+```
+
+**Utilizing LDAP Queries**
+
+LDAP (Lightweight Directory Access Protocol) allows querying directory structures. Through LDAP queries, attackers can extract network topology information, including subnetwork configurations.
+
+Crafting precise LDAP queries is essential for extracting meaningful data, often requiring knowledge of the LDAP schema in use within the target environment.
+
+---
+
+This detailed breakdown of subnetwork identification methods equips offensive cybersecurity practitioners with the insights needed to effectively map and understand network topologies within larger infrastructures.
