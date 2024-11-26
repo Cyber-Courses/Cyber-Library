@@ -1,0 +1,115 @@
+---
+title: 'VoIP Enumeration: Techniques for Network Discovery'
+description: Explore VoIP Enumeration techniques for service discovery, user enumeration,
+  and infrastructure mapping to enhance network security analysis.
+keywords:
+- VoIP Enumeration
+- SIP Protocol Analysis
+- User Enumeration
+- Service Discovery
+- Network Mapping
+- VoIP Security
+- H.323 Protocol
+- RTP Stream Detection
+- Media Gateway Analysis
+- Credential Brute Force
+---
+
+# VoIP Enumeration
+
+## Service Discovery
+
+### SIP Protocol Analysis
+
+SIP (Session Initiation Protocol) is a fundamental protocol in VoIP, used to initiate, maintain, and terminate calls. To begin with SIP protocol analysis, the first step is to identify open ports commonly used by SIP services, such as TCP/UDP port 5060 (for unencrypted signaling) and 5061 (for TLS-encrypted signaling). Tools like `nmap` can be utilized to perform a quick scan for these ports using a command such as:
+
+```bash
+nmap -p 5060,5061 <target-ip>
+```
+
+Once you have identified open SIP ports, you can leverage tools like `SIPvicious` for discovering SIP endpoints. The `svmap` component of SIPvicious helps in scanning a range of IPs and ports to determine active SIP devices:
+
+```bash
+svmap -p 5060 <target-ip-range>
+```
+
+Analyze the SIP header information obtained from these scans to gather details such as vendor specifics, software versions, and device types, which could be beneficial for enumeration and exploitation.
+
+### H.323 Protocol Identification
+
+H.323 is another protocol suite used for communication and conferencing over packet-based networks. Identifying H.323 services involves detecting active endpoints typically operating on port 1720. `Nmap` can be configured with scripts tailored to uncover H.323 services:
+
+```bash
+nmap --script h323-info -p 1720 <target-ip>
+```
+
+The script provides insights into H.323 protocols' signaling and associated data channels, which can be further analyzed for vulnerabilities.
+
+### RTP Stream Detection
+
+RTP (Real-Time Transport Protocol) streams carry the actual media data for VoIP calls. Detecting these streams helps confirm ongoing communication sessions. Packet capture tools such as `Wireshark` can be employed to identify RTP streams:
+
+1. Start capturing packets on the suspected network.
+2. Filter packets using Wireshark's display filter for RTP:
+
+   ```
+   rtp
+   ```
+
+This aids in monitoring call information such as codec used, payload types, and call timing, providing further context for potential disruption or data extraction.
+
+### MGCP and SCCP Discovery
+
+MGCP (Media Gateway Control Protocol) and SCCP (Skinny Client Control Protocol) are protocols used in VoIP architecture. To discover MGCP services, scan for port 2427 and for SCCP services, check port 2000. Custom scripts or tools like `Nmap` can be extended to scan and identify these services specifically:
+
+```bash
+nmap -p 2427 <target-network-cidr>
+```
+
+The outputs help determine the presence of media gateways and Cisco equipment using SCCP, setting a base for targeted attacks.
+
+## User Enumeration
+
+### SIP User Enumeration Techniques
+
+User enumeration can be carried out using SIP methods like INVITE, REGISTER, and OPTIONS. This involves sending crafted requests to the SIP server and observing responses. Tools like `SIPVicious` can automate this process. For example:
+
+```bash
+svwar -m INVITE <target-ip>
+```
+
+This command sends INVITE requests to gather valid SIP users, where response variations denote the existence of these users on the system.
+
+### Brute Force Attacks on SIP Accounts
+
+Dictionary attacks can be mounted on SIP accounts by attempting multiple user credentials until valid combinations are found. Tools such as `Hydra` provide a straightforward approach:
+
+```bash
+hydra -L users.txt -P passwords.txt -s 5060 -f <target-ip> sip
+```
+
+This process helps crack weak credentials, exposing user accounts without strong security practices.
+
+### Voicemail Enumeration
+
+Voicemail systems on VoIP setups often have default passwords, creating potential enumeration avenues. By examining known default passwords, you can enumerate extensions linked to voicemail systems. Scripts or manual engagement through direct calls can reveal these entries, highlighting negligence in the operational security of the target.
+
+## Infrastructure Mapping
+
+### VoIP Device Fingerprinting
+
+Fingerprinting involves identifying devices by examining their network signatures and protocols. VoIP devices like IP phones and gateways can be fingerprinted using tools that capture responses using SNMP queries or specialized scripts. Once gathered, these details furnish a clear picture of the network constituents and their potential vulnerabilities.
+
+### Network Topology Identification
+
+Mapping the topology involves identifying VoIP device connections and their operational flow. Network monitoring tools or packet analyzers can be used for an in-depth understanding of how devices interact. Documenting these paths offers insights into potential weaknesses or misconfigurations in the network layout.
+
+### Media Gateway Analysis
+
+Discovering media gateways and understanding their roles helps in pinpointing where media traffic is managed. These gateways are strategic targets for media interception. Scanning can reveal how data is routed and where gateways communicate with the rest of the network, suggesting ways for deeper incursions.
+
+### VoIP Provider Mapping
+
+Mapping service providers within a VoIP network provides clarity about external connections and network routing. This step involves identifying service providers handling endpoints or SIP trunks used by the organization. Analyzing these connections can uncover information leaks or pathways for unauthorized access attempts, also hinting at the security practices employed by third-party services. 
+
+These sections of VoIP Enumeration provide essential techniques in understanding, analyzing, and approaching the multifaceted components of a VoIP network. By methodically engaging with these processes, practitioners can dissect and exploit potential vulnerabilities in the target network.
