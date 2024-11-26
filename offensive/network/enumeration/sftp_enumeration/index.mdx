@@ -1,0 +1,89 @@
+---
+title: 'SFTP Enumeration: Techniques and Best Practices'
+description: Explore effective techniques for SFTP enumeration including service detection,
+  authentication mechanisms, and directory listing.
+keywords:
+- SFTP enumeration
+- service detection
+- credential gathering
+- directory listing
+- authentication mechanisms
+---
+
+## Offensive Network Enumeration: SFTP Enumeration
+
+### Service Detection
+
+#### Banner Grabbing Techniques
+Banner grabbing is a critical first step in understanding the specifics of an SFTP service you are engaging with. Tools like `nmap` with the version detection flag (-sV) are effective in identifying the software version and the vendor information for an SFTP service. Besides, using `Netcat` to connect directly to the service port can sometimes reveal version data if the service is configured to display a banner. Moreover, specialized scripts like `ssh-banner.nse` for `nmap` provide tailored options for extracting SSH-related banners, which often apply to SFTP services, given their reliance on SSH protocols. These scripts help automate the process of banner extraction, saving time and reducing manual effort.
+
+Example command using `nmap` for banner grabbing:
+
+```bash
+nmap -sV -p 22 --script=ssh2-enum-algos,ssh-hostkey <target-ip>
+```
+
+#### Port Scanning for SFTP
+Port scanning for SFTP primarily involves focusing on the default port, 22, used by SSH and consequently SFTP. However, given that services can run on non-standard ports, performing a comprehensive port scan may reveal services running outside their typical port range. Using `nmap`'s service version detection can help you confirm whether SSH-based services on non-standard ports support SFTP functionalities. Tools like `masscan` can be used for wider scans across large network ranges, offering high speed at the cost of some granularity. Employing both stealth (for avoiding detection) and aggressive scanning (for thoroughness) helps in enumeration without raising alarms prematurely.
+
+Example command using `masscan` for broad port scanning:
+
+```bash
+masscan -p22 <target-network> --rate=1000
+```
+
+#### Protocol Analysis
+Analyzing the underlying protocol traffic using network protocol analyzers like Wireshark or Tcpdump allows for a deeper investigation into the SFTP communication. By capturing packets on port 22 during an SFTP transaction, you can inspect the handshake and see which encryption ciphers are being used. This analysis could reveal whether the SFTP server is using weak or deprecated cryptography algorithms, which might be exploitable.
+
+Example command to capture network traffic using Tcpdump:
+
+```bash
+tcpdump -i <interface> port 22 -w sftp_traffic.pcap
+```
+
+### Authentication Mechanisms Analysis
+
+#### Credential Gathering and Brute Forcing
+Identifying valid credentials often simplifies the process of enumerating an SFTP server. Using brute force techniques through tools like `Hydra` and `Medusa` allows the testing of multiple credentials against the SFTP service until a valid username and password combination is discovered. These tools are versatile and support parallel attacks which can significantly cut down the time needed for such operations. Additionally, gaining access to SSH keys from compromised hosts could assist in logging in to the SFTP service if public-key authentication is allowed.
+
+Example command using `Hydra` for password brute-forcing:
+
+```bash
+hydra -l <username> -P <password-list> sftp://<target-ip>
+```
+
+#### Public Key Authentication Verification
+Exploring the SSH directories on compromised machines can reveal authorized keys listed in files such as `/home/<user>/.ssh/authorized_keys`. If you have read access to this file during enumeration, you could gain insights into which keys are permitted to access the server. Conversely, public GitHub repositories and configuration scripts may also inadvertently expose private keys. Automated tools that scrape for such information can identify these weaknesses, possibly leading to undetected access.
+
+#### Weak Authentication Configuration Identification
+Weak authentication settings significantly undermine SFTP security. These could include scenarios where password authentication remains enabled without proper key-based alternatives or where known default credentials are left unchanged. Analyzing configuration files like `sshd_config` can help identify such vulnerabilities. It's vital in this step to look for direct or indirect indicators of poor security hygiene, which can be exploited for broader access.
+
+### Directory and File Listing
+
+#### Exploration of SFTP Hierarchical Structure
+After gaining access, leveraging command-line SFTP clients enables the enumeration of available directories and files. Recursive directory listing is often automated using scripting languages like Python or Bash to rapidly capture all files' names and hierarchical details on the server. This automation is useful in uncovering large file systems where manual inspection would be impractically tedious.
+
+Example command using SFTP client to list directory contents:
+
+```bash
+sftp -i <private-key-path> <user>@<target-ip>:<directory-path>
+```
+
+#### Hidden File and Directory Detection
+Detecting hidden files and directories involves testing various naming conventions like file names starting with a dot (.), which UNIX-like systems use to mark hidden files. Scripts crafted for directory scanning can help spot such hidden entities, especially where permissions have inadvertently exposed them. Misconfigured access controls sometimes reveal test directories or backup files containing critical data or credentials.
+
+#### Access Validation and Data Extraction
+Once directories are enumerated, it is crucial to validate existing access permissions. This process involves checking if files and directories are readable, writable, or executable where they should not be. This testing can expose sensitive files with loose permissions, leading to data exfiltration. Utilizing simple SFTP commands to upload and download test files measures these permissions. Caution is necessary, focusing on operational security to minimize the risk of detection.
+
+Example command to test file upload:
+
+```bash
+put local_test_file.txt /remote/path/
+```
+
+### Additional Tactics
+
+#### Connection Hijacking and Man-in-the-Middle Attacks
+Advanced enumeration tactics include using SSH Man-in-the-Middle tools to capture SFTP session data. These tools can sniff and intercept data packets between a legitimate client and the server, thereby revealing login credentials or transfers in plain text if the sessions are not encrypted adequately. Under specific network conditions, particularly where secure channels are not enforced, hijacking sessions becomes feasible.
+
+These strategies enhance the enumeration of SFTP services, equipping penetration testers with robust methodologies to uncover configuration weaknesses and mismanagement in deploying these services.
