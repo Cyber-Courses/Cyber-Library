@@ -1,0 +1,128 @@
+---
+title: Enumerating Supported Authentication Methods in SSH
+description: Learn techniques for enumerating SSH authentication methods and tools
+  used for enumeration in cybersecurity.
+keywords:
+- SSH enumeration
+- authentication methods
+- enumerate SSH
+- cybersecurity techniques
+- SSH vulnerabilities
+- offensive security
+- Pentesting
+- secure shell
+- network security
+- hacking SSH
+---
+
+### Enumerating Supported Authentication Methods
+
+#### Overview of SSH Authentication Enumeration
+
+Identifying supported authentication methods in SSH services is crucial for understanding the potential entry points available to an attacker. SSH (Secure Shell) is a widely used protocol for secure remote logins and other secure network services over an insecure network. Enumerating its authentication mechanisms enables a security practitioner to tailor their approach when attempting to gain unauthorized access. This involves determining what methods an SSH server supports and, consequently, identifying the weakest link in the authorization process.
+
+#### Techniques for Enumerating Authentication Methods
+
+**Banner Grabbing**
+
+Banner grabbing is a straightforward technique used to glean information about the available services and their configurations by pulling the "banner" or welcome message of a service. OpenSSH, for instance, often reveals some default authentication capabilities within its banner. This information can then be used to infer potential methods of attack.
+
+ *Tools and Commands:*
+- Use `ssh` to connect and read the banner:
+
+  ```shell
+  ssh -v <ip_address>
+  ```
+
+- `nmap` for service detection and banner grabbing:
+
+  ```shell
+  nmap -sV --script ssh2-enum-algos <ip_address>
+  ```
+
+- Employ `netcat` to manually connect and observe banner output:
+
+  ```shell
+  nc <ip_address> 22
+  ```
+
+**Protocol Negotiation**
+
+During the SSH handshake, the client and server exchange information regarding supported ciphers, authentication methods, and other configurations. By capturing or simulating this handshake, one can enumerate which authentication methods are supported. This requires engaging in a partial SSH session whereby you analyze these exchanges.
+
+**Tools and Techniques:**
+- Use the `ssh-keyscan` utility to fetch key data and version information, allowing method enumeration:
+
+  ```shell
+  ssh-keyscan -t <key_type> <ip_address>
+  ```
+
+#### Tool Usage for Enumeration
+
+**Custom Scripting with Python**
+
+Python offers several libraries, such as `paramiko` and `ssh2-python`, to facilitate crafting scripts that engage with the SSH protocol programmatically. These scripts can simulate connection attempts to negotiate supported authentication methods.
+
+*Example Script Using Paramiko:*
+
+```python
+import paramiko
+
+def scan_auth_methods(hostname, port):
+    client = paramiko.SSHClient()
+    transport = paramiko.Transport((hostname, port))
+    try:
+        transport.start_client()
+        methods = transport.get_remote_server_key()
+        print("Authentication methods supported:", transport.auth_methods)
+    finally:
+        transport.close()
+
+scan_auth_methods('hostname', 22)
+```
+
+**Leverage Existing Tools**
+
+- **Nmap**: Utilize Nmap's vast range of scripts, specifically the `ssh2-enum-algos`, to check for supported authentication methods.
+
+  ```shell
+  nmap -p 22 --script=ssh2-enum-algos <target-ip>
+  ```
+
+- **Metasploit**: Metasploit framework offers auxiliary modules that can be used for enumerating SSH authentication methods.
+
+  ```shell
+  use auxiliary/scanner/ssh/ssh_enumusers
+  ```
+
+#### Bypassing and Manipulating Authentication
+
+**Crafting Special Packets**
+
+Develop custom packets that simulate legitimate SSH negotiations to test server responses to different authentication requests. This often requires in-depth knowledge of the SSH protocol format and packet creation.
+
+**Fuzzing Authentication Mechanisms**
+
+Conducting fuzzing on SSH's authentication mechanism involves sending various inputs to identify unhandled exceptions or anomalies. Tools like `Peach Fuzzer` or `AFL` can assist in manipulating the authentication negotiation.
+
+#### Handling Encrypted Authentication Traffic
+
+**Decrypting Traffic for Method Inspection**
+
+When in a position to act as a man-in-the-middle (MITM), tools like `SSLsplit` can help intercept and decrypt SSH traffic. This allows attackers to inspect negotiation packets and uncover supported authentication methods.
+
+- `SSLsplit` Configuration for traffic inspection:
+
+  ```shell
+  sslsplit -k /path/to/certificate-key.pem -c /path/to/certificate.pem <proxy_config>
+  ```
+
+#### Mitigating Controls and Evasion Techniques
+
+**Evading Logging**
+
+To avoid detection, attackers may slow down their enumeration attempts or combine them with normal traffic flows to obfuscate their actions. A strategic analysis of the server's logging capabilities and modifying frequency or nature of attempts can aid in circumventing detection mechanisms.
+
+#### Strategic Application in Penetrations
+
+After successfully enumerating the authentication methods, the next logical step is to plan attacks that exploit these authentications vectors. Prioritize these based on ease of exploitation and the presence of other vulnerabilities that can be chained together. Techniques such as brute-forcing passwords, exploiting weak keys, or social engineering for session details become viable post enumeration.
