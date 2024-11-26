@@ -1,0 +1,92 @@
+---
+title: Enumerating Readable and Writable Files on FTP Servers
+description: Learn how to effectively enumerate readable and writable files in FTP
+  environments for network security assessments.
+keywords:
+- FTP enumeration
+- file permissions
+- readable files
+- writable files
+- penetration testing
+- network security
+- file transfer protocol
+- vulnerability assessment
+- cybersecurity
+- data extraction
+---
+
+### Enumerating Readable and Writable Files
+
+**Introduction to File Enumeration in FTP**
+
+Enumerating readable and writable files on FTP servers is a critical step in evaluating the security posture of a system, allowing attackers to identify potential footholds and entry points for an attack. FTP servers often contain a myriad of directories and files with varying permissions, some of which may be configured insecurely. By identifying files that are both readable and writable, attackers can leverage these permissions to escalate privileges, extract sensitive data, or implant malicious code.
+
+**Prerequisites to Effective File Enumeration**
+
+Successful file enumeration requires a solid understanding of the File Transfer Protocol (FTP) and the underlying file systems of target environments. It is essential to comprehend how files and directories are structured and how permissions are assigned and enforced. Familiarity with command-line interfaces and basic scripting skills will enable more efficient enumeration processes and result interpretation.
+
+**Access and Identify FTP Services**
+
+Before enumerating files, attackers must first identify which systems are running FTP services. This can be accomplished using network scanning tools such as Nmap. A typical Nmap command to discover FTP services is as follows:
+
+```shell
+nmap -p 21 -sV <target_ip_range>
+```
+
+This command scans a range of IP addresses for open port 21, which is the default port for FTP services, and attempts to identify the version of the service running. Detection of incorrectly configured services may reveal the possibility of anonymous logins, allowing attackers to further explore the server’s file system without credentials.
+
+**Using FTP Clients for Enumeration**
+
+Once access is garnered, FTP clients like `ncftp` or `lftp` provide a direct interface to interact with the target server. In environments allowing anonymous login, listing accessible files and directories can begin immediately. The following command demonstrates listing files using a basic FTP client:
+
+```shell
+ftp <target_ip>
+# After the connection is established
+ls
+```
+
+These commands enable an attacker to view directory contents, but further steps may be needed to enumerate files with special permissions or nested within deeper subdirectories.
+
+**Exploit Writable Directories**
+
+Writable directories present an opportunity for deeper penetration into the target. Identifying and exploiting writable directories allows attackers to upload scripts, malware, or tools that facilitate further exploits. To discover writable directories, manual testing can be combined with automated tools:
+
+```shell
+touch testfile.txt
+put testfile.txt
+```
+
+This sequence attempts to upload a test file into current directories. If successful, unrestricted write permissions are likely present, indicating potential vulnerabilities that an attacker can further exploit.
+
+**Read-Only File Enumeration and Exploitation**
+
+Identifying readable files is another key aspect of file enumeration. These files might not allow modifications or uploads, but analyzing their content could reveal sensitive information such as cleartext passwords, configuration settings, or personally identifiable information (PII). For example:
+
+```shell
+get sensitive_config.txt
+```
+
+Once downloaded, the attacker can analyze files offline to extract data useful for moving laterally within networks or escalating privileges.
+
+**Advanced Techniques for File Enumeration**
+
+For environments where manual techniques are ineffective or inefficient, advanced enumeration can be automated using scripts or penetration testing frameworks like Metasploit. Utilizing Metasploit modules specific to FTP services can streamline the process:
+
+```shell
+msfconsole
+use auxiliary/scanner/ftp/ftp_version
+set RHOSTS <target_ip_range>
+run
+```
+
+This module helps enumerate FTP services, providing detailed version information that can be leveraged to find specific exploits or misconfigurations.
+
+**Evading Detection During Enumeration**
+
+While conducting file enumeration, discrete operations are paramount. Evading detection involves using non-standard ports, disguising traffic patterns, and using encrypted communication. Timing requests and limiting the rate of requests to avoid tripping automated detection mechanisms can help maintain a low profile.
+
+**Post-Enumeration Actions**
+
+The data collected from enumerating files and directories should be organized for analysis. This process reveals potential vulnerabilities or misconfigurations that can be used to escalate privileges or further exploit the network. Utilizing this information strategically allows attackers to formulate comprehensive attack plans, focusing on expanding their foothold, exfiltrating data, or crippling network defenses.
+
+By engaging methodical and stealthy enumeration techniques, attackers enhance their offensive cybersecurity capabilities, reducing the risk of detection while effectively identifying exploitable weaknesses within a target's file system.
