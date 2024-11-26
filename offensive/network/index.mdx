@@ -1,0 +1,186 @@
+---
+title: 'Offensive Cybersecurity: Mastering Network Techniques'
+description: Explore critical offensive network techniques from scanning to persistence,
+  helping security professionals enhance their cybersecurity skills.
+keywords:
+- offensive cybersecurity
+- network security
+- scanning techniques
+- service enumeration
+- initial access techniques
+- privilege escalation
+- lateral movement
+- data exfiltration
+- command and control
+---
+
+# Offensive Cybersecurity: Network
+
+## Scanning
+
+### Network Mapping and Discovery
+
+Network mapping is a critical initial step in offensive cybersecurity, providing adversaries with a virtual blueprint of the target network. Tools such as `nmap` and `masscan` are quintessential for this phase, each offering various scanning techniques. `nmap` is preferred for its comprehensive scanning capabilities and ability to identify live hosts, open ports, and services. A basic `nmap` scan command is:
+
+```bash
+nmap -sP 192.168.0.1/24
+```
+
+This command conducts a ping scan across a specified subnet to determine active hosts. For high-speed scanning, `masscan` is utilized, capable of scanning entire IP address spaces at incredible speeds, though it requires tuning to avoid network disruptions:
+
+```bash
+masscan -p80,443 192.168.0.0/16 --rate=1000
+```
+
+Techniques for evading detection involve using different scan timings, fragmented packets, or randomizing payloads.
+
+### Port Scanning Techniques
+
+Port scanning aims to uncover listening services on network hosts. Techniques vary based on the TCP/IP model, including TCP, SYN, and UDP scans. A SYN scan is commonly used due to its stealth compared to a full TCP connection:
+
+```bash
+nmap -sS 192.168.0.10
+```
+
+Advanced scans like FIN, XMAS, and ACK test packet response and firewall policies. Service and version detection can be integrated to unmask service information:
+
+```bash
+nmap -sV 192.168.0.10
+```
+
+The choice between full-scale versus targeted scanning is often determined by the network's response and desired stealth level.
+
+### OS Fingerprinting
+
+Fingerprinting the operating system involves deducing the target's OS and version. Active techniques send crafted packets to elicit unique OS responses, while passive techniques monitor traffic patterns. `nmap` includes OS detection:
+
+```bash
+nmap -O 192.168.0.10
+```
+
+Accuracy can be increased by combining multiple scans and leveraging tools like `p0f`, which excels at passive OS fingerprinting.
+
+## Enumeration
+
+### Service Enumeration
+
+Enumerating running services gives insight into potential vulnerabilities. Extracting banners with tools like `telnet`, `nc` (Netcat), and `nmap` banner grabbing options is essential:
+
+```bash
+nc 192.168.0.10 22
+nmap -sV --version-intensity 5 192.168.0.10
+```
+
+Successful detection enables identification of outdated software and misconfigurations.
+
+### User Enumeration
+
+Accessing a list of valid usernames can significantly aid further attacks. Techniques vary based on protocol; SMB (Server Message Block) and LDAP (Lightweight Directory Access Protocol) are often targeted. Tools like `enum4linux` enumerate SMB shares and users:
+
+```bash
+enum4linux -a 192.168.0.10
+```
+
+SNMP (Simple Network Management Protocol) enumeration may reveal user accounts through community strings, using tools like `snmpwalk`.
+
+### Network Infrastructure Enumeration
+
+Understanding the network's backbone involves identifying devices like routers, firewalls, and IDS/IPS. This is often achieved using ICMP probing and traceroute tools. DNS zone transfers can reveal subnet structures:
+
+```bash
+dig axfr @ns1.example.com example.com
+```
+
+Cache snooping can also infer internal DNS entries, aiding in mapping hidden network segments.
+
+## Initial Access Techniques
+
+### Phishing Infrastructure on Internal Networks
+
+Crafting network-based phishing campaigns require the ability to set up convincing fake websites or email spamming. Setting up tools like `Gophish` allows attackers to mimic legitimate internal resources, potentially extracting credentials for lateral access.
+
+### Exploiting Network Protocols
+
+SMB, DNS, and RDP protocols, when misconfigured, offer entry points. Capturing credentials through NTLM relay and HTTP proxy exploits remain prevalent. Tools such as `Responder` and `Impacket` suites facilitate these exploits:
+
+```bash
+python3 Responder.py -I eth0
+python3 smbrelayx.py
+```
+
+### Spear Phishing and Social Engineering Tactics
+
+Tailored phishing emails targeting specific company employees bypass generalized security. Scripts embedding malicious payloads within document attachments remain common. Tools like `SET` (Social-Engineer Toolkit) automate such campaigns.
+
+## Exploitation
+
+### Exploiting Network Services
+
+The complexity of network service exploitation often lies in identifying zero-day vulnerabilities. Using frameworks like `Metasploit` or `Cobalt Strike`, exploits are launched against detected vulnerable services:
+
+```bash
+msfconsole
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOST 192.168.0.10
+exploit
+```
+
+### Web to Network Pivoting
+
+Compromising web applications can lead to further network intrusion, often by exploiting VPN or misconfigured remote access services. Escalating privileges within a compromised web app can lead to network-level attacks, forming pivot points via SSH tunnels.
+
+### Denial of Service Attacks
+
+DoS attacks can disable network services, creating entry opportunities. Techniques like amplification (e.g., DNS or NTP Reflection Attacks) leverage network characteristics to increase the impact of these attacks. Evading detection involves spreading attack origins via botnets.
+
+## Post Exploitation
+
+### Network Traffic Analysis
+
+Capturing and analyzing traffic can reveal passwords and session tokens. Tools like `Wireshark` provide packet-level insight. Deploying `tcpdump` on compromised hosts facilitates ongoing traffic monitoring:
+
+```bash
+tcpdump -i eth0 -w capture.pcap
+```
+
+### Data Exfiltration Techniques
+
+Covert channels hide data transfers, preserve bandwidth, and minimize detection. Utilizing DNS tunnels or ICMP packets can exfiltrate data without raising alerts. Implementing tools like `iacom` or manipulating packet encoding can help obfuscate traffic.
+
+### Command and Control (C2) on Networks
+
+Establishing a C2 channel maintains attacker presence. Encrypted protocols such as HTTPS or DNS over HTTPS (DoH) make detection challenging. Beacons and call-back scheduling techniques ensure continuous command access even when network configurations change.
+
+## Privilege Escalation 
+
+### Network-Based Privilege Escalation
+
+Exploiting weak network configurations often involves analyzing routing protocols, VLAN tagging, or firewall rules. Gaining access to misconfigured ACLs (Access Control Lists) can facilitate lateral spread and privilege escalation.
+
+### Credential Theft on Networks
+
+Acquiring administrative credentials requires strategic keystroke logging or sniffer deployments. Tools like `Mimikatz` allow harvesting of credentials cached in memory, while pass-the-hash techniques exploit NTLM authentication weaknesses.
+
+## Lateral Movement
+
+### Techniques for Cross-Network Movement
+
+Movement within networks often leverages trust relationships between domains. Protocol exploitation (e.g., RDP, SMB) facilitates this, using compromised credentials to access adjoining systems:
+
+```bash
+crackmapexec smb 192.168.0.1/24 -u user -p password
+```
+
+### Active Directory Exploitation
+
+AD servers, when compromised, can grant extensive control across network domains. Kerberos and ticket-granting tickets (TGT) attacks (e.g., Golden Ticket) provide high-level access, utilizing tools like `kerberoast` to capture and forge tickets.
+
+## Persistence Techniques
+
+### Network-Based Persistence Mechanisms
+
+Backdooring network appliances or modifying device firmware can provide opponents continuous access. Altering DHCP responses or DNS entries can create return paths even after network cleanups.
+
+### Beaconing Techniques for Sustained Control
+
+Network beacons ensure ongoing C2 communication. Implementing stealth techniques like low-frequency beaconing or randomizing transmission intervals mitigates detection, while advanced encoding conceals traffic within legitimate channels.
