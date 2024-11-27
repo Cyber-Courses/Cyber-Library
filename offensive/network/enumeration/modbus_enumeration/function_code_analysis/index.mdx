@@ -1,0 +1,157 @@
+---
+title: Comprehensive Function Code Analysis in Modbus Protocol
+description: Explore function code analysis essential for Modbus protocol security,
+  covering read/write codes and diagnostic responses.
+keywords:
+- Modbus function codes
+- Read Write function codes
+- Diagnostic codes Modbus
+- Exception codes Modbus
+- Industrial control systems
+- Modbus security
+- Network enumeration
+- Modbus exploitation
+- Cybersecurity techniques
+---
+
+# Function Code Analysis in Modbus Enumeration
+
+## Introduction to Modbus Function Codes
+
+Modbus is a communication protocol widely used in industrial environments to facilitate communication between devices. Function codes are integral to the Modbus protocol as they define specific actions to be performed on Modbus-compatible devices. These codes allow devices to interpret and respond to requests appropriately. Analyzing function codes is crucial in offensive cybersecurity to exploit potential vulnerabilities and understand the interaction between client and server devices within a Modbus network. Function code analysis involves identifying, categorizing, and utilizing these codes to achieve strategic offensive goals in network enumeration.
+
+## [Identifying Read/Write Function Codes](offensive/network/enumeration/modbus_enumeration/function_code_analysis/identifying_readwrite_function_codes)
+
+### Analyzing Read Function Codes
+
+Read function codes are utilized to extract data from Modbus devices. They are instrumental in gathering information without altering device state.
+
+#### Techniques for Detecting `Read Coils (FC1)`
+
+`Read Coils (FC1)` allows the retrieval of the status of discrete coils. Attackers may exploit this function code to determine the on/off state of connected devices or actuators. 
+
+```bash
+modbus-cli read-coils --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --count 10
+```
+
+#### Exploiting `Read Discrete Inputs (FC2)`
+
+`Read Discrete Inputs (FC2)` is similar to FC1 but targets discrete input contacts rather than coil states. Identification of this code can reveal sensor statuses, which attackers can use to map operational patterns.
+
+```bash
+modbus-cli read-discrete-inputs --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --count 5
+```
+
+#### Leveraging `Read Holding Registers (FC3)`
+
+`Read Holding Registers (FC3)` retrieves the contents of registers, essential for acquiring process variables and configurations maintainable on controllers.
+
+```bash
+modbus-cli read-holding-registers --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --count 4
+```
+
+#### Probing `Read Input Registers (FC4)`
+
+`Read Input Registers (FC4)` accesses input data registers, typically capturing real-time measurement data from sensors.
+
+```bash
+modbus-cli read-input-registers --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --count 6
+```
+
+### Exploiting Write Function Codes
+
+Write function codes enable modifications to the state or configuration of Modbus devices, presenting opportunities for more intrusive operational interference.
+
+#### Assessing `Write Single Coil (FC5)`
+
+`Write Single Coil (FC5)` alters the state of a single coil, which can be used to toggle the power state of an actuator.
+
+```bash
+modbus-cli write-single-coil --host 192.168.1.10 --port 502 --unit-id 1 --address 0 --value ON
+```
+
+#### Manipulating `Write Single Register (FC6)`
+
+`Write Single Register (FC6)` writes a new value into a register, making it possible to change operational parameters.
+
+```bash
+modbus-cli write-single-register --host 192.168.1.10 --port 502 --unit-id 1 --address 0 --value 12345
+```
+
+#### Targeting `Write Multiple Coils (FC15)`
+
+`Write Multiple Coils (FC15)` allows bulk updates to coils, facilitating simultaneous control of multiple operations within an industrial system.
+
+```bash
+modbus-cli write-multiple-coils --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --values ON,OFF,ON
+```
+
+#### Interfering with `Write Multiple Registers (FC16)`
+
+`Write Multiple Registers (FC16)` provides the capability to update several registers in one command, influencing broad control.
+
+```bash
+modbus-cli write-multiple-registers --host 192.168.1.10 --port 502 --unit-id 1 --start 0 --values 100,200,300
+```
+
+## [Discovering Diagnostic and Exception Codes](offensive/network/enumeration/modbus_enumeration/function_code_analysis/discovering_diagnostic_and_exception_codes)
+
+### Diagnostic Function Codes
+
+Diagnostic function codes furnish additional device information, often bypassing the more restrictive operational registers.
+
+#### Utilizing `Return Query Data (FC8)`
+
+`Return Query Data (FC8)` executes loopback tests and additional diagnostics that can disclose internal configurations and operational states.
+
+```bash
+modbus-cli diagnostics --host 192.168.1.10 --port 502 --unit-id 1 --sub-transaction query
+```
+
+#### Extracting Data with `Return Diagnostic Register (FC8)`
+
+In depth manipulation of diagnostic procedures can be utilized to gather extensive performance metrics and device diagnostics not ordinarily accessible.
+
+```bash
+modbus-cli diagnostics --host 192.168.1.10 --port 502 --unit-id 1 --sub-transaction data
+```
+
+#### Implementing Diagnostic Mode Interrogations
+
+Diagnostic codes facilitate interrogation through custom sub-functions, capable of engaging in a variety of device tests undetected.
+
+### Exception Response Codes
+
+Exception codes present detailed error response during communication, essential for crafting precise exploit attempts.
+
+#### Interpreting Exception Codes for Error Handling
+
+By understanding specific exception codes, exploit paths may be refined to handle potential device communication barriers with increased sophistication.
+
+#### Crafting Requests to Elicit Specific Exception Responses
+
+Purposely engineering requests that induce exception responses can provide deep insight into device error handling and fault tolerance.
+
+## Tools and Scripts for Function Code Analysis
+
+In offensive engagements, deploying automated tools and custom scripts is vital for efficient enumeration and exploitation of Modbus devices.
+
+### Automation Tools for Function Code Enumeration
+
+Tools such as `modbus-cli` and frameworks like Metasploit provide robust platforms to automate enumeration tasks and enhance the efficiency of locating and exploiting function codes.
+
+### Custom Scripts for Modbus Function Code Manipulation
+
+Custom scripting using languages like Python with libraries such as `pymodbus` enables tailored enumeration and manipulation strategies, increasing the specificity and stealth of operations.
+
+```python
+from pymodbus.client.sync import ModbusTcpClient
+
+client = ModbusTcpClient("192.168.1.10")
+client.write_coil(1, True)
+client.close()
+```
+
+## Strategic Offensive Application
+
+Integrating insights from function code analysis with other network enumeration results creates cohesive attack vectors. For example, the combination of function code access with device mappings and version information can lead to more targeted interventions, maximising the effectiveness of an offensive security operation. Offensive practitioners must correlate function code data with system vulnerabilities, expediting penetration into industrial control systems.
