@@ -1,0 +1,122 @@
+---
+title: Identifying Open Portmapper Services on Port 111
+description: Learn to identify and exploit open Portmapper services on port 111, including
+  scanning techniques and common vulnerabilities.
+keywords:
+- Portmapper
+- open services
+- port 111
+- RPC enumeration
+- network scanning
+- Nmap
+- vulnerabilities
+- exploit techniques
+---
+
+# Identifying Open Portmapper Services (Port 111)
+
+## Introduction to Portmapper Service
+
+Portmapper is a key component in the Remote Procedure Call (RPC) protocol suite. It operates over TCP and UDP port 111 and serves as an essential element for RPC communication. Portmapper's primary function is to map RPC program numbers to network address ports where the services can be accessed. This mapping mechanism permits an RPC client to discover which ports are connected to specific services on a server. This service aggregation is frequently used in distributed systems and by applications requiring numerous RPC service calls.
+
+Among the many systems leveraging Portmapper are Network File System (NFS) servers, where its role is vital in the service discovery process. By allowing RPC-based applications to dynamically bind and discover services, Portmapper eliminates the need for hard-coded port numbers, granting flexibility in service deployment while potentially introducing attack surfaces for an adversary.
+
+## Identifying Open Portmapper Instances
+
+To discover open Portmapper services on a network, practitioners typically employ network scanning tools such as Nmap and Masscan. These tools allow users to probe the network specifically for port 111, thereby identifying hosts that expose the Portmapper service.
+
+### Network Scanning Techniques for Port 111
+
+The Nmap network scanner is widely used to identify open ports and services active on a network host. One common method of probing for the Portmapper service involves executing a simple port scan. For example:
+
+```shell
+nmap -p 111 <target-ip>
+```
+
+This command targets TCP and UDP port 111 on the specified host, potentially revealing if the service is actively listening. For a more comprehensive scan across a network range, you can combine the port scan with the RPC discovery module:
+
+```shell
+nmap -sV -p 111 --script=rpcinfo <target-subnet>
+```
+
+Masscan offers a faster scanning option for large network ranges, leveraging asynchronous network I/O to enhance speed:
+
+```shell
+masscan -p111 <target-subnet> --rate=1000
+```
+
+### Analyzing Scanned Results for Service Verification
+
+After identifying open instances, verifying what services are running on port 111 is essential. Often, Nmap will return more service-oriented information when used with service detection scripts, presenting the user with a breakdown of available programs and their port mappings.
+
+## Techniques for Enumerating Portmapper Services
+
+Once an open Portmapper service is identified, the next step involves enumerating the services that it manages. Enumerating these services allows the investigator to glean information about running applications, which can be crucial for identifying potential entry points.
+
+### Leveraging RPC Information Gathering Techniques
+
+One can employ the `rpcinfo` command-line tool, which provides detailed information about RPC services registered with the Portmapper:
+
+```shell
+rpcinfo -p <target-ip>
+```
+
+This command queries the target host on port 111, outputting a list of services registered, program numbers, versions, and corresponding port numbers. This enumeration helps in dissecting the active RPC calls for further analysis.
+
+### Understanding Output Information for Exploitation Paths
+
+Interpreting the output from service enumeration involves identifying known vulnerable programs and assessing the available RPC methods. Services exposing outdated or inadequately secured RPC programs often become prime targets for exploitation efforts.
+
+## Recognizing Vulnerabilities in Open Portmapper Implementations
+
+The Portmapper service, especially when misconfigured, can expose several vulnerabilities to network attackers. Recognizing these vulnerabilities includes understanding configuration flaws and potential misrouting in service mapping.
+
+### Identifying Common Misconfigurations and Setup Errors
+
+Common security lapses include unintentionally open access to external networks, neglect of protective access controls, and the absence of encrypted RPC traffic. Misconfigurations often render RPC services open to unauthorized access, forming entry points for attackers.
+
+### Mapping Vulnerable RPC Calls to Potential Exploits
+
+Identifying and cataloging vulnerable RPC calls might involve correlating program numbers with known vulnerabilities documented in CVEs. Analysis tools and exploit frameworks frequently automate this process, detecting exploitable service patterns.
+
+## Exploitation Strategies for Vulnerable Portmapper Services
+
+Once vulnerabilities are identified, devising exploitation strategies is the subsequent step. Exploiting Portmapper services typically involves activities such as intercepting RPC traffic, executing arbitrary code, or abusing service misconfigurations.
+
+### Utilizing Known Vulnerabilities and Exploits
+
+Utilizing documented vulnerabilities in RPC services often involves deploying pre-existing exploit modules available in frameworks like Metasploit:
+
+```shell
+use exploit/unix/misc/rpc_dmi_remote_rce
+set RHOSTS <target-ip>
+run
+```
+
+### Crafting Custom Attack Vectors Based on RPC Enumeration
+
+Crafting novel attack vectors requires developing a deep understanding of service behavior and potentially exploiting service logic errors. This custom development might involve generating tailored payloads to exploit specific RPC method vulnerabilities.
+
+## Mitigation and Detection Evasion
+
+Mitigation strategies focus on protecting the Portmapper service and reducing attack surfaces, while detection evasion attempts to conceal probing activities.
+
+### Techniques for Bypassing Defensive Measures
+
+Techniques include using fragmented probes to evade detection or employing encrypted channels to bypass intrusion detection systems while assessing Portmapper services.
+
+### Methods for Concealing Identification Attempts
+
+Timing attacks to mimic legitimate network behavior or using anonymous networks to hide the origin of scanning attempts are common strategies used by adversaries to obfuscate portmapper enumeration activities.
+
+## Post-Compromise Techniques
+
+Successful service exploitation may lead to further post-compromise activities, expanding an attacker’s control over the compromised system.
+
+### Establishing Persistence through RPC Service Manipulation
+
+Attackers can create persistence mechanisms by altering RPC service configurations via unauthorized RPC calls or introducing startup services tied to compromised RPC daemons.
+
+### Leveraging Compromised RPC Services for Lateral Movement
+
+Adversaries can further manipulate compromised Portmapper services to facilitate lateral movement capabilities within a network. Exploiting service insights gained through enumeration, attackers can pivot to additional network assets, leveraging compromised RPC mappings for horizontal access enhancement.
