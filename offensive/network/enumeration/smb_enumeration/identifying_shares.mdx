@@ -1,0 +1,86 @@
+---
+title: Identifying Shares in SMB Enumeration Techniques
+description: Learn how to effectively identify and enumerate SMB shares using various
+  tools and methodologies for enhanced network security.
+keywords:
+- SMB enumeration
+- share identification
+- network security
+- Nmap SMB
+- SMBclient
+- CrackMapExec
+- hidden shares
+- share monitoring
+- privilege escalation
+- automated enumeration
+---
+
+# Identifying Shares
+
+## Understanding SMB Share Enumeration
+
+The Server Message Block (SMB) protocol is designed for providing shared access to files, printers, and serial ports within a network. SMB operates primarily over TCP/IP and is used typically by Windows-based systems. Understanding SMB is crucial when enumerating shares, as it influences how shares are discovered and accessed.
+
+Different versions of SMB, from SMB1 to the latest SMB3, offer varying levels of security and performance features. For instance, SMB3 introduced end-to-end encryption, which affects how share enumeration is performed. Knowing these differences helps to tailor enumeration techniques based on the environment's SMB version.
+
+## Tools for Share Enumeration
+
+### Nmap Scripts
+
+Nmap, a powerful network scanning tool, includes scripts for specific tasks. The script `smb-enum-shares` is particularly useful for SMB share enumeration as it automates the process of discovering available network shares on a target machine. This script can be executed with the following command:
+
+```
+nmap --script smb-enum-shares.nse -p 445 <target-ip>
+```
+
+The script probes the target and lists all the declared SMB shares. Analyzing the output, you can identify which shares are publicly accessible and which require authentication or might be sensitive.
+
+### SMBclient
+
+SMBclient is a command-line tool that functions like FTP for SMB shares. It allows both connection and browsing of shares in a detailed manner. Use it to list shares with:
+
+```
+smbclient -L //<target-ip> -U <username>
+```
+
+Upon supplying the username and password, SMBclient will return a list of all available shares on the specified SMB server, highlighting which ones can be accessed with given credentials. Scripting around SMBclient can automate the discovery process over large networks.
+
+### CrackMapExec
+
+CrackMapExec (CME) is a versatile post-exploitation tool for auditing Active Directory environments. It can enumerate SMB shares across a range of IPs. Its usage for share enumeration looks like this:
+
+```
+crackmapexec smb <target-ip-range> -u <username> -p <password> --shares
+```
+
+CME displays the accessible shares for each system it attempts to authenticate against, providing a quick overview of share availability within the network.
+
+## Techniques for Detailed Share Analysis
+
+### User-Specific Enumerations
+
+By enumerating SMB shares with different user credentials, one can determine the access levels for diverse user accounts. This technique often reveals shares that are not publicly accessible but are available to specific users, aiding in privilege escalation or lateral movement. Testing different credentials in a structured manner helps uncover such discrepancies.
+
+### Hidden Shares Detection
+
+Hidden or administrative shares typically end with a `$`, like `C$` or `ADMIN$`, and are not visible unless intentionally searched for. Detection involves probing the network with tools that explicitly check for such markers. Identifying these shares often reveals default configurations that might be leveraged for further exploitation.
+
+## Continuous Share Monitoring
+
+### Automated Enumeration Scripts
+
+Developing automated scripts to periodically enumerate and log SMB shares can help maintain awareness of changes in the network, such as new shares or changes in permissions. For instance, combining cron jobs with enumeration scripts on Linux systems can provide consistent monitoring without manual intervention.
+
+### Monitoring Changes
+
+Logging share accessibility changes over time is crucial for security audits and incident detection. Any unexpected addition of a share or change in permissions could indicate malicious activity. Such logs serve as vital tools for forensic analysis post-breach.
+
+## Leveraging Share Information
+
+### Exploiting Discovered Shares
+
+Discovered shares can offer a wealth of information and serve as entry points into a network. Sensitive data stored in writable shares, or misconfigured permissions offering unwarranted access, can escalate an attacker's capabilities. Identifying critical shares and their contents is essential for assessing potential attack vectors.
+
+### Integration with Exploitation Frameworks
+
+Enumeration results can be directly fed into exploitation frameworks like Metasploit. By doing so, attackers can craft specific modules or campaigns to exploit vulnerabilities related to the discovered shares. This integration facilitates a streamlined approach towards achieving objectives such as privilege escalation or data exfiltration in a penetration test or red-team assessment.
