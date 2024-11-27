@@ -1,0 +1,140 @@
+---
+title: Listing Allowed Commands per User for Cybersecurity
+description: Discover techniques to list allowed commands per user, focusing on user
+  permissions and privilege escalation in IT security.
+keywords:
+- allowed commands
+- user enumeration
+- permission analysis
+- privilege escalation
+- Linux commands
+- Windows commands
+- command restrictions
+- PAM configurations
+- group policies
+- security enumeration
+---
+
+## Listing Allowed Commands per User
+
+### Understanding User and Group Context
+
+#### User Enumeration Techniques
+
+In the context of command and access discovery, identifying active users on a target system is crucial. Techniques for user enumeration vary depending on the operating system. On UNIX/Linux systems, the `/etc/passwd` file is a common source for discovering user accounts, as it contains information about all users, including system accounts. The `cat /etc/passwd` command can be used to list these accounts. Meanwhile, on Windows systems, user enumeration might involve querying for domain users with commands like `net user` or `wmic useraccount get name`.
+
+**Example Command**:
+```bash
+# UNIX/Linux example
+cat /etc/passwd
+
+# Windows example
+net user
+```
+
+#### Group Membership Identification
+
+Understanding a user's group membership is equally important, as it determines the permissions and access controls that apply to that user. On UNIX/Linux, group memberships can be found in the `/etc/group` file. Command utilities like `groups username` or `id username` show which groups a user belongs to. For Windows, `net localgroup` or specific PowerShell cmdlets can list group memberships.
+
+**Example Command**:
+```bash
+# UNIX/Linux example
+groups john_doe
+
+# Windows example
+net localgroup Administrators
+```
+
+### Permission Analysis
+
+#### Understanding Permission Models
+
+UNIX/Linux and Windows have distinct permission models. UNIX/Linux employs a classic owner-group-others model using read, write, and execute permissions, represented numerically (e.g., 755). The `ls -l` command displays file permissions, revealing access rights. Windows uses Access Control Lists (ACLs), providing a more granular approach by allowing specific permissions settings for each user or group.
+
+**Example Command**:
+```bash
+# UNIX/Linux example
+ls -l /path/to/file
+
+# Windows example
+icacls C:\path\to\file.txt
+```
+
+#### Privilege Escalation Opportunities
+
+Analyzing these permissions can reveal opportunities for privilege escalation. For instance, in UNIX/Linux, files with the setuid or setgid bits set can be potential targets for exploitation if improperly configured. The `find` command can locate these binaries. On Windows, attention should be paid to binaries that allow for script execution with elevated privileges, or any services running with SYSTEM permissions.
+
+**Example Command**:
+```bash
+# UNIX/Linux example
+find / -perm /4000 2>/dev/null
+
+# Windows example
+Get-Service | Where-Object {$_.Status -eq 'Running'}
+```
+
+### Command Restriction Mechanisms
+
+#### Linux PAM and Sudo Restrictions
+
+Linux PAM (Pluggable Authentication Modules) and sudo configurations are essential for identifying command restrictions. The sudoers file, often located at `/etc/sudoers`, specifies which commands a user can execute as another user. Review this file carefully to understand the scope of command execution permitted. PAM configurations, located in `/etc/pam.d/`, can also impose additional restrictions or controls over user commands.
+
+**Example Command**:
+```bash
+# Reviewing sudoers file
+cat /etc/sudoers
+
+# Examining PAM configuration
+cat /etc/pam.d/common-auth
+```
+
+#### Windows UAC and Group Policy
+
+On Windows systems, User Account Control (UAC) settings define the privileges adjustment thresholds for administrative tasks. Group Policies can further restrict command execution and must be evaluated to understand constraints. Policies are managed via the Group Policy Editor (`gpedit.msc`), where command restrictions can be examined under user configurations.
+
+**Example Command**:
+```bash
+# Check UAC settings
+# No direct command - usually via Control Panel or Security Policy settings
+
+# Examining Group Policy
+gpresult /R
+```
+
+### Tools and Techniques for Command Listing
+
+#### Utilizing System Tools for Enumeration
+
+Several system tools can assist in listing the allowed commands for users. In UNIX/Linux, commands like `getfacl` can show file access control lists beyond standard permissions, while `icacls` in Windows offers similar functionality for inspecting ACLs. PowerShell cmdlets provide native enumeration capabilities to uncover system configurations.
+
+**Example Command**:
+```bash
+# UNIX/Linux example
+getfacl /path/to/file
+
+# Windows example
+icacls C:\path\to\directory
+```
+
+#### Automated Enumeration Tools
+
+Several automated tools exist for comprehensive enumeration. Tools like LinEnum or Linux Exploit Suggester on Linux, and PowerSploit scripts on Windows, can automate the gathering of significant data points, including command permissions and potential vulnerabilities. These tools integrate findings to map out potential attack vectors more efficiently.
+
+**Example Tool Usage**:
+```bash
+# Example: LinEnum for Linux enumeration
+./LinEnum.sh -k password,permission
+
+# Example: PowerUp (PowerSploit module)
+Invoke-AllChecks
+```
+
+### Cross-Referencing with Known Vulnerabilities
+
+#### Mapping Allowed Commands to Known Exploits
+
+Once a list of allowed commands is identified, cross-referencing them with known vulnerabilities becomes imperative. Utilizing vulnerability databases such as CVE or NVD can help identify exploits relevant to these commands. This strategic approach involves applying corresponding CVEs to the identified permissions to assess feasibility.
+
+#### Correlation with Threat Intelligence
+
+Mapping this information against threat intelligence can prioritize command exploration. Information on recent advanced persistent threats (APT) or attack vectors exploited by adversaries provides context to focus effort on the most impactful privileges. Applying this intelligence ensures that security measures are aligned with contemporary threats, enhancing readiness and response strategies. This correlation incorporates information from reports like MITRE ATT&CK, enabling operations to align with known tactics and procedures.
