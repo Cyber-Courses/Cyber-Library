@@ -1,0 +1,48 @@
+---
+title: Comprehensive Guide to NetBIOS Enumeration Techniques
+description: Explore detailed techniques for NetBIOS enumeration, including service
+  discovery, resource identification, and user enumeration.
+keywords:
+- NetBIOS enumeration
+- service discovery
+- hostname gathering
+- shared resources
+- user enumeration
+- network enumeration
+- cybersecurity techniques
+- offensive security
+- enumeration tools
+- network discovery
+---
+
+# NetBIOS Enumeration
+
+NetBIOS Enumeration focuses on leveraging the capabilities and services provided by the NetBIOS protocol to extract critical network information. This involves discovering services, hostnames, IP addresses, shared resources, and enumerating users and groups. Each facet of this enumeration process can be crucial in understanding the network environment and planning further offensive strategies.
+
+## [Service Discovery](offensive/network/enumeration/netbios_enumeration/service_discovery)
+
+NetBIOS Name Service (NBNS) functions by broadcasting and processing name queries in a LAN to map NetBIOS names to IP addresses. Attackers use this characteristic to detect and enumerate services on a network. Tools such as `nbtscan` and `Nmap` are commonly used for NBNS scanning. Running the command `nbtscan -r 192.168.1.0/24` will reveal a list of hosts along with their NetBIOS names and IP addresses. 
+
+Additionally, attackers can employ packet capturing tools like Wireshark to directly intercept and analyze NetBIOS name broadcasts. This strategy involves capturing NBNS traffic and identifying active, potentially exploitable hosts on a network segment.
+
+## [Gathering Hostnames and IP Addresses](offensive/network/enumeration/netbios_enumeration/gathering_hostnames_and_ip_addresses)
+
+Collecting hostnames via NetBIOS is achievable through NetBIOS name table queries. The `NBTSTAT` tool can be used to execute these queries and gain insights into computer names and their corresponding IP addresses. For instance, executing `nbtstat -A 192.168.1.5` retrieves the NetBIOS name associated with the IP. 
+
+This process assists attackers in deducing the IP addressing scheme and organizational layout. After correlating gathered hostnames with IP addresses, an attacker can map out nodes within a subnet and better understand the network topology.
+
+## [Shared Resources Identification](offensive/network/enumeration/netbios_enumeration/shared_resources_identification)
+
+This aspect focuses on discovering share points within a network where sensitive information might reside. Using commands like `net view \\192.168.1.5`, an attacker can list shared directories on a target system. More advanced tactics involve using SMB protocols and tools, such as Metasploit's auxiliary modules or SMBRelay, to further probe for accessible shared resources. 
+
+Another technique involves performing session status requests to identify active sessions and potential open resources. This can reveal endpoints ideal for lateral movement within the target network.
+
+## [User and Group Enumeration](offensive/network/enumeration/netbios_enumeration/user_and_group_enumeration)
+
+Enumerating users and groups begins with extracting usernames using NetBIOS APIs. Tools such as `enum4linux` can pull comprehensive user lists from NetBIOS-enabled machines with commands like `enum4linux -U 192.168.1.5`. This information is pivotal for identifying potential targets for credential attacks, such as brute forcing.
+
+When it comes to user group analysis, attackers look into returned data to identify group memberships and permissions. Developing an understanding of this allows an attacker to determine if any users have administrative privileges or belong to strategic resource groups. Metasploit modules assist in advanced enumeration activities concerning NT domain structures, offering a deep dive into user group associations.
+
+---
+
+Understanding each subtopic of NetBIOS Enumeration is critical for constructing an effective reconnaissance strategy. These techniques harness the unguarded nature of NetBIOS over internal networks to reveal invaluable authentication and configuration data.
