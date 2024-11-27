@@ -1,0 +1,130 @@
+---
+title: Assessing Access Controls and Permissions in Cybersecurity
+description: Explore effective techniques for evaluating access controls and permissions
+  to enhance network security and prevent unauthorized access.
+keywords:
+- access controls
+- permissions assessment
+- network security
+- privilege escalation
+- ACL analysis
+- user enumeration
+- cybersecurity techniques
+- credential harvesting
+- group memberships
+- security vulnerabilities
+---
+
+### Assessing Access Controls and Permissions
+
+Understanding and assessing access controls and permissions is crucial in determining the security posture of a network. It involves identifying and analyzing how privileges are assigned to users and systems, allowing you to discover potential vulnerabilities that may be exploited for unauthorized access or privilege escalation.
+
+#### Identifying User Accounts
+
+In offensive cybersecurity, identifying user accounts that hold significant permissions is a primary step. These accounts could provide access to sensitive areas or functions within a network. To enumerate these accounts:
+
+- **LDAP Queries**: If the target network uses directory services like Active Directory, LDAP queries can be utilized to extract user account details. The command-line tool `ldapsearch` can be employed to perform these queries:
+
+  ```bash
+  ldapsearch -x -h <LDAP_SERVER> -D "<BIND_DN>" -w <PASSWORD> -b "<BASE_DN>" "(objectClass=person)" cn uid
+  ```
+
+- **Net Commands**: On Windows networks, the `net user` command can be used locally or over SMB to list users:
+
+  ```shell
+  net user /domain
+  ```
+
+#### Analyzing Permission Inheritance
+
+Permission inheritance in file systems or directory services can inadvertently grant higher privileges than intended, creating security risks. Understanding and analyzing these permissions help in identifying such risk points.
+
+- Tools like `icacls` on Windows can list inherited permissions on files and folders, highlighting potential vulnerabilities:
+
+  ```shell
+  icacls "C:\Path\To\Directory" /T | findstr "Inherited"
+  ```
+
+- For complex environments, scripts can be used to recursively identify permission inheritance and display anomalous privileges.
+
+#### Enumerating Group Memberships
+
+Group memberships often dictate what resources or permissions a user will inherit. Enumerating group memberships is critical to understanding how access is structured:
+
+- On Windows, `net group /domain` can list all groups, helping in mapping users to their respective privilege levels.
+  
+  ```shell
+  net group "Domain Admins" /domain
+  ```
+
+- On UNIX-like systems, `/etc/group` file can be parsed to find group memberships:
+
+  ```bash
+  cat /etc/group
+  ```
+
+#### Access Control List (ACL) Analysis
+
+ACLs specify individual user or group permissions on resources. Analyzing them reveals how roles and permissions are defined and can uncover misconfigurations:
+
+- Using `getfacl` on UNIX systems, operators can view ACL entries for understanding current permissions:
+
+  ```bash
+  getfacl /path/to/file
+  ```
+
+- On Windows, the `powershell` cmdlet `Get-Acl` helps in extracting ACL data for further analysis:
+
+  ```powershell
+  Get-Acl C:\Path\To\Resource | Format-List
+  ```
+
+#### Detecting Excessive Permissions
+
+Excessive permissions can lead to security weaknesses allowing attackers an easier path to privilege escalation. This involves comparing actual permissions against least privilege guidelines and identifying discrepancies.
+
+- Automated tools like `Bloodhound` can be used in Active Directory environments to visualize and detect excessive permissions and potential attack paths.
+  
+- Manual reviews of permission sets against business processes help in identifying unneeded privileges.
+
+#### Bypassing Access Restrictions
+
+By understanding misconfigured permissions, attackers may bypass normal access restrictions. This involves exploiting permission exploits and leveraging found paths to increase access:
+
+- Using known vulnerabilities in misconfigured systems or overly permissive ACLs allows attackers to execute commands or access data beyond their current privileges.
+
+- Techniques such as DLL hijacking or escalating host machine permissions by exploiting service vulnerabilities are common methods of bypassing.
+
+#### Credential Harvesting Preparation
+
+Weak permissions can expose credential files or stores to an adversary. Preparation involves identifying such potential exposures for extraction:
+
+- Using `Mimikatz` to exploit Windows credential stores exposed due to weak file permissions:
+
+  ```shell
+  sekurlsa::logonpasswords
+  ```
+
+- For UNIX systems, inspecting shadow files and comparing hashes can lead to credential extraction when permissions allow unauthorized access.
+
+#### Privilege Escalation through Permissions
+
+After identifying weaknesses, privilege escalation becomes a target to gain further access or control. By leveraging the discrepancies in permissions, operators can elevate their privileges:
+
+- Escalating privileges by exploiting permission flaws found during enumeration, such as adding the current user to a privileged group.
+
+- Employing scripts and automated tools that can exploit privilege escalation vectors highlighted by weak permission configurations.
+
+#### Cleanup and Logging
+
+Once assessments are complete, cleaning up traces to avoid detection is necessary. This involves understanding how logs are generated and stored:
+
+- Resetting permissions or reversing changes made during testing:
+
+  ```bash
+  chmod 700 /path/to/previously/modified/file
+  ```
+
+- Modifying or deleting logs related to these operations, often requiring access to system-level logging mechanisms. However, ethical considerations and legal boundaries must always be observed.
+
+Through these detailed explorations, offensive practitioners can methodically assess, exploit, and utilize access controls and permissions, broadening their understanding and capabilities within network environments.
