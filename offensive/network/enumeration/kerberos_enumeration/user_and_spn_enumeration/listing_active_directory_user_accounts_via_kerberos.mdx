@@ -1,0 +1,61 @@
+---
+title: Listing Active Directory User Accounts via Kerberos
+description: Discover techniques to enumerate Active Directory user accounts using
+  Kerberos, enhancing your network security assessments.
+keywords:
+- Kerberos user enumeration
+- Active Directory accounts
+- Kerberos authentication
+- enumerating user accounts
+- Kerberoasting
+- ticket requests
+- Active Directory enumeration
+- network security
+- KDC operations
+---
+
+# Listing Active Directory User Accounts via Kerberos
+
+## Understanding Kerberos Protocol
+
+### Kerberos Authentication Overview
+
+Kerberos is a network authentication protocol designed to provide strong authentication for client-server applications by using secret-key cryptography. It aims to prevent eavesdropping and replay attacks. Within an Active Directory environment, Kerberos serves as the primary authentication mechanism. The protocol operates around the concept of 'tickets' to allow nodes communicating over a non-secure network to prove their identity in a more secure manner.
+
+The process begins with the client authenticating themselves to the Key Distribution Center (KDC), receiving a Ticket Granting Ticket (TGT). This TGT can then be used to request service tickets for specific services within the network, facilitating robust and efficient authentication through the use of symmetric key cryptography.
+
+### Key Distribution Center (KDC) Operations
+
+The Key Distribution Center is a critical component of the Kerberos protocol. It consists of two main services: the Authentication Service (AS) and the Ticket Granting Service (TGS). The AS handles the initial authentication of the user or service, issuing a TGT. Once the user has the TGT, they can request service tickets from the TGS for individual services.
+
+In the enumeration of user accounts, understanding the interaction with the KDC is crucial. The entire process relies on initiating ticket requests which can, under certain circumstances, reveal valuable information about user accounts within the Active Directory domain.
+
+## Active Directory Interaction Through Kerberos
+
+### Kerberoasting and its Implications
+
+Kerberoasting is an attack technique abusing the Kerberos protocol to extract service account credentials from the Active Directory. By requesting service tickets for Service Principal Names (SPNs), a potential attacker can further leverage these against the Kerberos infrastructure. The same attack vectors used for SPN extraction can be adapted and utilized to enumerate domain user accounts through their service ticket requests. 
+
+### Kerberos Tickets and Active Directory Enumeration
+
+The Kerberos ticket mechanism can inadvertently facilitate user account enumeration. By making calculated requests for service tickets and analyzing the responses, an attacker can glean insights into the existence and properties of user accounts. This process involves intercepting and analyzing ticket requests and responses between clients and the KDC.
+
+## Technique Execution for User Enumeration
+
+### Enumerating Domain User Accounts
+
+Domain user accounts can be enumerated by leveraging Kerberos service ticket requests. This can be done by initiating Authentication Service Requests (AS-REQ) without sending any passwords—simply requesting information. Various tools can automate these processes, sending out multiple AS-REQ requests to gauge responses based on existent and non-existent users.
+
+### Leveraging AS-REQ and TGS-REQ for Enumeration
+
+AS-REQ (Authentication Service Request) and TGS-REQ (Ticket Granting Service Request) packets are fundamental to the enumeration process. An AS-REQ sent for a non-existent user will generally receive a negative response from the KDC, whereas requests for existing users might solicit different reactions, allowing inference of valid account names.
+
+## Integration with Existing Enumeration Strategies
+
+### Cross-referencing Kerberos Output with Other Enumerations
+
+Once Kerberos-based enumeration has gathered user account data, it is crucial to cross-reference these findings with other network enumeration outputs. This can include information obtained from SMB shares, LDAP queries, or previous network recon tasks. Creating a comprehensive map of user and service accounts becomes feasible with an enriched data set.
+
+### Handling Kerberos Logging and Detection Mechanisms
+
+Kerberos operations, due to their critical nature, are closely monitored within most enterprise environments. Therefore, understanding and navigating typical logging and detection mechanisms is important to avoid triggering alerts. Analysts often modify their approach by disguising the steps to blend with normal traffic patterns, possibly pacing their requests or scheduling activities during peak times. In-depth knowledge of how the event logs capture activities can guide this obfuscation to maintain stealth.
