@@ -1,0 +1,61 @@
+---
+title: 'Rlogin Enumeration: Techniques for Effective Detection'
+description: Discover comprehensive techniques for Rlogin enumeration, including service
+  detection, user account enumeration, and trusted host discovery.
+keywords:
+- Rlogin enumeration
+- service detection
+- user account enumeration
+- trusted hosts discovery
+- network enumeration
+- Rlogin service
+- brute force username
+- trust relationships
+---
+
+### Rlogin Enumeration
+
+#### [Service and Version Detection](offensive/network/enumeration/rlogin_enumeration/service_and_version_detection)
+
+Rlogin, a legacy remote login protocol, requires precise service and version detection for effective enumeration. The detection process begins with identifying Rlogin's presence on a target network, followed by determining the specific version in use.
+
+- **[Identifying Rlogin Service](offensive/network/enumeration/rlogin_enumeration/service_and_version_detection/identifying_rlogin_service/)**
+  - Tools such as Netcat and Telnet can be leveraged to perform banner grabbing, directly interacting with the service to reveal its type. Sending manual connection requests to standard Rlogin ports can provide initial service identification. Additionally, `nmap` with scripts designed to identify Rlogin services effectively pinpoints active ports and services by executing the command:
+    ```bash
+    nmap -p 513 <target-ip> --script=rlogin-brute
+    ```
+
+- **[Detecting Rlogin Version](offensive/network/enumeration/rlogin_enumeration/service_and_version_detection/detecting_rlogin_version/)**
+  - Version detection is crucial for understanding the specific deployment of Rlogin. This process often involves further querying once a service is identified to extract version information, using `nmap` with version detection capabilities:
+    ```bash
+    nmap -sV -p 513 <target-ip>
+    ```
+  - Such information assists in identifying potential vulnerabilities or misconfigurations related to the specific Rlogin version in use.
+
+#### [User Account Enumeration](offensive/network/enumeration/rlogin_enumeration/user_account_enumeration)
+
+User account enumeration targets discovering user accounts that can access the Rlogin service. This provides a foundation for further penetration testing or exploitation.
+
+- **[Listing Available Rlogin Users](offensive/network/enumeration/rlogin_enumeration/user_account_enumeration/listing_available_rlogin_users/)**
+  - Brute forcing usernames is a standard method in user account enumeration. Tools like Hydra or Medusa can automate this process by systematically trying username lists:
+    ```bash
+    hydra -L usernames.txt -P passwords.txt rlogin://<target-ip>
+    ```
+  - Successful attempts reveal valid usernames, facilitating subsequent steps in exploitation or further reconnaissance.
+
+- **[Identifying Privileged Accounts](offensive/network/enumeration/rlogin_enumeration/user_account_enumeration/identifying_privileged_accounts/)**
+  - Special focus on identifying accounts with elevated privileges, as they are usually prioritized in security assessments. Reviewing leaked or intercepted data to recognize privileged accounts is paramount.
+
+#### [Trusted Hosts Discovery](offensive/network/enumeration/rlogin_enumeration/trusted_hosts_discovery)
+
+In Rlogin environments, identifying systems with trusted host status is vital, as these often have less restricted access.
+
+- **[Enumerating Trusted Hosts from .rhosts Files](offensive/network/enumeration/rlogin_enumeration/trusted_hosts_discovery/enumerating_trusted_hosts_from_.rhosts_files/)**
+  - The `.rhosts` file checks on the target system serve as an initial step. By enumerating these files, attackers can map the network for potential lateral movement and pivoting points.
+
+- **[Assessing Trust Relationships in Network](offensive/network/enumeration/rlogin_enumeration/trusted_hosts_discovery/assessing_trust_relationships_in_network/)**
+  - A comprehensive sweep using scanning tools like Nmap helps in identifying `_hosts.equiv_` file on hosts to understand trust relationships better. Enhance these findings with network scans aimed at revealing all trusted hosts within the network:
+    ```bash
+    nmap -p 513 --script rlogin-trust --open <network-range>
+    ```
+  - Exploring these trust paths potentially exposes new vectors for exploitation.
