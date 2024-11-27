@@ -1,0 +1,66 @@
+---
+title: User and Mailbox Enumeration Techniques in IMAP
+description: Learn essential techniques for user and mailbox enumeration in IMAP,
+  including username discovery and mailbox structure analysis.
+keywords:
+- IMAP enumeration
+- username enumeration
+- mailbox discovery
+- IMAP security
+- email phishing
+- access control analysis
+- brute force enumeration
+- response timing analysis
+- synchronization features
+- encryption tactics
+---
+
+# User and Mailbox Enumeration
+
+User and Mailbox Enumeration in the context of IMAP is a critical skill set for offensive cybersecurity professionals. This involves the ability to identify valid usernames on a target IMAP server and uncover the mailbox structure, both of which can provide insights and entry points into a network.
+
+## [Enumerating Valid Usernames](offensive/network/enumeration/imap_enumeration/user_and_mailbox_enumeration/enumerating_valid_usernames)
+
+### Brute Force Username Enumeration
+
+In brute force username enumeration, attackers systematically and programmatically attempt logins with a list of potential usernames. This requires configuring an IMAP client to handle repeated login attempts while capturing and analyzing server responses. IMAP servers typically respond with distinct codes or messages that indicate whether a username exists. By analyzing these responses, attackers can discern valid usernames. Consideration must be given to account lockout mechanisms, and adjustments made, such as timing delays between attempts, to avoid detection or lockouts.
+
+### Exploit Common IMAP Server Misconfigurations
+
+Exploiting server misconfigurations involves identifying and taking advantage of settings that inadvertently reveal user information. Some IMAP implementations are more verbose with error messages or misconfigured to validate the existence of usernames. Tools like `hydra` or `medusa` are often utilized in tandem with specific IMAP modules to automate the exploitation of these configurations, providing a systematic approach to uncovering valid usernames.
+
+### Leveraging Known Userlists
+
+Integrating known userlists, often gathered from previous engagements or data breaches, can enhance username enumeration. Attackers often use dictionary attacks wherein extensive lists of likely usernames are leveraged against the server. These lists can be procured from sources such as past breaches and open-source repositories. Tools that support these techniques allow for efficient cross-referencing against large datasets, increasing the likelihood of finding valid users.
+
+### Analyzing Response Timing
+
+Detailed response timing analysis involves crafting specialized scripts to measure the Round Trip Time (RTT) of server responses. Subtle timing discrepancies can indicate the presence of valid usernames, as authenticating a legitimate username might take slightly longer due to additional processing by the server. Time-based attacks require precision and the ability to eliminate network-induced variances, often incorporating statistical methods to ensure accuracy.
+
+### Social Engineering Tactics
+
+Using social engineering to capture valid credentials typically involves crafting phishing emails that entice users to reveal login details under false pretenses. IMAP phishing focuses on mimicking backend login prompts or email provider branding, coupled with sophisticated spear-phishing techniques. Sophisticated obfuscation tactics are used to bypass detection, often incorporating encryption within email headers or bodies to evade spam filters and detection mechanisms.
+
+## [Mailbox Structure Discovery](offensive/network/enumeration/imap_enumeration/user_and_mailbox_enumeration/mailbox_structure_discovery)
+
+### IMAP Folder Listing
+
+IMAP supports folder listing commands like `LIST` and `LSUB`, which can reveal a user's mailbox structure. These commands can be issued directly to the IMAP server to enumerate folders, effectively mapping out the organization of a mailbox. Automated scripts can be configured to routinely execute these commands and parse the outputs for analysis.
+
+### Analyzing Access Controls
+
+Discovering and analyzing Access Control Lists (ACLs) is essential for understanding permissions across a mailbox system. Through the use of the `ACL` command, attackers can determine access rights for different users or entities within an IMAP system. Poorly configured ACLs can inadvertently expose sensitive mailboxes or folders, which can be leveraged for further enumeration or data extraction.
+
+### Exploiting Synchronization Features
+
+Synchronization commands such as the IDLE command can be exploited to monitor real-time changes within a mailbox. By leveraging these features, attackers can observe when new mail arrives or when folders are updated, providing insights into user activity patterns. Such monitoring requires persistence and the ability to maintain a foothold without raising suspicion within the network.
+
+### Content Keyword Searches
+
+Advanced content search queries can be executed using IMAP's search capabilities, allowing enumeration based on specific keywords or phrases. This tactic involves sending targeted search requests to capture email content that matches predefined criteria, enabling focused data discovery efforts. This form of reconnaissance can uncover sensitive information within emails and attachments relevant to targeted objectives.
+
+### Metadata Analysis
+
+Metadata extracted from email headers can provide insights into user behaviors, roles, and communications within an organization. Analyzing metadata involves examining headers for routing information, server stamps, and message IDs, facilitating the understanding of the email flow and potential internal structures. This analysis may also involve correlating timestamps and sender/receiver pairings to build a network of communications.
+
+Understanding these techniques and methodologies can significantly enhance an attacker's ability to enumerate users and mailboxes through IMAP, facilitating deeper penetration into target networks. Each of these techniques incorporates a variety of tools and commands, focusing on exploiting server features and behaviors to extract maximum information.
