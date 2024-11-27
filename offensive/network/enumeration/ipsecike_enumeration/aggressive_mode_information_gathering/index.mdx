@@ -1,0 +1,74 @@
+---
+title: Aggressive Mode Information Gathering in IKE Protocols
+description: Learn to gather information using aggressive mode in IKE protocols, including
+  PSK hash extraction and endpoint enumeration techniques.
+keywords:
+- aggressive mode
+- IKE protocols
+- information gathering
+- pre-shared key hash
+- endpoint enumeration
+- IPSec
+- network enumeration
+- cybersecurity techniques
+---
+
+### Aggressive Mode Information Gathering
+
+In the realm of IPSec/IKE enumeration, aggressive mode information gathering plays a pivotal role in identifying potential vulnerabilities. Two primary aspects of this technique include extracting the pre-shared key hash and enumerating endpoint information, both integral to forming a comprehensive understanding of the target network. The aggressive mode in IKE protocols provides a faster exchange than the main mode but at the cost of reduced security. This makes it a prime target for attackers seeking to gather useful information.
+
+#### Understanding Aggressive Mode Negotiation
+
+Aggressive mode within the IPsec/IKE protocols is characterized by a three-message exchange that is both quicker and more open to interception than the main mode, which employs a six-message exchange. This mode sacrifices some security features present in main mode exchanges to expedite the connection setup process, making it an attractive target for attackers due to its transmission of more recognizable negotiating parameters. Analyzing traffic patterns through this mode allows attackers to ascertain shared secret hashes without requiring an extended handshake often seen in the main mode.
+
+#### Extracting Pre-Shared Key Hash
+
+Extracting the pre-shared key (PSK) hash is a crucial component of aggressive mode information gathering. During an aggressive mode exchange, participants transmit encrypted hashes of the pre-shared key. Attackers can intercept these hashes and subsequently perform offline attacks to crack them.
+
+- **Capturing the Hash**: Use tools like `ike-scan` to initiate a phase 1 IKE exchange. The goal is to capture the aggressive mode's second message, where the identity payload is encrypted with a hash of the pre-shared key.
+  
+- **Tools and Techniques**: `ike-scan` and similar tools are pivotal for this form of extraction. Running the following `ike-scan` command can help initiate an aggressive mode handshake and extract the hash:
+
+  ```bash
+  ike-scan --aggressive --id=TARGET_IDENTIFIER TARGET_IP
+  ```
+
+  Here, `TARGET_IDENTIFIER` is an identifier (e.g., a username or group name) that might be used during the handshake, and `TARGET_IP` is the IP address of the target.
+  
+- For more details on this subtopic, refer to [Extracting Pre-Shared Key Hash](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/extracting_pre-shared_key_hash).
+
+#### Enumerating Endpoint Information
+
+The process of enumerating endpoint information involves identifying vital details about the IKE/IPsec endpoints, such as their IP addresses, vendor information, and device characteristics. This information can be leveraged to tailor further attacks or intelligence gathering efforts.
+
+- **Endpoint Identifier Payloads**: During the aggressive mode exchange, endpoint identifiers are exchanged. These can often reveal the IP address alongside other identifying characteristics.
+  
+- **Techniques**: With tools like `strongSwan`, attackers can observe and collect endpoint attributes transmitted during the handshake. Listening for the payloads that contain these identifiers aids in mapping out network devices.
+
+- **Practical Exercise**: By executing:
+
+  ```bash
+  strongswan pki --print --in id_pub.pem --type cert
+  ```
+
+  You can parse and interpret certificates that can disclose substantial endpoint details.
+  
+- For additional information on enumerating endpoints, explore [Enumerating Endpoint Information](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/enumerating_endpoint_information).
+
+#### Automated Enumeration Tools
+
+Efficient enumeration relies on automation. Tools such as `pike` and scripting functionalities within `ike-scan` facilitate streamlined operations for information collectors. 
+
+- **Configuration**: Proper configuration of tools can rapidly sequence through potential targets, highlighting vulnerable configurations.
+  
+- **Scripts**: Employing scripts to automate these processes allows for scalability and consistency, ensuring that data gathered is reliable and comprehensive. Custom scripts can sequence through multiple IP addresses to map out entire subnets.
+
+#### Mitigating Aggressive Mode Vulnerabilities
+
+To bolster security against aggressive mode information gathering:
+
+- **Analysis**: Conduct thorough audits for aggressive mode usage. Consider disallowing its use unless absolutely necessary due to inherent weaknesses.
+
+- **Loopback Address Exposure**: Ensure firewall rules and security policies handle traffic correctly to prevent information leakage through improper aggressive mode configurations. Adjust configuration to mandate stronger encryption and key exchange parameters. 
+
+Implementing these practices reduces the threat landscape posed by aggressive mode, ensuring that system exchanges remain resilient against unauthorized information collection.
