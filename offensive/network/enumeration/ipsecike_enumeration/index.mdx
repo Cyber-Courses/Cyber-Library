@@ -1,0 +1,48 @@
+---
+title: IPsec/IKE Enumeration Techniques and Best Practices
+description: Explore detailed techniques for IPsec/IKE enumeration, service detection,
+  phase analysis, and aggressive mode information gathering.
+keywords:
+- IPsec enumeration
+- IKE enumeration
+- network enumeration
+- service detection
+- encryption algorithms
+- aggressive mode
+- security protocols
+---
+
+### IPsec/IKE Enumeration
+
+#### [Service and Version Detection](offensive/network/enumeration/ipsecike_enumeration/service_and_version_detection)
+
+**IPsec and IKE Service Identification**  
+The process of detecting IPsec and IKE services involves utilizing network scanning tools capable of identifying security associations and key exchanges. Tools like Nmap can be employed to identify IPsec/IKE services and their associated ports, typically UDP port 500 for traditional configurations and port 4500 for NAT traversal scenarios. Detection involves crafting packets that mimic legitimate IKE negotiation messages to elicit responses from servers or clients.
+
+**Version Discovery**  
+Determining the IKE version in use, whether IKEv1 or IKEv2, is critical due to differences in their security setups and vulnerabilities. This can be achieved through banner grabbing, where probing packets are sent to elicit version-specific responses from an IKE-enabled machine. These responses help differentiate between IKEv1 and IKEv2, allowing attackers to tailor their subsequent methodologies to the specific vulnerabilities present in each protocol version.
+
+#### [IKE Phase 1 and Phase 2 Enumeration](offensive/network/enumeration/ipsecike_enumeration/ike_phase_1_and_phase_2_enumeration)
+
+**IKE Phase 1 Negotiation Overview**  
+During the initial stage of IKE communication, Phase 1 sets up a secure channel for further negotiations. Through techniques such as passive packet inspection and active probing, attackers can capture ISAKMP messages exchanged during Phase 1. Successful enumeration here can disclose details about encryption algorithms, hash functions, and Diffie-Hellman groups utilized by the target system, providing insight into the target’s security posture.
+
+**IKE Phase 2 Communication**  
+Phase 2 exchanges, also known as Quick Mode in IKE, build on the secure channel established in Phase 1 to set up IPsec SAs (Security Associations). Attackers can target these communications to determine the specific protocols used (e.g., AH or ESP), as well as details of the encryption algorithms and lifetimes involved in IPsec tunnel formation. Tools like Wireshark and specific scripts in Nmap provide a means to analyze these communications for vulnerabilities or misconfigurations.
+
+#### [Aggressive Mode Information Gathering](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering)
+
+**Aggressive Mode Characteristics**  
+Aggressive Mode in IKE is known for trading security for speed by reducing the number of messages exchanged during initial setup. This characteristic makes it susceptible to security flaws, allowing attackers to collect valuable information such as pre-shared keys' hashes. Enumeration in this mode can expose responder identities and potentially the IP addresses of endpoint devices involved in initial negotiations.
+
+**Attack Vectors for Gathering Information**  
+Combining dictionary or brute force tactics with captured IKE negotiation details can reveal pre-shared keys used in Aggressive Mode. Attackers target the known vulnerabilities of this mode, especially where weak or default configurations are employed. Alternatively, misconfigured endpoints and firewall rules might divulge network topology or endpoint-specific information. Tools such as ike-scan and hashcat are employed to perform these operations, providing capabilities to capture and decrypt IKE communications effectively.
+
+For further exploration of these topics, delve into the associated links for detailed procedural and command-based guidance on execution:
+
+- [Identifying IKE Versions: IKEv1 and IKEv2](offensive/network/enumeration/ipsecike_enumeration/service_and_version_detection/identifying_ike_versions_ikev1_and_ikev2/)
+- [Detecting IPsec Protocols: AH & ESP](offensive/network/enumeration/ipsecike_enumeration/service_and_version_detection/detecting_ipsec_protocols_ah_esp/)
+- [Identifying Supported Encryption Algorithms](offensive/network/enumeration/ipsecike_enumeration/ike_phase_1_and_phase_2_enumeration/identifying_supported_encryption_algorithms/)
+- [Discovering Hashing and Authentication Methods](offensive/network/enumeration/ipsecike_enumeration/ike_phase_1_and_phase_2_enumeration/discovering_hashing_and_authentication_methods/)
+- [Extracting Pre-shared Key Hash](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/extracting_pre-shared_key_hash/)
+- [Enumerating Endpoint Information](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/enumerating_endpoint_information/)
