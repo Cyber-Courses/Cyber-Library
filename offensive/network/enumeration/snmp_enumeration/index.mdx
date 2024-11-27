@@ -1,0 +1,71 @@
+---
+title: Comprehensive Guide to SNMP Enumeration Techniques
+description: Explore effective methods for SNMP enumeration, covering service detection,
+  community string discovery, and OID exploration.
+keywords:
+- SNMP enumeration
+- service detection
+- community strings
+- OID exploration
+- network security
+- information gathering
+- network device enumeration
+---
+
+## SNMP Enumeration
+
+### Service and Version Detection
+SNMP service and version detection is the foundation for successful enumeration. The process begins by identifying active SNMP services on the target network. SNMP services typically run on UDP port 161. Various network scanning tools like Nmap can be used to confirm the presence of SNMP services:
+
+```bash
+nmap -sU -p 161 --script=snmp-info <target-ip>
+```
+
+This command will scan the target IP for SNMP services. Once detected, understanding the SNMP version (v1, v2c, or v3) in use is crucial. Each version has different security features with SNMP v3 including authentication and encryption. For additional insights on SNMP service detection and versioning, see [Service and Version Detection](offensive/network/enumeration/snmp_enumeration/service_and_version_detection).
+
+### Community String Discovery
+Community strings in SNMP v1 and v2c function similarly to passwords. These strings control access and determine the level of information retrievable through SNMP queries. Default and weak community strings like "public" or "private" can be attacked to gain unauthorized access.
+
+#### Default and Weak Community Strings
+SNMP defaults are a significant security concern. Operations can test commonly used community strings by leveraging scans that use predefined lists. An insightful resource is [Default and Weak Community Strings](offensive/network/enumeration/snmp_enumeration/community_string_discovery/default_and_weak_community_strings/), where techniques for exploiting default settings are discussed in detail.
+
+#### Brute Forcing Community Strings
+Brute forcing involves attempting numerous strings to guess the valid community string. Tools such as `onesixtyone` can automate this task, testing against known SNMP devices:
+
+```bash
+onesixtyone -c community.txt -i ips.txt
+```
+
+This command tries different community strings from `community.txt` on IP addresses from `ips.txt`. Read more about comprehensive approaches at [Brute Forcing Community Strings](offensive/network/enumeration/snmp_enumeration/community_string_discovery/brute-forcing_community_strings/).
+
+### System and Network Information Gathering
+A critical phase in SNMP enumeration is obtaining detailed system and network insights through legitimate community strings.
+
+#### Enumerating Network Device Information
+You can extract specifics like system descriptors, locations, or roles from target devices, using tools like `snmpwalk`:
+
+```bash
+snmpwalk -v2c -c public <target-ip>
+```
+
+This command may reveal valuable system descriptions and device-specific data. For further exploration on device fingerprinting, refer to [Enumerating Network Device Information](offensive/network/enumeration/snmp_enumeration/system_and_network_information_gathering/enumerating_network_device_information/).
+
+#### Collecting System and Interface Details
+Aoother dimension involves gathering performance metrics and interface details. This can include interface counters and traffic stats, providing insights into network load or potential bottlenecks. Investigate methodologies and operations at [Collecting System and Interface Details](offensive/network/enumeration/snmp_enumeration/system_and_network_information_gathering/collecting_system_and_interface_details/).
+
+### OID and MIB Exploration
+Object Identifiers (OIDs) and Management Information Bases (MIBs) represent the data SNMP can query on a device.
+
+#### SNMP Walk
+SNMP walks are broad queries run across a sequence of OIDs to gather extensive data. This is crucial for mapping current device configurations and parameter settings:
+
+```bash
+snmpwalk -v2c -c public <target-ip> 1.3.6.1
+```
+
+This command navigates the OID tree, delivering a snapshot of what queryable data exists. Delve into more on OID enumeration at [SNMP Walk](offensive/network/enumeration/snmp_enumeration/oid_and_mib_exploration/snmp_walk/).
+
+#### Mapping Custom MIBs for Device-specific Data
+Custom MIBs enable parsing of less obvious, often device-specific data. Employing these MIBs requires understanding their structure and application, turning opaque data into actionable insights. Discover more about customization methods at [Mapping Custom MIBs for Device-specific Data](offensive/network/enumeration/snmp_enumeration/oid_and_mib_exploration/mapping_custom_mibs_for_device-specific_data/).
+
+By leveraging these detailed methodologies and utilizing relevant commands, security professionals can efficiently enumerate and extract critical network and system data through SNMP services, exposing avenues for potential exploitation or threat assessments.
