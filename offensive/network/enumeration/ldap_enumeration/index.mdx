@@ -1,0 +1,72 @@
+---
+title: Comprehensive Guide to LDAP Enumeration Techniques
+description: Explore effective LDAP enumeration techniques for extracting user, group,
+  and schema information in network environments.
+keywords:
+- LDAP enumeration
+- service detection
+- user enumeration
+- group enumeration
+- schema discovery
+- organizational unit enumeration
+- penetration testing
+- directory structure
+- network security
+- LDAP queries
+---
+
+## LDAP Enumeration
+
+LDAP Enumeration involves querying and extracting valuable information from Lightweight Directory Access Protocol (LDAP) services within a network. This process is essential for penetration testers seeking to understand the directory structure, user and group data, and other sensitive information. Below are detailed explanations and techniques for effectively enumerating LDAP services.
+
+### [Service and Version Detection](offensive/network/enumeration/ldap_enumeration/service_and_version_detection)
+
+To effectively begin LDAP enumeration, identifying the service and its version is crucial. This can be achieved through several technical approaches:
+
+- **Open Ports Identification**: Nmap is commonly used for port scanning to determine active services on the network. The command `nmap -p 389,636 target_ip` targets the default LDAP (port 389) and LDAPS (port 636) ports.
+- **Banner Grabbing**: Utilize netcat or telnet to connect to LDAP ports and capture service banners. This step can reveal the LDAP service version. For instance:
+  ```bash
+  nc target_ip 389
+  ```
+- **Protocol Analysis**: Use Wireshark to intercept LDAP packets. Filters like `ldap` can be applied to analyze LDAP protocol traffic, revealing version and service details.
+
+### [Domain and Organizational Unit (OU) Enumeration](offensive/network/enumeration/ldap_enumeration/domain_and_organizational_unit_ou_enumeration)
+
+Understanding the domain and organizational unit (OU) structure is critical in LDAP enumeration. Techniques include:
+
+- **[LDAP DIT (Directory Information Tree) Inspection](offensive/network/enumeration/ldap_enumeration/domain_and_organizational_unit_ou_enumeration/enumerating_domains_and_forests/)**: Query the LDAP directory for the root DSE base to identify directory name and domain information.
+- **[Enumerate OUs](offensive/network/enumeration/ldap_enumeration/domain_and_organizational_unit_ou_enumeration/identifying_organizational_units/)**: Execute LDAP queries using tools like `ldapsearch` to list the OUs:
+  ```bash
+  ldapsearch -x -h target_ip -b "dc=example,dc=com" "(objectClass=organizationalUnit)"
+  ```
+- **SPN Scanning**: Use scripts or tools such as `kerbrute` to scan for service principal names (SPNs), aiding in identifying organizational units and structures.
+
+### [User and Group Enumeration](offensive/network/enumeration/ldap_enumeration/user_and_group_enumeration)
+
+Gathering user and group information is a potent aspect of LDAP enumeration that includes:
+
+- **[Identify User Objects](offensive/network/enumeration/ldap_enumeration/user_and_group_enumeration/listing_users_and_attributes/)**: Perform LDAP queries to list user entries. Focus on objectClass attributes such as `person` or `user`:
+  ```bash
+  ldapsearch -x -h target_ip -b "dc=example,dc=com" "(objectClass=person)"
+  ```
+- **[Extract Group Memberships](offensive/network/enumeration/ldap_enumeration/user_and_group_enumeration/group_membership_and_privilege_discovery/)**: Query the directory to extract group membership details using attributes like `memberOf`:
+  ```bash
+  ldapsearch -x -h target_ip -b "dc=example,dc=com" "(memberOf=*)"
+  ```
+- **Account Information Gathering**: Focus on detailed attributes such as `mail`, `telephoneNumber`, or other user-specific details to gather comprehensive user data.
+
+### [Schema and Attribute Discovery](offensive/network/enumeration/ldap_enumeration/schema_and_attribute_discovery)
+
+Discovering schema and attributes provides insight into available objects and their properties:
+
+- **[Discover Schema Base](offensive/network/enumeration/ldap_enumeration/schema_and_attribute_discovery/exploring_ldap_schema_for_available_attributes/)**: Query LDAP to list schema elements and understand directory object classes and attributes for more targeted enumeration:
+  ```bash
+  ldapsearch -x -h target_ip -s base -b "cn=schema" "(objectClass=subschema)"
+  ```
+- **[Attribute Enumeration](offensive/network/enumeration/ldap_enumeration/schema_and_attribute_discovery/identifying_sensitive_attributes_e.g._passwordlastset/)**: Execute LDAP queries to uncover all attributes related to specific objects, such as discovering significant attributes like `pwdLastSet`:
+  ```bash
+  ldapsearch -x -h target_ip -b "dc=example,dc=com" "(pwdLastSet=*)"
+  ```
+- **Customized Schema Inspection**: Investigate the directory for custom schema extensions, as they may reveal application-specific data or sensitive information not part of the default schema.
+
+Through these techniques, penetration testers can methodically gather a comprehensive understanding of LDAP services and the valuable information they contain. This knowledge is critical for developing further activities such as exploiting user credentials or organizational weaknesses.
