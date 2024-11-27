@@ -1,0 +1,52 @@
+---
+title: Service and Version Detection for IKE and IPsec Protocols
+description: Learn methodologies for detecting IKE versions and identifying IPsec
+  protocols effectively.
+keywords:
+- IKE version detection
+- IPsec protocol identification
+- AH ESP detection
+- IKEv1 IKEv2 differences
+- network enumeration
+- service detection techniques
+- offensive cybersecurity
+- packet analysis
+---
+
+## Service and Version Detection
+
+In the realm of IPsec/IKE enumeration, service and version detection plays a crucial role in understanding the service architectures and protocol versions deployed within a network. The ability to effectively detect and differentiate versions of the Internet Key Exchange (IKE) and identify IPsec protocols such as Authentication Header (AH) and Encapsulating Security Payload (ESP) are essential skills in offensive cybersecurity.
+
+### [Identifying IKE Versions (IKEv1 and IKEv2)](offensive/network/enumeration/ipsecike_enumeration/service_and_version_detection/identifying_ike_versions_ikev1_and_ikev2)
+
+#### Protocol Differentiation Techniques
+Understanding the packet structures of IKEv1 and IKEv2 is fundamental. IKEv1 uses distinct payload types and is recognizable by its main mode and aggressive mode, while IKEv2 simplifies negotiations with a more efficient setup and additional message types. Network operators can analyze the key exchange messages to discern differences, relying on technical specifications to identify unique characteristics of each version.
+
+#### Active Probing for IKE Version Detection
+To actively detect IKE versions, use probing methods that initiate IKE negotiations with the target. Tools like `ike-scan` can be configured to initiate main mode or aggressive mode requests. By scrutinizing the returned packets, you can determine if the response patterns indicate IKEv1 or IKEv2. Command example with `ike-scan`:
+```sh
+ike-scan --trans=1,3,14 --ine=-ike-version=1 <target-ip>
+```
+This command attempts to initiate an IKEv1 negotiation to observe response characteristics.
+
+#### Signature-Based Detection Methods
+Leverage signature detection tools capable of deep packet inspection, such as Snort or Suricata. Configure the systems to recognize known signatures associated with IKE version-specific payloads. Maintaining up-to-date signature databases is critical to ensure recognition accuracy during attacks or security assessments.
+
+#### Remote Version Fingerprinting
+Fingerprinting remotely involves crafting particular packets that elicit identifiable responses from IKE servers. By capturing and analyzing these specific responses, you systematically discern the IKE version. This process often involves fine-tuning packet payloads and leveraging unusual options or flags to increase detection accuracy.
+
+### [Detecting IPsec Protocols (AH, ESP)](offensive/network/enumeration/ipsecike_enumeration/service_and_version_detection/detecting_ipsec_protocols_ah_esp)
+
+#### Evaluating Header Information
+AH and ESP can be differentiated by examining packet headers. Analyze the headers for their protocol fields—AH uses protocol number 51, while ESP uses 50. The presence and structure of these headers within the packets are assessed to establish which protocol is being utilized, focusing on SPI values and additional encryptions or authentications applied.
+
+#### Traffic Pattern Recognition
+In-depth traffic analysis can reveal patterns indicative of AH and ESP usage. By monitoring packet lengths, flow times, and session behaviors, operators can infer protocol use. For example, ESP may reveal consistent payload sizes due to encapsulated security once data is encrypted, unlike the less common AH, which does not encrypt payload data.
+
+#### Active Discovery Techniques
+Probe the network with strategically crafted packets designed to tease out specific responses consistent with AH or ESP. Through manipulation of IP packet headers and payloads, observe the target's reactions and identify traits unique to these protocols.
+
+#### Protocol Identification Through Anomalies
+Use anomaly detection methodologies to spot unusual traffic patterns that suggest AH or ESP usage. Tools like Bro (Zeek) can be configured to flag deviations from normal protocol operations, drawing attention to unauthorized or unexpected IPsec protocol employment within a network environment.
+
+The comprehensively detailed methods in this section equip security professionals with the ability to assess and engage with IKE-based security architectures, revealing pivotal service and version information critical to offensive cybersecurity operations.
