@@ -1,0 +1,66 @@
+---
+title: Comprehensive Guide to Kerberos Enumeration Techniques
+description: Explore essential tools and methods for Kerberos enumeration, focusing
+  on service detection, realm discovery, and user account enumeration.
+keywords:
+- Kerberos enumeration
+- service detection
+- domain discovery
+- SPN enumeration
+- Kerberos security
+- network enumeration
+- Active Directory
+- AS-REP Roasting
+- user enumeration
+- KDC mapping
+---
+
+# Kerberos Enumeration
+
+Kerberos Enumeration is a critical process within offensive cybersecurity aimed at uncovering valuable information about network authentication services. This guide delves into Kerberos-specific techniques, tools, and methodologies that enhance the understanding of service detection, domain and realm discovery, as well as user and service principal name (SPN) enumeration.
+
+## Service Detection
+
+### Identifying Kerberos on Port 88
+Service detection begins with identifying Kerberos services operating on the network. [Nmap](../service_detection) is a quintessential tool that scans networks for open ports, particularly focusing on TCP/UDP port 88, where Kerberos operates. Use the following command to detect Kerberos services:
+```bash
+nmap -p 88 --open -sV -T4 -Pn <target>
+```
+This command scans for open port 88 on the target and attempts to determine the version of the service running.
+
+### Detecting Kerberos Versions and Configurations
+Once the service is detected, it's crucial to determine the specific Kerberos version and its configurations. This often involves analyzing packet captures using [`Wireshark`](../service_detection/detecting_kerberos_versions_and_configurations/). Investigating the Authentication Service (AS) and Ticket Granting Service (TGS) exchange packets can reveal encryption types and protocol versions used. Look for indicators such as the AS-REQ and AS-REP messages that detail the initial authentication requests and responses in Kerberos.
+
+## Domain and Realm Discovery
+
+### Enumerating Kerberos Realm Information
+Discovering domain and realm details within a Kerberos environment is essential for mapping the network's authentication structure. Using tools like `rpcclient` or custom LDAP queries, you can [enumerate realm information](../domain_and_realm_discovery/enumerating_kerberos_realm_information/) from the directory. Commands such as:
+```bash
+rpcclient -U "" -N <target_domain> -c "lsaquery"
+```
+can be leveraged to gain insights into domain naming conventions and potential trust relationships between realms.
+
+### Mapping Domain Controllers and KDCs
+For offensive operations, identifying Domain Controllers (DCs) is crucial, as they host Key Distribution Centers (KDCs), which are pivotal to Kerberos operations. Tools like `nslookup` or `dig` can be used for DNS queries to [map these controllers](../domain_and_realm_discovery/mapping_domain_controllers_and_kdcs/), often using SRV records specified for Kerberos:
+```bash
+dig _kerberos._udp.<domain> SRV
+```
+This returns the list of domain controllers that participate in handling Kerberos authentication requests.
+
+## User and SPN Enumeration
+
+### Listing Active Directory User Accounts via Kerberos
+One of the key tactics in Kerberos enumeration involves extracting user lists from Active Directory using Kerberos protocols. Techniques like [AS-REP Roasting](../user_and_spn_enumeration/listing_active_directory_user_accounts_via_kerberos/) exploit scenarios where accounts lack pre-authentication, allowing adversaries to indirectly harvest valid usernames:
+```bash
+GetNPUsers.py <domain>/<username>:<password> -usersfile <file_with_usernames>
+```
+This command targets password-protected services that can be cracked offline without further interaction with the server.
+
+### Extracting Service Principal Names (SPNs)
+Enumerating SPNs is vital for identifying service accounts in the network. SPNs provide clarity on what services are run under certain user accounts and can often lead to [Kerberoasting](../user_and_spn_enumeration/extracting_service_principal_names_spns/) opportunities:
+```bash
+setspn -Q */* <target_domain>
+```
+This Active Directory tool command helps in listing all registered SPNs within the target domain, revealing accounts exposed to Kerberos ticket attacks.
+
+In essence, Kerberos Enumeration provides a methodical approach towards understanding and exploiting the intricacies of Kerberos authentication mechanisms, empowering cybersecurity professionals to scrutinize services and data pivotal to network security.
