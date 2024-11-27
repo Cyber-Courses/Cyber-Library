@@ -1,0 +1,57 @@
+---
+title: Domain and OU Enumeration in Active Directory
+description: Explore comprehensive techniques for enumerating domains and organizational
+  units within Active Directory to enhance penetration testing.
+keywords:
+- domain enumeration
+- OU enumeration
+- Active Directory
+- ldapsearch
+- BloodHound
+- penetration testing
+- LDAP queries
+- organizational units
+- domain trust relationships
+---
+
+### Domain and Organizational Unit (OU) Enumeration
+
+#### Enumerating Domains and Forests
+
+[Visit Enumerating Domains and Forests](offensive/network/enumeration/ldap_enumeration/domain_and_organizational_unit_ou_enumeration/enumerating_domains_and_forests)
+
+Understanding the structure of domains and forests is crucial for effective penetration testing within an Active Directory (AD) environment. Domains are the cornerstone of AD, serving as administrative boundaries with trust relationships, while forests comprise a collection of domains. Enumerating domains is vital for attackers looking to identify targets and assess the scope of their operation.
+
+To perform domain enumeration, security professionals often utilize tools such as `ldapsearch`, `enum4linux`, and PowerShell scripts. These utilities allow for querying LDAP directories to retrieve information about domain configurations. For example, `ldapsearch` can be employed using the command:
+
+```sh
+ldapsearch -x -h <domain_controller> -D <bind_dn> -W -b "dc=example,dc=com"
+```
+
+This command connects to an LDAP server, authenticates using the distinguished name (`-D`), and queries the base domain. Enumerating domain details often involves extracting metadata from the `rootDSE` entry, providing insights into the forest and domain hierarchy.
+
+Domain enumeration also focuses on dissecting trust relationships. By understanding which domains trust each other, attackers can traverse these relationships in pursuit of expanding their access in a network. Techniques for identifying and exploiting domain trusts include analyzing domain controllers for existing trust links and identifying improperly configured trusts that may serve as entry points for attacks.
+
+Automating these tasks is achieved using scripts that systematically extract domain data. By scripting LDAP queries, penetration testers can efficiently harvest domain-related information, ensuring thoroughness and accuracy while minimizing the time spent on manual queries. Commonly encountered pitfalls include the risk of detection, which can be mitigated by using stealthier methods such as randomized query intervals and utilizing less noisy enumeration tools.
+
+#### Identifying Organizational Units
+
+[Visit Identifying Organizational Units](offensive/network/enumeration/ldap_enumeration/domain_and_organizational_unit_ou_enumeration/identifying_organizational_units)
+
+Organizational Units (OUs) play an instrumental role in structuring an Active Directory by segmenting users and resources into manageable domains. OUs allow for the application of Group Policies and make the administration of complex environments more tractable. From an attacker's perspective, identifying OUs is beneficial for understanding the organization's structure and planning further exploitation activities.
+
+Enumeration of OUs can be conducted using tools like `ldapsearch`, `BloodHound`, and PowerShell scripts. Here's an example of a basic LDAP search to list OUs:
+
+```sh
+ldapsearch -x -h <domain_controller> -b "ou=Organizations,dc=example,dc=com" "(objectClass=organizationalUnit)"
+```
+
+BloodHound, in particular, provides a visual map of OUs, offering an intuitive understanding of the organizational hierarchy. This tool can help identify which OUs may lead to sensitive data or privileged accounts, guiding the attacker’s strategy.
+
+Complex OU hierarchies require systematic mapping, as these structures can be nested and span across various layers. Navigating these can involve collecting specific attributes that signify relationships and roles within OUs, enabling the attacker to outline potential pivot points or high-value targets quickly.
+
+By leveraging OU information, attackers can adjust their tactics accordingly, prioritizing OUs that potentially serve as security boundaries or hold key credentials. Automation of OU enumeration enhances scalability, allowing attackers to manage and analyze large datasets efficiently. Custom scripts can streamline this process, providing quick insights while minimizing manual intervention.
+
+Given the stealth nature required for enumeration tasks, attackers employ evasion techniques such as using encrypted LDAP connections to avoid network inspection, minimizing query rates to dodge anomaly detection systems, and leveraging domain-joined devices to conduct internal probing inconspicuously.
+
+By understanding and employing thorough domain and OU enumeration techniques, attackers can gain significant insights into an organization's network environment, paving the way for more targeted and effective penetration strategies.
