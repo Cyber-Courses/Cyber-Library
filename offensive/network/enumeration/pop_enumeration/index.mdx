@@ -1,0 +1,118 @@
+---
+title: Comprehensive Guide to POP Enumeration Techniques
+description: Learn techniques for POP Enumeration including service detection, banner
+  grabbing, and user enumeration to enhance your cybersecurity toolkit.
+keywords:
+- POP Enumeration
+- service detection
+- banner grabbing
+- user enumeration
+- cybersecurity techniques
+- network enumeration
+- POP3
+- POP3S
+- Nmap
+---
+
+## POP Enumeration
+
+### Service Detection
+Detecting services operating on a network is a foundational step in POP enumeration, which involves identifying open ports, understanding protocol versions, and pinpointing SSL/TLS services.
+
+#### [Identify Open Ports](offensive/network/enumeration/pop_enumeration/service_detection)
+Open ports are often the first indication of a POP server. Commonly, POP3 uses TCP port 110, while its secured version, POP3S, often operates on port 995.
+
+1. **Nmap Scanning**: 
+   ```bash
+   nmap -p 110,995 <target-IP>
+   ```
+   This command will probe the target for the traditional ports used by POP services.
+
+2. **Non-Standard Port Analysis**:
+   Expand your scan to a wider range of ports if standard ones show no results:
+   ```bash
+   nmap -p 1-65535 --min-rate=1000 <target-IP>
+   ```
+
+- Further details on this can be found [here](offensive/network/enumeration/pop_enumeration/service_detection/identifying_open_pop_ports_110_995/).
+
+#### [Protocol Version Detection](offensive/network/enumeration/pop_enumeration/service_detection/detecting_pop_server_implementations/)
+Understanding the specific server implementation provides insight into potential vulnerabilities.
+
+1. **nmap Version Detection**:
+   ```bash
+   nmap -sV -p 110,995 <target-IP>
+   ```
+   The `-sV` flag attempts to determine the service version using a variety of techniques, including banner grabbing.
+
+2. **Manual Telnet**:
+   Connect using telnet to observe immediate responses:
+   ```bash
+   telnet <target-IP> 110
+   ```
+
+#### [SSL/TLS Service Identification](offensive/network/enumeration/pop_enumeration/service_detection)
+When encryption is implemented, additional reconnaissance is necessary.
+
+1. **SSL Enumeration with Nmap**:
+   ```bash
+   nmap --script ssl-enum-ciphers -p 995 <target-IP>
+   ```
+   Compile information on supported ciphers and protocols offered by the server.
+
+### Banner Grabbing
+Acquiring server banners can disclose crucial details like software versions and configurations.
+
+#### [Extracting Server Version and Configuration](offensive/network/enumeration/pop_enumeration/banner_grabbing/extracting_server_version_and_configuration/)
+Extracting server banners provides actionable intelligence for further exploitation.
+
+1. **Direct Telnet Connection**:
+   Retrieve initial banner information:
+   ```bash
+   telnet <target-IP> 110
+   ```
+
+2. **Netcat Usage**:
+   Another alternative for banner discovery:
+   ```bash
+   nc <target-IP> 110
+   ```
+
+#### [Identifying Security Mechanisms from Banners](offensive/network/enumeration/pop_enumeration/banner_grabbing/identifying_security_mechanisms_from_banners/)
+Banners often reveal if security enhancements are in effect, like authentication or encryption features.
+
+- Tool Example:
+  Use an Nmap script to parse banners for security mechanism clues.
+
+### User Enumeration
+Gaining insights into valid user accounts on the POP server can guide further offensive actions.
+
+#### [Using VRFY or EXPN Commands for User Discovery](offensive/network/enumeration/pop_enumeration/user_enumeration/using_vrfy_or_expn_commands_for_user_discovery/)
+Designed originally for SMTP, these commands may be tested on multi-functional servers that could be incorrectly configured.
+
+- Example script to test user existence:
+  ```bash
+  echo "VRFY user@example.com" | nc <target-IP> 110
+  ```
+
+#### [Analyzing POP Authentication Responses](offensive/network/enumeration/pop_enumeration/user_enumeration/analyzing_pop_authentication_responses/)
+Monitor different server responses to hone in on legitimate usernames.
+
+1. **Command for Brute-Force Tools** (e.g., Hydra):
+   ```bash
+   hydra -L user.txt -P pass.txt <target-IP> pop3 -vV
+   ```
+   Substitute `user.txt` and `pass.txt` with your wordlists.
+
+2. **Timing Attacks**:
+   Script variations in response times to guess user validity:
+   ```bash
+   # Sample pseudocode for timing analysis
+   connect_to_pop()
+   start_time = current_time()
+   authenticate("known_user", "wrong_pass")
+   if response_time > threshold
+       log "Potential valid user"
+   ```
+
+Useful tool observations and elaborate methodologies for interpreting responses are detailed further [here](offensive/network/enumeration/pop_enumeration/user_enumeration/analyzing_pop_authentication_responses/).
