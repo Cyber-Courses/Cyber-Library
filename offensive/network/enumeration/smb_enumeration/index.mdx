@@ -1,0 +1,53 @@
+---
+title: Comprehensive Guide to SMB Enumeration Techniques
+description: Explore essential techniques for SMB enumeration, including share discovery,
+  user extraction, and permission enumeration.
+keywords:
+- SMB enumeration
+- identify server version
+- enumerate shares
+- extract user information
+- permissions enumeration
+---
+
+### SMB Enumeration
+
+SMB Enumeration is a critical stage in offensive network security assessments which focuses on gaining insights into resources available over the Server Message Block (SMB) protocol. This process can reveal a wealth of information about the target network’s structure, user accounts, permissions, and shared resources.
+
+#### [Identifying Server Version](offensive/network/enumeration/smb_enumeration/identifying_server_version)
+
+Detecting the SMB server version plays a crucial role in vulnerability assessments. Different SMB versions have varied security implications. Using tools such as `nmap`, a security professional can ascertain the SMB version by employing scripts like `smb-enum*` that interact with the SMB service. For example, executing a command such as:
+
+```bash
+nmap -p 445 --script smb-os-discovery TARGET_IP
+```
+
+can reveal information such as OS details and SMB dialects supported by the server. Additionally, `smbclient` can be invoked to query version information directly by interacting with the server, which displays handshake data including the protocol version. Analyzing packet captures in `Wireshark` can offer deeper insights by observing the negotiation protocols utilized during the SMB handshake.
+
+#### [Identifying Shares](offensive/network/enumeration/smb_enumeration/identifying_shares)
+
+Listing available shared resources is pivotal to understanding what data or resources may be accessible. The `smbclient` tool can work with commands like:
+
+```bash
+smbclient -L //TARGET_IP -N
+```
+
+to list all available shares without requiring authentication. For thorough automation, `enum4linux` can be utilized to fetch a complete list of shares along with additional metadata. The `Metasploit Framework` also provides modules like `auxiliary/scanner/smb/smb_enumshares` which can be used to automate discovery across larger networks.
+
+#### [Extracting Users Information](offensive/network/enumeration/smb_enumeration/extracting_users_information)
+
+Gathering user account data from an SMB server can reveal potential targets for further exploitation. Tools like `enum4linux` are invaluable, offering detailed dumps of user lists and policies by leveraging null sessions or low-privileged accounts. `Metasploit` provides additional scouting capabilities with its `auxiliary/scanner/smb/smb_enumusers` module. These methodologies often reveal user account names, potentially including those with elevated privileges, providing a starting point for targeted attacks against known users.
+
+#### [Enumerating Permissions](offensive/network/enumeration/smb_enumeration/enumerating_permissions)
+
+Understanding permission structures over SMB shares can expose misconfigurations leading to potential abuse. `smbmap` facilitates insight into user permissions by mapping access rights to each discovered network share, highlighting potential write or read capabilities. The `acccheck` utility attempts authentication using known credentials to test for access rights across resources. Custom scripts powered by Python's `Impacket` library can further refine permission enumeration by employing ACLs (Access Control Lists) to dynamically adjust checks based on found data.
+
+#### [Collecting System and Network Information](offensive/network/enumeration/smb_enumeration/collecting_system_and_network_information)
+
+Gleaning comprehensive system and network information via SMB can provide critical intelligence on network configuration and potential weak points. Tools like `smbclient`, paired with `rpcclient`, can explore system settings and export configurations. Commands such as:
+
+```bash
+rpcclient -U "" -N TARGET_IP
+```
+
+can list domain names, server roles, and other essential data relevant to network architecture. `Wireshark` packet analysis during SMB sessions can reveal even more granular information, such as routing paths, domain membership, and server configurations, offering a tactical advantage in network assessments.
