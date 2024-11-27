@@ -1,0 +1,139 @@
+---
+title: Service and Version Detection in LDAP Enumeration
+description: Learn techniques for detecting LDAP service types and versions, leveraging
+  tools like Nmap, Metasploit, and custom scripting.
+keywords:
+- LDAP service detection
+- version detection
+- Nmap
+- LDAP enumeration
+- security testing tools
+- Metasploit
+- service fingerprinting
+- banner grabbing
+- protocol analysis
+---
+
+## Service and Version Detection
+
+### LDAP Server Identification
+
+**Port Scanning for LDAP**
+
+Conducting port scans is essential in identifying LDAP services running within a network. The Lightweight Directory Access Protocol (LDAP) generally operates over TCP and UDP ports, specifically the default ports 389 for LDAP and 636 for LDAPS, which hosts LDAP over SSL/TLS for secure transmissions.
+
+- **Nmap Usage**: Utilize Nmap, a widely used network scanning tool, to assertively scan for LDAP services. You can initiate a scan using the following command:
+  ```bash
+  nmap -p 389,636 -sV <target_ip>
+  ```
+  This command instructs Nmap to scan the specified ports on the target IP and use version detection (`-sV`) to determine the services running there.
+  
+- **Masscan**: For high-volume environments, Masscan provides an efficient means of scanning large IP ranges quickly. Using syntax such as:
+  ```bash
+  masscan <target_range> -p 389,636 --rate=1000
+  ```
+  allows for rapid identification of potential LDAP services prior to more detailed analysis.
+
+**Fingerprinting OpenLDAP and Microsoft Active Directory**
+
+Fingerprinting enables the determination of whether an identified LDAP service is OpenLDAP or Microsoft Active Directory (AD).
+
+- **Nmap LDAP Scripts**: Leverage Nmap's scripting engine, specifically targeting LDAP services, to gather service-specific information. Use:
+  ```bash
+  nmap -p 389 --script ldap-rootdse <target_ip>
+  ```
+  This script queries the RootDSE, providing insight into the server type and capabilities.
+  
+- **ldapsearch Tool**: Employ the ldapsearch tool to interact directly with LDAP services:
+  ```bash
+  ldapsearch -x -H ldap://<target_ip> -s base -b "" objectClass=*
+  ```
+  By examining the entries returned, you can deduce the type of LDAP used, leveraging knowledge of typical attributes and structural elements unique to different LDAP implementations.
+
+### LDAP Version Detection
+
+**Querying LDAP Version**
+
+Determining the LDAP version in use can assist attackers in assessing potential vulnerabilities.
+  
+- **ldapsearch Command**: Utilize ldapsearch to extract version-related attributes:
+  ```bash
+  ldapsearch -x -H ldap://<target_ip> -b "" supportedLDAPVersion
+  ```
+  Automating these queries can identify LDAP instances supporting legacy versions with known security issues.
+
+- **Automated Detection Scripts**: Develop scripts, in Python or Bash, to automate the extraction and logging of version information across multiple LDAP endpoints, aiding large-scale reconnaissance efforts.
+
+**Exploiting Version-Specific Vulnerabilities**
+
+Once the LDAP version is determined, assess it against known vulnerabilities.
+
+- **Researching Exploits**: Use databases like CVE Details and Exploit-DB to map the LDAP version to known exploits, looking for common weaknesses such as inadequate authentication checks or buffer overflows.
+  
+- **Custom Exploits**: In certain cases, develop custom proof-of-concept scripts that target unpatched vulnerabilities specific to the detected version, facilitating penetration testing endeavors.
+
+### Security Testing Tools and Techniques
+
+**Metasploit Integration**
+
+Metasploit provides a rich framework for testing LDAP services.
+
+- **Auxiliary Modules**: Utilize Metasploit's auxiliary scan modules to efficiently discern LDAP service and version information:
+  ```shell
+  use auxiliary/scanner/ldap/ldap_version
+  set RHOSTS <target_ip>
+  run
+  ```
+
+- **Custom Modules**: Create custom Metasploit modules to extend functionality, targeting specific configurations or vulnerabilities revealed by version detection.
+
+**Custom Scripting**
+
+Craft scripts using libraries like ldap3 (Python) for adaptive querying, enabling detailed interaction with LDAP services for more nuanced reconnaissance:
+
+```python
+from ldap3 import Server, Connection, ALL
+
+server = Server('<target_ip>', get_info=ALL)
+conn = Connection(server)
+conn.bind()
+print(server.info)
+```
+
+By deploying custom scripts in frameworks like Python, tailored operations can be conducted against LDAP services, offering deep insights into the service’s version and configurations.
+
+### Banner Grabbing Techniques
+
+**Manual Banner Grabbing**
+
+Manual interaction through command-line utilities can yield initial version insights.
+
+- **Using Telnet/Netcat**: By connecting simple network utilities like telnet or netcat to LDAP ports, responses can be evaluated for indicative version details:
+  ```bash
+  nc <target_ip> 389
+  ```
+  This connection might reveal banners or initial handshake messages containing version information.
+
+**Automated Banner Capture**
+
+- **Nmap Service Version Detection**: Execute Nmap's `-sV` option to automate banner grabbing processes:
+  ```bash
+  nmap -p 389,636 -sV <target_ip>
+  ```
+  Automating banner capture can uncover crucial details efficiently across large network segments.
+
+### Advanced Detection Techniques
+
+**Timing and Response Analysis**
+
+Investigate variations in LDAP server response times to determine finer aspects of the server's nature.
+
+- **Timing Attacks**: Analyze server response times under controlled query loads to infer additional characteristics that might not be apparent from direct queries.
+
+**Protocol Analysis**
+
+Deep dive into LDAP traffic for protocol-level insights.
+
+- **Wireshark Analysis**: Use packet capture tools like Wireshark to intercept and scrutinize LDAP packets, analyzing fields that might disclose version information during connection establishments or typical sessions.
+
+- **Protocol Traces**: Examine captured traces for deviations or specific attributes that can reveal deeper insights about service versions and configurations, contributing to a more comprehensive attack vector planning.
