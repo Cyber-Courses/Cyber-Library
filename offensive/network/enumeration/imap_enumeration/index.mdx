@@ -1,0 +1,64 @@
+---
+title: Comprehensive Guide to IMAP Enumeration Techniques
+description: Explore detailed techniques for IMAP enumeration including service detection,
+  user mailbox probing, and authentication mechanisms.
+keywords:
+- IMAP Enumeration
+- Email enumeration
+- Service version detection
+- Mailbox structure discovery
+- Authentication mechanisms
+- Network enumeration
+- Cybersecurity techniques
+- Penetration testing strategies
+- User enumeration
+---
+
+## IMAP Enumeration
+
+### [Service and Version Detection](offensive/network/enumeration/imap_enumeration/service_and_version_detection)
+To identify the IMAP service running on a target server, techniques like banner grabbing are essential. When an IMAP server is contacted, it often sends a welcome banner displaying the service name and version. Utilizing tools like `telnet` or `netcat`, attackers can connect to the IMAP port (default 143 or 993 for SSL) to retrieve this information. For example:
+
+```shell
+telnet example.com 143
+```
+
+In scenarios where IMAP over SSL/TLS is used, `openssl` can help in banner capture:
+
+```shell
+openssl s_client -connect example.com:993
+```
+
+Network scanning tools such as Nmap can automate this detection. A simple Nmap command like `nmap -sV -p 143,993 example.com` scans specified ports for running services and extracts banner information. Detection of TLS/SSL support is vital for determining encryption capabilities, achieved by analyzing responses when attempting to initiate an SSL/TLS connection.
+
+### [User and Mailbox Enumeration](offensive/network/enumeration/imap_enumeration/user_and_mailbox_enumeration)
+Usernames and associated mailboxes can be inferred through various techniques. Leveraging standard IMAP commands such as `EXAMINE` or `SELECT`, attackers can enumerate potential mailbox paths. For instance:
+
+```shell
+a001 LIST "" "*"
+```
+
+This command requests a list of all available mailboxes on the server. Using a combination of brute force and dictionary attacks, one can test possible usernames. By sending repeated login attempts with known or default username lists, valid accounts can be identified based on server responses.
+
+#### [Enumerating Valid Usernames](offensive/network/enumeration/imap_enumeration/user_and_mailbox_enumeration/enumerating_valid_usernames/)
+This process involves meticulous trial and error to match usernames against IMAP server responses. An attacker sends login requests using an automated script with various potential usernames.
+
+#### [Mailbox Structure Discovery](offensive/network/enumeration/imap_enumeration/user_and_mailbox_enumeration/mailbox_structure_discovery/)
+Understanding the directory and storage structure of an IMAP server is crucial. This involves utilizing commands like `LIST` in innovative ways to map the mail directory layout, which can inform a successful exploitation plan.
+
+### [Capability and Authentication Mechanisms](offensive/network/enumeration/imap_enumeration/capability_and_authentication_mechanisms)
+Utilizing the `CAPABILITY` command, it is possible to capture the features that the IMAP server supports. This includes authentication mechanisms and extensions that may be exploited. Sending a command like:
+
+```shell
+a001 CAPABILITY
+```
+
+Provides a list of supported commands and allows attackers to tailor their strategy based on the available features.
+
+#### [Discovering Supported Authentication Methods](offensive/network/enumeration/imap_enumeration/capability_and_authentication_mechanisms/discovering_supported_authentication_methods/)
+Exploration of authentication types, such as CRAM-MD5 or DIGEST-MD5, helps determine potential weaknesses.
+
+#### [Exploring IMAP Capabilities](offensive/network/enumeration/imap_enumeration/capability_and_authentication_mechanisms/exploring_imap_capabilities/)
+This involves a deeper analysis of the capabilities announced via the IMAP banner or through direct inquiry, like determining if the server supports STARTTLS or other optional security layers.
+
+Advanced tactics include simulating realistic interactive sessions to extract user, server, and mail data. Response timing analysis can also provide insight into the server's setup and capacity and potential password policies, contributing to a comprehensive enumeration strategy.
