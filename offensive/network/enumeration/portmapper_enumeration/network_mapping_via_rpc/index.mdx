@@ -1,0 +1,76 @@
+---
+title: 'Network Mapping via RPC: Guide to Service Enumeration'
+description: Learn effective techniques for network mapping via RPC, focusing on identifying
+  NFS, NIS, and other RPC services.
+keywords:
+- RPC
+- network mapping
+- NFS
+- NIS
+- portmapper
+- service enumeration
+- RPC services
+- cybersecurity
+---
+
+# Network Mapping via RPC
+
+## Understanding RPC and Portmapper Networking
+
+Remote Procedure Call (RPC) provides a powerful paradigm for implementing client-server interaction. RPC allows a client to execute a procedure on a remote server as if it were a local call. This mechanism is widely used in various network services, including Network File System (NFS) and Network Information Service (NIS). The portmapper, also known as rpcbind, plays a critical role in locating processes that run on dynamic ports. It listens on a fixed port and can provide the port numbers for service-specific daemons to requesting clients.
+
+In offensive cybersecurity, understanding the operations of RPC and portmapper is essential as it enables attackers to map network environments by detecting exposed RPC services. Effective mapping of these services can unveil critical components of the target network infrastructure, aiding in further exploitation activities.
+
+## [Identifying NFS and NIS Services](offensive/network/enumeration/portmapper_enumeration/network_mapping_via_rpc/identifying_nfs_and_nis_services)
+
+Identifying NFS and NIS services involves scanning the network for RPC services that correspond to these specific functionalities. NFS is designed to allow a user on a client computer to access files over a network, similar to how local storage is accessed. NIS, on the other hand, provides directory services for distributing configuration data across computers in a network.
+
+Tools like `rpcinfo` can query the portmapper to identify which RPC services are running, including NFS and NIS. For instance, you can use the following command to identify NFS services:
+
+```bash
+rpcinfo -p <target_ip> | grep nfs
+```
+
+Similarly, for detecting NIS services, look for ypserv and ypxfrd in the RPC service list. Knowledge of how these services are configured and operated is vital in conducting effective reconnaissance and understanding potential vulnerabilities that can be exploited later.
+
+## [Discovering Other RPC-Enabled Services](offensive/network/enumeration/portmapper_enumeration/network_mapping_via_rpc/discovering_other_rpc-enabled_services)
+
+Beyond identifying NFS and NIS, it is also important to discover other RPC-enabled services that could be present in the network. Many systems use RPC for other functions, such as `rquotad`, `mountd`, and `statd`. Each of these services might be a target for specific exploits or could provide additional information about the network’s layout.
+
+Using tools like `nmap` with the `rpc-grind` NSE script can enhance the discovery process. Here's an example command that facilitates extensive scanning for RPC services on a target network:
+
+```bash
+nmap -sV --script=rpc-grind <target_ip>
+```
+
+These services are valuable for attackers as they represent additional doors into the network infrastructure. Enumeration of these services allows adversaries to identify weaknesses and craft specific strategies for infiltration.
+
+## Advanced Enumeration Techniques
+
+Advanced enumeration techniques involve crafting customized scripts that can deal specifically with unique or little-known RPC services. Attackers may need to develop bespoke solutions when facing uncommon services, by reverse engineering how the portmapper allocates dynamic ports.
+
+Furthermore, penetration testers can attempt to bypass network security measures such as firewalls or intrusion detection systems by manipulating packets associated with RPC services. Understanding network rules and restrictions can provide avenues for more subtle scanning and mapping efforts, avoiding detection and increasing the chances of successful information gathering.
+
+## Utilizing Tools and Scripts
+
+The selection and use of appropriate tools and scripts are crucial in RPC enumeration. Among the most effective tools are `rpcinfo` and `nmap`, but custom scripts written in languages such as Python or Bash can automate tasks and increase the efficiency of enumeration processes. Tailored scripts can be designed to run repetitive tasks, gather and organize data, and handle exceptions or variations in network setup.
+
+Here is an example of using a Python script to automate RPC port querying:
+
+```python
+import subprocess
+
+def check_rpc_services(ip):
+    result = subprocess.run(['rpcinfo', '-p', ip], capture_output=True, text=True)
+    return result.stdout
+
+print(check_rpc_services('<target_ip>'))
+```
+
+Scripting enhances capability by allowing the running of complex tasks with minimal manual input, making the enumeration process faster and less prone to human error.
+
+## Analyzing Enumerated Data
+
+Once data is collected from RPC enumeration, analyzing this data becomes imperative in constructing a comprehensive view of the network topology. This involves interpreting results to understand the services' operational status, configurations, and potential vulnerabilities. Enumerated data can be cross-referenced with known vulnerabilities to highlight potential entry points.
+
+By correlating RPC data with other information gathered from network enumeration tactics, deeper insights into the network's architecture and security posture can be gained, providing a solid foundation for further offensive operations.
