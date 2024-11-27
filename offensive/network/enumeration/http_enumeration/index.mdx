@@ -1,0 +1,87 @@
+---
+title: Comprehensive Guide to HTTP Enumeration Techniques
+description: Explore effective HTTP Enumeration techniques including service detection,
+  header analysis, and identifying unprotected resources.
+keywords:
+- HTTP Enumeration
+- service detection
+- header analysis
+- web security
+- unprotected resources
+- banner grabbing
+- directory enumeration
+- security headers
+- fingerprinting
+- HTTP/HTTPS services
+---
+
+# HTTP Enumeration
+
+## [Service Detection](offensive/network/enumeration/http_enumeration/Service%20Detection)
+
+HTTP Enumeration begins with identifying the services running over HTTP/HTTPS protocols, focusing on their configurations, versions, and the platforms they operate on. 
+
+### Banner Grabbing Techniques
+Banner grabbing is a fundamental technique in service detection where the goal is to send HTTP requests to a server and analyze the banner messages that come back in the response headers. These banners often contain information such as the server type (e.g., Apache, Nginx, IIS) and any additional modules or versions in use. Tools like `Netcat`, `Nmap`, or even `cURL` can be used for this purpose, executing simple commands like:
+
+```shell
+curl -I http://target-site.com
+```
+
+This command sends a HEAD request to the server, prompting it to return the headers of a webpage, which can be instrumental in determining the server’s identity. See more on [Detecting HTTP/HTTPS Services](offensive/network/enumeration/http_enumeration/Detecting%20HTTP%2FHTTPS%20Services/).
+
+### Version and Platform Identification
+After gathering the banner information, the output needs manual inspection or analysis using dedicated parsers to indicate technical details, for example:
+
+```shell
+nmap -sV --script=http-title,http-server-header -p 80,443 target-site.com
+```
+
+This command uses Nmap's scripting engine to gather insights from HTTP headers and page titles, pinpointing the server's architecture and any potential platform-specific vulnerabilities. Explore further techniques in [Fingerprinting HTTP Protocol Versions](offensive/network/enumeration/http_enumeration/Fingerprinting%20HTTP%20Protocol%20Versions/).
+
+### Web Server Fingerprinting
+Beyond basic banner grabbing, more intricate web server fingerprinting is needed to detect deception attempts by server administrators who mask servers or utilize custom banners. Tools such as `HTTPrint` or `WhatWeb` thoroughly assess returned feature sets against known patterns to identify certain server traits, enabling attackers to tailor their probing with known vulnerabilities specific to server versions or technologies.
+
+## [Header Analysis](offensive/network/enumeration/http_enumeration/Header%20Analysis)
+
+HTTP Headers offer valuable information that can confirm suspicions raised during service detection or display additional weaknesses.
+
+### Analysis of HTTP Headers
+An exhaustive study of all given HTTP headers reveals both general server information and configuration anomalies. By processing headers like `Server`, `X-Powered-By`, and `Date`, one can ascertain server versions and potentially vulnerable technologies.
+
+```shell
+curl --head http://target-site.com
+```
+
+Example headers might display:
+- `Server: Apache/2.4.18 (Ubuntu)`
+- `X-Powered-By: PHP/7.4.3`
+
+Check detailed techniques on [Extracting Server Headers for Information](offensive/network/enumeration/http_enumeration/Extracting%20Server%20Headers%20for%20Information/).
+
+### Security Header Inspection
+A lack or incorrect configuration of security headers like `X-Content-Type-Options`, `X-Frame-Options`, and `Content-Security-Policy` weakens a site's defenses against attacks such as Cache Poisoning, Clickjacking, and Cross-Site Scripting (XSS). Identifying and understanding these headers' presence or absence informs potential exploitation paths. Further insights can be found in [Analyzing Security Headers](offensive/network/enumeration/http_enumeration/Analyzing%20Security%20Headers/).
+
+### Cookie and Session Analysis
+Cookies and session management are critical areas. Examination of cookie settings for flags like `HttpOnly` and `Secure` appraises how resistant sessions are to hijack attempts. Misconfigured settings here can open an avenue of attack, especially if coupled with discovered vulnerabilities.
+
+## [Unprotected Resources](offensive/network/enumeration/http_enumeration/Unprotected%20Resources)
+
+After parsing service configurations and headers, it's crucial to detect unprotected web resources that might allow deeper system access.
+
+### Directory and File Enumeration
+Directory and file enumeration uses brute-force techniques with tools like `Dirbuster` and `Gobuster` to uncover hidden paths or resources containing sensitive information. By cultivating a broad and comprehensive wordlist, one can identify access points that administrators may have neglected to secure.
+
+```shell
+gobuster dir -u http://target-site.com -w /path-to-wordlist/wordlist.txt
+```
+
+The utility assists in ferreting out default setups, misconfigured security settings, or potential entry points into larger systems. Delve into specifics on [Enumerating Hidden Directories](offensive/network/enumeration/http_enumeration/Enumerating%20Hidden%20Directories/).
+
+### Exploration of Misconfigured Web Directories
+Indexes exposed due to incorrect configurations potentially reveal accessible internal workings of a site. Validation of accessible resources via direct testing or directory traversal exploits can extract sensitive or critical operational data, expanding attack surface.
+
+### Assessment of Backup and Old Files
+Often, administrators forget to restrict access to backup or outdated files on the server. Detecting such files can unveil configurations, credentials, or operational blueprints that are instrumental in planning comprehensive penetration attempts. More strategies can be explored in [Discovering Publicly Accessible Files](offensive/network/enumeration/http_enumeration/Discovering%20Publicly%20Accessible%20Files/).
+
+By thoroughly examining these areas, a security professional in offensive operations can construct an informed attack strategy, leveraging gathered data to perform effective penetration tests and vulnerability assessments.
