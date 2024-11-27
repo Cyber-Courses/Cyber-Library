@@ -1,0 +1,46 @@
+---
+title: Comprehensive Guide to Telnet Enumeration Techniques
+description: Explore key methods for Telnet enumeration, including service detection
+  and user enumeration strategies.
+keywords:
+- Telnet enumeration
+- network security
+- banner grabbing
+- service detection
+- user enumeration
+- open ports
+- exploiting vulnerabilities
+- cybersecurity techniques
+- penetration testing
+- Telnet vulnerabilities
+---
+
+# Telnet Enumeration
+
+Telnet is a network protocol used to provide a bidirectional interactive text-based communication facility using a virtual terminal connection over the network. In offensive cybersecurity, enumerating Telnet services is crucial for identifying potential vulnerabilities and misconfigurations. This involves detecting active Telnet services, understanding their configuration, and identifying potential points of access.
+
+## [Service Detection](offensive/network/enumeration/telnet_enumeration/service_detection/)
+
+### Banner Grabbing
+
+Banner grabbing involves connecting to the Telnet service to retrieve and analyze the initial welcome message or banner provided by the server. This banner might include information about the Telnet server software, its version, and potentially even the operating system. Tools such as `telnet` and `nmap` are effective for this purpose. Using `telnet`, simply connect to a target IP with the Telnet port (e.g., `telnet 192.168.1.100 23`). Nmap provides more advanced service detection with the `-sV` flag, as in `nmap -sV -p 23 192.168.1.100`, to identify services and their versions running on a given port.
+
+### [Identifying Open Telnet Ports (23)](offensive/network/enumeration/telnet_enumeration/service_detection/identifying_open_telnet_ports_23/)
+
+Port scanning is the process of probing an IP address for open and listening ports, identifying services that could be exploited. Since Telnet typically operates over TCP port 23, identifying open Telnet ports is a priority in enumeration. `nmap` can be employed to scan for open Telnet ports with a command such as `nmap -p 23 192.168.1.0/24`. An open Telnet port signifies an active service, and further analysis can be performed to investigate its configuration and security posture.
+
+### [Detecting Telnet Server Versions and Implementations](offensive/network/enumeration/telnet_enumeration/service_detection/detecting_telnet_server_versions_and_implementations/)
+
+Service fingerprinting involves identifying the specific Telnet server versions and implementations. This information is crucial to determine known vulnerabilities that could be exploited. The `nmap` scripting engine (NSE) can automate this process, providing detailed service fingerprints using scripts such as `telnet-encryption` and `telnet-ntlm-info`. These scripts can be executed with a command like `nmap --script telnet-encryption,telnet-ntlm-info -p 23 -v 192.168.1.100`, providing expanded information on the accessed Telnet service and its capabilities.
+
+## [User Enumeration](offensive/network/enumeration/telnet_enumeration/user_enumeration/)
+
+### [Identifying Valid Usernames Through Banner Messages](offensive/network/enumeration/telnet_enumeration/user_enumeration/identifying_valid_usernames_through_banner_messages/)
+
+By analyzing Telnet banner messages during connection attempts, attackers may be able to discern valid usernames. Some Telnet servers respond differently to login attempts with valid versus invalid usernames during authentication, allowing attackers to enumerate a list of valid user accounts on the system. By utilizing automated login scripts that test a range of possible usernames and observing the server's responses, attackers can optimize this process to identify valid credentials.
+
+### [Analyzing Login Prompts for Potential User Information](offensive/network/enumeration/telnet_enumeration/user_enumeration/analyzing_login_prompts_for_potential_user_information/)
+
+The Telnet login prompt may occasionally reveal information that can be leveraged for user enumeration. This could include hints, naming schemes, or even system-specific information that could correlate with user accounts. By connecting to the Telnet service and carefully analyzing the responses during normal and failed login attempts, attackers can gather potentially valuable intelligence to aid in further intrusive activities. Such information can also be harvested through automated scripts that cycle through potential username combinations while capturing detailed server feedback.
+
+Telnet Enumeration, as a critical component of penetration testing, encapsulates a series of steps designed to identify and leverage weaknesses in Telnet service deployment. By systematically detecting, analyzing, and exploiting vulnerabilities within Telnet services, attackers can establish unauthorized access and gather data crucial for offensive cybersecurity operations.
