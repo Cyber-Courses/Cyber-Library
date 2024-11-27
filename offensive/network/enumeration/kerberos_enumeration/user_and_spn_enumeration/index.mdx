@@ -1,0 +1,66 @@
+---
+title: User and SPN Enumeration Techniques in Active Directory
+description: Learn effective strategies for user and SPN enumeration in Active Directory
+  to enhance your cybersecurity assessments.
+keywords:
+- User Enumeration
+- SPN Extraction
+- Active Directory
+- Kerberos Enumeration
+- Pentesting
+- Kerberoasting
+- Network Attacks
+- Service Principal Names
+- Security Assessment
+- Offensive Cybersecurity
+---
+
+### User and SPN Enumeration
+
+In the realm of offensive cybersecurity, the ability to enumerate users and Service Principal Names (SPNs) provides a crucial foothold in conducting further network-based attacks, particularly within Active Directory environments. This segment delves into these aspects, detailing methodologies and tools that facilitate SPN extraction and Active Directory user listing via Kerberos, which are instrumental in advancing a penetration test or red team operation.
+
+#### [Extracting Service Principal Names (SPNs)](offensive/network/enumeration/kerberos_enumeration/user_and_spn_enumeration/extracting_service_principal_names_spns)
+
+##### Understanding SPN Basics
+
+Service Principal Names, or SPNs, are unique identifiers for services running on servers in a network. They play a pivotal role in Kerberos authentication, allowing clients to identify and authenticate with services without requiring their user credentials. In offensive operations, understanding the structure and purpose of SPNs is vital. An SPN typically follows the format `service/classname:host`, which is a crucial piece of information for an attacker.
+
+##### Enumeration Tools and Techniques
+
+Several tools exist to facilitate the discovery of SPNs within an Active Directory. PowerShell and **ldapsearch** are commonly used for querying the directory service to retrieve SPN information. For instance, PowerShell's `Get-ADUser` cmdlet can be employed with the `-Properties servicePrincipalName` parameter to extract SPNs for user accounts.
+
+Example Command:
+```powershell
+Get-ADUser -Filter * -Properties servicePrincipalName | Where-Object { $_.servicePrincipalName -ne $null }
+```
+
+LDAP queries can similarly be used to harvest SPNs, particularly targeting the `servicePrincipalName` attribute of user objects.
+
+##### Pentesting with SPN Data
+
+The extraction of SPNs can lead to significant advantages in a penetration test, particularly through attacks like Kerberoasting. This attack involves requesting a Kerberos ticket for a service account with a known SPN, capturing the ticket, and then attempting to crack the ticket offline to recover the service account’s password. This method exploits weak password policies that are often applied to service accounts, thus enabling privilege escalation and lateral movement within the network.
+
+---
+
+#### [Listing Active Directory User Accounts via Kerberos](offensive/network/enumeration/kerberos_enumeration/user_and_spn_enumeration/listing_active_directory_user_accounts_via_kerberos)
+
+##### Techniques for User Enumeration
+
+Active Directory user enumeration via Kerberos typically leverages weaknesses in Kerberos pre-authentication. By sending AS-REQ (Authentication Server Request) messages without pre-authentication, responses can hint at valid user accounts. Tools like **Impago** or **kerbrute** can automate this process.
+
+Example Command:
+```bash
+./kerbrute userenum --domain CONTOSO.COM --dc 192.168.1.1 usernames.txt
+```
+
+This command uses `kerbrute` to enumerate valid user accounts from a given domain controller.
+
+##### Advanced Enumeration Tactics
+
+User enumeration can often be detected if not executed carefully, invoking the need for stealthier techniques. Using built-in AD tools or scripts that mimic legitimate traffic patterns can help evade detection systems, turning passive enumeration into an attacker’s advantage.
+
+##### Strategic Attack Planning with Enumerated Data
+
+Once user accounts are enumerated, attackers can use this information strategically to advance attacks such as pass-the-hash or silver ticket attacks, where stolen hashes or Kerberos tickets are used to access other network resources. These credentials form the base of privilege escalation paths, where the attacker seeks high-value targets such as domain administrators.
+
+Each piece of enumerated data correlates with potential attack vectors and should be prioritized based on network topology and identified security controls' weaknesses. This approach enables efficient exploitation planning and execution.
