@@ -1,0 +1,76 @@
+---
+title: User and Group Enumeration in LDAP Analysis
+description: Explore techniques for user and group enumeration in LDAP, including
+  listing users and discovering group memberships.
+keywords:
+- LDAP enumeration
+- user attributes
+- group membership
+- privilege discovery
+- offensive security
+- ldapsearch
+- access control
+- cybersecurity
+- enumeration techniques
+- directory services
+---
+
+# User and Group Enumeration
+
+In the context of LDAP enumeration, user and group enumeration is a critical phase where the focus is on extracting user lists and understanding group memberships. This understanding is essential for identifying potential attack vectors and privilege escalation opportunities within an organization's network. Below, we delve into the detailed processes of [Listing Users and Attributes](#listing-users-and-attributes) and [Group Membership and Privilege Discovery](#group-membership-and-privilege-discovery), providing technical depth and practical insights into these operations.
+
+## Listing Users and Attributes
+
+**Objective**: The primary goal is to identify and catalog user accounts along with their attributes within an LDAP directory. This operation enhances the ability to analyze directory structures and potential vulnerabilities.
+
+Querying LDAP for user entries involves executing LDAP queries to retrieve a comprehensive list of user accounts. This task requires familiarity with LDAP structures and filter syntax. Using tools like `ldapsearch`, practitioners can perform these queries effectively. Here is an example command using `ldapsearch` to list all user entries:
+
+```bash
+ldapsearch -x -h ldap.example.com -D "cn=admin,dc=example,dc=com" -W -b "dc=example,dc=com" "(objectClass=person)"
+```
+
+The above command specifies the search base with `-b` and filters for entries of the `objectClass=person`. The use of `"cn=admin,dc=example,dc=com"` as the distinguished name (DN) indicates authentication using an admin account.
+
+Retrieving and interpreting user attributes is pivotal for understanding user roles and associated details. Practitioners often look for attributes such as `cn` (common name), `uid` (user ID), `mail`, and `displayName`. Each of these attributes provides insights into the user's identity and potential access.
+
+### Tools and Techniques
+
+- **LDAP Client Tools**: `ldapsearch`, a tool in the OpenLDAP suite, is frequently used to perform search operations on LDAP directories. Its simplicity and powerful filter options make it an ideal choice for enumeration.
+- **Nmap NSE Scripts**: Nmap's scripting engine (NSE) includes scripts for LDAP enumeration, useful for mapping directory structures and extracting user information.
+- **Custom Scripts**: Scripting with languages like Python using libraries such as `ldap3` allows for automation and custom filtering, catering to specific enumeration needs.
+
+Crafting LDAP search filters requires precision to effectively zero in on user accounts and relevant attributes. Filters in LDAP queries define which entries to return. Example of a filter to retrieve only users with an email address attribute:
+
+```bash
+ldapsearch -x -b "dc=example,dc=com" "(mail=*)"
+```
+
+Understanding and utilizing these tools and techniques ensures a successful user enumeration strategy, providing a foundational step in understanding potential exploitation paths.
+
+Further details are available in the [Listing Users and Attributes](offensive/network/enumeration/ldap_enumeration/user_and_group_enumeration/listing_users_and_attributes) section.
+
+## Group Membership and Privilege Discovery
+
+**Objective**: This task focuses on discovering group memberships and associated privileges, enabling the mapping of access controls and identifying potential escalation paths.
+
+Querying group entries is about extracting relevant information regarding group memberships and understanding objects such as `groupOfNames`, `groupOfUniqueNames`, and `posixGroup`. Each object class provides different ways of checking a user's group association.
+
+For instance, using `ldapsearch` to find all members of a specific group, one might use:
+
+```bash
+ldapsearch -x -b "cn=Administrators,ou=Groups,dc=example,dc=com" "member=cn=*"
+```
+
+Analyzing user-group relationships involves interpreting attributes like `member`, `memberUid`, and `uniqueMember`. These attributes help define which users belong to specific groups, providing insights into role assignments and organizational structure.
+
+Privilege identification involves assessing the roles and special permissions granted to groups. Understanding these privileges can highlight potential weaknesses and are pivotal for planning lateral movement or privilege escalation attempts.
+
+### Tools and Techniques
+
+- **OpenLDAP Utilities**: Tools like `ldapsearch` or `ldapcmp` for comparing different directory states are invaluable when performing group enumeration.
+- **LDAP Search Filters**: Crafting specific filters to retrieve detailed group and membership information allows for targeted enumeration.
+- **Custom LDAP Scripts**: Creating scripts to process LDAP responses, analyze memberships, and simulate access scenarios can provide deep insights into group dynamics and permissions.
+
+A rigorous approach to group membership and privilege discovery involves leveraging these tools and techniques to unearth critical access control information, making it an essential component of a comprehensive offensive security strategy.
+
+For more insights, check the [Group Membership and Privilege Discovery](offensive/network/enumeration/ldap_enumeration/user_and_group_enumeration/group_membership_and_privilege_discovery) section.
