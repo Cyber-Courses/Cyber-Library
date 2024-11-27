@@ -1,0 +1,66 @@
+---
+title: User Enumeration Techniques in POP Services
+description: Explore effective methods for user enumeration in POP services using
+  VRFY, EXPN, and authentication response analysis.
+keywords:
+- User Enumeration
+- POP3 Protocol
+- VRFY Command
+- EXPN Command
+- SMTP Enumeration
+- Email Security
+- User Discovery Techniques
+- Authentication Responses
+- Offensive Security
+- Network Enumeration
+---
+
+# User Enumeration in POP Enumeration
+
+User enumeration through POP services can be a significant method for attackers to discover valid usernames, which can later be leveraged in more targeted attacks. Below is an in-depth exploration of two primary techniques: using SMTP `VRFY` or `EXPN` commands and analyzing POP authentication responses.
+
+## [Using VRFY or EXPN Commands for User Discovery](offensive/network/enumeration/pop_enumeration/user_enumeration/using_vrfy_or_expn_commands_for_user_discovery)
+
+### Overview of VRFY and EXPN Commands
+
+SMTP services can expose user information through commands like `VRFY` and `EXPN`, particularly when misconfigured. Historically, these commands were intended for server-side assistance to verify user addresses or expand mailing lists. However, they are often abused in an unauthorized manner to list valid users on the system.
+
+### Command Execution
+
+Attackers utilize the `VRFY` or `EXPN` commands to probe SMTP servers. A successful execution involves sending crafted commands to the server and interpreting the responses. Here's an example of how an attacker might perform this through a telnet session:
+
+```bash
+telnet target.smtp.server 25
+HELO test
+VRFY username
+```
+
+If the server reveals a successful response, the username is likely valid; a non-delivery response typically means the user does not exist.
+
+### Bypassing Common Blocks
+
+While many SMTP configurations now disable `VRFY` and `EXPN` due to their vulnerability, attackers can attempt to bypass these blocks by identifying specific server versions known to have weaknesses or by using obfuscated command variations. Modern approaches might involve testing different server implementations known to mishandle these commands.
+
+## [Analyzing POP Authentication Responses](offensive/network/enumeration/pop_enumeration/user_enumeration/analyzing_pop_authentication_responses)
+
+### Overview of POP3 Protocol
+
+The Post Office Protocol version 3 (POP3) is a simple mail protocol used to retrieve emails from a server. It operates with simple commands and responses, which can often be exploited for information leakage about valid users based on the server's reaction to authentication attempts.
+
+### Response Code Inspection
+
+POP3 distinguishes between valid and invalid login attempts with different response codes. An attacker can script a series of login attempts with different usernames while capturing the responses to determine patterns that indicate a valid username. Timing differences in server responses might also suggest differences in username validation processing.
+
+```bash
+telnet pop.server.com 110
+USER testuser
+PASS somepassword
+```
+
+A server's negative response might provide enough clues to distinguish between incorrect passwords and unknown usernames.
+
+### Automation Techniques
+
+Attackers can automate the enumeration process by scripting these attempts, making it possible to process numerous username guesses efficiently. Automation tools can integrate these findings into a larger attack framework, enhancing the efficiency and scope of subsequent targeted attacks.
+
+Consideration of ethical and legal implications is critical in responsibly applying this knowledge. Offensive cybersecurity professionals must align with legal standards and obtain appropriate permissions before engaging in security testing activities.
