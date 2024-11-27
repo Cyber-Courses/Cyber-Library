@@ -1,0 +1,108 @@
+---
+title: Service Detection Techniques for Ident Enumeration
+description: Explore effective techniques for identifying and analyzing Ident services
+  for cybersecurity.
+keywords:
+- Service Detection
+- Ident Services
+- Port 113
+- Nmap Scanning
+- Credentialed Scans
+- Fingerprinting Techniques
+- Network Enumeration
+- Security Vulnerabilities
+- Automation in Cybersecurity
+- Bypassing Firewalls
+---
+
+# Service Detection in Ident Enumeration
+
+## [Identifying Open Ident Services (Port 113)](offensive/network/enumeration/ident_enumeration/service_detection/identifying_open_ident_services_port_113)
+
+### Scanning Techniques for Port 113
+Port 113 is typically used by Ident services to report back information, such as the identity of the user who is initiating a network connection. To detect open Ident services effectively, offensive cybersecurity professionals often employ various scanning techniques.
+
+**Advanced Nmap Scanning**:  
+Nmap is a versatile tool that allows for multiple types of scans. A common technique involves using a TCP SYN scan on port 113 to ascertain which hosts are listening. The command for a basic TCP SYN scan on port 113 looks like this:
+
+```bash
+nmap -sS -p 113 <target-ip>
+```
+
+Incorporating service version detection allows for deeper insight:
+
+```bash
+nmap -sV -p 113 <target-ip>
+```
+
+**Masscan for Large Networks**:  
+When dealing with large networks, Masscan provides a high-speed alternative. It can scan the entirety of IPv4 space, reporting back open ports such as 113:
+
+```bash
+masscan -p113 <network-range> --rate 1000
+```
+
+**Scripting with Python for Tailored Probing**:  
+Python scripts allow for customization in probing Ident services, giving flexibility in how requests are constructed and analyzed.
+
+### Credentialed vs Uncredentialed Detection
+Distinction between scans performed with credentials versus those without can provide varied levels of insight and response.
+
+**Leveraging Credentialed Scans for Better Insight**:  
+Credentialed scans involve using authenticated access to probe the Ident service, yielding more detailed information. This might require previously acquired access credentials.
+
+**Analyzing Uncredentialed Scan Results with Precision**:  
+Uncredentialed scans rely solely on the information returned from open services without credentials. Analysis hinges on interpreting default responses accurately.
+
+### Bypassing Firewalls and Intrusion Detection Systems
+To reach Ident services behind firewalls and IDS, evasion techniques are vital.
+
+**Port Knocking Techniques**:  
+This involves initiating a sequence of port connections designed to open a particular port, such as 113.
+
+**Crafting Custom Packet Payloads**:  
+Customizing packet payloads can disguise scan traffic to appear benign.
+
+**Utilizing Fragmented Packets to Avoid Detection**:  
+Fragmenting packets can disrupt deep packet inspection, aiding in evading detection systems.
+
+## [Determining Ident Server Implementations](offensive/network/enumeration/ident_enumeration/service_detection/determining_ident_server_implementations)
+
+### Enumeration of Ident Daemons
+Ident servers can be numerous and varied.
+
+**Use of Custom Scripts for Identification**:  
+Scripts can automate the identification of Ident servers by polling with specific queries.
+
+**Profiling Common Ident Server Banner Output**:  
+Banner grabbing is an effective way to identify the server implementation of open Ident services. Often, the banner can include software version and operating system details.
+
+### Fingerprinting Techniques
+Identifying the specific implementation and version of an Ident server requires advanced fingerprinting methods.
+
+**Crafting ICP Packets for Server Response Analysis**:  
+Interpreting responses from crafted ICP packets can indicate specific server characteristics.
+
+**Utilization of Operating System-Level Detectors**:  
+Using techniques and tools that can determine the associated OS can give clues to Ident server implementations.
+
+**Timing Analysis for Indirect Identification**:  
+Timing how long different servers take to respond can inadvertently provide identification clues via systematic delays.
+
+### Assessing Ident Server Configurations
+Configurations often indicate if an Ident service can be exploited.
+
+**Querying for Default and Misconfigured Settings**:  
+Identifying servers with default or weak configurations can point to potential vulnerabilities.
+
+**Cross-Referencing Ident Metadata with Known Vulnerabilities**:  
+Once metadata is gathered, it can be cross-referenced with databases of known vulnerabilities to identify security weaknesses.
+
+### Automated Tools and Scripts
+Automation is key for efficiency in large engagements.
+
+**Review and Deployment of Tools like Netcat and Socat**:  
+Tools like Netcat can be utilized for creating raw connections, while Socat can handle more complicated scenarios involving proxies and multiple protocols.
+
+**Developing Custom Bash or Python Scripts to Automate Detection Procedures**:  
+Custom scripting can allow for repetitive tasks to be performed seamlessly, facilitating continuous and automated enumeration of Ident services.
