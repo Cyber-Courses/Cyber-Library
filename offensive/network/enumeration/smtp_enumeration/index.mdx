@@ -1,0 +1,100 @@
+---
+title: SMTP Enumeration Techniques and Best Practices
+description: Explore SMTP Enumeration to identify vulnerabilities, user accounts,
+  and server configurations in your cybersecurity assessments.
+keywords:
+- SMTP enumeration
+- email enumeration
+- service detection
+- user enumeration
+- open relay testing
+- SMTP security
+- SMTP vulnerabilities
+- email validation
+- SMTP commands
+- cybersecurity techniques
+---
+
+# SMTP Enumeration
+
+SMTP Enumeration entails identifying valuable information from an SMTP server, including its configuration, users, and vulnerabilities. This process is crucial in offensive cybersecurity, whereby security professionals explore potential exploitation paths. It is pivotal to understand how SMTP operates and identify potential weaknesses. This exploration includes service detection, user enumeration, and testing relay and configuration setups.
+
+## Service Detection
+
+Service detection focuses on discovering details of the SMTP service running on the target server, such as its software and version, which can indicate specific vulnerabilities.
+
+### [Identifying Open SMTP Ports (25, 465, 587)](offensive/network/enumeration/smtp_enumeration/service_detection/identifying_open_smtp_ports_25_465_587/)
+
+SMTP communication relies on ports such as 25 (traditional SMTP), 465 (SMTPS), and 587 (submission). Enumerating these ports to verify their availability is crucial. Tools like Nmap offer potent capabilities for this purpose. 
+
+```bash
+nmap -p 25,465,587 --open -sV [target_ip]
+```
+
+This command checks if these SMTP ports are open and attempts to identify the version of the software running.
+
+### [Detecting SMTP Server Software and Versions](offensive/network/enumeration/smtp_enumeration/service_detection/detecting_smtp_server_software_and_versions/)
+
+Determining the specific software and its version running behind open SMTP ports can be achieved through banner grabbing, utilizing commands like `HELO` or `EHLO`. These commands elicit responses revealing software details.
+
+```bash
+telnet [target_ip] 25
+EHLO example.com
+```
+
+The server responds with a banner revealing critical information about the SMTP server architecture and version.
+
+## User Enumeration
+
+User enumeration on SMTP servers involves identifying valid user accounts through available server commands and their responses.
+
+### [Using VRFY and EXPN Commands](offensive/network/enumeration/smtp_enumeration/user_enumeration/using_vrfy_and_expn_commands/)
+
+The VRFY and EXPN commands can be employed to verify email addresses and expand mailing lists, respectively. For instance, sending a VRFY command for a specific user might return a confirmation if the user exists.
+
+```bash
+telnet [target_ip] 25
+VRFY username
+```
+
+The server may respond with user details, validating the existence of such an account.
+
+### [Analyzing Response Codes for Valid Email Addresses](offensive/network/enumeration/smtp_enumeration/user_enumeration/analyzing_response_codes_for_valid_email_addresses/)
+
+SMTP servers return specific response codes that can indicate the validity of an email address. Commands like `RCPT TO` can be used strategically to differentiate legitimate addresses based on these responses.
+
+```bash
+RCPT TO: alice@example.com
+```
+
+A "250 OK" response confirms the email's existence, while a "550 No such user" signals invalidity.
+
+## Relay and Configuration Testing
+
+The final aspect of SMTP Enumeration involves inspecting the server's relay capabilities and configurations for misconfigurations that can be leveraged.
+
+### [Testing for Open Relays](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/testing_for_open_relays/)
+
+Testing for open relay involves sending an email through an SMTP server without authentication. This vulnerability can lead to misuse for spam. Here's how you might test it:
+
+```bash
+telnet [target_ip] 25
+MAIL FROM:<attacker@example.com>
+RCPT TO:<victim@example.com>
+DATA
+Test email
+.
+```
+
+Open relays improperly permit this email dispatch to proceed through the server.
+
+### [Identifying SMTP Features with EHLO/HELO](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/identifying_smtp_features_with_ehlohelo/)
+
+Using `EHLO/HELO` not only aids in banner grabbing but also reveals supported server features like STARTTLS, which can affect secure connection handling.
+
+```bash
+telnet [target_ip] 25
+EHLO domain.com
+```
+
+The server's response lists available commands and extensions, providing insight into potential security weaknesses and misconfiguration in handling features.
