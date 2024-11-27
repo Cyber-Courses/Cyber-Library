@@ -1,0 +1,53 @@
+---
+title: Command and Access Discovery in rexec Enumeration
+description: Explore command listing and access control assessment for rexec service.
+keywords:
+- rexec enumeration
+- command discovery
+- access control assessment
+- user permissions
+- privilege escalation
+- command enumeration
+- security implications
+- dynamic access testing
+---
+
+# Command and Access Discovery in rexec Enumeration
+
+## Listing Allowed Commands per User
+
+### User Account Validation through rexec
+The Remote Execution (rexec) service operates by executing commands from a remote host, necessitating authentication before execution. Validation of user accounts is essential to verify which accounts can interact with rexec. This process typically involves an authenticated connection attempt with well-known user credentials. Analysts use tools like `netcat` or automated scripts to initiate connections and test user credentials to compile a list of valid accounts.  
+
+### Command Enumeration Methodologies
+Once valid user accounts are identified, enumerating the list of commands they can execute is crucial. The rexec service itself does not inherently disclose command listings; therefore, probing techniques are necessary. By crafting specific command queries, testers can gauge which commands execute successfully and which prompt errors due to restrictions, thereby disclosing the method of allowed command retrieval indirectly. Manual enumeration is possible; however, automation through scripting is often deployed for efficiency.
+
+### Automation of Command Enumeration
+To streamline command enumeration across multiple accounts, automation tools and scripts are employed. Tools such as `Rex`, and customized Python or Bash scripts, iterate through known command lists, logging successes and analyzing response headers and statuses to identify executed commands. Example of a basic automation script might involve a sequence of rexec requests iterating over a command list:
+
+```bash
+for cmd in $(cat command_list.txt); do
+    rexec -l validuser -p password remotehost $cmd && echo $cmd >> allowed_commands.txt
+done
+```
+
+### Command Impact Analysis
+Upon compiling a list of executable commands through rexec, it's imperative to assess the impact and security implications of these commands. Commands granting privileged access, data exfiltration, or configuration alterations could be potential security risks. A risk-based approach evaluates each command's potential to be leveraged in lateral movement or privilege escalation.
+
+[Learn more about Listing Allowed Commands per User](./offensive/network/enumeration/rexec_enumeration/command_and_access_discovery/listing_allowed_commands_per_user)
+
+## Assessing Access Controls and Permissions
+
+### Access Control Enumeration Techniques
+Access control limits determine the breadth of rexec's operational reach for any user. To assess these limits, enumeration involves reviewing configuration files, enviroment variables, and system-wide user permission settings, often requiring elevated permissions on the target machine. Special attention is paid to files like `/etc/hosts.allow` and `/etc/hosts.deny`, as they dictate potential user access to rexec.
+
+### Privilege Mapping and Escalation Vectors
+Mapping privileges helps identify areas where permissions may be excessive or improperly set. This mapping can reveal paths for privilege escalation, such as sudo permissions or exploited setuid binaries. Complications arise when configurations are dynamically adjusted or temporarily altered, necessitating a current and ongoing mapping effort.
+
+### Dynamic Access Control Testing
+Dynamic testing entails simulated attack scenarios to evaluate how well current access controls withstand real-world exploitation attempts. This may include temporarily altering system configurations, such as modifying file permissions or utilizing test accounts to probe the protective measures in place.
+
+### Permissions Adjustment Tests
+Permissions adjustment tests involve crafting controlled experiments where permissions are deliberately modified to analyze system behavior and security integrity. These adjustments are done within secure, ethical frameworks using test environments designed to mimic target settings.
+
+[Learn more about Assessing Access Controls and Permissions](./offensive/network/enumeration/rexec_enumeration/command_and_access_discovery/assessing_access_controls_and_permissions)
