@@ -1,0 +1,279 @@
+---
+title: Comprehensive Guide to Offensive Cybersecurity Techniques
+description: Explore essential offensive cybersecurity techniques, including network
+  exploitation, web application attacks, and malware development strategies.
+keywords:
+- offensive cybersecurity
+- network exploitation
+- web application attacks
+- malware development
+- red teaming
+- exploit development
+- cloud security
+- API vulnerabilities
+- container security
+---
+
+# Offensive Cybersecurity Roadmap
+
+## Network
+
+### Reconnaissance and Network Mapping
+Network reconnaissance involves gathering information about a target network to create a map of its structure and devices. Techniques include passive information gathering, scanning, and active enumeration of network components. Tools like Nmap and Wireshark are leveraged to identify open ports, services, and potential vulnerabilities. Use commands like:
+
+```bash
+nmap -sS -O -v target-ip
+```
+
+This command performs a TCP SYN scan and detects the target operating system.
+
+### Lateral Movement Strategies
+Lateral movement refers to techniques attackers use to pivot through the network after initial access. This includes exploiting vulnerabilities in adjacent network segments and using compromised credentials to access resources. Attackers may utilize tools such as PsExec or PowerShell for lateral propagation.
+
+### Exploiting Network Protocols
+This involves identifying weaknesses in network protocols like SMB, RDP, or DNS and leveraging them to execute unauthorized actions. Knowledge of protocol mechanics and anomaly creation can lead to successful exploitation.
+
+### Man-in-the-Middle (MitM) Attack Techniques
+MitM attacks involve intercepting and altering the communication between two parties without detection. Techniques may include ARP spoofing or DNS poisoning. Attackers utilize tools like Ettercap and MITMf for capturing and manipulating traffic.
+
+### Network Traffic Analysis and Manipulation
+Traffic analysis involves monitoring network data packets to identify patterns or anomalies. Attackers may reroute, drop, or inject packets to disrupt or dissect communications. Tools like Tcpdump and Scapy are commonly used for these purposes.
+
+## Web Application
+
+### Advanced Injection Attacks (SQLi, NoSQLi)
+SQL Injection involves inserting malicious SQL code into user input fields to manipulate or extract data from a database. The principle extends to NoSQL databases with NoSQLi. SQLmap is a common tool for automating SQL injection and database takeover:
+
+```bash
+sqlmap -u "http://target.com/search?q=test" --dbs
+```
+
+This command attempts to extract database names from the target URL.
+
+### Cross-Site Scripting (XSS) and CSRF Exploitation
+XSS allows attackers to inject scripts into web pages viewed by other users, enabling session hijacking or data theft. CSRF tricks users into executing unwanted actions on a different site where they are authenticated.
+
+### Insecure Direct Object Reference (IDOR) and BOLAs
+IDOR vulnerabilities allow attackers to access data by manipulating references to objects (e.g., user IDs). Broken Object Level Authorization (BOLAs) involves improper enforcement of access control over individual objects.
+
+### Web Shell Tactics and Persistence
+Install a web shell on a compromised server for persistent access and remote command execution. Web shells are simple scripts that provide an interface via HTTP.
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+Example of a simplistic PHP web shell.
+
+### Web Application Firewall Evasion
+Evading WAFs involves crafting payloads that bypass signature-based detection. Techniques include encoding, obfuscation, or fragmentation of attack vectors.
+
+## Mobile Application
+
+### Reverse Engineering Mobile Applications
+Reverse engineering involves decrypting and analyzing a mobile app's code to understand its logic and identify vulnerabilities. Tools like APKTool or Hopper are essential for disassembly or decompilation.
+
+### Mobile Platform Vulnerability Exploitation
+Each mobile platform (e.g., Android, iOS) has specific vulnerabilities. Exploits may involve leveraging system privileges or outdated libraries.
+
+### Intercepting and Manipulating Mobile Communications
+Attackers use tools like Burp Suite or Frida to intercept and manipulate data transmitted by mobile applications, especially when SSL/TLS implementations are weak or misconfigured.
+
+### Mobile Application Data Security Breaches
+Targeting insecure data storage or data transmission methods used by mobile apps, where sensitive information is stored or communicated without adequate encryption.
+
+## Supply Chain
+
+### Targeting Development and Delivery Pipelines
+Compromising the development pipeline can lead to widespread distribution of malicious code. Attackers target source code repositories or CI/CD environments to inject backdoors.
+
+### Embedded Systems Security Testing
+Focus on identifying vulnerabilities within firmware or software of embedded devices. Testing often includes hardware interfaces like JTAG or UART.
+
+### Supply Chain Compromise Techniques
+Inserting malicious components within a product's supply chain disrupts the integrity before it reaches the end-user. Notable instances include hardware implants or tampered update files.
+
+### Third-Party Software Backdooring
+Introducing hidden, unauthorized code into software products supplied by third-party vendors during development, intentional or via exploit.
+
+## CI/CD
+
+### Compromising CI/CD Environments
+Unauthorized access to a CI/CD environment grants power to alter the software build process, potentially inserting malicious code before deployment.
+
+### Infiltrating Build Pipelines
+Attackers intercept or modify build artifacts, leading to the distribution of compromised software. Vulnerabilities in build scripts or dependencies are commonly exploited.
+
+### Artifact Tampering and Integrity Compromise
+Modification of build artifacts undetected can subvert software's intended functionality. Ensuring artifact integrity is crucial, relying on checksums or cryptographic signatures.
+
+### CI/CD Tool Vulnerability Exploitation
+Known vulnerabilities in CI/CD tools, such as Jenkins or GitLab, can be exploited for unauthorized access and code alteration.
+
+## Cloud
+
+### Cloud Service Exploitation Techniques
+Exploiting misconfigurations or vulnerabilities in cloud services to gain unauthorized access or control over cloud-managed resources.
+
+### Misconfigured Cloud Storage Attacks
+Targeting exposed storage services such as AWS S3 buckets due to inadequate security controls like public write or read access.
+
+### Cloud Identity and Access Management Bypass
+Gaining unauthorized access to cloud assets by exploiting weak IAM policies or overly permissive roles.
+
+### Serverless Architecture Attack Vectors
+Exploiting vulnerabilities in serverless frameworks by abusing event triggers or injecting malicious payloads into function execution contexts.
+
+## Container
+
+### Container Escape Techniques
+Identifying and exploiting vulnerabilities allowing malicious code to break out of the container environment into the host system.
+
+### Attacking Kubernetes Clusters
+Exploiting misconfigurations within Kubernetes environments to gain unauthorized control or disrupt service.
+
+### Exploiting Container Orchestration Vulnerabilities
+Targeting vulnerabilities in orchestration tools like Docker Swarm or Kubernetes to access restricted environments.
+
+### Container Image Poisoning
+Tampering with container images by injecting malicious code, affecting systems where these images are deployed.
+
+## API
+
+### API Endpoint Enumeration and Reconnaissance
+Identifying API endpoints and mapping their structure to determine available resources and potential vulnerabilities.
+
+### API Authentication and Authorization Bypass
+Exploiting vulnerabilities that allow bypassing authentication layers or improper authorization checks.
+
+### Rate Limit and Quota Abuse
+Bypassing rate limits to overwhelm the API or extract more data than intended by manipulating request headers or payloads.
+
+### Exploiting REST and SOAP API Vulnerabilities
+Targeting specific APIs through injection, deserialization attacks, or leveraging exposure due to verbose error messages.
+
+## Hardware
+
+### Hardware Interface Exploitation
+Manipulating or accessing hardware interfaces to extract sensitive data or modify device operations.
+
+### Side-Channel Attacks on Hardware
+Leveraging electromagnetic emissions, power consumption analysis, or timing information to infer device operations or retrieve sensitive information.
+
+### Embedded Device Breaching
+Gaining unauthorized access to embedded devices through vulnerabilities in firmware or external communication interfaces.
+
+### Hardware Firmware Reverse Engineering
+Analyzing the firmware of hardware devices to identify vulnerabilities or understand device operation through reverse engineering.
+
+## Wireless
+
+### Wireless Network Attacks (Wi-Fi, Bluetooth)
+Exploiting weak Wi-Fi protocols (WEP/WPA2) or Bluetooth misconfigurations to intercept and manipulate wireless communications.
+
+### Rogue Access Point Deployment
+Deploying unauthorized access points to intercept wireless communications, a technique often used in phishing or credential theft.
+
+### Eavesdropping on Wireless Communications
+Listening to unencrypted communication over a wireless network to capture sensitive information like passwords.
+
+### Wireless Protocol Exploitation
+Exploiting weaknesses in protocols like Zigbee or Bluetooth Low Energy (BLE) to gain control or spy on device communications.
+
+## Physical Security Attacks
+
+### Social Engineering and Physical Penetration
+Using deception to bypass physical security measures, involving impersonation or credential forgery to gain unauthorized access to facilities.
+
+### Bypassing Physical Access Controls
+Circulating barriers such as locks or biometric systems through techniques like lock picking or relay attacks.
+
+### Physical Layer Information Exfiltration
+Extracting data through physical means, like copying data from exposed hard drives or intercepting electromagnetic signals.
+
+### Physical Security Assessment Methods
+Simulation-based techniques to assess vulnerabilities in physical security setups, involving penetration testing of premises.
+
+## Cryptographic
+
+### Cryptographic Protocol Attacks
+Exploiting vulnerabilities in cryptographic protocols, leading to data decryption, authentication bypass, or impersonation.
+
+### Cryptanalysis Techniques
+Techniques employ mathematical and systemic analysis to compromise cryptographic security, including breaking ciphers.
+
+### Key Management Abuse
+Attacking improper key management practices leading to unauthorized key disclosure and data decryption.
+
+### Breaking Symmetric and Asymmetric Encryption
+Finding weaknesses or exploiting implementation flaws to decrypt data without key possession. Examples include attacks on AES or RSA.
+
+## Exploit Development
+
+### Identifying Vulnerability Exploitation Opportunities
+Research and discover vulnerabilities in software or hardware that can be exploited. Focus on entry points within unsanitized inputs or unchecked operations.
+
+### Advanced Memory Corruption Techniques
+Leverage weaknesses in memory operations to achieve arbitrary code execution, including buffer overflows and use-after-free exploits.
+
+### Shellcode Crafting and Delivery
+Designing and injecting shellcode as a payload to execute malicious instructions on a target system.
+
+### Exploit Framework Utilization
+Using tools like Metasploit to aid exploit development and manage attack vectors through configurable modules for varying targets.
+
+## Red Teaming
+
+### Planning and Execution of Red Team Engagements
+Red teaming involves simulating advanced persistent threats (APTs) to evaluate organizational defenses. Planning focuses on achieving specific tactics, techniques, and procedures (TTPs).
+
+### Red Team Infrastructure and Tooling Setup
+Building a secure and resilient infrastructure for conducting red team operations, focusing on command and control (C2) systems and attack tools.
+
+### Multi-Stage Attack Campaigns
+Coordinated campaigns mimicking real-world attackers, involving multiple phases like reconnaissance, exploitation, and lateral movement.
+
+### Adversary Simulation and Emulation
+Realistic simulation of tactics used by advanced threat actors to evaluate an organization's defensive measures and identify improvement areas.
+
+## Evasion
+
+### Network and Endpoint Detection Bypass
+Utilizing tactics to avoid detection by IDS/IPS and endpoint security solutions, through malware obfuscation or exploiting detection gaps.
+
+### Anti-Forensics and Evidence Manipulation
+Techniques designed to thwart forensic analysis or erode evidence trail, critical in maintaining covert operations.
+
+### Obfuscation and Encryption Techniques
+Masking payloads or communications through layers of obfuscation or encryption to evade security measures and analysis.
+
+### Honeypot and Sandbox Evasion
+Detecting and avoiding interaction with decoy systems like honeypots or sandbox environments that aim to capture malicious activities.
+
+## Malware Development
+
+### Custom Payload Design and Delivery
+Creating tailored payloads, often targeting specific environments or bypassing existing defenses, emphasizes stealth and functionality.
+
+### Malware Evasion and Persistence Techniques
+Crafting malware to persist on the system post-compromise and avoid detection through obfuscation or manipulation of host defenses.
+
+### C2 Infrastructure Development and Management
+Building and managing command and control infrastructure to maintain autonomy over compromised systems, key for persistent threat actors.
+
+### Anti-Malware Bypass Methods
+Efforts to circumvent automated malware detection systems using evasion techniques such as signature manipulation or behavior modification.
+
+## Software
+
+### Software Backdooring Techniques
+Introducing surreptitious access points into software code for unauthorized access, often via manipulated opensource or proprietary code bases.
+
+### Application Logic Manipulation
+Exploit errors in business logic or application flow to execute unintended actions or extract data improperly.
+
+### Advanced Reverse Engineering Tactics
+Deep-dive analysis of software executables using tools like IDA Pro or Ghidra to expose internal logic or vulnerabilities in closed-source systems.
+
+### Code Injection and Hooking
+Injecting malicious code into running processes or intercepting application workflows through hook techniques, often used for privilege escalation.
