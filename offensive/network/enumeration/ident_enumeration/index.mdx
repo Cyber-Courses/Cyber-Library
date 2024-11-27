@@ -1,0 +1,70 @@
+---
+title: Ident Enumeration Techniques for System and User Data
+description: Explore Ident enumeration methods for detecting services, identifying
+  users, and gathering system information effectively.
+keywords:
+- Ident Enumeration
+- service detection
+- user identification
+- system information gathering
+- network enumeration
+- Ident protocol
+- username enumeration
+- OS fingerprinting
+---
+
+# Ident Enumeration
+
+Ident Enumeration involves the process of gathering user and system information through the Ident protocol, primarily over TCP port 113. This process can provide insights into user activities and system configurations on networked devices. This guide delves into methods and techniques for conducting Ident Enumeration, structured into service detection, user identification, and system information gathering.
+
+## Service Detection
+
+### Identifying Open Ident Services
+Ident services typically operate on TCP port 113. Detection involves scanning the network to identify hosts with open Ident ports. By executing commands such as:
+
+```bash
+nmap -p 113 <target-IP>
+```
+
+you can determine if an Ident service is active. Tools like Nmap can facilitate automated scanning across large networks to identify potential targets with open Ident services.
+
+[Learn more about service detection](offensive/network/enumeration/ident_enumeration/service_detection).
+
+### Determining Ident Server Implementations
+Various software implementations exist for Ident services, such as pidentd or oidentd. Accurately fingerprinting these implementations involves examining the banners returned by the Ident service.
+
+```bash
+telnet <target-IP> 113
+```
+
+A successful connection typically reveals implementation-specific information. Careful analysis of these responses can highlight differences in Implementations. For deeper insights, refer to [determining Ident server implementations](offensive/network/enumeration/ident_enumeration/service_detection/determining_ident_server_implementations/).
+
+## User Identification
+
+### Retrieving Associated Usernames for Active Connections
+Once an active Ident service is discovered, attempts can be made to retrieve usernames associated with active user sessions. By querying the Ident service, information regarding the user running particular network services can be gathered.
+
+```bash
+echo "<source-port> , <destination-port>" | nc <target-IP> 113
+```
+
+This command sends a query that may return a username, thus allowing enumeration of users logged on or processes running on the target system. Explore methods for [retrieving usernames](offensive/network/enumeration/ident_enumeration/user_identification/retrieving_associated_usernames_for_active_connections/).
+
+### Mapping Ident Responses to Known Services
+The data returned by Ident services can often be matched with known service configurations, assisting in verifying services a user might be utilizing. Reconciling an Ident server's output with known services can help build a profile of user activity and potential weak points.
+
+For comprehensive strategies, explore [mapping Ident responses](offensive/network/enumeration/ident_enumeration/user_identification/mapping_ident_responses_to_known_services/).
+
+## System Information Gathering
+
+### Extracting OS or Service Metadata from Ident Responses
+By analyzing Ident service responses, valuable metadata regarding the operating system or software environment can be extracted. The structure and content of Ident responses may divulge information about system specifications or configuration details.
+
+Refer to [extracting OS or service metadata](offensive/network/enumeration/ident_enumeration/system_information_gathering/extracting_os_or_service_metadata_from_ident_responses/) for in-depth methodologies.
+
+### Correlating Ident Users with Remote Access Accounts
+One advanced technique is correlating Ident-derived usernames with existing remote access accounts. Achieving this provides insights into access controls and might highlight potential vulnerabilities in user management.
+
+Efforts like these require a systematic approach to the examination and cross-referencing of user data. Details for correlating identities can be found in the section [correlating Ident users](offensive/network/enumeration/ident_enumeration/system_information_gathering/correlating_ident_users_with_remote_access_accounts/).
+
+This roadmap highlights paths and techniques to efficiently gather intelligence from Ident services, forming a critical part of offensive cybersecurity practices in network environments.
