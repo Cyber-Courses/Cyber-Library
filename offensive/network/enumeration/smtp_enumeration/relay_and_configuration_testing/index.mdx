@@ -1,0 +1,38 @@
+---
+title: Relay and Configuration Testing in SMTP Enumeration
+description: Explore techniques for testing open relays and identifying SMTP features
+  to enhance your network security.
+keywords:
+- SMTP relay testing
+- open relay detection
+- SMTP features
+- EHLO/HELO commands
+- SMTP enumeration techniques
+- network security
+- SMTP vulnerabilities
+- security testing tools
+- email server configuration
+- relay misconfiguration
+---
+
+# Relay and Configuration Testing
+
+## [Testing for Open Relays](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/testing_for_open_relays)
+
+Testing for open relays involves verifying if an SMTP server is improperly configured to allow anyone to send emails through it, bypassing any authentication mechanisms. This vulnerability is exploited by attackers to distribute spam or malicious content. An SMTP server configured as an open relay can be utilized as a part of a botnet to anonymize attacks or distribute phishing emails, leading to severe security issues.
+
+To begin with, the objective is to craft SMTP message sequences that test the relay configurations without triggering alarms or false positives. This involves sending messages to the server, both with legitimate recipient addresses on the server's domain and external ones, while monitoring the responses. A misconfigured server that allows sending messages externally without requiring authentication is termed as an open relay.
+
+Several tools can be employed to automate the detection of open relays. Tools like `smtp-user-enum`, or custom scripts using scripting languages like Python, can be utilized to interact with the target SMTP server and test its relay features. These tools systematically try different combinations of sender and recipient addresses and analyze the server's responses for confirmation.
+
+Interpreting the results of the relay tests is crucial. A server correctly configured should reject unauthorized requests with specific SMTP response codes, typically in the 5xx range indicating a permanent error. In contrast, a server that forwards these messages suggests a potential relay misconfiguration. Analysts must thus categorize servers as open, closed, or selectively open based on these responses, further investigating selectively open relays as they might be configured incorrectly under particular situations or conditions.
+
+## [Identifying SMTP Features with EHLO/HELO](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/identifying_smtp_features_with_ehlohelo)
+
+Identifying SMTP features is conducted through the EHLO/HELO commands, which are fundamental in the SMTP protocol to initiate communication with the server and understand its capabilities. The EHLO command, in particular, provides a list of extensions supported by the server, which enables an attacker to craft more specific attacks based on these capabilities.
+
+The primary distinction between EHLO and HELO is that EHLO is used in Extended SMTP (ESMTP) and requests the server to list supported extensions. In contrast, HELO is the basic, legacy SMTP command used primarily for backward compatibility. By sending an EHLO command, an attacker can enumerate the capabilities of an SMTP server, such as support for encryption (STARTTLS), authentication (AUTH), multiple message handling (PIPELINING), and others.
+
+Analyzing server responses involves interpreting the lines of textual information returned by the server following an EHLO command. Each response typically lists supported features, with each line beginning with '250' indicating success and the availability of the feature. For instance, the presence of '250-STARTTLS' suggests that the server supports Transport Layer Security (TLS) connections, which might be targeted if weaknesses in its implementation are known.
+
+SMTP capabilities enumeration is a critical step that precedes the crafting of attack vectors. It allows the attacker to selectively target weaknesses and features without exhaustive trial and error. Tools like `telnet` or `netcat` (nc) can be used manually, although more sophisticated penetration testing frameworks can automate the process, enhancing both speed and accuracy. The enumeration process is crucial as it provides a map of potential attack surfaces, crucial for any strategic offensive operation.
