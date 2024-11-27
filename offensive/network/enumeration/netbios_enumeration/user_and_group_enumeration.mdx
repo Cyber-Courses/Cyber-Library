@@ -1,0 +1,76 @@
+---
+title: User and Group Enumeration Techniques in NetBIOS
+description: Explore user and group enumeration techniques using NetBIOS for effective
+  network analysis and security assessments.
+keywords:
+- User Enumeration
+- Group Enumeration
+- NetBIOS Protocol
+- SMB Traffic Analysis
+- Null Sessions
+- Network Discovery
+- NBNS Queries
+- Security Assessment
+- Service Enumeration
+- Active Directory
+---
+
+## Understanding NetBIOS Protocol
+
+The NetBIOS (Network Basic Input/Output System) protocol is a critical component in network communication, particularly within Windows environments. It operates at the session layer and is fundamental for applications on different computers to communicate over a Local Area Network (LAN). The protocol facilitates name resolution, allowing applications to identify services on the network without the need for an IP address. This capability is exploited in enumeration processes to discover active services and computer names.
+
+NetBIOS over TCP/IP, or NBT, enables legacy applications, which were initially designed to operate over NetBIOS API, to communicate over modern IP networks. NetBIOS uses port 137 (UDP) for name services, port 138 (UDP) for datagram services, and port 139 (TCP) for session services. Particularly, NetBIOS Name Service (NBNS) is similar to DNS in functionality, making it valuable for querying network resources.
+
+## NetBIOS Naming Service (NBNS)
+
+NBNS is central to the discovery of NetBIOS names on the network. It provides a mechanism to associate NetBIOS names to IP addresses and manage these mappings dynamically. When a client or application needs to resolve a NetBIOS name, it queries via NBNS.
+
+You can use the `nbtstat` command to query the list of names that are registered with NBNS. For instance, the command `nbtstat -A <IP-address>` will return the NetBIOS name table of a remote machine, providing insights into hostnames and registered services. NBNS queries can reveal potential targets by listing devices that respond on the network.
+
+## User Enumeration via NetBIOS
+
+User enumeration involves identifying usernames that can later be used in further attacks, such as password guessing or crafting social engineering attacks. NetBIOS allows for querying session data that may include username information. Tools such as `smbclient`, part of the Samba suite, can interact with SMB shares and list available sessions, revealing usernames. The command:
+
+```bash
+smbclient -L //<target-IP> -N
+```
+
+This command lists shares and connected users without requiring a username or password, assuming guest access is permitted.
+
+## Group Enumeration Tactics
+
+This stage targets the identification of groups within a network domain or a local computer. Enumerating user groups can help an attacker understand roles and associated privileges, offering a deeper attack surface. Tools like `Enum` and `DumpSec` are instrumental in this process. For example, `DumpSec` can list users and groups from NT-based systems, often without needing elevated privileges, if misconfigurations allow it.
+
+```bash
+enum.exe -G <target-IP>
+```
+
+This command will display the groups defined on the target, highlighting administrative and privileged groups of interest.
+
+## Exploiting Null Sessions
+
+Null sessions or anonymous logins grant users the ability to extract information from a server without supplying credentials. Though contemporary systems have mitigated the vulnerability of null sessions, legacy systems might still be susceptible. Tools like `rpcclient` can connect to an SMB service using null sessions:
+
+```bash
+rpcclient -U "" <target-IP>
+```
+
+Once connected, commands such as `enumusers` and `querydominfo` can list users and domain information, respectively. Understanding and leveraging null sessions are crucial for user and group enumeration in environments where security patches are not applied.
+
+## Analyzing SMB and NetBIOS Traffic
+
+Traffic analysis involves capturing and inspecting network packets to extract important relationships and detailed enumeration data. Using packet sniffers like Wireshark, analysts can capture NetBIOS-over-TCP/IP and SMB traffic, which often contains usernames, machine names, and shared resource details in plaintext.
+
+In Wireshark, filter by `nbns` or `smb` protocols to focus on relevant packets. Detailed analysis helps to verify open sessions and identify potentially sensitive username and group data being transmitted over the network.
+
+## Mitigation and Evasion Techniques
+
+While conducting enumeration, staying undetected is paramount for continued access and data exfiltration. Employing techniques to avoid triggering SMB and NetBIOS detection systems, like IDS/IPS, relies on low-traffic probing and timing of requests to mimic legitimate queries.
+
+Successful evasion involves crafting packets that blend into regular traffic or exploiting encrypted connections to carry out enumeration activities. Understanding the target's logging practices and IDS configurations can inform the best approach for stealth operations.
+
+## Integration with Broader Enumeration Activities
+
+Findings from user and group enumeration need to be integrated with other network intelligence activities such as service discovery and resource identification. By correlating enumeration data from multiple sources, attackers can craft more comprehensive exploitation plans. This involves mapping users to services, identifying group privileges, and triangulating with discovered IPs and shared resources.
+
+Coordinating data from service discovery, IP address mapping, and resource sharing greatly enhances an attacker’s understanding of the environment, providing pathways for lateral movement and privilege escalation.
