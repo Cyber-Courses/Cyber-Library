@@ -1,0 +1,55 @@
+---
+title: Comprehensive Guide to Rexec Enumeration Techniques
+description: Discover effective methods for Rexec enumeration, including service detection,
+  user account enumeration, and command access discovery.
+keywords:
+- Rexec enumeration
+- service detection
+- user account enumeration
+- command discovery
+- offensive security
+- network enumeration
+- privileged users
+---
+
+# Rexec Enumeration
+
+---
+
+## [Service and Version Detection](offensive/network/enumeration/rexec_enumeration/service_and_version_detection)
+
+### [Identifying Rexec Service and Port](offensive/network/enumeration/rexec_enumeration/service_and_version_detection/identifying_rexec_service_and_port/)
+
+Utilizing network scanning tools such as Nmap is essential for identifying open Rexec ports, typically TCP port 512. The command `nmap -p 512 <target-ip>` can help determine the presence of an Rexec service. If the port is open, further interrogation can identify that the service running is indeed Rexec. Analyzing the network responses during these scans helps differentiate Rexec from other services using similar ports.
+
+### [Detecting Supported Rexec Versions](offensive/network/enumeration/rexec_enumeration/service_and_version_detection/detecting_supported_rexec_versions/)
+
+Banner grabbing is a common technique employed to detect the software version of Rexec services. Executing telnet or `nc` (Netcat) to connect to the Rexec port allows you to capture the initial banner upon connection. Reviewing these banners provides version information that can be matched against known vulnerabilities or software versions in use. The command `nc <target-ip> 512` may yield direct service information upon banner display.
+
+---
+
+## [User Account Enumeration](offensive/network/enumeration/rexec_enumeration/user_account_enumeration)
+
+### [Listing Available User Accounts](offensive/network/enumeration/rexec_enumeration/user_account_enumeration/listing_available_user_accounts/)
+
+User account enumeration on Rexec services can be achieved through brute-force techniques using tools such as Hydra or Medusa. By employing dictionaries of common usernames, attackers can exploit Rexec's responses to distinguish valid user accounts. The command `hydra -l <username> -P <password-list> rexec://<target-ip>` allows for systematic user account checking based on server responses to login attempts.
+
+### [Identifying Privileged Users](offensive/network/enumeration/rexec_enumeration/user_account_enumeration/identifying_privileged_users/)
+
+Beyond mere user enumeration, focus on distinguishing administrative or privileged users through error message analysis and login attempt feedback. Often, Rexec services indicate user privilege levels via connection response discrepancies. Assessing these variations helps discern which accounts hold advanced rights, potentially serving as a gateway to elevated access within the network.
+
+---
+
+## [Command and Access Discovery](offensive/network/enumeration/rexec_enumeration/command_and_access_discovery)
+
+### [Listing Allowed Commands per User](offensive/network/enumeration/rexec_enumeration/command_and_access_discovery/listing_allowed_commands_per_user/)
+
+Investigating which commands are executively permitted for users is integral in understanding the Rexec service's configuration. Leveraging direct interaction tools like `rexec` with specific credentials helps identify command limitations per user. The command `rexec -l <username> <target-ip> <command>` tests different command executions under specific user credentials, revealing access levels.
+
+### [Assessing Access Controls and Permissions](offensive/network/enumeration/rexec_enumeration/command_and_access_discovery/assessing_access_controls_and_permissions/)
+
+Mapping the permissions and access controls applied within the Rexec environment involves simulating various user scenarios and command executions. With active directories and privilege escalations in mind, documenting these permissions helps determine effective lateral movement strategies in compromised networks. Use findings to outline potential escalation paths for unauthorized data or resource access.
+
+---
+
+Rexec enumeration complements a holistic network enumeration approach, feeding into broader offensive security methodologies. Employing strategic Rexec enumeration tactics sharpens penetration testing capabilities and deepens insights into networked system vulnerabilities.
