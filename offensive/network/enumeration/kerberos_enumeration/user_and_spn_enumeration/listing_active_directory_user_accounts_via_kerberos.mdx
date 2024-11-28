@@ -1,0 +1,75 @@
+---
+title: Listing Active Directory User Accounts via Kerberos
+description: Learn effective techniques for enumerating Active Directory users using
+  Kerberos authentication methods and tools.
+keywords:
+- Active Directory user enumeration
+- Kerberos authentication
+- AS-REQ packets
+- Kerberos pre-authentication
+- enumeration techniques
+- cybersecurity tools
+- Impacket
+- Kerbrute
+- SPN extraction
+- penetration testing
+---
+
+## Overview of Kerberos-Based Enumeration
+
+Kerberos is a network authentication protocol designed to provide secure authentication for user and service requests. Its primary function is to allow devices on a network to authenticate one another without sending passwords across the network. Kerberos typically relies on the use of Tickets to grant access to different services and relies on a Key Distribution Center (KDC) to issue these tickets. The protocol operates by passing Ticket Granting Tickets (TGTs) and Service Tickets between the client and the server to secure and authenticate communications.
+
+## Leveraging Kerberos for User Enumeration
+
+### Kerberos Protocol Mechanisms
+
+Kerberos user enumeration leverages the inherent protocol flow, specifically the initial AS-REQ (Authentication Service Request) messages sent to the KDC. During this initial request, the client does not necessarily have to provide a valid password; instead, it attempts to gain access by providing a username. When the username exists within the Directory but has pre-authentication disabled, the KDC generates an error message saying that additional pre-authentication is needed, thereby indicating the existence of the user account.
+
+## Techniques for Active Directory User Listing
+
+### AS-REQ Packets without Pre-Authentication
+
+Sending AS-REQ (Authentication Service Requests) without pre-authentication allows attackers to probe the Kerberos service by submitting usernames to gauge the response. When a valid username is submitted, the KDC issues an error noting that pre-authentication is required. This behavior can be cataloged and analyzed to identify valid usernames within the target Active Directory (AD) environment. 
+
+### Kerberos Pre-Authentication Bypass
+
+Kerberos pre-authentication is an additional security layer requiring users to provide proof of their identity before requesting a TGT. Certain configurations may have this setting disabled, resulting in a potential vulnerability. By exploiting this configuration oversight, an attacker can bypass pre-authentication requirements and enumerate existing user accounts within the Active Directory without knowledge of user credentials.
+
+## Tool Utilization and Custom Scripting
+
+### Existing Tools and Scripts
+
+Several tools have been developed to automate the enumeration of Kerberos users in AD environments. Tools such as Kerbrute and Impacket's GetNPUsers.py are widely used in offensive security to automate these processes. These tools are designed to rapidly query a Kerberos service to determine valid usernames by making numerous login attempts and analyzing the KDC's response.
+
+Example Usage of Kerbrute:
+```bash
+kerbrute userenum -d example.com usernames.txt
+```
+
+### Developing Custom Scripts
+
+For environments where custom scripting or unique attack vectors are required, security professionals can create their scripts using Python or other scripting languages to send AS-REQ packets and handle responses, thus streamlining the enumeration process. By crafting bespoke scripts, attackers can modify or adapt requests to avoid detection and increase their chance of success. 
+
+## Mitigation Techniques and Evasion Techniques
+
+### Detection and Logging Evasion
+
+Attackers can obfuscate their activities using techniques such as slowing down requests to evade detection mechanisms, utilizing forged packets, or altering packet contents to bypass defenses. Sophisticated adversaries often implement flood-timing attacks to evade logging systems designed to spot rapid brute force attacks.
+
+### Mitigating Kerberos Enumeration Risks
+
+To mitigate the risks associated with Kerberos enumeration, it is critical that organizations ensure pre-authentication is required for all user accounts. Additionally, enabling dynamic user account lockout policies and robust auditing capabilities on both the client and server can help identify and thwart enumeration-based attacks. Updating and patching servers to protect against known inherit protocol flaws and ensuring least privilege access controls can reduce exposure and lateral movement options for attackers.
+
+## Cross-Referencing with Extracting Service Principal Names (SPNs)
+
+Combining the data gathered from user enumeration with SPN extraction initiatives can be highly beneficial, providing a clearer map of the services and accounts associated with each discovered user. This data can allow attackers to pinpoint target accounts and leverage SPN data to perform further attacks such as kerberoasting, thereby elevating their access and potential for privilege escalation.
+
+## Operational Execution
+
+### Strategically Planning Enumeration
+
+Effective enumeration requires a methodical and planned approach; scheduling the enumeration to take place at times when it is less likely to be detected is beneficial. Identifying the target environment, understanding its logging policies, and choosing the appropriate tools align with successful operational execution.
+
+### Integrating Results into Broader Offensive Campaigns
+
+Data derived from user enumeration should be integrated systematically into larger campaigns by pairing the findings with vulnerability scanning, credential stuffing, or lateral movement tactics. Proper categorization and analysis of enumerated accounts enable penetration testers and attackers to craft structured, targeted attack plans or penetration testing objectives, achieving a comprehensive representation of an organization’s attack surface.
