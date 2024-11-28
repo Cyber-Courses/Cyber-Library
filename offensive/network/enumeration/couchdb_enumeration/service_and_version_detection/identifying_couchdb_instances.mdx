@@ -1,0 +1,114 @@
+---
+title: Identifying CouchDB Instances for Effective Enumeration
+description: Learn techniques for identifying CouchDB instances through scanning,
+  fingerprinting, and analysis.
+keywords:
+- CouchDB instances
+- network scanning
+- port scanning
+- banner grabbing
+- traffic analysis
+- Shodan
+- Censys
+- automation
+- service detection
+- enumeration techniques
+---
+
+## Identifying CouchDB Instances
+
+### Network Scanning for CouchDB Services
+
+**Port Scanning for Default CouchDB Ports**
+
+Identifying CouchDB instances begins with scanning the network for its default communication ports. CouchDB typically listens on TCP port 5984. Port scanning is a fundamental technique that allows the identification of open ports corresponding to specific services. Tools like Nmap facilitate this process by enabling comprehensive network sweeps to locate machines exposing the CouchDB service.
+
+Using Nmap, one can execute a simple command to scan a range of IP addresses for open ports:
+
+```bash
+nmap -p 5984 192.168.1.0/24
+```
+
+This command targets the common IPv4 subnet of 192.168.1.0/24 and specifically looks for hosts with TCP port 5984 open. This scan will reveal all active devices broadcasting CouchDB on the network.
+
+**Banner Grabbing**
+
+Once potential CouchDB instances are found, banner grabbing is employed to collect further details. Banner grabbing involves extracting the initial data or “banner” sent by a service when a connection is established. This technique helps identify the service running on a specific port and often provides version information.
+
+Using the `curl` command, a simple HTTP GET request can be issued to a suspected CouchDB instance:
+
+```bash
+curl http://192.168.1.100:5984/
+```
+
+This will return an HTTP header and response body, typically indicating whether CouchDB is running and potentially what version it is.
+
+### Fingerprinting Techniques
+
+**Identifying Technology Stack**
+
+HTTP response headers offer vital clues into the underlying technology stack of the exposed service. Analyzing these headers is essential for confirming whether a given service is indeed CouchDB. Specific patterns such as server header information or ETag values embedded in responses can often point conclusively to CouchDB.
+
+Direct examination of these responses involves investigating headers like `Server`, which may announce CouchDB with version numbers, or the presence of specific attributes in JSON responses typical of CouchDB.
+
+### Analyzing Network Traffic
+
+**Intercepting and Analyzing Traffic**
+
+Monitoring network traffic can reveal CouchDB instances by recognizing specific traffic patterns and protocols. Tools like Wireshark are instrumental for this task as they allow for the capture and analysis of packets on the network.
+
+By setting up Wireshark to capture traffic to and from TCP port 5984, one can filter for CouchDB traffic and analyze the session data being transmitted. Special attention should be paid to recurring JSON structures and HTTP method patterns that are characteristic of CouchDB interactions.
+
+### Leveraging Search Engines and Public Databases
+
+**Shodan and Censys Searches**
+
+Public search engines such as Shodan and Censys index internet-facing services, making them valuable resources for discovering CouchDB instances worldwide. By crafting queries specifically for CouchDB, one can locate numerous publicly accessible instances.
+
+Example Shodan search:
+
+```
+port:5984 "couchdb"
+```
+
+This query scans Shodan’s database for any services listening on port 5984 and explicitly associated with CouchDB, providing a list of possibly misconfigured or publicly accessible CouchDB instances.
+
+**Exploiting Public Data Breaches for Target Identification**
+
+Searching public breach repositories might uncover credentials or logs pointing to exposed CouchDB instances. Although more indirect, this approach can sometimes yield crucial pieces of information to direct further investigations on specific networks or subnets.
+
+### Automation and Scripting for Large Scale Detection
+
+**Scripting with Python for Bulk Scanning**
+
+For environments with a large number of IP addresses to probe, automating the scanning process is efficient. Python scripts can be tailored to automate network scans and banner grabbing tasks, systematically searching for CouchDB’s default ports and checking service banners.
+
+Utilizing Python’s `socket` library alongside HTTP request libraries like `requests`, scripts can programmatically interact with network services, automate data collection and compile results into manageable formats:
+
+```python
+import socket
+
+def scan_host(ip, port=5984):
+    try:
+        sock = socket.create_connection((ip, port), timeout=3)
+        sock.sendall(b"GET / HTTP/1.1\r\nHost: " + ip.encode() + b"\r\n\r\n")
+        response = sock.recv(4096)
+        if b"couchdb" in response.lower():
+            print(f"CouchDB found on {ip}:{port}")
+        sock.close()
+    except:
+        pass
+
+# Example to scan a range of hosts
+for ip_end in range(1, 255):
+    ip = f"192.168.1.{ip_end}"
+    scan_host(ip)
+```
+
+### Post-Identification Steps
+
+**Documenting Identified Instances**
+
+Once CouchDB instances are earmarked within a network, it is imperative to properly document them for follow-up actions. This documentation should include IP addresses, detected port numbers, service versions, banner information, and any other pertinent data captured during discovery.
+
+By maintaining a structured catalog of findings, teams can prioritize vulnerabilities for further assessment or exploit development, ensuring a methodical and focused approach to offensive operations.
