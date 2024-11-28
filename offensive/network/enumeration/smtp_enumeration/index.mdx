@@ -1,0 +1,89 @@
+---
+title: Comprehensive Guide to SMTP Enumeration Techniques
+description: Explore SMTP enumeration strategies to identify vulnerabilities, validate
+  users, and test configurations for effective cybersecurity assessments.
+keywords:
+- SMTP enumeration
+- email enumeration
+- SMTP vulnerabilities
+- open relay testing
+- user enumeration
+- SMTP security
+- service detection
+---
+
+# SMTP Enumeration
+
+SMTP Enumeration is a critical process in offensive cybersecurity that focuses on uncovering potential vulnerabilities within SMTP (Simple Mail Transfer Protocol) services. This roadmap guides you through the stages of SMTP enumeration, providing technical depth and methodology for identifying service details, user accounts, and configuration weaknesses. 
+
+## Service Detection
+The initial phase of SMTP enumeration focuses on identifying SMTP services and understanding their configurations. This process involves several steps to establish an effective basis for further exploration.
+
+### Identifying Open SMTP Ports (25, 465, 587)
+SMTP typically operates over port 25, while SMTP over SSL (SMTPS) uses ports 465 and 587. Enumerating these ports involves scanning using tools like Nmap to detect open services. By targeting these ports, attackers can identify active SMTP servers and filter out irrelevant responses, focusing efforts on real targets. Use the following Nmap command to scan for open SMTP ports:
+
+```
+nmap -p 25,465,587 [target_ip] --open
+```
+
+For more details on this step, visit [Identifying Open SMTP Ports](offensive/network/enumeration/smtp_enumeration/service_detection/identifying_open_smtp_ports_25_465_587/).
+
+### Detecting SMTP Server Software and Versions
+Once open ports are identified, the next step is to ascertain the server software and versions running on these ports. This information can be gleaned from banner grabbing techniques or by using specific Nmap scripts, which probe the service to return detailed banner information. This helps determine if the server is running outdated or vulnerable software. Execute the following command for a tailored banner grab:
+
+```
+nmap --script smtp-enum-users -p 25 [target_ip]
+```
+
+More information on this process can be found at [Detecting SMTP Server Software and Versions](offensive/network/enumeration/smtp_enumeration/service_detection/detecting_smtp_server_software_and_versions/).
+
+## User Enumeration
+User Enumeration is a technique focused on identifying valid email addresses or user accounts on SMTP servers. This is crucial for understanding potential attack surfaces related to social engineering or unauthorized access attempts.
+
+### Using VRFY and EXPN Commands
+The VRFY and EXPN SMTP commands allow enumerators to verify user accounts and expand aliases or mailing lists, revealing more email addresses associated with a target. While these commands are often disabled, servers that do not enforce proper security measures may inadvertently expose user information through their responses.
+
+To utilize these commands, establish a connection with the SMTP server using telnet, and input the following:
+```
+telnet [target_ip] 25
+VRFY [username]
+EXPN [email_alias]
+```
+
+For detailed insights and examples, see [Using VRFY and EXPN Commands](offensive/network/enumeration/smtp_enumeration/user_enumeration/using_vrfy_and_expn_commands/).
+
+### Analyzing Response Codes for Valid Email Addresses
+Understanding SMTP response codes during enumeration attempts is vital for discerning valid and invalid email addresses. Codes such as 250 indicate successful VRFY or EXPN results, suggesting the existence of a valid user or alias, while codes like 550 signify invalid users or denied queries.
+
+For additional discussion and breakdown of these response codes, refer to [Analyzing Response Codes for Valid Email Addresses](offensive/network/enumeration/smtp_enumeration/user_enumeration/analyzing_response_codes_for_valid_email_addresses/).
+
+## Relay and Configuration Testing
+Testing SMTP configuration and relay options exposes weaknesses in server setups, preventing potential misuse for spam or unauthorized routing.
+
+### Testing for Open Relays
+Open relays occur when SMTP servers allow unknown external sources to send emails through them without authentication. Enumerating for open relays involves crafting mail commands to assess whether the server forwards these emails to other domains. Misconfigured relays are a significant threat, often exploited for sending spam or phishing emails.
+
+This can be tested with:
+```
+telnet [target_ip] 25
+MAIL FROM:<attacker@domain.com>
+RCPT TO:<victim@anotherdomain.com>
+DATA
+Subject: Test
+This is a test message.
+.
+```
+
+Further details are available at [Testing for Open Relays](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/testing_for_open_relays/).
+
+### Identifying SMTP Features with EHLO/HELO
+The EHLO or HELO commands inform users about what the SMTP server supports, which often includes a list of extended features and configurations that might be exploitable, such as authentication mechanisms or size limits.
+
+Start SMTP sessions with EHLO to gather this information:
+
+```
+telnet [target_ip] 25
+EHLO
+```
+
+To dive deeper into identifying SMTP configurations using EHLO/HELO, explore [Identifying SMTP Features with EHLO/HELO](offensive/network/enumeration/smtp_enumeration/relay_and_configuration_testing/identifying_smtp_features_with_ehlohelo/).
