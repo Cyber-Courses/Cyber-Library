@@ -1,0 +1,101 @@
+---
+title: Techniques for Listing Logged-in Users Securely
+description: Explore methods to effectively list logged-in users across systems, utilizing
+  command line tools, scripts, and network protocols.
+keywords:
+- user enumeration
+- logged-in users
+- system access
+- command line tools
+- network protocols
+- automated scripts
+- user session details
+- offensive security
+- cybersecurity techniques
+---
+
+## Accessing Remote Systems for User Enumeration
+
+To begin enumerating logged-in users on a remote system, one must first establish a connection. This involves accessing remote systems via protocols like SSH for Unix/Linux systems or RDP for Windows. Proper access generally requires valid credentials or exploits to bypass authentication. With appropriate access, attackers leverage existing privileges to query user sessions. It is critical to avoid detection during this stage, as unauthorized access attempts can trigger alerts.
+
+PowerShell and SSH can serve as powerful tools to initiate connections on Windows and Unix/Linux respectively. Example command for Unix/Linux might be:
+
+```sh
+ssh user@remote_host
+```
+
+Once connected, gaining administrative or root access, if not initially obtained, enhances the ability to list user sessions. Those with deep security knowledge understand the significance of using minimally-privileged access initially to avoid standing out in logs.
+
+## Utilizing Native Operating System Command Line Tools
+
+Native commands on Windows and Unix/Linux systems enhance the ability to enumerate users efficiently. On Windows, the `query user` command is useful for identifying active users. This command provides session details for users logged in locally or remotely:
+
+```cmd
+query user
+```
+
+For extensive enumeration, `net sessions` and `net users` can be leveraged to gather details about network sessions and all users on a system.
+
+In Unix/Linux environments, quintessential commands like `who`, `w`, and `users` present current user session data concisely. To illustrate, the `who` command offers a snapshot of all logged-in users and their IP addresses:
+
+```sh
+who
+```
+
+Additionally, the `finger` command provides granular details like login time and terminal used:
+
+```sh
+finger
+```
+
+These native command tools are incredibly efficient, taking advantage of built-in system functionality for querying user session data.
+
+## Scripting for Automated User Enumeration
+
+Automation scripts escalate the efficiency of user enumeration. Using languages like Python or PowerShell, attackers can craft scripts to iterate through systems, gathering user data seamlessly. Automation helps in large-scale operations, minimizing time and manual intervention. A simple Python script using `os` and `subprocess` libraries can repeatedly execute user listing commands across multiple target systems, consolidating the data:
+
+```python
+import os, subprocess
+
+def list_users():
+    output = subprocess.check_output("who", shell=True)
+    return output.decode()
+
+print(list_users())
+```
+
+Such scripts are invaluable in offensive operations, drastically reducing manual enumeration workloads.
+
+## Leveraging Network Protocols for User Discovery
+
+Enumerating users through network protocols can disclose session data while remaining off the endpoint. For instance, Server Message Block (SMB) and Remote Desktop Protocol (RDP) often reveal connected users without directly logging into systems. Slightly older protocols like SNMP and Telnet might also expose user session details due to misconfigurations:
+
+Using `smbclient` in Unix/Linux environments:
+
+```sh
+smbclient -L //server_ip -U username
+```
+
+A deep understanding of network protocols and possible enumeration points can greatly assist in discreet user session discovery without endpoint interaction.
+
+## Exploiting Third-party Software and Tools
+
+Off-the-shelf cybersecurity tools often include capabilities for user enumeration. Frameworks like Metasploit allow enumerators to run modules specifically tailored for listing users:
+
+```shell
+use auxiliary/scanner/smb/smb_enumusers
+```
+
+Tools like PsExec for Windows, or the Unix/Linux equivalent `Nmap` with specific scripts, allow enumerators to execute commands and retrieve user information efficiently.
+
+These third-party tools are often preferred for their comprehensive functionality and constant updates to utilize the latest exploitation techniques.
+
+## Bypassing User Enumeration Detection Mechanisms
+
+Every enumerator must consider methods to bypass detection mechanisms configured to monitor enumeration activity. This involves avoiding commands that generate evident log entries or trigger intrusion detection systems. Techniques like modifying scripts to stagger automated requests over extended periods can help bypass threshold-based alarms. 
+
+Enumerators often disable logging temporarily, execute stealthy command sequences, or tamper with system logs post enumeration to cover their tracks. Such subterfuge requires not just technical know-how but also strategic planning to avoid alerting alert monitoring systems.
+
+## Integrating with Collecting User Session Details
+
+Detailed session information extends the value of enumerated data. By integrating user enumeration with session detail collection, enumerators piece together comprehensive user profiles, including application accesses and behavioral patterns. This collaboration allows attackers to plan subsequent strategic attacks with deep insights into user activity and system interactions. Harmonizing these activities ensures complete and effective end-to-end offensive strategies.
