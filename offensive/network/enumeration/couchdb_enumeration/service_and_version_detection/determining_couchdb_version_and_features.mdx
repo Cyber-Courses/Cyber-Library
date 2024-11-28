@@ -1,0 +1,131 @@
+---
+title: Determining CouchDB Version and Features
+description: Learn effective techniques to identify CouchDB versions and their features
+  using HTTP API endpoints and enumeration tools.
+keywords:
+- CouchDB version detection
+- CouchDB features
+- HTTP API endpoints
+- database enumeration
+- CouchDB vulnerabilities
+- automated version detection
+- misconfigurations
+- CouchDB security
+- Nmap CouchDB
+- CouchDB exploits
+---
+
+# Determining CouchDB Version and Features
+
+## Understanding CouchDB's HTTP API Endpoints
+
+CouchDB operates extensively through an HTTP API, providing a straightforward mechanism for interacting with the database. To determine the version of CouchDB, begin by targeting its HTTP API endpoints, which often disclose valuable metadata.
+
+The typical approach involves making an HTTP GET request to the root endpoint (`http://<couchdb_host>:<port>/`) of the CouchDB instance. The server response usually contains JSON output, including the "version" field:
+
+```json
+{
+  "couchdb": "Welcome",
+  "version": "2.3.1",
+  "features": [
+    "pluggable storage engines",
+    "scheduler"
+  ]
+}
+```
+
+By examining these endpoints, one can gather both the version and features without needing authenticated access. The response not only confirms the presence of CouchDB but also provides version-specific capabilities that can guide further reconnaissance and exploitation efforts.
+
+## Leveraging Default and Common Credentials
+
+CouchDB installations can sometimes be vulnerable due to the use of default or weak credentials. The database might utilize a default administrative account upon installation, which, if unchanged, can be exploited.
+
+Attempt common username/password combinations (e.g., admin/admin) against the CouchDB instance using an HTTP client or automated scripts. Obtaining administrative access allows you to explore endpoints like `/_up`, `/_all_dbs`, or `/_membership`, which provide additional insights into the CouchDB's configuration, including its version and enabled features.
+
+```bash
+curl -X GET http://admin:admin@<couchdb_host>:<port>/_all_dbs
+```
+
+Bypass strategies for authentication involve manipulating HTTP headers or exploiting specific CouchDB vulnerabilities that may apply to out-of-date or poorly secured instances.
+
+## Identifying CouchDB Version via HTTP Headers
+
+Exploiting the HTTP protocol’s nature, the CouchDB server often inserts identifying information into HTTP response headers. Such headers may reveal the server version directly. When querying CouchDB endpoints, pay close attention to headers like `Server`, which might look like:
+
+```
+Server: CouchDB/2.3.1 (Erlang OTP/22)
+```
+
+Capturing and analyzing these headers can be achieved with tools like `curl` or web browsers' developer tools console:
+
+```bash
+curl -I http://<couchdb_host>:<port>/
+```
+
+Understanding and mapping these headers to CouchDB versions provides crucial clues during the reconnaissance phase, and helps in identifying potential vulnerabilities based on disclosed versions.
+
+## Database Enumeration Scripts
+
+Tools such as Nmap provide scripts specifically designed for identifying CouchDB instances and extracting version information. Utilizing the `nmap` scripting engine, one can detect and enumerate CouchDB services efficiently:
+
+```bash
+nmap -p5984 --script=couchdb-info <target_ip>
+```
+
+The output will reveal version details and key features linked to the identified CouchDB version. The use of database enumeration scripts is a powerful technique to combine host discovery with version detection in a single operation.
+
+## Exploiting Overview and Active Tasks Endpoints
+
+CouchDB's design includes RESTful endpoint exposure, such as `/_active_tasks`, which lists running tasks and sometimes leaks versioning details or ongoing operations indicative of the version.
+
+Accessing the overview `/_utils` interface, commonly exposed by older CouchDB versions, can inadvertently disclose useful metadata. Use curl or a browser to make requests to these endpoints:
+
+```bash
+curl http://<couchdb_host>:<port>/_active_tasks
+```
+
+Thus, examining these endpoints and understanding their relationship with CouchDB version releases allows attackers to tailor their approach based on the operational details gathered.
+
+## Cross-Referencing Known Vulnerabilities
+
+Once the CouchDB version is ascertained, reference it against vulnerability databases such as CVE or exploit-db to identify exploits specific to the detected version. Exploiting identified vulnerabilities can result in unauthorized data access, command execution, or further penetration into the system:
+
+1. Visit [CVE Details](https://www.cvedetails.com/)
+2. Search for `CouchDB` along with the detected version
+3. Plan attack strategies based on the available exploits matching the detected version
+
+Cross-referencing vulnerabilities allows you to evaluate the risk exposure of the target effectively and plan precise exploitation strategies accordingly.
+
+## Automating Version Detection
+
+Automation streamlines the detection and enumeration process, particularly when scanning multiple targets in a network. Scripts, written in Python or other languages, can automate querying, credential testing, and version collection across diversified infrastructure:
+
+```python
+import requests
+
+def get_couchdb_version(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            version_info = response.json().get("version")
+            return version_info if version_info else "Unknown Version"
+    except Exception as error:
+        return f"Error: {str(error)}"
+
+version = get_couchdb_version('http://<couchdb_host>:<port>')
+print(f"CouchDB Version: {version}")
+```
+
+Incorporating such scripts into comprehensive frameworks can lead to efficient, scalable scans that uncover version and feature details with minimal effort.
+
+## Exploiting Misconfigurations
+
+CouchDB environments may suffer from configuration pitfalls, inadvertently exposing critical data. Common issues like open CORS settings or misconfigured proxy settings might allow unrestricted cross-origin requests, which could be leveraged to reveal sensitive information.
+
+Audit web security settings and probe for misconfigured access policies by examining the CouchDB instance's response to specific web requests, identifying gaps like:
+
+```bash
+curl -X OPTIONS http://<couchdb_host>:<port>/ -i
+```
+
+Detecting and understanding these misconfigurations is pivotal in leveraging the CouchDB setup to gather comprehensive version and feature information effectively. This kind of security flaw detection can also act as a precursor to follow-up attacks in an offensive cybersecurity strategy.
