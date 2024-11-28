@@ -1,0 +1,279 @@
+---
+title: Offensive Cybersecurity Techniques and Strategies
+description: Explore a comprehensive roadmap of offensive cybersecurity techniques
+  targeting networks, applications, and more.
+keywords:
+- offensive cybersecurity
+- network exploitation
+- application security
+- malware development
+- penetration testing
+- red teaming
+- security threats
+- vulnerability assessment
+- cyber attacks
+---
+
+# Mapa Drogowy dla Ofensywnej Cyberbezpieczeństwa
+
+## Sieć
+
+### Rozpoznanie i Mapowanie Sieci
+Rozpoznanie sieci polega na zbieraniu informacji o docelowej sieci w celu stworzenia mapy jej struktury oraz urządzeń. Techniki obejmują pasywne zbieranie informacji, skanowanie i aktywną enumerację komponentów sieci. Narzędzia takie jak Nmap i Wireshark są wykorzystywane do identyfikacji otwartych portów, usług oraz potencjalnych podatności. Przykład polecenia:
+
+```bash
+nmap -sS -O -v target-ip
+```
+
+To polecenie wykonuje skanowanie SYN TCP i wykrywa system operacyjny celu.
+
+### Strategie Ruchu Poziomego
+Ruch poziomy odnosi się do technik, które atakujący używają do przemieszczania się w sieci po uzyskaniu pierwszego dostępu. Obejmuje to wykorzystywanie podatności w sąsiednich segmentach sieci oraz używanie skompromitowanych danych uwierzytelniających do uzyskania dostępu do zasobów. Atakujący mogą korzystać z narzędzi takich jak PsExec czy PowerShell w celu propagacji lateralnej.
+
+### Wykorzystywanie Protokołów Sieciowych
+Obejmuje identyfikację słabości w protokołach sieciowych jak SMB, RDP, czy DNS i wykorzystanie ich do nieautoryzowanych działań. Znajomość mechaniki protokołów i tworzenia anomalii może prowadzić do udanej eksploatacji.
+
+### Techniki Ataków Man-in-the-Middle (MitM)
+Ataki MitM polegają na przechwytywaniu i zmienianiu komunikacji między dwiema stronami bez wykrycia. Techniki mogą obejmować fałszowanie ARP czy zatruwanie DNS. Atakujący używają narzędzi takich jak Ettercap i MITMf do przechwytywania i manipulacji ruchem.
+
+### Analiza i Manipulacja Ruchu Sieciowego
+Analiza ruchu polega na monitorowaniu pakietów danych sieciowych w celu identyfikowania wzorców lub anomalii. Atakujący mogą przekierowywać, odrzucać lub wstrzykiwać pakiety, by zakłócać lub analizować komunikację. Narzędzia takie jak Tcpdump i Scapy są powszechnie używane do tych celów.
+
+## Aplikacje Webowe
+
+### Zaawansowane Ataki Wstrzyknięcia (SQLi, NoSQLi)
+SQL Injection polega na wstrzykiwaniu złośliwego kodu SQL do pól wejściowych użytkownika w celu manipulacji lub ekstrakcji danych z bazy. Zasada ta rozszerza się na bazy danych NoSQL z NoSQLi. SQLmap to popularne narzędzie do automatyzacji wstrzyknięć SQL i przejmowania bazy danych:
+
+```bash
+sqlmap -u "http://target.com/search?q=test" --dbs
+```
+
+To polecenie próbuje wyodrębnić nazwy baz danych z docelowego URL.
+
+### Wykorzystywanie XSS i CSRF
+XSS pozwala atakującym na wstrzykiwanie skryptów do stron internetowych oglądanych przez innych użytkowników, umożliwiając przejęcie sesji lub kradzież danych. CSRF oszukuje użytkowników do wykonania niechcianych działań na innej stronie, na którą są zalogowani.
+
+### Bezpośredni Dostęp do Obiektów i BOLAs
+Podatności IDOR pozwalają atakującym na dostęp do danych poprzez manipulację referencjami do obiektów (np. identyfikatory użytkowników). Uszkodzone Autoryzacje obiektów niskiego poziomu (BOLAs) polegają na niewłaściwym stosowaniu kontroli dostępu indywidualnych obiektów.
+
+### Taktyki Web Shell i Trwałość
+Instalacja web shell na skompromitowanym serwerze zapewnia trwały dostęp i zdalne uruchamianie poleceń. Web shell to proste skrypty zapewniające interfejs przez HTTP.
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+Przykład prostego web shell PHP.
+
+### Omijanie Zapor Sieciowych Webowych
+Omijanie zapor WAF polega na tworzeniu ładunków, które przejdą przez wykrywanie sygnaturowe. Techniki obejmują kodowanie, zaciemnianie lub fragmentację wektorów ataku.
+
+## Aplikacje Mobilne
+
+### Inżynieria Wsteczna Aplikacji Mobilnych
+Inżynieria wsteczna polega na dekodowaniu i analizie kodu aplikacji mobilnej, aby zrozumieć jej logikę i zidentyfikować podatności. Narzędzia takie jak APKTool lub Hopper są niezbędne do dezasemblacji lub dekompilacji.
+
+### Eksploatacja Podatności Platform Mobilnych
+Każda platforma mobilna (np. Android, iOS) ma specyficzne podatności. Eksploity mogą wiązać się z wykorzystaniem uprawnień systemowych lub przestarzałych bibliotek.
+
+### Przechwytywanie i Manipulowanie Komunikacjami Mobilnymi
+Atakujący używają narzędzi takich jak Burp Suite czy Frida, aby przechwytywać i manipulować danymi przesyłanymi przez aplikacje mobilne, szczególnie gdy implementacje SSL/TLS są słabe lub źle skonfigurowane.
+
+### Naruszenia Bezpieczeństwa Danych Aplikacji Mobilnych
+Celowanie w niebezpieczne metody przechowywania lub przesyłania danych używane przez aplikacje mobilne, gdzie wrażliwe informacje są przechowywane lub komunikowane bez odpowiedniego szyfrowania.
+
+## Łańcuch Dostaw
+
+### Celowanie w Pipeline Rozwoju i Dostarczenia
+Kompromitacja pipeline rozwoju może prowadzić do szerokiej dystrybucji złośliwego kodu. Atakujący celują w repozytoria kodu źródłowego lub środowiska CI/CD, aby wstrzykiwać backdoory.
+
+### Testowanie Bezpieczeństwa Systemów Wbudowanych
+Skupienie się na identyfikacji podatności wewnątrz firmware lub oprogramowania urządzeń wbudowanych. Testowanie często obejmuje interfejsy sprzętowe, takie jak JTAG czy UART.
+
+### Techniki Kompromitacji Łańcucha Dostaw
+Wprowadzanie złośliwych komponentów wewnątrz łańcucha dostaw produktu zakłóca integralność przed dotarciem do końcowego użytkownika. Zauważalne przypadki obejmują implanty sprzętowe lub zmanipulowane pliki aktualizacji.
+
+### Zakładanie Backdoorów w Oprogramowaniach Firm Trzecich
+Wprowadzanie ukrytego, nieautoryzowanego kodu do produktów oprogramowania dostarczanych przez zewnętrznych dostawców w trakcie rozwoju, celowo lub poprzez atak.
+
+## CI/CD
+
+### Kompromitacja Środowisk CI/CD
+Nieautoryzowany dostęp do środowiska CI/CD daje możliwość modyfikacji procesu budowania oprogramowania, potencjalnie wprowadzając złośliwy kod przed wdrożeniem.
+
+### Infiltracja Pipeline'ów Budowania
+Atakujący przechwytują lub modyfikują artefakty budowane, prowadząc do dystrybucji zkompromitowanego oprogramowania. Powszechnie wykorzystywane są podatności w skryptach budowania lub zależnościach.
+
+### Fałszowanie Artefaktów i Kompromitacja Integralności
+Modyfikacja artefaktów budowy przeprowadzona niezauważenie może podważyć zamierzoną funkcjonalność oprogramowania. Zapewnienie integralności artefaktów jest kluczowe, polegające na sumach kontrolnych lub podpisach kryptograficznych.
+
+### Wykorzystywanie Podatności Narzędzi CI/CD
+Znane podatności w narzędziach CI/CD, takich jak Jenkins czy GitLab, mogą być wykorzystane do nieautoryzowanego dostępu i modyfikacji kodu.
+
+## Chmura
+
+### Techniki Wykorzystywania Usług Chmurowych
+Wykorzystywanie niezabezpieczonych konfiguracji lub podatności usług chmurowych w celu uzyskania nieautoryzowanego dostępu lub kontroli nad zarządzanymi zasobami chmurowymi.
+
+### Ataki na Źle Skonfigurowane Przechowywanie w Chmurze
+Celowane są odsłonięte usługi przechowywania, takie jak wiadra usługi AWS S3 z powodu niewystarczających środków bezpieczeństwa, takich jak publiczny zapis lub dostęp do odczytu.
+
+### Omijanie Zarządzania Tożsamością i Dostępem W Chmurze
+Uzyskiwanie nieautoryzowanego dostępu do zasobów chmurowych poprzez wykorzystywanie słabych polityk IAM lub zbyt permisywnych ról.
+
+### Wektory Ataku Architektury Bezserwerowej
+Wykorzystywanie podatności w środowiskach bezserwerowych poprzez nadużywanie wyzwalaczy zdarzeń albo wstrzykiwanie złośliwych ładunków do kontekstów wykonywania funkcji.
+
+## Kontenery
+
+### Techniki Ucieczki z Kontenerów
+Identyfikacja i eksploitacja podatności pozwalających złośliwemu kodowi na opuszczenie środowiska kontenera i przedostanie się do systemu hosta.
+
+### Atakowanie Klastrow Kubernetes
+Eksploatacja błędnych konfiguracji w środowiskach Kubernetes w celu uzyskania nieautoryzowanej kontroli lub zakłócenia usługi.
+
+### Wykorzystywanie Podatności Orkiestracji Kontenerów
+Celowanie w podatności narzędzi do orkiestracji, takich jak Docker Swarm czy Kubernetes, aby uzyskać dostęp do zastrzeżonych środowisk.
+
+### Zatrucie Obrazów Kontenerów
+Manipulowanie obrazami kontenerów przez wstrzykiwanie złośliwego kodu, co wpływa na systemy, na których te obrazy są wdrażane.
+
+## API
+
+### Enumeracja Punktów Końcowych i Rozpoznanie API
+Identyfikacja punktów końcowych API i mapowanie ich struktury w celu określenia dostępnych zasobów i potencjalnych podatności.
+
+### Omijanie Uwierzytelniania i Autoryzacji w API
+Wykorzystywanie podatności, które pozwalają na pomijanie warstw uwierzytelniania lub niewłaściwe sprawdzanie autoryzacji.
+
+### Nadużywanie Limitów i Kwot
+Omijanie limitów szybkości w celu przytłoczenia API lub wyciągnięcia większej ilości danych niż zamierzono poprzez manipulację nagłówkami żądań lub ładunkami.
+
+### Wykorzystywanie Podatności API REST i SOAP
+Celowanie w konkretne API poprzez wstrzykiwanie, ataki deserializacyjne lub wykorzystywanie nadużycia wynikającego z zbyt wylewnych komunikatów o błędach.
+
+## Sprzęt
+
+### Eksploatacja Interfejsów Sprzętowych
+Manipulowanie lub dostęp do interfejsów sprzętowych w celu wyciągnięcia wrażliwych danych lub zmiany operacji urządzenia.
+
+### Ataki Bocznych Kanałów na Sprzęcie
+Wykorzystywanie emisji elektromagnetycznych, analizy zużycia energii lub informacji o czasie w celu określenia operacji urządzenia lub uzyskania wrażliwych informacji.
+
+### Naruszanie Urządzeń Wbudowanych
+Uzyskiwanie nieautoryzowanego dostępu do urządzeń wbudowanych poprzez podatności w firmware lub zewnętrznych interfejsach komunikacyjnych.
+
+### Inżynieria Wsteczna Firmware Sprzętu
+Analiza firmware'u urządzeń sprzętowych w celu identyfikacji podatności lub zrozumienia operacji urządzenia za pomocą inżynierii wstecznej.
+
+## Bezprzewodowe
+
+### Ataki na Sieci Bezprzewodowe (Wi-Fi, Bluetooth)
+Wykorzystywanie słabych protokołów Wi-Fi (WEP/WPA2) lub błędnych konfiguracji Bluetooth do przechwytywania i manipulacji komunikacją bezprzewodową.
+
+### Rozmieszczanie Fałszywego Punktu Dostępowego
+Rozmieszczanie nieautoryzowanych punktów dostępowych w celu przechwytywania komunikacji bezprzewodowej, technika często stosowana w phishingu lub kradzieży poświadczeń.
+
+### Podsłuchiwanie Komunikacji Bezprzewodowej
+Słuchanie niezaszyfrowanej komunikacji w sieci bezprzewodowej w celu przechwycenia wrażliwych informacji, takich jak hasła.
+
+### Wykorzystywanie Protokołów Bezprzewodowych
+Wykorzystywanie słabości w protokołach takich jak Zigbee czy Bluetooth Low Energy (BLE) w celu uzyskania kontroli lub szpiegowania komunikacji urządzeń.
+
+## Ataki na Bezpieczeństwo Fizyczne
+
+### Inżynieria Społeczna i Penetracja Fizyczna
+Używanie oszustwa do omijania zabezpieczeń fizycznych, w tym podszywania się lub fałszerstwa legitymacji w celu uzyskania nieautoryzowanego dostępu do obiektów.
+
+### Omijanie Fizycznych Kontroli Dostępu
+Omijanie barier takich jak zamki czy systemy biometryczne poprzez techniki takie jak otwieranie zamków czy ataki przekaźnikowe.
+
+### Wydobycie Informacji z Warstwy Fizycznej
+Wyciąganie danych za pomocą fizycznych środków, takich jak kopiowanie danych z odsłoniętych dysków twardych czy przechwytywanie sygnałów elektromagnetycznych.
+
+### Metody Oceny Bezpieczeństwa Fizycznego
+Techniki oparte na symulacji do oceny podatności w ustawieniach bezpieczeństwa fizycznego, obejmujące testy penetracyjne na terenie obiektów.
+
+## Kryptograficzne
+
+### Ataki na Protokoły Kryptograficzne
+Wykorzystywanie podatności w protokołach kryptograficznych, prowadzące do odszyfrowania danych, ominięcia uwierzytelnienia lub podszywania się.
+
+### Techniki Kryptanalizy
+Techniki wykorzystują matematyczną i systematyczną analizę w celu naruszenia bezpieczeństwa kryptograficznego, w tym łamanie szyfrów.
+
+### Nadużycie Zarządzania Kluczami
+Atakowanie niewłaściwych praktyk zarządzania kluczami prowadzących do nieautoryzowanego ujawnienia kluczy i odszyfrowania danych.
+
+### Łamanie Szyfrowania Symetrycznego i Asymetrycznego
+Odnajdywanie słabości lub wykorzystywanie błędów implementacyjnych w celu odszyfrowania danych bez posiadania klucza. Przykłady obejmują ataki na AES czy RSA.
+
+## Rozwój Eksploitów
+
+### Identyfikacja Możliwości Wykorzystania Podatności
+Badanie i odkrywanie podatności w oprogramowaniu lub sprzęcie, które mogą zostać wykorzystane. Skup się na punktach wejścia w nieoczyszczonych danych wejściowych lub niekontrolowanych operacjach.
+
+### Zaawansowane Techniki Korupcji Pamięci
+Wykorzystanie słabych stron operacji pamięciowych do osiągnięcia dowolnego wykonania kodu, w tym przepełnień buforów i wykorzystywania użytków po zwolnieniu.
+
+### Projektowanie i Dostarczenie Shellcode
+Projektowanie i wstrzykiwanie shellcode jako ładunku, aby wykonywać złośliwe instrukcje na docelowym systemie.
+
+### Wykorzystywanie Ram Eksploitacji
+Korzystanie z narzędzi takich jak Metasploit, aby ułatwić rozwój eksploitów i zarządzać wektorami ataku poprzez konfigurowalne moduły dla różnych celów.
+
+## Red Teaming
+
+### Planowanie i Realizacja Zadań Red Team
+Red teaming polega na symulowaniu zaawansowanych trwałych zagrożeń (APT), aby ocenić defensywę organizacji. Planowanie koncentruje się na osiąganiu określonych taktyk, technik i procedur (TTP).
+
+### Budowa Infrastruktury i Narzędzi Red Team
+Budowanie bezpiecznej i odpornej infrastruktury do prowadzenia operacji red team, z naciskiem na systemy dowodzenia i kontroli (C2) oraz narzędzia ataku.
+
+### Wieloetapowe Kampanie Atakowe
+Skoordynowane kampanie naśladujące rzeczywistych atakujących, obejmujące wiele faz, takie jak rozpoznanie, eksploatacja i ruch boczny.
+
+### Symulacja i Emulacja Przeciwników
+Realistyczna symulacja taktyk używanych przez zaawansowanych aktorów zagrożeń, aby ocenić środki obronne organizacji i zidentyfikować obszary do poprawy.
+
+## Ewentualność
+
+### Omijanie Wykrywania przez Sieć i Endpoint
+Wykorzystywanie taktyk do unikania wykrycia przez IDS/IPS i rozwiązania zabezpieczeń końcowych, poprzez zaciemnianie złośliwego oprogramowania lub wykorzystywanie luk wykrywania.
+
+### Anti-Forensics i Manipulacja Dowodami
+Techniki mające na celu uniemożliwienie analizy sądowej lub erozję śladu dowodowego, co jest kluczowe w utrzymaniu działań w tajemnicy.
+
+### Techniki Obfuskacji i Szyfrowania
+Maskowanie ładunków lub komunikacji przez warstwy obfuskacji lub szyfrowania w celu uniknięcia zabezpieczeń i analiz.
+
+### Omijanie Honeypotów i Środowisk Piaskownicowych
+Wykrywanie i unikanie interakcji z systemami przynętami, takimi jak honeypoty lub środowiska piaskownicowe, które mają na celu przechwycenie działań złośliwych.
+
+## Rozwój Złośliwego Oprogramowania
+
+### Projektowanie i Dostarczenie Customowych Ładunków
+Tworzenie dostosowanych ładunków, często skierowanych na określone środowiska lub omijających istniejące obrony, z naciskiem na ukrycie i funkcjonalność.
+
+### Techniki Ewentualności i Utrzymania Złośliwego Oprogramowania
+Tworzenie złośliwego oprogramowania, aby utrzymywało się w systemie po kompromitacji i unikało wykrycia poprzez zaciemnienie lub manipulację obroną hosta.
+
+### Budowa i Zarządzanie Infrastrukturą C2
+Budowanie i zarządzanie infrastrukturą dowodzenia i kontroli, aby utrzymać autonomię nad zkompromitowanymi systemami, kluczowe dla trwałych aktorów zagrożeń.
+
+### Metody Omijania Anti-Malware
+Dążenia do obejścia automatycznych systemów wykrywania złośliwego oprogramowania z użyciem technik omijania, takich jak manipulacja sygnaturami czy modyfikacja zachowania.
+
+## Oprogramowanie
+
+### Techniki Backdooringu Oprogramowania
+Wprowadzanie potajemnych punktów dostępu do kodu oprogramowania dla nieautoryzowanego dostępu, często przez manipulowane kodowanie otwartego lub własnościowego kodu źródłowego.
+
+### Manipulacja Logiką Aplikacji
+Wykorzystaj błędy w logice biznesowej lub przepływie aplikacji do wykonania niezamierzonych działań lub niewłaściwego wyodrębniania danych.
+
+### Zaawansowane Techniki Inżynierii Wstecznej
+Szczegółowa analiza plików wykonywalnych oprogramowania za pomocą narzędzi takich jak IDA Pro czy Ghidra, aby ujawnić wewnętrzną logikę lub podatności w zamkniętych systemach źródłowych.
+
+### Wstrzykiwanie Kodów i Hakowanie
+Wstrzykiwanie złośliwego kodu do uruchomionych procesów lub przechwytywanie przepływów pracy aplikacji za pomocą technik hakowania, często używane do eskalacji uprawnień.
