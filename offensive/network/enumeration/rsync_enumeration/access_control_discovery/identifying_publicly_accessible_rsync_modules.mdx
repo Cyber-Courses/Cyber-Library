@@ -1,0 +1,91 @@
+---
+title: Identifying Publicly Accessible Rsync Modules
+description: Learn techniques to discover and assess publicly accessible Rsync modules
+  in network security assessments.
+keywords:
+- Rsync enumeration
+- publicly accessible modules
+- access control discovery
+- network scanning
+- Rsync permissions
+- data exposure
+- cybersecurity
+- offensive operations
+- module accessibility
+- Rsynchronization
+---
+
+# Identifying Publicly Accessible Rsync Modules
+
+## Introduction to Rsync Enumeration
+
+Rsync is a widely used tool for incremental file transfer, synchronizing files between two systems over a network. In the context of offensive operations, understanding how to identify publicly accessible Rsync modules is crucial, as these can expose sensitive data if not properly secured. Access control discovery within Rsync environments involves identifying which Rsync modules are accessible without authentication, allowing potential data leakage or unauthorized file manipulation.
+
+## Scanning for Rsync Services
+
+To identify public Rsync modules, the initial step is detecting active Rsync services on a network. This can be accomplished using network scanning tools like Nmap, which allows for the detection of open Rsync ports typically running on port 873.
+
+### Example Nmap Command:
+```bash
+nmap -p 873 --script rsync-list-modules <target-ip-range>
+```
+
+This command scans the specified IP range, aiming to identify hosts with the Rsync service running. The `rsync-list-modules` script included in Nmap's Scripting Engine (NSE) can directly interact with Rsync services to enumerate available modules.
+
+Alternatives to Nmap include bespoke Python scripts or tools like `masscan` for quicker network sweeps, followed by targeted Rsync enumeration on identified IPs.
+
+## Extracting Module Lists from Rsync Services
+
+Once an Rsync service is identified, the next step is to extract a list of available modules. Rsync supports a "list-only" mode that enumerates modules without allowing data transfer, serving as a non-intrusive method to gather module names.
+
+### Using Native Rsync Command:
+```bash
+rsync <target-ip>:: --list-only
+```
+
+Executing the above command against a target IP will list the Rsync modules configured on the server. This approach can be scripted to automate the enumeration across large IP ranges, capturing a comprehensive list of modules for further analysis.
+
+## Verifying Module Accessibility
+
+After listing available modules, it is essential to verify their accessibility. Public Rsync modules are those accessible without authentication, allowing anyone to read and possibly write data.
+
+### Testing Public Access:
+- **Read Access**: Attempt to list the contents of a module using Rsync or alternative file-exploration commands.
+  
+  Example Command:
+  ```bash
+  rsync rsync://<target-ip>/<module-name>
+  ```
+
+- **Write Access**: Attempt to upload a test file to the module, checking if write permissions are granted.
+
+Analyzing the output of these operations helps determine the module's accessibility, revealing potential public access if permissions are not adequately restricted.
+
+## Bypassing Basic Restrictions
+
+In some cases, Rsync modules may implement basic restrictions, such as IP whitelisting. By leveraging proxy servers or VPN tunnels, attackers can circumvent these restrictions by appearing to access the module from an approved network.
+
+## Documentation and Reporting
+
+Documenting findings is critical for operational clarity and subsequent actions. Each discovered module should be meticulously recorded, detailing its access capabilities and the potential risk associated with its exposure.
+
+### Reporting Template:
+- **Module Name**: Example_Module
+- **Read Access**: Available/Restricted
+- **Write Access**: Available/Restricted
+- **Potential Risk**: Data Exposure/Data Manipulation
+
+Reports should maintain a standard format to facilitate analysis and integration with broader security assessments.
+
+## Integration with Broader Offensive Campaigns
+
+Publicly accessible Rsync modules provide leverage for further operations, such as data exfiltration or the deployment of additional offensive tooling. Understanding how to strategically use these modules in the context of a broader campaign enhances their value as an operational asset.
+
+## Tools and Resources
+
+Several tools and resources can aid in the enumeration and analysis of Rsync modules:
+- **Nmap**: For initial network scanning and Rsync service detection.
+- **Rsync**: Native tool for module listing and access verification.
+- **Scripts**: Custom scripts in Python or similar to automate the discovery process.
+
+Acquiring proficiency in these tools and the methodologies described can significantly enhance the effectiveness of offensive cybersecurity operations targeting Rsync services.
