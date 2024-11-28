@@ -1,0 +1,112 @@
+---
+title: Identifying Exposed Methods and Objects in Java RMI
+description: Learn to identify and exploit exposed methods and objects in Java RMI
+  services for improved cybersecurity assessments.
+keywords:
+- Java RMI
+- exposed methods
+- remote objects
+- RMI service enumeration
+- cybersecurity
+- vulnerability assessment
+- service introspection
+- method invocation
+- Java deserialization
+- pen testing
+---
+
+# Identifying Exposed Methods and Objects
+
+In the realm of Java RMI (Remote Method Invocation) service enumeration, identifying exposed methods and objects is pivotal for uncovering potential vulnerabilities. This process involves accessing the RMI registry, enumerating available services, analyzing remote object references, exploring method invocations, exploiting exposed objects, and chaining vulnerabilities for advanced offensive maneuvers.
+
+## Accessing the RMI Registry
+
+Accessing the RMI registry is the first step in identifying exposed methods and objects. The RMI registry acts as a directory that maps human-readable names to remote object references. The goal is to connect to the registry to begin the enumeration process.
+
+- **Connect to RMI Registry:**
+  - Utilize Java's built-in mechanism for RMI to connect to the registry. The `Naming.lookup()` method can be used to connect to a specific service by providing its URL. This method verifies if the connection can be established and lists the available bindings in the registry. 
+  - Example:
+    ```java
+    try {
+        Remote obj = Naming.lookup("//server-host/service-name");
+        // Proceed with further operations
+    } catch (Exception e) {
+        // Handle exception
+    }
+    ```
+
+- **Leverage Network Scanning Tools:**
+  - Use specialized network scanning tools that are designed for inspecting Java RMI services, such as Nmap with the `rmi-dumpregistry` script. These tools allow for automated enumeration of the RMI registry, revealing services that are publicly registered.
+
+## Enumerating Services
+
+The enumeration of services involves retrieving a list of services present in the RMI registry, allowing the operator to understand what functionality is exposed.
+
+- **Retrieve Service Listings:**
+  - From the established connection, try to extract all bindings by using available utilities or writing custom scripts. The objective is to obtain a list of the services that are part of the registry.
+  - Example with `rmiregistry`:
+    ```bash
+    rmiregistry <port>
+    ```
+
+- **Service Introspection:**
+  - Inspect service descriptors to gather further insights into their functionality. Examine interface definitions and service metadata that reveal methods exposed over RMI.
+
+## Understanding Remote Object References
+
+Remote objects in Java RMI need to be understood as they form the basis of operations in RMI services.
+
+- **Analyze RemoteInterfaces:**
+  - Use Java reflection capabilities to study remote interfaces exposed by the registry. Reflection provides method signatures and other vital details without executing the methods.
+  - Example:
+    ```java
+    Method[] methods = obj.getClass().getMethods();
+    for (Method method : methods) {
+        System.out.println(method.getName());
+    }
+    ```
+
+- **Remote Object Deserialization:**
+  - Investigate data formats used to serialize and deserialize objects. Track down how objects are marshalled and ensure exploitation does not arise from improper handling during serialization.
+
+## Exploring Method Invocation
+
+To assess vulnerabilities, it is essential to explore which methods can be invoked and how they interact with the system.
+
+- **Invoke Known Methods:**
+  - Identify and invoke methods that are documented or well-known within the interface. This process helps establish which parts of an RMI service are accessible.
+  - Perform a security review of these methods to determine if they are secure in their configuration or misconfigured.
+
+- **Identify and Exploit Vulnerable Methods:**
+  - Search for methods that are not secure or are insufficiently protected. Test these methods by manipulating input parameters to uncover security flaws.
+  - Write automated scripts for consistency and thoroughness in this testing phase.
+
+## Exploiting Exposed Objects
+
+Once objects and their associated methods are identified, exploitation steps can target vulnerabilities present in these objects.
+
+- **Malicious Payloads via Java Objects:**
+  - Develop serialized Java objects to be sent to the server, aiming to execute commands maliciously. This involves crafting payloads that exploit insecure deserialization.
+  - Example command for serialization attacks:
+    ```java
+    // Serializing a malicious object 
+    ObjectOutputStream oos = new ObjectOutputStream(new Socket("server-host", port).getOutputStream());
+    oos.writeObject(maliciousPayload);
+    oos.flush();
+    ```
+
+- **RCE through Codebase Manipulation:**
+  - Manipulate the codebase to control class loading from server environments. Focus on JVM argument setups that may allow arbitrary class execution by specifying custom codebases.
+
+## Chaining Vulnerabilities
+
+Finally, chaining vulnerabilities involves linking discovered weaknesses to craft more complex attacks.
+
+- **Combine Enumeration with Exploits:**
+  - Integrate findings from method and object discovery to develop multi-step attacks, combining lower-severity issues to achieve significant impact.
+  - Use custom scripts to automate and sequence these chained exploits efficiently.
+
+- **Persistence and Backdoors:**
+  - Implement backdoor mechanisms by exploiting RMI service operations, establishing persistent access to the system. Manipulate RMI configurations to maintain covert and ongoing access.
+
+Through these strategies, offensive cybersecurity practitioners can thoroughly explore and leverage exposed methods and objects in Java RMI services, potentially identifying strategic attack vectors within a network.
