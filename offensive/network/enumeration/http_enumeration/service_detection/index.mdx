@@ -1,0 +1,109 @@
+---
+title: Service Detection Techniques for HTTP/HTTPS Services
+description: Explore key techniques for detecting and fingerprinting HTTP/HTTPS services
+  to identify vulnerabilities.
+keywords:
+- service detection
+- HTTP services
+- HTTPS services
+- port scanning
+- banner grabbing
+- TLS SSL enumeration
+- service version identification
+- fingerprinting HTTP
+- cybersecurity enumeration
+- network vulnerabilities
+---
+
+### Service Detection
+
+In the realm of offensive cybersecurity, service detection is a critical step during the enumeration phase of network and application testing. Understanding the types of services available and their versions helps in identifying potential vulnerabilities. The following subtopics provide an in-depth exploration of techniques and tools for detecting and fingerprinting HTTP/HTTPS services.
+
+---
+
+#### [Detecting HTTP/HTTPS Services](offensive/network/enumeration/http_enumeration/service_detection/detecting_httphttps_services)
+
+Detecting HTTP and HTTPS services involves identifying which ports are open and what services are hosted on those ports.
+
+1. **Port Scanning for HTTP/HTTPS**
+
+   Port scanning is the foundational step in detecting services. Tools such as Nmap and Masscan are extensively used in this phase. Nmap's syntax for scanning common web service ports (80, 443) is straightforward:
+
+   ```
+   nmap -p 80,443 <target-IP>
+   ```
+
+   Masscan, known for its speed, can be used to scan a large range efficiently:
+
+   ```
+   masscan <target-subnet> -p80,443 --rate=1000
+   ```
+
+   By determining open ports, you can begin to speculate on what services are running and what potential vulnerabilities might exist.
+
+2. **Banner Grabbing Techniques**
+
+   Once potential HTTP/HTTPS services are identified, banner grabbing is employed to gather more detailed information about the service itself. Basic banner grabbing can be achieved via Netcat:
+
+   ```
+   nc <target-IP> 80
+   HEAD / HTTP/1.0
+   ```
+
+   This command sends a simple HTTP HEAD request and displays server response headers, which often contain valuable information. Nmap can also automate this with scripts designed for banner grabbing:
+
+   ```
+   nmap -p 80,443 --script=banner <target-IP>
+   ```
+
+3. **TLS/SSL Enumeration**
+
+   Discovering SSL/TLS certificates provides insights into encryption practices and potential misconfigurations. By using tools such as SSL Labs' SSL Test or SSLSCAN, you can extract certificate details and evaluate security posture:
+
+   ```
+   sslscan <target-IP>
+   ```
+
+   Review the certificate's domain, issuer, and expiration data to assess the legitimacy and robustness of the encryption employed.
+
+4. **Service Version Identification**
+
+   Nmap's service version detection feature help attackers identify software version and determine potential weaknesses:
+
+   ```
+   nmap -sV -p 80,443 <target-IP>
+   ```
+
+   Version information is then cross-referenced against cybersecurity databases such as the Common Vulnerabilities and Exposures (CVE).
+
+---
+
+#### [Fingerprinting HTTP Protocol Versions](offensive/network/enumeration/http_enumeration/service_detection/fingerprinting_http_protocol_versions)
+
+Fingerprinting HTTP protocol versions involves identifying which HTTP and HTTPS versions are in use, which can highlight potential upgrade requirements or compatibility issues.
+
+1. **Protocol Version Discovery**
+
+   Sending HTTP requests to gather protocol information relies on the analysis of response headers. For manual HTTP requests, Curl is a useful tool:
+
+   ```
+   curl -I http://<target-IP>
+   ```
+
+   Analyzing the response headers, especially the `Server` and `X-Powered-By` fields, can reveal much about the target's HTTP protocols.
+
+2. **Advanced Fingerprinting Techniques**
+
+   Tools like Wappalyzer and WhatWeb automate the fingerprinting process to identify both HTTP versions and underlying server technologies. These tools can parse a large number of sites efficiently to discover technological usage patterns and potential version-based vulnerabilities.
+
+   Using Wappalyzer CLI, you might perform fingerprinting as follows:
+
+   ```
+   wappalyzer <target-URL>
+   ```
+
+3. **Evasion and Detection Posture**
+
+   Practitioners should be cautious to employ evasion techniques to prevent detection. Techniques include varying request intervals to avoid consistent traffic patterns and using diverse user-agent strings to mimic different browsers and reduce the chance of triggering intrusion detection systems (IDS) or intrusion prevention systems (IPS).
+
+By mastering these service detection techniques, practitioners can effectively map out network defenses and vulnerabilities, forming the foundation for subsequent cybersecurity operations.
