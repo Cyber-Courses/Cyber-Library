@@ -1,0 +1,79 @@
+---
+title: Using INVITE Requests for VoIP Extension Enumeration
+description: Learn how to utilize INVITE requests to effectively identify active extensions
+  in VoIP networks for security assessments.
+keywords:
+- INVITE requests
+- SIP protocol
+- VoIP enumeration
+- active extensions
+- security assessment
+- SIP response codes
+- enumeration techniques
+- network security
+- SIP vulnerabilities
+- user enumeration
+---
+
+# Using INVITE Requests to Identify Active Extensions
+
+## Understanding INVITE Requests
+
+INVITE requests form a fundamental part of the Session Initiation Protocol (SIP), a protocol used for initiating, maintaining, and terminating real-time sessions that involve video, voice, messaging, and other communications services between endpoints in an IP network. An INVITE request is specifically used to start a session between two endpoints. It contains essential information about the session parameters that the calling party supports.
+
+The UAC (User-Agent Client) generates an INVITE request which traverses through a series of SIP proxies to ultimately reach the UAS (User-Agent Server). Upon reaching the UAS, the response from the INVITE request should normally provide information on the availability of the target user.
+
+## Preparing the Environment for INVITE-Based Enumeration
+
+For INVITE request enumeration, tools such as SIPVicious or SIPp are commonly used. These tools allow testers to send batches of SIP INVITE requests and analyze the responses. Before executing any enumeration activities, set up a test SIP server:
+
+1. **Select a SIP Test Server**: Use open-source SIP servers like Asterisk or FreeSWITCH to simulate a real-world environment.
+2. **Network Configuration**: Ensure that your testing environment has appropriate network configurations, such as ensuring the firewall allows SIP traffic and the server is reachable.
+3. **Tool Setup**: Install SIPVicious or SIPp from their respective repositories. Customize and verify the installation based on your testing framework.
+
+## Crafting INVITE Messages for Enumeration Purposes
+
+An INVITE message contains various headers such as `To`, `From`, `Via`, `Call-ID`, and `CSeq`, which are crucial for SIP operations:
+
+- **Base Format of INVITE**: A well-structured INVITE request is necessary to avoid immediate suspicion or auto-responses from security mechanisms.
+- **Header Modification**: Alter headers like `User-Agent` and `Contact` to resemble legitimate traffic patterns.
+- **Incremental Numbering**: Use a numeric or alphanumeric sequence in the `To` field of the INVITE request to test different extension numbers systematically.
+
+## Execution of INVITE-Based Enumeration
+
+To begin the enumeration, execute a series of INVITE requests using a tool like SIPVicious. Example command:
+
+```bash
+svmap -m INVITE -u sip:1001-2000@your.sip.server
+```
+
+- This command dispatches INVITE requests to extensions `1001` through `2000`.
+- **Monitoring Responses**: Use traffic monitors to watch for responses like `200 OK`, `404 Not Found`, or `486 Busy Here`. The `200 OK` response indicates an active extension.
+- **False Positive Checks**: Follow-up on ambiguous responses with repeat requests or auxiliary checks.
+
+## Analyzing and Interpreting Responses
+
+Focus on SIP response codes:
+
+- **200 OK**: Confirms an active user or extension.
+- **404 Not Found**: Indicates the extension number is inactive.
+- **486 Busy Here**: Reveals an active extension but currently in use.
+
+Responses should be logged and compared against the expected configuration for accurate mapping of active extensions. Translate these responses into a consolidated list of active extensions for further investigation.
+
+## Bypassing Security Controls
+
+SIP infrastructures typically incorporate defensive measures such as ACLs (Access Control Lists) or rate limiting. Techniques to bypass such barriers include:
+
+- **Header Spoofing**: Modify higher-layer protocol headers to mimic legitimate client behavior.
+- **Request Timings**: Schedule requests at variable intervals to thwart detection by rate limits.
+- **Traffic Analysis**: Use packet analyzers to understand SIP defenses and adapt your approach based on observed patterns.
+
+## Post-Enumeration Steps
+
+Once active extensions are identified, subsequent steps may involve:
+
+- **Extension Exploitation**: Identify and exploit extensions with default passwords or exploit known vulnerabilities.
+- **Attack Expansion**: Use identified active extensions to form a base for launching broader attacks within the voice over IP (VoIP) network.
+
+For attackers or security testers, this data can pave the way for more advanced attack vectors like SIP trunk manipulation or PBX (Private Branch Exchange) attacks, based on the specifics of the target environment.
