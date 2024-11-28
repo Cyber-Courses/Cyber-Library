@@ -1,0 +1,82 @@
+---
+title: Querying TACACS+ Servers for Active User Accounts
+description: Learn techniques to query and enumerate active accounts on TACACS+ servers
+  effectively while understanding vulnerabilities.
+keywords:
+- TACACS+ servers
+- active accounts enumeration
+- TACACS+ authentication
+- network enumeration
+- user account discovery
+- network security
+- credential exploitation
+- TACACS+ vulnerability
+---
+
+### Querying TACACS+ Servers for Active Accounts
+
+#### Understanding TACACS+ Protocol
+
+The TACACS+ (Terminal Access Controller Access-Control System Plus) protocol is a security protocol used in networks to provide centralized authentication, authorization, and accounting (AAA) services. It is typically deployed to control user access to network devices like routers, switches, and firewalls. TACACS+ operates over TCP, typically on port 49, which provides reliable transport for authentication requests and responses, contrasting to the old RADIUS protocol that uses UDP.
+
+TACACS+ separates authentication, authorization, and accounting processes, allowing for more granular access control. Sensitive data like usernames and passwords are encrypted during transmission, which offers a degree of security, but weak configurations or exploits can sometimes be leveraged to query the server for active user accounts.
+
+#### Identifying TACACS+ Server Targets
+
+Effective enumeration of TACACS+ servers begins with precise network scanning techniques. Tools like Nmap can be utilized to discover server presence with commands such as:
+
+```bash
+nmap -p 49 --open <target-network-range>
+```
+
+This command scans for open TACACS+ ports. Once identified, servers can be fingerprinted to ascertain the specific service type and version, which helps refine attack strategies. For instance, banner grabbing through tools like Nc or Telnet can be attempted by connecting to the server on port 49 and capturing any version information or server messages:
+
+```bash
+nc -v -n <target-ip> 49
+```
+
+#### Exploiting TACACS+ Configuration
+
+TACACS+ configuration files can often hold valuable information such as usernames, passwords, or encrypted traffic settings. Identifying and accessing these files requires gaining elevated permissions on systems where they are stored, typically within the network infrastructure. Enumeration methods might involve:
+
+- **Identifying File Locations**: Configuration files are generally located in directories like `/etc/tacacs+` or `/usr/local/etc`.
+- **File Extraction Tools**: Use tools such as `scp` combined with compromised credentials to download and analyze files:
+
+```bash
+scp <user>@<target-ip>:/etc/tacacs+/tac_plus.conf .
+```
+
+Decrypting TACACS+ communication involves capturing traffic between the TACACS+ client and server using network sniffing tools such as Wireshark or Tcpdump, focusing on port 49 traffic. Analyzing the captured packets can sometimes reveal weak encryption implementations.
+
+#### Extracting Active Accounts
+
+Modules for exploiting TACACS+ often rely on default credentials and misconfigurations. Once access to configuration files is obtained, common credentials should be tested. Active accounts can be sought by:
+
+- **Default and Weak Password Lists**: Employ brute-force techniques using password lists against identified services.
+- **Parsing TACACS+ Logs**: Analyze logs located on the TACACS+ server for patterns indicating active users. Logs typically record successful and unsuccessful login attempts, which can be processed using text analysis tools or customized parsing scripts.
+
+```bash
+cat tac_plus.log | grep "accepted"
+```
+
+#### Automated Tools and Custom Scripts
+
+Several automated tools can assist in enumerating TACACS+ servers. Tools like Hydra support brute-forcing login credentials against TACACS+ services:
+
+```bash
+hydra -l admin -P /usr/share/wordlists/rockyou.txt <target-ip> tacacs
+```
+
+For more tailored approaches, custom scripts written in languages such as Python can automate repeated tasks or parse server responses to enumerate users more efficiently. Employ HTTP requests or socket connections to interact programmatically with the server.
+
+#### Mitigating Detection and Hardening Techniques
+
+Enumeration efforts can lead to detection by network security tools or administrators. To mitigate this, tactics such as proxy usage to obscure source IP addresses should be employed, alongside tools like Metasploit or custom scripts designed to minimize logging footprint.
+
+To defend against such enumerations, systems can implement countermeasures, including:
+
+- **Enhanced Authentication Policies**: Enforce stronger passwords and regular rotation.
+- **Encryption Best Practices**: Utilize secure encryption algorithms for TACACS+ communications beyond the default settings.
+- **Access Controls**: Limit the IP ranges from which the TACACS+ server can be accessed, and employ logging and alerting mechanisms to detect unauthorized access attempts.
+
+Understanding and applying these techniques allow offensive security experts to accurately query TACACS+ servers for active accounts, while also providing network defenders with insights necessary to protect against such attacks.
