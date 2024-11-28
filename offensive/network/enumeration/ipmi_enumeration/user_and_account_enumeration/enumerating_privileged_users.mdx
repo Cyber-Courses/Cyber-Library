@@ -1,0 +1,141 @@
+---
+title: Techniques for Enumerating Privileged Users in Networks
+description: Learn advanced strategies for identifying privileged users within networks
+  and managing access vulnerabilities effectively.
+keywords:
+- privileged user enumeration
+- network security
+- credential harvesting
+- Nmap scripts
+- Active Directory
+- Kerberos attacks
+- misconfigured services
+- credential reuse
+- BloodHound
+- Metasploit
+---
+
+# Enumerating Privileged Users
+
+In the landscape of offensive cybersecurity, identifying privileged users within a network is a critical component of a successful enumeration phase. Privileged users often have elevated permissions that, if compromised, can lead to catastrophic breaches within an organization's infrastructure. This article focuses on the techniques and tools used to identify these accounts effectively.
+
+## Advanced Enumeration Tools and Techniques
+
+### Nmap NSE Scripts for Privilege Detection
+
+Nmap offers a robust scripting engine (NSE) that can be utilized to automate the detection of privileged accounts within a target network. By employing scripts specifically tailored for identifying elevated permissions, such as those targeting SMB or LDAP services, an attacker can glean valuable information about user roles and privileges.
+
+Example Command:
+```bash
+nmap --script smb-enum-users -p445 <target IP>
+```
+
+This command uses the `smb-enum-users` script to list SMB users on the target host, potentially revealing those with administrative privileges.
+
+### Automated Tools for Privileged Account Discovery
+
+Automated tools such as Metasploit or standalone utilities like `GetUserSPNs.py` are essential for large-scale operations. These tools efficiently discover accounts with privilege escalation paths, such as those that are vulnerable to Kerberoasting attacks.
+
+Example Command:
+```bash
+python GetUserSPNs.py domain/user -spn HTTP -dc-ip <domain controller IP>
+```
+
+This script looks for service principal names (SPNs) associated with privileged accounts, which can be indicative of potential misconfigurations.
+
+## Credential Harvesting and Analysis
+
+### Password Spraying and Brute Force
+
+Password spraying is a method where common passwords are tested across a large number of accounts, allowing attackers to avoid account lockout policies. Brute force attacks are more targeted, often automating the process with tools like Hydra or CrackMapExec.
+
+Example Command using Hydra:
+```bash
+hydra -L users.txt -P passwords.txt <target IP> smb
+```
+
+This attempts to brute force SMB credentials with usernames and passwords from the respective files.
+
+### Analyzing Credential Reuse and Misconfigurations
+
+Analysis of credential reuse can highlight weaknesses where privileged credentials are used across multiple services. Tools such as BloodHound can be leveraged to map privilege escalation paths and potential misconfigurations within an Active Directory environment.
+
+Example Command:
+```bash
+bloodhound-python -c All -d <domain> -u <user> -p <password> -dc <domain controller IP>
+```
+
+This populates BloodHound with data about domain users, helping identify misconfigurations and credential reuse patterns.
+
+## Leveraging Protocols and Services for Privileged Enumeration
+
+### SMB Protocol and LDAP Queries
+
+SMB and LDAP are commonly used protocols that can be queried to enumerate domain users, including those with administrative privileges. Enum4linux is a versatile tool for such queries.
+
+Example Command:
+```bash
+enum4linux -a <target IP>
+```
+
+This command scans a target host for available SMB and NetBIOS information, including potential administrative accounts.
+
+### RPC and WMI Queries
+
+Within Windows networks, RPC and WMI are instrumental in gathering information about user privileges. Tools such as `rpcclient` and WMIC are used to automate these queries.
+
+Example RPCclient Command:
+```bash
+rpcclient <target IP> -U ""%""
+```
+
+This opens an interactive shell to enumerate users and groups, useful for identifying those with elevated access rights.
+
+## Attack Surface Expansion Through Service Exploitation
+
+### Harvesting Privileged Users via Misconfigured Services
+
+Exploiting misconfigured services is a direct method to expose privileged users. Metasploit can be configured to automate these processes, targeting known vulnerabilities that reveal user roles or credentials.
+
+Example Command:
+```bash
+msfconsole -q -x "use auxiliary/scanner/smb/smb_enumusers; set RHOSTS <target IP>; run"
+```
+
+This Metasploit auxiliary module enumerates SMB users, aiding in the identification of those with elevated privileges.
+
+### Zero-Trust Vulnerabilities and Privileged Access
+
+Exploiting OAuth and SAML authentication frameworks can expose privileged access, especially in cloud environments. Harvested tokens can be leveraged for privilege escalation effectively.
+
+## Cross-Domain Privileged Account Enumeration
+
+### Interactive Domain Trusts Analysis
+
+Mapping domain trusts can reveal cross-domain privileges, with tools like `TrustEnum` supporting this type of analysis. This is particularly relevant in environments with multiple domains or forests.
+
+### Inter-Forest Privileged User Discovery
+
+Techniques for cross-domain analysis, such as Kerberos ticket-based attacks, allow attackers to enumerate privileged users across different domains, extending the potential attack surface.
+
+### Cross-Domain Kerberos Silver and Golden Ticket Attacks
+
+Utilizing advanced Kerberos attacks, including Silver and Golden Ticket forgeries, attackers can impersonate privileged users or access resources cross-domain.
+
+## Maintaining Persistence
+
+### Backdooring Privileged Accounts
+
+Maintaining persistence through compromised privileged accounts involves manipulating registry settings or creating scheduled tasks that ensure continued access even after remediation attempts.
+
+### Advanced Credential Theft
+
+Mimikatz is a leading tool for credentials extraction, directly targeting systems' memory to extract usernames and passwords of privileged users, which can then be used to establish command and control.
+
+```bash
+mimikatz.exe
+```
+
+Within the Mimikatz console, executing the `sekurlsa::logonpasswords` command retrieves cached credentials, providing the necessary data for a broader breach.
+
+By understanding and utilizing these techniques, offensive security professionals can effectively enumerate and exploit privileged users within diverse network environments. Each method presents unique insights into user roles, system misconfigurations, and potential avenues for unauthorized access, heightening the operational effectiveness of an attack strategy.
