@@ -1,0 +1,90 @@
+---
+title: 'Cassandra Enumeration: Keyspaces and Tables Guide'
+description: Learn how to enumerate keyspaces and tables in Cassandra, uncovering
+  valuable database structures and security insights.
+keywords:
+- Cassandra enumeration
+- keyspaces
+- tables
+- CQLSH
+- database security
+- replication strategies
+- system tables
+- data mapping
+- NoSQL
+---
+
+# Enumerating Keyspaces and Tables
+
+Understanding the structure and content of a database is an essential task in offensive cybersecurity, particularly when targeting Cassandra, a popular NoSQL database system. Enumerating keyspaces and tables in Cassandra is a crucial step in identifying valuable data and assessing the database's security posture. This process involves accessing metadata to discover the organization of data across the database.
+
+## Understanding Keyspaces
+
+### Definition and Purpose
+Keyspaces in Cassandra serve as the top-level namespace that organizes tables (analogous to databases in relational database systems). Each keyspace can contain multiple tables, and it defines crucial properties such as replication strategies that determine how data is stored across the cluster. Understanding keyspaces is fundamental as it aids in mapping the database's structure and storage behavior.
+
+### Accessing Keyspace Information
+To access keyspace information, attackers typically query the built-in system keyspace, specifically tables such as `system_schema.keyspaces`. This table provides metadata details about each keyspace, including its name, replication settings, and other configurations. Direct queries to this table can reveal the keyspace schema without needing explicit permissions on each keyspace.
+
+## Keyspace Enumeration Techniques
+
+### Using CQLSH
+The Cassandra Query Language Shell (CQLSH) is a command-line interface utilized to interact with Cassandra clusters. It allows users to list all available keyspaces using the command:
+
+```shell
+DESCRIBE KEYSPACES;
+```
+
+This command provides a quick overview of all keyspaces present in the Cassandra environment, offering an initial mapping of the database landscape.
+
+### Automated Scripts
+Scripts and custom tools can automate the process of keyspace enumeration. Leveraging Python libraries such as Cassandra Driver (`cassandra-driver`), attackers can write scripts that connect to the Cassandra cluster and systematically extract keyspace information. Automation aids in efficiency and can potentially bypass manual restrictions if the scripts simulate legitimate user interactions.
+
+## Identifying Keyspace Constraints
+
+### Replication Strategy
+Every keyspace in Cassandra is associated with a replication strategy, which dictates how data is duplicated across nodes. Common strategies include `SimpleStrategy`, suitable for single Data-Center replicas, and `NetworkTopologyStrategy`, which supports multi-DC setups. Identifying these strategies allows attackers to understand data redundancy and potential attack vectors related to data availability and integrity.
+
+### Replication Factor
+The replication factor specifies the number of replicas kept for each piece of data. It indicates data redundancy and fault tolerance levels. When enumerating keyspaces, examining replication factors can provide insights into how resilient the database is against node failures, which can be critical for formulating attack plans.
+
+## Table Structure in Keyspaces
+
+### Table Characteristics
+Within keyspaces, tables store actual data entries using a column-family approach. Each table has a unique set of columns, primary keys, and clustering keys that determine data distribution and access patterns. Understanding the structure and organization of tables is essential for targeting specific datasets within a keyspace.
+
+### System Tables
+Cassandra maintains several system tables within the `system_schema` keyspace that describe table configurations. By querying tables like `system_schema.tables` and `system_schema.columns`, attackers can access detailed information about each table's schema, including column data types, indexes, and primary keys, without needing to directly interact with the application's database models.
+
+## Table Enumeration Approaches
+
+### CQLSH Commands for Table Details
+To enumerate table details via CQLSH, one can use commands like:
+
+```shell
+DESCRIBE TABLES <keyspace_name>;
+```
+
+This command lists all tables within a specified keyspace, providing an overview of its structure. To gain deeper insights, attackers may use:
+
+```shell
+DESCRIBE TABLE <keyspace_name>.<table_name>;
+```
+
+This outputs the complete schema for a specific table, including column definitions, indexes, and primary keys.
+
+### Advanced Scripting
+Utilizing advanced scripting techniques with languages such as Python or Bash allows for comprehensive table enumeration. These scripts can iterate over all keyspaces, extract table schemas, and store them for offline analysis. Scripting can also integrate with other tools to perform more complex tasks like vulnerability scanning based on discovered schemas.
+
+## Security Considerations
+
+### Access Control Measures
+Access to keyspace and table metadata might be restricted by access controls and permissions defined within the Cassandra environment. These are usually managed by roles and user privileges. Understanding and potentially bypassing these controls require an attacker to exploit misconfigurations or use elevated credentials found during previous steps in the enumeration process.
+
+### Understanding Permissions
+Permissions in Cassandra play a significant role in controlling access to data. They define which users can read, write, or execute commands on keyspaces and tables. During enumeration, understanding the existing permission model helps to assess what actions can be taken on the discovered schemas, potentially revealing security weaknesses or misconfigurations.
+
+## Linking Keyspaces and Tables
+
+### System Metadata Interrogation
+Connecting keyspaces to their respective tables involves querying system metadata tables. By accessing `system_schema.keyspaces` and `system_schema.tables`, attackers can map out the full database schema. This process provides a visual representation of the database's hierarchy, aiding in the planning of further offensive operations such as SQL injection tests or privilege escalation attempts.
