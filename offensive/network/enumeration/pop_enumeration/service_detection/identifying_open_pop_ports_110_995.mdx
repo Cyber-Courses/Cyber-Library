@@ -1,0 +1,109 @@
+---
+title: Identifying Open POP Ports (110, 995) Techniques
+description: Learn effective methods for detecting open POP ports (110, 995) and gain
+  insights for network security assessments.
+keywords:
+- open POP ports
+- POP3
+- POP3S
+- port scanning techniques
+- Nmap
+- SSLScan
+- network enumeration
+- cybersecurity methods
+- automated scans
+- encryption verification
+---
+
+### Identifying Open POP Ports (110, 995)
+
+When implementing offensive cybersecurity techniques, identifying open ports, specifically for the Post Office Protocol (POP), plays a crucial role in network enumeration and exploitation strategies. Ports 110 and 995 are commonly used by POP3 and POP3S (POP over SSL/TLS) services, respectively. Detecting these ports can reveal valuable information about mail servers and potential vulnerabilities within a target network.
+
+#### Techniques for Scanning Ports
+
+Open port detection typically starts with active scanning methods. Nmap, a popular open-source network scanner, is often employed due to its versatility and depth. To identify open POP ports using Nmap, execute the following command:
+
+```bash
+nmap -p 110,995 <target-ip>
+```
+
+This command targets ports 110 and 995, returning responses from hosts that have these ports open. For broader scans, Masscan offers high-speed scanning capabilities. With proper configuration, it scales well for extensive networks:
+
+```bash
+masscan -p110,995 --rate 1000 <target-ip-range>
+```
+
+For custom port probing, scripting with Python's Scapy library allows for detailed packet crafting and response analysis. Here's an example snippet:
+
+```python
+from scapy.all import *
+
+target_ip = "target-ip"
+ports = [110, 995]
+
+for port in ports:
+    pkt = IP(dst=target_ip)/TCP(dport=port, flags="S")
+    response = sr1(pkt, timeout=2, verbose=0)
+    if response is not None and response[TCP].flags == "SA":
+        print(f"Port {port} is open")
+```
+
+Stealth scanning strategies are used to bypass detection systems. Techniques such as conducting slow or fragmented packet scans can avoid raising alarms. TCP Idle scans, which utilize a third host to obscure the scan's true origin, are effective in certain circumstances. This technique requires advanced knowledge of TCP/IP stacks and idle hosts to effectively mask the scanning IP.
+
+#### OS-Specific Port Scanning Strategies
+
+Focusing on the target operating system, specific strategies can be used. For Windows, PowerShell scripts can automate network discovery and port scans:
+
+```powershell
+Test-NetConnection -ComputerName <target-ip> -Port 110,995
+```
+
+For Linux/Unix systems, bash scripting becomes a powerful tool for automated scans:
+
+```bash
+for port in 110 995; do
+  nc -zv <target-ip> $port 2>&1 | grep succeeded
+done
+```
+
+#### Identifying Encrypted (SSL/TLS) POP Services
+
+To identify encrypted POP services, SSLScan provides insights into SSL/TLS configuration on port 995. Execute:
+
+```bash
+sslscan <target-ip>:995
+```
+
+This scan details both supported cipher suites and protocol versions. OpenSSL's `s_client` utility offers manual verification of SSL/TLS handshakes and allows for certificate examination:
+
+```bash
+openssl s_client -connect <target-ip>:995
+```
+
+This command opens a TLS connection and displays critical security information, such as the certificate chain and handshake results, highlighting opportunities for man-in-the-middle attacks if weak ciphers are in use.
+
+#### Network Proxy and Bypass Techniques for Deep Scanning
+
+To perform network probing while avoiding detection, one might utilize SOCKS5 proxy servers. By configuring ProxyChains, scan traffic can be routed through multiple proxy layers:
+
+```bash
+proxychains nmap -p 110,995 <target-ip>
+```
+
+Additionally, leveraging the Tor network facilitates anonymous scanning, obscuring the scanner's origin. When combined with tools like Nmap or Masscan, this method can effectively evade network-based surveillance systems.
+
+#### Effective Use of Vulnerability Databases
+
+Once POP ports are identified, correlating them with known vulnerabilities from databases such as CVE provides avenues for exploitation. Platforms like Shodan and Censys enable searching by service and port type to gain historical data insights and identify weaknesses associated with specific IP addresses or service configurations.
+
+#### Automation and Scheduling of Repeat Scans
+
+For continuous monitoring, develop custom scripts to automate regular scans. In Linux environments, cron jobs can be set to execute these scripts at determined intervals:
+
+```bash
+0 * * * * /usr/bin/bash /path/to/scan_script.sh
+```
+
+Ansible, a configuration management tool, can enhance these automation efforts by orchestrating complex scan workflows across various environments. Develop Ansible playbooks to initiate scheduled scans, ensuring consistent monitoring and reporting of the POP services' status on the network.
+
+These methods, when effectively executed, will significantly contribute to identifying open POP ports, forming the foundation for further offensive network endeavors.
