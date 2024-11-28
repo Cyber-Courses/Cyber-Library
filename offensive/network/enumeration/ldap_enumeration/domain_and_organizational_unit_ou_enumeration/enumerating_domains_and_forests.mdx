@@ -1,0 +1,64 @@
+---
+title: Enumerating Domains and Forests in Active Directory
+description: Explore techniques and tools for enumerating domains and forests in Active
+  Directory environments for enhanced security and penetration testing.
+keywords:
+- domain enumeration
+- forest enumeration
+- Active Directory
+- LDAP queries
+- BloodHound
+- PowerShell
+- Nmap
+- domain trusts
+- cross-forest enumeration
+- cybersecurity
+---
+
+### Enumerating Domains and Forests
+
+#### Domain and Forest Conceptualization
+
+Understanding the structure of domains and forests in Active Directory (AD) is fundamental for any offensive cybersecurity operation targeting these environments. **Domains** are logical groupings of network resources, holding authenticated user accounts, computers, and peripheral devices managed under a common security policy. Domains function as a boundary for administrative tasks, and each has its own database and security policies.
+
+**Forests** are overarching structures that encompass one or more domains. Within a forest, domains maintain a transitive trust relationship, meaning that trust extends to all domains within the forest. This simplifies resource sharing and user management across domains within the forest.
+
+Domain functional levels determine the supported features and allowable operations within each domain. Similarly, forest functional levels dictate the capabilities enabled across all domains in the forest. Understanding these levels is crucial due to their impact on enumeration and attack surface.
+
+#### Tools and Techniques for Enumeration
+
+**LDAP Query Utilization** is a primary method for retrieving domain and forest information. Lightweight Directory Access Protocol (LDAP) queries can extract critical information regarding domain users, computers, and their properties from the AD database. Constructing effective LDAP queries requires precision, utilizing base distinguished names (DNs) and specific attribute filters to retrieve relevant domain and forest data.
+
+Command example:
+```shell
+ldapsearch -x -H ldap://target-server -D "cn=admin,dc=example,dc=com" -W -b "dc=example,dc=com" "(objectClass=domain)" 
+```
+
+**Active Directory PowerShell Modules** provide an efficient interface to query and manage AD objects. Cmdlets like `Get-ADDomain` and `Get-ADForest` are powerful for domain enumeration. They allow operators to pull comprehensive details such as domain SID, user accounts, and domain trusts.
+
+Command example:
+```powershell
+Get-ADDomain
+Get-ADForest
+```
+
+**Nmap and NSE (Nmap Scripting Engine)** can be deployed to identify AD DS (Active Directory Domain Services) infrastructure. Special NSE scripts target LDAP services to enumerate domain controllers and related services.
+
+Command example:
+```shell
+nmap --script ldap-rootdse -p 389 target-IP
+```
+
+#### Advanced Enumeration Strategies
+
+**BloodHound** is a tool that uses graph theory to reveal and analyze relationships within AD environments. By ingesting data collected from enumeration tools like PowerShell or native Windows command-line utilities, BloodHound can map domain and forest trust relationships, highlighting potential paths to fully compromise the AD environment.
+
+Cross-forest enumeration is essential when dealing with environments where forest trusts exist. Understanding how to traverse these trusts can uncover additional resources and broaden an attacker’s access. Analyzing cross-forest trust types, such as external or forest trusts, and the permissions associated with them informs what actions are possible within the trusted contexts.
+
+#### Persistence and Identifying Weaknesses in Domain and Forest Trusts
+
+Malicious enumeration techniques focus on stealth and nontraditional query approaches to remain undetected. Techniques such as using DNS SRV records to locate services or leveraging service tickets for Kerberos can provide intelligence without generating excessive logs or alerts.
+
+Identifying **trust misconfigurations** between domains and forests is a critical step in developing intrusion persistence mechanisms. Such misconfigurations may include incorrect trust relationship scoping or inappropriate delegation settings, which can be exploited to establish connections between otherwise isolated environments. By carefully mapping these weaknesses, attackers can extend their operational reach, maintaining control across multiple domains and potentially entire forests.
+
+Understanding and leveraging these techniques enable a comprehensive approach to domain and forest enumeration, critical for both offensive operations and enhancing security postures through defensive anticipation of such techniques.
