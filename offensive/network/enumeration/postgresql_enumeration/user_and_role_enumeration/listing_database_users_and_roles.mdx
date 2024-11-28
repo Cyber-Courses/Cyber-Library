@@ -1,0 +1,75 @@
+---
+title: Listing Database Users and Roles in PostgreSQL
+description: Learn to enumerate database users and roles in PostgreSQL with queries,
+  automation, and tools for effective privilege assessment.
+keywords:
+- PostgreSQL
+- database users
+- roles enumeration
+- SQL queries
+- privilege escalation
+- automated scripts
+- system catalogs
+- network enumeration
+---
+
+### Understanding PostgreSQL System Catalogs
+
+PostgreSQL maintains critical system catalogs that store essential information about database objects, including users and roles. Two primary catalogs, `pg_roles` and `pg_user`, provide a gateway to retrieving detailed user and role information. The `pg_roles` view is a logical view constructed from `pg_authid`, which contains authentication identifiers for both users and roles. Unlike `pg_roles`, `pg_authid` is not accessible directly due to sensitive information it carries, such as password hashes. However, for comprehensive user data, understanding its structure is critical when gaining indirect access through superuser privileges.
+
+Another useful view is `pg_user`, which, unlike `pg_roles`, focuses on individual user accounts, excluding role details related to group functionality. These system catalogs are central to listing and understanding the current users and roles within a given PostgreSQL instance.
+
+### Using SQL Queries for User and Role Extraction
+
+To enumerate database users and roles in PostgreSQL, structured SQL queries can be designed to fetch names and detailed attributes. For example:
+
+```sql
+SELECT rolname, rolsuper, rolinherit, rolcreaterole, rolcreatedb, rolcanlogin
+FROM pg_roles;
+```
+
+The above query extracts all role names along with their significant attributes: superuser status, inheritance permissions, role creation rights, database creation rights, and login abilities. Such information is crucial to understand the landscape of privilege distribution in the database.
+
+In addition, by tailoring SQL queries to focus on specific aspects, users can customize their enumeration. For instance, querying the `pg_user` view would be simpler in terms of structure but provides narrower scoped information focusing purely on users rather than roles.
+
+### Automating User and Role Enumeration
+
+Automating the enumeration of users and roles improves efficiency and ensures consistency in data retrieval. Scripts using languages such as Python can leverage libraries such as `psycopg2`, a PostgreSQL adapter, to interact with the database:
+
+```python
+import psycopg2
+
+connection = psycopg2.connect("dbname=mydatabase user=myuser password=mypassword")
+
+cursor = connection.cursor()
+cursor.execute("SELECT rolname FROM pg_roles")
+roles = cursor.fetchall()
+
+for role in roles:
+    print(role[0])
+
+cursor.close()
+connection.close()
+```
+
+This Python script establishes a connection to the database and executes a simple query to list all roles, demonstrating programmatic enumeration that can be incorporated into broader automation suites.
+
+### Leveraging PostgreSQL Functions for Enumeration
+
+PostgreSQL provides several built-in functions that can be pivotal in the enumeration process. `current_user` and `session_user` functions return the name of the current user and the user session ID, respectively. This information can be a starting point for more in-depth enumeration tactics. Additionally, using the `has_database_privilege` function can help establish what privileges a user holds over various databases, assisting in the identification of potential privilege escalation paths.
+
+### Network-Based Enumeration Techniques
+
+Enumeration doesn't solely rely on querying the database directly. Network-based techniques can infer user and role information by analyzing authentication traffic. Tools that capture network packets, like Wireshark, can be employed to monitor connections to the PostgreSQL server. By analyzing data flows, especially during login attempts, it is possible to deduce roles involved, especially when specific usernames are incorporated in connection strings or authentication attempts are identifiable.
+
+### Privilege Escalation Opportunities
+
+The enumeration of users and roles provides foundational data to strategize potential privilege escalations within a PostgreSQL environment. Identifying users with excess privileges or misconfigured roles can indicate paths to escalate access. Combinations of role memberships can also present scenarios where escalation is indirectly possible, through exploiting intermediary roles or chaining role grants to achieve higher privilege levels.
+
+### Integration with Broader Enumeration Efforts
+
+While listing database users and roles is a significant task, it gains greater potency when integrated with other network and application enumeration efforts. Coupling this information with service discovery, vulnerability assessments, and application-specific configurations can map comprehensive attack vectors in the environment. Leveraging a cross-disciplinary approach, insights from database enumeration can inform and refine the overall offensive strategy.
+
+### Tools and Utilities for Enumeration
+
+Various tools facilitate the process of user and role enumeration in PostgreSQL databases. Utilities such as `Metasploit`, with its dedicated PostgreSQL modules, provide automated frameworks for enumerating database users and roles. Similarly, network scanning tools like `nmap` can be scripted to include PostgreSQL enumeration in its fingerprinting processes. Custom scripts also offer a tailored approach, balancing stealth and precision to suit particular operational needs. In comparing tools, evaluative criteria such as efficiency, impact on network performance, and stealthiness should guide the selection process for offensive operations.
