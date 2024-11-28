@@ -1,0 +1,179 @@
+---
+title: Comprehensive Guide to User and Group Enumeration
+description: Explore effective techniques for user and group enumeration in network
+  security, covering tools like Nbtstat, RPC, and Active Directory.
+keywords:
+- User Enumeration
+- Group Enumeration
+- NetBIOS
+- Active Directory
+- RPC
+- SMB Enumeration
+- LDAP
+- Enumeration Techniques
+- Network Security
+---
+
+# User and Group Enumeration
+
+## Network Configuration Discovery
+
+### Understanding NetBIOS Protocol
+
+NetBIOS (Network Basic Input/Output System) is an API used by legacy applications on LANs, which supports communication between networked devices. NetBIOS Name Service (NBNS) is responsible for name registration and resolution within the local network. Understanding the NetBIOS protocol is crucial for user and group enumeration because it facilitates the discovery of network resources and services, enabling enumeration of user accounts and groups associated with various devices on the network.
+
+NetBIOS operates primarily via UDP on ports 137 and 138, and TCP on port 139. Enumerators can utilize these ports to query network devices, collecting details about user account names, associated groups, and shared resources. The process involves sending a name request and interpreting responses that include lists of hostnames, which can ultimately reveal detailed information about users and groups within the network.
+
+### Identifying Active Directory Domain Structure
+
+Active Directory (AD) is a directory service developed by Microsoft for Windows domain networks. Its domain structure is hierarchical, consisting of domains, forests, trees, and organizational units. It holds user account information, user profiles, and authorizations.
+
+In user and group enumeration, identifying the AD domain structure provides insights into how the users and groups are organized, managed, and authenticated across the network. This is foundational to understanding the permissions and roles assigned to different user groups, as well as recognizing potential entry points for escalation.
+
+## NetBIOS Name Service (NBNS) Enumeration
+
+### Using Nbtstat for User and Group Enumeration
+
+`Nbtstat` is a diagnostic tool for troubleshooting NetBIOS name resolution problems. It displays the state of current NetBIOS over TCP/IP connections and NetBIOS name cache.
+
+Command:
+```
+nbtstat -A <IP_Address>
+```
+
+Executing this command returns a NetBIOS name table, which may include the registered usernames and account roles associated with that endpoint. By iterating through multiple IP addresses in the target network range, an attacker can compile a comprehensive list of active usernames and groups.
+
+### Leveraging Wireshark for NBNS Traffic Analysis
+
+Wireshark is a network protocol analyzer that allows users to capture and interactively browse the traffic running on a computer network. By capturing NBNS traffic, one can identify broadcasts and responses revealing user and group names on a network.
+
+To capture and analyze NetBIOS traffic:
+1. Launch Wireshark and configure the capture filter to focus on port 137 with `udp.port == 137`.
+2. Analyze any name query or name registration packets to extract potential usernames and group associations.
+3. Pay close attention to response packets containing user group information tied to a particular machine.
+
+## Remote Procedure Call (RPC) Analysis
+
+### Employing Rpcclient for Enumerating Users and Groups
+
+`Rpcclient` is a tool part of the Samba suite, allowing users to execute client-side Microsoft RPC calls. This tool can query and gather critical information, including user and group details, from a Windows machine or domain.
+
+Command to enumerate users:
+```
+rpcclient -U "" -N <hostname> -c "enumdomusers"
+```
+
+Command to enumerate groups:
+```
+rpcclient -U "" -N <hostname> -c "enumdomgroups"
+```
+
+Using Rpcclient, information like usernames, RID identifiers, and details on group memberships can be effectively retrieved, contributing to a broader understanding of user hierarchies and relationships within a network.
+
+### Querying User and Group Lists via RPC
+
+RPC techniques involve querying target systems to retrieve lists of users and groups. These queries are essential to building a blueprint of how users and groups interconnect, which can be later used for privilege escalation or lateral movement across systems.
+
+## LDAP Enumeration Techniques
+
+### Using Nmap for LDAP Queries
+
+Nmap, a powerful network scanning tool, can be employed to query LDAP servers, allowing attackers to extract public information about users and groups.
+
+Example Nmap script usage:
+```
+nmap -p 389 --script ldap-search <target>
+```
+
+This searches the LDAP directory, collecting information about entries, schema-defined attributes including user names, email addresses, and their groups.
+
+### Extracting User and Group Information with Ldapsearch
+
+`Ldapsearch` utility directly communicates with an LDAP server to request data. Highly effective in pulling extensive records about users and groups, it leverages filters to pinpoint specific attributes of interest.
+
+Example command:
+```
+ldapsearch -x -b "dc=example,dc=com" "(objectClass=user)" cn mail
+```
+
+This command query Active Directory over LDAP to gather comprehensive details about users’ common names (CN) and mail attributes, potentially unveiling critical user and role data.
+
+## SMB and SAMBA Enumeration
+
+### Tools and Techniques for Enumerating SMB Protocol
+
+Server Message Block (SMB) is an application-layer network protocol, mainly used for providing shared access to files and printers. Enumerating SMB is crucial for understanding user and group access privileges across networked resources.
+
+Example tools include:
+- **Enum4linux**: Specialized for extracting user and group info from Windows hosts via SMB.
+- **Metasploit's auxiliary modules**: Provide specialized scripts for extracting user and group data from SMB servers.
+
+Command with Enum4linux:
+```
+enum4linux -U <target>
+```
+
+### Enumerating User and Group Shares
+
+Identifying shared directories and files accessible over SMB helps attackers understand data permissions across different user groups. This is typically accomplished by querying shared directories and correlating them with groups having access permissions.
+
+Tools such as `smbclient` or utilities within Metasploit can be employed to list accesses, aiding in mapping out user-group relationships.
+
+## Active Directory Enumeration Tools
+
+### Integrating Powerview for Active Directory Enumeration
+
+Powerview, a powerful PowerShell script, helps in rapidly enumerating users, groups, shares, and sessions in AD environments.
+
+Useful command for retrieving all users:
+```powershell
+Get-NetUser | Select-Object name
+```
+
+This cmdlet delivers a complete list of domain users and can further explore group memberships with additional parameters, shaping an in-depth look at user-to-group mappings.
+
+### Using BloodHound to Map AD User and Group Relations
+
+BloodHound looks for Active Directory trust relationships and paths to administrative control. It uses data collected from tools like Powerview to visualize user, group, and permission correlations inside a domain.
+
+By identifying attack paths through group memberships and user roles, BloodHound aids in detecting vulnerable points leading to privilege escalation or complete domain compromise.
+
+## Cross-Referencing Enumeration Data
+
+### Mapping User and Group Data Across Service Enumeration
+
+Cross-referencing collected user and group details across different services uncovers cohesive patterns binding user accounts and their permissions. It provides a broader viewpoint on how permissions flow across the network and highlights any inconsistencies or weaknesses in access control models.
+
+### Identifying High-Value Targets Within Enumerated Groups
+
+High-value targets typically have elevated privileges, access to sensitive information, or strategic network administrative capabilities. By analyzing group memberships and associated user roles, these high-value targets can be identified for staged attacks or future exploitation.
+
+## Scripted Automation and Tool Integration
+
+### Automating User and Group Enumeration via Scripting
+
+Automation scripts consolidate enumeration processes, enhancing repeatability and efficiency in diverse operating environments. Scripts tailored with Python or Shell can execute commands like those in Rpcclient or LDAPsearch, iterating over multiple hosts concurrently.
+
+### Toolchain Development for Seamless Enumeration
+
+Developing a toolchain aids in seamlessly integrating different enumeration techniques, ensuring smooth transitions between methods and consolidating results efficiently. Automation frameworks like Ansible or custom PowerShell scripts typically form the backbone of such toolchains.
+
+## Mitigation Evasion
+
+### Techniques to Evade Detection While Enumerating Users and Groups
+
+Disguising network enumeration activities to evade any Intrusion Detection Systems (IDS) or audit trails is critical. Techniques include IP address spoofing, slowing down scan speed, or splitting enumeration tasks over time, thus reducing network visibility and alerts.
+
+### Analyzing Common Blue Team Defenses
+
+Understanding how Blue Teams monitor and protect against enumeration is important. Analyzing traffic filtering, monitoring logs, and correlating patterns gives insights into adaptive evasion strategies that can neutralize defensive measures.
+
+## Advanced Enumeration Tactics
+
+### Applying Techniques in Multi-Domain Environments
+
+Multi-domain environments add complexity, and enumeration demands cross-domain trust relationship analysis, user permissions tracking, and group policy enumeration on an enterprise level to truly understand trans-domain security dynamics.
+
+### Leveraging Windows Management Instrumentation for Advanced Enumeration
+
+Windows Management Instrumentation (WMI) allows enumeration of users and groups by querying the Windows OS directly. Its expansive reach offers valuable attributes about user accounts and services running under specific user contexts, serving as a powerful tool in an attacker’s arsenal.
