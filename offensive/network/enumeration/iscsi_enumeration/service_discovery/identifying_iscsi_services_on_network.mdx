@@ -1,0 +1,88 @@
+---
+title: 'Identifying iSCSI Services on Network: A Comprehensive Guide'
+description: Learn effective methods to identify iSCSI services on your network, including
+  scanning techniques, banner grabbing, and custom scripting.
+keywords:
+- iSCSI service discovery
+- network scanning
+- Nmap iSCSI
+- banner grabbing iSCSI
+- Deep Packet Inspection
+- custom Python scripts
+- Metasploit iSCSI
+- iSCSI configuration investigation
+- iSCSI enumeration techniques
+---
+
+### Identifying iSCSI Services on Network
+
+#### Network Scanning for iSCSI
+
+The iSCSI (Internet Small Computer Systems Interface) protocol is a network protocol that allows the transmission of SCSI commands over IP networks, commonly used for linking data storage facilities. The standard implementation of iSCSI uses TCP on port 3260, making it essential for offensive operators to be adept at identifying these services within a network. Understanding these port details and the service's nature is crucial for initial discovery.
+
+To kickstart the discovery process, leveraging network scanning tools like Nmap provides a foundational approach. Nmap can be used to scan for the default TCP port commonly associated with iSCSI. A typical Nmap command for identifying iSCSI services is:
+
+```bash
+nmap -p 3260 --script iscsi-info <target-IP>
+```
+
+This command targets TCP port 3260 and uses the `iscsi-info` script to gather intelligence specifically about iSCSI endpoints. The results may reveal whether any iSCSI services are active on the network, providing insights into their configurations and roles.
+
+#### Banner Grabbing Techniques
+
+Identifying iSCSI services can be further refined through banner grabbing techniques. Banner grabbing involves sending simple requests to extract service-level information offered by network services. If iSCSI services are present, they may be potentially identifiable from their responses to crafted requests.
+
+The Netcat (nc) tool can be utilized for this purpose, serving as a versatile command-line utility for reading from and writing to network connections. The command:
+
+```bash
+echo "SR | nc <target-IP> 3260
+```
+
+This sends a basic string to the iSCSI port, hoping for a banner response that indicates service specifics, such as vendor information or versioning.
+
+#### Deep Packet Inspection Tools
+
+Deep Packet Inspection (DPI) is a sophisticated technique used to analyze network packets at a very granular level. Tools like Wireshark are employed to capture and filter iSCSI-specific traffic. To monitor iSCSI packets, one might apply a filter that isolates packets associated with TCP port 3260:
+
+```plaintext
+tcp.port == 3260
+```
+
+By capturing this traffic over a period, an analyst can ascertain usage patterns, session initiation, and other pertinent data, thereby solidifying the confirmation of iSCSI operations on the network.
+
+#### Customized Scripting
+
+Sometimes, pre-built tools may not meet the specific needs demanded by complex or obscure network configurations. Creating custom scripts in languages such as Python can be an effective measure to address these gaps. A Python script leveraging the `socket` library can be tailored to incrementally test a range of IPs for open iSCSI ports, outputting interactions to detect active iSCSI services.
+
+The script might look something like this:
+
+```python
+import socket
+
+def scan_ips(ip_range):
+    for ip in ip_range:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex((ip, 3260))
+        if result == 0:
+            print(f"iSCSI service detected on {ip}:3260")
+        sock.close()
+
+ip_list = ['192.168.1.{}'.format(i) for i in range(1, 255)]
+scan_ips(ip_list)
+```
+
+This script takes an IP range and attempts connections to port 3260 on each address to detect accessible iSCSI services.
+
+#### Intrusive Techniques for Service Confirmation
+
+For advanced users, using vulnerability assessment tools like Metasploit can deepen the exploration into iSCSI services. Metasploit houses modules like `iscsi_enum` that probe existing services for detailed information. Caution, however, should be exercised due to the intrusive nature of these methods, which can lead to detection by defensive monitoring systems.
+
+#### Advanced iSCSI Discovery Methods
+
+Online resources such as Shodan and Censys index publicly accessible devices connected to the internet, including iSCSI services. These platforms can be queried to enumerate and map iSCSI instances globally. Shodan, for example, can filter IPs responding on the traditional iSCSI port, obtainable through their web interface or API.
+
+#### Gathering Detailed iSCSI Configuration Information
+
+Collecting detailed configuration details involves tools and techniques dedicated to pulling more than superficial endpoint data. Extracting Logical Unit Numbers (LUNs) and understanding the login credentials or authentication methods, like CHAP (Challenge-Handshake Authentication Protocol), utilized in the network, can provide further insights into the storage architecture. Tools specifically designed to interact with iSCSI services, however, are often necessary to view and manipulate these attributes.
+
+This approach systematically identifies, verifies, and interrogates iSCSI endpoints within a network, proving invaluable for penetration testers and cybersecurity professionals engaged in service discovery operations.
