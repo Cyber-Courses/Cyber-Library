@@ -1,0 +1,126 @@
+---
+title: Listing Available Databases in MSSQL Enumeration
+description: Explore techniques for listing available databases in MSSQL, including
+  advanced tactics and tools for effective database enumeration.
+keywords:
+- MSSQL enumeration
+- listing databases
+- SQL Server discovery
+- database enumeration techniques
+- system stored procedures
+- automated enumeration tools
+- bypassing security measures
+- database metadata insights
+---
+
+## Understanding MSSQL Protocols and Authentication Mechanisms
+
+**Overview of MSSQL Protocols**
+
+MSSQL (Microsoft SQL Server) communicates primarily over TCP/IP using port 1433 by default. It employs the TDS (Tabular Data Stream) protocol for communications between database clients and the server. Understanding this protocol is critical for enumerating databases, as it dictates how queries are transmitted and responses received. The adoption of the encrypted connection using SSL/TLS can pose challenges, requiring attackers to bypass or properly negotiate to capture or interact with transmitted data.
+
+**Authentication Challenges in MSSQL**
+
+MSSQL supports multiple authentication models, notably Windows Authentication and SQL Server Authentication. Windows Authentication leverages Active Directory for identity validation, while SQL Server Authentication uses locally-stored credentials. Enumerators need access to valid logins; therefore, credential leaks or brute forcing may be necessary but can trigger security alerts.
+
+**Leveraging Credentials for Access**
+
+Effective database enumeration requires valid access credentials. Attackers often rely on stolen or leaked credentials. Once authenticated, attackers can use these credentials to run enumeration queries against the database, thus gaining information on the available databases on the server.
+
+## Techniques for Basic Database Discovery
+
+**Using System Stored Procedures**
+
+MSSQL offers several system stored procedures that simplify the discovery of available databases:
+
+- `sp_databases`: When executed, this stored procedure returns a list of databases accessible to the current user.
+  
+  ```sql
+  EXEC sp_databases;
+  ```
+
+- `sp_helpdb`: This provides information on the available databases including their database size, owner, creation date, and status.
+
+  ```sql
+  EXEC sp_helpdb;
+  ```
+
+These stored procedures form the base level information which most enumerators start with. Knowing how to interpret the result sets, particularly when dealing with substantial data, is essential for effective enumeration.
+
+**Retrieving Default Databases**
+
+Upon a successful connection, MSSQL typically offers several default databases such as `master`, `model`, `tempdb`, and `msdb`. These databases host crucial metadata and operational information useful for enumeration activities. Understanding their structure, including tables and system views, helps in crafting efficient queries that extract valuable information.
+
+**Understanding and Analyzing Result Sets**
+
+Effective enumeration requires that the administrator properly understand the columns and data returned by these system procedures, which typically include database name, size, and status, among others. Categorizing this information and correlating it with other gathered data can reveal insights into system configurations or misconfigurations.
+
+## Advanced Database Enumeration Tactics
+
+**Leveraging MS-SQL Queries**
+
+For more detailed enumeration, attackers can leverage direct SQL queries:
+
+- `SELECT * FROM sys.databases`: This query provides comprehensive details about each database known to the master database, offering more depth than the basic procedures and often requiring elevated privileges.
+
+  ```sql
+  SELECT name, database_id, create_date FROM sys.databases;
+  ```
+
+- `sys.master_files`: Used to enumerate attached database files and their configurations. It can reveal database file locations, which are crucial for further exploitation.
+
+**Efficient Use of CmdExec and SQL Jobs**
+
+Attackers can exploit the `xp_cmdshell` stored procedure to execute system commands directly on the host. While usually disabled due to security risks, if accessible, it enables database enumeration through system-level commands. Besides, SQL Jobs can be manipulated or created to perform repeated or automated scanning tasks.
+
+## Bypassing Defensive Measures During Enumeration
+
+**Identifying and Circumventing Security Controls**
+
+Databases may employ security measures such as auditing and anomaly detection to trace suspicious activities. Identifiers logging access attempts are often housed in `master` security views or third-party tools. Recognizing these aids enumeration by enabling actions to remain undetected.
+
+**Using Encoded Queries to Evade Detection**
+
+Encoded or obfuscated queries can bypass simplistic pattern-matching security systems. Base64 encoding for data captures or leveraging robust application encoders help in transmitting potentially malicious payloads under the guise of harmless traffic.
+
+**Stealth Techniques for Database Enumeration**
+
+Maintaining a low footprint is crucial during enumeration. Techniques involve adjusting the frequency of queries, limiting information requests based on observed responses, and adopting flexible access times to mimic typical user patterns.
+
+## Leveraging Metadata for Information Extraction
+
+**Utilizing Information Schema Views**
+
+Information schema views (e.g., `INFORMATION_SCHEMA.SCHEMATA`) offer an ANSI-SQL way to retrieve metadata about database components. These views provide information about database schemas, tables, columns, etc., often serving as a standardized entry point for broad enumeration.
+
+**Analyzing Database Properties and Options**
+
+Examining metadata allows identification of database-specific properties and options. Queries specifically aimed at `DATABASEPROPERTYEX` or examining database options using `sys.databases` can reveal configurations such as collation, recovery model, and compatibility level.
+
+**Extracting Information from Master Database**
+
+The `master` database catalog houses system-level information essential for administrating server configurations and existing databases. Queries into this repository, while visible to privileged users, provide an overarching view of the database server's landscape.
+
+## Utilizing Tools and Scripts for Automated Enumeration
+
+**MSSQL-Specific Enumeration Tools**
+
+Numerous tools, such as `SQLRecon`, `Nmap` with MSSQL scripts, and Metasploit have dedicated modules, automate enumeration tasks. Configuration of these tools often involves choosing parameters representative of specific targets, helping streamline discovery processes.
+
+**Automating Database Enumeration with Scripts**
+
+Scripting capabilities within PowerShell, Python, or Bash allow creation of automated scripts to conduct repeated enumeration. These scripts can be customized to interact with MSSQL specifically, perform queries, capture results, and analyze prompt outputs efficiently.
+
+## Post-Enumeration Strategies
+
+**Organizing and Analyzing Retrieved Data**
+
+Post enumeration, retrieved data should be systematically organized—possibly using databases or structured data files (e.g., CSV, JSON). Organizers should distinguish between user-created and system databases to efficiently plan further actions.
+
+**Prioritizing Databases for Further Attack Vectors**
+
+Enumerators may need to prioritize databases based on gathered intelligence, focusing on those with numerous privileges, sensitive data storage, or administrative roles for further attack steps.
+
+**Documenting Findings for Reporting and Further Exploitation Steps**
+
+Thorough documentation of the enumeration phase indicates known vulnerabilities, misconfigurations, and potential exploit paths. Detailed reports aid in planning future exploitation phases or for remediation insights in security assessments.
