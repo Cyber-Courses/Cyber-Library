@@ -1,0 +1,160 @@
+---
+title: Comprehensive Guide to Network Mapping Techniques
+description: Explore effective host discovery, topology mapping, and enumeration techniques
+  for robust network mapping in cybersecurity.
+keywords:
+- network mapping
+- host discovery techniques
+- ARP scans
+- DNS enumeration
+- traceroute analysis
+- network visualization
+- SMB enumeration
+- scan evasion
+- IPv6 mapping
+- network analysis
+---
+
+# Network Mapping
+
+## Host Discovery Techniques
+
+### Ping Sweeps
+
+Ping sweeps employ ICMP Echo Request packets to determine live hosts on a target network. By sending ICMP packets to multiple IPs within a network range, attackers can determine which devices are responsive by listening for ICMP Echo Replies. Tools like `nmap` facilitate this technique with commands such as:
+
+```bash
+nmap -sn 192.168.1.0/24
+```
+
+This command sends ICMP Echo Requests to the given subnet, identifying live hosts. However, ICMP might be blocked by firewalls, necessitating alternative methods.
+
+### ARP Scans
+
+ARP scans focus on local network segments, exploiting the fact that ARP (Address Resolution Protocol) is used to map IP addresses to MAC addresses within a local network. By broadcasting an ARP request to the entire network, an attacker can identify live devices, as they respond with their MAC addresses. In switched environments, this is particularly effective because ARP packets are not typically routed through firewalls. Tools like `arp-scan` perform these actions with:
+
+```bash
+arp-scan --localnet
+```
+
+This command sends ARP requests to all devices on the local network, returning a list of IP and MAC pairs for active devices.
+
+### DNS Enumeration
+
+DNS enumeration involves querying DNS records to gather information about the network, including hostnames and IP addresses. Extracting DNS records such as A, AAAA, and PTR can provide insights into the network's infrastructure and potential points of interest. Tools like `dnsenum` help automate this process:
+
+```bash
+dnsenum example.com
+```
+
+This command attempts to extract DNS records for the domain, uncovering subdomains and associated IP addresses that may not be immediately visible.
+
+### SNMP Sweep
+
+Simple Network Management Protocol (SNMP) sweeps involve querying devices using SNMP to extract system information and operational statistics. Many network devices and systems support SNMP, often using default community strings such as "public". `snmpwalk` is a tool that can be employed for such sweeps:
+
+```bash
+snmpwalk -c public -v1 ip-address
+```
+
+Substituting `ip-address` with the target's IP leads to a retrieval of SNMP data, potentially revealing device models, configurations, and more.
+
+## Network Topology Mapping
+
+### Traceroute Analysis
+
+Traceroute techniques identify the hops and paths data takes to reach a destination, providing a primitive map of network topology. Each hop represents an intermediate router or gateway. The classic `traceroute` tool can be run as:
+
+```bash
+traceroute example.com
+```
+
+By inspecting response times and the number of hops, it helps in understanding the network path and identifying points of congestion or bottlenecks.
+
+### Path Analysis Tools
+
+Advanced tools like `mtr` and `pathping` combine traceroute and ping features to deliver a more comprehensive network path analysis. `mtr` updates in real-time to show live path latency and packet loss, executed with:
+
+```bash
+mtr example.com
+```
+
+This provides a dynamic view, effectively mapping the network's performance and stability across paths.
+
+### Network Visualization
+
+Network visualization tools like `Maltego` and `Cytoscape` assist in creating graphical representations of network topology. These tools import data from the aforementioned mapping techniques, allowing comprehensive visualization. Users input gathered data to automatically generate connected diagrams that highlight critical nodes and connections.
+
+## Network Enumeration
+
+### SMB/NetBIOS Enumeration
+
+SMB (Server Message Block) and NetBIOS enumeration extracts shared resources in Microsoft environments. By querying these protocols, attackers can list shared files, printers, and even enumerate user accounts. Tools like `enum4linux` facilitate this process:
+
+```bash
+enum4linux -a ip-address
+```
+
+This command helps to extract and display SMB and NetBIOS information from Windows systems.
+
+### LDAP Queries
+
+LDAP (Lightweight Directory Access Protocol) queries probe directories, retrieving valuable information about network nodes, users, and group policies. Through LDAP enumeration, an attacker can map out an organizational structure. Command-line tools like `ldapsearch` assist in conducting searches:
+
+```bash
+ldapsearch -x -h ldap-server -b "dc=example,dc=com"
+```
+
+This command accesses the LDAP server, extracting directory information based on the specified base domain.
+
+### RIP and BGP Enumeration
+
+Routing protocols like RIP (Routing Information Protocol) and BGP (Border Gateway Protocol) can be enumerated to gather details about routers and autonomous systems, revealing the network's routing paths and policies. The `BGPstream` tool provides capabilities for BGP enumeration:
+
+```bash
+bgpstream -start 2023-01-01 -end 2023-01-02 -live
+```
+
+This gathers live network routing data, allowing the reconstruction of routing paths and neighboring relationships.
+
+## Advanced Network Mapping Techniques
+
+### Scan Evasion Techniques
+
+Scan evasion techniques such as fragmentation, decoy scanning, and timing manipulation help in avoiding detection during mapping operations. Fragmentation breaks down packets to evade intrusion detection systems, while decoy scanning makes it harder for systems to identify the source of the scan. `nmap` can execute such evasive tactics with:
+
+```bash
+nmap -f -D RND:10 192.168.1.1
+```
+
+The `-f` option fragments packets, and `-D` creates decoys to mask scan origins, increasing stealth.
+
+### IPv6 Network Mapping
+
+With the adoption of IPv6, mapping requires adapted strategies to address its extensive address space. Using tools capable of IPv6 scanning like `nmap`, users can perform host discovery:
+
+```bash
+nmap -6 -sn 2607:f8b0:4005:805::200e
+```
+
+This command performs an ICMP sweep in IPv6 space, identifying active hosts within the subset.
+
+### Cross-Site Scripting for Network Discovery
+
+Exploitation of Cross-Site Scripting (XSS) vulnerabilities allows attackers to pivot into internal networks indirectly. Injecting malicious scripts enables attackers to use the victim's browser as a proxy for scanning internal networks. Tools like `XSSer` facilitate such exploitations for network discovery.
+
+## Analysis and Reporting
+
+### Map Correlation
+
+The correlation of network data is critical for creating accurate and detailed network maps. By integrating multiple datasets from different host discovery methods, the resulting map reflects a full account of the network topology, highlighting vulnerabilities and infrastructure points.
+
+### Data Enrichment
+
+Enhancing map detail through third-party data and intelligence sources increases its accuracy and utility. Cross-referencing discovered hosts and subnets with threat feeds can expose potentially compromised systems or emerging threats.
+
+### Automated Mapping Scripts
+
+Automated scripts streamline the task of data processing and map creation. Custom scripts can parse raw data from scanning outputs and aggregate it into coherent maps, often employing programming languages such as Python for data handling and visualization purposes, leveraging libraries like `matplotlib` or `networkx`. 
+
+By meticulously following these methodologies and utilizing the specified tools and techniques, one can effectively engage in network mapping, a foundational task in the realm of offensive cybersecurity operations.
