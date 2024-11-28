@@ -1,0 +1,114 @@
+---
+title: Checking Network Level Authentication (NLA) Explained
+description: Learn how to check, evaluate, and bypass Network Level Authentication
+  (NLA) in RDP, ensuring secure access to remote systems.
+keywords:
+- Network Level Authentication
+- NLA
+- Remote Desktop Protocol
+- RDP security
+- NLA detection tools
+- bypassing NLA
+- rdp-sec-check
+- Nmap RDP scripts
+- Metasploit NLA
+- Windows RDP settings
+---
+
+### Understanding Network Level Authentication (NLA)
+
+Network Level Authentication (NLA) is a security feature introduced in Remote Desktop Protocol (RDP) sessions to enhance protection against unauthorized access. NLA requires the connecting user to authenticate before a full RDP session is established, providing a layer of security by requiring credentials to be presented earlier in the connection process. Therefore, this feature helps mitigate certain types of attacks, such as denial-of-service (DoS) and brute-force attacks, by reducing the resource consumption on the server side until a valid user authentication is received.
+
+Before the introduction of NLA, a remote user would establish a connection to a machine running terminal services and consume server resources to render the login screen visible. With NLA, this authentication happens before any resources are allocated, preventing unauthenticated users from reaching even the login stage. Configuring NLA will prompt clients to use encryption, adding an additional layer of security to the credentials being transmitted across the network.
+
+### Tools for Checking NLA
+
+#### Using `rdp-sec-check` for NLA Status Evaluation
+
+`rdp-sec-check` is a tool designed to enumerate RDP servers and detect the presence of security features like NLA. This tool sends specific packets to the RDP service to determine whether NLA is enforced on a target machine. To use `rdp-sec-check`, you can execute the following command:
+
+```bash
+rdp-sec-check <target-ip> -port 3389
+```
+
+This command checks the specified RDP port (default is 3389) to determine if NLA is enabled, reporting back the security configurations in place on the remote server.
+
+#### Employing `Nmap` Scripts to Detect NLA Implementation
+
+Nmap, a powerful network discovery and security auditing tool, offers multiple scripts dedicated to probing RDP services. The script `rdp-enum-encryption` can be used to determine if NLA is required. To run this script, execute:
+
+```bash
+nmap --script rdp-enum-encryption -p 3389 <target-ip>
+```
+
+This script will scan the specified RDP port and return detailed information about the RDP encryption and authentication method used, including whether NLA is enforced.
+
+#### Utilizing `Metasploit Framework` Auxiliary Modules for NLA Detection
+
+The Metasploit Framework offers auxiliary modules for assessing RDP configurations. Use the `auxiliary/scanner/rdp/rdp_scanner` module to check if NLA is enabled on the remote host. Load the module and set the necessary options:
+
+```bash
+use auxiliary/scanner/rdp/rdp_scanner
+set RHOSTS <target-ip>
+run
+```
+
+The output will indicate if NLA is enforced, along with other RDP security settings.
+
+### Manual Techniques for Enumerating NLA
+
+#### Interpreting RDP Banner Messages
+
+Analyzing RDP banner messages can reveal whether NLA is required. When connecting to an RDP service, the initial handshake may disclose the necessity for NLA depending on the responses from the server during protocol negotiation.
+
+#### Examining Windows Firewall and Security Policy Settings
+
+Reviewing the target’s Windows firewall settings and local security policies provides insights into the current NLA configuration. Administrators usually configure NLA through Group Policy settings located under Computer Configuration -> Administrative Templates -> Windows Components -> Remote Desktop Services -> Remote Desktop Session Host -> Security.
+
+#### Identifying NLA Configuration in System Registry Settings
+
+The Windows registry contains entries defining the configuration of RDP sessions. By accessing the registry key `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp`, one can verify the encryption and authentication levels set for RDP connections, including whether NLA is required for client authentication.
+
+### Bypassing NLA
+
+#### Leveraging Man-in-the-Middle (MitM) Techniques Against NLA
+
+A MitM attack might exploit weaknesses in the underlying encryption protocols used by NLA. Attackers can intercept traffic between the client and server to capture and manipulate data, potentially gaining unauthorized access if encryption is improperly implemented.
+
+#### Exploiting Weaknesses in Host Security Configurations
+
+Weak security configurations, such as misconfigured firewalls or outdated software, can create opportunities to bypass NLA. Vulnerabilities such as "BlueKeep" (CVE-2019-0708) exploit RDP protocol weaknesses, allowing attackers to execute code without requiring NLA credentials.
+
+#### Using Vulnerability Weighted Techniques (e.g., BlueKeep Vulnerability)
+
+Exploiting critical vulnerabilities like BlueKeep allows attackers to bypass NLA entirely by executing unauthenticated code on the target system. This can be achieved by using exploit modules within frameworks like Metasploit:
+
+```bash
+use exploit/windows/rdp/cve_2019_0708_bluekeep_rce
+set RHOST <target-ip>
+run
+```
+
+### Verifying NLA Bypass Attempts
+
+#### Monitoring and Analyzing Network Traffic for RDP Sessions
+
+Network traffic analysis tools, such as Wireshark, can be used to monitor RDP sessions and verify if bypass attempts impact traffic patterns. Look for anomalies or unexpected connection attempts that might suggest a compromise.
+
+#### Logging NLA Authentication and Connection Requests
+
+Windows servers maintain logs of authentication attempts. Event logs can be reviewed to track successful or failed login attempts. NLA-related logs will often appear under Event ID 4625 (failed logins) or 4624 (successful logins) in the Security event log.
+
+#### Cross-verifying with Host Security Logs and NLA Event IDs
+
+Ensure comprehensive log analysis by coupling network-level observations with host-level logs. Check specific Event IDs related to Remote Desktop Services for deviations from standard user behavior, which might indicate an NLA bypass.
+
+### Persistence Post-NLA Bypass
+
+#### Establishing Unauthenticated RDP Sessions
+
+Once NLA is bypassed, attackers might create persistent unauthenticated RDP sessions by employing scripts or modifying Group Policies to keep an open backdoor, negating the need for further NLA negotiation.
+
+#### Ensuring Network Backdoors Remain Open Outside of NLA Protection
+
+Attackers may employ techniques such as creating new user accounts with administrative privileges or altering security settings to ensure persistent access to a compromised system, bypassing the protections offered by NLA.
