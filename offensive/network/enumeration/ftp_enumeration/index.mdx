@@ -1,0 +1,46 @@
+---
+title: Comprehensive Guide to FTP Enumeration Techniques
+description: Explore FTP enumeration strategies including service detection, directory
+  scanning, and anonymous access verification.
+keywords:
+- FTP Enumeration
+- service detection
+- directory enumeration
+- anonymous access verification
+- FTP security
+- vulnerability assessment
+- file access
+- Nmap
+- banner grabbing
+- network security
+---
+
+# FTP Enumeration
+
+FTP Enumeration involves identifying and analyzing FTP services within a network for security assessments. This process typically includes service and version detection, directory and file enumeration, and verification of anonymous access. Each component plays a crucial role in understanding the security posture and potential vulnerabilities within FTP implementations.
+
+## [Service and Version Detection](offensive/network/enumeration/ftp_enumeration/service_and_version_detection)
+
+### [Identifying FTP Services and Ports](offensive/network/enumeration/ftp_enumeration/service_and_version_detection/identifying_ftp_services_and_ports/)
+Nmap is a prime tool for identifying FTP services on a network. By scanning known FTP ports (commonly port 21) using the `-p` flag, or leveraging Nmap’s default scripts, practitioners can detect active FTP services. Use commands like `nmap -p 21 <target-ip>` to initiate port-specific scans, or `nmap -sS -p- <target-ip>` for a comprehensive port sweep.
+
+### [Fingerprinting FTP Versions and Implementations](offensive/network/enumeration/ftp_enumeration/service_and_version_detection/fingerprinting_ftp_versions_and_implementations/)
+Once an FTP service is identified, determining the software version is crucial for vulnerability assessment. Use Nmap’s `-sV` option to perform service version detection: `nmap -sV -p 21 <target-ip>`. Additionally, banner grabbing techniques via Telnet or Netcat: `echo QUIT | nc <target-ip> 21`, are fundamental in retrieving version details directly from the FTP banner response. Tools like Metasploit offer auxiliary modules designed explicitly for FTP service enumeration, automating many of these processes and providing a detailed output.
+
+## [Directory and File Enumeration](offensive/network/enumeration/ftp_enumeration/directory_and_file_enumeration)
+
+### [Listing Accessible Directories](offensive/network/enumeration/ftp_enumeration/directory_and_file_enumeration/listing_accessible_directories/)
+After confirming service access, map the directory structure by querying the FTP server using commands such as `LIST` or `NLST`. These commands offer insights into accessible directories, critical for evaluating storage and permissions. FTP clients like FileZilla or command-line clients can streamline this process, providing more intuitive navigation of FTP structures.
+
+### [Enumerating Readable and Writable Files](offensive/network/enumeration/ftp_enumeration/directory_and_file_enumeration/enumerating_readable_and_writable_files/)
+Conducting a thorough enumeration involves identifying files that are readable and possibly writable. Exploratory commands such as `RETR` and `STOR` can assess file access capabilities, shedding light on potential upload vulnerabilities. Scripts and tools can automate the discovery process, making it feasible to handle larger and more complex directory structures efficiently. Discovering writable files or directories can be a precursor to various Practical Exploitation Techniques like uploading malicious files to gain further access or pivot within the network.
+
+## [Anonymous Access Verification](offensive/network/enumeration/ftp_enumeration/anonymous_access_verification)
+
+### [Checking for Enabled Anonymous Login](offensive/network/enumeration/ftp_enumeration/anonymous_access_verification/checking_for_enabled_anonymous_login/)
+Anonymous FTP login can pose a significant security weakness if misconfigured. Testing for such access typically involves logging in with default credentials—username: `anonymous`, password: `guest`—using an FTP client. If successful, this implies potential exposure of sensitive data, reinforcing the need to secure files and directories against unauthorized access.
+
+### [Discovering Default or Weak Credentials](offensive/network/enumeration/ftp_enumeration/anonymous_access_verification/discovering_default_or_weak_credentials/)
+Analyzing and testing default or weak credentials expands on identifying potential misconfigurations in authentication mechanisms. Capturing FTP sessions with traffic analysis tools can reveal repeated unauthorized access attempts, indicating insecure configurations. Post-authorization, it is crucial to assess directory-level permissions and check for potential escalations. Moreover, implementing brute force attacks using tools like Hydra can expose weak password policies and emphasize underlying security issues. 
+
+Utilizing this structured approach to FTP enumeration ensures comprehensive exploration of FTP services, facilitating the identification of potential vulnerabilities that need to be addressed to secure the network effectively.
