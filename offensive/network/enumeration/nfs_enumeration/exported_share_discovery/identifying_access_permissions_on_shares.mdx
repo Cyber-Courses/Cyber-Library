@@ -1,0 +1,53 @@
+---
+title: Identifying Access Permissions on NFS Shares
+description: Learn how to identify access permissions on NFS shares, exploit misconfigurations,
+  and enhance your offensive security strategies.
+keywords:
+- NFS shares
+- access permissions
+- enumeration methods
+- ACL review
+- privilege escalation
+- permission bypass
+- offensive security tools
+- lateral movement
+- network exploitation
+---
+
+# Identifying Access Permissions on Shares
+
+## Enumeration Methods
+
+Network File System (NFS) enumeration methods serve as the fundamental step in identifying access permissions on shares. Offensive operators utilize these methods to detect available NFS shares within a target network. Tools such as `showmount` provide critical information on what shares are exported and to whom they are accessible. The primary goal is to list all shares and examine the users or systems that have access to them.
+
+Executing a command like `showmount -e <target_IP>` facilitates the retrieval of export information from a server, displaying shared directories and their accessibility. Understanding this output allows offensive operators to gain insight into potential targets for privilege analysis or exploitation. Enumeration also involves querying NFS servers using tools like `rpcinfo`, which can determine the available Remote Procedure Call (RPC) services that may facilitate further exploration of share permissions.
+
+## Access Control List Review
+
+Once shares are enumerated, reviewing their Access Control Lists (ACLs) becomes imperative. ACLs dictate the permission framework that governs user access to NFS shares. Offensive security practitioners need to analyze ACLs to ascertain which users or groups have specific permissions. Each share can have distinct read, write, or execute permissions assigned to various entities within the network, thus presenting different opportunities for exploitation.
+
+To extract ACL information, tools like `nfsacl` can be evaluated. This tool provides detailed permission listings, breaking down the level of access afforded to each user or group. Understanding permissions allows attackers to align their strategies, deciding whether to attempt direct access or seek misconfigurations that extend their operational capabilities within the network.
+
+## Practical Tool Usage
+
+In offensive security, practical tool usage is critical for assessing and exploiting NFS permissions. Commands and utilities such as `showmount`, `rpcinfo`, and `nfsacl` are central for accessing detailed permission information. Offensive operators can utilize these tools to not only list shares but also deeply analyze access levels.
+
+For instance, `showmount` provides a quick overview of available shares, while `rpcinfo` further details the operational RPC services, shedding light on other potential vectors for the investigation. Further analysis can be conducted using scripts or custom tools that leverage the output from these utilities to automate the collection of ACLs for a more structured analysis.
+
+## Bypassing Permission Restrictions
+
+After identifying existing permissions, the next focus involves bypassing any restrictive settings to gain unauthorized access. This often involves exploiting misconfigurations within NFS exports, such as shares being accessible to unintended users due to misapplied settings or open permissions inadvertently left by administrators.
+
+An example includes discovering world-writable shares, which can be modified by anyone. These shares represent a critical vulnerability as they allow unauthorized users to write data or execute scripts. Detecting such permission lapses enables attackers to execute malicious activities stealthily, utilizing legitimate pathways within the network.
+
+## Privilege Escalation Potential
+
+Exploiting NFS permissions presents a significant opportunity for privilege escalation. By analyzing the permission structure, attackers can identify paths that lead to higher privilege levels within the network hierarchy. This often involves chaining exploits, where initial access to a share with moderate permissions can facilitate further exploration or execution of exploits that capitalize on elevated permissions.
+
+For instance, attacking service accounts with broad access or identifying SUID (Set User ID) executables hosted on writable shares can lead to privilege escalation. Understanding the correlation between network permissions and privilege escalation techniques is crucial for enhancing the effectiveness of offensive operations.
+
+## Persistence and Movement
+
+By leveraging identified permissions, operators can establish persistence within a network using NFS shares as continuous access points. This strategy involves maintaining system access over extended periods, utilizing existent permissions to avoid detection. Persistent access enables attackers to return to compromised systems at their discretion, circumventing traditional security measures.
+
+Additionally, the ability to move laterally within the network is enhanced by exploiting NFS shares. This form of movement involves accessing and compromising other systems within the network by capitalizing on the unlocked permissions facilitated through NFS enumeration. Lateral movement enhances operational reach and solidifies an attacker’s presence within the target environment, enabling further exploitation and data exfiltration activities.
