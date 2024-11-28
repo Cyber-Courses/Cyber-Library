@@ -1,0 +1,117 @@
+---
+title: How to Determine Redis Version and Configuration
+description: Learn techniques to identify Redis versions and configurations for security
+  assessment and enumeration.
+keywords:
+- Redis version detection
+- Redis configuration analysis
+- banner grabbing Redis
+- Redis INFO command
+- Redis AUTH exploitation
+- Redis misconfiguration
+- automated Redis enumeration
+- Redis security assessment
+- Redis server configuration
+---
+
+## Version Identification through Banner Grabbing
+
+Banner grabbing is an essential technique for identifying the version of a Redis server, as software often discloses version information when a connection is initiated. The Redis server, running on its default port 6379, typically reveals its version through a banner upon connecting to the service. 
+
+To achieve this, use tools like `nc` (Netcat) or `telnet` which enable manual interaction with the Redis server. By initiating a connection and sending a basic command like `INFO`, you can obtain information about the server including its version. Here is an example using Netcat:
+
+```bash
+nc <redis-server-ip> 6379
+INFO
+```
+
+Upon executing the above commands, observe the response for lines showing the Redis version, typically formatted as `# Server redis_version:x.x.x`.
+
+For automated detection, Nmap offers a streamlined approach. By using the `-sV` flag, Nmap attempts to determine service versions on open ports. Redis-specific service scripts further refine this detection:
+
+```bash
+nmap -p 6379 --script=redis-info <target-ip>
+```
+
+This command helps confirm the Redis version along with additional details about the service environment.
+
+## Exploiting Incorrectly Configured AUTH
+
+Redis uses an optional authentication mechanism, which if not properly configured, can leave the database exposed. To check if the AUTH command is improperly set up, attempt to connect without a password. Successful connection without authentication indicates a potential security issue.
+
+Using Metasploit's auxiliary modules can automate this check. The Redis module within Metasploit can try default and common passwords:
+
+```bash
+use auxiliary/scanner/redis/redis_login
+set RHOSTS <target-ip>
+run
+```
+
+If access is garnered without a password, this may provide a direct route to version and configuration data.
+
+## Unauthenticated Command Execution
+
+When Redis authentication is disabled, commands can be executed directly to extract valuable information. The `INFO` command is particularly useful:
+
+```python
+import redis
+
+client = redis.StrictRedis(host='<redis-server-ip>', port=6379)
+info = client.info()
+print(info['redis_version'])
+```
+
+This Python script connects to a Redis server and outputs its software version. If no authentication is needed, this script can provide extensive server details.
+
+## Analyzing Redis Configuration with INFO
+
+The `INFO` command in Redis, when executed, returns comprehensive information about the server. It not only reveals the version but also configuration details:
+
+```bash
+nc <redis-server-ip> 6379
+INFO all
+```
+
+Running `INFO all` gives you a dump of various statistics and configurations. Analyze these outputs, focusing on configuration settings that might hint at security misconfigurations.
+
+## Checking for Misconfigurations Through CONFIG GET
+
+The `CONFIG GET` command permits inspection of Redis configuration and can reveal unsafe settings:
+
+```bash
+nc <redis-server-ip> 6379
+CONFIG GET *
+```
+
+Key items to review include:
+- `bind`: Ensures Redis binds only to specific IPs.
+- `protected-mode`: Should be enabled if no password is set.
+- `requirepass`: Must be set to ensure authentication.
+
+By understanding these parameters, assess whether the current configuration exposes potential vulnerabilities.
+
+## Automation of Version and Configuration Enumeration
+
+To improve efficiency, automate Redis enumeration across multiple servers. Scripting in Python or using an automation framework can simplify this task. Consider leveraging Ruby-based scripts or incorporate Redis tasks into broader tools like Ansible or Metasploit for mass scanning:
+
+```ruby
+require 'redis'
+
+redis = Redis.new(host: '<redis-server-ip>')
+puts redis.info
+```
+
+Crafting scripts to gain both version and configuration data from multiple Redis instances can significantly accelerate your reconnaissance phase.
+
+## Assessment of Configuration Data for Exploit Paths
+
+Once configuration data is acquired, scrutinize it for exploitation opportunities. Investigating fields like `dir` can expose writable directories for future leverage:
+
+```bash
+nc <redis-server-ip> 6379
+CONFIG GET dir
+```
+
+Gain insights on how configuration allows for potential privilege escalation or persistence by accessing logs or dump directories. Review `appendonly`, `save`, and other backup options for pathways to manipulate or capture data on the server.
+
+By understanding Redis's operational and configuration landscape, map out attack vectors that could be exploited under weak configurations or insufficient patching, ensuring a prepared offensive stance on Redis databases.
