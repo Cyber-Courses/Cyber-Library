@@ -1,0 +1,111 @@
+---
+title: Enumerating Tables, Columns, and Schemas in Databases
+description: Learn effective techniques for enumerating database tables, columns,
+  and schemas to enhance your cybersecurity skills.
+keywords:
+- database enumeration
+- SQL injection
+- INFORMATION_SCHEMA
+- schema discovery
+- MSSQL enumeration
+- database security
+- data extraction techniques
+- metadata retrieval
+- penetration testing
+- cybersecurity best practices
+---
+
+## Exploiting Default Credentials and Misconfigurations
+
+### Identifying Weak Passwords
+Penetrators target databases using default or weak passwords to gain unauthorized access. Upon accessing a database management system (DBMS), attackers utilize common usernames such as "sa" for MSSQL and default passwords like "password123". Such attempts are enhanced using dictionary attacks to expedite password cracking. The success of this vector is contingent on the absence of robust password policies.
+
+### Leveraging Misconfigured Permissions
+Educated attackers exploit inadequately configured database permissions. By running permission audits and focusing on misconfigured roles that grant excessive privileges, attackers can access sensitive tables and columns. For instance, accounts given unnecessary administrative privileges reveal opportunities for escalated access and subsequent data enumeration.
+
+### Exploiting Misconfigured Services
+Database services often run with minimized security configurations for operational ease. Analysts identify misconfigured services by probing open database ports and examining service banners. SQL Server Browser, when wrongly configured, provides listing entries that expose schemas and related metadata. Misconfigured file permissions and database links further aid in exposing invaluable schema information.
+
+## Leveraging SQL Injection
+
+### Using Error-Based SQL Injection for Enumeration
+Error-based SQL injection invites error messages from the database server that divulge table structures and potential column data types. SQL error messages can be cultivated by injecting malformed queries, such as `' ORDER BY 1--`, which prompt detailed responses from the database about the unexpected input, revealing schema insights.
+
+### Exploiting Union-Based SQL Injection
+Union-based SQL injection amalgamates the query results with defined database tables' results. Using UNION SELECT, attackers retrieve sensitive schema information. An example command is:
+```sql
+1' UNION SELECT table_name, NULL FROM information_schema.tables--
+```
+This command can enumerate all table names within the database if exploited successfully.
+
+### Performing Blind SQL Injection Techniques
+Blind SQL injection techniques involve inferencing database schema information without visible database errors or returned data. Attackers use conditional statements to infer schema details:
+```sql
+1' AND (SELECT COUNT(*) FROM information_schema.tables WHERE table_name='employees')>0--
+```
+Attackers receive boolean indicators through HTTP responses observing presence or absence of specified tables.
+
+## Utilizing Database Functions for Metadata Extraction
+
+### Using INFORMATION_SCHEMA for Table and Column Enumeration
+Attackers access the `INFORMATION_SCHEMA` which is a system database provided by SQL-compliant DBMS. Queries such as:
+```sql
+SELECT table_name FROM INFORMATION_SCHEMA.tables
+```
+enumerate accessible tables. Similarly, extracting column details is possible through:
+```sql
+SELECT column_name FROM INFORMATION_SCHEMA.columns WHERE table_name='employees'
+```
+
+### Employing sys.tables and sys.columns for Detailed Metadata
+In environments where `INFORMATION_SCHEMA` is restricted, adversaries utilize system catalog views like `sys.tables` and `sys.columns` for deep metadata insights:
+```sql
+SELECT name FROM sys.tables WHERE is_ms_shipped=0
+```
+And subsequently extracting columns:
+```sql
+SELECT name FROM sys.columns WHERE object_id = OBJECT_ID('employees')
+```
+
+### Exploring DBMS Metadata Functions
+Database Management Systems (DBMS) possess intrinsic metadata functions. Attackers exploit built-in functions like `DBMS_METADATA.GET_DDL` in Oracle databases to extract the data definition language (DDL) script of tables, providing a replica of object configurations.
+
+## Network and Protocol Layer Techniques
+
+### Capturing and Analyzing SQL Network Traffic
+Network analyzers like Wireshark intercept SQL traffic to capture queries revealing schema structures. Filters such as `tcp.port == 1433` isolate SQL Server packets for analysis, identifying schema-related commands exchanged in plain text.
+
+### Injecting Enumeration Queries via SQL Server Browser
+Attackers exploit the SQL Server Browser service to unveil database instances. The service, when probed via UDP at port 1434, replies with listing entries that provide version information and accessible database schemas. Malicious users then tailor enumeration queries concerning these databases.
+
+## Automating Enumeration with Tools
+
+### Utilizing SQLMap for Automated Schema Enumeration
+SQLMap simplifies schema enumeration, automating injection attacks with dynamic payloads. Users invoke SQLMap with the command:
+```bash
+sqlmap -u 'http://target.com/page?param=value' --dbs
+```
+It retrieves database and table names sequentially without manual query injections.
+
+### Employing PowerShell Scripts for MSSQL Enumeration
+PowerShell provides a robust platform for executing MSSQL enumeration scripts. Scripts like `Get-MSSQL-Info.ps1` employ integrated .NET classes to extract schema information programmatically, aiding in quick enumeration processes.
+
+### Configuring and Using Metasploit Auxiliary Modules
+Metasploit's auxiliary modules offer commands like:
+```bash
+use auxiliary/admin/mssql/mssql_enum
+set RHOSTS target_ip
+run
+```
+This facilitates enumeration of MSSQL databases, detailing table, column, and schema information efficiently within a penetration testing session.
+
+## Post-Enumeration Strategies
+
+### Estimating Potential Impact Based on Discovered Information
+Once enumeration is accomplished, assessing the impact involves gauging the sensitivity and business value of the discovered schema elements. Analysts identify critical tables managing financial, personal, or intellectual data, calculating the impact of potential unauthorized extraction.
+
+### Organizing and Presenting Enumerated Data for Further Exploitation
+Proper organization of collected data enables accurate analysis and exploitation strategies. Attackers compile lists of enumerated tables and columns, arranging them within the context of potential security vulnerabilities and plotting pathways for deeper attacks.
+
+### Assessing Further Exploitation Vectors Based on Enumerated Schema
+Refining exploitation strategies involves devising targeted attacks on enumerated schemas. Analysts focus on known vulnerabilities tied to specific database versions or configurations and develop escalation tactics, readying to exploit discovered weak points further.
