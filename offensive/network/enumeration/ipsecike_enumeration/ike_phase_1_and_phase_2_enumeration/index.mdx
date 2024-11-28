@@ -1,0 +1,77 @@
+---
+title: IKE Phase 1 and 2 Enumeration Techniques and Strategies
+description: Explore effective techniques for IKE Phase 1 and 2 enumeration in IPsec.
+  Identify encryption algorithms and authentication methods.
+keywords:
+- IKE enumeration
+- IPsec Phase 1
+- IPsec Phase 2
+- encryption algorithms
+- authentication methods
+- network security
+- enumeration techniques
+- IKE scan tools
+- cybersecurity strategies
+---
+
+### IKE Phase 1 and Phase 2 Enumeration
+
+#### Understanding IKE Negotiation Process
+
+IKE (Internet Key Exchange) involves two phases essential for establishing secure communications via IPsec. Phase 1 establishes a secure channel for negotiating the IPsec security associations (SAs) necessary for data exchange in Phase 2. 
+
+- **IKE Phase 1** uses either Main Mode or Aggressive Mode. Main Mode typically involves six messages to establish a secure, authenticated channel. These messages include exchanging security proposals, DH (Diffie-Hellman) values, and user identities, while incorporating encryption to prevent eavesdropping. Aggressive Mode, on the other hand, requires fewer messages (usually three) but can expose more data to a potential attacker.
+
+- **IKE Phase 2** uses the secured channel established in Phase 1 to negotiate IPsec SAs. This phase exchanges security parameters for the IPsec session using the Quick Mode. Key material from Phase 1 is reused, and additional protection is provided by the encrypted channel from the first phase, ensuring the confidentiality and integrity of negotiations.
+
+Understanding these processes and differences provides a foundational basis for the effective enumeration of encryption algorithms, hashing methods, and authentication mechanisms.
+
+#### [Identifying Supported Encryption Algorithms](offensive/network/enumeration/ipsecike_enumeration/ike_phase_1_and_phase_2_enumeration/identifying_supported_encryption_algorithms)
+
+The identification of supported encryption algorithms is essential for understanding the cryptographic strength and possible vulnerabilities of a VPN setup.
+
+- **Enumeration of Phase 1 Encryption Algorithms**: In Phase 1, encryption algorithms can be enumerated by analyzing the Security Associations (SAs) proposed by the IKE initiator. Tools such as `ike-scan` can send aggressive mode requests to elicit responses that contain SA details, which include supported encryption types. Use the command:
+  ```bash
+  ike-scan --multiline --showbackoff <target-ip>
+  ```
+  This command will reveal the SA proposals from the target, highlighting the encryption algorithms supported.
+
+- **Enumeration of Phase 2 Encryption Algorithms**: Phase 2 proposals are typically solicited via the encrypted channel established in Phase 1. It requires a successful capture of Quick Mode messages, understandable via tools capable of deep packet inspection (DPI), or the use of `Wireshark` to analyze network captures for ESP (Encapsulating Security Payload) parameters.
+
+Both phases reveal important details about the cryptographic preferences of the remote IPsec service, which can help in crafting compatible or exploitative responses.
+
+#### [Discovering Hashing and Authentication Methods](offensive/network/enumeration/ipsecike_enumeration/ike_phase_1_and_phase_2_enumeration/discovering_hashing_and_authentication_methods)
+
+Determining hashing and authentication methods provides additional leverage points when attempting to penetrate an IPsec setup.
+
+- **Identifying Hash Functions used in IKE Negotiations**: During Phase 1 enumerable through tools like `ike-scan`, hashing algorithms are typically part of the SA proposals. The command:
+  ```bash
+  ike-scan -A <target-ip>
+  ```
+  can be employed to enumerate such options. In Phase 2, Quick Mode hash cookies reveal the specific hash functions used; these are encrypted within the Phase 1 protections, mandating prior decryption or interception using MitM attacks for observation.
+
+- **Authentication Method Enumeration**: The recognition of authentication schemes, whether through Pre-shared Keys (PSK) or Digital Certificates, is a critical aspect. Aggressive Mode exchanges may visually disclose these preferences due to non-encryption of initial identity data. This is discernible with tools that facilitate deeper inspection of IKE packet exchanges, such as `Wireshark`. Adjust scenarios accordingly, exploiting any weaknesses in PSK methodologies by employing a brute force approach when feasible.
+
+Enumerating and decoding these components accurately exposes their attributes and potential vulnerabilities, aiding in successful attack strategy development. 
+
+#### Using Enumeration Tools and Scripts
+
+Effective enumeration of IKE phases necessitates the usage of dedicated tools and scripts capable of automating processes and analyzing outputs accurately.
+
+- **Introduction to IKE Enumeration Tools**: Premier tools such as `ike-scan`, `Wireshark`, and more advanced frameworks with scripting capabilities are essential for this process. These tools are purpose-built to extract, analyze, and present enumeration data diligently.
+
+- **Automating IKE Phase Enumeration**: Custom scripts can employ these tools within scripted workflows, leveraging command-line automation to methodically enumerate large ranges of IPs or multiple VPN gateways. For practical application, consider developing bash or Python scripts that automate aggressive mode scans across subnet collections.
+
+These utility processes are crucial for minimizing manual input while maximizing the detail and scope of your enumeration activity.
+
+#### Strategy for Effective Enumeration
+
+Develop a coherent and methodical strategy for conducting IKE enumeration focused on prioritized discovery and systemic penetration effectiveness.
+
+- **Developing an Enumeration Game Plan**: Formulating a plan means integrating enumeration into broader reconnaissance and exploitation phases. Prioritize targets based on perceived value or operational necessity, and incorporate findings into multi-layered attack vectors or into broader vulnerability assessments for the network.
+
+- **Prioritizing Targets and Improving Efficiency**: Streamline the enumeration process by filtering extraneous targets and focusing on IPsec gateways critical to network entry. Optimize the use of computational resources and bandwidth by scripting to perform tasks during periods of minimal network load to avoid detection.
+
+- **Integrating Enumeration into Overall Offensive Strategy**: Combine findings from the IKE enumeration with other reconnaissance data. Develop attack chains that utilize every scrap of data acquired, ensuring a comprehensive approach to penetrating, testing, or securing the network infrastructure.
+
+The enumeration techniques and strategies described are key to constructing precise offensive cyber operations that exploit vulnerabilities in IPsec IKE implementations.
