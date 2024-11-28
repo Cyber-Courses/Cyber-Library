@@ -1,0 +1,85 @@
+---
+title: Guide to Determining AMQP Broker and Version
+description: Learn effective methods to identify AMQP brokers and their versions using
+  various techniques and tools.
+keywords:
+- AMQP broker
+- version detection
+- Nmap AMQP script
+- banner grabbing
+- RabbitMQ
+- AMQP protocols
+- service interrogation
+- encryption
+- Metasploit
+---
+
+# Determining AMQP Broker and Version
+
+## Researching AMQP Protocol Details
+
+Understanding the Advanced Message Queuing Protocol (AMQP) is critical for identifying its broker and version. AMQP is a binary protocol designed to support a wide variety of messaging applications and communication patterns. It is therefore imperative to familiarize yourself with its protocol specifications and any changes across its versions.  AMQP version 0-9-1, for example, often used by RabbitMQ, has different characteristics than AMQP 1.0, which gives insights into the services that might be employed by various brokers. By correlating these specifications, one can identify unique broker-specific features or idiosyncrasies that facilitate accurate broker version determination.
+
+## Active Service Interrogation
+
+Nmap, a versatile network scanning tool, comes equipped with scripts that can aid in AMQP service interrogation. The `amqp-info.nse` script is particularly useful for extracting broker version information. Using Nmap, you can run a command such as:
+
+```bash
+nmap -sV --script amqp-info -p 5672 <target_ip>
+```
+
+This command initiates a version scan (`-sV`) on the typical AMQP port (`5672`) and utilizes the `amqp-info.nse` script to probe for version details. This active service interrogation approach allows for the extraction of valuable version information directly from the broker’s response.
+
+## Crafted AMQP Requests
+
+Crafting specific AMQP handshake packets to communicate with the broker can also yield useful version information. By orchestrating a series of AMQP-compliant messages, you can extract headers that might contain broker type and version details. These specially crafted handshake requests exploit the typical initial connections made during AMQP session establishment, potentially revealing version information within the negotiation phase.
+
+## Banner Grabbing Techniques
+
+Banner grabbing involves sending requests to a service and interpreting the resulting banner set in return by the server. Tools like `netcat` can be particularly effective for this purpose:
+
+```bash
+nc <target_ip> 5672
+```
+
+Upon connecting to the service, banners returned by some AMQP brokers might include explicit version details. Analyzing these response headers can provide quick insight into the broker's software identity and its version without necessitating deeper engagement with the service.
+
+## Leveraging Broker-Specific APIs
+
+Many AMQP brokers, such as RabbitMQ, offer management APIs accessible via HTTP or HTTPS. These APIs can sometimes directly or indirectly expose version information. By utilizing GET requests to specific endpoints, you may retrieve details about the broker and its version:
+
+```bash
+curl -u guest:guest http://<target_ip>:15672/api/overview
+```
+
+In this scenario, the response would typically include structured JSON that may contain key fields indicating the broker software and version, as well as other pertinent configuration details.
+
+## Exploit Framework Modules
+
+Metasploit offers auxiliary modules tailored for protocol and service detection. Specific Metasploit scripts are capable of probing for broker-related details, including version numbers:
+
+```bash
+use auxiliary/scanner/amqp/amqp_version
+set RHOSTS <target_ip>
+run
+```
+
+Customize the script by specifying the target IP address or range to execute a focused interrogation on the AMQP service, revealing broker software and possible versioning via predefined exploit modules.
+
+## Script and Tool Enhancement
+
+Enhancing existing enumeration scripts specific to AMQP can improve version detection capabilities. By adding logic to parse version-specific identifiers or comparing against known bad signatures, one can fine-tune these scripts to provide succinct version output. Incorporate error handling measures to mitigate alerts on the targeted networks during the probing process, maintaining stealth while acquiring valuable data.
+
+## Decoding Encrypted or Custom Protocol Versions
+
+In cases where AMQP communications are encrypted or a broker uses a custom protocol implementation, understanding the encryption mechanism and strategically implementing a decryption plan become critical. This may involve leveraging existing encryption keys or using sophisticated techniques to hypothetically reverse-engineer proprietary protocol adaptations, potentially revealing versioning information through experimentation and testing.
+
+## Utilizing Broker-Specific Features
+
+Different AMQP brokers have unique features that can be exploited for version detection. For instance, RabbitMQ provides additional queues and exchanges that can be queried:
+
+```bash
+rabbitmqctl status
+```
+
+Successfully leveraging a broker's specific management or diagnostic capabilities—such as RabbitMQ’s status command—may reveal broker version among other detailed configuration settings. Investigating such features and understanding their different behaviors across broker versions remains essential for precise determination.
