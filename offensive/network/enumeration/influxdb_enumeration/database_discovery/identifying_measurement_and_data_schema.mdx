@@ -1,0 +1,65 @@
+---
+title: Identifying Measurement and Data Schema in InfluxDB
+description: Learn techniques for extracting measurement data and schema from InfluxDB,
+  including querying and analyzing retention policies.
+keywords:
+- InfluxDB
+- measurement schema
+- data extraction
+- InfluxQL
+- database security
+- network enumeration
+- retention policies
+- data analysis
+---
+
+### Identifying Measurement and Data Schema in InfluxDB
+
+**Probing Access and Authentication Methods**
+
+InfluxDB requires authentication and authorization to access data. Offensive operations begin with understanding these mechanisms to evaluate potential vulnerabilities. InfluxDB offers several authentication methods, including basic HTTP authentication and token-based authentication, which are essential to probe. Enumerating valid credentials by testing default credentials (such as `admin:admin`) is a common technique. Also, applications interacting with InfluxDB might hard-code credentials, which could be extracted through reverse engineering or network traffic analysis.
+
+**Example Commands:**
+```shell
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=SHOW USERS"
+```
+
+**Executing Influx Query Language (InfluxQL) Commands**
+
+Once authentication is overcome, use InfluxQL to interact with the database to reveal schema information. InfluxQL provides several commands to display database structure:
+
+- `SHOW MEASUREMENTS` lists all measurements within the currently selected database. Measurements are similar to tables in traditional databases.
+- `SHOW FIELD KEYS` provides insight into the fields available in a measurement, which correspond to the columns in tables.
+- `SHOW TAG KEYS` lists the indexed tags used for filtering and grouping data.
+
+These commands are instrumental in identifying the structural elements of collected data in the database.
+
+**Example Commands:**
+```shell
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=SHOW MEASUREMENTS"
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=SHOW FIELD KEYS FROM my_measurement"
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=SHOW TAG KEYS FROM my_measurement"
+```
+
+**Extracting Measurement Schemas**
+
+To delve deeper into the measurement schema, execute advanced queries to retrieve comprehensive metadata. By examining the output of `SHOW SERIES`, practitioners can uncover not only the schema but also the series cardinality, a critical factor in performance tuning and attack planning. Series cardinality refers to the number of unique time-series data points that exist within a measurement, providing insight into the complexity and scale of the dataset.
+
+**Database Schema Mapping**
+
+Mapping the database schema involves understanding the relationship between measurements, fields, and tags. This process is crucial in visualizing how data is organized and accessed within InfluxDB. Automated scripts can streamline this process, ensuring that all relationships and dependencies are uncovered. Scripting tools (e.g., Python scripts using libraries such as `influxdb` or `pandas`) can automate data extraction and provide visualization capabilities, making it easier to spot anomalies or weaknesses in the database structure.
+
+**Analyzing Data Retention Mechanisms**
+
+InfluxDB employs retention policies to manage the lifecycle of time-series data. To identify which data is retained and for how long, the `SHOW RETENTION POLICIES` command is useful. Understanding these policies helps in determining the availability and lifecycle of data, which could be crucial for planning long-term data exfiltration strategies. This analysis can also illustrate the temporal relationships between datasets and its implications on schema evolution.
+
+**Example Commands:**
+```shell
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=SHOW RETENTION POLICIES ON my_database"
+```
+
+**Intercepting and Manipulating Data Streams**
+
+Finally, intercepting and manipulating data streams provides a dynamic perspective on schema in use. Network sniffing tools like Wireshark can capture real-time InfluxDB traffic, allowing attackers to monitor how data changes over time. Such activities can reveal additional, undocumented schemas or expose underlying changes due to application updates or reconfigurations. Through these techniques, attackers can analyze traffic patterns to deduce how schemas evolve or how new schemas might emerge over time.
+
+This comprehensive approach to identifying measurement and data schema in InfluxDB not only exposes the current structure but also enables insight into temporal changes and data management practices, providing an extensive understanding of the database's layout, management, and vulnerabilities.
