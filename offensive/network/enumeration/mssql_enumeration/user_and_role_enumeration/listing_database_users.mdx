@@ -1,0 +1,137 @@
+---
+title: Techniques for Listing Database Users in SQL Server
+description: Explore effective methods to list database users in SQL Server, including
+  SQL queries, automation, and exploitation techniques.
+keywords:
+- database users
+- SQL Server
+- user enumeration
+- privilege escalation
+- automated scripting
+- network sniffing
+- database misconfigurations
+---
+
+# Listing Database Users
+
+Listing database users involves identifying and enumerating user accounts existing within a database management system such as Microsoft SQL Server. This process is a fundamental aspect of the user and role enumeration process and is critical for understanding the potential attack surface. It provides insights into which accounts exist, their privileges, and potential entry points for lateral movement or privilege escalation. Below are detailed methodologies and techniques for effectively listing database users in an offensive security context.
+
+## SQL Query Techniques
+
+### Direct Query Execution
+
+Direct query execution is one of the primary methodologies for listing database users. This technique leverages SQL queries to interact directly with database system tables that contain user information. For Microsoft SQL Server, crucial tables include `sys.sysusers` and `sys.syslogins`. These tables provide detailed information about database users and their login credentials. For instance:
+
+```sql
+-- List all users in the current database
+SELECT * FROM sys.sysusers;
+
+-- List all login accounts at the server level
+SELECT * FROM sys.syslogins;
+```
+
+Exploiting these tables requires adequate permissions, typically held by database administrators or highly privileged accounts. Successful execution of these queries yields information about usernames, user IDs, whether accounts are active, and more.
+
+### View and Stored Procedure Utilization
+
+Utilizing system views and stored procedures offers an alternative approach to listing users when direct access to system tables is restricted. Microsoft SQL Server provides built-in views like `sys.database_principals` and `sys.server_principals`, which can be queried to list user accounts and corresponding details:
+
+```sql
+-- View database-level user information
+SELECT name, type_desc FROM sys.database_principals;
+
+-- View server-level login information
+SELECT name, type_desc FROM sys.server_principals;
+```
+
+Stored procedures as another avenue can be leveraged to gather user information, especially if these stored procedures are inadvertently exposed or misconfigured to allow broader access.
+
+## Scripting for Automation
+
+### Batch Scripting
+
+To scale database enumeration beyond manual queries, scripts can be crafted to automate the collection of user information. These scripts repeat queries over multiple databases or systems and incorporate logic to handle errors or unexpected results. Batch scripts are a powerful tool for this purpose. Here is a simple example:
+
+```batch
+@echo off
+sqlcmd -S <server> -U <username> -P <password> -Q "SELECT name FROM sys.database_principals" > users.txt
+```
+
+This script connects to a specified SQL Server instance, executes the query, and outputs the results to a text file. It can be easily modified to loop through multiple servers or databases.
+
+### Powerful Scripts
+
+Utilizing scripting languages such as PowerShell or Python further enhances automation capabilities. These languages can incorporate database libraries to facilitate connectivity and query execution, such as `pyodbc` in Python:
+
+```python
+import pyodbc
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=server_name;DATABASE=master;UID=user;PWD=password')
+cursor = conn.cursor()
+cursor.execute("SELECT name FROM sys.server_principals")
+user_list = cursor.fetchall()
+
+for user in user_list:
+    print(user.name)
+
+conn.close()
+```
+
+This Python script connects to an SQL Server and retrieves user names from the `sys.server_principals` view, printing each name to the console.
+
+## Leveraging Database Privileges
+
+### Privilege Escalation Techniques
+
+Exploiting privileges is a method by which attackers escalate their access rights to execute user enumeration tasks. This involves identifying misconfigured privileges that allow non-admin users to run commands or queries meant for administrative roles. Attackers may focus on accounts with poorly defined permissions, enabling them to access user listings beyond their intended scope.
+
+### Using Service Accounts
+
+Service accounts, which are often given elevated privileges and poorly monitored, can also be exploited to enumerate database users. These accounts may run regular tasks that can be hijacked or leveraged to obtain a list of users, particularly if those services interact with database systems on a privileged level.
+
+## Network Interception Methods
+
+### Sniffing Database Traffic
+
+Network sniffing involves capturing network packets to extract sensitive information during transmission. Table names and principal details can sometimes be observed from unencrypted SQL traffic. Tools like Wireshark can be employed to inspect traffic for SQL database communication and can be particularly useful in environments where SSL/TLS is not enforced.
+
+### Man-in-the-Middle Attack Implementation
+
+Man-in-the-middle (MitM) attacks intercept and alter communications between client and server without detection. By implementing MitM attacks in database environments, attackers may intercept SQL queries being run by legitimate users that return user data:
+
+```bash
+# Example of setting up a MitM attack listener
+mitmproxy -p <port>
+```
+
+By capturing traffic between administrators and the database server, an attacker can gain insights into user management queries, effectively listing user accounts.
+
+## Exploiting Misconfigurations
+
+### Database Misconfiguration Audit
+
+Conducting an audit to identify misconfigurations is a proactive method for listing users. Databases often have security settings that, when misconfigured, expose user details inadvertently. Attackers search for common misconfigurations, such as inadequate access controls or exposure of administrative interfaces without proper authentication:
+
+```bash
+# Scan a network for databases with exposed ports
+nmap -p 1433 --script ms-sql-info <target>
+```
+
+Exploiting these misconfigurations allows attackers to bypass normal security protocols to enumerate sensitive database information.
+
+## Persistence Techniques and Cleanup
+
+### Stealthy Presence Maintenance
+
+Maintaining a stealthy presence while enumerating users involves executing queries and collecting data without triggering alerts. Utilizing low-noise techniques and deleting or obfuscating log entries helps evade detection. Regularly monitoring logs and audit trails to identify which actions are logged and developing methods to avoid such monitoring is crucial.
+
+### Cleanup Procedures
+
+After the enumeration process, it's crucial to implement cleanup procedures to remove any evidence of the activity. This means removing logs or traces of executed queries and scripts. Automated scripts designed to clear history and logs ensure offenders leave no trail:
+
+```sql
+-- Example command to clear SQL Server logs
+EXEC sys.sp_cycle_errorlog;
+```
+
+Executing such commands or scripts post-operation minimizes the likelihood of detection and maintains security posture integrity.
