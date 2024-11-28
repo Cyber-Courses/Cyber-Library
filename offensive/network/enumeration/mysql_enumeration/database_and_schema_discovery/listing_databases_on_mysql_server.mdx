@@ -1,0 +1,160 @@
+---
+title: 'Listing Databases on MySQL Server: Techniques Explained'
+description: Explore powerful techniques for enumerating databases on MySQL servers,
+  from direct access to SQL injection methods.
+keywords:
+- MySQL databases
+- database enumeration
+- SQL injection
+- MySQL access techniques
+- network traffic analysis
+- credential abuse
+- privilege escalation
+- database discovery
+- reverse proxy
+- automation scripts
+---
+
+### Direct Connection Techniques
+
+Direct connection techniques involve establishing a link between the attacker’s machine and the MySQL server to enumerate databases. This is typically executed using standard networking ports and protocols.
+
+**Accessing MySQL via Default Ports**
+
+The MySQL server listens on TCP port 3306 by default. Attackers can leverage this well-known port to initiate a direct connection. Command-line clients such as `mysql` can be employed to connect to the server directly if network firewall settings permit:
+
+```bash
+mysql -h target_ip -u root -p
+```
+
+Once connected, a successful authentication allows the attacker to execute SQL commands, including database enumeration queries.
+
+**Exploiting Misconfigured Firewalls**
+
+Inadequately configured firewalls can expose MySQL service ports to unauthorized access. Attackers can scan for open ports on a target using tools like `nmap`:
+
+```bash
+nmap -p 3306 target_ip
+```
+
+An open port 3306 indicates potential direct interaction opportunities. Misconfigurations in firewall rules can unintentionally permit inbound traffic to the MySQL service, which can be exploited to list databases.
+
+### Credential Use and Abuse
+
+Exploiting credentials focuses on utilizing known or weak credentials to gain unauthorized access to the MySQL server.
+
+**Using Default and Weak Credentials**
+
+During initial installations, MySQL servers may retain default credentials. Attackers can attempt to access the server using these credentials. Known weak credential combinations are another avenue for exploitation:
+
+```bash
+mysql -h target_ip -u root -p'password'
+```
+
+Gaining access this way reveals database list capabilities, depending on the user's privileges.
+
+**Brute Force Attacks**
+
+Brute force attacks involve systematically checking possible combinations of usernames and passwords using automated tools like `Hydra`:
+
+```bash
+hydra -l root -P /path/to/password/list.txt target_ip mysql
+```
+
+The goal is to discover valid login credentials that provide access to enumerate databases.
+
+### SQL Statement Execution
+
+Executing carefully chosen SQL statements serves as a straightforward method for retrieving database listings.
+
+**SHOW DATABASES Command**
+
+The `SHOW DATABASES;` command is a default SQL statement that lists all databases visible to the connected user. Once connected to the MySQL server:
+
+```sql
+SHOW DATABASES;
+```
+
+This command will return a list of databases that the authenticated user can access, leveraging their specific grants and permissions on the system.
+
+### Leveraging SQL Injection
+
+SQL injection allows attackers to manipulate backend SQL queries to reveal database information.
+
+**Blind SQL Injection Techniques**
+
+Blind SQL injection extracts data without directly reflecting the SQL query output. Time-based or error-based techniques can be applied by injecting custom payloads into vulnerable entry points:
+
+```sql
+1' OR IF((SELECT COUNT(*) FROM information_schema.schemata WHERE schemaname='test'), SLEEP(5), 0) -- -
+```
+
+The response time or resultant errors can confirm the existence of databases.
+
+**Union-Based SQL Injection**
+
+By exploiting vulnerable endpoints that allow union-based SQL injections, an attacker can merge the results of `SHOW DATABASES;` into the original query:
+
+```sql
+' UNION SELECT NULL, schema_name FROM information_schema.schemata -- 
+```
+
+This approach mandates that column structures align for successful execution.
+
+### Access Escalation Methods
+
+Escalation entails increasing access levels to overcome restrictions and enumerate databases completely.
+
+**Privilege Escalation**
+
+After initial access, attackers can aim to escalate their privileges to user roles with broader access. Executing exploits designed to grant elevated permissions can afford comprehensive database visibility.
+
+**Stored Procedures and Execution Privileges**
+
+Stored procedures, if misconfigured, can allow execution of privileged commands. An attacker might exploit stored procedures to run administrative commands that return database listings:
+
+```sql
+CALL mysql.procedure_analyze(); -- Potentially revealing databases
+```
+
+### Network Traffic Analysis
+
+Network traffic monitoring focuses on capturing packets flowing over the network to reveal database-related information.
+
+**Packet Sniffing**
+
+Attackers capture MySQL traffic using network sniffer tools like `Wireshark` to analyze unencrypted SQL commands, potentially revealing database names:
+
+```bash
+wireshark -i eth0 'port 3306'
+```
+
+If traffic encryption is not enforced, database names are visible in the captured data.
+
+**Reverse Proxy Interception**
+
+Placing a proxy between the MySQL server and its clients can allow interception and modification of SQL commands, facilitating the extraction of database names:
+
+```bash
+mitmproxy --mode transparent --tcp-port 3306
+```
+
+With careful inspection, intercepted traffic can be manipulated to disclose database-related queries.
+
+### Post-Exploitation Database Enumeration
+
+Utilizing footholds gained from initial access, an attacker can engage in more focused database enumeration strategies.
+
+**Leveraging Compromised Hosts**
+
+Upon compromising a network host, an attacker can pivot and use local utilities to enumerate databases on reachable MySQL servers. This approach allows for exploration without triggering perimeter defenses.
+
+**Automation and Scripting Approaches**
+
+Repeated enumeration tasks are streamlined with scripts that automate database discovery. These scripts utilize tools like `sqlmap` with adjusted configurations to efficiently list databases across multiple engagements:
+
+```bash
+sqlmap -u 'http://target.com/vuln.php?id=1' --dbs
+```
+
+Such scripts enhance operational efficiency by automating repetitive database enumeration processes.
