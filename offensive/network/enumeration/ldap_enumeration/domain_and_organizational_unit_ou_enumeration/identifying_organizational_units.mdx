@@ -1,0 +1,82 @@
+---
+title: Comprehensive Guide to Identifying Organizational Units
+description: Learn effective techniques to identify and analyze organizational units
+  in LDAP environments for cybersecurity assessments.
+keywords:
+- organizational units
+- LDAP
+- enumeration techniques
+- Active Directory
+- access control
+- security assessments
+- information gathering
+- network reconnaissance
+- privilege escalation
+- LDAP queries
+---
+
+# Identifying Organizational Units
+
+## Understanding LDAP Structures
+
+LDAP (Lightweight Directory Access Protocol) is essential for interacting with directory services and obtaining information about organizational units within a network. The core structure of an LDAP environment is the Directory Information Tree (DIT), which represents the organization's structure hierarchically. At the root of this tree, you'll find different entities distinguished by their Distinguished Names (DNs), which uniquely identify each entry within the LDAP directory. Common Names (CNs) further categorize these entries, acting as identifiers for specific objects such as users, computers, or organizational units (OUs).
+
+An organizational unit is a container within the directory that can hold users, groups, and other objects, playing a critical role in organizing and securing the domain. By understanding how these elements interrelate, security professionals can effectively navigate and manipulate the LDAP structure during assessment and penetration testing activities.
+
+## Information Gathering
+
+The initial step involves gathering as much information as possible about the target's directory services. This includes identifying LDAP servers or AD (Active Directory) Domain Controllers within the network. Reconnaissance techniques can be both passive and active. For passive information gathering, a practitioner might scan public records, business registries, or social engineering techniques to uncover details about the organization's use of directory services.
+
+Furthermore, capturing network traffic can also reveal LDAP communication, which occasionally discloses valuable data about the structure. Tools such as Wireshark or tcpdump can monitor this communication, allowing an attacker to gather insights including server names, domain details, and even sometimes enumerate OUs.
+
+## LDAP Query Techniques
+
+To identify organizational units, one executes LDAP queries specifically designed to extract this information effectively. LDAP queries use filter strings to search within the directory. For example, to query all OUs, one might use the filter `(objectCategory=organizationalUnit)`. This query will return all organizational units within the scope allowed by directory permissions.
+
+The `ldapsearch` tool is a powerful utility for querying LDAP directories. An example command to enumerate organizational units could look like this:
+
+```bash
+ldapsearch -x -H ldap://targetserver.com -b "dc=example,dc=com" "(objectClass=organizationalUnit)"
+```
+
+This command specifies a base domain "example.com" and searches for all entries with the organizational unit object class.
+
+## Analyzing Directory Structures
+
+Upon retrieving information about organizational units, it's essential to analyze the directory structure for potential entry points or weaknesses. Mapping these units allows for a simple visualization of how the organization segregates its resources and controls access. Visualization tools or scripts can convert LDAP data into graphs or structured charts to aid in this analysis.
+
+Understanding the OU hierarchy assists in figuring out potential targets for lateral movement, privilege escalation, or identifying areas with weaker security controls.
+
+## Organizational Unit Enumeration Tools
+
+Tools such as `nmap` can be augmented with scripts to interact with LDAP, enabling automated enumeration. For example, Nmap’s LDAP scripts can be run to identify OUs within a network:
+
+```bash
+nmap -p 389 --script=ldap-search -v targetserver.com
+```
+
+PowerShell offers another robust means of enumeration via Active Directory cmdlets like `Get-ADOrganizationalUnit`, providing flexibility in how an attacker can script enumeration tasks. For example:
+
+```powershell
+Get-ADOrganizationalUnit -Filter * -Properties CanonicalName
+```
+
+This command retrieves all organizational units while displaying their full paths in the directory.
+
+## Access Control and Permissions
+
+Once organizational units are identified, the next step involves understanding access control and permissions. Each OU can have specific access control lists (ACLs) governing who can view or modify objects within it. By analyzing these ACLs, it's possible to pinpoint ineffective security configurations or overly permissive permissions that pose a risk.
+
+These permissions can reveal opportunities for an attacker to escalate privileges, especially if administrative permissions are not tightly controlled.
+
+## Advanced Tactics
+
+Beyond basic enumeration, one might exploit misconfigurations within the structure of organizational units. For example, script execution privileges or write access to GPOs (Group Policy Objects) can be leveraged for lateral movement or privilege escalation.
+
+Testing password policies within these units can also yield opportunities; if user passwords are not enforced with adequate complexity, it could lead to compromised user accounts within these units.
+
+## Persistence and Expansion
+
+When offensive operations necessitate maintaining access, one should look to establish persistence within specific organizational units. Techniques include altering startup scripts or embedding backdoors in user accounts within the OU. Maintaining persistence ensures continued access even after potential remediation efforts.
+
+The gathered intelligence can facilitate expanding access to additional OUs or even move laterally across different domains. By thoroughly understanding the relationship and dependencies between various organizational units, an adversary can create a strategic map for prolonged and extensive access.
