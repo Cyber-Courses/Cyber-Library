@@ -1,0 +1,107 @@
+---
+title: Listing Uploaded Images and Tags in Docker Registries
+description: Explore techniques for listing and analyzing Docker images and tags,
+  including API usage, automation, and evasion strategies.
+keywords:
+- Docker Registry API
+- image enumeration
+- tag analysis
+- image manifests
+- automation scripts
+- registry misconfigurations
+- anonymity tools
+- credential vulnerabilities
+- log evasion
+---
+
+### Listing Uploaded Images and Tags
+
+#### Understanding Docker Registry APIs
+
+Docker Registry APIs provide a REST interface to interact with Docker image repositories hosted on a registry. The most commonly used version, Docker Registry API v2, facilitates operations such as image pulls and pushes, tag management, and image enumeration. Each endpoint serves a specific purpose, from listing repositories to retrieving detailed information about specific images. To enumerate images and tags effectively, it's crucial to understand these endpoints.
+
+The API requires varying levels of authentication based on the registry's configuration. Public registries might allow anonymous access to list images and tags, while private registries generally require authentication, typically via basic authentication or token-based schemes. Familiarity with endpoints and authentication mechanisms is vital for navigating and exploiting Docker registries effectively.
+
+#### Enumeration Techniques
+
+**Direct Interaction with Registry Endpoints**
+
+Directly interacting with Docker registry endpoints is a fundamental technique for listing images and tags. Tools like `curl` allow you to craft HTTP GET requests to relevant API endpoints, such as `/v2/_catalog` for listing repositories and `/v2/<repository>/tags/list` for retrieving image tags. Understanding the expected response format helps identify available images and their associated tags.
+
+For example, a command to list repositories on a registry using `curl` might look like:
+
+```bash
+curl -X GET https://<registry-url>/v2/_catalog
+```
+
+This request would return a JSON object containing the repository names. Conducting similar requests for image tags involves a link to specific repositories retrieved from this initial step.
+
+**Automating Enumeration with Scripts**
+
+Manual enumeration of images and tags can be time-consuming, especially for large registries. Automation scripts in Python or Bash can significantly streamline this process. Utilizing libraries such as `requests` in Python, you can efficiently handle HTTP requests and manage pagination in API responses. These scripts can be designed to iterate through repositories and list out all associated tags, saving results for further analysis.
+
+A simple Python script to enumerate tags might include:
+
+```python
+import requests
+
+registry_url = "https://<registry-url>"
+
+def list_tags(repository):
+    url = f"{registry_url}/v2/{repository}/tags/list"
+    response = requests.get(url)
+    if response.status_code == 200:
+        tags = response.json().get('tags', [])
+        return tags
+    return []
+
+repositories = requests.get(f"{registry_url}/v2/_catalog").json().get('repositories', [])
+
+for repo in repositories:
+    tags = list_tags(repo)
+    print(f"Repository: {repo}, Tags: {tags}")
+```
+
+This script effectively enumerates tags by iterating over all repositories and querying each for its tags.
+
+#### Analyzing Image Metadata
+
+**Extracting Image Manifests**
+
+Image manifests are JSON documents that describe the layers, configuration, and history of a Docker image. To extract an image manifest, you can interact with the `/v2/<repository>/manifests/<tag>` endpoint of the Docker Registry API. The manifest provides crucial metadata such as the SHA256 digests of image layers, which can be analyzed to understand the image's structure or look for specific layer modifications.
+
+These manifests can be retrieved with a `curl` command similar to:
+
+```bash
+curl -X GET https://<registry-url>/v2/<repository>/manifests/<tag>
+```
+
+Analyzing these manifests is essential for understanding the composition and potentially identifying vulnerabilities or useful information embedded within the layers.
+
+**Tag Analysis**
+
+Tagging is a method used to identify different builds of a Docker image. During enumeration, collecting data on tags provides insights into how images are being versioned. Tags commonly include labels like `latest`, as well as more specific version numbers. Analyzing the naming conventions and the frequency of updates within these tags can highlight deployment practices and possible entry points via outdated images.
+
+#### Leveraging Registry Configuration Missteps
+
+**Accessing Misconfigured Registries**
+
+Misconfigurations in Docker registries often lead to unintended exposure of repositories and images. Common issues include publicly accessible without authentication settings or overly permissive access controls. Identifying these configurations typically involves attempting standard enumeration techniques to see if any unauthorized list access can be achieved.
+
+For instance, trying basic accesses without authentication and monitoring response codes can expose such misconfigurations.
+
+**Exploiting Default Credential Vulnerabilities**
+
+Even if authentication is required, oversight such as default credentials or predictable passwords presents another attack vector. By leveraging brute-force techniques or default password lists, access can be gained to otherwise protected registries.
+
+Tools that automate authentication attempts can be effective in this scenario, revealing mismanagement of credential policies.
+
+#### Maintaining Anonymity and Covering Tracks
+
+**IP Rotation and Anonymity Tools**
+
+When performing enumeration or other offensive activities, maintaining anonymity is crucial. Using VPNs, proxies, or networks like Tor can help obfuscate your source IP address, reducing the likelihood of being traced back during or after the enumeration. Regularly changing IP addresses can add an additional layer of difficulty in tracking the operation back to a single source.
+
+**Log Evasion Techniques**
+
+Crafting API queries in a way that minimizes detection by monitoring systems is essential. This can include slow queries with longer intervals, randomized query patterns, and focusing on non-intrusive read operations to avoid triggering alerts. These practices help keep enumeration efforts under the radar of common intrusion detection systems.
