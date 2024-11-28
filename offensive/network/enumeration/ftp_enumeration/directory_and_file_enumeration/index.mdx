@@ -1,0 +1,59 @@
+---
+title: Directory and File Enumeration in FTP Environments
+description: Explore techniques for directory and file enumeration in FTP server contexts,
+  enhancing your cybersecurity skills.
+keywords:
+- directory enumeration
+- file enumeration
+- FTP security
+- enumeration techniques
+- readable writable files
+- automated scanning
+- directory permissions
+- cybersecurity
+- penetration testing
+---
+
+# Directory and File Enumeration
+
+In the context of offensive cybersecurity, understanding the nuances of directory and file enumeration within an FTP environment is pivotal for identifying potential security flaws. The process involves systematically mapping out accessible directories and comprehending file permissions to assess risks or exploitation possibilities.
+
+## [Listing Accessible Directories](offensive/network/enumeration/ftp_enumeration/directory_and_file_enumeration/listing_accessible_directories)
+
+### Understanding Directory Structures
+
+Each FTP server typically employs a specific directory structure, which can indicate its configuration and purpose. Enumeration begins by recognizing common directory hierarchies, like `/htdocs`, where web-related files might reside, or `/backup`, which may contain sensitive backup data. Understanding these structures can assist security professionals in prioritizing targets for further analysis. These structures can often be deduced from publicly available configurations or guessed using common directory names.
+
+### Automated Directory Scanning Techniques
+
+Automated tools offer an efficient method for discovering directories on FTP servers. By leveraging commands such as `LIST` or `NLST`, which display directory contents, attackers can rapidly gather information about the server's structure sans full authentication. Tools like `nmap` with scripts specifically designed for FTP enumeration, or tools like `dirb` and `dirbuster`, can be fine-tuned to enumerate directories quickly. These tools utilize wordlists to automate the guessing of directory names, vastly increasing the chances of uncovering hidden paths.
+
+Example command using `nmap`:
+```bash
+nmap -p 21 --script ftp-anon,ftp-brute,ftp-syst <target IP>
+```
+
+### Handling Directory Permissions
+
+It's crucial to assess the permissions of discovered directories to gauge the level of access the server allows based on an assumed role (e.g., anonymous user). Misconfigured permissions can lead to unauthorized data exposure or unwarranted access to sensitive directories. Techniques such as altering the FTP user context or using path traversal exploits might allow access to otherwise restricted directories. 
+
+## [Enumerating Readable and Writable Files](offensive/network/enumeration/ftp_enumeration/directory_and_file_enumeration/enumerating_readable_and_writable_files)
+
+### Identifying File Types of Interest
+
+Critical to a comprehensive enumeration is the identification of files that hold valuable information or can serve as vectors for further infiltration. Files like `config.php`, `.env`, or `password.txt` can contain critical data including credentials or configuration details. Tools can be customized to scan directories for specific file extensions or names, aiding in pinpointing such targets.
+
+### Read and Write Permission Testing
+
+Testing permissions on files provides insight into what data can be accessed or altered. Using FTP commands, like `RETR` for download or `STOR` for upload, one can test and record the success of file manipulation attempts. Tools can automate these tests, logging which files are susceptible to unauthorized reading or writing, highlighting paths for potential data exfiltration or payload delivery.
+
+### Data Extraction and Payload Deployment
+
+Files with both read and write permissions are prime candidates for data extraction or malicious payload deployment. Scripts can be developed to efficiently extract critical information or automate the upload of a payload. Once a payload is uploaded, further tests can verify whether the FTP server supports server-side execution, enabling the attacker to run malicious scripts directly from the server.
+
+Example command for file download using `curl`:
+```bash
+curl -O ftp://username:password@ftp.example.com/remote/path/file.txt
+```
+
+Refer back to foundational knowledge from the **Technology** section to gain an essential understanding of the FTP protocol and command structure, which is imperative for successfully executing these enumeration techniques. This detailed exploration into FTP directory and file enumeration seeks to provide cybersecurity professionals with the tools and methodologies necessary to uncover and exploit misconfigurations effectively.
