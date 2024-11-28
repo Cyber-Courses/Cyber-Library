@@ -1,0 +1,126 @@
+---
+title: Identifying SMTP Features through EHLO and HELO Commands
+description: Learn how to identify and enumerate SMTP server features using EHLO and
+  HELO commands for network security assessments.
+keywords:
+- SMTP features
+- EHLO command
+- HELO command
+- SMTP enumeration
+- SMTP security
+- SMTP extensions
+- open relay testing
+- network security
+- email server analysis
+---
+
+# Identifying SMTP Features with EHLO/HELO
+
+## EHLO/HELO Command Usage
+
+### Command Syntax and Execution
+
+The EHLO and HELO commands are essential when interacting with an SMTP server, utilized during the initial greeting phase of the SMTP communication protocol. The primary role of these commands is to identify the client's domain name to the SMTP server. The syntax for both commands is straightforward. The basic format is:
+
+```
+HELO <domain>
+```
+
+or
+
+```
+EHLO <domain>
+```
+
+where `<domain>` is the hostname of the client executing the command. The HELO command is the original SMTP greeting command, while EHLO is an extension introduced in the Extended SMTP (ESMTP) protocol, offering a broader set of functionalities.
+
+### Differences and Usage Context
+
+HELO is defined in the original SMTP standard (RFC 5321) and is used to initiate a session with basic functionalities. However, with the advent of ESMTP, EHLO became more prevalent due to its ability to invoke additional features provided by SMTP extensions. EHLO, therefore, should be used preferentially unless you need to communicate with a legacy server that does not support ESMTP.
+
+## Connecting to SMTP Servers
+
+### Establishing a Connection via Telnet or Netcat
+
+To test SMTP server features, you first need to establish a connection. This can often be done using simple network tools such as Telnet or Netcat. The basic procedure involves:
+
+1. Opening a command prompt or terminal session.
+2. Running `telnet <SMTP server> 25` or `nc <SMTP server> 25` to connect to the SMTP server on port 25.
+
+Upon successful connection, you should receive an SMTP banner, signaling readiness to proceed with HELO or EHLO commands.
+
+### Using Specific SMTP Clients or Libraries
+
+For more advanced or automated enumeration tasks, using specialized SMTP clients or programming libraries in Python (such as the `smtplib`) can provide greater control and flexibility. These clients can manage connections over various ports, including 587 or 465 for secure communications via STARTTLS or SSL.
+
+## Enumerating SMTP Server Features
+
+### Understanding Server Responses
+
+When you send an EHLO command to an SMTP server, it responds with a list of supported features. Each response is prefixed with a three-digit numerical code, typically starting with `250`, indicating success. Understanding these response codes is crucial for extracting meaningful data.
+
+### Analyzing Server Banners for Version and Server Type
+
+The initial server banner usually contains information about the server type and version. For instance, a response like `220 mail.example.com ESMTP Postfix` indicates the server uses Postfix software, which can be vital intelligence for planning any subsequent operations.
+
+## Identifying Supported SMTP Extensions
+
+### Listing Common SMTP Extensions
+
+Common SMTP extensions include:
+
+- **STARTTLS**: Indicates support for encryption over the standard SMTP port.
+- **AUTH**: Specifies authentication methods supported by the server, such as PLAIN or LOGIN.
+- **PIPELINING**: Allows multiple SMTP commands to be issued at once without waiting for a response.
+- **DSN**: Delivery Status Notification support.
+
+### Method of Detecting Support
+
+These features are detected in the server's response to an EHLO command. For example, an EHLO might yield:
+
+```
+250-STARTTLS
+250-AUTH PLAIN LOGIN
+250-PIPELINING
+250-DSN
+```
+
+Each line represents a supported extension or feature.
+
+## Automated Tools for EHLO/HELO Enumeration
+
+### SMTP Enumeration Software
+
+Tools such as Nmap offer scripted solutions for SMTP feature enumeration. With Nmap, you can use scripts like `--script smtp-commands` to automate the EHLO/HELO interaction, deciphering supported features rapidly.
+
+```bash
+nmap --script smtp-commands -p 25 <target_ip>
+```
+
+### Configuration and Execution of SMTP Enumeration Scripts
+
+Scripts must be correctly configured to target the correct ports and optionally interact with encrypted connections (using ports 465 or 587). This might involve setting up environment variables or modifying script parameters.
+
+### Interpreting Tool Outputs
+
+Outputs from tools should be carefully reviewed to validate server configurations. Look for discrepancies in expected responses, which might indicate misconfigurations or potential vulnerabilities.
+
+## Interpretation of Enumerated Features
+
+### Potential Attack Vectors
+
+The supported features can indicate potential weaknesses or areas of attack interest. For example, if STARTTLS is supported but improperly configured, it may be susceptible to downgrade attacks. Knowing which authentication methods are supported under AUTH can reveal vectors for brute force or credential stuffing attacks.
+
+### Configuration Weaknesses
+
+Each disclosed extension can highlight potential misconfigurations; for instance, a server that supports unencrypted AUTH methods could be exploited during credential exchanges.
+
+## Follow-Up Enumeration Actions
+
+### Cross-Verification with SMTP Relays
+
+Collected intelligence from EHLO/HELO exchanges should be cross-referenced with the SMTP relay configuration to evaluate open relay vulnerabilities or other misconfigurations. This holistic view significantly enhances the assessment quality and threat posture understanding.
+
+### Authentication and Security Testing
+
+Identified features are pivotal for further testing of authentication protocols and the robustness of encryption mechanisms, such as STARTTLS. Ensuring these are correctly implemented eliminates critical vulnerabilities that might otherwise be exploited by an adversary.
