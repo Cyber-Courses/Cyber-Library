@@ -1,0 +1,106 @@
+---
+title: Discovering User and Application Data in Redis
+description: Learn techniques to discover and exfiltrate user and application data
+  from Redis instances, including data mapping and integrity checks.
+keywords:
+- Redis data discovery
+- user data extraction
+- application data mapping
+- authentication bypass Redis
+- data exfiltration Redis
+- data integrity manipulation
+- Redis security vulnerabilities
+- automated data collection
+- lateral movement Redis
+---
+
+### Redis Authentication Bypass Techniques
+
+Redis, by default, runs without requiring a password, making it vulnerable if left unpacked behind sensitive networks. When authentication is used, it typically involves specifying a password with the `requirepass` directive in the configuration. Attackers can exploit misconfigurations such as weak passwords, default configurations (no password set), or improperly exposed Redis servers to bypass authentication.
+
+Techniques for exploiting these vulnerabilities include attempting to connect to Redis without authentication (if `requirepass` is not configured) or using default/common passwords in a brute-force manner. Tools like `hydra` or custom scripts using `redis-cli` can be employed in brute-forcing attacks:
+
+```sh
+redis-cli -h target_ip -p target_port ping
+```
+
+If the server responds, it is likely open for further attacks. In cases where a password is required, the attempt to authenticate might resemble:
+
+```sh
+redis-cli -h target_ip -p target_port -a password ping
+```
+
+### Exfiltration of Data from Open Redis Instances
+
+Data exfiltration from Redis involves identifying open Redis instances and extracting stored data. Open Redis ports can be identified using tools like `nmap`, specifying Redis' default port (6379):
+
+```sh
+nmap -p 6379 target_ip
+```
+
+Once open instances are identified, `redis-cli` can be used to access the server and enumerate keys to retrieve data:
+
+```sh
+redis-cli -h target_ip keys '*'
+```
+
+Scripts can automate this process, making it efficient for attackers to search, filter, and download keys of interest, ultimately funneling sensitive data off the target network.
+
+### Identification and Extraction of User Data
+
+User-related data stored in Redis might reside in keys with identifiable prefixes (e.g., "user:" or usernames). Attackers will query these keys and dump their contents:
+
+```sh
+redis-cli -h target_ip keys 'user:*'
+```
+
+Typical operations include examining returned key-value pairs to discern user credentials, tokens, or other identifiable personal information. Once found, data is fetched via:
+
+```sh
+redis-cli -h target_ip get user:username
+```
+
+After collecting data, analysis focuses on understanding structure and extracting meaningful insights, leveraging knowledge of typical database schemas.
+
+### Application Data Mapping and Decryption
+
+Recognizing and extracting application-specific data requires understanding Redis data structures and encryption methods employed by the application. Attackers need to discern between various data types like hashes, sets, or lists. To access a hash, commands may include:
+
+```sh
+redis-cli -h target_ip hgetall app:data
+```
+
+If data is encrypted, attackers must identify encryption algorithms, gain access to keys, and decrypt the payloads, often requiring reverse engineering and analysis of the associated application.
+
+### Data Integrity Checks and Manipulation
+
+Many applications implement integrity checks to prevent tampering. Attackers must identify these mechanisms by analyzing application logic or observing patterns. Methods for manipulation involve direct alteration of key values—once integrity methods are bypassed—or inserting malicious payloads:
+
+```sh
+redis-cli -h target_ip set key value
+```
+
+By tampering, attackers might gain further insights or execute higher privilege actions unwarrantingly.
+
+### Automating Data Discovery and Collection
+
+Automation in Redis data discovery involves scripting for efficient enumeration and extraction. Scripts utilize loops and conditionals to parse vast amounts of keys, focusing on patterns indicative of sensitive data. Commonly used languages include Python, employing libraries like `hiredis`:
+
+```python
+import redis
+r = redis.Redis(host='target_ip', port=6379)
+for key in r.scan_iter("prefix:*"):
+    print(r.get(key))
+```
+
+Automated tasks include scheduling frequent scans and compressing extracted data for stealthy exfiltration.
+
+### Pivoting through Discovered Data
+
+Data discovered in Redis often serves as a pivot point to escalate privileges via lateral movement. Exploiting user credentials uncovered from Redis can facilitate access to other systems or services within the network. Attackers can leverage SSH keys, tokens, or session cookies found in Redis:
+
+```sh
+ssh user@host
+```
+
+This step intricately connects reconnaissance efforts with stages of exploitation and persistence, potentially compromising broader network infrastructure through Redis-stored data.
