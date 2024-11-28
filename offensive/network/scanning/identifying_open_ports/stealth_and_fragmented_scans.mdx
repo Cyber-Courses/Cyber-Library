@@ -21,16 +21,6 @@ keywords:
 
 Stealth scans aim to identify open ports on target systems while evading detection by Intrusion Detection Systems (IDS) and firewalls. Unlike more straightforward approaches, they exploit the subtleties in TCP/IP to avoid logging activities that could alert defenders. The primary advantage is reduced risk of detection, which is crucial for maintaining anonymity during reconnaissance.
 
-### TCP SYN Scans with Stealth
-
-A TCP SYN scan, often referred to as a half-open scan, initializes a connection with the SYN packet but does not complete the TCP handshake. This method involves sending a SYN packet to a target port and analyzing the response:
-
-- **SYN-ACK Response**: The port is open. The scan sends an RST (reset) packet, avoiding a complete three-way handshake.
-- **RST Response**: The port is closed.
-- **No Response**: The port is filtered, suggesting that a firewall blocks communication.
-
-The stealth comes from never completing the handshake, leaving minimal logs. However, despite reduced logging, detection is possible if particular monitoring systems track SYN requests without follow-up acknowledgments.
-
 ### FIN, Xmas, and Null Scans
 
 - **FIN Scan**: Sends a FIN flag to the target port. Open ports under this scan will not reply, while closed ports will respond with an RST packet.
@@ -60,17 +50,3 @@ The `-f` flag instructs Nmap to send fragmented IP packets, assisting in passing
 ### Reassembling Fragmented Responses
 
 Upon reaching the destination, fragmented packets are expected to be reassembled by the target system. Similar reconstruction is necessary on the scanning side to interpret responses. Network stack behavior varies, and detection of open or filtered ports relies on adeptly managing these reassembled fragments.
-
-## Advanced Execution of Stealth and Fragmented Scans
-
-### Tool Configuration for Stealth and Fragmentation
-
-Tools like Nmap allow operators to configure numerous options that enhance stealth and fragmentation capabilities. By tweaking packet size and offset, and using fragmentation, operators can make detection by defensive measures more challenging. For deeper customization, a packet crafting tool like Scapy can hand-craft packets for precise control over fragment attributes.
-
-### Combining Stealth and Fragmentation
-
-Operators often combine methods for heightened stealth, integrating both stealth and fragmentation techniques. This enhances evasion by making reconnaissance efforts less conspicuous and bypassing defensive layers. The complexity of tactics increases by leveraging packet crafting tools to vary timing, sequence numbers, and acknowledge packets to mislead detection systems.
-
-### Patterns of Detection Avoidance
-
-Detection mechanisms, like IDS/IPS, evolve to counter these offensive techniques. Effective operations require a thorough understanding of the network's defensive mechanisms, allowing attackers to modulate their strategies accordingly. Advanced tactics might include altering scan timing, randomizing packet size, and employing diverse IP addresses to spread reconnaissance activities, all aiming to outmaneuver defense apparatus and maintain stealth.
