@@ -1,0 +1,102 @@
+---
+title: Enumerating Keys and Data Structures in Redis
+description: Learn key enumeration techniques in Redis, analyze data structures, and
+  explore methods for efficient data extraction.
+keywords:
+- Redis
+- key enumeration
+- data structures
+- RDB
+- AOF
+- database security
+- data exfiltration
+- Redis commands
+- secure connection
+---
+
+### Authenticating and Connecting to Redis
+
+Securing a connection to a Redis instance involves understanding both the default configurations and potential misconfigurations that can be exploited. Redis by default does not enforce authentication, but it can be configured with a password using the `requirepass` directive. Attackers often look for unsecured instances exposed to the network or poorly guarded credentials.
+
+To authenticate with Redis, you can use:
+
+```shell
+redis-cli -h [host] -p [port] -a [password]
+```
+
+In cases of default or weak passwords, brute forcing becomes a viable option. Network scans can identify misconfigured instances, often used in cloud environments where default settings might leave Redis exposed.
+
+### Key Enumeration Techniques
+
+Key enumeration is a crucial step in understanding the data landscape within a Redis instance. The basic command for retrieving keys is:
+
+```shell
+redis-cli KEYS '*'
+```
+
+This command returns all keys but can block the Redis server if the dataset is large. An alternative is using the `SCAN` command, which provides a cursor-based iteration method, allowing non-blocking operation:
+
+```shell
+redis-cli SCAN 0
+```
+
+The `SCAN` command can be combined with pattern matching to filter specific key types. Efficient enumeration often requires understanding of the keyspace layout, which can be indicative of application-level structures or patterns.
+
+### Identifying Data Structures
+
+Redis supports a variety of data types, each serving different functional roles:
+
+- **Strings**: The simplest data type, but can be used to store serialized objects.
+- **Lists**: Useful for queues, you can retrieve and manipulate elements through LPOP/RPOP or LPUSH/RPUSH.
+- **Sets**: Allow for operations like unions or intersections, identified by usage of SADD or SMEMBERS commands.
+- **Hashes**: Representing objects with fields, explored with HGETALL or HSCAN commands.
+- **Sorted Sets**: Store ordered collections, useful for ranking items, using ZADD and ZRANGE commands.
+
+The command to check a key's type is:
+
+```shell
+redis-cli TYPE [key]
+```
+
+Recognizing the data type is critical for planning further exploitation such as data manipulation or retrieval strategies.
+
+### Analyzing Encoded Data Structures
+
+Redis supports persistence through RDB and AOF files, which encode the in-memory data structure:
+
+- **RDB**: A snapshot file format.
+- **AOF**: An append-only log format capturing each write operation.
+
+For offline analysis, tools such as `redis-rdb-tools` or `raof` can parse these files and convert them to a more human-readable format. Understanding serialized data can help in reconstructing lost objects or analyzing system state without a direct connection to the Redis server.
+
+### Efficient Data Retrieval and Extraction
+
+Efficient data retrieval minimizes detection and logging. The `SCAN` command allows for retrieving data incrementally:
+
+```shell
+redis-cli --scan | while read key; do
+  redis-cli GET "$key"
+done
+```
+
+For large datasets, batch processing with pipelines can improve performance. Careful use of TTLs and backups ensures that sensitive operations leave minimal traces:
+
+```shell
+echo -e "GET key1\nGET key2" | redis-cli --pipe
+```
+
+### Exfiltration and Data Manipulation
+
+Once enumerated, data may require exfiltration through secure channels. Tools like `stunnel` can tunnel Redis traffic over SSL, adding a layer of encryption. Modifying data structures can aid in persistence; for instance, altering configuration keys to maintain access or inserting malicious scripts into application data:
+
+```shell
+redis-cli SET [key] [value]
+```
+
+Understanding how these changes impact the broader application ecosystem is important for exploiting trust relationships or facilitating lateral movement.
+
+### Post-Enumeration Actions
+
+After enumerating and retrieving key data, ensure that all assets are documented in compliance with standard ethical practices and legal requirements. This documentation aids in assessing potential attack vectors or opportunities for lateral movement.
+
+Further exploration and correlation with other enumeration results might identify additional vulnerabilities, allowing deeper penetration testing or red teaming activities. Integrating with automated scripts may facilitate continuous monitoring or alerting, enhancing situational awareness for potential breaches.
