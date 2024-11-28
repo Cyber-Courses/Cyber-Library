@@ -1,0 +1,76 @@
+---
+title: Aggressive Mode Information Gathering in IPsec/IKE
+description: Learn techniques for extracting PSK hashes and enumerating endpoint information
+  in IPsec Aggressive Mode for enhanced security assessments.
+keywords:
+- Aggressive Mode
+- IPsec IKE
+- Information Gathering
+- Pre-Shared Key Hash
+- Endpoint Enumeration
+- ISAKMP
+- Network Security
+- Cybersecurity Techniques
+---
+
+## Aggressive Mode Information Gathering
+
+Aggressive Mode Information Gathering is an essential aspect of offensive cybersecurity, specifically in the context of IPsec/IKE enumeration. This technique involves a focused effort to extract valuable information from VPN exchanges that use Aggressive Mode. Such exchanges, though less preferred due to vulnerability reasons, enable attackers to gather substantial data due to their verbose nature. The process typically focuses on extracting pre-shared key hashes and enumerating endpoint information. Below, we delve into these methodologies to provide a comprehensive understanding.
+
+### [Extracting Pre-Shared Key Hash](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/extracting_pre-shared_key_hash)
+
+In Aggressive Mode, pre-shared keys (PSKs) are more exposed, offering an opportunity for information gathering through their hashes. The main target is to identify PSKs, especially if they are weak, leading to further exploitation.
+
+#### Identifying Weak Pre-Shared Keys
+
+PSKs often suffer from weak configurations due to user choices or legacy systems. Attackers identify such weaknesses during the PSK hashing process of the Aggressive Mode exchange. Weak pre-shared keys make the VPN configuration vulnerable, paving the way for easier data extraction.
+
+#### Tools for PSK Hash Extraction
+
+Tools like `ike-scan` are employed to send crafted ISAKMP packets to VPN endpoints, eliciting a response that includes the PSK hash. Here’s how you can use `ike-scan`:
+
+```bash
+ike-scan --show-backoff --multiline --id=<VPN_IDENTIFIER> <TARGET_IP>
+```
+
+In this command:
+- `--show-backoff`: Displays timing information for retransmissions.
+- `--multiline`: Shows detailed information about each responder in multiline format.
+- `--id=<VPN_IDENTIFIER>`: Specifies the VPN Group ID.
+
+#### PSK Hash Cracking Techniques
+
+Once the hash is extracted, tools like `hashcat` or `John the Ripper` come into play. These tools allow you to perform dictionary and brute-force attacks on the extracted hash. The usage of `hashcat` can be demonstrated as follows:
+
+```bash
+hashcat -m 5300 <extracted_hash_file> <dictionary_file>
+```
+
+Where `-m 5300` specifies the VPN PSK mode.
+
+### [Enumerating Endpoint Information](offensive/network/enumeration/ipsecike_enumeration/aggressive_mode_information_gathering/enumerating_endpoint_information)
+
+Aggressive Mode also reveals substantial endpoint information. Enumerating such data allows attackers to craft specialized attacks or validate existing threat models.
+
+#### Capturing SA Proposals
+
+Security Association (SA) proposals suggest encryption and hash algorithms supported by the endpoint. Analyzing these reveals potential weaknesses in the algorithm choices or mismatches in configuration across endpoints.
+
+#### Endpoint Identity Exposure
+
+Identity payloads in ISAKMP exchanges can expose information like IP addresses, potential device types, and even configuration policies. Extracting this information requires:
+
+- Capturing exchanges using packet sniffing tools (e.g., Wireshark or tcpdump).
+- Analyzing packets to deduce endpoint characteristics based on identifiable information.
+
+#### Analyzing ISAKMP Packets
+
+To thoroughly analyze ISAKMP packets, tools like Wireshark provide graphical analysis capabilities:
+
+1. Capture the traffic using:
+   ```bash
+   tcpdump -i <interface> 'port 500'
+   ```
+2. Import the `.pcap` file into Wireshark and filter for ISAKMP protocols to visualize the exchanges, focusing on phase 1 and phase 2 handshakes to extract detailed nuances about the endpoints.
+
+Aggressive Mode Information Gathering thus reveals both structural and operational insights about the IPsec setup, allowing for an enhanced strategic offensive posture.
