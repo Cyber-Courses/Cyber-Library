@@ -1,0 +1,130 @@
+---
+title: Mapping Column Names and Data Types in PostgreSQL
+description: Discover techniques to map column names and data types in PostgreSQL
+  for effective database enumeration.
+keywords:
+- PostgreSQL
+- column mapping
+- data types
+- database enumeration
+- system catalogs
+- pg_attribute
+- pg_type
+- offensive security
+- SQL queries
+- automated scripts
+---
+
+# Mapping Column Names and Data Types
+
+## Understanding Database Metadata
+
+PostgreSQL, like many relational database management systems, stores metadata within system catalogs. This metadata includes crucial information about the database's structure, such as tables, columns, data types, and relationships. In the context of offensive cybersecurity, understanding and mapping these column names and data types allows attackers to identify potential targets and tailor their approaches based on the database schema's structure.
+
+The primary goal of mapping column names and data types is to comprehend the logical structure of data stored within the database. This knowledge allows an attacker to understand what data may be sensitive or valuable, as well as to exploit specific data type constraints or weaknesses.
+
+## Accessing PostgreSQL System Catalogs
+
+PostgreSQL organizes its metadata within the `pg_catalog` schema, which contains various system catalogs (essentially tables) storing details about tables, columns, data types, and more. Offensive operatives can glean extensive information by querying these system catalogs without needing high-privilege access levels. The key catalogs for understanding columns and their data types are as follows:
+
+- **`pg_attribute`**: Stores information about table columns, including their names, data types, and attributes.
+- **`pg_type`**: Contains data regarding data types available within the PostgreSQL installation.
+- **`pg_class`**: Provides metadata regarding database tables and their relations. This is used to associate columns to their respective tables.
+
+## Identifying Relevant Catalogs for Columns and Data Types
+
+By querying these catalogs, you can map columns and their data types. For example, the **`pg_attribute`** table provides column details such as `attname` for column name and `atttypid` which links to **`pg_type`** for understanding the data type.
+
+To identify columns and their data types, you can use a query as follows:
+
+```sql
+SELECT
+    a.attname AS column_name,
+    t.typname AS data_type,
+    c.relname AS table_name
+FROM
+    pg_attribute a
+JOIN
+    pg_class c ON a.attrelid = c.oid
+JOIN
+    pg_type t ON a.atttypid = t.oid
+WHERE
+    c.relname = 'target_table_name'
+    AND a.attnum > 0;
+```
+
+This SQL query joins several catalogs to target specific information, filtering for user-specific tables (using the condition `a.attnum > 0` to ignore system columns).
+
+## Query Construction for Column Mapping
+
+Constructing queries that can adapt to filter data for specific tables or schemas maximizes the effectiveness of data retrieval. Offensive operatives can employ various conditions to refine their searches. For instance, specifying a schema name would involve an additional join with **`pg_namespace`**:
+
+```sql
+SELECT
+    a.attname AS column_name,
+    t.typname AS data_type,
+    c.relname AS table_name,
+    nspname AS schema_name
+FROM
+    pg_attribute a
+JOIN
+    pg_class c ON a.attrelid = c.oid
+JOIN
+    pg_type t ON a.atttypid = t.oid
+JOIN
+    pg_namespace n ON c.relnamespace = n.oid
+WHERE
+    n.nspname = 'target_schema_name'
+    AND a.attnum > 0;
+```
+
+This query now includes the schema name, allowing attackers to play directly into precisely mapped structures.
+
+## Automating Enumeration with Scripts
+
+Manual querying is inefficient; automation scripts streamline the enumeration process. Scripts can be written in Python using libraries such as `psycopg2` or `SQLAlchemy` to establish a database connection and perform the necessary queries programmatically. For instance, a Python script using psycopg2 may look like:
+
+```python
+import psycopg2
+
+def map_columns():
+    conn = psycopg2.connect("dbname=test user=postgres password=secret")
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT
+            a.attname AS column_name,
+            t.typname AS data_type,
+            c.relname AS table_name
+        FROM
+            pg_attribute a
+        JOIN
+            pg_class c ON a.attrelid = c.oid
+        JOIN
+            pg_type t ON a.atttypid = t.oid
+        WHERE
+            a.attnum > 0;
+    """)
+    rows = cur.fetchall()
+    for row in rows:
+        print(f"Table: {row[2]}, Column: {row[0]}, Data Type: {row[1]}")
+    cur.close()
+    conn.close()
+
+map_columns()
+```
+
+Scripts like this automate column and data type mapping across all tables, providing valuable reconnaissance data efficiently.
+
+## Analyzing Results for Attack Vector Identification
+
+Once data is mapped, analysis focuses on identifying vulnerabilities or attack vectors specific to the identified types or column properties. For instance, numerical data types might be susceptible to overflow attacks, while string data types might be vulnerable to SQL injection or buffer overflows if not properly sanitized.
+
+Understanding which columns hold sensitive data, such as passwords or personally identifiable information (PII), directly informs attack strategies, guiding which columns are likely to yield the most valuable information if exploited.
+
+## Employing Discovered Information in Attack Scenarios
+
+Attackers use this mapped data to craft payloads targeting specific data types. For example, if a column is identified as an `integer`, an attacker might attempt SQL Injection to manipulate numerical logic, whereas for `text` types, they might inject strings exploiting formatting vulnerabilities.
+
+The mapping facilitates targeted data exfiltration. Knowing the data types aids in deciphering application logic from how data is stored, which assists in crafting database-specific attacks or determining suitable exploitation methods to bypass data validation checks.
+
+Such detailed mapping transforms reconnaissance data into actionable intelligence for executing sophisticated attacks or developing zero-day exploits.
