@@ -1,0 +1,84 @@
+---
+title: Listing Users and Their Privileges in Cassandra
+description: Learn how to enumerate users and their privileges in Cassandra for enhanced
+  cybersecurity.
+keywords:
+- Cassandra
+- user privileges
+- access control enumeration
+- CQL
+- cybersecurity
+- role permissions
+- privilege escalation
+- system tables
+- authentication
+- authorization
+---
+
+### Listing Users and Their Privileges
+
+In the context of offensive cybersecurity and specifically within access control enumeration, listing users and their privileges in a Cassandra environment is a critical step in understanding and exploiting the security posture of a network.
+
+#### Understanding Cassandra Authentication and Authorization
+
+Cassandra employs both authentication and authorization mechanisms controlled through the `IAuthenticator` and `IAuthorizer` interfaces. Authentication verifies user identities, while authorization determines access levels and permissions. The default authenticator is `AuthenticatorAllowAll`, which provides no security, but more secure options like `PasswordAuthenticator` require valid credentials for access.
+
+The `IAuthorizer` is responsible for checking permissions. By default, Cassandra uses `CassandraAuthorizer`, which stores permissions in the `system_auth` keyspace. Configuring these correctly is crucial for securing access and managing user privileges effectively.
+
+#### Cassandra System Tables
+
+Cassandra's internal keyspace, `system_auth`, houses several tables essential for enumeration: `users`, `roles`, and `role_permissions`. 
+
+- `system_auth.users`: Contains user role definitions.
+- `system_auth.roles`: Stores user credentials and some role attributes.
+- `system_auth.role_permissions`: Lists permissions associated with each role.
+
+Querying these tables allows an attacker to list all users and correlate them with their roles, revealing potential avenues for privilege escalation.
+
+#### Enumerating Users with CQL
+
+The Cassandra Query Language (CQL) is the examination tool of choice. To list users and roles, execute queries like:
+
+```sql
+SELECT * FROM system_auth.roles;
+```
+
+This command extracts all users and their roles. The outputs reveal the roles associated with each user, allowing the identification of privileged accounts, such as those with administrative rights.
+
+```sql
+SELECT * FROM system_auth.users;
+```
+
+Execute this to gather information about existing user accounts. Ensure that account settings, such as password hashes (if available), are documented for further analysis.
+
+#### Extracting User Privileges
+
+Obtaining detailed privilege information can be done by querying the `role_permissions` table:
+
+```sql
+SELECT * FROM system_auth.role_permissions;
+```
+
+This query will list permissions granted to roles, allowing an analysis of access control. Each entry reveals what database objects each role can access and the specific actions permitted, such as SELECT, MODIFY, and EXECUTE.
+
+#### Privilege Escalation Opportunities
+
+After acquiring a comprehensive list of users and their privileges, assess the environment for any misconfigurations or unnecessarily high privileges. Pay attention to default roles that might be broadly provisioned, and examine role inheritance hierarchies that could lead to accumulated privileges over time.
+
+Determine if certain roles have excessive privileges or if there are any vulnerabilities or weaknesses that allow for privilege escalation, such as misassigned roles or permissions.
+
+#### Using Scripts and Tools
+
+Automation scripts significantly speed up the enumeration process. Tools such as `cassandrascripts`, available on repositories like GitHub, can simplify the enumeration of users and privileges if tailored correctly for the organization's environment.
+
+These scripts generally interact directly with the `system_auth` keyspace and extract pertinent details quickly, providing actionable intelligence for the offensive cybersecurity practitioner.
+
+#### Mitigation and Hardening Recommendations
+
+Recognizing the vulnerabilities posed by inadequate access control, enforce stringent authentication and authorization protocols. Some critical recommendations include:
+
+- Disable anonymous access and configure roles with precise, minimum-necessary permissions.
+- Regularly audit user roles and permissions using scripts or manual review, especially post-deployment of new applications or services.
+- Use strong, unique passwords for all roles and enable auditing features to monitor role and permission changes.
+  
+By effectively securing user roles and privileges, organizations can prevent unauthorized access and minimize the risk of privilege escalation within Cassandra databases. Properly implemented authentication and authorization help mitigate the potential security risks highlighted through offensive cybersecurity operations.
