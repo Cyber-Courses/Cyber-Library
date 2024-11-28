@@ -1,0 +1,82 @@
+---
+title: Guide to Listing Available Databases in CouchDB
+description: Learn how to list available databases in CouchDB, including methods,
+  tools, and techniques for effective database enumeration.
+keywords:
+- CouchDB enumeration
+- database listing
+- HTTP methods
+- NoSQL database
+- database discovery
+- network enumeration
+- security assessment
+- access control
+- automated tools
+---
+
+# Listing Available Databases
+
+## Introduction to Database Enumeration in Context
+
+In the realm of offensive cybersecurity, database enumeration plays a crucial role in network enumeration by providing insights into the database assets within an organization's infrastructure. This process involves identifying and cataloging databases, which can then be analyzed for potential vulnerabilities. Unlike document discovery, which focuses on retrieving documents and their associated metadata, database enumeration concentrates on the structural components, such as tables and schemas, enabling attackers to assess the organization’s data storage systems effectively.
+
+## CouchDB Enumeration Framework
+
+CouchDB is a NoSQL database that operates over HTTP, making it accessible through standard web requests. Understanding its architecture is essential for effective enumeration. CouchDB typically listens on port 5984 and exposes its database information via HTTP, allowing attackers to leverage unprotected endpoints for enumeration. Enumerating CouchDB requires familiarity with its HTTP-based API and understanding of its database structure, which includes database names, documents, and design documents.
+
+## Identifying CouchDB Endpoints
+
+Discovering available databases requires first identifying CouchDB endpoints. This involves scanning for the default CouchDB port (5984) using network scanning tools like Nmap. Command example:
+
+```bash
+nmap -p 5984 --open <target-ip>
+```
+
+Once an open port is identified, probing common paths such as `/_utils/` can lead to administrative interfaces, while paths like `/_all_dbs` can reveal database listings directly.
+
+## HTTP Methods and Their Use in Database Discovery
+
+HTTP methods like GET and HEAD are pivotal in database enumeration. GET requests retrieve database content, while HEAD can confirm the existence of resources without transferring data. Interpreting HTTP response codes (e.g., 200 OK for successful access or 404 Not Found for non-existent paths) aids in discerning the presence and accessibility of CouchDB resources.
+
+## Listing Databases in CouchDB
+
+Listing databases typically involves sending HTTP GET requests to specific CouchDB endpoints. The `_all_dbs` endpoint is particularly useful for this task. A request can be crafted as follows:
+
+```bash
+curl -X GET http://<target-ip>:5984/_all_dbs
+```
+
+Authentication, if required, involves sending credentials via basic HTTP authentication or including them in the request header. Handling authentication is crucial for accessing protected resources and involves carefully crafting requests with appropriate headers or session tokens.
+
+## Automated Tools for Database Enumeration
+
+Several tools facilitate CouchDB enumeration by automating requests and analyzing responses. Open-source tools such as Nmap with specific scripts can aid in database discovery:
+
+```bash
+nmap --script=http-couchdb-databases.nse <target-ip>
+```
+
+These tools can integrate with larger security frameworks, offering comprehensive assessments by correlating enumeration data with potential vulnerabilities.
+
+## Bypassing Access Controls for Database Discovery
+
+To enumerate databases in environments with stringent access controls, attackers may manipulate requests or exploit weak configurations. Techniques such as HTTP method tampering or leveraging misconfigured CORS settings can provide unauthorized access to database listings.
+
+## Scripted Enumeration of Database Assets
+
+Custom scripts can streamline the database enumeration process, allowing automation and scalability. Python scripts using libraries like `requests` can be crafted to query CouchDB endpoints and handle authentication and response parsing.
+
+```python
+import requests
+
+response = requests.get('http://<target-ip>:5984/_all_dbs', auth=('user', 'password'))
+print(response.json())
+```
+
+## CouchDB Enumeration in Complex Networks
+
+In environments with complex network architectures, techniques such as using proxies and tunnels become essential. Tools like `proxychains` or SSH tunneling can help pivot into network segments, providing access to CouchDB instances not directly reachable.
+
+## Analysis of Discovered Databases
+
+Once databases are enumerated, thorough analysis is critical. This involves assessing the relevance of each database concerning the attack goals and identifying potential vulnerabilities. Correlating database versions and configurations with known exploits further aids in prioritizing target databases for post-enumeration exploitation strategies.
