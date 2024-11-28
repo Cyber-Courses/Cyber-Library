@@ -1,4 +1,3 @@
-```markdown
 # ยินดีต้อนรับสู่ Cyber Library
 
 ยินดีต้อนรับสู่ **Cyber Library** ที่เก็บรวบรวมข้อมูลที่ขับเคลื่อนโดยชุมชน ซึ่งมุ่งเน้นการสร้างแหล่งความรู้ที่ครอบคลุมในหัวข้อเกี่ยวกับความปลอดภัยทางไซเบอร์ ไม่ว่าคุณจะเป็นผู้เชี่ยวชาญด้านความปลอดภัยที่มีประสบการณ์หรือเพิ่งเริ่มต้นการเดินทาง Cyber Library นี้มีทรัพยากรอันมีค่าให้ในหลากหลายโดเมน
@@ -69,4 +68,3 @@ git clone https://github.com/Cyber-Courses/Cyber-Library.git
 หากคุณมีคำถามใด ๆ โปรดเปิดประเด็นหรือติดต่อผ่าน [Wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki) หรือ [Discord server](https://discord.gg/a9XwRKxdHf)
 
 เยี่ยมชมเว็บไซต์: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
-```
