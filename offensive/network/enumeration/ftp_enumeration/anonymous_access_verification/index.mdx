@@ -1,0 +1,59 @@
+---
+title: Anonymous Access Verification for FTP Enumeration
+description: Learn how to check for anonymous login and discover weak credentials
+  on FTP servers to improve security.
+keywords:
+- anonymous access
+- FTP enumeration
+- check anonymous login
+- weak credentials
+- brute force FTP
+- FTP security
+- default credentials
+- nmap FTP scan
+- hydra password cracking
+- network enumeration
+---
+
+### Anonymous Access Verification in FTP Enumeration
+
+#### [Checking for Enabled Anonymous Login](offensive/network/enumeration/ftp_enumeration/anonymous_access_verification/checking_for_enabled_anonymous_login)
+
+Anonymous access verification begins with identifying FTP servers that permit anonymous login. This process involves scanning networks to detect active FTP services. Tools like `nmap` can be used to perform such scans efficiently. For instance, using `nmap -p 21 -sV <IP_RANGE>` helps identify active FTP servers and their versions, crucial for understanding potential vulnerabilities.
+
+When attempting anonymous logins, it is essential to systematically test the access without triggering defensive mechanisms. This is typically done by using a combination of manual attempts and automated tools. The basic command line for checking an FTP server for anonymous login support is:
+
+```bash
+ftp -n <ftp_server_ip>
+```
+
+Once connected, you can enter the following command to attempt an anonymous login:
+
+```plaintext
+USER anonymous
+PASS <anything>
+```
+
+If access is granted, the server does not require traditional user authentication, allowing for exploration of the server's public files.
+
+For efficiency, automation scripts can be employed to verify anonymous login capabilities on a larger scale. These scripts iterate over a list of IPs, attempting connections and logging the responses. When writing such scripts, interpretive strategies are crucial. Identifying server responses and logs for string indicators like "Login successful" or "230" status codes helps confirm unauthorized access.
+
+Through these methods, the detection of anonymous login capabilities provides a way to understand potential exposures in the FTP service that might be leveraged for further enumeration and access.
+
+#### [Discovering Default or Weak Credentials](offensive/network/enumeration/ftp_enumeration/anonymous_access_verification/discovering_default_or_weak_credentials)
+
+Discovering weak or default credentials requires a blend of research and tactical execution. Many FTP servers ship with default credentials (e.g., `admin:admin` or `user:password`) which are often not changed post-installation. Resources like online security guides or manufacturer manuals can provide initial insights into these defaults.
+
+Brute force techniques, employing tools like `hydra`, can be used to test an array of common credentials rapidly. An example command to execute a brute force attack on an FTP server is:
+
+```bash
+hydra -l admin -P /path/to/password/list.txt ftp://<ftp_server_ip>
+```
+
+This command line specifies `hydra` to test the username `admin` against a password list at the specified FTP server.
+
+Credential lists are invaluable in this process. Maintaining robust and updated lists ensures effective testing. Sources of credential lists include GitHub repositories, penetration testing forums, and compiled lists from security research.
+
+Automated tools like `hydra` and `medusa` simplify the testing process. These tools allow for customizable settings that can alter the speed, parallelism, and response handling to adapt to various testing environments. It's crucial to manage resource usage to avoid detection through abnormal traffic patterns.
+
+Finally, verifying findings to eliminate false positives is crucial. Once suspect credentials are identified, manually retesting with them ensures that authentication is genuine. This step guarantees that only real vulnerabilities are reported, mitigating the risk of misidentification and aiding in the development of precise remediation strategies.
