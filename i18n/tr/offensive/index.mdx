@@ -1,0 +1,276 @@
+---
+title: Saldırgan Siber Güvenlik Tekniklerine Kapsamlı Rehber
+description: Ağ istismarı, web uygulama saldırıları ve zararlı yazılım geliştirme stratejileri dahil olmak üzere temel saldırgan siber güvenlik tekniklerini keşfedin.
+keywords:
+- saldırgan siber güvenlik
+- ağ istismarı
+- web uygulama saldırıları
+- zararlı yazılım geliştirme
+- kırmızı takım faaliyeti
+- istismar geliştirme
+- bulut güvenliği
+- API güvenlik açıkları
+- konteyner güvenliği
+---
+
+# Saldırgan Siber Güvenlik Yol Haritası
+
+## Ağ
+
+### Keşif ve Ağ Haritalama
+Ağ keşfi, hedef ağ hakkında bilgi toplayarak yapısını ve cihazlarını haritalamak için yapılır. Teknikler arasında pasif bilgi toplama, tarama ve ağ bileşenlerinin aktif olarak sayım yapılması bulunur. Nmap ve Wireshark gibi araçlar, açık portları, hizmetleri ve potansiyel güvenlik açıklarını belirlemek için kullanılır. Örneğin şu komut kullanılır:
+
+```bash
+nmap -sS -O -v hedef-ip
+```
+
+Bu komut, bir TCP SYN taraması yaparak hedef işletim sistemini tespit eder.
+
+### Yanal Hareket Stratejileri
+Yanal hareket, saldırganların başlangıçtaki erişimlerinden sonra ağ boyunca dolaşmak için kullandıkları teknikleri ifade eder. Bu, bitişik ağ segmentlerinde güvenlik açıklarının istismar edilmesini ve ele geçirilmiş kimlik bilgilerinin kaynaklara erişimde kullanılmasını içerir. Saldırganlar, yan hareketler için PsExec veya PowerShell gibi araçlar kullanabilirler.
+
+### Ağ Protokollerini İstismar Etme
+Bu, SMB, RDP veya DNS gibi ağ protokollerindeki zayıflıkları belirleyip bunları yetkisiz işlemler gerçekleştirmek için kullanmayı içerir. Protokol mekaniklerini ve tutarsızlık yaratmayı bilmek, başarılı bir istismara yol açabilir.
+
+### Ortadaki Adam (MitM) Saldırı Teknikleri
+MitM saldırıları, iki taraf arasındaki iletişimi algılanmadan kesip değiştirerek gerçekleşir. Teknikler arasında ARP aldatması veya DNS zehirlenmesi yer alabilir. Saldırganlar, trafiği yakalayıp manipüle etmek için Ettercap ve MITMf gibi araçlar kullanır.
+
+### Ağ Trafiği Analizi ve Manipülasyonu
+Trafik analizi, ağ veri paketlerini izleyerek kalıpları veya anomalileri tanımlamayı içerir. Saldırganlar, iletişimi kesmek veya incelemek amacıyla paketleri yönlendirebilir, düşürebilir veya enjekte edebilir. Bu amaçlar için Tcpdump ve Scapy gibi araçlar yaygın olarak kullanılmaktadır.
+
+## Web Uygulaması
+
+### Gelişmiş Enjeksiyon Saldırıları (SQLi, NoSQLi)
+SQL Enjeksiyonu, kullanıcı giriş alanlarına kötü niyetli SQL kodu ekleyerek veritabanından veri manipülasyonu veya çıkarma işlemidir. Bu prensip, NoSQL veritabanları için NoSQL enjeksiyonu (NoSQLi) ile de geçerlidir. SQLmap, SQL enjeksiyonlarını otomatikleştirme ve veritabanı ele geçirme işlemleri için yaygın bir araçtır:
+
+```bash
+sqlmap -u "http://hedef.com/arama?q=test" --dbs
+```
+
+Bu komut, hedef URL'den veritabanı adlarını çıkarmaya çalışır.
+
+### Çapraz Site Betikleme (XSS) ve CSRF Sömürüsü
+XSS, saldırganların diğer kullanıcılar tarafından görüntülenen web sayfalarına betikler enjekte etmelerine imkan tanır ve oturum çalmak veya veri hırsızlığı gerçekleştirebilir. CSRF, kullanıcının başka bir sitede istenmeyen işlemler yapmasını sağlar.
+
+### Güvensiz Doğrudan Nesne Referansı (IDOR) ve BOLAs
+IDOR zafiyetleri, saldırganların nesnelere (örneğin kullanıcı kimlikleri) referansları manipüle ederek verilere erişmesine olanak tanır. Kırık Nesne Seviyesi Yetkilendirme (BOLAs), bireysel nesneler üzerinde erişim kontrolünün yetersiz uygulanmasını içerir.
+
+### Web Shell Taktikleri ve Kalıcılık
+Kompleks bir PHP web shell örneği:
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+### Web Uygulama Duvarı Aşma
+WAF'leri aşmak, imza tabanlı algılamadan kaçabilen yükleri hazırlamayı içerir. Teknikler arasında kodlama, obfuscation veya saldırı vektörlerinin parçalanması yer alabilir.
+
+## Mobil Uygulama
+
+### Mobil Uygulamaları Tersine Mühendislik
+Tersine mühendislik, bir mobil uygulamanın kodunu çözmek ve analiz etmek, mantığını anlamak ve güvenlik açıklarını tanımlamak anlamına gelir. APKTool veya Hopper gibi araçlar, sökme veya derleme için gereklidir.
+
+### Mobil Platform Güvenlik Açığı İstismarı
+Her bir mobil platformun (örneğin Android, iOS) belli başlı zafiyetleri vardır. İstismarlar, sistem ayrıcalıklarının veya güncel olmayan kütüphanelerin kullanılmasını içerebilir.
+
+### Mobil İletişimlerin Yakalayıp Manipülasyonu
+Saldırganlar, özellikle SSL/TLS uygulamaları zayıf veya yanlış yapılandırıldığında, Burp Suite veya Frida gibi araçlarla mobil uygulamalar tarafından iletilen verileri kesip manipüle eder.
+
+### Mobil Uygulama Veri Güvenliği İhlalleri
+Hassas bilgilerin yeterli şifreleme olmadan depolandığı veya iletildiği, mobil uygulamalar tarafından kullanılan güvenli olmayan veri depolama veya veri iletim yöntemlerini hedeflemek.
+
+## Tedarik Zinciri
+
+### Geliştirme ve Teslimat Boru Hatlarını Hedefleme
+Geliştirme boru hattını tehlikeye atmak, kötü niyetli kodların yaygın olarak dağıtılmasına yol açabilir. Saldırganlar, kaynak kod depolarını veya CI/CD ortamlarını arka kapılar eklemek için hedefler.
+
+### Gömülü Sistem Güvenliği Testi
+Gömülü cihazların yazılımı veya donanımındaki zafiyetleri belirlemeye odaklanın. Testler genellikle JTAG veya UART gibi donanım arabirimlerini içerir.
+
+### Tedarik Zinciri İhlali Teknikleri
+Bir ürünün tedarik zincirine kötü niyetli bileşenler eklemek, ürünün son kullanıcıya ulaşmadan önceki bütünlüğünü bozar. Donanım implantları veya değiştirilmiş güncelleme dosyaları gibi örnekler not edilmiştir.
+
+### Üçüncü Taraf Yazılım Arkakapı Ekleme
+Geliştirme sırasında üçüncü taraf satıcılar tarafından sağlanan yazılım ürünlerine gizli, yetkisiz kod tanıtmak, kasıtlı veya istismar yoluyla.
+
+## CI/CD
+
+### CI/CD Ortamlarının İhlali
+CI/CD ortamına yetkisiz erişim yazılım derleme sürecini değiştirme gücü verir ve dağıtımdan önce kötü niyetli kod ekleyebilir.
+
+### Derleme Boru Hatlarına Sızma
+Saldırganlar, derleme eserlerini kesebilir veya değiştirebilir ve bunun sonucunda bozulmuş yazılım dağıtımı gerçekleştirilebilir. Derleme betiklerindeki veya bağımlılıklardaki güvenlik açıkları yaygın olarak istismar edilir.
+
+### Eser Tahribatı ve Bütünlük İhlali
+Görünmeden derleme eserlerinin değiştirilmesi, yazılımın amaçlanan işlevselliğini bozabilir. Eser bütünlüğünü sağlamak için kontrol toplamları veya kriptografik imzalar kullanılarak güvence altına alınır.
+
+### CI/CD Araç Zafiyeti İstismarı
+Jenkins veya GitLab gibi CI/CD araçlarında bilinen zafiyetler, yetkisiz erişim ve kod değiştirme işlemleri için istismar edilebilir.
+
+## Bulut
+
+### Bulut Hizmeti İstismar Teknikleri
+Bulut yönetimli kaynaklar üzerinde yetkisiz erişim veya kontrol sağlamak için bulut hizmetlerindeki yanlış yapılandırmaları veya güvenlik açıklarını istismar etme.
+
+### Yanlış Yapılandırılmış Bulut Depolama Saldırıları
+AWS S3 kovaları gibi güvenlik kontrolü yetersiz bırakılan açık depolama hizmetlerini hedef alarak, genel yazma veya okuma erişimi gibi.
+
+### Bulut Kimlik ve Erişim Yönetimi Baypası
+Zayıf IAM politikaları veya aşırı izinli rollerden yararlanarak bulut varlıklarına yetkisiz erişim sağlama.
+
+### Sunucusuz Mimari Saldırı Vektörleri
+Olay tetikleyicilerini kötüye kullanarak veya fonksiyon yürütme bağlamlarına kötü niyetli yükler enjekte ederek sunucusuz çerçevelerdeki zafiyetleri istismar etme.
+
+## Konteyner
+
+### Konteyner Kaçış Teknikleri
+Zararlı kodun konteyner ortamından ana sistemine kaçmasına izin veren güvenlik açıklarını tespit etme ve istismar etme.
+
+### Kubernetes Kümelerini Hedefleme
+Kubernetes ortamlarındaki yanlış yapılandırmaları istismar ederek yetkisiz kontrol ele geçirme veya hizmetleri bozma.
+
+### Konteyner Orkestrasyon Zafiyetlerini İstismar Etme
+Docker Swarm veya Kubernetes gibi orkestrasyon araçlarındaki zafiyetleri hedefleyerek sınırlı erişim ortamlarına erişme.
+
+### Konteyner Görüntü Zehirleme
+Konteyner görüntülerine zararlı kod enjekte ederek, bu görüntülerin dağıtıldığı sistemleri etkileme.
+
+## API
+
+### API Uç Noktası Belirleme ve Keşif
+Kullanılabilir kaynakları ve potansiyel güvenlik açıklarını değerlendirmek için API uç noktalarını belirleyerek yapı haritalama.
+
+### API Kimlik Doğrulama ve Yetkilendirme Baypası
+Kimlik inceleme katmanlarını aşan veya yanlış izin kontrolü eksikliklerini istismar eden güvenlik açıklarını kullanma.
+
+### Hız Sınırlama ve Kota İhlali
+İstek başlıklarını veya yüklerini manipüle ederek API'yi bunaltmak veya amaçlanandan daha fazla veri çıkarmak için hız sınırlarını aşma.
+
+### REST ve SOAP API Güvenlik Açıklarını İstismar Etme
+Hata mesajlarının ayrıntılı olması veya maruz kalması nedeniyle enjeksiyon, serileştirme saldırıları veya bu durumdan yararlanarak belirli API'leri hedef alma.
+
+## Donanım
+
+### Donanım Arayüzü İstismarı
+Cihaz işletimlerini değiştirmek veya hassas verileri çıkarmak için donanım arayüzlerini manipüle etme veya erişim sağlama.
+
+### Donanım Üzerinde Yan Kanal Saldırıları
+Elektriksel yayılımlar, güç tüketim analizi veya zamanlama bilgilerini kullanarak cihaz operasyonları veya hassas bilgileri elde etme.
+
+### Gömülü Cihaza Erişim
+Donanım iletişim arabirimlerinden veya yazılımından zafiyetleri istismar ederek gömülü cihazlara yetkisiz erişim sağlama.
+
+### Donanım Üzerinde Firmware Tersine Mühendislik
+Donanım cihazlarının firmware'ini analiz ederek zafiyetleri tanımlama veya cihaz işletimini tersine mühendislik üzerinde daha iyi anlama.
+
+## Kablosuz
+
+### Kablosuz Ağ Saldırıları (Wi-Fi, Bluetooth)
+Zayıf Wi-Fi protokollerini (WEP/WPA2) veya Bluetooth yapılandırmalarını istismar ederek kablosuz iletişimleri kesip manipüle etme.
+
+### Sahte Erişim Noktası Yerleştirilmesi
+Yetkisiz erişim noktaları yerleştirerek kablosuz iletişimleri kesintiye uğratma, kimlik avı veya kimlik bilgisi hırsızlığı için yaygın kullanılan bir tekniktir.
+
+### Kablosuz İletişimlerde Dinleme
+Kablosuz bir ağ üzerinden şifrelenmemiş iletişimleri dinleyerek şifreler gibi hassas bilgileri yakalama.
+
+### Kablosuz Protokol İstismarı
+Zigbee veya BLE gibi protokollerdeki zayıflıkları istismar ederek cihaz iletişimlerini kontrol etme veya gizlice dinleme.
+
+## Fiziksel Güvenlik Saldırıları
+
+### Sosyal Mühendislik ve Fiziksel Yanlış Yönlendirme
+Tesislere yetkisiz erişim sağlamak için kimlik taklidi veya kimlik bilgilerini sahtesini yapma gibi yanıltmalar kullanarak fiziksel güvenlik önlemlerini aşma.
+
+### Fiziksel Erişim Kontrollerini Aşma
+Kilitleri veya biyometrik sistemleri dolaşarak, anahtar kopyalama veya röle saldırıları gibi teknikler kullanma.
+
+### Fiziksel Katman Bilgi Çıkartma
+Fiziksel yollarla veri çıkartma, açıkta kalmış sabit disklerden veri kopyalama veya elektromanyetik sinyalleri kesme.
+
+### Fiziksel Güvenlik Değerlendirme Yöntemleri
+Mevzilerin penetrasyon testi yapılması dahil olmak üzere fiziksel güvenlik kurulumlarında zafiyetleri değerlendirmek için simülasyon tabanlı teknikler.
+
+## Kriptografik
+
+### Kriptografik Protokol Saldırıları
+Veri deşifre etme, kimlik doğrulama atlatma veya sahte kimlik geçirme gibi kriptografik protokollerdeki zafiyetlerin istismar edilmesi.
+
+### Kriptoanaliz Teknikleri
+Şemaları kırmak dahil olmak üzere kriptografik güvenliği tehlikeye atmak için matematiksel ve sistemik analiz teknikleri kullanma.
+
+### Anahtar Yönetimi İhlalleri
+Yetkisiz anahtar ifşaatı ve veri şifreleme için yetersiz anahtar yönetim uygulamalarını hedefleme.
+
+### Simetrik ve Asimetrik Şifreyi Kırma
+AES veya RSA üzerindeki saldırılar gibi, anahtar olmadan verileri deşifre etmek için zayıflıkları bulma veya uygulama hatalarını istismar etme.
+
+## İstismar Geliştirme
+
+### Zafiyet İstismar Fırsatları Belirleme
+Yazılım veya donanımda istismar edilebilecek zayıflıkları araştırma ve keşfetme. Onaylanmamış girişler veya kontrol edilmemiş operasyonlar içindeki giriş noktalarına odaklanma.
+
+### İleri Hafıza Bozulması Teknikleri
+Rasgele kod yürütme sağlamak için hafıza operasyonlarındaki zayıflıkları kullanma, tampon taşmaları ve serbest bırakmadan sonra kullanımı içeren istismarlar.
+
+### Shellcode Hazırlama ve Teslim Etme
+Hedef sisteme zararlı talimatları yürütmek için yük olarak shellcode tasarlama ve enjekte etme.
+
+### İstismar Çerçeve Kullanımı
+İstismar geliştirme ve yapılandırılabilir modüller aracılığıyla değişken hedefler için saldırı vektörlerini yönetmek için Metasploit gibi araçlar kullanma.
+
+## Kırmızı Takım
+
+### Kırmızı Takım Çalışmalarının Planlanması ve Uygulanması
+Kırmızı takım faaliyetleri, organizasyonel savunmaları değerlendirmek için gelişmiş kalıcı tehditleri (APT) simüle etmek anlamına gelir. Planlama, belirli taktikleri, teknikleri ve prosedürleri (TTP'ler) gerçekleştirmeye odaklanır.
+
+### Kırmızı Takım Altyapısı ve Araç Kurulumu
+Saldırı araçlarına ve komuta-kontrol (C2) sistemlerine odaklanarak, kırmızı takım operasyonlarını yürütmek için güvenli ve dayanıklı bir altyapı kurma.
+
+### Çok Aşamalı Saldırı Kampanyaları
+Keşif, istismar ve yanal hareket gibi birden fazla aşamayı içeren koordineli kampanyalar, gerçek dünya saldırganlarını taklit eder.
+
+### Düşman Simülasyonu ve Emülasyonu
+Bir organizasyonun savunma önlemlerini değerlendirmek ve iyileştirme alanlarını belirlemek için gelişmiş tehdit aktörlerinin kullandığı taktiklerin gerçekçi simülasyonu.
+
+## Kaçış
+
+### Ağ ve Uç Nokta Tespiti Baypası
+IDS/IPS ve uç nokta güvenlik çözümlerini atlatmak için kötü niyetli yazılım obfuscation veya tespit boşluklarını istismar yoluyla kullanma.
+
+### Anti-Forensics ve Kanıt Manipülasyonu
+Adli analizi engellemek veya kanıt izini bozmak için geliştirilen teknikler, gizli operasyonların sürdürülmesinde kritiktir.
+
+### Obfuscation ve Şifreleme Teknikleri
+Güvenlik önlemlerinden ve analizden kaçınmak amacıyla yükleri veya iletişimleri çok katmanlı obfuscation veya şifreleme ile maskeleme.
+
+### Tuzak Sistemler ve Sandbox Atlatma
+Kötü niyetli faaliyetleri yakalamayı amaçlayan tuzak sistemler (honeypots) veya sanal alanlarla (sandbox) etkileşimden kaçınma ve algılama yöntemleri.
+
+## Zararlı Yazılım Geliştirme
+
+### Özel Yük Tasarımı ve Teslimatı
+Özgün savunmalardan kaçınarak veya belirli ortamları hedefleyen, genellikle gizlilik ve işlevselliğe vurgu yapan özel yükler oluşturma.
+
+### Zararlı Yazılım Kaçış ve Kalıcılık Teknikleri
+Kompromiz sonrası sistemde kalıcılığı sağlamak ve obfuscation veya ev sahibi savunmaları manipüle ederek tespit edilmekten kaçınmak için zararlı yazılım oluşturma.
+
+### C2 Altyapısı Geliştirme ve Yönetimi
+Kompromize sistemler üzerinde özerkliği sürdürmek için komuta ve kontrol altyapısını oluşturma ve yönetme, kalıcı tehdit aktörleri için esastır.
+
+### Anti-Malware Aşma Yöntemleri
+İmza manipülasyonu veya davranış değişimi gibi gizleme teknikleri kullanarak otomatik zararlı yazılım tespit sistemlerini aşma çabaları.
+
+## Yazılım
+
+### Yazılım Arkakapı Ekleme Teknikleri
+Çoğunlukla manipüle edilmiş açık kaynak veya tescilli kod tabanları aracılığıyla, yazılım koduna yetkisiz erişim için gizli erişim noktaları ekleme.
+
+### Uygulama Mantığı Manipülasyonu
+İş mantığında veya uygulama akışında hataları istismar ederek istenmeyen eylemleri yürütme veya veriyi uygunsuz bir şekilde çıkarma.
+
+### İleri Tersine Mühendislik Taktikleri
+IDA Pro veya Ghidra gibi araçları kullanarak, kapalı kaynaklı sistemlerdeki iç mantığı veya zafiyetleri ortaya çıkarmak için yazılım yürütülebilir dosyalarının derinlemesine analizi.
+
+### Kod Enjeksiyonu ve Bağlama
+Çoğunlukla ayrıcalık yükseltme için kullanılan, kötü niyetli kodu çalışan işlemlere enjekte etme veya uygulama iş akışlarını kanca teknikleri ile kesme.

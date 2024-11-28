@@ -1,0 +1,278 @@
+---
+title: Hướng Dẫn Toàn Diện Về Kỹ Thuật An Ninh Không Gian Mạng Tấn Công
+description: Khám phá các kỹ thuật an ninh không gian mạng tấn công cần thiết, bao gồm khai thác mạng, tấn công ứng dụng web và chiến lược phát triển phần mềm độc hại.
+keywords:
+- an ninh không gian mạng tấn công
+- khai thác mạng
+- tấn công ứng dụng web
+- phát triển phần mềm độc hại
+- red teaming
+- phát triển khai thác lỗ hổng
+- bảo mật đám mây
+- lỗ hổng API
+- bảo mật container
+---
+
+# Lộ Trình An Ninh Không Gian Mạng Tấn Công
+
+## Mạng
+
+### Trinh Sát và Lập Bản Đồ Mạng
+Trinh sát mạng liên quan đến việc thu thập thông tin về mạng mục tiêu để tạo một bản đồ về cấu trúc và thiết bị của nó. Các kỹ thuật bao gồm thu thập thông tin thụ động, quét và liệt kê các thành phần mạng một cách chủ động. Các công cụ như Nmap và Wireshark được sử dụng để xác định các cổng mở, dịch vụ và các điểm yếu tiềm tàng. Sử dụng các lệnh như:
+
+```bash
+nmap -sS -O -v target-ip
+```
+
+Lệnh này thực hiện một quét TCP SYN và phát hiện hệ điều hành mục tiêu.
+
+### Chiến Lược Di Chuyển Trong Mạng
+Di chuyển trong mạng đề cập đến các kỹ thuật mà kẻ tấn công sử dụng để chuyển đổi qua mạng sau khi có quyền truy cập ban đầu. Điều này bao gồm khai thác các lỗ hổng trong các phân đoạn mạng liền kề và sử dụng thông tin đăng nhập bị xâm phạm để truy cập tài nguyên. Kẻ tấn công có thể sử dụng các công cụ như PsExec hoặc PowerShell để truyền đi.
+
+### Khai Thác Các Giao Thức Mạng
+Điều này bao gồm việc xác định điểm yếu trong các giao thức mạng như SMB, RDP hoặc DNS và lợi dụng chúng để thực hiện các hành động trái phép. Hiểu biết về cơ chế giao thức và tạo ra dị thường có thể dẫn đến khai thác thành công.
+
+### Kỹ Thuật Tấn Công Người Trung Gian (MitM)
+Các cuộc tấn công MitM bao gồm việc chặn và thay đổi thông tin liên lạc giữa hai bên mà không bị phát hiện. Các kỹ thuật có thể bao gồm giả mạo ARP hoặc đầu độc DNS. Những kẻ tấn công sử dụng các công cụ như Ettercap và MITMf để bắt và thao túng lưu lượng.
+
+### Phân Tích và Thao Tác Lưu Lượng Mạng
+Phân tích lưu lượng liên quan đến việc giám sát các gói dữ liệu để xác định khuôn mẫu hoặc dị thường. Kẻ tấn công có thể chuyển hướng, bỏ hoặc chèn gói để gián đoạn hoặc phân tích thông tin liên lạc. Các công cụ như Tcpdump và Scapy được sử dụng phổ biến cho các mục đích này.
+
+## Ứng Dụng Web
+
+### Tấn Công Tiêm Phun Cao Cấp (SQLi, NoSQLi)
+Tiêm phun SQL liên quan đến việc chèn mã SQL độc hại vào các trường nhập liệu của người dùng để thao tác hoặc trích xuất dữ liệu từ cơ sở dữ liệu. Nguyên tắc này được mở rộng đến các cơ sở dữ liệu NoSQL với NoSQLi. SQLmap là một công cụ phổ biến để tự động hóa việc tiêm phun SQL và chiếm đóng cơ sở dữ liệu:
+
+```bash
+sqlmap -u "http://target.com/search?q=test" --dbs
+```
+
+Lệnh này cố gắng trích xuất tên cơ sở dữ liệu từ URL mục tiêu.
+
+### Khai Thác XSS và CSRF
+XSS cho phép kẻ tấn công chèn tập lệnh vào các trang web mà người dùng khác xem, cho phép chiếm quyền phiên hoặc đánh cắp dữ liệu. CSRF lừa người dùng thực hiện các hành động không mong muốn trên một trang web khác nơi họ đã xác thực.
+
+### Tham Chiếu Đối Tượng Trực Tiếp Không An Toàn (IDOR) và BOLAs
+Lỗ hổng IDOR cho phép kẻ tấn công truy cập dữ liệu bằng cách thao tác tham chiếu đến các đối tượng (ví dụ: ID người dùng). BOLAs liên quan đến việc thực thi không đúng quyền truy cập đối tượng ở cấp độ cá nhân.
+
+### Chiến Thuật Shell Web và Duy Trì
+Cài đặt một shell web trên máy chủ bị xâm phạm để truy cập và thực thi lệnh từ xa. Shell web là các kịch bản đơn giản cung cấp một giao diện thông qua HTTP.
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+Ví dụ về một shell PHP đơn giản.
+
+### Tránh Rào Cản Ứng Dụng Web
+Tránh WAFs liên quan đến việc tạo các tải trọng để vượt qua phát hiện dựa trên chữ ký. Các kỹ thuật bao gồm mã hóa, làm rối, hoặc phân mảnh vector tấn công.
+
+## Ứng Dụng Di Động
+
+### Kỹ Thuật Phân Tích Ngược Ứng Dụng Di Động
+Phân tích ngược bao gồm giải mã và phân tích mã của ứng dụng di động để hiểu logic của nó và xác định các lỗ hổng. Công cụ như APKTool hoặc Hopper cần thiết cho việc gỡ bỏ hoặc giải mã.
+
+### Khai Thác Lỗ Hổng Nền Tảng Di Động
+Mỗi nền tảng di động (ví dụ: Android, iOS) có các lỗ hổng cụ thể. Khai thác có thể liên quan đến việc lợi dụng quyền hệ thống hoặc thư viện quá hạn.
+
+### Chặn và Thao Tác Truyền Thông Di Động
+Kẻ tấn công sử dụng công cụ như Burp Suite hoặc Frida để chặn và thao tác dữ liệu do ứng dụng di động truyền đi, đặc biệt khi các triển khai SSL/TLS yếu hoặc sai cấu hình.
+
+### Sự Cố Bảo Mật Dữ Liệu Ứng Dụng Di Động
+Nhắm mục tiêu vào lưu trữ dữ liệu không an toàn hoặc phương pháp truyền thông không an toàn mà các ứng dụng di động sử dụng, nơi thông tin nhạy cảm được lưu trữ hoặc truyền mà không được mã hóa đầy đủ.
+
+## Chuỗi Cung Ứng
+
+### Tấn Công Đường Phát Triển và Giao Hàng
+Xâm nhập vào đường phát triển có thể dẫn đến phát tán rộng rãi mã độc. Kẻ tấn công nhắm vào các kho mã nguồn hoặc môi trường CI/CD để cấy mã độc.
+
+### Kiểm Tra Bảo Mật Hệ Thống Nhúng
+Tập trung vào việc xác định các lỗ hổng bên trong firmware hoặc phần mềm của các thiết bị nhúng. Kiểm tra thường bao gồm giao diện phần cứng như JTAG hoặc UART.
+
+### Kỹ Thuật Xâm Nhập Chuỗi Cung Ứng
+Chèn các thành phần độc hại trong chuỗi cung ứng sản phẩm làm giảm tính toàn vẹn trước khi đến tay người dùng cuối. Các ví dụ nổi bật bao gồm các implant phần cứng hoặc các tệp cập nhật bị chỉnh sửa.
+
+### Chèn Mã Độc Vào Phần Mềm Bên Thứ Ba
+Đưa mã chưa được phép hoặc mã độc vào sản phẩm phần mềm do bên thứ ba cung cấp trong quá trình phát triển, theo cách cố ý hoặc thông qua khai thác.
+
+## CI/CD
+
+### Xâm Nhập Môi Trường CI/CD
+Truy cập trái phép vào môi trường CI/CD cho phép kẻ tấn công thay đổi quá trình xây dựng phần mềm, tiềm ẩn việc chèn mã độc trước khi triển khai.
+
+### Xâm Nhập Chuỗi Xây Dựng
+Kẻ tấn công chặn hoặc thay đổi các hiện vật xây dựng, dẫn đến việc phát tán phần mềm bị tổn hại. Các lỗ hổng trong kịch bản xây dựng hoặc phụ thuộc thường bị khai thác.
+
+### Thao Túng và Làm Mất Tính Toàn Vẹn Hiện Vật
+Sự thay đổi không bị phát hiện của các hiện vật xây dựng có thể làm suy yếu chức năng dự kiến của phần mềm. Đảm bảo tính toàn vẹn của hiện vật là rất quan trọng, dựa vào checksum hoặc chữ ký mã hóa.
+
+### Khai Thác Lỗ Hổng Công Cụ CI/CD
+Các lỗ hổng đã biết trong các công cụ CI/CD, chẳng hạn như Jenkins hoặc GitLab, có thể bị khai thác để truy cập trái phép và thay đổi mã.
+
+## Đám Mây
+
+### Kỹ Thuật Khai Thác Dịch Vụ Đám Mây
+Khai thác các sai sót hoặc lỗ hổng trong dịch vụ đám mây để giành quyền truy cập trái phép hoặc kiểm soát các tài nguyên do đám mây quản lý.
+
+### Tấn Công Lưu Trữ Đám Mây Sai Cấu Hình
+Nhắm mục tiêu vào các dịch vụ lưu trữ công khai như các bucket S3 của AWS do thiếu kiểm soát bảo mật như quyền viết hoặc đọc công khai.
+
+### Bỏ Qua Quản Lý Quyền Hạn và Danh Tính Đám Mây
+Giành quyền truy cập trái phép vào tài nguyên đám mây thông qua việc khai thác chính sách IAM yếu hoặc vai trò có quyền quá rộng rãi.
+
+### Kiến Trúc Serverless và Vectơ Tấn Công
+Khai thác lỗ hổng trong các khung serverless bằng cách lạm dụng các kích hoạt sự kiện hoặc chèn tải trọng độc hại vào ngữ cảnh thực thi hàm.
+
+## Container
+
+### Kỹ Thuật Trốn Thoát Container
+Xác định và khai thác các lỗ hổng cho phép mã độc thoát khỏi môi trường container vào hệ thống aliexpress oc.host.
+
+### Tấn Công Các Cụm Kubernetes
+Khai thác các cấu hình sai trong các môi trường Kubernetes để chiếm quyền kiểm soát trái phép hoặc gây gián đoạn dịch vụ.
+
+### Khai Thác Lỗ Hổng Điều Hành Container
+Nhắm vào các lỗ hổng trong các công cụ điều hành như Docker Swarm hoặc Kubernetes để truy cập vào các môi trường bị hạn chế.
+
+### Đầu Độc Hình Ảnh Container
+Chỉnh sửa các hình ảnh container bằng cách chèn mã độc, ảnh hưởng đến các hệ thống nơi các hình ảnh này được triển khai.
+
+## API
+
+### Liệt Kê Điểm Kết API và Trinh Sát
+Xác định các điểm kết API và lập bản đồ cấu trúc của chúng để xác định tài nguyên có sẵn và các lỗ hổng tiềm tàng.
+
+### Bỏ Qua Xác Thực và Ủy Quyền API
+Khai thác các lỗ hổng cho phép bỏ qua các tầng xác thực hoặc kiểm tra ủy quyền không đúng cách.
+
+### Lạm Dụng Giới Hạn Tốc Độ và Hạn Ngạch
+Bỏ qua các giới hạn tốc độ để làm ngập API hoặc trích xuất nhiều dữ liệu hơn so với dự kiến bằng cách thao tác tiêu đề yêu cầu hoặc tải trọng.
+
+### Khai Thác Lỗ Hổng REST và SOAP API
+Nhắm vào các API cụ thể thông qua tấn công tiêm phun, giải tuần tự hoặc lợi dụng sự phơi bày do thông báo lỗi chi tiết.
+
+## Phần Cứng
+
+### Khai Thác Giao Diện Phần Cứng
+Thao tác hoặc truy cập giao diện phần cứng để trích xuất dữ liệu nhạy cảm hoặc thay đổi hoạt động của thiết bị.
+
+### Tấn Công Kênh Phụ Trên Phần Cứng
+Lợi dụng phát thải điện từ, phân tích tiêu thụ điện năng hoặc thông tin thời gian để suy diễn hoạt động của thiết bị hoặc truy xuất thông tin nhạy cảm.
+
+### Xâm Phạm Thiết Bị Nhúng
+Giành quyền truy cập trái phép vào các thiết bị nhúng thông qua các lỗ hổng trong firmware hoặc giao diện truyền thông bên ngoài.
+
+### Phân Tích Ngược Firmware Phần Cứng
+Phân tích firmware của các thiết bị phần cứng để xác định lỗ hổng hoặc hiểu rõ hoạt động của thiết bị thông qua phân tích ngược.
+
+## Không Dây
+
+### Tấn Công Mạng Không Dây (Wi-Fi, Bluetooth)
+Khai thác các giao thức Wi-Fi yếu (WEP/WPA2) hoặc cấu hình sai Bluetooth để chặn và thao tác truyền thông không dây.
+
+### Triển Khai Điểm Truy Cập Rogue
+Triển khai các điểm truy cập không được phép để chặn truyền thông không dây, kỹ thuật thường được sử dụng trong tấn công lừa đảo hoặc đánh cắp thông tin xác thực.
+
+### Nghe Lén Truyền Thông Không Dây
+Nghe lén truyền thông không được mã hóa qua mạng không dây để nắm bắt thông tin nhạy cảm như mật khẩu.
+
+### Khai Thác Giao Thức Không Dây
+Khai thác điểm yếu trong các giao thức như Zigbee hoặc Bluetooth Low Energy (BLE) để chiếm quyền kiểm soát hoặc gián điệp truyền thông giữa các thiết bị.
+
+## Tấn Công An Ninh Vật Lý
+
+### Kỹ Thuật Xã Hỗn và Xâm Nhập Vật Lý
+Sử dụng lừa đảo để vượt qua các biện pháp an ninh vật lý, bao gồm việc giả mạo hoặc làm giả chứng chỉ để giành quyền truy cập trái phép vào các cơ sở.
+
+### Vượt Qua Kiểm Soát Truy Cập Vật Lý
+Vượt qua các rào cản như khóa hoặc hệ thống sinh trắc học thông qua các kỹ thuật như mở khóa hoặc tấn công truyền tiếp.
+
+### Trích Xuất Thông Tin Lớp Vật Lý
+Trích xuất dữ liệu thông qua các phương tiện vật lý, như sao chép dữ liệu từ ổ cứng bị phơi bày hoặc chặn tín hiệu điện từ.
+
+### Phương Pháp Đánh Giá An Ninh Vật Lý
+Các kỹ thuật dựa trên mô phỏng để đánh giá các lỗ hổng trong thiết lập an ninh vật lý, liên quan đến việc kiểm tra xâm nhập cơ sở.
+
+## Mật Mã
+
+### Tấn Công Giao Thức Mật Mã
+Khai thác các lỗ hổng trong giao thức mật mã, dẫn đến việc giải mã dữ liệu, vượt qua xác thực hoặc giả mạo.
+
+### Kỹ Thuật Phân Tích Mật Mã
+Các kỹ thuật sử dụng phân tích toán học và hệ thống để làm tổn thương an ninh mật mã, bao gồm phá vỡ các sơ đồ.
+
+### Lạm Dụng Quản Lý Khóa
+Tấn công các thực hành quản lý khóa không đúng cách dẫn đến tiết lộ khóa trái phép và giải mã dữ liệu.
+
+### Phá Vỡ Mã Hoá Đối Xứng và Không Đối Xứng
+Tìm điểm yếu hoặc khai thác sai sót trong triển khai để giải mã dữ liệu mà không cần có khóa. Ví dụ bao gồm các cuộc tấn công vào AES hoặc RSA.
+
+## Phát Triển Khai Thác Lỗ Hổng
+
+### Xác Định Cơ Hội Khai Thác Lỗ Hổng
+Nghiên cứu và phát hiện các lỗ hổng trong phần mềm hoặc phần cứng có thể bị khai thác. Tập trung vào các điểm đầu vào không được kiểm tra hoặc hoạt động không được kiểm chứng.
+
+### Kỹ Thuật Tổn Hại Bộ Nhớ Cao Cấp
+Tận dụng điểm yếu trong hoạt động bộ nhớ để đạt được thực thi mã tùy ý, bao gồm tràn bộ nhớ đệm và khai thác lỗi sau khi giải phóng.
+
+### Tạo Shellcode và Phương Thức Cung Cấp
+Thiết kế và chèn shellcode như một tải trọng để thực thi các chỉ dẫn độc hại trên hệ thống mục tiêu.
+
+### Sử Dụng Khung Khai Thác Lỗ Hổng
+Sử dụng các công cụ như Metasploit để hỗ trợ phát triển khai thác và quản lý các vector tấn công thông qua các mô-đun có thể tuỳ chỉnh cho các mục tiêu khác nhau.
+
+## Red Teaming
+
+### Lập Kế Hoạch và Thực Thi Các Cuộc Tấn Công Đội Đỏ
+Red teaming liên quan đến việc mô phỏng các mối đe dọa dai dẳng cao cấp (APTs) để đánh giá các biện pháp phòng thủ của tổ chức. Lập kế hoạch tập trung vào việc đạt được các chiến thuật, kỹ thuật và quy trình (TTPs) cụ thể.
+
+### Thiết Lập Cơ Sở Hạ Tầng và Công Cụ Đội Đỏ
+Xây dựng một cơ sở hạ tầng an toàn và kiên cường để thực hiện các hoạt động đội đỏ, tập trung vào hệ thống điều khiển và điều khiển (C2) và công cụ tấn công.
+
+### Chiến Dịch Tấn Công Đa Pha
+Các chiến dịch phối hợp mô phỏng kẻ tấn công thực tế, bao gồm nhiều giai đoạn như trinh sát, khai thác và di động trong mạng.
+
+### Mô Phỏng và Hóa Hình Đối Thủ
+Mô phỏng thực tế các chiến thuật được sử dụng bởi các tác nhân đe dọa cao cấp để đánh giá các biện pháp phòng thủ của tổ chức và xác định các lĩnh vực cần cải thiện.
+
+## Né Tránh
+
+### Tránh Phát Hiện Mạng và Điểm Kết Thúc
+Sử dụng các chiến thuật để tránh phát hiện bởi các hệ thống IDS/IPS và giải pháp an ninh điểm kết thúc, thông qua che giấu phần mềm độc hại hoặc khai thác các khoảng trống phát hiện.
+
+### Kỹ Thuật Chống Phân Tích Kỹ Thuật Số và Thao Tác Bằng Chứng
+Các kỹ thuật được thiết kế để ngăn chặn phân tích kỹ thuật số hoặc xóa vết dấu của bằng chứng, quan trọng trong việc duy trì các hoạt động bí mật.
+
+### Che Giấu và Kỹ Thuật Mã Hóa
+Che giấu tải trọng hoặc các thông điệp thông qua các lớp mã hóa hoặc che giấu để tránh các biện pháp an ninh và phân tích.
+
+### Né Tránh Hệ Thống Honeypot và Sandbox
+Phát hiện và tránh tương tác với các hệ thống mồi như honeypot hoặc môi trường sandbox nhằm bắt giữ các hoạt động độc hại.
+
+## Phát Triển Phần Mềm Độc Hại
+
+### Thiết Kế Tải Trọng Tùy Chỉnh và Phân Phối
+Tạo các tải trọng tùy chỉnh, thường nhắm vào các môi trường cụ thể hoặc vượt qua các phòng thủ hiện có, nhấn mạnh đến tính ẩn danh và chức năng.
+
+### Kỹ Thuật Né Tránh và Duy Trì Của Phần Mềm Độc Hại
+Thiết kế phần mềm độc hại để tồn tại trên hệ thống sau khi bị xâm phạm và tránh phát hiện thông qua che giấu hoặc thao tác với các biện pháp phòng thủ của máy chủ.
+
+### Phát Triển và Quản Lý Cơ Sở Hạ Tầng C2
+Xây dựng và quản lý cơ sở hạ tầng điều khiển và điều khiển để duy trì quyền tự chủ trên các hệ thống bị xâm nhập, quan trọng cho các tác nhân đe dọa dai dẳng.
+
+### Phương Thức Vượt Qua Hệ Thống Chống Phần Mềm Độc Hại
+Nỗ lực vượt qua các hệ thống phát hiện phần mềm độc hại tự động thông qua các kỹ thuật né tránh như thay đổi chữ ký hoặc biến đổi hành vi.
+
+## Phần Mềm
+
+### Kỹ Thuật Chèn Mã Vào Phần Mềm
+Đưa các điểm truy cập trái phép vào mã phần mềm để truy cập trái phép, thường thông qua mã nguồn mở hoặc mã độc quyền bị thao tác.
+
+### Thao Tác Logic Ứng Dụng
+Khai thác lỗi trong logic kinh doanh hoặc luồng ứng dụng để thực hiện các hành động không mong muốn hoặc trích xuất dữ liệu không đúng cách.
+
+### Kỹ Thuật Phân Tích Ngược Cao Cấp
+Phân tích sâu các tập tin thực thi phần mềm bằng cách sử dụng các công cụ như IDA Pro hoặc Ghidra để bộc lộ logic nội bộ hoặc lỗ hổng trong các hệ thống mã nguồn đóng.
+
+### Tiêm Mã và Kỹ Thuật Hooking
+Tiêm mã độc vào các quy trình đang chạy hoặc chặn luồng công việc của ứng dụng thông qua kỹ thuật hook, thường sử dụng để leo thang quyền hạn.
