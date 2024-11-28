@@ -1,0 +1,76 @@
+---
+title: Listing Configured Splunk Users and Roles Overview
+description: Discover how to enumerate users and roles in Splunk for enhanced cybersecurity
+  insights.
+keywords:
+- Splunk user enumeration
+- Splunk role enumeration
+- cybersecurity
+- Splunk API
+- user management
+- role management
+- access control
+- security assessment
+- authentication
+- privilege escalation
+---
+
+## Targeting Splunk Instances
+
+### Locating Splunk Instances
+
+Identifying target Splunk instances is the initial step in listing configured users and roles. Splunk typically runs on default ports such as 8000 for the web interface and 8089 for the management port. Utilizing tools like Shodan, a robust search engine for Internet-connected devices, can aid in discovering publicly exposed Splunk endpoints. By using specific search queries, it is possible to filter results to display only those systems that run Splunk by looking for default ports or known server headers.
+
+Network scanning tools like Nmap can also be employed to detect open Splunk management and web ports across a local or remote network. Performing a SYN scan (`nmap -sS <target-IP> -p8000,8089`) detects live ports, while a service version scan (`nmap -sV <target-IP> -p8000,8089`) helps in further validating the presence of Splunk by fetching banner information.
+
+### Authenticating to Splunk
+
+Upon identifying active Splunk instances, gaining access via authentication becomes the next step. Often, unsecured deployments may have default credentials such as admin/admin due to oversight. Attempting default credentials is a primary tactic executed manually through the web interface or automated using credential-stuffing tools.
+
+Tools like Hydra (`hydra -l admin -P /path/to/password.list <splunk-ip> http-get /`) can automate password attempts against the Splunk login page. Burp Suite, a proxy tool for web application security testing, can also monitor and alter login requests to leverage automated credential spraying efficiently.
+
+## Enumerating Users
+
+### Accessing User Management APIs
+
+Once authenticated, Splunk provides a REST API interface that can be utilized to enumerate users. The API endpoint `/services/authentication/users` allows an authenticated user to collect details on existing user accounts within the Splunk environment. Interacting with this endpoint requires appropriate privileges, typically an administrative account.
+
+Curl commands or scripting languages like Python can facilitate these API interactions. For instance, a Curl command to fetch user data could look like this:
+
+```bash
+curl -k -u admin:password https://<splunk-ip>:8089/services/authentication/users
+```
+
+### Parsing User Data
+
+The retrieved user data from the API is typically in XML or JSON format, containing a wealth of information like usernames, roles, and creation dates. Automating the parsing process using Python scripts can efficiently extract these details. Utilizing libraries like `requests` for API calls and `json` or `xml.etree.ElementTree` for data parsing can structure the extracted information for further analysis.
+
+Storing this data in databases or structured files (e.g., CSV) enables systematic analysis, cross-referencing, and exporting for subsequent security assessments or exploit development.
+
+## Enumerating Roles
+
+### Understanding Splunk Role Architecture
+
+Splunk deploys role-based access controls (RBAC) to manage permissions across users. Roles define capabilities such as search index visibility and dashboard access. Comprehensive enumeration requires understanding these configurations alongside default roles like `admin`, `power`, and `user`.
+
+Roles can overlap in permissions, complicating enumeration by layering capabilities. Discerning the implications of roles provides insights into restriction levels and potential privilege escalation pathways.
+
+### Accessing Role Management APIs
+
+Similar to user enumeration, Splunk offers a REST API endpoint `/services/authorization/roles` for role enumeration. Authenticated requests against this endpoint return role configurations, listing permissions allocated to each role. To query roles, use Curl as follows:
+
+```bash
+curl -k -u admin:password https://<splunk-ip>:8089/services/authorization/roles
+```
+
+### Validating User and Role Findings
+
+### Cross-checking User and Role Listings
+
+Correlating user entries with their associated roles reveals the security posture each user presents. Capturing permissions linked through roles highlights users who may have elevated access unexpectedly. This mapping process assists in recognizing security vulnerabilities or segregation of duty violations within the Splunk configuration.
+
+### Exploiting Misconfigurations
+
+Misconfigured roles that allocate excessive permissions relative to user responsibilities are exploitation targets. Identifying such privilege discrepancies facilitates the development of attack plans aiming for internal reconnaissance or further system exploitation.
+
+Malicious actors may capitalize on insufficiently managed user-role mappings, particularly through users unintentionally granted administrative capabilities. Regularizing automated tests and audits on role configurations can preempt such vulnerabilities.
