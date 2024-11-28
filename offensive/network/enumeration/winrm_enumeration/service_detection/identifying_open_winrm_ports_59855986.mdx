@@ -1,0 +1,111 @@
+---
+title: Identifying Open WinRM Ports (5985/5986) Explained
+description: Learn techniques for identifying open WinRM ports 5985/5986 and strategies
+  for effective network reconnaissance.
+keywords:
+- WinRM ports
+- port enumeration
+- Nmap
+- Masscan
+- network scanning
+- Windows Remote Management
+- IT security
+- service detection
+---
+
+# Identifying Open WinRM Ports (5985/5986)
+
+## Introduction to WinRM Port Enumeration
+
+Windows Remote Management (WinRM) is Microsoft's implementation of the WS-Management protocol, a standard web services protocol used for remote software and hardware management. WinRM is the Windows-native remote management service, often used for administrative purposes. By default, WinRM operates over HTTP on TCP port 5985 and over HTTPS on TCP port 5986. Identifying these open ports is crucial for attackers performing lateral movement within a network, as access to WinRM can often enable remote command execution.
+
+## Network Scanning Tools for Port Detection
+
+Identifying open WinRM ports is typically achieved through network scanning tools capable of probing a large number of hosts efficiently.
+
+### Utilizing Nmap for WinRM Port Detection
+
+Nmap, a powerful and versatile network scanner, can be utilized to detect open WinRM ports effectively. The basic syntax for scanning a network range for WinRM ports is as follows:
+
+```bash
+nmap -p 5985,5986 <target-IP/range>
+```
+
+To improve scan effectiveness, Nmap scripts specific to WinRM can be used. The `--script` flag allows inclusion of scripts that can further enumerate WinRM services:
+
+```bash
+nmap -p 5985,5986 --script=msrpc-enum <target-IP/range>
+```
+
+Additionally, combining TCP SYN scan (`-sS`) with service version detection (`-sV`) provides more granular information:
+
+```bash
+nmap -sS -sV -p 5985,5986 <target-IP/range>
+```
+
+### Leveraging Masscan for Large-Scale Network Scans
+
+Masscan is designed to scan the entire Internet in a short time, making it an excellent choice for large scale detection of open ports. The following command demonstrates how to configure Masscan to find open WinRM ports:
+
+```bash
+masscan <target-IP/range> -p 5985,5986 --rate=10000
+```
+
+Masscan's `--rate` option allows controlling the speed of scanning, providing a balance between thoroughness and detection avoidance.
+
+## Port Identification Techniques
+
+### Using Basic TCP Connectivity Checks
+
+Basic connectivity can be tested using tools like `telnet` or `nc` to confirm open ports:
+
+```bash
+nc -zv <target-IP> 5985
+nc -zv <target-IP> 5986
+```
+
+If the port is open, you will receive a successful connection message. Otherwise, the connection will be refused, indicating the port is closed.
+
+### Employing Specialized Scripts and Tools
+
+Other tools and custom scripts can provide more detailed insights into open ports. For instance, `WinRM` PowerShell scripts can be adapted to confirm service availability and enumerate service configurations when accessible.
+
+### Correlating Results with Default Known States
+
+Attackers should correlate results with default settings in known Windows environments to verify the expected presence of WinRM. This may include testing against known configurations and settings typical within target environments.
+
+## Evasion Tactics to Avoid Network Security Tools
+
+When conducting scans, attackers often aim to avoid detection by network security systems such as Intrusion Detection Systems (IDS) and firewalls.
+
+### Customizing Payloads and Signatures
+
+By altering the payloads used in network requests, attackers can modify the signature of their traffic, helping it to blend in with legitimate traffic.
+
+### Timing and Frequency Adjustments
+
+Scans can be staggered over time to minimize detection chances. Tools such as Nmap provide options like `--randomize-hosts` and `-T<0-5>` to adjust timing templates and avoid predictable scanning patterns.
+
+## Validating Open Ports for WinRM Access
+
+Once open ports are identified, further verification ensures that these ports correspond to active WinRM services.
+
+### Methods to Verify Detected Open Ports
+
+Verification can include more targeted service-level interactions, such as sending specific WinRM protocol requests to the host and analyzing the response for known patterns.
+
+### Cross-referencing with System Services and Firewall Rules
+
+The accessibility of these ports may also be confirmed by inspecting system configurations and firewall rules. Administrative privileges may be required to access such settings directly.
+
+## Post-Detection Strategy
+
+Upon successful detection of open WinRM ports, offensive operations can transition to leveraging these findings for further exploration.
+
+### Planning the Next Steps
+
+This involves enumerating additional data from the exposed endpoints, such as version detection, exploiting misconfigurations, or using stolen credentials for lateral movement.
+
+### Integrating Findings with Broader Reconnaissance Efforts
+
+Open WinRM ports are one piece of the larger reconnaissance puzzle. Identifying these services can be complemented by network topology mapping, identification of other exposed services, and vulnerability assessments, aiding in comprehensive attack planning. The integration of such findings into the overall attack strategy maximizes effectiveness and increases the likelihood of successful compromise.
