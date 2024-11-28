@@ -1,0 +1,77 @@
+---
+title: Collecting System and Network Information with SMB
+description: Learn advanced techniques for enumerating system and network info using
+  SMB protocols efficiently.
+keywords:
+- SMB enumeration
+- network information gathering
+- host discovery
+- OS fingerprinting
+- service enumeration
+- network configuration
+- user details extraction
+- SMB vulnerabilities
+- insider threat detection
+---
+
+# Collecting System and Network Information in SMB Enumeration
+
+## Host Discovery and OS Fingerprinting
+
+Advanced host discovery involves using the SMB protocol to determine which systems on a network are operational and capable of communication. Utilizing network scanning tools like Nmap, you can identify live hosts by targeting specific ports associated with SMB, typically TCP port 445 and occasionally TCP port 139. By crafting packets specifically for these ports, attackers can infer the presence of SMB services and make initial assessments about the operating system based on SMB capabilities. Tools such as `smb-os-discovery` in Nmap provide OS fingerprinting features that determine the operating system running on a remote host by analyzing the unique characteristics of SMB responses.
+
+```bash
+nmap -p 445 --script smb-os-discovery <target-IP>
+```
+
+## Connected Devices Enumeration
+
+Enumerating network devices involves identifying and cataloging all devices within a network segment that offer SMB services. This is achieved by querying SMB shares and observing network traffic patterns typical of SMB communication. Tools like `nbtscan` can be used to list NetBIOS names and associated IPs, effectively cataloging devices that are ready to interact using SMB. This information facilitates network mapping and helps identify key systems that can be targeted for further exploitation.
+
+```bash
+nbtscan <target-network>
+```
+
+## Service Enumeration on Targets
+
+Service enumeration aims to differentiate between various services that a host offers through its SMB capabilities. This involves querying SMB shares to identify available services, permissions, and possible misconfigurations that could be exploited. Attackers can use tools like `smbclient`, a command-line SMB client that can connect to shares, list available services, and extract relevant information about each service's structure.
+
+```bash
+smbclient -L <target-IP> -U <username>
+```
+
+## Network Configuration Extraction
+
+SMB offers a wealth of network information that can be extracted to understand network setup and vulnerabilities. Tools like `enum4linux` are proficient at gathering network configuration settings, such as IP addresses, subnet masks, default gateways, and DNS servers. These details are critical in planning lateral movements across the network as they help identify potential hidden segments or improperly secured equipment.
+
+```bash
+enum4linux -A <target-IP>
+```
+
+## Gathering SMB Host Information
+
+By querying the SMB services on a target, specific host information such as computer names and domain affiliations can be determined. This is crucial for understanding the organization's network structure and identifying key domain controllers or servers critical to network operations. Scripts and tools that specialize in SMB service querying can extract this information, often revealing insights about the organization of the IT infrastructure.
+
+## SMB Version Scanning
+
+Identifying the SMB version deployed on a system is fundamental in determining the nature of vulnerabilities that may be exploitable. Tools designed for SMB enumeration often include scripts for SMB version detection, as certain vulnerabilities are version-specific. The transition from SMBv1 to SMBv2 and SMBv3 was driven by security enhancements; therefore, identifying a system running an older version signifies a higher risk of exploitable weaknesses.
+
+## Dumping SMB Capabilities
+
+An analysis of SMB capabilities involves reviewing various security configurations such as SMB signing and encryption. These settings are critical in understanding the security posture of the network services, indicating whether additional security measures are enforced. By dumping SMB capabilities using specific scripts or queries, offensive cybersecurity professionals can evaluate the potential for man-in-the-middle attacks or replay attacks if signing is not mandatory or encryption is disabled.
+
+## Collecting User and Group Details
+
+Information about users and groups on a network can often be extracted via SMB enumeration tools, which attempt to list domain users, administrators, and custom roles within the system. This data serves as a starting point for sophisticated attacks, such as privilege escalation. SMB enumeration scripts typically probe user and share directories for this metadata, enabling attackers to map network hierarchy and user privileges.
+
+```bash
+rpcclient -U "" <target-IP> --command='enumdomusers'
+```
+
+## Tracking System Time and Logs
+
+Collecting system time configurations can provide valuable information for coordinating time-sensitive attacks or synchronizing attack footprints across multiple systems. SMB services often allow querying for system clock settings, assisting attackers in manipulating or analyzing log entries to cover tracks or reconstruct attack timelines. Moreover, understanding log structures can unveil network access patterns, informing future attack vectors.
+
+## Identifying Insider Threat Indicators
+
+Insider threats present unique challenges due to the trust level these users possess. By analyzing information collected from SMB queries, it may be possible to identify abnormal transfer patterns or access attempts indicative of insider threats. This involves examining shared directories, access logs, and unauthorized file movements, utilizing SMB logs to paint a comprehensive picture of insider threat activity within the network. By setting traps or utilizing honeypot systems, potential insider threats can be isolated and identified through abnormal SMB traffic or access attempts.
