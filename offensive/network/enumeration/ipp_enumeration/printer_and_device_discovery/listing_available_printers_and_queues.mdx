@@ -1,0 +1,90 @@
+---
+title: How to List Available Printers and Queues Effectively
+description: Learn methods to discover and list available printers and their queues
+  using various protocols and tools.
+keywords:
+- list printers
+- printer queues
+- IPP protocol
+- SNMP printer enumeration
+- LPD discovery
+- network printer scanning
+- Active Directory printers
+- Zeroconf services
+- printer management
+---
+
+# Listing Available Printers and Queues
+
+## Network Scanning for Printer Endpoints
+
+Network scanning is crucial for identifying printer endpoints within a given network. This process starts with discovering IP address ranges that need to be scanned, which are usually specified in network configuration files or through subnet scanning. Once the IP ranges are established, network scanning tools such as Nmap can be deployed to conduct the scan. These tools are configured to specifically detect devices that advertise printer-friendly ports such as 515 (LPD), 631 (IPP), and 9100 (JetDirect).
+
+Nmap Command Example:
+```bash
+nmap -p 515,631,9100 [target-subnet]
+```
+
+The output will reveal any devices with open printer service ports, indicating possible printer points to investigate further. Understanding which ports are active allows us to narrow down which devices may host print services.
+
+## Using IPP and LPD Protocols for Detection
+
+The Internet Printing Protocol (IPP) and the Line Printer Daemon (LPD) are two primary protocols used for printer communication. By interacting with these protocols, you can enumerate the printers available on a network. This involves sending properly constructed IPP requests or leveraging LPD for queue status checks.
+
+IPP requests can be sent using command-line tools like `CURL` to query printers, enabling you to receive responses that list available printers and their attributes.
+
+CURL Command Example for IPP:
+```bash
+curl ipp://[printer-ip]:631/ -X GET
+```
+
+For LPD-based printers, the `lpd` command can help list queue status and other printer details, though it requires a compatible client system.
+
+## SNMP Enumeration of Printer Devices
+
+Simple Network Management Protocol (SNMP) is widely used for network management and can be leveraged to enumerate printer devices by querying specific Management Information Bases (MIBs) known to be associated with printers. SNMPwalk is a popular command-line utility used to perform operations on these MIBs.
+
+SNMPWalk Command Example:
+```bash
+snmpwalk -v 2c -c [community-string] [target-ip] | grep -i printer
+```
+
+The command above targets specific IPs and yields output pertaining to printers and their operational status. Parsing this data reveals vital information about printer models, queue status, and operational metrics.
+
+## Interfacing with Active Directory for Printer Lists
+
+In environments using Windows Active Directory, printers are often registered in AD to facilitate network printing. By using LDAP queries, you can extract detailed lists of these printers. Tools like `ldapsearch` can perform such queries against the directory, offering insights into the printers set up within the domain.
+
+LDAPSearch Command Example:
+```bash
+ldapsearch -x -b "DC=example,DC=com" "(objectClass=printQueue)"
+```
+
+Executing this provides a complete list, including printer names, IP addresses, and their configuration within the AD environment, giving you a clear map of available printers.
+
+## Analyzing Zero Configuration Networking (Zeroconf) Services
+
+Zero Configuration Networking (Zeroconf) protocols like mDNS or Bonjour facilitate local network service discovery without requiring manual service enumeration. Tools such as `avahi-browse` or `dns-sd` are used to query locally available service types.
+
+Avahi-browse Command Example:
+```bash
+avahi-browse -a | grep _printer
+```
+
+The command helps identify published printer services on the local network that use mDNS or DNS-SD, which are typically associated with Zeroconf setups. Such output gives you a list of printer names and capabilities.
+
+## Printer Queue Enumeration Through OS Interactions
+
+On client systems, it’s possible to enumerate printer queues directly by interfacing with both Windows and Unix-based operating systems. Commands like `lpstat` on Unix or PowerShell scripts on Windows can reveal detailed queue information.
+
+Unix lpstat Command Example:
+```bash
+lpstat -p -d
+```
+
+Windows PowerShell Example:
+```powershell
+Get-Printer | Format-List Name, PrinterStatus
+```
+
+These commands show the printers configured on the local machine or network, along with their queue status. Understanding this data helps in assessing configurations, identifying unauthenticated printers, and analyzing queued jobs for potential misconfigurations exploitable in security assessments.
