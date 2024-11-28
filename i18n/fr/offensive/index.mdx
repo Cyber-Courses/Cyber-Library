@@ -1,0 +1,278 @@
+---
+title: Guide Complet des Techniques de Cybersécurité Offensive
+description: Découvrez les techniques essentielles de cybersécurité offensive, y compris l'exploitation réseau, les attaques d'applications web et les stratégies de développement de logiciels malveillants.
+keywords:
+- cybersécurité offensive
+- exploitation réseau
+- attaques d'applications web
+- développement de logiciels malveillants
+- red teaming
+- développement d'exploits
+- sécurité cloud
+- vulnérabilités API
+- sécurité des conteneurs
+---
+
+# Feuille de Route de la Cybersécurité Offensive
+
+## Réseau
+
+### Reconnaissance et Cartographie Réseau
+La reconnaissance réseau consiste à collecter des informations sur un réseau cible pour créer une carte de sa structure et de ses dispositifs. Les techniques incluent la collecte d'informations passive, le balayage, et l'énumération active des composants du réseau. Des outils comme Nmap et Wireshark sont utilisés pour identifier les ports ouverts, les services et les vulnérabilités potentielles. Utilisez des commandes comme :
+
+```bash
+nmap -sS -O -v target-ip
+```
+
+Cette commande effectue un scan SYN TCP et détecte le système d'exploitation cible.
+
+### Stratégies de Mouvement Latéral
+Le mouvement latéral désigne les techniques utilisées par les attaquants pour pivoter à travers le réseau après un accès initial. Cela inclut l'exploitation des vulnérabilités dans les segments réseau adjacents et l'utilisation d'identifiants compromis pour accéder aux ressources. Les attaquants peuvent utiliser des outils tels que PsExec ou PowerShell pour la propagation latérale.
+
+### Exploitation des Protocoles Réseau
+Cela implique l'identification de faiblesses dans les protocoles réseau comme SMB, RDP, ou DNS et leur utilisation pour exécuter des actions non autorisées. La connaissance des mécanismes du protocole et de la création d'anomalies peut conduire à une exploitation réussie.
+
+### Techniques d'Attaque de l'Homme du Milieu (MitM)
+Les attaques MitM impliquent l'interception et l'altération de la communication entre deux parties sans détection. Les techniques peuvent inclure l'usurpation ARP ou l'empoisonnement DNS. Les attaquants utilisent des outils comme Ettercap et MITMf pour capturer et manipuler le trafic.
+
+### Analyse et Manipulation du Trafic Réseau
+L'analyse du trafic implique la surveillance des paquets de données réseau pour identifier les motifs ou les anomalies. Les attaquants peuvent rediriger, supprimer ou injecter des paquets pour perturber ou analyser les communications. Des outils comme Tcpdump et Scapy sont couramment utilisés à ces fins.
+
+## Application Web
+
+### Attaques d'Injection Avancée (SQLi, NoSQLi)
+L'injection SQL implique l'insertion de code SQL malveillant dans les champs de saisie utilisateur pour manipuler ou extraire des données d'une base de données. Le principe s'étend aux bases de données NoSQL avec NoSQLi. SQLmap est un outil courant pour automatiser l'injection SQL et la prise de contrôle de bases de données :
+
+```bash
+sqlmap -u "http://target.com/search?q=test" --dbs
+```
+
+Cette commande tente d'extraire les noms de base de données de l'URL cible.
+
+### Exploitation XSS et CSRF
+XSS permet aux attaquants d'injecter des scripts dans des pages web vues par d'autres utilisateurs, permettant le détournement de session ou le vol de données. CSRF trompe les utilisateurs pour exécuter des actions indésirables sur un autre site où ils sont authentifiés.
+
+### Référence Directe Insecure d'Objets (IDOR) et BOLAs
+Les vulnérabilités IDOR permettent aux attaquants d'accéder aux données en manipulant les références aux objets (par exemple, les ID utilisateur). Les Broken Object Level Authorizations (BOLAs) impliquent une application inadéquate du contrôle d'accès sur des objets individuels.
+
+### Tactiques de Web Shell et Persistance
+Installer un web shell sur un serveur compromis pour un accès persistant et l'exécution de commandes à distance. Les web shells sont de simples scripts qui fournissent une interface via HTTP.
+
+```php
+<?php system($_GET['cmd']); ?>
+```
+
+Exemple d'un web shell PHP simpliste.
+
+### Évasion de Pare-feu d'Application Web
+Éviter les pare-feu d'applications web implique de créer des charges utiles qui contournent la détection basée sur les signatures. Les techniques incluent le codage, l'obfuscation ou la fragmentation des vecteurs d'attaque.
+
+## Application Mobile
+
+### Ingénierie Inverse des Applications Mobiles
+L'ingénierie inverse consiste à décrypter et analyser le code d'une application mobile pour comprendre sa logique et identifier des vulnérabilités. Des outils comme APKTool ou Hopper sont essentiels pour le désassemblage ou la décompilation.
+
+### Exploitation des Vulnérabilités des Plateformes Mobiles
+Chaque plateforme mobile (par exemple, Android, iOS) possède des vulnérabilités spécifiques. Les exploits peuvent impliquer l'utilisation de privilèges système ou de bibliothèques obsolètes.
+
+### Interception et Manipulation des Communications Mobiles
+Les attaquants utilisent des outils comme Burp Suite ou Frida pour intercepter et manipuler les données transmises par les applications mobiles, surtout lorsque les implémentations SSL/TLS sont faibles ou mal configurées.
+
+### Failles de Sécurité des Données des Applications Mobiles
+Cibler le stockage de données non sécurisé ou les méthodes de transmission utilisées par les applications mobiles, où des informations sensibles sont stockées ou communiquées sans cryptage adéquat.
+
+## Chaîne d'Approvisionnement
+
+### Ciblage des Pipelines de Développement et de Distribution
+Compromettre le pipeline de développement peut mener à une large distribution de code malveillant. Les attaquants ciblent les dépôts de code source ou les environnements CI/CD pour injecter des portes dérobées.
+
+### Test de Sécurité des Systèmes Embarqués
+Se concentre sur l'identification des vulnérabilités au sein du firmware ou des logiciels des dispositifs embarqués. Le test inclut souvent des interfaces matérielles comme JTAG ou UART.
+
+### Techniques de Compromission de la Chaîne d'Approvisionnement
+Insérer des composants malveillants dans la chaîne d'approvisionnement d'un produit perturbe l'intégrité avant qu'il n'atteigne l'utilisateur final. Les cas notables incluent les implants matériels ou les fichiers de mise à jour falsifiés.
+
+### Porte Dérobée dans les Logiciels de Tiers
+Introduire un code caché et non autorisé dans les produits logiciels fournis par des vendeurs tiers lors du développement, intentionnellement ou via exploit.
+
+## CI/CD
+
+### Compromission des Environnements CI/CD
+Un accès non autorisé à un environnement CI/CD accorde le pouvoir de modifier le processus de construction logiciel, potentiellement en insérant du code malveillant avant le déploiement.
+
+### Infiltration des Pipelines de Construction
+Les attaquants interceptent ou modifient les artefacts de construction, entraînant la distribution de logiciels compromis. Les vulnérabilités dans les scripts de construction ou les dépendances sont couramment exploitées.
+
+### Falsification des Artefacts et Compromission de l'Intégrité
+La modification des artefacts de construction sans détection peut subvertir la fonctionnalité prévue du logiciel. Assurer l'intégrité des artefacts est crucial, s'appuyant sur des sommes de contrôle ou des signatures cryptographiques.
+
+### Exploitation des Vulnérabilités des Outils CI/CD
+Les vulnérabilités connues dans les outils CI/CD, tels que Jenkins ou GitLab, peuvent être exploitées pour un accès non autorisé et une altération du code.
+
+## Cloud
+
+### Techniques d'Exploitation des Services Cloud
+Exploiter les mauvaises configurations ou les vulnérabilités dans les services cloud pour obtenir un accès non autorisé ou un contrôle sur les ressources gérées par le cloud.
+
+### Attaques sur les Stockages Cloud Mal Configurés
+Cibler les services de stockage exposés tels que les buckets S3 d'AWS en raison de contrôles de sécurité inadéquats comme l'accès en écriture ou lecture publique.
+
+### Contournement de la Gestion des Identités et des Accès Cloud
+Obtenir un accès non autorisé aux actifs cloud en exploitant des politiques IAM faibles ou des rôles trop permissifs.
+
+### Vecteurs d'Attaque de l'Architecture Sans Serveur
+Exploiter des vulnérabilités dans les frameworks sans serveur en abusant des déclencheurs d'événements ou en injectant des charges malveillantes dans les contextes d'exécution des fonctions.
+
+## Conteneur
+
+### Techniques d'Évasion de Conteneur
+Identifier et exploiter des vulnérabilités permettant à du code malveillant de s'échapper de l'environnement de conteneur vers le système hôte.
+
+### Attaques sur les Clusters Kubernetes
+Exploiter des mauvaises configurations au sein des environnements Kubernetes pour obtenir un contrôle non autorisé ou perturber le service.
+
+### Exploitation des Vulnérabilités d'Orchestration de Conteneur
+Cibler des vulnérabilités dans les outils d'orchestration comme Docker Swarm ou Kubernetes pour accéder à des environnements restreints.
+
+### Empoisonnement des Images de Conteneur
+Altérer les images de conteneur en injectant du code malveillant, affectant les systèmes où ces images sont déployées.
+
+## API
+
+### Énumération et Reconnaissance des Points de Terminaison API
+Identifier les points de terminaison API et cartographier leur structure pour déterminer les ressources disponibles et les vulnérabilités potentielles.
+
+### Contournement de l'Authentification et de l'Autorisation API
+Exploiter des vulnérabilités qui permettent de contourner les couches d'authentification ou des vérifications d'autorisation incorrectes.
+
+### Abus des Limites de Taux et Quotas
+Contourner les limites de taux pour surcharger l'API ou extraire plus de données que prévu en manipulant les en-têtes ou charges de requêtes.
+
+### Exploitation des Vulnérabilités des APIs REST et SOAP
+Cibler des APIs spécifiques via des attaques par injection, déserialization, ou en exploitant l'exposition due à des messages d'erreur verbeux.
+
+## Matériel
+
+### Exploitation des Interfaces Matérielles
+Manipuler ou accéder aux interfaces matérielles pour extraire des données sensibles ou modifier les opérations des dispositifs.
+
+### Attaques Par Canal Latéral sur le Matériel
+Exploiter les émissions électromagnétiques, l'analyse de la consommation d'énergie ou l'information temporelle pour inférer les opérations des dispositifs ou récupérer des informations sensibles.
+
+### Violation des Dispositifs Embarqués
+Obtenir un accès non autorisé aux dispositifs embarqués via des vulnérabilités dans le firmware ou les interfaces de communication externes.
+
+### Ingénierie Inverse des Firmwares Matériels
+Analyser le firmware des dispositifs matériels pour identifier des vulnérabilités ou comprendre le fonctionnement des dispositifs par ingénierie inverse.
+
+## Sans Fil
+
+### Attaques sur les Réseaux Sans Fil (Wi-Fi, Bluetooth)
+Exploiter des protocoles Wi-Fi faibles (WEP/WPA2) ou des mauvaises configurations Bluetooth pour intercepter et manipuler les communications sans fil.
+
+### Déploiement de Points d'Accès Malveillants
+Déployer des points d'accès non autorisés pour intercepter les communications sans fil, technique souvent utilisée dans les attaques de phishing ou de vol d'identifiants.
+
+### Écoute des Communications Sans Fil
+Écouter les communications non cryptées sur un réseau sans fil pour capturer des informations sensibles comme des mots de passe.
+
+### Exploitation des Protocoles Sans Fil
+Exploiter des faiblesses dans des protocoles comme Zigbee ou Bluetooth Low Energy (BLE) pour prendre le contrôle ou espionner les communications des dispositifs.
+
+## Attaques de Sécurité Physique
+
+### Ingénierie Sociale et Pénétration Physique
+Utiliser la tromperie pour contourner les mesures de sécurité physique, impliquant l'imitation ou la falsification d'identifiants pour obtenir un accès non autorisé aux installations.
+
+### Contournement des Contrôles d'Accès Physiques
+Contourner les barrières telles que les serrures ou les systèmes biométriques par des techniques comme le crochetage ou les attaques par relais.
+
+### Exfiltration d'Informations au Niveau Physique
+Extraire des données par des moyens physiques, comme la copie de données à partir de disques durs exposés ou l'interception de signaux électromagnétiques.
+
+### Méthodes d'Évaluation de la Sécurité Physique
+Techniques basées sur la simulation pour évaluer les vulnérabilités dans les configurations de sécurité physique, impliquant des tests de pénétration des locaux.
+
+## Cryptographie
+
+### Attaques sur les Protocoles Cryptographiques
+Exploiter des vulnérabilités dans les protocoles cryptographiques, menant à la décryptage des données, au contournement de l'authentification ou à l'usurpation d'identité.
+
+### Techniques de Cryptanalyse
+Les techniques utilisent l'analyse mathématique et systémique pour compromettre la sécurité cryptographique, y compris le cassage de chiffrement.
+
+### Abus de la Gestion des Clés
+Attaquer de mauvaises pratiques de gestion des clés conduisant à la divulgation non autorisée de clés et au décryptage des données.
+
+### Briser le Chiffrement Symétrique et Asymétrique
+Trouver des faiblesses ou exploiter les défauts d'implémentation pour décrypter des données sans possession de clé. Les exemples incluent des attaques sur AES ou RSA.
+
+## Développement d'Exploits
+
+### Identification des Opportunités d'Exploitation des Vulnérabilités
+Rechercher et découvrir des vulnérabilités dans des logiciels ou matériels qui peuvent être exploitées. Se concentrer sur les points d'entrée au sein des entrées non sécurisées ou des opérations non vérifiées.
+
+### Techniques Avancées de Corruption de la Mémoire
+Exploiter des faiblesses dans les opérations mémoire pour obtenir une exécution de code arbitraire, y compris les dépassements de tampon et les exploits de type use-after-free.
+
+### Conception et Livraison de Shellcode
+Concevoir et injecter du shellcode en tant que charge utile pour exécuter des instructions malveillantes sur un système cible.
+
+### Utilisation de Cadres d'Exploitation
+Utiliser des outils comme Metasploit pour faciliter le développement d'exploits et gérer les vecteurs d'attaque à travers des modules configurables pour des cibles variées.
+
+## Red Teaming
+
+### Planification et Exécution des Engagements Red Team
+Le red teaming implique la simulation de menaces persistantes avancées (APT) pour évaluer les défenses organisationnelles. La planification se concentre sur l'accomplissement de tactiques, techniques et procédures (TTP) spécifiques.
+
+### Configuration des Infrastructures et Outils de Red Team
+Construire une infrastructure sécurisée et résiliente pour mener des opérations de red team, en se concentrant sur les systèmes de commande et de contrôle (C2) et les outils d'attaque.
+
+### Campagnes d'Attaques en Plusieurs Étapes
+Campagnes coordonnées imitant des attaquants du monde réel, impliquant plusieurs phases comme la reconnaissance, l'exploitation et le mouvement latéral.
+
+### Simulation et Émulation de l'Adversaire
+Simulation réaliste des tactiques utilisées par des acteurs de menaces avancées pour évaluer les mesures défensives d'une organisation et identifier les domaines d'amélioration.
+
+## Évasion
+
+### Contournement de la Détection Réseau et Endpoint
+Utiliser des tactiques pour éviter la détection par les IDS/IPS et les solutions de sécurité des points d'extrémité, par l'obfuscation des logiciels malveillants ou en exploitant des lacunes dans la détection.
+
+### Anti-Forensique et Manipulation des Preuves
+Techniques conçues pour contrecarrer l'analyse forensique ou éroder la traçabilité des preuves, cruciales dans le maintien d'opérations furtives.
+
+### Techniques d'Obfuscation et de Cryptage
+Masquer les charges utiles ou les communications à travers des couches d'obfuscation ou de cryptage pour échapper aux mesures de sécurité et à l'analyse.
+
+### Évasion des Honeypots et Sandboxes
+Détecter et éviter l'interaction avec des systèmes leurres comme les honeypots ou des environnements sandbox qui visent à capturer les activités malveillantes.
+
+## Développement de Logiciels Malveillants
+
+### Conception et Livraison de Chargements Personnalisés
+Créer des charges utiles personnalisées, souvent ciblant des environnements spécifiques ou contournant les défenses existantes, mettant l'accent sur la furtivité et la fonctionnalité.
+
+### Techniques d'Évasion et de Persistance des Logiciels Malveillants
+Concevoir des logiciels malveillants pour persister sur le système après compromission et éviter la détection par obfuscation ou manipulation des défenses de l'hôte.
+
+### Développement et Gestion de l'Infrastructure C2
+Créer et gérer une infrastructure de commande et de contrôle pour maintenir l'autonomie sur des systèmes compromis, clé pour les acteurs de menaces persistantes.
+
+### Méthodes de Contournement des Anti-Malwares
+Efforts pour contourner les systèmes automatisés de détection de logiciels malveillants en utilisant des techniques d'évasion telles que la manipulation de la signature ou la modification du comportement.
+
+## Logiciel
+
+### Techniques de Porte Dérobée dans les Logiciels
+Introduire des points d'accès subreptices dans le code software pour un accès non autorisé, souvent via un code open source ou propriétaire manipulé.
+
+### Manipulation de la Logique Applicative
+Exploiter des erreurs dans la logique métier ou le flux de l'application pour exécuter des actions non intentionnelles ou extraire des données de manière inadéquate.
+
+### Tactiques Avancées d'Ingénierie Inverse
+Analyse approfondie des exécutables logiciels en utilisant des outils comme IDA Pro ou Ghidra pour exposer la logique interne ou les vulnérabilités dans les systèmes fermés.
+
+### Injection de Code et Interception
+Injecter du code malveillant dans des processus en cours d'exécution ou intercepter les flux de travail d'application à travers des techniques de hooks, souvent utilisées pour l'escalade de privilèges.
