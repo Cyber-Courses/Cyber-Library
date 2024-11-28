@@ -1,0 +1,101 @@
+---
+title: Enumerating Publicly Accessible Docker Registries
+description: Learn techniques for identifying and analyzing publicly accessible Docker
+  registries, focusing on enumeration and security assessments.
+keywords:
+- Docker registry enumeration
+- publicly accessible registries
+- Docker security
+- registry scanning
+- vulnerability assessment
+- metadata extraction
+- open Docker registry services
+- access control bypass
+- image analysis
+---
+
+## Enumerating Publicly Accessible Registries
+
+### Identifying Registry Services
+
+**Targeting Domain and IP Ranges for Scanning**
+
+To begin the enumeration of publicly accessible registries, it is essential to identify potential targets by focusing on domain and IP ranges. One effective way to achieve this is by using domain-specific tools that can compile a list of relevant domains within your scope. Tools like Sublist3r and Amass can be used to gather subdomain information related to the primary domain of interest.
+
+Additionally, extracting ASN (Autonomous System Number) information can provide a comprehensive list of IP ranges associated with a target organization. Websites such as bgp.he.net or services like ASN Lookup can be leveraged to acquire this data. These resources illustrate which IP spaces are under the control of the desired organization, which can be integral in casting a wide net for potential Docker registry instances.
+
+**Scanning for Open Ports Associated with Registries**
+
+The next fundamental step involves scanning for open ports that typically relate to Docker registries. Conventionally, Docker registries operate on TCP port 5000. However, as part of a thorough assessment, employ an Nmap scan to search for any open ports on your target list that may indicate a non-standard setup for Docker registries. A basic Nmap command for this purpose would look like:
+
+```bash
+nmap -p 5000 [target_ip_range]
+```
+
+For broader scans covering more potential ports, consider using:
+
+```bash
+nmap -p- -sV --open --reason -Pn [target_ip_range]
+```
+
+Analyze port scan results to identify service versions and anomalies in open ports, indicating unconventional registry configurations.
+
+### Performing Basic Enumeration
+
+**Accessing Publicly Available Registry Endpoints**
+
+Once potentially open registry services have been identified, attempt direct HTTP access to these endpoints. Craft basic HTTP GET requests to test their accessibility. For instance, accessing the registry's root endpoint might return a directory listing or a specific API response. Using `curl`, you can execute:
+
+```bash
+curl -X GET http://[target_ip]:5000/v2/_catalog
+```
+
+Directory enumeration can yield insights into repository names or metadata accessible to unauthenticated users, laying the groundwork for further analysis.
+
+**Leveraging Automated Tools for Registry Enumeration**
+
+Automated tools significantly simplify the enumeration process. Tools like `docker-reg-tool` or a similar Docker registry search utility can systematically probe networked Docker registries for available repositories and images. Additionally, scripts can be used to iteratively check for Docker registries across potential subdomains.
+
+A bash script may look like:
+
+```bash
+for subdomain in $(cat subdomains.txt); do
+  curl -s http://$subdomain:5000/v2/_catalog --connect-timeout 5 && echo "Accessible: $subdomain"
+done
+```
+
+This script checks each subdomain to verify if a registry is exposed and accessible.
+
+### Analyzing Registry Content
+
+**Extracting Metadata and Image Lists**
+
+With access to a Docker registry, focus on extracting detailed information about available repositories and their corresponding images. The Docker Registry HTTP API allows you to fetch metadata, enabling insights into repository content and structure. Execute:
+
+```bash
+curl -s http://[registry_ip]/v2/[repository_name]/tags/list
+```
+
+This command retrieves tags for a specific repository, which can provide clues regarding the lifecycle and updates of the images stored. Iterating over these tags can highlight missing patches or outdated images.
+
+**Identifying Sensitive Information within Registries**
+
+Once image tags and layers are accessible, comprehensive analysis should search for any exposed sensitive information within these layers. Look for credentials, API keys, or configuration files inadvertently committing sensitive information. Use tools like `truffleHog` or `Gitleaks`, both of which can scan through image layers to identify known patterns of sensitive data.
+
+### Advanced Enumeration Techniques
+
+**Bypassing Access Controls**
+
+Some Docker registries might appear secured by authentication barriers. Research known attack vectors that apply to Docker registry components, which might include exploiting weak authentication mechanisms. Techniques such as stealing session cookies, performing brute-force attacks on weak passwords, or utilizing default credentials could assist in gaining unintended access.
+
+**Analyzing Versioning and Tagging Strategies**
+
+A crucial advanced strategy involves analyzing the registry's image versioning and tagging conventions. Enumerate all available tags to identify vulnerability-laden image deployments or unpatched application versions.
+
+```bash
+curl http://[registry_ip]/v2/[repository_name]/tags/list
+```
+
+Comprehending tagging conventions across images allows practitioners to predict patch cycles and potentially identify outdated software that might be exploited.
+
+Each aspect of this roadmap for enumerating publicly accessible Docker registries involves precise and informed steps targeting weaknesses or operational oversights in registry deployment, aiding in comprehensive security assessments.
