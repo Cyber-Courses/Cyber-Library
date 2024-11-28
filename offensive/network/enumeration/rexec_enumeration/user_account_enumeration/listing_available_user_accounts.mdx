@@ -1,0 +1,110 @@
+---
+title: 'Listing Available User Accounts: Techniques & Tools'
+description: Explore methods to list user accounts via network protocols and OS-specific
+  techniques for effective enumeration.
+keywords:
+- user account enumeration
+- SMB enumeration
+- LDAP queries
+- Kerberos enumeration
+- Linux user listing
+- Windows user accounts
+- database enumeration
+- application-specific enumeration
+- automated tools
+---
+
+### Enumeration via Network Protocols
+
+#### SMB Enumeration
+SMB (Server Message Block) protocol is often utilized in networks for sharing files and printers. Practical enumeration involves leveraging null sessions or existing access to list user accounts on a network. Tools such as `enum4linux` and `smbclient` can be used for this task. Null session connections do not require authentication on certain Windows systems, allowing attackers to probe and list user accounts. For example, using `enum4linux`:
+```bash
+enum4linux -U <target-IP>
+```
+This command attempts to retrieve userlist information from the target, exposing SMB user accounts accessible to unauthenticated sessions.
+
+#### LDAP Queries
+LDAP (Lightweight Directory Access Protocol) enables querying of directory services such as Active Directory. Crafting LDAP queries to enumerate user details involves utilizing access to the directory service. LDAP enumeration can reveal large amounts of user information with minimal permissions. A common tool is `ldapsearch`:
+```bash
+ldapsearch -x -h <IP> -b "dc=example,dc=com" "(objectClass=user)"
+```
+This command descends through the directory and retrieves entries defined as user objects, providing their account information in the directory tree.
+
+#### SNMP Enumeration
+Simple Network Management Protocol (SNMP) can provide substantial information about network devices and users through object identifiers (OIDs). Using tools like `snmpwalk`, you can enumerate account details if SNMP services are configured improperly:
+```bash
+snmpwalk -v2c -c public <target-IP> 1.3.6.1.4.1.77.1.2.25
+```
+In this command, SNMP version 2c is used with the community string `public` to pull a list of usernames configured on the target device.
+
+#### Kerberos Enumeration
+Kerberos exploits can facilitate user enumeration through service principal name (SPN) probing and AS-REQ (Authentication Service Requests) with TGT (Ticket Granting Ticket). Tools like `kerbrute` can automate this process:
+```bash
+kerbrute userenum -d TARGETDOMAIN.COM --dc <domain-controller-IP> userlist.txt
+```
+This command attempts to enumerate valid user accounts by sending TGT requests for each user in `userlist.txt` to the domain controller.
+
+### OS-Specific User Enumeration
+
+#### Windows User Enumeration
+Windows environments provide numerous options for user enumeration, particularly through PowerShell and command-line utilities like `net user`:
+```bash
+net user /domain
+```
+This command lists all domain user accounts. PowerShell can similarly be used for more advanced scripting to automate user enumeration tasks without requiring administrative privileges.
+
+#### Linux User Enumeration
+The `/etc/passwd` file is a traditional target for attackers seeking to list all local user accounts on a Linux system. Using direct commands:
+```bash
+cat /etc/passwd
+```
+The command reads the passwd file, listing usernames and their associated details. Analysis of SSH logs can also yield user-specific data for further enumeration.
+
+#### macOS User Enumeration
+On macOS, enumeration employs system utilities like `dscl` (Directory Service Command Line) to query the local directory:
+```bash
+dscl . list /Users
+```
+This command lists all local user accounts on a macOS system, leveraging the directory service layer integrated into the OS.
+
+### Application-Specific Enumeration Techniques
+
+#### Email/Web Application User Enumeration
+Web applications can inadvertently expose valid usernames through error messages during login attempt disputes or timing discrepancies in responses. Pen testers can script tools to detect invalid/valid user differentiations when inputs are correctly parsed.
+
+#### Database User Enumeration
+SQL injection may allow attackers to retrieve usernames directly from the database. An example payload might use UNION to extract user account data:
+```sql
+' OR 1=1 UNION SELECT username FROM users--
+```
+This SQL injection variant attempts to combine a secure query with another one targeting a user table.
+
+### Automated Tools and Scripts for Efficient Enumeration
+
+#### Tool Selection and Configuration
+For robust enumeration, employing tools like `Hydra`, `Metasploit`, or custom scripts enhances efficiency. Configure these tools to handle input/output formats cohesively with your network environment's characteristics without triggering alerts.
+
+#### Scripting Custom Enumeration
+Using Python or Bash scripts, you can automate repeated enumeration tasks. A simple Python script to iterate over a list of IPs and perform user enumeration might leverage modules like `os` or `subprocess`:
+```python
+import subprocess
+
+def enumerate_users(ip_list):
+    for ip in ip_list:
+        process = subprocess.Popen(["enum4linux", "-U", ip], stdout=subprocess.PIPE)
+        out, err = process.communicate()
+        print(out.decode())
+
+# Provide a file with IPs
+with open("ips.txt") as f:
+    ips = f.read().splitlines()
+    enumerate_users(ips)
+```
+
+### Data Correlation and Analysis
+
+#### Cross-Reference User Information
+Collected data should be cross-referenced against multiple sources to provide a full user account profile picture. This involves matching LDAP data against SMB findings to validate and enrich the target account information.
+
+#### Identifying Patterns and Anomalies
+Analyzing user account lists for unusual patterns or anomalies helps identify misconfigurations or high-value user accounts. Correlate login patterns, password policies, and account status to pinpoint potential vectors for privilege escalation. Automatized tools or scripts might house logic templates for these detections.
