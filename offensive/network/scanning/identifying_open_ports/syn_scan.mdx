@@ -1,0 +1,69 @@
+---
+title: 'SYN Scan: Stealthy Network Port Scanning Technique'
+description: Learn about SYN Scan, its advantages and execution techniques for effective port scanning.
+keywords:
+- SYN Scan
+- port scanning
+- network reconnaissance
+- Nmap
+- TCP handshake
+- cybersecurity techniques
+---
+
+# SYN Scan
+
+A SYN scan, often referred to as a half-open scan, leverages the TCP three-way handshake to identify open ports without completing the full connection process. This technique is favored for its speed and stealthiness, making it a common choice for attackers looking to identify open ports without easily tipping off the target's intrusion detection systems (IDS). By sending a TCP SYN packet to a target port, an attacker can infer the state of the port based on the target's response. An open port will respond with a SYN-ACK packet, indicating it is open to connections. A closed port will typically respond with a RST (reset) packet, and if no response is received, the port may be filtered by a firewall.
+
+Unlike a Full Connect Scan, which requires completing the full handshake, the SYN scan stops after receiving the SYN-ACK packet. Due to its non-committal nature, SYN scanning is generally less likely to be logged by the target system's event logs. This stealthiness, combined with its efficiency, makes it preferred for initial reconnaissance operations.
+
+## Methodology of SYN Scan
+
+The SYN scan begins by crafting SYN packets targeting specific ports on a host machine. The scan involves sending these packets consecutively to various ports to gauge their openness. Upon sending a SYN packet, the scanner waits for a response from the target.
+
+Several responses indicate different states:
+- **SYN-ACK**: An open port that is ready to establish a connection.
+- **RST**: A closed port, rejecting connection attempts.
+- **No Response**: Indicates possible filtering by firewalls or packet loss.
+
+## Benefits of SYN Scans
+
+SYN scans are preferred for several reasons. First, their speed and efficiency are noteworthy; they quickly assess the state of ports by avoiding the overhead of establishing complete TCP connections. This makes them suitable for rapid scanning of large networks.
+
+Another benefit is their low-profile nature. Since they do not complete the TCP handshake, there is minimal logging on the target system. This characteristic makes SYN scans ideal for stealth in reconnaissance missions where detection needs to be minimized.
+
+## Limitations of SYN Scans
+
+Despite their advantages, SYN scans can be intercepted by modern Intrusion Detection Systems (IDS). These systems are designed to detect anomalies in network traffic, including half-open connections that are indicative of SYN scans.
+
+Security mechanisms like firewalls may also pose limitations. They often implement SYN rate limiting and other heuristics to mitigate scans, dropping or blocking incoming SYN packets that exceed specified thresholds. Additionally, the use of session timeouts and other advanced filtering techniques can obscure scan results, leading to incomplete or erroneous data.
+
+## Setting Up SYN Scan on nmap
+
+Nmap is a widely used tool for performing SYN scans due to its robust network scanning capabilities and flexibility. To initiate a SYN scan on Nmap, use the following command:
+
+```bash
+nmap -sS [target]
+```
+
+In this command, `-sS` specifies a SYN scan. The `[target]` can be an IP address or a domain name.
+
+
+## Analysis and Interpretation of Results
+
+### Differentiating Between Open, Closed, and Filtered Ports
+
+An open port replying with a SYN-ACK indicates readiness to establish a connection. Conversely, a RST response signals a closed port. The absence of a response often points to filtering by a firewall. Analyzing these responses can help construct a map of accessible services on the target machine.
+
+### Identifying Anomalies and Misconfigurations
+
+Unexpected responses or the lack of any response from known open ports might indicate network anomalies or defensive mechanisms such as intrusion detection systems. Misconfigurations in firewall rules might mark some ports as open, allowing unmonitored ingress.
+
+### Integrating Results for Next-Stage Exploitation
+
+Ports identified as open may correspond to services with known vulnerabilities. Such information is vital in strategizing further exploitation. Using vulnerability assessment tools, follow up by scanning discovered ports for vulnerabilities.
+
+## Advanced SYN Scan Techniques
+
+### Combining with Other Scans for Comprehensive Analysis
+
+SYN scans can be paired with UDP scans, full connect scans, or application-layer fingerprinting to deliver a comprehensive network profile, aiding in constructing a more complete image of the target’s configuration and potential vulnerabilities.

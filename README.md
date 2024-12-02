@@ -11,7 +11,7 @@ The **Cyber Library** is organized into various categories covering different ar
 - **Defensive**: Topics related to defending systems and networks, such as incident response, threat hunting, SIEM, EDR, and blue team operations.
 - **Governance**: Covers compliance, regulatory frameworks, audits, and risk management essential for cybersecurity governance.
 - **Offensive**: Offensive security topics including penetration testing, social engineering, red teaming, and exploitation techniques.
-- **Technology**: Covers tools, platforms, and technologies like cloud security, network infrastructure, endpoint security, and cryptography.
+- **Technology**: A solid foundation for understanding both offensive and defensive cybersecurity strategies.
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
 
