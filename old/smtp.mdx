@@ -1,8 +1,8 @@
 # SMTP
 
 
-Port : 25, 587, 465, 2525
-
+> Port : 25, 587, 465, 2525
+> 
 
 ---
 
@@ -68,13 +68,13 @@ SMTP, or Simple Mail Transfer Protocol, is a protocol that is used for sending e
 
 ```mermaid
 sequenceDiagram
-    participant Sender_MUA as Sender's MUA <br/(bob@example.com)
-    participant Sender_MTA as Sender's MTA <br/(example.com)
-    participant Receiver_MTA as Receiver's MTA <br/(example.net)
-    participant Receiver_MUA as Receiver's MUA <br/(alice@example.net)
-    Sender_MUA-Sender_MTA: Send email <br/(SMTP)
-    Sender_MTA-Receiver_MTA: Transfer email <br/(SMTP)
-    Receiver_MTA-Receiver_MUA: Retrieve email <br/(POP/IMAP)
+    participant Sender_MUA as Sender's MUA <br/> (bob@example.com)
+    participant Sender_MTA as Sender's MTA <br/> (example.com)
+    participant Receiver_MTA as Receiver's MTA <br/> (example.net)
+    participant Receiver_MUA as Receiver's MUA <br/> (alice@example.net)
+    Sender_MUA->>Sender_MTA: Send email <br/> (SMTP)
+    Sender_MTA->>Receiver_MTA: Transfer email <br/> (SMTP)
+    Receiver_MTA->>Receiver_MUA: Retrieve email <br/> (POP/IMAP)
 
 ```
 
@@ -100,10 +100,10 @@ SMTP communication consists of a client-server architecture, where the client is
 sequenceDiagram
     participant MUA as Mail User Agent (Client)
     participant MTA as Mail Transfer Agent (Server)
-    MUA-MTA: Initiates Connection
-    MTA--MUA: Responds
-    MUA-MTA: Sends Email
-    MTA--MUA: Acknowledges Receipt
+    MUA->>MTA: Initiates Connection
+    MTA-->>MUA: Responds
+    MUA->>MTA: Sends Email
+    MTA-->>MUA: Acknowledges Receipt
 ```
 
 Here's a detailed breakdown of the SMTP communication process:
@@ -118,20 +118,20 @@ Here's a detailed breakdown of the SMTP communication process:
 sequenceDiagram
     participant Client as SMTP Client
     participant Server as SMTP Server
-    Client-Server: Establish TCP Connection
-    Server-Client: 220 Service Ready
-    Client-Server: HELO/EHLO + Domain
-    Server-Client: 250 OK
-    Client-Server: MAIL FROM: <Sender
-    Server-Client: 250 OK
-    Client-Server: RCPT TO: <Recipient
-    Server-Client: 250 OK
-    Client-Server: DATA
-    Server-Client: 354 Start mail input
-    Client-Server: Email Body + "."
-    Server-Client: 250 OK
-    Client-Server: QUIT
-    Server-Client: 221 Closing Connection
+    Client->>Server: Establish TCP Connection
+    Server->>Client: 220 Service Ready
+    Client->>Server: HELO/EHLO + Domain
+    Server->>Client: 250 OK
+    Client->>Server: MAIL FROM: <Sender>
+    Server->>Client: 250 OK
+    Client->>Server: RCPT TO: <Recipient>
+    Server->>Client: 250 OK
+    Client->>Server: DATA
+    Server->>Client: 354 Start mail input
+    Client->>Server: Email Body + "."
+    Server->>Client: 250 OK
+    Client->>Server: QUIT
+    Server->>Client: 221 Closing Connection
 ```
 
 SMTP's simplicity, ease of implementation, and ability to work across a variety of systems has made it the de facto protocol for email transmission. However, it's worth noting that SMTP is inherently insecure as it transmits messages in plain text, making it vulnerable to eavesdropping. Therefore, it's often used with other protocols like SSL/TLS for encryption and SPF, DKIM, and DMARC for email authentication and integrity checks.

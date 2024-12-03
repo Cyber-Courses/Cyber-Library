@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-Address Space Layout Randomization (ASLR) is a computer security technique that randomizes the location where system executables are loaded into memory. This unpredictability makes it more difficult for an attacker to predict target addresses, thus preventing many types of security attacks, including buffer overflow attacks.
-
+> Address Space Layout Randomization (ASLR) is a computer security technique that randomizes the location where system executables are loaded into memory. This unpredictability makes it more difficult for an attacker to predict target addresses, thus preventing many types of security attacks, including buffer overflow attacks.
+> 
 
 ### 🧐 Why ?
 
-ASLR is an important security feature because it makes it harder for attackers to execute malicious code on a system. Even if a vulnerability exists in a software, ASLR can prevent an attacker from reliably jumping to a specific exploited function in memory. This increases the difficulty of exploiting the system, making it less attractive to attackers.
-
+> ASLR is an important security feature because it makes it harder for attackers to execute malicious code on a system. Even if a vulnerability exists in a software, ASLR can prevent an attacker from reliably jumping to a specific exploited function in memory. This increases the difficulty of exploiting the system, making it less attractive to attackers.
+> 
 
 ### ⛏️ How ?
 
-ASLR is typically implemented at the operating system level. In Linux, for example, you can enable ASLR by setting the kernel parameter 'kernel.randomize_va_space' to 2. This can be done by adding the line 'kernel.randomize_va_space = 2' to '/etc/sysctl.conf' and then running 'sysctl -p' to apply the change. In Windows, ASLR is enabled by default and can be managed through the Windows Defender Security Center.
-
+> ASLR is typically implemented at the operating system level. In Linux, for example, you can enable ASLR by setting the kernel parameter 'kernel.randomize_va_space' to 2. This can be done by adding the line 'kernel.randomize_va_space = 2' to '/etc/sysctl.conf' and then running 'sysctl -p' to apply the change. In Windows, ASLR is enabled by default and can be managed through the Windows Defender Security Center.
+> 
 
 ### ⏳ When ?
 
-ASLR was first implemented in the early 2000s as a response to the widespread problem of buffer overflow attacks. It was incorporated into Linux in 2005, into OpenBSD in 2003, and into Windows starting with Vista in 2007.
-
+> ASLR was first implemented in the early 2000s as a response to the widespread problem of buffer overflow attacks. It was incorporated into Linux in 2005, into OpenBSD in 2003, and into Windows starting with Vista in 2007.
+> 
 
 # ⚙️ Technical Explanations
 
@@ -42,7 +42,7 @@ ASLR has been an important security feature since the early 2000s when it was in
 For example, consider a simple C program that has a buffer overflow vulnerability. The code might look something like this:
 
 ```c
-#include <string.h
+#include <string.h>
 
 void vulnerable_function(char* string){
     char buffer[100];
@@ -63,7 +63,7 @@ When compiled and run on a system with ASLR enabled, the memory addresses for th
 To demonstrate, let's say the attacker wants to run the command `/bin/sh` (which starts a shell) by exploiting the buffer overflow. They would first need to write the malicious code (in assembly language), compile it, and then get its hexadecimal representation. This could be done using tools like `nasm` (a assembler) and `xxd` (a hex dump utility):
 
 ```bash
-$ echo -e "section .text\\n   global _start\\n_start:\\n   xor eax, eax\\n   push eax\\n   push 0x68732f2f\\n   push 0x6e69622f\\n   mov ebx, esp\\n   mov ecx, eax\\n   mov edx, eax\\n   mov al, 11\\n   int 0x80" shellcode.asm
+$ echo -e "section .text\\n   global _start\\n_start:\\n   xor eax, eax\\n   push eax\\n   push 0x68732f2f\\n   push 0x6e69622f\\n   mov ebx, esp\\n   mov ecx, eax\\n   mov edx, eax\\n   mov al, 11\\n   int 0x80" > shellcode.asm
 $ nasm -f elf32 shellcode.asm
 $ ld -m elf_i386 -o shellcode shellcode.o
 $ objdump -d ./shellcode | grep '[0-9a-f]:' | grep -v 'file' | cut -f2 -d: | cut -f1-6 -d' ' | tr -s ' ' | tr '\\t' ' ' | sed 's/ $//g' | sed 's/ /\\\\x/g' | paste -d '' -s | sed 's/^/"/' | sed 's/$/"/g'

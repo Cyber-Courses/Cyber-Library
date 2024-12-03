@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-Logstash is an open-source data collection pipeline tool. It ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash' like Elasticsearch. Logstash is part of the Elastic Stack along with Beats, Elasticsearch, and Kibana.
-
+> Logstash is an open-source data collection pipeline tool. It ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite 'stash' like Elasticsearch. Logstash is part of the Elastic Stack along with Beats, Elasticsearch, and Kibana.
+> 
 
 ### 🧐 Why ?
 
-The importance of Logstash lies in its ability to simplify the process of managing, analyzing, and visualizing large volumes of data. It allows for efficient data processing and enrichment, and can be used to create a centralized logging system, crucial for system monitoring, troubleshooting, and operational intelligence. Its compatibility with numerous data types and sources makes it an essential tool for every system administrator and data analyst.
-
+> The importance of Logstash lies in its ability to simplify the process of managing, analyzing, and visualizing large volumes of data. It allows for efficient data processing and enrichment, and can be used to create a centralized logging system, crucial for system monitoring, troubleshooting, and operational intelligence. Its compatibility with numerous data types and sources makes it an essential tool for every system administrator and data analyst.
+> 
 
 ### ⛏️ How ?
 
-To start using Logstash, you first need to install it on your Linux system. It can be installed and run on the terminal using package managers like YUM or APT. Once installed, you can configure Logstash to ingest data by creating a configuration file that specifies the input, filter, and output plugins. You then run Logstash with this configuration file, and it will start ingesting and processing data as specified. Logstash's flexibility allows you to customize your data processing pipeline to suit your needs.
-
+> To start using Logstash, you first need to install it on your Linux system. It can be installed and run on the terminal using package managers like YUM or APT. Once installed, you can configure Logstash to ingest data by creating a configuration file that specifies the input, filter, and output plugins. You then run Logstash with this configuration file, and it will start ingesting and processing data as specified. Logstash's flexibility allows you to customize your data processing pipeline to suit your needs.
+> 
 
 ### ⏳ When ?
 
-Logstash was first released by Jordan Sissel in 2009 as a standalone project, before being later incorporated into the Elastic Stack.
-
+> Logstash was first released by Jordan Sissel in 2009 as a standalone project, before being later incorporated into the Elastic Stack.
+> 
 
 # ⚙️ Technical Explanations
 
@@ -45,25 +45,25 @@ Let's assume you have a web server and you want to use Logstash to process your 
 ```bash
 input {
   file {
-    path ="/var/log/apache2/access.log"
-    start_position ="beginning"
+    path => "/var/log/apache2/access.log"
+    start_position => "beginning"
   }
 }
 
 filter {
   grok {
-    match ={ "message" ="%{COMBINEDAPACHELOG}" }
+    match => { "message" => "%{COMBINEDAPACHELOG}" }
   }
   date {
-    match =[ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+    match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
   }
 }
 
 output {
   elasticsearch {
-    hosts =["localhost:9200"]
+    hosts => ["localhost:9200"]
   }
-  stdout { codec =rubydebug }
+  stdout { codec => rubydebug }
 }
 
 ```

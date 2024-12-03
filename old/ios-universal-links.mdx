@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-iOS Universal Links are a facility provided by the Apple iOS platform to allow an app to handle URLs that would typically be handled by the Safari browser, or another app on the system. Universal links give your app the ability to handle links directly, eliminating the need for a user to confirm they want to leave the browser and open your app if they click on a link that your app can handle.
-
+> iOS Universal Links are a facility provided by the Apple iOS platform to allow an app to handle URLs that would typically be handled by the Safari browser, or another app on the system. Universal links give your app the ability to handle links directly, eliminating the need for a user to confirm they want to leave the browser and open your app if they click on a link that your app can handle.
+> 
 
 ### 🧐 Why ?
 
-Universal Links are a powerful tool for developers and businesses alike. They enable a seamless user experience by connecting web content with its corresponding app content. For example, a user reading a restaurant review on a website can tap a link to open the restaurant’s details directly in a restaurant review app, if it's installed. This can greatly enhance the user experience and increase user engagement with apps. For businesses, this can boost app usage and create more opportunities for user interaction and conversion.
-
+> Universal Links are a powerful tool for developers and businesses alike. They enable a seamless user experience by connecting web content with its corresponding app content. For example, a user reading a restaurant review on a website can tap a link to open the restaurant’s details directly in a restaurant review app, if it's installed. This can greatly enhance the user experience and increase user engagement with apps. For businesses, this can boost app usage and create more opportunities for user interaction and conversion.
+> 
 
 ### ⛏️ How ?
 
-Implementing iOS Universal Links involves a few steps: 1. Enable associated domains on your app ID. 2. Enable associated domains on the app. 3. Add the associated domain to your app. 4. Prepare your app to handle universal links. 5. Create an Apple App Site Association file and upload it to your HTTPS web server.
-
+> Implementing iOS Universal Links involves a few steps: 1. Enable associated domains on your app ID. 2. Enable associated domains on the app. 3. Add the associated domain to your app. 4. Prepare your app to handle universal links. 5. Create an Apple App Site Association file and upload it to your HTTPS web server.
+> 
 
 ### ⏳ When ?
 
-Apple introduced Universal Links in iOS 9 as a part of their deep linking APIs. They have since become a standard part of iOS development, and are widely used in a variety of apps to create a seamless user experience between web and app content.
-
+> Apple introduced Universal Links in iOS 9 as a part of their deep linking APIs. They have since become a standard part of iOS development, and are widely used in a variety of apps to create a seamless user experience between web and app content.
+> 
 
 # ⚙️ Technical Explanations
 
@@ -46,14 +46,14 @@ Here is a detailed example of how Universal Links are implemented, using a hypot
 1. **Enable Associated Domains** on your app ID via the Apple Developer account. This is done by checking the "Associated Domains" checkbox in the Capabilities tab of the Target settings in Xcode.
 2. **Enable Associated Domains on the app**. In Xcode, go to your Target, then in the Signing & Capabilities tab, click on "+ Capability" and add "Associated Domains".
 3. **Add the Associated Domain to your app**. This is done by adding an entry to the Associated Domains field in Xcode in the format `applinks:myapp.com`.
-4. **Prepare your app to handle Universal Links**. In your AppDelegate.swift file, implement the function `application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -Void) -Bool` to handle incoming links.
+4. **Prepare your app to handle Universal Links**. In your AppDelegate.swift file, implement the function `application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool` to handle incoming links.
 
 The implementation might look like this:
 
 ```swift
 func application(_ application: UIApplication,
                  continue userActivity: NSUserActivity,
-                 restorationHandler: @escaping ([UIUserActivityRestoring]?) -Void) -Bool {
+                 restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
     guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
           let incomingURL = userActivity.webpageURL,
           let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
