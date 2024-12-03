@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-> The 'set_release_agent' command is a Linux kernel feature that allows the system administrator to specify a program that the kernel will run whenever a cgroup no longer has any tasks in it. This is typically used in a file path format such as '/path/payload'.
-> 
+The 'set_release_agent' command is a Linux kernel feature that allows the system administrator to specify a program that the kernel will run whenever a cgroup no longer has any tasks in it. This is typically used in a file path format such as '/path/payload'.
+
 
 ### 🧐 Why ?
 
-> Understanding the 'set_release_agent' command is crucial as it is frequently used in managing system resources. For system administrators, it's a valuable tool for keeping the system organized and efficient. For hackers, it could potentially be exploited to launch unauthorized programs or processes.
-> 
+Understanding the 'set_release_agent' command is crucial as it is frequently used in managing system resources. For system administrators, it's a valuable tool for keeping the system organized and efficient. For hackers, it could potentially be exploited to launch unauthorized programs or processes.
+
 
 ### ⛏️ How ?
 
-> To use the 'set_release_agent' command, you would typically access the cgroup filesystem and echo the path of your intended program into the 'release_agent' file. For example: 'echo /path/payload > /sys/fs/cgroup/release_agent'. It is critical to ensure that the specified path is secure and the program it points to is authorized and safe to run.
-> 
+To use the 'set_release_agent' command, you would typically access the cgroup filesystem and echo the path of your intended program into the 'release_agent' file. For example: 'echo /path/payload /sys/fs/cgroup/release_agent'. It is critical to ensure that the specified path is secure and the program it points to is authorized and safe to run.
+
 
 ### ⏳ When ?
 
-> The 'set_release_agent' command has been available in Linux kernels since version 2.6.24, released in 2008. It's a feature that's commonly used in systems administration and can be a part of various scripts and programs.
-> 
+The 'set_release_agent' command has been available in Linux kernels since version 2.6.24, released in 2008. It's a feature that's commonly used in systems administration and can be a part of various scripts and programs.
+
 
 # ⚙️ Technical Explanations
 
@@ -55,7 +55,7 @@ This command creates a new cgroup named 'my_cgroup' under the 'cpu' subsystem, w
 Next, you would add processes to this cgroup. This can be done by writing the process ID (PID) of each process to the 'tasks' file in the cgroup directory:
 
 ```
-echo 1234 > /sys/fs/cgroup/cpu/my_cgroup/tasks
+echo 1234 /sys/fs/cgroup/cpu/my_cgroup/tasks
 
 ```
 
@@ -66,7 +66,7 @@ Now, let's say you have a script called '[notify.sh](http://notify.sh/)' that se
 To do this, you would use the 'set_release_agent' command:
 
 ```
-echo /path/to/notify.sh > /sys/fs/cgroup/cpu/release_agent
+echo /path/to/notify.sh /sys/fs/cgroup/cpu/release_agent
 
 ```
 
@@ -75,7 +75,7 @@ This command sets the 'release_agent' of the 'cpu' subsystem to '[notify.sh](htt
 Finally, you would set the 'notify_on_release' flag of 'my_cgroup' to '1'. This tells the kernel to run the 'release_agent' when 'my_cgroup' becomes empty:
 
 ```
-echo 1 > /sys/fs/cgroup/cpu/my_cgroup/notify_on_release
+echo 1 /sys/fs/cgroup/cpu/my_cgroup/notify_on_release
 
 ```
 

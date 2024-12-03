@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-> Executing an attack by spawning a process that immediately ends inside the 'x' child cgroup is a technique used in cybersecurity. A cgroup (control group) is a Linux kernel feature that limits, accounts, and isolates the CPU, memory, disk I/O, and network usage of one or more processes. The 'x' child cgroup refers to a specific cgroup in the hierarchy where the process is spawned and immediately terminated.
-> 
+Executing an attack by spawning a process that immediately ends inside the 'x' child cgroup is a technique used in cybersecurity. A cgroup (control group) is a Linux kernel feature that limits, accounts, and isolates the CPU, memory, disk I/O, and network usage of one or more processes. The 'x' child cgroup refers to a specific cgroup in the hierarchy where the process is spawned and immediately terminated.
+
 
 ### 🧐 Why ?
 
-> This technique is important in cybersecurity as it can be used to evade detection by security tools that monitor process creation and termination. By spawning and immediately ending a process within a cgroup, the attacker can execute malicious activities without raising alerts. This is particularly useful in environments where process monitoring is heavily relied upon for detecting malicious activities.
-> 
+This technique is important in cybersecurity as it can be used to evade detection by security tools that monitor process creation and termination. By spawning and immediately ending a process within a cgroup, the attacker can execute malicious activities without raising alerts. This is particularly useful in environments where process monitoring is heavily relied upon for detecting malicious activities.
+
 
 ### ⛏️ How ?
 
-> To implement this technique, an attacker would first need to gain access to a system with cgroup capabilities, such as a Linux-based system. They would then need to create a child cgroup within the system cgroup hierarchy, which can be done using the 'mkdir' command. Once the 'x' child cgroup is created, the attacker can spawn a process inside this cgroup and immediately terminate it, thereby bypassing process monitoring tools.
-> 
+To implement this technique, an attacker would first need to gain access to a system with cgroup capabilities, such as a Linux-based system. They would then need to create a child cgroup within the system cgroup hierarchy, which can be done using the 'mkdir' command. Once the 'x' child cgroup is created, the attacker can spawn a process inside this cgroup and immediately terminate it, thereby bypassing process monitoring tools.
+
 
 ### ⏳ When ?
 
-> The use of this technique has been prevalent since the introduction of cgroups in the Linux kernel in 2007. However, it has gained more attention in recent years due to the increasing use of containerization technologies, which heavily rely on cgroups.
-> 
+The use of this technique has been prevalent since the introduction of cgroups in the Linux kernel in 2007. However, it has gained more attention in recent years due to the increasing use of containerization technologies, which heavily rely on cgroups.
+
 
 # ⚙️ Technical Explanations
 
@@ -63,7 +63,7 @@ mkdir /sys/fs/cgroup/cpu/x
 
 ```bash
 # Set CPU limit to 50%
-echo 50000 > /sys/fs/cgroup/cpu/x/cpu.cfs_quota_us
+echo 50000 /sys/fs/cgroup/cpu/x/cpu.cfs_quota_us
 
 ```
 
@@ -71,7 +71,7 @@ echo 50000 > /sys/fs/cgroup/cpu/x/cpu.cfs_quota_us
 
 ```bash
 # Spawn a process in the 'x' child cgroup
-echo $$ > /sys/fs/cgroup/cpu/x/tasks &
+echo $$ /sys/fs/cgroup/cpu/x/tasks &
 
 # Immediately terminate the process
 kill $!

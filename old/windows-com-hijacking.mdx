@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-> Windows COM Hijacking is a post-exploitation technique used by attackers to execute malicious code, often to maintain persistence in a system. Component Object Model (COM) is a Microsoft technology that allows interprocess communication and dynamic object creation in a large range of programming languages. The COM infrastructure relies on a set of registry keys to map COM objects to DLLs. By manipulating these keys, an attacker can redirect the COM objects to execute their malicious code.
-> 
+Windows COM Hijacking is a post-exploitation technique used by attackers to execute malicious code, often to maintain persistence in a system. Component Object Model (COM) is a Microsoft technology that allows interprocess communication and dynamic object creation in a large range of programming languages. The COM infrastructure relies on a set of registry keys to map COM objects to DLLs. By manipulating these keys, an attacker can redirect the COM objects to execute their malicious code.
+
 
 ### 🧐 Why ?
 
-> Understanding Windows COM Hijacking is crucial as it is a powerful technique that can be used to maintain persistence within a system. The manipulation of COM objects provides a stealthy way for attackers to execute their malicious code as it can easily bypass security measures like anti-virus software. Hence, it is an important topic for security researchers and practitioners.
-> 
+Understanding Windows COM Hijacking is crucial as it is a powerful technique that can be used to maintain persistence within a system. The manipulation of COM objects provides a stealthy way for attackers to execute their malicious code as it can easily bypass security measures like anti-virus software. Hence, it is an important topic for security researchers and practitioners.
+
 
 ### ⛏️ How ?
 
-> COM Hijacking is achieved by identifying a COM object that is instantiated during the boot process, but whose corresponding DLL does not exist. The attacker then places their malicious DLL with the same name in the expected path. When the system boots, the COM object is redirected to execute the malicious DLL. To counter this, one should regularly monitor and audit the registry keys associated with COM objects.
-> 
+COM Hijacking is achieved by identifying a COM object that is instantiated during the boot process, but whose corresponding DLL does not exist. The attacker then places their malicious DLL with the same name in the expected path. When the system boots, the COM object is redirected to execute the malicious DLL. To counter this, one should regularly monitor and audit the registry keys associated with COM objects.
+
 
 ### ⏳ When ?
 
-> COM Hijacking has been in use since the introduction of the Component Object Model technology by Microsoft, which was in the mid-1990s. However, its use as a post-exploitation technique in cyber attacks has been more common in recent years.
-> 
+COM Hijacking has been in use since the introduction of the Component Object Model technology by Microsoft, which was in the mid-1990s. However, its use as a post-exploitation technique in cyber attacks has been more common in recent years.
+
 
 # ⚙️ Technical Explanations
 
@@ -37,7 +37,7 @@ For instance, let's consider a scenario where an attacker wants to execute a mal
 
 ```bash
 # Use the 'reg query' command to search for the CLSID of the missing DLL
-C:\\> reg query HKCR\\CLSID /s /f "missing.dll"
+C:\\reg query HKCR\\CLSID /s /f "missing.dll"
 
 ```
 
@@ -45,7 +45,7 @@ C:\\> reg query HKCR\\CLSID /s /f "missing.dll"
 
 ```bash
 # Navigate to the registry key
-C:\\> regedit HKEY_CLASSES_ROOT\\CLSID\\{CLSID}
+C:\\regedit HKEY_CLASSES_ROOT\\CLSID\\{CLSID}
 
 ```
 
@@ -53,7 +53,7 @@ C:\\> regedit HKEY_CLASSES_ROOT\\CLSID\\{CLSID}
 
 ```bash
 # Replace the path
-C:\\> reg add HKEY_CLASSES_ROOT\\CLSID\\{CLSID}\\InprocServer32 /v "C:\\path\\to\\malicious.dll"
+C:\\reg add HKEY_CLASSES_ROOT\\CLSID\\{CLSID}\\InprocServer32 /v "C:\\path\\to\\malicious.dll"
 
 ```
 

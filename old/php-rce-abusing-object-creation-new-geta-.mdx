@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-> PHP - RCE abusing object creation: new $_GET['a']($_GET['b']) is a technique used by attackers to exploit PHP applications. This involves manipulating GET parameters to create instances of arbitrary classes and invoke methods.
-> 
+PHP - RCE abusing object creation: new $_GET['a']($_GET['b']) is a technique used by attackers to exploit PHP applications. This involves manipulating GET parameters to create instances of arbitrary classes and invoke methods.
+
 
 ### 🧐 Why ?
 
-> Understanding this technique is crucial for PHP developers and security professionals alike, as it can lead to serious vulnerabilities in an application. An attacker can use this technique to execute arbitrary code, potentially gaining unauthorized access or control over a system.
-> 
+Understanding this technique is crucial for PHP developers and security professionals alike, as it can lead to serious vulnerabilities in an application. An attacker can use this technique to execute arbitrary code, potentially gaining unauthorized access or control over a system.
+
 
 ### ⛏️ How ?
 
-> This technique exploits the flexibility of PHP's object-oriented programming. By using the 'new' keyword with a user-supplied class name, an attacker can create a new object and call a method within this object. This can be done by manipulating the GET parameters in a URL or HTTP request. For instance, an attacker might use a GET parameter like '?a=ExampleClass&b=executeMethod' to create an object of the 'ExampleClass' and invoke the 'executeMethod'.
-> 
+This technique exploits the flexibility of PHP's object-oriented programming. By using the 'new' keyword with a user-supplied class name, an attacker can create a new object and call a method within this object. This can be done by manipulating the GET parameters in a URL or HTTP request. For instance, an attacker might use a GET parameter like '?a=ExampleClass&b=executeMethod' to create an object of the 'ExampleClass' and invoke the 'executeMethod'.
+
 
 ### ⏳ When ?
 
-> This technique has been used by attackers for many years, as it exploits the fundamental design of PHP's object-oriented programming. It is still relevant today, particularly in applications that do not properly sanitize user input.
-> 
+This technique has been used by attackers for many years, as it exploits the fundamental design of PHP's object-oriented programming. It is still relevant today, particularly in applications that do not properly sanitize user input.
+
 
 # ⚙️ Technical Explanations
 
@@ -53,16 +53,16 @@ if (isset($_GET['a']) && isset($_GET['b'])) {
     $className = $_GET['a'];
     $methodName = $_GET['b'];
     $obj = new $className();
-    $obj->$methodName();
+    $obj-$methodName();
 }
-?>
+?
 
 ```
 
 The script is designed to create an instance of `ExampleClass` and call the `executeMethod` when accessed with the following URL:
 
 ```
-<http://localhost/test.php?a=ExampleClass&b=executeMethod>
+<http://localhost/test.php?a=ExampleClass&b=executeMethod
 
 ```
 
@@ -87,12 +87,12 @@ if (isset($_GET['a']) && isset($_GET['b'])) {
 
     if (in_array($className, $allowedClasses) && in_array($methodName, $allowedMethods)) {
         $obj = new $className();
-        $obj->$methodName();
+        $obj-$methodName();
     } else {
         echo "Invalid class or method.";
     }
 }
-?>
+?
 
 ```
 

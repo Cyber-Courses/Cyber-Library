@@ -7,23 +7,23 @@
 
 ### 👀 What ?
 
-> The 'notify_on_release' is a parameter in the cgroup filesystem in Linux. Cgroup, short for control groups, is a kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.) of a collection of processes. When 'notify_on_release' is enabled (set to 1), a release agent will be called when the last task in a cgroup has exited.
-> 
+The 'notify_on_release' is a parameter in the cgroup filesystem in Linux. Cgroup, short for control groups, is a kernel feature that limits, accounts for, and isolates the resource usage (CPU, memory, disk I/O, etc.) of a collection of processes. When 'notify_on_release' is enabled (set to 1), a release agent will be called when the last task in a cgroup has exited.
+
 
 ### 🧐 Why ?
 
-> Understanding 'notify_on_release' is important as it is a mechanism that can help in managing resources effectively in a Linux system. For instance, it can be used to clean up resources when they are no longer needed, which can help prevent resource leaks and keep the system running efficiently.
-> 
+Understanding 'notify_on_release' is important as it is a mechanism that can help in managing resources effectively in a Linux system. For instance, it can be used to clean up resources when they are no longer needed, which can help prevent resource leaks and keep the system running efficiently.
+
 
 ### ⛏️ How ?
 
-> To use 'notify_on_release', you first need to navigate to the directory of the cgroup you are interested in. Then, you can enable 'notify_on_release' by echoing 1 into the 'notify_on_release' file. For example: `echo 1 > /sys/fs/cgroup/my_cgroup/notify_on_release`. After this, when the last task in the 'my_cgroup' cgroup exits, the release agent specified in the 'release_agent' file of the root cgroup will be called.
-> 
+To use 'notify_on_release', you first need to navigate to the directory of the cgroup you are interested in. Then, you can enable 'notify_on_release' by echoing 1 into the 'notify_on_release' file. For example: `echo 1 /sys/fs/cgroup/my_cgroup/notify_on_release`. After this, when the last task in the 'my_cgroup' cgroup exits, the release agent specified in the 'release_agent' file of the root cgroup will be called.
+
 
 ### ⏳ When ?
 
-> The 'notify_on_release' feature has been available since the introduction of cgroups in the Linux kernel in 2007. It is a low-level feature that is often used indirectly through higher level tools and systems such as Docker and Kubernetes, which use cgroups to isolate their workloads.
-> 
+The 'notify_on_release' feature has been available since the introduction of cgroups in the Linux kernel in 2007. It is a low-level feature that is often used indirectly through higher level tools and systems such as Docker and Kubernetes, which use cgroups to isolate their workloads.
+
 
 # ⚙️ Technical Explanations
 
@@ -39,7 +39,7 @@ For instance, suppose a cgroup was assigned a certain amount of memory for its t
 
 However, with 'notify_on_release' enabled, the system can automatically initiate cleanup actions, releasing the allocated resources back to the pool. This is just one example of how 'notify_on_release' can help maintain resource efficiency in a Linux system.
 
-To enable 'notify_on_release', you would navigate to the directory of the cgroup you are interested in and echo 1 into the 'notify_on_release' file. For example: `echo 1 > /sys/fs/cgroup/my_cgroup/notify_on_release`.
+To enable 'notify_on_release', you would navigate to the directory of the cgroup you are interested in and echo 1 into the 'notify_on_release' file. For example: `echo 1 /sys/fs/cgroup/my_cgroup/notify_on_release`.
 
 This functionality has been available since the introduction of cgroups in the Linux kernel in 2007. It's primarily a low-level feature, often utilized indirectly through higher-level tools and systems like Docker and Kubernetes, which use cgroups to isolate their workloads.
 
@@ -55,7 +55,7 @@ cd /sys/fs/cgroup/my_cgroup
 1. **Enable `notify_on_release`**: We can enable `notify_on_release` by echoing 1 into the `notify_on_release` file. In the terminal, we would type:
 
 ```bash
-echo 1 > notify_on_release
+echo 1 notify_on_release
 
 ```
 
@@ -64,7 +64,7 @@ This command will set `notify_on_release` to 1, indicating that it is enabled.
 1. **Specify a release agent**: We need to specify a release agent that will be called when `my_cgroup` becomes empty. Suppose we have a script called `my_release_agent.sh` that handles resource cleanup, we can specify this as our release agent in the `release_agent` file of the root cgroup.
 
 ```bash
-echo /path/to/my_release_agent.sh > /sys/fs/cgroup/release_agent
+echo /path/to/my_release_agent.sh /sys/fs/cgroup/release_agent
 
 ```
 
