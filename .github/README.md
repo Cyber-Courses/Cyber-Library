@@ -6,12 +6,12 @@ Welcome to the **Cyber Library**, a community-driven repository that aims to bui
 
 The **Cyber Library** is organized into various categories covering different areas of cybersecurity, including:
 
-- **Career**: Guidance for building and advancing a career in cybersecurity, including skills development, certifications, and industry insights.
-- **Concepts**: Core cybersecurity concepts such as risk management, threat modeling, encryption, and security fundamentals.
-- **Defensive**: Topics related to defending systems and networks, such as incident response, threat hunting, SIEM, EDR, and blue team operations.
-- **Governance**: Covers compliance, regulatory frameworks, audits, and risk management essential for cybersecurity governance.
-- **Offensive**: Offensive security topics including penetration testing, social engineering, red teaming, and exploitation techniques.
-- **Technology**: A solid foundation for understanding both offensive and defensive cybersecurity strategies.
+- **Foundations:** Delve into core security principles, ethical considerations, human factors, and the historical evolution of cybersecurity.
+- **Offensive:** Learn about ethical hacking methodologies, reconnaissance techniques, network exploitation, and red/purple teaming strategies.
+- **Defensive:** Discover proactive preparation, continuous monitoring, incident response, recovery planning, and post-incident improvement.
+- **Governance:** Understand the frameworks, policies, compliance standards, and strategic decision-making that keep organizations secure at the top level.
+- **Career:** Explore roles, career paths, professional development, certifications, and how to grow and succeed in the cybersecurity industry.
+- **Technology:** Unpack the fundamentals of computing, networks, cryptography, data management, and the technical building blocks that power digital infrastructures.
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
 
@@ -21,6 +21,8 @@ The goal of **Cyber Library** is to:
 - Provide a structured, up-to-date repository of cybersecurity knowledge.
 - Create a reference for professionals, learners, and enthusiasts in the cybersecurity field.
 - Encourage continuous learning and sharing of expertise across the global security community.
+
+If you find this project useful, consider giving it a **star** ⭐ — it really helps!
 
 ## 🌐 Using Cyber Library Offline
 
