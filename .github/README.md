@@ -65,6 +65,10 @@ This project thrives on the contributions of people like you. We invite you to:
 - Contribute your knowledge and expertise.
 - Help us grow and improve this library.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Cyber-Courses/Cyber-Library&type=Date)](https://www.star-history.com/#Cyber-Courses/Cyber-Library&Date)
+
 ## 📧 Contact
 
 If you have any questions, feel free to open an issue or reach out via the [Wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki) or our [Discord server](https://discord.gg/a9XwRKxdHf).
