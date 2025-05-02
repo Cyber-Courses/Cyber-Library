@@ -65,7 +65,7 @@ This project thrives on the contributions of people like you. We invite you to:
 - Contribute your knowledge and expertise.
 - Help us grow and improve this library.
 
-## Star History
+## ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Cyber-Courses/Cyber-Library&type=Date)](https://www.star-history.com/#Cyber-Courses/Cyber-Library&Date)
 
