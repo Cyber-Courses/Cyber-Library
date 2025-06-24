@@ -1,0 +1,75 @@
+---
+title: Exploiting Wide Byte Injection in MySQL with GBK
+description: Learn to use Wide Byte Injection with GBK encoding for MySQL WAF bypass
+  techniques.
+keywords:
+- Wide Byte Injection
+- GBK encoding
+- MySQL
+- WAF bypass
+- sql injection
+- charset escape
+- multibyte injection
+---
+
+# Wide Byte Injection (GBK)
+
+## Context
+
+The objective of this article is to teach how to exploit Wide Byte Injection vulnerabilities in MySQL using GBK encoding for bypassing Web Application Firewalls (WAFs). To fully comprehend this technique, readers should be familiar with concepts like GBK encoding, charset escape, multibyte injection, and general MySQL WAF bypass strategies.
+
+## Theory
+
+### GBK Encoding and Wide Byte Injection
+
+GBK is a character encoding system used for Simplified Chinese characters. It uses 1 to 2 bytes per character, which allows for a wide variety of character representations. This is particularly useful for constructing wide byte injections, as it can be leveraged to manipulate how injection attempts are interpreted by the database, potentially bypassing input validation.
+
+Wide Byte Injection takes advantage of multibyte character sets such as GBK. The core idea is to use wide byte sequences to alter the structure of an SQL query. By doing so, an attacker can bypass certain WAF protections that are designed without accounting for multibyte character encoding, enabling the insertion of malicious SQL code.
+
+### Charset Escape Mechanism
+
+The charset escape mechanism is a fundamental concept that allows an attacker to create SQL queries that escape normal interpretation. This exploit relies on the fact that many WAF systems do not correctly handle multibyte sequences, which can be used to escape and inject SQL commands that would otherwise be filtered or sanitized. This flaw in implementation can be exploited to bypass WAF protections by crafting specific payloads that exploit these weaknesses.
+
+## Practice
+
+### Wide Byte Injection using GBK Encoding
+
+To perform Wide Byte Injection using GBK encoding, follow these steps:
+
+- **Identify Input Fields:**
+  - Begin by identifying input fields in the web application that might be vulnerable to SQL injection. This involves understanding how input data is processed and whether it's incorporated into SQL queries without proper sanitization.
+
+- **Standard SQL Execution:**
+  - Here is a typical SQL query that you might aim to exploit:
+  
+  ```sql
+  SELECT * FROM users WHERE username = 'admin' AND password = '1234';
+  ```
+
+- **Crafting the Payload:**
+  - Create an injection payload using GBK wide byte sequences. The goal is to manipulate the SQL query's logic through this special encoding:
+  
+  ```sql
+  ' OR '1'='1' -- 
+  ```
+
+- **SQL Execution with Payload:**
+  - Inject your crafted payload into the vulnerable input field. This altered query could look like this:
+  
+  ```sql
+  SELECT * FROM users WHERE username = 'admin' AND password = '1234' OR '1'='1' -- ;
+  ```
+
+- **Observation and Adjustment:**
+  - Observe the behavior of the WAF. If the injection is successful, unauthorized access to the application should be evident. Adjust the payload if necessary to evade specific defenses or sanitization checks implemented by the WAF.
+
+### Result
+
+Using this technique, you can achieve an authentication bypass. By effectively bypassing the WAF, you gain unauthorized access to the application, demonstrating the power of Wide Byte Injection under certain configurations.
+
+## Tools
+
+- **Sqlmap**
+- **Burp Suite** 
+
+These tools assist in automating SQL injection attacks and analyzing web application traffic, offering powerful capabilities for testing and refining your attack techniques.
