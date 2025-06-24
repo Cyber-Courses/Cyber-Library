@@ -1,0 +1,51 @@
+---
+title: Bypass WAF GROUP_CONCAT with JSON_ARRAYAGG
+description: Learn to bypass WAF restrictions on GROUP_CONCAT using JSON_ARRAYAGG
+  in MySQL for effective SQL injection.
+keywords:
+- WAF bypass
+- JSON_ARRAYAGG
+- GROUP_CONCAT alternative
+- SQL injection
+- MySQL security
+---
+
+# Alternative to GROUP_CONCAT
+
+## Context
+
+This article aims to equip you with the knowledge required to bypass Web Application Firewall (WAF) restrictions on the `GROUP_CONCAT` SQL function by using `JSON_ARRAYAGG` in MySQL. This technique is particularly useful when conducting SQL injection attacks and you encounter WAF protections that block the `GROUP_CONCAT` function. To fully engage with this topic, you should already have a basic understanding of SQL functions, MySQL data types, and MySQL WAF bypass techniques.
+
+## Theory
+
+### Limitations of GROUP_CONCAT in WAF Contexts
+
+The `GROUP_CONCAT` function is commonly used in SQL injection attacks to aggregate multiple row values into a single string. However, this function is often flagged and blocked by WAFs due to predefined symbol limits and detection patterns. WAFs are designed to identify and prevent the aggregation of data, which might lead to data exfiltration.
+
+### Using JSON_ARRAYAGG as an Alternative
+
+`JSON_ARRAYAGG` is a more recent MySQL function that is designed to aggregate data into JSON arrays. It serves as an effective alternative to `GROUP_CONCAT` because it can bypass WAF rules that specifically target `GROUP_CONCAT`. By replacing `GROUP_CONCAT` with `JSON_ARRAYAGG`, attackers can potentially evade WAF detection, allowing for successful data aggregation without setting off security alarms.
+
+## Practice
+
+### Bypassing WAF with JSON_ARRAYAGG
+
+You can effectively bypass WAF restrictions with the following method:
+
+- **Identify SQL injection points where `GROUP_CONCAT` is blocked**: Begin by analyzing the target web application to identify injection points. This requires observing the behavior of the application when SQL injection payloads are introduced.
+
+- **Execute a query using `JSON_ARRAYAGG`**: Craft and execute a query that uses `JSON_ARRAYAGG` to aggregate data without triggering WAF rules. 
+
+```sql
+SELECT JSON_ARRAYAGG(column_name) FROM table_name;
+```
+
+#### Result
+
+Upon successful execution, this technique allows you to aggregate data in JSON array format without triggering WAF restrictions tailored against `GROUP_CONCAT`. This demonstrates a successful bypass of WAF input validation and data protection mechanisms.
+
+## Tools
+
+- **MySQL Client**: A fundamental tool for executing MySQL queries, allowing users to interact directly with the database to perform SQL injections and other related techniques. 
+
+By mastering this technique, you can enhance your capability to perform SQL injections in environments protected by Web Application Firewalls, opening a pathway to data aggregation that might otherwise be blocked.
