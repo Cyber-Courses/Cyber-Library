@@ -1,0 +1,68 @@
+---
+title: 'MySQL WAF Bypass: Alternative to VERSION Keyword'
+description: Learn how to bypass WAF restrictions on MySQL using alternatives to the
+  VERSION keyword for SQL injection attacks.
+keywords:
+- MySQL WAF bypass
+- SQL injection
+- alternative to VERSION
+- '@@innodb_version'
+- global.version
+- WAF evasion
+- MySQL version information
+- bypass tactics
+---
+
+# Alternative to VERSION
+
+## Context
+
+The objective of this guide is to teach how to bypass Web Application Firewall (WAF) rules that block the use of the `VERSION` keyword in MySQL SQL injection attacks. Readers should already be familiar with WAF evasion techniques, SQL query structures, and specific methods for bypassing MySQL WAF protection.
+
+## Theory
+
+### WAF Evasion Techniques for MySQL
+
+Web Application Firewalls (WAFs) are designed to prevent SQL injection attacks by blocking certain SQL keywords like `VERSION`. However, attackers can often circumvent these protections using alternative methods to access similar information. The key is to understand the vulnerability model these WAFs rely on and identify ways to bypass their keyword-based blocking strategies.
+
+### Alternative Methods to Retrieve MySQL Version
+
+There are effective alternatives to using the `VERSION` keyword to gather version information of a MySQL server. These methods can be used as part of an SQL injection attack to retrieve the necessary data without directly invoking `VERSION`, thus slipping past WAF defenses.
+
+- **Using `@@innodb_version`:** This system variable can be queried to retrieve the InnoDB version, which often approximates the MySQL server version.
+  
+- **Querying `global.version`:** Accessing global server variables allows an attacker to recover version information using a less conspicuous query method.
+
+## Practice
+
+### Using @@innodb_version for WAF Evasion
+
+This technique involves manually executing a query to retrieve the InnoDB version, providing indirect information about the database server's version.
+
+- Execute the following command to retrieve the version:
+  
+  ```bash
+  SELECT @@innodb_version;
+  ```
+
+- This step is effective because it retrieves the InnoDB storage engine version, which usually reflects the MySQL server's version in environments where InnoDB is the default storage engine.
+
+- **Result:** This method successfully bypasses WAF rules designed to block the `VERSION` keyword and allows an attacker to extract version information.
+
+### Querying global.version for WAF Evasion
+
+This technique leverages the `SHOW GLOBAL VARIABLES` command to obtain the MySQL server's version.
+
+- Use the following command to query global server variables:
+
+  ```bash
+  SHOW GLOBAL VARIABLES LIKE 'version';
+  ```
+
+- This query provides the same information that would conventionally be accessed using a direct `VERSION` query but does so in a manner less likely to be flagged by a WAF.
+
+- **Result:** Executing this command provides access to the version information by exploiting an alternative querying method, effectively circumventing WAF input validation.
+
+## Tools
+
+- **MySQL Command Line Client**: This tool allows for the execution of SQL queries directly on the database and is essential for utilizing the mentioned techniques.
