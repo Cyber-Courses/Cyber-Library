@@ -1,0 +1,67 @@
+---
+title: Bypassing WAFs with MySQL Conditional Comments
+description: Learn how to use MySQL conditional comments for SQL obfuscation and WAF
+  bypass.
+keywords:
+- MySQL
+- conditional comments
+- SQL obfuscation
+- WAF bypass
+- SQL injection
+- MySQL versioning
+- web security
+---
+
+# Conditional Comments
+
+## Context
+
+This article focuses on leveraging conditional comments in MySQL to perform SQL obfuscation, thereby bypassing Web Application Firewalls (WAFs). This technique is used in scenarios where directly injecting SQL might be hindered by protective measures. To follow this guide, you should be familiar with general SQL comments, MySQL syntax, and existing techniques for MySQL WAF bypass.
+
+## Theory
+
+### Conditional Comments in MySQL
+
+Conditional comments are a special type of SQL comment that MySQL processes only if the server version matches the condition specified within the comment. These comments can be powerful in executing code specific to certain MySQL versions.
+
+- **Definition**: Conditional comments in MySQL allow code to execute only if a specific condition, often the MySQL version, is met. They are formatted in the form `/*! MySQL_version Query */`.
+
+- **Core Principle**: These comments enable the inclusion of commands that execute only under particular MySQL versions, making them a useful tool for both developers and attackers to write adaptable queries.
+
+- **Vulnerability Model**: Attackers exploit this functionality to obfuscate SQL queries. By embedding their payload within conditional comments, they can disguise the queries' intentions, making detection by WAFs more challenging.
+
+### SQL Obfuscation Techniques
+
+Obfuscation techniques modify the appearance of an SQL query without affecting its functionality, often to bypass security controls like WAFs.
+
+- **Definition**: SQL obfuscation involves altering the syntax or structure of an SQL query while maintaining its operational outcome. It is a common approach to avoid detection by automated systems.
+
+- **Attack Sequence**: By crafting SQL payloads using conditional comments, attackers can hide malicious intentions. This makes recognition and blocking by WAFs more difficult, as the query appears less suspicious.
+
+## Practice
+
+### Using Conditional Comments for WAF Bypass
+
+#### Step-by-Step Guide
+
+1. **Identify the MySQL Version**: To effectively use conditional comments, identify the target MySQL version to understand which comments will be executed. This can often be inferred or determined via information disclosure vulnerabilities or during the reconnaissance phase.
+
+2. **Craft a Conditional Comment**:
+   ```sql
+   SELECT /*!50000 1,2,3*/ FROM users;
+   ```
+   - This query will execute only if the MySQL version is 5.0.0 or higher. By embedding non-executing parts of your query within conditional comments, you can tailor the code to specific environments.
+
+3. **Obfuscate Your Query**:
+   ```sql
+   SELECT /*!40101 * FROM*/ users WHERE id=1;
+   ```
+   - This example shows how obfuscation works by embedding parts of the query in conditional comments. Such a query can bypass simplistic WAF rule sets that might fail to parse the conditional comment segment appropriately.
+
+#### Result
+
+By correctly implementing these techniques, you can successfully bypass WAFs using conditional comments within SQL queries. This method avoids detection by obscuring the nature of the injected SQL, leveraging the conditional comment feature of MySQL to selectively execute parts of the payload. 
+
+## Tools
+
+- **MySQL Client**: A command-line client for connecting and executing queries on MySQL databases. It is essential for testing and deploying conditional comments in SQL queries.
