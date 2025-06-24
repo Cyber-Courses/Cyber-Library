@@ -1,0 +1,70 @@
+---
+title: Extract Data Using Indexes in MySQL SQL Injection
+description: Learn how to exploit MySQL SQL injection to extract data without column
+  names using UNION-based techniques and column indexes.
+keywords:
+- SQL injection
+- UNION-based SQL injection
+- MySQL
+- column indexes
+- anonymous select queries
+- data extraction
+- database security
+---
+
+# Extract Data Without Columns Name
+
+## Context
+
+In this article, we will explore how to exploit MySQL UNION-based SQL injection to extract data without relying on column names. This technique leverages the use of column indexes rather than names, allowing attackers to extract information even when specific schema details are unknown. It assumes familiarity with SQL syntax, database schema structures, and basic union-based injection processes.
+
+## Theory
+
+### Understanding UNION-based SQL Injection Without Column Names
+
+UNION-based SQL injection is a technique that allows the combination of results from multiple SELECT statements into a single result set. By exploiting this mechanism, attackers can append malicious queries to an existing SQL command executed by the server. When an application does not properly validate input fields, it can become vulnerable to this type of injection, enabling data extraction operations.
+
+In this context, the goal is to reveal sensitive data by referring to database columns using their positional index rather than their explicit names. This method is particularly useful when column names are unknown or shielded by security practices.
+
+### Column Indexing in SQL Queries
+
+A column index in SQL refers to the position of a column returned in a result set. Rather than selecting columns by name, an attacker can reference them by their index, which is advantageous in blind SQL injection scenarios.
+
+To successfully apply this technique, the attacker must first identify the total number of columns in the target query. This is essential because each SELECT statement combined in a UNION query must have the same number of columns.
+
+### Anonymous SELECT Queries
+
+Anonymous SELECT queries are those that use column indexes instead of names. An attacker can send a UNION SELECT query with dummy values like `SELECT 1,2,3,...` to the application to understand which columns might be injectable. Once identified, these indexed positions can be replaced with queries to extract relevant data from those columns.
+
+## Practice
+
+### Extract Data Using Column Indexes
+
+This section guides you through using SQL injection to extract data by leveraging column indexes, without needing prior knowledge of column names.
+
+- **Identify the Number of Columns in the Target Query:**
+  To determine how many columns are being returned by the sub-query, execute the following type of command:
+
+  ```bash
+  ' UNION SELECT 1,2,3,... FROM target_table WHERE condition; --
+  ```
+
+  By iterating through the sequence of numbers until the application returns no errors, you can discover the number of columns involved in the query.
+
+- **Exploit Using Column Indexes:**
+  Once the column count is known, you can modify the UNION SELECT command to extract sensitive information stored in particular columns. Replace `n` with the index of the columns you wish to inspect:
+
+  ```bash
+  ' UNION SELECT 1,username,3,... FROM users WHERE condition; --
+  ```
+
+  Replace `username` appropriately with additional queries to extract other data as needed corresponding to known positions.
+
+**Outcome:** By following these steps, sensitive data can be accessed without knowledge of column names, enabling further exploitation paths such as privilege escalation or data exfiltration.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+The revealed techniques allow offensive security professionals to frame SQL injection attacks more effectively, especially when column names are obfuscated or non-disclosed due to defensive measures.
