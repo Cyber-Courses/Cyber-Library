@@ -1,0 +1,58 @@
+---
+title: MYSQL Error Based SQL Injection - GROUP BY Technique
+description: Explore MySQL error-based SQL injection using GROUP BY clause to extract
+  database schema information.
+keywords:
+- MySQL
+- error-based SQL injection
+- GROUP BY
+- database schema
+- RAND()
+- vulnerability exploitation
+- information disclosure
+---
+
+# MYSQL Error Based - GROUP BY
+
+## Context
+
+This article explores the exploitation of MySQL error-based SQL injection using the `GROUP BY` clause. This technique leverages improperly handled errors in SQL queries to extract sensitive information from a database. To fully understand and implement this technique, you should have a foundational knowledge of SQL syntax, MySQL functions, error handling, and previous experience with MySQL error-based SQL injections.
+
+## Theory
+
+### Error-Based SQL Injection in MySQL
+
+Error-based SQL injection is an offensive technique that exploits error messages to gain insights into the database structure. By crafting deliberate errors in SQL queries, an attacker can force the database to return error messages that may reveal valuable information. This method is particularly useful when other SQL injection techniques do not yield results.
+
+### GROUP BY Clause in SQL
+
+The `GROUP BY` clause is an SQL command used to aggregate data by grouping rows that share certain properties. It is commonly used in conjunction with aggregate functions such as COUNT, SUM, AVG, etc. Using `GROUP BY` improperly, such as specifying non-existent columns, can generate errors, making it a target for error-based SQL injection attacks.
+
+### Error Generation via GROUP BY
+
+Injecting a `GROUP BY` clause using invalid columns can trigger errors, which are exploited to retrieve information about the database schema. The errors often contain hints about column names and data types, which are critical for further exploitation. This attack sequence involves introducing randomness or deliberate flaws in the `GROUP BY` clause to provoke the desired errors.
+
+## Practice
+
+### MySQL Error-Based Injection via GROUP BY
+
+1. **Identify Injectable Parameter**: Start by identifying a parameter in a SQL query that is vulnerable to injection. This often involves testing inputs such as page parameters, forms, or URLs for SQL syntax errors or unusual behavior.
+
+2. **Inject GROUP BY Clause**:
+   - Use the following SQL injection payload to target a vulnerable query:
+   ```bash
+   SELECT * FROM users WHERE id=1 GROUP BY RAND(); --
+   ```
+   - Here, `RAND()` is used to induce an error by forcing the database to randomly select values, leading to an inevitable conflict when grouping.
+
+3. **Observe Error Message**:
+   - Execute the injected SQL query and closely observe the error message returned by the database.
+   - Analyze the error for information about the database schema, such as visible column names and data types, which can guide further exploitation.
+
+#### Result
+
+By following this technique, you can extract critical database schema information through error messages, potentially exposing column names, data types, and other schema details. This information is crucial for planning subsequent stages of a database penetration test, including further SQL injection attacks tailored to the database's structure.
+
+## Tools
+
+- **sqlmap**: A popular penetration testing tool used to automate the process of detecting and exploiting SQL injection vulnerabilities, including error-based techniques using `GROUP BY`.
