@@ -34,25 +34,52 @@ Injecting a `GROUP BY` clause using invalid columns can trigger errors, which ar
 
 ## Practice
 
-### MySQL Error-Based Injection via GROUP BY
-
 1. **Identify Injectable Parameter**: Start by identifying a parameter in a SQL query that is vulnerable to injection. This often involves testing inputs such as page parameters, forms, or URLs for SQL syntax errors or unusual behavior.
+
+   ```http
+   http://example.com/product.php?id=1
+   ```
 
 2. **Inject GROUP BY Clause**:
    - Use the following SQL injection payload to target a vulnerable query:
-   ```bash
-   SELECT * FROM users WHERE id=1 GROUP BY RAND(); --
+   ```sql
+   1' GROUP BY CONCAT_WS(':', version(), FLOOR(RAND(0)*2)) HAVING MIN(0) -- -
    ```
-   - Here, `RAND()` is used to induce an error by forcing the database to randomly select values, leading to an inevitable conflict when grouping.
+   - Full query becomes:
+   ```sql
+   SELECT name FROM users 
+   WHERE id = '1'
+   GROUP BY CONCAT_WS(':', version(), FLOOR(RAND(0)*2)) 
+   HAVING MIN(0) -- -
+   ```
+	- CONCAT_WS(':', ...): Function: Joins multiple strings using : as a delimiter.
+	- FLOOR(RAND(0)*2): 
+		- RAND(0) is a seeded pseudo-random number generator (same seed = deterministic sequence).
+		- RAND(0)*2 returns a float between 0 and 2 → e.g., 0.234, 1.892, etc.
+		- FLOOR(...) then reduces it to 0 or 1.
+
+			 > Each row has a 50/50 chance of being tagged with 0 or 1.
+        
+	- GROUP BY CONCAT_WS(...): This randomly groups rows based on: 
+		- The MySQL version (constant for all rows)
+		- A random binary (0 or 1) value
+
+			 > Because random values are used, it is probable that two rows will have the same group key, like: 8.0.33:1 and 8.0.33:1
+
+	- HAVING MIN(0): The HAVING clause is required syntactically for GROUP BY, and MIN(0) is used as a dummy condition:
+		- It’s always false, and ensures that no rows are returned normally.
+		- This helps prevent the app from showing anything in the output—only the error is visible.
+
+			> So while the real exploit occurs through the error message, the result set itself is empty.
+       
 
 3. **Observe Error Message**:
-   - Execute the injected SQL query and closely observe the error message returned by the database.
-   - Analyze the error for information about the database schema, such as visible column names and data types, which can guide further exploitation.
+   - Execute the injected SQL query and closely observe the error message returned by the database. This could result to an error message like:
+   ```sql
+   Duplicate entry '8.0.33:1' for key '<group_key>'
+   ```
 
-#### Result
-
-By following this technique, you can extract critical database schema information through error messages, potentially exposing column names, data types, and other schema details. This information is crucial for planning subsequent stages of a database penetration test, including further SQL injection attacks tailored to the database's structure.
 
 ## Tools
 
-- **sqlmap**: A popular penetration testing tool used to automate the process of detecting and exploiting SQL injection vulnerabilities, including error-based techniques using `GROUP BY`.
+- sqlmap
