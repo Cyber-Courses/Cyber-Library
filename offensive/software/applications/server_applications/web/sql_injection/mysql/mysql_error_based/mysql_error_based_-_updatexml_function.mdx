@@ -1,0 +1,74 @@
+---
+title: 'MySQL Error-Based UpdateXML Function: Exploit Guide'
+description: Learn how to exploit MySQL error-based SQL injection via UpdateXML function
+  for database insights.
+keywords:
+- MySQL
+- Error-Based SQL Injection
+- UpdateXML
+- XPath Injection
+- Database Exploit
+- SQL Injection
+- Error Output
+---
+
+# MYSQL Error Based - UpdateXML Function
+
+## Context
+
+The objective of this article is to teach the exploitation of MySQL error-based SQL injection using the UpdateXML function. To understand and successfully apply the techniques discussed here, you should have prior knowledge of SQL syntax, error handling, XPath, as well as a basic understanding of MySQL error-based SQL injection.
+
+## Theory
+
+### UpdateXML Function in MySQL
+
+The `UpdateXML` function is a built-in MySQL function designed to modify XML data within a database. It is particularly vulnerable to exploitation when unsanitized user inputs are directly passed to it. By injecting malicious XPath expressions, attackers can force the database to produce error messages, which may inadvertently reveal sensitive database information.
+
+### Error-Based SQL Injection
+
+Error-based SQL injection is a technique that exploits the database's error messages to extract data. It operates on the principle of creating errors that generate descriptive output from the database, providing clues about its structure and content. This technique is particularly effective in databases that are configured to provide detailed error messages.
+
+### XPath Injection
+
+XPath injection involves targeting XML data manipulation functions by crafting malicious XPath queries. These queries are designed to manipulate XML data in ways that can generate errors. The resulting error messages can reveal information about the XML data structure or other underlying database details.
+
+## Practice
+
+### Exploiting UpdateXML for Error-Based SQL Injection
+
+To leverage UpdateXML for error-based SQL injection, follow these steps:
+
+- **Identify Vulnerable Input Fields:**
+  Start by identifying input fields in a web application that are susceptible to SQL injection. These fields typically do not sanitize user inputs before including them in SQL queries.
+
+- **Inject Malicious XPath to Reveal Database Name:**
+  Use the following SQL command to exploit the vulnerability and reveal the database name through a crafted XPath injection:
+
+  ```sql
+  SELECT UpdateXML(1,CONCAT('~',(SELECT database()),'~'),1);
+  ```
+
+  This injection will cause MySQL to attempt to update the XML with an invalid value, producing an error message that contains the name of the current database enclosed within tildes (`~`).
+
+- **Observe Error Message:**
+  Carefully analyze the error message returned by the database. It should contain the name of the current database, thus confirming the vulnerability and the success of the attack.
+
+- **Extract Current Database User:**
+  To obtain more information, such as the database user, use the following SQL command:
+
+  ```sql
+  SELECT UpdateXML(1,CONCAT('~',(SELECT user()),'~'),1);
+  ```
+
+  This command exploits the same vulnerability to produce an error message that reveals the database user.
+
+- **Extract Information:**
+  Review the generated error messages to extract both the database name and the current database user, providing further insights into the target system.
+
+### Result
+
+By following the above steps, an attacker can gain access to core database information, including the database schema and user details. This information may lead to further exploitation or reveal additional vulnerabilities within the system.
+
+## Tools
+
+- **sqlmap**: An automated tool for exploiting SQL injection flaws and achieving database takeover. It can be configured to automate the process of SQL injection, including error-based techniques using functions like `UpdateXML`.
