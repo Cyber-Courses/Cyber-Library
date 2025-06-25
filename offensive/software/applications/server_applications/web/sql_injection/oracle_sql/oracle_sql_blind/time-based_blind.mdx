@@ -1,0 +1,64 @@
+---
+title: Oracle SQL Time-Based Blind SQL Injection Guide
+description: Explore how to exploit Oracle SQL time-based blind SQL injections for
+  data extraction using timing functions like DBMS_LOCK.SLEEP.
+keywords:
+- Oracle SQL
+- time-based blind
+- SQL injection
+- DBMS_LOCK.SLEEP
+- timing attack
+- blind SQL injection
+- data extraction
+---
+
+# Time-Based Blind
+
+## Context
+
+This article focuses on exploiting Oracle SQL time-based blind SQL injection. This technique is used for data extraction by manipulating query execution times. Before proceeding, readers should be familiar with SQL query execution, Oracle database functions, the HTTP request-response cycle, and general Oracle SQL injection techniques.
+
+## Theory
+
+### Oracle Database Timing Functions
+
+Oracle databases have built-in functions such as `DBMS_LOCK.SLEEP`, which can introduce intentional delays when executing SQL queries. By manipulating these delays, attackers can infer true or false conditions within queries. The primary principle here is leveraging time delays to deduce information without receiving direct responses from the database.
+
+### Blind SQL Injection Mechanisms
+
+Blind SQL injection allows attackers to exploit SQL injection vulnerabilities without direct data retrieval. Unlike traditional SQL injection, where data is returned in the response, blind SQL injections involve triggering different outcomes based on conditions evaluated in the SQL query. This is achieved by using conditional logic within the SQL query that causes time delays based on whether the condition is true or false, thereby indirectly revealing information about the database structure or data.
+
+### Timing Attack Mitigation Strategies
+
+To defend against timing-based SQL injection attacks, stringent input validation and the use of parameterized queries are critical. Timing attacks typically exploit weaknesses in input sanitization, allowing attackers to manipulate SQL queries. Ensuring that input is properly sanitized and queries are parameterized is essential to mitigating such vulnerabilities.
+
+## Practice
+
+### Exploiting Time-Based Blind SQL Injection
+
+To exploit a time-based blind SQL injection, the attacker will construct SQL queries that conditionally introduce delays. Here’s how this can be done manually in an Oracle SQL environment:
+
+- Start with a basic insertion of delay:
+  ```sql
+  SELECT CASE WHEN (condition) THEN DBMS_LOCK.SLEEP(seconds) ELSE NULL END FROM dual;
+  ```
+  Use conditional logic to introduce a delay based on the evaluation of the condition in the SQL query.
+
+- Test the database for vulnerability:
+  ```sql
+  SELECT CASE WHEN (1=1) THEN DBMS_LOCK.SLEEP(5) ELSE NULL END FROM dual;
+  ```
+  This query introduces a delay of 5 seconds. If the database takes longer to respond, it indicates that SQL injection is possible.
+
+- Data inference using conditional delays:
+  ```sql
+  SELECT CASE WHEN (ASCII(SUBSTR((SELECT column_name FROM table_name WHERE ROWNUM=1),1,1))>77) THEN DBMS_LOCK.SLEEP(5) ELSE NULL END FROM dual;
+  ```
+  By adjusting the condition, observe if there’s a delay to infer if the ASCII value of the first character of the column's name is greater than 77. This step-by-step data inference continues using similar queries to extract information based on the time delay of responses.
+
+Expected Outcome: Through these steps, sensitive data can be extracted by deducing true or false conditions through the timing of the database's responses.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
