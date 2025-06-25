@@ -1,0 +1,65 @@
+---
+title: 'WAF Evasion: Using SQLMap Prefix and Suffix'
+description: Learn how to bypass WAFs in SQL injections using prefix and suffix options
+  in SQLMap.
+keywords:
+- SQLMap
+- WAF evasion
+- prefix and suffix
+- SQL injection
+- payload wrapping
+- web application firewalls
+- tampering techniques
+---
+
+# Prefix and Suffix
+
+## Context
+
+In the realm of web application security, web application firewalls (WAFs) often pose a challenge when attempting SQL injection attacks. One effective technique to circumvent these protective measures is through the strategic use of prefix and suffix options in SQLMap. This method involves modifying the injection payloads to avoid detection by appending or prepending additional strings, thereby modifying the attack signature. To undertake this technique, a reader should be familiar with SQL injection fundamentals, the structure of HTTP requests, and the basic operation of web application firewalls.
+
+## Theory
+
+### Prefix and Suffix in SQLMap
+
+Prefix and suffix are options within SQLMap, a powerful tool for automated SQL injection and database takeover. These options allow users to add custom strings before (prefix) or after (suffix) the actual SQL injection payload. The core principle behind this feature is to disguise the payload by making it appear different from common attack signatures that a WAF might be configured to detect.
+
+### WAF Evasion with Prefix and Suffix
+
+Web Application Firewalls are designed to identify and block malicious requests based on patterns or signatures commonly associated with SQL injection attacks. By cleverly modifying the payloads using prefix and suffix, attackers can create inputs that evade standard filtering mechanisms. The strategy involves inserting harmless-looking strings around the payloads, which might confuse the WAF's detection routines and allow the attack to proceed unimpeded.
+
+### Payload Wrapping Techniques
+
+In the context of WAF evasion, payload wrapping techniques refer to the practice of surrounding SQL injection payloads with additional data that appears innocuous or legitimate. This bypass logic exploits potential implementation flaws in WAFs, as they might struggle to accurately parse and analyze these more complex, seemingly benign payloads.
+
+## Practice
+
+### Using Prefix and Suffix in SQLMap
+
+To effectively use prefix and suffix for SQL injection, follow these steps:
+
+- **Launch SQLMap with Prefix and Suffix:**
+
+    To prepend or append specific strings to your SQL payloads, utilize the following command:
+
+    ```bash
+    sqlmap -u "http://example.com/vuln" --prefix="/**/" --suffix="--"
+    ```
+
+    This command sends a request to `http://example.com/vuln` with SQL injection payloads wrapped with the prefix `/**/` and the suffix `--`. The prefix `/**/` and the suffix `--` disguise the payload, making it harder for WAFs to recognize it as malicious.
+
+- **Manipulate SQL Logic with Prefix and Suffix:**
+
+    Another technique is to inject logical SQL operations directly into the payload using prefix and suffix. For example:
+
+    ```bash
+    sqlmap -u "http://example.com/vuln" --prefix="' OR '1'='1" --suffix="--"
+    ```
+
+    This command uses the prefix `"' OR '1'='1"` to manipulate the SQL logic, potentially causing the query to always evaluate as true, while the suffix `--` comments out the remainder of the query, preventing syntax errors.
+
+In both scenarios, the outcome is that the payloads might successfully bypass WAF filters because the non-standard formatting does not match known threat profiles.
+
+## Tools
+
+- **SQLMap**
