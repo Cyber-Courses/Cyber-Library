@@ -1,0 +1,91 @@
+---
+title: Exploiting SQLite ATTACH DATABASE for Code Execution
+description: Learn to exploit the ATTACH DATABASE feature in SQLite for remote code
+  execution and privilege escalation.
+keywords:
+- SQLite
+- ATTACH DATABASE
+- remote code execution
+- database exploitation
+- file write
+- database redirection
+- privilege escalation
+---
+
+# Attach Database
+
+## Context
+
+This guide explores how to exploit SQLite's ATTACH DATABASE functionality to execute remote code within SQLite environments. Readers should be familiar with the underlying structure of SQLite databases, how SQL queries are executed, the implications of file system permissions, and basic SQLite remote code execution techniques.
+
+## Theory
+
+### SQLite ATTACH DATABASE Feature
+
+The ATTACH DATABASE command in SQLite is designed to attach additional databases to the current database connection. This functionality facilitates access to multiple databases within a single session, enabling complex data operations across databases. However, when misused or exposed to unchecked inputs, this feature presents a security vulnerability.
+
+### Exploitation via ATTACH DATABASE
+
+Improper input validation related to the ATTACH DATABASE command can lead to arbitrary file writes on the server hosting the SQLite database. During exploitation, an attacker injects SQL commands to attach a database file that they control, paving the way for executing unauthorized operations on it.
+
+### File Write and Database Redirection
+
+The ATTACH DATABASE command's capability to redirect database operations to arbitrary files can be exploited to create or overwrite critical files on the server. By redirecting these operations, attackers can manipulate server-side behaviors, potentially leading to unauthorized file writes.
+
+### Privilege Escalation via SQLite
+
+SQLite features, such as ATTACH DATABASE, offer pathways to privilege escalation through database schema manipulation or configuration changes. This can be exploited to modify sensitive database entries or escalate privileges across applications relying on SQLite for data storage and management.
+
+## Practice
+
+### SQLite ATTACH DATABASE Exploitation
+
+The following steps illustrate how to manually exploit the ATTACH DATABASE feature in SQLite to execute arbitrary code:
+
+1. **Open an in-memory SQLite database:**
+
+    ```bash
+    sqlite3 'file::memory:?cache=shared'
+    ```
+
+    This opens an in-memory SQLite database, priming the environment for manipulating database connections without persisting changes on disk initially.
+
+2. **Attach a malicious database file:**
+
+    ```bash
+    ATTACH DATABASE '/tmp/evil.db' AS evil;
+    ```
+
+    Here, a database named 'evil' is attached by specifying an arbitrary file path. If successful, it indicates that the environment is susceptible to unauthorized file operations.
+
+3. **Create a table in the attached database:**
+
+    ```bash
+    CREATE TABLE evil.exploit (payload TEXT);
+    ```
+
+    This command creates a table within the malicious database context. It serves as a container for any payloads intended for exploitation.
+
+4. **Insert a malicious payload into the table:**
+
+    ```bash
+    INSERT INTO evil.exploit (payload) VALUES ('malicious_code');
+    ```
+
+    In this step, a payload containing potentially malicious code is inserted into the newly created table. The nature of this code dictates the impact on the target environment.
+
+5. **Trigger the payload execution:**
+
+    ```bash
+    SELECT * FROM evil.exploit;
+    ```
+
+    Executing this query triggers the execution of the payload, culminating in the desired remote code execution on the host system.
+
+### Outcome
+
+By following these steps, an attacker can achieve remote code execution through the ATTACH DATABASE feature of SQLite. This highlights the critical need to ensure inputs are rigorously validated and restricted in environments leveraging SQLite.
+
+## Tools
+
+- **sqlite3**: This is the command-line interface for SQLite databases, facilitating the execution of SQL commands and database manipulations.
