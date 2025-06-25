@@ -1,0 +1,74 @@
+---
+title: Exploiting Oracle Java Classes for Command Execution
+description: Learn how to exploit Oracle Java Classes via SQL injection for command
+  execution in Oracle databases.
+keywords:
+- Oracle Java Classes
+- command execution
+- SQL injection
+- Oracle JVM
+- Java stored procedures
+- security
+- runtime getRuntime
+---
+
+# Oracle Java Class
+
+## Context
+
+In this article, we will explore how to exploit Oracle Java Classes for command execution via SQL injection. This technique leverages the ability to run Java code within Oracle databases using stored procedures. Readers should already understand the Java Virtual Machine, stored procedures, JDBC, and Oracle SQL Command Execution to fully grasp the process.
+
+## Theory
+
+### Java Stored Procedures in Oracle
+
+Java stored procedures enable Java code execution inside Oracle databases, providing powerful extensions to SQL capabilities. However, if not properly secured, these stored procedures can be exploited to run unauthorized commands on the system hosting the database.
+
+### Oracle JVM Architecture
+
+Oracle JVM is an embedded Java Virtual Machine within Oracle databases, allowing direct execution of Java classes and methods from SQL. This tight integration permits sophisticated operations but also presents security challenges if misused.
+
+### java.lang.Runtime.getRuntime()
+
+The `java.lang.Runtime.getRuntime()` is a Java method used to execute system commands directly from Java applications. By invoking `Runtime.getRuntime().exec()`, an attacker can execute arbitrary operating system commands, which is a critical step in the exploitation process.
+
+### Security Implications of oracle.aurora.vm
+
+The package `oracle.aurora.vm` includes classes specific to Oracle's JVM. Exploiting vulnerabilities within this package can lead to executing unauthorized commands or altering database configurations.
+
+### Bypassing Java Security Manager
+
+The Java Security Manager is designed to restrict certain types of operations, such as file access and network connections. But when it is bypassed or disabled, attackers can execute arbitrary commands without the intended security restrictions.
+
+## Practice
+
+### Exploiting Java Stored Procedures for Command Execution
+
+To execute commands via Oracle Java Classes, follow these steps:
+
+1. **Load Java Class into Oracle Database**
+    ```bash
+    SELECT loadjava('-user', 'username/password', '-resolve', 'MyJavaClass.class');
+    ```
+   Load your Java class into the Oracle database. The `loadjava` utility is used to upload Java bytecode files to the database.
+
+2. **Create a Stored Procedure with Java Method**
+    ```bash
+    CREATE OR REPLACE PROCEDURE exec_cmd AS LANGUAGE JAVA NAME 'MyJavaClass.executeCommand()';
+    ```
+   Create a stored procedure that links to the Java method intended for command execution. This procedure acts as a callable interface for the desired Java function.
+
+3. **Invoke the Stored Procedure to Execute Command**
+    ```bash
+    CALL exec_cmd();
+    ```
+   Call the stored procedure to execute its linked Java method, thereby running the specified system commands.
+
+By following these steps, you achieve command execution within the Oracle environment via Java stored procedures.
+
+## Tools
+
+- **sqlplus**
+- **loadjava**
+
+These tools facilitate connecting to the Oracle database, uploading Java classes, and executing SQL commands necessary for the described exploitation process.
