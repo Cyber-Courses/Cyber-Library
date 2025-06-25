@@ -32,13 +32,7 @@ To counteract these restrictions, attackers can identify which SQL functions are
 
 The core principle here is to replace `GROUP_CONCAT` with `JSON_ARRAYAGG` in your SQL payloads, maintaining your ability to aggregate data while circumventing WAF restrictions. This substitution allows the aggregation of data into a format (JSON) that is often less scrutinized by security mechanisms.
 
-### Symbol Limitations and Bypass Techniques
-
-In addition to blocking certain functions, WAFs may also limit the use of specific symbols, such as commas or parentheses, which are common in SQL queries. To navigate these limitations, attackers can employ alternative syntax or encoding techniques to reduce symbol usage and obfuscate their SQL payloads, thereby bypassing these restrictions.
-
 ## Practice
-
-### Using JSON_ARRAYAGG for WAF Bypass
 
 - **Identify SQL injection point** where `GROUP_CONCAT` is blocked by attempting to inject a payload using this function.
 - Replace `GROUP_CONCAT` with `JSON_ARRAYAGG` in your SQL query to aggregate the data silently. Here is a command example:
@@ -51,19 +45,6 @@ In addition to blocking certain functions, WAFs may also limit the use of specif
 
 The expected outcome is to successfully bypass WAF restrictions using `JSON_ARRAYAGG`, accessing aggregated data without triggering security defenses.
 
-### Symbol Limitation Bypass
-
-- **Identify symbol restrictions** that the WAF imposes by analyzing errors or failed queries upon injection attempts.
-- Use alternative syntax in your SQL query to reduce symbol usage, adapting your payload to the limitations. An example command is:
-  
-  ```sql
-  SELECT JSON_ARRAYAGG(column_name) FROM table_name WHERE condition LIMIT 1;
-  ```
-
-- **Adapt your payload** using alternative methods, such as changing the structure or encoding parts of your query, to further obfuscate and bypass the WAF's symbol analyzers.
-
-The objective is to bypass symbol limitations using alternative syntax or format strategies, ensuring your query executes despite imposed restrictions.
-
 ## Tools
 
-- **MySQL Client**
+- **Burp Suite**
