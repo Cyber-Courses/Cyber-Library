@@ -1,0 +1,77 @@
+---
+title: 'MariaDB SQL Injection Techniques: Exploit & Defend'
+description: Explore MariaDB SQL injection, focusing on comment-based tactics. Learn
+  to exploit or secure databases with theory, practice, and tools.
+keywords:
+- MariaDB
+- SQL injection
+- comment-based injection
+- database security
+- authentication bypass
+- sqlmap
+- Burp Suite
+---
+
+# MariaDB
+
+## Context
+
+This article focuses on exploiting MariaDB databases using SQL injection techniques, with a particular emphasis on comment-based injection. To follow along, you should be familiar with basic SQL syntax, database schemas, and various SQL injection techniques used across MySQL, PostgreSQL, Microsoft SQL Server, Oracle SQL, SQLite, and IBM Db2.
+
+## Theory
+
+### MariaDB-Specific SQL Injection
+
+MariaDB SQL injection exploits involve manipulating the database using malicious SQL code. This type of attack takes advantage of MariaDB's unique handling of SQL queries, which includes specific syntax and behaviors distinct from other SQL platforms.
+
+#### Vulnerability Model
+
+A key vulnerability in MariaDB is its handling of SQL comments. By leveraging these, attackers can manipulate the execution flow of queries, bypassing security measures or executing arbitrary SQL commands.
+
+### Comment-Based Injection
+
+Comment-based SQL injection is a technique where attackers use SQL comments to alter query logic. This often involves injecting comments to terminate legitimate query portions and append malicious payloads.
+
+#### Attack Sequence
+
+1. **Termination:** Use comments to terminate valid SQL statements, effectively removing the rest of the query from execution.
+2. **Payload Execution:** Append malicious SQL commands that exploit the altered query structure.
+3. **Bypass Filters:** Exploit comment syntax to bypass input filtering mechanisms.
+
+## Practice
+
+### MariaDB Comment-Based SQL Injection
+
+#### Step-by-Step Execution
+
+- Injecting comments to manipulate a query allows an attacker to bypass conditions:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1 /*' AND '1'='1*/;
+  ```
+  This injection uses a comment to effectively remove the `' AND '1'='1` part of the query, potentially bypassing additional conditions.
+
+- Using a double dash (`--`) is another strategy:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1 -- ' AND '1'='1';
+  ```
+  Here, the double dash comments out the rest of the query after `id=1`, rendering additional logic inert and potentially bypassing authentication checks.
+
+- Version-specific comments can also be used to stealthily append additional logic:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1 /*!50000AND*/ '1'='1';
+  ```
+  The above uses a conditional comment that is only executed if the version number is greater than or equal to 50000, providing a method to execute additional SQL based on the database version.
+
+#### Expected Outcome
+
+By successfully leveraging these comment-based injection techniques, attackers can bypass authentication mechanisms or circumvent access controls within a MariaDB-powered application.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite** 
+
+These tools can automate the SQL injection process, test MariaDB databases for vulnerabilities, and analyze the effectiveness of comment-based injections.
