@@ -1,0 +1,88 @@
+---
+title: Wide Byte Injection (GBK) Explained
+description: Learn to exploit MySQL WAF vulnerabilities using GBK encoding in wide
+  byte injections to bypass security measures.
+keywords:
+- Wide Byte Injection
+- GBK Encoding
+- MySQL WAF Bypass
+- SQL Injection
+- Character Encoding
+- Web Security
+- Multibyte Injection
+---
+
+# Wide Byte Injection (GBK)
+
+## Context
+
+Wide Byte Injection using GBK encoding is a technique used to exploit SQL injection vulnerabilities in applications that leverage multi-byte character encoding systems. Specifically, this method targets MySQL WAFs (Web Application Firewalls) that may not correctly handle encodings like GBK. This technique presupposes familiarity with character encoding systems, SQL query structures, the architecture of web applications, and fundamental MySQL WAF bypass strategies.
+
+## Theory
+
+### GBK Encoding and Wide Byte Injection
+
+GBK encoding is a character set used predominantly for simplified Chinese characters. It utilizes both one and two bytes per character, which opens an avenue for potential exploitation in applications expecting single-byte characters. 
+
+Wide byte injection is a technique capitalizing on such multi-byte character encodings. The fundamental vulnerability model here lies in the improper handling of these wide bytes by web application firewalls, which can be bypassed. Attackers inject malicious payloads with wide byte characters, allowing them to manipulate the SQL queries executed by a vulnerable application.
+
+### Charset Escape Techniques
+
+The core principle behind this technique is to use multi-byte characters to escape single-byte logical constraints. This is achieved by crafting payloads that cleverly exploit the permitted character encodings, thereby altering the SQL logic in a favorable manner for the attacker. 
+
+By embedding multi-byte characters at strategic points within the input fields, attackers can guide the executed SQL query to bypass specific WAF rules. This can lead to unauthorized data access or manipulation, executed by exploiting the knowledge of charset interactions and vulnerability patterns.
+
+## Practice
+
+### Wide Byte Injection using GBK Encoding
+
+To execute a Wide Byte Injection successfully using GBK encoding, follow these steps:
+
+1. **Identify input fields vulnerable to SQL injection.**
+   - Determine input points within the web application that appear susceptible to SQL injection attacks. These may typically include login forms, search fields, or any user input areas.
+
+2. **Craft a basic SQL injection payload.**
+
+   ```bash
+   SELECT * FROM users WHERE username = 'admin' AND password = 'password';
+   ```
+   
+   - This is a typical example of an SQL query structure within a vulnerable application.
+
+3. **Test with a simple SQL injection payload.**
+
+   ```sql
+   admin' AND '1'='1' -- 
+   ```
+   
+   - This payload is used to test the field's vulnerability, confirming whether it can be exploited for unauthorized access.
+
+4. **Modify the payload to include wide byte characters.**
+   - Transition from a simple payload to one that incorporates wide byte characters, which will interact with the application’s GBK encoding.
+
+5. **Apply a Wide Byte Injection payload.**
+
+   ```sql
+   admin' AND '1'='1' %df%27 -- 
+   ```
+   
+   - Here, `%df%27` represents a portion of a payload using wide byte characters in a GBK-encoded context. 
+
+6. **Execute the query with the wide byte payload.**
+
+   ```bash
+   SELECT * FROM users WHERE username = 'admin' AND password = 'password%df%27 -- ';
+   ```
+   
+   - This crafted SQL query demonstrates how the application might interpret the wide byte input, potentially bypassing the WAF.
+
+### Outcome
+
+By exploiting this technique, attackers can bypass the WAF, potentially gaining unauthorized access to web application resources or even escalating privileges by authenticating as an admin or another high-privilege user.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite** 
+
+These tools facilitate the automation of SQL injection tests and payload crafting, helping in the identification and exploitation of vulnerable input points.
