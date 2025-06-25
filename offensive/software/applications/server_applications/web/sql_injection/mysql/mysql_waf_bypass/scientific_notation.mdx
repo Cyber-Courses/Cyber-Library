@@ -1,0 +1,64 @@
+---
+title: How to Use Scientific Notation for MySQL WAF Bypass
+description: Learn to bypass MySQL WAFs using scientific notation in SQL injections.
+keywords:
+- Scientific Notation
+- MySQL WAF Bypass
+- SQL Injection
+- e notation
+- float injection
+---
+
+# Scientific Notation
+
+## Context
+
+This article explores how to use scientific notation as a technique to bypass MySQL Web Application Firewalls (WAFs) during SQL injection attacks. For this technique, you should have a solid understanding of scientific notation, also known as e notation, and how float values are utilized within SQL queries. Additionally, familiarity with common methodologies for bypassing MySQL WAFs is assumed.
+
+## Theory
+
+### Scientific Notation in SQL
+
+Scientific notation, commonly used in programming and mathematics, expresses numbers as a base multiplied by a power of ten. This is typically represented in the form `aEb`, where `a` is the base and `b` is the exponent. For example, the number `12300` can be succinctly written as `1.23e4` in scientific notation. MySQL supports this notation, which allows numeric values to be formatted in this way within SQL queries.
+
+Employing scientific notation can be advantageous in scenarios where input filters are present, as it might slip through validation checks designed to only scrutinize standard numeric entries.
+
+### WAF Bypass Using Scientific Notation
+
+WAFs are designed to detect and block potentially malicious queries before they reach the database. However, they might not fully parse or understand scientific notation, especially if the filters are only configured to guard against conventional integer or string-based injection patterns. This peculiar oversight can be exploited by attackers to inject malicious payloads encapsulated in scientific notation, bypassing the defensive checks intended to thwart SQL injection attacks.
+
+The process involves crafting SQL injection payloads that replace standard numeric inputs with their scientific notation equivalents, potentially allowing them to evade detection and subsequently compromise the target database.
+
+## Practice
+
+### Scientific Notation Injection
+
+- **Identify a Vulnerable SQL Input Field:**
+  Begin by locating a SQL input field that is susceptible to injection attacks. This could be done through reconnaissance or by using tools such as Burp Suite to intercept and inspect HTTP requests.
+
+- **Execute a Basic Scientific Notation Query:**
+  Use a query with scientific notation to test the response of the WAF.
+
+  ```bash
+  SELECT * FROM users WHERE id = 1.23e4;
+  ```
+
+  This query attempts to select a user id formatted in scientific notation. Observe whether the WAF blocks this query or allows it to pass through to the database.
+
+- **Inject a Payload with Scientific Notation:**
+  Construct a more complex injection using scientific notation to test if the WAF can detect an SQL injection.
+
+  ```bash
+  SELECT * FROM users WHERE id = 1e0 OR 1=1;
+  ```
+
+  Here, `1e0` is used in place of `1`, and the `OR 1=1` clause is a classic injection payload designed to always evaluate to true, thereby returning all records if executed.
+
+**Result:** By embedding an injection payload within scientific notation, you may successfully bypass WAF input validation. If the attack succeeds, it may allow you to execute arbitrary queries against the database, demonstrating the potential efficacy of this technique in a test environment.
+
+## Tools
+
+- **sqlmap:** Automated tool for detecting and exploiting SQL injection flaws.
+- **Burp Suite:** Essential for intercepting HTTP requests and manipulating parameters for testing inputs.
+
+This technique highlights the importance of understanding less conventional attack vectors like scientific notation, which can be an effective strategy for evading certain types of security filters employed by WAFs.

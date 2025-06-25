@@ -1,0 +1,94 @@
+---
+title: Uncover IBM Db2 Schema & Metadata via SQL Injection
+description: Learn to discover IBM Db2 schema and metadata using SQL Injection techniques,
+  focusing on system catalogs for database insights.
+keywords:
+- IBM Db2
+- SQL Injection
+- schema discovery
+- metadata
+- system catalogs
+- database enumeration
+- privilege escalation
+- Db2 SYSTABLES
+- Db2 SYSCOLUMNS
+- role discovery
+---
+
+# Schema and Metadata Discovery
+
+## Context
+
+In offensive cybersecurity, understanding the structure and data stored in a database can be as critical as gaining access itself. This article focuses on leveraging SQL Injection to discover schema and metadata within IBM Db2 databases. We assume you have a foundational understanding of database schematics, metadata, and are familiar with Db2 enumeration techniques.
+
+## Theory
+
+### Db2 System Catalogs and Views
+
+Db2 databases store a wealth of system metadata across various system catalogs. These catalogs are indispensable for database administrators, and equally so for anyone attempting to uncover the inner workings of a database through unauthorized means.
+
+- **System Catalogs**: These are tables that contain metadata regarding the structure of the database. They provide significant insights including definitions of tables, views, columns, and more.
+- **SYSIBM.SYSTABLES**: This view contains information about all tables in the database, including table names and creators.
+- **SYSCAT.SCHEMATA**: Provides a list of all schemas defined within the database, offering a high-level overview of the data organization.
+- **SYSIBM.SYSCOLUMNS**: This catalog details the columns of each table, including data types and column names, essential for understanding the structure of data within tables.
+
+### Schema and Metadata Discovery Techniques
+
+Leveraging SQL Injection, you can query these catalogs to extract crucial database schema details:
+
+- **Extract Information through SQL Injection**: By injecting crafted SQL queries, it’s possible to retrieve schema information from these system catalogs.
+- **Table and Column Details Extraction**: Accessing SYSIBM and SYSCAT views enables an intruder to map out table structures, column names, and data types.
+- **Roles and Privileges Identification**: By querying system catalogs such as SYSCAT.DBAUTH and SYSCAT.ROLES, you can discover the roles and privileges that might be leveraged for privilege escalation.
+
+## Practice
+
+### Extracting Table Information
+
+To gain insights into tables within a specific schema, execute the following SQL command. This will reveal all tables under the defined schema, helping to map potential points of interest for further exploitation.
+
+```bash
+SELECT * FROM SYSIBM.SYSTABLES WHERE CREATOR = 'SCHEMA_NAME';
+```
+
+*Outcome*: Executing this command provides access to table names and relevant metadata, which is crucial for understanding database organization and contents.
+
+### Retrieving Column Details
+
+Once you have table names, the next step is to uncover the structure of these tables. This can be achieved by querying the SYSIBM.SYSCOLUMNS catalog.
+
+```bash
+SELECT * FROM SYSIBM.SYSCOLUMNS WHERE TBNAME = 'TABLE_NAME';
+```
+
+*Outcome*: This command gives access to column names and their respective data types, allowing for a detailed understanding of how data is stored and structured.
+
+### Enumerating Schemas
+
+Discovering the various schemas in a database provides a broader understanding of how data is sectioned and organized across the system.
+
+```bash
+SELECT * FROM SYSCAT.SCHEMATA;
+```
+
+*Outcome*: The execution of this command results in access to a list of schema names, presenting a macro view of the database's organizational structure.
+
+### Discovering Roles and Privileges
+
+Understanding who has access and what rights they possess can lead to significant opportunities for privilege escalation. Query these catalogs to get insights into roles and privileges.
+
+```bash
+SELECT * FROM SYSCAT.ROLES;
+```
+
+```bash
+SELECT * FROM SYSCAT.DBAUTH;
+```
+
+*Outcome*: These commands enable the enumeration of roles and their corresponding privileges, potentially uncovering pathways to gain elevated access within the database.
+
+## Tools
+
+- **Db2 Command Line Processor (CLP)**
+- **SQL Injection Tools**
+
+Mastering these techniques allows for deep insights into database structure and potential misuse of access rights, setting the stage for advanced exploitation strategies in offensive operations.

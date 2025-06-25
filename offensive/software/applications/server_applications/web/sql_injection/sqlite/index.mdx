@@ -1,0 +1,123 @@
+---
+title: 'Exploiting SQLite: Injection Techniques & Security'
+description: Learn SQL injection tactics for SQLite databases. Discover how to exploit
+  SQLite vulnerabilities through enumeration, blind injection, and more.
+keywords:
+- SQLite
+- SQL injection
+- file-based database
+- database abuse
+- remote code execution
+- enumeration techniques
+- blind SQL injection
+- error based injection
+- extension loading
+- evasion techniques
+---
+
+# SQLite
+
+## Context
+
+This article aims to instruct on SQLite-specific SQL injection techniques used in offensive security operations. The reader is expected to be familiar with SQL syntax, database engines, and web application architecture.
+
+## Theory
+
+### SQLite-Specific SQL Injection
+
+SQLite is a file-based database engine often embedded within applications. Unlike other database systems, SQLite lacks a network interface, making it susceptible to local file-based attacks. Exploiting SQLite typically involves injecting SQL payloads to manipulate database files, aiming to expose or alter data.
+
+### Embedded Database Injection
+
+Embedded database injection refers to attacks targeting databases embedded within applications. Applications using SQLite may expose SQL queries to user input, creating potential vectors for injection attacks. The typical attack sequence includes identifying injectable parameters, crafting payloads, and executing them to manipulate data.
+
+### File-Based Database Abuse
+
+File-based database abuse exploits SQLite’s nature as a file-based system to access or manipulate database files directly. These databases are stored as files, which makes them susceptible to malicious file manipulation. By leveraging SQL injection, attackers can read from or write to database files, potentially achieving remote code execution (RCE).
+
+## Practice
+
+### SQLite Enumeration Techniques
+
+Enumerating the database structure is critical for identifying potential injection points.
+
+- To list all tables in the SQLite database:
+
+    ```bash
+    SELECT name FROM sqlite_master WHERE type='table';
+    ```
+
+- To retrieve the SQL schema for the 'users' table:
+
+    ```bash
+    SELECT sql FROM sqlite_master WHERE type='table' AND name='users';
+    ```
+
+The outcome of these queries is the identification of the database’s structure and potential injection points.
+
+### SQLite Blind SQL Injection
+
+Blind SQL injection can be used to determine the existence of specific data without direct output.
+
+- To check if a user with the username 'admin' exists:
+
+    ```bash
+    SELECT CASE WHEN (SELECT COUNT(*) FROM users WHERE username='admin') THEN 'true' ELSE 'false' END;
+    ```
+
+This technique exploits blind SQL injection to potentially bypass authentication mechanisms by inferring whether certain users exist.
+
+### SQLite Error Based Injection
+
+Error-based injection leverages database error messages to uncover vulnerabilities.
+
+- To generate an error that may reveal information:
+
+    ```bash
+    SELECT 1/0 FROM users;
+    ```
+
+This query divides by zero, triggering an error message that can disclose information about database structure or configuration, aiding vulnerability discovery.
+
+### SQLite Remote Code Execution
+
+Gain remote code execution by loading malicious extensions.
+
+- To load a malicious SQLite extension:
+
+    ```bash
+    SELECT load_extension('/path/to/malicious_extension');
+    ```
+
+Executing the above command with a compromised extension allows for arbitrary code execution on the host, illustrating an RCE attack through SQLite.
+
+### SQLite File Manipulation
+
+File manipulation through SQL injection offers the ability to read/write files on the server.
+
+- To write data from the 'users' table to a file:
+
+    ```bash
+    SELECT writefile('/tmp/output.txt', data) FROM users;
+    ```
+
+This command writes database information to a file on the server, demonstrating how SQL injection can result in file manipulation and potential data exfiltration.
+
+### SQLite Evasion Techniques
+
+Evasion techniques involve bypassing security filters using subtle coding strategies.
+
+- To evade input validation using comments:
+
+    ```bash
+    SELECT * FROM users WHERE username='admin'/**/AND/**/password='pass';
+    ```
+
+Inserting comments disrupts pattern-based input validation, illustrating how input validation mechanisms can be evaded.
+
+## Tools
+
+- **sqlmap**
+- **SQLite3 CLI** 
+
+These tools facilitate the execution of SQL injection techniques against SQLite databases, enhancing the effectiveness of offensive security operations.

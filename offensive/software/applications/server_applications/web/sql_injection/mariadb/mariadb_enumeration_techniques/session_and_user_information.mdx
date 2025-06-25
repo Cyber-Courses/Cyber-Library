@@ -1,0 +1,105 @@
+---
+title: MariaDB Session and User Information Enumeration
+description: Discover how to enumerate MariaDB session and user details via SQL injection.
+keywords:
+- MariaDB
+- SQL injection
+- session enumeration
+- user information
+- current_user()
+- user()
+- session_user
+- database()
+- '@@hostname'
+---
+
+# Session and User Information
+
+## Context
+
+In this guide, we explore techniques to enumerate session and user information in MariaDB, particularly through SQL injection methods. This knowledge is crucial in offensive cybersecurity tactics for recognizing and leveraging database session details. To follow this guide effectively, readers should already be familiar with concepts such as SQL queries, database sessions, and user privileges.
+
+## Theory
+
+### MariaDB Session and User Functions
+
+**user():**  
+This function returns the username and host for the current session. It's often used to verify the identity operating in the session context, which can be pivotal during an attack to understand the privileges that might be available.
+
+**current_user():**  
+The function `current_user()` gives back the username that is authenticated and has specific privileges within the session. It's critical for revealing which account's permissions your injected queries run under.
+
+**session_user:**  
+Unlike `user()` and `current_user()`, the `session_user` variable identifies the user who initiated the session. While subtle, the difference can be crucial when impersonating users or conducting privilege escalation attacks.
+
+**SELECT CONNECTION_ID():**  
+This function is used to fetch the unique connection ID for the session. This ID can be used to track specific session activities or for session hijacking strategies.
+
+**@@hostname:**  
+It provides the hostname of the server, which can be useful for mapping the database structure, especially in multi-server databases or cloud environments.
+
+**database():**  
+This function returns the current database's name. In SQL environments, knowing your database context is essential for constructing correct queries.
+
+**schema():**  
+Alias for `database()`, this function similarly returns the name of the current database, which helps in understanding the working schema context of your session.
+
+### Enumeration via SQL Injection
+
+**Inject SQL to Extract Session and User Information:**  
+Using SQL injection, attackers can input malicious SQL code into an input field to manipulate the SQL statement executed on the database. This manipulation can lead to unauthorized data retrieval of session and user information.
+
+**SQL Injection Model:**  
+SQL injection vulnerabilities allow attackers to retrieve or modify data in the database without authentication. It forms the basis for exposing sensitive information used in enumeration strategies.
+
+**Core Principle:**  
+As a core principle, leveraging built-in SQL functions such as those provided by MariaDB helps gather intricate details about each session, potentially facilitating further exploitation or privilege escalation.
+
+## Practice
+
+### Enumerate User and Session Information via SQL Injection
+
+To exploit a MariaDB database and access sensitive user and session information, follow these steps manually:
+
+- **Retrieve the current session's username and host:**
+    ```sql
+    SELECT user();
+    ```
+  Execute this command to find out who is executing the session and from which host, providing insight into potentially compromising the session.
+
+- **Identify the username with session privileges:**
+    ```sql
+    SELECT current_user();
+    ```
+  This will reveal the privileges under which your queries are executed, crucial for assessing what operations you can perform.
+
+- **Get the session initiator's username:**
+    ```sql
+    SELECT session_user;
+    ```
+  Utilize this query to determine the originating user of the session, aiding in impersonation or privilege escalation.
+
+- **Fetch the unique connection ID for the session:**
+    ```sql
+    SELECT CONNECTION_ID();
+    ```
+  Use this function to track session activity or to attempt session hijacking by focusing on the specific connection.
+
+- **Determine the server's hostname:**
+    ```sql
+    SELECT @@hostname;
+    ```
+  This command provides the server's hostname, which is useful for mapping out the network or understanding multi-server environments.
+
+- **Identify the current database in use:**
+    ```sql
+    SELECT database();
+    ```
+  This command tells which database is currently being used, aiding in crafting context-specific exploitation strategies.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite** 
+
+This guide outlines effective methods to obtain crucial session and user information from a MariaDB database using SQL injection. By understanding and applying these techniques, offensive cybersecurity professionals can gain insights into database environments, potentially discovering paths for deeper exploits.

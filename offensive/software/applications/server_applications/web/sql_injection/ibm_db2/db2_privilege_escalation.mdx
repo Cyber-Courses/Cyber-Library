@@ -1,0 +1,90 @@
+---
+title: DB2 Privilege Escalation Techniques
+description: Explore effective techniques for escalating privileges in IBM DB2 using
+  SQL injection vulnerabilities.
+keywords:
+- DB2 privilege escalation
+- SQL injection
+- IBM DB2 security
+- database vulnerability
+- DBA privileges
+- SQL payloads
+- session authorization
+---
+
+# DB2 Privilege Escalation
+
+## Context
+
+This guide focuses on escalating privileges in IBM DB2 using SQL injection techniques. It assumes familiarity with database privilege models, SQL statements, and prior exposure to IBM DB2 SQL injection vulnerabilities.
+
+## Theory
+
+### Understanding DB2 Privilege Hierarchy
+
+DB2 privileges control access to database objects and operations. These privileges can be granted at various levels, from system-wide permissions to specific database object access. Understanding this hierarchy is crucial for identifying potential vulnerabilities. A common security flaw arises when privileges are misconfigured, allowing unauthorized users to gain elevated access.
+
+### Exploiting Privilege Escalation via SQL Injection
+
+This technique involves identifying points in a database application susceptible to SQL injection, then crafting and injecting payloads that manipulate queries to escalate privileges. SQL injection vulnerabilities allow malicious actors to execute unauthorized SQL commands, which can include granting higher privileges to unauthorized users or groups.
+
+### DB2 Security Mechanisms
+
+DB2 relies on mechanisms like authentication, authorization, and auditing to maintain database security. The system assumes users have only the privileges necessary for their role. However, flaws in privilege management can be exploited, if not carefully managed and audited, potentially leading to unauthorized access and control over the database environment.
+
+## Practice
+
+### Privilege Escalation via GRANT DBA
+
+Exploiting SQL injection vulnerabilities can allow attackers to grant DBA privileges to unauthorized users. The following steps demonstrate how to achieve this:
+
+1. **Identify SQL Injection Point:**
+    ```bash
+    SELECT * FROM users WHERE username='admin' AND password='password' --';
+    ```
+    This query is crafted to check for known credentials. The `--` operator comments out the trailing text, often needed to negate unwanted query constructs.
+
+2. **Inject Payload to Escalate Privileges:**
+    ```sql
+    '; GRANT DBA TO PUBLIC; --
+    ```
+    Injecting this payload alters the SQL flow to grant DBA permissions to all users, represented by `PUBLIC`.
+
+3. **Commit the Privilege Change:**
+    ```bash
+    COMMIT;
+    ```
+    Executing a commit ensures that the changes made by the injected SQL take effect within the database.
+
+Outcome: DBA privileges are successfully granted to the PUBLIC user group.
+
+### Privilege Escalation via SET SESSION AUTHORIZATION
+
+The following steps highlight how session authorization can be manipulated:
+
+1. **Identify SQL Injection Point:**
+    ```bash
+    SELECT * FROM users WHERE username='admin' AND password='password' --';
+    ```
+    This serves to highlight the vulnerability where authenticated bypass attacks can begin.
+
+2. **Inject Payload to Change Session Authorization:**
+    ```sql
+    '; SET SESSION AUTHORIZATION 'DBA'; --
+    ```
+    This payload switches the session's user context to that of a DBA, leveraging elevated privileges during the session.
+
+3. **Commit the Session Change:**
+    ```bash
+    COMMIT;
+    ```
+    As with privilege grants, committing the change finalizes the unauthorized switch to DBA authorization.
+
+Outcome: The session's authorization is elevated to DBA, enabling privileged operations within the session's lifetime.
+
+## Tools
+
+- **sqlmap**
+- **DB2 Client**
+
+By utilizing tools like `sqlmap` and `DB2 Client`, penetration testers can automate the detection and exploitation of SQL injection vulnerabilities, allowing for a more efficient privilege escalation process.

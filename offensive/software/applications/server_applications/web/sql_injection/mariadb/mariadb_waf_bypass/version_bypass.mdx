@@ -1,0 +1,70 @@
+---
+title: Version Bypass Techniques for MariaDB SQL Injection
+description: Learn how to bypass WAFs using version obfuscation in MariaDB SQL injections.
+  Follow practical steps to execute version queries undetected.
+keywords:
+- Version Bypass
+- MariaDB
+- SQL Injection
+- WAF Evasion
+- Version Obfuscation
+- '@@version_comment'
+- select version() limit 1
+- Database Version Detection
+- WAF Bypass Techniques
+---
+
+# Version Bypass
+
+## Context
+
+In this article, we delve into the technique of bypassing Web Application Firewalls (WAFs) through version obfuscation within MariaDB SQL injections. This approach is pivotal for situations where direct SQL queries are intercepted and blocked by security mechanisms. We assume that readers possess an understanding of SQL queries, database versioning, WAF mechanisms, and have prior knowledge of MariaDB WAF Bypass strategies.
+
+## Theory
+
+### Version Obfuscation in SQL Queries
+
+Version obfuscation is a technique that involves the alteration of SQL queries to disguise the intent or content of the query, specifically to evade detection by WAFs. By utilizing non-standard SQL syntax, attackers can bypass security filters set to detect typical database version queries. This is crucial in scenarios where direct queries to identify the database version might be flagged and blocked by security systems.
+
+### MariaDB Version Detection Techniques
+
+In many deployments, WAFs are configured to block queries that attempt to extract version information due to the potential for these queries to inform more targeted attacks. Therefore, attackers often modify the version queries to bypass these filters. Understanding how WAFs detect such queries and manipulating them to avoid detection is a key tactic in offensive cybersecurity.
+
+### WAF Evasion Techniques
+
+WAF evasion involves using alternative syntax to achieve the same goal as standard queries, with the intention of circumventing rule-based filtering mechanisms. This exploits the fact that WAFs may not recognize or properly interpret obfuscated queries, thus allowing attackers to retrieve critical information like database versions without triggering security alerts.
+
+## Practice
+
+### Version Bypass using @@version_comment
+
+To execute a version bypass using the `@@version_comment`, follow these steps manually. The goal of these steps is to retrieve the database version information without triggering the WAF.
+
+- **Retrieve Version Comment**
+
+    Using the following SQL command, you can attempt to obtain the version comment, thereby potentially revealing version-related information in a way that is less likely to be intercepted by WAFs:
+
+    ```bash
+    SELECT @@version_comment;
+    ```
+
+    This command leverages `@@version_comment`, a server system variable that can provide insights into the database version without using the standard `version()` function directly.
+
+- **Alternate Version Query with LIMIT Clause**
+
+    Another technique involves obfuscating the standard version query using the `LIMIT` clause:
+
+    ```bash
+    SELECT version() LIMIT 1;
+    ```
+
+    By appending `LIMIT 1` to the query, you create a mild form of obfuscation that may bypass simpler WAF rules that recognize only straightforward calls to `version()`.
+
+Successfully executing these steps should allow you to ascertain the MariaDB version information without setting off any automated defenses.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+These tools can facilitate the process of crafting, sending, and analyzing obfuscated SQL queries to ensure their success in bypassing WAF mechanisms.
