@@ -1,0 +1,94 @@
+---
+title: IBM Db2 Version and Environment Detection Techniques
+description: Discover techniques for detecting IBM Db2 version and environment info
+  using SQL injections.
+keywords:
+- IBM Db2
+- version detection
+- environment information
+- SQL injection
+- sysibm.sysversions
+- sysproc.env_get_inst_info
+- database enumeration
+---
+
+# Version and Environment Detection
+
+## Context
+
+In this article, we will explore techniques for extracting version and environment information from IBM Db2 databases using SQL injection methodologies. The ability to enumerate such details is crucial for understanding the target environment, which aids in further exploitation strategies. This content assumes you have knowledge of basic database enumeration and experience in executing SQL queries.
+
+## Theory
+
+### Db2 Version Identification Methods
+
+Understanding the version of an IBM Db2 database is essential for tailoring subsequent attack strategies. Various methods can be employed to detect the version, primarily through leveraging system catalog tables and built-in functions in Db2. 
+
+### Understanding Db2 Catalog Tables
+
+Db2 catalog tables store metadata about the database, including schema, type of objects, and system configuration. The `sysibm.sysversions` table, in particular, holds information about version details. SQL injection can exploit such catalog tables to extract sensitive data, providing unauthorized insight into the database's structure and configuration.
+
+### Environment Variable Extraction in Db2
+
+Extracting environment variables from a Db2 database can reveal critical insights about the running instance's operational settings. Using SQL functions like `sysproc.env_get_inst_info()`, attackers can retrieve environment details that divulge setup configurations and provide a deeper understanding of the instance.
+
+### Db2 System Information Retrieval
+
+System-level information disclosure from Db2 is another crucial step in post-exploitation. Functions like `sysibmadm.env_sys_info` are often used in SQL injection attacks to access underlying system attributes and configuration details, offering a comprehensive view of the target's operational posture.
+
+## Practice
+
+### Db2 Version Detection via sysibm.sysversions
+
+To determine the version of Db2, querying the `sysibm.sysversions` table is an effective approach.
+
+```bash
+SELECT * FROM sysibm.sysversions;
+```
+
+Executing this command provides sensitive data access to the version description of the database.
+
+### Environment Information via sysproc.env_get_inst_info()
+
+Retrieve detailed information about the Db2 instance's environment using the `sysproc.env_get_inst_info()` function.
+
+```bash
+SELECT * FROM TABLE(sysproc.env_get_inst_info()) AS t;
+```
+
+This command yields environment-specific details such as instance name, node name, and configuration directories.
+
+### Version Retrieval using getvariable('sysibm.version')
+
+The `getvariable` function can be used to directly fetch the Db2 version.
+
+```bash
+VALUES getvariable('sysibm.version');
+```
+
+This statement executes a command that returns the current Db2 version, leveraging built-in environment variables.
+
+### Product Information via sysproc.env_get_prod_info()
+
+Acquiring product information can be executed using the `sysproc.env_get_prod_info()` function.
+
+```bash
+SELECT * FROM TABLE(sysproc.env_get_prod_info()) AS t;
+```
+
+Fetching product details is critical for understanding the Db2 setup, including build level and fix pack information, which can influence attack methodologies.
+
+### System Information via sysibmadm.env_sys_info
+
+To comprehensively ascertain system attributes, `sysibmadm.env_sys_info` should be queried.
+
+```bash
+SELECT * FROM sysibmadm.env_sys_info;
+```
+
+The resulting insight into system settings provides important operational context that can guide further penetration testing efforts.
+
+## Tools
+
+- **Db2 Command Line Processor (CLP)**
+- **SQL Injection Tools**
