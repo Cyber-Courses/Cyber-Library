@@ -1,0 +1,152 @@
+---
+title: 'Getting Started with Sqlmap: Basic Usage Guide'
+description: Learn the basics of using Sqlmap for SQL injection testing in web applications.
+keywords:
+- sqlmap usage
+- SQL injection testing
+- basic sqlmap tutorial
+- sqlmap options
+- web application security
+---
+
+# Basic Usage
+
+## Context
+
+This article provides a detailed guide on the basic usage of sqlmap for SQL injection testing. Sqlmap is a powerful tool used to detect and exploit SQL injection vulnerabilities in web applications. This guide assumes an understanding of HTTP requests and the fundamentals of SQL injection.
+
+## Theory
+
+### URL Parameter Usage
+
+When testing a web application for SQL injection vulnerabilities, it is essential to identify the target URL. Sqlmap provides the `--url` option to specify the vulnerable application endpoint. This is a critical step in focusing the tool on the correct target.
+
+### Parameter Selection
+
+Web applications often consist of numerous parameters that could be susceptible to SQL injection. The `-p` option in sqlmap allows users to specify which parameters to focus on during testing, granting more targeted and effective results.
+
+### User Agent Spoofing
+
+The user-agent string is a crucial part of HTTP requests, often used by applications to tailor responses and by security systems to differentiate between visitors. Sqlmap provides the `--user-agent` parameter to modify the default user-agent string, which can help bypass some defenses.
+
+### Random Agent Usage
+
+To avoid detection by systems flagging static user-agent strings, sqlmap supports the `--random-agent` option. This automatically randomizes the user-agent string with each request, mimicking legitimate browsing behavior.
+
+### Thread Management
+
+Sqlmap allows users to define the number of concurrent threads with the `--threads` option. Increasing the thread count can speed up the testing process but may also increase server load.
+
+### Risk Assessment
+
+The aggressiveness of the SQL injection tests can be controlled via the `--risk` parameter, which ranges from 1 (default) to 3. Higher risk levels increase the likelihood of detecting vulnerabilities but may also increase the risk of application disruptions.
+
+### Level Setting
+
+The depth of testing is guided by the `--level` parameter, also ranging from 1 to 5. A higher level results in more exhaustive testing, which can be beneficial for thorough assessments.
+
+### DBMS Selection
+
+Identifying the target Database Management System (DBMS) type optimizes the injection techniques sqlmap uses. This can be specified using the `--dbms` option (e.g., MySQL, PostgreSQL).
+
+### OS Detection
+
+The target's operating system can be specified using the `--os` option, aiding sqlmap in using OS-specific techniques. This information can help enhance the precision of the exploitation.
+
+### Batch Mode
+
+For non-interactive testing, sqlmap's `--batch` option automates prompts typically requiring user confirmation, facilitating smoother scripted or long-running operations.
+
+### Authentication Type
+
+When interacting with applications protected by authentication, the type of authentication can be specified through `--auth-type`. This informs sqlmap of the method to use when sending requests.
+
+### Authentication Credentials
+
+Credentials necessary for authenticated requests can be input using `--auth-cred`. This allows sqlmap to access areas of the web application that require user login.
+
+### Proxy Usage
+
+Sqlmap can route its requests through a specified proxy server using the `--proxy` option, making traffic visible for analysis or routing through a VPN for anonymity.
+
+### Union Character Specification
+
+The `--union-char` option allows specification of an alternative character used in union-based injection queries, useful in scenarios where the common character encounters issues.
+
+### SSL Enforcement
+
+To ensure secure connections, the `--force-ssl` option guarantees that all requests made by sqlmap are over SSL/TLS, even if the target does not explicitly require it.
+
+### Timeout Handling
+
+The `--timeout` parameter sets a maximum waiting period for server responses, useful to prevent indefinite hanging of tests on unresponsive servers.
+
+### Retry Mechanism
+
+If requests fail due to network instability or server errors, sqlmap can retry the request a set number of times specified by the `--retries` option, helping overcome transient issues.
+
+## Practice
+
+### Basic SQL Injection Test with sqlmap
+
+To begin testing a web application for SQL injection vulnerabilities using sqlmap, follow these steps:
+
+- Execute a basic SQL injection test:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --batch
+  ```
+  This command initiates scanning of the specified URL with default settings in non-interactive mode.
+
+- Choose a specific parameter to test:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' -p id --batch
+  ```
+  Here, only the 'id' parameter is targeted for injection testing.
+
+- Set a custom user-agent string:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --user-agent 'Mozilla/5.0' --batch
+  ```
+  This can help bypass user-agent-specific restrictions on some web servers.
+
+- Use a random user-agent string:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --random-agent --batch
+  ```
+  Avoid detection by systems flagging static user-agent strings.
+
+- Increase concurrent thread count:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --threads 5 --batch
+  ```
+  This can considerably speed up the scanning process.
+
+- Set a higher risk level:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --risk 3 --batch
+  ```
+  Increase the intensity of tests conducted on the application.
+
+- Specify a target DBMS:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --dbms mysql --batch
+  ```
+  Tailor sqlmap's payloads and techniques based on known DBMS characteristics.
+
+- Force SSL usage:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --force-ssl --batch
+  ```
+  This ensures that all requests are encrypted.
+
+- Define timeout for responses:
+  ```bash
+  sqlmap --url 'http://example.com/vuln.php?id=1' --timeout 10 --batch
+  ```
+  Limits the waiting period for responses to mitigate delays due to server unresponsiveness.
+
+These steps will help identify potential SQL injection vulnerabilities using sqlmap, providing insights into the security posture of the target application.
+
+## Tools
+
+- **sqlmap**
