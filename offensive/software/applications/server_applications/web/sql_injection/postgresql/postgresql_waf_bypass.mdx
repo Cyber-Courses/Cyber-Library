@@ -1,0 +1,94 @@
+---
+title: Mastering PostgreSQL WAF Bypass Techniques
+description: Explore techniques to bypass WAFs using PostgreSQL SQL injection methods.
+  Learn to evade detection with CHR() and dollar sign injections.
+keywords:
+- PostgreSQL
+- WAF bypass
+- SQL injection
+- CHR() function
+- dollar sign injection
+- web application firewall
+- security testing
+---
+
+# PostgreSQL WAF Bypass
+
+## Context
+
+In this article, we will explore techniques for bypassing Web Application Firewalls (WAFs) using PostgreSQL-specific SQL injection methods. This knowledge is essential for penetration testers and red teamers looking to execute SQL injections in environments protected by WAFs. We assume familiarity with web application firewalls, SQL injection fundamentals, and PostgreSQL syntax.
+
+## Theory
+
+### WAF Evasion Techniques
+
+Web Application Firewalls are designed to protect web applications by filtering and monitoring HTTP requests. They often block known attack patterns, making SQL injection challenging. However, there are methods to circumvent these defenses.
+
+To bypass a WAF, one must first identify its presence and understand its filtering rules. Analyzing these rules helps in crafting payloads that evade detection, allowing malicious SQL queries to execute successfully.
+
+### CHR() Function Usage in PostgreSQL
+
+The `CHR()` function in PostgreSQL can be used to transform ASCII codes into characters. This function is instrumental in obfuscating SQL payloads, helping to bypass string-based filters in WAFs.
+
+**Example:**
+
+The string "admin" can be represented using the ASCII codes of its constituent characters, transforming filters into bypassing opportunities.
+
+### Dollar Sign Injection in PostgreSQL
+
+PostgreSQL supports the use of the dollar sign ('$') to denote variables or identifiers. This feature can be exploited to inject variables into SQL queries, which might not be covered by WAF keyword detection mechanisms.
+
+By utilizing prepared statements and the dollar sign notation, attackers can design payloads that evade filters by appearing innocuous or differently structured than typical patterns.
+
+## Practice
+
+### CHR() Function for WAF Bypass
+
+This technique leverages the `CHR()` function to generate characters, thereby obfuscating the SQL query contents.
+
+- **Step 1**: Construct a sequence using `CHR()`:
+  
+  ```bash
+  SELECT CHR(65)||CHR(66)||CHR(67);
+  ```
+
+  This constructs the string "ABC", avoiding direct inclusion of alphanumeric strings that might trigger WAF rules.
+
+- **Step 2**: Obfuscate a text input:
+
+  ```bash
+  SELECT * FROM users WHERE username=CHR(97)||CHR(100)||CHR(109)||CHR(105)||CHR(110);
+  ```
+
+  Here, "admin" is obfuscated through ASCII codes, potentially bypassing filters set for keyword detection.
+
+**Outcome**: Successfully bypass WAF string filters using the `CHR()` function to achieve authentication bypass or data retrieval.
+
+### Dollar Sign Injection for WAF Bypass
+
+Exploiting the dollar sign notations in PostgreSQL, this method injects variables in a way that circumvents certain WAF filters.
+
+- **Step 1**: Use a variable in your injection:
+
+  ```bash
+  SELECT * FROM users WHERE username=$1;
+  ```
+
+  Here, `$1` presents a user-defined variable that evades detection by not being a direct SQL keyword.
+
+- **Step 2**: Prepare and execute a statement:
+
+  ```bash
+  PREPARE stmt FROM 'SELECT * FROM users WHERE username=$1'; EXECUTE stmt('admin');
+  ```
+
+  This code prepares a SQL statement using a variable placeholder and executes it, aimed at sidestepping WAF keyword filters.
+
+**Outcome**: By using dollar sign variable injection, you successfully bypass WAF defenses to gain unauthorized access or data exposure.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+These tools assist in automating SQL injection testing, including the formulation and delivery of WAF bypass payloads within SQL queries.
