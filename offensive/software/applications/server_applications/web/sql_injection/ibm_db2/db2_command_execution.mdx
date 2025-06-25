@@ -1,0 +1,84 @@
+---
+title: 'DB2 Command Execution: Techniques & Practices'
+description: Learn DB2 command execution through SQL injection with stored procedures
+  and practical examples.
+keywords:
+- DB2 command execution
+- SQL injection
+- stored procedures
+- ADMIN_CMD
+- QSYS2.QCMDEXC
+- db2cmd
+- DB2 security
+- DB2 vulnerabilities
+- command execution techniques
+---
+
+# DB2 Command Execution
+
+## Context
+
+This article aims to provide guidance on executing system commands through IBM DB2 using SQL injection techniques. It assumes that readers have foundational knowledge in SQL injection basics, an understanding of DB2 architecture, and familiarity with stored procedures.
+
+## Theory
+
+### Command Execution Mechanisms in DB2
+
+IBM DB2 provides multiple entry points for executing operating system commands when SQL injection vulnerabilities are present. These methods typically involve exploiting the database's ability to run stored procedures, which are precompiled SQL code segments that can execute complex operations including calling OS level commands. Specifically, vulnerabilities exist when user input is not properly sanitized, allowing malicious SQL snippets to exploit these procedures.
+
+The core strategy hinges on leveraging stored procedures such as `ADMIN_CMD` or `QSYS2.QCMDEXC()` to carry out command execution. These procedures originally serve administrative purposes but can be misused for unauthorized actions if safeguards are not properly implemented.
+
+### Exploitation of Stored Procedures
+
+Stored procedures play a pivotal role in database management, offering a method to encapsulate complex SQL queries under a single callable command. In DB2, procedures like `SYSPROC.ADMIN_CMD` or `QSYS2.QCMDEXC()` are potent in their capability to execute commands. When an SQL injection vulnerability is found, an attacker can inject SQL code that invokes these procedures, leading to command execution on the host system.
+
+For instance, using these procedures, attackers can craft SQL injections that effectively bypass normal security checks, as DB2 often trusts the procedural calls as being executed by legitimate, authorized users.
+
+### DB2 Security Controls
+
+DB2 incorporates a number of security controls to prevent misuse of its functionalities, especially concerning its stored procedures. Typically, execution permissions for sensitive procedures are restricted to certain user roles. However, in cases where these permissions are incorrectly configured or when a user with sufficient privileges is compromised, these security checks can be bypassed, leading to successful exploitation.
+
+It is this configuration oversight often leveraged during an SQL injection attack that allows stored procedures to serve as a vector for command execution.
+
+## Practice
+
+### Executing Commands via ADMIN_CMD
+
+The `ADMIN_CMD` stored procedure can be misused to execute operating system commands if an attacker successfully injects rogue SQL. Here's how it might be done:
+
+- Run the following SQL command to execute a system command:
+  ```bash
+  SELECT SYSPROC.ADMIN_CMD('command_to_execute');
+  ```
+
+This method allows the execution of arbitrary operating system commands through the database's execution environment.
+
+### Using QSYS2.QCMDEXC() for Command Execution
+
+`QSYS2.QCMDEXC()` is another stored procedure in DB2 that can be exploited for OS command execution. The attack is similar in method to the `ADMIN_CMD` exploitation:
+
+- Execute an OS command using:
+  ```bash
+  SELECT QSYS2.QCMDEXC('command_to_execute');
+  ```
+
+By invoking `QSYS2.QCMDEXC()`, attackers gain the ability to run commands directly, bypassing typical user restrictions.
+
+### Leveraging db2cmd for Shell Access
+
+The `db2cmd` utility can be used to gain shell access, providing a broader scope for command execution within a Windows environment:
+
+- Execute a command with:
+  ```bash
+  db2cmd /c command_to_execute
+  ```
+
+This approach opens a command shell, allowing further interaction with the operating system at the shell level.
+
+## Tools
+
+- **db2cmd**
+- **SYSPROC.ADMIN_CMD**
+- **QSYS2.QCMDEXC** 
+
+Together, these tools and techniques highlight potential weaknesses in DB2 environments subject to SQL injection vulnerabilities, enabling unauthorized command execution if defenses are not properly configured.
