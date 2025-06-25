@@ -1,0 +1,74 @@
+---
+title: Extract Database Info via Information_schema in MariaDB
+description: Learn to extract database details using information_schema via union-based
+  SQL injection in MariaDB.
+keywords:
+- information_schema
+- union-based SQL injection
+- MariaDB database extraction
+- schema enumeration
+- SQL queries
+- database schema
+- sensitive data access
+---
+
+# Extract Database With Information_schema
+
+## Context
+
+This article provides a detailed walkthrough on how to extract database information using the `information_schema` within MariaDB through a union-based SQL injection attack. This guide assumes the reader has knowledge of SQL queries, database schema structures, `information_schema`, and specifically the use of Union Based SQL Injection in a MariaDB environment.
+
+## Theory
+
+### Information Schema in MariaDB
+
+The `information_schema` in MariaDB is a special schema that contains metadata about all other schemas present within the database server. It serves as a warehouse for database structure information, including details about tables, columns, and data types. This schema is invaluable for attackers seeking to enumerate database contents without needing specific user credentials for direct access.
+
+### Union-Based SQL Injection
+
+Union-based SQL injection is a common attack vector where an attacker appends a `UNION SELECT` statement to a vulnerable SQL query. This technique allows the attacker to combine results from the original query with results from attacker-controlled queries. When executed successfully, it enables extraction of additional database information beyond what is ordinarily accessible.
+
+### Schema Enumeration Techniques
+
+The exploitation model for schema enumeration through union-based SQL injection involves querying the `information_schema` to list databases, tables, and columns. Attackers use SQL injection capabilities to query `information_schema.tables` and `information_schema.columns`, systematically exposing the structure and layout of the target database for further exploitation.
+
+## Practice
+
+### Extract Database Names
+
+To retrieve the names of all databases on a MariaDB server, execute the following SQL command:
+
+```bash
+SELECT schema_name FROM information_schema.schemata;
+```
+
+This command queries the `information_schema.schemata` table, which contains a list of all databases in the server. The outcome is access to all database names present on the server, laying the groundwork for further targeted extraction activities.
+
+### Extract Table Names from a Specific Database
+
+Once you've identified a target database from the previous step, extract its table names by executing:
+
+```bash
+SELECT table_name FROM information_schema.tables WHERE table_schema='target_db';
+```
+
+Replace `'target_db'` with the name of the database you wish to explore. This command retrieves a list of table names stored within the specified database schema, granting insight into the structure of the chosen database.
+
+### Extract Column Names from a Specific Table
+
+To delve deeper into a specific table within the target database, extract column names using:
+
+```bash
+SELECT column_name FROM information_schema.columns WHERE table_name='target_table';
+```
+
+Substitute `'target_table'` with the actual table name whose columns you are interested in. The result is a comprehensive list of column names from this table, facilitating data extraction or further manipulation.
+
+## Tools
+
+The following tools are instrumental in carrying out this type of SQL injection attack:
+
+- **sqlmap**
+- **Burp Suite**
+
+Each of these tools provides unique functionalities that aid in discovering and exploiting SQL injection vulnerabilities within web applications interfacing with MariaDB. Use them wisely to automate or enhance the efficiency of your manual testing processes.
