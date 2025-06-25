@@ -1,0 +1,70 @@
+---
+title: Wide Byte Injection (GBK) Explained for MySQL WAF Bypass
+description: Understand how GBK encoding facilitates wide byte injection to bypass
+  MySQL web application firewalls.
+keywords:
+- Wide Byte Injection
+- GBK Encoding
+- MySQL WAF Bypass
+- Character Encoding
+- SQL Injection
+---
+
+# Wide Byte Injection (GBK)
+
+## Context
+
+The objective of this article is to explain how to exploit MySQL Web Application Firewalls (WAFs) using Wide Byte Injection with GBK encoding. This technique requires an understanding of character encoding, SQL queries, web application architecture, and the general concepts surrounding MySQL WAF Bypass. 
+
+## Theory
+
+### GBK Encoding and Wide Byte Injection
+
+GBK encoding is a character set used primarily for simplified Chinese characters. It utilizes 1-2 bytes per character, enabling a larger array of characters than single-byte encoding schemes. Wide byte injection leverages these multi-byte character encodings to bypass input validation mechanisms, especially effective against poorly configured WAFs.
+
+The vulnerability model for wide byte injection lies in how multi-byte characters are parsed within SQL queries. By inserting partial or malformed multi-byte sequences, an attacker can alter the intended parsing of the SQL statement, effectively bypassing traditional WAF filters that do not account for such character manipulations.
+
+The attack sequence of a wide byte injection involves deliberately injecting a wide byte character into an SQL query to disrupt WAF pattern matching, allowing malicious queries to go undetected. This manipulation changes the interpretation of the query by the database, often leading to security vulnerabilities like authentication bypass.
+
+### Charset Escape Techniques
+
+Charset escape techniques involve manipulating character encoding to insert unexpected byte sequences—a fundamental tactic in SQL injection attacks. The core principle is to leverage encoding schemes like GBK to introduce new byte sequences that a WAF might not recognize or sanitize effectively.
+
+Through smart use of wide byte characters, attackers can evade common WAF pattern matching algorithms. This makes Wide Byte Injection a potent technique for bypassing security measures that depend heavily on predictable input sanitation and recognition.
+
+## Practice
+
+### Wide Byte Injection using GBK Encoding
+
+To exploit wide byte injection via GBK encoding, follow these steps:
+
+- Begin with a standard SQL query intended for authentication purposes:
+
+    ```bash
+    SELECT * FROM users WHERE username = 'admin' AND password = '1234';
+    ```
+
+- Test the initial payload to observe the WAF's response and any error messages it generates:
+
+    ```http
+    admin' AND password = '1234' -- 
+    ```
+
+- Introduce the wide byte character using GBK encoding to attempt bypassing the WAF:
+
+    ```http
+    admin' AND password = '1234' %df%5c -- 
+    ```
+
+- Combine the final payload with the wide byte injection to complete the bypass strategy:
+
+    ```bash
+    SELECT * FROM users WHERE username = 'admin' AND password = '1234' %df%5c -- ;
+    ```
+
+The expected outcome is an authentication bypass due to the successful evasion of the WAF filters, allowing an attacker to manipulate the database queries effectively without detection.
+
+## Tools
+
+- **Burp Suite**
+- **SQLMap**
