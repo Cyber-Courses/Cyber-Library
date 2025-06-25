@@ -1,0 +1,76 @@
+---
+title: Bypass WAFs with Scientific Notation in SQL
+description: Learn to bypass MariaDB WAFs using SQL injection with scientific notation
+  payloads.
+keywords:
+- scientific notation
+- WAF bypass
+- MariaDB SQL injection
+- SQL payload
+- numeric evasion
+---
+
+# Scientific Notation Evasion
+
+## Context
+
+The purpose of this guide is to teach you how to effectively use scientific notation to bypass Web Application Firewalls (WAF) in the context of SQL injections specifically targeting MariaDB. This method relies on WAFs inability to recognize scientific notation as a potential threat, allowing an attacker to execute SQL injection attacks despite the presence of security measures.
+
+Assumed knowledge for successfully implementing this technique includes understanding SQL syntax, familiarity with WAF mechanisms and how they operate, knowledge of floating-point representation in numeric data, and experience with conducting SQL injections on MariaDB databases.
+
+## Theory
+
+### Scientific Notation in SQL
+
+Scientific notation is a method of representing numbers that are too large or too small to be conveniently written in decimal form. In SQL, scientific notation expresses numbers as a base and an exponent, such as `1e1` which translates to 10. Database engines like MariaDB parse these as regular numeric inputs.
+
+Understanding the application of scientific notation is crucial for constructing injection payloads that can evade pattern-based detection systems within WAFs. 
+
+### WAF Detection Mechanisms
+
+Web Application Firewalls are designed to secure web services by inspecting incoming requests for malicious patterns, such as known SQL injection signatures. They often use pattern matching to detect and block potentially dangerous SQL queries.
+
+However, a vulnerability emerges because many WAFs do not recognize scientific notation as harmful, treating it as a normal numeric input. This can be exploited by changing standard numeric expressions into their scientific equivalents, slipping past generic SQL injection filters.
+
+### Crafting Scientific Notation Payloads
+
+The crafting of scientific notation payloads involves identifying numeric fields that are susceptible to injection attacks. Once these fields are identified, an attacker can replace typical numeric values in the SQL query with their scientific notation counterparts to evade detection.
+
+To successfully employ this method, it is essential to:
+- Identify fields that process numeric data and are vulnerable to SQL injection.
+- Convert standard numerical values to scientific notation, e.g., using `1e1` instead of `10`.
+
+## Practice
+
+### Scientific Notation Evasion in SQL Injection
+
+Follow these steps to evade WAFs using scientific notation in your SQL injection attempts:
+
+- Identify the target field that is vulnerable to numeric-based SQL injection.
+  
+- Use scientific notation in SQL queries to obfuscate the injection. For example, if you wish to retrieve data where the `id` is `10`, instead of writing:
+
+  ```sql
+  SELECT * FROM users WHERE id = 10;
+  ```
+
+  Use:
+
+  ```sql
+  SELECT * FROM users WHERE id = 1e1;
+  ```
+
+- Similarly, to inject into a condition checking for price values greater than `10`, you would use:
+
+  ```sql
+  SELECT * FROM products WHERE price > 1.0e+1;
+  ```
+
+Each of these payloads in scientific notation should bypass basic WAF filters configured to block commonly used SQL injection patterns, allowing you to manipulate or query database entries without raising immediate alarms.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+These tools can facilitate the process of crafting and automating such SQL injections by testing against different WAF rules and providing a broad view of potential vectors that can be exploited in conjunction with scientific notation evasion tactics.
