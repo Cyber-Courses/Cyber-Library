@@ -1,0 +1,85 @@
+---
+title: Boolean-based Blind SQL Injection Explained
+description: Learn how to exploit Boolean-based Blind SQL Injection in MariaDB for
+  secure data extraction through conditional logic.
+keywords:
+- Boolean-based Blind
+- SQL Injection
+- MariaDB
+- conditional logic
+- data extraction
+- Boolean logic
+- pattern matching
+- ASCII function
+- SUBSTRING function
+- REGEXP binary match
+---
+
+# Boolean-based Blind SQL Injection
+
+## Context
+
+Boolean-based Blind SQL Injection is a technique used in the field of offensive cybersecurity to exploit vulnerabilities in applications using MariaDB (or similar databases), enabling unauthorized data extraction. This method leverages the application's responses to specially crafted SQL queries that result in true or false conditions, even when direct database responses are not visible to the attacker. Mastery of SQL query structure, Boolean logic, conditional statements, and prior knowledge of MariaDB Blind SQL Injection techniques are assumed for effective execution of this attack.
+
+## Theory
+
+### Boolean-based Blind SQL Injection
+
+Boolean-based Blind SQL Injection exploits the application's behavior when a SQL query returns a true or false response. An attacker can infer sensitive data by systematically manipulating the query conditions to validate his hypotheses about the database's contents.
+
+### Conditional Logic in SQL
+
+At the core of Boolean-based Blind SQL Injection is the utilization of SQL conditional logic. Attackers craft queries that leverage conditional statements such as `IF()`. By monitoring whether the application returns a change in its response or behavior (such as success or error), attackers can determine if a condition is true or false.
+
+### Functions for Data Extraction
+
+To retrieve data, attackers can use SQL functions like `SUBSTRING`, `ASCII`, and `IF()`. The `SUBSTRING` function allows selection of specific portions of a string, enabling byte-by-byte extraction of data. Combined with `ASCII`, it allows determination of specific character values by their numeric equivalents.
+
+### Pattern Matching Techniques
+
+Pattern matching functions such as `LIKE` and `REGEXP` can infer data structure and content by matching specific patterns within the data. These can be used during SQL Injection to understand bits of the data through pattern representation, especially when used to decode structures hidden in blind attacks by matching certain segments or characters.
+
+## Practice
+
+### Boolean-based Blind SQL Injection
+
+The following steps outline a manual execution of Boolean-based Blind SQL Injection to extract sensitive data from a database.
+
+- **Query Setup**: Begin by executing a SQL command to test a condition.
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND IF(SUBSTRING((SELECT password FROM users WHERE id=1),1,1)='a',1,0);
+    ```
+
+    This query checks if the first character of the password is 'a'. If the condition is true, the response will differ from the case where the condition is false.
+
+- **ASCII Verification**: Use ASCII value to verify guessed characters.
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND ASCII(SUBSTRING((SELECT password FROM users WHERE id=1),1,1))=97;
+    ```
+
+    Here, we are checking whether the ASCII value of the first character of the password is 97 (`'a'`).
+
+- **Pattern Matching with LIKE**: Use pattern matching for the first character.
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND 'a%' LIKE (SELECT password FROM users WHERE id=1);
+    ```
+
+    This query checks if the password starts with 'a' using the `LIKE` operator.
+
+- **Case-Sensitive Pattern Matching**: Employ `REGEXP BINARY` for enhanced pattern matching.
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND 'a%' REGEXP BINARY (SELECT password FROM users WHERE id=1);
+    ```
+
+    This REGEXP BINARY query is used for a case-sensitive match to reinforce the inferred information about the data structure.
+
+The outcome of these steps is the incremental access to sensitive data stored in the database by iteratively using Boolean logic to confirm each character or piece of data.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
