@@ -1,0 +1,72 @@
+---
+title: 'MariaDB Truncation: Exploit Authentication Bypass'
+description: Learn how to exploit MariaDB truncation for authentication bypass using
+  SQL injection techniques effectively.
+keywords:
+- MariaDB
+- truncation
+- authentication bypass
+- SQL injection
+- VARCHAR handling
+- login collision
+- database security
+---
+
+# MariaDB Truncation
+
+## Context
+
+The objective of this article is to teach the exploitation of MariaDB truncation for authentication bypass. This technique focuses on leveraging SQL truncation to gain unauthorized access to applications that use MariaDB as a backend. It assumes knowledge of SQL truncation, the VARCHAR data type, and basic authentication mechanisms.
+
+## Theory
+
+### SQL Truncation Mechanism in MariaDB
+
+SQL truncation occurs when input exceeds the defined column length in a database table. In the context of MariaDB, truncation can be a significant security vulnerability if input validation is not properly implemented. When the input data is too lengthy for the column size, MariaDB silently truncates it, which can be exploited for unintended outcomes, such as authentication bypass.
+
+### VARCHAR Handling in MariaDB
+
+VARCHAR columns are defined with a maximum length, which specifies how many characters the column can store. If a user input exceeds this length, MariaDB trims the excess characters without throwing an error. This is an important behavior to understand, as it can lead to unexpected application logic if the application does not handle these cases correctly.
+
+### Authentication Bypass via Truncation
+
+One method of exploiting the truncation feature is through authentication bypass. By crafting an input that exceeds the column length, an attacker can cause intentional truncation, creating a situation where different inputs might result in the same truncated output. This can lead to login collisions if the system assumes every username should be unique.
+
+### Collision Risks in Login Process
+
+When a truncation occurs, two distinct usernames may be truncated to the same value. An attacker can exploit this by registering a long username that, when truncated, collides with another existing user's username. If the application does not adequately handle these cases, it can lead to unauthorized access by circumventing the normal authentication flow.
+
+## Practice
+
+### MariaDB Truncation for Authentication Bypass
+
+The following steps outline how to perform an authentication bypass using MariaDB truncation:
+
+- **Identify target application with VARCHAR username field:** Ensure the target application uses a VARCHAR field for storing usernames. This is a crucial precondition as the attack relies on the truncation behavior of VARCHAR columns.
+
+- **Check truncation behavior:**
+  ```bash
+  SELECT username FROM users WHERE username='longusername';
+  ```
+  Use a command to check if the application is prone to truncation by attempting to retrieve a username that exceeds expected input lengths.
+
+- **Create a user with an intentionally long username:**
+  ```sql
+  INSERT INTO users (username, password) VALUES ('longusername', 'password');
+  ```
+  Insert a new user entry with a username longer than the allowed length. This tests whether the system will silently truncate this username.
+
+- **Attempt login with truncated username:**
+  ```bash
+  SELECT * FROM users WHERE username='longuser';
+  ```
+  Try to login using the truncated version of the username. If the application does not handle truncation properly, it might allow an attacker to log in as another user whose username collides after truncation.
+
+This series of steps can lead to an authentication bypass by exploiting the truncation behavior, ultimately granting unauthorized access to resources.
+
+## Tools
+
+- **MariaDB Client**
+- **SQLMap** 
+
+These tools are instrumental in executing SQL commands, testing database vulnerabilities, and carrying out the truncation attack effectively.
