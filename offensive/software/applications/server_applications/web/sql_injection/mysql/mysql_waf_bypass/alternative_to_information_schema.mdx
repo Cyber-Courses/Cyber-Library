@@ -1,0 +1,63 @@
+---
+title: 'Bypass WAF: Alternative to Information Schema'
+description: Learn to access MySQL database metadata without using information_schema
+  for WAF evasion.
+keywords:
+- MySQL
+- WAF evasion
+- metadata access
+- information_schema alternative
+- innodb_table_stats
+---
+
+# Alternative to Information Schema
+
+## Context
+
+The goal of this guide is to teach how to bypass Web Application Firewalls (WAF) when accessing MySQL database metadata, specifically without using the conventional `information_schema` method. This technique is essential when conducting SQL injection in environments protected by WAFs, which often block attempts to query `information_schema` to prevent data leaks. A fundamental understanding of `information_schema` and general WAF evasion techniques is assumed.
+
+## Theory
+
+### Understanding Information Schema Limitations
+
+*Information schema* is a built-in system database in MySQL that provides metadata, allowing users to access detailed information about database objects such as tables, columns, and indexes. However, due to its comprehensive nature, WAFs commonly thwart queries targeting the `information_schema`, recognizing them as potential attempts to exfiltrate sensitive database structure and data. This makes it crucial to find alternative methods for metadata access during a penetration testing exercise targeting MySQL databases.
+
+### Alternative Metadata Access Methods
+
+To circumvent restrictions on `information_schema`, attackers can leverage other system tables that gather similar metadata insights. One such alternative involves using InnoDB tables, particularly those like `innodb_table_stats`, which contain valuable metadata about database tables. By identifying and querying these tables, it becomes possible to gather necessary insights into the database structure even when direct access to the `information_schema` is not feasible.
+
+## Practice
+
+### Access Metadata via InnoDB Tables
+
+Here's how to access database metadata by querying InnoDB tables such as `innodb_table_stats`, thereby bypassing restrictions imposed by WAFs on `information_schema`.
+
+- **Step 1: Identify InnoDB Tables Storing Metadata**
+
+  First, understand which InnoDB tables hold the metadata that might be valuable. InnoDB statistics tables like `innodb_table_stats` are of interest.
+
+- **Step 2: Query the InnoDB Table for Metadata**
+
+  Using a MySQL client, execute the following command to retrieve metadata from `innodb_table_stats`:
+
+  ```bash
+  SELECT * FROM mysql.innodb_table_stats WHERE database_name='target_db';
+  ```
+
+- **Step 3: Analyze the Output**
+
+  The output will display statistics and relevant information about the tables within the specified database (`target_db`) without involving the `information_schema`.
+
+  ```text
+  +---------+------------+----------+----------+-------------+
+  | DATABASE_NAME | TABLE_NAME | STATS_INITIALIZED | STATS_UPDATED | NUM_ROWS   |
+  +---------+------------+----------+----------+-------------+
+  | target_db | users     | Yes              | 2023-10-11      | 1024       |
+  +---------+------------+----------+----------+-------------+
+  ```
+
+**Result:** By querying InnoDB metadata tables, attackers can successfully gather database structure information, thereby achieving `sensitive_data_access` without tripping WAF defenses against `information_schema` access.
+
+## Tools
+
+- **MySQL Client**: Used for executing SQL queries against the target MySQL database.
