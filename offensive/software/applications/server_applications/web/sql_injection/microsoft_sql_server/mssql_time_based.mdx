@@ -1,0 +1,66 @@
+---
+title: Exploiting MSSQL Time-Based SQL Injection
+description: Learn to exploit MSSQL time-based SQL injection for data extraction using
+  WAITFOR DELAY and SQL functions.
+keywords:
+- MSSQL
+- Time-Based SQL Injection
+- WAITFOR DELAY
+- SQL functions
+- data extraction
+- input validation
+- conditional logic
+---
+
+# MSSQL Time Based
+
+## Context
+
+The objective of this article is to instruct on exploiting MSSQL time-based SQL injection vulnerabilities for data extraction purposes. This method allows attackers to infer data from a database by analyzing the time it takes for the server to respond to certain queries. Readers are expected to have prior knowledge of SQL query execution and an understanding of time delay functions.
+
+## Theory
+
+### Time-Based SQL Injection in MSSQL
+
+Time-based SQL injection is a technique that exploits SQL queries by introducing time delays, allowing an attacker to infer the content of a database based on response delays. This vulnerability arises from inadequate input validation, permitting the execution of SQL commands that manipulate response times.
+
+### WAITFOR DELAY Function
+
+The `WAITFOR DELAY` function in MSSQL is used to create intentional delays in the execution of SQL queries. It is an essential component in time-based SQL injection, as it helps to infer true or false conditions by analyzing the response time from the database server.
+
+### CHAR Function Usage
+
+The `CHAR` function in SQL is used to convert an integer to its corresponding character. This function is crucial in the context of SQL injection attacks as it can aid in the extraction of data, character by character, from a database.
+
+### Conditional Logic with IF
+
+The `IF` statement in SQL allows execution of code based on a given condition. In a time-based SQL injection attack, the `IF` statement is used to discern true or false conditions by inducing a delay via `WAITFOR DELAY` when a condition is met, helping to identify valuable data within the database.
+
+## Practice
+
+### Exploiting MSSQL Time-Based SQL Injection
+
+To exploit MSSQL time-based SQL injection, we can craft SQL queries that infer database content based on the server's response time. Here are practical steps:
+
+- Start by crafting a query to detect the first character of the database name "master". The query induces a delay if the first character is 'm':
+
+    ```bash
+    SELECT CASE WHEN (SELECT SUBSTRING(name,1,1) FROM sys.databases WHERE name='master')='m' WAITFOR DELAY '0:0:5' ELSE WAITFOR DELAY '0:0:0' END
+    ```
+    This query checks if the first character of the database name 'master' is 'm', inducing a 5-second delay if true.
+
+- Use a query to verify if the first character of the SQL Server version is 'M', using ASCII value to check:
+
+    ```bash
+    SELECT CASE WHEN (ASCII(SUBSTRING((SELECT @@version),1,1))=77) WAITFOR DELAY '0:0:5' ELSE WAITFOR DELAY '0:0:0' END
+    ```
+    This command checks if the ASCII value of the first character of the SQL version string is 77 ('M'), and it induces a 5-second delay if the condition is true.
+
+By using these techniques, the attacker interprets the data by observing the server's delay, which reveals whether conditions are true or false, thereby allowing data inference.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite** 
+
+By leveraging these tools and techniques, malicious actors can perform time-based SQL injection to extract data from an MSSQL database effectively, bypassing authentication without directly accessing or visualizing the information.
