@@ -1,0 +1,77 @@
+---
+title: Mastering Boolean with CASE WHEN in SQL Injection
+description: Explore exploiting PostgreSQL SQL Injection using CASE WHEN for conditional
+  logic.
+keywords:
+- PostgreSQL
+- Boolean-based SQL Injection
+- CASE WHEN
+- SQL syntax
+- conditional expressions
+- SQL Injection techniques
+- database security
+---
+
+# Boolean with CASE WHEN
+
+## Context
+
+This article explores the exploitation of PostgreSQL Boolean-based SQL Injection utilizing CASE WHEN statements. The reader is expected to have intermediate knowledge of SQL syntax, Boolean logic, conditional expressions, and prior experience with PostgreSQL Blind SQL Injection techniques. This technique is commonly used to infer sensitive information by evaluating database responses to conditional logic.
+
+## Theory
+
+### Conditional Expressions in SQL
+
+Conditional expressions in SQL are used to evaluate conditions and return specified results based on whether these conditions are true or false. A fundamental way to embed conditional logic in SQL queries is through the use of the `CASE WHEN` statement.
+
+- **Definition**: Conditional expressions evaluate given conditions and return specific results depending on whether the outcome is true or false.
+- **Core Principle**: The `CASE WHEN` structure allows execution of logic based on the outcome of a condition within SQL queries. It serves as a flexible tool for SQL Injection attacks by enabling attackers to define logic that manipulates the database's query responses.
+
+### Boolean Logic in SQL Injection
+
+Boolean-based SQL Injection relies on evaluating true or false conditions to derive data stealthily. The technique involves injecting SQL statements that leverage Boolean logic to manipulate database responses, which in turn provide insights into the data stored in databases.
+
+- **Vulnerability Model**: Boolean-based SQL Injection targets systems where SQL queries are constructed dynamically, allowing attackers to inject conditions that return true or false outcomes.
+- **Attack Sequence**: By implanting specific conditional statements using Boolean logic, attackers can induce the database to behave in a way that reveals information about its contents or structure. By observing whether certain conditions trigger, attackers can infer sensitive details.
+
+### CASE WHEN Usage in PostgreSQL
+
+The `CASE WHEN` construct is integral to executing conditional logic within PostgreSQL queries. This method permits the insertion of logic that alters the result set based on the evaluation of a condition, aiding attackers in discerning database information based on query outcomes.
+
+- **Definition**: `CASE WHEN` allows logical conditions to be expressed within SQL queries, providing different results based on whether the given conditions are met.
+- **Core Principle**: `CASE WHEN` is used to manipulate the results of queries conditionally, thereby assisting in the inference of sensitive data when utilized for SQL Injection attacks.
+
+## Practice
+
+### Exploiting Boolean-based SQL Injection with CASE WHEN
+
+#### Steps to Exploit
+
+- **Basic CASE WHEN Syntax:**
+  ```sql
+  SELECT CASE WHEN (1=1) THEN 'true' ELSE 'false' END;
+  ```
+  - This command demonstrates the basic syntax of CASE WHEN to understand conditional logic, where the condition `1=1` always evaluates to 'true'.
+
+- **Username Existence Check:**
+  ```sql
+  SELECT CASE WHEN (username='admin') THEN 'true' ELSE 'false' END FROM users;
+  ```
+  - Inject this statement to determine if a username, such as 'admin', exists within the users table by evaluating if the condition is true.
+
+- **Timing-based Inference:**
+  ```sql
+  SELECT CASE WHEN (SELECT COUNT(*) FROM users WHERE username='admin') > 0 THEN pg_sleep(5) ELSE pg_sleep(0) END;
+  ```
+  - Utilize this command to introduce a time delay observable by the attacker. If 'admin' exists, the query introduces a 5-second delay. This aids in inferring the existence of specific data based on response times.
+
+#### Outcome
+
+- **Sensitive Data Access**: By successfully executing Boolean-based SQL Injection using the `CASE WHEN` technique, attackers can deduce sensitive information by interpreting the database's response to conditional queries. In scenarios where information is retrieved indirectly, this method is particularly effective.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+These tools can facilitate the automated exploitation and identification of SQL Injection vulnerabilities in web applications.
