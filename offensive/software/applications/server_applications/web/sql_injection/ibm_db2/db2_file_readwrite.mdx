@@ -1,0 +1,84 @@
+---
+title: Exploiting DB2 for File Read/Write via SQL Injection
+description: Learn how to exploit SQL Injection in IBM DB2 for file read/write operations.
+keywords:
+- DB2 SQL Injection
+- file read
+- file write
+- ADMIN_CMD
+- external script execution
+- db2cmd
+- server exploitation
+---
+
+# DB2 File Read/Write
+
+## Context
+
+Exploiting SQL Injection vulnerabilities in IBM's DB2 database can open up avenues for unauthorized file read and write operations. This guide demonstrates how attackers leverage misconfigurations and inadequate input validations in DB2's `ADMIN_CMD` to perform such operations. A foundational understanding of SQL Injection, file system permissions, and database privilege structures is assumed.
+
+## Theory
+
+### ADMIN_CMD and Its Role in DB2
+
+The `ADMIN_CMD` is a stored procedure in DB2 that allows administrators to perform various maintenance tasks. Although designed for legitimate uses, if this command's inputs are not properly validated, it becomes a vector for SQL Injection attacks, enabling attackers to execute arbitrary commands.
+
+### File System Access via SQL Injection
+
+By exploiting SQL Injection through `ADMIN_CMD`, attackers can gain access to a target's file system. This process involves injecting malicious SQL code that instructs the database server to execute file read or write commands—effectively treating the database as a gateway to the server's underlying file system. The attack's success hinges on leveraging the database's existing permissions to authenticate and execute these operations without direct access to the server.
+
+### Understanding DB2 Permissions
+
+DB2 employs a permission model that dictates what database users can do. Users with higher privileges could perform operations that might be unsafe if those privileges are not correctly managed. When permission settings are misconfigured, it opens a pathway for attackers to exploit overly permissive settings to perform unauthorized file operations.
+
+### Leveraging External Scripts for Exploitation
+
+Beyond direct SQL injections, DB2 allows for external script execution. Attackers can exploit this by crafting SQL Injection payloads that execute external scripts on the database server, potentially enacting file reads, writes, or even system commands. This capability ties back into the potentially dangerous flexibility afforded to DB2 through its command execution features.
+
+## Practice
+
+### File Read via SQL Injection
+
+The following approach demonstrates reading a file using SQL Injection with `ADMIN_CMD`:
+
+- **Inject the command**:
+    ```bash
+    SELECT ADMIN_CMD('cat /etc/passwd');
+    ```
+
+    This SQL query exploits `ADMIN_CMD` to read the contents of the `/etc/passwd` file, showcasing a classic attack on Linux-based servers.
+
+- **Outcome**: Successful execution would result in access to sensitive data contained in the `/etc/passwd` file.
+
+### File Write via SQL Injection
+
+To write data to a file using SQL Injection, the following is employed:
+
+- **Inject the command**:
+    ```bash
+    SELECT ADMIN_CMD('echo "test" > /tmp/testfile');
+    ```
+
+    This command writes a string `test` to `/tmp/testfile`, demonstrating an unauthorized file write via SQL Injection.
+
+- **Outcome**: The ability to write arbitrary data to the server, which could lead to further code execution or data tampering.
+
+### Executing External Scripts
+
+Another method is to execute external scripts through SQL Injection:
+
+- **Inject the command**:
+    ```bash
+    SELECT ADMIN_CMD('db2cmd /c dir');
+    ```
+
+    Here, an attacker leverages `ADMIN_CMD` to execute the `dir` command, listing directory contents on the system hosting the DB2 instance, showing command execution capabilities.
+
+- **Outcome**: Execute arbitrary system commands, potentially gaining further control over the host server.
+
+## Tools
+
+- **db2cmd**
+- **db2batch** 
+
+These tools facilitate the execution of commands and batch scripts on the DB2 database, thus being part of the exploitation and administration toolkit.
