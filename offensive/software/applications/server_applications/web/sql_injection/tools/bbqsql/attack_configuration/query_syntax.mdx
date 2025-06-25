@@ -1,0 +1,76 @@
+---
+title: 'Blind SQL Injection: Mastering Query Syntax with BBQSQL'
+description: Learn to construct SQL queries using BBQSQL for blind SQL injection.
+keywords:
+- Blind SQL Injection
+- BBQSQL
+- SQL Query Construction
+- Row Indexing
+- Char Index
+- Comparator Usage
+---
+
+# Query Syntax
+
+## Context
+
+This article aims to teach the construction and configuration of custom SQL queries for BBQSQL to exploit blind SQL injection vulnerabilities. It assumes knowledge of SQL query structure, the HTTP request-response cycle, and basic understanding of Blind SQL Injection.
+
+## Theory
+
+### Custom Query Construction
+
+Custom query construction involves creating SQL queries specifically tailored to exploit blind SQL injection vulnerabilities. These queries are designed to extract data from a database by leveraging conditional responses. The crafted queries must manipulate how the application interacts with the database, allowing malicious actors to obtain information without direct outputs.
+
+### Row Index Usage
+
+The `${row_index}` placeholder is critical for iterating over rows within a database table during an attack. By incrementing the row index, attackers can systematically access and manipulate each individual row to extract data.
+
+### Char Index Usage
+
+The `${char_index}` placeholder is utilized to iterate over each character within a string. This approach is essential when extracting string values from a database, as it allows attackers to focus on retrieving individual characters.
+
+### Char Val Usage
+
+`${char_val}` represents the ASCII value of a character being tested. This placeholder is pivotal as it works in conjunction with comparators to determine the actual character values stored in the database.
+
+### Comparator Usage
+
+The `${comparator}` is a crucial element in the syntax for comparing extracted values against expected results. This comparison is essential for discerning true/false conditions during blind SQL injection, guiding attackers towards successful data retrieval.
+
+### Sleep Function Injection
+
+`${sleep}` introduces deliberate delays to infer conditions based on response time. This technique is used to exploit time-based blind SQL injection vulnerabilities. By monitoring the server's response delay, attackers can infer whether a condition was true or false based on the duration of the delay.
+
+### Query Template Design
+
+A query template is a structured format that uses placeholders for dynamic values in SQL queries. This facilitates automated query generation and execution. When configured correctly, the template allows attackers to efficiently perform SQL injections by substituting placeholders with actual values during runtime.
+
+### Blind SQL Injection Loop Mechanism
+
+The blind SQL injection loop mechanism iteratively tests conditions in the query to extract data without direct output. This method relies on side-channel information such as timing or Boolean responses to derive the necessary data.
+
+## Practice
+
+### Constructing a Custom Query for BBQSQL
+
+- Begin by identifying the target database and its table structure. Understanding the schema is crucial for crafting effective queries.
+  
+- Use the following query template to extract character values from the database:
+  ```sql
+  SELECT CASE WHEN (SELECT ASCII(SUBSTRING(column_name, ${char_index}, 1)) FROM table_name WHERE id=${row_index})=${char_val} THEN ${sleep} ELSE 0 END
+  ```
+  This template employs placeholders to facilitate the extraction of each character in the target data.
+  
+- Configure BBQSQL with this custom query template. Ensure that placeholders like `${row_index}`, `${char_index}`, `${char_val}`, and `${sleep}` are correctly mapped to BBQSQL parameters.
+
+- Execute BBQSQL with the configured query to exploit the vulnerability:
+  ```bash
+  bbqsql -u 'http://target.com/vulnerable_endpoint' --method POST --data 'param1=value1&param2=value2' --query-template 'SELECT CASE WHEN (SELECT ASCII(SUBSTRING(column_name, ${char_index}, 1)) FROM table_name WHERE id=${row_index})=${char_val} THEN ${sleep} ELSE 0 END'
+  ```
+  
+Through these steps, sensitive data can be extracted from the database using blind SQL injection methods facilitated by BBQSQL.
+
+## Tools
+
+- **BBQSQL**
