@@ -17,11 +17,17 @@ keywords:
 
 Exploiting SQL Injection vulnerabilities in IBM's DB2 database can open up avenues for unauthorized file read and write operations. This guide demonstrates how attackers leverage misconfigurations and inadequate input validations in DB2's `ADMIN_CMD` to perform such operations. A foundational understanding of SQL Injection, file system permissions, and database privilege structures is assumed.
 
+Note: The effectiveness of these techniques depends on several factors including DB2 version, operating system, user privileges, and database configuration. This guide assumes a relatively permissive environment for demonstration purposes.
+
 ## Theory
 
 ### ADMIN_CMD and Its Role in DB2
 
-The `ADMIN_CMD` is a stored procedure in DB2 that allows administrators to perform various maintenance tasks. Although designed for legitimate uses, if this command's inputs are not properly validated, it becomes a vector for SQL Injection attacks, enabling attackers to execute arbitrary commands.
+The `ADMIN_CMD` stored procedure is an administrative interface that permits execution of database-level commands such as reorganization, runstats, and file imports. While it does not natively support arbitrary shell commands, attackers may still abuse it by targeting adjacent procedures or poorly implemented wrappers in custom UDFs (User Defined Functions).
+
+#### Misconceptions About `ADMIN_CMD`
+
+Contrary to popular assumptions, `ADMIN_CMD` does not directly support Unix shell commands like `cat` or `echo`. Such commands may only execute through auxiliary means—like wrapped OS-level script calls, or vulnerable stored procedures linked via fenced-mode UDFs.
 
 ### File System Access via SQL Injection
 
@@ -29,11 +35,16 @@ By exploiting SQL Injection through `ADMIN_CMD`, attackers can gain access to a 
 
 ### Understanding DB2 Permissions
 
-DB2 employs a permission model that dictates what database users can do. Users with higher privileges could perform operations that might be unsafe if those privileges are not correctly managed. When permission settings are misconfigured, it opens a pathway for attackers to exploit overly permissive settings to perform unauthorized file operations.
+In DB2, executing the `ADMIN_CMD` routine requires specific privileges. The following authorities are necessary to execute this routine:
+
+EXECUTE privilege on the routine
+DATAACCESS authority
+DBADM authority
+SQLADM authority
 
 ### Leveraging External Scripts for Exploitation
 
-Beyond direct SQL injections, DB2 allows for external script execution. Attackers can exploit this by crafting SQL Injection payloads that execute external scripts on the database server, potentially enacting file reads, writes, or even system commands. This capability ties back into the potentially dangerous flexibility afforded to DB2 through its command execution features.
+Beyond direct SQL injections, DB2 allows for external script execution. Attackers can exploit this by crafting SQL Injection payloads that execute external scripts on the database server, potentially enacting file reads, writes, or even system commands. This capability highlights the significant risk associated with allowing command execution features within DB2, particularly when misconfigured or insufficiently controlled.
 
 ## Practice
 
@@ -41,44 +52,48 @@ Beyond direct SQL injections, DB2 allows for external script execution. Attacker
 
 The following approach demonstrates reading a file using SQL Injection with `ADMIN_CMD`:
 
-- **Inject the command**:
-    ```bash
-    SELECT ADMIN_CMD('cat /etc/passwd');
+- **Inject the command using `IMPORT`**:
+    ```sql
+    CALL SYSPROC.ADMIN_CMD('IMPORT FROM /tmp/data.del OF DEL INSERT INTO sensitive_table');
     ```
 
-    This SQL query exploits `ADMIN_CMD` to read the contents of the `/etc/passwd` file, showcasing a classic attack on Linux-based servers.
+    This command attempts to load data from a file into a DB2 table. If attackers can control the file path or target table, this could lead to sensitive file disclosure via indirect reads.
 
-- **Outcome**: Successful execution would result in access to sensitive data contained in the `/etc/passwd` file.
+- **Alternate technique using `LOAD`**:
+    ```sql
+    CALL SYSPROC.ADMIN_CMD('LOAD FROM /tmp/shadow.del OF DEL INSERT INTO sensitive_table');
+    ```
+    This example uses the `LOAD` command to bring data from a file into a DB2 table. It can be faster than `IMPORT` and supports more complex data structures. As with `IMPORT`, success depends on control over the file path and permissions.
+
+- **Trick using `MODIFIED BY HEX`**:
+This technique tries to load non-DEL or binary files into a DB2 table by treating the input as hex-encoded content. It's useful when the file isn't structured as a traditional CSV or delimited format. The target table should be flexible enough to accept large, raw string data—for example:
+    ```sql
+      CREATE TABLE shadow_dump (col1 VARCHAR(32000));
+    ```
+
+    ```sql
+    CALL SYSPROC.ADMIN_CMD('IMPORT FROM /etc/shadow OF DEL MODIFIED BY HEX INSERT INTO shadow_dump');
+    ```
+    This won't always parse cleanly, but it can help extract readable segments from otherwise unsupported file types.
+
+- **Outcome**: Successful execution would result in indirect access to file contents through database tables.
 
 ### File Write via SQL Injection
 
 To write data to a file using SQL Injection, the following is employed:
 
 - **Inject the command**:
-    ```bash
-    SELECT ADMIN_CMD('echo "test" > /tmp/testfile');
+    ```sql
+    CALL SYSPROC.ADMIN_CMD('EXPORT TO /tmp/export.del OF DEL SELECT * FROM sensitive_table');
     ```
 
-    This command writes a string `test` to `/tmp/testfile`, demonstrating an unauthorized file write via SQL Injection.
+    This exports sensitive table data to a file on disk, assuming the DB2 instance has necessary write permissions. It demonstrates a valid write scenario leveraging legitimate export functionality.
 
 - **Outcome**: The ability to write arbitrary data to the server, which could lead to further code execution or data tampering.
 
-### Executing External Scripts
-
-Another method is to execute external scripts through SQL Injection:
-
-- **Inject the command**:
-    ```bash
-    SELECT ADMIN_CMD('db2cmd /c dir');
-    ```
-
-    Here, an attacker leverages `ADMIN_CMD` to execute the `dir` command, listing directory contents on the system hosting the DB2 instance, showing command execution capabilities.
-
-- **Outcome**: Execute arbitrary system commands, potentially gaining further control over the host server.
-
 ## Tools
 
-- **db2cmd**
-- **db2batch** 
+- **Burp Suite**
+- **sqlmap**
 
-These tools facilitate the execution of commands and batch scripts on the DB2 database, thus being part of the exploitation and administration toolkit.
+
