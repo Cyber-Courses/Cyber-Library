@@ -1,0 +1,111 @@
+---
+title: Preventing & Securing Server-Side Template Injection
+description: Learn strategies to prevent and secure against SSTI vulnerabilities in
+  web applications through input validation, secure configurations, and sandboxing.
+keywords:
+- SSTI prevention
+- template security
+- input validation
+- secure template
+- sandboxing
+- template hardening
+- template injection mitigation
+---
+
+# Prevention & Security
+
+## Context
+
+This article aims to provide you with actionable strategies and configurations to prevent and mitigate Server-Side Template Injection (SSTI) vulnerabilities in web server applications. The guidance assumes that you are familiar with template engines, input validation techniques, sandboxing, and the concept of Server-Side Template Injection.
+
+## Theory
+
+### SSTI Attack Surface and Prevention Principles
+
+Server-Side Template Injection occurs when untrusted user input is embedded in server-side templates and interpreted as code. It is crucial never to render user input directly in templates without strict validation and sanitization. By understanding how template engines interpret input as code, attackers can execute arbitrary logic if input control is not enforced.
+
+### Input Validation and Sanitization for Templates
+
+Input validation is a cornerstone of SSTI prevention. Whitelist allowed input types and patterns for all template variables. Attackers may use encoding, concatenation, or template-specific syntax to bypass naive filters, so input validation must occur before data reaches the template rendering logic.
+
+### Secure Template Engine Configuration
+
+Secure configuration of template engines is essential. Disable features that allow code execution, file access, or arbitrary expression evaluation. Consider all user-supplied data as untrusted, regardless of its source. Remember, default template engine settings may expose dangerous functionality if not hardened.
+
+### Template Engine Sandboxing and Access Control
+
+Use sandboxed template environments to restrict access to sensitive objects and functions. Improper sandboxing can allow escape to the underlying system or sensitive APIs. Attackers often probe for sandbox escapes by injecting expressions referencing restricted objects.
+
+### Best Practices for Template Security Hardening
+
+Adhering to best practices can greatly mitigate SSTI risks. Keep template engines updated to patch known vulnerabilities. Limit the template context to only required variables and data, and conduct regular code reviews with a focus on template usage.
+
+## Practice
+
+### Implement Strict Input Validation for Template Variables
+
+- Define a whitelist of allowed characters and patterns for each template variable to prevent the injection of template syntax or code.
+- Example in Python: only allows alphanumeric usernames with underscores, 3-20 characters.
+
+    ```python
+    import re
+
+    def validate_username(username):
+        if re.fullmatch(r'[a-zA-Z0-9_]{3,20}', username):
+            return True
+        return False
+    ```
+
+Successful implementation will block malicious template expressions from reaching the engine.
+
+### Harden Template Engine Configuration
+
+- Disable template engine features that allow code execution or file access to reduce the attack surface.
+- In Jinja2, this could involve disabling global functions and enabling autoescaping:
+
+    ```python
+    from jinja2 import Environment, FileSystemLoader
+    JINJA2_ENV = Environment(loader=FileSystemLoader('templates'), autoescape=True)
+    JINJA2_ENV.globals = {}
+    ```
+
+This prevents exploitation through insecure template engine defaults.
+
+### Enforce Template Sandboxing and Access Control
+
+- Configure the template engine to restrict access to sensitive objects and APIs, preventing access to dangerous functions or sandbox escape.
+- In Jinja2, use a sandboxed environment:
+
+    ```python
+    from jinja2.sandbox import SandboxedEnvironment
+    JINJA2_ENV = SandboxedEnvironment(autoescape=True)
+    ```
+
+This mitigates risks of attackers escaping template sandboxes.
+
+### Limit Template Context Exposure
+
+- Pass only required variables to the template context, reducing the available attack surface.
+- Flask example demonstrates limiting exposure:
+
+    ```python
+    render_template('profile.html', username=user.username)
+    ```
+
+Such practices prevent exploitation by unnecessary context variables.
+
+### Regularly Update and Patch Template Engines
+
+- Ensure the latest security patches are applied by regularly updating template engines.
+
+    ```bash
+    pip install --upgrade Jinja2
+    ```
+
+This reduces risks from known vulnerabilities and public exploits.
+
+## Tools
+
+- **Jinja2**
+- **Flask**
+- **jinja2.sandbox**
