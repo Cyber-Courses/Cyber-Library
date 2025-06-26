@@ -8,7 +8,6 @@ keywords:
 - SQL injection
 - IBM DB2
 - hexadecimal representation
-- HEX function
 - CHR function
 - obfuscation
 - binary string
@@ -28,18 +27,6 @@ Hexadecimal encoding represents binary data in a format that is human-readable u
 
 The key principle of using hex encoding in SQL injection is its ability to transform queries into formats that a WAF might not recognize as malicious. By encoding SQL commands and keywords as hexadecimal, attackers aim to bypass filters designed to block injection attempts.
 
-### Hex Function Usage in IBM DB2
-
-In IBM DB2, the `HEX()` function is a powerful tool that converts strings into their hexadecimal representation. This function can be used not only for data analysis and transformation but also for crafting obfuscated payloads that evade security mechanisms.
-
-When attackers use `HEX()`, they can dynamically convert input into a hex format, allowing for flexible payload creation. This is particularly useful when the direct use of SQL keywords might trigger WAF rules.
-
-### CHR Function Usage in IBM DB2
-
-The `CHR()` function in IBM DB2 returns the character corresponding to a specified ASCII code. By combining this with hex encoding, attackers can build SQL payloads one character at a time, further complicating detection by WAFs.
-
-This function is advantageous in scenarios where direct retrieval or input of specific characters is filtered or blocked. By constructing strings character by character, attackers can customize payloads that conform to allowed traffic patterns while still executing effectively.
-
 ### Obfuscation Methods Using Hex Encoding
 
 Web Application Firewalls (WAFs) are designed to block malicious SQL queries. However, they may not decode or recognize hex-encoded payloads, allowing SQL injection attacks to succeed. 
@@ -50,7 +37,7 @@ By encoding critical SQL keywords and strings, attackers can obfuscate their ope
 
 ### Hex Encoding for WAF Bypass
 
-The following techniques demonstrate how hex encoding can be leveraged to bypass WAFs in an IBM DB2 environment:
+The following technique demonstrate how hex encoding can be leveraged to bypass WAFs in an IBM DB2 environment:
 
 - **Hex-Encoding Direct Queries**
 
@@ -60,26 +47,6 @@ The following techniques demonstrate how hex encoding can be leveraged to bypass
 
     Here, the string 'admin' is hex-encoded and represented as `x'61646d696e'`. This form may not be recognized by a WAF as an SQL injection attempt, thus allowing the query to execute without triggering defenses.
 
-- **Dynamic Encoding with HEX() Function**
-
-    ```sql
-    SELECT * FROM users WHERE username = HEX('admin');
-    ```
-
-    Using the `HEX()` function enables dynamic conversion of the string 'admin' into its hexadecimal equivalent. This approach can adjust to different payloads and contexts.
-
-- **Character-by-Character Construction Using CHR() Function**
-
-    ```sql
-    SELECT * FROM users WHERE username = CHR(97)||CHR(100)||CHR(109)||CHR(105)||CHR(110);
-    ```
-
-    This query reconstructs 'admin' by concatenating the ASCII values of its characters using the `CHR()` function. Such a technique bypasses filters that might detect and block literal SQL keywords or strings.
-
-By using these methods, attackers can execute SQL injections without exposing recognizable patterns to filtering mechanisms, thus achieving their intended bypass.
-
 ## Tools
 
-- **IBM DB2** 
-
-By understanding and applying these hex encoding techniques, offensive professionals should be able to effectively test WAF implementations and identify vulnerabilities within protected SQL databases.
+- **Burp Suite**
