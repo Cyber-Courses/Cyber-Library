@@ -1,0 +1,94 @@
+---
+title: 'Exploiting IDOR with Common Identifiers: Techniques and Tools'
+description: Learn about exploiting IDOR vulnerabilities using guessable identifiers,
+  such as emails and usernames, and protect against unauthorized access.
+keywords:
+- IDOR
+- common identifiers
+- web security
+- email enumeration
+- username enumeration
+- base64 identifiers
+- vulnerability exploitation
+---
+
+# Common Identifiers Parameter
+
+## Context
+
+This article explores the exploitation of Insecure Direct Object References (IDOR) vulnerabilities through common, guessable identifiers as URL parameters in web applications. Assumed knowledge includes handling user identification techniques, working with parameters, understanding base64 encoding, and recognizing the concept of IDOR vulnerabilities. The focus is on how attackers can leverage predictable identifiers like usernames, emails, or base64 encodings to gain unauthorized access to sensitive data.
+
+## Theory
+
+### Nature of Common Identifiers in Web Parameters
+
+Common identifiers in web applications usually include user-facing values such as emails, usernames, or IDs. These are often used as direct object references in web parameters. The predictability and public availability of these identifiers make them an attractive target for attackers seeking unauthorized access. Attackers exploit these identifiers by substituting them in parameter fields to access other users' data.
+
+### Vulnerability Model: Guessable and Enumerated Identifiers
+
+When web applications utilize emails, usernames, or base64-encoded IDs as access keys, they may inadvertently expose sensitive information if proper authorization checks are lacking. Attackers initiate their attack sequence by guessing or enumerating valid identifiers, subsequently substituting them into parameterized requests. This allows them to access data belonging to other users.
+
+### Identifier Enumeration Techniques
+
+Public resources, registration forms, and error messages can inadvertently reveal valid usernames or emails, assisting attackers in constructing a viable list of identifiers. Automated scripts and wordlists enable brute-forcing or enumeration of these identifiers efficiently, providing attackers with a method to identify valid targets.
+
+### Base64 and Obfuscated Identifiers
+
+Base64 encoding is commonly used to obfuscate identifiers, giving the illusion of security without actual protection. Attackers can easily bypass this superficial obfuscation by encoding or decoding identifiers, granting them unauthorized access to resources.
+
+## Practice
+
+### Manual IDOR Exploitation via Common Identifiers
+
+This technique involves manually testing endpoints that use emails, usernames, or base64-encoded identifiers as parameters.
+
+- Identify web application endpoints that utilize common identifiers as parameters. These parameters might appear in URL queries or POST request bodies.
+- Use the `curl` command to manually test access to a user's profile using a known email:
+
+    ```bash
+    curl -i -X GET 'https://target.com/profile?email=john.doe@example.com'
+    ```
+
+- Attempt to access profiles by substituting a guessed or enumerated username:
+
+    ```bash
+    curl -i -X GET 'https://target.com/profile?username=janedoe'
+    ```
+
+- Attempt to access profiles using a base64-encoded form of the username (e.g., 'janedoe' becomes 'amFuZWRvZQ=='):
+
+    ```bash
+    curl -i -X GET 'https://target.com/profile?id=amFuZWRvZQ=='
+    ```
+
+- Examine the responses for any unauthorized access or disclosure of another user's data. Successful exploitation reveals sensitive information of users other than the attacker.
+
+### Automated Enumeration and Exploitation of Identifier-based IDOR
+
+Leverage tools to automate the process of enumerating and exploiting common identifiers.
+
+- Prepare a wordlist of common emails or usernames from public data leaks, commonly used patterns, or registration forms.
+- Use `wfuzz` to automate requests to the target web application, scanning for accessible profiles by email:
+
+    ```bash
+    wfuzz -c -z file,emails.txt --hh 0 'https://target.com/profile?email=FUZZ'
+    ```
+
+- Similarly, automate requests for enumerating profiles by username:
+
+    ```bash
+    wfuzz -c -z file,usernames.txt --hh 0 'https://target.com/profile?username=FUZZ'
+    ```
+
+- For base64-encoded usernames, automate using:
+
+    ```bash
+    wfuzz -c -z file,base64_usernames.txt --hh 0 'https://target.com/profile?id=FUZZ'
+    ```
+
+- Review the responses to identify unauthorized access points, shedding light on which identifiers successfully lead to data leakage. The outcome is the discovery and exploitation of IDOR vulnerabilities through predictable identifiers.
+
+## Tools
+
+- **curl**
+- **wfuzz**
