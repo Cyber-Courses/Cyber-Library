@@ -1,0 +1,105 @@
+---
+title: Inject Template Syntax for Web Vulnerability Testing
+description: Explore template syntax injection to detect and fingerprint server-side
+  template vulnerabilities with manual and automated techniques.
+keywords:
+- template syntax injection
+- SSTI
+- automated vulnerability testing
+- template engine fingerprinting
+- security testing
+- polyglot payload
+- web application security
+- tplmap tool
+- manual injection techniques
+---
+
+# Inject Template Syntax
+
+## Context
+
+In this article, we will demonstrate the injection of template syntax to confirm and fingerprint server-side template injection vulnerabilities. This process involves exploiting web applications that incorrectly handle user input by blindly evaluating template syntax on the server side. This manipulation can lead to revealing sensitive data or arbitrary code execution on the server. The readers of this guide are expected to understand template syntax, server-side rendering, input validation, and have prior knowledge of Server Side Template Injection (SSTI) techniques.
+
+## Theory
+
+### Template Syntax Injection Fundamentals
+
+Template syntax injection occurs when an attacker injects template expressions into user-controllable input fields. These expressions are evaluated by the server-side template engine, which, if not properly configured or validated, can execute payloads injected by an attacker. Different template engines use distinct syntax patterns, making the success of the injection heavily dependent on using the correct expressions for the target engine.
+
+### Payload Discovery and Syntax Detection
+
+To uncover vulnerable points, attackers submit a variety of template expressions into application inputs, observing any output changes or errors that may occur. Polyglot payloads—expressions utilizing multiple syntaxes—are often employed to maximize the chances of successful detection across multiple engines. If the injected syntax is correctly evaluated or an indicative error message occurs, it signals the presence of a template injection vulnerability and helps in identifying the engine type.
+
+### Template Engine Fingerprinting via Syntax Injection
+
+Each template engine, such as Jinja2, Twig, ERB, and others, has unique delimiters and behavior. By injecting engine-specific payloads and analyzing responses or error messages, you can match them to known engines, effectively fingerprinting the server-side template engine you're dealing with.
+
+## Practice
+
+### Manual Injection of Template Syntax for Detection
+
+To manually inject template syntax and detect vulnerabilities, follow these steps:
+
+- **Jinja2, Twig, Django Syntax:**
+  ```http
+  {{7*7}}
+  ```
+  Evaluate arithmetic expressions using common interpolation techniques.
+
+- **Ruby ERB Syntax:**
+  ```ruby
+  #{7*7}
+  ```
+  Employ Ruby-style interpolation.
+
+- **Velocity, Freemarker Syntax:**
+  ```java
+  ${7*7}
+  ```
+  Use Java template engines' expression formats.
+
+- **Embedded Ruby/JavaScript Syntax:**
+  ```erb
+  <%= 7*7 %>
+  ```
+
+- **Perl Template Toolkit:**
+  ```perl
+  [%= 7*7 %]
+  ```
+
+- **EJS Unescaped Output:**
+  ```ejs
+  <%- 7*7 %>
+  ```
+
+- **Polyglot Syntax:**
+  ```http
+  ${{<%[%'\"}}%\\.
+  ```
+  Craft a payload that tries to match multiple engines' syntaxes to increase chances of successful evaluation or error generation.
+
+Submit each payload to potentially vulnerable input fields. Look for evaluated values such as 49, or note any syntax errors and template engine stack traces in responses. These will provide clues regarding the presence and type of template injection vulnerability.
+
+**Outcome:** Successfully identifying evaluated expressions or error messages that signal the presence of a template injection vulnerability and indicate the type of engine in use.
+
+### Automated Template Syntax Injection and Fingerprinting
+
+Automation simplifies the process of detecting and fingerprinting template injection vulnerabilities:
+
+- **Automated Detection with Tplmap:**
+  ```bash
+  tplmap -u http://target/app --data 'input=INJECT_HERE'
+  ```
+  Tplmap is a tool designed for automatic detection and exploitation of Server Side Template Injection vulnerabilities. It tests for various template engines and reports the type and success of injection.
+
+- **Reviewing Tplmap Output:**
+  Assess tplmap’s results to confirm injection success and determine the template engine type.
+
+**Outcome:** Automated discovery ensures quicker and more reliable identification and fingerprinting of template injection vulnerabilities on the server-side.
+
+## Tools
+
+- **tplmap**
+
+Using these techniques and tools, a security professional can effectively identify and exploit server-side template injection vulnerabilities, allowing for a deeper understanding of the application's handling of user input and helping in penetration testing scenarios.
