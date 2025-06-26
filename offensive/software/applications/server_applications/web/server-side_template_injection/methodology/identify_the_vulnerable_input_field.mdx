@@ -1,0 +1,59 @@
+---
+title: Identify Vulnerable Input Fields for SSTI
+description: Discover how to identify vulnerable SSTI input fields in web apps.
+keywords:
+- SSTI
+- input field
+- template injection
+- vulnerable input
+- web security
+- server-side
+- template engine
+- dynamic content
+- reflection
+- input validation
+---
+
+# Identify the Vulnerable Input Field
+
+## Context
+
+The objective of this article is to enable the operator to systematically identify input fields susceptible to server-side template injection (SSTI) in web applications. It assumes knowledge of input validation, template engines, HTTP requests, and Server Side Template Injection (SSTI). Understanding how data flows through web applications and identifying which components process user input is critical for detecting these vulnerabilities.
+
+## Theory
+
+### Input Field Exposure in Dynamic Templates
+
+Vulnerable input fields are user-controllable data sources that are rendered by server-side templates. These fields become avenues for exploitation when they pass user input directly to a template engine without proper validation. The core principle here is that any user input reflected in dynamic content may potentially be processed by a template engine. The typical attack sequence involves an attacker submitting malicious input, which the server renders in a template. The template engine processes this input possibly leading to exploitation.
+
+### Common SSTI Injection Points
+
+Injection points are locations in the application where user input is inserted into server-side templates. It’s important to note that not all input fields are equally exploitable; a key focus should be on those inputs reflected in dynamic server responses. The data flow through these points can be summarized as: User input → Application logic → Template engine → Rendered output. Identifying these specific flows helps in pinpointing areas where the application may be vulnerable to SSTI.
+
+### Indicators of Template-Based Rendering
+
+Certain features of web applications, like preview pages, dynamic emails, or error messages, are common places where templates are used. The presence of these features often indicates template-based rendering. The reflection of user input in output is a strong suggestion of possible template processing. Therefore, recognizing these indicators can help identify potential SSTI vulnerabilities.
+
+## Practice
+
+### Manual Identification of SSTI-Susceptible Input Fields
+
+- **Map all user-controllable input fields in the application.** Catalog elements like forms, search bars, contact forms, upload fields, etc., as these are all potential entry points for user input.
+
+- **Submit unique, easily identifiable input values to each field.** Use markers such as 'ssti_test_123' to track and identify the reflection of this input in subsequent steps.
+
+- **Trigger application features that generate dynamic content.** Examine features such as preview pages, confirmation emails, error messages, and logs since these often employ templates to render user data.
+
+- **Inspect all rendered outputs for direct or indirect reflection of test input.** Check various outputs including HTML, emails, PDFs, error pages, and logs for the presence of your marker.
+
+- **Document all fields where input is reflected in server-generated content.** These input fields are potential candidates for further SSTI testing and should be noted for subsequent stages of vulnerability assessment.
+
+The outcome of this manual process should be a comprehensive list of input fields that reflect user input in server-side templates. This list sets the stage for further testing with SSTI payloads to confirm vulnerabilities.
+
+## Tools
+
+- **Burp Suite**
+- **OWASP ZAP**
+- **Browser Developer Tools**
+
+Using these tools can greatly assist in the identification and analysis of potential SSTI vulnerabilities by allowing you to inspect requests and responses, manipulate inputs, and track where and how your input is reflected in the application.
