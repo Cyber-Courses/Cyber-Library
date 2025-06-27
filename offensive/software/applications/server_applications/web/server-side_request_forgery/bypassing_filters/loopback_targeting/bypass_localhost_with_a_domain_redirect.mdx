@@ -1,0 +1,68 @@
+---
+title: Bypass Localhost with Domain Redirection Techniques
+description: Learn methods to bypass localhost filters using domain redirection in
+  SSRF exploits. Understand loopback-resolving domains and custom DNS records.
+keywords:
+- SSRF
+- localhost bypass
+- domain redirection
+- loopback-targeting
+- DNS resolution
+- custom CNAME
+- localtest.me
+- nip.io
+---
+
+# Bypass Localhost with a Domain Redirect
+
+## Context
+
+This guide demonstrates how attackers can exploit Server-Side Request Forgery (SSRF) protections by redirecting domain names to localhost, effectively bypassing loopback address filters. The assumed knowledge for this guide includes DNS resolution, localhost networking, HTTP headers, understanding of SSRF, and techniques for bypassing filters.
+
+## Theory
+
+### Domain-based Loopback Redirection
+
+Domain-based loopback redirection involves using DNS-resolvable domains that map to the loopback addresses such as 127.0.0.1 or ::1. It's a common evasion technique because many SSRF filters only block direct loopback IPs rather than domains that resolve to those IPs. In a typical attack sequence, an attacker provides a crafted domain such as `localtest.me` which resolves to localhost, thus bypassing naive filtering mechanisms.
+
+### Popular Loopback-Resolving Domains
+
+There are several public domains known for resolving to localhost when subdomains are created under them. Examples include `localtest.me`, `localh.st`, and `nip.io`. When an application receives one of these domains, it resolves it via DNS and connects to the loopback address. A vulnerability arises when application filters check for the strings '127.0.0.1' or 'localhost' but don’t evaluate the resolved IP address, allowing attackers to bypass these checks.
+
+### Custom DNS and CNAME Redirection
+
+Another technique involves the registration or control of domains with DNS A or CNAME records directing to 127.0.0.1. An attacker can set up a DNS entry like `spoofed.[burp_collaborator]` with a DNS record resolving to a loopback address. The core problem here is that applications might trust DNS resolution results without verifying them against a denylist.
+
+## Practice
+
+### Using Public Loopback-Resolving Domains (e.g., localtest.me, nip.io)
+
+- **Identify a target SSRF parameter** that accepts a URL. This is a crucial point where the server is making requests based on user inputs.
+- **Payload:** Use a domain like `http://localtest.me/admin`. This domain resolves to 127.0.0.1, thereby targeting localhost when accessed.
+- **Payload:** Another option includes using `http://127.0.0.1.nip.io/secret`. The special nip.io service resolves such subdomains to loopback addresses.
+  
+By implementing these payloads, attackers can bypass loopback address filters and access internal-only resources.
+
+### Custom Domain with DNS A or CNAME Record to Localhost
+
+- **Register or utilize a DNS service** supporting A/CNAME record customizations. This gives the attacker control over DNS resolution outcomes.
+- **Create an A record** pointing specifically to 127.0.0.1 or use a CNAME pointing to localhost.
+- **Payload:** An example of how this configuration could be exploited is `http://spoofed.attacker.com/`, where spoofed.attacker.com resolves to 127.0.0.1.
+
+This approach allows attackers to bypass SSRF filters effectively by employing domains they control which resolve to localhost.
+
+### Using Collaborator or OAST Domains with Loopback DNS
+
+- **Set up a Burp Collaborator or OAST domain** that resolves to 127.0.0.1 when queried. Certain OAST services enable attackers to specify custom DNS records.
+- **Payload:** Deploying a domain like `http://spoofed.redacted.oastify.com/` reveals how such domains can be configured to resolve to 127.0.0.1.
+
+Leveraging OAST or collaborator infrastructures with loopback DNS permits attackers to breach SSRF loopback restrictions.
+
+## Tools
+
+- **dig**
+- **nslookup**
+- **Burp Collaborator**
+- **OASTify** 
+
+These tools assist in the process of verifying domain resolutions and managing custom DNS records for exploitation purposes.
