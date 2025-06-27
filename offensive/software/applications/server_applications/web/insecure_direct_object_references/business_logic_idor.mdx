@@ -1,0 +1,82 @@
+---
+title: Exploiting Business Logic IDOR Vulnerabilities
+description: Learn how to exploit Business Logic IDOR for unauthorized access to business
+  objects like invoices and accounts, using manual and automated techniques.
+keywords:
+- Business Logic IDOR
+- exploitation
+- unauthorized access
+- business objects
+- vulnerabilities
+- authorization bypass
+- invoices
+- accounts
+- application logic
+---
+
+# Business Logic IDOR
+
+## Context
+
+The purpose of this article is to demonstrate the exploitation of Business Logic IDOR (Insecure Direct Object References) vulnerabilities. These vulnerabilities can be leveraged to access or manipulate unauthorized business objects such as invoices, orders, accounts, and more. This is accomplished by exploiting flaws within the application logic itself. This guide assumes knowledge of business logic, object references, and authorization mechanisms.
+
+## Theory
+
+### Business Logic IDOR Fundamentals
+
+Business Logic IDOR occurs when the access to objects is controlled by business rules, not just by direct identifiers. Attackers exploit weak or predictable business logic to access or manipulate objects that they do not own. The vulnerability arises because authorization checks are either flawed or completely absent, relying on inadequate validation of business logic instead of strict object reference controls.
+
+### Common Business Object Targets
+
+Business Logic IDOR vulnerabilities often target business objects such as invoices, orders, transactions, accounts, subscriptions, billing records, and customer data. The typical attack sequence begins with an attacker identifying object references that are tied to business logic. The attacker then manipulates these parameters with the goal of accessing or altering objects that are otherwise unauthorized.
+
+### Authorization Bypass via Business Logic Flaws
+
+A common vulnerability model includes applications trusting user-supplied object references when business rules are not enforced or lacking on the server-side. Attackers exploit these weaknesses by crafting requests that reference objects outside their authorized scope, taking advantage of missing or weak business logic checks.
+
+## Practice
+
+### Manual exploitation of Business Logic IDOR in invoice management
+
+- **Identify endpoints handling invoice access or modification.**  
+  Focus on URLs or API routes such as `/invoice/view?id=12345`.
+
+- **Attempt to access another user's invoice by changing the id parameter:**
+
+  ```bash
+  curl -b sessionid=attacker_session 'https://target-app.com/invoice/view?id=10001'
+  ```
+
+- **Observe the response for unauthorized invoice data.**  
+  Successful access indicates a business logic IDOR.
+
+- **Attempt to modify invoice details for an unauthorized object:**
+
+  ```bash
+  curl -b sessionid=attacker_session -X POST 'https://target-app.com/invoice/update' -d 'id=10001&amount=0'
+  ```
+
+The outcome of this technique is that the attacker gains access to or modifies invoices belonging to other users, exploiting Business Logic IDOR vulnerabilities.
+
+### Automated enumeration of business object IDs for account takeover
+
+- **Automate requests to enumerate accessible account objects:**
+
+  ```bash
+  for id in {10000..10100}; do
+      curl -b sessionid=attacker_session 'https://target-app.com/account/view?id=$id'
+  done
+  ```
+
+- **Review responses for unauthorized account data.**  
+  Identify which IDs return valid data not belonging to the attacker.
+
+The outcome of this automated technique is the bulk discovery of accessible business objects due to the exploitation of flawed business logic checks.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **ffuf** 
+
+These tools can be utilized to manually or automatically exploit Business Logic IDOR vulnerabilities, providing a deeper understanding of potential authorization weaknesses in application logic.
