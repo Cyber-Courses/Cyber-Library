@@ -1,0 +1,113 @@
+---
+title: Effective XSLT Injection Prevention Strategies
+description: Learn how to secure web applications against XSLT injection with best
+  practices on validation, sandboxing, and configuration.
+keywords:
+- XSLT injection prevention
+- secure XSLT processing
+- input validation
+- template sanitization
+- sandboxing
+- access control
+- XML security
+- dangerous XSLT functions
+- engine configuration
+- whitelisting XSLT elements
+---
+
+# Prevention & Security
+
+## Context
+
+This article aims to equip readers with operational strategies and configurations to prevent XSLT injection in web server applications. To follow along, you should understand how XSLT processing works in web applications, be familiar with XML document structure and parsing, and know common XSLT engines and their integration.
+
+## Theory
+
+### Threat Model for XSLT Injection
+
+XSLT injection occurs when untrusted input is processed by an XSLT engine, allowing the attacker to control transformations. The typical sequence involves the attacker submitting malicious XSLT, the engine executing arbitrary templates or functions, and this leading to possible code execution or data exposure.
+
+### Principles of Secure XSLT Processing
+
+To ensure secure XSLT processing, never process untrusted XSLT input without strict validation and sandboxing. It's crucial to restrict XSLT engine features to the minimum required for business logic. Additionally, apply the principle of least privilege to the transformation context and file system access to minimize potential damage.
+
+### Input Validation and Template Sanitization
+
+Input validation is about ensuring that only safe, expected XSLT constructs are accepted. Attackers often obfuscate payloads to bypass naive pattern matching or blacklists. Therefore, prefer a whitelisting approach where you specify allowed XSLT elements and attributes rather than relying on blacklisting.
+
+### Dangerous XSLT Functions and Features
+
+Dangerous functions in XSLT include `document()`, `xsl:import`, `xsl:include`, extension objects, and system calls. Many XSLT engines enable these features by default, making it critical to explicitly disable them to avert potential security vulnerabilities.
+
+### Sandboxing and Access Control
+
+Sandboxing limits XSLT execution to a controlled environment without external resource access. When developing applications, assume that all user-supplied XSLT is hostile unless proven safe.
+
+### Security Configuration Best Practices
+
+To secure XSLT processing, disable external entity resolution and file/network access in XSLT engines. Employ a defense-in-depth strategy that combines input validation, engine hardening, and monitoring to detect and block any malicious activities.
+
+## Practice
+
+### Whitelisting XSLT Elements and Attributes
+
+- **Explanation:** Define a strict schema or list of allowed XSLT elements and attributes to prevent the use of dangerous or unexpected constructs.
+
+- **Python Example:**
+
+  ```python
+  import lxml.etree as ET
+  from defusedxml.lxml import fromstring
+
+  ALLOWED_ELEMENTS = {'xsl:stylesheet', 'xsl:template', 'xsl:value-of'}
+
+  xslt_doc = fromstring(user_supplied_xslt)
+  for elem in xslt_doc.iter():
+      if elem.tag not in ALLOWED_ELEMENTS:
+          raise Exception(f'Forbidden XSLT element: {elem.tag}')
+  ```
+
+- **Outcome:** Blocks XSLT payloads using non-whitelisted elements or attributes.
+
+### Disabling Dangerous XSLT Features in Engine Configuration
+
+- **Explanation:** Configure the XSLT engine to disable `document()`, `xsl:import`, `xsl:include`, and extension functions to reduce the attack surface.
+
+- **Java Example:**
+
+  ```bash
+  export JAVA_OPTS='-Djavax.xml.accessExternalStylesheet=none -Djavax.xml.accessExternalDTD=none'
+  ```
+
+- **Outcome:** Prevents exploitation via dangerous XSLT features.
+
+### Sandboxing XSLT Execution
+
+- **Explanation:** Run XSLT transformations in a restricted environment such as a chroot, container, or with limited user privileges to limit damage from injections.
+
+- **Docker Example:**
+
+  ```bash
+  docker run --rm -v $(pwd):/data --user nobody xsltproc xsltproc /data/template.xsl /data/input.xml
+  ```
+
+- **Outcome:** Mitigates the impact of successful XSLT injection by isolating execution.
+
+### Enforcing Secure Defaults and Monitoring
+
+- **Explanation:** Set secure defaults for XSLT processing and monitor for suspicious transformation patterns to detect and block anomalous or malicious XSLT activity.
+
+- **Monitoring Example:**
+
+  ```bash
+  grep 'xsl:import\\|xsl:include\\|document(' /var/log/xslt_engine.log
+  ```
+
+- **Outcome:** Early detection and prevention of XSLT injection attempts.
+
+## Tools
+
+- **defusedxml**
+- **lxml**
+- **xsltproc**
+- **Docker**
