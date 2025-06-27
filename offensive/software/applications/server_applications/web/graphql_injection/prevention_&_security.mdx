@@ -1,0 +1,154 @@
+---
+title: 'Securing GraphQL: Prevention & Security Strategies'
+description: Learn effective strategies to harden GraphQL endpoints against injection
+  attacks using depth limits, input validation, and more.
+keywords:
+- GraphQL security
+- query depth limiting
+- input validation
+- rate limiting
+- introspection disabling
+- authentication
+- CORS policy
+- security headers
+- authorization
+---
+
+# Prevention & Security
+
+## Context
+
+The objective of this article is to equip readers with operational techniques to harden GraphQL endpoints against injection and related attacks. The reader is assumed to have knowledge of the GraphQL schema structure, HTTP protocol fundamentals, API security basics, and familiarity with GraphQL Injection attack vectors.
+
+## Theory
+
+### GraphQL Security Best Practices
+
+Adopting a defense-in-depth approach is essential in protecting GraphQL APIs. This strategy involves implementing layered controls to mitigate various attack vectors. Applying the principle of least privilege ensures that access and operations are restricted to only what is necessary, significantly reducing potential exposure to attacks. Additionally, reducing the attack surface by minimizing the exposed schema and operations can mitigate the risk of exploitation.
+
+### Query Depth and Complexity Controls
+
+Deep or overly complex queries are vulnerable to resource exhaustion and may bypass logic controls. By limiting the query depth and complexity, you can effectively prevent abuse and protect the backend systems from being overwhelmed by resource-intensive requests.
+
+### Input Validation and Sanitization in GraphQL
+
+Input validation is critical in enforcing strict type and format checks on all user-supplied data. Moreover, sanitizing inputs helps ensure that injection payloads do not reach resolvers, which is crucial for preventing common injection attacks.
+
+### Access Control and Authorization
+
+All GraphQL requests should be authenticated, and fine-grained authorization should be enforced at the resolver level. Missing or weak access controls can lead to privilege escalation or unauthorized data exposure.
+
+### Operational Hardening of GraphQL Endpoints
+
+To reduce schema exposure, disable introspection on production environments. Implementing rate limiting and timeouts helps mitigate brute-force and resource exhaustion attacks. Setting strict CORS and security headers can further protect against cross-origin attacks and information leakage.
+
+## Practice
+
+### Enforce Query Depth and Complexity Limits
+
+- Configure your GraphQL server to reject queries that exceed predetermined safe depth or complexity limits.
+  
+  ```javascript
+  const depthLimit = require('graphql-depth-limit');
+  app.use('/graphql', graphqlHTTP({
+      schema: mySchema,
+      validationRules: [depthLimit(5)],
+  }));
+  ```
+  
+  By implementing these limits using libraries such as `graphql-depth-limit`, you can block queries that could potentially exhaust system resources or bypass intended logic.
+
+### Disable Introspection in Production
+
+- Disabling introspection queries in production environments prevents attackers from discovering schema details.
+
+  ```javascript
+  const { NoSchemaIntrospectionCustomRule } = require('graphql');
+  app.use('/graphql', graphqlHTTP({
+      schema: mySchema,
+      validationRules: [NoSchemaIntrospectionCustomRule],
+  }));
+  ```
+
+  This configuration hides your schema structure, making it more challenging for unauthenticated users to map out the API.
+
+### Implement Input Validation and Sanitization
+
+- Validate and sanitize all user inputs at the resolver or schema level to prevent the injection of malicious payloads.
+
+  ```javascript
+  const { GraphQLString } = require('graphql');
+  const EmailType = new GraphQLScalarType({
+      name: 'Email',
+      serialize(value) {
+          if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(value)) {
+              throw new Error('Invalid email format');
+          }
+          return value;
+      }
+  });
+  ```
+  
+  Use custom scalars for strict validation of fields such as emails to ensure data integrity and security.
+
+### Enforce Authentication and Fine-Grained Authorization
+
+- Require authentication for all GraphQL requests and implement per-resolver authorization checks.
+
+  ```javascript
+  function isAuthenticated(context) {
+      if (!context.user) throw new Error('Not authenticated');
+  }
+
+  const resolvers = {
+      Query: {
+          sensitiveData: (parent, args, context) => {
+              isAuthenticated(context);
+              if (!context.user.isAdmin) throw new Error('Forbidden');
+              return getSensitiveData();
+          }
+      }
+  };
+  ```
+
+  This approach ensures that unauthorized access is effectively blocked at the resolver level.
+
+### Apply Rate Limiting and Timeout Controls
+
+- Limit request rates and set execution timeouts to mitigate abuse.
+
+  ```javascript
+  const rateLimit = require('express-rate-limit');
+  app.use('/graphql', rateLimit({
+      windowMs: 1 * 60 * 1000,
+      max: 30
+  }));
+  ```
+
+  Implementing tools like `express-rate-limit` helps protect against resource exhaustion by limiting the number of requests per minute.
+
+### Set Security Headers and CORS Policies
+
+- Configure HTTP headers and CORS to restrict cross-origin access and ensure appropriate security.
+
+  ```bash
+  npm install helmet cors
+  ```
+
+  ```javascript
+  const helmet = require('helmet');
+  const cors = require('cors');
+  app.use(helmet());
+  app.use(cors({ origin: 'https://trusted.domain.com' }));
+  ```
+
+  Utilizing middleware such as `helmet` and `cors` helps enforce security policies and protects against cross-origin attacks.
+
+## Tools
+
+- **graphql-depth-limit**
+- **express-rate-limit**
+- **helmet**
+- **cors** 
+
+These tools provide foundational support for hardening GraphQL endpoints, ensuring that your applications remain secure against various attack vectors.
