@@ -1,0 +1,104 @@
+---
+title: 'Thread Comment Testing: Exploit Web Logic Flaws'
+description: Explore race conditions, comment limit bypass, user impersonation, and
+  privilege abuse in web comment systems.
+keywords:
+- Thread Comment Testing
+- Web Application Security
+- Race Condition Exploits
+- Comment Limit Bypass
+- User Impersonation
+- Privilege Abuse
+- Comment System Security
+- Web Logic Flaws
+---
+
+# Thread Comment Testing
+
+## Context
+
+In this article, we will explore the method of Thread Comment Testing which identifies and exploits business logic flaws inherent in web application comment systems. These flaws can manifest as race conditions, comment limit bypasses, user impersonation, and privilege abuse. Maintaining an understanding of web application architecture, HTTP protocols, user authentication mechanisms, and general business logic errors will be necessary to fully comprehend and effectively conduct these tests.
+
+## Theory
+
+### Thread Comment System Logic and Attack Surface
+
+Thread comment systems facilitate user interactions and discussions within web applications. Despite their utility, they can harbor business logic errors when the security controls do not align with intended workflows, opening up attack vectors. Attackers can exploit these vectors by targeting comment endpoints to exceed limits, impersonate other users, or escalate privileges.
+
+### Race Conditions in Web Comment Features
+
+Race conditions arise when multiple requests to manipulate shared resources occur simultaneously, leaving the system in an inconsistent or unintended state. Comment flooding—generating excessive comment entries—is one such exploitation of race conditions. This occurs when mechanisms for locking and ensuring atomicity in the comment-posting logic are deficient. By sending concurrent requests, attackers can bypass restrictions on user-specific or thread-specific comment submissions.
+
+### Comment Limit Bypass Techniques
+
+Web applications often apply limits to the number or frequency of comments a user can submit. When these limits are enforced only on the client-side or through weak server-side checks, they become susceptible to manipulation. Attackers can exceed established limits by tweaking request timing, altering parameters, or manipulating session tokens.
+
+### Impersonated and Privileged Comment Abuse
+
+Impersonated commenting takes place when an attacker posts comments on behalf of another genuine user either via manipulation or through privilege escalation. This typically exploits trust assumptions whereby applications may not adequately validate session ownership. Attackers essentially alter user IDs or elevate privilege flags within comment submission requests to perform unauthorized actions.
+
+## Practice
+
+### Comment Flood via Race Condition
+
+- **Identify** the comment submission endpoint and any apparent rate or volume restrictions applied by the application.
+  
+- **Execute** the following command in the terminal to fire multiple concurrent POST requests to the comment endpoint:
+
+    ```bash
+    for i in {1..20}; do
+        curl -X POST -b cookies.txt -d 'comment=RaceTest'$i'' https://target.com/thread/123/comment &
+    done
+    wait
+    ```
+
+- **Verify** the thread for duplicated or over-limit comments to assess whether the application enforces comment controls under concurrent requests.
+
+**Expected Outcome:** Successfully bypassing comment limits through race conditions, leading to potential comment flooding.
+
+### Bypass Comment Limit via Parameter Manipulation
+
+- **Capture** a valid comment request via a web proxy tool like Burp Suite.
+
+- **Modify** parameters such as `user_id`, `thread_id`, or `timestamp` contained within this captured request to circumvent server-side tracking mechanisms.
+
+- **Submit** the altered request using the following command:
+
+    ```bash
+    curl -X POST -b cookies.txt -d 'comment=LimitBypass&user_id=attacker2' https://target.com/thread/123/comment
+    ```
+
+**Expected Outcome:** Successfully bypassing the comment limit by tampering with request parameters.
+
+### Impersonated Comment Submission
+
+- **Intercept** a comment submission request with the aid of a proxy tool.
+
+- **Alter** the `user_id` or `author` field to reflect another valid user’s credentials to test the server's integrity checks.
+
+- **Execute** the following command to attempt posting as another user:
+
+    ```bash
+    curl -X POST -b cookies.txt -d 'comment=Impersonate&user_id=targetuser' https://target.com/thread/123/comment
+    ```
+
+**Expected Outcome:** Authentication bypass is achieved, permitting comments posted under another user’s identity.
+
+### Privileged Comment Abuse
+
+- **Identify** privilege-related parameters such as `is_moderator` or `is_admin` within comment requests.
+
+- **Manipulate** these privilege indicators to escalate powers associated with comment actions, such as sticking or deleting comments.
+
+- **Attempt** to submit a privileged comment using the command below:
+
+    ```bash
+    curl -X POST -b cookies.txt -d 'comment=Abuse&is_moderator=true' https://target.com/thread/123/comment
+    ```
+
+**Expected Outcome:** Gaining unauthorized access to higher-level comment privileges.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
