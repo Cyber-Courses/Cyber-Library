@@ -1,0 +1,118 @@
+---
+title: Comprehensive Guide to XXE Detection & Reconnaissance
+description: Discover methods for identifying XML endpoints & analyzing parser behavior
+  for XXE attacks. Learn manual techniques with detailed instructions.
+keywords:
+- XXE detection
+- XML endpoints
+- parser fingerprinting
+- XXE reconnaissance
+- DOCTYPE injection test
+- XML upload detection
+- parameter pollution
+- entity processing
+- parsing logic
+---
+
+# XXE Detection & Reconnaissance
+
+## Context
+
+The purpose of this guide is to equip practitioners with the necessary skills to identify and map XML endpoints, analyze parser behaviors, and evaluate the XXE (XML External Entity) attack surface for targeted exploitation. The reader is expected to be familiar with XML structure, XML parsing mechanisms, the HTTP request/response cycle, and the basic concepts of XML External Entity Injection.
+
+## Theory
+
+### Identifying XML Attack Surface
+
+XML endpoints are application interfaces responsible for accepting and processing XML input. For a successful XXE attack, attackers must first locate all potential XML input vectors that can pose a risk. The process of reconnaissance is critical as it lays the foundation for exploitation by mapping these endpoints efficiently.
+
+### Parser Fingerprinting and Behavior Analysis
+
+Parser fingerprinting is the process of identifying the specific type and configuration of an XML parser used by an application. This identification is crucial as different parsers and their specific configurations can significantly influence the likelihood of a successful XXE attack and affect the construction of payloads. Through behavioral analysis, one can discover how parsers handle entities, potential error messages, and specific parsing behaviors.
+
+### Entity Reflection and DOCTYPE Injection Testing
+
+Entity reflection tests are used to determine if user-supplied entities are processed or echoed back by the parser. DOCTYPE injection tests help verify the parser's capability to handle custom entity definitions, an essential criterion for XXE exploitation.
+
+### Content-Type and Version Detection
+
+The Content-Type header and XML version declarations play important roles in determining how parsers invoke specific parsing logic. By varying these factors, attackers can discern the parsing logic and discover how different content-types or XML versions affect an application's behavior.
+
+### Parameter Pollution and XML Upload Vectors
+
+Parameter pollution involves injecting multiple XML parameters to explore parsing limits and behaviors. Similarly, XML upload vectors comprise file uploads and API endpoints that accept XML documents. Identifying these vectors is critical for understanding how an application processes XML input.
+
+## Practice
+
+### Manual XML Endpoint Discovery via Traffic Analysis
+
+- **Command Line**
+  ```bash
+  curl -v http://target/api/endpoint -H 'Content-Type: application/xml' -d '<test/>'
+  ```
+
+  Initiate a request against suspected endpoints using XML payloads to observe how the server processes the input.
+
+- Analyze the server's response for parsing errors, reflected entity references, or stack traces to understand which endpoints are processing XML.
+
+**Outcome:** Successful enumeration of endpoints that accept and parse XML input.
+
+### Parser Fingerprinting with Malformed XML
+
+- **Payload**
+  ```xml
+  <root><unclosed_tag></root>
+  ```
+
+  Send malformed XML to the endpoint to provoke error messages that may reveal parser specifics.
+
+- Examine error responses for parser names, versions, or stack traces to perform effective parser fingerprinting.
+
+**Outcome:** Identifies the parser type and configuration for crafting precise XXE payloads.
+
+### Entity Reflection and DOCTYPE Injection Test
+
+- **Payload**
+  ```xml
+  <?xml version="1.0"?><!DOCTYPE root [<!ENTITY test "XXE">]><root>&test;</root>
+  ```
+
+  Inject a custom entity and check if it is processed or triggers any errors.
+
+- Look for 'XXE' in the response or error messages indicating that entities are being processed.
+
+**Outcome:** Determines whether the application processes external or internal entities and supports DOCTYPE declarations.
+
+### Content-Type and XML Version Variation
+
+- **Command Line**
+  ```bash
+  curl -v http://target/api/endpoint -H 'Content-Type: text/xml' -d '<?xml version="1.1"?><root/>'
+  ```
+
+  Experiment with varying Content-Type headers and XML versions to trigger different server parsing logic.
+
+- Observe for changes in responses or error patterns for clues on parser logic.
+
+**Outcome:** Maps parser invocation logic and supported XML versions.
+
+### Parameter Pollution and XML Upload Recon
+
+- **Payload**
+  ```xml
+  param1=<root></root>&param1=<test></test>
+  ```
+
+  Try injecting duplicate XML parameters to test how the application handles them.
+
+- Test XML file submissions through forms or API endpoints to identify how the application supports parameterized parsing and file uploads.
+
+**Outcome:** Discovers potential vectors for XML uploads and parameter pollution opportunities.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **Postman**
+
+These tools are essential for sending requests, analyzing responses, and methodically testing the XML parsing infrastructure of target systems.
