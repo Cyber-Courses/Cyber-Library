@@ -1,0 +1,71 @@
+---
+title: Currency Arbitrage in Web Applications
+description: Explore methods to exploit currency arbitrage vulnerabilities, focusing
+  on exchange rate discrepancies in multi-currency transactions.
+keywords:
+- currency arbitrage
+- multi-currency transactions
+- exchange rate discrepancies
+- web application vulnerabilities
+- refund exploitation
+---
+
+# Currency Arbitrage
+
+## Context
+
+This article demonstrates how to identify and exploit currency arbitrage vulnerabilities in web applications that handle multi-currency transactions. It assumes the reader has a solid understanding of currency conversion mechanisms, familiarity with exchange rates, and the application of multi-currency transaction workflows, alongside general knowledge of business logic error exploitation.
+
+## Theory
+
+### Currency Arbitrage in Web Applications
+
+Currency arbitrage in web applications involves exploiting discrepancies in exchange rates or conversion logic to gain financial advantage. Attackers can profit by manipulating transaction flows between currencies that have inconsistent or outdated exchange rates. Such vulnerabilities arise when applications use static, delayed, or mismatched exchange rates across different transaction stages.
+
+### Arbitrage Mechanisms and Attack Surface
+
+One common attack sequence is initiating a purchase in one currency and executing a refund or partial refund in another, exploiting rate differences. Attackers may switch currencies between cart, checkout, and refund processes to trigger inconsistent conversions. This method capitalizes on the lack of atomicity in currency conversion across the transaction lifecycle.
+
+### Business Logic Vulnerabilities Enabling Arbitrage
+
+Separate modules for purchases and refunds may use different exchange rate sources or update intervals, creating implementation flaws that attackers can exploit. Additionally, insufficient validation on currency selection or refund currency permits attacker-controlled conversions, bypassing logic filters designed to prevent such actions.
+
+## Practice
+
+### Manual Exploitation of Cross-Currency Refund Arbitrage
+
+- Identify a web application that supports purchases and refunds in multiple currencies. Target platforms are those with flexible currency handling and refund options.
+- Monitor the exchange rates used by the application during purchase and refund stages, looking for discrepancies or delays in rate updates.
+- Purchase an item in Currency A (e.g., USD).
+- Request a refund in Currency B (e.g., EUR) if the application allows, exploiting the application's logic to select a different refund currency.
+- Calculate the profit by comparing the effective rates at purchase and refund. Profit is realized if the refund value in Currency B exceeds the original spend in Currency A.
+
+### Automated Discovery of Arbitrage Opportunities
+
+```python
+#!/usr/bin/env python3
+import requests
+
+# Example: Automate purchase/refund in different currencies
+# Replace with actual endpoints and authentication
+session = requests.Session()
+
+# Step 1: Purchase in USD
+purchase = session.post('https://target.site/api/purchase', json={'item_id': 123, 'currency': 'USD'})
+
+# Step 2: Refund in EUR
+refund = session.post('https://target.site/api/refund', json={'order_id': purchase.json()['order_id'], 'currency': 'EUR'})
+
+print('Purchase:', purchase.json())
+print('Refund:', refund.json())
+```
+
+- Analyze the responses to determine if the refund value in EUR exceeds the original USD spend. The automated script aids in identifying profitable arbitrage scenarios.
+
+## Tools
+
+- **Burp Suite**
+- **Postman**
+- **Python (requests)**
+
+By understanding the vulnerabilities in business logic related to currency conversions, attackers can potentially exploit these weaknesses for financial gain through careful manipulation of cross-currency transactions.
