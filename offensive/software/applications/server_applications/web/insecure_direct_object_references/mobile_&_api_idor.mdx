@@ -1,0 +1,101 @@
+---
+title: Exploiting IDOR in Mobile Apps & APIs
+description: Explore how to exploit Insecure Direct Object References in mobile apps
+  and APIs, focusing on real-world attack execution.
+keywords:
+- IDOR
+- Insecure Direct Object References
+- mobile app vulnerabilities
+- API security
+- authorization bypass
+- session tokens
+- API keys
+- OAuth token exploitation
+---
+
+# Mobile & API IDOR
+
+## Context
+
+Insecure Direct Object References (IDOR) are vulnerabilities that occur when applications expose internal identifiers in a way that allows unauthorized access to data through direct manipulation. This article demonstrates the exploitation of IDOR vulnerabilities within the context of mobile applications and APIs, focusing on real-world attack execution against these environments. To follow along, the reader should be familiar with API endpoint structures, session management concepts, and authorization mechanisms.
+
+## Theory
+
+### IDOR in Mobile and API Environments
+
+IDOR is a type of access control vulnerability where user-controllable input references objects directly, without performing proper authorization checks. In mobile apps and API environments, IDOR vulnerabilities often arise when endpoints are exposed that reference user data by predictable or easily discoverable identifiers. An example is when mobile apps or APIs trust client-side controls and fail to enforce server-side authorization validation adequately.
+
+### Attack Surface in Mobile and API Contexts
+
+Mobile applications interact with backend APIs primarily through REST or SOAP protocols, transmitting identifiers and other data in requests. Attackers can manipulate these identifiers in API requests to gain unauthorized access to resources. A common trust assumption is that authenticated users will only access resources associated with their account, which results in verification oversights in object-level authorization.
+
+### Session and Token-Based Authorization Weaknesses
+
+APIs using session tokens, API keys, or OAuth tokens may inadequately enforce object-level authorization checks. Mobile applications might expose endpoints such as `/api/v1/users/{user_id}` without verifying if the authenticated user actually owns the `user_id` being requested or modified. This presents opportunities for attackers to exploit and gain access to unauthorized data simply by altering identifiers in requests.
+
+## Practice
+
+### Manual IDOR Exploitation via Mobile API
+
+To exploit IDOR vulnerabilities manually through mobile APIs, follow these steps:
+
+- **Intercept mobile app traffic using a proxy**: Set up a proxy tool like Burp Suite to observe and modify API requests sent by the mobile app.
+
+    ```bash
+    adb shell am start -n com.example.app/.MainActivity
+    ```
+
+- **Observe API requests for user-controllable IDs**: Identify requests that include identifiers directly tied to user data (e.g., `/api/v1/users/1234`).
+
+- **Modify and send a crafted request**: Alter the identifier to access unauthorized data.
+
+    ```http
+    GET /api/v1/users/5678 HTTP/1.1
+    Host: api.example.com
+    Authorization: Bearer <valid_token>
+    ```
+
+- **Examine the API response**: Check if data belonging to a different user is returned.
+
+This technique results in unauthorized access to data belonging to other users via manipulated API requests.
+
+### Automated IDOR Enumeration Against API Endpoints
+
+For a more scalable approach to discovering IDOR vulnerabilities, automate enumeration using tools:
+
+- **Set up an automated scanner**: Use tools like Autorize or IDORbuster to automate identifier manipulation and response analysis.
+
+    ```bash
+    python idorbuster.py -u 'https://api.example.com/api/v1/users/{id}' -t <valid_token> -r 1000-2000
+    ```
+
+- **Review output for unauthorized data**: Analyze responses returned by the API to find data accessible without proper authorization.
+
+This method allows the automated discovery of IDOR vulnerabilities, exposing multiple users' data on a broader scale.
+
+### Testing IDOR in OAuth and API Key Scenarios
+
+To test IDOR vulnerabilities involving OAuth tokens or API keys:
+
+- **Intercept requests carrying tokens or keys**: Capture API requests that include sensitive tokens in the Authorization header.
+
+- **Execute crafted requests**: Attempt to access resources with tokens not associated with the targeted data.
+
+    ```http
+    GET /api/v1/accounts/9999 HTTP/1.1
+    Host: api.example.com
+    Authorization: Bearer <other_user_token>
+    ```
+
+- **Inspect responses for unauthorized access**: Determine if object-level authorization checks are bypassed, indicating a vulnerability.
+
+This scenario reveals bypass of object-level authorization using valid tokens or API keys, facilitating unauthorized access.
+
+## Tools
+
+- **Burp Suite**
+- **adb**
+- **Autorize**
+- **IDORbuster** 
+
+This comprehensive exploration of Mobile & API IDOR exploitation methods illustrates the various vulnerabilities present in modern applications and highlights the techniques needed to identify and exploit these weaknesses effectively.
