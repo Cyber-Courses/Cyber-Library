@@ -1,0 +1,105 @@
+---
+title: 'Preventing LDAP Injection: Techniques & Security Measures'
+description: Learn vital techniques for preventing LDAP Injection attacks and securing
+  web applications with best practices.
+keywords:
+- LDAP Injection prevention
+- input validation
+- filter sanitization
+- parameterized queries
+- access control
+- LDAP security
+- LDAP configuration
+- cybersecurity
+- web application security
+- LDAP secure coding
+---
+
+# Prevention & Security
+
+## Context
+
+This article aims to equip you with practical techniques to secure web applications against LDAP Injection attacks. It assumes knowledge of LDAP protocol fundamentals, web application architecture, and the mechanics of LDAP Injection attacks.
+
+## Theory
+
+### Input Validation for LDAP Queries
+
+Input validation is a critical process that involves examining user-supplied data to ensure it does not contain any malicious content that could compromise LDAP filters. The primary goal is to reject or sanitize any input that includes LDAP filter meta-characters, thus securing the applications from potential injections.
+
+### LDAP Filter Sanitization and Escaping
+
+Sanitization involves removing or escaping characters that could alter the logic of LDAP filters. Attackers often exploit unescaped characters like `*`, `(`, `)`, `\`, and null bytes to manipulate queries. Effective sanitization requires identifying these characters and ensuring they do not interfere with the application's LDAP operations.
+
+### Parameterized LDAP Queries
+
+Parameterized queries provide a robust defense mechanism by separating user input from the LDAP filter logic. This ensures that data is treated as literal input rather than part of the query structure, which effectively prevents injection. Utilizing parameterized APIs or libraries when constructing LDAP queries is a core principle that should be strictly adhered to.
+
+### Access Control and Least Privilege
+
+Enforcing strict access control measures is essential to limit the capabilities of LDAP service accounts. The principle of least privilege dictates that accounts should only have permissions required for necessary operations. It is a mistake to assume that all authenticated users are authorized for sensitive LDAP queries.
+
+### Secure LDAP Configuration
+
+Secure configuration of LDAP servers can prevent unauthorized access and exposure of sensitive data. Enforcing LDAPS (LDAP over SSL/TLS) is a crucial step in protecting credentials and queries during transit. Proper configuration also involves preventing anonymous binds and ensuring that only authorized interactions are allowed.
+
+## Practice
+
+### Implementing Input Validation and Escaping in LDAP Queries (Java Example)
+
+To prevent LDAP Injection, it is crucial to sanitize user inputs by escaping special characters. Below is an example Java function that can be used to escape LDAP filter meta-characters.
+
+```java
+public static String escapeLDAPSearchFilter(String filter) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < filter.length(); i++) {
+        char curChar = filter.charAt(i);
+        switch (curChar) {
+            case '\\': sb.append("\\\\5c"); break;
+            case '*': sb.append("\\\\2a"); break;
+            case '(': sb.append("\\\\28"); break;
+            case ')': sb.append("\\\\29"); break;
+            case '\0': sb.append("\\\\00"); break;
+            default: sb.append(curChar);
+        }
+    }
+    return sb.toString();
+}
+```
+
+Apply this function to all user-supplied input before constructing LDAP filters to prevent any malicious input from altering the query logic.
+
+### Using Parameterized LDAP Queries (Python ldap3 Example)
+
+The `ldap3` library in Python allows for safe construction of LDAP queries using parameterized input. Here’s how you can utilize variable substitution to prevent injection:
+
+```python
+from ldap3 import Server, Connection, ALL, SUBTREE
+
+server = Server('ldaps://ldap.example.com', get_info=ALL)
+conn = Connection(server, user='cn=readonly,dc=example,dc=com', password='readonlypass', auto_bind=True)
+user_input = 'jdoe'
+search_filter = f'(uid={user_input})'
+conn.search('dc=example,dc=com', search_filter, search_scope=SUBTREE, attributes=['cn'])
+```
+
+Always validate and escape `user_input` before incorporating it into `search_filter` to mitigate LDAP Injection by separating input from filter logic.
+
+### Enforcing Least Privilege on LDAP Service Accounts
+
+Configure LDAP service accounts to operate with the minimum privileges necessary. Ensure they have read-only access to required attributes and are denied write or administrative privileges unless explicitly needed. This limitation reduces the impact an attacker can have through LDAP Injection.
+
+### Securing LDAP Communication Channels
+
+Ensure that your communications with LDAP servers are secured through SSL/TLS, which can be enforced with a command like:
+
+```bash
+ldapsearch -H ldaps://ldap.example.com -x -D 'cn=readonly,dc=example,dc=com' -W -b 'dc=example,dc=com' '(uid=jdoe)'
+```
+
+This command helps verify that LDAP over SSL/TLS is enforced, thus preventing interception or tampering with queries and credentials.
+
+## Tools
+
+- **ldap3**
+- **ldapsearch**
