@@ -1,0 +1,87 @@
+---
+title: Bypass SSRF Filters with Rare IP Addresses
+description: Learn how to bypass SSRF filters using rare IP address notations like
+  127.1 and shorthand loops, accessing internal services.
+keywords:
+- SSRF
+- bypass filters
+- IP address notations
+- shorthand IP
+- loopback address
+- filter evasion
+- internal resource access
+---
+
+# Bypass Using Rare Address
+
+## Context
+
+In the realm of offensive cybersecurity, bypassing Server-Side Request Forgery (SSRF) filters using rare or shorthand IP address notations enables attackers to reach restricted internal services. Understanding these techniques is critical, assuming prior knowledge of IP address notations, loopback addresses, the structure of HTTP requests, and SSRF.
+
+## Theory
+
+### Rare Address Notations for Loopback and Internal IPs
+
+Rare address notations involve using unconventional representations of IP addresses to bypass filtering mechanisms. These notations can be particularly effective against filters that recognize and block standard forms of IP addresses.
+
+- **Definition**: Rare address notations might include formats such as `127.1` for loopback or alternative numerical representations like `2130706433` for the same address.
+
+- **Core Principle**: Filtering mechanisms often focus on common IP address patterns (e.g., `127.0.0.1`), which can leave them vulnerable to shorthand or integer representations that resolve to the same address. 
+
+- **Attack Sequence**: An attacker can manipulate the SSRF parameter to use a rare IP variant, bypassing the filter to access internal services.
+
+### Filter Evasion via Address Trickery
+
+Web application filters typically use regex or string matching rules. Many filters do not normalize or resolve addresses before filtering. This oversight allows attackers to use address trickery for bypass.
+
+- **Filter Bypass Logic**: Filters are usually designed to catch well-known patterns. Bypassing happens when they fail to normalize these patterns to a canonical form before comparison.
+
+- **Vulnerability Model**: Applications that lack address normalization or resolution in their validation logic are susceptible to rare address bypass techniques.
+
+### Examples of Rare Address Formats
+
+- **127.1**: This shorthand representation maps to `127.0.0.1`, commonly used for the loopback address.
+  
+- **0/**: In certain contexts, this may be interpreted as `0.0.0.0` or `127.0.0.0`, although its handling depends on the system and network configuration.
+  
+- **2130706433**: As an integer representation, this value corresponds to `127.0.0.1`. Some systems decode this integer to a standard IP address, facilitating filter bypass.
+
+## Practice
+
+### Bypassing SSRF Filters with Shorthand and Rare IP Addresses
+
+Attackers can leverage rare and shorthand IP notations to exploit SSRF vulnerabilities and bypass restrictive filters that are not equipped to handle these variations.
+
+- **Identify SSRF Parameters**: First, identify which parameters within the application are vulnerable to SSRF and can be manipulated to bypass IP filters.
+
+- **Execute Payloads**:
+
+  ```bash
+  # Using shorthand for loopback
+  http://127.1/
+  ```
+
+  ```bash
+  # Using integer form of loopback address
+  http://2130706433/
+  ```
+
+  ```bash
+  # Using unconventional address that may resolve to 127.0.0.0
+  http://0/
+  ```
+
+- **Testing with Curl**: Use curl to test if these payloads bypass the filters and access internal resources.
+
+  ```bash
+  curl -v 'http://target-app/vuln?url=http://127.1/'
+  ```
+
+Applying these techniques can allow unauthorized access to internal resources, effectively bypassing SSRF filters designed to prevent just such activity.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+
+By mastering the use of rare address notations, you can effectively navigate and exploit SSRF vulnerabilities, bypassing traditional IP filtering mechanisms to access internal network services.
