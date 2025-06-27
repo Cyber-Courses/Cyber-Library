@@ -1,0 +1,103 @@
+---
+title: 'LaTeX Prevention: Secure Your Web Applications'
+description: Learn how to prevent LaTeX injection with secure configurations and input
+  validation in web apps.
+keywords:
+- LaTeX prevention
+- input validation
+- LaTeX injection
+- sandboxing
+- whitelist commands
+---
+
+# LaTeX Prevention
+
+## Context
+
+This article outlines strategies and configurations required to prevent LaTeX injection in web applications that process user-supplied LaTeX. It assumes knowledge of LaTeX document structures, input validation principles, command execution context, and LaTeX Injection attack vectors.
+
+## Theory
+
+### Threat Model for LaTeX Injection Prevention
+
+LaTeX injection arises when untrusted input is processed by a LaTeX engine, enabling attacker-controlled code execution. Attackers leverage LaTeX's macro system, file I/O, or shell escape features to perform unauthorized actions. Prevention of these attacks hinges on strict input validation, secure configuration of the LaTeX engine, and adequate runtime isolation.
+
+### Input Validation and Sanitization for LaTeX
+
+The core principle is to sanitize all user-supplied LaTeX input before compilation. Attackers often obfuscate payloads using nested macros, Unicode, or encoding tricks. Implementing a whitelist—allowing only a minimal, approved set of safe LaTeX commands—is crucial. While blacklisting blocks known dangerous commands, it might not account for obfuscated variants.
+
+### Secure LaTeX Engine Configuration
+
+Configuring the LaTeX engine securely involves disabling shell escape (`\write18`) and file I/O capabilities. Always treat user input as potentially malicious. Default engine configurations may permit commands or packages that could be exploited.
+
+### Sandboxing and Runtime Isolation
+
+Running LaTeX compilations in a sandboxed environment with minimal privileges is essential. LaTeX engines can inadvertently leak information through error messages or logs, which necessitates isolation strategies to mitigate risk.
+
+## Practice
+
+### Whitelisting Safe LaTeX Commands
+
+To prevent unauthorized command execution, establish a strict whitelist of allowable LaTeX commands. Only permit the commands necessary for the application's intended use.
+
+```python
+import re
+
+SAFE_COMMANDS = [r'\\textbf', r'\\emph', r'\\section', r'\\subsection']
+
+def sanitize_latex(input_str):
+    pattern = r'(\\[a-zA-Z]+)'
+    for match in re.findall(pattern, input_str):
+        if match not in SAFE_COMMANDS:
+            input_str = input_str.replace(match, '')
+    return input_str
+```
+
+This Python script removes any LaTeX commands not specified in the whitelist from the user input, effectively preventing execution of unauthorized LaTeX commands.
+
+### Disabling Shell Escape and File I/O in LaTeX Engine
+
+Disable shell escapes and file I/O features to mitigate exploitation of the LaTeX engine. This prevents the execution of OS commands or file manipulations.
+
+```bash
+pdflatex -no-shell-escape -output-directory=/tmp/latex_output input.tex
+```
+
+The above command line ensures no shell escapes are allowed and confines output to a specific directory.
+
+### Sandboxing LaTeX Compilation
+
+Running LaTeX in a contained, minimal environment helps limit the impacts of any successful injection.
+
+```bash
+firejail --private --net=none --whitelist=/tmp/latex_output pdflatex -no-shell-escape input.tex
+```
+
+This command uses `firejail` to run the LaTeX process with no network access, ensuring the process operates in isolation.
+
+### Error Message Suppression and Output Filtering
+
+Suppression of error messages prevents attackers from gleaning information from LaTeX processing errors.
+
+```bash
+pdflatex -interaction=batchmode input.tex > /dev/null 2>&1
+```
+
+Use this command to suppress error messages from the LaTeX engine.
+
+In addition, filter sensitive error messages from logs:
+
+```python
+with open('output.log') as f:
+    for line in f:
+        if 'error' in line.lower():
+            continue
+        print(line)
+```
+
+This Python script filters log contents to avoid returning sensitive error information to users.
+
+## Tools
+
+- **pdflatex**: Used to process LaTeX documents with restricted options.
+- **firejail**: Provides a sandbox environment for process isolation and security.
