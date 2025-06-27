@@ -1,0 +1,70 @@
+---
+title: Bypass With Double Quote in Command Injection
+description: Learn to evade command injection filters by using double quote injection
+  for arbitrary command execution.
+keywords:
+- command injection
+- double quote injection
+- input sanitization
+- command execution
+- shell vulnerabilities
+- security bypass
+- filter evasion
+---
+
+# Bypass With Double Quote
+
+## Context
+
+The objective of this article is to demonstrate how to bypass command injection filters using double quotes. This technique is useful for evading input sanitization mechanisms in order to execute arbitrary commands on a target system. For this exploration, you should be familiar with basic command line syntax, the role of shell metacharacters in command execution, and the principles of Command Injection attacks.
+
+## Theory
+
+### Double Quote Injection in Shells
+
+Double quote injection is a technique that leverages the way shells parse input to bypass input filters. When injected into an input field, double quotes can split or obfuscate command tokens, making it difficult for filters to detect malicious input. Shells interpret double quotes as string delimiters, allowing you to embed metacharacters or fragmented command text that will be correctly reassembled and executed at runtime.
+
+For example, filters that are designed to block the execution of specific keywords or metacharacters may fail if the blocked content is fragmented using double quotes (e.g., transforming `whoami` into `w"h"oami`).
+
+### Quote Confusion and Filter Weaknesses
+
+The concept of quote confusion arises when attackers exploit the way filters perform pattern matching to bypass security mechanisms. Naive filters might match on full command keywords (e.g., seeing `whoami` as a complete string) and miss fragmented forms like `w"h"oami`, enabling the attacker to bypass these filters.
+
+Such implementation flaws result from improper input validation, which allows the shell to reassemble fragmented commands during execution. This turn compromises the application and potentially its host.
+
+### Practical Examples of Double Quote Bypass
+
+By injecting double quotes within command tokens, attackers can reconstruct valid commands at runtime. For instance, transforming `whoami` into `w"h"oami` allows the split command to evade rudimentary filters while still executing correctly within the shell environment.
+
+## Practice
+
+### Bypassing Command Injection Filters with Double Quotes
+
+To exploit a vulnerability using double quote injection, you can follow these practical steps:
+
+- **Identify a Vulnerable Command Injection Point**: Locate an input field or parameter within the application that directly passes user input to a shell command. Assuming the application doesn't sanitize input effectively, this will be your point of attack.
+  
+- **Payload Injection**: Use double quotes to split a command into segments that will bypass conventional filters. For example:
+
+    ```plaintext
+    w"h"oami
+    ```
+  
+- **Execute the Injection**: Send the manipulated payload to the targeted parameter. If using a web application, this can be done via a POST request:
+
+    ```bash
+    curl -X POST -d 'username=w"h"oami' http://target-app/vuln-endpoint
+    ```
+  
+- **Validate Successful Bypass**: Examine the application's response. If the command was executed successfully, the output (e.g., the current user of the system) will be returned:
+
+    ```plaintext
+    www-data
+    ```
+
+Following these steps can lead to arbitrary shell command execution by effectively bypassing input filters using double quotes.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
