@@ -1,0 +1,90 @@
+---
+title: 'SSI Injection: File Operations Explained'
+description: Explore SSI file operations, including directory traversal, file inclusion,
+  and disclosure techniques.
+keywords:
+- SSI injection
+- file operations
+- directory traversal
+- file inclusion
+- path traversal
+- SSI directives
+- web security
+---
+
+# File Operations
+
+## Context
+
+The objective of this article is to demonstrate how file access, enumeration, and disclosure can be executed through Server Side Include (SSI) injection using file and virtual directives. This guidance assumes that the reader is familiar with the basics of SSI directive syntax and injection techniques, has a good understanding of web server file systems, and is aware of server configurations that may be relevant to SSI.
+
+## Theory
+
+### SSI File and Virtual Include Directives
+
+Server Side Include (SSI) directives allow web developers to dynamically include file content within web pages. There are two primary directives: `file` and `virtual`. The `file` directive allows inclusion of files relative to the web root, whereas the `virtual` directive uses server-mapped paths. When SSI directives are improperly validated, attackers can potentially abuse them to access unintended files. This makes it possible to traverse directories and include sensitive files due to insufficient input sanitization.
+
+### Path Traversal and Local File Inclusion via SSI
+
+Path traversal involves manipulating file paths, typically using sequences like `../../`, to access directories and files outside the intended ones. Attackers can inject an SSI directive with a traversal payload to include sensitive files, such as `/etc/passwd` or system configuration files, bypassing regular access controls. Additionally, using encoding techniques such as URL encoding may allow attackers to bypass weak filters designed to prevent such directory traversals.
+
+### File Enumeration and Disclosure Techniques
+
+When SSI includes are used, observing error messages or partial file inclusion responses can reveal file existence and content. Attackers can iteratively inject SSI includes for common files to enumerate accessible resources on a server.
+
+### Include Chaining and Sensitive File Access
+
+Include chaining leverages multiple SSI directives to access or combine several files into a single response. This technique significantly increases the impact of the attack by aggregating sensitive data from multiple sources or bypassing restrictions that limit access to single files.
+
+## Practice
+
+### Accessing Sensitive Files via SSI File Directive
+
+- **Inject the Payload:** Use the following payload to inject a path traversal directive:
+  ```html
+  <!--#include file="../../../../etc/passwd" -->
+  ```
+  This payload attempts to include the `/etc/passwd` file by traversing directories from the web root.
+
+- **Submit the Payload:** Input this payload into a user-controllable field that the server processes for SSIs.
+
+- **Observe Server Response:** Check the server's response to see if the contents of `/etc/passwd` are displayed, which would indicate successful file access.
+
+### Enumerating Accessible Files with SSI Virtual Directive
+
+- **Inject the Payload:** Use the following payload to attempt file inclusion:
+  ```html
+  <!--#include virtual="/etc/shadow" -->
+  ```
+  This attempts to include the file `/etc/shadow` using the virtual path.
+
+- **Iterate Over Files:** Adjust the virtual path to test a list of common sensitive files.
+
+- **Analyze Responses:** Look for file content or error messages in the server's responses that indicate file existence.
+
+### Bypassing Filters with Encoded Path Traversal
+
+- **Inject the Encoded Payload:** 
+  ```html
+  <!--#include file="..%2f..%2f..%2f..%2fetc%2fpasswd" -->
+  ```
+  This uses URL encoding to potentially bypass simple path filters.
+
+- **Observe Filter Bypass:** Examine whether the encoded payload successfully evades input validation checks, granting access to restricted files.
+
+### Chaining Multiple SSI Includes for Aggregated Disclosure
+
+- **Inject the Chain Payload:**
+  ```html
+  <!--#include file="/etc/passwd" --><!--#include file="/etc/hosts" -->
+  ```
+  This combines two SSI file includes into one injection attempt.
+
+- **Review Combined Response:** Send the chained payload and inspect the server's response for aggregated data from multiple files.
+
+## Tools
+
+- **Burp Suite**
+- **curl** 
+
+This article provides actionable insights into exploiting file operations via SSI injection techniques, ideal for use in controlled penetration testing environments.
