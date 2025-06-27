@@ -24,18 +24,18 @@ This article describes how to exploit time-based blind SQL injection vulnerabili
 
 ### Understanding Time-based Blind SQL Injection
 
-Time-based blind SQL injection is a method whereby attackers use database response times to infer information. Unlike traditional SQL injection, which might return direct results, this method manipulates SQL queries to induce timed delays based on conditional logic. In IBM DB2, since there is no native SLEEP() or BENCHMARK() function, attackers use resource-intensive ("heavy") queries—such as large cartesian joins—to create a measurable delay when a condition is true.
+Time-based blind SQL injection is a method whereby attackers use database response times to infer information. Unlike traditional SQL injection, which might return direct results, this method manipulates SQL queries to induce timed delays based on conditional logic. In IBM Db2, there are no native delay functions (such as SLEEP or BENCHMARK). Instead, attackers use resource-intensive ("heavy") queries—such as large cartesian joins—to create a measurable delay when a condition is true.
 
-> **Insight:** Time-based blind SQLi in DB2 relies on triggering slow queries (e.g., joining large system tables multiple times) to cause a noticeable delay when a condition is met. This is especially useful when no direct output is available and boolean-based techniques are unreliable.
+> **Insight:** In Db2, time-based blind SQLi relies on triggering slow queries (e.g., joining large system tables multiple times) to cause a noticeable delay when a condition is met. This is especially useful when no direct output is available and boolean-based techniques are unreliable.
 
 The attack sequence typically involves the following steps:
    - Formulate a conditional SQL query.
    - Use a heavy query to introduce a delay for specific conditions.
-   - Analyze the response delays to deduce true or false.
+   - Analyze the application's response time to deduce true or false.
 
-### Conditional Timing in IBM DB2
+### Conditional Timing in IBM Db2
 
-In the context of IBM DB2, conditional timing uses heavy SQL queries to create processing delays based on query conditions. This method exploits vulnerabilities where user input is not sufficiently validated, allowing attackers to execute timing-based queries.
+Conditional timing in IBM Db2 uses heavy SQL queries to create processing delays based on query conditions. This method exploits vulnerabilities where user input is not sufficiently validated, allowing attackers to execute timing-based queries.
 
 Key concepts include:
    - Conditional heavy queries can reveal data by the timing of responses.
@@ -43,15 +43,14 @@ Key concepts include:
 
 ### Key Techniques
 
-To implement a time-based blind SQL injection in DB2, use resource-intensive queries such as cartesian joins of large system tables (e.g., `sysibm.columns`). By checking the time taken to execute a query, insights about database values can be gleaned.
-- **SYSDUMMY1**: A special table in DB2 often utilized to execute test queries.
-- **MON_GET_ACTIVITY** and **MON_GET_CONNECTION**: These functions are employed for monitoring query execution time. Using these functions, one can track and analyze the duration of executed queries, which is pivotal in identifying the impact of injected conditional statements.
+To implement a time-based blind SQL injection in Db2, use resource-intensive queries such as cartesian joins of large system tables (e.g., `sysibm.columns`). By checking the time taken to receive a response from the application, insights about database values can be gleaned.
+- **SYSDUMMY1**: A special table in Db2 often utilized to execute test queries.
 
 ## Practice
 
 ### Time-based Blind SQL Injection
 
-This technique involves crafting SQL queries that exploit timing delays to infer data. 
+This technique involves crafting SQL queries that exploit timing delays to infer data. In IBM Db2, you can use resource-intensive queries (such as large cartesian joins) to create a measurable delay when a condition is true.
 
 - **Verify Vulnerability with a Heavy Query**
   ```sql
@@ -64,22 +63,20 @@ This technique involves crafting SQL queries that exploit timing delays to infer
     ```sql
     ' AND (SELECT COUNT(*) FROM sysibm.columns t1, sysibm.columns t2, sysibm.columns t3)>0 AND (SELECT ASCII(SUBSTR(user,1,1)) FROM sysibm.sysdummy1)=68 --
     ```
-    If the response is delayed, the first character is 'D'. Repeat for each character and position to extract the full value.
+    If the response is delayed, the first character is 'D'.
+  - **Adapt for other characters/positions:**
+    Change the `=68` to the ASCII value of the character you want to test, and change `SUBSTR(user,1,1)` to target other positions (e.g., `SUBSTR(user,2,1)` for the second character).
+
+> **Tip:** This pattern can be used to extract any string value, one character at a time, by iterating through possible ASCII values and positions. The delay is only triggered when the condition is true, allowing you to infer the value based on response time.
 
 - **DB2-Specific: Extract System Metadata (e.g., Version) with Timing**
-  - **Check if DB2 version is 11.x (time-based):**
+  - **Check if Db2 version is 11.x (time-based):**
     ```sql
     ' AND (SELECT COUNT(*) FROM sysibm.columns t1, sysibm.columns t2, sysibm.columns t3)>0 AND (SELECT COUNT(*) FROM sysibm.sysversions WHERE versionnumber BETWEEN 11000000 AND 11999999)>0 --
     ```
     If the response is delayed, the version is 11.x. Adjust the range to refine the version.
 
 > **Tip:** You can use similar heavy queries to extract other system information, such as OS version or service pack, by targeting fields in `SYSIBMADM.ENV_SYS_INFO`.
-
-- **Monitor Execution Time**
-  ```sql
-  SELECT MON_GET_ACTIVITY(NULL, NULL) WHERE EXECUTION_TIME > threshold;
-  ```
-  Track the execution time of queries to ensure they match expected delay patterns, which helps validate your inferences about the database content.
 
 ### Example Output/Behavior
 - **TRUE Condition:** Application response is delayed (e.g., several seconds), indicating the condition is true.
@@ -91,5 +88,5 @@ This technique involves crafting SQL queries that exploit timing delays to infer
 
 ## Tools
 
-- **DB2 Command Line Processor**
+- **Db2 Command Line Processor**
 - **Wireshark**
