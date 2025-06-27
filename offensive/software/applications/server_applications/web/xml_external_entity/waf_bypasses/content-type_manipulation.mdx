@@ -1,0 +1,88 @@
+---
+title: 'Content-Type Manipulation: Bypassing WAFs & Exploiting XXE'
+description: Learn how to utilize Content-Type manipulation to bypass WAFs and exploit
+  vulnerabilities like XXE in web applications effectively.
+keywords:
+- Content-Type manipulation
+- WAF bypass
+- XXE
+- HTTP headers
+- multipart XML injection
+- SOAP action bypass
+- mime types
+---
+
+# Content-Type Manipulation
+
+## Context
+
+Content-Type Manipulation is an offensive technique used to bypass Web Application Firewalls (WAF) and exploit vulnerabilities such as XML External Entity (XXE) in web applications. This technique requires a solid understanding of HTTP headers, MIME types, XML structure, and the XML External Entity vulnerability. With this knowledge, attackers can manipulate the Content-Type header to trick WAFs and gain unauthorized access.
+
+## Theory
+
+### Role of Content-Type in HTTP Requests
+
+The Content-Type header is a crucial part of an HTTP request as it specifies the media type of the request body. Servers and WAFs rely on this header to determine how to parse and handle the incoming data properly. For example, a Content-Type of `application/xml` would typically be parsed as an XML document.
+
+### WAF Detection and Filtering Logic
+
+WAFs use sophisticated logic to inspect HTTP requests and apply the necessary protections. They often examine the Content-Type header to decide if specific XML protections should be enforced. By altering this header, attackers can bypass WAF filters designed to detect and block malicious XML content.
+
+### Content-Type Spoofing Techniques
+
+Content-Type spoofing involves sending XML payloads with misleading or non-standard Content-Type headers to bypass WAF filtering rules. Some backends are configured to parse XML regardless of the specified Content-Type, allowing attackers to exploit this oversight and execute XXE attacks.
+
+### Multipart and Form-Data XML Bypass
+
+Attackers can embed XML payloads within `multipart/form-data` requests and use various boundary tricks to obscure the XML content from WAF inspection. Since WAFs may not deeply inspect multipart bodies, this technique can effectively evade detection.
+
+### SOAP Action and Charset Parameter Bypass
+
+Manipulating SOAPAction or charset parameters is another method to sidestep strict Content-Type checks. By altering these parameters, attackers can exploit loose parsing rules and bypass WAF-level protections, leading to backend processing of the malicious XML.
+
+## Practice
+
+### Content-Type Spoofing with Non-Standard Header
+
+Exploit the WAF's reliance on Content-Type headers by sending XML data with a non-standard header.
+
+```bash
+curl -X POST https://target/app -H 'Content-Type: text/plain' --data-binary @payload.xml
+```
+
+This approach tricks the WAF into treating the payload as non-XML, bypassing XML-specific security filters and allowing the backend to process XXE payloads.
+
+### Multipart/Form-Data XML Injection
+
+Embed XML content within a multipart/form-data request to bypass inspection.
+
+```bash
+curl -X POST https://target/app -F 'file=@payload.xml;type=text/xml'
+```
+
+Here, the WAF might not adequately scrutinize the multipart body, facilitating the backend's XML parsing, which can lead to successful exploitation.
+
+### Spoofing with Application/XML and Charset Parameter
+
+Alter the charset parameter to confuse the WAF's parsing mechanism.
+
+```bash
+curl -X POST https://target/app -H 'Content-Type: application/xml; charset=evil' --data-binary @payload.xml
+```
+
+By manipulating the charset, attackers can lead the WAF to misinterpret the Content-Type, overlooking malicious XML content.
+
+### SOAPAction Header Manipulation
+
+Target SOAP-based services by manipulating the SOAPAction header.
+
+```bash
+curl -X POST https://target/soap -H 'Content-Type: text/xml' -H 'SOAPAction: evilAction' --data-binary @payload.xml
+```
+
+WAFs might not enforce SOAP-specific protections adequately, allowing the backend to process the malicious XML payload.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
