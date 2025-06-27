@@ -1,0 +1,88 @@
+---
+title: Comprehensive Guide to IDOR Prevention Techniques
+description: Explore IDOR prevention mechanisms, access control patterns, and testing
+  methods for web applications.
+keywords:
+- IDOR prevention
+- access control
+- authorization matrix
+- indirect reference mapping
+- role-based access control
+- attribute-based access control
+- input validation
+- output encoding
+- web applications
+---
+
+# IDOR Prevention
+
+## Context
+
+The purpose of this guide is to empower offensive cybersecurity practitioners to identify, test, and navigate common IDOR (Insecure Direct Object Reference) prevention mechanisms in web applications. This document presupposes that the reader has a solid understanding of general access control models, authorization logic, and session management concepts.
+
+## Theory
+
+### IDOR Prevention Mechanisms in Web Applications
+
+IDOR prevention is crucial for maintaining secure access control within web applications. These mechanisms ensure that only authenticated and authorized users can access or modify resources directly via object references, rather than just obscuring object identifiers. The vulnerability occurs when insufficient authorization checks allow attackers to manipulate these references, resulting in unauthorized data access or modification.
+
+### Access Control Implementation Patterns
+
+In modern web applications, access control is typically enforced through code logic, middleware, or frameworks. This ensures that user permissions are validated on the server-side with every object access request, preventing unauthorized data exposure.
+
+### Authorization Matrix and Indirect Reference Mapping
+
+An authorization matrix is a structured format that defines specific users or roles and their respective permissions for accessing objects or performing certain actions. Indirect reference mapping is a technique where direct identifiers are replaced with random or mapped tokens, adding a layer of security. However, the inadequacy of mapping processes or predictable token patterns can compromise these schemes.
+
+### Role-Based and Attribute-Based Access Control
+
+Role-Based Access Control (RBAC) assigns permission based on the user’s role within an organization. Conversely, Attribute-Based Access Control (ABAC) uses user, resource, and environmental attributes to enforce fine-grained rules. Attackers often probe for misconfigurations or logic flaws within these access control models to escalate privileges or access unauthorized information.
+
+### Input Validation and Output Encoding in IDOR Prevention
+
+Input validation ensures that object references comply with expected values and formats, while output encoding ensures no leaks about object references in application responses. If these processes are not properly conducted, it can result in unauthorized data access or leakage of sensitive object references.
+
+## Practice
+
+### Enumerate and Test Authorization Logic for Object Access
+
+1. Identify endpoints that reference objects, focusing on URLs, parameters, or API calls exposing object references. Example: `/user/1234/profile`.
+2. Execute an authenticated request to a known accessible object:
+   ```bash
+   curl -b sessionid=VALID_SESSION 'https://target-app.com/user/1234/profile'
+   ```
+3. Modify the object reference to check for unauthorized access:
+   ```bash
+   curl -b sessionid=VALID_SESSION 'https://target-app.com/user/5678/profile'
+   ```
+4. Analyze HTTP status codes and response content for any failures in access control enforcement, such as unexpected data disclosure or inappropriate responses (403 Forbidden or 401 Unauthorized).
+
+### Test Indirect Reference Mapping Robustness
+
+1. Find endpoints using indirect object references, often characterized by non-sequential, non-numeric identifiers. Example: `/resource?id=abc123token`.
+2. Access objects with valid indirect references:
+   ```bash
+   curl -b sessionid=VALID_SESSION 'https://target-app.com/resource?id=abc123token'
+   ```
+3. Try fuzzing or use token enumeration to assess the predictability of token mapping and access control robustness:
+   ```bash
+   curl -b sessionid=VALID_SESSION 'https://target-app.com/resource?id=xyz789token'
+   ```
+
+### Probe RBAC/ABAC Enforcement for Object Access
+
+1. Authenticate with accounts possessing different roles or privileges.
+2. As a low-privileged user, attempt to access higher-privileged resources:
+   ```bash
+   curl -b sessionid=LOW_PRIV_SESSION 'https://target-app.com/admin/report'
+   ```
+3. Ensure high-privileged users are not accessing lower-privileged resources inadvertently:
+   ```bash
+   curl -b sessionid=HIGH_PRIV_SESSION 'https://target-app.com/user/1234/profile'
+   ```
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **ffuf**
