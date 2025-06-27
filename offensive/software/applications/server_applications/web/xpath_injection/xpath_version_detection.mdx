@@ -1,0 +1,72 @@
+---
+title: XPath Version Detection Techniques Explained
+description: Learn to identify the XPath engine version on web applications for targeted
+  exploitation.
+keywords:
+- XPath version detection
+- XPath engine fingerprinting
+- XPath functionality
+- XPath injection
+- XPath exploitation
+- web application security
+- XPath 1.0 vs 2.0
+- XPath version probing
+- XSStrike tool
+- XPath manual detection
+---
+
+# XPath Version Detection
+
+## Context
+
+Determining the XPath engine and version used by a web application is crucial for tailoring exploitation strategies. This knowledge allows attackers to craft version-specific payloads and exploit version-dependent functionalities. A solid understanding of XPath syntax, XML document structure, and general XPath injection techniques is assumed for effective application of these methods.
+
+## Theory
+
+### XPath Engine and Version Diversity
+
+XPath processors, used within web applications, differ in their supported features, functions, and error messages across various versions like 1.0, 2.0, and 3.0. Recognizing the specific version of an XPath engine helps in crafting payloads that can exploit version-specific features, leading to a more precise and effective attack.
+
+### Version-Specific Functionality and Detection Logic
+
+Certain functions are unique to specific XPath versions. For example, the `matches()` function, used for regular expression matching, is available starting from XPath 2.0 onwards. By probing for such version-specific features and analyzing how the application responds, attackers can infer the XPath engine version.
+
+### Fingerprinting XPath Implementations
+
+Fingerprinting involves sending specially crafted XPath queries aimed at provoking error messages or behavior changes that are unique to specific engines. This technique exploits the weaknesses in protocol or implementation that might leak details about the XPath engine through its error handling and function support.
+
+## Practice
+
+### Manual XPath Version Detection via Function Probing
+
+- **Payload**: `' or matches('a','a') or '1'='2`
+  - This query tries to invoke the `matches()` function, which is only supported in XPath 2.0+. 
+
+- **Observation**: After injecting the payload, observe how the application responds. A successful evaluation or specific error message can indicate support for XPath 2.0+, while a generic error or no noticeable effect might suggest the use of XPath 1.0.
+
+- **Control Payload**: `' or string-length('test')=4 or '1'='2`
+  - The `string-length()` function is available in all XPath versions. Use this as a control to ensure that the application is processing XPath expressions.
+
+- **Comparison and Conclusion**: By comparing the responses to these payloads, attackers can determine functional discrepancies. If only the control payload works as expected, it suggests that the more advanced function is unsupported, indicating an older XPath version.
+
+### Automated XPath Engine Fingerprinting with XSStrike
+
+- **Command Line**:
+  ```bash
+  xsstrike --xpath --fingerprint -u 'http://target/app?search=test'
+  ```
+  - This command instructs XSStrike to perform XPath fingerprinting on the specified target, automating the detection process.
+
+- **Output Analysis**:
+  ```text
+  Detected XPath version: 1.0
+  Engine: libxml2
+  Function support: string-length(), not(), contains()
+  ```
+  - XSStrike efficiently identifies the XPath version and engine, along with listing the supported functions, which aids in crafting further targeted payloads.
+
+## Tools
+
+- **XSStrike**
+
+XSStrike is an effective automated tool for XPath engine detection, enabling attackers to quickly identify the version and functions supported by the target web application's XPath processor.
