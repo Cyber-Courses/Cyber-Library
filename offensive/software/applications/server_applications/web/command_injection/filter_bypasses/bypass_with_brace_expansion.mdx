@@ -1,0 +1,88 @@
+---
+title: Bypass Filters with Shell Brace Expansion
+description: Learn to exploit command injection vulnerabilities by bypassing input
+  filters using shell brace expansion techniques.
+keywords:
+- brace expansion
+- filter bypass
+- command injection
+- shell scripting
+- payload construction
+- vulnerability exploitation
+- bash expansion
+---
+
+# Bypass With Brace Expansion
+
+## Context
+
+The objective of this article is to demonstrate how to exploit command injection vulnerabilities by bypassing input filters using shell brace expansion. It assumes that the reader has a basic understanding of shell scripting, command line argument structure, and brace expansion syntax. A general knowledge of command injection exploitation techniques is also expected.
+
+## Theory
+
+### Brace Expansion in Unix Shells
+
+Brace expansion is a feature available in many Unix shells, such as bash and sh. It allows users to generate arbitrary strings from patterns within braces, like `{a,b}`. This expansion is performed by the shell before executing the command, enabling alternative forms of the command to be executed without literal specification in the input.
+
+This concept becomes particularly relevant in the context of command injection vulnerabilities. Input filters on some applications may block dangerous keywords and commands like `cat` or `echo`, but they could fail to account for brace expansion. As a result, these filtered commands can still execute if they are reconstructed at runtime using brace syntax.
+
+### Filter Bypass via Brace Expansion
+
+Attackers can craft payloads using braces to reconstruct blocked commands dynamically during execution. For example, a filter that blocks the literal string `cat` may not detect `{c,a,t}`, which will expand to `cat`.
+
+The following Mermaid diagram illustrates this process:
+
+```mermaid
+flowchart TD
+    A[User Input] --> B[Input Filter]
+    B -->|Blocks 'cat'| C[Payload: {c,a,t}]
+    C --> D[Shell Expansion]
+    D --> E[Command Executed: cat]
+```
+
+### Brace Payload Construction
+
+To exploit this vulnerability, attackers construct brace payloads that replace a command or its arguments with a brace-expanded equivalent. It is essential that these payloads are syntactically valid and that the target system's shell supports the expansion.
+
+For instance, a payload such as `{c,a,t}` can be used for the `cat` command. This trick leverages the shell's expansion ability to bypass input filters that check for the exact keyword.
+
+## Practice
+
+### Bypassing Filters with Brace Expansion
+
+To apply this technique, follow these steps:
+
+- **Identify the Injection Point:**
+  - Locate a command injection point where the application filters out certain dangerous commands, such as `cat` or `echo`.
+  - Test the parameter to determine which keywords are filtered.
+
+- **Craft a Payload:**
+  - Use a brace-expanded form of the blocked command to bypass the filter. For example, `{c,a,t} /etc/passwd` reconstructs the `cat` command when expanded by the shell.
+
+- **Inject the Payload:**
+  - Execute the following command to inject the payload:
+  
+    ```bash
+    curl -X POST -d "username=admin;{c,a,t} /etc/passwd" http://target/vuln
+    ```
+
+  - This sends a POST request with the brace expansion as part of the payload to the vulnerable web application.
+
+- **Confirm Execution:**
+  - Successful command execution will result in output such as:
+
+    ```
+    root:x:0:0:root:/root:/bin/bash
+    ...
+    ```
+
+  - This indicates that the filter was bypassed and the `cat` command executed successfully.
+
+### Outcome
+
+By employing this technique, an attacker can execute arbitrary commands on the target system despite input filters, using brace expansion to bypass restrictions.
+
+## Tools
+
+- **curl**  
+- **Burp Suite**  
