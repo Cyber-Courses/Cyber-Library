@@ -1,0 +1,90 @@
+---
+title: Mastering XML Input Validation & Sanitization
+description: Learn how to validate and sanitize XML input to prevent XXE attacks using
+  schema validation, whitelisting, and sanitization.
+keywords:
+- XML input validation
+- XXE prevention
+- schema validation
+- XML sanitization
+- whitelist XML elements
+- content filtering
+- safe XML parsing
+---
+
+# Input Validation & Sanitization
+
+## Context
+
+The objective of this guide is to demonstrate operational techniques for validating and sanitizing XML input to prevent XML External Entity (XXE) exploitation. Assumed knowledge includes an understanding of XML structure and syntax, how XML parsers process input, general input validation concepts, and the mechanics of XML External Entity attacks.
+
+## Theory
+
+### Principles of XML Input Validation
+
+XML input validation ensures that only well-formed and expected XML structures are processed by the application. This principle relies on rejecting or sanitizing any XML input that deviates from the defined schema or expected structure. If improperly validated, malicious XML constructs, including external entities, can be processed by the parser and potentially exploited.
+
+### Schema Validation and Whitelisting
+
+Schema validation enforces XML structure and content rules using XSD (XML Schema Definition) or DTD (Document Type Definition). This method operates by whitelisting only the required XML elements and attributes, denying all others by default. Without this robust schema or validation, an attacker may submit XML with malicious entities, leading to potential exploitation.
+
+### Sanitization and Content Filtering
+
+Sanitization involves removing or neutralizing dangerous XML constructs before parsing. Advanced attackers may obfuscate payloads to bypass simplistic filters, which necessitates robust sanitization. Combining validation and sanitization provides a defense-in-depth strategy against XXE attacks.
+
+## Practice
+
+### Enforce XML Schema Validation (XSD)
+
+Using an XSD schema is a powerful way to strictly define allowed XML structure and content. This practice prevents unexpected elements or entities from being processed.
+
+- **Step 1**: Use the following command to validate an XML file against a schema:
+  
+  ```bash
+  xmllint --noout --schema schema.xsd input.xml
+  ```
+
+  This command ensures that `input.xml` adheres to the rules defined in `schema.xsd`. Non-compliant XML, including XXE payloads, will be rejected before they are processed.
+
+### Whitelist XML Elements and Attributes
+
+By enforcing a whitelist of XML tags, you can block XML documents containing unauthorized elements from further processing. Below is an example Python script using `defusedxml.ElementTree` to achieve this:
+
+```python
+import defusedxml.ElementTree as ET
+
+allowed_tags = {'user', 'id', 'email'}
+tree = ET.parse('input.xml')
+
+for elem in tree.iter():
+    if elem.tag not in allowed_tags:
+        raise ValueError('Disallowed element: ' + elem.tag)
+```
+
+This script parses `input.xml` and raises an error if it encounters a tag that is not in the list of allowed tags.
+
+### Sanitize XML Input Before Parsing
+
+Sanitizing XML input involves stripping out potentially malicious declarations such as DOCTYPE and ENTITY to neutralize XXE vectors. Here is a script to perform such sanitization:
+
+```python
+import re
+
+with open('input.xml') as f:
+    xml = f.read()
+
+xml = re.sub(r'<!DOCTYPE[^>]*>', '', xml)
+xml = re.sub(r'<!ENTITY[^>]*>', '', xml)
+
+with open('sanitized.xml', 'w') as f:
+    f.write(xml)
+```
+
+This script reads the XML from `input.xml`, removes DOCTYPE and ENTITY declarations, and writes the sanitized content to `sanitized.xml`.
+
+## Tools
+
+- **xmllint**
+- **defusedxml**
+
+By following these practices, you can effectively validate and sanitize XML input, mitigating the risk of XXE exploitation.
