@@ -1,0 +1,135 @@
+---
+title: 'SSI Injection: Prevention & Security Measures'
+description: Learn effective techniques to prevent and secure web applications from
+  Server Side Include injection attacks. Implement SSI security best practices.
+keywords:
+- SSI injection
+- web application security
+- SSI prevention
+- server hardening
+- input validation
+- directive whitelisting
+- secure configuration
+- SSI best practices
+- web server
+- template processing
+---
+
+# Prevention & Security
+
+## Context
+
+This article aims to equip readers with operational techniques to prevent and secure web applications against Server Side Include (SSI) injection attacks. It assumes that readers have a foundational understanding of Server Side Includes (SSI), web server configuration basics, and the fundamentals of SSI injection attack vectors.
+
+## Theory
+
+### Risks of Uncontrolled SSI Processing
+
+SSI injection vulnerabilities arise when user input embedded in SSI directives is not properly validated or sanitized. This scenario can allow attackers to inject code that executes commands on the server, leading to unauthorized data access or server control. Improper input validation or insecure SSI configuration can expose the server to such risks, compromising both data integrity and system security.
+
+### Principles of SSI Injection Prevention
+
+The cornerstone of preventing SSI injection lies in adopting a "deny by default" approach. This means disabling SSI processing on your server unless absolutely necessary. When it is required, ensure that all user-supplied input is rigorously validated and sanitized prior to being included in SSI-processed files. Moreover, restrict SSI directives to a safe, minimal subset using a whitelist approach, permitting only the necessary directives. 
+
+### Directive Filtering and Whitelisting
+
+Merely blacklisting specific directives is insufficient for robust security, as attackers may utilize alternate encodings or syntax variations to bypass filters. Instead, implementing a whitelist approach is crucial. For example, allow benign directives like `echo` and `include`, while consistently blocking potentially dangerous ones such as `exec` and `cmd`.
+
+### Secure SSI Configuration and Server Hardening
+
+Often, default web server settings may enable unsafe SSI processing or include dangerous directives. A secure configuration should assume all user input is untrusted and ensure that direct inclusion in SSI contexts is prohibited. Regularly revisit and tighten your server's security settings to mitigate the risk of exploitation through SSI.
+
+## Practice
+
+### Disabling SSI Processing Globally
+
+To disable SSI processing and eliminate the risk of SSI injection entirely:
+
+- Open the terminal and execute the following command to disable `mod_include` in Apache:
+
+    ```bash
+    a2dismod include
+    ```
+
+    This command turns off the SSI feature across all web server contexts.
+
+- Reload the Apache configuration to apply changes:
+
+    ```bash
+    systemctl reload apache2
+    ```
+
+    By doing this, SSI directives are no longer processed, effectively removing the associated risks.
+
+### Restricting SSI Directives via Configuration
+
+To remove SSI options and reduce the attack surface in specific server contexts:
+
+- Execute the following command to remove the "Includes" option from the default site configuration:
+
+    ```bash
+    echo 'Options -Includes' >> /etc/apache2/sites-available/000-default.conf
+    ```
+
+    This action disables SSI processing for the specified site.
+
+- Reload the Apache configuration:
+
+    ```bash
+    systemctl reload apache2
+    ```
+
+    This ensures SSI processing is specifically turned off for the targeted configuration.
+
+### Whitelisting Safe SSI Directives
+
+To prevent execution of unsafe directives while allowing safe ones:
+
+- Modify the mod_include configuration to disable command execution:
+
+    ```bash
+    echo 'SSIEnableCmd Off' >> /etc/apache2/mods-available/include.conf
+    ```
+
+    This configuration prevents the `exec` directive from running commands.
+
+- Reload the Apache configuration:
+
+    ```bash
+    systemctl reload apache2
+    ```
+
+    This action blocks command execution while still allowing other safe SSI directives.
+
+### Input Validation and Sanitization for SSI Contexts
+
+To ensure safe input handling:
+
+- Implement input validation in your application code as shown below:
+
+    ```python
+    import re
+
+    def process_input():
+        user_input = get_user_input()
+        if re.search(r'[<>{}\\[\\]$%#;|`]', user_input):
+            raise ValueError('Invalid characters in input')
+        # Proceed with safe inclusion
+    
+    process_input()
+    ```
+
+    This script verifies that user input does not contain potentially dangerous SSI meta-characters, thus preventing injection attacks.
+
+### Securing Template Processing Workflows
+
+Avoiding SSI processing altogether is a viable method for securing applications. Instead, use safer templating engines such as Jinja2 or Mustache for dynamic content rendering:
+
+- Select a non-SSI template engine (e.g., Jinja2, Mustache) for rendering dynamic content. By replacing SSI with these alternatives, you eliminate the SSI attack surface from your application stack.
+
+## Tools
+
+- **Apache HTTP Server**
+- **mod_include** 
+
+These tools are central to configuring and managing SSI processes within a web application environment.
