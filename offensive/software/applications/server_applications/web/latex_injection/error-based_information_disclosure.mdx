@@ -1,0 +1,75 @@
+---
+title: Exploiting Error-Based Information Disclosure in LaTeX
+description: Learn how to exploit LaTeX error messages in web apps to extract sensitive
+  info through error-based information disclosure techniques.
+keywords:
+- LaTeX error messages
+- error-based information disclosure
+- web application security
+- information leakage
+- compilation error
+---
+
+# Error-Based Information Disclosure
+
+## Context
+
+This guide demonstrates how to exploit LaTeX error messages in web applications to extract sensitive information through error-based information disclosure. It assumes knowledge of error handling mechanisms, the general architecture of web applications, and LaTeX injection techniques.
+
+## Theory
+
+### Nature of Error-Based Information Disclosure in LaTeX Web Apps
+
+Error-based information disclosure occurs when LaTeX compilation errors inadvertently expose sensitive details to users. These verbose error messages can provide insights into file paths, the underlying system environment, or debug data that are not intended for end-user access. This vulnerability model is rooted in improper error handling within applications that render user-generated content into LaTeX, inadvertently exposing internal application or server details.
+
+### Common Error Message Patterns and Their Implications
+
+LaTeX error messages commonly include specific details such as file paths, line numbers, and details of system packages or configurations. An attacker may inject malformed LaTeX syntax to intentionally trigger compilation errors, interpreting the error feedback to extract sensitive data. The typical data flow involves user input being processed by a LaTeX engine, compiling or rendering errors, and returning error messages within the HTTP response back to the attacker.
+
+### Attacker Mindset: Leveraging Error Messages
+
+Attackers aim to craft payloads that maximize verbosity and the extent of information leakage in error responses. They iteratively refine these LaTeX payloads to trigger varied types of errors, each potentially disclosing different facets of the server or application environment.
+
+### Impact and Risk of Information Disclosure
+
+The leakage of error details can facilitate further exploitation, such as path traversal or command injection attacks targeted at exposed system specifics. Information disclosure vulnerabilities broaden the attack surface by unveiling application internals, configurations, and environment specifics, significantly increasing risk.
+
+## Practice
+
+### Triggering and Analyzing LaTeX Error Messages for Information Disclosure
+
+- **Identify user input fields processed by a LaTeX engine.**  
+   Locate areas of the web application where LaTeX injection is feasible.
+
+- **Inject Payload**  
+   ```latex
+   \input{nonexistentfile}
+   ```  
+   This payload attempts to reference a non-existent file to trigger a file-not-found error.
+
+- **Submit the Payload via the Web Application's Input Form**  
+   Submit this LaTeX code through available user input methods exposed by the application interface.
+
+- **Review the Returned Error Message**  
+   After submission, analyze the returned error message outputted by the application for sensitive information like file paths, system info, or debug data.
+
+- **Inject Another Payload**  
+   ```latex
+   \undefinedcommand
+   ```  
+   Use this payload to invoke an error due to an undefined command, aiming to trigger a different error response.
+
+- **Submit the New Payload and Review**  
+   As before, submit the payload and review the error message for additional leaked details such as LaTeX version or paths related to packages.
+
+### Outcome
+
+Successful execution of these steps results in sensitive information such as file paths, system details, or debug data being disclosed through LaTeX error messages, providing a foothold for further exploitation.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **Browser Developer Tools** 
+
+These tools can help facilitate the injection and inspection of web application traffic to identify and exploit error-based information disclosure vulnerabilities effectively.
