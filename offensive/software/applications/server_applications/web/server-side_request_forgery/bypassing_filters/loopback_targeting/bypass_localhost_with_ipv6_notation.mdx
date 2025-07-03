@@ -1,0 +1,76 @@
+---
+title: Bypass Localhost Restrictions Using IPv6 Notation
+description: Learn to bypass SSRF filters with IPv6 notation, accessing localhost
+  services by exploiting loopback vulnerabilities.
+keywords:
+- SSRF
+- IPv6 loopback
+- localhost bypass
+- IPv6 notation
+- filter bypass
+- loopback targeting
+- cybersecurity technique
+- server-side vulnerability
+- IPv6 address
+---
+
+# Bypass Localhost with IPv6 Notation
+
+## Context
+
+In this guide, we'll demonstrate how to bypass Server-Side Request Forgery (SSRF) localhost restrictions by exploiting IPv6 loopback notation. This technique assumes familiarity with IPv6 addressing, understanding of localhost and loopback addresses, HTTP request structure, and general SSRF exploitation.
+
+## Theory
+
+### IPv6 Loopback Addressing in SSRF Context
+
+The IPv6 loopback address `::1` is the equivalent of the IPv4 address `127.0.0.1`. These addresses point to the localhost interface, allowing processes on the same host to communicate without using a physical network interface.
+
+In the context of SSRF, using `[::1]` or `[::ffff:127.0.0.1]`, which is a valid IPv6 representation for the loopback interface, can be crucial. These notations instruct the web server to interpret the address as localhost, bypassing filters that block '127.0.0.1'.
+
+### Filter Bypass via Alternative IPv6 Notation
+
+Often, SSRF protection filters are designed to block requests to '127.0.0.1' or 'localhost', under the assumption that these strings indicate an attempt to access internal services. However, neglecting IPv6 notations can leave a system vulnerable.
+
+Attackers can submit SSRF payloads utilizing these alternative notations to bypass security measures. If a filter does not normalize or resolve these IPv6 addresses, the notation `[::1]` or `[::ffff:127.0.0.1]` can be used to effectively target localhost.
+
+## Practice
+
+### Bypassing SSRF Localhost Filters with IPv6 Notation
+
+- **Identify SSRF Input:** First, locate the input parameter within the target application that accepts a URL for SSRF. Analyze the application to confirm it's blocking known localhost strings like '127.0.0.1' or 'localhost'.
+
+- **Payload with IPv6 Notation:**
+  
+  ```http
+  http://[::1]:80/
+  ```
+
+  Utilize this payload in place of a blocked IPv4 address to attempt a connection to the localhost.
+
+- **Alternative IPv6 Notation:**
+
+  ```http
+  http://[::ffff:127.0.0.1]:80/
+  ```
+
+  Deploy this payload, leveraging the IPv4-mapped IPv6 address, to reach the localhost similarly.
+
+- **Execute SSRF Attack with Curl:**
+
+  ```bash
+  curl -v 'http://target-app/vuln?url=http://[::1]:80/'
+  ```
+
+  Use the `curl` tool to submit the SSRF payload to the vulnerable application endpoint.
+
+- **Analyze the Response:** 
+
+  Observe the server's response to determine if the payload successfully accessed localhost. Look for signs such as internal service data being returned or specific error messages that indicate interaction with an internal-only service.
+
+By employing the IPv6 notations `[::1]` and `[::ffff:127.0.0.1]`, you can bypass input filters that concentrate on IPv4 loopback addresses, allowing unauthorized access to services limited to localhost.
+
+## Tools
+
+- **curl**: A command-line tool to transfer data from or to a server.
+- **Burp Suite**: A comprehensive security tool for web application testing, useful for capturing and manipulating requests.
