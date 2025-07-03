@@ -1,0 +1,129 @@
+---
+title: XSLT Engines & Detection Techniques for Web Applications
+description: Explore methods to identify and fingerprint XSLT engines in web applications
+  for strategic exploitation.
+keywords:
+- XSLT engines
+- XSLT detection
+- Saxon fingerprinting
+- Xalan identification
+- libxslt traits
+- MSXML detection
+- XSLT processor
+- XML transformation
+- web application security
+---
+
+# XSLT Engines & Detection
+
+## Context
+
+The primary goal of this article is to equip offensive operators with the knowledge to identify and fingerprint XSLT engines within web applications. Proper identification of these engines is crucial for launching effective attacks tailored to the specific capabilities and vulnerabilities of the target environment. Operators are assumed to have foundational knowledge in XSLT processing, XML structure, web server architecture, and XSLT injection techniques.
+
+## Theory
+
+### Role of XSLT Engines in Web Applications
+
+XSLT engines serve a critical function in web applications by transforming XML data through the application of XSLT stylesheets. These engines are integral for dynamically rendering content or transforming data formats in response to client requests. The landscape of XSLT engines is diverse, with each offering unique features, extension functions, and security boundaries that attackers can leverage.
+
+### Fingerprinting and Detection Principles
+
+The ability to fingerprint an XSLT engine allows attackers to craft precise payloads and strategies that exploit the nuanced behaviors of specific engines. This process typically involves the injection of engine-specific XSLT code followed by an analysis of the application's response to identify clues about the engine being used.
+
+### Common XSLT Engines and Their Traits
+
+Understanding the traits of common XSLT engines is fundamental for effective detection and exploitation:
+
+- **Saxon**: A powerful Java-based processor that supports advanced XSLT 2.0/3.0 features, including proprietary extension functions.
+- **Xalan**: An Apache Java engine known for its support of XSLT 1.0 and its distinctive extension namespaces.
+- **libxslt**: A C-based engine popular in environments like PHP and Python, notable for its limited extension support.
+- **MSXML**: A Microsoft engine that is COM-based and Windows-specific, known for exposing proprietary objects.
+
+### Engine-Specific Fingerprinting Techniques
+
+Fingerprinting an XSLT engine involves exploiting engine-specific extension functions or error messages which reveal the underlying processor. Unsupported function calls or namespace references often trigger unique error patterns, making them effective for identification.
+
+### Processor Version and Capability Detection
+
+Detecting the version and capabilities of an XSLT processor involves injecting version-revealing XSLT code or invoking engine-specific functions. The results, whether in the form of error messages, output, or side effects, can help infer the processor's identity and its version.
+
+## Practice
+
+### Detecting Saxon XSLT Engine via Extension Function
+
+- **Payload**
+
+    ```xml
+    <xsl:value-of select="saxon:systemId()" xmlns:saxon="http://saxon.sf.net/"/>
+    ```
+
+- **Execution**
+    - Inject the payload into the target application.
+    - Submit it and observe the output or error message.
+
+When Saxon is present, it will either return a specific value or an error indicative of its processing; other engines will react differently.
+
+### Fingerprinting Xalan via Extension Namespace
+
+- **Payload**
+
+    ```xml
+    <xsl:value-of select="xalan:environmentVariable('PATH')" xmlns:xalan="org.apache.xalan.lib.Environment"/>
+    ```
+
+- **Execution**
+    - Insert the payload into the XSLT input.
+    - Analyze the response for the variable's value or errors referencing the Xalan namespace.
+
+Successful execution or specific namespace error will indicate the presence of the Xalan engine.
+
+### Identifying libxslt via EXSLT Support
+
+- **Payload**
+
+    ```xml
+    <xsl:value-of select="exsl:node-set(.)" xmlns:exsl="http://exslt.org/common"/>
+    ```
+
+- **Execution**
+    - Deploy the payload in the environment.
+    - Check the application's response for a correct transformation or error message.
+
+libxslt will correctly process the node-set function; other engines may return errors or ignore it.
+
+### Detecting MSXML via Proprietary Object Access
+
+- **Payload**
+
+    ```xml
+    <xsl:value-of select="ms:script('WScript.Shell')" xmlns:ms="urn:schemas-microsoft-com:xslt"/>
+    ```
+
+- **Execution**
+    - Place the payload within the XSLT data.
+    - Observe whether the object is created or if an error occurs.
+
+MSXML is identifiable through its reaction to proprietary object invocation.
+
+### Processor Version Detection via Error Message Analysis
+
+- **Payload**
+
+    ```xml
+    <xsl:value-of select="unknown:function()"/>
+    ```
+
+- **Execution**
+    - Inject the payload to provoke an error.
+    - Study the returned error message for information revealing engine and version details.
+
+Engines often leak version or vendor information within error messages, providing useful insights for fingerprinting.
+
+## Tools
+
+- **Burp Suite**
+- **OWASP ZAP**
+- **curl**
+- **Postman** 
+
+These tools aid in observing network traffic, injecting payloads, and analyzing the responses that help identify the XSLT engine in use.
