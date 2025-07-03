@@ -1,0 +1,82 @@
+---
+title: Mastering Special Blind LDAP Injection Techniques
+description: Explore advanced methods of extracting LDAP data using blind injection,
+  character extraction, and automated scripts.
+keywords:
+- blind LDAP injection
+- character extraction
+- binary search
+- automated LDAP attack
+- TRUE condition response
+- LDAP data extraction
+- cybersecurity
+- sensitive data access
+---
+
+# Special Blind LDAP Injection
+
+## Context
+
+Special Blind LDAP Injection is a powerful technique used by offensive cybersecurity operators to extract sensitive data from LDAP directories without receiving direct feedback. This technique focuses on utilizing special blind injection methods to infer information by observing application response changes. Operators are assumed to have a solid understanding of LDAP protocol fundamentals, web application architecture, and basic LDAP injection concepts.
+
+## Theory
+
+### Blind LDAP Injection Fundamentals
+
+Blind LDAP injection occurs when attackers exploit fields where LDAP responses aren't directly exposed, but the application's behavior indicates TRUE or FALSE conditions. This approach relies on the principle that attackers can infer data by observing changes in application behavior as a result of crafted LDAP queries.
+
+### TRUE Condition Response Logic
+
+In blind LDAP injection, the attacker injects conditions into the LDAP query that evaluate to TRUE or FALSE. The key principle is to observe the application's response behavior, such as error messages or page content changes, to map these changes back to the true or false evaluation of the injected condition.
+
+### Character-by-Character Extraction
+
+A common technique in blind LDAP injection is character-by-character extraction. In this approach, attackers iteratively guess each character position in a target sensitive field, using application responses to verify the correctness of each character. This model is particularly effective against sensitive fields like passwords, where the goal is to brute-force each character individually.
+
+### Binary Search Optimization in Blind LDAP
+
+To optimize blind LDAP injection, attackers employ binary search logic. This reduces the time needed for extraction by dividing the character set into portions and narrowing down possible values per character position, halving the search space with each iteration.
+
+### Automated Blind LDAP Extraction
+
+Automation plays a crucial role in blind LDAP extraction. Scripts can systematically generate and dispatch payloads, parse the responses, and reconstruct sensitive values. The process involves looping through each position and character set, using TRUE/FALSE logic to efficiently extract the required information.
+
+## Practice
+
+### Manual Blind LDAP Extraction (Character-by-Character)
+
+1. **Identify an injectable LDAP parameter:** Locate a field where LDAP injection is possible, and the application behavior changes based on query results.
+   
+2. **Inject payload to test character:** 
+   ```sql
+   (&(uid=admin)(password=a*))
+   ```
+   Test if the first character of the password is 'a'.
+   
+3. **Observe application response:** Determine if the injected condition is met by observing the application's behavior for TRUE/FALSE indication.
+   
+4. **Iterate for next character:**
+   ```sql
+   (&(uid=admin)(password=b*))
+   ```
+   Repeat this process for the next character in the charset.
+
+5. **Continue until the value is reconstructed:** Iterate through all possible characters for each position until the entire sensitive value, such as a password, is fully extracted.
+
+Outcome: Successful manual extraction of sensitive LDAP field values through iteration and observation of application responses.
+
+### Automated Blind LDAP Extraction with Binary Search
+
+1. **Execute the automated script:**
+   ```bash
+   python blind_ldap_extract.py --url http://target/login --user admin --field password --charset abcdefghijklmnopqrstuvwxyz0123456789 --maxlen 20
+   ```
+   Run a pre-written script that utilizes binary search logic to extract the password.
+   
+2. **Script operation:** The script automatically injects payloads, parses TRUE/FALSE responses, and reconstructs the target value, increasing speed and reducing manual intervention.
+
+Outcome: Automated extraction of sensitive LDAP data using optimized blind injection logic, significantly decreasing extraction time and effort.
+
+## Tools
+- **Burp Suite**
+- **wfuzz**
