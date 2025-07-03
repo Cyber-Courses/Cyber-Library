@@ -1,0 +1,115 @@
+---
+title: Evasion Techniques for SSTI Exploitation
+description: Explore strategies for bypassing filters and WAFs in SSTI with obfuscation,
+  encoding, and syntax manipulation.
+keywords:
+- SSTI exploitation
+- filter evasion
+- WAF bypass
+- payload obfuscation
+- Unicode encoding
+- template manipulation
+- server-side injection
+- security evasion techniques
+- attack payloads
+---
+
+# Evasion Techniques
+
+## Context
+
+The purpose of this article is to demonstrate and operationalize evasion techniques for bypassing filters and defenses during the exploitation of Server-Side Template Injection (SSTI). This topic assumes that the reader possesses an understanding of template engine internals and syntax, the ability to craft and manipulate HTTP requests, and a general familiarity with SSTI exploitation methodologies.
+
+## Theory
+
+### Filter and WAF Evasion in SSTI
+
+Evasion techniques are critical in bypassing input filters, Web Application Firewalls (WAFs), or sanitization mechanisms during the exploitation of SSTI vulnerabilities. Filters often block known payloads or patterns, so attackers must obfuscate or alter payloads to evade detection. WAFs and input filters typically rely on static signatures, regular expressions (regex), or blacklists, which can be circumvented by altering the structure of the payload.
+
+### Obfuscation and Encoding Strategies
+
+Obfuscation modifies the appearance of payloads without changing their logic, aiming to defeat pattern-based defenses. Encoding, such as URL encoding or Unicode, can mask dangerous characters or keywords from naive filters. Attackers can combine encoding, whitespace, and string manipulation to craft payloads that execute but evade detection.
+
+### Template Syntax Manipulation
+
+Altering template syntax, including whitespace, comments, and case sensitivity, can bypass strict pattern matching. By injecting comments or splitting keywords with whitespace, attackers can break filter logic while preserving the execution of the template.
+
+## Practice
+
+### Bypassing Filters with Whitespace and Comments
+
+- Utilize a standard SSTI payload for arithmetic evaluation: 
+
+  ```javascript
+  {{-7}}
+  ```
+
+- Inject a template comment to break up the payload signature:
+
+  ```javascript
+  {% comment %}ignore{% endcomment %}{{7*7}}
+  ```
+
+- Add extra whitespace to evade strict pattern filters:
+
+  ```javascript
+  {{ 7 * 7 }}
+  ```
+
+These payloads are designed to execute despite input filters or WAFs that specifically target common SSTI patterns.
+
+### Encoding and Unicode Obfuscation
+
+- Use URL encoding to bypass filters blocking curly braces:
+
+  ```plaintext
+  %7B%7B7*7%7D%7D
+  ```
+
+- Inject a Unicode newline to split the payload and evade regex-based filters:
+
+  ```javascript
+  {{7\u000a*7}}
+  ```
+
+Encoded or Unicode-modified payloads are capable of evading naive pattern-based defenses.
+
+### Case and String Concatenation Bypass
+
+- Split function names to evade keyword-based filters:
+
+  ```javascript
+  {{ conca'cat'('7','7') }}
+  ```
+
+- Use template string concatenation operators to avoid direct numeric operations:
+
+  ```javascript
+  {{ '7' ~ '7' }}
+  ```
+
+These payloads execute by avoiding direct use of filtered keywords or operators, thus escaping detection.
+
+### Template Obfuscation with Nested Expressions
+
+- Wrap operands in parentheses to alter the payload structure:
+
+  ```javascript
+  {{ (7) * (7) }}
+  ```
+
+- Use array indexing to obfuscate arithmetic operations:
+
+  ```javascript
+  {{ [7][0]*[7][0] }}
+  ```
+
+Obfuscated payloads such as these bypass filters that expect standard arithmetic expressions, thereby executing successfully while avoiding detection.
+
+## Tools
+
+- **Burp Suite**
+- **wfuzz**
+- **curl**
+
+These tools assist in crafting and sending requests, as well as fuzzing input vectors, aiding in the discovery and exploitation of SSTI vulnerabilities.
