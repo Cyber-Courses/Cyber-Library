@@ -1,0 +1,89 @@
+---
+title: Comprehensive Guide to LDAP Server Reconnaissance
+description: Learn techniques for identifying and exploiting LDAP server vulnerabilities,
+  including fingerprinting, SSL detection, and schema discovery.
+keywords:
+- LDAP server reconnaissance
+- LDAP fingerprinting
+- LDAP version detection
+- LDAP naming context
+- LDAPS SSL detection
+- network scanning
+- LDAP schema discovery
+- Active Directory
+- OpenLDAP
+---
+
+# LDAP Server Reconnaissance
+
+## Context
+
+The objective of LDAP server reconnaissance is to allow offensive security practitioners to identify the type, version, capabilities, and potential exposures of LDAP servers for subsequent exploitation. This guide assumes the reader has foundational knowledge of the LDAP protocol, directory services concepts, network scanning, and LDAP injection basics.
+
+## Theory
+
+### LDAP Server Fingerprinting and Exposure
+
+LDAP server reconnaissance involves identifying the server type, version, and capabilities through network and protocol analysis. Fingerprinting an LDAP server can reveal if it's an implementation like Active Directory or OpenLDAP. Such information is crucial as it highlights the server's attack surface. Misconfigured or improperly exposed LDAP servers may disclose sensitive metadata or employ weak authentication methods, making them vulnerable to exploitation.
+
+### Version and Implementation Detection
+
+To discern the version and vendor of an LDAP server, attackers can probe LDAP endpoints for banners, supported controls, and schema information. This is possible because some LDAP servers inadvertently disclose version or vendor details in their rootDSE entries or error messages. 
+
+### Naming Context and Schema Discovery
+
+The naming context of an LDAP server refers to the root distinguished names (DNs) it manages. By querying the rootDSE, one can discover the server's namingContexts, supportedLDAPVersion, and schemaNamingContext, which can offer insights into the LDAP directory's structure and capacity.
+
+### SSL/TLS and Port Exposure
+
+LDAP services are often available on TCP ports 389 (plaintext) and 636 (LDAPS, secured via SSL/TLS). Identifying open LDAP ports and assessing whether these connections are secure can provide insights into the server's exposure and potential for secure channel enforcement.
+
+## Practice
+
+### LDAP Port Scanning and Service Detection
+
+1. **Command**:
+    ```bash
+    nmap -p 389,636 --script ldap-rootdse <target_ip>
+    ```
+    This command scans for open LDAP/LDAPS ports and tries to retrieve rootDSE information.
+
+**Outcome**: You will identify open LDAP ports and collect basic service banners from the target.
+
+### LDAP Server Banner and RootDSE Query
+
+1. **Command**:
+    ```bash
+    ldapsearch -x -H ldap://<target_ip>:389 -s base -b '' '(objectclass=*)'
+    ```
+    This query retrieves server information, naming contexts, and supported features by examining the rootDSE.
+
+**Outcome**: Extract vendor and version information, namingContexts, and server capabilities from the LDAP server.
+
+### LDAPS (SSL) Support Detection
+
+1. **Command**:
+    ```bash
+    openssl s_client -connect <target_ip>:636 -quiet
+    ```
+    Using OpenSSL, this test determines if the LDAPS port supports SSL/TLS.
+
+**Outcome**: Verify if LDAPS is enabled and review SSL certificate details.
+
+### LDAP Schema and Supported Controls Discovery
+
+1. **Command**:
+    ```bash
+    ldapsearch -x -H ldap://<target_ip>:389 -s base -b '' '(objectclass=*)' supportedControl supportedExtension supportedFeatures
+    ```
+    This command enumerates the LDAP server's supported controls and extensions.
+
+**Outcome**: Obtain a list of the server's supported controls, extensions, and additional features.
+
+## Tools
+
+- **nmap**
+- **ldapsearch**
+- **openssl** 
+
+This comprehensive guide allows security professionals to perform detailed reconnaissance on LDAP servers, identifying potential weaknesses for further exploitation.
