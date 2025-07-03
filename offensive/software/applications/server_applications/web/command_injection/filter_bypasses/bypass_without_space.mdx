@@ -1,0 +1,87 @@
+---
+title: Bypass Space Filtering in Command Injection
+description: Learn techniques to bypass space filtering in command injection scenarios
+  using shell parsing and alternative delimiters.
+keywords:
+- space filtering
+- command injection
+- shell parsing
+- ${IFS} substitution
+- tab character %09
+- ANSI-C quoting
+- input redirection
+- Windows variable slicing
+---
+
+# Bypass Without Space
+
+## Context
+
+The bypass without space technique focuses on circumventing web application filters that aim to impede command injection by blocking or stripping space characters. Understanding command line interpreters, shell metacharacters, and basic command injection is crucial for effectively applying these bypass techniques. This article outlines methods to exploit shell features and input transformation to achieve command injection without relying on spaces, vital in penetration testing and red teaming contexts.
+
+## Theory
+
+### Space Character Filtering in Command Injection
+
+Web applications often deploy space character filtering to thwart command injection attempts. By blacklisting or removing spaces, these systems aim to prevent the concatenation of multiple commands or separation of command arguments. However, this defensive measure can be bypassed through alternative representations and shell parsing techniques.
+
+### Alternative Delimiters and Shell Parsing
+
+Shell interpreters, by design, support various mechanisms for interpreting spaces and whitespace. These include the usage of internal field separators, tab characters, and specialized quoting techniques that enable separating commands and arguments without explicit spaces.
+
+### Key Bypass Techniques Without Spaces
+
+1. **${IFS} Substitution**
+   - The Internal Field Separator (IFS) in Unix-like operating systems is an environment variable that specifies word boundaries. `${IFS}` can be used as a substitute for the space character in shell commands, effectively tricking the shell into parsing the command correctly even when spaces are filtered out.
+
+2. **Tab Character (%09)**
+   - The tab character is another form of whitespace recognized by shells. In the context of URL encoding, `%09` represents a tab character. Injecting this URL-encoded character can serve to separate commands or arguments in the absence of a space.
+
+3. **ANSI-C Quoting ($'\\x20')**
+   - ANSI-C quoting provides a way to integrate arbitrary byte values, including spaces, into command lines. By using `$'\\x20'`, a space character can be injected into a command without directly typing the space.
+
+4. **Input Redirection Without Spaces**
+   - Some shell environments allow input redirection to be performed without spaces. This redirection can facilitate file reading or writing operations despite space restrictions.
+
+5. **Windows Variable Slicing**
+   - In Windows command shells, variable slicing can be used to produce specific characters. For example, manipulating `%var:~0,1%` can yield a space or other characters as needed to bypass filters.
+
+## Practice
+
+### Bypassing Space Filtering with ${IFS}
+
+- **Payload:** `cat${IFS}/etc/passwd`
+- **Explanation:** `${IFS}` is expanded to a space by the shell, allowing the command `cat /etc/passwd` to be executed.
+- **Outcome:** The command is executed, and the contents of `/etc/passwd` are displayed.
+
+### Bypassing Space Filtering with Tab Character
+
+- **Payload:** `cat%09/etc/passwd`
+- **Explanation:** `%09` is the URL-encoded representation of a tab character. The shell interprets it as a separator between `cat` and `/etc/passwd`.
+- **Outcome:** The command executes using the tab character as an argument separator, displaying the contents of `/etc/passwd`.
+
+### Bypassing Space Filtering with ANSI-C Quoting
+
+- **Payload:** `cat$'\\x20'/etc/passwd`
+- **Explanation:** The payload uses ANSI-C quoting to inject a space character (`\\x20`). This allows commands like `cat /etc/passwd` to be executed.
+- **Outcome:** The space is injected via ANSI-C quoting, resulting in command execution.
+
+### Bypassing Space Filtering with Input Redirection
+
+- **Payload:** `<</etc/passwd`
+- **Explanation:** Certain shells permit input redirection without spaces. This exploit reads the contents of a file as input.
+- **Outcome:** The file `/etc/passwd` is read, bypassing the need for an explicit space.
+
+### Bypassing Space Filtering with Windows Variable Slicing
+
+- **Payload:** `type%var:~0,1%C:\Windows\win.ini`
+- **Explanation:** On Windows CMD, `%var:~0,1%` can be set to evaluate to a space, enabling the injection of spaces using variable slicing.
+- **Outcome:** The command `type C:\Windows\win.ini` executes using the sliced space.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP** 
+
+These tools facilitate the testing and exploitation of command injection vulnerabilities with space filtering bypass techniques.

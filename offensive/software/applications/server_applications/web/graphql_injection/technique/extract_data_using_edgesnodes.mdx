@@ -1,0 +1,102 @@
+---
+title: Extract Data Using GraphQL Edges and Nodes
+description: Learn how attackers exploit GraphQL edges/nodes for data extraction.
+keywords:
+- GraphQL
+- pagination
+- edges
+- nodes
+- data extraction
+- Relay specification
+- security weaknesses
+---
+
+# Extract Data Using Edges/Nodes
+
+## Context
+
+The goal is to demonstrate how attackers can extract sensitive or bulk data from GraphQL APIs by exploiting the edges/nodes patterns found in connection-based pagination. Understanding of the GraphQL schema structure, query syntax, mutation basics, pagination concepts, and fundamental GraphQL Injection techniques is assumed.
+
+## Theory
+
+### GraphQL Connections, Edges, and Nodes
+
+In GraphQL, connections are constructs used for implementing paginated lists of data. They are fundamental in APIs following the Relay specification and allow for efficient navigation of paginated data sets. Connections typically consist of edges and nodes.
+
+Edges represent the link between a paginated connection and its nodes, acting as containers. They often hold cursors, which are key to pagination. Nodes, on the other hand, are the actual data entities or objects that are part of this list.
+
+By manipulating these edges and nodes, attackers can effectively enumerate and extract massive datasets in an often unnoticed manner, exploiting the pagination setup.
+
+### Cursor-Based Pagination and Relay Specification
+
+Cursor-based pagination relies on opaque cursors to retrieve sequential data pages, avoiding the pitfalls of simple numeric offset enumeration. This method is particularly relevant in the context of the Relay specification, where it provides a more scalable approach to pagination.
+
+A critical vulnerability in this scheme arises when these connections are not appropriately secured. Attackers can traverse the dataset unrestricted by iterating through the cursors, thus extracting all associated nodes. This involves crafting queries that methodically progress through the cursor pointers to harvest data en masse.
+
+### Security Weaknesses in Edges/Nodes Implementations
+
+A common implementation flaw is the lack of rigorous access controls applied to these connections, leaving sensitive data exposed via the edges/nodes pattern. Attackers may also succeed by manipulating query parameters like 'first' and 'after' to navigate through the data without triggering restrictions or alarms. This manipulation can effectively bypass intended data security measures, opening breaches in the dataset's integrity.
+
+## Practice
+
+### Bulk Data Extraction via Edges/Nodes Pagination
+
+1. Identify a connection field within the GraphQL schema, such as `usersConnection`. These fields are often characterized by their edges/nodes architecture used for pagination.
+
+2. Submit an initial query to retrieve the first page of user data and include cursors for further navigation:
+
+   ```graphql
+   {
+     usersConnection(first: 5) {
+       edges {
+         cursor
+         node {
+           id
+           email
+           username
+         }
+       }
+     }
+   }
+   ```
+
+3. Extract the 'cursor' value from the last edge in your GraphQL response. This cursor will allow you to query subsequent pages.
+
+4. Use the extracted cursor value to fetch the next page:
+
+   ```graphql
+   {
+     usersConnection(first: 5, after: "<CURSOR_VALUE>") {
+       edges {
+         cursor
+         node {
+           id
+           email
+           username
+         }
+       }
+     }
+   }
+   ```
+
+   Replace `<CURSOR_VALUE>` with the actual cursor obtained from the previous response.
+
+5. Repeat steps 3 and 4, iterating through the cursors until you have extracted the complete dataset. For larger datasets, consider scripting these actions to automate the process effectively.
+
+### Automated Extraction Using GraphQL Tools
+
+For a more efficient, less manual approach, use automated tools available in the ecosystem:
+
+- Execute the tool via command line:
+
+  ```bash
+  python graphql-cursor-pagination-extractor.py --endpoint https://target/graphql --connection usersConnection --fields id,email,username --page-size 5
+  ```
+
+By automating, you're able to systematically extract all nodes within a connection, leveraging the edges/nodes pagination to its full adversarial potential.
+
+## Tools
+
+- **Burp Suite**
+- **Postman**
+- **graphql-cursor-pagination-extractor**

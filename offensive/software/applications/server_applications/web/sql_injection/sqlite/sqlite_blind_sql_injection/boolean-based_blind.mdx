@@ -1,0 +1,94 @@
+---
+title: Mastering Boolean-based Blind SQL Injection in SQLite
+description: Learn how to exploit Boolean-based Blind SQL Injection in SQLite via
+  SQL conditions and functions for data extraction.
+keywords:
+- Boolean-based Blind
+- SQL Injection
+- SQLite
+- data extraction
+- conditional logic
+- substr function
+- hexadecimal representation
+- information disclosure
+---
+
+# Boolean-based Blind
+
+## Context
+
+The purpose of this article is to guide you through the process of exploiting Boolean-based Blind SQL Injection in SQLite databases to extract data. This technique relies on sending SQL queries that return true or false responses, allowing us to infer data indirectly. It is assumed that you are already familiar with HTTP requests, basic database queries, Boolean logic, and general principles of SQLite Blind SQL Injection.
+
+## Theory
+
+### Boolean-based Blind SQL Injection Mechanics
+
+Boolean-based Blind SQL Injection is a method used to infer information from a database by exploiting SQL queries that evaluate to true or false. By carefully constructing SQL injection payloads, an attacker can manipulate these conditions to gain insights into the target data based on the response of the SQL server.
+
+The attack sequence typically involves injecting SQL conditions that check for specific data characteristics, and based on the true/false outcome, the attacker outside the database can deduce the presence or absence of certain information.
+
+### Conditional Logic in SQL
+
+Conditional logic in SQL is vital for manipulating query results, especially in the context of Boolean-based Blind SQL Injection. This technique leverages the lack of input validation to execute conditional SQL statements within a query. An attacker can use these conditions to selectively retrieve information by observing true or false evaluation based on the injected logic.
+
+### Functions for Data Extraction
+
+Certain SQL functions are particularly useful when performing Boolean-based Blind SQL Injection:
+
+- **`substr()`**: Extracts a substring from a string, often used to retrieve a single character at a time from a larger string.
+- **`unicode()`**: Retrieves the Unicode code of a character, useful for determining the exact character value without returning strings.
+- **`hex()`**: Converts a character to its hexadecimal equivalent, aiding in comparison operations.
+- **`ascii()`**: Similar to `unicode()`, it provides the ASCII value, commonly used for character comparison.
+
+These functions help break down the task of data extraction into smaller, manageable queries, allowing attackers to infer data one character at a time.
+
+### Case When Statements
+
+The SQL `CASE WHEN` construct is pivotal for executing logic based on specific conditions. It enables the execution of different branches of logic depending on whether a condition is true or false. In the context of SQL injection, it allows us to return specific values based on whether a condition meets a criterion, which is crucial for deducing information in a blind context.
+
+## Practice
+
+### Boolean-based Blind SQL Injection
+
+To execute a Boolean-based blind SQL injection attack in SQLite, follow these steps:
+
+- **Determine the Length of the Data**
+
+    ```bash
+    SELECT CASE WHEN (SELECT length(password) FROM users WHERE username='admin') > 5 THEN 'true' ELSE 'false' END;
+    ```
+
+    This query checks if the password length for the 'admin' user is greater than 5. A result of 'true' suggests the password length exceeds 5, while 'false' suggests it does not.
+
+- **Check Specific Character with ASCII**
+
+    ```bash
+    SELECT CASE WHEN (SELECT ascii(substr(password,1,1)) FROM users WHERE username='admin') = 97 THEN 'true' ELSE 'false' END;
+    ```
+
+    By verifying that the ASCII value of the first character of the password is 97, which corresponds to 'a', the query helps infer if 'a' is indeed the first character.
+
+- **Hexadecimal Character Verification**
+
+    ```bash
+    SELECT CASE WHEN (SELECT hex(substr(password,1,1)) FROM users WHERE username='admin') = '61' THEN 'true' ELSE 'false' END;
+    ```
+
+    This checks the first character of the password against its hexadecimal representation, '61', corresponding to 'a'.
+
+- **Unicode Character Confirmation**
+
+    ```bash
+    SELECT CASE WHEN (SELECT unicode(substr(password,1,1)) FROM users WHERE username='admin') = 97 THEN 'true' ELSE 'false' END;
+    ```
+
+    By confirming the Unicode value of the first character, this query further ensures accuracy in character inference.
+
+Successfully executing these steps allows you to infer sensitive data, like passwords, through careful evaluation of true/false SQL responses.
+
+## Tools
+
+- **SQLite3**
+- **Burp Suite** 
+
+These tools facilitate script writing and testing of SQL injections through HTTP requests, making them instrumental in practical exploitation scenarios.

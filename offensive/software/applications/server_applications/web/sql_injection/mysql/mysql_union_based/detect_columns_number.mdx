@@ -1,0 +1,81 @@
+---
+title: Detect Columns Number in MySQL with UNION Injection
+description: Learn how to find the number of columns using UNION-based SQL injection
+  in MySQL. Master the Null and Order By methods for accurate results.
+keywords:
+- SQL injection
+- MySQL
+- UNION injection
+- column count
+- Null method
+- Order By
+- database security
+---
+
+# Detect Columns Number
+
+## Context
+
+The focus of this article is to teach how to determine the number of columns in a MySQL table using UNION-based SQL injection. The reader should have a good understanding of SQL syntax, HTTP requests, database schema concepts, and be familiar with the basics of MySQL UNION-based injection techniques.
+
+## Theory
+
+### Union Injection Basics
+
+Union injection is an SQL injection technique that allows an attacker to combine the results of multiple SELECT statements. For a UNION injection to work, the number and data types of columns in the SELECT statements must match.
+
+### Determining Column Count
+
+To determine the correct number of columns for a successful UNION injection, two primary methods are used: the Null method and the Order By method.
+
+#### Null Method
+
+This method involves using NULL values in a UNION SELECT statement. NULLs can bypass data type constraints, enabling cross-comparison of different data types without errors. Increment the number of NULLs used in the UNION SELECT statement until no error is returned.
+
+#### Order By Method
+
+The Order By method involves incrementally increasing the ORDER BY clause number until an error is encountered. The highest working number before the error indicates the correct number of columns.
+
+## Practice
+
+### Determine Column Count with UNION Injection
+
+Using the UNION injection method to find the correct number of columns involves step-by-step testing with NULL values in a UNION SELECT statement.
+
+- Identify an injectable parameter by performing basic SQL injection tests.
+- Start with a single NULL in the UNION SELECT to check if the injection is working.
+
+```http
+http://example.com/page?id=1' UNION SELECT NULL--
+```
+
+- If no error occurs, increment the number of NULLs until you find the correct column count.
+
+```http
+http://example.com/page?id=1' UNION SELECT NULL,NULL--
+```
+
+- Continue this process, adding more NULLs, until you find the exact number where no errors are returned.
+
+### Determine Column Count with ORDER BY
+
+This technique uses the ORDER BY clause to reveal the number of columns.
+
+- Start by identifying an injectable parameter with basic SQL injection tests.
+- Use ORDER BY with a starting number of 1 to test the column order.
+
+```http
+http://example.com/page?id=1 ORDER BY 1--
+```
+
+- Increment the ORDER BY number step by step until an error is triggered.
+
+```http
+http://example.com/page?id=1 ORDER BY 2--
+```
+
+- Continue this process until an error occurs, which means you have attempted to order by more columns than exist. The highest working number before the error indicates the column count.
+
+## Tools
+
+- **sqlmap**: A powerful tool for automatic SQL injection and database takeover.

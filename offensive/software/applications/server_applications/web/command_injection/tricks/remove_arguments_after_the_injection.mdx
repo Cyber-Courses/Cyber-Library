@@ -1,0 +1,63 @@
+---
+title: Avoid Arguments Post-Command Injection
+description: Learn to exploit CLI parsing with '--' to remove arguments after injection
+  for reliable command execution.
+keywords:
+- command injection
+- argument termination
+- CLI parsing
+- security exploitation
+- -- end of options
+- payload injection
+- command line interface
+---
+
+# Remove Arguments After The Injection
+
+## Context
+
+This article delves into a technique used in command injection attacks, specifically focusing on the removal of arguments after the injection point. The objective is to demonstrate how attackers can terminate or remove subsequent command-line arguments to control command-line interface (CLI) parsing and alter the program behavior for exploitation. It is assumed that you are familiar with concepts such as how command-line interfaces and argument parsing work, as well as basic command injection techniques.
+
+## Theory
+
+### Argument Termination in Command-Line Parsing
+
+Argument termination is the process of stopping the interpretation of further command-line arguments beyond a specific point. In many command-line interface parsers, especially those adhering to POSIX standards, the use of `--` is significant. The `--` option is interpreted as the end of command options, meaning any arguments following `--` are treated as positional arguments or are ignored altogether.
+
+This feature of argument termination can become a vulnerability if improperly handled. It allows attackers to bypass restrictions that might otherwise be implicitly enforced by subsequent arguments or options. Exploiting this behavior, attackers can manipulate how injected commands are processed, potentially altering the application's expected operation.
+
+### Manipulating CLI Parsing with `--`
+
+The double dash, `--`, is a convention that signals the end of command options. When used strategically after a payload, it prevents the application from appending unwanted or potentially restrictive arguments. This technique can neutralize appended arguments that would otherwise restrict or sanitize the injected commands.
+
+For instance, if an attacker has a means to inject commands into an application and the application normally appends certain flags or options after user input for security purposes, injecting `--` would effectively bypass those controls.
+
+### Exploitation Scenarios for Argument Removal
+
+An attacker can inject a payload followed by `--` to ensure that only their intended command executes, with any subsequent appended arguments being ignored or treated as mere positional arguments. This can be particularly effective against applications that append security flags or restrictive options after user input. If the application developers rely on such appended arguments to enforce security measures, introducing `--` can disrupt this flow and lead to potential exploitation.
+
+## Practice
+
+### Injecting `--` to Remove Subsequent Arguments
+
+- **Identify a command injection point**: The first step is to find an injection point where user input is concatenated with additional arguments by the application. Understanding the command structure is critical to determine where these additional arguments are appended.
+
+- **Payload Example**:
+  ```bash
+  ; id --
+  ```
+  By injecting a payload with `--` after the command, further argument parsing is terminated. For example, the above payload injects the `id` command followed by `--` to stop the parsing of additional arguments.
+
+- **Submitting and Observing**: Submit the crafted payload and observe the application's response. If the payload is successful, any appended arguments are ignored or treated merely as positional arguments, effectively rendering them useless. You should check if the application fails to apply any restrictive options after encountering `--`.
+
+The expected outcome is that the injected command executes without interference from any appended arguments, enabling reliable exploitation of the target.
+
+## Tools
+
+- **Burp Suite**
+
+- **curl**
+
+- **wfuzz**
+
+These tools can be used to identify command injection points and assist in injecting payloads to test for argument termination vulnerabilities.

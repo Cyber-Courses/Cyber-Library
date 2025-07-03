@@ -1,0 +1,104 @@
+---
+title: MariaDB Command Execution via UDF Explained
+description: Learn how to execute system commands on MariaDB through User-Defined
+  Functions (UDFs) with a detailed guide.
+keywords:
+- MariaDB
+- User-Defined Functions
+- UDF
+- command execution
+- lib_mysqludf_sys
+- DLL injection
+- plugin directory
+- security risks
+---
+
+# COMMAND - UDF
+
+## Context
+
+This article explores how to execute system commands on MariaDB databases by leveraging User-Defined Functions (UDFs). It assumes you have a basic understanding of UDFs, shared objects, the plugin directory in MariaDB, and general concepts of MariaDB command execution.
+
+## Theory
+
+### User-Defined Functions (UDFs) in MariaDB
+
+User-Defined Functions (UDFs) allow developers to add custom functions to MariaDB. They extend the capabilities of MariaDB beyond the built-in SQL functions. However, if misused or improperly secured, UDFs can be exploited to execute system commands, posing significant security risks.
+
+### lib_mysqludf_sys Library
+
+The `lib_mysqludf_sys` library provides the ability to execute system commands through UDFs. This library can be exploited to run arbitrary system commands on the server hosting the MariaDB instance, offering a potent vector for attackers if they can upload and use this library.
+
+### DLL Injection in MariaDB
+
+DLL Injection, in the context of MariaDB, involves injecting a shared object to extend the functionality of the database. An attacker could upload a malicious shared object and register it as a UDF. This process involves:
+
+- Compiling a malicious shared object.
+- Placing it in the MariaDB plugin directory.
+- Creating a UDF using this shared object.
+- Executing commands via the UDF.
+
+### Plugin Directory in MariaDB
+
+The plugin directory in MariaDB is where the database looks for shared objects and plugins. It operates under the assumption that all files in this directory are trusted. By default, MariaDB loads plugins from this directory, meaning any shared object placed here can be executed by the database, making it a critical target for attackers.
+
+## Practice
+
+### Executing system commands via UDF in MariaDB
+
+To execute system commands in MariaDB using UDFs, follow the steps below:
+
+1. **Identify the plugin directory:**
+    
+    ```bash
+    SHOW VARIABLES LIKE 'plugin_dir';
+    ```
+    
+    Knowing where to place the shared object is essential for it to be loaded by MariaDB.
+
+2. **Determine the operating system:**
+
+    ```bash
+    SELECT @@version_compile_os;
+    ```
+    
+    This step ensures that the shared object is compiled for the correct operating system.
+
+3. **Compile the shared object:**
+
+    ```bash
+    gcc -shared -o lib_mysqludf_sys.so -fPIC lib_mysqludf_sys.c
+    ```
+    
+    Use a C compiler to create the shared object file from the `lib_mysqludf_sys` source code. Ensure the compilation matches the MariaDB server's architecture and OS.
+
+4. **Upload the compiled shared object to the plugin directory:**
+
+    ```bash
+    UPLOAD lib_mysqludf_sys.so TO plugin_dir
+    ```
+    
+    Place the compiled shared object into the plugin directory. You might need specific privileges to perform this action.
+
+5. **Create the UDF:**
+
+    ```bash
+    CREATE FUNCTION sys_exec RETURNS INTEGER SONAME 'lib_mysqludf_sys.so';
+    ```
+    
+    Register the new UDF `sys_exec` using the uploaded shared object.
+
+6. **Execute a system command using the UDF:**
+
+    ```bash
+    SELECT sys_exec('id');
+    ```
+    
+    This command executes the Unix `id` command via the UDF, demonstrating the ability to run arbitrary system commands.
+
+Using this method, you can leverage MariaDB vulnerabilities to execute system-level commands, providing substantial control over the host system.
+
+## Tools
+
+- **gcc**: Used to compile the shared object for UDF.
+- **MariaDB client**: Required for executing SQL commands against the MariaDB server.

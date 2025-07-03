@@ -1,0 +1,88 @@
+---
+title: JWT Token IDOR Exploitation Techniques
+description: Explore JWT Token manipulation techniques for IDOR exploitation, including
+  claims tampering and signature bypass.
+keywords:
+- JWT Token
+- IDOR
+- JWT claims manipulation
+- authorization bypass
+- token exploitation
+- security vulnerabilities
+- web security
+---
+
+# JWT Token IDOR
+
+## Context
+
+The purpose of this article is to demonstrate how exploiting Insecure Direct Object References (IDOR) through manipulation of JWT claims can lead to unauthorized resource access. To fully understand and apply the techniques described, you should be familiar with the structure and validation of JSON Web Tokens (JWT), general object access control concepts, and standard web authorization mechanisms.
+
+## Theory
+
+### JWT Claims as Object Identifiers
+
+JWT claims such as `sub`, `user_id`, or custom fields serve as references to specific application objects. These fields are often used for authorization decisions. However, if these claims are relied upon without proper validation and checks, attackers could manipulate them to access data that belongs to other users.
+
+### Vulnerability Model: JWT IDOR
+
+Applications that trust JWT claims for object access without verifying user authorization are vulnerable to IDOR attacks. An attacker can decode the JWT, modify the object identifier claim, then re-encode and sign it to submit the token and access unintended resources.
+
+### JWT None Algorithm and Weak Signing
+
+Certain implementations of JWT libraries mistakenly allow the use of the 'alg':'none' in the JWT header or rely on insufficiently secure signing keys. When exploited, this flaw allows attackers to craft unsigned tokens or tokens signed with easily guessable keys, which bypass signature verification altogether.
+
+## Practice
+
+### Manual JWT Claim Manipulation for IDOR
+
+- **Decode the JWT Payload**:
+  ```bash
+  echo '<JWT_TOKEN>' | cut -d'.' -f2 | python3 -c "import base64, sys; print(base64.urlsafe_b64decode(sys.stdin.read() + '===').decode('utf-8'))"
+  ```
+  This command decodes the JWT payload to allow inspection of the claims.
+
+- **Identify the Object Identifier Claim**:
+  Examine the decoded payload for claims like `sub` or `user_id` that represent object identifiers.
+
+- **Modify Claim Value**:
+  Alter the value of the relevant claim to mimic another valid user or object ID.
+
+- **Re-encode and Sign JWT**:
+  ```bash
+  python3 jwt_tool.py encode --alg HS256 --key <known_or_guessed_key> --payload '{\"sub\": \"2\"}'
+  ```
+  Use this command to re-encode and sign the JWT with the modified claims using a known or guessed signing key.
+
+- **Replace and Resend the Token**:
+  Substitute the modified JWT in your HTTP request and send it to the application to gain access to unauthorized resources.
+
+Outcome: This method allows an attacker to access another user's resources by manipulating JWT claims, bypassing authorization controls.
+
+### JWT None Algorithm Exploit
+
+- **Craft Unsigned JWT**:
+  ```bash
+  python3 jwt_tool.py encode --alg none --payload '{"sub": "2"}'
+  ```
+  Create a JWT with the 'alg':'none' algorithm in the header and a manipulated payload.
+
+- **Replace and Resend the Token**:
+  Use the crafted JWT to replace the original token and issue a request to the targeted web application.
+
+Outcome: This approach bypasses signature validation, allowing unauthorized access to resources.
+
+### Automated JWT IDOR Enumeration
+
+- **Automate Claims Enumeration**:
+  ```bash
+  python3 jwt_idor_enum.py --token <JWT_TOKEN> --claim sub --range 1-100 --key <key>
+  ```
+  Deploy this script to automatically modify claims and attempt resource access over a defined range of object IDs.
+
+Outcome: Automation of claim manipulation enables the enumeration and unauthorized access of multiple users’ data.
+
+## Tools
+
+- **jwt_tool**
+- **jwt_idor_enum.py**

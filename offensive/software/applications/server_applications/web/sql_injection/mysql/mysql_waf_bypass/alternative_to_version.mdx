@@ -1,0 +1,82 @@
+---
+title: Bypass WAF Using Alternative MySQL Version Functions
+description: Learn effective methods to retrieve MySQL version info without triggering
+  WAF defenses using alternatives to the VERSION function.
+keywords:
+- MySQL version
+- WAF evasion
+- '@@innodb_version'
+- '@@global.version'
+- '@@version'
+- SQL injection
+---
+
+# Alternative to VERSION
+
+## Context
+
+In this article, we explore methods to bypass Web Application Firewalls (WAFs) by using alternatives to the MySQL `VERSION` function. The intended readers are those familiar with techniques for WAF evasion and MySQL versioning. This guide focuses on practical methods to retrieve MySQL version information without triggering typical WAF defenses that block direct calls to the `version()` function.
+
+## Theory
+
+### MySQL Version Information Retrieval
+
+MySQL provides several methods to retrieve version information. These are often targeted by WAFs because knowing the version can reveal potential vulnerabilities specific to that MySQL release. The function `version()` is commonly blocked by WAFs because of the risk of information leakage.
+
+### WAF Evasion Techniques
+
+WAFs deploy a variety of rules to block SQL injection attempts and direct access to sensitive functions like `version()`. However, these defenses may not be comprehensive and can often overlook alternative approaches to retrieving the same information. Bypassing these defenses involves identifying and utilizing overlooked or non-standard methods for extracting version data.
+
+## Practice
+
+### Using @@innodb_version for WAF Evasion
+
+To bypass WAF filters, you can use the `@@innodb_version` variable, which also provides the version number of MySQL. This variable might not be blocked if the WAF is only looking for `version()` usage.
+
+- Use `@@innodb_version` to retrieve MySQL version information.
+  
+  ```bash
+  SELECT @@innodb_version;
+  ```
+
+  ```
+  8.0.23
+  ```
+
+**Result**: Successfully retrieve version information without triggering the WAF.
+
+### Using @@global.version for WAF Evasion
+
+Another alternative is the `@@global.version` variable. It serves as an excellent method to obtain version details while evading WAF inspections that look for direct calls to the `version()` function.
+
+- Use `@@global.version` to bypass the WAF and get the version info.
+  
+  ```bash
+  SELECT @@global.version;
+  ```
+
+  ```
+  8.0.23
+  ```
+
+**Result**: Retrieve version information bypassing WAF rules.
+
+### Using @@version for WAF Evasion
+
+As an alternative to the `version()` function, the `@@version` variable can be used. It offers the same information and may not be included in WAF signatures looking exclusively for the function call.
+
+- Use `@@version` as an alternative to the `version()` function.
+  
+  ```bash
+  SELECT @@version;
+  ```
+
+  ```
+  8.0.23
+  ```
+
+**Result**: Access version information without triggering WAF defenses.
+
+## Tools
+
+- **MySQL Client**: Used to perform the SQL queries and retrieve the version information from the MySQL server. This client is integral for executing the commands needed to test these evasion techniques.

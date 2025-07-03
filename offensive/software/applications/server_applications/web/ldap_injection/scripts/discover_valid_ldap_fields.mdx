@@ -1,0 +1,80 @@
+---
+title: 'Discover Valid LDAP Fields: A Comprehensive Guide'
+description: Understand and automate LDAP attribute enumeration with scripting techniques
+  to discover valid fields in LDAP schema.
+keywords:
+- LDAP attribute enumeration
+- LDAP injection
+- automated LDAP discovery
+- LDAP schema
+- directory service concepts
+- LDAP query structure
+- Python scripts for LDAP
+- LDAP field discovery
+---
+
+# Discover Valid LDAP Fields
+
+## Context
+
+The goal of this technique is to enumerate valid LDAP attribute fields through the use of injection and scripting methodologies. This enables further exploitation activities, providing a broader attack surface. Readers should be familiar with the fundamentals of the LDAP protocol, directory service concepts, the structure of LDAP queries, and general LDAP injection techniques.
+
+## Theory
+
+### LDAP Attribute Enumeration via Injection
+
+LDAP attribute enumeration involves identifying valid attribute names within an LDAP schema by exploiting injection vulnerabilities. Attackers can leverage this method by monitoring error messages or examining any behavioral differences that arise due to the injections. The core concept is to inject candidate attribute names into LDAP queries and observe the LDAP server’s responses. This allows attackers to distinguish valid attributes from invalid ones based on the server's feedback.
+
+### Automated LDAP Field Discovery with Scripts
+
+Scripts are often employed to automate the discovery process. By using scripts, attackers can systematically test numerous attribute names, significantly increasing the speed and coverage of the LDAP field discovery process. The data flow in this process typically involves a script that injects attribute names sourced from a wordlist, evaluates server responses, and logs any valid fields that are discovered.
+
+### Wordlists and Fuzzing Strategies
+
+The use of comprehensive attribute wordlists is crucial for improving discovery rates. These wordlists include both common and custom attribute names, which might be specific to certain LDAP implementations. In order to bypass input filters, fuzzing techniques may encode or obfuscate attribute names, allowing injections to circumvent basic defenses.
+
+## Practice
+
+### Automated LDAP Attribute Field Enumeration Using Python Script
+
+- **Prepare a wordlist**: Compile a list of common and customized LDAP attribute names. This wordlist enhances the probability of identifying existing fields within the LDAP schema.
+
+    ```text
+    GivenName
+    UID
+    Mail
+    cn
+    sn
+    ```
+
+- **Python Script for Automation**: Create a script utilizing Python to automate the enumeration of LDAP fields against a target application.
+
+    ```python
+    #!/usr/bin/env python3
+    import requests
+    
+    url = 'http://target-app/ldap_search'
+    wordlist = open('ldap_attributes.txt')
+    
+    for attr in wordlist:
+        payload = f'*)({attr.strip()}=*)'
+        r = requests.post(url, data={'search': payload})
+        
+        if 'Invalid attribute' not in r.text:
+            print(f'Valid attribute found: {attr.strip()}')
+    ```
+
+    This script injects each attribute from the wordlist and examines the server's response for error messages indicating invalid fields.
+
+- **Execute the Script**: Run the script to initiate the enumeration process.
+
+    ```bash
+    python3 ldap_field_enum.py
+    ```
+
+The execution of this script will output a list of valid LDAP attribute fields, offering new targets for further exploitation and more refined LDAP queries.
+
+## Tools
+
+- **python3**
+- **requests**

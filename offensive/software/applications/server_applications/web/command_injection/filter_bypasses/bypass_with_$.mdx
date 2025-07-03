@@ -1,0 +1,71 @@
+---
+title: Bypass Command Injection Filters with $()
+description: Learn how to bypass command injection filters using shell command substitution
+  with $(). Explore techniques, payloads, and tools.
+keywords:
+- command injection
+- $() substitution
+- filter bypass
+- shell scripting
+- command execution
+- input sanitization
+- security
+---
+
+# Bypass With $()
+
+## Context
+
+This article explores how to bypass command injection filters by leveraging shell command substitution using `$()`. This technique allows attackers to execute commands within a vulnerable application by embedding them in `$()`, thereby bypassing common input filters. The reader should be familiar with command line interpreters, shell scripting, environment variables, and the basics of command injection exploitation.
+
+## Theory
+
+### Command Substitution with $() in Shells
+
+The `$()` syntax in shell scripting is used for command substitution. This approach facilitates the execution of a command embedded within larger shell commands and returns its output. It is a powerful construct that allows dynamic execution, which can be exploited if input is improperly sanitized. By using `$()`, an attacker can execute commands indirectly, bypassing direct keyword or character filtering mechanisms.
+
+### Bypassing Filters Using $()
+
+In scenarios where an application implements filtering that blocks direct command keywords, using `$()` can become an effective bypass strategy. The filtering logic might only focus on blocking certain command names or special characters, but it might not account for command substitution syntax. Attackers can exploit this oversight by embedding a payload within `$()`, effectively evading naive filtering mechanisms.
+
+### Dynamic Command Execution via $()
+
+The `$()` syntax permits runtime evaluation, allowing attackers to dynamically construct and execute commands. This becomes particularly dangerous in cases where applications pass unsanitized user input to system shell commands. Such implementation flaws create a fertile ground for exploitation using `$()`, enabling attackers to manipulate application behavior or access sensitive information through dynamic command execution.
+
+## Practice
+
+### Bypassing Command Injection Filters with $()
+
+Follow these steps to exploit vulnerable inputs using command substitution:
+
+- **Locate Vulnerable Input Fields:** Identify parameters within the application where user input is passed to a shell command. Understanding how and where input interacts with the system shell is crucial for targeting command injection vulnerabilities.
+
+- **Basic Command Substitution Payload:** Use the payload `$(id)` to perform a basic command substitution, which executes the `id` command to retrieve user identity information.
+
+  ```bash
+  $(id)
+  ```
+
+- **Advanced Command Substitution Payload:** Employ `$(cat /etc/passwd)` to attempt reading sensitive files. This payload demonstrates how command substitution can be used to access confidential system files.
+
+  ```bash
+  $(cat /etc/passwd)
+  ```
+
+- **Injection Example with HTTP Request:** Use curl to send a request where `$()` is incorporated within a parameter, leveraging command execution.
+
+  ```bash
+  curl http://target/app?user=$(whoami)
+  ```
+
+- **Evaluate Response:** After injecting the payload, analyze the application response for command execution evidence, such as output data or altered application behavior. This verification step is essential to confirm the success of the attack.
+
+When effectively executed, these steps lead to arbitrary command execution via the bypassing of input filters using the command substitution syntax `$()`.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP** 
+
+These tools assist in probing for vulnerabilities, injecting payloads, and observing responses, which are key components in crafting and verifying the effectiveness of command injection attacks.

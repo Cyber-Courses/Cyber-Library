@@ -1,0 +1,126 @@
+---
+title: Mastering Command Chaining Techniques in Cybersecurity
+description: Explore command chaining for impactful web injections using semicolon,
+  logical operators, and pipes.
+keywords:
+- command chaining
+- cybersecurity
+- web injection
+- logical operators
+- semicolon
+- pipe command
+- conditional execution
+- background execution
+---
+
+# Chaining Commands
+
+## Context
+
+This detailed guide is aimed at offensive operators, exploring the technique of chaining multiple shell commands during web command injection. The goal is to maximize the impact of an attack and bypass simple input restrictions by leveraging command chaining to execute multiple commands in one go. The reader is assumed to possess prior knowledge of shell commands, command-line interfaces, logical operators, and command injection techniques.
+
+## Theory
+
+### Purpose and Power of Command Chaining
+
+Command chaining is a technique used to combine multiple shell commands into a single injection payload. This practice enables attackers to execute commands sequentially, conditionally, or even in parallel after a successful injection. By chaining commands, attackers can enhance the scope of their attack, evade simple input filters, and automate tasks post-exploitation with minimal effort.
+
+### Shell Operators for Chaining
+
+Various shell operators allow for effective command chaining:
+
+- **Semicolon (`;`)**: Executes commands sequentially, irrespective of their success or failure.
+- **Logical AND (`&&`)**: Executes the subsequent command only if the preceding command is successful.
+- **Logical OR (`||`)**: Executes the subsequent command only if the preceding command fails.
+- **Background Execution (`&`)**: Runs a command in the background, proceeding to the next command immediately.
+- **Pipe (`|`)**: Passes the output of one command as the input to the next, allowing for data manipulation and filtering.
+
+### Conditional and Parallel Execution
+
+Chaining commands using conditional operators (&&, ||) facilitates logic-based payloads that enhance stealth and help evade filters. Additionally, background execution (&) and piping (|) enable running commands in parallel and manipulating data concurrently, providing attackers with more options to exploit vulnerabilities.
+
+### Threat Surface Expansion via Chaining
+
+Chaining commands can significantly expand the attack surface by allowing attackers to conduct multi-stage payloads in a single request. This capability enables attackers to integrate enumeration, exploitation, and data exfiltration processes in one cohesive operation, which increases the complexity for defenders attempting to mitigate such threats.
+
+## Practice
+
+### Sequential Command Chaining with Semicolon
+
+To execute commands sequentially without regard to success or failure:
+
+```bash
+whoami; id; uname -a
+```
+
+This payload injects three commands to collect system and user information one after the other.
+
+**Outcome**: This technique ensures multiple commands are executed in order, providing attackers with a stream of information.
+
+### Conditional Execution with Logical AND (`&&`)
+
+To execute a command based on the success of a previous command:
+
+```bash
+cat /etc/passwd && echo 'Success'
+```
+
+In this payload, "Success" is echoed only if the `/etc/passwd` file is accessed successfully.
+
+**Outcome**: This method ensures the second command only runs if the first is successful, beneficial for executing logic-based chains.
+
+### Conditional Execution with Logical OR (`||`)
+
+To execute a command conditioned on the failure of an earlier command:
+
+```bash
+cat /no_such_file || echo 'Failed'
+```
+
+This payload echoes "Failed" only if the attempt to read a non-existent file fails.
+
+**Outcome**: The second command runs only upon failure of the first, which is useful for implementing error handling or bypassing filters.
+
+### Background Execution with `&`
+
+Execute commands in parallel, running one in the background:
+
+```bash
+sleep 10 & whoami
+```
+
+The `sleep` command is run in the background, and `whoami` follows immediately.
+
+**Outcome**: Running commands in parallel can be applied for timing attacks or creating disruptive effects like DoS.
+
+### Output Piping with `|`
+
+To manipulate or filter the output of a command:
+
+```bash
+ls -la / | grep bin
+```
+
+This payload lists the root directory and filters for entries containing "bin".
+
+**Outcome**: Piping outputs through additional commands helps in refining results, essential in many enumeration tasks.
+
+### Complex Multi-Operator Chaining
+
+Combine multiple operators for intricate logic chaining:
+
+```bash
+id && uname -a || echo 'uname failed'; whoami
+```
+
+This chained command uses AND, OR, and a semicolon to create robust logic-centric execution.
+
+**Outcome**: This enables flexible and logic-driven execution of multiple commands within a single injection payload.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP** 
+
+These tools can be used to facilitate and automate the execution of command injections and analysis of responses in web applications.

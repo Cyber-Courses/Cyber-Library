@@ -1,0 +1,66 @@
+---
+title: Bypass Command Injection with Single Quote Techniques
+description: Learn how to bypass command injection filters using single quote splitting
+  in web apps.
+keywords:
+- command injection
+- single quote bypass
+- web security
+- input validation weaknesses
+- quote splitting payloads
+---
+
+# Bypass With Single Quote
+
+## Context
+
+The objective of this article is to demonstrate how to bypass command injection filters using single quote splitting techniques in web applications. This method leverages input validation weaknesses to execute commands that would otherwise be blocked by simple filters. Assumed prerequisite knowledge includes understanding command execution, input sanitization, and general command injection techniques.
+
+## Theory
+
+### Single Quote Injection in Command Contexts
+
+Single quote injection is a technique used in command contexts where attackers exploit shell interpreters' treatment of single quotes. These injects can split or terminate string arguments within shell commands. Shell interpreters view single quotes as string delimiters, significantly influencing how commands are parsed. When input validation is inadequate, injected single quotes can escape or split string arguments, altering the command structure to achieve malicious purposes.
+
+### Quote Splitting Payloads for Filter Bypass
+
+Quote splitting payloads are crafted to insert single quotes within commands. This technique is used to evade blacklists or input filters that look for exact dangerous strings. An attacker might create a payload such as `w'h'o'am'i` to bypass filters explicitly blocking the string `whoami`. These filters often fail to detect or match fragmented payloads because they depend on literal string matching, allowing them to be bypassed by altering the structure of the command using embedded quotes.
+
+### Input Validation Weaknesses Enabling Single Quote Bypass
+
+Applications that rely on blacklisting known dangerous strings or lack comprehensive quoting logic often have input validation weaknesses. These weaknesses occur when an application fails to properly re-quote or sanitize user input before executing that input in a shell command. As a result, this flawed implementation allows malicious payloads containing single quotes to execute commands unintentionally.
+
+## Practice
+
+### Bypassing Command Injection Filters with Single Quote Splitting
+
+To execute this technique, follow these steps:
+
+- **Identify Vulnerable Input Fields:** Look for fields within the application where command injection might be possible. This requires initial reconnaissance to find endpoints that execute shell commands based on user input, even if basic command injection attempts are filtered.
+  
+- **Craft the Payload:** Use a payload like `w'h'o'am'i` which splits a command such as `whoami` into fragments with single quotes. This transformation effectively evades basic filtering mechanisms looking for the full command word.
+  
+  ```sql
+  w'h'o'am'i
+  ```
+
+- **Send the Payload:** Use a tool to inject the crafted payload into the vulnerable parameter. The command below demonstrates sending the payload using `curl` in a POST request:
+
+  ```bash
+  curl -X POST -d "username=w'h'o'am'i" http://target-app/vuln-endpoint
+  ```
+
+- **Confirm Successful Bypass:** Observe the output of the command to verify command execution. Successful execution may return expected command output, showing that the injection bypass was successful.
+
+  ```text
+  www-data
+  ```
+
+By following this process, you can achieve command execution by bypassing input filters using single quote splitting.
+
+## Tools
+
+- **Curl**
+- **Burp Suite** 
+
+These tools are useful for manually sending crafted requests or for automating payload delivery to assess filter bypass in web applications.

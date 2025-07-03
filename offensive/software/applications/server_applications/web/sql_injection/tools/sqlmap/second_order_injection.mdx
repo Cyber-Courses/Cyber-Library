@@ -1,0 +1,93 @@
+---
+title: 'Second Order Injection: Understanding & Exploit Techniques'
+description: Explore how to exploit second order SQL injection vulnerabilities using
+  Sqlmap and manual methods with this comprehensive guide.
+keywords:
+- Second Order Injection
+- SQL Injection
+- Sqlmap
+- Stored Input
+- Web Security
+- Injection Exploit
+- Cybersecurity Techniques
+---
+
+# Second Order Injection
+
+## Context
+
+In this article, we will explore the operational use of Sqlmap to exploit second order SQL injection vulnerabilities. Readers are assumed to have a basic understanding of SQL injection, web application architecture, and database interaction. This technique is critical for attackers needing to exploit stored inputs that are executed later in a different context.
+
+## Theory
+
+### Understanding Second Order Injection
+
+Second order injection involves a scenario where a seemingly benign input is stored and later used in a SQL query within a different execution context. This vulnerability arises due to improper sanitization of stored inputs that become part of a database interaction later. The attack sequence typically involves two main phases: the initial storage of an input and its subsequent retrieval and execution within a SQL query.
+
+### Identifying Stored Input Points
+
+To exploit a second order injection, the attacker must identify input fields that are stored and used in later SQL operations. The process involves:
+
+- Submitting a specialized payload through an input field.
+- Triggering the context where this stored input is later used, such as through a query execution.
+- Observing if the payload executed results in any anomalous behavior suggestive of a SQL injection.
+
+### Exploiting Delayed Execution Flaws
+
+Exploitation involves crafting payloads specifically designed to be stored and executed within a SQL context later. Attackers may need to use encoding or obfuscation techniques to bypass input filters. The general approach includes:
+
+- Carefully crafting payloads for storage by identifying input points.
+- Triggering the specific context to ensure the SQL execution path includes the stored input.
+- Executing the SQL injection attack effectively.
+
+## Practice
+
+### Exploiting Second Order SQL Injection with Sqlmap
+
+The following steps guide you through exploiting a second order SQL injection vulnerability using Sqlmap:
+
+1. **Automate the injection with Sqlmap:**
+
+    ```bash
+    sqlmap -u "http://example.com/vuln" --second-order "http://example.com/trigger" --data="input=PAYLOAD"
+    ```
+
+    Use Sqlmap to automate the process by specifying both the vulnerable URL and the URL that triggers the execution of your stored input.
+
+2. **Increase testing depth:**
+
+    ```bash
+    --level=5 --risk=3
+    ```
+
+    Adjust these parameters to ensure a comprehensive testing by increasing the level and risk factors.
+
+3. **Run in non-interactive mode:**
+
+    ```bash
+    --batch
+    ```
+
+    This option lets Sqlmap run automatically without manual interventions, which can be useful for large-scale operations.
+
+### Manual Verification of Second Order Injection
+
+If automation is not feasible, a manual approach can be taken to verify the vulnerability:
+
+- **Identify fields that store data:** Focus on input fields used across different application sections.
+  
+- **Submit a test payload:**
+
+    ```sql
+    '; DROP TABLE users; --
+    ```
+
+    Craft and enter a payload designed to test for SQL injection vulnerabilities.
+
+- **Trigger the execution context:** Use the application flow to retrieve and execute the stored input, monitoring for any unintended SQL execution effects.
+
+## Tools
+
+- **sqlmap**: A powerful open-source tool for detecting and exploiting SQL injection flaws, able to automate the detection of vulnerabilities in web applications, including second order injections.
+
+By following these detailed steps and understanding the underlying theory, you can effectively exploit second order SQL injection vulnerabilities in a test environment using Sqlmap. This practical guide aims to empower cybersecurity practitioners with the knowledge to anticipate, detect, and exploit stored input injection errors comprehensively.

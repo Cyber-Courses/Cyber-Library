@@ -1,0 +1,91 @@
+---
+title: Exploiting SQLite to Read Server Files
+description: Learn how to leverage SQL injection in SQLite to access server files
+  securely and responsibly.
+keywords:
+- SQLite
+- SQL injection
+- file read
+- PRAGMA
+- database schema
+- sqlite_master
+- security exploitation
+- file system access
+---
+
+# SQLite Read File
+
+## Context
+
+This article will delve into how to exploit SQLite through SQL injection to read files from a server. It assumes you have foundational knowledge of database schema structures, file system permissions, and crafting SQL queries. This guide focuses on the offensive aspects of SQLite file manipulation, specifically using SQL injection techniques.
+
+## Theory
+
+### SQLite File Read via SQL Injection
+
+SQLite databases can sometimes be manipulated through SQL injection to enable an attacker to read files on the server. This is contingent on vulnerabilities within the web application that allow untrusted input to be fed into SQLite queries without proper sanitization or parameterization.
+
+**Vulnerability Model:** An attacker can exploit these SQL injection vulnerabilities by injecting specific commands that instruct SQLite to read and return file contents.
+
+**Attack Sequence:** The typical attack flow involves identifying an injectable parameter, using SQL injection to bypass input controls, and executing special SQLite functions that read files from the server.
+
+### SQLite Master Table and PRAGMA
+
+The `sqlite_master` table is a critical component within SQLite databases, storing metadata about all the database objects such as tables, indexes, and details about the structure.
+
+**Core Principle:** PRAGMA commands are SQLite-specific, allowing queries about the database's settings and schema without altering data. These can be vital in enumerating database structures and discovering hidden tables or paths.
+
+**Attack Sequence:** An attacker can use PRAGMA commands to list all databases and glean insights into the file system paths revealed by the query results.
+
+### File System Access via SQLite
+
+Exploiting file system access is possible if the database user has the necessary permissions to read or even execute files on the server.
+
+**Vulnerability Model:** SQLite can execute commands that access the file system directly if permission policies allow the database engine such access.
+
+**Precondition:** Ensure the SQL query is run with a context that has permissions required to read the target files. Attention should be paid to the application’s environment and user permissions.
+
+**Attack Sequence:** Using SQL injection, an attacker can craft SELECT statements and specific SQLite functions to read data from text files located on the file system.
+
+## Practice
+
+### File Read via SQL Injection
+
+To conduct a file read by exploiting a SQL Injection vulnerability, follow these steps:
+
+- Use SQL injection to read files with SQLite-specific functions:
+  
+  ```bash
+  SELECT readfile('/etc/passwd');
+  ```
+  *This command attempts to read the contents of /etc/passwd if server permissions allow.*
+
+- List all tables within a database to identify potential data exposure points:
+  
+  ```bash
+  SELECT * FROM sqlite_master WHERE type='table';
+  ```
+  *This command enumerates all tables, revealing potential targets for further exploitation or exploration.*
+
+- Use PRAGMA to list databases:
+  
+  ```bash
+  PRAGMA database_list;
+  ```
+  *This command reveals the file paths of all databases managed by the SQLite instance, offering insight into accessible files.*
+
+- Query the schema of a specific table to understand its structure:
+
+  ```bash
+  SELECT sql FROM sqlite_master WHERE tbl_name='users';
+  ```
+  *This command retrieves the SQL used to create the 'users' table, indicating possible data fields and useful attack vectors.*
+
+Upon successful exploitation, you will have accessed sensitive data files through SQL injection techniques leveraged against SQLite. It's crucial to ensure that all actions are carried out responsibly and within the bounds of legal and ethical standards.
+
+## Tools
+
+- **sqlite3**
+- **sqlmap** 
+
+These tools can aid in executing the outlined techniques, allowing automated and more extensive testing of SQLite SQL injection scenarios.

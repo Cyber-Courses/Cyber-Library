@@ -1,0 +1,95 @@
+---
+title: SSRF Discovery Techniques for Web Applications
+description: Learn techniques to discover SSRF vulnerabilities, including parameter
+  fuzzing, DNS monitoring, and behavioral analysis in web applications.
+keywords:
+- SSRF discovery
+- web application vulnerabilities
+- parameter fuzzing
+- DNS monitoring
+- behavioral analysis
+- image fetchers
+- PDF generators
+- URL preview
+---
+
+# Discovery
+
+## Context
+
+Server-Side Request Forgery (SSRF) discovery involves identifying potential vulnerabilities in web applications where attackers can exploit server-side capabilities to make unauthorized requests. This process is crucial in an offensive security context as it allows operators to reveal endpoints susceptible to hostile manipulations. You should be familiar with HTTP requests, web server architecture, URL parsing, and the basic concepts of SSRF.
+
+## Theory
+
+### SSRF Discovery Surface in Web Applications
+
+SSRF discovery is about locating application features or endpoints that accept user-supplied URLs to initiate server-side HTTP requests. Attackers typically seek endpoints that fetch remote resources, due to their inherent risk of triggering unintended actions. The discovery phase emphasizes identifying sites where user inputs are incorporated into server-initiated requests.
+
+### Common SSRF-Prone Features and Endpoints
+
+Certain web application features are particularly vulnerable to SSRF attacks due to their operational requirements. These include:
+
+- **Image Fetchers:** Tools that display or manipulate images from specified URLs.
+- **PDF Generators:** Utilities that convert URLs to PDF documents.
+- **URL Preview Features:** Services that generate previews of the content at a given URL.
+- **Webhooks:** Functions that post messages to provided URLs.
+- **SSO Endpoints:** Single sign-on systems that rely on URL-based communication.
+
+Additionally, endpoints used for importing data from external URLs or interacting with internal services are prime SSRF candidates.
+
+### Parameter Name Fuzzing and SSRF Indicators
+
+Parameter name fuzzing involves testing various parameter names to identify those that could initiate server-side requests. Begin by using common SSRF keywords like `url`, `link`, `target`, `dest`, `next`, `data`, and `callback`. Monitor application responses for signs of server-side fetching, such as error messages or content discrepancies.
+
+### Behavioral Analysis for SSRF Discovery
+
+SSRF discovery relies on detecting how applications handle user-provided URLs. Effective strategies include:
+
+- Monitoring for out-of-band interactions with DNS or HTTP logs to confirm server-side activity.
+- Analyzing timing variations, error responses, and reflected content for clues indicating SSRF behavior.
+
+## Practice
+
+### Manual SSRF Endpoint Discovery via Parameter Fuzzing
+
+1. **Command Line Fuzzing:**
+
+   ```bash
+   ffuf -w ssrf-params.txt -u 'https://target.com/page?FUZZ=http://attacker.com' -fs 0
+   ```
+   
+2. **Review Responses:**
+   - Look for anomalies such as errors, timeouts, or unexpected content in responses that suggest SSRF processing.
+
+### Out-of-Band SSRF Discovery Using DNS Logging
+
+1. **Prepare for OOB Detection:**
+   - Register a unique domain with a service like `dnslog.cn` or `Burp Collaborator`.
+
+2. **Send Request:**
+
+   ```bash
+   curl 'https://target.com/page?url=http://<unique>.dnslog.cn'
+   ```
+   
+3. **Monitor DNS Logs:**
+   - Observe the DNS logging service for queries from the target server to confirm server-side request execution.
+
+### Error-Based SSRF Discovery via Crafted URLs
+
+1. **Send Command:**
+
+   ```bash
+   curl 'https://target.com/page?url=http://localhost:12345'
+   ```
+   
+2. **Analyze Responses:**
+   - Check for unusual error messages or delayed responses which can indicate attempts to connect with internal resources.
+
+## Tools
+
+- **ffuf**
+- **Burp Collaborator**
+- **dnslog.cn**
+
+This structured approach should equip you to efficiently identify and confirm SSRF vulnerabilities within target applications, using both manual strategies and automated tools.
