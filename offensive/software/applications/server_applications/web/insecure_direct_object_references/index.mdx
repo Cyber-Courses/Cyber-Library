@@ -1,0 +1,79 @@
+---
+title: Understanding Insecure Direct Object References
+description: Learn to identify and exploit IDOR vulnerabilities in web apps and APIs.
+keywords:
+- IDOR
+- insecure direct object references
+- access control
+- unauthorized data access
+- API security
+- object reference manipulation
+- web application vulnerabilities
+- REST API exploitation
+- privilege escalation
+- parameter tampering
+---
+
+# Insecure Direct Object References
+
+## Context
+
+Insecure Direct Object References (IDOR) occur when an application exposes a reference to an internal object in a way that allows users to manipulate it to access unintended data. This vulnerability is part of broader access control flaws and is commonly found in web applications and APIs. This guide aims to equip offensive operators with the skills to identify, exploit, and validate IDOR vulnerabilities.
+
+## Theory
+
+### IDOR Fundamentals
+
+Insecure Direct Object References happen when user-controllable input is directly from data elements used as object references without robust authorization checks. The vulnerability exploits the reliance on client-side inputs to determine object access, leading attackers to manipulate references such as IDs, filenames, or keys to access unauthorized resources. Commonly, IDOR is a result of missing or inadequate server-side authorization validation, allowing attackers to guess or enumerate valid references.
+
+### Common IDOR Attack Surfaces
+
+Attack surfaces for IDOR typically involve user input, such as URLs or POST bodies, that directly maps to backend resource identifiers. An attacker can authenticate as a low-privilege user, intercept their requests, and modify object references, assuming there are no further checks on this input at the server side. Automated scripts can be employed to enumerate predictable or sequential object IDs, expanding the attack surface and potentially identifying exploitable endpoints rapidly.
+
+### Reference Manipulation Techniques
+
+Object references like numeric identifiers, UUIDs, hashes, or filenames are potential vectors for IDOR attacks. Simple obfuscation tactics, such as hashing or encoding, do not inherently protect against this vulnerability if robust authorization measures are absent. To exploit IDOR, an attacker typically modifies the parameter values within legitimate requests to test the application's response to unauthorized access attempts or privilege escalations.
+
+### IDOR in Modern APIs
+
+Modern APIs, including REST, GraphQL, and mobile APIs, frequently expose object references in patterns that may be predictable. The underlying susceptibility to IDOR in these APIs often arises from a lack of granular authorization checks. As such, the API layer requires just as much scrutiny as traditional web endpoints in identifying possible IDOR vectors.
+
+## Practice
+
+### Manual IDOR Exploitation via Parameter Tampering
+
+1. **Identify endpoints**: Look for where user-controllable parameters reference objects in URLs or request bodies, such as `/user/123/profile`.
+2. **Baseline request**: Authenticate as a low-privilege user and use `curl`:
+   ```bash
+   curl -b sessionid=abc123 https://target-app.com/api/user/123/profile
+   ```
+3. **Modify object reference**: Attempt accessing other users' data:
+   ```bash
+   curl -b sessionid=abc123 https://target-app.com/api/user/124/profile
+   ```
+4. **Observe response**: Analyze the response for unauthorized data or error messages indicating access.
+
+**Outcome**: Successful response means unauthorized data access is possible due to an IDOR vulnerability.
+
+### Automated IDOR Enumeration with ffuf
+
+1. **Utilize ffuf** to fuzz a user ID parameter, checking for objects accessible without authorization:
+   ```bash
+   ffuf -u https://target-app.com/api/user/FUZZ/profile -b sessionid=abc123 -w users.txt -mc 200
+   ```
+
+**Outcome**: This automated process can identify accessible resources, providing a list of data points vulnerable to IDOR.
+
+### IDOR Exploitation in API Requests (Burp Suite Repeater)
+
+1. **Capture a valid request**: Use Burp Suite Proxy to intercept an API request referencing a user-owned object.
+2. **Modify the object reference**: Change the object ID or filename within Burp Suite Repeater.
+3. **Analyze the response**: Send the modified request and check if unauthorized access to data occurs.
+
+**Outcome**: Such tampering can result in unauthorized privilege escalation or access to sensitive data if successful.
+
+## Tools
+
+- **ffuf**
+- **Burp Suite**
+- **curl**
