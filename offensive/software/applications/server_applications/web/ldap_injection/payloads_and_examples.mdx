@@ -1,0 +1,92 @@
+---
+title: 'LDAP Injection Payloads: Practical Examples'
+description: Explore LDAP injection payloads & examples for offensive operations.
+  Learn to manipulate LDAP filters with crafted payloads.
+keywords:
+- LDAP injection
+- payloads
+- LDAP filter manipulation
+- authentication bypass
+- user enumeration
+- wildcard exploitation
+- privilege escalation
+---
+
+# Payloads and Examples
+
+## Context
+
+This article focuses on demonstrating practical LDAP injection payloads and their effects on LDAP queries for offensive operations. Before proceeding, you should have a solid understanding of the LDAP protocol structure and operation, the syntax and logic of LDAP filters, and the fundamentals of LDAP injection attacks.
+
+## Theory
+
+### LDAP Injection Payload Construction
+
+LDAP injection payloads are carefully crafted strings that manipulate the logic of LDAP filters to alter query results or bypass authentication mechanisms. These payloads exploit filter logic by leveraging wildcards, logical operators, and by manipulating the structure of filters. The core vulnerability exploited here is the unsanitized user input that gets concatenated into LDAP filters, allowing attackers to inject crafted payloads that modify the intended query logic.
+
+### Bypassing LDAP Filters with Payloads
+
+Attackers can bypass LDAP filters by injecting always-true conditions into queries. This technique allows bypassing authentication checks or enumerating directory objects inadvertently exposed by the altered query logic. The use of wildcards (*) and logical OR (|) operators can match all entries or bypass specific attribute checks. Additionally, injecting additional filter components can escalate privileges or allow access to unauthorized data.
+
+### Common LDAP Injection Payload Patterns
+
+Several common payload patterns are frequently used in LDAP injection attacks:
+
+1. **Always-true payloads**: An example is `(uid=*)` or `(|(uid=*))`, which are used to force the query to match any entry regardless of the actual user ID.
+2. **OR-based bypass**: Payloads such as `(|(cn=admin)(cn=*))` leverage the logical OR operator to match either an administrative user or any user with a common name.
+3. **AND-based manipulation**: Payloads like `(&(objectClass=user)(uid=*))` combine logical AND operators with wildcards to refine search scope while matching any user ID.
+4. **Wildcard exploitation**: This technique uses payloads like `(cn=*)` to match all common names, exploiting the lack of restriction on wildcard usage.
+
+## Practice
+
+### Injecting Always-True LDAP Payloads for Authentication Bypass
+
+- **Payload**: `*) (| (uid=*))`
+  
+  This payload injects an always-true OR condition to bypass user checks.
+
+- **Execution**:
+  - Submit this payload in the username or search field of the vulnerable application.
+  
+- **Outcome**: The attacker gains access without valid credentials by forcing the LDAP filter to always return true, thereby matching all potential entries.
+
+### OR-Based LDAP Filter Manipulation for User Enumeration
+
+- **Payload**: `*) (| (cn=*))`
+  
+  This payload forces the filter to match any common name, enabling user enumeration.
+
+- **Execution**:
+  - Inject the payload and observe the application response for user listing or authentication success.
+  
+- **Outcome**: The attacker can retrieve user or object listings from the LDAP directory, gaining access to sensitive data.
+
+### Wildcard Exploitation in LDAP Filters
+
+- **Payload**: `(uid=*)`
+  
+  This payload matches all user IDs, bypassing specific user checks.
+
+- **Execution**:
+  - Inject this payload into search or login fields to enumerate or access all users.
+  
+- **Outcome**: The attacker accesses or enumerates all user entries in the directory, potentially revealing sensitive information.
+
+### AND-Based LDAP Filter Manipulation for Privilege Escalation
+
+- **Payload**: `(&(objectClass=*)(uid=*))`
+  
+  This payload combines the objectClass with a wildcard to escalate or broaden search scope.
+
+- **Execution**:
+  - Use this payload in fields where privilege or group membership is checked.
+  
+- **Outcome**: The attacker manipulates the filter to gain access to privileged objects or accounts, escalating their level of access within the system.
+
+## Tools
+
+- **Burp Suite**
+- **ldapsearch**
+- **OWASP ZAP** 
+
+These tools can assist in the testing and execution of LDAP injection techniques by facilitating the manipulation of requests and the observation of responses in web applications.
