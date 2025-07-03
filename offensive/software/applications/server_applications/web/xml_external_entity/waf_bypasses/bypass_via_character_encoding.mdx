@@ -1,0 +1,84 @@
+---
+title: Bypass WAF with Character Encoding Techniques
+description: Explore how to bypass WAF protections on XML endpoints using character
+  encoding manipulation for XXE attacks.
+keywords:
+- WAF bypass
+- character encoding
+- XXE exploitation
+- UTF-16 encoding
+- XML parsing
+- byte order mark
+- encoding evasion
+---
+
+# Bypass via Character Encoding
+
+## Context
+
+This guide will demonstrate how to bypass Web Application Firewall (WAF) protections on XML endpoints using character encoding manipulation. The goal is to enable successful XML External Entity (XXE) exploitation by evading WAF signatures through the use of alternate character encodings. This guide assumes knowledge of character encoding, XML structure, web application firewalls, and XML External Entity attacks.
+
+## Theory
+
+### Character Encoding in XML Parsing
+
+Character encoding defines the manner in which bytes are interpreted as characters in XML documents. XML parsers are required to honor encoding declarations and byte order marks (BOM) to interpret the document content correctly. A vulnerability arises when WAFs only inspect precisely decoded UTF-8 or ASCII payloads. In such cases, payloads using alternative encodings may bypass detection and deliver malicious content without triggering protective mechanisms.
+
+### Encoding Evasion Techniques
+
+Encoding evasion involves an attacker crafting an XML payload in a non-default encoding, such as UTF-16, with the intent of bypassing WAF signature detection. This method leverages the fact that WAFs often fail to decode or normalize non-standard encodings, allowing malicious entities within the payload to pass through. The Byte Order Mark (BOM) is critical in this process; it signals the XML parser about the encoding, thereby influencing how the content is read.
+
+### Tooling and Payload Construction
+
+Tools like `iconv` allow attackers to convert XML payloads between different encodings, for instance, from UTF-8 to UTF-16. Properly encoded payloads need to include the correct BOM and update the encoding declaration in the XML prolog to match the new encoding. This ensures that XML parsers correctly interpret the data, thereby facilitating the bypass of input validation mechanisms.
+
+## Practice
+
+### Manual XXE WAF Bypass via UTF-16 Encoding
+
+- Craft a standard XXE payload in XML format. Begin with a working XXE exploit in UTF-8:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+    <foo>&xxe;</foo>
+    ```
+
+- Convert the payload to UTF-16LE encoding using the `iconv` tool:
+
+    ```bash
+    iconv -f UTF-8 -t UTF-16LE xxe.xml > xxe-utf16.xml
+    ```
+
+- Prepend the UTF-16LE BOM (0xFF 0xFE) to the file if it is not already present. This ensures the XML parser recognizes the encoding as UTF-16.
+
+- Update the XML prolog to match the new encoding:
+
+    ```xml
+    <?xml version="1.0" encoding="UTF-16"?>
+    <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+    <foo>&xxe;</foo>
+    ```
+
+- Send the UTF-16 encoded XML to the vulnerable endpoint, typically via an HTTP POST request. Watch for signs that the payload is executed without triggering WAF detection.
+
+**Outcome:** The WAF fails to detect the XXE due to the unhandled encoding, allowing payload execution.
+
+### Automated Encoding Evasion with Burp Suite
+
+- Configure Burp Suite to intercept and modify XML requests. Use Burp extensions or manually edit requests to prepare for encoding manipulation.
+
+- Replace the XML payload with a UTF-16 encoded version. This step can be carried out using `iconv` or specific Burp Suite extensions designed for payload encodings.
+
+- Ensure the presence of the correct BOM and update the encoding declaration in the XML prolog to reflect the new encoding intended for the parser.
+
+- Forward the modified request to the server using Burp's intercept tool. Watch for server and WAF responses to confirm a successful bypass.
+
+**Outcome:** Automated tooling submits an encoded payload that bypasses WAF input validation, potentially exploiting XXE vulnerabilities.
+
+## Tools
+
+- **iconv**
+- **Burp Suite**
+
+This detailed guide should empower intermediate practitioners to effectively bypass WAF mechanisms through character encoding techniques, facilitating successful exploitation in a controlled testing environment.
