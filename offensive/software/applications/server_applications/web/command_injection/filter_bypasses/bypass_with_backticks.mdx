@@ -1,0 +1,61 @@
+---
+title: Exploit Command Injection Using Backtick Bypass
+description: Learn how to exploit command injection by bypassing filters using shell
+  backticks effectively.
+keywords:
+- command injection
+- filter bypass
+- shell backticks
+- nested backticks
+- split backticks
+- web security
+- command execution
+---
+
+# Bypass With Backticks
+
+## Context
+
+The objective of this article is to demonstrate how attackers can exploit command injection vulnerabilities by bypassing input filters using the shell backtick syntax. This requires an understanding of basic command execution and shell syntax, especially in the context of command injection.
+
+## Theory
+
+### Shell Backtick Syntax for Command Substitution
+
+Backticks (`) are used in Unix shell environments to execute commands and replace them with their output. When a string is encapsulated within backticks, the shell recognizes it as a command to be executed. The result of this execution substitutes the original backtick wrapped expression.
+
+### Filter Bypass Using Backticks
+
+Many web applications implement input filters to prevent command injection attacks. However, these filters may not account for the backtick syntax, allowing adversaries to inject and execute arbitrary code. By embedding input within backticks, attackers can trick the system into evaluating and executing unfiltered commands.
+
+### Variants: Nested and Split Backticks
+
+Nested backticks allow one command to be embedded within another, providing an additional complexity layer to circumvent filters. Meanwhile, split backticks involve breaking up a command string using empty backticks to avoid simple keyword detection by filters. For example, injecting `wh``oami` can bypass a naive filter looking for the string "whoami."
+
+## Practice
+
+### Basic Command Execution with Backticks
+
+- **Payload:** `\`whoami\``
+  
+    By injecting `whoami` wrapped in backticks, an attacker can execute this arbitrary command. This basic form is often effective where input validation does not correctly escape or filter backticks.
+
+### Bypassing Filters with Split Backticks
+
+- **Payload:** `wh``oami`
+  
+    This technique splits the command with backticks, effectively bypassing keyword-based filters that look for predefined command sequences such as "whoami." By inserting empty backticks, the input becomes undetectable by simple string matching filters.
+
+### Nested Backtick Injection
+
+- **Payload:** `` `echo `whoami`` ``
+  
+    By nesting `whoami` within an `echo` command, this payload demonstrates another level of complexity to evade input filtering. The outer backticks execute the command inside them, while the nested backticks execute `whoami`, whose result is then echoed back.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP**
+
+These tools can be instrumental in crafting and testing injection payloads, analyzing HTTP requests and responses, and identifying security vulnerabilities. They allow security professionals to understand how inputs are processed by target web applications and find potential entry points for backtick injection.
