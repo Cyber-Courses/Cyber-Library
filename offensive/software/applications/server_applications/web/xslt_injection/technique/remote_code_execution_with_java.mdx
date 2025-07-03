@@ -1,0 +1,76 @@
+---
+title: Exploit Remote Code Execution with Java XSLT Injection
+description: Learn how to achieve remote code execution via XSLT injection in Java
+  environments using Xalan's runtime extensions.
+keywords:
+- remote code execution
+- java xslt injection
+- xalan runtime
+- rt:exec
+- java reflection
+- xslt payload
+- java command execution
+---
+
+# Remote Code Execution with Java
+
+## Context
+
+The focus of this article is to demonstrate how remote code execution can be achieved through XSLT injection in Java-based environments. This is particularly applicable when using Xalan, a Java XSLT processor that supports runtime extensions. Readers should be familiar with XSLT processing and injection fundamentals, as well as the basics of the Java runtime environment and XML parsing.
+
+## Theory
+
+### Java XSLT Processors and Extension Mechanisms
+
+Xalan is a widely used Java XSLT processor that provides extended functionalities through extension functions. These functions allow the execution of Java methods directly from within XSLT, enhancing the capabilities of standard XSLT processing. However, this powerful feature can become a vulnerability if untrusted XSLT input is processed. In such cases, attackers can exploit these extensions to invoke any Java class method, potentially leading to arbitrary code execution.
+
+### Xalan Runtime Extensions for Command Execution
+
+The Xalan processor provides specific namespaces, such as 'rt', which expose the underlying Java Runtime methods, specifically `Runtime.getRuntime()` and `exec()`. This allows system commands to be executed directly from an XSLT stylesheet. Attackers can craft an XSLT payload that calls `rt:getRuntime()` to obtain a runtime instance, and then use `exec()` to execute system commands. If input filters are not robust, attackers might apply obfuscation techniques or alternate namespace prefixes to bypass these filters and succeed with their injections.
+
+### Payload Construction and Execution Flow
+
+The crafted XSLT payload acts as a carrier to trigger Java methods and execute operating system commands. The typical attack sequence involves: 
+
+1. Injecting an XSLT payload that uses `rt:exec`.
+2. The command is executed on the server where Xalan processes the XSLT.
+3. The output of this command is exfiltrated back to the attacker through the XSLT result processing.
+
+## Practice
+
+### Remote Code Execution via Xalan Runtime Extension
+
+To achieve remote code execution using Xalan's runtime extensions, follow these steps:
+
+1. **Craft the XSLT Payload**:
+   Use the following XSLT code to execute an `id` command on the server:
+
+   ```xml
+   <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+                   xmlns:rt="http://xml.apache.org/xalan/java/java.lang.Runtime" 
+                   version="1.0">
+       <xsl:template match="/">
+           <xsl:variable name="runtime" select="rt:getRuntime()"/>
+           <xsl:variable name="process" select="$runtime/exec('id')"/>
+           <xsl:variable name="inputStream" select="$process/getInputStream()"/>
+           <xsl:copy-of select="document($inputStream)"/>
+       </xsl:template>
+   </xsl:stylesheet>
+   ```
+
+   This payload utilizes the `rt:exec` mechanism to run the `id` command. The output is captured via the command's input stream and returned by the XSLT processor.
+
+2. **Inject the Payload**:
+   Submit the crafted XSLT payload to the vulnerable endpoint. The method of submission will vary depending on the application's interface, which could be a file upload feature or an API endpoint.
+
+3. **Analyze the Response**:
+   After submission, review the response from the server to identify if the output of the executed command, in this case, the `id` command, is present. Successful execution confirms the ability to perform remote code execution on the server.
+
+The outcome of this process is remote code execution, allowing arbitrary system commands to be executed on a Java server configured to process XSLT using Xalan.
+
+## Tools
+
+- **Burp Suite**
+- **curl** 
+
+These tools can assist in crafting and submitting requests to test for XSLT injection points and to analyze responses for command execution results.
