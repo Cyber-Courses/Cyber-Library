@@ -1,0 +1,95 @@
+---
+title: Understanding Package Injection in LaTeX
+description: Explore package injection in LaTeX, a technique allowing the injection
+  and execution of unauthorized or malicious code via package-loading mechanisms.
+keywords:
+- LaTeX package injection
+- malicious code execution
+- usepackage command
+- RequirePackage
+- package path traversal
+- LaTeX security
+- documentclass injection
+---
+
+# Package Injection
+
+## Context
+
+Package injection in LaTeX allows attackers to inject and execute unauthorized or malicious code via package-loading mechanisms. This technique exploits the way LaTeX documents handle external packages, enabling attackers to perform actions such as code execution and information disclosure. To fully understand this attack, knowledge of LaTeX document structure, package management, and general injection techniques is assumed.
+
+## Theory
+
+### LaTeX Package Loading Mechanisms
+
+LaTeX provides mechanisms for extending its functionality through packages. The `\usepackage` and `\RequirePackage` commands load external `.sty` files into a LaTeX document, enabling additional features. LaTeX typically searches for these packages in predefined directories and paths specified by the user. If these paths are controllable, attackers can introduce custom or malicious packages into the process.
+
+### Attack Surface: Package Injection
+
+The vulnerability arises when user input is directly incorporated into the LaTeX source, allowing arbitrary use of `\usepackage` or `\RequirePackage`. An attacker can inject directives that reference malicious or sensitive packages. Once injected, these packages can execute malicious code or leak sensitive information during document compilation.
+
+### Techniques for Malicious Package Injection
+
+Malicious packages can redefine commands, execute shell escapes, or leak data. Attackers often employ path traversal techniques (e.g., `../`) to load their packages from outside the standard directories. Furthermore, the `\input` command can be used to load arbitrary `.sty` files if `\usepackage` is restricted or filtered.
+
+## Practice
+
+### Injecting a Malicious Package via \usepackage
+
+- **Payload**: 
+  ```latex
+  \usepackage{/tmp/malicious}
+  ```
+  This command injects a package from a writable directory such as `/tmp` if accessible.
+
+- Ensure `/tmp/malicious.sty` contains attacker-controlled LaTeX code.
+
+**Outcome**: During LaTeX compilation, the malicious code within the injected package is executed.
+
+### Bypassing Filters with \input for Package Loading
+
+- **Payload**: 
+  ```latex
+  \input{/tmp/malicious.sty}
+  ```
+  This command directly loads an `.sty` file, effectively bypassing any `\usepackage` restrictions.
+
+**Outcome**: The LaTeX engine executes code in the specified `.sty` file.
+
+### Path Traversal to Load Unauthorized Packages
+
+- **Payload**:
+  ```latex
+  \usepackage{../../attacker/malicious}
+  ```
+  This uses directory traversal to attempt loading a package from outside allowed paths.
+
+**Outcome**: LaTeX processes and executes code from an attacker-controlled, non-standard location.
+
+### Injecting with \RequirePackage in Document Preamble
+
+- **Payload**: 
+  ```latex
+  \RequirePackage{/tmp/malicious}
+  ```
+  This command is used as an alternative to `\usepackage`, loading packages early in the document's processing phase.
+
+**Outcome**: Executes the malicious package code as soon as the document begins processing.
+
+### Abusing \documentclass to Load Arbitrary Class Files
+
+- **Payload**: 
+  ```latex
+  \documentclass{/tmp/malicious}
+  ```
+  Loads a custom class file, which can embed arbitrary LaTeX code.
+
+**Outcome**: Executes malicious code contained in the class file at the start of the document processing.
+
+## Tools
+
+- **pdflatex**
+- **lualatex**
+- **xelatex**
+
+Each of these LaTeX engines can compile documents with injected malicious packages, facilitating code execution or information disclosure through carefully crafted inputs.
