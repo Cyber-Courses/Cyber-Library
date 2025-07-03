@@ -1,0 +1,85 @@
+---
+title: SSRF Exploitation Using Default Loopback Targets
+description: Learn to exploit SSRF by targeting default loopback addresses, bypassing
+  filters to access internal services.
+keywords:
+- SSRF
+- default loopback targets
+- 127.0.0.1 exploitation
+- bypassing filters
+- localhost access
+- internal services
+- IP addressing
+- server-side request forgery
+- network security
+---
+
+# Default Targets
+
+## Context
+
+In this article, we will explore how to exploit Server-Side Request Forgery (SSRF) vulnerabilities by targeting default loopback addresses to access internal services. Many web applications implement basic filters to block specific IP addresses like 'localhost' or '127.0.0.1' but overlook other representations of local interfaces. This content assumes familiarity with loopback interfaces, IP addressing, network routing, and basic SSRF exploitation techniques.
+
+## Theory
+
+### Default Loopback Targets in SSRF
+
+Default loopback targets are standard IP addresses or hostnames that resolve to the local interface. These are traditionally used to access internal services safely. However, due to minimal SSRF protection layers on many web applications, they can be a security weakness. Many SSRF filters focus exclusively on blocking 'localhost' or '127.0.0.1', but they may miss alternate loopback representations, allowing attackers to bypass these simplistic security measures.
+
+By exploiting these vulnerabilities, attackers can potentially make requests to internal admin panels, metadata endpoints, or other sensitive services, thus breaching the internal network from the outside.
+
+### Common Default Loopback Identifiers
+
+Several representations exist for the loopback interface:
+
+- **127.0.0.1**: The canonical IPv4 loopback address, essential in networking for testing and internal access.
+- **0.0.0.0**: Typically used to bind all interfaces, yet in some networking stacks, it is treated as a local address.
+- **localhost**: A hostname that, via `/etc/hosts` or DNS settings, resolves to a loopback interface.
+  
+Note that the IPv6 loopback address `[::1]` is also a candidate but discussed under sibling topics.
+
+### Filter Bypass via Default Targets
+
+To bypass SSRF filters using default targets, an attacker can:
+
+1. Submit an SSRF payload using an unfiltered default loopback address.
+2. Rely on the application backend to resolve this address and make a request to an internal service.
+3. Observe the response or an internal action that indicates successful exploitation, thereby bypassing naive filters.
+
+## Practice
+
+### SSRF Exploitation Using Default Loopback Targets
+
+The following step-by-step guide illustrates how to exploit SSRF vulnerabilities using default loopback addresses:
+
+- **Identify SSRF Injection Point**: Locate a vulnerable parameter or endpoint within a web application that allows server-side fetching of remote resources based on user input.
+  
+- **Payloads to Test**: Execute the following payloads to test if an application interface allows accessing internal services:
+  
+  ```http
+  http://127.0.0.1:8080/admin
+  ```
+  Attempt to access an internal admin panel using the canonical IPv4 loopback address.
+
+  ```http
+  http://0.0.0.0:8080/admin
+  ```
+  Test if the application treats `0.0.0.0` as a valid local target.
+  
+  ```http
+  http://localhost:8080/admin
+  ```
+  Utilize the `localhost` hostname to target the loopback interface.
+
+- **Observe Application Responses**: After injecting the payloads, monitor application responses for evidence of internal service access, such as admin panel content, error messages indicating misconfiguration, or other behavioral changes.
+
+#### Expected Outcome
+
+By successfully utilizing SSRF to access default loopback targets, you should gain unauthorized access to internal services or data, effectively leveraging these overlooked addresses as a pivot point into otherwise protected resources.
+
+## Tools
+
+- **Burp Suite**
+- **curl** 
+
+These tools can assist in crafting, sending, and analyzing SSRF payloads to determine the extent of access achieved through default targets.
