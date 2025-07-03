@@ -54,10 +54,14 @@ session = requests.Session()
 purchase = session.post('https://target.site/api/purchase', json={'item_id': 123, 'currency': 'USD'})
 
 # Step 2: Refund in EUR
-refund = session.post('https://target.site/api/refund', json={'order_id': purchase.json()['order_id'], 'currency': 'EUR'})
-
-print('Purchase:', purchase.json())
-print('Refund:', refund.json())
+try:
+    refund = session.post('https://target.site/api/refund', json={'order_id': purchase.json()['order_id'], 'currency': 'EUR'})
+    refund.raise_for_status()  # Raise an HTTPError for bad responses (4xx and 5xx)
+    print('Purchase:', purchase.json())
+    print('Refund:', refund.json())
+except requests.exceptions.RequestException as e:
+    print(f"Error during refund request: {e}")
+    refund = None
 ```
 
 - Analyze the responses to determine if the refund value in EUR exceeds the original USD spend. The automated script aids in identifying profitable arbitrage scenarios.
