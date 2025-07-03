@@ -1,0 +1,89 @@
+---
+title: Bypass With Tilde Expansion Guide
+description: Learn how to use tilde expansion to bypass command injection filters
+  in web applications. Essential for cybersecurity enthusiasts.
+keywords:
+- tilde expansion
+- command injection
+- filter bypass
+- web security
+- shell expansion
+- user directory
+- cybersecurity
+---
+
+# Bypass With Tilde Expansion
+
+## Context
+
+The aim of this tutorial is to demonstrate how tilde expansion can be utilized to bypass command injection filters within web applications. This technique leverages common shell expansion features to navigate filesystem paths that might otherwise be blocked by naive filtering mechanisms. To fully grasp this technique, readers should possess foundational knowledge of shell expansion, file system paths, user home directories, and command injection vulnerabilities.
+
+## Theory
+
+### Tilde Expansion Mechanism in Shells
+
+Tilde (~) is a powerful shorthand used in Unix-like shell environments, serving as an alias for user home directories. When a command is executed, the shell recognizes and expands the tilde to the appropriate path:
+
+- `~`: Expands to the current user's home directory.
+- `~user`: Expands to the specified user's home directory.
+- `~+`: Expands to the current working directory.
+- `~-`: Expands to the previous working directory.
+
+This mechanism is pivotal because many web application filters, designed to block absolute or relative paths, can overlook such expansions. Thus, attackers may use tilde expansion to navigate these filters and access restricted filesystem locations.
+
+### Home Directory Reference in Shells
+
+Understanding shell behavior with home directory references provides insight into potential filter bypass tactics:
+
+- Using `~`, an attacker can attempt to access resources in the home directory of the executing user.
+- `~user` can be employed if the attacker has insights into existing usernames on the system.
+- Expansions like `~+` and `~-` offer dynamic path resolution, translating into the current and previous working directories, respectively.
+
+### Tilde Shell Trick for Filter Bypass
+
+Filters that blacklist traditional paths like `/etc/passwd` or `/home/user` may fail to block their tilde-expanded counterparts. This oversight allows attackers to craft payloads that can circumvent such filters unimpeded. For example, while a direct path like `/etc/passwd` may be blocked, using `~root/passwd` might succeed if tilde expansion is not adequately considered by the filter.
+
+### Command Injection Bypass Techniques Using Tilde Expansion
+
+In scenarios where an application is vulnerable to command injection, leveraging tilde expansion can provide an effective method for bypassing input validation mechanisms based on path restrictions. This expansion can be combined with various command injection vectors to access files and directories usually considered beyond reach.
+
+## Practice
+
+### Bypassing Path Filters with Tilde Expansion
+
+To exploit command injection vulnerabilities using tilde expansion, follow these steps:
+
+- **Identify an Injection Point**: Locate where command injection is possible. Specifically, look where path-based filters are in place, typically to block sensitive paths like `/etc/passwd`.
+
+- **Craft and Inject Payloads**:
+  - Use the following payload to attempt accessing a file within the user's home directory:
+    ```bash
+    cat ~/file.txt
+    ```
+    This command tries to read `file.txt` located in the home directory, using tilde expansion.
+
+  - Exploit the current working directory reference:
+    ```bash
+    cat ~+/file.txt
+    ```
+    Use `~+` to access `file.txt` within the current directory, avoiding filters targeting relative (`./`) or absolute (`/`) paths.
+
+  - Utilize the previous working directory path:
+    ```bash
+    cat ~-/file.txt
+    ```
+    By leveraging `~-`, gain access to `file.txt` in the prior working directory, a method potentially unknown to some filters.
+
+- **Execute the Injection**:
+  - Deliver the payload via a web request. For example, use `curl` to inject the payload into a web application's query parameter:
+    ```bash
+    curl http://target/app?input=cat~+/secret.txt
+    ```
+    This injects the tilde expansion through a basic HTTP GET request containing the payload.
+
+Upon success, these payloads will sidestep path-based checks, granting access to otherwise restricted filesystem entities.
+
+## Tools
+
+- **curl**: A command-line tool for transferring data with URL syntax, useful for crafting HTTP requests containing the injection payload.
+- **Burp Suite**: A comprehensive platform used for web application security testing, capable of intercepting and manipulating HTTP requests to facilitate injection testing.
