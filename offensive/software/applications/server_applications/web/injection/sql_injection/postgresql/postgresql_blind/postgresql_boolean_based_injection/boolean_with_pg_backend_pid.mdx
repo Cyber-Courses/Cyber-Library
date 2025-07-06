@@ -1,0 +1,72 @@
+---
+title: Boolean-based Injection with pg_backend_pid()
+description: Learn how to exploit Boolean-based SQL Injection using pg_backend_pid()
+  in PostgreSQL, inferring data from changes in response behavior.
+keywords:
+- pg_backend_pid
+- Boolean-based SQL Injection
+- PostgreSQL
+- SQL Injection Exploitation
+- Database Security
+- Backend Process ID
+- Conditional Sleep SQL Injection
+---
+
+# Boolean with pg_backend_pid()
+
+## Context
+
+This article focuses on the exploitation technique of Boolean-based SQL Injection using the `pg_backend_pid()` function in PostgreSQL. The reader is expected to have knowledge of SQL query execution, fundamental Boolean logic, database functions, and PostgreSQL Blind SQL Injection.
+
+## Theory
+
+### pg_backend_pid() Function in PostgreSQL
+
+The `pg_backend_pid()` function in PostgreSQL returns the process ID of the current backend server process. This function is typically used to identify the current session's backend process, which is useful for debugging or monitoring purposes. By leveraging this function within SQL queries, attackers can determine whether a specific condition is true or false based on changes in the behavior of the database responses.
+
+### Boolean Logic in SQL Injection
+
+Boolean-based SQL Injection techniques exploit the ability to execute queries that evaluate conditions as either true or false. This approach allows attackers to infer information about the structure and contents of a database by observing changes in query results or response times. By crafting specific conditions using SQL syntax, attackers can manipulate query responses to reveal sensitive information.
+
+### Exploiting Boolean-based SQL Injection with pg_backend_pid()
+
+Exploiting Boolean-based SQL Injection with the `pg_backend_pid()` function involves crafting SQL conditions that alter the behavior of the query based on the truthfulness of a condition involving the process ID. Through careful manipulation, attackers can confirm the presence of SQL injection vulnerabilities by observing changes in query results or response times.
+
+## Practice
+
+### Boolean-based SQL Injection using pg_backend_pid()
+
+To leverage Boolean-based SQL Injection using the `pg_backend_pid()` function, follow these steps:
+
+- **Verify Process ID with a Known Value**
+
+    Use the following query to check if the current backend process ID matches a known value. This establishes a baseline for understanding how the query behaves.
+
+    ```bash
+    SELECT 1 WHERE pg_backend_pid() = 12345;
+    ```
+
+- **Inject a True Condition**
+
+    Inject a condition that evaluates as true if the process ID matches the expected value. This allows observation of how the database response changes.
+
+    ```sql
+    1 OR pg_backend_pid() = 12345;
+    ```
+
+- **Conditional Sleep for Time-based Inference**
+
+    By using a conditional sleep, attackers can infer whether the correct process ID was guessed based on the response time of the query. If the condition holds true, the database will delay its response.
+
+    ```bash
+    SELECT CASE WHEN (pg_backend_pid() = 12345) THEN pg_sleep(5) ELSE pg_sleep(0) END;
+    ```
+
+By executing these commands, you can determine the current backend process ID and confirm the presence of a SQL injection vulnerability. This confirmation is based on observing changes in response behavior, such as delays indicating successful condition matching.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite** 
+
+These tools can facilitate the exploitation of SQL injection vulnerabilities by automating the crafting and execution of malicious payloads.

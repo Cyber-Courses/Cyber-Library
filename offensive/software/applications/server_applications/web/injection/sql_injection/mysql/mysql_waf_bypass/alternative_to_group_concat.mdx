@@ -1,0 +1,50 @@
+---
+title: 'Bypass WAF: Alternative to GROUP_CONCAT in MySQL'
+description: Learn to bypass WAF restrictions using JSON_ARRAYAGG as an alternative
+  to GROUP_CONCAT in MySQL.
+keywords:
+- WAF bypass
+- GROUP_CONCAT alternative
+- JSON_ARRAYAGG
+- SQL injection
+- MySQL functions
+- symbol limitations
+- data aggregation bypass
+---
+
+# Alternative to GROUP_CONCAT
+
+## Context
+
+The objective of this guide is to teach you how to bypass Web Application Firewall (WAF) restrictions on the `GROUP_CONCAT` function using alternative MySQL functions. To follow along, you are expected to have foundational knowledge of SQL functions, database aggregation, and techniques for bypassing MySQL WAFs.
+
+## Theory
+
+### GROUP_CONCAT Limitations in WAF Contexts
+
+WAFs often impose restrictions on certain SQL functions, such as `GROUP_CONCAT`, to prevent data aggregation leaks that can lead to security vulnerabilities. Attackers may exploit these functions during SQL injection attacks to aggregate multiple rows of data into a single result string, posing a significant threat to data confidentiality.
+
+To counteract these restrictions, attackers can identify which SQL functions are blocked and explore alternative aggregation methods that achieve similar outcomes without being flagged by the WAF.
+
+### Using JSON_ARRAYAGG as an Alternative
+
+`JSON_ARRAYAGG` is a powerful MySQL function that aggregates values into a JSON array. This function can serve as an effective alternative to `GROUP_CONCAT` when you're attempting to perform SQL injection attacks under the radar of WAFs that block `GROUP_CONCAT`.
+
+The core principle here is to replace `GROUP_CONCAT` with `JSON_ARRAYAGG` in your SQL payloads, maintaining your ability to aggregate data while circumventing WAF restrictions. This substitution allows the aggregation of data into a format (JSON) that is often less scrutinized by security mechanisms.
+
+## Practice
+
+- **Identify SQL injection point** where `GROUP_CONCAT` is blocked by attempting to inject a payload using this function.
+- Replace `GROUP_CONCAT` with `JSON_ARRAYAGG` in your SQL query to aggregate the data silently. Here is a command example:
+  
+  ```sql
+  SELECT JSON_ARRAYAGG(column_name) FROM table_name WHERE condition;
+  ```
+
+- **Verify** if `JSON_ARRAYAGG` successfully bypasses the WAF by checking for a JSON array response including the intended data.
+
+The expected outcome is to successfully bypass WAF restrictions using `JSON_ARRAYAGG`, accessing aggregated data without triggering security defenses.
+
+## Tools
+
+- **Burp Suite**

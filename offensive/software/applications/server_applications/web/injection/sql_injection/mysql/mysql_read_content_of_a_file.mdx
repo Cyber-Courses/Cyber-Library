@@ -1,0 +1,70 @@
+---
+title: 'MySQL File Read Exploit: Using SQL Injection Effectively'
+description: Learn to exploit MySQL's LOAD_FILE() function via SQL injection to access
+  server files. Understand preconditions, restrictions, and bypass techniques.
+keywords:
+- MySQL
+- LOAD_FILE
+- SQL injection
+- file disclosure
+- secure_file_priv
+- vulnerability
+- database security
+---
+
+# MYSQL Read Content of a File
+
+## Context
+
+This guide focuses on exploiting MySQL to read the content of files on a server using SQL injection techniques. To successfully follow this guide, you should have a good understanding of SQL injection basics, file system permissions, and MySQL privileges.
+
+## Theory
+
+### MySQL File Reading Capabilities
+
+MySQL has the capability to read files directly from the server using the `LOAD_FILE()` function. This function can be exploited via SQL injection vulnerabilities to disclose the contents of files stored on the server.
+
+To use `LOAD_FILE()`, certain conditions must be met:
+- The MySQL user must have the FILE privileges.
+- The file must be readable by the MySQL process.
+
+These conditions mean that if an application is vulnerable to SQL injection, there is a potential path to exploit this function to access sensitive data within the server's files.
+
+### Security Controls and Bypasses
+
+A significant security measure that controls file reading in MySQL is the `secure_file_priv` variable. This setting restricts file operations to only those within specified directories, thereby aiming to mitigate potential disclosure risks.
+
+However, it is possible to bypass these restrictions when:
+- The directory specified by `secure_file_priv` includes readable files of interest.
+- The attacker targets files within these directories that are inadvertently exposed.
+
+Understanding these restrictions and planning around them can enable successful exploitation.
+
+## Practice
+
+### Exploiting LOAD_FILE() via SQL Injection
+
+1. **Identify SQL Injection Points**
+   - Look for potential SQL injection vulnerabilities in the application's input fields, URLs, or parameters that interact with the database.
+
+2. **Execute the LOAD_FILE() Function**
+   - Utilize the following SQL syntax within an injection point:
+   ```sql
+   SELECT LOAD_FILE('/etc/passwd');
+   ```
+   This command attempts to read the contents of the `/etc/passwd` file, showcasing how the function might reveal file contents.
+
+3. **Verify File Accessibility**
+   - Ensure the target file path is indeed accessible and readable by the MySQL process. This might involve checking permissions or confirming the file exists on the server.
+
+4. **Review secure_file_priv Restrictions**
+   - Determine if `secure_file_priv` is configured, which might restrict file reads to certain directories. Modify your approach or target files within the permitted directories.
+
+#### Result
+
+By exploiting the `LOAD_FILE()` functionality through SQL injection, you may gain access to the contents of sensitive files residing on the server. This type of access can lead to exposure of critical data, such as user credentials or configuration settings, thereby compromising the server’s security.
+
+## Tools
+
+- **sqlmap**: A powerful tool for automating the process of detecting and exploiting SQL injection vulnerabilities.
+- **MySQL client**: Provides a direct interface to execute SQL queries and interact with the database manually.

