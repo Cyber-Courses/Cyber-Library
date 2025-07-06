@@ -1,0 +1,133 @@
+---
+title: Uncover IBM DB2 Schema & Metadata via SQL Injection
+description: Learn to discover IBM DB2 schema and metadata using SQL Injection techniques,
+  focusing on system catalogs for database insights.
+keywords:
+- IBM DB2
+- SQL Injection
+- schema discovery
+- metadata
+- system catalogs
+- database enumeration
+- privilege escalation
+- DB2 SYSTABLES
+- DB2 SYSCOLUMNS
+- role discovery
+---
+
+# Schema and Metadata Discovery
+
+## Context
+
+In offensive cybersecurity, understanding the structure and data stored in a database can be as critical as gaining access itself. This article focuses on leveraging SQL Injection to discover schema and metadata within IBM DB2 databases. We assume you have a foundational understanding of database schematics, metadata, and are familiar with DB2 enumeration techniques.
+
+## Theory
+
+### DB2 System Catalogs and Views
+
+DB2 databases store a wealth of system metadata across various system catalogs. These catalogs are indispensable for database administrators, and equally so for anyone attempting to uncover the inner workings of a database through offensive security testing.
+
+- **System Catalogs**: These are tables that contain metadata regarding the structure of the database. They provide significant insights including definitions of tables, views, columns, and more.
+- **SYSIBM.SYSTABLES** & **SYSIBM.TABLES**: Contain information about all tables in the database, including table names and creators. (Note: Table and column names may differ slightly between DB2 versions.)
+- **SYSCAT.SCHEMATA**: Provides a list of all schemas defined within the database, offering a high-level overview of the data organization.
+- **SYSIBM.SYSCOLUMNS**: Details the columns of each table, including data types and column names, essential for understanding the structure of data within tables.
+
+> **Tip:** You can tailor queries to select only specific columns (e.g., `SELECT name, tbname FROM SYSIBM.SYSCOLUMNS;`) instead of using `*` to reduce noise and focus on relevant data.
+
+### Schema and Metadata Discovery Techniques
+
+Leveraging SQL Injection, you can query these catalogs to extract crucial database schema details:
+
+- **Extract Information through SQL Injection**: By injecting crafted SQL queries, it's possible to retrieve schema information from these system catalogs.
+- **Table and Column Details Extraction**: Accessing SYSIBM and SYSCAT views enables an intruder to map out table structures, column names, and data types.
+- **Roles and Privileges Identification**: By querying system catalogs such as SYSCAT.DBAUTH and SYSCAT.ROLES, you can discover the roles and privileges that might be leveraged for privilege escalation.
+
+## Practice
+
+### Quick Reference Table
+
+| Goal                        | Example Query                                                      |
+|-----------------------------|--------------------------------------------------------------------|
+| List databases/catalogs     | `SELECT DISTINCT(TABLE_CATALOG) FROM SYSIBM.TABLES;`               |
+| List schemas                | `SELECT SCHEMANAME FROM SYSCAT.SCHEMATA;`                          |
+| List all columns            | `SELECT name, tbname, coltype FROM SYSIBM.SYSCOLUMNS;`             |
+| List all tables             | `SELECT table_name FROM SYSIBM.TABLES;`                            |
+| List all tables (alt)       | `SELECT name FROM SYSIBM.SYSTABLES;`                               |
+| Find tables by column name  | `SELECT tbname FROM SYSIBM.SYSCOLUMNS WHERE name='username';`      |
+
+### Listing Databases / Catalogs
+
+To enumerate the available databases or catalogs in IBM DB2, use:
+
+```sql
+SELECT DISTINCT(TABLE_CATALOG) FROM SYSIBM.TABLES;
+```
+*Outcome*: Returns the names of available databases (catalogs).
+
+### Listing Schemas
+
+To enumerate schemas in the database:
+
+```sql
+SELECT SCHEMANAME FROM SYSCAT.SCHEMATA;
+```
+*Outcome*: Returns a list of schema names, providing a high-level overview of the database's organization.
+
+### Listing All Tables
+
+To list all tables in the database, you can use either of the following queries (depending on DB2 version/environment):
+
+```sql
+SELECT table_name FROM SYSIBM.TABLES;
+```
+
+```sql
+SELECT name FROM SYSIBM.SYSTABLES;
+```
+*Outcome*: Returns the names of all tables in the database.
+
+To list tables within a specific schema:
+
+```sql
+SELECT * FROM SYSIBM.SYSTABLES WHERE CREATOR = 'SCHEMA_NAME';
+```
+*Outcome*: Returns all tables under the defined schema, with additional metadata.
+
+### Listing All Columns
+
+To enumerate all columns in the database, including their table and data type:
+
+```sql
+SELECT name, tbname, coltype FROM SYSIBM.SYSCOLUMNS;
+```
+*Outcome*: Returns all column names, their parent table, and data type.
+
+To list columns for a specific table:
+
+```sql
+SELECT * FROM SYSIBM.SYSCOLUMNS WHERE TBNAME = 'TABLE_NAME';
+```
+*Outcome*: Returns all columns and their details for the specified table.
+
+### Finding Tables by Column Name
+
+To find all tables that contain a specific column (e.g., 'username'):
+
+```sql
+SELECT tbname FROM SYSIBM.SYSCOLUMNS WHERE name='username';
+```
+*Outcome*: Returns the names of tables that have a column named 'username'.
+
+### Enumerating Schemas (Full Details)
+
+To get detailed information about all schemas:
+
+```sql
+SELECT * FROM SYSCAT.SCHEMATA;
+```
+*Outcome*: Returns detailed schema metadata.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**

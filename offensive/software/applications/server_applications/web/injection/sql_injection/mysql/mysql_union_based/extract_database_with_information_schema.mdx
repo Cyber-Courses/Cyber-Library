@@ -1,0 +1,65 @@
+---
+title: Extract Database Names Using MySQL Information_Schema
+description: Learn how to enumerate MySQL databases via union-based SQL injection
+  using information_schema.
+keywords:
+- MySQL
+- information_schema
+- database enumeration
+- union-based SQL injection
+- SQL injection vulnerability
+- extract database names
+- schema enumeration
+---
+
+# Extract Database With Information_Schema
+
+## Context
+
+This guide focuses on extracting database names using the `information_schema` in MySQL through union-based SQL injection. It assumes familiarity with key concepts such as `information_schema`, schema enumeration, and the MySQL Union-Based SQL Injection technique. Mastery of these topics will enable the successful execution of this method to enumerate databases on a targeted MySQL server.
+
+## Theory
+
+### Understanding Information_Schema in MySQL
+
+The `information_schema` is a system database that provides essential metadata about the other databases contained within a MySQL server. This includes information about tables, columns, and database configurations. 
+
+- **Core Principle**: The `information_schema` is not a typical user-accessible database but a collection of read-only tables that store data about other databases. It's integral for schema enumeration because it contains the `schemata` table which lists all accessible databases.
+- **Vulnerability Model**: Attackers can leverage vulnerabilities to access `information_schema` through SQL injection, allowing them to enumerate and potentially exploit databases.
+
+### Union-Based SQL Injection for Database Enumeration
+
+Union-based SQL injection is an effective method for database enumeration when there's a vulnerable injection point. This technique allows attackers to seamlessly combine the output of a legitimate query with crafted queries that can fetch information from any accessible table, including those within `information_schema`.
+
+- **Attack Sequence**: Attackers utilize the `UNION SELECT` statement to append the results from their injected query to the existing output. This requires knowledge of the number of columns retrieved by the original query to align the data correctly.
+- **Data Flow**: By strategically placing SQL payloads, attackers can retrieve information from `information_schema.schemata`, a critical step in uncovering names of all databases across the MySQL server.
+
+## Practice
+
+This section outlines the steps to exploit a vulnerable web application using union-based SQL injection to reveal database names.
+
+- **Identify a Vulnerable Parameter**: Use manual testing or automated tools (such as Burp Suite) to identify an SQL injection vulnerability in a web application's parameter, such as a URL query string or form input.
+
+- **Verify Vulnerability**: Execute a basic injection to test response:
+  ```sql
+  SELECT schema_name FROM information_schema.schemata; --
+  ```
+
+- **Craft a UNION SELECT Payload**: Formulate a payload to extract database names. Ensure it matches the number of columns returned by the original query.
+  
+- **Example Payload**:
+  ```sql
+  UNION SELECT NULL, schema_name FROM information_schema.schemata; --
+  ```
+
+- **Adjust NULLs Based on the Number of Columns**: The number of `NULL` values in the payload must match the actual columns used in the original query to maintain syntax correctness.
+
+- **Injection into Vulnerable Parameter**: Inject this payload into the identified parameter. For example, in a URL:
+  ```http
+  http://example.com/vuln.php?id=1 UNION SELECT NULL, schema_name FROM information_schema.schemata; --
+  ```
+
+## Tools
+
+- **sqlmap**: Automate detection and exploitation of SQL injection vulnerabilities.
+- **Burp Suite**: Assistance in identifying and manipulating web application vulnerabilities, including SQL injection points.

