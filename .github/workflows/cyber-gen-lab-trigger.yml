@@ -1,0 +1,110 @@
+name: Deploy to CyberGen
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  deploy-to-cybergen:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'deploy-cybergen')
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch full history to detect changes
+        
+    - name: Detect new/changed MDX files
+      id: detect-files
+      run: |
+        echo "🔍 Detecting new/changed MDX files..."
+        
+        # Get list of changed files in the last commit
+        CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep -E '\.mdx$' || true)
+        
+        if [ -z "$CHANGED_FILES" ]; then
+          echo "No MDX files changed, skipping deployment"
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "Changed MDX files:"
+          echo "$CHANGED_FILES"
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Deploy to CyberGen
+      if: steps.detect-files.outputs.changed == 'true'
+      run: |
+        echo "🚀 Deploying to CyberGen..."
+        
+        # Process each changed MDX file
+        while IFS= read -r file; do
+          if [ -f "$file" ]; then
+            echo "📄 Processing file: $file"
+            
+            # Create the raw GitHub URL for the file
+            RAW_URL="https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/$file"
+            echo "🔗 Raw URL: $RAW_URL"
+            
+            # Trigger CyberGen build_plan.sh
+            echo "🎯 Triggering CyberGen build_plan.sh..."
+            
+            # Use repository dispatch to trigger CyberGen
+            PAYLOAD=$(cat <<EOF
+        {
+          "event_type": "deploy-cybergen",
+          "client_payload": {
+            "mdx_url": "$RAW_URL",
+            "file_path": "$file",
+            "source_repo": "${{ github.repository }}",
+            "commit_sha": "${{ github.sha }}",
+            "commit_message": "${{ github.event.head_commit.message }}",
+            "triggered_by": "${{ github.actor }}"
+          }
+        }
+        EOF
+            )
+            
+            curl -X POST \
+              -H "Accept: application/vnd.github.v3+json" \
+              -H "Authorization: token ${{ secrets.CYBERGEN_GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              "https://api.github.com/repos/CyberCTF/CyberGen/dispatches" \
+              -d "$PAYLOAD"
+            
+            if [ $? -eq 0 ]; then
+              echo "✅ Successfully triggered CyberGen for $file"
+            else
+              echo "❌ Failed to trigger CyberGen for $file"
+            fi
+          fi
+        done <<< "${{ steps.detect-files.outputs.files }}"
+        
+    - name: Create summary
+      if: steps.detect-files.outputs.changed == 'true'
+      run: |
+        echo "## 🎯 CyberGen Deployment Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Source Repository:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Message:** ${{ github.event.head_commit.message }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Deployed Files:**" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "${{ steps.detect-files.outputs.files }}" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Status:** ✅ Successfully triggered CyberGen deployment" >> $GITHUB_STEP_SUMMARY
+        echo "**Timestamp:** $(date)" >> $GITHUB_STEP_SUMMARY
+        
+    - name: No changes detected
+      if: steps.detect-files.outputs.changed == 'false'
+      run: |
+        echo "ℹ️ No MDX files were changed in this commit"
+        echo "## ℹ️ No Changes Detected" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "No MDX files were modified, so CyberGen deployment was not triggered." >> $GITHUB_STEP_SUMMARY
