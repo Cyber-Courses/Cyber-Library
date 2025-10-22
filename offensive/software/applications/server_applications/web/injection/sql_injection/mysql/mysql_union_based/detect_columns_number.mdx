@@ -10,6 +10,9 @@ keywords:
 - Null method
 - Order By
 - database security
+- data type matching
+- UNION SELECT
+- error-based detection
 ---
 
 # Detect Columns Number
@@ -24,6 +27,10 @@ The focus of this article is to teach how to determine the number of columns in 
 
 Union injection is an SQL injection technique that allows an attacker to combine the results of multiple SELECT statements. For a UNION injection to work, the number and data types of columns in the SELECT statements must match.
 
+### Why Column Count Detection is Critical
+
+Before attempting UNION-based data extraction, you must know the exact number of columns in the original query. Mismatched column counts will result in SQL errors, preventing successful exploitation.
+
 ### Determining Column Count
 
 To determine the correct number of columns for a successful UNION injection, two primary methods are used: the Null method and the Order By method.
@@ -35,6 +42,10 @@ This method involves using NULL values in a UNION SELECT statement. NULLs can by
 #### Order By Method
 
 The Order By method involves incrementally increasing the ORDER BY clause number until an error is encountered. The highest working number before the error indicates the correct number of columns.
+
+### Data Type Considerations
+
+While NULL values can bypass most data type constraints, some MySQL configurations may still require careful consideration of data types when performing UNION injections. Always test with NULLs first, then refine with specific data types if needed.
 
 ## Practice
 
@@ -76,6 +87,29 @@ http://example.com/page?id=1 ORDER BY 2--
 
 - Continue this process until an error occurs, which means you have attempted to order by more columns than exist. The highest working number before the error indicates the column count.
 
+### Alternative: Using GROUP BY for Column Detection
+
+If ORDER BY is filtered, you can use GROUP BY as an alternative method:
+
+```http
+http://example.com/page?id=1 GROUP BY 1--
+http://example.com/page?id=1 GROUP BY 2--
+```
+
+Continue incrementing until an error occurs, similar to the ORDER BY method.
+
+### Verifying Column Count with Data Extraction
+
+Once you've determined the column count, verify it by attempting to extract data:
+
+```http
+http://example.com/page?id=1 UNION SELECT 1,2,3,4--
+```
+
+Replace the numbers with actual column names or functions like `database()`, `user()`, `version()` to extract useful information.
+
 ## Tools
 
-- **sqlmap**: A powerful tool for automatic SQL injection and database takeover.
+- **sqlmap**: A powerful tool for automatic SQL injection and database takeover, with built-in support for UNION-based column count detection using both NULL and ORDER BY methods.
+- **Burp Suite**: Comprehensive platform for manual testing, useful for crafting and testing UNION injection payloads with real-time response analysis.
+- **OWASP ZAP**: Alternative web application security scanner that can assist in identifying UNION injection vulnerabilities and column count detection.
