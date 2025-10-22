@@ -1,0 +1,109 @@
+---
+title: Exploiting MySQL with SLEEP in Subselect for SQL Injection
+description: Learn to exploit MySQL using SLEEP in subselect for time-based SQL injection
+  attacks.
+keywords:
+- MySQL
+- SLEEP function
+- subselect
+- SQL injection
+- blind timing attacks
+- time-based vulnerability
+- database security
+- IF() function
+- conditional delays
+- subquery injection
+---
+
+# Using SLEEP in a Subselect
+
+## Context
+
+In this article, we explore how to exploit MySQL time-based SQL injection vulnerabilities by using the SLEEP function in a subselect. This technique exploits the delay introduced by SLEEP to infer database information through blind timing attacks. It is crucial for attackers to have a working knowledge of SQL queries, subselects, timing attacks, and specific concepts related to MySQL time-based injections.
+
+## Theory
+
+### SLEEP Function in MySQL
+
+The SLEEP function in MySQL is used to pause the execution of a query for a specified number of seconds. This characteristic makes it valuable for timing-based SQL injection attacks, allowing attackers to introduce deliberate delays and craft discriminative conditions to retrieve hidden information.
+
+### Subselects in SQL
+
+A subselect, or subquery, is a SELECT statement nested within another SQL query. Subselects adjust the main query's logic and introduce delays via functions like SLEEP. Understanding how to leverage subselects enables more sophisticated and conditional timing attacks.
+
+### Blind Timing Attacks
+
+Blind timing attacks exploit delays created by the SLEEP function to infer information about the database system. By causing differential time delays in query execution based on conditions, attackers can extract abstract data from the database system efficiently without needing direct feedback.
+
+### Advantages of Subselect Timing Attacks
+
+Using SLEEP in subselects offers several advantages:
+- **Conditional execution**: Only delays when specific conditions are met
+- **Stealth**: More difficult to detect than direct SLEEP injections
+- **Flexibility**: Can be combined with complex logic and multiple conditions
+- **Bypass filters**: Often bypasses simple WAF rules that block direct SLEEP usage
+
+## Practice
+
+### Using SLEEP in a Subselect for Time-Based SQL Injection
+
+This section walks through the process of using SLEEP in a subselect for a time-based SQL injection attack.
+
+- **Identify a Vulnerable Parameter:** 
+  Begin by analyzing the web application to locate a parameter vulnerable to SQL injection. This could involve testing each input field and query string to find exploitable points.
+
+- **Basic Injection with SLEEP:**
+  ```http
+  http://example.com/page?id=1' AND (SELECT SLEEP(5))--
+  ```
+  Insert the above SQL statement into the application where the vulnerable parameter is identified. This will pause (SLEEP) the execution for 5 seconds if successfully injected. Note any delays to confirm the success of the injection.
+
+- **Conditional Logic Injection:**
+  ```http
+  http://example.com/page?id=1' AND (SELECT IF(1=1,SLEEP(5),0))--
+  ```
+  Use conditional logic within subselects to introduce a delay based on specific conditions, such as `1=1`. If the condition is true, the query pauses; otherwise, it proceeds normally. This allows you to deduce boolean responses and iteratively extract data based on timing.
+
+- **Data Extraction with Conditional Delays:**
+  ```http
+  http://example.com/page?id=1' AND (SELECT IF(ASCII(SUBSTRING((SELECT database()),1,1))=100,SLEEP(5),0))--
+  ```
+  Extract data character by character by using conditional delays. This example checks if the first character of the database name has ASCII value 100 (letter 'd').
+
+- **Multiple Condition Testing:**
+  ```http
+  http://example.com/page?id=1' AND (SELECT IF((SELECT COUNT(*) FROM information_schema.tables)>0,SLEEP(5),0))--
+  ```
+  Test multiple conditions to gather information about the database structure, such as checking if certain tables exist.
+
+- **Timing Analysis:**
+  - Measure response times carefully (use tools like Burp Suite's timer)
+  - Establish baseline response time first
+  - Look for consistent delays of 5+ seconds to confirm true conditions
+  - Account for network latency and server load variations
+
+## Tools
+
+- **sqlmap:** A popular tool for automating the detection and exploitation of SQL injection vulnerabilities, including time-based injections with subselect support.
+- **Burp Suite:** A comprehensive platform for web application security testing, useful for identifying and exploiting vulnerabilities in web apps through methods like SQL injection, with built-in timing analysis.
+- **OWASP ZAP:** Alternative web application security scanner that can assist in identifying time-based SQL injection vulnerabilities.
+- **Custom timing scripts:** Python or bash scripts to measure response times accurately and automate the timing analysis process.
+
+## Common Challenges and Solutions
+
+### WAF Bypass Techniques
+- Use alternative delay functions: `BENCHMARK(5000000,MD5('test'))` instead of `SLEEP(5)`
+- Obfuscate SLEEP function: `SLEEP(5)` → `SLEEP/**/(5)` or `SLEEP(0x5)`
+- Use nested subqueries to bypass simple pattern matching
+
+### Timing Variations
+- Account for network latency by testing multiple times
+- Use longer delays (10+ seconds) in noisy environments
+- Test during off-peak hours for more consistent results
+
+### Detection Avoidance
+- Use shorter delays initially to avoid triggering rate limiting
+- Vary timing patterns to avoid detection by monitoring systems
+- Combine with other injection techniques to reduce reliance on timing alone
+
+By mastering this technique, you can effectively leverage time-based vulnerabilities to extract sensitive information from poorly secured MySQL databases. This should only be done in ethical situations with full authorization and knowledge of its impact on the target system.
