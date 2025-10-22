@@ -10,6 +10,9 @@ keywords:
 - database extraction
 - SQL vulnerabilities
 - security testing
+- time-based injection
+- SLEEP() function
+- boolean-based injection
 ---
 
 # MYSQL Blind Using A Conditional Statement
@@ -38,6 +41,14 @@ IF(condition, true_result, false_result)
 
 When exploited, this function can cause conditional delays or errors based on the truth value of the condition. For instance, by embedding sleep functions within an IF statement, attackers can force an application to delay responses, confirming the truth of tested conditions. This ability to manipulate response times is a potent tool for extracting vital database information in a blind SQL injection attack.
 
+### Time-Based vs Boolean-Based Blind Injection
+
+MySQL blind SQL injection can be categorized into two main types:
+- **Time-based**: Uses `SLEEP()` function to introduce delays based on conditions
+- **Boolean-based**: Relies on different application responses for true/false conditions
+
+Both techniques can be combined with `IF()` statements for more sophisticated attacks.
+
 ## Practice
 
 ### MySQL Blind SQL Injection Using Conditional Statements
@@ -63,6 +74,13 @@ To exploit MySQL blind SQL injection vulnerabilities using conditional statement
   ```
   - By comparing the response time against expected delays, determine whether the condition (e.g., `database() = 'target_db'`) is true, slowly revealing the desired database name.
 
+- **Alternative boolean-based approach**:
+  - If time-based injection is not feasible, use boolean-based conditions that rely on different application responses:
+  ```bash
+  http://example.com/item?id=1' AND IF(ASCII(SUBSTRING((SELECT database()),1,1))=100, 1, 0)-- -
+  ```
+  - Observe changes in application behavior (error messages, different content, HTTP status codes) to determine if the condition is true or false.
+
 - **Iterate for complete information**:
   - Continue this process iteratively, modifying the condition's logic to peel away new layers or specific entities of the database structure and contents you aim to uncover.
 
@@ -70,5 +88,6 @@ To exploit MySQL blind SQL injection vulnerabilities using conditional statement
 
 ## Tools
 
-- **sqlmap**: A powerful open-source SQL injection tool that automates the detection and exploitation of SQL injection flaws.
-- **Burp Suite**: A comprehensive platform for web application security testing, useful for manually crafting and testing payloads in SQL injection scenarios.
+- **sqlmap**: A powerful open-source SQL injection tool that automates the detection and exploitation of SQL injection flaws, with specific support for time-based and boolean-based blind injection techniques.
+- **Burp Suite**: A comprehensive platform for web application security testing, useful for manually crafting and testing payloads in SQL injection scenarios, including timing analysis and response comparison.
+- **OWASP ZAP**: Alternative web application security scanner that can assist in identifying and testing blind SQL injection vulnerabilities.
