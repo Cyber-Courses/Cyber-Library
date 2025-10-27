@@ -1,0 +1,91 @@
+---
+title: Boolean-based Blind SQL Injection in IBM DB2
+description: Explore Boolean-based Blind SQL Injection techniques to extract data
+  using conditional logic in IBM DB2 databases.
+keywords:
+- Boolean-based blind
+- SQL injection
+- IBM DB2
+- conditional logic
+- data extraction
+- boolean logic
+- vulnerability
+- sensitive data
+- application behavior
+---
+
+# Boolean-based Blind
+
+## Context
+
+This article explores the technique of exploiting Boolean-based Blind SQL Injection within IBM DB2 databases. By leveraging SQL's Boolean logic, it is possible to extract data from a database one bit at a time, based on the application's response to true or false conditions. This method is particularly useful when the application does not return any output directly, making traditional SQL injection techniques ineffective. To gain the most from this article, readers should have a background in SQL syntax, understand Boolean logic, be familiar with HTTP requests, and have prior knowledge of DB2 Blind SQL Injection.
+
+## Theory
+
+### Boolean Logic in SQL
+
+Boolean logic in SQL uses conditional statements to manipulate the execution of SQL queries. When a query is executed, Boolean conditions evaluate to either true or false, which can affect the query's outcome. In the context of SQL injection, an attacker can input these conditions to verify if certain information exists or to extract specific data by interpreting the true/false evaluation.
+
+> **Insight:** Boolean-based blind SQL injection is not limited to extracting user data. You can also use it to enumerate system metadata, such as DB2 version, operating system, and privileges, by targeting system tables and environment variables.
+
+### Exploiting Conditional Responses
+
+Boolean-based Blind SQL Injection exploits conditional responses of the application. A successful attack begins with injecting a condition that is always true (such as `1=1`) and observing the application's behavior. If the application responds differently when changing the injected condition from true to false, it indicates a potential vulnerability. By carefully crafting conditions that evaluate data properties, attackers can extract sensitive information based on patterns in the application's responses.
+
+> **Tip:** Application behavior that indicates a true/false result may include differences in HTTP status codes, page content, error messages, or response times. For example, a normal page load for TRUE and a blank or error page for FALSE.
+
+### Data Extraction through Boolean Conditions
+
+Data extraction through Boolean conditions involves using successive queries to infer information one piece at a time. Attackers can determine aspects such as the length of data fields or specific values by injecting queries that evaluate the truth of various conditions. Changes in application behavior indicate correctness of these guesses, allowing attackers to piece together sensitive data by employing logical testing across multiple injections.
+
+> **Tip:** This technique can be automated using tools or custom scripts to iterate through possible values and interpret application responses, greatly speeding up the extraction process.
+
+## Practice
+
+### Boolean-based Blind SQL Injection
+
+Boolean-based Blind SQL Injection can be manually executed by crafting SQL queries that infer data from true/false conditions. Here is how to perform this technique effectively:
+
+- **Verify Vulnerability with True Condition**
+  ```sql
+  SELECT * FROM users WHERE id = 1 AND 1=1 -- 
+  ```
+  Execute this query to test if a known true condition results in a typical application response, confirming that the input is being evaluated.
+
+- **Confirm Vulnerability with False Condition**
+  ```sql
+  SELECT * FROM users WHERE id = 1 AND 1=2 -- 
+  ```
+  This basic false condition should lead to a different response. If the application's behavior changes, further exploitation may be possible.
+
+- **Extract Data by Checking Length of Username**
+  ```sql
+  SELECT * FROM users WHERE id = 1 AND (SELECT LENGTH(username) FROM users WHERE id=1)=5 -- 
+  ```
+  Use this query to determine if the username associated with `id=1` consists of 5 characters, based on the application's response.
+
+- **Identify Specific Character of Username**
+  - **Check First Character:**
+    ```sql
+    SELECT * FROM users WHERE id = 1 AND (SELECT ASCII(SUBSTR(username,1,1)) FROM users WHERE id=1)=65 -- 
+    ```
+    This query verifies if the first character is 'A' (ASCII value 65).
+
+  - **Check Second Character:**
+    ```sql
+    SELECT * FROM users WHERE id = 1 AND (SELECT ASCII(SUBSTR(username,2,1)) FROM users WHERE id=1)=66 -- 
+    ```
+    This query checks if the second character is 'B' (ASCII value 66).
+
+### Example Output/Behavior
+- **TRUE Condition:** Application returns a normal page, expected data, or a specific message.
+- **FALSE Condition:** Application returns a blank page, error message, or different content/response code.
+
+### Troubleshooting & Automation
+- If the application response is inconsistent, try using time-based blind SQLi to infer true/false.
+- Automate the process with tools like sqlmap or custom scripts to speed up extraction and reduce manual effort.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
