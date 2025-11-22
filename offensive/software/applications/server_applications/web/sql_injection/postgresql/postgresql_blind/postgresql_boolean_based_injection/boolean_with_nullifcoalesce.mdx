@@ -1,0 +1,69 @@
+---
+title: Mastering NULLIF/COALESCE for SQL Injection
+description: Learn to exploit PostgreSQL SQL Injection using NULLIF and COALESCE functions
+  for Boolean-based attacks.
+keywords:
+- SQL Injection
+- PostgreSQL
+- NULLIF
+- COALESCE
+- Boolean-based injection
+- Authentication bypass
+- SQL query logic
+- Database security
+- Cybersecurity
+---
+
+# Boolean with NULLIF/COALESCE
+
+## Context
+
+This article explores a specific SQL injection technique in PostgreSQL, known as Boolean-based SQL Injection using the `NULLIF` and `COALESCE` functions. This technique is targeted at gaining unauthorized access to database content by manipulating Boolean logic within SQL queries. The assumed reader should have foundational knowledge of SQL query structure, basic Boolean logic, null handling in SQL, and PostgreSQL Blind SQL Injection techniques.
+
+## Theory
+
+### NULLIF Function Usage
+
+The `NULLIF` function plays a pivotal role in this SQL injection technique. It is defined as a conditional expression that takes two arguments and returns `NULL` if they are equal; otherwise, it returns the first argument. This behavior is leveraged to strategically introduce `NULL` values into SQL queries, which can alter the execution flow and expose sensitive data during an injection attack. Understanding this function's usage allows an attacker to manipulate query results based on specific logic requirements.
+
+### COALESCE Function Usage
+
+The `COALESCE` function is another powerful tool used to affect SQL query control flow. It is defined to return the first non-`NULL` value from a list of expressions. This can be utilized to manage `NULL` handling in SQL queries, ensuring that if one part yields a `NULL`, the script reverts to the subsequent default value, thereby guiding the decision flow in injections through expected outcomes.
+
+### Boolean Logic in SQL Injection
+
+Boolean-based SQL injections involve inserting conditions that can be evaluated to either `TRUE` or `FALSE`. The injection outcome hinges on whether the conditional expression in the SQL query returns a truthy value, which in turn affects the server's response. This technique exploits the differing behaviors in query results to deduce hidden information from the database without observing actual database responses directly.
+
+### Exploiting NULL Handling in PostgreSQL
+
+The manipulation of `NULL` handling functions, such as `NULLIF` and `COALESCE`, provides a method to control query execution in injection attacks. By crafting injections that appropriately introduce or handle `NULL` values, attackers can guide the database response to reveal or bypass information, thus executing an authentication bypass or extracting data with precision.
+
+## Practice
+
+### Boolean-based SQL Injection with NULLIF/COALESCE
+
+To conduct a Boolean-based SQL Injection using `NULLIF` and `COALESCE`, follow these steps carefully:
+
+- **Injecting with NULLIF:**
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND NULLIF((SELECT COUNT(*) FROM information_schema.tables), 0) IS NULL;
+    ```
+
+    This SQL injection checks if the count of tables is zero by using `NULLIF` to return `NULL` when the subquery count is non-zero. If this condition is true, the query will return a `NULL`, used to influence the logical flow based on expected database content.
+
+- **Injecting with COALESCE:**
+
+    ```bash
+    SELECT * FROM users WHERE id = 1 AND COALESCE((SELECT username FROM users WHERE id=1), 'default') = 'admin';
+    ```
+
+    Here, `COALESCE` is employed to verify whether the username retrieved is 'admin'. It checks if the first value is `NULL`, providing a fallback to 'default'. If 'admin' is deduced, the query logic will efficiently guide an authentication bypass.
+
+The desired outcome of these steps is an effective authentication bypass, achieved by exploiting the decision-making logic inherent in SQL queries through the strategic use of `NULLIF` and `COALESCE`.
+
+## Tools
+
+- **sqlmap**
+
+The use of `sqlmap` can significantly automate exploitation processes for SQL injection attacks, providing practical tools for real-world application of these techniques.

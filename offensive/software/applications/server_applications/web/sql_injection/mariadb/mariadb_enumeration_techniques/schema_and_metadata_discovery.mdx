@@ -1,0 +1,113 @@
+---
+title: Schema and Metadata Discovery in MariaDB
+description: Explore SQL Injection techniques for discovering schema and metadata
+  in MariaDB.
+keywords:
+- MariaDB
+- schema discovery
+- metadata extraction
+- SQL Injection
+- database security
+- information_schema
+- stored procedures
+- SQLi techniques
+---
+
+# Schema and Metadata Discovery
+
+## Context
+
+In the world of offensive cybersecurity, discovering schema and metadata within a target's database is a pivotal step. This process provides attackers with an understanding of the database's structure and the data it contains, all without needing direct access to the database management interface. This content focuses on leveraging SQL Injection techniques specifically tailored for MariaDB to achieve such outcomes. It is assumed that the reader is already comfortable with database schema concepts, metadata, and has experience with Mariadb Enumeration Techniques.
+
+## Theory
+
+### MariaDB Schema and Metadata
+
+In the context of databases, a **schema** defines the structure—this includes configurations for tables, columns, and their interrelations. The schema gives a blueprint of how data is organized within the database.
+
+**Metadata**, on the other hand, is data about data. It provides details such as table names and column types which describe the database's organizational structure but do not include actual data entries.
+
+### SQL Injection for Metadata Discovery
+
+**SQL Injection (SQLi)** is a code injection technique that attackers use to execute arbitrary SQL queries on a database. It exploits vulnerabilities in applications that concatenate SQL queries with potentially untrusted inputs.
+
+By using SQL Injection, an attacker can craft queries to extract information about the schema and metadata of a database, allowing them to map out the database's structure without needing direct access.
+
+### Key Metadata Tables in MariaDB
+
+There are specific tables and views in MariaDB that store essential metadata:
+
+- **information_schema.tables**: This table contains information about all tables in a given database.
+  
+- **information_schema.columns**: This offers information regarding all columns within the tables of the database.
+  
+- **mysql.proc**: Stores metadata about all stored procedures defined in the database.
+
+## Practice
+
+### Extract Table Names using SQL Injection
+
+To start with, you can extract table names from the database schema using SQL Injection. This involves querying the `information_schema.tables` table to access a list of tables present in the current database.
+
+```bash
+SELECT table_name FROM information_schema.tables WHERE table_schema=DATABASE();
+```
+
+This query targets the currently selected database and provides a list of all table names for further exploitation.
+
+### Extract Column Names using SQL Injection
+
+After identifying table names, the next step involves listing column names for specific tables. This can be achieved through:
+
+```bash
+SELECT column_name FROM information_schema.columns WHERE table_name='target_table';
+```
+
+Replace `'target_table'` with the actual table name obtained from the previous step to derive specific column details.
+
+### Discover Stored Procedures using SQL Injection
+
+Stored procedures can contain various sensitive operations and logic. Use this query to list all procedures in the current database:
+
+```bash
+SELECT name FROM mysql.proc WHERE db=DATABASE();
+```
+
+Such information can illuminate procedural logic conducted by the database and potential exploitable workflows.
+
+### Monitor Active Processes using SQL Injection
+
+Gathering real-time information about database activities is strategic in exploiting and understanding business logic:
+
+```bash
+SHOW PROCESSLIST;
+```
+
+This SQL statement displays active database processes, potentially revealing user activities, executing queries, or operations that may be further manipulated.
+
+### Check InnoDB Status using SQL Injection
+
+InnoDB is a common storage engine in MariaDB. To explore its internal activities and statistics such as lock status or memory usage:
+
+```bash
+SHOW ENGINE INNODB STATUS;
+```
+
+This output can provide low-level insights into internal operations which could indirectly suggest operational weaknesses.
+
+### List Open Tables using SQL Injection
+
+To maintain updated knowledge on which tables are currently utilized or open within a session, the following command is practical:
+
+```bash
+SHOW OPEN TABLES;
+```
+
+By identifying all currently open tables, you can potentially target focus areas for data extraction or manipulation.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+
+By mastering these techniques, one can efficiently uncover the architecture and potentially sensitive metadata of a MariaDB database, eventually paving the way for more orchestrated exploits. Always use such skills responsibly and within the bounds of applicable laws and permissions.

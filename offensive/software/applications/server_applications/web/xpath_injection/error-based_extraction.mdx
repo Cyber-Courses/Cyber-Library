@@ -1,0 +1,62 @@
+---
+title: Mastering Error-Based XPath Extraction Techniques
+description: Learn how to extract sensitive data using XPath error-based techniques.
+  Exploit verbose error messages for effective data extraction.
+keywords:
+- XPath injection
+- error-based extraction
+- XML parsing errors
+- information disclosure
+- error message leakage
+---
+
+# Error-Based Extraction
+
+## Context
+
+The objective of this guide is to enable offensive operators to extract sensitive data from web applications via error-based XPath injection. This technique involves leveraging error messages for information disclosure. Readers should already have a solid understanding of XML structure and document traversal, XPath query syntax and logic, general error handling in web applications, and the fundamentals of XPath Injection.
+
+## Theory
+
+### Error-Based XPath Injection Fundamentals
+
+Error-based XPath extraction involves exploiting verbose error messages to reveal sensitive data by crafting malformed queries. Attackers use intentionally invalid XPath queries to trigger error messages that may contain backend information. This technique becomes viable in applications that expose raw XPath or XML parsing errors, making them susceptible to information leakage.
+
+### Mechanics of XPath Error Message Leakage
+
+The process involves submitting malformed or logic-altering XPath payloads and observing the resulting error output for clues or direct data leakage. Implementation flaws such as uncaught exceptions or debug output can inadvertently reveal node names, attribute values, or the structure of the query itself. Additionally, attackers can bypass weak input validation to inject special characters or functions that cause parsing errors.
+
+### Types of XPath Error Messages
+
+XPath error messages may disclose various types of information, including syntax errors, invalid node references, or evaluation results. The typical data flow is as follows: an injected payload is processed by the XPath engine, leading to an error that the application then reflects back in its response, allowing the attacker to analyze this for sensitive information.
+
+## Practice
+
+### Manual Error-Based XPath Extraction
+
+- Identify input fields that are processed by backend XPath queries. Target login, search, or filter fields that are likely candidates for interacting with XML data.
+- Inject a logic-altering payload to test for error handling and message verbosity:
+    ```sql
+    ' or 1=1 or 'a'='b
+    ```
+- Trigger a syntax or logic error to see if node names are leaked:
+    ```sql
+    ' or substring(name(/*),1,1)='x
+    ```
+- Use `curl` to send the payload and capture the HTTP response for error message analysis:
+    ```bash
+    curl -i -X POST -d "username=' or substring(name(/*),1,1)='x" http://target-app/login
+    ```
+- Analyze application responses for details on XPath or XML errors. Look for node names, attribute values, or fragments of the query structure in the error output.
+- Iteratively adjust payloads to extract data such as counts, node names, or attribute values based on feedback from error messages:
+    ```sql
+    ' or count(//user)=1 or 'a'='b
+    ```
+
+The outcome of these steps should be the extraction of sensitive XML structure or data through careful analysis of error messages.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **OWASP ZAP**

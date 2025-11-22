@@ -1,0 +1,64 @@
+---
+title: Extract Column Names without Info_Schema in MySQL 4.x
+description: Learn how to deduce column names in MySQL 4.x using error messages and
+  UNION queries without information_schema.
+keywords:
+- MySQL 4.x
+- column name guessing
+- error message
+- UNION queries
+- SQL injection
+---
+
+# Extract Columns Name Without Information_Schema
+
+## Context
+
+This article aims to teach you how to extract column names from a MySQL 4.x database without directly using the information_schema. To engage effectively with this content, you should have an understanding of SQL UNION queries and how to interpret MySQL error messages. This technique is essential due to the absence of information_schema in MySQL 4.x, necessitating alternative methods for schema discovery.
+
+## Theory
+
+### Column Name Guessing in MySQL 4.x
+
+Column name guessing involves deducing column names without direct access to the database schema. In MySQL 4.x, the information_schema—typically used to access schema details like table and column names—does not exist. As a result, attackers must rely on alternative approaches to infer this information. One effective method is to utilize error messages and strategically crafted UNION queries to surmise the names of columns.
+
+### Error Message Utilization
+
+One of the core principles in this technique is leveraging MySQL error messages to identify valid column names. Attackers can craft specific queries that intentionally trigger errors within the database. These error messages can sometimes provide subtle hints that assist in confirming or refuting guesses about column names. By carefully analyzing these messages, attackers can deduce the correct column names iteratively.
+
+## Practice
+
+### Column Name Extraction via Error Messages
+
+- Begin by identifying a vulnerable SQL injection point that supports UNION-based injection. This typically involves locating a parameter within the web application's database query where you can inject additional SQL statements.
+
+```text
+Identify a vulnerable UNION-based SQL injection point.
+```
+
+- Use an initial UNION query to determine the number of columns involved in the original query. This might look something like:
+
+```bash
+SELECT * FROM users WHERE id = 1 UNION SELECT 1,2,3,... -- -
+```
+
+- Once the number of columns is confirmed, iteratively replace numeric placeholders with potential column names you wish to verify. For example:
+
+```bash
+SELECT * FROM users WHERE id = 1 UNION SELECT username, 2, 3,... -- -
+```
+
+- Submit these queries through the injection point and observe the web application's response. Look for any error messages that provide clues regarding valid or invalid column names.
+
+```text
+Observe error messages for clues on valid column names.
+```
+
+#### Result
+
+Through the careful analysis of error messages generated from these inquiries, it is possible to ascertain valid column names within the database. Successful exploitation can provide sensitive data access by allowing further queries that fetch valuable dataset details.
+
+## Tools
+
+- **sqlmap**: Automate the process of testing SQL injection vulnerabilities, which can include the discovery of column names.
+- **Burp Suite**: Assist in capturing and modifying traffic to further test and confirm injections within web applications.

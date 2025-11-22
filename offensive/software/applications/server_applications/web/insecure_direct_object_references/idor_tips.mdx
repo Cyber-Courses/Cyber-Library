@@ -1,0 +1,131 @@
+---
+title: Advanced IDOR Exploitation Techniques & Tips
+description: Explore advanced techniques for exploiting IDOR vulnerabilities in web
+  apps, including parameter manipulation and automation tools.
+keywords:
+- IDOR exploitation
+- web application security
+- parameter manipulation
+- authorization bypass
+- session fixation
+- Burp Suite
+- IDOR scanning
+- header manipulation
+- automation tools
+- HTTP method variation
+---
+
+# IDOR Tips
+
+## Context
+
+This guide aims to provide advanced techniques and tips for discovering and exploiting Insecure Direct Object Reference (IDOR) vulnerabilities in web applications. It assumes that you have a solid understanding of HTTP methods and request structuring, JSON and XML data formats, parameter handling in web applications, authorization mechanisms, and the core concept of IDOR and its basic exploitation.
+
+## Theory
+
+### Expanding the IDOR Attack Surface
+
+IDOR vulnerabilities can be found beyond just numeric IDs. They can exist in any parameter that references user-controllable objects. Attackers take advantage of IDOR by manipulating the request structure, varying data formats, and modifying parameter names to bypass authorization checks.
+
+### Parameter Manipulation Techniques
+
+- **Parameter Pollution:** This occurs when multiple instances of a single parameter are supplied in a request, potentially altering backend logic.
+- **Array Injection:** Using array syntax in parameters, such as `user_id[]=1&user_id[]=2`, can permit access to multiple objects.
+- **JSON Transformation:** Modifying JSON keys or using nesting techniques to bypass object mapping and authorization logic.
+
+### HTTP Method and Data Format Variation
+
+- Changing HTTP methods, such as switching from POST to PUT, may engage different backend authorization logic.
+- Switching payload formats between XML and JSON can expose inconsistencies in backend validation, leading to authorization bypass.
+
+### Session and Header Manipulation
+
+- **Session Fixation:** This involves forcing a victim to use a known session ID, allowing an attacker to hijack their access.
+- **Header Manipulation:** Modifying headers—like `X-User-ID`—to impersonate other users, exploiting weaknesses in how headers are trusted for authorization.
+
+### Automation and Tooling for IDOR Discovery
+
+Automated tools can significantly aid in the enumeration of object references and testing for authorization bypasses at scale. Tools like Burp Suite and dedicated IDOR scanners automate the process of parameter fuzzing and response analysis, enhancing the efficiency and reach of IDOR discovery efforts.
+
+## Practice
+
+### Parameter Pollution for IDOR Discovery
+
+- Execute the following command:
+  
+  ```bash
+  curl -b sessionid=abc123 'https://target/app/resource?user_id=1&user_id=2'
+  ```
+  
+  This command tests the backend's handling of multiple `user_id` parameters. If handled incorrectly, it can allow unauthorized access to resources.
+
+### Array Injection in Parameters
+
+- Test array syntax handling with this command:
+  
+  ```bash
+  curl -b sessionid=abc123 'https://target/app/resource?user_id[]=1&user_id[]=2'
+  ```
+  
+  Successful exploitation might result in access or enumeration of data belonging to multiple users.
+
+### HTTP Method Variation
+
+- Use HTTP method alteration:
+  
+  ```bash
+  curl -X PUT -b sessionid=abc123 'https://target/app/resource/2'
+  ```
+  
+  This tests for inconsistencies in authorization logic across HTTP methods such as POST and PUT.
+
+### Switching Data Formats (JSON/XML)
+
+- Send JSON payload for testing:
+
+  ```bash
+  curl -X POST -H 'Content-Type: application/json' -d '{"user_id":2}' -b sessionid=abc123 https://target/app/resource
+  ```
+
+- Follow with XML payload:
+
+  ```bash
+  curl -X POST -H 'Content-Type: application/xml' -d '<user_id>2</user_id>' -b sessionid=abc123 https://target/app/resource
+  ```
+
+  These payload variations check for disparate validation logic across data formats.
+
+### Header Manipulation for IDOR
+
+- Modify request headers:
+
+  ```bash
+  curl -H 'X-User-ID: 2' -b sessionid=abc123 https://target/app/resource
+  ```
+  
+  Properly executed, this manipulation can allow access to resources of other users by exploiting how headers are trusted.
+
+### Session Fixation for IDOR
+
+- Set a known session ID and when the victim authenticates, exploit the session to gain access.
+
+  By leveraging session fixation, attackers can hijack sessions after victims log in using the fixed session ID.
+
+### Automated IDOR Enumeration with Burp Suite
+
+- Configure Burp Intruder to fuzz object IDs within requests. This setup allows automated enumeration and discovery of IDOR vulnerabilities by iterating over potential object references.
+
+### Automated IDOR Scanning with Dedicated Tools
+
+- Run the following command using an IDOR scanner:
+
+  ```bash
+  idor-scanner -u 'https://target/app/resource?id=FUZZ' -c cookies.txt
+  ```
+
+  This tool automates the process of detecting IDOR vulnerabilities across different endpoints by fuzzing object references.
+
+## Tools
+
+- **Burp Suite**
+- **idor-scanner**

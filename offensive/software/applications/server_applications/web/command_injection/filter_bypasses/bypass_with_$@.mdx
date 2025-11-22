@@ -1,0 +1,64 @@
+---
+title: Bypass Command Filters with $@ Shell Variable
+description: Learn to exploit command injection filters using $@ to bypass restrictions
+  and execute arbitrary commands.
+keywords:
+- command injection
+- filter bypass
+- $@ shell variable
+- argument vector
+- web security
+- shell expansion
+- input filtering
+---
+
+# Bypass With $@
+
+## Context
+
+The primary aim of this article is to explain how to exploit command injection vulnerabilities using the `$@` shell variable to bypass input restrictions and achieve arbitrary command execution. This technique leverages the properties of shell metacharacters and the command execution context. Readers are expected to have a foundational understanding of these concepts, as well as experience with basic command injection techniques.
+
+## Theory
+
+### $@ in Shells: Argument Vector Expansion
+
+The `$@` variable is pivotal in shell scripting and command execution. It expands to all positional parameters as separate quoted words. This means that if a script or command line invocation includes `$@`, each argument is treated individually, even when embedded within double quotes. This characteristic makes `$@` a potent tool for injecting arguments into a command line, potentially bypassing filters that block spaces or specific characters.
+
+### Bypassing Filters with $@
+
+Input filters often aim to secure applications by blocking critical characters such as spaces or metacharacters that could be used for command injection. However, some filters fail to account for shell variable expansion, creating an opportunity for exploitation. In such cases, an attacker can inject `$@` into a vulnerable command, causing the shell to expand it and reconstruct the intended command. This bypass tactic is particularly effective when spaces are among the restricted characters.
+
+### Argument Vector Injection
+
+Argument vector injection involves manipulating shell variables like `$@` to alter the command execution sequence. This method is especially effective against web applications that directly pass user input to shell commands without proper sanitization. An injection that includes `$@` can change how arguments are processed, allowing for successful execution of otherwise blocked commands.
+
+## Practice
+
+### Bypassing Command Injection Filters Using $@ Expansion
+
+To effectively use the `$@` technique in practice, follow these steps:
+
+- **Identify a Vulnerable Web Parameter**
+  - Begin by identifying a web application parameter that is susceptible to command injection. These parameters are typically part of user input fields, such as form inputs or URL query parameters.
+  - Focus on parameters that implement input filtering, especially those blocking spaces or other metacharacters.
+
+- **Craft the Injection Payload**
+  ```bash
+  who$@ami
+  ```
+  - In this payload, `$@` is injected between the `who` and `ami` commands. If a filter blocks spaces, this usage bypasses the filter, and when expanded by the shell, reconstructs the complete command as `whoami`.
+
+- **Submit the Payload**
+  - Execute the payload by submitting it through the vulnerable parameter.
+  - Use tools like Burp Suite or `curl` to transmit the payload accurately.
+  - Analyze the application's output to confirm if shell expansion occurred and the full command executed.
+
+**Expected Outcome:**
+- Successful exploitation results in the execution of arbitrary commands despite input filters. This demonstrates a filter bypass using `$@`, confirming the vulnerability and the potential for further exploitation.
+
+## Tools
+
+- **Burp Suite**
+- **curl** 
+
+By using these tools, you can effectively craft and test payloads, analyze application responses, and confirm the success of filter bypass techniques with `$@`.

@@ -1,0 +1,84 @@
+---
+title: SQLite Version and Environment Detection Techniques
+description: Learn how to detect SQLite versions and environments using SQL injection.
+  Explore version detection, compile-time options, and other settings.
+keywords:
+- SQLite version detection
+- SQL injection
+- PRAGMA compile options
+- database environment detection
+- SQLite enumeration
+- PRAGMA encoding
+- compile-time config
+- SQLite page size
+- information disclosure
+---
+
+# Version and Environment Detection
+
+## Context
+
+In offensive cybersecurity, particularly when dealing with SQL injection vulnerabilities, detecting the version and environment of a SQLite database can be crucial. Gaining insights into the specific version and its compile-time and runtime configurations allows attackers to tailor their exploits accordingly. This knowledge is often the first phase of SQL injection attacks aimed at harvesting information about a database server.
+
+## Theory
+
+### SQLite Version Detection
+
+SQLite version detection is an essential step in SQL enumeration techniques. Understanding which version of SQLite is running can reveal vulnerabilities or feature sets that an attacker could exploit.
+
+To detect the SQLite version, utilize an SQL injection to run the query `SELECT sqlite_version()`. This command will output the current SQLite version installed on the server. Knowing the version helps in understanding the exploit landscape, as some versions may have unpatched vulnerabilities.
+
+### Environment Configuration Detection
+
+Exploring the environment configuration involves querying SQLite to reveal details about compile-time options and runtime settings. These configurations can affect the database's functionality and security posture.
+
+- **Compile-Time Options Detection:** Use the SQL command `PRAGMA compile_options` via SQL injection. This will return a list of options used during the compilation of SQLite, providing insights that might be helpful in determining database capabilities and potential weaknesses.
+
+- **Determining the Database Encoding:** Through SQL injection, executing the command `PRAGMA encoding` will disclose the encoding setting of the database. This can be relevant to understanding how data is stored and accessed within the database, potentially impacting how injection attacks might be constructed.
+
+- **Page Size Settings Detection:** The command `PRAGMA page_size` is useful for ascertaining the page size setting. By determining this, attackers can learn more about how data is structured and potentially predict performance characteristics or buffer sizes.
+
+## Practice
+
+### SQLite Version Detection via SQL Injection
+
+To detect the SQLite version using SQL injection, follow these steps:
+
+- **Step:** Execute the following SQL command via injection to reveal the SQLite version:
+  
+  ```bash
+  SELECT sqlite_version();
+  ```
+
+- **Expected Outcome:** This operation will disclose the SQLite version being used, aiding in environment fingerprinting and potential vulnerability exploitation.
+
+### Environment Configuration Detection via SQL Injection
+
+Gaining environment configuration information can enhance an attacker's understanding of the target database. Follow these steps:
+
+- **Step:** To list compile-time options:
+  
+  ```bash
+  PRAGMA compile_options;
+  ```
+
+- **Step:** To determine the database encoding:
+  
+  ```bash
+  PRAGMA encoding;
+  ```
+
+- **Step:** To retrieve the database page size setting:
+  
+  ```bash
+  PRAGMA page_size;
+  ```
+
+- **Expected Outcome:** These commands will reveal detailed SQLite environment configurations, including compile options, encoding, and page size settings. This information can guide subsequent exploitation activities.
+
+## Tools
+
+- **SQLite3**
+- **sqlmap**
+
+These tools assist in managing SQL commands and automating SQL injection attacks, useful for the exploratory phase of discovering database versioning and configuration details.

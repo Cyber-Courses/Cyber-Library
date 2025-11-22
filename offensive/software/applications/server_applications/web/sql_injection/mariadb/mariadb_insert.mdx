@@ -1,0 +1,89 @@
+---
+title: Mastering MariaDB INSERT for SQL Injection Exploits
+description: Learn how to exploit MariaDB INSERT statements for SQL injection attacks
+  to manipulate database data and escalate privileges.
+keywords:
+- MariaDB
+- INSERT statement
+- SQL injection
+- database manipulation
+- privilege escalation
+- REPLACE INTO
+- ON DUPLICATE KEY UPDATE
+---
+
+# MariaDB INSERT
+
+## Context
+
+This article outlines the methodology for exploiting MariaDB INSERT statements as part of a SQL injection attack. This offensive technique capitalizes on improperly validated inputs within web applications to manipulate a MariaDB database. To fully understand and execute this methodology, prior knowledge of SQL syntax, database privileges, and web application architecture is essential.
+
+## Theory
+
+### INSERT Statement Abuse in MariaDB
+
+In MariaDB, the `INSERT` statement is pivotal as it enables the addition of new rows to a database table. However, when input validation is lax, attackers can exploit this statement for SQL injection attacks. In such scenarios, carefully crafted malicious payloads can be inserted into a database through a vulnerable security layer, manipulating or even corrupting data.
+
+### Techniques for Exploiting INSERT Statements
+
+To exploit `INSERT` statements, attackers can leverage them for injecting malicious SQL commands. Some of the key techniques involve:
+
+- **Basic Injection through Input Fields:** By manipulating input fields intended for user data, attackers can use `INSERT INTO ... VALUES()` to inject unwanted SQL segments, thereby corrupting or altering the intended structure of a database entry.
+  
+- **Using REPLACE INTO for Overwriting:** The `REPLACE INTO` command operates similarly to `INSERT`, but it will overwrite existing entries that conflict with the new row. This is particularly useful for attacking credentials by replacing them with new ones, facilitating privilege escalation.
+
+- **ON DUPLICATE KEY UPDATE Manipulation:** This clause can be attached to an `INSERT` statement to update existing records when a duplicate key is detected. This allows conditional changes to the database, assisting in unauthorized data manipulation.
+
+### Privilege Escalation via INSERT
+
+The privileges granted for executing an `INSERT` command can be similarly exploited to escalate database access. Attackers can inject commands into tables containing user credentials to alter privilege levels, gaining unauthorized or elevated rights within the database environment.
+
+## Practice
+
+### Exploiting INSERT for SQL Injection
+
+To successfully exploit `INSERT` statements in a MariaDB database, follow these tactical steps:
+
+- **Basic User Addition Using INSERT:**
+
+  ```bash
+  INSERT INTO users (username, password) VALUES ('admin', 'pass');
+  ```
+
+  This command adds a new user entry with the username 'admin' and the associated password 'pass'.
+
+- **Injecting SQL to Bypass Authentication:**
+
+  ```sql
+  INSERT INTO users (username, password) VALUES ('admin', ''); -- ');
+  ```
+
+  Here, the SQL injection bypasses typical password checks through an unfinished string that comments out the rest of the statement.
+
+- **Overwriting User Information with REPLACE INTO:**
+
+  ```bash
+  REPLACE INTO users (username, password) VALUES ('admin', 'newpass');
+  ```
+
+  The `REPLACE INTO` statement overwrites the password for the 'admin' user, granting immediate unauthorized access to a known account.
+
+- **Conditionally Updating an Existing Entry:**
+
+  ```sql
+  INSERT INTO users (username, password) VALUES ('admin', 'pass') ON DUPLICATE KEY UPDATE password='newpass';
+  ```
+
+  This statement checks for the existence of an 'admin' user and, if found, updates the password to 'newpass'. This allows control over account credentials without creating duplicates.
+
+#### Outcome
+
+The successful manipulation of an `INSERT` statement can lead to privilege escalation by altering or adding unauthorized entries to the database. This can result in gaining unauthorized access to or control over sensitive data.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+- **MySQL Client** 
+
+These tools can assist in automating and executing SQL injection attacks against vulnerable web applications interfacing with MariaDB databases.

