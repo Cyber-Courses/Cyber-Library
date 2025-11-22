@@ -1,4 +1,4 @@
-# Welcome to Cyber Library
+# Cyber Library
 
 Welcome to the **Cyber Library**, a community-driven repository that aims to build a comprehensive knowledge base of cybersecurity topics. Whether you’re a seasoned security expert or just starting your journey, this library offers valuable resources across a wide range of domains.
 
@@ -10,8 +10,8 @@ The **Cyber Library** is organized into various categories covering different ar
 - **Offensive:** Learn about ethical hacking methodologies, reconnaissance techniques, network exploitation, and red/purple teaming strategies.
 - **Defensive:** Discover proactive preparation, continuous monitoring, incident response, recovery planning, and post-incident improvement.
 - **Governance:** Understand the frameworks, policies, compliance standards, and strategic decision-making that keep organizations secure at the top level.
+- **Inteligence:** 
 - **Career:** Explore roles, career paths, professional development, certifications, and how to grow and succeed in the cybersecurity industry.
-- **Technology:** Unpack the fundamentals of computing, networks, cryptography, data management, and the technical building blocks that power digital infrastructures.
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
 
