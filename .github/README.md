@@ -10,7 +10,7 @@ The **Cyber Library** is organized into various categories covering different ar
 - **Offensive:** Learn about ethical hacking methodologies, reconnaissance techniques, network exploitation, and red/purple teaming strategies.
 - **Defensive:** Discover proactive preparation, continuous monitoring, incident response, recovery planning, and post-incident improvement.
 - **Governance:** Understand the frameworks, policies, compliance standards, and strategic decision-making that keep organizations secure at the top level.
-- **Inteligence:** 
+- **Intelligence:** Explore threat intelligence, OSINT (Open Source Intelligence), intelligence gathering methodologies, and how actionable insights are derived to inform security decisions.
 - **Career:** Explore roles, career paths, professional development, certifications, and how to grow and succeed in the cybersecurity industry.
 
 Visit the website: [www.cyberlibrary.fr](https://www.cyberlibrary.fr)
