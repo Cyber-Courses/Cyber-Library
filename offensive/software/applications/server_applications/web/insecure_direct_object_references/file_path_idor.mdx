@@ -1,0 +1,93 @@
+---
+title: 'Understanding File Path IDOR: Exploit Techniques'
+description: Explore how to exploit File Path IDOR vulnerabilities and access unauthorized
+  files via parameter manipulation in web applications.
+keywords:
+- File Path IDOR
+- IDOR vulnerability
+- unauthorized file access
+- file path manipulation
+- web application security
+- file enumeration
+- path traversal
+- access control
+---
+
+# File Path IDOR
+
+## Context
+
+This article demonstrates the exploitation of File Path IDOR vulnerabilities, which allow unauthorized file access by manipulating file path parameters in web applications. The reader is expected to have an understanding of file system structures, how web servers handle files, and basic HTTP methods.
+
+## Theory
+
+### File Path IDOR Fundamentals
+
+File Path Insecure Direct Object Reference (IDOR) occurs when user-supplied file path parameters are not properly validated, enabling unauthorized access to files. This vulnerability exploits direct references to files through user-controllable parameters like `download.php?file=`, where the application fails to enforce adequate access control measures.
+
+Applications vulnerable to File Path IDOR expose a serious security risk by not validating the ownership or access rights of a user-supplied file path. This lack of validation creates an opportunity for attackers to enumerate or manipulate file references, potentially accessing sensitive information.
+
+### Attack Surface and Exploitation Vectors
+
+The typical attack sequence for exploiting a File Path IDOR vulnerability involves modifying the file path parameter to access files that should be restricted to other users. The data flow in this context is as follows: user input in the form of a file path is processed by the application logic, which then accesses the file system and sends the file content back in the response to the user.
+
+The fundamental implementation flaw is the application's over-reliance on user-supplied file paths without adequately verifying if the requesting user should have access to those files.
+
+### Common File Path IDOR Scenarios
+
+Common scenarios where File Path IDOR vulnerabilities may occur include:
+
+- **Document, image, or PDF download endpoints**: Using file paths or filenames as parameters without access controls.
+  
+- **Predictable file names or IDs**: Attackers can enumerate files by guessing or sequentially trying file names or IDs to gain unauthorized access to documents such as invoices, reports, or images.
+
+- **File upload and download endpoints**: Improper validation allows manipulating these endpoints to access files uploaded by other users.
+
+## Practice
+
+### Manual File Path IDOR Exploitation via Parameter Manipulation
+
+The manual approach to exploiting File Path IDOR involves directly manipulating file path parameters to access unauthorized files.
+
+- Initiate a baseline request by trying to access a known file:
+
+```bash
+curl -i 'https://target.com/download.php?file=documents/report1.pdf'
+```
+
+- Increment the file name or ID to test for additional accessible files:
+
+```bash
+curl -i 'https://target.com/download.php?file=documents/report2.pdf'
+```
+
+- Attempt to access files belonging to other users by modifying the file path:
+
+```bash
+curl -i 'https://target.com/download.php?file=uploads/user123/profile.jpg'
+```
+
+- Test for path traversal vulnerabilities in conjunction with IDOR:
+
+```bash
+curl -i 'https://target.com/download.php?file=../../etc/passwd'
+```
+
+These steps can lead to unauthorized access to files belonging to other users or sensitive system files.
+
+### Automated File Path IDOR Enumeration with ffuf
+
+Automation can expedite the process of discovering File Path IDOR vulnerabilities by using tools like `ffuf` for brute-forcing file paths.
+
+- Execute an ffuf scan to brute-force potential accessible documents using a wordlist:
+
+```bash
+ffuf -u 'https://target.com/download.php?file=documents/FUZZ.pdf' -w files.txt -mc 200
+```
+
+This command systematically tests different possible file names, using the status code `200` to identify successful unauthorized accesses.
+
+## Tools
+
+- **curl**
+- **ffuf**

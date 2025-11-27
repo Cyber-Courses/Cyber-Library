@@ -1,0 +1,90 @@
+---
+title: Exploring SSI Injection for Information Disclosure
+description: Learn how to exploit SSI injection to extract sensitive server information
+  and environment variables.
+keywords:
+- SSI injection
+- information disclosure
+- environment variables
+- server configuration
+- <!--#printenv -->
+- web server security
+- HTTP headers
+---
+
+# Information Disclosure
+
+## Context
+
+In this article, we will explore how to exploit Server Side Include (SSI) injection vulnerabilities for information disclosure. By leveraging SSI injection, attackers can extract sensitive server environment variables and configuration details. We assume you have foundational knowledge of HTTP headers, web server configuration, SSI directives, and general Server Side Include Injection techniques.
+
+## Theory
+
+### SSI Environment Variable Exposure
+
+Server Side Includes (SSI) are directives that allow web servers to dynamically generate content in web pages. When improperly configured, SSI directives pose a security risk as they can output server environment variables directly into HTTP responses. Attackers can inject SSI code to extract sensitive metadata about the server and the client interacting with it.
+
+### Commonly Disclosed Variables and Their Impact
+
+Several environment variables are particularly valuable to attackers:
+
+- **SERVER_NAME**: Reveals the hostname or IP address of the server.
+- **REMOTE_ADDR**: Displays the IP address of the client as seen by the server.
+- **HTTP_USER_AGENT**: Shows the User-Agent string from the client's HTTP request.
+- **DOCUMENT_ROOT**: Indicates the root directory from which web documents are served.
+
+The disclosure of these variables can significantly aid in further exploitation and targeting, giving attackers insights into server configuration and client interactions.
+
+### Abusing `<!--#printenv -->` for Bulk Disclosure
+
+One potent SSI directive is `<!--#printenv -->`. When injected, this directive outputs all environment variables accessible to the server process within the HTTP response. This bulk disclosure can provide a comprehensive view of the server environment, allowing attackers to easily extract a wide range of sensitive information.
+
+## Practice
+
+### Extracting Specific Environment Variables via SSI Injection
+
+In this technique, we will inject specific SSI directives to retrieve individual environment variables. This method allows targeted extraction of server and client details.
+
+1. **Extract Server Name**
+   ```html
+   <!--#echo var="SERVER_NAME" -->
+   ```
+   - This injection retrieves the server's hostname.
+
+2. **Reveal Document Root**
+   ```html
+   <!--#echo var="DOCUMENT_ROOT" -->
+   ```
+   - This injection exposes the web server's document root directory.
+
+3. **Get Client IP Address**
+   ```html
+   <!--#echo var="REMOTE_ADDR" -->
+   ```
+   - This extraction displays the client's IP address as perceived by the server.
+
+4. **Show Client User Agent**
+   ```html
+   <!--#echo var="HTTP_USER_AGENT" -->
+   ```
+   - This injection reveals the User-Agent string from the HTTP request header.
+
+   The outcome of these injections is that attackers retrieve specific server and client environment details, which can be used for further analysis or exploit development.
+
+### Bulk Environment Variable Disclosure Using `printenv`
+
+For a comprehensive dump of server environment variables, the `<!--#printenv -->` directive can be leveraged.
+
+1. **Inject Bulk Disclosure Directive**
+   ```html
+   <!--#printenv -->
+   ```
+   - This straightforward injection outputs all environment variables available to the server process, providing an exhaustive view of the server's environment.
+
+   By using this technique, attackers can access a wide array of environment variables, gaining insights into server settings, user accounts, and operational contexts.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP**

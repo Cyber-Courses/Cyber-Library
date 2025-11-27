@@ -1,0 +1,77 @@
+---
+title: Bypass IBM DB2 WAF Using Alternate SQL Syntax
+description: Learn to bypass IBM DB2 WAF with alternate SQL syntax techniques like
+  CHAR(), CONCAT(), and more for secure evasion.
+keywords:
+- IBM DB2
+- WAF bypass
+- alternate syntax
+- SQL injection
+- CHAR function
+- CONCAT function
+---
+
+# Alternate Syntax
+
+## Context
+
+In this article, we explore how to employ alternate SQL syntax techniques to bypass Web Application Firewalls (WAFs) specifically for IBM DB2. The focus will be on employing various syntax structures that achieve the same end-result while eluding pattern-based recognition by security mechanisms. It assumes you have a fundamental grasp of SQL query structure, database functions, WAF mechanisms, and IBM DB2 WAF bypass techniques.
+
+## Theory
+
+### Alternate Syntax Techniques in SQL Injection
+
+Alternate syntax in SQL injection involves using diverse SQL constructs to achieve identical query results. This approach is crucial for bypassing Web Application Firewalls, which may rely on detecting specific patterns or keywords. By employing alternate syntaxes, attackers can exploit WAF blind spots, enabling SQL injection that might otherwise be filtered out.
+
+### CHAR() Function Usage
+
+The `CHAR()` function is employed to convert numeric values into characters. This obfuscation technique can help circumvent string-based filters implemented by WAFs. For instance, rather than inputting a character-based string that a WAF might detect, attackers can encode the same string using the `CHAR()` function.
+
+### CONCAT() Function Usage
+
+`CONCAT()` is a function that amalgamates multiple strings into a single string. This is particularly useful for dynamically constructing payloads that evade signature or pattern-based detection by WAFs. By constructing parts of a SQL query separately and combining them, attackers can bypass WAF filters that target specific word sequences.
+
+### Version Obfuscation Techniques
+
+Obfuscating database version information helps in eluding WAFs programmed to filter based on version-specific syntax. By disguising version details, one can execute potentially dangerous queries under the guise of benign interactions.
+
+### INLINE CAST Usage
+
+Using INLINE CAST involves converting data types directly within a SQL query. This is instrumental in bypassing WAF rules that expect data of specific types. By altering the data type, attackers can evade type-based detection mechanisms.
+
+## Practice
+
+### Bypassing WAF with CHAR() Function
+
+To bypass a WAF that filters specific strings, use the `CHAR()` function to encode the string:
+
+```bash
+SELECT * FROM users WHERE username = CHAR(97,100,109,105,110);
+```
+
+This converts "admin" to `CHAR()` format, effectively bypassing WAF string filters and granting unauthorized data access.
+
+### Using CONCAT() for WAF Evasion
+
+Evasion of pattern-based WAF detection can be achieved by splitting and concatenating strings:
+
+```bash
+SELECT * FROM users WHERE username = CONCAT('ad','min');
+```
+
+This divides "admin" into segments that are joined, allowing for successful authentication without triggering pattern detectors.
+
+### Obfuscating Version with INLINE CAST
+
+To avoid version-specific filtering, transform the version output using casting:
+
+```bash
+SELECT CAST(version() AS CHAR);
+```
+
+This tactic allows bypassing WAFs that scrutinize version outputs for infraction indicators.
+
+## Tools
+
+- **DB2 SQL Editor**
+- **SQLMap**

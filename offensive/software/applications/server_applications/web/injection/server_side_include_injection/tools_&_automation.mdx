@@ -1,0 +1,93 @@
+---
+title: SSI Tools & Automation for Vulnerability Testing
+description: Guide on leveraging automated tools for efficient SSI injection testing
+  and exploitation.
+keywords:
+- SSI injection
+- automation
+- vulnerability testing
+- web security
+- Nikto
+- wfuzz
+- Burp Suite
+- nmap
+- SSI payloads
+---
+
+# Tools & Automation
+
+## Context
+
+This guide is designed to enable offensive operators to effectively utilize and integrate automated tools for Server Side Include (SSI) injection testing and exploitation. It assumes the reader has knowledge of server side includes, web server configuration, the HTTP request-response cycle, and foundational understanding of SSI Injection techniques.
+
+## Theory
+
+### Role of Automation in SSI Injection
+
+Automation plays a critical role in discovering SSI vulnerabilities efficiently, reducing the manual effort involved in testing. Automated tools systematically identify SSI injection points and test the effectiveness of various payloads. A typical workflow involves scanning for SSI capabilities, injecting payloads, analyzing server responses, and reporting any vulnerabilities discovered.
+
+### Categories of SSI Injection Tooling
+
+- **SSI Scanners**: These tools are designed to identify potential SSI injection points within web applications.
+- **Fuzzers**: Automated tools that deliver various payloads to test for the execution of SSI directives.
+- **Payload Generators**: Tools to create valid SSI directives that can be leveraged for injection.
+- **Burp Suite Extensions**: These integrate SSI testing capabilities directly into interception proxies like Burp Suite for streamlined assessment.
+- **SHTML File Scanners**: Automated tools that search for vulnerable files containing SSI directives across web servers.
+
+### Automation Integration Strategies
+
+To achieve comprehensive SSI testing coverage, it's essential to combine multiple tools. Integrating SSI payloads into web proxy workflows allows for dynamic testing. Efficient triaging and vulnerability management can be further enhanced by automating the correlation and reporting of results.
+
+## Practice
+
+### Automated SSI Injection Scanning with Nikto
+
+To automate the discovery of SSI injection points using Nikto, perform the following steps:
+
+- Open your command line interface and execute the following command:
+  
+  ```bash
+  nikto -h http://target-site.com -Plugins 'ssi'
+  ```
+
+  This command instructs Nikto to scan the specified target URL for SSI vulnerabilities using its SSI-specific plugin. Successful execution results in the identification of potential SSI injection points and vulnerable files.
+
+### SSI Payload Fuzzing with wfuzz
+
+Fuzz an endpoint with various SSI payloads to test its vulnerability:
+
+- Execute the following command to automate the fuzzing process:
+
+  ```bash
+  wfuzz -c -z file,ssi-payloads.txt --hh 0 http://target-site.com/FUZZ
+  ```
+
+  Here, `wfuzz` uses a list of SSI payloads to send requests to the target site, attempting to detect execution of SSI directives. Adjust the payload file (`ssi-payloads.txt`) to suit the target application context. Successful detection signifies that the endpoint executes SSI directives as part of the vulnerability discovery process.
+
+### Integrating SSI Testing with Burp Suite Extension
+
+Enhance SSI testing capabilities within Burp Suite by utilizing the Burp SSI extension. Follow these steps:
+
+- Install the "Burp SSI" extension from the BApp Store. This extension enables automated SSI payload injection within Burp Suite.
+- Configure the extension to inject SSI payloads into selected request parameters. This setup targets specific fields within HTTP requests for SSI testing.
+- Use Burp Suite to intercept and modify HTTP requests, reviewing responses for evidence of SSI execution. Successful automation results in the identification of exploitable SSI vulnerabilities within the proxy workflow.
+
+### Enumerating SHTML Files with Nmap
+
+Leverage Nmap to enumerate web files, including SHTML files, which might contain SSI directives:
+
+- Run the following command to start the enumeration:
+
+  ```bash
+  nmap --script http-enum -p 80,443 target-site.com
+  ```
+
+  This command uses Nmap's `http-enum` script to scan the target's HTTP services, listing web directories and files including potential `.shtml` files that may harbor vulnerable SSI directives.
+
+## Tools
+
+- **Nikto**
+- **wfuzz**
+- **Burp Suite**
+- **Burp SSI Extension**
+- **nmap**

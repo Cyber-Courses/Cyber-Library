@@ -1,0 +1,103 @@
+---
+title: Understanding and Exploiting Argument Injection
+description: Explore argument injection vulnerabilities, associated attack vectors,
+  and real-world exploitation scenarios.
+keywords:
+- argument injection
+- command line arguments
+- input validation
+- command injection
+- code execution
+- security vulnerabilities
+- filter bypass
+- real-world examples
+- web applications
+---
+
+# Argument Injection
+
+## Context
+
+Argument injection is an attack technique where attackers exploit vulnerabilities in how applications handle command line arguments. This type of injection enables the modification or addition of arguments to influence or control the behavior of a program. Operators executing this technique should have familiarity with command line argument structures, general command injection techniques, and common input validation weaknesses.
+
+## Theory
+
+### Argument Injection Fundamentals
+
+Argument injection occurs when untrusted input is inserted as command-line arguments. This results in unexpected program behaviors due to flaws in how applications construct or parse these arguments. These vulnerabilities often arise when applications concatenate user input into command invocations without proper sanitization or quoting. 
+
+### Attack Surface and Threat Scenarios
+
+Applications vulnerable to argument injection failures often trust that user input will not modify the argument structure or introduce new flags. An attacker, by supplying crafted input, can cause an application to pass these inputs as arguments, triggering unintended behavior.
+
+### Common Argument Injection Vectors
+
+Attackers use various tricks to inject new arguments, such as leveraging whitespace manipulation, special characters, separators, and encoding strategies. One common flaw is failing to appropriately quote or escape user input when building command-line calls.
+
+### Real-World Examples
+
+1. **Chrome gpu-launcher Argument Injection**: Attackers can inject the `--gpu-launcher` argument in a way that executes arbitrary binaries.
+   
+2. **SSH ProxyCommand Argument Injection**: Crafted input can control the execution of `ProxyCommand`, running arbitrary commands during SSH sessions.
+
+3. **psql -o Pipe Execution**: By injecting shell metacharacters into the output file argument of the `psql` command, attackers can execute shell commands.
+
+4. **wget Argument Injection**: Injection can modify options or configure output paths, allowing attackers to overwrite files or execute commands.
+
+### Bypassing Input Filters
+
+To bypass input filters, attackers might use techniques like fullwidth Unicode characters, alternate whitespace, or encoded characters to evade basic input validation measures.
+
+## Practice
+
+### Chrome gpu-launcher Argument Injection
+
+- **Target**: A web application launches Chrome and accepts user-controlled arguments.
+- **Payload**:
+  ```bash
+  --gpu-launcher=/tmp/malicious.sh
+  ```
+  This command injects a custom launcher script, executing attacker-controlled code with Chrome's privileges.
+
+### SSH ProxyCommand Argument Injection
+
+- **Target**: An application constructs an SSH command with user input embedded in the `ProxyCommand` argument.
+- **Payload**:
+  ```bash
+  user@host -o ProxyCommand='malicious_command'
+  ```
+  By injecting the `ProxyCommand` option, attackers can execute arbitrary commands as part of the SSH connection.
+
+### psql -o Pipe Execution via Argument Injection
+
+- **Target**: A web application passes user input into `psql -o <output_file>`.
+- **Payload**:
+  ```sql
+  |/bin/bash -c 'id' #
+  ```
+  This payload abusively injects a shell command by manipulating the output file argument, executing the command with the database process's privileges.
+
+### Wget Argument Injection for File Overwrite
+
+- **Target**: An application uses `wget` with a user-supplied URL or output file path.
+- **Payload**:
+  ```bash
+  --output-document=/etc/passwd
+  ```
+  This technique exploits argument injection to overwrite sensitive files by controlling the designated output path of a vulnerable `wget` command.
+
+### Fullwidth Unicode Payload for Filter Bypass
+
+- **Target**: Filters block standard argument separators.
+- **Payload**:
+  ```bash
+  --output‐document=/tmp/pwned.txt
+  ```
+  By using a fullwidth hyphen, attackers can sneak past naive input filters, allowing the argument injection to succeed.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **wfuzz**
+- **Custom payload scripts** 

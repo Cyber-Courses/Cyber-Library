@@ -1,0 +1,105 @@
+---
+title: 'Understanding SSI Injection: Application Context'
+description: Learn how SSI injection vulnerabilities manifest in various application
+  contexts and exploit vectors for code execution or data access.
+keywords:
+- SSI injection
+- web application
+- dynamic content
+- server-side includes
+- vulnerability
+- code execution
+- data access
+- template engine
+- CMS
+---
+
+# Application Context
+
+## Context
+
+The goal of this article is to demonstrate how Server Side Include (SSI) injection can be exploited in various web application contexts. This technique allows attackers to execute arbitrary code or access sensitive data through improperly processed user input. This requires prior knowledge of server-side includes, web application architecture, the HTTP protocol, and an understanding of basic SSI injection techniques.
+
+## Theory
+
+### SSI Injection in Web Application Ecosystems
+
+SSI injection occurs when user-controllable input is improperly processed by the server's SSI parser, enabling the execution of unintended directives. In a web application context, this often stems from dynamic content generation, template engine misuse, or poor input handling configuration.
+
+### Common SSI Injection Vectors in Applications
+
+SSI injection typically follows a sequence where user input, whether from a form, URL, header, or file, is stored or reflected in a resource parsed by the SSI engine. Once the resource is requested and parsed, the injected payload is executed, leading to potential command execution or data leakage.
+
+### Application-Specific SSI Injection Scenarios
+
+SSI vulnerabilities often appear in specific application scenarios, such as:
+
+- **Content Management Systems (CMS):** These systems may allow SSI injections through template editing or file upload functionalities.
+- **Custom Template Engines:** These engines might pass user inputs to SSI-capable files without adequate sanitization.
+- **Dynamic Content Endpoints:** API responses or similar outputs might unintentionally include user input in SSI-processed files.
+
+### User Input Processing and SSI Risk
+
+The risk of SSI vulnerabilities arises primarily from deficient filtering and sanitization, which allow an SSI directive to reach the server parser. For exploitation, the application must either store or reflect user input in a file or response that the server parses for SSI directives.
+
+## Practice
+
+### SSI Injection via Form Input Reflection
+
+- **Identify a form** where the input is reflected in a webpage served by an SSI-enabled server. Target forms that generate or update server-parsed files.
+- **Submit the following payload** to exploit SSI:
+
+    ```html
+    <!--#exec cmd="id"-->
+    ```
+
+    This payload attempts to execute the `id` command on the server.
+- **Trigger the page or resource rendering** by submitting the form. Ensure the server processes the file with SSI enabled to see command execution in the output.
+
+**Expected Outcome:** The server executes the payload, allowing arbitrary command execution via SSI injection in the form input.
+
+### SSI Injection via File Upload
+
+- **Locate a file upload feature** that saves files in a directory where the server enables SSI parsing. CMS or custom applications might parse user-uploaded files as HTML.
+- **Prepare and upload this payload** as a `.shtml` or `.html` file:
+
+    ```html
+    <!--#include file="/etc/passwd"-->
+    ```
+
+    This payload tries to include sensitive file contents in the output.
+- **Access the uploaded file** through a web browser to trigger SSI parsing and validate file inclusion.
+
+**Expected Outcome:** Through SSI injection in uploaded content, an attacker can retrieve sensitive server files.
+
+### SSI Injection via URL Parameter Reflection
+
+- **Find a URL parameter** that appears in a processed page or resource handled by the SSI engine. Focus on dynamic pages where parameters end up being stored or reflected in server responses.
+- **Craft and send a request** with the following payload:
+
+    ```html
+    <!--#echo var="DOCUMENT_ROOT"-->
+    ```
+
+    This directive aims to echo a server environment variable.
+- **Check the rendered page** to confirm if the variable's value is displayed, indicating successful injection.
+
+**Expected Outcome:** Attackers access server environment data through SSI injection in URL parameters.
+
+### SSI Injection via HTTP Header Reflection
+
+- **Identify endpoints** that reflect HTTP headers like `User-Agent` into SSI-parsed responses. Some logging or error pages deceptively include these headers.
+- **Insert this SSI command payload** into a header using a tool like `curl`:
+
+    ```bash
+    curl -H 'User-Agent: <!--#exec cmd="uname -a"-->' http://target/page
+    ```
+
+- **Access the server resource** to observe the effects of SSI parsing, which may render the command output in the response.
+
+**Expected Outcome:** Attackers can execute arbitrary commands on the server using SSI injection in HTTP headers.
+
+## Tools
+
+- **curl**
+- **Burp Suite**

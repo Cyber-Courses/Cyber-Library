@@ -1,0 +1,93 @@
+---
+title: Exploiting SSI in Apache, Nginx, IIS, and Lighttpd
+description: Learn how to exploit server-side includes in Apache, Nginx, IIS, and
+  Lighttpd for effective SSI injection.
+keywords:
+- SSI injection
+- Apache mod_include
+- Nginx SSI module
+- IIS server-side includes
+- Lighttpd SSI support
+- server-specific syntax
+- command execution
+- information disclosure
+- web server
+- vulnerability exploitation
+---
+
+# Server-Specific Implementations
+
+## Context
+
+The purpose of this content is to equip offensive security operators with the knowledge to exploit Server-Side Include (SSI) injection across various web servers, such as Apache, Nginx, IIS, and Lighttpd. The reader is assumed to be familiar with general SSI concepts, basic web server configurations, and the core methodology of SSI injections.
+
+## Theory
+
+### SSI Processing Modules and Activation
+
+SSI support is implemented through specific modules depending on the web server being used. For successful exploitation, understanding how these modules interpret directives is critical. Exploitation potential often hinges on whether misconfigurations or default settings expose SSI processing to user input.
+
+### Apache mod_include and SSI Syntax
+
+In Apache servers, SSI is enabled by the mod_include module. The directives follow the syntax `<!--#directive parameter="value" -->`. Common directives such as `exec`, `include`, `echo`, and `printenv` are supported. If `exec` or `include` are used without proper input sanitization, this could allow for command execution or file disclosure, presenting a significant security risk.
+
+### Nginx SSI Module and Syntax
+
+Nginx facilitates SSI through the ngx_http_ssi_module, using a similar syntax: `<!--#directive param='value' -->`. Nginx's support for SSI is somewhat limited, concentrating on only a few directives like `echo`, `include`, `set`, and `if`. The module does not support command execution, which limits potential exploitation primarily to information disclosure.
+
+### IIS Server-Side Includes
+
+On IIS servers, SSI support is provided for pages with extensions like .shtml, .stm, or .shtm. These pages process standard SSI directives. While IIS does support `include`, `echo`, and sometimes `exec` directives, `exec` is typically restricted by default. Improper configurations might, however, allow this directive, enabling command execution.
+
+### Lighttpd SSI Support
+
+Lighttpd offers basic SSI support through its mod_ssi module, which operates in a syntax manner similar to Apache. Although only a subset of directives, like `echo`, `include`, and `exec`, are supported, enabling the `exec` directive without precaution can enable unfettered command execution through unsanitized user input.
+
+### Server-Specific Syntax and Directive Differences
+
+There is variation across server platforms in directive names, parameter quoting, and supported features. For effective exploitation, the payloads must be custom-tailored to the server’s specific SSI implementation.
+
+## Practice
+
+### Apache mod_include SSI Injection
+
+- **Payload**: 
+  ```html
+  <!--#exec cmd="id" -->
+  ```
+- **Application**: Submit the payload within a user-controllable input that is rendered on a page processed with SSI on an Apache server.
+- **Outcome**: Arbitrary operating system commands can be executed on an Apache server where mod_include is enabled.
+
+### Nginx SSI Information Disclosure
+
+- **Payload**:
+  ```html
+  <!--#echo var="DOCUMENT_ROOT" -->
+  ```
+- **Application**: Inject this payload into a field that is reflected on an Nginx page where SSI is enabled.
+- **Outcome**: This approach allows disclosure of sensitive server environment variables via the SSI echo directive.
+
+### IIS SSI Command Execution (if exec enabled)
+
+- **Payload**:
+  ```html
+  <!--#exec cmd="whoami" -->
+  ```
+- **Application**: Submit the crafted payload in a user input field reflected in a processed page with .shtml, .stm, or .shtm extensions.
+- **Outcome**: Exploits improperly configured IIS servers to execute operating system commands if the `exec` directive is permitted.
+
+### Lighttpd SSI Command Execution
+
+- **Payload**:
+  ```html
+  <!--#exec cmd="uname -a" -->
+  ```
+- **Application**: Craft the payload into a field reflected on a Lighttpd page that supports SSI.
+- **Outcome**: This allows the execution of system commands on a Lighttpd server where mod_ssi with exec enabled is not properly configured.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP** 
+

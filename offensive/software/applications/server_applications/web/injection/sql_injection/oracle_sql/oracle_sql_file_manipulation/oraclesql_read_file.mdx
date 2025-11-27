@@ -1,0 +1,95 @@
+---
+title: 'OracleSQL Read File: Exploit Techniques & Tools'
+description: Learn to exploit Oracle SQL for reading files from server's filesystem
+  using UTL_FILE and DBMS_LOB packages.
+keywords:
+- OracleSQL
+- file reading
+- UTL_FILE
+- DBMS_LOB
+- directory objects
+- SQL injection
+- Oracle database security
+---
+
+# OracleSQL Read File
+
+## Context
+
+The objective of this article is to teach how to exploit Oracle SQL to read files from the server's filesystem. This offensive technique assumes a solid understanding of file system permissions, Oracle directory objects, and experience with Oracle SQL injection (SQLi).
+
+## Theory
+
+### Oracle File Reading Mechanisms
+
+Oracle SQL can read files from the server using specific packages like UTL_FILE and DBMS_LOB. These packages provide functions to open, read, and manipulate files stored on the database server. If an attacker gains access to these functions, they can potentially read sensitive data.
+
+#### Vulnerability Model
+
+Improperly secured directory objects are the primary vulnerability exploited in Oracle databases. When directory objects are not securely configured, they can allow unauthorized access to file storage paths, leading to potential information disclosure.
+
+### Exploiting Oracle Directory Objects
+
+A directory object in Oracle is essentially a pointer to a filesystem directory on the server. It allows Oracle SQL processes to perform file operations in that location. To exploit this, learning which directory objects are available for use and what permissions they have is crucial. 
+
+#### Attack Sequence
+
+The typical attack sequence involves:
+
+1. Identifying accessible directory objects.
+2. Attempting to use those directory objects to open and read files without appropriate authorization.
+
+### Oracle File System Access Control
+
+Access to files on an Oracle server is mediated via directory objects, which define which directories Oracle can access. Oracle manages permissions at the directory level, which means that any file operation using those directories inherits the directory's access permissions.
+
+#### Vulnerability Model
+
+Weak permissions on directory objects can lead to unauthorized users reading files containing sensitive information. These permissions need to be tightly controlled to prevent exploitation.
+
+## Practice
+
+### Reading Files with UTL_FILE
+
+UTL_FILE is a package that enables file handling operations through SQL code. Below are the steps to exploit it for reading files:
+
+- **Open a file for reading:**
+
+  Use the Oracle SQL command to open a file from a pre-existing directory object:
+
+  ```sql
+  SELECT UTL_FILE.FOPEN('DIRECTORY','filename','r') FROM dual;
+  ```
+
+  This command attempts to open the specified 'filename' in read mode from the directory object 'DIRECTORY'.
+
+- **Read a line from the file:**
+
+  Once the file is open, retrieve content line-by-line:
+
+  ```sql
+  SELECT UTL_FILE.GET_LINE(file_handle, buffer) FROM dual;
+  ```
+
+  Here, `file_handle` is acquired from the previous step, and `buffer` is used to hold the line's data. The successful execution of this results in accessing file contents.
+
+### Reading Files with DBMS_LOB
+
+DBMS_LOB is another package that provides functionalities to manipulate large objects. Here's how you can use it:
+
+- **Load file content into a LOB variable:**
+
+  To read file content with DBMS_LOB, execute the following:
+
+  ```sql
+  SELECT DBMS_LOB.LOADFROMFILE(lob_loc, bfile_loc, amount) FROM dual;
+  ```
+
+  This command loads the file content at the location specified by `bfile_loc` into a LOB variable `lob_loc`. The `amount` parameter specifies how much data to load. Successful execution provides access to the file content.
+
+## Tools
+
+- **SQL*Plus**
+- **Oracle SQL Developer** 
+
+These tools facilitate interaction with Oracle databases, offering interfaces to execute SQL commands and manage database objects efficiently.

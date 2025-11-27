@@ -1,0 +1,86 @@
+---
+title: Exploiting Mass Assignment IDOR Vulnerabilities
+description: Learn to identify and exploit Mass Assignment IDOR using JSON and form
+  field injection techniques in web applications.
+keywords:
+- Mass Assignment
+- IDOR
+- web security
+- parameter binding
+- JSON injection
+- form field injection
+- framework risks
+---
+
+# Mass Assignment IDOR
+
+## Context
+
+The objective of this article is to enable offensive operators to identify and exploit Mass Assignment IDOR vulnerabilities in web applications by manipulating object properties through parameter binding. This technique requires an understanding of object properties, parameter binding, JSON structure, and Insecure Direct Object References (IDOR).
+
+## Theory
+
+### Mass Assignment Vulnerability Fundamentals
+
+Mass assignment vulnerabilities occur when web applications automatically map user input to object properties without adequate filtering. This practice can expose the application to unauthorized manipulation of object fields. When frameworks auto-bind request data to model objects, they risk allowing attackers to modify fields that should remain protected. As a core principle, the lack of filtering can enable attackers to supply extra parameters to manipulate unintended object fields.
+
+### IDOR via Mass Assignment
+
+In the context of IDOR, attackers can exploit mass assignment by submitting crafted input that includes unauthorized object references. This can allow applications to update or reveal data not owned by the attacker. The exploitation process hinges on the trust assumption where the application implicitly trusts all fields in incoming requests for object updates, failing to restrict modifications to sensitive properties.
+
+### Framework-Specific Mass Assignment Risks
+
+Different web frameworks present unique risks related to mass assignment:
+
+- **Rails**: Misconfiguration of `attr_accessible` or `attr_protected` can allow arbitrary property updates.
+- **Django**: Use of `ModelForm` or serializers without explicit field whitelisting can expose sensitive fields.
+- **Spring Boot**: `@ModelAttribute` or direct binding of request bodies can inadvertently expose internal fields.
+
+### Common Attack Vectors
+
+The most prevalent attack vectors leveraging mass assignment include:
+
+- **JSON Object Injection**: Attackers supply additional keys in JSON payloads to alter protected fields.
+- **Form Field Injection**: Hidden or extra fields are added to form submissions to manipulate data.
+
+### Attacker Workflow
+
+The following workflow outlines the typical steps taken by attackers to exploit Mass Assignment IDOR:
+
+```mermaid
+flowchart TD
+    A[Identify object update endpoint] --> B[Enumerate accepted parameters]
+    B --> C[Inject unauthorized property]
+    C --> D[Observe unauthorized data access or modification]
+```
+
+## Practice
+
+### Exploiting Mass Assignment IDOR via JSON Object Injection
+
+To exploit mass assignment IDOR using JSON object injection:
+
+- Identify an endpoint that updates user-owned objects via a JSON payload. Focus on PUT, PATCH, or POST endpoints that accept JSON bodies.
+- Execute a command to attempt property manipulation:
+
+  ```bash
+  curl -X PATCH https://target/app/api/profile/123 -H 'Content-Type: application/json' -d '{"email":"attacker@evil.com","role":"admin"}'
+  ```
+
+  The example above attempts to change a non-user-controllable property (e.g., 'role').
+
+- Confirm whether the unauthorized property was updated or exposed in the application’s response. Success indicates a mass assignment IDOR exploit has been achieved, potentially leading to privilege escalation or unauthorized data access.
+
+### Form Field Injection for Mass Assignment IDOR
+
+To exploit mass assignment via form field injection:
+
+- Locate a web form that updates user data, such as profile update forms.
+- Utilize browser developer tools or a proxy tool like Burp Suite to add hidden fields (e.g., 'isAdmin', 'user_id') to the form submission. Inject additional fields that are not present in the original form.
+- Submit the modified form. Observe if unauthorized changes or privilege escalations occur, indicating a successful mass assignment IDOR attack.
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **OWASP ZAP** 

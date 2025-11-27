@@ -1,0 +1,70 @@
+---
+title: 'Bypass Localhost with CIDR: SSRF Attack Tactics'
+description: Learn to bypass SSRF protections using CIDR notation and exploit loopback
+  vulnerabilities.
+keywords:
+- SSRF
+- loopback address
+- CIDR notation
+- 127.0.0.0/8
+- bypass localhost
+- network segmentation
+- filter evasion
+- internal service access
+- server-side request forgery
+---
+
+# Bypass Localhost with CIDR
+
+## Context
+
+In this article, we'll explore how to circumvent server-side request forgery (SSRF) restrictions that are designed to block access to localhost using CIDR notation. The focus will be on leveraging the full IPv4 loopback range to bypass naive filtering mechanisms that only block specific loopback IPs like 127.0.0.1. This technique assumes a foundational understanding of IP addressing, CIDR notation, and SSRF.
+
+## Theory
+
+### Loopback Range and CIDR Notation in SSRF
+
+The loopback network is defined by the IP range 127.0.0.0/8, which includes every address from 127.0.0.0 to 127.255.255.255. This CIDR notation signifies all IP addresses that resolve back to the host machine. Many SSRF vulnerabilities arise because filters only block the specific address 127.0.0.1, neglecting the entire loopback subnet.
+
+This oversight allows attackers to bypass these filters by targeting any other IP within the loopback range. For instance, using 127.0.0.2 instead of 127.0.0.1 can successfully evade filters that do not comprehensively block the entire 127.0.0.0/8 range.
+
+### Filter Evasion via Subnet Mask Manipulation
+
+In many applications, the input is parsed to check if it matches the localhost IP. However, when developers implement simplistic checks that only recognize 127.0.0.1, the vulnerability arises. Attackers can opt to use any other valid loopback address to subvert these checks. The assumption that blocking 127.0.0.1 suffices to prevent access to localhost is flawed, allowing unwanted requests to proceed using other loopback addresses.
+
+### Network Segmentation and SSRF Impact
+
+Loopback addresses are meant to be accessible only from the local host, which is why they're targeted for SSRF attacks to reach internal services assumed to be secure. The failure to validate inputs properly can inadvertently expose services meant only for local access to malicious external requests via the SSRF vector.
+
+## Practice
+
+### Bypassing SSRF Localhost Filters with Alternate Loopback Addresses (CIDR)
+
+To exploit SSRF vulnerabilities using CIDR-based loopback addresses, follow these steps:
+
+- **Identify the SSRF Parameter:**
+  First, locate the specific web application parameter or input field that allows server-side requests. This is often found in features like URL fetchers, web hooks, or other services accepting URL inputs.
+
+- **Craft the Payload:**
+  Leverage a loopback address within the range 127.0.0.0/8. Instead of using 127.0.0.1, which may be blocked, choose a different address such as 127.0.0.2.
+
+  ```http
+  http://127.0.0.2/
+  ```
+
+- **Send the Malicious Request:**
+  Use a tool such as `curl` to send a POST request to the vulnerable application with an SSRF payload targeting the alternate loopback address.
+
+  ```bash
+  curl -X POST 'https://target-app.com/api/fetch?url=http://127.0.0.2/'
+  ```
+
+- **Analyze the Response:**
+  Carefully examine the server's response for indications of access to internal services. A successful request typically reveals internal service data not intended for exposure.
+
+Executing these steps effectively bypasses naive SSRF filters by exploiting the less obvious targets in the loopback address range.
+
+## Tools
+
+- **curl**
+- **Burp Suite**

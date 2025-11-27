@@ -1,0 +1,95 @@
+---
+title: 'XML Parser Hardening: Secure XML from XXE'
+description: Learn techniques to harden XML parsers against XXE by disabling risky
+  features and enforcing secure configurations.
+keywords:
+- XML parser hardening
+- disable external entities
+- disable DTD processing
+- secure XML parser configurations
+- XXE mitigation
+- XML External Entity
+- parser security techniques
+---
+
+# XML Parser Hardening
+
+## Context
+
+XML Parser Hardening involves configuring XML parsers in a way that mitigates risks from XML External Entity (XXE) vulnerabilities. These configurations primarily focus on disabling features that allow malicious actors to exploit XML parsers by leveraging external resources and defining custom entities. This article assumes an understanding of XML structure, parser configurations, and the mechanics behind XXE attacks.
+
+## Theory
+
+### Risks of Insecure XML Parser Features
+
+XML parsers, by default, may have enabled features that pose security risks. A notable example is the external entity resolution feature. This allows an XML parser to access resources beyond the XML document itself, opening doors for XXE attacks. Attackers can exploit this feature to retrieve sensitive information or execute arbitrary code on the server hosting the parser.
+
+Another risky feature is DTD processing, which allows the creation and use of custom entity definitions within XML documents. This, combined with the external subsets, might be exploited to manipulate the XML content in unexpected ways, further exacerbating the issue if not properly controlled.
+
+The core principle in XML parser hardening is to restrict these features. By disabling them, we reduce the attack surface, subsequently minimizing the risk of XXE vulnerabilities and related threats.
+
+### Key Parser Hardening Controls
+
+The primary control is disabling external entity resolution. By preventing XML parsers from reaching external resources, potential XXE vectors are greatly limited. 
+
+Another vital control is to disable DTD processing within the XML parsing process. This measure guards against the introduction of malicious entity definitions. 
+
+Enforcing these secure parser settings is an integral part of ensuring XML parsers are protected against an array of XML-oriented attacks. Through these controls, organizations can practice defense-in-depth against evolving XML-based threats.
+
+## Practice
+
+### Disable External Entity Resolution in Java (SAXParser)
+
+To configure the SAXParser in Java to disable external entities and DTDs, follow these manual steps:
+
+- Compile the Java code using:
+    ```bash
+    javac HardenedXMLParser.java
+    ```
+
+- Implement the following code in your Java application:
+    ```java
+    import javax.xml.parsers.SAXParserFactory;
+
+    SAXParserFactory factory = SAXParserFactory.newInstance();
+    factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+    factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+    factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+    factory.setXIncludeAware(false);
+    factory.setNamespaceAware(true);
+    ```
+
+This configuration ensures the SAXParserFactory in Java does not resolve external entities or load external DTDs. With this hardened parser, references to external entities or DTDs in the XML will be rejected, significantly mitigating the risk of an XXE attack.
+
+### Disable DTD Processing in Python (lxml)
+
+To disable DTD processing in Python's lxml library, execute the following instructions:
+
+- Integrate the following script into your Python application:
+    ```python
+    from lxml import etree
+
+    parser = etree.XMLParser(resolve_entities=False, load_dtd=False, no_network=True)
+    tree = etree.fromstring(xml_data, parser)
+    ```
+
+This Python code creates an XML parser that ignores external entities and DTDs. As a result, the lxml library’s parser is effectively safeguarded against threats associated with XML DTDs and entities, thereby preventing XXE attacks.
+
+### Harden .NET XML Parser (XmlReaderSettings)
+
+For the .NET framework, XML parsers can be hardened by following these steps:
+
+- Use the following C# configuration to set safer parsing settings:
+    ```csharp
+    XmlReaderSettings settings = new XmlReaderSettings();
+    settings.DtdProcessing = DtdProcessing.Prohibit;
+    settings.XmlResolver = null;
+    ```
+
+In this setup, the .NET XmlReaderSettings prohibits DTD processing and disables the mechanism that resolves external resources. Consequently, the parser is protected against both DTDs and external entity vectors, neutralizing potential XXE exploitation.
+
+## Tools
+
+- **Java SAXParserFactory**
+- **Python lxml**
+- **.NET XmlReaderSettings** 

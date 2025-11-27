@@ -1,0 +1,74 @@
+---
+title: Exploiting MSSQL Stacked Query for SQL Injection
+description: Learn about MSSQL Stacked Query SQL Injection techniques to execute commands
+  and manipulate databases effectively.
+keywords:
+- MSSQL Stacked Query
+- SQL Injection
+- Semicolon Termination
+- Batch Execution
+- xp_cmdshell
+- Stored Procedure Execution
+- Dynamic SQL
+---
+
+# MSSQL Stacked Query
+
+## Context
+This article provides a detailed exploration of exploiting MSSQL Stacked Query SQL Injection for command execution. The reader is assumed to have a good grasp of SQL syntax, database transactions, and HTTP requests to fully understand the mechanics and leverage this technique.
+
+## Theory
+
+### Semicolon Termination in SQL
+In SQL, a semicolon (`;`) acts as a statement terminator, allowing multiple SQL statements to be executed in the context of a single operation. This feature can be harnessed to perform SQL injection attacks by stacking queries within one submission.
+
+### Comment Termination Techniques
+SQL comments, such as `--`, are used to terminate the execution of a SQL query, ignoring any remaining part of the statement. This technique is crucial for altering the behavior of an existing SQL command and ensuring syntax errors are avoided during exploitation.
+
+### Batch Execution in MSSQL
+Batch execution refers to the process where multiple SQL commands are submitted and executed sequentially within a single batch. Attackers can exploit this by injecting a semicolon to add extra, potentially malicious SQL commands, thereby extending the capability of a simple injection.
+
+### Stored Procedure Execution
+Stored procedures are precompiled collections of SQL statements stored in the database. Using the `EXEC` or `EXECUTE` keyword, these procedures can be run on the server, enabling the execution of complex operations, including those triggered via an injection attack.
+
+### Dynamic SQL Execution
+Dynamic SQL involves constructing SQL statements dynamically at runtime. This feature often becomes a significant vulnerability if user inputs are directly concatenated into SQL strings, as it opens the door for injection attacks.
+
+### Parameterized Queries
+To combat SQL injection, parameterized queries use placeholders within SQL strings, subsequently binding parameters to these placeholders to separate code from data inputs—effectively preventing typical forms of SQL injection which exploit direct concatenation of input data.
+
+## Practice
+
+### MSSQL Stacked Query Injection
+
+- **Execute Stacked Query to Drop a Table:**
+  To demonstrate using a stacked query, consider the following SQL injection that appends a query designed to drop a table:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1; DROP TABLE users;--
+  ```
+  This injection not only fetches data from the `users` table but also issues a command to drop the table, exploiting the ability to stack queries.
+
+- **Execute OS Command via xp_cmdshell:**
+  Leveraging the `xp_cmdshell` stored procedure can allow OS-level command execution underlying the MSSQL database. This can be achieved with:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1; EXEC xp_cmdshell 'dir';--
+  ```
+  This query will attempt to list directory contents on the server, demonstrating how SQL injection can traverse beyond mere data manipulation.
+
+- **Execute Dynamic SQL for Server Information:**
+  Using `sp_executesql`, one can execute dynamic SQL code. For instance, extracting the SQL server version simplifies as:
+  
+  ```bash
+  SELECT * FROM users WHERE id=1; EXEC sp_executesql N'SELECT @@version';--
+  ```
+  Utilizing this injection retrieves the server version details, showcasing information gathering via dynamic SQL execution.
+
+## Tools
+
+- **sqlmap**
+- **Burp Suite**
+- **Metasploit**
+
+These tools assist attackers by automating the detection and exploitation of SQL injection vulnerabilities, with features specifically to handle complex scenarios involving stacked queries.
