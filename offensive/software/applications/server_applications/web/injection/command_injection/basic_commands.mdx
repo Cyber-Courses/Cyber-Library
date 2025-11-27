@@ -1,0 +1,74 @@
+---
+title: Basic Commands in Web Command Injection
+description: Learn to use shell commands for web command injection to enumerate users,
+  files, and privileges.
+keywords:
+- basic commands
+- command injection
+- web security
+- shell commands
+- user enumeration
+- file enumeration
+- privilege context
+---
+
+# Basic Commands
+
+## Context
+
+This article demonstrates how to use basic shell commands as payloads in web command injection scenarios to enumerate users, files, and privileges. We assume that you have an understanding of shell commands, web server architecture, and the fundamentals of command injection.
+
+## Theory
+
+### Purpose of Basic Commands in Command Injection
+
+Basic commands are simple shell instructions executed in a command injection context. They are primarily used to verify the success of an injection, explore the operating environment, enumerate users, and identify potential further attack vectors.
+
+Attackers often utilize these commands to confirm whether arbitrary code execution has been achieved, determine the user context in which their commands are running, and gather environment details crucial for planning further attacks.
+
+### Commonly Used Basic Commands
+
+- **whoami**: This command reveals the current user context of the exploited process. It allows the attacker to understand which user's privileges they are operating under.
+- **cat /etc/passwd**: This command is used to list system users on Unix-like systems. It provides a directory of potential user accounts that can be targeted for privilege escalation.
+- **ls -la**: This command enumerates all files and directories in the current working directory along with their permissions. It helps in identifying files of interest and setting up further explorations.
+
+### Shell Execution and Output Interpretation
+
+Commands injected into vulnerable web applications execute with the privileges of the web server process, typically under a low-privileged user like `www-data`. The typical sequence of an attack includes injecting a command, triggering its execution, and scrutinizing the web application's response for command outputs.
+
+## Practice
+
+### Injecting 'whoami' to Identify Execution Context
+
+- **Payload**: Inject the `whoami` command into a vulnerable parameter of a web application.
+  ```bash
+  whoami
+  ```
+- **Observation**: After execution, observe the response from the web application to see which user context the server is operating under. This often manifests as the username that the web server process runs as, such as `www-data` or `apache`.
+
+**Expected Outcome**: The attacker identifies the privilege level of the exploited process, aiding in planning further exploits or privilege escalation techniques.
+
+### Reading /etc/passwd to Enumerate Users
+
+- **Payload**: Inject the `cat /etc/passwd` command.
+  ```bash
+  cat /etc/passwd
+  ```
+- **Review**: Examine the web application’s response for a list of user accounts. Each line typically represents a user in a colon-separated format denoting user information like username, user ID, group ID, home directory, and default shell.
+
+**Expected Outcome**: The attacker gains access to a list of system users, which can be instrumental for crafting more advanced attacks or targeting specific accounts for privilege escalation.
+
+### Listing Files and Directories with 'ls -la'
+
+- **Payload**: Inject the `ls -la` command.
+  ```bash
+  ls -la
+  ```
+- **Analysis**: Inspect the output for information about files and directories, including their sizes, permissions, and ownership. This information can highlight sensitive files that the attacker can access and help them navigate the file system structure more effectively.
+
+**Expected Outcome**: The attacker maps the file system, identifies resources, and determines their accessibility, thus aiding reconnaissance efforts or identifying sensitive data for extraction.
+
+## Tools
+
+- **Burp Suite**
+- **curl** 

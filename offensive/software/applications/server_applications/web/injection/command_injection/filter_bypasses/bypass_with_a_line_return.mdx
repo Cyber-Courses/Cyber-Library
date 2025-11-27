@@ -1,0 +1,91 @@
+---
+title: Bypass with Line Return in Command Injection
+description: Learn how newline characters enable command injection filter bypass in
+  web applications.
+keywords:
+- command injection
+- newline bypass
+- filter evasion
+- payload construction
+- web application security
+- shell command execution
+- input validation flaws
+---
+
+# Bypass With A Line Return
+
+## Context
+
+The purpose of this article is to showcase the technique of bypassing command injection filters using line return (newline) characters. This technique allows attackers to split or chain commands in web server applications, potentially exploiting input validation flaws. The reader is assumed to be familiar with newline characters, command execution contexts, and the basics of command injection.
+
+## Theory
+
+### Role of Line Return in Command Injection
+
+In command injection attacks, the line return (newline, `\n`) can serve as a critical tool for attackers. A newline character is interpreted by shell interpreters as a command separator. This allows multiple commands to be included in a single input stream, where each newline signifies the end of one command and the beginning of another.
+
+Shell environments often interpret these newline characters to execute the input as separate shell commands. As such, filters designed to block potentially dangerous keywords may overlook payloads that are split across lines using newline characters. This oversight offers an opportunity for attackers to insert malicious commands while bypassing filters that only scrutinize the first line of input.
+
+### Filter Bypass via Line Return
+
+A common method of exploiting this vulnerability is the deliberate injection of a newline character to separate benign input from malicious commands. When input validation mechanisms only check the first line for dangerous keywords or patterns, or fail to sanitize data after encountering a newline, attackers can utilize this flaw to inject malicious commands into the input stream undetected.
+
+### Payload Construction with Line Returns
+
+Crafting payloads with line returns requires a deep understanding of the target application’s handling of multi-line input. Exploitative payloads often incorporate encoded or literal newlines to evade filters and execute unintended commands. Some web applications fail to safely process such multi-line inputs, thereby directly exposing the shell.
+
+## Practice
+
+### Manual Exploitation Using Literal Newline Injection
+
+- **Identify a Command Injection Point:**  
+  Begin by analyzing a web application for potential vulnerabilities. Assume that a parameter vulnerable to command injection has been identified.
+  
+- **Craft a Payload:**  
+  To test the injection point, prepare a payload such as:
+  
+  ```http
+  test\nid
+  ```
+  
+  This payload uses a newline to split the input; `test` acts as benign data, while `id` is a system command that provides user identity information.
+  
+- **Inject the Payload Using curl:**
+
+  ```bash
+  curl -G 'http://target/app?input=test%0Aid'
+  ```
+  
+  Here, `%0A` is the URL-encoded representation of the newline character.
+
+- **Evaluate the Output:**
+
+  ```text
+  uid=33(www-data) gid=33(www-data) groups=33(www-data)
+  ```
+
+  If successful, the `id` command executes, and the shell returns the user and group identifiers for the web server process.
+
+### Automated Exploitation with Burp Suite Intruder
+
+- **Configure Burp Intruder:**  
+  Set up Burp Suite Intruder to conduct comprehensive testing that injects payloads containing newline characters into the identified command injection points.
+
+- **Deploy a Payload:**  
+  Utilize a payload such as:
+  
+  ```http
+  test%0Aid
+  ```
+
+  Which includes a URL-encoded newline, allowing the `id` command to be injected.
+
+- **Analyze Server Responses:**  
+  Examine the server's responses for any indications of command execution. The success of the injection will be evident from the presence of desired command outputs within the responses.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+
+By understanding and applying the technique of newline-based filter bypass, attackers can successfully execute arbitrary commands on the target system, navigating past input validation barriers with precision.

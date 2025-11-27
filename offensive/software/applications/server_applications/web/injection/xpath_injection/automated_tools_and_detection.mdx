@@ -1,0 +1,82 @@
+---
+title: Automated Tools for XPath Injection Detection
+description: Explore automated tools for detecting XPath injection vulnerabilities
+  in web apps.
+keywords:
+- XPath injection tools
+- XPath vulnerability scanning
+- Burp Suite
+- OWASP ZAP
+- XPath payloads
+- sqlmap
+- XSStrike
+---
+
+# Automated Tools and Detection
+
+## Context
+
+    The purpose of this guide is to enable offensive operators to leverage automated tools for identifying and exploiting XPath injection vulnerabilities within web applications. To get the most out of this content, a reader should already be familiar with XPath syntax and structure, understand basic web application architecture, and have experience with manual XPath injection techniques and exploitation flows.
+
+## Theory
+
+### Automated XPath Injection Scanning
+
+    Automated scanning utilizes specialized tools designed to identify XPath injection points within web applications. These scanners facilitate the process by automating the delivery of payloads, analyzing responses, and reporting discovered vulnerabilities. Typically, the workflow involves selecting a target, injecting various payloads into input fields, analyzing the application's responses, and confirming any vulnerabilities that may exist.
+
+### Detection Logic and Payload Strategies
+
+    Automated tools rely on carefully crafted payloads to stimulate errors or induce logical anomalies within XPath queries. Strategies to bypass input filters often include encoding variations, strategically inserted comments, or adjusted whitespace. By monitoring the application's responses to these payloads, automated tools can detect anomalies that indicate successful injection points.
+
+### Tool Capabilities and Limitations
+
+    While not every scanning tool is equipped for XPath injection, some require additional configurations, custom payloads, or modules. Detection effectiveness is often influenced by the application's error response behavior and the diversity of payloads employed by the tool. These tools operate on the premise that the web application will behave predictably to standardized input patterns, which can occasionally limit their accuracy in detection.
+
+## Practice
+
+### Automated XPath Injection Scanning with Burp Suite Extension
+
+    - Launch Burp Suite to enable interception and scanning:
+        ```bash
+        burpsuite
+        ```
+    - Install and enable the BApp XPath Injection extension for payload coverage.
+    - Define the target scope and proxy browser traffic to capture relevant requests.
+    - Execute an active scan against identified input points to trigger automated payloads.
+    - Outcome: Burp Suite reports XPath injection candidates with supporting requests and responses.
+
+### XPath Injection Detection with OWASP ZAP Fuzzer
+
+    - Launch OWASP ZAP:
+        ```bash
+        zap.sh
+        ```
+    - Map input fields or parameters that relay attacker-controlled data.
+    - Run the fuzzer with a curated XPath payload list to probe each parameter.
+    - Inspect responses for verbose errors or logic changes that confirm injection.
+    - Outcome: fuzzing uncovers XPath injection vectors highlighted in ZAP history.
+
+### Automated XPath Injection Exploitation with sqlmap (XPath Mode)
+
+    - Invoke sqlmap with the XPath technique flag:
+        ```bash
+        sqlmap -u "http://target/app?param=1" --technique=XPATH
+        ```
+    - Allow sqlmap to enumerate parameters, confirm injection, and extract XML data.
+    - Outcome: sqlmap reports vulnerable parameters and dumps accessible XML nodes.
+
+### XPath Injection Assessment with XSStrike
+
+    - Run XSStrike in XPath mode:
+        ```bash
+        xsstrike --url "http://target/app?param=1" --fuzzer xpath
+        ```
+    - Review the generated report for reflected payloads, confirmed injections, and suggested exploitation paths.
+    - Outcome: XSStrike delivers a consolidated view of XPath injection surfaces and successful payloads.
+
+## Tools
+
+    - **Burp Suite**
+    - **OWASP ZAP**
+    - **sqlmap**
+    - **XSStrike**

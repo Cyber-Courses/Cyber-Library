@@ -1,0 +1,76 @@
+---
+title: Network Resource Testing Using Time-Based Blind XXE
+description: Understand how to use time-based blind XXE for internal network resource
+  testing and service enumeration via response delays.
+keywords:
+- Network Resource Testing
+- Time-Based Blind XXE
+- XML External Entity
+- Service Enumeration
+- Internal Network Discovery
+- Response Time Analysis
+- Vulnerable XML Parsers
+---
+
+# Network Resource Testing
+
+## Context
+
+Network Resource Testing using Time-Based Blind XXE focuses on leveraging response time delays to detect internal network resources. This method is employed when a web application is vulnerable to XML External Entity (XXE) attacks, particularly the blind variety, which do not provide direct data return from the server. This technique assumes knowledge of XML parsing, XXE vulnerability mechanisms, and the basic principles of network latency.
+
+## Theory
+
+### Time-Based Blind XXE for Network Resource Testing
+
+Time-based blind XXE is a technique that exploits the time it takes for a server to respond to crafted XML input. This is useful for situations where direct feedback is not available. Attackers send requests that cause the application to interact with internal resources and measure the resulting response times. These timing differences can reveal whether a resource is accessible and actively interacting with the server.
+
+The vulnerability arises when an XML parser processes entities that may reach network resources. If these entities include URLs pointing to internal resources, timing differences in the server's response can suggest the presence or absence of the targeted resources.
+
+### Attack Surface: Internal Network Discovery via XXE
+
+This attack requires crafting an XML with external entities, targeting internal network resources. Attackers then submit the XML to the vulnerable parser and measure the time it takes for the server to respond. Lack of proper network egress filtering means that these XXE payloads can traverse internal networks. The assumption is that XML parsers, being server-side, have access to internal resources, making them valuable probes for network reconnaissance.
+
+### Timing Analysis for Service Enumeration
+
+Service enumeration via timing analysis hinges on understanding that open ports or active services will cause a delay in server responses, while closed ports typically lead to immediate failures. In a time-based blind XXE attack, this manifests as longer response times indicating server interaction with an active service, while shorter response times suggest the service may be closed or the port filtered out. This data flow makes the XXE a powerful tool for network reconnaissance aimed at service enumeration.
+
+## Practice
+
+### Manual Network Resource Testing via Time-Based Blind XXE
+
+- **Craft Payload:**
+  - Use the following XML to reference an internal IP address and port:
+
+    ```xml
+    <!DOCTYPE root [<!ENTITY test SYSTEM "http://10.0.0.5:8080/">]><root>&test;</root>
+    ```
+
+- **Submit and Measure:**
+  - Submit this XML to the vulnerable endpoint.
+  - Record the response time for each submission.
+
+- **Iterative Testing:**
+  - Modify the external entity to point to various internal IPs and ports.
+  - Continue to monitor the response times.
+
+- **Analysis:**
+  - Compare the recorded response times.
+  - Longer delays could indicate an open port or active service.
+  - Immediate failures could point to closed or filtered ports.
+
+### Automated Network Resource Testing with XXEinjector
+
+- **XXEinjector Command:**
+  - Execute the following command to automate testing with XXEinjector:
+
+    ```bash
+    xxeinjector --url http://target/vuln --file payloads/network_ports.txt --timing
+    ```
+
+- **Review Results:**
+  - Analyze the output from XXEinjector for any timing discrepancies.
+  - Investigate any extended response times for potential internal services.
+
+## Tools
+
+- **XXEinjector**

@@ -1,0 +1,79 @@
+---
+title: File Existence Testing with Time-based Blind XXE
+description: Learn how to test file existence using time-based blind XXE attacks,
+  targeting sensitive files through timing side-channels and XML payloads.
+keywords:
+- File Existence Testing
+- Time-based Blind XXE
+- XML External Entity
+- Timing Side-Channels
+- File Path Enumeration
+- Security Vulnerability
+- XML Parsing Attack
+---
+
+# File Existence Testing
+
+## Context
+
+File Existence Testing leverages vulnerabilities in XML processing, specifically focusing on time-based blind XML External Entity (XXE) attacks. The goal of this technique is to determine the presence of specific files on a server by observing response delays. This approach assumes the reader has a working understanding of XML structure and parsing, entity declaration and referencing, file system permissions on the target OS, along with general XXE exploitation knowledge and a basic understanding of Time-based Blind XXE fundamentals.
+
+## Theory
+
+### File Existence Testing via Time-based Blind XXE
+
+File Existence Testing utilizes time-based blind XXE techniques to infer whether a file is present on a server. The process involves submitting XML that conditionally triggers time delays based on the presence of a file. Essentially, if an application parses XML with external entity resolution enabled, it may inadvertently allow attackers to detect file existence through timing side-channels.
+
+### Timing Side-Channels in XXE
+
+Timing side-channels exploit delays in response times to leak information. In the context of XXE, attackers submit an XML payload that will cause a noticeable delay if a referenced file is accessed by the server. The following steps outline the attack sequence:
+
+1. Submit XML that references a target file through an entity.
+2. The server parses the XML, attempting to resolve the entity.
+3. If the file exists, this triggers a conditional delay due to attempting to access the file.
+4. The attacker measures the response time to infer whether the file exists.
+
+### File Path Targeting and Enumeration
+
+When targeting files, attackers can attempt to access a variety of file paths, including sensitive files like configuration files. By crafting entity references, attackers can leverage directory traversal sequences (e.g., `../../`) to bypass default directory restrictions, allowing a broader search area for file existence.
+
+## Practice
+
+### Manual File Existence Testing via Time-based Blind XXE
+
+- **Craft the Payload**: Create an XML payload that includes an external entity referencing the desired file.
+
+    ```xml
+    <!DOCTYPE root [
+      <!ENTITY xxe SYSTEM "file:///etc/passwd"> 
+      <!ENTITY delay SYSTEM "file:///dev/random"> 
+    ]>
+    <root>&xxe;&delay;</root>
+    ```
+
+  Replace `/etc/passwd` with the file path you wish to test. The reference to `/dev/random` simulates a delay when accessed, used here to determine file existence based on response time.
+
+- **Send and Measure**: Dispatch this payload to the vulnerable XML endpoint on the server and take note of the response time. A significant delay in the response may suggest that the file exists and was accessed.
+
+- **File Enumeration**: Iterate the process using different file paths to determine the existence of other files, focusing on potentially sensitive or crucial files for the application or server configuration.
+
+### Automated File Existence Enumeration with XXEinjector
+
+- **Run the Command**: Utilize a tool like `xxeinjector` to automate the process of testing multiple file paths. Prepare a list of file paths in `files.txt` and execute the tool with the following command.
+
+    ```bash
+    xxeinjector.py --file-existence --url http://target/vuln-endpoint --file-list files.txt
+    ```
+
+- **Analyze the Output**: The tool will provide output indicating which files exist based on observed response time differences.
+
+    ```
+    [+] File exists: /etc/passwd
+    [+] File does not exist: /root/secret.txt
+    ```
+
+This output confirms or denies the existence of files, allowing for automated and comprehensive file existence testing using time-based blind XXE.
+
+## Tools
+
+- **xxeinjector**

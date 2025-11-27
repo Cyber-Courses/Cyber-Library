@@ -1,0 +1,71 @@
+---
+title: Understanding LDAP Authentication Bypass Techniques
+description: Explore LDAP injection methods to bypass authentication. Learn manual
+  and automated filter logic manipulation for security testing.
+keywords:
+- LDAP injection
+- Authentication bypass
+- Filter logic abuse
+- LDAP authentication
+- Web security
+- LDAP payloads
+- Manual bypass
+- Automated tool
+- Security testing
+---
+
+# Authentication Bypass
+
+## Context
+
+The objective of this article is to demonstrate and execute LDAP injection techniques aimed at bypassing authentication in web applications. This guide is geared towards individuals already familiar with the fundamentals of the LDAP protocol, web authentication mechanisms, LDAP query syntax, and general LDAP injection concepts.
+
+## Theory
+
+### LDAP Authentication Logic and Attack Surface
+
+LDAP authentication is a process of validating user credentials by querying an LDAP directory. In many applications, user input is concatenated into LDAP filters for authentication purposes. This creates a potential vulnerability model where improper input sanitization allows attackers to manipulate LDAP filter logic to their advantage.
+
+### Filter Logic Abuse for Authentication Bypass
+
+Attackers can bypass authentication by injecting malicious payloads that alter the filter logic, making the query always return true. For instance, payloads such as `(uid=*)` or `(objectClass=*)` match any entry in the directory, thereby bypassing credential checks. Through the injection of OR/AND logic, attackers can combine their inputs with always-true conditions, ensuring a successful bypass.
+
+### Common LDAP Authentication Bypass Payloads
+
+- `(uid=*)`: This payload matches all users and bypasses username checks.
+- `(objectClass=*)`: Used for a broad bypass as it matches any object within the directory.
+- `(&(uid=*)(uid=*))`: A complex, always-true filter for scenarios involving multi-parameter logins.
+- `(|(uid=*)(uid=attacker))`: An OR injection payload that matches either any user or a specific attacker input.
+
+## Practice
+
+### Manual LDAP Authentication Bypass via Always-True Filter Injection
+
+1. **Identify the login form** to determine if LDAP is used for authentication. This can often be inferred from application documentation, error messages, or by inspecting network traffic for LDAP queries.
+   
+2. **Test for injection** by submitting special characters such as `*` in the username field. Observe if this causes errors or any unexpected authentication behavior.
+
+3. **Inject the payload**:
+   - Use `*` as the username to attempt a filter bypass with `(uid=*)`.
+   - For an OR condition, inject `*) (|(uid=*))` to modify the filter logic to always return true.
+
+4. **Submit the form** with a dummy password and observe the outcome.
+   
+5. **Check if authentication** is bypassed and access is granted without valid credentials.
+
+Executing these steps successfully should allow unauthorized access to the application, demonstrating the effectiveness of an LDAP authentication bypass via filter injection.
+
+### Automated LDAP Authentication Bypass Using ldapInjectionTool
+
+Run the following command to automate the bypass:
+
+```bash
+ldapInjectionTool --url http://target/login --payload '*) (|(uid=*))'
+```
+
+This command will facilitate automated payload injection, followed by analysis of responses to verify the authentication bypass's success.
+
+## Tools
+
+- **ldapInjectionTool**
+- **Burp Suite**

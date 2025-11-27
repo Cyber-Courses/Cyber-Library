@@ -1,0 +1,80 @@
+---
+title: 'Backgrounding Long Running Commands: Guide for Persistence'
+description: Learn to execute long-running commands persistently using backgrounding
+  techniques in command injection scenarios.
+keywords:
+- command injection
+- background execution
+- persistent processes
+- nohup
+- disown
+- Unix shell
+- long-running commands
+---
+
+# Backgrounding Long Running Commands
+
+## Context
+
+The goal of this article is to empower attackers with the ability to persistently execute long-running commands through command injection by utilizing backgrounding processes. This technique is particularly useful when exploiting web applications vulnerable to command injection, where direct execution of lengthy commands might lead to hang-ups or timeouts.
+
+Prior knowledge needed includes understanding of process management, shell command execution, and command injection techniques.
+
+## Theory
+
+### Background Execution in Unix Shells
+
+Backgrounding processes is a technique used in Unix shells that allows commands to run independently of the current shell session. This is achieved by appending an ampersand (`&`) to the command. The primary benefit of backgrounding commands is that it lets the shell return control immediately to the user, which can be highly beneficial in a command injection scenario where shell access is through a web application.
+
+Web applications that are prone to command injection vulnerabilities might hang or experience timeouts if they are tasked with executing long commands. By backgrounding these commands, attackers can avoid these pitfalls and maintain control over the exploited application.
+
+### Persistence of Backgrounded Processes
+
+Persistent background processes continue to run even after the shell session from which they were launched has ended. This persistence is crucial for maintaining control and ensuring that the command completes its execution. Tools such as `nohup` and the `disown` command achieve this by detaching the process from the terminal and preventing it from being terminated if the session closes.
+
+By using these methods, attackers can ensure that their injected commands survive beyond the lifetime of any web processes or other shell environments.
+
+### Command Injection Exploitation with Backgrounding
+
+From an attacker's perspective, the ability to inject commands that run in the background is an effective way to exploit vulnerabilities while bypassing potential application-level timeouts or output restrictions. This technique often involves crafting payloads that include backgrounding symbols and mechanisms to prevent the target application from becoming unresponsive during the attack.
+
+## Practice
+
+### Backgrounding with Ampersand (&)
+
+This technique focuses on using the ampersand symbol to execute a command in the background during a command injection.
+
+- **Payload:** `sleep 60 &`
+
+  This payload injects a simple command that runs for 60 seconds in the background.
+
+- **Payload:** `bash -c 'your_command &'`
+
+  This variation wraps an arbitrary command for background execution.
+
+**Outcome:** The injected command runs in the background, allowing the web application to remain responsive.
+
+### Persistent Backgrounding with nohup
+
+This approach uses the `nohup` tool to ensure command persistence even if the initiating shell session closes.
+
+- **Payload:** `nohup your_command > /dev/null 2>&1 &`
+
+  This command ensures that the injected command continues running after the shell exits, redirecting standard output and errors to `/dev/null`.
+
+**Outcome:** The command perseveres beyond the web process's lifecycle, which can be valuable for establishing longer-term persistence in an exploited system.
+
+### Disowning Backgrounded Processes
+
+Disowning assists in disassociating the backgrounded process entirely from the shell, preventing its termination when the shell exits.
+
+- **Payload:** `bash -c 'your_command & disown'`
+
+  The disown command detaches the backgrounded process from the shell session.
+
+**Outcome:** The process survives shell termination, increasing the reliability and duration of the exploitation.
+
+## Tools
+
+- **bash**
+- **nohup** 

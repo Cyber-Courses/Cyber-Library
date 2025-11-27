@@ -1,0 +1,95 @@
+---
+title: 'XSLT Injection: Read Files & SSRF Techniques'
+description: Explore exploiting XSLT to read files and perform SSRF using document()
+  in cybersecurity.
+keywords:
+- XSLT injection
+- document() function
+- SSRF
+- file disclosure
+- cybersecurity
+- local file read
+- HTTP request exploitation
+- document URI abuse
+- XSLT vulnerability
+---
+
+# Read Files and SSRF Using Document
+
+## Context
+
+This guide demonstrates how to exploit XSLT injection to read local files and perform Server-Side Request Forgery (SSRF) using the `document()` function. It assumes you are familiar with XSLT processing, can identify and exploit XSLT injection points, and understand the basics of XML, XSLT syntax, and HTTP request/response mechanics.
+
+## Theory
+
+### The document() Function in XSLT
+
+The `document()` function in XSLT retrieves and parses external XML resources specified by a URI. This function is powerful because, depending on the configuration of the XSLT processor, it can access local files using `file://` URIs or remote resources through `http://` and `https://`. When improperly configured, this capability can be exploited by attackers to fetch sensitive files or trigger unwanted HTTP requests by injecting XSLT payloads utilizing `document()`.
+
+### File Disclosure via document()
+
+If an XSLT processor permits the use of `file://` URIs, attackers gain the ability to read arbitrary files on the server. This is achieved by crafting a payload using the `xsl:copy-of` element alongside the `document()` function to include the contents of a file in the XSLT output.
+
+### SSRF via document()
+
+The `document()` function can be abused to make HTTP requests to internal or external systems, leading to SSRF. By injecting XSLT that references network resources, an attacker can probe internal systems or exfiltrate data, leveraging the server's network context.
+
+### Abuse Scenarios and Limitations
+
+For successful exploitation, the application must allow XSLT injection, and the `document()` function must not be restricted by configuration. However, many processors impose limitations on file or network access. The degree of exploitation possible largely depends on these security configurations.
+
+## Practice
+
+### Read Local Files Using document()
+
+This technique demonstrates reading local files by leveraging the `document()` function within XSLT.
+
+- **Payload:**
+
+    ```xml
+    <xsl:copy-of select="document('file:///etc/passwd')"/>
+    ```
+
+    This payload attempts to read the `/etc/passwd` file on Unix-like systems. Adjust the file path as needed based on the target's operating system.
+
+- **Insertion:**
+
+    Attempt to inject the above payload into the XSLT input field or parameter that is vulnerable to XSLT injection. The exact method will vary based on the application's point of injection.
+
+- **Expected Output:**
+
+    If successful, the file's contents will be printed:
+
+    ```text
+    root:x:0:0:root:/root:/bin/bash
+    ...
+    ```
+
+### SSRF Using document()
+
+This attack method uses `document()` to make HTTP requests to internal services.
+
+- **Payload:**
+
+    ```xml
+    <xsl:copy-of select="document('http://127.0.0.1:8080/secret')"/>
+    ```
+
+    This payload sends an HTTP request to an internal service running on `localhost` at port `8080`.
+
+- **Insertion:**
+
+    Inject this payload through the same XSLT injection point.
+
+- **Expected Output:**
+
+    If the request is successful, the response is incorporated into the XSLT output:
+
+    ```xml
+    <secret>Internal Data</secret>
+    ```
+
+## Tools
+
+- **Burp Suite**
+- **curl**

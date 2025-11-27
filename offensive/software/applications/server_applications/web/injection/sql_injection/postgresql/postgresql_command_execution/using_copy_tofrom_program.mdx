@@ -1,0 +1,70 @@
+---
+title: Exploiting PostgreSQL COPY TO/FROM PROGRAM
+description: Learn to exploit PostgreSQL's COPY TO/FROM PROGRAM for command execution
+  with this detailed guide.
+keywords:
+- PostgreSQL
+- COPY TO/FROM PROGRAM
+- command execution
+- SQL injection
+- privilege escalation
+- security
+- database exploitation
+---
+
+# Using COPY TO/FROM PROGRAM
+
+## Context
+
+This article covers the exploitation of PostgreSQL's `COPY TO/FROM PROGRAM` functionality for executing shell commands. It assumes knowledge of SQL queries, database permissions, PostgreSQL architecture, and previous understanding of PostgreSQL command execution.
+
+## Theory
+
+### COPY TO/FROM PROGRAM Functionality
+
+The `COPY TO/FROM PROGRAM` feature in PostgreSQL enables the execution of shell commands directly from SQL commands. This functionality is primarily used for data import and export by running system commands that handle file operations. It's a powerful feature allowing integration with external processes.
+
+### Exploiting COPY TO/FROM PROGRAM
+
+To exploit this feature, one can inject SQL statements that allow arbitrary shell command execution via `COPY TO/FROM PROGRAM`. However, exploiting this functionality requires the attacker to have superuser or elevated privileges because this feature inherently poses security risks if exposed to non-privileged users.
+
+### PostgreSQL Privilege Escalation
+
+Privilege escalation in PostgreSQL can often arise from misconfigured permissions that allow an attacker with limited access to gain higher-level privileges. For exploiting `COPY TO/FROM PROGRAM`, an attacker needs to have been granted sufficient privileges to execute this feature, usually running at a superuser level.
+
+### Command Injection via COPY
+
+To conduct command injection via the `COPY TO/FROM PROGRAM`, an attacker needs to craft specific SQL payloads that can bypass any input validation mechanisms. By injecting commands into the process, the attacker can execute arbitrary commands on the server, potentially leading to a full system compromise.
+
+## Practice
+
+### Exploiting COPY TO/FROM PROGRAM for Command Execution
+
+1. **Identify Accessible Tables**
+   - First, list all accessible tables to determine potential injection points where you might exploit the `COPY` command.
+   
+   ```bash
+   SELECT * FROM pg_catalog.pg_tables;
+   ```
+
+2. **Execute a Shell Command to Write Output to a File**
+   - Use the `COPY TO PROGRAM` statement to execute a shell command. Here, we use it to write the output of the `id` command to a temporary file.
+
+   ```bash
+   COPY (SELECT '') TO PROGRAM 'id > /tmp/output';
+   ```
+
+3. **Read the Executed Command’s Output**
+   - Use the `COPY FROM PROGRAM` statement to read the contents written by the previous command. This will retrieve the output of the shell command executed in the previous step.
+
+   ```bash
+   COPY (SELECT '') FROM PROGRAM 'cat /tmp/output';
+   ```
+
+   By following these steps, an attacker can execute arbitrary shell commands on the PostgreSQL server, leveraging the `COPY TO/FROM PROGRAM` for command execution.
+
+## Tools
+
+- **psql**
+   
+- **Metasploit**

