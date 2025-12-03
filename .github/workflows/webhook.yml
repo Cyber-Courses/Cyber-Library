@@ -1,0 +1,55 @@
+name: webhook
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [published, created]
+
+jobs:
+  send-webhook:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: GH token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID_GENERATOR }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY_GENERATOR }}
+          owner: ${{ secrets.ORG_NAME }}
+
+      - name: Send webhook
+        run: |
+          COMMIT_SHA="${{ github.event_name == 'release' && github.event.release.target_commitish || github.sha }}"
+          RELEASE_TAG="${{ github.event_name == 'release' && github.event.release.tag_name || '' }}"
+
+          PAYLOAD=$(cat <<EOF
+          {
+            "event_type": "${{ secrets.WEBHOOK_EVENT_NAME }}",
+            "client_payload": {
+              "commit_sha": "$COMMIT_SHA",
+              "repository": "${{ github.repository }}",
+              "branch": "${{ github.ref_name }}",
+              "release_tag": "$RELEASE_TAG"
+            }
+          }
+          EOF
+          )
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ steps.app-token.outputs.token }}" \
+            "${{ secrets.URL_DISPATCH }}" \
+            -d "$PAYLOAD")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+
+          if [ "$HTTP_CODE" -ne 204 ]; then
+            echo "Webhook failed with HTTP code: $HTTP_CODE"
+            exit 1
+          fi
