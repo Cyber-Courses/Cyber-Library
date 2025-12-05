@@ -1,0 +1,75 @@
+---
+title: >-
+  Extract Database With Information Schema: MySQL Database Enumeration via
+  UNION-based SQL Injection
+description: >-
+  Learn how to enumerate and extract MySQL database names using UNION-based SQL
+  injection and the information_schema database. Step-by-step guide for
+  attackers to leverage metadata tables for schema discovery on vulnerable web
+  applications.
+keywords:
+  - mysql
+  - information_schema
+  - database enumeration
+  - union-based sql injection
+  - sql injection
+  - schema enumeration
+  - mysql exploitation
+  - web application security
+  - database extraction
+  - penetration testing
+---
+
+# Extract Database With Information schema
+
+## Context
+
+This guide demonstrates how to enumerate and extract all MySQL database names by leveraging the `information_schema` database through UNION-based SQL injection. The attacker will use crafted payloads to query metadata tables, revealing the database structure on vulnerable web applications that display query outputs.
+
+## Theory
+
+### Role of information_schema in MySQL
+
+The `information_schema` database serves as the repository of metadata for all databases managed by a MySQL server. It contains details about every database, table, and column present in the environment.
+
+The `SCHEMATA` table within `information_schema` specifically maintains a list of all available database names. By targeting this table, attackers can enumerate every database to which the MySQL server has access.
+
+### Schema Enumeration via UNION-based SQL Injection
+
+UNION-based SQL injection is a technique where an attacker appends a malicious `UNION SELECT` statement to an existing SQL query, causing the database to merge attacker-controlled results with legitimate query results. When the web application’s output is visible to the attacker, this technique can reveal sensitive information, including schema details.
+
+By querying `information_schema.schemata` through an appropriate UNION SELECT payload, the attacker is able to enumerate the database names. This requires understanding of the vulnerable query structure, particularly the number and types of columns returned.
+
+A web application vulnerable to SQL injection that displays query output becomes an ideal target for schema enumeration. This lays the groundwork for subsequent enumeration or exploitation attacks.
+
+### Practical Considerations and Detection
+
+Access to the `information_schema` database may be limited if the database user lacks sufficient privileges or if the application implements additional filtering controls. In practice, some web applications may also filter, truncate, or sanitize returned data, which could conceal some or all of the extracted database names. Successful exploitation requires adapting payloads to the specific environment and application response.
+
+## Practice
+
+### Enumerate MySQL Databases Using UNION-based SQL Injection
+
+- Craft a UNION-based SQL injection payload to extract database names from the `information_schema.schemata` table:
+  
+    ```sql
+    ' UNION SELECT 1, schema_name FROM information_schema.schemata-- -
+    ```
+
+- Adjust the number of columns and the position of `schema_name` in the SELECT statement to align with the original query structure of the target.
+  
+- Use a tool such as `curl` to send the injected payload to the vulnerable web application:
+
+    ```bash
+    curl -G 'http://target/vuln.php' --data-urlencode "id=1 UNION SELECT 1, schema_name FROM information_schema.schemata-- -"
+    ```
+
+- Observe the web application’s response for the appearance of database names. These names should be present within the rendered content if the injection and column alignment are correct.
+
+Upon successful exploitation, the attacker will obtain a list of all MySQL database names present on the server, providing a complete enumeration of the schemas and setting the stage for further targeted attacks.
+
+## Tools
+
+- **sqlmap**
+- **curl**
+- **Burp Suite**
