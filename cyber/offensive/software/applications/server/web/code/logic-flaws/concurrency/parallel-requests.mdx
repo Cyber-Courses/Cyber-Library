@@ -1,0 +1,93 @@
+---
+title: 'Parallel Requests in Web Application Attacks: Exploiting Race Conditions'
+description: Learn how attackers exploit parallel requests to trigger race conditions and logic flaws in web applications. Discover techniques, tools, and real-world examples for identifying and leveraging concurrency vulnerabilities.
+keywords:
+  - parallel requests
+  - concurrent requests
+  - race condition
+  - web application security
+  - logic flaws
+  - timing attack
+  - request flooding
+  - parallel execution
+  - exploiting concurrency
+  - web application attacks
+---
+# Parallel Requests
+
+## Context
+
+This page enables offensive operators to exploit logic flaws in web applications by orchestrating and executing parallel requests. The goal is to trigger race conditions, bypass critical logic, or manipulate state inconsistencies. This technique specifically targets concurrency issues in server-side application logic where assumptions about sequential execution break down under simultaneous access.
+
+## Theory
+
+### Parallel Requests in Web Application Attacks
+
+Parallel requests involve sending multiple HTTP requests to a web application at the same time, targeting the same resource or logic flow. Many web applications are built with the assumption that requests occur in a sequential manner. When exposed to deliberate, simultaneous requests, these assumptions can fail.
+
+This vulnerability model arises because transactional logic—like processing a transfer or allocating a resource—may lack proper synchronization. When two or more requests hit the same endpoint at once, the application may be tricked into performing unintended actions.
+
+An attack sequence typically involves the adversary dispatching a burst of concurrent requests at a target operation. By carefully crafting these requests, the attacker can push the application's logic out of its expected state.
+
+### Race Conditions via Parallel Execution
+
+A race condition occurs when multiple operations execute in parallel without adequate control over their interactions, leading to inconsistent or flawed results. For example, two withdrawal requests for the same bank account processed simultaneously could both succeed, even if only one should.
+
+Parallel requests enable attackers to exploit code paths where checks and updates are not atomic. For instance, an application may check a user’s balance and—if sufficient—proceed to update it. If two requests are handled at once, they may each see the same old balance, both pass the check, and both proceed.
+
+Successful exploitation of a race condition through parallel requests can lead to serious impacts: privilege escalation, duplicated actions (such as double-purchase or double-withdrawal), bypassed restrictions, or even data corruption.
+
+### Attacker Mindset and Threat Surface
+
+Attackers seek endpoints that expose state changes or critical operations—areas likely to suffer from insufficient locking or synchronization. Common targets include financial transactions, resource allocations, password resets, or actions that modify sensitive account data.
+
+From an offensive standpoint, endpoints that alter server-side state and lack clear transactional controls form the accessible threat surface. Comprehensive enumeration and targeted parallel request patterns help probe these weaknesses.
+
+## Practice
+
+### Exploiting a Race Condition via Parallel Requests
+
+- Identify endpoints that perform sensitive, state-changing operations. Examples include money transfers, password resets, or coupon redemptions.
+- Begin by testing these endpoints for sequential logic flaws—submit the same request multiple times in rapid succession and observe the outcome. If unexpected behavior results, the endpoint is promising.
+- To intensify, configure an attack with a suitable tool (such as Burp Suite Intruder or Turbo Intruder) to dispatch multiple concurrent requests to the vulnerable endpoint.
+
+    ```bash
+    # Using Turbo Intruder from command line to send parallel POST requests
+    turbo-intruder script.py
+    ```
+
+- Craft HTTP payloads that are either identical or varied as needed to exploit the suspected flaw. For example, two simultaneous withdrawal requests:
+
+    ```http
+    POST /withdraw HTTP/1.1
+    Host: target-app.com
+    Cookie: session=SESSIONID
+    Content-Type: application/x-www-form-urlencoded
+
+    amount=100
+    ```
+
+- Launch the attack by sending a burst of 10-100+ parallel requests within milliseconds. Tune concurrency settings for your tool to maximize timing overlap.
+
+    ```bash
+    # Using curl and xargs for a parallel flood
+    cat request.txt | xargs -n 1 -P 20 curl -K -
+    ```
+  
+    ```bash
+    # Using ffuf for concurrent requests
+    ffuf -w requests.txt:DATA -X POST -d @DATA -u https://target-app.com/withdraw -t 50
+    ```
+
+- Closely monitor responses for signs of a logic bypass. Look for duplicated confirmations, negative balances, or error messages that indicate an inconsistency.
+
+- Parallel request timing is critical—iterate on the number of concurrent requests and payload structure to optimize the attack.
+
+When performed successfully, this technique results in logic bypass or state inconsistencies, such as unauthorized funds outflow, double actions, or enforced privilege escalation.
+
+## Tools
+
+- **Burp Suite Intruder**
+- **Turbo Intruder**
+- **ffuf**
+- **curl (with xargs or parallel)**
