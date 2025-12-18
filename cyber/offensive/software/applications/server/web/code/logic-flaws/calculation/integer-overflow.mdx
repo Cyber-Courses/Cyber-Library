@@ -1,0 +1,102 @@
+---
+title: 'Integer Overflow: Exploiting Numeric Vulnerabilities in Web Applications'
+description: Learn how integer overflow vulnerabilities occur in web application calculations, how attackers exploit them, and effective detection and prevention techniques for secure coding.
+keywords:
+  - integer overflow
+  - numeric overflow
+  - arithmetic overflow
+  - web application security
+  - MAX_INT
+  - '2147483647'
+  - buffer overflow
+  - integer underflow
+  - logic flaw exploitation
+  - input validation
+  - secure coding
+---
+# Integer Overflow
+
+## Context
+
+This guide focuses on identifying, exploiting, and weaponizing integer overflow vulnerabilities in web application calculation logic. Offensive operators can leverage these flaws to achieve privilege escalation, data manipulation, or application compromise in scenarios where user-supplied numbers impact backend calculations.
+
+## Theory
+
+### Integer Overflow Fundamentals
+
+Integer overflow occurs when the result of an arithmetic operation exceeds the maximum value that can be stored by a given integer data type. For example, in a 32-bit signed integer, the maximum value (MAX_INT) is 2,147,483,647. Incrementing this value by 1 wraps it around to -2,147,483,648 due to the limitations of binary storage.
+
+Web applications often perform calculations on user-supplied data. If these arithmetic operations are not properly safeguarded, a user can supply values near the limit of the integer type, causing overflows. This can have unintended or exploitable effects.
+
+Unchecked arithmetic on backend systems increases the attack surface. Numeric parameters untouched by input validation—such as quantity, price, counters, or bonus points—become prime targets. When an operation like addition or multiplication is performed on a value at or near MAX_INT, the integer overflows, and the value wraps, possibly disrupting application behavior.
+
+### Causes and Attack Surface
+
+The typical attack surface for integer overflows lies in web application input fields or API parameters that feed directly into numeric calculations with insufficient checks. An attacker may supply a value like 2,147,483,647 into a field such as "quantity" or "amount". When the system tries to increment or multiply this value, it exceeds the type’s capacity, resulting in an overflow.
+
+APIs are equally vulnerable if backend logic lacks parameter validation. Attackers can invoke endpoints directly with crafted values. Vulnerable backend code often takes these manipulated numbers and performs unchecked operations, setting the stage for a successful overflow.
+
+An attacker generally aims to supply values right at the MAX_INT or slightly below, hoping that a following arithmetic operation (like add or multiply) will cross the boundary and wrap the value, often turning a large number into a negative or small integer.
+
+### Exploitation and Impact
+
+Once an integer overflow is triggered, the wrapped value can interact with business logic in unexpected ways. Overflow may turn a positive value into a negative, unintentionally bypassing authorization checks or enabling undesirable discounts. This can be leveraged to perform unauthorized actions like receiving a free product, bypassing account limits, or escalating privileges.
+
+Integer overflows can also act as the precursor to more severe vulnerabilities. If an overflowed value controls memory allocation or array indices, it may lead to buffer overflows—a class of vulnerability capable of arbitrary code execution.
+
+The real-world impact depends on how the overflowed value is processed. When business logic relies on the integrity of numeric inputs without enforcing boundaries, attackers can exploit integer overflows to subvert expected calculations for financial or access gain.
+
+### Detection and Prevention
+
+Detecting integer overflow vulnerabilities involves fuzzing numeric input fields with a range of boundary values. Submitting values like 2,147,483,647, 2,147,483,646, 0, and -1 can reveal edge case handling failures.
+
+Manual code review is valuable—search for arithmetic operations that execute on untrusted, user-controlled data without bounds checking. Absence of input validation or use of unsafe arithmetic libraries increases risk.
+
+Tools like Burp Suite Intruder, ffuf, and wfuzz can automate the process, rapidly testing large sets of payloads tuned for integer overflow scenarios. Applications returning anomalous responses or exhibiting logic changes when tested with boundary numbers should be manually investigated for exploitation potential.
+
+## Practice
+
+### Manual Exploitation of Integer Overflow in Web Application Calculation
+
+- Identify a numeric input parameter in the target application that is used in backend calculations, such as "quantity" or "balance".
+- Submit an HTTP POST request with the parameter set to `2147483647` (MAX_INT for 32-bit signed integers), targeting an endpoint that performs an arithmetic operation.
+
+    ```http
+    POST /api/purchase HTTP/1.1
+    Host: targetsite.com
+    Content-Type: application/json
+
+    {
+        "quantity": 2147483647,
+        "product_id": "1001"
+    }
+    ```
+
+- Trigger the backend calculation, for example by initiating an order, checkout, or increment action expected to increase the supplied value.
+- Observe the application’s response for logic anomalies—negative values, improper discount, or unrestricted actions. Look for evidence such as unexpected totals, errors, or unauthorized functionality.
+
+- If the overflow results in a negative or otherwise manipulated value, attempt to leverage it—such as purchasing large quantities at a discounted or free rate.
+
+### Automated Fuzzing for Integer Overflow Vulnerabilities
+
+- Configure Burp Suite Intruder or a similar tool to target the numeric parameter. Set the payload set to include values at and around signed and unsigned integer boundaries:
+
+    ```
+    2147483647
+    2147483646
+    0
+    -1
+    4294967295
+    ```
+
+- Launch the fuzzer against the application, allowing each payload to be injected into the vulnerable parameter(s).
+
+- Monitor the responses for anomalies such as HTTP 500 errors, negative values in returned data, or unexpected business logic changes.
+
+- Isolate any payloads producing unusual results for deeper manual review and exploitation attempts.
+
+## Tools
+
+- **Burp Suite**
+- **ffuf**
+- **wfuzz**
