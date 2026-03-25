@@ -1,6 +1,6 @@
 ---
 title: Carrière
-description: Vue d’ensemble des parcours en cybersécurité : rôles et responsabilités, compétences clés, et intérêt des certifications et des diplômes.
+description: "Vue d’ensemble des parcours en cybersécurité : rôles et responsabilités, compétences clés, et intérêt des certifications et des diplômes."
 keywords:
   - carrière cybersécurité
   - parcours professionnels

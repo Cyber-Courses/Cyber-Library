@@ -1,6 +1,6 @@
 ---
 title: Intelligence
-description: Vue d’ensemble de l’intelligence en cybersécurité : niveaux stratégique, opérationnel et tactique, et lien avec la défense proactive et la gestion des risques.
+description: "Vue d’ensemble de l’intelligence en cybersécurité : niveaux stratégique, opérationnel et tactique, et lien avec la défense proactive et la gestion des risques."
 keywords:
   - intelligence cybersécurité
   - renseignement stratégique
