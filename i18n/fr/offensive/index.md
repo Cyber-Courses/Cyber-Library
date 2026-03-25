@@ -1,5 +1,5 @@
 ---
-title: Offensif
+title: Offensive
 description: Découvrez comment le hacking éthique, le red teaming, les programmes de bug bounty et d’autres techniques de sécurité offensive permettent d’identifier et de traiter les vulnérabilités sur les couches physique, réseau, logicielle et humaine.
 keywords:
   - cybersécurité offensive
@@ -12,7 +12,7 @@ keywords:
   - gestion des risques
 ---
 
-# Offensif
+# Offensive
 
 ## Qu’est-ce que la cybersécurité offensive ?
 
