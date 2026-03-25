@@ -1,5 +1,5 @@
 ---
-title: Défensif
+title: Défensive
 description: Vue d’ensemble pratique de la cybersécurité défensive : renseignement sur les menaces, évaluation des vulnérabilités, réponse aux incidents et amélioration continue pour la résilience de l’entreprise.
 keywords:
   - cybersécurité défensive
@@ -11,7 +11,7 @@ keywords:
   - continuité d’activité
 ---
 
-# Défensif
+# Défensive
 
 ## Qu’est-ce que la cybersécurité défensive ?
 
