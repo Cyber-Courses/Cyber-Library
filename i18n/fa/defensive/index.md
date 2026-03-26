@@ -3,13 +3,13 @@ title: دفاعی
 description: رویکردی سیستماتیک برای حفاظت از داده‌ها، سیستم‌ها و کاربران در برابر
   تهدیدات سایبری.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- امنیت سایبری دفاعی
+- اطلاعات تهدید
+- ارزیابی های آسیب پذیری
+- واکنش حادثه
+- نظارت مستمر
+- تحلیل پس از حادثه
+- تداوم کسب و کار
 ---
 
 # دفاعی

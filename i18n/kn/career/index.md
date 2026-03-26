@@ -2,13 +2,13 @@
 title: ವೃತ್ತಿ
 description: ಸೈಬರ್‌ಸುರಕ್ಷೆಯಲ್ಲಿ ವೃತ್ತಿ ನಿರ್ಮಾಣದ ಕುರಿತು ಸಮಗ್ರ ವಿವರಣೆ
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- ಸೈಬರ್ ಸೆಕ್ಯುರಿಟಿ ವೃತ್ತಿ
+- ವೃತ್ತಿ ಮಾರ್ಗಗಳು
+- ಪಾತ್ರಗಳು ಮತ್ತು ಜವಾಬ್ದಾರಿಗಳು
+- ತಾಂತ್ರಿಕ ಮತ್ತು ಮೃದು ಕೌಶಲ್ಯಗಳು
+- ಪ್ರಮಾಣೀಕರಣಗಳು
+- ಶೈಕ್ಷಣಿಕ ಪದವಿಗಳು
+- ವೃತ್ತಿಪರ ಅಭಿವೃದ್ಧಿ
 ---
 
 # ವೃತ್ತಿ

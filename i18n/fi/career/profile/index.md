@@ -2,16 +2,16 @@
 title: Profiili
 description: Ymmärrä kyberturvallisuusprofiilisi ja miten se voi ohjata uraasi.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- kyberturvallisuuden roolit
+- urapolkuja
+- taitojen kehittäminen
+- kyberturvallisuussertifikaatit
+- turvallisuus ura
+- lähtötason roolit
+- keskitason rooleja
+- ylemmän tason rooleja
+- tekniset taidot
+- johtamispolkuja
 ---
 
 # Profiili

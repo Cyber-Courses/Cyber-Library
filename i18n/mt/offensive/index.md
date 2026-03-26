@@ -1,4 +1,22 @@
-```markdown
+---
+title: Offensiv
+description: Offensiv tas-cibersigurtà jinvolvi simulazzjoni etika ta' attakki reali
+  biex jiġu skoperti vulnerabbiltajiet qabel ma atturi malizzjużi jistgħu jisfruttawhom.
+  Billi jaġixxu bħala avversarji awtorizzati, it-timijiet tas-sigurtà jesponu punti
+  dgħajfa fid-difiżi ta' organizzazzjoni, u jippermettu li dawk il-kwistjonijiet jiġu
+  indirizzati b'mod proattiv. Dan il-proċess mhux biss jidentifika theddid potenzjali
+  iżda…
+keywords:
+- ċiber sigurtà offensiva
+- hacking etiku
+- ittestjar tal-penetrazzjoni
+- tim aħmar
+- programm ta’ bug bounty
+- inġinerija soċjali
+- protezzjoni tad-data
+- immaniġġjar tar-riskju
+---
+
 # Offensiv
 
 ## X'inhu Offensiv tas-Cibersigurtà?
@@ -14,4 +32,3 @@ Offensiv tas-cibersigurtà għandu rwol kritiku fit-tnaqqis tar-riskju u l-valid
 L-implimentazzjoni ta' offensiv tas-cibersigurtà tibda billi jiġu identifikati s-saffi li jikkostitwixxu l-ambjent ta' organizzazzjoni. Is-saff tal-bniedem, spiss il-ħolqa l-aktar dgħajfa, jista' jiġi ttestjat permezz ta' eżerċizzji ta' inġinerija soċjali mfassla biex ikejlu l-għarfien u l-konformità mal-protokolli tas-sigurtà. Is-saff fiżiku jiffoka fuq il-kontrolli ta' aċċess u l-ħardwer, billi jiddetermina kemm faċilment persuna mhux awtorizzata tista' tinfiltra faċilità jew tgħawweġ apparati. Fis-saff tan-netwerk, il-professjonisti tas-sigurtà jeżaminaw firewalls, routers, u komponenti oħra tal-infrastruttura biex jaraw jekk l-attakkanti jistgħux jiksru l-perimetru jew jivvjaġġaw lateralment fi ħdan sistema kompromessa. Is-saff tas-softwer, min-naħa l-oħra, jgħaddi minn valutazzjonijiet għal difetti ta' kodifikazzjoni, konfigurazzjonijiet ħżiena, u lakuni loġiċi li jistgħu jippermettu lil intruż jeskala privileġġi jew jesfiltra data. Timijiet offensivi jistgħu wkoll jesploraw mekkaniżmi ta' protezzjoni tad-data—bħal enkrizzjoni u kodifikazzjoni—biex jivverifikaw ir-reżiljenza tagħhom għal manipulazzjoni jew sforzi ta' bypass.
 
 F'dawn is-saffi, varjetà ta' metodoloġiji jiggwidaw operazzjonijiet offensivi. It-testjar ta' penetrazzjoni jiffoka fuq attakki mmirati kontra sistemi speċifiċi biex jiskopru vulnerabbiltajiet b'mod ikkontrollat, u jipprovdi provi konkreti ta' kunċetti ta' sfruttament. It-timijiet ħomor jużaw approċċ usa', aktar olistiku li jimitaw avversarji sofistikati u persistenti, ittestjar mhux biss tad-difiżi teknoloġiċi iżda wkoll tal-proċessi ta' rispons għall-inċidenti, komunikazzjoni, u teħid ta' deċiżjonijiet tal-organizzazzjoni. Ħafna kumpaniji jimpjegaw ukoll programmi ta' bug bounty, li jistiednu riċerkaturi indipendenti biex jissondaw sistemi u jirrapportaw difetti ta' sigurtà għal premjijiet. Kull inizjattiva offensiva teħtieġ għarfien tekniku, adattabilità, u kreattività, peress li l-attakkanti reali qed jevolvu kontinwament il-metodi tagħhom. Fl-aħħar mill-aħħar, dawn is-simulazzjonijiet ta' attakki mmexxija b'mod etiku jservu bħala pilastru fundamentali ta' strateġija komprensiva ta' cibersigurtà, li jdawlu l-blind spots u jmexxu titjib kontinwu.
-```

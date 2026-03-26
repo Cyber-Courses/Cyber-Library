@@ -3,14 +3,14 @@ title: Offensivo
 description: Esplorazione della cybersecurity offensiva, il suo significato, importanza
   e metodi di implementazione.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- sicurezza informatica offensiva
+- hacking etico
+- test di penetrazione
+- squadra rossa
+- ricompensa per gli insetti
+- ingegneria sociale
+- protezione dei dati
+- gestione del rischio
 ---
 
 # Offensivo

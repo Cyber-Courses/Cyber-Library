@@ -3,14 +3,14 @@ title: Intelligenza
 description: Esplorazzjoni teknika tal-intelliġenza fis-sigurtà ċibernetika, inklużi
   l-importanza u l-implimentazzjoni tagħha.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- intelliġenza taċ-ċibersigurtà
+- intelliġenza strateġika
+- intelliġenza operazzjonali
+- intelliġenza tattika
+- ġestjoni tar-riskju
+- Indikaturi ta' Kompromess
+- għalf tat-theddid
+- ċiklu tal-intelliġenza
 ---
 
 # Intelligenza

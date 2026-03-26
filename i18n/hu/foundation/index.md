@@ -5,13 +5,13 @@ description: A kiberbiztonság gyökerei a 20. század végének hacker kultúr�
   technológia megértésére, módosítására és határainak feszegetésére. Ezek a korai
   hackerek gyakran digitális határok felfedezőinek tekintették magukat, akik…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- kiberbiztonsági alapítvány
+- hacker kultúra
+- kiberbiztonsági történelem
+- kiberbiztonsági etika
+- kockázatkezelés
+- bizalom a digitális rendszerekben
+- emberi elem a kiberbiztonságban
 ---
 
 # Alapok

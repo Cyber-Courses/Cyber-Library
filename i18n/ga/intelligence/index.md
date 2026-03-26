@@ -4,14 +4,14 @@ description: Fiosraigh an ról ríthábhachtach atá ag intleacht i gcosaint chi
   lena n-áirítear bailiú, próiseáil, agus anailís faisnéise chun bagairtí a aithint
   agus a mhaolú.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- faisnéis cibearshlándála
+- faisnéis straitéiseach
+- faisnéis oibriúcháin
+- intleacht oirbheartaíochta
+- bainistíocht riosca
+- Táscairí Comhréiteach
+- Fothaí bagairt
+- timthriall faisnéise
 ---
 
 # Intleacht

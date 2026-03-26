@@ -3,14 +3,14 @@ title: Uzbrukuma Kiberdrošība
 description: Izpratne par uzbrukuma kiberdrošību un tās nozīmi organizāciju aizsardzībā
   pret kiberdraudiem.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
+- aizskaroša kiberdrošība
+- ētiska uzlaušana
+- iespiešanās pārbaude
+- sarkanā komanda
 - bug bounty
-- social engineering
-- data protection
-- risk management
+- sociālā inženierija
+- datu aizsardzība
+- riska pārvaldība
 ---
 
 # Uzbrukuma Kiberdrošība

@@ -5,13 +5,13 @@ description: Ura kyberturvallisuudessa on dynaaminen matka, joka tarjoaa mahdoll
   kyberturvallisuuden asiantuntijoille kasvaa vastaavasti, mikä luo elinvoimaiset
   ja nopeatempoiset työmarkkinat. Olitpa vasta aloittelemassa tai haluamassa…
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- kyberturvallisuuden ura
+- urapolkuja
+- roolit ja vastuut
+- tekniset ja pehmeät taidot
+- sertifikaatit
+- akateemiset tutkinnot
+- ammatillinen kehitys
 ---
 
 # Ura

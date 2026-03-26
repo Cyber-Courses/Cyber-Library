@@ -1,17 +1,18 @@
 ---
-title: Grundlagen der Cybersicherheit
-description: Erforschung der Ursprünge und Entwicklung der Cybersicherheit, einschließlich
-  Hacker-Kultur, Ethik und Risiko.
+title: Grundlagen
+description: Die Cybersicherheit hat ihre frühesten Wurzeln in der Hacker-Kultur des
+  späten 20. Jahrhunderts. Seit dem Moment, als Menschen begannen, mit Computern zu
+  experimentieren, bestand der Wunsch, die Technologie zu verstehen, zu modifizieren
+  und ihre Grenzen zu erweitern. Diese frühen Hacker sahen sich oft als Entdecker
+  digitaler Grenzen, die…
 keywords:
-- cybersecurity foundation
-- hackerkultur
-- cybersicherheitsgeschichte
-- cybersicherheitsethik
+- Cybersicherheitsgrundlagen
+- Hackerkultur
+- Cybersicherheitsgeschichte
+- Cybersicherheitsethik
 - Risikomanagement
-- vertrauen in digitale Systeme
+- Vertrauen in digitale Systeme
 - menschliches Element in der Cybersicherheit
-author: Experte für Cybersicherheit
-date: '2023-10-05'
 ---
 
 # Grundlagen

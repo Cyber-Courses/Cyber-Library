@@ -1,3 +1,21 @@
+---
+title: Llywodraethu
+description: Mae llywodraethu seiberddiogelwch yn fframwaith cynhwysfawr o bolisïau,
+  rolau, a phrosesau gwneud penderfyniadau y mae sefydliad yn eu sefydlu i reoli a
+  lliniaru risgiau seiber. Mae'n darparu'r cynllun ar gyfer integreiddio seiberddiogelwch
+  i bob agwedd ar y busnes, gan sicrhau nad yw mentrau diogelwch yn gweithredu ar
+  eu…
+keywords:
+- llywodraethu diogelwch seiber
+- fframweithiau llywodraethu
+- rheoli risg
+- cydymffurfiaeth
+- strategaeth fusnes
+- gwydnwch seiber
+- goruchwyliaeth y bwrdd
+- parhad gweithredol
+---
+
 # Llywodraethu
 
 ## Beth yw Llywodraethu Seiberddiogelwch?

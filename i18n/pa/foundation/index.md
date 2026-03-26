@@ -2,13 +2,13 @@
 title: ਸਾਈਬਰਸੁਰੱਖਿਆ ਦਾ ਮੂਲ
 description: ਸਾਈਬਰਸੁਰੱਖਿਆ ਦੇ ਇਤਿਹਾਸ, ਹੈਕਰ ਸੰਸਕ੍ਰਿਤੀ, ਅਤੇ ਨੈਤਿਕਤਾ ਬਾਰੇ ਜਾਣਕਾਰੀ।
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਫਾਊਂਡੇਸ਼ਨ
+- ਹੈਕਰ ਸਭਿਆਚਾਰ
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਇਤਿਹਾਸ
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਨੈਤਿਕਤਾ
+- ਜੋਖਮ ਪ੍ਰਬੰਧਨ
+- ਡਿਜ਼ੀਟਲ ਸਿਸਟਮ ਵਿੱਚ ਭਰੋਸਾ
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਵਿੱਚ ਮਨੁੱਖੀ ਤੱਤ
 ---
 
 # ਮੂਲ

@@ -3,14 +3,14 @@ title: Офанзивна сајбер безбедност
 description: Разбирање на офанзивната сајбер безбедност, нејзината важност и методи
   за имплементација.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- навредлива сајбер безбедност
+- етичко хакирање
+- тестирање на пенетрација
+- црвено здружување
+- награда за бубачки
+- социјален инженеринг
+- заштита на податоците
+- управување со ризик
 ---
 
 # Офанзивна

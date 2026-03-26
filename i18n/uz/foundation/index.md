@@ -5,13 +5,13 @@ description: Kiberxavfsizlikning dastlabki ildizlari 20-asr oxiridagi xakerlar m
   boshlab, texnologiyani tushunish, o'zgartirish va chegaralarni kengaytirishga intilish
   mavjud edi. Ushbu dastlabki xakerlar ko'pincha o'zlarini raqamli…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- kiberxavfsizlik fondi
+- xakerlik madaniyati
+- kiberxavfsizlik tarixi
+- kiberxavfsizlik etikasi
+- risklarni boshqarish
+- raqamli tizimlarga ishonch
+- kiberxavfsizlikdagi inson elementi
 ---
 
 # Asos

@@ -3,13 +3,13 @@ title: Difensiva
 description: Esplora la cybersecurity difensiva, la sua importanza e come viene implementata
   per proteggere i dati e i sistemi dalle minacce informatiche.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- sicurezza informatica difensiva
+- informazioni sulle minacce
+- valutazioni di vulnerabilità
+- risposta all'incidente
+- monitoraggio continuo
+- analisi post-incidente
+- continuità aziendale
 ---
 
 # Difensiva

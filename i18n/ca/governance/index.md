@@ -1,3 +1,20 @@
+---
+title: Governança
+description: La governança de la ciberseguretat és el marc integral de polítiques,
+  rols i processos de presa de decisions que una organització estableix per gestionar
+  i mitigar els riscos cibernètics. Proporciona el pla per integrar la ciberseguretat
+  en tots els aspectes del negoci, assegurant que les iniciatives de seguretat…
+keywords:
+- governança de ciberseguretat
+- marcs de governança
+- gestió de riscos
+- compliment normatiu
+- estratègia empresarial
+- resiliència cibernètica
+- supervisió del consell
+- continuïtat operativa
+---
+
 # Governança
 
 ## Què és la Governança de la Ciberseguretat?

@@ -3,13 +3,13 @@ title: Grundläggande
 description: Utforska ursprunget och utvecklingen av cybersäkerhet, hacker-kultur
   och dess betydelse i dagens digitala värld.
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- stiftelsen för cybersäkerhet
+- hackerkultur
+- cybersäkerhetshistoria
+- cybersäkerhetsetik
+- riskhantering
+- förtroende för digitala system
+- mänskligt inslag i cybersäkerhet
 ---
 
 # Grundläggande

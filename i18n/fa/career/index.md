@@ -2,13 +2,13 @@
 title: حرفه
 description: 'مسیر حرفه‌ای در امنیت سایبری: فرصت‌ها و چالش‌ها'
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- حرفه امنیت سایبری
+- مسیرهای شغلی
+- نقش ها و مسئولیت ها
+- مهارت های فنی و نرم
+- گواهینامه ها
+- مدارک تحصیلی
+- توسعه حرفه ای
 ---
 
 # حرفه

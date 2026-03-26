@@ -3,13 +3,13 @@ title: రక్షణాత్మక
 description: సైబర్ ముప్పుల నుండి డేటా, వ్యవస్థలు మరియు వినియోగదారులను రక్షించడానికి
   రక్షణాత్మక సైబర్ సెక్యూరిటీ యొక్క ప్రాముఖ్యత మరియు విధానాలు.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- రక్షణాత్మక సైబర్ భద్రత
+- ముప్పు తెలివితేటలు
+- దుర్బలత్వ అంచనాలు
+- సంఘటన ప్రతిస్పందన
+- నిరంతర పర్యవేక్షణ
+- సంఘటన అనంతర విశ్లేషణ
+- వ్యాపార కొనసాగింపు
 ---
 
 # రక్షణాత్మక

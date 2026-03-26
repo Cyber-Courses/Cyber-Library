@@ -5,14 +5,14 @@ description: Inteligencija u kibernetičkoj sigurnosti odnosi se na prikupljanje
   prijetnji. Obuhvaća više razina kako bi se zadovoljile kratkoročne i dugoročne potrebe,
   obično poznate kao strateške, operativne i taktičke. Strateška…
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
+- kibersigurnosna inteligencija
+- strateško izviđanje
+- operativna obavještajna služba
+- taktičko izviđanje
 - risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- Indikatori kompromisa
+- izvori prijetnji
+- ciklus izviđanja
 ---
 
 # Inteligencija

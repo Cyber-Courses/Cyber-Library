@@ -2,14 +2,14 @@
 title: 智能
 description: 在网络安全中，智能是收集、处理和分析信息，以识别、评估和缓解网络威胁的过程。
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
+- 网络安全情报
+- 战略情报
+- 运营情报
+- 战术情报
 - risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- 妥协指标
+- 威胁源
+- 情报循环
 ---
 
 # 智能

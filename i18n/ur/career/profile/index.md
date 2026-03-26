@@ -3,16 +3,16 @@ title: پروفائل
 description: سائبر سیکیورٹی پروفائل کو سمجھنا آپ کے پیشہ ورانہ سفر میں آپ کی موجودہ
   حیثیت اور مستقبل کے اہداف کو واضح کرنے میں مدد کرتا ہے۔
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- سائبر سیکیورٹی کے کردار
+- کیریئر کے راستے
+- مہارت کی ترقی
+- سائبرسیکیوریٹی سرٹیفیکیشن
+- سیکورٹی کیریئر
+- داخلہ سطح کے کردار
+- درمیانی درجے کے کردار
+- سینئر سطح کے کردار
+- تکنیکی مہارت
+- انتظامی راستے
 ---
 
 # پروفائل

@@ -3,13 +3,13 @@ title: Կարիերա
 description: Կիբեռանվտանգության ոլորտում կարիերայի հնարավորություններ և զարգացման
   ուղիներ
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- կիբերանվտանգության կարիերա
+- կարիերայի ուղիները
+- դերերն ու պարտականությունները
+- տեխնիկական և փափուկ հմտություններ
+- հավաստագրերը
+- գիտական ​​աստիճաններ
+- մասնագիտական ​​զարգացում
 ---
 
 # Կարիերա

@@ -3,13 +3,13 @@ title: Gairm
 description: Turas dinimiciúil i gcibearshlándáil le deiseanna do ghairmithe ag gach
   leibhéal.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- gairme cibearshlándála
+- cosáin ghairme
+- róil agus freagrachtaí
+- scileanna teicniúla agus bog
+- deimhnithe
+- céimeanna acadúla
+- forbairt ghairmiúil
 ---
 
 # Gairm

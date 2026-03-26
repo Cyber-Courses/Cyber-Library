@@ -3,13 +3,13 @@ title: Ulinzi
 description: 'Ulinzi wa Mtandao: Mbinu za Kulinda Data na Mfumo wa Shirika Dhidi ya
   Vitisho vya Mtandao.'
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- ulinzi wa cybersecurity
+- tishio akili
+- tathmini za kuathirika
+- majibu ya tukio
+- ufuatiliaji unaoendelea
+- uchambuzi wa baada ya tukio
+- mwendelezo wa biashara
 ---
 
 # Ulinzi

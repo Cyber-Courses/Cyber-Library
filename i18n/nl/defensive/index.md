@@ -3,13 +3,13 @@ title: Defensief
 description: Een diepgaande verkenning van defensieve cybersecurity, inclusief methoden
   voor preventie, detectie en respons.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- defensieve cyberbeveiliging
+- dreigingsinformatie
+- kwetsbaarheidsbeoordelingen
+- reactie op incidenten
+- continue monitoring
+- analyse na het incident
+- bedrijfscontinuïteit
 ---
 
 # Defensief

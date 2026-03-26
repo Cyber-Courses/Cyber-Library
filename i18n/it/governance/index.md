@@ -3,14 +3,14 @@ title: Governance
 description: Scopri la governance della cybersecurity, la sua importanza e come viene
   implementata.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- governance della sicurezza informatica
+- quadri di governance
+- gestione del rischio
+- conformità
+- strategia aziendale
+- resilienza informatica
+- supervisione del consiglio
+- continuità operativa
 ---
 
 # Governance

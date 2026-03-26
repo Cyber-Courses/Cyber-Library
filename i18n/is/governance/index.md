@@ -1,6 +1,19 @@
 ---
-title: "Stjórnun"
-description: "Alhliða umgjörð um stjórnun netöryggis, mikilvægi þess og hvernig það er framkvæmt."
+title: Stjórnun
+description: Stjórnun netöryggis er alhliða umgjörð af stefnum, hlutverkum og ákvarðanatökuferlum
+  sem fyrirtæki setur upp til að stjórna og draga úr netáhættu. Hún veitir leiðbeiningar
+  um hvernig netöryggi er samþætt í alla þætti fyrirtækisins, þannig að öryggisátak
+  starfi ekki í einangrun heldur samræmist heildarmarkmiðum fyrirtækisins. Þetta samræmi
+  þýðir að…
+keywords:
+- stjórnun netöryggis
+- ramma kerfi stjórnunar
+- áhættustýring
+- eftirlit og samræmi
+- viðskiptastefna
+- netþol
+- eftirlit stjórnar
+- rekstrarframleiðni
 ---
 
 # Stjórnun

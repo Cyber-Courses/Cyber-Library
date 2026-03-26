@@ -3,14 +3,14 @@ title: Siguria Kibernetike Ofensive
 description: Një eksplorim i thellë i sigurisë kibernetike ofensive, rëndësisë së
   saj dhe metodave të zbatimit.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- siguri kibernetike fyese
+- hakimi etik
+- testimi i penetrimit
+- bashkimi i kuq
+- shpërblim bug
+- inxhinieri sociale
+- mbrojtjen e të dhënave
+- menaxhimi i riskut
 ---
 
 # Siguria Kibernetike Ofensive

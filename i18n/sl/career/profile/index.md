@@ -1,6 +1,18 @@
 ---
 title: Profil
-description: Razumevanje vašega profila kibernetske varnosti je ključno za usmerjanje vaše kariere in razvojnih priložnosti.
+description: Razumevanje vašega profila kibernetske varnosti je ključno za usmerjanje
+  vaše kariere in razvojnih priložnosti.
+keywords:
+- kibernetske varnosti
+- karierne poti
+- razvoj spretnosti
+- kibernetske varnostne certifikate
+- varnostna kariera
+- vloge na začetni ravni
+- vloge na srednji ravni
+- vloge na višji ravni
+- tehnične spretnosti
+- menedžerske poti
 ---
 
 # Profil

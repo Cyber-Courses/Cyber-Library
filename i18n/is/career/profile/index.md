@@ -1,7 +1,21 @@
 ---
-title: "Kynning"
-description: "Skilningur á netöryggisprófíl er nauðsynlegur til að skilgreina stöðu þína í faglegri vegferð og markmið."
-keywords: "netöryggisprófíl, starfsferill, hæfni, vottanir, netöryggi"
+title: Kynning
+description: Að skilja netöryggisprófílinn þinn er nauðsynlegt þar sem það hjálpar
+  þér að skilgreina hvar þú stendur í faglegri vegferð þinni og hvert þú vilt stefna.
+  Netöryggisprófíl sameinar núverandi hæfni þína, reynslu, áhugamál og markmið, sem
+  þjónar sem leiðarvísir til að samræma starfsval þitt við réttu hlutverkin, vottanirnar
+  og…
+keywords:
+- hlutverk í netöryggi
+- ferlar ferils
+- þróun færni
+- vottanir netöryggis
+- ferill í öryggi
+- byrjenda hlutverk
+- millistigs hlutverk
+- yfirstigs hlutverk
+- tæknifærni
+- stjórnunarferlar
 ---
 
 # Kynning

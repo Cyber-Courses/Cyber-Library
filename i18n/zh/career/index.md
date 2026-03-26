@@ -2,13 +2,13 @@
 title: 职业
 description: 探索网络安全领域的职业生涯，包括个人发展、职业进步和行业生态系统。
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- 网络安全职业
+- 职业道路
+- 角色和职责
+- 技术和软技能
+- 认证
+- 学位
+- 专业发展
 ---
 
 # 职业

@@ -3,14 +3,14 @@ title: Axborot
 description: Kiberxavfsizlikda axborotning ahamiyati va aqlli tahlilni amalga oshirish
   usullari.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kiberxavfsizlik razvedkasi
+- strategik razvedka
+- operativ razvedka
+- taktik razvedka
+- risklarni boshqarish
+- Murosa ko'rsatkichlari
+- tahdid tasmasi
+- razvedka aylanishi
 ---
 
 # Axborot

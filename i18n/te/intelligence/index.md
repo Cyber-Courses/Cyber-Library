@@ -2,14 +2,14 @@
 title: ఇంటెలిజెన్స్
 description: సైబర్ భద్రతలో ఇంటెలిజెన్స్ యొక్క ప్రాముఖ్యత మరియు అమలు విధానం
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- సైబర్ సెక్యూరిటీ ఇంటెలిజెన్స్
+- వ్యూహాత్మక మేధస్సు
+- కార్యాచరణ మేధస్సు
+- వ్యూహాత్మక మేధస్సు
+- ప్రమాద నిర్వహణ
+- రాజీ సూచికలు
+- ముప్పు ఫీడ్లు
+- మేధస్సు చక్రం
 ---
 
 # ఇంటెలిజెన్స్

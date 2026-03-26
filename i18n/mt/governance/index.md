@@ -1,4 +1,22 @@
-```markdown
+---
+title: Governanza
+description: Il-governanza tas-sigurtà ċibernetika hija l-qafas komprensiv ta' politiki,
+  rwoli, u proċessi ta' teħid ta' deċiżjonijiet li organizzazzjoni tistabbilixxi biex
+  timmaniġġja u tnaqqas ir-riskji ċibernetiċi. Dan jipprovdi l-pjan għall-integrazzjoni
+  tas-sigurtà ċibernetika f'kull aspett tan-negozju, jiżgura li l-inizjattivi tas-sigurtà
+  ma jaħdmux f'iżolament iżda minflok jaqblu mal-objettivi ġenerali tal-kumpanija.
+  Din l-allinjament…
+keywords:
+- governanza taċ-ċiber sigurtà
+- qafas ta’ governanza
+- immaniġġjar tar-riskju
+- konformità
+- strateġija tan-negozju
+- reżiljenza ċibernetika
+- superviżjoni tal-bord
+- kontinwità operattiva
+---
+
 # Governanza
 
 ## X'inhi l-Governanza tas-Sigurtà Ċibernetika?
@@ -24,4 +42,3 @@ Billi jibnu fuq din il-bażi strateġika, il-pass li jmiss huwa li jiġu identif
 Fil-livell strateġiku, governanza effettiva teħtieġ l-istabbiliment ta' mekkaniżmi ta' sorveljanza u proċessi ta' ġestjoni tar-riskju li jimmonitorjaw u jevalwaw il-prestazzjoni tal-qafas tas-sigurtà ċibernetika. Dan jinvolvi l-istabbiliment ta' rwoli u responsabbiltajiet ċari, id-definizzjoni ta' metriċi u indikaturi ewlenin tal-prestazzjoni (KPIs), u l-ħolqien ta' kanali ta' rappurtar li jżommu lill-partijiet interessati infurmati. B'dawn l-istrutturi fis-seħħ, l-organizzazzjonijiet huma f'pożizzjoni aħjar biex kontinwament jivvalutaw u jrafinaw il-pożizzjoni tagħhom tas-sigurtà ċibernetika, jiżguraw li l-qafas ta' governanza jibqa' aġil quddiem theddid emerġenti.
 
 L-istadju finali fl-implimentazzjoni tal-governanza tas-sigurtà ċibernetika huwa t-twettiq operattiv u l-infurzar tal-politiki u l-proċeduri stabbiliti. Din il-fażi tiffoka fuq li tiżgura li l-organizzazzjoni kollha—mill-mexxejja sal-impjegati individwali—tifhem u taderixxi mal-qafas tas-sigurtà ċibernetika. L-isforzi operattivi jinkludu li tiġi żgurata l-kontinwità tan-negozju, il-ġestjoni tar-riskji ta' partijiet terzi, u l-istabbiliment ta' sistemi ta' rappurtar robusti. Barra minn hekk, enfasi qawwija titqiegħed fuq programmi ta' għarfien u taħriġ kontinwi, li jgħinu biex jinkoraġġixxu kultura ta' sigurtà madwar l-organizzazzjoni. Billi sistematikament jeżegwixxu u jinfurzaw dawn il-miżuri, il-kumpaniji mhux biss inaqqsu r-riskji ċibernetiċi iżda wkoll itejbu r-reżiljenza ġenerali tagħhom, fl-aħħar mill-aħħar idawru vulnerabbiltajiet potenzjali f'vantaġġi strateġiċi.
-```

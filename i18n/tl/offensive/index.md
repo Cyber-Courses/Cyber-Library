@@ -2,14 +2,14 @@
 title: Nakakasakit
 description: Pag-unawa sa Nakakasakit na Cybersecurity at ang Kahalagahan Nito
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
+- nakakasakit na cybersecurity
+- etikal na pag-hack
+- pagsubok sa pagtagos
 - red teaming
 - bug bounty
 - social engineering
-- data protection
-- risk management
+- proteksyon ng data
+- pamamahala ng panganib
 ---
 
 # Nakakasakit

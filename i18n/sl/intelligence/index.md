@@ -3,14 +3,14 @@ title: Inteligenca
 description: Razumevanje vloge inteligence v kibernetski varnosti, vključno z njenim
   pomenom in načinom izvajanja.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kibernetska varnost
+- strateško obveščanje
+- operativno obveščanje
+- taktična inteligenca
+- obvladovanje tveganja
+- Indikatorji kompromisa
+- viri groženj
+- obveščevalni cikel
 ---
 
 # Inteligenca

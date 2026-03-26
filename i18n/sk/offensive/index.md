@@ -2,14 +2,14 @@
 title: Ofenzívna
 description: Preskúmanie ofenzívnej kybernetickej bezpečnosti, jej významu a metodík.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
+- urážlivú kybernetickú bezpečnosť
+- etické hackovanie
+- penetračné testovanie
+- červená tímová
 - bug bounty
-- social engineering
-- data protection
-- risk management
+- sociálne inžinierstvo
+- ochranu údajov
+- riadenie rizík
 ---
 
 # Ofenzívna

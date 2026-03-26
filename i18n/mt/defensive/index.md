@@ -1,6 +1,15 @@
 ---
-title: "Difensiva"
-description: "Approċċ sistematiku għas-sigurtà ċibernetika difensiva biex tipproteġi d-dejta, is-sistemi, u l-utenti minn theddid ċibernetiku."
+title: Difensiva
+description: Approċċ sistematiku għas-sigurtà ċibernetika difensiva biex tipproteġi
+  d-dejta, is-sistemi, u l-utenti minn theddid ċibernetiku.
+keywords:
+- ċibersigurtà difensiva
+- intelliġenza dwar it-theddid
+- valutazzjonijiet tal-vulnerabbiltà
+- reazzjoni għall-inċidenti
+- monitoraġġ kontinwu
+- analiżi ta' wara l-inċident
+- kontinwità tan-negozju
 ---
 
 # Difensiva

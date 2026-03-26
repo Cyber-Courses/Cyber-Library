@@ -1,7 +1,16 @@
 ---
-title: "Valdymas"
-description: "Sužinokite apie kibernetinio saugumo valdymą, jo svarbą ir kaip jį įgyvendinti organizacijoje."
-keywords: "kibernetinis saugumas, valdymas, rizikos valdymas, strategija, atitiktis"
+title: Valdymas
+description: Sužinokite apie kibernetinio saugumo valdymą, jo svarbą ir kaip jį įgyvendinti
+  organizacijoje.
+keywords:
+- kibernetinio saugumo valdymas
+- valdymo sistemas
+- rizikos valdymas
+- atitikties
+- verslo strategija
+- kibernetinis atsparumas
+- valdybos priežiūra
+- veiklos tęstinumą
 ---
 
 # Valdymas

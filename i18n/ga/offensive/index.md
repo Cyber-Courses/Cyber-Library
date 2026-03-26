@@ -3,14 +3,14 @@ title: Cibearshlándáil Ionsaitheach
 description: Tuiscint ar Chibearshlándáil Ionsaitheach, a thábhacht, agus conas a
   dhéantar í.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- cibearshlándáil ionsaitheach
+- hacking eiticiúil
+- tástáil treá
+- foireann dearg
+- bounty fabht
+- innealtóireacht shóisialta
+- cosaint sonraí
+- bainistíocht riosca
 ---
 
 # Ionsaitheach

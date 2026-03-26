@@ -6,16 +6,16 @@ description: Memahami profil keselamatan siber anda adalah penting kerana ia mem
   matlamat semasa anda, berfungsi sebagai peta jalan untuk menyelaraskan pilihan kerjaya
   anda dengan peranan, pensijilan, dan peluang pembangunan yang betul.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- peranan keselamatan siber
+- laluan kerjaya
+- pembangunan kemahiran
+- pensijilan keselamatan siber
+- kerjaya keselamatan
+- peranan peringkat permulaan
+- peranan peringkat pertengahan
+- peranan peringkat senior
+- kemahiran teknikal
+- laluan pengurusan
 ---
 
 # Profil

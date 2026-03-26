@@ -2,13 +2,13 @@
 title: Phòng thủ
 description: Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- phòng thủ an ninh mạng
+- thông tin về mối đe dọa
+- đánh giá tính dễ bị tổn thương
+- ứng phó sự cố
+- giám sát liên tục
+- phân tích sau sự cố
+- kinh doanh liên tục
 ---
 
 # Phòng thủ

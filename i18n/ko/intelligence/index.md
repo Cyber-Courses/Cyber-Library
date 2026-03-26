@@ -2,14 +2,14 @@
 title: 지능
 description: 사이버 보안에서 지능의 역할과 중요성에 대한 기술적 탐구
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- 사이버보안 인텔리전스
+- 전략적 인텔리전스
+- 운영 인텔리전스
+- 전술정보
+- 위험 관리
+- 침해 지표
+- 위협 피드
+- 지능주기
 ---
 
 # 지능

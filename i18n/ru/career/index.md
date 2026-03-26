@@ -3,13 +3,13 @@ title: Карьера в кибербезопасности
 description: Изучите динамичную карьеру в кибербезопасности, включая профиль, путь
   и ландшафт индустрии.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- карьера в области кибербезопасности
+- карьерный путь
+- роли и обязанности
+- технические и мягкие навыки
+- сертификаты
+- ученые степени
+- профессиональное развитие
 ---
 
 # Карьера
