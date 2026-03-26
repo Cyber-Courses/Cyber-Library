@@ -3,13 +3,13 @@ title: Grondslag
 description: Die oorsprong van kuberveiligheid en die ontwikkeling daarvan in die
   moderne digitale wêreld.
 keywords:
-- stigting vir kuberveiligheid
-- hacker kultuur
-- cybersecurity Geskiedenis
-- cybersecurity etiek
-- Risikobestuur
-- vertroue in digitale stelsels
-- menslike elemente in kuberveiligheid
+  - kuberveiligheidsgrondslag
+  - hackerkultuur
+  - geskiedenis van kuberveiligheid
+  - etiek van kuberveiligheid
+  - risikobestuur
+  - vertroue in digitale stelsels
+  - menslike element in kuberveiligheid
 ---
 
 # Grondslag

@@ -5,13 +5,13 @@ description: Kyberturvallisuuden juuret ovat 1900-luvun lopun hakkerikulttuuriss
   laajentaa teknologian rajoja. Nämä varhaiset hakkerit näkivät itsensä usein digitaalisten
   rajojen tutkimusmatkailijoina, jotka halusivat oppia ja jakaa tietoa ilman…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- kyberturvallisuuden säätiö
+- hakkerikulttuuria
+- kyberturvallisuuden historiaa
+- kyberturvallisuuden etiikka
+- riskien hallinta
+- luottaa digitaalisiin järjestelmiin
+- inhimillinen elementti kyberturvallisuudessa
 ---
 
 # Perusta

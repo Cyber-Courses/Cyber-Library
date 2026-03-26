@@ -4,14 +4,14 @@ description: Een diepgaande verkenning van offensieve cybersecurity, inclusief h
   belang, de methodologieën en de rol in het versterken van de beveiligingshouding
   van een organisatie.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- offensieve cyberbeveiliging
+- ethisch hacken
+- penetratietesten
+- rood samenspel
+- bug premie
+- sociale engineering
+- gegevensbescherming
+- risicobeheer
 ---
 
 # Offensief

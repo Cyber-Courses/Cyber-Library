@@ -3,13 +3,13 @@ title: Каријера у сајбер безбедности
 description: Истражите динамичну каријеру у сајбер безбедности, укључујући профиле,
   путовање и пејзаж индустрије.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- каријера сајбер безбедности
+- каријерне стазе
+- улоге и одговорности
+- техничке и меке вештине
+- сертификати
+- академске дипломе
+- стручно усавршавање
 ---
 
 # Каријера

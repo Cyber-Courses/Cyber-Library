@@ -3,14 +3,14 @@ title: Seiberddiogelwch Ymosodol
 description: Deall seiberddiogelwch ymosodol, ei bwysigrwydd, a'r dulliau a ddefnyddir
   i'w weithredu yn foesegol.
 keywords:
-- cybersecurity Ymosodedig
-- hacio moesegol
-- treiddiad Prawf
-- tîm coch
-- bounty bygiau
-- peirianneg gymdeithasol
-- Diogelu Data
-- Rheoli risg
+  - seiberddiogelwch ymosodol
+  - hacio moesegol
+  - treiddiad prawf
+  - tîm coch
+  - bounty bygiau
+  - peirianneg gymdeithasol
+  - diogelu data
+  - rheoli risg
 ---
 
 # Ymosodol

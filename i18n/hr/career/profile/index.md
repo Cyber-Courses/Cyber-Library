@@ -1,18 +1,21 @@
 ---
 title: Profil
-description: Razumijevanje vašeg profila kibernetičke sigurnosti ključno je za definiranje
-  vaše profesionalne putanje i budućih ciljeva.
+description: Razumijevanje vašeg profila kibernetičke sigurnosti ključno je jer vam
+  pomaže definirati gdje se nalazite u svojoj profesionalnoj karijeri i kamo želite
+  ići. Profil kibernetičke sigurnosti kombinira vaše trenutne vještine, iskustva,
+  interese i ciljeve, služeći kao putokaz za usklađivanje vaših karijernih izbora
+  s pravim ulogama, certifikatima i razvojnim prilikama.…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- uloge kibernetske sigurnosti
+- karijerni putovi
+- razvoj vještina
+- certifikati kibernetske sigurnosti
+- karijera u sigurnosti
+- ulazne uloge
+- srednje razine uloga
+- seniorske uloge
+- tehničke vještine
+- menadžerski putovi
 ---
 
 # Profil

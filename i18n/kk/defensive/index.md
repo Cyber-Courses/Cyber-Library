@@ -2,13 +2,13 @@
 title: Қорғаныс
 description: Киберқауіпсіздіктің қорғаныс тәсілдері
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- қорғаныс киберқауіпсіздік
+- қауіп барлауы
+- осалдықты бағалау
+- оқиғаға жауап беру
+- үздіксіз бақылау
+- оқиғадан кейінгі талдау
+- бизнестің үздіксіздігі
 ---
 
 # Қорғаныс

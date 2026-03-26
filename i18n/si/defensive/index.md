@@ -3,13 +3,13 @@ title: ආරක්ෂිත
 description: ආයතනික දත්ත, පද්ධති සහ පරිශීලකයන් සයිබර් තර්ජන වලින් ආරක්ෂා කිරීම සඳහා
   ආරක්ෂිත සයිබර් ආරක්ෂාවක්.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- ආරක්ෂක සයිබර් ආරක්ෂාව
+- තර්ජන බුද්ධිය
+- අවදානම් තක්සේරු කිරීම්
+- සිදුවීම් ප්රතිචාරය
+- අඛණ්ඩ අධීක්ෂණය
+- පශ්චාත් සිදුවීම් විශ්ලේෂණය
+- ව්යාපාර අඛණ්ඩතාව
 ---
 
 # ආරක්ෂිත

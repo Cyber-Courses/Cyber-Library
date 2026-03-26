@@ -2,13 +2,13 @@
 title: ป้องกัน
 description: การรักษาความปลอดภัยทางไซเบอร์เชิงป้องกันคืออะไร? ทำไมถึงสำคัญ? และทำอย่างไร?
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- ความปลอดภัยทางไซเบอร์เชิงป้องกัน
+- หน่วยสืบราชการลับภัยคุกคาม
+- การประเมินช่องโหว่
+- การตอบสนองต่อเหตุการณ์
+- การตรวจสอบอย่างต่อเนื่อง
+- การวิเคราะห์หลังเหตุการณ์
+- ความต่อเนื่องทางธุรกิจ
 ---
 
 # ป้องกัน

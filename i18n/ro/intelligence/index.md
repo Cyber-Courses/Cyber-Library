@@ -3,14 +3,14 @@ title: Inteligență
 description: Explorarea conceptului de inteligență în securitatea cibernetică, importanța
   sa și modul de implementare.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- inteligență de securitate cibernetică
+- inteligență strategică
+- inteligența operațională
+- inteligența tactică
+- managementul riscurilor
+- Indicatori de compromis
+- amenințări
+- ciclul inteligenței
 ---
 
 # Inteligență

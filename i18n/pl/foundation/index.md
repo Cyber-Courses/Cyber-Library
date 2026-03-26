@@ -6,13 +6,13 @@ description: Cyberbezpieczeństwo ma swoje najwcześniejsze korzenie w kulturze 
   wczesni hakerzy często postrzegali siebie jako odkrywców cyfrowych granic, chętnych
   do…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- fundacja cyberbezpieczeństwa
+- kultura hakerska
+- historia cyberbezpieczeństwa
+- etyka cyberbezpieczeństwa
+- zarządzanie ryzykiem
+- zaufanie do systemów cyfrowych
+- element ludzki w cyberbezpieczeństwie
 ---
 
 # Podstawy

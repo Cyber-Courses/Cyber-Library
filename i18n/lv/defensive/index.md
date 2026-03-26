@@ -3,13 +3,13 @@ title: Aizsardzība
 description: Sistemātiska pieeja organizācijas datu, sistēmu un lietotāju aizsardzībai
   pret kiberapdraudējumiem.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- aizsardzības kiberdrošība
+- draudu izlūkošana
+- ievainojamības novērtējumi
+- incidenta reakcija
+- nepārtraukta uzraudzība
+- pēc incidenta analīze
+- darbības nepārtrauktība
 ---
 
 # Aizsardzība

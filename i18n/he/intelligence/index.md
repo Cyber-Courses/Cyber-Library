@@ -2,14 +2,14 @@
 title: מודיעין
 description: הבנת המודיעין בסייבר, חשיבותו ויישומו
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- מודיעין סייבר
+- מודיעין אסטרטגי
+- מודיעין מבצעי
+- מודיעין טקטי
+- ניהול סיכונים
+- מדדי פשרה
+- הזנות איומים
+- מחזור מודיעין
 ---
 
 # מודיעין

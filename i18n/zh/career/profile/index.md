@@ -2,16 +2,16 @@
 title: 网络安全概况
 description: 了解您的网络安全概况对于定义您的职业旅程和未来目标至关重要。
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- 网络安全角色
+- 职业道路
+- 技能发展
+- 网络安全认证
+- 保安事业
+- 入门级角色
+- 中层角色
+- 高级职位
+- 技术技能
+- 管理路径
 ---
 
 # 概况

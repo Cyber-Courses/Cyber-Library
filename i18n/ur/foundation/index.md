@@ -6,13 +6,13 @@ description: سائبر سیکیورٹی کی ابتدائی جڑیں 20ویں �
   خود کو ڈیجیٹل سرحدوں کے مہم جو سمجھتے تھے، جو علم سیکھنے اور بانٹنے کے خواہشمند
   تھے،…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- سائبرسیکیوریٹی فاؤنڈیشن
+- ہیکر ثقافت
+- سائبر سیکیورٹی کی تاریخ
+- سائبرسیکیوریٹی اخلاقیات
+- رسک مینجمنٹ
+- ڈیجیٹل نظام پر اعتماد
+- سائبر سیکیورٹی میں انسانی عنصر
 ---
 
 # بنیاد

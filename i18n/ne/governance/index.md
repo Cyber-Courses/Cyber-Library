@@ -5,14 +5,14 @@ description: साइबर सुरक्षा शासन भनेको 
   गर्दछ। यसले व्यवसायको हरेक पक्षमा साइबर सुरक्षालाई एकीकृत गर्ने खाका प्रदान गर्दछ,
   जसले गर्दा सुरक्षा पहलहरू अलग रूपमा सञ्चालन हुँदैनन् तर कम्पनीको समग्र…
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- साइबर सुरक्षा शासन
+- सुशासन ढाँचा
+- जोखिम व्यवस्थापन
+- अनुपालन
+- व्यापार रणनीति
+- साइबर लचिलोपन
+- बोर्ड निरीक्षण
+- परिचालन निरन्तरता
 ---
 
 # शासन

@@ -2,14 +2,14 @@
 title: Inteligência
 description: Compreensão da inteligência em cibersegurança, sua importância e implementação.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- inteligência de segurança cibernética
+- inteligência estratégica
+- inteligência operacional
+- inteligência tática
+- gestão de risco
+- Indicadores de compromisso
+- feeds de ameaças
+- ciclo de inteligência
 ---
 
 # Inteligência

@@ -5,13 +5,13 @@ description: Siguria kibernetike ka rrënjët e saj më të hershme në kulturë
   me kompjuterët, ekzistonte një dëshirë për të kuptuar, modifikuar dhe shtyrë kufijtë
   e teknologjisë. Këta hakerë të hershëm shpesh e shihnin veten si…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- fondacioni i sigurisë kibernetike
+- kulturën e hakerëve
+- historia e sigurisë kibernetike
+- etikën e sigurisë kibernetike
+- menaxhimi i riskut
+- besimi në sistemet dixhitale
+- elementi njerëzor në sigurinë kibernetike
 ---
 
 # Themelimi

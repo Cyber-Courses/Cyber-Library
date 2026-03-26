@@ -5,13 +5,13 @@ description: Një karrierë në sigurinë kibernetike është një udhëtim dina
   për ekspertë të aftë në sigurinë kibernetike rritet në përputhje me rrethanat, duke
   paraqitur një treg pune të gjallë dhe me ritëm të shpejtë.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- karrierën e sigurisë kibernetike
+- rrugët e karrierës
+- rolet dhe përgjegjësitë
+- aftësi teknike dhe të buta
+- çertifikatat
+- gradat akademike
+- zhvillimin profesional
 ---
 
 # Karriera

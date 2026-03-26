@@ -4,14 +4,14 @@ description: அறிவு என்பது சைபர் பாதுக�
   ஆகும், இது சைபர் மிரட்டல்களை அடையாளம் காண, மதிப்பீடு செய்ய மற்றும் குறைக்க நோக்கமாகக்
   கொண்டது.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- இணைய பாதுகாப்பு நுண்ணறிவு
+- மூலோபாய நுண்ணறிவு
+- செயல்பாட்டு நுண்ணறிவு
+- தந்திரோபாய நுண்ணறிவு
+- இடர் மேலாண்மை
+- சமரசத்தின் குறிகாட்டிகள்
+- அச்சுறுத்தல் ஊட்டங்கள்
+- நுண்ணறிவு சுழற்சி
 ---
 
 # அறிவு

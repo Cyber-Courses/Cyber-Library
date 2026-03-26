@@ -2,13 +2,13 @@
 title: Cosaint
 description: Cur síos ar Chibearshlándáil Chosanta agus a thábhacht.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- cibearshlándáil chosanta
+- faisnéis bhagairt
+- measúnuithe leochaileachta
+- freagairt teagmhais
+- monatóireacht leanúnach
+- anailís iar-eachtra
+- leanúnachas gnó
 ---
 
 # Cosaint

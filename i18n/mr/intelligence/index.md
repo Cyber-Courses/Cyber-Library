@@ -3,14 +3,14 @@ title: बुद्धिमत्ता
 description: सायबरसुरक्षा क्षेत्रातील बुद्धिमत्तेचे महत्त्व, त्याची गरज आणि त्याची
   अंमलबजावणी.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- सायबर सुरक्षा बुद्धिमत्ता
+- धोरणात्मक बुद्धिमत्ता
+- ऑपरेशनल बुद्धिमत्ता
+- सामरिक बुद्धिमत्ता
+- जोखीम व्यवस्थापन
+- तडजोडीचे सूचक
+- धमकी फीड
+- बुद्धिमत्ता चक्र
 ---
 
 # बुद्धिमत्ता

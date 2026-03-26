@@ -1,16 +1,19 @@
 ---
 title: Ofensif
-description: Memahami pentingnya dan penerapan keamanan siber ofensif dalam mengidentifikasi
-  kerentanan dan meningkatkan postur keamanan organisasi.
+description: Keamanan siber ofensif melibatkan simulasi serangan dunia nyata secara
+  etis untuk mengungkap kerentanan sebelum aktor jahat dapat mengeksploitasinya. Dengan
+  bertindak sebagai penyerang yang berwenang, tim keamanan mengungkap titik lemah
+  dalam pertahanan organisasi, memungkinkan masalah tersebut ditangani secara proaktif.
+  Proses ini tidak hanya mengidentifikasi potensi ancaman tetapi juga mengonfirmasi…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
+- keamanan ofensif
+- peretasan etis
+- pengujian penetrasi
 - red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- program bug bounty
+- rekayasa sosial
+- perlindungan data
+- manajemen risiko
 ---
 
 # Ofensif

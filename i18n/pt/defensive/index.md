@@ -3,13 +3,13 @@ title: Defensiva
 description: Uma abordagem sistemática para proteger dados, sistemas e usuários contra
   ameaças cibernéticas.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- cibersegurança defensiva
+- inteligência de ameaças
+- avaliações de vulnerabilidade
+- resposta a incidentes
+- monitoramento contínuo
+- análise pós-incidente
+- continuidade dos negócios
 ---
 
 # Defensiva

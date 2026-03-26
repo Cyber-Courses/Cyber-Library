@@ -2,14 +2,14 @@
 title: පාලනය
 description: සයිබර් ආරක්ෂක පාලනය පිළිබඳ සවිස්තරාත්මක විග්‍රහයක්
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- සයිබර් ආරක්ෂණ පාලනය
+- පාලන රාමු
+- අවදානම් කළමනාකරණය
+- අනුකූල වීම
+- ව්යාපාර උපාය මාර්ගය
+- සයිබර් ඔරොත්තු දීමේ හැකියාව
+- මණ්ඩල අධීක්ෂණය
+- මෙහෙයුම් අඛණ්ඩතාව
 ---
 
 # පාලනය

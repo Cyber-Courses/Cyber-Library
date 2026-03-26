@@ -2,14 +2,14 @@
 title: ထောက်လှမ်းရေး
 description: ကွန်ပျူတာလုံခြုံရေးတွင် ထောက်လှမ်းရေး၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- ဆိုက်ဘာလုံခြုံရေးထောက်လှမ်းရေး
+- ဗျူဟာထောက်လှမ်းရေး
+- စစ်ဆင်ရေးထောက်လှမ်းရေး
+- နည်းဗျူဟာထောက်လှမ်းရေး
+- အန္တရာယ်စီမံခန့်ခွဲမှု
+- အပေးအယူ အညွှန်းကိန်းများ
+- ခြိမ်းခြောက်စာများ
+- ထောက်လှမ်းရေးသံသရာ
 ---
 
 # ထောက်လှမ်းရေး

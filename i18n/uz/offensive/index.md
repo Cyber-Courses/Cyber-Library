@@ -5,14 +5,14 @@ description: Hujumkor kiberxavfsizlik, zararli aktorlar ulardan foydalana olmasd
   qilishni o'z ichiga oladi. Ruxsat etilgan raqiblar sifatida harakat qilib, xavfsizlik
   jamoalari tashkilotning mudofaasidagi zaif nuqtalarni ochib beradi, bu esa ushbu…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
+- hujumkor kiberxavfsizlik
+- axloqiy xakerlik
+- kirish testi
+- qizil jamoa
 - bug bounty
-- social engineering
-- data protection
-- risk management
+- ijtimoiy muhandislik
+- ma'lumotlarni himoya qilish
+- risklarni boshqarish
 ---
 
 # Hujumkor

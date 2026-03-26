@@ -3,14 +3,14 @@ title: ඉන්ටෙලිජන්ස්
 description: සයිබර් ආරක්ෂාව සඳහා ඉන්ටෙලිජන්ස් යනු තොරතුරු එකතු කිරීම, සැකසීම සහ විශ්ලේෂණය
   කිරීමයි.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- සයිබර් ආරක්ෂණ බුද්ධිය
+- උපාය මාර්ගික බුද්ධිය
+- මෙහෙයුම් බුද්ධිය
+- උපායශීලී බුද්ධිය
+- අවදානම් කළමනාකරණය
+- සම්මුතියේ දර්ශක
+- තර්ජන පෝෂණය
+- බුද්ධි චක්රය
 ---
 
 # ඉන්ටෙලිජන්ස්

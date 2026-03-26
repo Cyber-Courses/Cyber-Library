@@ -5,16 +5,16 @@ description: Kuelewa profaili yako ya usalama wa mtandao ni muhimu kwa sababu in
   usalama wa mtandao inachanganya ujuzi wako wa sasa, uzoefu, maslahi, na malengo,
   ikitumika kama ramani ya njia ya kuoanisha chaguo zako za kazi na majukumu…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- majukumu ya usalama mtandao
+- njia za kazi
+- maendeleo ya ujuzi
+- vyeti vya usalama wa mtandao
+- kazi ya usalama
+- majukumu ya ngazi ya kuingia
+- majukumu ya ngazi ya kati
+- majukumu ya ngazi ya juu
+- ujuzi wa kiufundi
+- njia za usimamizi
 ---
 
 # Profaili

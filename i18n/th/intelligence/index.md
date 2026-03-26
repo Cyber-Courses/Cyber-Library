@@ -2,14 +2,14 @@
 title: ความฉลาด
 description: การรวบรวม ประมวลผล และวิเคราะห์ข้อมูลเพื่อระบุ ประเมิน และลดภัยคุกคามทางไซเบอร์
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- ข้อมูลข่าวกรองด้านความปลอดภัยทางไซเบอร์
+- หน่วยสืบราชการลับเชิงกลยุทธ์
+- หน่วยสืบราชการลับในการดำเนินงาน
+- ความฉลาดทางยุทธวิธี
+- การบริหารความเสี่ยง
+- ตัวชี้วัดของการประนีประนอม
+- ฟีดภัยคุกคาม
+- วงจรสติปัญญา
 ---
 
 # ความฉลาด

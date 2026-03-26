@@ -5,14 +5,14 @@ description: Saldırgan siber güvenlik, kötü niyetli aktörler bu açıkları
   ortaya çıkarmayı içerir. Yetkili rakipler olarak hareket eden güvenlik ekipleri,
   bir kuruluşun savunmasındaki zayıf noktaları ortaya çıkarır ve bu sorunların…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- saldırgan siber güvenlik
+- etik hackleme
+- penetrasyon testi
+- kırmızı takım
+- hata ödülü
+- sosyal mühendislik
+- veri koruma
+- risk yönetimi
 ---
 
 # Saldırgan

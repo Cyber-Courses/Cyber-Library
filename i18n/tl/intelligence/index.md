@@ -3,14 +3,14 @@ title: Intelligence
 description: Pag-unawa sa papel ng intelligence sa cybersecurity at ang kahalagahan
   nito sa pagbuo ng mga estratehiya sa seguridad.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
+- katalinuhan sa cybersecurity
+- madiskarteng katalinuhan
 - operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- taktikal na katalinuhan
+- pamamahala ng panganib
+- Mga Tagapagpahiwatig ng Kompromiso
+- mga feed ng pagbabanta
+- ikot ng katalinuhan
 ---
 
 # Intelligence

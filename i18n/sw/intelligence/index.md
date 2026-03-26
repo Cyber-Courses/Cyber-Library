@@ -2,14 +2,14 @@
 title: Ujasusi
 description: Uelewa wa ujasusi katika usalama wa mtandao, umuhimu wake, na jinsi unavyotekelezwa.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- akili ya usalama wa mtandao
+- akili ya kimkakati
+- akili ya uendeshaji
+- akili ya kimbinu
+- usimamizi wa hatari
+- Viashiria vya Maelewano
+- milisho ya tishio
+- mzunguko wa akili
 ---
 
 # Ujasusi

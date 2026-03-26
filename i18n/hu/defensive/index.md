@@ -5,13 +5,13 @@ description: A védekező kiberbiztonság egy szisztematikus megközelítés, am
   Ez magában foglalja a megelőzési, észlelési és reagálási stratégiák integrálását
   a rosszindulatú tevékenységek hatásának minimalizálása érdekében. A…
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- védekező kiberbiztonság
+- fenyegetési hírszerzés
+- sebezhetőségi felmérések
+- eseményre adott válasz
+- folyamatos monitorozás
+- incidens utáni elemzés
+- az üzletmenet folytonossága
 ---
 
 # Védekező

@@ -5,13 +5,13 @@ description: קריירה בתחום הסייבר היא מסע דינמי מל�
   תוסס ומהיר. בין אם אתם רק מתחילים או מחפשים להתקדם, תחום הסייבר מציע שפע של מקום
   להתפתחות אישית ומקצועית.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- קריירה בסייבר
+- מסלולי קריירה
+- תפקידים ואחריות
+- מיומנויות טכניות ורכות
+- הסמכות
+- תארים אקדמיים
+- התפתחות מקצועית
 ---
 
 # קריירה

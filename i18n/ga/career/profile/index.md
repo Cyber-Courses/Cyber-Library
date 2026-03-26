@@ -3,16 +3,16 @@ title: Próifíl
 description: Tuiscint ar do phróifíl cibearshlándála chun do thuras gairmiúil a ailíniú
   le deiseanna forbartha agus deimhnithe cuí.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- rólanna cibearshlándála
+- cosáin ghairme
+- forbairt scileanna
+- deimhnithe cibearshlándála
+- gairme slándála
+- róil leibhéal iontrála
+- rólanna meánleibhéil
+- róil ardleibhéil
+- scileanna teicniúla
+- cosáin bhainistíochta
 ---
 
 # Próifíl

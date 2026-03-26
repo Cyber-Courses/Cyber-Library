@@ -2,14 +2,14 @@
 title: Greind
 description: Skilgreining, mikilvægi og framkvæmd greindar í netöryggi.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- netöryggisvitund
+- stefnumótandi vitund
+- rekstrarvitund
+- tæknileg vitund
+- áhættustýring
+- viktanir um brot
+- ógnarstreymi
+- vitundarhringur
 ---
 
 # Greind

@@ -2,14 +2,14 @@
 title: ബുദ്ധിമുട്ട്
 description: സൈബർസുരക്ഷയിൽ ബുദ്ധിമുട്ടിന്റെ നിർവചനം, പ്രാധാന്യം, നടപ്പാക്കൽ
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- സൈബർ സുരക്ഷാ ഇൻ്റലിജൻസ്
+- തന്ത്രപരമായ ബുദ്ധി
+- പ്രവർത്തന ബുദ്ധി
+- തന്ത്രപരമായ ബുദ്ധി
+- റിസ്ക് മാനേജ്മെൻ്റ്
+- വിട്ടുവീഴ്ചയുടെ സൂചകങ്ങൾ
+- ഭീഷണി ഫീഡുകൾ
+- ബുദ്ധി ചക്രം
 ---
 
 # ബുദ്ധിമുട്ട്
