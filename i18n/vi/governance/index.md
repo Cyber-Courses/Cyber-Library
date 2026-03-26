@@ -1,4 +1,4 @@
-# Quản Trị
+# Quản trị
 
 ## Quản Trị An Ninh Mạng Là Gì?
 

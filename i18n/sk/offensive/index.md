@@ -1,10 +1,10 @@
 ---
-title: "Ofenzívna kybernetická bezpečnosť"
+title: "Ofenzívna"
 description: "Preskúmanie ofenzívnej kybernetickej bezpečnosti, jej významu a metodík."
 keywords: "ofenzívna kybernetická bezpečnosť, etické hackovanie, penetračné testovanie, red teaming"
 ---
 
-# Ofenzívna kybernetická bezpečnosť
+# Ofenzívna
 
 ## Čo je ofenzívna kybernetická bezpečnosť?
 

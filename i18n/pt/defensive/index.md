@@ -1,9 +1,9 @@
 ---
-title: "Cibersegurança Defensiva"
+title: "Defensiva"
 description: "Uma abordagem sistemática para proteger dados, sistemas e usuários contra ameaças cibernéticas."
 ---
 
-# Cibersegurança Defensiva
+# Defensiva
 
 ## O Que É Cibersegurança Defensiva?
 

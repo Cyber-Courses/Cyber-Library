@@ -1,9 +1,9 @@
 ---
-title: "Ciberseguretat Ofensiva"
+title: "Ofensiva"
 description: "Exploració detallada de la ciberseguretat ofensiva, la seva importància i com es duu a terme."
 ---
 
-# Ciberseguretat Ofensiva
+# Ofensiva
 
 ## Què És la Ciberseguretat Ofensiva?
 

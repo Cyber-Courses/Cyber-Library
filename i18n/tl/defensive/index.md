@@ -1,9 +1,9 @@
 ---
-title: "Depensibong Cybersecurity"
+title: "Depensibo"
 description: "Isang sistematikong paraan sa pagprotekta ng data, sistema, at mga gumagamit mula sa mga banta sa cyberspace."
 ---
 
-# Depensibong Cybersecurity
+# Depensibo
 
 ## Ano ang Depensibong Cybersecurity?
 

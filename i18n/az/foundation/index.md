@@ -1,4 +1,8 @@
-```markdown
+---
+title: "Əsaslar"
+description: "Kiber təhlükəsizliyin kökləri, haker mədəniyyəti, tarix və etika haqqında giriş."
+---
+
 # Əsaslar
 
 ## Giriş
@@ -40,4 +44,3 @@ Etibar demək olar ki, onlayn dünyanın hər aspektini dəstəkləyir. Qarşıl
 İnsanlar kiber təhlükəsizlikdə ən böyük dəyişkən olaraq qalır. Maşınlar və proqram təminatı onlara proqramlaşdırılmış məntiq və qaydalara uyğun davransa da, insanlar texnologiyanın tam proqnozlaşdıra bilməyəcəyi şəkildə səhvlər edə və ya zərərli hərəkət edə bilərlər. Yamaların tətbiq edilməsini unutmaqdan fişinq bağlantılarına klikləməyə qədər, insan səhvləri ən əhəmiyyətli pozuntuların bir çoxuna səbəb olur.
 
 Bu məsələlərin həlli tez-tez müntəzəm təlim, aydın siyasətlər və təhlükəsizlik şüurlu davranışı dəyərləndirən bir mədəniyyəti əhatə edir. Yaxşı hazırlanmış məlumatlandırma kampaniyaları və istifadəçi təhsili proqramları təsadüfi səhvlərin ehtimalını azaldır. İnsanlar həm potensial nəticələri, həm də təhlükəsiz davranış üçün ən yaxşı təcrübələri başa düşdükdə, təşkilatlar yalnız proqram təminatı yaması ilə həll edilə bilməyən təhdidlərdən daha yaxşı qoruna bilərlər.
-```

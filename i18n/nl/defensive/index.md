@@ -1,9 +1,9 @@
 ---
-title: "Defensieve Cybersecurity"
+title: "Defensief"
 description: "Een diepgaande verkenning van defensieve cybersecurity, inclusief methoden voor preventie, detectie en respons."
 ---
 
-# Defensieve Cybersecurity
+# Defensief
 
 ## Wat Is Defensieve Cybersecurity?
 

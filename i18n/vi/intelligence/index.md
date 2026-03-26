@@ -1,9 +1,9 @@
 ---
-title: "Trí Tuệ"
+title: "Trí tuệ"
 description: "Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai hiệu quả chương trình trí tuệ."
 ---
 
-# Trí Tuệ
+# Trí tuệ
 
 ## Trí Tuệ Là Gì?
 
