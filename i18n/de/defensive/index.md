@@ -1,10 +1,10 @@
 ---
-title: Verteidigende Cybersicherheit
+title: Defensive
 description: Eine umfassende Erklärung der verteidigenden Cybersicherheit, ihrer Bedeutung und ihrer Umsetzung.
 keywords: Verteidigende Cybersicherheit, Bedrohungsabwehr, Vorfallsreaktion, Sicherheitsstrategie
 ---
 
-# Verteidigende Cybersicherheit
+# Defensive
 
 ## Was ist Verteidigende Cybersicherheit?
 

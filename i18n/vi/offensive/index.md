@@ -1,9 +1,9 @@
 ---
-title: "Tấn Công"
+title: "Tấn công"
 description: "Tìm hiểu về an ninh mạng tấn công, tầm quan trọng và cách thực hiện."
 ---
 
-# Tấn Công
+# Tấn công
 
 ## An Ninh Mạng Tấn Công Là Gì?
 
