@@ -3,16 +3,17 @@ title: Upravljanje
 description: Upravljanje kibernetičkom sigurnošću je sveobuhvatan okvir politika,
   uloga i procesa donošenja odluka koje organizacija uspostavlja kako bi upravljala
   i smanjila kibernetičke rizike. Pruža nacrt za integraciju kibernetičke sigurnosti
-  u svaki aspekt poslovanja, osiguravajući da sigurnosne inicijative ne djeluju…
+  u svaki aspekt poslovanja, osiguravajući da sigurnosne inicijative ne djeluju izolirano,
+  već da su usklađene s ukupnim ciljevima tvrtke. Ova…
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- upravljanje kibernetskom sigurnošću
+- okviri upravljanja
+- upravljanje rizikom
+- usklađenost
+- poslovna strategija
+- kibernetska otpornost
+- nadzor upravnog odbora
+- operativni kontinuitet
 ---
 
 # Upravljanje

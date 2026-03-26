@@ -3,14 +3,14 @@ title: Offensiv
 description: Utforska offensiv cybersäkerhet och dess betydelse för att identifiera
   och åtgärda sårbarheter.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- offensiv cybersäkerhet
+- etiskt hackande
+- penetrationsprovning
+- röd teaming
+- buggpris
+- social ingenjörskonst
+- dataskydd
+- riskhantering
 ---
 
 # Offensiv

@@ -5,13 +5,13 @@ description: Ang cybersecurity ay may pinagmulan sa kultura ng hacker noong huli
   kompyuter, nagkaroon ng pagnanais na maunawaan, baguhin, at itulak ang mga hangganan
   ng teknolohiya. Ang mga naunang hacker ay madalas na nakikita ang kanilang sarili…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- pundasyon ng cybersecurity
+- kultura ng hacker
+- kasaysayan ng cybersecurity
+- etika sa cybersecurity
+- pamamahala ng panganib
+- tiwala sa mga digital system
+- elemento ng tao sa cybersecurity
 ---
 
 # Pundasyon

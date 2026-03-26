@@ -3,13 +3,13 @@ title: રક્ષણાત્મક
 description: રક્ષણાત્મક સાયબરસિક્યુરિટી શું છે, તેનો મહત્વ શું છે, અને તે કેવી રીતે
   કરવામાં આવે છે તે વિશેની વિગતવાર સમજણ.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- રક્ષણાત્મક સાયબર સુરક્ષા
+- ધમકી બુદ્ધિ
+- નબળાઈ આકારણીઓ
+- ઘટના પ્રતિભાવ
+- સતત દેખરેખ
+- ઘટના પછીનું વિશ્લેષણ
+- વ્યાપાર સાતત્ય
 ---
 
 # રક્ષણાત્મક

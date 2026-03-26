@@ -3,13 +3,13 @@ title: ကာကွယ်ရေး
 description: ကာကွယ်ရေးဆိုတာ ဘာလဲ၊ အရေးကြီးမှုနှင့် ဘယ်လိုလုပ်ဆောင်ရမလဲဆိုတာကို နက်ရှိုင်းစွာရှင်းပြထားသော
   ဆောင်းပါး
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- ကာကွယ်ရေး ဆိုက်ဘာလုံခြုံရေး
+- ခြိမ်းခြောက်ထောက်လှမ်းရေး
+- အားနည်းချက် အကဲဖြတ်ချက်များ
+- အဖြစ်အပျက်တုံ့ပြန်မှု
+- စဉ်ဆက်မပြတ်စောင့်ကြည့်
+- ဖြစ်ရပ်လွန်သုံးသပ်ချက်
+- စီးပွားရေးအဆက်မပြတ်
 ---
 
 # ကာကွယ်ရေး

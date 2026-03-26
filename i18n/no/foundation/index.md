@@ -5,13 +5,13 @@ description: Cybersikkerhet har sine tidligste røtter i hackerkulturen fra slut
   eksisterte det et ønske om å forstå, modifisere og presse grensene for teknologi.
   Disse tidlige hackerne så ofte på seg selv som oppdagelsesreisende i digitale…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- stiftelsen for cybersikkerhet
+- hackerkultur
+- cybersikkerhetshistorie
+- cybersikkerhetsetikk
+- risikostyring
+- tillit til digitale systemer
+- menneskelig element i cybersikkerhet
 ---
 
 # Grunnlag

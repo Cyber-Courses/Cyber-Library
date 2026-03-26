@@ -1,7 +1,15 @@
 ---
-title: "Kyberturvallisuuden hallinta"
-description: "Ymmärrä kyberturvallisuuden hallinnan merkitys ja sen toteuttaminen organisaatiossa."
-keywords: "Kyberturvallisuus, hallinta, riskienhallinta, tietoturva, strategia"
+title: Kyberturvallisuuden hallinta
+description: Ymmärrä kyberturvallisuuden hallinnan merkitys ja sen toteuttaminen organisaatiossa.
+keywords:
+- kyberturvallisuuden hallinta
+- hallintokehykset
+- riskien hallinta
+- noudattamista
+- liiketoimintastrategia
+- kyberresilienssi
+- hallituksen valvonta
+- toiminnan jatkuvuus
 ---
 
 # Hallinta

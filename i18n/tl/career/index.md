@@ -3,13 +3,13 @@ title: Karera
 description: Isang detalyado at teknikal na paggalugad sa karera sa cybersecurity,
   kabilang ang mga profile, paglalakbay, at tanawin ng industriya.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- karera sa cybersecurity
+- mga landas sa karera
+- mga tungkulin at responsibilidad
+- teknikal at malambot na kasanayan
+- mga sertipikasyon
+- akademikong degree
+- propesyonal na pag-unlad
 ---
 
 # Karera

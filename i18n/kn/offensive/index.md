@@ -3,14 +3,14 @@ title: ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ
 description: ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ ಎಂದರೇನು, ಅದರ ಮಹತ್ವ ಮತ್ತು ಹೇಗೆ ಕಾರ್ಯಗತಗೊಳಿಸಲಾಗುತ್ತದೆ
   ಎಂಬುದರ ಕುರಿತು ವಿವರವಾದ ವಿವರಣೆ.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್ ಭದ್ರತೆ
+- ನೈತಿಕ ಹ್ಯಾಕಿಂಗ್
+- ನುಗ್ಗುವ ಪರೀಕ್ಷೆ
+- ಕೆಂಪು ತಂಡ
+- ಬಗ್ ಬೌಂಟಿ
+- ಸಾಮಾಜಿಕ ಎಂಜಿನಿಯರಿಂಗ್
+- ಡೇಟಾ ರಕ್ಷಣೆ
+- ಅಪಾಯ ನಿರ್ವಹಣೆ
 ---
 
 # ಆಕ್ರಮಣಕಾರಿ

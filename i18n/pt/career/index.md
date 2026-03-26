@@ -3,13 +3,13 @@ title: Carreira
 description: Exploração detalhada de uma carreira em cibersegurança, incluindo perfil,
   jornada e panorama.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- carreira em segurança cibernética
+- planos de carreira
+- papéis e responsabilidades
+- habilidades técnicas e sociais
+- certificações
+- graus acadêmicos
+- desenvolvimento profissional
 ---
 
 # Carreira

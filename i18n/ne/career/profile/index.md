@@ -5,16 +5,16 @@ description: आफ्नो साइबर सुरक्षा प्रो�
   गर्न मद्दत गर्दछ। साइबर सुरक्षा प्रोफाइलले तपाईंको वर्तमान सीपहरू, अनुभवहरू, चासोहरू,
   र लक्ष्यहरूलाई संयोजन गर्दछ, जसले तपाईंको करियर छनोटहरूलाई सही भूमिकाहरू,…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- साइबर सुरक्षा भूमिकाहरू
+- क्यारियर मार्गहरू
+- कौशल विकास
+- साइबर सुरक्षा प्रमाणपत्रहरू
+- सुरक्षा क्यारियर
+- प्रवेश-स्तर भूमिकाहरू
+- मध्य-स्तर भूमिकाहरू
+- वरिष्ठ स्तरको भूमिका
+- प्राविधिक सीपहरू
+- व्यवस्थापकीय मार्गहरू
 ---
 
 # प्रोफाइल

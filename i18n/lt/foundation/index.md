@@ -5,13 +5,13 @@ description: Kibernetinis saugumas savo ištakas sieja su XX a. pabaigos hakeri�
   suprasti, modifikuoti ir išplėsti technologijų ribas. Šie ankstyvieji hakeriai dažnai
   save laikė skaitmeninių ribų tyrinėtojais, trokštančiais mokytis ir…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- kibernetinio saugumo fondas
+- įsilaužėlių kultūra
+- kibernetinio saugumo istorija
+- kibernetinio saugumo etika
+- rizikos valdymas
+- pasitikėjimas skaitmeninėmis sistemomis
+- žmogiškasis kibernetinio saugumo elementas
 ---
 
 # Pagrindai

@@ -1,6 +1,15 @@
 ---
-title: "Styring"
-description: "En dybdegående guide til cybersikkerhedsstyring, dens betydning og implementering."
+title: Styring
+description: En dybdegående guide til cybersikkerhedsstyring, dens betydning og implementering.
+keywords:
+- cybersikkerhedsforvaltning
+- styringsrammer
+- risikoforvaltning
+- overensstemmelse
+- forretningsstrategien
+- cyberrobusthed
+- bestyrelsesovervågning
+- driftskontinuitet
 ---
 
 # Styring

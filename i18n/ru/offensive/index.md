@@ -2,14 +2,14 @@
 title: Наступательная
 description: Изучение офенсивной кибербезопасности, её важности и методов реализации.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- наступательная кибербезопасность
+- этический хакинг
+- тестирование на проникновение
+- красная команда
+- награда за ошибку
+- социальная инженерия
+- защита данных
+- управление рисками
 ---
 
 # Наступательная

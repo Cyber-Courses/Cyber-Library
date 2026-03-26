@@ -3,16 +3,16 @@ title: Профил
 description: Разбирањето на вашиот профил во сајбер безбедноста е клучно за дефинирање
   на вашата професионална патека и идни цели.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- улоги во сајбер безбедноста
+- кариерни патеки
+- развој на вештини
+- сертификати за сајбер безбедност
+- безбедносна кариера
+- улоги на почетно ниво
+- улоги на средно ниво
+- улоги на повисоко ниво
+- технички вештини
+- менаџерски патеки
 ---
 
 # Профил

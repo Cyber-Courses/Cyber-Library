@@ -1,3 +1,21 @@
+---
+title: Serangan
+description: Keselamatan siber serangan melibatkan simulasi serangan dunia nyata secara
+  etika untuk mengenal pasti kelemahan sebelum pelaku jahat dapat mengeksploitasinya.
+  Dengan bertindak sebagai musuh yang diberi kuasa, pasukan keselamatan mendedahkan
+  titik lemah dalam pertahanan organisasi, membolehkan isu-isu tersebut ditangani
+  secara proaktif. Proses ini bukan sahaja mengenal pasti ancaman berpotensi…
+keywords:
+- keselamatan siber ofensif
+- penggodaman beretika
+- ujian penembusan
+- pasukan merah
+- bug bounty
+- kejuruteraan sosial
+- perlindungan data
+- pengurusan risiko
+---
+
 # Serangan
 
 ## Apakah Keselamatan Siber Serangan?

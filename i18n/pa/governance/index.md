@@ -3,14 +3,14 @@ title: ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ
 description: ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ ਦੇ ਅਹਿਮ ਪਹਲੂਆਂ ਦੀ ਸਮਝ ਅਤੇ ਇਸਦੇ ਲਾਭਾਂ ਦੀ ਵਿਸਤ੍ਰਿਤ
   ਜਾਣਕਾਰੀ।
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਸ਼ਾਸਨ
+- ਸ਼ਾਸਨ ਫਰੇਮਵਰਕ
+- ਜੋਖਮ ਪ੍ਰਬੰਧਨ
+- ਪਾਲਣਾ
+- ਕਾਰੋਬਾਰੀ ਰਣਨੀਤੀ
+- ਸਾਈਬਰ ਲਚਕਤਾ
+- ਬੋਰਡ ਦੀ ਨਿਗਰਾਨੀ
+- ਕਾਰਜਸ਼ੀਲ ਨਿਰੰਤਰਤਾ
 ---
 
 # ਗਵਰਨੈਂਸ

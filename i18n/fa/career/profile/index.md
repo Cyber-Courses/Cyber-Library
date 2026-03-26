@@ -3,16 +3,16 @@ title: پروفایل
 description: درک پروفایل امنیت سایبری شما برای تعریف مسیر حرفه‌ای و اهداف شغلی ضروری
   است.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- نقش های امنیت سایبری
+- مسیرهای شغلی
+- توسعه مهارت
+- گواهینامه های امنیت سایبری
+- حرفه امنیتی
+- نقش های سطح ابتدایی
+- نقش های سطح متوسط
+- نقش های سطح ارشد
+- مهارت های فنی
+- مسیرهای مدیریتی
 ---
 
 # پروفایل

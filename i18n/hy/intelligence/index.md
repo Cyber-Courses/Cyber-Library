@@ -3,14 +3,14 @@ title: Ինտելեկտ
 description: Ինտելեկտի դերը կիբեռանվտանգության մեջ, ներառյալ դրա կարևորությունը և
   իրականացումը
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- կիբերանվտանգության հետախուզություն
+- ստրատեգիական հետախուզություն
+- օպերացիոն հետախուզություն
+- տակտիկական հետախուզություն
+- ռիսկերի կառավարում
+- կոմպրոմետացիայի ցուցանիշներ
+- սպառնալիքների հոսքեր
+- հետախուզության ցիկլ
 ---
 
 # Ինտելեկտ

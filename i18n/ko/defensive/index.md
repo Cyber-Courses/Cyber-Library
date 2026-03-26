@@ -2,13 +2,13 @@
 title: 방어
 description: 조직의 데이터를 사이버 위협으로부터 보호하는 체계적인 접근 방식에 대한 설명.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- 방어적인 사이버 보안
+- 위협 인텔리전스
+- 취약점 평가
+- 사고 대응
+- 지속적인 모니터링
+- 사고 후 분석
+- 비즈니스 연속성
 ---
 
 # 방어

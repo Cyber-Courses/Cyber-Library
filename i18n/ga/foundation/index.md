@@ -1,7 +1,14 @@
 ---
-title: "Bunús"
-description: "Tuiscint ar an gcultúr hacker agus an stair a bhaineann le cibearshlándáil."
-keywords: "cibearshlándáil, cultúr hacker, stair, eitic, riosca, iontaoibh"
+title: Bunús
+description: Tuiscint ar an gcultúr hacker agus an stair a bhaineann le cibearshlándáil.
+keywords:
+- bunús cibearshlándála
+- cultúr hacker
+- stair cibearshlándála
+- eitic cibearshlándála
+- bainistíocht riosca
+- muinín i gcórais dhigiteacha
+- eilimint dhaonna sa chibearshlándáil
 ---
 
 # Bunús

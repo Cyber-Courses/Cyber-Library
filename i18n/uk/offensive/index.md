@@ -3,14 +3,14 @@ title: Офенсивна
 description: Дослідження офенсивної кібербезпеки, її важливість та методи реалізації
   для виявлення вразливостей.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- наступальна кібербезпека
+- етичний хакерство
+- тестування на проникнення
+- червоний об'єднання
+- баунті
+- соціальна інженерія
+- захист даних
+- управління ризиками
 ---
 
 # Офенсивна

@@ -2,13 +2,13 @@
 title: साइबर सुरक्षा में करियर
 description: साइबर सुरक्षा में करियर के अवसर और विकास की संभावनाएँ।
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- साइबर सुरक्षा करियर
+- करियर पथ
+- भूमिकाएँ और जिम्मेदारियाँ
+- तकनीकी और मृदु कौशल
+- प्रमाणपत्र
+- शैक्षणिक डिग्री
+- व्यावसायिक विकास
 ---
 
 # करियर

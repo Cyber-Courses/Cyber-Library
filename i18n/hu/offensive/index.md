@@ -1,3 +1,21 @@
+---
+title: Támadó
+description: A támadó kiberbiztonság magában foglalja a valós támadások etikus szimulálását
+  annak érdekében, hogy feltárjuk a sebezhetőségeket, mielőtt a rosszindulatú szereplők
+  kihasználhatnák azokat. Az engedélyezett ellenfelek szerepét betöltve a biztonsági
+  csapatok feltárják a szervezet védelmének gyenge pontjait, lehetővé téve ezek proaktív
+  kezelését. Ez a folyamat nemcsak a potenciális fenyegetéseket…
+keywords:
+- offenzív kiberbiztonság
+- etikus hekkelés
+- penetrációs tesztelés
+- vörös csapat
+- bug bounty
+- szociális mérnöki
+- adatvédelem
+- kockázatkezelés
+---
+
 # Támadó
 
 ## Mi az a Támadó Kiberbiztonság?

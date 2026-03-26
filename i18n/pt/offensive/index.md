@@ -3,14 +3,14 @@ title: Ofensiva
 description: Exploração abrangente da cibersegurança ofensiva, sua importância e métodos
   de implementação.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- cibersegurança ofensiva
+- hacking ético
+- teste de penetração
+- equipe vermelha
+- recompensa de insetos
+- engenharia social
+- proteção de dados
+- gestão de risco
 ---
 
 # Ofensiva

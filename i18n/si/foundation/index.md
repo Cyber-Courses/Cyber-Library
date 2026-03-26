@@ -3,13 +3,13 @@ title: 'සයිබර් ආරක්ෂාව: මූලිකත්වය �
 description: සයිබර් ආරක්ෂාව පිළිබඳ මූලික දැනුම සහ ඉතිහාසය, හෑකර් සංස්කෘතිය, ආචාරශීලිකත්වය,
   සහ විශ්වාසය.
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- සයිබර් ආරක්ෂණ පදනම
+- හැකර් සංස්කෘතිය
+- සයිබර් ආරක්ෂණ ඉතිහාසය
+- සයිබර් ආරක්ෂණ ආචාර ධර්ම
+- අවදානම් කළමනාකරණය
+- ඩිජිටල් පද්ධති කෙරෙහි විශ්වාසය
+- සයිබර් ආරක්ෂණයේ මානව අංගය
 ---
 
 # මූලිකත්වය

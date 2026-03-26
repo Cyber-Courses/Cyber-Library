@@ -4,13 +4,13 @@ description: Savunmacı siber güvenlik, kuruluşların verilerini, sistemlerini
   siber tehditlerden korumak için kullanılan sistematik bir yaklaşımdır. Bu makale,
   savunmacı siber güvenliğin önemini ve nasıl uygulanacağını açıklar.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- savunma siber güvenliği
+- tehdit istihbaratı
+- güvenlik açığı değerlendirmeleri
+- olay müdahalesi
+- sürekli izleme
+- olay sonrası analiz
+- iş sürekliliği
 ---
 
 # Savunmacı

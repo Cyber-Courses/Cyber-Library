@@ -1,3 +1,19 @@
+---
+title: Sylfaen
+description: Mae seiberddiogelwch yn tarddu o ddiwylliant hacwyr diwedd yr 20fed ganrif.
+  O'r eiliad y dechreuodd pobl arbrofi gyda chyfrifiaduron, roedd awydd i ddeall,
+  addasu, a gwthio ffiniau technoleg. Yn aml, roedd yr hacwyr cynnar hyn yn gweld
+  eu hunain fel archwilwyr o ffiniau digidol, yn awyddus i ddysgu…
+keywords:
+- sylfaen diogelwch seiber
+- diwylliant hacwyr
+- hanes diogelwch seiber
+- moeseg diogelwch seiber
+- rheoli risg
+- ymddiried mewn systemau digidol
+- elfen ddynol mewn diogelwch seiber
+---
+
 # Sylfaen
 
 ## Cyflwyniad

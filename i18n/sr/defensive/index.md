@@ -3,13 +3,13 @@ title: Дефанзивна сајбер безбедност
 description: Систематски приступ заштити података, система и корисника од сајбер претњи
   кроз превенцију, детекцију и одговор.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- одбрамбена сајбер безбедност
+- обавештајни подаци о претњи
+- процене рањивости
+- одговор на инцидент
+- континуирано праћење
+- анализа након инцидента
+- континуитет пословања
 ---
 
 # Дефанзивна

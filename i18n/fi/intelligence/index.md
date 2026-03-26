@@ -2,14 +2,14 @@
 title: Älykkyys
 description: Kyberturvallisuuden älykkyyden merkitys, tärkeys ja toteutus.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kyberturvallisuustiedustelu
+- strateginen tiedustelu
+- toiminnallinen tiedustelu
+- taktinen tiedustelu
+- riskien hallinta
+- Kompromissin indikaattorit
+- uhka syötteitä
+- älykkyyskierto
 ---
 
 # Älykkyys

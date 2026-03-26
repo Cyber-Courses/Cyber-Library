@@ -2,13 +2,13 @@
 title: អាជីព
 description: ការងារនៅក្នុងវិស័យសន្តិសុខសាយបឺរ គឺជាដំណើរដ៏គួរឱ្យរំភើបដែលពោរពេញដោយឱកាសសម្រាប់អ្នកជំនាញគ្រប់កម្រិត។
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- អាជីពសន្តិសុខតាមអ៊ីនធឺណិត
+- ផ្លូវអាជីព
+- តួនាទី និងទំនួលខុសត្រូវ
+- ជំនាញបច្ចេកទេស និងទន់
+- វិញ្ញាបនប័ត្រ
+- សញ្ញាបត្រសិក្សា
+- ការអភិវឌ្ឍន៍វិជ្ជាជីវៈ
 ---
 
 # អាជីព

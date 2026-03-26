@@ -3,14 +3,14 @@ title: Beheer
 description: Omvattende uiteensetting van kuberveiligheidsbeheer, die belangrikheid
   daarvan, en hoe dit geïmplementeer word.
 keywords:
-- cybersecurity beheer
-- bestuursraamwerke
-- Risikobestuur
-- nakoming
-- sakestrategie
-- kuber veerkragtigheid
-- raad toesig
-- operasionele kontinuïteit
+  - kuberveiligheidsbeheer
+  - bestuursraamwerke
+  - risikobestuur
+  - nakoming
+  - sakestrategie
+  - kuberveerkragtigheid
+  - raadtoesig
+  - operasionele kontinuïteit
 ---
 
 # Beheer

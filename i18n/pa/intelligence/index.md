@@ -2,14 +2,14 @@
 title: ਇੰਟੈਲੀਜੈਂਸ
 description: ਸਾਈਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਇੰਟੈਲੀਜੈਂਸ ਦੀ ਭੂਮਿਕਾ ਅਤੇ ਮਹੱਤਵ
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਖੁਫੀਆ ਜਾਣਕਾਰੀ
+- ਰਣਨੀਤਕ ਖੁਫੀਆ
+- ਕਾਰਜਸ਼ੀਲ ਖੁਫੀਆ
+- ਰਣਨੀਤਕ ਬੁੱਧੀ
+- ਜੋਖਮ ਪ੍ਰਬੰਧਨ
+- ਸਮਝੌਤਾ ਦੇ ਸੂਚਕ
+- ਧਮਕੀ ਫੀਡ
+- ਖੁਫੀਆ ਚੱਕਰ
 ---
 
 # ਇੰਟੈਲੀਜੈਂਸ

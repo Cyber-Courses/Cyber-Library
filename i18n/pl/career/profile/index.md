@@ -4,16 +4,16 @@ description: Zrozumienie swojego profilu w zakresie cyberbezpieczeństwa jest kl
   ponieważ pomaga określić, gdzie jesteś w swojej zawodowej podróży i dokąd chcesz
   zmierzać.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- role cyberbezpieczeństwa
+- ścieżki kariery
+- rozwój umiejętności
+- certyfikaty cyberbezpieczeństwa
+- kariera bezpieczeństwa
+- role na poziomie podstawowym
+- role średniego szczebla
+- role wyższego szczebla
+- umiejętności techniczne
+- ścieżki menadżerskie
 ---
 
 # Profil

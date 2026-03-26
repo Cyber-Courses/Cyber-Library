@@ -2,14 +2,14 @@
 title: Inteliģence
 description: Izpratne par inteliģenci kiberdrošībā, tās nozīmi un īstenošanu.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kiberdrošības izlūkošana
+- stratēģiskā izlūkošana
+- operatīvā izlūkošana
+- taktiskā izlūkošana
+- riska pārvaldība
+- Kompromisa rādītāji
+- draudu plūsmas
+- izlūkošanas cikls
 ---
 
 # Inteliģence

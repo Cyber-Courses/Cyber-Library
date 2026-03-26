@@ -1,15 +1,19 @@
 ---
 title: Sóknaröryggi
-description: 'Sóknaröryggi í netöryggi: Skilgreining, mikilvægi og framkvæmd.'
+description: Sóknaröryggi í netöryggi felur í sér siðferðilega hermingu á raunverulegum
+  árásum til að afhjúpa veikleika áður en illgjarnir aðilar geta nýtt sér þá. Með
+  því að starfa sem heimilaðir andstæðingar afhjúpa öryggisteymi veikleika í vörnum
+  stofnunar, sem gerir kleift að bregðast við þeim fyrirbyggjandi. Þessi ferli ekki
+  aðeins…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- sóknar netöryggi
+- siðleg tölvuþrjótun
+- innráðspróf
+- rauð lið
+- villuverðlaun
+- félagsleg verkfræði
+- gagnavörn
+- áhættustýring
 ---
 
 # Sóknaröryggi

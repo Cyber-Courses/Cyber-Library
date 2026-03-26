@@ -2,13 +2,13 @@
 title: Defensiv
 description: Explorarea conceptelor și importanței securității cibernetice defensive.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- securitate cibernetică defensivă
+- informații despre amenințări
+- evaluări de vulnerabilitate
+- răspuns la incident
+- monitorizare continuă
+- analiza post-incident
+- continuitatea afacerii
 ---
 
 # Defensiv

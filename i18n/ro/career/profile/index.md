@@ -1,6 +1,19 @@
 ---
 title: Profilul de Securitate Cibernetică
-description: Înțelegerea profilului tău de securitate cibernetică este esențială pentru a-ți defini parcursul profesional și a-ți alinia alegerile de carieră cu rolurile și oportunitățile potrivite.
+description: Înțelegerea profilului tău de securitate cibernetică este esențială pentru
+  a-ți defini parcursul profesional și a-ți alinia alegerile de carieră cu rolurile
+  și oportunitățile potrivite.
+keywords:
+- rolurile de securitate cibernetică
+- căi de carieră
+- dezvoltarea deprinderilor
+- certificări de securitate cibernetică
+- cariera de securitate
+- roluri de nivel de intrare
+- roluri de nivel mediu
+- roluri de nivel superior
+- aptitudini tehnice
+- căi manageriale
 ---
 
 # Profilul de Securitate Cibernetică

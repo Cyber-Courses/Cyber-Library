@@ -1,4 +1,20 @@
-```markdown
+---
+title: Nadace
+description: Kybernetická bezpečnost má své nejranější kořeny v hackerské kultuře
+  konce 20. století. Od chvíle, kdy lidé začali experimentovat s počítači, existovala
+  touha pochopit, modifikovat a posouvat hranice technologie. Tito raní hackeři se
+  často považovali za průzkumníky digitálních hranic, dychtící se učit a sdílet znalosti
+  bez nutnosti způsobit škodu.…
+keywords:
+- základy kybernetické bezpečnosti
+- hackerská kultura
+- historie kybernetické bezpečnosti
+- etika kybernetické bezpečnosti
+- řízení rizik
+- důvěra v digitální systémy
+- lidský prvek v kybernetické bezpečnosti
+---
+
 # Nadace
 
 ## Úvod
@@ -40,4 +56,3 @@ Důvěra je základem téměř každého aspektu online světa. Interakce, trans
 Lidé zůstávají největší proměnnou v kybernetické bezpečnosti. Ačkoli stroje a software se chovají podle logiky a pravidel, která jsou do nich naprogramována, lidé mohou dělat chyby nebo jednat se zlomyslností způsoby, které technologie sama o sobě nemůže plně předvídat. Od zapomínání na aplikaci záplat po klikání na phishingové odkazy, lidské chyby způsobují mnoho z nejvýznamnějších narušení.
 
 Řešení těchto problémů často zahrnuje pravidelné školení, jasné politiky a kulturu, která si cení bezpečnostního chování. Dobře navržené kampaně na zvyšování povědomí a vzdělávací programy pro uživatele snižují pravděpodobnost náhodných chyb. Když lidé chápou jak potenciální důsledky, tak osvědčené postupy pro bezpečné chování, organizace se mohou lépe chránit před hrozbami, které žádná softwarová záplata sama o sobě nemůže vyřešit.
-```

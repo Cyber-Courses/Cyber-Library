@@ -2,14 +2,14 @@
 title: បញ្ញា
 description: ការបកស្រាយអំពីបញ្ញានៅក្នុងសន្តិសុខសាយបឺរ និងសារៈសំខាន់របស់វា
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- ស៊ើបការណ៍សន្តិសុខតាមអ៊ីនធឺណិត
+- ភាពវៃឆ្លាតយុទ្ធសាស្ត្រ
+- ស៊ើបការណ៍ប្រតិបត្តិការ
+- បញ្ញាយុទ្ធសាស្ត្រ
+- ការគ្រប់គ្រងហានិភ័យ
+- សូចនាករនៃការសម្របសម្រួល
+- ចំណីគំរាមកំហែង
+- វដ្តបញ្ញា
 ---
 
 # បញ្ញា

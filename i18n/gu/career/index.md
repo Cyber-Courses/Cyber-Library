@@ -2,13 +2,13 @@
 title: કેરિયર
 description: સાઇબરસિક્યુરિટી ક્ષેત્રમાં કેરિયર વિશેની માહિતી અને માર્ગદર્શિકા.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- સાયબર સુરક્ષા કારકિર્દી
+- કારકિર્દી માર્ગો
+- ભૂમિકાઓ અને જવાબદારીઓ
+- તકનીકી અને નરમ કુશળતા
+- પ્રમાણપત્રો
+- શૈક્ષણિક ડિગ્રી
+- વ્યાવસાયિક વિકાસ
 ---
 
 # કેરિયર

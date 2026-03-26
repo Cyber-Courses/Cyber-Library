@@ -2,13 +2,13 @@
 title: ਰੱਖਿਆ
 description: ਰੱਖਿਆਈ ਸਾਇਬਰਸੁਰੱਖਿਆ ਦੇ ਤਰੀਕੇ ਅਤੇ ਮਹੱਤਵ
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- ਰੱਖਿਆਤਮਕ ਸਾਈਬਰ ਸੁਰੱਖਿਆ
+- ਧਮਕੀ ਖੁਫੀਆ
+- ਕਮਜ਼ੋਰੀ ਦੇ ਮੁਲਾਂਕਣ
+- ਘਟਨਾ ਪ੍ਰਤੀਕਰਮ
+- ਲਗਾਤਾਰ ਨਿਗਰਾਨੀ
+- ਘਟਨਾ ਤੋਂ ਬਾਅਦ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ
+- ਕਾਰੋਬਾਰ ਦੀ ਨਿਰੰਤਰਤਾ
 ---
 
 # ਰੱਖਿਆ

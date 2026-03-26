@@ -3,14 +3,14 @@ title: Kecerdasan
 description: Kecerdasan dalam keselamatan siber melibatkan pengumpulan, pemprosesan,
   dan analisis maklumat untuk mengenal pasti, menilai, dan mengurangkan ancaman siber.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- perisikan keselamatan siber
+- kecerdasan strategik
+- risikan operasi
+- kecerdasan taktikal
+- pengurusan risiko
+- Petunjuk Kompromi
+- suapan ancaman
+- kitaran kecerdasan
 ---
 
 # Kecerdasan

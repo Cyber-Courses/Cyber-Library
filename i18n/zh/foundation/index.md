@@ -1,14 +1,14 @@
 ---
 title: 基础
-description: 了解网络安全的起源、黑客文化、历史、伦理、目的、风险与信任以及人类因素。
+description: 网络安全的最早根源可以追溯到20世纪末的黑客文化。从人们开始尝试使用计算机的那一刻起，就存在一种理解、修改和突破技术边界的愿望。这些早期的黑客往往把自己看作是数字前沿的探索者，渴望学习和分享知识，而不一定意图伤害。随着时间的推移，对技术的探索演变成了保护数据、系统和人员免受恶意攻击的公认需求。
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- 网络安全基础
+- 黑客文化
+- 网络安全历史
+- 网络安全伦理
+- 风险管理
+- 对数字系统的信任
+- 网络安全中的人为因素
 ---
 
 # 基础

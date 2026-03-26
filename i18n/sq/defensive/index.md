@@ -3,13 +3,13 @@ title: Mbrojtëse
 description: Një qasje sistematike për mbrojtjen e të dhënave, sistemeve dhe përdoruesve
   nga kërcënimet kibernetike.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- siguria kibernetike mbrojtëse
+- inteligjenca e kërcënimit
+- vlerësimet e cenueshmërisë
+- reagim ndaj incidentit
+- monitorimi i vazhdueshëm
+- analiza pas incidentit
+- vazhdimësia e biznesit
 ---
 
 # Mbrojtëse

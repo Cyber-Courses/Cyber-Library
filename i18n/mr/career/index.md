@@ -2,13 +2,13 @@
 title: करिअर
 description: सायबरसुरक्षा क्षेत्रातील करिअरच्या संधी आणि प्रगतीचा सखोल आढावा.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- सायबर सुरक्षा करिअर
+- करिअर मार्ग
+- भूमिका आणि जबाबदाऱ्या
+- तांत्रिक आणि सॉफ्ट कौशल्ये
+- प्रमाणपत्रे
+- शैक्षणिक पदव्या
+- व्यावसायिक विकास
 ---
 
 # करिअर

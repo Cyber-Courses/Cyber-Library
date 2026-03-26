@@ -3,14 +3,14 @@ title: Интеллект
 description: Киберқауіпсіздік саласындағы интеллект — ақпаратты жинау, өңдеу және
   талдау арқылы киберқатерлерді анықтау және азайту.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- киберқауіпсіздік барлауы
+- стратегиялық барлау
+- операциялық барлау
+- тактикалық барлау
+- тәуекелдерді басқару
+- Компромисс көрсеткіштері
+- қауіп арналары
+- интеллект циклі
 ---
 
 # Интеллект

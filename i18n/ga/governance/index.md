@@ -1,3 +1,21 @@
+---
+title: Rialachas
+description: Is éard atá i rialachas cibearshlándála ná creat cuimsitheach de bheartais,
+  róil, agus próisis cinnteoireachta a bhunaíonn eagraíocht chun rioscaí cibear a
+  bhainistiú agus a mhaolú. Soláthraíonn sé an plean le haghaidh comhtháthú cibearshlándála
+  i ngach gné den ghnó, ag cinntiú nach n-oibríonn tionscnaimh slándála go neamhspleách
+  ach…
+keywords:
+- rialachas slándála cibear
+- creatlacha rialachais
+- bainistíocht riosca
+- comhlíonadh
+- straitéis ghnó
+- athléimneacht chibear
+- maoirseacht an bhord
+- leanúnacht oibríochta
+---
+
 # Rialachas
 
 ## Cad is Rialachas Cibearshlándála ann?
