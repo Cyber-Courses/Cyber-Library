@@ -3,13 +3,13 @@ title: Kariera
 description: Dynamiczna podróż w dziedzinie cyberbezpieczeństwa z możliwościami rozwoju
   zawodowego.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- karierę w cyberbezpieczeństwie
+- ścieżki kariery
+- role i obowiązki
+- umiejętności techniczne i miękkie
+- certyfikaty
+- stopnie naukowe
+- rozwój zawodowy
 ---
 
 # Kariera

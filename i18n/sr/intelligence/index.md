@@ -3,14 +3,14 @@ title: Интелигенција
 description: Разумевање интелигенције у сајбер безбедности и њен значај у идентификацији
   и ублажавању претњи.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- обавештајни подаци о сајбер безбедности
+- стратешке обавештајне службе
+- оперативне обавештајне
+- тактичке обавештајне службе
+- управљање ризиком
+- Индикатори компромиса
+- претња храни
+- обавештајни циклус
 ---
 
 # Интелигенција

@@ -2,13 +2,13 @@
 title: پایه
 description: بررسی تاریخچه و فرهنگ هکرها در امنیت سایبری
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- بنیاد امنیت سایبری
+- فرهنگ هکر
+- تاریخچه امنیت سایبری
+- اخلاق امنیت سایبری
+- مدیریت ریسک
+- اعتماد به سیستم های دیجیتال
+- عنصر انسانی در امنیت سایبری
 ---
 
 # پایه

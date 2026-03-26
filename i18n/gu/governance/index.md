@@ -4,14 +4,14 @@ description: સાઇબરસિક્યુરિટી ગવર્નન્
   વ્યાપક માળખું છે જે સંગઠન સાઇબર જોખમોને વ્યવસ્થિત કરવા અને ઘટાડવા માટે સ્થાપિત કરે
   છે.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- સાયબર સુરક્ષા શાસન
+- શાસન માળખાં
+- જોખમ સંચાલન
+- અનુપાલન
+- વ્યવસાય વ્યૂહરચના
+- સાયબર સ્થિતિસ્થાપકતા
+- બોર્ડ દેખરેખ
+- ઓપરેશનલ સાતત્ય
 ---
 
 # ગવર્નન્સ

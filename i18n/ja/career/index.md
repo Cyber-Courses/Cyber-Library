@@ -2,13 +2,13 @@
 title: キャリア
 description: サイバーセキュリティのキャリアに関する包括的なガイド
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- サイバーセキュリティのキャリア
+- キャリアパス
+- 役割と責任
+- テクニカルスキルとソフトスキル
+- 認証
+- 学位
+- 専門能力開発
 ---
 
 # キャリア

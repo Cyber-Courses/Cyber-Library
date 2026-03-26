@@ -2,14 +2,14 @@
 title: 治理
 description: 了解网络安全治理的重要性及其实施方法。
 keywords:
-- cybersecurity governance
-- governance frameworks
+- 网络安全治理
+- 治理框架
 - risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- 遵守
+- 经营策略
+- 网络弹性
+- 董事会监督
+- 运营连续性
 ---
 
 # 治理

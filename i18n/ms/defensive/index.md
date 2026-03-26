@@ -5,13 +5,13 @@ description: Keselamatan siber pertahanan adalah pendekatan sistematik untuk mel
   strategi pencegahan, pengesanan, dan tindak balas untuk meminimumkan kesan aktiviti
   jahat. Dari kecerdasan ancaman dan penilaian kerentanan hingga perancangan…
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- keselamatan siber defensif
+- perisikan ancaman
+- penilaian kelemahan
+- tindak balas insiden
+- pemantauan berterusan
+- analisis selepas kejadian
+- kesinambungan perniagaan
 ---
 
 # Pertahanan

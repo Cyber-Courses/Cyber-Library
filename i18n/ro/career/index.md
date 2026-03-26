@@ -3,13 +3,13 @@ title: Carieră
 description: Explorați o carieră dinamică în domeniul securității cibernetice, cu
   oportunități de dezvoltare personală și profesională.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- cariera de securitate cibernetică
+- căi de carieră
+- roluri și responsabilități
+- abilități tehnice și soft
+- certificari
+- grade academice
+- dezvoltare profesionala
 ---
 
 # Carieră

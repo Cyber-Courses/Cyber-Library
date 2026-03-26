@@ -2,13 +2,13 @@
 title: 경력
 description: 사이버 보안 경력에 대한 포괄적이고 기술적인 탐구
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- 사이버 보안 경력
+- 진로
+- 역할과 책임
+- 기술 및 소프트 스킬
+- 인증
+- 학업 학위
+- 전문성 개발
 ---
 
 # 경력

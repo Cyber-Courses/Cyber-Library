@@ -5,13 +5,13 @@ description: Kiberdrošības pirmsākumi meklējami 20. gadsimta beigu hakeru ku
   un paplašināt tehnoloģiju robežas. Šie agrīnie hakeri bieži vien uzskatīja sevi
   par digitālo robežu pētniekiem, kuri vēlas mācīties un dalīties zināšanās, ne…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- kiberdrošības fonds
+- hakeru kultūra
+- kiberdrošības vēsture
+- kiberdrošības ētika
+- riska pārvaldība
+- uzticēšanās digitālajām sistēmām
+- cilvēka elements kiberdrošībā
 ---
 
 # Pamati

@@ -2,14 +2,14 @@
 title: 거버넌스
 description: 사이버 보안 거버넌스의 중요성과 구현 방법에 대한 심층적인 기술 설명
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- 사이버 보안 거버넌스
+- 거버넌스 프레임워크
+- 위험 관리
+- 규정 준수
+- 사업 전략
+- 사이버 탄력성
+- 이사회 감독
+- 운영 연속성
 ---
 
 # 거버넌스

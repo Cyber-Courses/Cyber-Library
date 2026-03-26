@@ -5,13 +5,13 @@ description: An ninh mạng có nguồn gốc từ văn hóa hacker cuối thế
   đẩy giới hạn của công nghệ. Những hacker đầu tiên thường tự coi mình là những nhà
   thám hiểm của biên giới kỹ thuật số, háo hức học hỏi và chia sẻ kiến thức mà không…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- quỹ an ninh mạng
+- văn hóa hacker
+- lịch sử an ninh mạng
+- đạo đức an ninh mạng
+- quản lý rủi ro
+- niềm tin vào hệ thống kỹ thuật số
+- yếu tố con người trong an ninh mạng
 ---
 
 # Nền tảng

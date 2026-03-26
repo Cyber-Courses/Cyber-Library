@@ -5,14 +5,14 @@ description: Ulinzi wa kivita wa mtandao unahusisha kuiga mashambulizi halisi kw
   kama wapinzani walioidhinishwa, timu za usalama hufichua sehemu dhaifu katika ulinzi
   wa shirika, kuruhusu masuala hayo kushughulikiwa kwa njia ya utangulizi.…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- usalama wa mtandao unaokera
+- udukuzi wa kimaadili
+- kupima kupenya
+- timu nyekundu
+- fadhila ya mdudu
+- uhandisi wa kijamii
+- ulinzi wa data
+- usimamizi wa hatari
 ---
 
 # Ulinzi wa Kivita

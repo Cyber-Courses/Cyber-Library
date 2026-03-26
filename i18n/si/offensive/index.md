@@ -2,14 +2,14 @@
 title: ප්‍රහාරක
 description: ප්‍රහාරක සයිබර් ආරක්ෂාව පිළිබඳව සවිස්තරාත්මක විමසුමක්
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
+- ආක්‍රමණශීලී සයිබර් ආරක්‍ෂාව
+- සදාචාරාත්මක හැක් කිරීම
+- විනිවිද යාමේ පරීක්ෂණය
+- රතු කණ්ඩායම
 - bug bounty
-- social engineering
-- data protection
-- risk management
+- සමාජ ඉංජිනේරු
+- දත්ත ආරක්ෂාව
+- අවදානම් කළමනාකරණය
 ---
 
 # ප්‍රහාරක

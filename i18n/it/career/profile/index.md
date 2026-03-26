@@ -3,16 +3,16 @@ title: Profilo
 description: Comprendere il proprio profilo di cybersecurity è essenziale per definire
   il proprio percorso professionale e le opportunità di sviluppo.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- ruoli di sicurezza informatica
+- percorsi di carriera
+- sviluppo delle competenze
+- certificazioni di sicurezza informatica
+- carriera nel settore della sicurezza
+- ruoli di livello base
+- ruoli di medio livello
+- ruoli di livello senior
+- competenze tecniche
+- percorsi manageriali
 ---
 
 # Profilo

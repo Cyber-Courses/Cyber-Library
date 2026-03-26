@@ -4,13 +4,13 @@ description: Siber güvenlik alanında kariyer, profesyoneller için dinamik bir
   Bu makale, siber güvenlik kariyerinin profili, yolculuğu ve manzarası hakkında derinlemesine
   bir inceleme sunar.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- siber güvenlik kariyeri
+- kariyer yolları
+- roller ve sorumluluklar
+- teknik ve sosyal beceriler
+- sertifikalar
+- akademik dereceler
+- mesleki gelişim
 ---
 
 # Kariyer

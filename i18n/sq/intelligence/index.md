@@ -3,14 +3,14 @@ title: Inteligjenca
 description: Një eksplorim i inteligjencës në sigurinë kibernetike, rëndësisë së saj
   dhe mënyrës së zbatimit.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- inteligjencën e sigurisë kibernetike
+- inteligjencës strategjike
+- inteligjencës operacionale
+- inteligjencës taktike
+- menaxhimi i riskut
+- Treguesit e kompromisit
+- ushqen kërcënimet
+- ciklit të inteligjencës
 ---
 
 # Inteligjenca

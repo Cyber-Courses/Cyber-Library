@@ -3,13 +3,13 @@ title: Защитная кибербезопасность
 description: Техническое руководство по методам защитной кибербезопасности для защиты
   данных и систем от киберугроз.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- оборонительная кибербезопасность
+- разведка угроз
+- оценки уязвимости
+- реагирование на инцидент
+- непрерывный мониторинг
+- анализ после инцидента
+- непрерывность бизнеса
 ---
 
 # Защитная

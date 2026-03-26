@@ -5,13 +5,13 @@ description: සයිබර් ආරක්ෂාව පිළිබඳ වෘ�
   ඉල්ලුමද වර්ධනය වෙමින් පවතී. ඔබ නවකයෙකු වුවත්, ප්‍රවර්ධනයක් සොයන කෙනෙකු වුවත්, සයිබර්
   ආරක්ෂාව පිළිබඳ ක්ෂේත්‍රය පුද්ගලික හා වෘත්තිමය සංවර්ධනය සඳහා විශාල අවකාශයක් ලබා…
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- සයිබර් ආරක්ෂණ වෘත්තිය
+- වෘත්තීය මාර්ග
+- භූමිකාවන් සහ වගකීම්
+- තාක්ෂණික සහ මෘදු කුසලතා
+- සහතික
+- අධ්යයන උපාධි
+- වෘත්තීය සංවර්ධනය
 ---
 
 # වෘත්තියය

@@ -3,13 +3,13 @@ title: Kazi
 description: Jifunze kuhusu safari ya kazi katika usalama wa mtandao, ikijumuisha
   wasifu, safari ya kitaaluma, na mazingira ya sekta.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- kazi ya usalama wa mtandao
+- njia za kazi
+- majukumu na wajibu
+- ujuzi wa kiufundi na laini
+- vyeti
+- digrii za kitaaluma
+- maendeleo ya kitaaluma
 ---
 
 # Kazi

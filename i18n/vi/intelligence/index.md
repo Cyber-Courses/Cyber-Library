@@ -3,12 +3,12 @@ title: Trí tuệ
 description: Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai
   hiệu quả chương trình trí tuệ.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
+- tình báo an ninh mạng
+- tình báo chiến lược
+- tình báo hoạt động
+- tình báo chiến thuật
+- quản lý rủi ro
+- Các chỉ số của sự thỏa hiệp
 - threat feeds
 - intelligence cycle
 ---

@@ -3,13 +3,13 @@ title: Одбранбена
 description: Систематски пристап за заштита на податоци, системи и корисници од сајбер
   закани.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- одбранбена сајбер безбедност
+- разузнавање за закана
+- проценки на ранливост
+- одговор на инцидентот
+- континуирано следење
+- анализа по инцидентот
+- деловниот континуитет
 ---
 
 # Одбранбена

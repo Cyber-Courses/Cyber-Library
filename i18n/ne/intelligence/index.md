@@ -3,14 +3,14 @@ title: बुद्धिमत्ता
 description: साइबर सुरक्षा मा बुद्धिमत्ता को भूमिका, महत्व र कार्यान्वयन को एक विस्तृत
   अन्वेषण।
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- साइबर सुरक्षा खुफिया
+- रणनीतिक बुद्धि
+- परिचालन खुफिया
+- रणनीतिक बुद्धि
+- जोखिम व्यवस्थापन
+- सम्झौताका सूचकहरू
+- धम्की फीड
+- बुद्धि चक्र
 ---
 
 # बुद्धिमत्ता

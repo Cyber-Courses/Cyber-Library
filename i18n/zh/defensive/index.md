@@ -2,13 +2,13 @@
 title: 防御
 description: 了解防御性网络安全的重要性及其实施方法，以保护组织免受网络威胁。
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- 防御性网络安全
+- 威胁情报
+- 脆弱性评估
+- 事件响应
+- 持续监控
+- 事后分析
+- 业务连续性
 ---
 
 # 防御

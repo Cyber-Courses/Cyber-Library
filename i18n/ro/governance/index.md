@@ -3,14 +3,14 @@ title: Guvernanța Cibernetică
 description: O explorare detaliată a guvernanței cibernetice, importanța și implementarea
   sa în organizații.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- guvernanța securității cibernetice
+- cadre de guvernare
+- managementul riscurilor
+- conformitate
+- strategie de afaceri
+- reziliența cibernetică
+- supravegherea consiliului
+- continuitate operațională
 ---
 
 # Guvernanța

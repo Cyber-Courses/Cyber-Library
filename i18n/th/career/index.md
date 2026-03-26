@@ -2,13 +2,13 @@
 title: อาชีพ
 description: การเดินทางในอาชีพด้านความปลอดภัยทางไซเบอร์ที่เต็มไปด้วยโอกาสสำหรับมืออาชีพในทุกระดับ
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- อาชีพความปลอดภัยทางไซเบอร์
+- เส้นทางอาชีพ
+- บทบาทและความรับผิดชอบ
+- ทักษะทางเทคนิคและทักษะทางอารมณ์
+- การรับรอง
+- องศาการศึกษา
+- การพัฒนาวิชาชีพ
 ---
 
 # อาชีพ

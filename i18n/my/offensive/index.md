@@ -3,14 +3,14 @@ title: တိုက်ခိုက်မှုဆိုင်ရာ
 description: တိုက်ခိုက်မှုဆိုင်ရာဆိုသည်မှာ ဘာလဲ၊ အရေးကြီးမှုနှင့် လုပ်ဆောင်နည်းများကို
   နက်ရှိုင်းစွာရှင်းပြသည်။
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- ထိုးစစ်ဆင်သော ဆိုက်ဘာလုံခြုံရေး
+- ကျင့်ဝတ်ဖောက်ပြန်မှု
+- ထိုးဖောက်စမ်းသပ်ခြင်း။
+- အနီရောင်အသင်း
+- bug ဆုကြေး
+- လူမှုရေးအင်ဂျင်နီယာ
+- ဒေတာကာကွယ်မှု
+- အန္တရာယ်စီမံခန့်ခွဲမှု
 ---
 
 # တိုက်ခိုက်မှုဆိုင်ရာ

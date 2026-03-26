@@ -2,14 +2,14 @@
 title: ಬುದ್ಧಿಮತ್ತೆ
 description: ಸೈಬರ್‌ಸುರಕ್ಷಾ ಕ್ಷೇತ್ರದಲ್ಲಿ ಬುದ್ಧಿಮತ್ತೆಯ ಮಹತ್ವ ಮತ್ತು ಅದರ ಕಾರ್ಯವಿಧಾನ
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- ಸೈಬರ್ ಭದ್ರತಾ ಗುಪ್ತಚರ
+- ಕಾರ್ಯತಂತ್ರದ ಬುದ್ಧಿವಂತಿಕೆ
+- ಕಾರ್ಯಾಚರಣೆಯ ಬುದ್ಧಿವಂತಿಕೆ
+- ಯುದ್ಧತಂತ್ರದ ಬುದ್ಧಿವಂತಿಕೆ
+- ಅಪಾಯ ನಿರ್ವಹಣೆ
+- ರಾಜಿ ಸೂಚಕಗಳು
+- ಬೆದರಿಕೆ ಫೀಡ್ಗಳು
+- ಗುಪ್ತಚರ ಚಕ್ರ
 ---
 
 # ಬುದ್ಧಿಮತ್ತೆ

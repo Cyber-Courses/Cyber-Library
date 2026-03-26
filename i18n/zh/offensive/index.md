@@ -2,13 +2,13 @@
 title: 进攻
 description: 了解进攻性网络安全的定义、重要性及其实施方法。
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
+- 进攻性网络安全
+- 道德黑客行为
+- 渗透测试
+- 红队
+- 错误赏金
+- 社会工程
+- 数据保护
 - risk management
 ---
 

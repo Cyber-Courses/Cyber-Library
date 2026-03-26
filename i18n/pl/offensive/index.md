@@ -2,14 +2,14 @@
 title: Ofensywne
 description: Zrozumienie i znaczenie ofensywnego cyberbezpieczeństwa w organizacjach.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- ofensywne cyberbezpieczeństwo
+- etyczne hakowanie
+- testy penetracyjne
+- drużyna czerwona
+- nagroda za błąd
+- inżynieria społeczna
+- ochrona danych
+- zarządzanie ryzykiem
 ---
 
 # Ofensywne

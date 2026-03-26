@@ -3,13 +3,13 @@ title: కెరీర్
 description: సైబర్‌సెక్యూరిటీ రంగంలో కెరీర్‌ను నిర్మించుకోవడం ఎలా అనే దానిపై లోతైన
   అవగాహన.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- సైబర్ సెక్యూరిటీ కెరీర్
+- కెరీర్ మార్గాలు
+- పాత్రలు మరియు బాధ్యతలు
+- సాంకేతిక మరియు మృదువైన నైపుణ్యాలు
+- ధృవపత్రాలు
+- విద్యా పట్టాలు
+- వృత్తిపరమైన అభివృద్ధి
 ---
 
 # కెరీర్

@@ -5,13 +5,13 @@ description: Karriera fis-sigurtà ċibernetika hija vjaġġ dinamiku mimli oppo
   għal esperti tas-sigurtà ċibernetika b'ħiliet tikber b'mod korrispondenti, u tippreżenta
   suq tax-xogħol vibranti u mgħaġġel. Kemm jekk qed tibda biss jew qed…
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- karriera taċ-ċibersigurtà
+- mogħdijiet tal-karriera
+- rwoli u responsabbiltajiet
+- ħiliet tekniċi u artab
+- ċertifikazzjonijiet
+- gradi akkademiċi
+- żvilupp professjonali
 ---
 
 # Karriera

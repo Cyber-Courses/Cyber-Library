@@ -2,14 +2,14 @@
 title: インテリジェンス
 description: サイバーセキュリティにおけるインテリジェンスの重要性とその実施方法についての技術的な解説。
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- サイバーセキュリティインテリジェンス
+- 戦略的インテリジェンス
+- 運用上のインテリジェンス
+- 戦術的知性
+- リスク管理
+- 侵害の兆候
+- 脅威フィード
+- インテリジェンスサイクル
 ---
 
 # インテリジェンス

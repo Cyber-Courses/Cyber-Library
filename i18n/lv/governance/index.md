@@ -2,14 +2,14 @@
 title: Pārvaldība
 description: Izpratne par kiberdrošības pārvaldību un tās nozīmi organizācijās.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- kiberdrošības pārvaldība
+- pārvaldības sistēmas
+- riska pārvaldība
+- atbilstība
+- biznesa stratēģija
+- kibernoturība
+- valdes uzraudzība
+- darbības nepārtrauktība
 ---
 
 # Pārvaldība

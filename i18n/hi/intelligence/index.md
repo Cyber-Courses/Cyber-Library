@@ -2,14 +2,14 @@
 title: इंटेलिजेंस
 description: साइबर सुरक्षा में इंटेलिजेंस की भूमिका और महत्व
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- साइबर सुरक्षा बुद्धिमत्ता
+- रणनीतिक बुद्धिमत्ता
+- परिचालन बुद्धिमत्ता
+- सामरिक बुद्धिमत्ता
+- जोखिम प्रबंधन
+- समझौते के संकेतक
+- खतरे की फ़ीड
+- बुद्धिमत्ता चक्र
 ---
 
 # इंटेलिजेंस

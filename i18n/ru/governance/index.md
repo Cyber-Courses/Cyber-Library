@@ -3,14 +3,14 @@ title: Управление кибербезопасностью
 description: Подробное руководство по управлению кибербезопасностью, его значимости
   и методам реализации.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- управление кибербезопасностью
+- структуры управления
+- управление рисками
+- согласие
+- бизнес-стратегия
+- киберустойчивость
+- надзор совета директоров
+- непрерывность работы
 ---
 
 # Управление

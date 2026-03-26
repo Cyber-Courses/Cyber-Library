@@ -2,16 +2,16 @@
 title: ប្រវត្តិរូប
 description: យល់ដឹងអំពីប្រវត្តិរូបសន្តិសុខសាយបឺរ
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- តួនាទីសន្តិសុខតាមអ៊ីនធឺណិត
+- ផ្លូវអាជីព
+- ការអភិវឌ្ឍន៍ជំនាញ
+- វិញ្ញាបនប័ត្រសុវត្ថិភាពអ៊ីនធឺណិត
+- អាជីពសន្តិសុខ
+- តួនាទីកម្រិតចូល
+- តួនាទីកណ្តាល
+- តួនាទីជាន់ខ្ពស់
+- ជំនាញបច្ចេកទេស
+- ផ្លូវគ្រប់គ្រង
 ---
 
 # ប្រវត្តិរូប

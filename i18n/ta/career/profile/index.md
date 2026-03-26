@@ -3,16 +3,16 @@ title: சைபர்செக்யூரிட்டி சுயவிவர
 description: சைபர்செக்யூரிட்டி சுயவிவரம் உங்கள் தொழில்முறை பயணத்தில் எங்கு இருக்கிறீர்கள்
   மற்றும் எங்கு செல்ல விரும்புகிறீர்கள் என்பதை வரையறுக்க உதவுகிறது.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- இணைய பாதுகாப்பு பாத்திரங்கள்
+- தொழில் பாதைகள்
+- திறன் வளர்ச்சி
+- இணைய பாதுகாப்பு சான்றிதழ்கள்
+- பாதுகாப்பு வாழ்க்கை
+- நுழைவு நிலை பாத்திரங்கள்
+- நடுத்தர அளவிலான பாத்திரங்கள்
+- மூத்த நிலை பாத்திரங்கள்
+- தொழில்நுட்ப திறன்கள்
+- நிர்வாக பாதைகள்
 ---
 
 # சுயவிவரம்

@@ -2,14 +2,14 @@
 title: Intelligencia
 description: A kiberbiztonsági intelligencia szerepe és fontossága
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kiberbiztonsági intelligencia
+- stratégiai hírszerzés
+- operatív hírszerzés
+- harcászati ​​felderítés
+- kockázatkezelés
+- A kompromisszum mutatói
+- fenyegetés táplálja
+- felderítési ciklus
 ---
 
 # Intelligencia

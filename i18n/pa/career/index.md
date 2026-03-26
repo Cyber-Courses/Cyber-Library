@@ -2,13 +2,13 @@
 title: ਕੈਰੀਅਰ
 description: ਸਾਇਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਕੈਰੀਅਰ ਦੀ ਸੰਭਾਵਨਾਵਾਂ ਅਤੇ ਵਿਕਾਸ ਦੇ ਮੌਕੇ
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਕੈਰੀਅਰ
+- ਕਰੀਅਰ ਦੇ ਰਸਤੇ
+- ਭੂਮਿਕਾਵਾਂ ਅਤੇ ਜ਼ਿੰਮੇਵਾਰੀਆਂ
+- ਤਕਨੀਕੀ ਅਤੇ ਨਰਮ ਹੁਨਰ
+- ਪ੍ਰਮਾਣੀਕਰਣ
+- ਅਕਾਦਮਿਕ ਡਿਗਰੀਆਂ
+- ਪੇਸ਼ੇਵਰ ਵਿਕਾਸ
 ---
 
 # ਕੈਰੀਅਰ
