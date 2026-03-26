@@ -1,9 +1,9 @@
 ---
-title: "Pealetungiv Küberturvalisus"
+title: "Pealetungiv"
 description: "Pealetungiv küberturvalisus hõlmab eetilist rünnakute simuleerimist, et avastada haavatavusi enne, kui pahatahtlikud osapooled neid ära kasutavad."
 ---
 
-# Pealetungiv Küberturvalisus
+# Pealetungiv
 
 ## Mis on Pealetungiv Küberturvalisus?
 

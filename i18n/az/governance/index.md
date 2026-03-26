@@ -1,4 +1,8 @@
-```markdown
+---
+title: "İdarəetmə"
+description: "Kibertəhlükəsizlik idarəetməsi, təşkilatın kibertəhlükələri idarə etmək və azaltmaq üçün qurduğu siyasətlər, rollar və qərar qəbul etmə proseslərinin çərçivəsidir."
+---
+
 # İdarəetmə
 
 ## Kibertəhlükəsizlik İdarəetməsi Nədir?
@@ -24,4 +28,3 @@ Bu strateji təməl üzərində qurulmaqla, növbəti addım uyğunluq tələbl�
 Strateji səviyyədə, effektiv idarəetmə kibertəhlükəsizlik çərçivəsinin fəaliyyətini izləyən və qiymətləndirən nəzarət mexanizmləri və risk idarəetmə proseslərinin yaradılmasını tələb edir. Bu, aydın rollar və məsuliyyətlərin müəyyən edilməsini, ölçü və əsas performans göstəricilərinin (KPI) müəyyən edilməsini və maraqlı tərəfləri məlumatlandıran hesabat kanallarının yaradılmasını əhatə edir. Bu strukturlar yerində olduqda, təşkilatlar kibertəhlükəsizlik mövqelərini davamlı olaraq qiymətləndirmək və təkmilləşdirmək üçün daha yaxşı vəziyyətdədirlər, beləliklə idarəetmə çərçivəsinin ortaya çıxan təhdidlər qarşısında çevik qalmasını təmin edirlər.
 
 Kibertəhlükəsizlik idarəetməsinin həyata keçirilməsinin son mərhələsi müəyyən edilmiş siyasət və prosedurların əməliyyat tətbiqi və icrasıdır. Bu mərhələ, rəhbərlikdən fərdi işçilərə qədər bütün təşkilatın kibertəhlükəsizlik çərçivəsini başa düşməsini və ona riayət etməsini təmin etməyə yönəlmişdir. Əməliyyat səyləri biznesin davamlılığını təmin etmək, üçüncü tərəf risklərini idarə etmək və möhkəm hesabat sistemləri qurmaq daxildir. Bundan əlavə, təşkilat daxilində təhlükəsizlik mədəniyyətini inkişaf etdirməyə kömək edən davamlı məlumatlandırma və təlim proqramlarına güclü diqqət yetirilir. Bu tədbirləri sistematik şəkildə həyata keçirərək və icra edərək, şirkətlər yalnız kibertəhlükələri azaltmır, həm də ümumi davamlılıqlarını artırır, nəticədə potensial zəiflikləri strateji üstünlüklərə çevirirlər.
-```

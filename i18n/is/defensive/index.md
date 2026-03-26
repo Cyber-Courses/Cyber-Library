@@ -1,9 +1,9 @@
 ---
-title: "Varnandi Netöryggi"
+title: "Varnandi"
 description: "Kynning á varnandi netöryggi, mikilvægi þess og hvernig það er framkvæmt."
 ---
 
-# Varnandi Netöryggi
+# Varnandi
 
 ## Hvað er Varnandi Netöryggi?
 

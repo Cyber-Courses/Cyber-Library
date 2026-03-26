@@ -1,9 +1,9 @@
 ---
-title: "Phòng Thủ"
+title: "Phòng thủ"
 description: "Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện."
 ---
 
-# Phòng Thủ
+# Phòng thủ
 
 ## An Ninh Mạng Phòng Thủ Là Gì?
 

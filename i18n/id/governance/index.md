@@ -1,4 +1,4 @@
-# Tata Kelola
+# Governansi
 
 ## Apa itu Tata Kelola Keamanan Siber?
 

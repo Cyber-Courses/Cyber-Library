@@ -1,10 +1,10 @@
 ---
-title: "Ciberseguridade Ofensiva"
+title: "Ofensiva"
 description: "Exploración técnica da ciberseguridade ofensiva, incluíndo a súa importancia e metodoloxías."
 keywords: "ciberseguridade ofensiva, hacking ético, probas de penetración, equipos vermellos, programas de recompensas por erros"
 ---
 
-# Ciberseguridade Ofensiva
+# Ofensiva
 
 ## Que é a Ciberseguridade Ofensiva?
 

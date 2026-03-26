@@ -1,4 +1,8 @@
-```markdown
+---
+title: "Aizsardzība"
+description: "Sistemātiska pieeja organizācijas datu, sistēmu un lietotāju aizsardzībai pret kiberapdraudējumiem."
+---
+
 # Aizsardzība
 
 ## Kas ir aizsardzības kiberdrošība?
@@ -18,4 +22,3 @@ Pat visstiprākās aizsardzības nevar garantēt absolūtu imunitāti. Tāpēc n
 Kad uzbrukums notiek, incidentu reaģēšana kļūst kritiska. Organizācijām ir jābūt skaidri definētam plānam, lai ierobežotu draudus, mazinātu zaudējumus un atjaunotu normālu darbību. Ievērojot noteiktas procedūras un izmantojot incidentu reaģēšanas rīkus, komandas var efektīvi pārvaldīt drošības incidentus un samazināt to ietekmi.
 
 Pēc incidenta atrisināšanas sākas mācību process. Pēcincedenta analīze ļauj organizācijām pārskatīt notikušo, identificēt vājās vietas savā aizsardzībā un pielietot gūtās mācības, lai uzlabotu savu drošības stāvokli. Nepārtraukti pilnveidojot savu aizsardzību un saglabājot modrību pret jauniem draudiem, organizācijas var pielāgoties mainīgajai kiberdrošības ainavai un aizsargāt savus kritiskos aktīvus.
-```

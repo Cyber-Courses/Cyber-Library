@@ -1,10 +1,10 @@
 ---
-title: "Keamanan Siber Ofensif"
+title: "Ofensif"
 description: "Memahami pentingnya dan penerapan keamanan siber ofensif dalam mengidentifikasi kerentanan dan meningkatkan postur keamanan organisasi."
 keywords: "keamanan siber ofensif, peretasan etis, pengujian penetrasi, tim merah, kerentanan keamanan"
 ---
 
-# Keamanan Siber Ofensif
+# Ofensif
 
 ## Apa Itu Keamanan Siber Ofensif?
 
