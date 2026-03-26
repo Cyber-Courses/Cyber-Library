@@ -1,3 +1,20 @@
+---
+title: Qeverisja
+description: Qeverisja e sigurisë kibernetike është korniza e plotë e politikave,
+  roleve dhe proceseve të vendimmarrjes që një organizatë krijon për të menaxhuar
+  dhe zbutur rreziqet kibernetike. Ajo ofron planin për integrimin e sigurisë kibernetike
+  në çdo aspekt të biznesit, duke siguruar që iniciativat e sigurisë të mos…
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
+---
+
 # Qeverisja
 
 ## Çfarë është Qeverisja e Sigurisë Kibernetike?

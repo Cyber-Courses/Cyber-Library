@@ -1,6 +1,16 @@
 ---
-title: "Інтелект"
-description: "Дослідження ролі інтелекту в кібербезпеці, його важливість та методи впровадження."
+title: Інтелект
+description: Дослідження ролі інтелекту в кібербезпеці, його важливість та методи
+  впровадження.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Інтелект

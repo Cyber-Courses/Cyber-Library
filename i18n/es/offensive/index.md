@@ -1,3 +1,20 @@
+---
+title: Ofensiva
+description: La ciberseguridad ofensiva implica simular éticamente ataques del mundo
+  real para descubrir vulnerabilidades antes de que actores maliciosos puedan explotarlas.
+  Al actuar como adversarios autorizados, los equipos de seguridad exponen puntos
+  débiles en las defensas de una organización, permitiendo que esos problemas se…
+keywords:
+- ciberseguridad ofensiva
+- hacking ético, piratería informática ética
+- ensayo de penetración
+- '"Red teaming"'
+- recompensa por hallazgo de errores
+- ingeniería social
+- protección de datos
+- gestión de riesgos
+---
+
 # Ofensiva
 
 ## ¿Qué es la Ciberseguridad Ofensiva?

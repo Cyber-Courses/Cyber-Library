@@ -1,6 +1,16 @@
 ---
-title: "Intelligens"
-description: "Utforskning av intelligens innen cybersikkerhet, inkludert betydning, implementering og strategiske fordeler."
+title: Intelligens
+description: Utforskning av intelligens innen cybersikkerhet, inkludert betydning,
+  implementering og strategiske fordeler.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelligens

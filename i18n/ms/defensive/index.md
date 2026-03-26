@@ -1,3 +1,19 @@
+---
+title: Pertahanan
+description: Keselamatan siber pertahanan adalah pendekatan sistematik untuk melindungi
+  data, sistem, dan pengguna organisasi daripada ancaman siber. Ia melibatkan integrasi
+  strategi pencegahan, pengesanan, dan tindak balas untuk meminimumkan kesan aktiviti
+  jahat. Dari kecerdasan ancaman dan penilaian kerentanan hingga perancangan…
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
+---
+
 # Pertahanan
 
 ## Apakah Keselamatan Siber Pertahanan?

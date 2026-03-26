@@ -1,4 +1,19 @@
-```markdown
+---
+title: Pagrindai
+description: Kibernetinis saugumas savo ištakas sieja su XX a. pabaigos hakerių kultūra.
+  Nuo to momento, kai žmonės pradėjo eksperimentuoti su kompiuteriais, atsirado noras
+  suprasti, modifikuoti ir išplėsti technologijų ribas. Šie ankstyvieji hakeriai dažnai
+  save laikė skaitmeninių ribų tyrinėtojais, trokštančiais mokytis ir…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Pagrindai
 
 ## Įvadas
@@ -40,4 +55,3 @@ Pasitikėjimas yra beveik kiekvieno internetinio pasaulio aspekto pagrindas. Są
 Žmonės išlieka didžiausia kintamąja kibernetiniame saugume. Nors mašinos ir programinė įranga elgiasi pagal joms užprogramuotą logiką ir taisykles, žmonės gali padaryti klaidų arba veikti piktybiškai būdais, kurių technologija vien negali visiškai numatyti. Nuo pamiršimo įdiegti pataisas iki paspaudimo ant sukčiavimo nuorodų, žmogiškos klaidos sukelia daugelį reikšmingiausių pažeidimų.
 
 Šių problemų sprendimas dažnai apima reguliarius mokymus, aiškias politikos gaires ir kultūrą, kuri vertina saugumui sąmoningą elgesį. Gerai suprojektuotos informuotumo kampanijos ir vartotojų švietimo programos mažina atsitiktinių klaidų tikimybę. Kai žmonės supranta tiek galimas pasekmes, tiek geriausias saugaus elgesio praktikas, organizacijos gali geriau apsisaugoti nuo grėsmių, kurių vien programinės įrangos pataisos negali išspręsti.
-```

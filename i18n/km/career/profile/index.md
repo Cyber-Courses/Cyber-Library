@@ -1,7 +1,17 @@
 ---
-title: "ប្រវត្តិរូប"
-description: "យល់ដឹងអំពីប្រវត្តិរូបសន្តិសុខសាយបឺរ"
-keywords: "ប្រវត្តិរូប, សន្តិសុខសាយបឺរ, អាជីព, ជំនាញ, វិញ្ញាបនបត្រ"
+title: ប្រវត្តិរូប
+description: យល់ដឹងអំពីប្រវត្តិរូបសន្តិសុខសាយបឺរ
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # ប្រវត្តិរូប

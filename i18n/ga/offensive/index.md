@@ -1,6 +1,16 @@
 ---
-title: "Cibearshlándáil Ionsaitheach"
-description: "Tuiscint ar Chibearshlándáil Ionsaitheach, a thábhacht, agus conas a dhéantar í."
+title: Cibearshlándáil Ionsaitheach
+description: Tuiscint ar Chibearshlándáil Ionsaitheach, a thábhacht, agus conas a
+  dhéantar í.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ionsaitheach

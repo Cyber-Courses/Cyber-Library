@@ -1,7 +1,14 @@
 ---
-title: "साइबर सुरक्षा में करियर"
-description: "साइबर सुरक्षा में करियर के अवसर और विकास की संभावनाएँ।"
-keywords: "साइबर सुरक्षा, करियर, प्रोफाइल, यात्रा, परिदृश्य"
+title: साइबर सुरक्षा में करियर
+description: साइबर सुरक्षा में करियर के अवसर और विकास की संभावनाएँ।
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # करियर

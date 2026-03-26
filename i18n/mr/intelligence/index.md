@@ -1,7 +1,16 @@
 ---
-title: "बुद्धिमत्ता"
-description: "सायबरसुरक्षा क्षेत्रातील बुद्धिमत्तेचे महत्त्व, त्याची गरज आणि त्याची अंमलबजावणी."
-keywords: "बुद्धिमत्ता, सायबरसुरक्षा, धोके, धोरणात्मक बुद्धिमत्ता, कार्यकारी बुद्धिमत्ता, तांत्रिक बुद्धिमत्ता"
+title: बुद्धिमत्ता
+description: सायबरसुरक्षा क्षेत्रातील बुद्धिमत्तेचे महत्त्व, त्याची गरज आणि त्याची
+  अंमलबजावणी.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # बुद्धिमत्ता

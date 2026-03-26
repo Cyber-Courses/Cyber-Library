@@ -1,6 +1,15 @@
 ---
-title: "Aizsardzība"
-description: "Sistemātiska pieeja organizācijas datu, sistēmu un lietotāju aizsardzībai pret kiberapdraudējumiem."
+title: Aizsardzība
+description: Sistemātiska pieeja organizācijas datu, sistēmu un lietotāju aizsardzībai
+  pret kiberapdraudējumiem.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Aizsardzība

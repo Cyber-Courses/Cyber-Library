@@ -1,6 +1,15 @@
 ---
 title: Kazi
-description: Jifunze kuhusu safari ya kazi katika usalama wa mtandao, ikijumuisha wasifu, safari ya kitaaluma, na mazingira ya sekta.
+description: Jifunze kuhusu safari ya kazi katika usalama wa mtandao, ikijumuisha
+  wasifu, safari ya kitaaluma, na mazingira ya sekta.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Kazi

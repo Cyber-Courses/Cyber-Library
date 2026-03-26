@@ -1,6 +1,14 @@
 ---
-title: "Պաշտպանական"
-description: "Պաշտպանական կիբերանվտանգության տեխնիկական բացատրություն և կարևորություն"
+title: Պաշտպանական
+description: Պաշտպանական կիբերանվտանգության տեխնիկական բացատրություն և կարևորություն
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Պաշտպանական

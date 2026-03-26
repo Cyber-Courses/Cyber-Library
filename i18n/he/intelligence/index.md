@@ -1,7 +1,15 @@
 ---
-title: "מודיעין"
-description: "הבנת המודיעין בסייבר, חשיבותו ויישומו"
-keywords: "מודיעין, סייבר, איומים, אבטחת מידע, ניתוח מידע"
+title: מודיעין
+description: הבנת המודיעין בסייבר, חשיבותו ויישומו
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # מודיעין

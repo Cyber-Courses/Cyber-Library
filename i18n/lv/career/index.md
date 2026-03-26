@@ -1,7 +1,15 @@
 ---
-title: "Karjera"
-description: "Karjera kiberdrošības jomā piedāvā daudz iespēju profesionāļiem visos līmeņos. Uzziniet par profilu, ceļojumu un ainavu šajā dinamiskajā nozarē."
-keywords: "kiberdrošība, karjera, profesionālā attīstība, profila izpratne, nozares ainava"
+title: Karjera
+description: Karjera kiberdrošības jomā piedāvā daudz iespēju profesionāļiem visos
+  līmeņos. Uzziniet par profilu, ceļojumu un ainavu šajā dinamiskajā nozarē.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karjera

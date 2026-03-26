@@ -1,7 +1,15 @@
 ---
 title: Karera
-description: Isang detalyado at teknikal na paggalugad sa karera sa cybersecurity, kabilang ang mga profile, paglalakbay, at tanawin ng industriya.
-keywords: cybersecurity, karera, profile, paglalakbay, tanawin ng industriya
+description: Isang detalyado at teknikal na paggalugad sa karera sa cybersecurity,
+  kabilang ang mga profile, paglalakbay, at tanawin ng industriya.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karera

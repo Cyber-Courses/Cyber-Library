@@ -1,6 +1,16 @@
 ---
-title: "Siguria Kibernetike Ofensive"
-description: "Një eksplorim i thellë i sigurisë kibernetike ofensive, rëndësisë së saj dhe metodave të zbatimit."
+title: Siguria Kibernetike Ofensive
+description: Një eksplorim i thellë i sigurisë kibernetike ofensive, rëndësisë së
+  saj dhe metodave të zbatimit.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Siguria Kibernetike Ofensive

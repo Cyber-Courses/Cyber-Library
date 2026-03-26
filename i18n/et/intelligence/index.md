@@ -1,7 +1,16 @@
 ---
-title: "Intelligentsus"
-description: "Intelligentsus küberjulgeolekus hõlmab teabe kogumist, töötlemist ja analüüsi, et tuvastada, hinnata ja leevendada küberohte."
-keywords: "intelligentsus, küberjulgeolek, strateegiline intelligentsus, operatiivne intelligentsus, taktikaline intelligentsus, ohuhaldus"
+title: Intelligentsus
+description: Intelligentsus küberjulgeolekus hõlmab teabe kogumist, töötlemist ja
+  analüüsi, et tuvastada, hinnata ja leevendada küberohte.
+keywords:
+- küberturvalisuse luure
+- strateegiline luure
+- operatiivne luure
+- taktikaline luure
+- riskijuhtimine
+- Kompromissinäitajad
+- ohuvood
+- luuretsükkel
 ---
 
 # Intelligentsus

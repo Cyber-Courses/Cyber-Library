@@ -1,7 +1,16 @@
 ---
 title: Pamamahala
-description: Isang komprehensibong gabay sa pamamahala ng cybersecurity at ang kahalagahan nito sa mga organisasyon.
-keywords: pamamahala ng cybersecurity, patakaran, panganib, estratehiya, seguridad
+description: Isang komprehensibong gabay sa pamamahala ng cybersecurity at ang kahalagahan
+  nito sa mga organisasyon.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Pamamahala

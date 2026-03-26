@@ -1,3 +1,20 @@
+---
+title: Hujumkor
+description: Hujumkor kiberxavfsizlik, zararli aktorlar ulardan foydalana olmasdan
+  oldin zaifliklarni aniqlash uchun haqiqiy hujumlarni axloqiy ravishda simulyatsiya
+  qilishni o'z ichiga oladi. Ruxsat etilgan raqiblar sifatida harakat qilib, xavfsizlik
+  jamoalari tashkilotning mudofaasidagi zaif nuqtalarni ochib beradi, bu esa ushbu…
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
+---
+
 # Hujumkor
 
 ## Hujumkor Kiberxavfsizlik Nima?

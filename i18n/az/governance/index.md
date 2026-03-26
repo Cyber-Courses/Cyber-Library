@@ -1,6 +1,16 @@
 ---
-title: "İdarəetmə"
-description: "Kibertəhlükəsizlik idarəetməsi, təşkilatın kibertəhlükələri idarə etmək və azaltmaq üçün qurduğu siyasətlər, rollar və qərar qəbul etmə proseslərinin çərçivəsidir."
+title: İdarəetmə
+description: Kibertəhlükəsizlik idarəetməsi, təşkilatın kibertəhlükələri idarə etmək
+  və azaltmaq üçün qurduğu siyasətlər, rollar və qərar qəbul etmə proseslərinin çərçivəsidir.
+keywords:
+- kibertəhlükəsizlik üzrə idarəetmə
+- idarəetmə çərçivələri
+- risklərin idarə edilməsi
+- uyğunluq
+- biznes strategiyası
+- kiber dayanıqlıq
+- lövhəyə nəzarət
+- əməliyyat davamlılığı
 ---
 
 # İdarəetmə

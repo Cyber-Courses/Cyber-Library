@@ -1,6 +1,15 @@
 ---
-title: "Kaitsev"
-description: "Süstemaatiline lähenemine organisatsiooni andmete, süsteemide ja kasutajate kaitsmiseks küberohtude eest."
+title: Kaitsev
+description: Süstemaatiline lähenemine organisatsiooni andmete, süsteemide ja kasutajate
+  kaitsmiseks küberohtude eest.
+keywords:
+- kaitsev küberjulgeolek
+- Microsofti ohuanalüüs
+- haavatavuse hinnangud
+- intsidentidele reageerimine
+- Pidev jälgimine
+- juhtum analüüs.
+- talitluspidevus
 ---
 
 # Kaitsev

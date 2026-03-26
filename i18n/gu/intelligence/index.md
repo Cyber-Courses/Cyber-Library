@@ -1,6 +1,16 @@
 ---
-title: "બુદ્ધિ"
-description: "સાઇબરસિક્યુરિટીમાં બુદ્ધિ શું છે, તે કેમ મહત્વપૂર્ણ છે, અને તે કેવી રીતે કરવામાં આવે છે તેની વિગતવાર સમજણ."
+title: બુદ્ધિ
+description: સાઇબરસિક્યુરિટીમાં બુદ્ધિ શું છે, તે કેમ મહત્વપૂર્ણ છે, અને તે કેવી રીતે
+  કરવામાં આવે છે તેની વિગતવાર સમજણ.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # બુદ્ધિ

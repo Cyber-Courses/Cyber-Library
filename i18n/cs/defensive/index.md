@@ -1,6 +1,15 @@
 ---
 title: Obranná
-description: Obranná kybernetická bezpečnost je systematický přístup k ochraně dat, systémů a uživatelů organizace před kybernetickými hrozbami.
+description: Obranná kybernetická bezpečnost je systematický přístup k ochraně dat,
+  systémů a uživatelů organizace před kybernetickými hrozbami.
+keywords:
+- obranná kybernetická bezpečnost
+- <g id="1">Informace o hrozbách. </g>
+- posouzení zranitelnosti
+- Incident response
+- Nepřetržité sledování
+- Analýza události
+- 2. Business continuity.
 ---
 
 # Obranná

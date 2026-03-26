@@ -1,3 +1,18 @@
+---
+title: Defensive
+description: A practical overview of defensive cybersecurity, covering threat intelligence,
+  vulnerability assessments, incident response, and continuous improvement strategies
+  to ensure business resilience.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
+---
+
 # Defensive
 
 ## What Is Defensive Cybersecurity?

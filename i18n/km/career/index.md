@@ -1,7 +1,14 @@
 ---
-title: "អាជីព"
-description: "ការងារនៅក្នុងវិស័យសន្តិសុខសាយបឺរ គឺជាដំណើរដ៏គួរឱ្យរំភើបដែលពោរពេញដោយឱកាសសម្រាប់អ្នកជំនាញគ្រប់កម្រិត។"
-keywords: "អាជីព, សន្តិសុខសាយបឺរ, ការអភិវឌ្ឍវិជ្ជាជីវៈ, ឧស្សាហកម្មសន្តិសុខ"
+title: អាជីព
+description: ការងារនៅក្នុងវិស័យសន្តិសុខសាយបឺរ គឺជាដំណើរដ៏គួរឱ្យរំភើបដែលពោរពេញដោយឱកាសសម្រាប់អ្នកជំនាញគ្រប់កម្រិត។
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # អាជីព

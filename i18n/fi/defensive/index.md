@@ -1,6 +1,15 @@
 ---
-title: "Defensiivinen kyberturvallisuus"
-description: "Ymmärrä defensiivisen kyberturvallisuuden merkitys ja toteutus organisaatioiden suojaamiseksi kyberuhkilta."
+title: Defensiivinen kyberturvallisuus
+description: Ymmärrä defensiivisen kyberturvallisuuden merkitys ja toteutus organisaatioiden
+  suojaamiseksi kyberuhkilta.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defensiivinen

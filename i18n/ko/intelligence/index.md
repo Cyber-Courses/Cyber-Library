@@ -1,7 +1,15 @@
 ---
-title: "지능"
-description: "사이버 보안에서 지능의 역할과 중요성에 대한 기술적 탐구"
-keywords: "사이버 보안, 지능, 위협 분석, 전략적 지능, 운영 지능, 전술적 지능"
+title: 지능
+description: 사이버 보안에서 지능의 역할과 중요성에 대한 기술적 탐구
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # 지능

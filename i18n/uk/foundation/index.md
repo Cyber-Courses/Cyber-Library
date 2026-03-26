@@ -1,6 +1,14 @@
 ---
-title: "Основи кібербезпеки"
-description: "Історія, культура хакерів, етика та філософія кібербезпеки."
+title: Основи кібербезпеки
+description: Історія, культура хакерів, етика та філософія кібербезпеки.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # Основи

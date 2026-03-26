@@ -1,6 +1,16 @@
 ---
-title: "Styrning"
-description: "En omfattande guide till cybersäkerhetsstyrning och dess betydelse för organisationer."
+title: Styrning
+description: En omfattande guide till cybersäkerhetsstyrning och dess betydelse för
+  organisationer.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Styrning

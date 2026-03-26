@@ -1,3 +1,19 @@
+---
+title: Osnove
+description: Kibernetička sigurnost ima svoje najranije korijene u hakerskoj kulturi
+  krajem 20. stoljeća. Od trenutka kada su ljudi počeli eksperimentirati s računalima,
+  postojala je želja za razumijevanjem, modificiranjem i pomicanjem granica tehnologije.
+  Ovi rani hakeri često su sebe vidjeli kao istraživače digitalnih granica,…
+keywords:
+- fondacija za sajber bezbjednost
+- hakerska kultura
+- historija kibernetičke sigurnosti
+- etika kibernetičke sigurnosti
+- Upravljanje rizicima
+- povjerenje u digitalne sisteme
+- ljudski element u kibernetičkoj sigurnosti
+---
+
 # Osnove
 
 ## Uvod

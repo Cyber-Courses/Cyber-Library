@@ -1,6 +1,16 @@
 ---
 title: Zeka
-description: Siber güvenlikte zeka, bilgi toplama, işleme ve analiz yoluyla siber tehditleri tanımlama, değerlendirme ve hafifletmeyi amaçlar.
+description: Siber güvenlikte zeka, bilgi toplama, işleme ve analiz yoluyla siber
+  tehditleri tanımlama, değerlendirme ve hafifletmeyi amaçlar.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Zeka

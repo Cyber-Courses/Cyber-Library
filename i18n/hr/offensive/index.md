@@ -1,7 +1,16 @@
 ---
-title: "Ofenzivna Kibernetička Sigurnost"
-description: "Razumijevanje ofenzivne kibernetičke sigurnosti, njene važnosti i metoda implementacije."
-keywords: "ofenzivna kibernetička sigurnost, etičko hakiranje, penetracijsko testiranje, red teaming, sigurnosne prijetnje"
+title: Ofenzivna Kibernetička Sigurnost
+description: Razumijevanje ofenzivne kibernetičke sigurnosti, njene važnosti i metoda
+  implementacije.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofenzivna

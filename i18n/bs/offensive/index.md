@@ -1,6 +1,15 @@
 ---
-title: "Ofanzivna"
-description: "Razumijevanje ofanzivne kibernetičke sigurnosti i njene važnosti"
+title: Ofanzivna
+description: Razumijevanje ofanzivne kibernetičke sigurnosti i njene važnosti
+keywords:
+- uvredljiva kibernetička sigurnost
+- etičko hakiranje
+- Penetracijsko testiranje
+- crveno udruživanje
+- nagrada za greške
+- Društveni inženjering
+- Zaštita podataka
+- Upravljanje rizicima
 ---
 
 # Ofanzivna

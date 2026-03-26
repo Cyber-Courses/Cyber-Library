@@ -1,7 +1,16 @@
 ---
-title: "Beheer"
-description: "Omvattende uiteensetting van kuberveiligheidsbeheer, die belangrikheid daarvan, en hoe dit geïmplementeer word."
-keywords: "kuberveiligheidsbeheer, kuberveiligheid, risiko bestuur, besigheidsdoelwitte, strategiese voordeel"
+title: Beheer
+description: Omvattende uiteensetting van kuberveiligheidsbeheer, die belangrikheid
+  daarvan, en hoe dit geïmplementeer word.
+keywords:
+- cybersecurity beheer
+- bestuursraamwerke
+- Risikobestuur
+- nakoming
+- sakestrategie
+- kuber veerkragtigheid
+- raad toesig
+- operasionele kontinuïteit
 ---
 
 # Beheer

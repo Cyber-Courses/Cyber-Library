@@ -1,7 +1,15 @@
 ---
 title: オフェンシブ
 description: 攻撃的サイバーセキュリティの概要、重要性、および実施方法についての詳細な説明。
-keywords: 攻撃的サイバーセキュリティ, エシカルハッキング, 脆弱性, ペネトレーションテスト, レッドチーミング
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # オフェンシブ

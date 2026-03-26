@@ -1,3 +1,20 @@
+---
+title: Saldırgan
+description: Saldırgan siber güvenlik, kötü niyetli aktörler bu açıkları istismar
+  etmeden önce gerçek dünya saldırılarını etik bir şekilde simüle ederek zayıf noktaları
+  ortaya çıkarmayı içerir. Yetkili rakipler olarak hareket eden güvenlik ekipleri,
+  bir kuruluşun savunmasındaki zayıf noktaları ortaya çıkarır ve bu sorunların…
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
+---
+
 # Saldırgan
 
 ## Saldırgan Siber Güvenlik Nedir?

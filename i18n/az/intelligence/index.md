@@ -1,6 +1,17 @@
 ---
-title: "Kəşfiyyat"
-description: "Kiber təhlükəsizlikdə kəşfiyyat, kiber təhdidlərin müəyyən edilməsi, qiymətləndirilməsi və azaldılması məqsədilə məlumatların toplanması, işlənməsi və təhlilidir."
+title: Kəşfiyyat
+description: Kiber təhlükəsizlikdə kəşfiyyat, kiber təhdidlərin müəyyən edilməsi,
+  qiymətləndirilməsi və azaldılması məqsədilə məlumatların toplanması, işlənməsi və
+  təhlilidir.
+keywords:
+- kibertəhlükəsizlik kəşfiyyatı
+- strateji kəşfiyyat
+- əməliyyat kəşfiyyatı
+- taktiki kəşfiyyat
+- risklərin idarə edilməsi
+- Kompromisin göstəriciləri
+- təhlükə qidaları
+- kəşfiyyat dövrü
 ---
 
 # Kəşfiyyat

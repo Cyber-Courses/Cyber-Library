@@ -1,7 +1,14 @@
 ---
-title: "அடித்தளம்"
-description: "இணைய பாதுகாப்பின் அடிப்படை விளக்கம் மற்றும் வரலாறு"
-keywords: "இணைய பாதுகாப்பு, ஹேக்கர் கலாச்சாரம், வரலாறு, நெறிமுறைகள், மனித உறுப்பு"
+title: அடித்தளம்
+description: இணைய பாதுகாப்பின் அடிப்படை விளக்கம் மற்றும் வரலாறு
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # அடித்தளம்

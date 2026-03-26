@@ -1,6 +1,15 @@
 ---
-title: "Каријера у сајбер безбедности"
-description: "Истражите динамичну каријеру у сајбер безбедности, укључујући профиле, путовање и пејзаж индустрије."
+title: Каријера у сајбер безбедности
+description: Истражите динамичну каријеру у сајбер безбедности, укључујући профиле,
+  путовање и пејзаж индустрије.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Каријера

@@ -1,6 +1,15 @@
 ---
-title: "Defenzivna Kibernetička Sigurnost"
-description: "Sustavni pristup zaštiti podataka, sustava i korisnika organizacije od kibernetičkih prijetnji."
+title: Defenzivna Kibernetička Sigurnost
+description: Sustavni pristup zaštiti podataka, sustava i korisnika organizacije od
+  kibernetičkih prijetnji.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defenzivna

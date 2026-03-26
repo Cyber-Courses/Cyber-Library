@@ -1,6 +1,16 @@
 ---
-title: "Intelligence"
-description: "Pag-unawa sa papel ng intelligence sa cybersecurity at ang kahalagahan nito sa pagbuo ng mga estratehiya sa seguridad."
+title: Intelligence
+description: Pag-unawa sa papel ng intelligence sa cybersecurity at ang kahalagahan
+  nito sa pagbuo ng mga estratehiya sa seguridad.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelligence

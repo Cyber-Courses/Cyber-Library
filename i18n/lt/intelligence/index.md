@@ -1,7 +1,16 @@
 ---
-title: "Intelektas"
-description: "Išsamus intelekto vaidmens kibernetinio saugumo srityje tyrimas, apimantis strateginius, operatyvinius ir taktinius aspektus."
-keywords: "intelektas, kibernetinis saugumas, strateginis intelektas, operatyvinis intelektas, taktinis intelektas"
+title: Intelektas
+description: Išsamus intelekto vaidmens kibernetinio saugumo srityje tyrimas, apimantis
+  strateginius, operatyvinius ir taktinius aspektus.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelektas

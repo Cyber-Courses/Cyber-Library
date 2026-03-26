@@ -1,6 +1,16 @@
 ---
-title: "आक्रामक"
-description: "आक्रामक साइबर सुरक्षाले वास्तविक आक्रमणहरूलाई नैतिक रूपमा अनुकरण गरेर कमजोरीहरू पत्ता लगाउँछ।"
+title: आक्रामक
+description: आक्रामक साइबर सुरक्षाले वास्तविक आक्रमणहरूलाई नैतिक रूपमा अनुकरण गरेर
+  कमजोरीहरू पत्ता लगाउँछ।
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # आक्रामक

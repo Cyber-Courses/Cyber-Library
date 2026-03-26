@@ -1,3 +1,19 @@
+---
+title: Obrona
+description: Obrona w cyberbezpieczeństwie to systematyczne podejście do ochrony danych,
+  systemów i użytkowników organizacji przed zagrożeniami cybernetycznymi. Obejmuje
+  integrację strategii zapobiegania, wykrywania i reagowania w celu zminimalizowania
+  wpływu złośliwych działań. Od wywiadu o zagrożeniach i oceny podatności po…
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
+---
+
 # Obrona
 
 ## Czym jest obrona w cyberbezpieczeństwie?

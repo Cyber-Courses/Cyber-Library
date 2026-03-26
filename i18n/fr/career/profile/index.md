@@ -2,16 +2,16 @@
 title: Profil
 description: Rôles, parcours, compétences et certifications dans les profils de cybersécurité.
 keywords:
-- rôles cybersécurité
-- parcours professionnels
+- rôles en matière de cybersécurité
+- cheminements de carrière
 - développement des compétences
-- certifications cybersécurité
-- carrière sécurité
-- postes juniors
-- postes intermédiaires
-- postes seniors
+- certifications en cybersécurité
+- carrière en sécurité
+- rôles de débutant
+- rôles de niveau intermédiaire
+- postes de niveau supérieur
 - compétences techniques
-- voies managériales
+- parcours managériaux
 ---
 
 # Profil

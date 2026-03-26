@@ -1,6 +1,19 @@
 ---
 title: Siber Güvenlik Profili
-description: Siber güvenlik kariyerinizdeki konumunuzu ve hedeflerinizi belirlemek için profilinizi anlamak önemlidir. Bu makale, kariyer yolları, roller, beceriler ve sertifikalar hakkında derinlemesine bilgi sunar.
+description: Siber güvenlik kariyerinizdeki konumunuzu ve hedeflerinizi belirlemek
+  için profilinizi anlamak önemlidir. Bu makale, kariyer yolları, roller, beceriler
+  ve sertifikalar hakkında derinlemesine bilgi sunar.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

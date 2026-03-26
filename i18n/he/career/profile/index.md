@@ -1,6 +1,18 @@
 ---
-title: "פרופיל"
-description: "הבנת הפרופיל שלך בתחום הסייבר היא חיונית כדי להגדיר את מיקומך במסע המקצועי שלך ולאן אתה רוצה להגיע."
+title: פרופיל
+description: הבנת הפרופיל שלך בתחום הסייבר היא חיונית כדי להגדיר את מיקומך במסע המקצועי
+  שלך ולאן אתה רוצה להגיע.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # פרופיל

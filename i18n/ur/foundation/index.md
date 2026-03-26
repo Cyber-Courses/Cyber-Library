@@ -1,3 +1,20 @@
+---
+title: بنیاد
+description: سائبر سیکیورٹی کی ابتدائی جڑیں 20ویں صدی کے آخر میں ہیکر کلچر میں ہیں۔
+  جب لوگوں نے کمپیوٹرز کے ساتھ تجربہ کرنا شروع کیا تو ٹیکنالوجی کو سمجھنے، اس میں
+  ترمیم کرنے اور اس کی حدود کو آگے بڑھانے کی خواہش پیدا ہوئی۔ یہ ابتدائی ہیکرز اکثر
+  خود کو ڈیجیٹل سرحدوں کے مہم جو سمجھتے تھے، جو علم سیکھنے اور بانٹنے کے خواہشمند
+  تھے،…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # بنیاد
 
 ## تعارف

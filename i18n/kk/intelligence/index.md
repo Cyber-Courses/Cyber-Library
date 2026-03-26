@@ -1,6 +1,16 @@
 ---
-title: "Интеллект"
-description: "Киберқауіпсіздік саласындағы интеллект — ақпаратты жинау, өңдеу және талдау арқылы киберқатерлерді анықтау және азайту."
+title: Интеллект
+description: Киберқауіпсіздік саласындағы интеллект — ақпаратты жинау, өңдеу және
+  талдау арқылы киберқатерлерді анықтау және азайту.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Интеллект

@@ -1,7 +1,15 @@
 ---
-title: "Основи на сајбер безбедноста"
-description: "Истражување на историјата, културата на хакерите и етиката во сајбер безбедноста."
-keywords: "сајбер безбедност, хакерска култура, историја на сајбер безбедноста, етика, ризик и доверба"
+title: Основи на сајбер безбедноста
+description: Истражување на историјата, културата на хакерите и етиката во сајбер
+  безбедноста.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # Основи

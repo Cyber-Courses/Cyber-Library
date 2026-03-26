@@ -1,6 +1,18 @@
 ---
 title: Profil
-description: Pochopení vašeho profilu v oblasti kybernetické bezpečnosti je klíčové pro definování vaší profesní cesty a budoucích cílů.
+description: Pochopení vašeho profilu v oblasti kybernetické bezpečnosti je klíčové
+  pro definování vaší profesní cesty a budoucích cílů.
+keywords:
+- role kybernetické bezpečnosti
+- kariérní dráhy
+- rozvoj dovedností
+- certifikace kybernetické bezpečnosti
+- kariéra v oblasti bezpečnosti
+- vstupní role
+- role střední úrovně
+- role na vyšší úrovni
+- TECHNICKÉ ZNALOSTI
+- manažerské cesty
 ---
 
 # Profil

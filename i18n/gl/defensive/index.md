@@ -1,4 +1,19 @@
-```markdown
+---
+title: Defensa
+description: A ciberseguridade defensiva é un enfoque sistemático para protexer os
+  datos, sistemas e usuarios dunha organización fronte ás ameazas cibernéticas. Implica
+  a integración de estratexias de prevención, detección e resposta para minimizar
+  o impacto das actividades maliciosas. Desde a intelixencia de ameazas e as…
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
+---
+
 # Defensa
 
 ## Que é a Ciberseguridade Defensiva?
@@ -18,4 +33,3 @@ Mesmo as defensas máis fortes non poden garantir unha inmunidade absoluta. Como
 Cando ocorre un ataque, a resposta a incidentes convértese en crítica. As organizacións deben ter un plan ben definido para conter a ameaza, mitigar os danos e restaurar as operacións normais. Ao seguir procedementos establecidos e aproveitar as ferramentas de resposta a incidentes, os equipos poden xestionar eficazmente os incidentes de seguridade e minimizar o seu impacto.
 
 Despois de resolver un incidente, comeza o proceso de aprendizaxe. A análise post-incidente permite ás organizacións revisar o que sucedeu, identificar debilidades nas súas defensas e aplicar as leccións aprendidas para mellorar a súa postura de seguridade. Ao refinar continuamente as súas defensas e manterse vixiantes contra as ameazas emerxentes, as organizacións poden adaptarse ao panorama cambiante da ciberseguridade e protexer os seus activos críticos.
-```

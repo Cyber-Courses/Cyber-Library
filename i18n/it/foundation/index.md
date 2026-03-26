@@ -1,4 +1,19 @@
-```markdown
+---
+title: Fondamenti
+description: La cybersecurity ha le sue radici più antiche nella cultura hacker della
+  fine del XX secolo. Dal momento in cui le persone hanno iniziato a sperimentare
+  con i computer, è emerso il desiderio di comprendere, modificare e spingere i confini
+  della tecnologia. Questi primi hacker si vedevano spesso come esploratori di…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Fondamenti
 
 ## Introduzione
@@ -40,4 +55,3 @@ La fiducia è alla base di quasi ogni aspetto del mondo online. Interazioni, tra
 Gli esseri umani rimangono la variabile più grande nella cybersecurity. Sebbene macchine e software si comportino secondo la logica e le regole programmate, le persone possono commettere errori o agire con malizia in modi che la tecnologia da sola non può prevedere completamente. Dimenticare di applicare patch o cliccare su link di phishing sono errori umani che causano molte delle violazioni più significative.
 
 Affrontare questi problemi spesso richiede formazione regolare, politiche chiare e una cultura che valorizza il comportamento attento alla sicurezza. Campagne di sensibilizzazione ben progettate e programmi di educazione degli utenti riducono la probabilità di passi falsi accidentali. Quando le persone comprendono sia le potenziali conseguenze che le migliori pratiche per un comportamento sicuro, le organizzazioni possono proteggersi meglio dalle minacce che nessuna patch software da sola può risolvere.
-```

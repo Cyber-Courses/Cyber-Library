@@ -1,7 +1,16 @@
 ---
-title: "Ofenzivní kybernetická bezpečnost"
-description: "Podrobný průzkum ofenzivní kybernetické bezpečnosti, její důležitosti a metod implementace."
-keywords: "ofenzivní kybernetická bezpečnost, etický hacking, penetrační testování, red teaming, zranitelnosti"
+title: Ofenzivní kybernetická bezpečnost
+description: Podrobný průzkum ofenzivní kybernetické bezpečnosti, její důležitosti
+  a metod implementace.
+keywords:
+- ofenzivní kybernetická bezpečnost
+- etický hacking
+- penetrační testování
+- červený teaming
+- bug bounty
+- Sociální inženýrství
+- data - ochrana
+- rizika managementu
 ---
 
 # Ofenzivní

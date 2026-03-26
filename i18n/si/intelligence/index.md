@@ -1,6 +1,16 @@
 ---
-title: "ඉන්ටෙලිජන්ස්"
-description: "සයිබර් ආරක්ෂාව සඳහා ඉන්ටෙලිජන්ස් යනු තොරතුරු එකතු කිරීම, සැකසීම සහ විශ්ලේෂණය කිරීමයි."
+title: ඉන්ටෙලිජන්ස්
+description: සයිබර් ආරක්ෂාව සඳහා ඉන්ටෙලිජන්ස් යනු තොරතුරු එකතු කිරීම, සැකසීම සහ විශ්ලේෂණය
+  කිරීමයි.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ඉන්ටෙලිජන්ස්

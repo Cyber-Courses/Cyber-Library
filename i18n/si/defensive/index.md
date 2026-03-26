@@ -1,6 +1,15 @@
 ---
-title: "ආරක්ෂිත"
-description: "ආයතනික දත්ත, පද්ධති සහ පරිශීලකයන් සයිබර් තර්ජන වලින් ආරක්ෂා කිරීම සඳහා ආරක්ෂිත සයිබර් ආරක්ෂාවක්."
+title: ආරක්ෂිත
+description: ආයතනික දත්ත, පද්ධති සහ පරිශීලකයන් සයිබර් තර්ජන වලින් ආරක්ෂා කිරීම සඳහා
+  ආරක්ෂිත සයිබර් ආරක්ෂාවක්.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ආරක්ෂිත

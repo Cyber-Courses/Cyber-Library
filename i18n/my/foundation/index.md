@@ -1,3 +1,19 @@
+---
+title: အခြေခံ
+description: ဆိုက်ဘာလုံခြုံရေးသည် ၂၀ ရာစုအဆုံးပိုင်းမှ ဟက်ကာယဉ်ကျေးမှုတွင် အမြစ်အမြစ်များစွာရှိသည်။
+  လူများက ကွန်ပျူတာများနှင့် စမ်းသပ်မှုများစတင်သောအခါမှစ၍ နည်းပညာကို နားလည်ရန်၊ ပြုပြင်ရန်နှင့်
+  နယ်နိမိတ်များကို ကျော်လွှားရန် ဆန္ဒရှိခဲ့သည်။ အစောပိုင်း ဟက်ကာများသည် မည်သည့်အန္တရာယ်ကိုမျှ
+  ရည်ရွယ်ခြင်းမရှိဘဲ နည်းပညာနယ်မြေများကို…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # အခြေခံ
 
 ## နိဒါန်း

@@ -1,6 +1,17 @@
 ---
-title: "સાઇબરસિક્યુરિટી ગવર્નન્સ"
-description: "સાઇબરસિક્યુરિટી ગવર્નન્સ એ નીતિઓ, ભૂમિકાઓ અને નિર્ણય-લેનાની પ્રક્રિયાઓનું વ્યાપક માળખું છે જે સંગઠન સાઇબર જોખમોને વ્યવસ્થિત કરવા અને ઘટાડવા માટે સ્થાપિત કરે છે."
+title: સાઇબરસિક્યુરિટી ગવર્નન્સ
+description: સાઇબરસિક્યુરિટી ગવર્નન્સ એ નીતિઓ, ભૂમિકાઓ અને નિર્ણય-લેનાની પ્રક્રિયાઓનું
+  વ્યાપક માળખું છે જે સંગઠન સાઇબર જોખમોને વ્યવસ્થિત કરવા અને ઘટાડવા માટે સ્થાપિત કરે
+  છે.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # ગવર્નન્સ

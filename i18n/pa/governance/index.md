@@ -1,6 +1,16 @@
 ---
-title: "ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ"
-description: "ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ ਦੇ ਅਹਿਮ ਪਹਲੂਆਂ ਦੀ ਸਮਝ ਅਤੇ ਇਸਦੇ ਲਾਭਾਂ ਦੀ ਵਿਸਤ੍ਰਿਤ ਜਾਣਕਾਰੀ।"
+title: ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ
+description: ਸਾਈਬਰਸੁਰੱਖਿਆ ਗਵਰਨੈਂਸ ਦੇ ਅਹਿਮ ਪਹਲੂਆਂ ਦੀ ਸਮਝ ਅਤੇ ਇਸਦੇ ਲਾਭਾਂ ਦੀ ਵਿਸਤ੍ਰਿਤ
+  ਜਾਣਕਾਰੀ।
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # ਗਵਰਨੈਂਸ

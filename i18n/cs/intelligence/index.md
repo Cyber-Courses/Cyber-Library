@@ -1,6 +1,15 @@
 ---
 title: Inteligence
 description: Přehled inteligence v kybernetické bezpečnosti, její důležitost a implementace.
+keywords:
+- zpravodajství v oblasti kybernetické bezpečnosti
+- strategické zpravodajství
+- Zpravodajské informace
+- taktická rozvědka
+- rizika managementu
+- Ukazatele kompromisu
+- kanály hrozeb
+- zpravodajský cyklus
 ---
 
 # Inteligence

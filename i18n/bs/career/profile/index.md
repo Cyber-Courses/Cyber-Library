@@ -1,6 +1,19 @@
 ---
-title: "Profil"
-description: "Razumijevanje vašeg profila u kibernetičkoj sigurnosti je ključno jer pomaže u definiranju vašeg trenutnog položaja u profesionalnom putovanju i gdje želite ići."
+title: Profil
+description: Razumijevanje vašeg profila u kibernetičkoj sigurnosti je ključno jer
+  pomaže u definiranju vašeg trenutnog položaja u profesionalnom putovanju i gdje
+  želite ići.
+keywords:
+- uloge u kibernetičkoj sigurnosti
+- staze karijere
+- razvoj vještina
+- certifikati za kibernetičku sigurnost
+- sigurnosna karijera
+- uloge ulaznog nivoa
+- uloge srednjeg nivoa
+- uloge na višem nivou
+- Tehničke sposobnosti
+- menadžerske staze
 ---
 
 # Profil

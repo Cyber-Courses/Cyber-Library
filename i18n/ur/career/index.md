@@ -1,6 +1,14 @@
 ---
-title: "کیریئر"
-description: "سائبر سیکیورٹی میں کیریئر کے مواقع اور ترقی کے راستے"
+title: کیریئر
+description: سائبر سیکیورٹی میں کیریئر کے مواقع اور ترقی کے راستے
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # کیریئر

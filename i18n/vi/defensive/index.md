@@ -1,17 +1,17 @@
 ---
-<<<<<<< dev
-title: "Phòng thủ"
-description: "Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện."
+title: Phòng thủ
+description: Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Phòng thủ
-=======
-title: "Phòng Thủ"
-description: "Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện."
----
-
-# Phòng Thủ
->>>>>>> main
 
 ## An Ninh Mạng Phòng Thủ Là Gì?
 

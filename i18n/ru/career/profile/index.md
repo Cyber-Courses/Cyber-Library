@@ -1,6 +1,18 @@
 ---
 title: Профиль
-description: Понимание вашего профиля в области кибербезопасности помогает определить ваше текущее положение и цели в профессиональном пути.
+description: Понимание вашего профиля в области кибербезопасности помогает определить
+  ваше текущее положение и цели в профессиональном пути.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Профиль

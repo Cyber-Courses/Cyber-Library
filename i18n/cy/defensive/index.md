@@ -1,6 +1,14 @@
 ---
-title: "Amddiffynnol"
-description: "Deall seiberddiogelwch amddiffynnol a'i bwysigrwydd mewn sefydliadau."
+title: Amddiffynnol
+description: Deall seiberddiogelwch amddiffynnol a'i bwysigrwydd mewn sefydliadau.
+keywords:
+- seiberddiogelwch amddiffynnol
+- cudd - wybodaeth bygythiad
+- asesiadau bregusrwydd
+- ymateb i ddigwyddiadau
+- monitro parhaus
+- rhestr o feysydd "Post - Incident Analysis
+- parhad busnes
 ---
 
 # Amddiffynnol

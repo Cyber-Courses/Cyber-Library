@@ -1,7 +1,16 @@
 ---
 title: Intelligentie
-description: Een diepgaande verkenning van de rol van intelligentie in cybersecurity, inclusief het belang en de implementatie ervan.
-keywords: intelligentie, cybersecurity, strategisch, operationeel, tactisch, dreigingsinformatie
+description: Een diepgaande verkenning van de rol van intelligentie in cybersecurity,
+  inclusief het belang en de implementatie ervan.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelligentie

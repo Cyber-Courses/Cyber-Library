@@ -1,7 +1,18 @@
 ---
-title: "Profil"
-description: "Kiber təhlükəsizlik profilinizi anlamaq və karyera inkişafınızı istiqamətləndirmək üçün əsas məqamlar."
-keywords: "Kiber təhlükəsizlik, karyera profili, bacarıqlar, sertifikatlar, karyera yolları"
+title: Profil
+description: Kiber təhlükəsizlik profilinizi anlamaq və karyera inkişafınızı istiqamətləndirmək
+  üçün əsas məqamlar.
+keywords:
+- kibertəhlükəsizlik rolları
+- karyera yolları
+- bacarığın inkişafı
+- kibertəhlükəsizlik sertifikatları
+- təhlükəsizlik karyerası
+- giriş səviyyəsində vəzifələr
+- orta səviyyəli vəzifələr
+- yüksək səviyyəli vəzifələr
+- texniki bacarıqlar
+- idarəetmə yolları
 ---
 
 # Profil

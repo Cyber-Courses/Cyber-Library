@@ -1,17 +1,19 @@
 ---
-<<<<<<< dev
-title: "Trí tuệ"
-description: "Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai hiệu quả chương trình trí tuệ."
+title: Trí tuệ
+description: Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai
+  hiệu quả chương trình trí tuệ.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Trí tuệ
-=======
-title: "Trí Tuệ"
-description: "Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai hiệu quả chương trình trí tuệ."
----
-
-# Trí Tuệ
->>>>>>> main
 
 ## Trí Tuệ Là Gì?
 

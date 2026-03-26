@@ -1,6 +1,16 @@
 ---
-title: "တိုက်ခိုက်မှုဆိုင်ရာ"
-description: "တိုက်ခိုက်မှုဆိုင်ရာဆိုသည်မှာ ဘာလဲ၊ အရေးကြီးမှုနှင့် လုပ်ဆောင်နည်းများကို နက်ရှိုင်းစွာရှင်းပြသည်။"
+title: တိုက်ခိုက်မှုဆိုင်ရာ
+description: တိုက်ခိုက်မှုဆိုင်ရာဆိုသည်မှာ ဘာလဲ၊ အရေးကြီးမှုနှင့် လုပ်ဆောင်နည်းများကို
+  နက်ရှိုင်းစွာရှင်းပြသည်။
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # တိုက်ခိုက်မှုဆိုင်ရာ

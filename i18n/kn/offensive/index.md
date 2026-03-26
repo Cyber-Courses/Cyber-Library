@@ -1,6 +1,16 @@
 ---
-title: "ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ"
-description: "ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ ಎಂದರೇನು, ಅದರ ಮಹತ್ವ ಮತ್ತು ಹೇಗೆ ಕಾರ್ಯಗತಗೊಳಿಸಲಾಗುತ್ತದೆ ಎಂಬುದರ ಕುರಿತು ವಿವರವಾದ ವಿವರಣೆ."
+title: ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ
+description: ಆಕ್ರಮಣಕಾರಿ ಸೈಬರ್‌ಸುರಕ್ಷತೆ ಎಂದರೇನು, ಅದರ ಮಹತ್ವ ಮತ್ತು ಹೇಗೆ ಕಾರ್ಯಗತಗೊಳಿಸಲಾಗುತ್ತದೆ
+  ಎಂಬುದರ ಕುರಿತು ವಿವರವಾದ ವಿವರಣೆ.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # ಆಕ್ರಮಣಕಾರಿ

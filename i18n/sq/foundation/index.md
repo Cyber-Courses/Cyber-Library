@@ -1,4 +1,19 @@
-```markdown
+---
+title: Themelimi
+description: Siguria kibernetike ka rrënjët e saj më të hershme në kulturën e hakerëve
+  të fundit të shekullit të 20-të. Që nga momenti kur njerëzit filluan të eksperimentojnë
+  me kompjuterët, ekzistonte një dëshirë për të kuptuar, modifikuar dhe shtyrë kufijtë
+  e teknologjisë. Këta hakerë të hershëm shpesh e shihnin veten si…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Themelimi
 
 ## Hyrje
@@ -40,4 +55,3 @@ Besimi mbështet pothuajse çdo aspekt të botës online. Ndërveprimet, transak
 Njerëzit mbeten variabli më i madh në sigurinë kibernetike. Edhe pse makinat dhe softueri sillen sipas logjikës dhe rregullave të programuara në to, njerëzit mund të bëjnë gabime ose të veprojnë me keqdashje në mënyra që teknologjia vetëm nuk mund t'i parashikojë plotësisht. Nga harrimi për të aplikuar përditësime deri te klikimi në lidhje phishing, gabimet njerëzore shkaktojnë shumë nga shkeljet më të rëndësishme.
 
 Adresimi i këtyre çështjeve shpesh përfshin trajnime të rregullta, politika të qarta dhe një kulturë që vlerëson sjelljen e ndërgjegjshme për sigurinë. Fushatat e ndërgjegjësimit të dizajnuara mirë dhe programet e edukimit të përdoruesve reduktojnë gjasat e gabimeve aksidentale. Kur njerëzit kuptojnë si pasojat e mundshme ashtu edhe praktikat më të mira për sjellje të sigurt, organizatat mund të mbrojnë më mirë veten kundër kërcënimeve që asnjë përditësim softuerik vetëm nuk mund të rregullojë.
-```

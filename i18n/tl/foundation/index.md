@@ -1,3 +1,19 @@
+---
+title: Pundasyon
+description: Ang cybersecurity ay may pinagmulan sa kultura ng hacker noong huling
+  bahagi ng ika-20 siglo. Mula nang magsimulang mag-eksperimento ang mga tao sa mga
+  kompyuter, nagkaroon ng pagnanais na maunawaan, baguhin, at itulak ang mga hangganan
+  ng teknolohiya. Ang mga naunang hacker ay madalas na nakikita ang kanilang sarili…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Pundasyon
 
 ## Panimula

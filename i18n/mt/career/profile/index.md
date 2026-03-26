@@ -1,6 +1,18 @@
 ---
 title: Profil
-description: Skopri l-importanza tal-profil tas-sigurtà ċibernetika tiegħek u kif jista' jiggwidak fil-karriera tiegħek.
+description: Skopri l-importanza tal-profil tas-sigurtà ċibernetika tiegħek u kif
+  jista' jiggwidak fil-karriera tiegħek.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

@@ -1,7 +1,18 @@
 ---
-title: "Profil"
-description: "Verstehen Sie Ihr Cybersicherheitsprofil, um Ihre berufliche Reise zu definieren und Ihre Karriereziele zu erreichen."
-keywords: "Cybersicherheitsprofil, Karrierewege, Rollen und Verantwortlichkeiten, Fähigkeiten, Zertifizierungen"
+title: Profil
+description: Verstehen Sie Ihr Cybersicherheitsprofil, um Ihre berufliche Reise zu
+  definieren und Ihre Karriereziele zu erreichen.
+keywords:
+- cybersicherheitsrollen
+- Karrierewege
+- Entwicklung von Fähigkeiten
+- cybersicherheitszertifizierungen
+- sicherheitskarriere
+- einstiegsrollen
+- mid-Level-Rollen
+- senior-Level-Rollen
+- Technische Fähigkeiten
+- führungspfade
 ---
 
 # Profil

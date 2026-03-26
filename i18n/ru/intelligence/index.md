@@ -1,7 +1,15 @@
 ---
-title: "Интеллект"
-description: "Понимание роли и важности интеллекта в кибербезопасности"
-keywords: "интеллект, кибербезопасность, стратегический интеллект, оперативный интеллект, тактический интеллект"
+title: Интеллект
+description: Понимание роли и важности интеллекта в кибербезопасности
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Интеллект

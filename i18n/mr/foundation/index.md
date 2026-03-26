@@ -1,3 +1,19 @@
+---
+title: पाया
+description: सायबरसुरक्षा 20व्या शतकाच्या उत्तरार्धातील हॅकर संस्कृतीच्या सुरुवातीच्या
+  मुळांमध्ये आहे. लोकांनी संगणकांसह प्रयोग करण्यास सुरुवात केली तेव्हापासून तंत्रज्ञान
+  समजून घेण्याची, बदलण्याची आणि त्याच्या मर्यादा ओलांडण्याची इच्छा होती. हे प्रारंभिक
+  हॅकर्स स्वतःला डिजिटल सीमांचे अन्वेषक मानत होते, ज्यांना हानी करण्याचा हेतू…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # पाया
 
 ## परिचय

@@ -1,6 +1,15 @@
 ---
-title: "Tấn công"
-description: "Tìm hiểu về an ninh mạng tấn công, tầm quan trọng và cách thực hiện."
+title: Tấn công
+description: Tìm hiểu về an ninh mạng tấn công, tầm quan trọng và cách thực hiện.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Tấn công

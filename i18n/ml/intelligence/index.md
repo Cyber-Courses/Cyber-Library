@@ -1,7 +1,15 @@
 ---
-title: "ബുദ്ധിമുട്ട്"
-description: "സൈബർസുരക്ഷയിൽ ബുദ്ധിമുട്ടിന്റെ നിർവചനം, പ്രാധാന്യം, നടപ്പാക്കൽ"
-keywords: "സൈബർസുരക്ഷ, ബുദ്ധിമുട്ട്, തന്ത്രങ്ങൾ, ഓപ്പറേഷണൽ ഇന്റലിജൻസ്, ടാക്ടിക്കൽ ഇന്റലിജൻസ്"
+title: ബുദ്ധിമുട്ട്
+description: സൈബർസുരക്ഷയിൽ ബുദ്ധിമുട്ടിന്റെ നിർവചനം, പ്രാധാന്യം, നടപ്പാക്കൽ
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ബുദ്ധിമുട്ട്

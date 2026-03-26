@@ -1,3 +1,19 @@
+---
+title: Ferill
+description: Ferill í netöryggi er kraftmikil vegferð sem býður upp á tækifæri fyrir
+  fagfólk á öllum stigum. Eftir því sem stafræni heimurinn stækkar eykst eftirspurnin
+  eftir hæfum sérfræðingum í netöryggi, sem skapar líflegan og hraðskreiðan vinnumarkað.
+  Hvort sem þú ert að byrja eða leitar að framgangi, þá býður netöryggissviðið…
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
+---
+
 # Ferill
 
 Ferill í netöryggi er kraftmikil vegferð sem býður upp á tækifæri fyrir fagfólk á öllum stigum. Eftir því sem stafræni heimurinn stækkar eykst eftirspurnin eftir hæfum sérfræðingum í netöryggi, sem skapar líflegan og hraðskreiðan vinnumarkað. Hvort sem þú ert að byrja eða leitar að framgangi, þá býður netöryggissviðið upp á nægt svigrúm til bæði persónulegs og faglegs vaxtar.

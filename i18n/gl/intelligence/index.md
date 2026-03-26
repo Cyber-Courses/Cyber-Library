@@ -1,6 +1,15 @@
 ---
-title: "Intelixencia"
-description: "Comprender a intelixencia na ciberseguridade e a súa importancia."
+title: Intelixencia
+description: Comprender a intelixencia na ciberseguridade e a súa importancia.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelixencia

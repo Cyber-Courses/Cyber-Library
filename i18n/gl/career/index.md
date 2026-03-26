@@ -1,6 +1,15 @@
 ---
-title: "Carreira"
-description: "Explora as oportunidades e o desenvolvemento profesional no campo da ciberseguridade."
+title: Carreira
+description: Explora as oportunidades e o desenvolvemento profesional no campo da
+  ciberseguridade.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Carreira

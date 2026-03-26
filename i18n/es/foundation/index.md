@@ -1,7 +1,14 @@
 ---
-title: "Fundamentos de la Ciberseguridad"
-description: "Exploración detallada de la historia, cultura y ética de la ciberseguridad."
-keywords: "ciberseguridad, cultura hacker, historia, ética, gestión de riesgos"
+title: Fundamentos de la Ciberseguridad
+description: Exploración detallada de la historia, cultura y ética de la ciberseguridad.
+keywords:
+- base de ciberseguridad
+- cultura hacker
+- historial de ciberseguridad
+- ética de ciberseguridad
+- gestión de riesgos
+- confianza en los sistemas digitales
+- elemento humano en ciberseguridad
 ---
 
 # Fundamentos

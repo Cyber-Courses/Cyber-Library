@@ -1,7 +1,15 @@
 ---
-title: "Ulinzi"
-description: "Ulinzi wa Mtandao: Mbinu za Kulinda Data na Mfumo wa Shirika Dhidi ya Vitisho vya Mtandao."
-keywords: "ulinzi wa mtandao, usalama wa mtandao, vitisho vya mtandao, majibu ya tukio, tathmini ya udhaifu"
+title: Ulinzi
+description: 'Ulinzi wa Mtandao: Mbinu za Kulinda Data na Mfumo wa Shirika Dhidi ya
+  Vitisho vya Mtandao.'
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Ulinzi

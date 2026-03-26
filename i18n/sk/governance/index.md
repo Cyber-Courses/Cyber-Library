@@ -1,6 +1,16 @@
 ---
-title: "Riadenie kybernetickej bezpečnosti"
-description: "Podrobný prehľad o riadení kybernetickej bezpečnosti vrátane jeho dôležitosti a implementácie."
+title: Riadenie kybernetickej bezpečnosti
+description: Podrobný prehľad o riadení kybernetickej bezpečnosti vrátane jeho dôležitosti
+  a implementácie.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Riadenie

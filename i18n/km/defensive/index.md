@@ -1,7 +1,14 @@
 ---
 title: ការពារជាមុន
 description: ការពារជាមុននៅក្នុងវិស័យសន្តិសុខបច្ចេកវិទ្យាព័ត៌មាន
-keywords: ការពារជាមុន, សន្តិសុខបច្ចេកវិទ្យាព័ត៌មាន, ការពារទិន្នន័យ, ការឆ្លើយតបនឹងហេតុការណ៍
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ការពារជាមុន

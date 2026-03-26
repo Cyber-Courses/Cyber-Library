@@ -1,6 +1,16 @@
 ---
-title: "ინტელექტი"
-description: "ინტელექტი კიბერუსაფრთხოებაში: რა არის, რატომ არის მნიშვნელოვანი და როგორ ხდება მისი განხორციელება."
+title: ინტელექტი
+description: 'ინტელექტი კიბერუსაფრთხოებაში: რა არის, რატომ არის მნიშვნელოვანი და როგორ
+  ხდება მისი განხორციელება.'
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ინტელექტი

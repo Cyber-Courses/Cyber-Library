@@ -1,6 +1,19 @@
 ---
-title: "Perfil"
-description: "Comprender su perfil de ciberseguridad es esencial para definir su posición en su trayectoria profesional y hacia dónde desea ir. Este artículo explora los caminos de carrera, roles, habilidades, certificaciones y grados en ciberseguridad."
+title: Perfil
+description: Comprender su perfil de ciberseguridad es esencial para definir su posición
+  en su trayectoria profesional y hacia dónde desea ir. Este artículo explora los
+  caminos de carrera, roles, habilidades, certificaciones y grados en ciberseguridad.
+keywords:
+- roles de ciberseguridad
+- Rutas de carrera
+- Desarrollo de competencias
+- certificaciones de ciberseguridad
+- carrera de seguridad
+- roles de nivel de entrada
+- roles de nivel medio
+- roles de alto nivel
+- conocimientos técnicos
+- rutas de gestión
 ---
 
 # Perfil

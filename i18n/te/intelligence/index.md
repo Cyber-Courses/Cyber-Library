@@ -1,6 +1,15 @@
 ---
-title: "ఇంటెలిజెన్స్"
-description: "సైబర్ భద్రతలో ఇంటెలిజెన్స్ యొక్క ప్రాముఖ్యత మరియు అమలు విధానం"
+title: ఇంటెలిజెన్స్
+description: సైబర్ భద్రతలో ఇంటెలిజెన్స్ యొక్క ప్రాముఖ్యత మరియు అమలు విధానం
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ఇంటెలిజెన్స్

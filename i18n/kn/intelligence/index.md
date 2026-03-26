@@ -1,7 +1,15 @@
 ---
-title: "ಬುದ್ಧಿಮತ್ತೆ"
-description: "ಸೈಬರ್‌ಸುರಕ್ಷಾ ಕ್ಷೇತ್ರದಲ್ಲಿ ಬುದ್ಧಿಮತ್ತೆಯ ಮಹತ್ವ ಮತ್ತು ಅದರ ಕಾರ್ಯವಿಧಾನ"
-keywords: "ಸೈಬರ್‌ಸುರಕ್ಷಾ, ಬುದ್ಧಿಮತ್ತೆ, ತಂತ್ರಜ್ಞಾನ, ಅಪಾಯ ನಿರ್ವಹಣೆ"
+title: ಬುದ್ಧಿಮತ್ತೆ
+description: ಸೈಬರ್‌ಸುರಕ್ಷಾ ಕ್ಷೇತ್ರದಲ್ಲಿ ಬುದ್ಧಿಮತ್ತೆಯ ಮಹತ್ವ ಮತ್ತು ಅದರ ಕಾರ್ಯವಿಧಾನ
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ಬುದ್ಧಿಮತ್ತೆ

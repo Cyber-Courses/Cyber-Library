@@ -1,7 +1,17 @@
 ---
-title: "网络安全概况"
-description: "了解您的网络安全概况对于定义您的职业旅程和未来目标至关重要。"
-keywords: "网络安全, 职业路径, 角色与职责, 技能, 认证与学位"
+title: 网络安全概况
+description: 了解您的网络安全概况对于定义您的职业旅程和未来目标至关重要。
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # 概况

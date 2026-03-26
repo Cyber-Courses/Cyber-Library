@@ -1,6 +1,16 @@
 ---
-title: "Inteligencia"
-description: "Podrobný prehľad o úlohe inteligencie v kybernetickej bezpečnosti, vrátane jej dôležitosti a implementácie."
+title: Inteligencia
+description: Podrobný prehľad o úlohe inteligencie v kybernetickej bezpečnosti, vrátane
+  jej dôležitosti a implementácie.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Inteligencia

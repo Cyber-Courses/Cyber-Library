@@ -1,3 +1,20 @@
+---
+title: Quản trị
+description: Quản trị an ninh mạng là khung chính sách toàn diện, vai trò và quy trình
+  ra quyết định mà một tổ chức thiết lập để quản lý và giảm thiểu rủi ro mạng. Nó
+  cung cấp bản thiết kế để tích hợp an ninh mạng vào mọi khía cạnh của doanh nghiệp,
+  đảm bảo rằng các sáng kiến an ninh không hoạt động một cách cô lập mà thay vào đó…
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
+---
+
 # Quản trị
 
 ## Quản Trị An Ninh Mạng Là Gì?

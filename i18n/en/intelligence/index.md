@@ -1,3 +1,19 @@
+---
+title: Intelligence
+description: A comprehensive overview of cybersecurity intelligence, focusing on its
+  strategic, operational, and tactical levels, and how it guides proactive defenses
+  and risk management.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
+---
+
 # Intelligence
 
 ## What Is Intelligence?

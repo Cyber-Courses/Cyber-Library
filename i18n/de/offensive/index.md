@@ -1,6 +1,16 @@
 ---
 title: Offensive Cybersicherheit
-description: Eine detaillierte Untersuchung der offensiven Cybersicherheit, ihrer Bedeutung und ihrer Implementierung.
+description: Eine detaillierte Untersuchung der offensiven Cybersicherheit, ihrer
+  Bedeutung und ihrer Implementierung.
+keywords:
+- offensive Cybersicherheit
+- ethisches Hacking
+- Penetrationstests
+- Red Teaming
+- Bug Bounty
+- Social Engineering
+- datenschutz
+- Risikomanagement
 ---
 
 # Offensive

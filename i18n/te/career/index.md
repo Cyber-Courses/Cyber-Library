@@ -1,6 +1,15 @@
 ---
-title: "కెరీర్"
-description: "సైబర్‌సెక్యూరిటీ రంగంలో కెరీర్‌ను నిర్మించుకోవడం ఎలా అనే దానిపై లోతైన అవగాహన."
+title: కెరీర్
+description: సైబర్‌సెక్యూరిటీ రంగంలో కెరీర్‌ను నిర్మించుకోవడం ఎలా అనే దానిపై లోతైన
+  అవగాహన.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # కెరీర్

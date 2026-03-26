@@ -1,6 +1,14 @@
 ---
-title: "Karrera"
-description: "Zibersegurtasuneko karrera bat aukera dinamikoak eskaintzen ditu profesionalentzat."
+title: Karrera
+description: Zibersegurtasuneko karrera bat aukera dinamikoak eskaintzen ditu profesionalentzat.
+keywords:
+- zibersegurtasun karrera
+- karrera-bideak
+- rolak eta erantzukizunak
+- trebetasun teknikoak eta bigunak
+- "& Ziurtagiriak"
+- titulu akademikoak
+- garapen profesionala
 ---
 
 # Karrera

@@ -1,6 +1,16 @@
 ---
-title: "Управление кибербезопасностью"
-description: "Подробное руководство по управлению кибербезопасностью, его значимости и методам реализации."
+title: Управление кибербезопасностью
+description: Подробное руководство по управлению кибербезопасностью, его значимости
+  и методам реализации.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Управление

@@ -1,6 +1,15 @@
 ---
-title: "ความฉลาด"
-description: "การรวบรวม ประมวลผล และวิเคราะห์ข้อมูลเพื่อระบุ ประเมิน และลดภัยคุกคามทางไซเบอร์"
+title: ความฉลาด
+description: การรวบรวม ประมวลผล และวิเคราะห์ข้อมูลเพื่อระบุ ประเมิน และลดภัยคุกคามทางไซเบอร์
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ความฉลาด
