@@ -1,7 +1,16 @@
 ---
-title: "Intelligens"
-description: "En dybdegående udforskning af intelligens inden for cybersikkerhed, herunder dets betydning og implementering."
-keywords: "cybersikkerhed, intelligens, strategisk intelligens, operationel intelligens, taktisk intelligens, trusselsvurdering"
+title: Intelligens
+description: En dybdegående udforskning af intelligens inden for cybersikkerhed, herunder
+  dets betydning og implementering.
+keywords:
+- cybersikkerhedsintelligens
+- strategisk efterretning
+- efterretninger
+- taktisk efterretning
+- risikoforvaltning
+- Kompromisindikatorer
+- Threatfeeds
+- efterretningscyklus
 ---
 
 # Intelligens

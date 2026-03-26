@@ -1,6 +1,15 @@
 ---
-title: "Carrera"
-description: "Explora una carrera en ciberseguridad, un campo dinámico con oportunidades para el desarrollo personal y profesional."
+title: Carrera
+description: Explora una carrera en ciberseguridad, un campo dinámico con oportunidades
+  para el desarrollo personal y profesional.
+keywords:
+- carrera en ciberseguridad
+- Rutas de carrera
+- Roles y funciones
+- habilidades técnicas y sociales
+- certificaciones
+- Títulos académicos
+- desarrollo profesional
 ---
 
 # Carrera

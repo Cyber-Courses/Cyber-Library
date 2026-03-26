@@ -1,6 +1,15 @@
 ---
-title: "Inteliģence"
-description: "Izpratne par inteliģenci kiberdrošībā, tās nozīmi un īstenošanu."
+title: Inteliģence
+description: Izpratne par inteliģenci kiberdrošībā, tās nozīmi un īstenošanu.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Inteliģence

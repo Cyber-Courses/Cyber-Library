@@ -1,6 +1,15 @@
 ---
 title: Karriere
-description: Utforsk en karriere innen cybersikkerhet med muligheter for personlig og profesjonell utvikling.
+description: Utforsk en karriere innen cybersikkerhet med muligheter for personlig
+  og profesjonell utvikling.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karriere

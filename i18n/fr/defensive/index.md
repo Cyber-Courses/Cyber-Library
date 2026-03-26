@@ -1,14 +1,16 @@
 ---
 title: Défensive
-description: "Vue d’ensemble pratique de la cybersécurité défensive : renseignement sur les menaces, évaluation des vulnérabilités, réponse aux incidents et amélioration continue pour la résilience de l’entreprise."
+description: 'Vue d’ensemble pratique de la cybersécurité défensive : renseignement
+  sur les menaces, évaluation des vulnérabilités, réponse aux incidents et amélioration
+  continue pour la résilience de l’entreprise.'
 keywords:
-  - cybersécurité défensive
-  - renseignement sur les menaces
-  - évaluation des vulnérabilités
-  - réponse aux incidents
-  - surveillance continue
-  - analyse post-incident
-  - continuité d’activité
+- cybersécurité défensive
+- renseignements sur les menaces
+- évaluations de vulnérabilité
+- réponse aux incidents
+- surveillance continue
+- analyse post-incident
+- continuité des activités
 ---
 
 # Défensive

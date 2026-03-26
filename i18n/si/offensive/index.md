@@ -1,6 +1,15 @@
 ---
-title: "ප්‍රහාරක"
-description: "ප්‍රහාරක සයිබර් ආරක්ෂාව පිළිබඳව සවිස්තරාත්මක විමසුමක්"
+title: ප්‍රහාරක
+description: ප්‍රහාරක සයිබර් ආරක්ෂාව පිළිබඳව සවිස්තරාත්මක විමසුමක්
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # ප්‍රහාරක

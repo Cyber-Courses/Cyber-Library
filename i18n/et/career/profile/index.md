@@ -1,6 +1,18 @@
 ---
-title: "Profiil"
-description: "Küberjulgeoleku profiili mõistmine on oluline, kuna see aitab määratleda teie positsiooni professionaalsel teekonnal ja sihte tulevikuks."
+title: Profiil
+description: Küberjulgeoleku profiili mõistmine on oluline, kuna see aitab määratleda
+  teie positsiooni professionaalsel teekonnal ja sihte tulevikuks.
+keywords:
+- küberturvalisuse rollid
+- karjäärivõimalused
+- NT1 õppima õppimine . .
+- küberturvalisuse sertifikaadid
+- turvakarjäär
+- algtaseme rollid
+- keskastme rollid
+- kõrgema taseme rollid
+- Tehnilised teadmised
+- juhtimisviisid
 ---
 
 # Profiil

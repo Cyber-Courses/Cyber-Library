@@ -1,6 +1,15 @@
 ---
-title: "Zarządzanie Cyberbezpieczeństwem"
-description: "Zrozumienie zarządzania cyberbezpieczeństwem i jego znaczenia dla organizacji."
+title: Zarządzanie Cyberbezpieczeństwem
+description: Zrozumienie zarządzania cyberbezpieczeństwem i jego znaczenia dla organizacji.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Zarządzanie

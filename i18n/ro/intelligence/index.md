@@ -1,6 +1,16 @@
 ---
-title: "Inteligență"
-description: "Explorarea conceptului de inteligență în securitatea cibernetică, importanța sa și modul de implementare."
+title: Inteligență
+description: Explorarea conceptului de inteligență în securitatea cibernetică, importanța
+  sa și modul de implementare.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Inteligență

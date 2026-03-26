@@ -1,3 +1,22 @@
+---
+title: Perfil
+description: Comprender o teu perfil de ciberseguridade é esencial porque che axuda
+  a definir onde te atopas na túa traxectoria profesional e cara a onde queres ir.
+  Un perfil de ciberseguridade combina as túas habilidades actuais, experiencias,
+  intereses e obxectivos, servindo como unha folla de ruta para aliñar as túas eleccións…
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
+---
+
 # Perfil
 
 Comprender o teu perfil de ciberseguridade é esencial porque che axuda a definir onde te atopas na túa traxectoria profesional e cara a onde queres ir. Un perfil de ciberseguridade combina as túas habilidades actuais, experiencias, intereses e obxectivos, servindo como unha folla de ruta para aliñar as túas eleccións de carreira cos roles, certificacións e oportunidades de desenvolvemento axeitados. Ao identificar o teu perfil, xa sexa técnico, de xestión ou híbrido, podes tomar decisións informadas sobre camiños de formación, adquisición de habilidades e oportunidades laborais que mellor se axusten ás túas fortalezas e aspiracións. Esta claridade non só mellora o crecemento persoal, senón que tamén aumenta o teu valor para os empregadores que buscan talento ben aliñado nun campo complexo e en rápida evolución.

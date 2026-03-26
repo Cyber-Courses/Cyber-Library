@@ -1,3 +1,19 @@
+---
+title: Karyera
+description: Kiber təhlükəsizlik sahəsində karyera, bütün səviyyələrdəki mütəxəssislər
+  üçün imkanlarla dolu dinamik bir səyahətdir. Rəqəmsal dünya genişləndikcə, bacarıqlı
+  kiber təhlükəsizlik mütəxəssislərinə olan tələbat da artır və bu da canlı, sürətli
+  bir iş bazarını təqdim edir. İstər yeni başlayırsınız, istərsə də irəliləmək…
+keywords:
+- kibertəhlükəsizlik karyerası
+- karyera yolları
+- vəzifə və öhdəliklər
+- texniki və yumşaq bacarıqlar
+- Sertifikatlar
+- akademik dərəcələr
+- peşəkar inkişaf
+---
+
 # Karyera
 
 Kiber təhlükəsizlik sahəsində karyera, bütün səviyyələrdəki mütəxəssislər üçün imkanlarla dolu dinamik bir səyahətdir. Rəqəmsal dünya genişləndikcə, bacarıqlı kiber təhlükəsizlik mütəxəssislərinə olan tələbat da artır və bu da canlı, sürətli bir iş bazarını təqdim edir. İstər yeni başlayırsınız, istərsə də irəliləmək istəyirsinizsə, kiber təhlükəsizlik sahəsi həm şəxsi, həm də peşəkar inkişaf üçün geniş imkanlar təqdim edir.

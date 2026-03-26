@@ -1,6 +1,14 @@
 ---
 title: ਰੱਖਿਆ
 description: ਰੱਖਿਆਈ ਸਾਇਬਰਸੁਰੱਖਿਆ ਦੇ ਤਰੀਕੇ ਅਤੇ ਮਹੱਤਵ
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ਰੱਖਿਆ

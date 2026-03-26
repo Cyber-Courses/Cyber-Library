@@ -1,3 +1,19 @@
+---
+title: Alapok
+description: A kiberbiztonság gyökerei a 20. század végének hacker kultúrájában keresendők.
+  Amióta az emberek elkezdtek kísérletezni a számítógépekkel, megjelent az igény a
+  technológia megértésére, módosítására és határainak feszegetésére. Ezek a korai
+  hackerek gyakran digitális határok felfedezőinek tekintették magukat, akik…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Alapok
 
 ## Bevezetés

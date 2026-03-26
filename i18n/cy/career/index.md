@@ -1,7 +1,15 @@
 ---
 title: Gyrfa
-description: Archwiliad o yrfa mewn seiberddiogelwch, gan gynnwys proffil, taith, a thirwedd y diwydiant.
-keywords: seiberddiogelwch, gyrfa, datblygiad proffesiynol, ecosystem diogelwch digidol
+description: Archwiliad o yrfa mewn seiberddiogelwch, gan gynnwys proffil, taith,
+  a thirwedd y diwydiant.
+keywords:
+- cybersecurity Career Saesneg
+- llwybrau gyrfa
+- Rolau a Chyfrifoldebau
+- sgiliau technegol a meddal
+- "& Tystysgrifau"
+- graddau academaidd
+- 2.Datblygiad Proffesiynol
 ---
 
 # Gyrfa

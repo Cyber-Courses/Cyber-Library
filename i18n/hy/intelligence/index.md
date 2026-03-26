@@ -1,6 +1,16 @@
 ---
-title: "Ինտելեկտ"
-description: "Ինտելեկտի դերը կիբեռանվտանգության մեջ, ներառյալ դրա կարևորությունը և իրականացումը"
+title: Ինտելեկտ
+description: Ինտելեկտի դերը կիբեռանվտանգության մեջ, ներառյալ դրա կարևորությունը և
+  իրականացումը
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Ինտելեկտ

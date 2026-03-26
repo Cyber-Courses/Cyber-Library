@@ -1,3 +1,20 @@
+---
+title: Gobernantza
+description: Zibersegurtasunaren gobernantza erakunde batek ziber-arriskuak kudeatzeko
+  eta arintzeko ezartzen duen politikak, rolak eta erabaki-prozesuen esparru integrala
+  da. Negozioaren alderdi guztietan zibersegurtasuna integratzeko planoa eskaintzen
+  du, segurtasun-ekimenak isolatuta ez daudela ziurtatuz, baizik eta enpresaren…
+keywords:
+- cybersecurity governance
+- governance frameworks
+- arriskuen kudeaketa
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
+---
+
 # Gobernantza
 
 ## Zer da Zibersegurtasunaren Gobernantza?

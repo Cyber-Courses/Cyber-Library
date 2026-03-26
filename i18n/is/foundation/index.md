@@ -1,4 +1,20 @@
-```markdown
+---
+title: Grunnur
+description: Netöryggi á rætur sínar að rekja til hakkaramenningar seint á 20. öld.
+  Frá því að fólk byrjaði að prófa tölvur var til staðar löngun til að skilja, breyta
+  og ýta undir mörk tækninnar. Þessir fyrstu hakkarar sáu sig oft sem landkönnuði
+  stafræna víðáttunnar, fúsir til að læra og deila þekkingu án þess að hafa endilega
+  í…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Grunnur
 
 ## Inngangur
@@ -40,4 +56,3 @@ Traust er undirstaða nánast allra þátta í netheiminum. Samskipti, viðskipt
 Menn eru enn stærsta breytan í netöryggi. Þó að vélar og hugbúnaður hegði sér samkvæmt rökum og reglum sem eru forritaðar í þær, geta menn gert mistök eða hegðað sér með illvilja á þann hátt sem tækni ein og sér getur ekki fullkomlega spáð fyrir um. Frá því að gleyma að setja upp plástra til að smella á phishing tengla, valda mannleg mistök mörgum af alvarlegustu brotunum.
 
 Að takast á við þessi mál felur oft í sér reglulega þjálfun, skýrar reglur og menningu sem metur öryggisvitundarhegðun. Vel hönnuð vitundarherferðir og fræðsluáætlanir fyrir notendur draga úr líkum á óviljandi mistökum. Þegar fólk skilur bæði mögulegar afleiðingar og bestu starfshætti fyrir örugga hegðun, geta stofnanir betur varið sig gegn ógnunum sem enginn hugbúnaðarplástur getur einn leyst.
-```

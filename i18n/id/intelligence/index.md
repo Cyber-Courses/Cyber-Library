@@ -1,6 +1,16 @@
 ---
-title: "Kecerdasan"
-description: "Memahami peran kecerdasan dalam keamanan siber dan bagaimana implementasinya dapat meningkatkan strategi keamanan."
+title: Kecerdasan
+description: Memahami peran kecerdasan dalam keamanan siber dan bagaimana implementasinya
+  dapat meningkatkan strategi keamanan.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Kecerdasan

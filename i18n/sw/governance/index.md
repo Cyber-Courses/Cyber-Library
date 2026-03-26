@@ -1,3 +1,21 @@
+---
+title: Utawala
+description: Utawala wa usalama wa mtandao ni mfumo wa kina wa sera, majukumu, na
+  michakato ya maamuzi ambayo shirika huanzisha ili kusimamia na kupunguza hatari
+  za mtandao. Inatoa mwongozo wa kuunganisha usalama wa mtandao katika kila kipengele
+  cha biashara, kuhakikisha kuwa juhudi za usalama hazifanyi kazi kwa kujitegemea
+  bali…
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
+---
+
 # Utawala
 
 ## Utawala wa Usalama wa Mtandao ni Nini?

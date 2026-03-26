@@ -1,6 +1,15 @@
 ---
-title: "Ciberseguretat Defensiva"
-description: "Una guia tècnica sobre la ciberseguretat defensiva, incloent la seva importància i com implementar-la."
+title: Ciberseguretat Defensiva
+description: Una guia tècnica sobre la ciberseguretat defensiva, incloent la seva
+  importància i com implementar-la.
+keywords:
+- ciberseguretat defensiva
+- intel·ligència d'amenaces
+- avaluacions de vulnerabilitat
+- resposta a incidències
+- seguiment continuat
+- anàlisi posterior a l'incident
+- continuïtat del negoci
 ---
 
 # Ciberseguretat Defensiva

@@ -1,3 +1,19 @@
+---
+title: Karijera
+description: Karijera u kibernetičkoj sigurnosti dinamično je putovanje ispunjeno
+  prilikama za profesionalce na svim razinama. Kako se digitalni svijet širi, potražnja
+  za vještim stručnjacima za kibernetičku sigurnost raste, stvarajući živopisno i
+  brzo tržište rada. Bilo da tek započinjete ili želite napredovati, područje…
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
+---
+
 # Karijera
 
 Karijera u kibernetičkoj sigurnosti dinamično je putovanje ispunjeno prilikama za profesionalce na svim razinama. Kako se digitalni svijet širi, potražnja za vještim stručnjacima za kibernetičku sigurnost raste, stvarajući živopisno i brzo tržište rada. Bilo da tek započinjete ili želite napredovati, područje kibernetičke sigurnosti nudi dovoljno prostora za osobni i profesionalni razvoj.

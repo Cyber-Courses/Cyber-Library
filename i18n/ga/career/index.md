@@ -1,7 +1,15 @@
 ---
-title: "Gairm"
-description: "Turas dinimiciúil i gcibearshlándáil le deiseanna do ghairmithe ag gach leibhéal."
-keywords: "gairm, cibearshlándáil, forbairt ghairmiúil, saineolas teicniúil, tionscal dinimiciúil"
+title: Gairm
+description: Turas dinimiciúil i gcibearshlándáil le deiseanna do ghairmithe ag gach
+  leibhéal.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Gairm

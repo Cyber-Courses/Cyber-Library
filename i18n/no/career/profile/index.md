@@ -1,6 +1,18 @@
 ---
-title: "Profil"
-description: "Forstå din cybersikkerhetsprofil for å definere din profesjonelle reise og fremtidige mål."
+title: Profil
+description: Forstå din cybersikkerhetsprofil for å definere din profesjonelle reise
+  og fremtidige mål.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

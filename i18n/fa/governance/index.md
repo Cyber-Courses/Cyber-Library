@@ -1,6 +1,16 @@
 ---
-title: "حاکمیت"
-description: "چارچوب جامع سیاست‌ها، نقش‌ها و فرآیندهای تصمیم‌گیری برای مدیریت و کاهش ریسک‌های سایبری."
+title: حاکمیت
+description: چارچوب جامع سیاست‌ها، نقش‌ها و فرآیندهای تصمیم‌گیری برای مدیریت و کاهش
+  ریسک‌های سایبری.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # حاکمیت

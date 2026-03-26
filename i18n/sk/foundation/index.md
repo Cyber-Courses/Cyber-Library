@@ -1,3 +1,19 @@
+---
+title: Základy
+description: Kybernetická bezpečnosť má svoje najskoršie korene v hackerskej kultúre
+  konca 20. storočia. Od momentu, keď ľudia začali experimentovať s počítačmi, existovala
+  túžba pochopiť, modifikovať a posúvať hranice technológie. Títo skorí hackeri sa
+  často videli ako prieskumníci digitálnych hraníc, ktorí túžia učiť sa a…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Základy
 
 ## Úvod

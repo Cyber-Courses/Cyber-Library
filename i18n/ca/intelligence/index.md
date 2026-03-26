@@ -1,6 +1,16 @@
 ---
 title: Intel·ligència
-description: Comprensió de la intel·ligència en ciberseguretat, la seva importància i com es duu a terme.
+description: Comprensió de la intel·ligència en ciberseguretat, la seva importància
+  i com es duu a terme.
+keywords:
+- intel·ligència de ciberseguretat
+- intel·ligència estratègica
+- intel·ligència operativa
+- intel·ligència tàctica
+- Gestió del Risc
+- Indicadors de compromís
+- fonts d'amenaces
+- cicle d'intel·ligència
 ---
 
 # Intel·ligència

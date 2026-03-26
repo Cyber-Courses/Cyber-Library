@@ -1,6 +1,18 @@
 ---
 title: Profiel
-description: Verstaan jou kuberveiligheidsprofiel om jou loopbaanpad te rig en jou waarde vir werkgewers te verhoog.
+description: Verstaan jou kuberveiligheidsprofiel om jou loopbaanpad te rig en jou
+  waarde vir werkgewers te verhoog.
+keywords:
+- cybersecurity rol
+- loopbaanpaaie
+- vaardigheidsontwikkeling
+- sertifisering van kuberveiligheid
+- sekuriteit loopbaan
+- entry Levels role
+- mid-Level Strategies
+- senior Levels Role
+- tegniese vaardighede
+- bestuurspaaie
 ---
 
 # Profiel

@@ -1,6 +1,16 @@
 ---
-title: "შეტევითი კიბერუსაფრთხოება"
-description: "შეტევითი კიბერუსაფრთხოების მნიშვნელობა, მეთოდები და მისი როლი ორგანიზაციების დაცვაში."
+title: შეტევითი კიბერუსაფრთხოება
+description: შეტევითი კიბერუსაფრთხოების მნიშვნელობა, მეთოდები და მისი როლი ორგანიზაციების
+  დაცვაში.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # შეტევითი კიბერუსაფრთხოება

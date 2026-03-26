@@ -1,6 +1,15 @@
 ---
-title: "Depensibo"
-description: "Isang sistematikong paraan sa pagprotekta ng data, sistema, at mga gumagamit mula sa mga banta sa cyberspace."
+title: Depensibo
+description: Isang sistematikong paraan sa pagprotekta ng data, sistema, at mga gumagamit
+  mula sa mga banta sa cyberspace.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Depensibo

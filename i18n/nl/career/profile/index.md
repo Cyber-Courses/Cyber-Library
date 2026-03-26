@@ -1,6 +1,18 @@
 ---
-title: "Profiel"
-description: "Begrijp uw cyberbeveiligingsprofiel om uw carrièrepad te definiëren en te verbeteren."
+title: Profiel
+description: Begrijp uw cyberbeveiligingsprofiel om uw carrièrepad te definiëren en
+  te verbeteren.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profiel

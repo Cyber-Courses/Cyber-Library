@@ -1,7 +1,14 @@
 ---
-title: "Fundamentele Securității Cibernetice"
-description: "Explorarea originilor, culturii hackerilor și evoluției securității cibernetice."
-keywords: "securitate cibernetică, cultură hacker, istorie, etică, risc, încredere"
+title: Fundamentele Securității Cibernetice
+description: Explorarea originilor, culturii hackerilor și evoluției securității cibernetice.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # Fundamente

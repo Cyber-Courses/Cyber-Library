@@ -1,7 +1,15 @@
 ---
-title: "සයිබර් ආරක්ෂාව: මූලිකත්වය සහ ඉතිහාසය"
-description: "සයිබර් ආරක්ෂාව පිළිබඳ මූලික දැනුම සහ ඉතිහාසය, හෑකර් සංස්කෘතිය, ආචාරශීලිකත්වය, සහ විශ්වාසය."
-keywords: "සයිබර් ආරක්ෂාව, හෑකර් සංස්කෘතිය, ආචාරශීලිකත්වය, විශ්වාසය, මිනිස් සාධකය"
+title: 'සයිබර් ආරක්ෂාව: මූලිකත්වය සහ ඉතිහාසය'
+description: සයිබර් ආරක්ෂාව පිළිබඳ මූලික දැනුම සහ ඉතිහාසය, හෑකර් සංස්කෘතිය, ආචාරශීලිකත්වය,
+  සහ විශ්වාසය.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # මූලිකත්වය

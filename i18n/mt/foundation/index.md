@@ -1,4 +1,19 @@
-```markdown
+---
+title: Fondazzjoni
+description: Is-sigurtà ċibernetika għandha l-għeruq tagħha fil-kultura tal-hackers
+  tal-aħħar tas-seklu 20. Minn meta n-nies bdew jesperimentaw bil-kompjuters, kien
+  hemm xewqa li jifhmu, jimmodifikaw, u jimbuttaw il-konfini tat-teknoloġija. Dawn
+  l-ewwel hackers spiss raw lilhom infushom bħala esploraturi ta' fruntieri diġitali,…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Fondazzjoni
 
 ## Introduzzjoni
@@ -40,4 +55,3 @@ Il-fiduċja hija l-bażi ta' kważi kull aspett tad-dinja online. L-interazzjoni
 Il-bnedmin jibqgħu l-ikbar varjabbli fis-sigurtà ċibernetika. Għalkemm il-magni u s-softwer iġibu ruħhom skont il-loġika u r-regoli programmati fihom, in-nies jistgħu jagħmlu żbalji jew jaġixxu b'malizzja b'modi li t-teknoloġija waħedha ma tistax tipprevedi bis-sħiħ. Minn li jinsew japplikaw patches għal li jagħfsu fuq links ta' phishing, l-iżbalji umani jikkawżaw ħafna mill-aktar ksur sinifikanti.
 
 L-indirizzar ta' dawn il-kwistjonijiet spiss jinvolvi taħriġ regolari, politiki ċari, u kultura li tgħożż imġieba konxja tas-sigurtà. Kampanji ta' għarfien iddisinjati tajjeb u programmi ta' edukazzjoni tal-utenti jnaqqsu l-probabbiltà ta' passi żbaljati aċċidentali. Meta n-nies jifhmu kemm il-konsegwenzi potenzjali kif ukoll l-aħjar prattiki għal imġieba sigura, l-organizzazzjonijiet jistgħu jipproteġu aħjar lilhom infushom kontra theddid li l-ebda patch tas-softwer waħdu ma jista' jiffissa.
-```

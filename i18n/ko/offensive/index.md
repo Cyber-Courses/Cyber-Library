@@ -1,6 +1,15 @@
 ---
 title: 공격
 description: 공격적 사이버 보안의 중요성과 구현 방법에 대한 기술적 탐구
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # 공격

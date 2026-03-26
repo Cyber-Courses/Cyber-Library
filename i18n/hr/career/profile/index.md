@@ -1,6 +1,18 @@
 ---
-title: "Profil"
-description: "Razumijevanje vašeg profila kibernetičke sigurnosti ključno je za definiranje vaše profesionalne putanje i budućih ciljeva."
+title: Profil
+description: Razumijevanje vašeg profila kibernetičke sigurnosti ključno je za definiranje
+  vaše profesionalne putanje i budućih ciljeva.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

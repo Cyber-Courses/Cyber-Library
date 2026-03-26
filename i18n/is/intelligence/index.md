@@ -1,6 +1,15 @@
 ---
 title: Greind
 description: Skilgreining, mikilvægi og framkvæmd greindar í netöryggi.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Greind

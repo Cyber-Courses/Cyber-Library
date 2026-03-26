@@ -1,7 +1,15 @@
 ---
-title: "Pārvaldība"
-description: "Izpratne par kiberdrošības pārvaldību un tās nozīmi organizācijās."
-keywords: "kiberdrošības pārvaldība, riska vadība, drošības stratēģija, atbilstība"
+title: Pārvaldība
+description: Izpratne par kiberdrošības pārvaldību un tās nozīmi organizācijās.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Pārvaldība

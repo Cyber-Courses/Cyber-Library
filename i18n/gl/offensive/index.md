@@ -1,7 +1,16 @@
 ---
-title: "Ofensiva"
-description: "Exploración técnica da ciberseguridade ofensiva, incluíndo a súa importancia e metodoloxías."
-keywords: "ciberseguridade ofensiva, hacking ético, probas de penetración, equipos vermellos, programas de recompensas por erros"
+title: Ofensiva
+description: Exploración técnica da ciberseguridade ofensiva, incluíndo a súa importancia
+  e metodoloxías.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofensiva

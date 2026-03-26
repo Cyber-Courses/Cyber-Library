@@ -1,6 +1,17 @@
 ---
-seo_title: "Intleacht i gCibearshlándáil"
-seo_description: "Fiosraigh an ról ríthábhachtach atá ag intleacht i gcosaint chibearshlándála, lena n-áirítear bailiú, próiseáil, agus anailís faisnéise chun bagairtí a aithint agus a mhaolú."
+title: Intleacht i gCibearshlándáil
+description: Fiosraigh an ról ríthábhachtach atá ag intleacht i gcosaint chibearshlándála,
+  lena n-áirítear bailiú, próiseáil, agus anailís faisnéise chun bagairtí a aithint
+  agus a mhaolú.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intleacht
