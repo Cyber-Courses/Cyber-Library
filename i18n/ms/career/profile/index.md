@@ -1,6 +1,21 @@
 ---
 title: Profil
-description: Memahami profil keselamatan siber anda adalah penting kerana ia membantu anda menentukan kedudukan anda dalam perjalanan profesional dan ke mana anda ingin pergi. Profil keselamatan siber menggabungkan kemahiran, pengalaman, minat, dan matlamat semasa anda, berfungsi sebagai peta jalan untuk menyelaraskan pilihan kerjaya anda dengan peranan, pensijilan, dan peluang pembangunan yang betul.
+description: Memahami profil keselamatan siber anda adalah penting kerana ia membantu
+  anda menentukan kedudukan anda dalam perjalanan profesional dan ke mana anda ingin
+  pergi. Profil keselamatan siber menggabungkan kemahiran, pengalaman, minat, dan
+  matlamat semasa anda, berfungsi sebagai peta jalan untuk menyelaraskan pilihan kerjaya
+  anda dengan peranan, pensijilan, dan peluang pembangunan yang betul.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

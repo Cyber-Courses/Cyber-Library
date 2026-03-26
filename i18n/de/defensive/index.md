@@ -1,7 +1,15 @@
 ---
 title: Defensive
-description: Eine umfassende Erklärung der verteidigenden Cybersicherheit, ihrer Bedeutung und ihrer Umsetzung.
-keywords: Verteidigende Cybersicherheit, Bedrohungsabwehr, Vorfallsreaktion, Sicherheitsstrategie
+description: Eine umfassende Erklärung der verteidigenden Cybersicherheit, ihrer Bedeutung
+  und ihrer Umsetzung.
+keywords:
+- defensive Cybersicherheit
+- Threat Intelligence
+- Schwachstellenbewertungen
+- Vorfallbearbeitung
+- kontinuierlichen Monitoring
+- Incident-Analysen
+- Geschäftskontinuität (or Geschäftsfortführung im Krisenfall)
 ---
 
 # Defensive

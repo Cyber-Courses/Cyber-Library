@@ -1,7 +1,16 @@
 ---
-title: "Ofensif"
-description: "Memahami pentingnya dan penerapan keamanan siber ofensif dalam mengidentifikasi kerentanan dan meningkatkan postur keamanan organisasi."
-keywords: "keamanan siber ofensif, peretasan etis, pengujian penetrasi, tim merah, kerentanan keamanan"
+title: Ofensif
+description: Memahami pentingnya dan penerapan keamanan siber ofensif dalam mengidentifikasi
+  kerentanan dan meningkatkan postur keamanan organisasi.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofensif

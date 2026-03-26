@@ -1,6 +1,16 @@
 ---
-title: "Inteligencja"
-description: "Zrozumienie roli inteligencji w cyberbezpieczeństwie, jej znaczenia oraz sposobów implementacji."
+title: Inteligencja
+description: Zrozumienie roli inteligencji w cyberbezpieczeństwie, jej znaczenia oraz
+  sposobów implementacji.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Inteligencja

@@ -1,6 +1,15 @@
 ---
-title: "ကာကွယ်ရေး"
-description: "ကာကွယ်ရေးဆိုတာ ဘာလဲ၊ အရေးကြီးမှုနှင့် ဘယ်လိုလုပ်ဆောင်ရမလဲဆိုတာကို နက်ရှိုင်းစွာရှင်းပြထားသော ဆောင်းပါး"
+title: ကာကွယ်ရေး
+description: ကာကွယ်ရေးဆိုတာ ဘာလဲ၊ အရေးကြီးမှုနှင့် ဘယ်လိုလုပ်ဆောင်ရမလဲဆိုတာကို နက်ရှိုင်းစွာရှင်းပြထားသော
+  ဆောင်းပါး
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ကာကွယ်ရေး

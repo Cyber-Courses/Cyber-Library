@@ -1,7 +1,16 @@
 ---
-title: "Интелигенција"
-description: "Разбирање на интелигенцијата во сајбер безбедноста и нејзината важност за организациите."
-keywords: "интелигенција, сајбер безбедност, закани, стратешка интелигенција, оперативна интелигенција, тактичка интелигенција"
+title: Интелигенција
+description: Разбирање на интелигенцијата во сајбер безбедноста и нејзината важност
+  за организациите.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Интелигенција

@@ -1,3 +1,19 @@
+---
+title: Himoya
+description: Himoya kiberxavfsizligi tashkilotning ma'lumotlari, tizimlari va foydalanuvchilarini
+  kiber tahdidlardan himoya qilish uchun tizimli yondashuvdir. Bu zararli faoliyatlarning
+  ta'sirini minimallashtirish uchun oldini olish, aniqlash va javob berish strategiyalarini
+  integratsiyalashni o'z ichiga oladi. Tahdidlar haqidagi…
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
+---
+
 # Himoya
 
 ## Himoya Kiberxavfsizligi Nima?

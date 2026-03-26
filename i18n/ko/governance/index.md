@@ -1,7 +1,15 @@
 ---
-title: "거버넌스"
-description: "사이버 보안 거버넌스의 중요성과 구현 방법에 대한 심층적인 기술 설명"
-keywords: "사이버 보안, 거버넌스, 리스크 관리, 전략적 자산, 규제 준수"
+title: 거버넌스
+description: 사이버 보안 거버넌스의 중요성과 구현 방법에 대한 심층적인 기술 설명
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # 거버넌스

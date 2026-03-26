@@ -1,7 +1,14 @@
 ---
 title: Müdafiə
 description: Müdafiə kiber təhlükəsizliyi haqqında ətraflı izah və onun əhəmiyyəti
-keywords: müdafiə kiber təhlükəsizliyi, kibertəhlükəsizlik, məlumatların qorunması, təhlükəsizlik strategiyaları
+keywords:
+- müdafiə kibertəhlükəsizliyi
+- təhlükə kəşfiyyatı
+- zəiflik qiymətləndirmələri
+- insidentə cavab
+- davamlı monitorinq
+- hadisədən sonrakı təhlil
+- biznes davamlılığı
 ---
 
 # Müdafiə

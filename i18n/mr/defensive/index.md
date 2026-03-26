@@ -1,6 +1,15 @@
 ---
-title: "संरक्षणात्मक सायबरसुरक्षा"
-description: "संरक्षणात्मक सायबरसुरक्षा म्हणजे संस्थेच्या डेटा, प्रणाली आणि वापरकर्त्यांचे सायबर धमक्यांपासून संरक्षण करण्याची एक प्रणालीबद्ध पद्धत आहे."
+title: संरक्षणात्मक सायबरसुरक्षा
+description: संरक्षणात्मक सायबरसुरक्षा म्हणजे संस्थेच्या डेटा, प्रणाली आणि वापरकर्त्यांचे
+  सायबर धमक्यांपासून संरक्षण करण्याची एक प्रणालीबद्ध पद्धत आहे.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # संरक्षणात्मक

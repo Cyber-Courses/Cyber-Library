@@ -1,6 +1,17 @@
 ---
-title: "அறிவு"
-description: "அறிவு என்பது சைபர் பாதுகாப்பில் தகவல் சேகரிப்பு, செயலாக்கம் மற்றும் பகுப்பாய்வு ஆகும், இது சைபர் மிரட்டல்களை அடையாளம் காண, மதிப்பீடு செய்ய மற்றும் குறைக்க நோக்கமாகக் கொண்டது."
+title: அறிவு
+description: அறிவு என்பது சைபர் பாதுகாப்பில் தகவல் சேகரிப்பு, செயலாக்கம் மற்றும் பகுப்பாய்வு
+  ஆகும், இது சைபர் மிரட்டல்களை அடையாளம் காண, மதிப்பீடு செய்ய மற்றும் குறைக்க நோக்கமாகக்
+  கொண்டது.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # அறிவு

@@ -1,6 +1,16 @@
 ---
 title: Governança
-description: Compreenda a governança de cibersegurança, sua importância e como implementá-la eficazmente em sua organização.
+description: Compreenda a governança de cibersegurança, sua importância e como implementá-la
+  eficazmente em sua organização.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Governança

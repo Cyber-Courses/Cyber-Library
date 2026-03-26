@@ -1,7 +1,16 @@
 ---
 title: Hücum Kiber Təhlükəsizliyi
-description: Hücum kiber təhlükəsizliyinin əhəmiyyəti və tətbiqi üsulları haqqında ətraflı izah.
-keywords: hücum kiber təhlükəsizliyi, etik hacking, penetrasiya testi, təhlükəsizlik zəiflikləri
+description: Hücum kiber təhlükəsizliyinin əhəmiyyəti və tətbiqi üsulları haqqında
+  ətraflı izah.
+keywords:
+- təhqiredici kibertəhlükəsizlik
+- etik xakerlik
+- nüfuzetmə testi
+- qırmızı komanda
+- böcək nemətləri
+- sosial mühəndislik
+- -== <g id="2">VERİLƏNLƏRİN QORUNMASI</g> =======
+- risklərin idarə edilməsi
 ---
 
 # Hücum

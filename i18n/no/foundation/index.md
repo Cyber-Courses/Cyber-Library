@@ -1,3 +1,19 @@
+---
+title: Grunnlag
+description: Cybersikkerhet har sine tidligste røtter i hackerkulturen fra slutten
+  av det 20. århundre. Fra det øyeblikket folk begynte å eksperimentere med datamaskiner,
+  eksisterte det et ønske om å forstå, modifisere og presse grensene for teknologi.
+  Disse tidlige hackerne så ofte på seg selv som oppdagelsesreisende i digitale…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Grunnlag
 
 ## Introduksjon

@@ -1,6 +1,15 @@
 ---
-title: "Sóknaröryggi"
-description: "Sóknaröryggi í netöryggi: Skilgreining, mikilvægi og framkvæmd."
+title: Sóknaröryggi
+description: 'Sóknaröryggi í netöryggi: Skilgreining, mikilvægi og framkvæmd.'
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Sóknaröryggi

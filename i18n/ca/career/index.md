@@ -1,7 +1,15 @@
 ---
 title: Carrera
-description: Explora les oportunitats professionals en ciberseguretat, un camp dinàmic i en creixement.
-keywords: carrera, ciberseguretat, desenvolupament professional, especialització, ecosistema
+description: Explora les oportunitats professionals en ciberseguretat, un camp dinàmic
+  i en creixement.
+keywords:
+- carrera de ciberseguretat
+- trajectòries professionals
+- Funcions i responsabilitats
+- habilitats tècniques i tècniques
+- Certificacions
+- Títols oficials i reconeguts
+- desenvolupament professional
 ---
 
 # Carrera

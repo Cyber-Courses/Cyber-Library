@@ -1,7 +1,15 @@
 ---
-title: "Carriera"
-description: "Esplora il percorso dinamico di una carriera nella cybersecurity, con opportunità di crescita personale e professionale."
-keywords: "carriera, cybersecurity, sviluppo professionale, specializzazione, ecosistema"
+title: Carriera
+description: Esplora il percorso dinamico di una carriera nella cybersecurity, con
+  opportunità di crescita personale e professionale.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Carriera

@@ -1,7 +1,15 @@
 ---
-title: "Ofenzívna"
-description: "Preskúmanie ofenzívnej kybernetickej bezpečnosti, jej významu a metodík."
-keywords: "ofenzívna kybernetická bezpečnosť, etické hackovanie, penetračné testovanie, red teaming"
+title: Ofenzívna
+description: Preskúmanie ofenzívnej kybernetickej bezpečnosti, jej významu a metodík.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofenzívna

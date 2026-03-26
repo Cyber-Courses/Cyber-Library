@@ -1,7 +1,14 @@
 ---
-title: "Dasar"
-description: "Memahami dasar-dasar keamanan siber dan budaya peretas."
-keywords: "keamanan siber, budaya peretas, etika peretasan, sejarah keamanan siber"
+title: Dasar
+description: Memahami dasar-dasar keamanan siber dan budaya peretas.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # Dasar

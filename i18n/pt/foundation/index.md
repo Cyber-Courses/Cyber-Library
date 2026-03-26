@@ -1,7 +1,15 @@
 ---
-title: "Fundação"
-description: "Exploração detalhada da evolução da cibersegurança, desde a cultura hacker até práticas modernas."
-keywords: "cibersegurança, cultura hacker, história da cibersegurança, ética, gestão de riscos, elemento humano"
+title: Fundação
+description: Exploração detalhada da evolução da cibersegurança, desde a cultura hacker
+  até práticas modernas.
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # Fundação

@@ -1,6 +1,15 @@
 ---
-title: "Carieră"
-description: "Explorați o carieră dinamică în domeniul securității cibernetice, cu oportunități de dezvoltare personală și profesională."
+title: Carieră
+description: Explorați o carieră dinamică în domeniul securității cibernetice, cu
+  oportunități de dezvoltare personală și profesională.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Carieră

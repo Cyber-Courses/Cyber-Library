@@ -1,6 +1,15 @@
 ---
-title: "Verdedigend"
-description: "Verstaan die belangrikheid en implementering van verdedigende kuberveiligheid om data en stelsels teen kuberbedreigings te beskerm."
+title: Verdedigend
+description: Verstaan die belangrikheid en implementering van verdedigende kuberveiligheid
+  om data en stelsels teen kuberbedreigings te beskerm.
+keywords:
+- defensiewe kuberveiligheid
+- bedreigingsintelligensie
+- kwesbaarheidsbeoordelings
+- voorval reaksie
+- deurlopende monitering
+- post-incident analise
+- besigheid kontinuïteit
 ---
 
 # Verdedigend

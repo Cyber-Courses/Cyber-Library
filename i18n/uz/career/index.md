@@ -1,7 +1,14 @@
 ---
-title: "Karyera"
-description: "Kiberxavfsizlik sohasida karyera imkoniyatlari va rivojlanish yo‘llari."
-keywords: "kiberxavfsizlik, karyera, rivojlanish, texnik tajriba, tarmoq"
+title: Karyera
+description: Kiberxavfsizlik sohasida karyera imkoniyatlari va rivojlanish yo‘llari.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karyera

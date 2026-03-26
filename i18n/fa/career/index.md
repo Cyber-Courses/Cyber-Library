@@ -1,7 +1,14 @@
 ---
-title: "حرفه"
-description: "مسیر حرفه‌ای در امنیت سایبری: فرصت‌ها و چالش‌ها"
-keywords: "امنیت سایبری, حرفه, توسعه حرفه‌ای, تخصص, شبکه‌سازی"
+title: حرفه
+description: 'مسیر حرفه‌ای در امنیت سایبری: فرصت‌ها و چالش‌ها'
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # حرفه

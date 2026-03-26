@@ -1,6 +1,15 @@
 ---
-title: "ガバナンス"
-description: "サイバーセキュリティガバナンスの重要性とその実施方法についての詳細な説明。"
+title: ガバナンス
+description: サイバーセキュリティガバナンスの重要性とその実施方法についての詳細な説明。
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # ガバナンス

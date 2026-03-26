@@ -1,6 +1,15 @@
 ---
-title: "အုပ်ချုပ်မှု"
-description: "စက်ဘီလ်လုံခြုံရေး အုပ်ချုပ်မှု၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ"
+title: အုပ်ချုပ်မှု
+description: စက်ဘီလ်လုံခြုံရေး အုပ်ချုပ်မှု၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # အုပ်ချုပ်မှု

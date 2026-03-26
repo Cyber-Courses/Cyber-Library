@@ -1,6 +1,15 @@
 ---
-title: "โจมตี"
-description: "การรักษาความปลอดภัยทางไซเบอร์เชิงรุกคือการจำลองการโจมตีในโลกจริงอย่างมีจริยธรรมเพื่อค้นหาช่องโหว่ก่อนที่ผู้ไม่หวังดีจะใช้ประโยชน์"
+title: โจมตี
+description: การรักษาความปลอดภัยทางไซเบอร์เชิงรุกคือการจำลองการโจมตีในโลกจริงอย่างมีจริยธรรมเพื่อค้นหาช่องโหว่ก่อนที่ผู้ไม่หวังดีจะใช้ประโยชน์
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # โจมตี

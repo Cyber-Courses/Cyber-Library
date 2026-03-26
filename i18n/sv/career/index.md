@@ -1,6 +1,14 @@
 ---
-title: "Karriär"
-description: "Utforska en karriär inom cybersäkerhet, dess möjligheter och landskap."
+title: Karriär
+description: Utforska en karriär inom cybersäkerhet, dess möjligheter och landskap.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karriär

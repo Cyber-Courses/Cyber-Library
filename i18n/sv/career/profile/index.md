@@ -1,6 +1,18 @@
 ---
-title: "Profil"
-description: "Förståelse för din cybersäkerhetsprofil är avgörande för att definiera din professionella resa och framtida mål."
+title: Profil
+description: Förståelse för din cybersäkerhetsprofil är avgörande för att definiera
+  din professionella resa och framtida mål.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

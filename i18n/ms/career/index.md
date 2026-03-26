@@ -1,7 +1,15 @@
 ---
 title: Kerjaya dalam Keselamatan Siber
-description: Panduan komprehensif untuk membina kerjaya dalam bidang keselamatan siber, termasuk profil, perjalanan, dan landskap industri.
-keywords: kerjaya keselamatan siber, profil keselamatan siber, perjalanan profesional, landskap keselamatan siber
+description: Panduan komprehensif untuk membina kerjaya dalam bidang keselamatan siber,
+  termasuk profil, perjalanan, dan landskap industri.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Kerjaya

@@ -1,6 +1,16 @@
 ---
-title: "Axborot"
-description: "Kiberxavfsizlikda axborotning ahamiyati va aqlli tahlilni amalga oshirish usullari."
+title: Axborot
+description: Kiberxavfsizlikda axborotning ahamiyati va aqlli tahlilni amalga oshirish
+  usullari.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Axborot

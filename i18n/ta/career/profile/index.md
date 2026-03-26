@@ -1,7 +1,18 @@
 ---
-title: "சைபர்செக்யூரிட்டி சுயவிவரம்"
-description: "சைபர்செக்யூரிட்டி சுயவிவரம் உங்கள் தொழில்முறை பயணத்தில் எங்கு இருக்கிறீர்கள் மற்றும் எங்கு செல்ல விரும்புகிறீர்கள் என்பதை வரையறுக்க உதவுகிறது."
-keywords: "சைபர்செக்யூரிட்டி, சுயவிவரம், தொழில்முறை வளர்ச்சி, சான்றிதழ்கள், திறன்கள்"
+title: சைபர்செக்யூரிட்டி சுயவிவரம்
+description: சைபர்செக்யூரிட்டி சுயவிவரம் உங்கள் தொழில்முறை பயணத்தில் எங்கு இருக்கிறீர்கள்
+  மற்றும் எங்கு செல்ல விரும்புகிறீர்கள் என்பதை வரையறுக்க உதவுகிறது.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # சுயவிவரம்

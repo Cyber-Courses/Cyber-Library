@@ -1,6 +1,16 @@
 ---
-title: "Ofensyvinė kibernetinė sauga"
-description: "Sužinokite apie ofensyvinę kibernetinę saugą, jos svarbą ir kaip ji įgyvendinama siekiant apsaugoti organizacijas nuo kibernetinių grėsmių."
+title: Ofensyvinė kibernetinė sauga
+description: Sužinokite apie ofensyvinę kibernetinę saugą, jos svarbą ir kaip ji įgyvendinama
+  siekiant apsaugoti organizacijas nuo kibernetinių grėsmių.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofensyvinė

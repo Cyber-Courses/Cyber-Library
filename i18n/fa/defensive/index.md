@@ -1,18 +1,18 @@
 ---
-<<<<<<< dev
 title: دفاعی
-=======
-title: امنیت سایبری دفاعی
->>>>>>> main
-description: رویکردی سیستماتیک برای حفاظت از داده‌ها، سیستم‌ها و کاربران در برابر تهدیدات سایبری.
-keywords: امنیت سایبری دفاعی، حفاظت از داده‌ها، پاسخ به حوادث، ارزیابی آسیب‌پذیری
+description: رویکردی سیستماتیک برای حفاظت از داده‌ها، سیستم‌ها و کاربران در برابر
+  تهدیدات سایبری.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
-<<<<<<< dev
 # دفاعی
-=======
-# امنیت سایبری دفاعی
->>>>>>> main
 
 ## امنیت سایبری دفاعی چیست؟
 
