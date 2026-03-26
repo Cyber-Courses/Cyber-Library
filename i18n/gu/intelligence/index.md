@@ -3,14 +3,14 @@ title: બુદ્ધિ
 description: સાઇબરસિક્યુરિટીમાં બુદ્ધિ શું છે, તે કેમ મહત્વપૂર્ણ છે, અને તે કેવી રીતે
   કરવામાં આવે છે તેની વિગતવાર સમજણ.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- સાયબર સુરક્ષા બુદ્ધિ
+- વ્યૂહાત્મક બુદ્ધિ
+- ઓપરેશનલ ઇન્ટેલિજન્સ
+- વ્યૂહાત્મક બુદ્ધિ
+- જોખમ સંચાલન
+- સમાધાનના સૂચક
+- ધમકી ફીડ્સ
+- બુદ્ધિ ચક્ર
 ---
 
 # બુદ્ધિ

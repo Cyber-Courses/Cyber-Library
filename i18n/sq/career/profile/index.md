@@ -1,6 +1,18 @@
 ---
 title: Profili
-description: Kuptimi i profilit tuaj të sigurisë kibernetike është thelbësor për të përcaktuar ku qëndroni në udhëtimin tuaj profesional dhe ku dëshironi të shkoni.
+description: Kuptimi i profilit tuaj të sigurisë kibernetike është thelbësor për të
+  përcaktuar ku qëndroni në udhëtimin tuaj profesional dhe ku dëshironi të shkoni.
+keywords:
+- rolet e sigurisë kibernetike
+- rrugët e karrierës
+- zhvillimin e aftësive
+- çertifikatat e sigurisë kibernetike
+- karrierën e sigurisë
+- rolet e nivelit fillestar
+- rolet e nivelit të mesëm
+- rolet e nivelit të lartë
+- aftësitë teknike
+- rrugët menaxheriale
 ---
 
 # Profili

@@ -3,14 +3,14 @@ title: ინტელექტი
 description: 'ინტელექტი კიბერუსაფრთხოებაში: რა არის, რატომ არის მნიშვნელოვანი და როგორ
   ხდება მისი განხორციელება.'
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- კიბერუსაფრთხოების დაზვერვა
+- სტრატეგიული დაზვერვა
+- ოპერატიული დაზვერვა
+- ტაქტიკური დაზვერვა
+- რისკის მართვა
+- კომპრომისის ინდიკატორები
+- საფრთხე კვებავს
+- დაზვერვის ციკლი
 ---
 
 # ინტელექტი

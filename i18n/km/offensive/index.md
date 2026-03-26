@@ -2,14 +2,14 @@
 title: ការពារប្រឆាំង
 description: ការពារប្រឆាំងជាមួយការវាយប្រហារបច្ចេកទេសដើម្បីរកឃើញចំណុចខ្សោយ
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- ការវាយលុកសន្តិសុខតាមអ៊ីនធឺណិត
+- ការលួចស្តាប់ប្រកបដោយសីលធម៌
+- ការធ្វើតេស្តជ្រៀតចូល
+- ក្រុមក្រហម
+- ប្រាក់រង្វាន់
+- វិស្វកម្មសង្គម
+- ការការពារទិន្នន័យ
+- ការគ្រប់គ្រងហានិភ័យ
 ---
 
 # ការពារប្រឆាំង

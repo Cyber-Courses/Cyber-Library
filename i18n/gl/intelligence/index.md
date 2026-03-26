@@ -2,14 +2,14 @@
 title: Intelixencia
 description: Comprender a intelixencia na ciberseguridade e a súa importancia.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- intelixencia de ciberseguridade
+- intelixencia estratéxica
+- intelixencia operativa
+- intelixencia táctica
+- xestión de riscos
+- Indicadores de compromiso
+- alimenta ameazas
+- ciclo da intelixencia
 ---
 
 # Intelixencia

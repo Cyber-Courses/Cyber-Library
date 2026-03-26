@@ -1,6 +1,15 @@
 ---
-title: "Upravljanje"
-description: "Razumevanje kibernetskega upravljanja, njegovega pomena in izvajanja."
+title: Upravljanje
+description: Razumevanje kibernetskega upravljanja, njegovega pomena in izvajanja.
+keywords:
+- upravljanje kibernetske varnosti
+- okviri upravljanja
+- obvladovanje tveganja
+- skladnost
+- poslovna strategija
+- kibernetska odpornost
+- nadzor odbora
+- kontinuiteto delovanja
 ---
 
 # Upravljanje

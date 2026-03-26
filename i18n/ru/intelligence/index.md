@@ -2,14 +2,14 @@
 title: Интеллект
 description: Понимание роли и важности интеллекта в кибербезопасности
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- разведка кибербезопасности
+- стратегическая разведка
+- оперативная разведка
+- тактическая разведка
+- управление рисками
+- Индикаторы компрометации
+- каналы угроз
+- цикл разведки
 ---
 
 # Интеллект

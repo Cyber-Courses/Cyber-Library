@@ -1,3 +1,22 @@
+---
+title: Boshqaruv
+description: Kiberxavfsizlik boshqaruvi - bu tashkilot kiberxatarlarni boshqarish
+  va kamaytirish uchun o'rnatadigan siyosatlar, rollar va qaror qabul qilish jarayonlarining
+  keng qamrovli tizimidir. Bu kiberxavfsizlikni biznesning har bir jihatiga integratsiya
+  qilish uchun reja bo'lib xizmat qiladi, xavfsizlik tashabbuslari izolyatsiyada ishlamasligini,
+  balki kompaniyaning umumiy maqsadlariga mos kelishini ta'minlaydi. Bu moslashuv
+  har…
+keywords:
+- kiberxavfsizlik boshqaruvi
+- boshqaruv ramkalari
+- xavf boshqaruvi
+- muvofiqlik
+- biznes strategiyasi
+- kiberbarqarorlik
+- kuzatuv kengashi
+- operatsion uzluksizlik
+---
+
 # Boshqaruv
 
 ## Kiberxavfsizlik Boshqaruvi Nima?

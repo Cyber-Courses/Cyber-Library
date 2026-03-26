@@ -5,14 +5,14 @@ description: സൈബർസുരക്ഷാ ഗവർണൻസ് ഒരു �
   എന്നിവയുടെ സമഗ്രമായ ഘടനയാണ്. ഇത് ബിസിനസ്സിന്റെ എല്ലാ മേഖലകളിലും സൈബർസുരക്ഷയെ സംയോജിപ്പിക്കുന്നതിനുള്ള
   രൂപരേഖ നൽകുന്നു, സുരക്ഷാ നടപടികൾ ഒറ്റപ്പെട്ട്…
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- സൈബർ സുരക്ഷാ ഭരണം
+- ഭരണ ചട്ടക്കൂടുകൾ
+- റിസ്ക് മാനേജ്മെൻ്റ്
+- പാലിക്കൽ
+- ബിസിനസ്സ് തന്ത്രം
+- സൈബർ പ്രതിരോധശേഷി
+- ബോർഡ് മേൽനോട്ടം
+- പ്രവർത്തന തുടർച്ച
 ---
 
 # ഗവർണൻസ്

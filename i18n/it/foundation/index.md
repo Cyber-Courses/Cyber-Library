@@ -5,13 +5,13 @@ description: La cybersecurity ha le sue radici più antiche nella cultura hacker
   con i computer, è emerso il desiderio di comprendere, modificare e spingere i confini
   della tecnologia. Questi primi hacker si vedevano spesso come esploratori di…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- fondamento della sicurezza informatica
+- cultura hacker
+- storia della sicurezza informatica
+- etica della sicurezza informatica
+- gestione del rischio
+- fiducia nei sistemi digitali
+- elemento umano nella sicurezza informatica
 ---
 
 # Fondamenti

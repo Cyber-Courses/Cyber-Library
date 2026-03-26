@@ -5,16 +5,16 @@ description: ඔබගේ kyබර ආරක්ෂක පැතිකඩ තේ�
   පැතිකඩක් යනු ඔබගේ වර්තමාන කුසලතා, අත්දැකීම්, රුචිකතා සහ ඉලක්ක එකට එකතු කරන අතර,
   ඔබේ වෘත්තීය තේරීම් නිවැරදි භූමිකා, සහතික සහ සංවර්ධන අවස්ථා සමඟ සමාලෝචනය කිරීමට…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- සයිබර් ආරක්ෂණ භූමිකාවන්
+- වෘත්තීය මාර්ග
+- කුසලතා සංවර්ධනය
+- සයිබර් ආරක්ෂණ සහතික
+- ආරක්ෂක වෘත්තිය
+- ප්‍රවේශ මට්ටමේ භූමිකාවන්
+- මධ්යම මට්ටමේ භූමිකාවන්
+- ජ්යෙෂ්ඨ මට්ටමේ භූමිකාවන්
+- තාක්ෂණික කුසලතා
+- කළමනාකරණ මාර්ග
 ---
 
 # පැතිකඩ

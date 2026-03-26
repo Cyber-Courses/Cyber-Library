@@ -1,4 +1,20 @@
-```markdown
+---
+title: Temelj
+description: Kibernetska varnost ima svoje najzgodnejše korenine v kulturi hekerjev
+  iz poznega 20. stoletja. Od trenutka, ko so ljudje začeli eksperimentirati z računalniki,
+  je obstajala želja po razumevanju, spreminjanju in premikanju meja tehnologije.
+  Ti zgodnji hekerji so se pogosto videli kot raziskovalci digitalnih meja, željni
+  učenja in deljenja znanja…
+keywords:
+- temelji kibernetske varnosti
+- hekerska kultura
+- zgodovina kibernetske varnosti
+- etika kibernetske varnosti
+- upravljanje tveganj
+- zaupanje v digitalne sisteme
+- človeški element kibernetske varnosti
+---
+
 # Temelj
 
 ## Uvod
@@ -39,5 +55,4 @@ Zaupanje je temelj skoraj vsakega vidika spletnega sveta. Interakcije, transakci
 
 Ljudje ostajajo največja spremenljivka v kibernetski varnosti. Čeprav se stroji in programska oprema obnašajo v skladu z logiko in pravili, ki so jim programirana, ljudje lahko naredijo napake ali delujejo z zlonamernostjo na načine, ki jih tehnologija sama ne more popolnoma predvideti. Od pozabljanja na uporabo popravkov do klikov na phishing povezave, človeške napake povzročajo mnoge najpomembnejše kršitve.
 
-Reševanje teh vprašanj pogosto vključuje redno usposabljanje, jasne politike in kulturo, ki ceni varnostno ozaveščeno vedenje. Dobro zasnovane kampanje ozaveščanja in programi izobraževanja uporabnikov zmanjšujejo verjetnost nenamernih napak. Ko ljudje razumejo tako potencialne posledice kot najboljše prakse za varno vedenje, se lahko organizacije bolje zaščitijo pred grožnjami, ki jih noben programski popravek ne more sam odpraviti.
-```
+Reševanje teh vprašanj pogosto vključuje redno usposabljanje, jasne politike in kulturo, ki ceni varnostno ozaveščeno vedenje. Dobro zasnovane kampanje ozaveščanja in programi izobraževanja uporabnikov zmanjšujejo verjetnost nenamernih napak. Ko ljudje razumejo tako potencialne posledice kot najboljše prakse za varno vedenje, se lahko organizacije bolje zaščitijo pred grožnjami, ki jih noben programski popravek ne more sam odpraviti.```

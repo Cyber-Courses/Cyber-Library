@@ -3,16 +3,16 @@ title: Perfil
 description: Compreender seu perfil de cibersegurança é essencial para alinhar suas
   escolhas de carreira com as oportunidades certas.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- funções de segurança cibernética
+- planos de carreira
+- desenvolvimento de habilidades
+- certificações de segurança cibernética
+- carreira de segurança
+- funções de nível de entrada
+- funções de nível médio
+- funções de nível sênior
+- habilidades técnicas
+- caminhos gerenciais
 ---
 
 # Perfil

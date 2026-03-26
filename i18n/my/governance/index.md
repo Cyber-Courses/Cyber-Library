@@ -2,14 +2,14 @@
 title: အုပ်ချုပ်မှု
 description: စက်ဘီလ်လုံခြုံရေး အုပ်ချုပ်မှု၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- ဆိုက်ဘာလုံခြုံရေး အုပ်ချုပ်မှု
+- အုပ်ချုပ်ရေးမူဘောင်များ
+- အန္တရာယ်စီမံခန့်ခွဲမှု
+- လိုက်နာမှု
+- စီးပွားရေးဗျူဟာ
+- ဆိုက်ဘာခံနိုင်ရည်ရှိသည်။
+- ဘုတ်အဖွဲ့ကြီးကြပ်မှု
+- လည်ပတ်မှုအဆက်မပြတ်
 ---
 
 # အုပ်ချုပ်မှု

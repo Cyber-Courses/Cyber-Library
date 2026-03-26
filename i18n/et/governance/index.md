@@ -1,6 +1,16 @@
 ---
 title: Küberjulgeoleku juhtimine
-description: Ülevaade küberjulgeoleku juhtimisest, selle tähtsusest ja rakendamisest organisatsioonides.
+description: Ülevaade küberjulgeoleku juhtimisest, selle tähtsusest ja rakendamisest
+  organisatsioonides.
+keywords:
+- küberturvalisuse juhtimine
+- juhtimisraamistikud
+- riskijuhtimine
+- ravisoostumus
+- äristrateegia
+- Kübervastupanuvõime
+- juhatuse järelevalve
+- tegevuse järjepidevus
 ---
 
 # Juhtimine

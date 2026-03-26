@@ -3,13 +3,13 @@ title: Ofenzivna Kibernetička Sigurnost
 description: Razumijevanje ofenzivne kibernetičke sigurnosti, njene važnosti i metoda
   implementacije.
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
+- ofenzivna kibernetička sigurnost
+- etičko hakiranje
+- penetracijsko ispitivanje
+- crveno udruživanje
+- nagrada za bube
+- društveni inženjering
+- zaštita podataka
 - risk management
 ---
 

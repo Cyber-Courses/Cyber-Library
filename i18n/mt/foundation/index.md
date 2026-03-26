@@ -5,13 +5,13 @@ description: Is-sigurtà ċibernetika għandha l-għeruq tagħha fil-kultura tal
   hemm xewqa li jifhmu, jimmodifikaw, u jimbuttaw il-konfini tat-teknoloġija. Dawn
   l-ewwel hackers spiss raw lilhom infushom bħala esploraturi ta' fruntieri diġitali,…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- fondazzjoni taċ-ċibersigurtà
+- kultura tal-hacker
+- storja taċ-ċibersigurtà
+- etika taċ-ċibersigurtà
+- ġestjoni tar-riskju
+- fiduċja fis-sistemi diġitali
+- element uman fiċ-ċibersigurtà
 ---
 
 # Fondazzjoni

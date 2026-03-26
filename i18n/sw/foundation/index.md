@@ -1,3 +1,19 @@
+---
+title: Msingi
+description: Usalama wa mtandao una mizizi yake ya awali katika utamaduni wa wahusika
+  wa karne ya 20. Tangu watu walipoanza kujaribu kompyuta, kulikuwa na hamu ya kuelewa,
+  kubadilisha, na kusukuma mipaka ya teknolojia. Wahusika hawa wa awali mara nyingi
+  walijiona kama wachunguzi wa mipaka ya kidijitali, wakitamani kujifunza na…
+keywords:
+- msingi wa usalama wa mtandao
+- utamaduni wa hacking
+- historia ya usalama wa mtandao
+- maadili ya usalama wa mtandao
+- usimamizi wa hatari
+- uaminifu katika mifumo ya kidijitali
+- mzingo wa binadamu katika usalama wa mtandao
+---
+
 # Msingi
 
 ## Utangulizi

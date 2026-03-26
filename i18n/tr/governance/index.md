@@ -3,14 +3,14 @@ title: Siber Güvenlik Yönetişimi
 description: Siber güvenlik yönetişimi, siber riskleri yönetmek ve hafifletmek için
   bir kuruluşun oluşturduğu kapsamlı politika, rol ve karar verme süreçleri çerçevesidir.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- siber güvenlik yönetişimi
+- yönetişim çerçeveleri
+- risk yönetimi
+- uyumluluk
+- iş stratejisi
+- siber dayanıklılık
+- yönetim kurulu gözetimi
+- operasyonel süreklilik
 ---
 
 # Yönetişim

@@ -1,4 +1,20 @@
-```markdown
+---
+title: Asas
+description: Keselamatan siber mempunyai akar awalnya dalam budaya penggodam pada
+  akhir abad ke-20. Sejak orang mula bereksperimen dengan komputer, terdapat keinginan
+  untuk memahami, mengubah, dan mendorong batas teknologi. Penggodam awal ini sering
+  melihat diri mereka sebagai penjelajah sempadan digital, bersemangat untuk belajar
+  dan berkongsi pengetahuan tanpa semestinya berniat jahat.…
+keywords:
+- asas keselamatan siber
+- budaya penggodam
+- sejarah keselamatan siber
+- etika keselamatan siber
+- pengurusan risiko
+- kepercayaan dalam sistem digital
+- elemen manusia dalam keselamatan siber
+---
+
 # Asas
 
 ## Pengenalan
@@ -40,4 +56,3 @@ Kepercayaan mendasari hampir setiap aspek dunia dalam talian. Interaksi, transak
 Manusia kekal sebagai pembolehubah terbesar dalam keselamatan siber. Walaupun mesin dan perisian berkelakuan mengikut logik dan peraturan yang diprogramkan ke dalamnya, orang boleh membuat kesilapan atau bertindak dengan niat jahat dengan cara yang teknologi sahaja tidak dapat sepenuhnya meramalkan. Dari terlupa untuk menerapkan tampalan hingga mengklik pada pautan phishing, kesilapan manusia menyebabkan banyak pelanggaran yang paling ketara.
 
 Menangani isu-isu ini sering melibatkan latihan berkala, dasar yang jelas, dan budaya yang menghargai tingkah laku yang sedar akan keselamatan. Kempen kesedaran yang direka dengan baik dan program pendidikan pengguna mengurangkan kemungkinan kesilapan yang tidak disengajakan. Apabila orang memahami kedua-dua potensi akibat dan amalan terbaik untuk tingkah laku yang selamat, organisasi dapat melindungi diri mereka dengan lebih baik terhadap ancaman yang tidak dapat diperbaiki oleh tampalan perisian sahaja.
-```

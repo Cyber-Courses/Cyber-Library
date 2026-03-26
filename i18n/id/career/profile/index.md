@@ -1,18 +1,21 @@
 ---
 title: Profil
-description: Memahami profil keamanan siber Anda sangat penting untuk menentukan posisi
-  Anda dalam perjalanan profesional dan tujuan masa depan.
+description: Memahami profil keamanan siber Anda sangat penting karena membantu Anda
+  menentukan posisi Anda dalam perjalanan profesional dan tujuan masa depan. Profil
+  keamanan siber menggabungkan keterampilan, pengalaman, minat, dan tujuan Anda saat
+  ini, berfungsi sebagai peta jalan untuk menyelaraskan pilihan karier Anda dengan
+  peran, sertifikasi, dan peluang pengembangan yang…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- peran keamanan siber
+- jalur karier
+- pengembangan keterampilan
+- sertifikasi keamanan siber
+- karier keamanan
+- peran pemula
+- peran menengah
+- peran senior
+- keterampilan teknis
+- jalur manajerial
 ---
 
 # Profil

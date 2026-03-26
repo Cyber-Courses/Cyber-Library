@@ -5,16 +5,16 @@ description: നിങ്ങളുടെ സൈബർസുരക്ഷാ പ�
   പോകാൻ ആഗ്രഹിക്കുന്നതെന്ന് നിർവചിക്കാനും സഹായിക്കുന്നു. ഒരു സൈബർസുരക്ഷാ പ്രൊഫൈൽ നിങ്ങളുടെ
   നിലവിലെ കഴിവുകൾ, അനുഭവങ്ങൾ, താൽപ്പര്യങ്ങൾ, ലക്ഷ്യങ്ങൾ എന്നിവയെ…
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- സൈബർ സുരക്ഷാ റോളുകൾ
+- കരിയർ പാതകൾ
+- നൈപുണ്യ വികസനം
+- സൈബർ സുരക്ഷാ സർട്ടിഫിക്കേഷനുകൾ
+- സുരക്ഷാ ജീവിതം
+- എൻട്രി ലെവൽ റോളുകൾ
+- മിഡ്-ലെവൽ റോളുകൾ
+- സീനിയർ ലെവൽ റോളുകൾ
+- സാങ്കേതിക കഴിവുകൾ
+- മാനേജർ പാതകൾ
 ---
 
 # പ്രൊഫൈൽ

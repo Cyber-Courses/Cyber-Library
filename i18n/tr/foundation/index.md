@@ -5,13 +5,13 @@ description: Siber güvenlik, 20. yüzyılın sonlarındaki hacker kültürüne 
   anlamak, değiştirmek ve sınırlarını zorlamak için bir arzu vardı. Bu erken dönem
   hackerlar, kendilerini dijital sınırların kaşifleri olarak görürlerdi ve…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- siber güvenlik vakfı
+- hacker kültürü
+- siber güvenlik geçmişi
+- siber güvenlik etiği
+- risk yönetimi
+- dijital sistemlere güven
+- Siber güvenlikte insan unsuru
 ---
 
 # Temel

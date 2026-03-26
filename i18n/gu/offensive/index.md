@@ -2,14 +2,14 @@
 title: ઓફેન્સિવ
 description: ઓફેન્સિવ સાયબરસિક્યુરિટી વિશેની વિગતવાર સમજણ અને તેની મહત્વતા
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- અપમાનજનક સાયબર સુરક્ષા
+- નૈતિક હેકિંગ
+- ઘૂંસપેંઠ પરીક્ષણ
+- લાલ ટીમિંગ
+- બગ બક્ષિસ
+- સામાજિક ઇજનેરી
+- ડેટા સંરક્ષણ
+- જોખમ સંચાલન
 ---
 
 # ઓફેન્સિવ

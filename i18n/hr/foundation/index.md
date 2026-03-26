@@ -3,15 +3,16 @@ title: Temelj
 description: Kibernetička sigurnost ima svoje najranije korijene u hakerskoj kulturi
   kasnog 20. stoljeća. Od trenutka kada su ljudi počeli eksperimentirati s računalima,
   postojala je želja za razumijevanjem, modificiranjem i pomicanjem granica tehnologije.
-  Ti rani hakeri često su sebe vidjeli kao istraživače digitalnih granica,…
+  Ti rani hakeri često su sebe vidjeli kao istraživače digitalnih granica, željne
+  učenja i dijeljenja znanja bez…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- temelji kibernetske sigurnosti
+- hackerska kultura
+- povijest kibernetske sigurnosti
+- etika kibernetske sigurnosti
+- upravljanje rizikom
+- povjerenje u digitalne sustave
+- ljudski čimbenik u kibernetskoj sigurnosti
 ---
 
 # Temelj

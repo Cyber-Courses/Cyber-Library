@@ -2,13 +2,13 @@
 title: Karriär
 description: Utforska en karriär inom cybersäkerhet, dess möjligheter och landskap.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- cybersäkerhetskarriär
+- karriärvägar
+- roller och ansvar
+- tekniska och mjuka färdigheter
+- certifieringar
+- akademiska examina
+- professionell utveckling
 ---
 
 # Karriär

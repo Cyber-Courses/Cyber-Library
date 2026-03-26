@@ -2,13 +2,13 @@
 title: Karrier
 description: Fedezze fel a kiberbiztonsági karrier lehetőségeit és kihívásait.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- kiberbiztonsági karrier
+- karrier utak
+- szerepek és felelősségek
+- technikai és soft készségek
+- tanúsítványok
+- tudományos fokozatok
+- szakmai fejlődés
 ---
 
 # Karrier

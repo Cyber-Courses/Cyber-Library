@@ -3,16 +3,16 @@ title: Profils
 description: Izpratne par jūsu kiberdrošības profilu ir būtiska, jo tā palīdz noteikt,
   kur atrodaties savā profesionālajā ceļojumā un kur vēlaties doties.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- kiberdrošības lomas
+- karjeras ceļi
+- prasmju attīstība
+- kiberdrošības sertifikāti
+- drošības karjera
+- sākuma līmeņa lomas
+- vidēja līmeņa lomas
+- augstākā līmeņa lomas
+- tehniskās prasmes
+- vadības ceļi
 ---
 
 # Profils

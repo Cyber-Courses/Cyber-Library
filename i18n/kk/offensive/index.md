@@ -2,14 +2,14 @@
 title: Шабуылдаушы
 description: Шабуылдаушы киберқауіпсіздік туралы түсінік және оның маңыздылығы
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- шабуылдаушы киберқауіпсіздік
+- этикалық бұзу
+- ену сынағы
+- қызыл команда
+- қате сыйлығы
+- әлеуметтік инженерия
+- деректерді қорғау
+- тәуекелдерді басқару
 ---
 
 # Шабуылдаушы

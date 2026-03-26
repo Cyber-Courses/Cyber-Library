@@ -5,14 +5,14 @@ description: Tadbir urus keselamatan siber adalah rangka kerja menyeluruh yang m
   untuk mengurus dan mengurangkan risiko siber. Ia menyediakan pelan tindakan untuk
   mengintegrasikan keselamatan siber ke dalam setiap aspek perniagaan,…
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- tadbir urus keselamatan siber
+- rangka kerja tadbir urus
+- pengurusan risiko
+- pematuhan
+- strategi perniagaan
+- ketahanan siber
+- pengawasan lembaga
+- kesinambungan operasi
 ---
 
 # Tadbir Urus

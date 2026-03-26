@@ -3,16 +3,16 @@ title: Hồ sơ
 description: Hiểu hồ sơ an ninh mạng của bạn là điều cần thiết vì nó giúp bạn xác
   định vị trí hiện tại trong hành trình nghề nghiệp và nơi bạn muốn đi.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- vai trò an ninh mạng
+- con đường sự nghiệp
+- phát triển kỹ năng
+- chứng chỉ an ninh mạng
+- sự nghiệp an ninh
+- vai trò cấp đầu vào
+- vai trò cấp trung
+- vai trò cấp cao
+- kỹ năng kỹ thuật
+- con đường quản lý
 ---
 
 # Hồ sơ

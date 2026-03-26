@@ -4,13 +4,13 @@ description: Een carrière in cybersecurity biedt dynamische mogelijkheden voor 
   op alle niveaus. Ontdek hoe je je profiel kunt begrijpen, je professionele reis
   kunt navigeren en het landschap van de cybersecurity-industrie kunt verkennen.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- carrière op het gebied van cyberbeveiliging
+- carrièrepaden
+- rollen en verantwoordelijkheden
+- technische en zachte vaardigheden
+- certificeringen
+- academische graden
+- professionele ontwikkeling
 ---
 
 # Carrière

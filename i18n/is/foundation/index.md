@@ -3,16 +3,15 @@ title: Grunnur
 description: Netöryggi á rætur sínar að rekja til hakkaramenningar seint á 20. öld.
   Frá því að fólk byrjaði að prófa tölvur var til staðar löngun til að skilja, breyta
   og ýta undir mörk tækninnar. Þessir fyrstu hakkarar sáu sig oft sem landkönnuði
-  stafræna víðáttunnar, fúsir til að læra og deila þekkingu án þess að hafa endilega
-  í…
+  stafræna víðáttunnar, fúsir til að læra og…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- grunnur netöryggis
+- tölvuþrjóta menning
+- saga netöryggis
+- siðfræði netöryggis
+- áhættustýring
+- traust á stafrænum kerfum
+- mannlegur þáttur í netöryggi
 ---
 
 # Grunnur

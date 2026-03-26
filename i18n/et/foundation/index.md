@@ -1,3 +1,20 @@
+---
+title: Alus
+description: Küberjulgeoleku juured ulatuvad 20. sajandi lõpu häkkerikultuuri. Alates
+  hetkest, mil inimesed hakkasid arvutitega eksperimenteerima, tekkis soov mõista,
+  muuta ja laiendada tehnoloogia piire. Need varased häkkerid nägid end sageli digitaalsete
+  piiride avastajatena, kes olid innukad õppima ja jagama teadmisi, ilma et nad tingimata
+  kahju sooviksid. Aja jooksul arenes nokitsemise…
+keywords:
+- küberturvalisuse alused
+- häkkerikultuur
+- küberturvalisuse ajalugu
+- küberturvalisuse eetika
+- riskijuhtimine
+- usaldus digitaalsüsteemides
+- inimene küberturvalisuses
+---
+
 # Alus
 
 ## Sissejuhatus

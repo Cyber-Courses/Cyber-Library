@@ -2,13 +2,13 @@
 title: அடித்தளம்
 description: இணைய பாதுகாப்பின் அடிப்படை விளக்கம் மற்றும் வரலாறு
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- இணைய பாதுகாப்பு அடித்தளம்
+- ஹேக்கர் கலாச்சாரம்
+- இணைய பாதுகாப்பு வரலாறு
+- இணைய பாதுகாப்பு நெறிமுறைகள்
+- இடர் மேலாண்மை
+- டிஜிட்டல் அமைப்புகளில் நம்பிக்கை
+- இணைய பாதுகாப்பில் மனித உறுப்பு
 ---
 
 # அடித்தளம்

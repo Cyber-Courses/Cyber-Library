@@ -3,13 +3,13 @@ title: დაცვითი
 description: სისტემატური მიდგომა ორგანიზაციის მონაცემების, სისტემების და მომხმარებლების
   დაცვაზე კიბერ საფრთხეებისგან.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- თავდაცვითი კიბერუსაფრთხოება
+- საფრთხის დაზვერვა
+- დაუცველობის შეფასებები
+- ინციდენტის რეაგირება
+- უწყვეტი მონიტორინგი
+- ინციდენტის შემდგომი ანალიზი
+- ბიზნესის უწყვეტობა
 ---
 
 # დაცვითი

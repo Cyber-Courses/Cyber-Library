@@ -2,13 +2,13 @@
 title: کیریئر
 description: سائبر سیکیورٹی میں کیریئر کے مواقع اور ترقی کے راستے
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- سائبر سیکورٹی کیریئر
+- کیریئر کے راستے
+- کردار اور ذمہ داریاں
+- تکنیکی اور نرم مہارت
+- سرٹیفیکیشن
+- تعلیمی ڈگریاں
+- پیشہ ورانہ ترقی
 ---
 
 # کیریئر

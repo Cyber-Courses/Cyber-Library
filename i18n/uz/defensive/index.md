@@ -5,13 +5,13 @@ description: Himoya kiberxavfsizligi tashkilotning ma'lumotlari, tizimlari va fo
   ta'sirini minimallashtirish uchun oldini olish, aniqlash va javob berish strategiyalarini
   integratsiyalashni o'z ichiga oladi. Tahdidlar haqidagi…
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- mudofaa kiberxavfsizlik
+- tahdid razvedkasi
+- zaifliklarni baholash
+- hodisaga javob
+- doimiy monitoring
+- voqeadan keyingi tahlil
+- biznesning uzluksizligi
 ---
 
 # Himoya

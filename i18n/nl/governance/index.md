@@ -3,14 +3,14 @@ title: Governance
 description: Een diepgaande verkenning van cybersecurity governance, het belang ervan
   en de implementatie binnen organisaties.
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- cyberbeveiligingsbeheer
+- bestuurskaders
+- risicobeheer
+- naleving
+- bedrijfsstrategie
+- cyberveerkracht
+- toezicht van het bestuur
+- operationele continuïteit
 ---
 
 # Governance

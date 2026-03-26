@@ -3,13 +3,13 @@ title: Karriere
 description: Utforsk en karriere innen cybersikkerhet med muligheter for personlig
   og profesjonell utvikling.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- cybersikkerhetskarriere
+- karriereveier
+- roller og ansvar
+- tekniske og myke ferdigheter
+- sertifiseringer
+- akademiske grader
+- faglig utvikling
 ---
 
 # Karriere

@@ -2,13 +2,13 @@
 title: 基礎
 description: サイバーセキュリティの基礎、ハッカー文化、歴史、倫理、目的、リスクと信頼、人間要素についての詳細な技術的説明。
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- サイバーセキュリティ基盤
+- ハッカー文化
+- サイバーセキュリティの歴史
+- サイバーセキュリティ倫理
+- リスク管理
+- デジタルシステムへの信頼
+- サイバーセキュリティにおける人的要素
 ---
 
 # 基礎

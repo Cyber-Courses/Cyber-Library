@@ -3,13 +3,13 @@ title: Carreira
 description: Explora as oportunidades e o desenvolvemento profesional no campo da
   ciberseguridade.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- carreira de ciberseguridade
+- camiños profesionais
+- roles e responsabilidades
+- habilidades técnicas e suaves
+- certificacións
+- titulacións académicas
+- desenvolvemento profesional
 ---
 
 # Carreira

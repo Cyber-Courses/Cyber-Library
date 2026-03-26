@@ -3,14 +3,14 @@ title: आक्रामक
 description: आक्रामक साइबर सुरक्षाले वास्तविक आक्रमणहरूलाई नैतिक रूपमा अनुकरण गरेर
   कमजोरीहरू पत्ता लगाउँछ।
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- आपत्तिजनक साइबर सुरक्षा
+- नैतिक ह्याकिङ
+- प्रवेश परीक्षण
+- रातो टोली
+- बग इनाम
+- सामाजिक ईन्जिनियरिङ्
+- डाटा सुरक्षा
+- जोखिम व्यवस्थापन
 ---
 
 # आक्रामक

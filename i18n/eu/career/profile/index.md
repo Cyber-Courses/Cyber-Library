@@ -1,6 +1,20 @@
 ---
-title: "Profila"
-description: "Zibersegurtasun profil bat ulertzea ezinbestekoa da zure ibilbide profesionala definitzeko eta nora joan nahi duzun argitzeko. Zure gaitasun, esperientzia, interes eta helburuak konbinatzen ditu, zure karrera aukerak rol, ziurtagiri eta garapen aukerekin lerrokatzeko bide orri gisa balio duena."
+title: Profila
+description: Zibersegurtasun profil bat ulertzea ezinbestekoa da zure ibilbide profesionala
+  definitzeko eta nora joan nahi duzun argitzeko. Zure gaitasun, esperientzia, interes
+  eta helburuak konbinatzen ditu, zure karrera aukerak rol, ziurtagiri eta garapen
+  aukerekin lerrokatzeko bide orri gisa balio duena.
+keywords:
+  - zibersegurtasun-rolak
+  - karrera-bideak
+  - trebetasunen garapena
+  - zibersegurtasun-ziurtagiriak
+  - segurtasun-karrera
+  - sarrera-mailako rolak
+  - erdi-mailako rolak
+  - goi-mailako rolak
+  - trebetasun teknikoak
+  - kudeaketa-ibilbideak
 ---
 
 # Profila

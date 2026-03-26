@@ -1,6 +1,18 @@
 ---
-title: "Profilis"
-description: "Suprasti savo kibernetinio saugumo profilį yra esminis žingsnis, padedantis nustatyti jūsų profesinę padėtį ir ateities tikslus."
+title: Profilis
+description: Suprasti savo kibernetinio saugumo profilį yra esminis žingsnis, padedantis
+  nustatyti jūsų profesinę padėtį ir ateities tikslus.
+keywords:
+- kibernetinio saugumo vaidmenis
+- karjeros keliai
+- įgūdžių ugdymas
+- kibernetinio saugumo sertifikatai
+- saugumo karjera
+- pradinio lygio vaidmenys
+- vidutinio lygio vaidmenys
+- aukštesnio lygio vaidmenys
+- techniniai įgūdžiai
+- vadybiniai keliai
 ---
 
 # Profilis

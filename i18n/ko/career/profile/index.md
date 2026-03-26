@@ -2,16 +2,16 @@
 title: 사이버 보안 프로필 이해하기
 description: 사이버 보안 프로필을 이해하고 경력 경로, 역할 및 책임, 기술, 인증 및 학위를 통해 경력을 발전시키는 방법에 대해 알아보세요.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- 사이버 보안 역할
+- 진로
+- 기술 개발
+- 사이버보안 인증
+- 보안 경력
+- 엔트리 레벨 역할
+- 중간 역할
+- 고위급 역할
+- 기술력
+- 경영 경로
 ---
 
 # 프로필

@@ -5,13 +5,13 @@ description: સાઇબરસિક્યુરિટીના પ્રાર
   કરવા અને તેની સીમાઓને આગળ ધપાવવાની ઇચ્છા હતી. આ પ્રારંભિક હેકર્સે પોતાને ડિજિટલ
   સીમાઓના અન્વેષક તરીકે જોયા, જેઓ જ્ઞાન શીખવા અને શેર કરવા ઉત્સુક હતા, હાનિ પહોંચાડવાનો…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- સાયબર સુરક્ષા ફાઉન્ડેશન
+- હેકર સંસ્કૃતિ
+- સાયબર સુરક્ષા ઇતિહાસ
+- સાયબર સુરક્ષા નીતિશાસ્ત્ર
+- જોખમ સંચાલન
+- ડિજિટલ સિસ્ટમમાં વિશ્વાસ
+- સાયબર સુરક્ષામાં માનવ તત્વ
 ---
 
 # આધાર

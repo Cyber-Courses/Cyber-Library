@@ -1,6 +1,16 @@
 ---
-title: "Ofensivă"
-description: "Explorarea securității cibernetice ofensive pentru descoperirea vulnerabilităților și îmbunătățirea protecției organizaționale."
+title: Ofensivă
+description: Explorarea securității cibernetice ofensive pentru descoperirea vulnerabilităților
+  și îmbunătățirea protecției organizaționale.
+keywords:
+- securitate cibernetică ofensivă
+- hacking etic
+- testarea de penetrare
+- echipă roșie
+- recompensă pentru bug-uri
+- inginerie socială
+- protecția datelor
+- managementul riscurilor
 ---
 
 # Ofensivă

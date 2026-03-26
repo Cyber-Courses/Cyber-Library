@@ -3,14 +3,14 @@ title: Intelligens
 description: Utforskning av intelligens inom cybersäkerhet, dess betydelse och hur
   det implementeras för att skydda mot cyberhot.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- cybersäkerhetsunderrättelser
+- strategiska underrättelser
+- operativa underrättelser
+- taktisk intelligens
+- riskhantering
+- Indikatorer för kompromiss
+- hot feeds
+- intelligenscykel
 ---
 
 # Intelligens

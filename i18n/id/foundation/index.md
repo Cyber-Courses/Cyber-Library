@@ -1,14 +1,18 @@
 ---
 title: Dasar
-description: Memahami dasar-dasar keamanan siber dan budaya peretas.
+description: Keamanan siber memiliki akar awalnya dalam budaya peretas pada akhir
+  abad ke-20. Sejak orang mulai bereksperimen dengan komputer, ada keinginan untuk
+  memahami, memodifikasi, dan mendorong batasan teknologi. Para peretas awal ini sering
+  melihat diri mereka sebagai penjelajah perbatasan digital, bersemangat untuk belajar
+  dan berbagi pengetahuan tanpa harus berniat…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- dasar keamanan siber
+- budaya peretas
+- sejarah keamanan siber
+- etika keamanan siber
+- manajemen risiko
+- kepercayaan pada sistem digital
+- faktor manusia dalam keamanan siber
 ---
 
 # Dasar

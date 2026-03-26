@@ -1,15 +1,17 @@
 ---
 title: Tấn công
-description: Tìm hiểu về an ninh mạng tấn công, tầm quan trọng và cách thực hiện.
+description: An ninh mạng tấn công liên quan đến việc mô phỏng các cuộc tấn công thực
+  tế một cách có đạo đức để phát hiện các lỗ hổng trước khi các tác nhân độc hại có
+  thể khai thác chúng. Bằng cách hành động như những kẻ thù…
 keywords:
-- offensive cybersecurity
-- ethical hacking
-- penetration testing
-- red teaming
-- bug bounty
-- social engineering
-- data protection
-- risk management
+- an ninh mạng tấn công
+- hack đạo đức
+- kiểm thử xâm nhập
+- red team
+- chương trình bug bounty
+- kỹ thuật xã hội
+- bảo vệ dữ liệu
+- quản lý rủi ro
 ---
 
 # Tấn công

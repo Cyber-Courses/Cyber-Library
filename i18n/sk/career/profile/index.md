@@ -1,6 +1,18 @@
 ---
-title: "Profil"
-description: "Pochopenie vášho profilu kybernetickej bezpečnosti je kľúčové pre definovanie vašej profesionálnej cesty a cieľov."
+title: Profil
+description: Pochopenie vášho profilu kybernetickej bezpečnosti je kľúčové pre definovanie
+  vašej profesionálnej cesty a cieľov.
+keywords:
+- úlohy v oblasti kybernetickej bezpečnosti
+- kariérne cesty
+- rozvoj zručností
+- certifikáty kybernetickej bezpečnosti
+- bezpečnostná kariéra
+- roly na základnej úrovni
+- roly na strednej úrovni
+- roly na vyššej úrovni
+- technické zručnosti
+- manažérske cesty
 ---
 
 # Profil

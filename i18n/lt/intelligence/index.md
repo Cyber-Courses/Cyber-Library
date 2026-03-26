@@ -3,14 +3,14 @@ title: Intelektas
 description: Išsamus intelekto vaidmens kibernetinio saugumo srityje tyrimas, apimantis
   strateginius, operatyvinius ir taktinius aspektus.
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- kibernetinio saugumo žvalgyba
+- strateginė žvalgyba
+- operatyvinė žvalgyba
+- taktinė žvalgyba
+- rizikos valdymas
+- Kompromiso rodikliai
+- grėsmės maitina
+- intelekto ciklas
 ---
 
 # Intelektas

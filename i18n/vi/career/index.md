@@ -3,13 +3,13 @@ title: Sự nghiệp
 description: Khám phá sự nghiệp trong lĩnh vực an ninh mạng với cơ hội phát triển
   cá nhân và chuyên môn.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- sự nghiệp an ninh mạng
+- con đường sự nghiệp
+- vai trò và trách nhiệm
+- kỹ năng kỹ thuật và mềm
+- chứng chỉ
+- bằng cấp học thuật
+- phát triển chuyên môn
 ---
 
 # Sự nghiệp

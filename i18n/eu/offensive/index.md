@@ -1,3 +1,22 @@
+---
+title: Ofentsiboa
+description: Ofentsibako zibersegurtasuna benetako erasoak etikoak diren simulazioak
+  egitea da, aktore gaiztoek ustiatu aurretik ahultasunak aurkitzeko. Autorizatutako
+  aurkarien moduan jokatuz, segurtasun taldeek erakundearen defentsen puntu ahulak
+  agerian uzten dituzte, arazo horiek modu proaktiboan konpondu ahal izateko. Prozesu
+  honek mehatxu potentzialak identifikatzeaz gain, lehendik dauden babesek, oztopo
+  fisikoetatik software babesetaraino,…
+keywords:
+- erasokorra zibersegurtasun
+- hacking etikoa
+- penetrazio proba
+- talde gorria
+- bug bounty
+- ingeniaritza soziala
+- datuen babesa
+- arriskuen kudeaketa
+---
+
 # Ofentsiboa
 
 ## Zer da Ofentsibako Zibersegurtasuna?

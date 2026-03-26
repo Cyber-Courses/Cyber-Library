@@ -4,13 +4,13 @@ description: Karir dalam keamanan siber menawarkan peluang dinamis bagi para pro
   di semua tingkatan, dengan permintaan yang terus meningkat seiring berkembangnya
   dunia digital.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- karier keamanan siber
+- jalur karier
+- peran dan tanggung jawab
+- keterampilan teknis dan lunak
+- sertifikasi
+- gelar akademik
+- pengembangan profesional
 ---
 
 # Karir

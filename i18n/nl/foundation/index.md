@@ -3,13 +3,13 @@ title: Grondslagen van Cyberbeveiliging
 description: Een diepgaande verkenning van de oorsprong, geschiedenis en filosofie
   van cyberbeveiliging.
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- Stichting Cybersecurity
+- hackercultuur
+- geschiedenis van cyberbeveiliging
+- ethiek op het gebied van cyberveiligheid
+- risicobeheer
+- vertrouwen in digitale systemen
+- menselijke factor in cyberveiligheid
 ---
 
 # Grondslagen

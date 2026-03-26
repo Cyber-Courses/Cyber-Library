@@ -3,13 +3,13 @@ title: Karjera
 description: Karjera kibernetinio saugumo srityje yra dinamiška kelionė, kupina galimybių
   profesionalams visais lygmenimis.
 keywords:
-- cybersecurity career
-- career paths
-- roles and responsibilities
-- technical and soft skills
-- certifications
-- academic degrees
-- professional development
+- kibernetinio saugumo karjerą
+- karjeros keliai
+- vaidmenis ir pareigas
+- techniniai ir minkštieji įgūdžiai
+- sertifikatus
+- akademiniai laipsniai
+- profesinį tobulėjimą
 ---
 
 # Karjera

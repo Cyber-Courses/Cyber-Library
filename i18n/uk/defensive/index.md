@@ -3,13 +3,13 @@ title: Захисна
 description: Дізнайтеся про важливість захисної кібербезпеки, її значення та методи
   реалізації для захисту організаційних даних від кіберзагроз.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- захисна кібербезпека
+- розвідка про загрози
+- оцінки вразливості
+- відповідь на інцидент
+- постійний моніторинг
+- аналіз після інциденту
+- безперервність бізнесу
 ---
 
 # Захисна

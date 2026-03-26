@@ -2,13 +2,13 @@
 title: พื้นฐาน
 description: บทนำเกี่ยวกับความปลอดภัยทางไซเบอร์ วัฒนธรรมแฮกเกอร์ และประวัติศาสตร์
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- มูลนิธิความปลอดภัยทางไซเบอร์
+- วัฒนธรรมแฮ็กเกอร์
+- ประวัติความปลอดภัยทางไซเบอร์
+- จริยธรรมด้านความปลอดภัยทางไซเบอร์
+- การบริหารความเสี่ยง
+- ไว้วางใจในระบบดิจิทัล
+- องค์ประกอบของมนุษย์ในความปลอดภัยทางไซเบอร์
 ---
 
 # พื้นฐาน

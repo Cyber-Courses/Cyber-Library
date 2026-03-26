@@ -2,14 +2,14 @@
 title: การกำกับดูแลความปลอดภัยทางไซเบอร์
 description: การอธิบายเชิงเทคนิคเกี่ยวกับการกำกับดูแลความปลอดภัยทางไซเบอร์และความสำคัญของมัน
 keywords:
-- cybersecurity governance
-- governance frameworks
-- risk management
-- compliance
-- business strategy
-- cyber resilience
-- board oversight
-- operational continuity
+- การกำกับดูแลความปลอดภัยทางไซเบอร์
+- กรอบการกำกับดูแล
+- การบริหารความเสี่ยง
+- การปฏิบัติตาม
+- กลยุทธ์ทางธุรกิจ
+- ความยืดหยุ่นทางไซเบอร์
+- การกำกับดูแลของคณะกรรมการ
+- ความต่อเนื่องในการปฏิบัติงาน
 ---
 
 # การกำกับดูแล

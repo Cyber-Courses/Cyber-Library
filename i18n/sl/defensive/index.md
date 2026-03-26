@@ -3,13 +3,13 @@ title: Defenzivna Kibernetska Varnost
 description: Celovit pregled defenzivne kibernetske varnosti, vključno s pomembnostjo,
   metodami in strategijami za zaščito organizacij pred kibernetskimi grožnjami.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- obrambna kibernetska varnost
+- obveščevalne informacije o grožnjah
+- ocene ranljivosti
+- odziv na incident
+- stalno spremljanje
+- analizo po incidentu
+- neprekinjeno poslovanje
 ---
 
 # Defenzivna

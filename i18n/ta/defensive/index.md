@@ -3,13 +3,13 @@ title: பாதுகாப்பு
 description: பாதுகாப்பு சைபர் பாதுகாப்பு என்பது ஒரு அமைப்பின் தரவுகள், அமைப்புகள்
   மற்றும் பயனர்களை சைபர் அச்சுறுத்தல்களிலிருந்து பாதுகாக்க ஒரு முறையான அணுகுமுறை ஆகும்.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- தற்காப்பு இணைய பாதுகாப்பு
+- அச்சுறுத்தல் உளவுத்துறை
+- பாதிப்பு மதிப்பீடுகள்
+- சம்பவம் பதில்
+- தொடர்ச்சியான கண்காணிப்பு
+- பிந்தைய நிகழ்வு பகுப்பாய்வு
+- வணிக தொடர்ச்சி
 ---
 
 # பாதுகாப்பு

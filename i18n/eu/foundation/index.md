@@ -1,3 +1,21 @@
+---
+title: Oinarriak
+description: Zibersegurtasunaren hastapenak XX. mendearen amaierako hacker kulturaren
+  baitan daude. Jendeak ordenagailuekin esperimentatzen hasi zen unetik bertatik,
+  teknologiaren mugak ulertu, aldatu eta gainditzeko nahia zegoen. Hasierako hacker
+  hauek askotan beraiek ikusten zituzten digital mugen esploratzaile gisa, kalterik
+  eragin nahi gabe ezagutza ikasi eta partekatzeko gogoz. Denborarekin, tinkering-aren
+  fokua datuak,…
+keywords:
+- zibersegurtasunaren oinarriak
+- hacker kultura
+- zibersegurtasunaren historia
+- zibersegurtasunaren etika
+- arriskuen kudeaketa
+- konfiantza sistema digitaletan
+- giza faktorea zibersegurtasunean
+---
+
 # Oinarriak
 
 ## Sarrera

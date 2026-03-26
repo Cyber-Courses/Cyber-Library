@@ -1,3 +1,19 @@
+---
+title: Fundació
+description: La ciberseguretat té les seves arrels més primerenques en la cultura
+  hacker de finals del segle XX. Des del moment en què les persones van començar a
+  experimentar amb els ordinadors, va existir un desig d'entendre, modificar i empènyer
+  els límits de la tecnologia. Aquests primers hackers sovint…
+keywords:
+- fonaments de ciberseguretat
+- cultura hacker
+- història de la ciberseguretat
+- ètica de la ciberseguretat
+- gestió de riscos
+- confiança en sistemes digitals
+- element humà en ciberseguretat
+---
+
 # Fundació
 
 ## Introducció

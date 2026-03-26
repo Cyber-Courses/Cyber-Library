@@ -3,16 +3,16 @@ title: Профиль
 description: Понимание вашего профиля в области кибербезопасности помогает определить
   ваше текущее положение и цели в профессиональном пути.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- роли кибербезопасности
+- карьерный путь
+- развитие навыков
+- сертификаты кибербезопасности
+- карьера в сфере безопасности
+- роли начального уровня
+- роли среднего звена
+- должности высшего уровня
+- технические навыки
+- управленческие пути
 ---
 
 # Профиль

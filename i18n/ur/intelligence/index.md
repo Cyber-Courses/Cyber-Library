@@ -3,14 +3,14 @@ title: انٹیلیجنس
 description: سائبر سیکیورٹی میں انٹیلیجنس کی اہمیت، اس کے فوائد، اور اس کے نفاذ کے
   طریقے
 keywords:
-- cybersecurity intelligence
-- strategic intelligence
-- operational intelligence
-- tactical intelligence
-- risk management
-- Indicators of Compromise
-- threat feeds
-- intelligence cycle
+- سائبر سیکورٹی انٹیلی جنس
+- اسٹریٹجک انٹیلی جنس
+- آپریشنل انٹیلی جنس
+- حکمت عملی کی انٹیلی جنس
+- رسک مینجمنٹ
+- سمجھوتہ کے اشارے
+- خطرہ فیڈ
+- انٹیلی جنس سائیکل
 ---
 
 # انٹیلیجنس

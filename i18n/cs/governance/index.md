@@ -1,6 +1,16 @@
 ---
-title: "Řízení kybernetické bezpečnosti"
-description: "Komplexní rámec politik, rolí a rozhodovacích procesů pro řízení a zmírňování kybernetických rizik v organizaci."
+title: Řízení kybernetické bezpečnosti
+description: Komplexní rámec politik, rolí a rozhodovacích procesů pro řízení a zmírňování
+  kybernetických rizik v organizaci.
+keywords:
+- správa kybernetické bezpečnosti
+- rámce správy a řízení
+- rizika managementu
+- dodržování předpisů
+- obchodní strategie
+- kybernetická odolnost
+- dozorčí rada
+- provozní kontinuita
 ---
 
 # Řízení

@@ -3,13 +3,13 @@ title: Obranná kybernetická bezpečnosť
 description: Systémový prístup k ochrane údajov, systémov a používateľov pred kybernetickými
   hrozbami.
 keywords:
-- defensive cybersecurity
-- threat intelligence
-- vulnerability assessments
-- incident response
-- continuous monitoring
-- post-incident analysis
-- business continuity
+- defenzívna kybernetická bezpečnosť
+- spravodajstvo o hrozbách
+- hodnotenia zraniteľnosti
+- reakciu na incident
+- nepretržité monitorovanie
+- analýza po incidente
+- kontinuita podnikania
 ---
 
 # Obranná

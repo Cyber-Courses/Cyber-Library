@@ -5,13 +5,13 @@ description: साइबर सुरक्षा २० औं शताब्
   बुझ्न, परिमार्जन गर्न, र धकेल्नको लागि इच्छा थियो। यी प्रारम्भिक ह्याकरहरूले प्रायः
   आफूलाई डिजिटल सीमाहरूको अन्वेषकको रूपमा देख्थे, जसले हानि पुर्‍याउने उद्देश्य…
 keywords:
-- cybersecurity foundation
-- hacker culture
-- cybersecurity history
-- cybersecurity ethics
-- risk management
-- trust in digital systems
-- human element in cybersecurity
+- साइबर सुरक्षा फाउन्डेसन
+- ह्याकर संस्कृति
+- साइबर सुरक्षा इतिहास
+- साइबर सुरक्षा नैतिकता
+- जोखिम व्यवस्थापन
+- डिजिटल प्रणालीमा विश्वास
+- साइबर सुरक्षा मा मानव तत्व
 ---
 
 # आधार

@@ -3,16 +3,16 @@ title: Profil
 description: Förståelse för din cybersäkerhetsprofil är avgörande för att definiera
   din professionella resa och framtida mål.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+- cybersäkerhetsroller
+- karriärvägar
+- kompetensutveckling
+- cybersäkerhetscertifieringar
+- säkerhetskarriär
+- roller på ingångsnivå
+- roller på mellannivå
+- roller på högre nivå
+- tekniska färdigheter
+- ledningsvägar
 ---
 
 # Profil

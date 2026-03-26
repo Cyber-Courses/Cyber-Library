@@ -1,4 +1,22 @@
-```markdown
+---
+title: Hyökkäävä
+description: Hyökkäävä kyberturvallisuus tarkoittaa eettisesti toteutettuja simulaatioita
+  todellisista hyökkäyksistä, joiden avulla paljastetaan haavoittuvuuksia ennen kuin
+  pahantahtoiset toimijat voivat hyödyntää niitä. Toimimalla valtuutettuina vastustajina,
+  turvallisuustiimit paljastavat organisaation puolustuksen heikot kohdat, mikä mahdollistaa
+  näiden ongelmien ennakoivan korjaamisen. Tämä prosessi ei ainoastaan tunnista potentiaalisia
+  uhkia, vaan myös vahvistaa, kestävätkö olemassa olevat suojaukset,…
+keywords:
+- ofensiivinen kyberturvallisuus
+- eettinen hakkerointi
+- penetraatiotestaus
+- red team -toiminta
+- bug bounty
+- sosiaalinen manipulointi
+- tietosuoja
+- riskienhallinta
+---
+
 # Hyökkäävä
 
 ## Mitä on Hyökkäävä Kyberturvallisuus?
@@ -14,4 +32,3 @@ Hyökkäävä kyberturvallisuus on keskeisessä asemassa riskin vähentämisess�
 Hyökkäävän kyberturvallisuuden toteuttaminen alkaa organisaation ympäristön muodostavien kerrosten tunnistamisella. Inhimillinen kerros, joka on usein heikoin lenkki, voidaan testata sosiaalisen manipuloinnin harjoituksilla, jotka on suunniteltu mittaamaan tietoisuutta ja turvallisuusprotokollien noudattamista. Fyysinen kerros keskittyy pääsynvalvontaan ja laitteistoon, arvioiden kuinka helposti valtuuttamaton henkilö voisi tunkeutua tiloihin tai manipuloida laitteita. Verkkokerroksessa turvallisuusammattilaiset tutkivat palomuureja, reitittimiä ja muita infrastruktuurikomponentteja nähdäkseen, voivatko hyökkääjät murtaa perimetrin tai liikkua sivusuunnassa vaarantuneessa järjestelmässä. Ohjelmistokerros puolestaan käy läpi arviointeja koodausvirheiden, väärinkonfiguraatioiden ja loogisten aukkojen varalta, jotka saattavat antaa tunkeutujalle mahdollisuuden laajentaa oikeuksia tai viedä tietoja. Hyökkäävät tiimit voivat myös tutkia tietosuojamekanismeja—kuten salaus ja koodaus—vahvistaakseen niiden kestävyyden manipulointia tai ohitusyrityksiä vastaan.
 
 Näissä kerroksissa erilaiset menetelmät ohjaavat hyökkääviä operaatioita. Läpimurtotestaus keskittyy kohdennettuihin hyökkäyksiin tiettyjä järjestelmiä vastaan paljastaakseen haavoittuvuuksia hallitulla tavalla, tarjoten konkreettisia todisteita konseptin hyväksikäytöstä. Red teaming käyttää laajempaa, kokonaisvaltaisempaa lähestymistapaa, joka jäljittelee kehittyneitä, pysyviä vastustajia, testaten paitsi teknologisia puolustuksia myös organisaation tapahtumien hallintaa, viestintää ja päätöksentekoprosesseja. Monet yritykset käyttävät lisäksi bug bounty -ohjelmia, jotka kutsuvat riippumattomia tutkijoita tutkimaan järjestelmiä ja raportoimaan tietoturva-aukoista palkkioita vastaan. Jokainen hyökkäävä aloite vaatii teknistä asiantuntemusta, sopeutumiskykyä ja luovuutta, sillä todelliset hyökkääjät kehittävät jatkuvasti menetelmiään. Lopulta nämä eettisesti johdetut hyökkäyssimulaatiot toimivat kattavan kyberturvallisuusstrategian perustavanlaatuisena pilarina, paljastaen sokeat pisteet ja edistäen jatkuvaa parantamista.
-```
