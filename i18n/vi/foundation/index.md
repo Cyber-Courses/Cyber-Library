@@ -1,4 +1,19 @@
-```markdown
+---
+title: Nền tảng
+description: An ninh mạng có nguồn gốc từ văn hóa hacker cuối thế kỷ 20. Từ khi con
+  người bắt đầu thử nghiệm với máy tính, đã tồn tại một mong muốn hiểu, sửa đổi và
+  đẩy giới hạn của công nghệ. Những hacker đầu tiên thường tự coi mình là những nhà
+  thám hiểm của biên giới kỹ thuật số, háo hức học hỏi và chia sẻ kiến thức mà không…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Nền tảng
 
 ## Giới thiệu
@@ -40,4 +55,3 @@ Niềm tin là nền tảng của hầu hết mọi khía cạnh của thế gi�
 Con người vẫn là biến số lớn nhất trong an ninh mạng. Mặc dù máy móc và phần mềm hoạt động theo logic và các quy tắc được lập trình vào chúng, con người có thể mắc sai lầm hoặc hành động với ác ý theo những cách mà công nghệ không thể hoàn toàn dự đoán. Từ việc quên áp dụng các bản vá lỗi đến nhấp vào các liên kết lừa đảo, lỗi của con người gây ra nhiều vi phạm nghiêm trọng nhất.
 
 Giải quyết những vấn đề này thường liên quan đến đào tạo thường xuyên, các chính sách rõ ràng và một văn hóa coi trọng hành vi có ý thức về an ninh. Các chiến dịch nâng cao nhận thức và chương trình giáo dục người dùng được thiết kế tốt làm giảm khả năng xảy ra các sai sót vô ý. Khi mọi người hiểu cả hậu quả tiềm tàng và các thực hành tốt nhất cho hành vi an toàn, các tổ chức có thể bảo vệ mình tốt hơn khỏi các mối đe dọa mà không một bản vá phần mềm nào có thể khắc phục được.
-```

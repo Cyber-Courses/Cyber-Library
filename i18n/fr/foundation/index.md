@@ -1,14 +1,16 @@
 ---
 title: Fondements
-description: Explorez les racines de la cybersécurité dans la culture hacker, son évolution vers une discipline essentielle, les débats éthiques autour du hacking et le rôle central de la gestion des risques et du comportement humain.
+description: Explorez les racines de la cybersécurité dans la culture hacker, son
+  évolution vers une discipline essentielle, les débats éthiques autour du hacking
+  et le rôle central de la gestion des risques et du comportement humain.
 keywords:
-  - fondements cybersécurité
-  - culture hacker
-  - histoire cybersécurité
-  - éthique cybersécurité
-  - gestion des risques
-  - confiance systèmes numériques
-  - facteur humain cybersécurité
+- fondation de cybersécurité
+- culture des hackers
+- histoire de la cybersécurité
+- éthique de la cybersécurité
+- gestion des risques
+- confiance dans les systèmes numériques
+- élément humain dans la cybersécurité
 ---
 
 # Fondements

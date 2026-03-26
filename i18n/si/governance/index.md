@@ -1,6 +1,15 @@
 ---
-title: "පාලනය"
-description: "සයිබර් ආරක්ෂක පාලනය පිළිබඳ සවිස්තරාත්මක විග්‍රහයක්"
+title: පාලනය
+description: සයිබර් ආරක්ෂක පාලනය පිළිබඳ සවිස්තරාත්මක විග්‍රහයක්
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # පාලනය

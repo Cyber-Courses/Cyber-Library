@@ -1,6 +1,14 @@
 ---
-title: "기초"
-description: "사이버 보안의 기초와 역사, 윤리 및 철학, 목적, 위험과 신뢰, 인간 요소에 대한 심층 탐구"
+title: 기초
+description: 사이버 보안의 기초와 역사, 윤리 및 철학, 목적, 위험과 신뢰, 인간 요소에 대한 심층 탐구
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # 기초

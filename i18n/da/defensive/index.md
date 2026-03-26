@@ -1,6 +1,14 @@
 ---
-title: "Defensiv"
-description: "En omfattende guide til defensiv cybersikkerhed, dens betydning og implementering."
+title: Defensiv
+description: En omfattende guide til defensiv cybersikkerhed, dens betydning og implementering.
+keywords:
+- defensiv cybersikkerhed
+- Trusselsintelligens
+- sårbarhedsvurderinger
+- hændelsesrespons
+- KONSTANT OVERVÅGNING
+- post-incident analyse
+- forretningskontinuitet
 ---
 
 # Defensiv

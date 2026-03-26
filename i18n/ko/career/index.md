@@ -1,7 +1,14 @@
 ---
 title: 경력
 description: 사이버 보안 경력에 대한 포괄적이고 기술적인 탐구
-keywords: 사이버 보안, 경력, 프로필, 여정, 환경
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # 경력

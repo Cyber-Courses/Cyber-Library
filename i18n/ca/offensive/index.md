@@ -1,6 +1,16 @@
 ---
-title: "Ofensiva"
-description: "Exploració detallada de la ciberseguretat ofensiva, la seva importància i com es duu a terme."
+title: Ofensiva
+description: Exploració detallada de la ciberseguretat ofensiva, la seva importància
+  i com es duu a terme.
+keywords:
+- ciberseguretat ofensiva
+- hacking ètic
+- proves de penetració
+- formació d'equips vermells
+- recompensa d'insectes
+- enginyeria social
+- 'Protecció de dades:'
+- Gestió del Risc
 ---
 
 # Ofensiva

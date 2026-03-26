@@ -1,6 +1,14 @@
 ---
-title: "Varnandi"
-description: "Kynning á varnandi netöryggi, mikilvægi þess og hvernig það er framkvæmt."
+title: Varnandi
+description: Kynning á varnandi netöryggi, mikilvægi þess og hvernig það er framkvæmt.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Varnandi

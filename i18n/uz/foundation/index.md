@@ -1,3 +1,19 @@
+---
+title: Asos
+description: Kiberxavfsizlikning dastlabki ildizlari 20-asr oxiridagi xakerlar madaniyatiga
+  borib taqaladi. Odamlar kompyuterlar bilan tajriba o'tkazishni boshlagan paytdan
+  boshlab, texnologiyani tushunish, o'zgartirish va chegaralarni kengaytirishga intilish
+  mavjud edi. Ushbu dastlabki xakerlar ko'pincha o'zlarini raqamli…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Asos
 
 ## Kirish

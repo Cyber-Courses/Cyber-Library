@@ -1,6 +1,14 @@
 ---
 title: ರಕ್ಷಣಾತ್ಮಕ
 description: ರಕ್ಷಣಾತ್ಮಕ ಸೈಬರ್‌ಸುರಕ್ಷತೆ
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ರಕ್ಷಣಾತ್ಮಕ

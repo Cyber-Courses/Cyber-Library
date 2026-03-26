@@ -1,7 +1,15 @@
 ---
-title: "रक्षात्मक साइबर सुरक्षा"
-description: "साइबर खतरों से संगठन की सुरक्षा के लिए रक्षात्मक साइबर सुरक्षा का महत्व और कार्यप्रणाली।"
-keywords: "रक्षात्मक साइबर सुरक्षा, साइबर खतरों से सुरक्षा, घटना प्रतिक्रिया, खतरा खुफिया, भेद्यता मूल्यांकन"
+title: रक्षात्मक साइबर सुरक्षा
+description: साइबर खतरों से संगठन की सुरक्षा के लिए रक्षात्मक साइबर सुरक्षा का महत्व
+  और कार्यप्रणाली।
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # रक्षात्मक

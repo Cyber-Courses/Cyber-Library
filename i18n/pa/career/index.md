@@ -1,6 +1,14 @@
 ---
-title: "ਕੈਰੀਅਰ"
-description: "ਸਾਇਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਕੈਰੀਅਰ ਦੀ ਸੰਭਾਵਨਾਵਾਂ ਅਤੇ ਵਿਕਾਸ ਦੇ ਮੌਕੇ"
+title: ਕੈਰੀਅਰ
+description: ਸਾਇਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਕੈਰੀਅਰ ਦੀ ਸੰਭਾਵਨਾਵਾਂ ਅਤੇ ਵਿਕਾਸ ਦੇ ਮੌਕੇ
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # ਕੈਰੀਅਰ

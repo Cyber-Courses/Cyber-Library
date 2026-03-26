@@ -1,6 +1,15 @@
 ---
-title: "ထောက်လှမ်းရေး"
-description: "ကွန်ပျူတာလုံခြုံရေးတွင် ထောက်လှမ်းရေး၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ"
+title: ထောက်လှမ်းရေး
+description: ကွန်ပျူတာလုံခြုံရေးတွင် ထောက်လှမ်းရေး၏ အရေးပါမှုနှင့် လုပ်ဆောင်နည်းများ
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ထောက်လှမ်းရေး

@@ -1,7 +1,16 @@
 ---
-title: "Uzbrukuma Kiberdrošība"
-description: "Izpratne par uzbrukuma kiberdrošību un tās nozīmi organizāciju aizsardzībā pret kiberdraudiem."
-keywords: "uzbrukuma kiberdrošība, ētiskā uzlaušana, ievainojamību atklāšana, drošības pārbaudes"
+title: Uzbrukuma Kiberdrošība
+description: Izpratne par uzbrukuma kiberdrošību un tās nozīmi organizāciju aizsardzībā
+  pret kiberdraudiem.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Uzbrukuma Kiberdrošība

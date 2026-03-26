@@ -1,7 +1,14 @@
 ---
-title: "基础"
-description: "了解网络安全的起源、黑客文化、历史、伦理、目的、风险与信任以及人类因素。"
-keywords: "网络安全, 黑客文化, 计算机历史, 伦理, 风险管理, 人类因素"
+title: 基础
+description: 了解网络安全的起源、黑客文化、历史、伦理、目的、风险与信任以及人类因素。
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # 基础

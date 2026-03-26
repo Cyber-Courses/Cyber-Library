@@ -1,6 +1,15 @@
 ---
-title: "Əsaslar"
-description: "Kiber təhlükəsizliyin kökləri, haker mədəniyyəti, tarix və etika haqqında giriş."
+title: Əsaslar
+description: Kiber təhlükəsizliyin kökləri, haker mədəniyyəti, tarix və etika haqqında
+  giriş.
+keywords:
+- kibertəhlükəsizlik fondu
+- haker mədəniyyəti
+- kibertəhlükəsizlik tarixç
+- kibertəhlükəsizlik etikası
+- risklərin idarə edilməsi
+- rəqəmsal sistemlərə etibar edin
+- kibertəhlükəsizlikdə insan elementi
 ---
 
 # Əsaslar

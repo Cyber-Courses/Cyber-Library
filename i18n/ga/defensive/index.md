@@ -1,6 +1,14 @@
 ---
-title: "Cosaint"
-description: "Cur síos ar Chibearshlándáil Chosanta agus a thábhacht."
+title: Cosaint
+description: Cur síos ar Chibearshlándáil Chosanta agus a thábhacht.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Cosaint

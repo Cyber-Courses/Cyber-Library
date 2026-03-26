@@ -1,6 +1,15 @@
 ---
-title: "Ofenzivna Kibernetska Varnost"
-description: "Razumevanje in pomen ofenzivne kibernetske varnosti ter kako se izvaja."
+title: Ofenzivna Kibernetska Varnost
+description: Razumevanje in pomen ofenzivne kibernetske varnosti ter kako se izvaja.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofenzivna Kibernetska Varnost

@@ -1,6 +1,16 @@
 ---
-title: "సైబర్‌సెక్యూరిటీ పాలన"
-description: "సైబర్‌సెక్యూరిటీ పాలన యొక్క ప్రాముఖ్యత, దాని అమలు విధానం మరియు వ్యాపార వ్యూహాలతో అనుసంధానం."
+title: సైబర్‌సెక్యూరిటీ పాలన
+description: సైబర్‌సెక్యూరిటీ పాలన యొక్క ప్రాముఖ్యత, దాని అమలు విధానం మరియు వ్యాపార
+  వ్యూహాలతో అనుసంధానం.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # పాలన

@@ -1,3 +1,19 @@
+---
+title: Perusta
+description: Kyberturvallisuuden juuret ovat 1900-luvun lopun hakkerikulttuurissa.
+  Heti kun ihmiset alkoivat kokeilla tietokoneita, syntyi halu ymmärtää, muokata ja
+  laajentaa teknologian rajoja. Nämä varhaiset hakkerit näkivät itsensä usein digitaalisten
+  rajojen tutkimusmatkailijoina, jotka halusivat oppia ja jakaa tietoa ilman…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Perusta
 
 ## Johdanto

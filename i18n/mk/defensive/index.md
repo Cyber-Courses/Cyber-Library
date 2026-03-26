@@ -1,6 +1,15 @@
 ---
-title: "Одбранбена"
-description: "Систематски пристап за заштита на податоци, системи и корисници од сајбер закани."
+title: Одбранбена
+description: Систематски пристап за заштита на податоци, системи и корисници од сајбер
+  закани.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Одбранбена

@@ -1,6 +1,15 @@
 ---
-title: "Defensiv"
-description: "En grundig utforskning av defensiv cybersikkerhet, dens betydning, og hvordan den implementeres for å beskytte organisasjoner mot cybertrusler."
+title: Defensiv
+description: En grundig utforskning av defensiv cybersikkerhet, dens betydning, og
+  hvordan den implementeres for å beskytte organisasjoner mot cybertrusler.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defensiv

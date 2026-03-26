@@ -1,7 +1,16 @@
 ---
-title: "Ofensiva"
-description: "Exploração abrangente da cibersegurança ofensiva, sua importância e métodos de implementação."
-keywords: "cibersegurança ofensiva, hacking ético, testes de penetração, red teaming, segurança da informação"
+title: Ofensiva
+description: Exploração abrangente da cibersegurança ofensiva, sua importância e métodos
+  de implementação.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Ofensiva

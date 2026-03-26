@@ -1,3 +1,20 @@
+---
+title: Podstawy
+description: Cyberbezpieczeństwo ma swoje najwcześniejsze korzenie w kulturze hakerów
+  z końca XX wieku. Od momentu, gdy ludzie zaczęli eksperymentować z komputerami,
+  istniała chęć zrozumienia, modyfikowania i przekraczania granic technologii. Ci
+  wczesni hakerzy często postrzegali siebie jako odkrywców cyfrowych granic, chętnych
+  do…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Podstawy
 
 ## Wprowadzenie

@@ -1,6 +1,16 @@
 ---
-title: "Seiberddiogelwch Ymosodol"
-description: "Deall seiberddiogelwch ymosodol, ei bwysigrwydd, a'r dulliau a ddefnyddir i'w weithredu yn foesegol."
+title: Seiberddiogelwch Ymosodol
+description: Deall seiberddiogelwch ymosodol, ei bwysigrwydd, a'r dulliau a ddefnyddir
+  i'w weithredu yn foesegol.
+keywords:
+- cybersecurity Ymosodedig
+- hacio moesegol
+- treiddiad Prawf
+- tîm coch
+- bounty bygiau
+- peirianneg gymdeithasol
+- Diogelu Data
+- Rheoli risg
 ---
 
 # Ymosodol

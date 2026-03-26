@@ -1,3 +1,22 @@
+---
+title: Perfil
+description: Entendre el teu perfil de ciberseguretat és essencial perquè t'ajuda
+  a definir on et trobes en el teu viatge professional i cap a on vols anar. Un perfil
+  de ciberseguretat combina les teves habilitats actuals, experiències, interessos
+  i objectius, servint com a full de ruta per alinear les teves eleccions de carrera…
+keywords:
+- funcions de ciberseguretat
+- trajectòries professionals
+- desenvolupament d'habilitats
+- certificacions de ciberseguretat
+- carrera de seguretat
+- rols d'entrada
+- funcions de nivell mitjà
+- funcions de nivell superior
+- Competències tècniques
+- camins de gestió
+---
+
 # Perfil
 
 Entendre el teu perfil de ciberseguretat és essencial perquè t'ajuda a definir on et trobes en el teu viatge professional i cap a on vols anar. Un perfil de ciberseguretat combina les teves habilitats actuals, experiències, interessos i objectius, servint com a full de ruta per alinear les teves eleccions de carrera amb els rols adequats, certificacions i oportunitats de desenvolupament. Identificant el teu perfil, ja sigui tècnic, gerencial o híbrid, pots prendre decisions informades sobre camins de formació, adquisició d'habilitats i oportunitats laborals que millor coincideixin amb les teves fortaleses i aspiracions. Aquesta claredat no només millora el creixement personal, sinó que també augmenta el teu valor per als ocupadors que busquen talent ben alineat en un camp complex i en ràpida evolució.

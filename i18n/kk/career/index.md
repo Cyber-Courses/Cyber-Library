@@ -1,6 +1,15 @@
 ---
-title: "Мансап"
-description: "Киберқауіпсіздік саласындағы мансап мамандар үшін мүмкіндіктерге толы динамикалық саяхат."
+title: Мансап
+description: Киберқауіпсіздік саласындағы мансап мамандар үшін мүмкіндіктерге толы
+  динамикалық саяхат.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Мансап

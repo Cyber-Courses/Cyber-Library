@@ -1,6 +1,15 @@
 ---
-title: "დაცვითი"
-description: "სისტემატური მიდგომა ორგანიზაციის მონაცემების, სისტემების და მომხმარებლების დაცვაზე კიბერ საფრთხეებისგან."
+title: დაცვითი
+description: სისტემატური მიდგომა ორგანიზაციის მონაცემების, სისტემების და მომხმარებლების
+  დაცვაზე კიბერ საფრთხეებისგან.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # დაცვითი

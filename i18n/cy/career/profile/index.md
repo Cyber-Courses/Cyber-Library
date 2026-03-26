@@ -1,7 +1,18 @@
 ---
 title: Proffil
-description: Deall eich proffil seiberddiogelwch i alinio eich dewisiadau gyrfa gyda'r rolau a'r cyfleoedd datblygu cywir.
-keywords: proffil seiberddiogelwch, llwybrau gyrfa, rolau a chyfrifoldebau, sgiliau, ardystiadau
+description: Deall eich proffil seiberddiogelwch i alinio eich dewisiadau gyrfa gyda'r
+  rolau a'r cyfleoedd datblygu cywir.
+keywords:
+- rolau seiberddiogelwch
+- llwybrau gyrfa
+- Yn datblygu sgiliau
+- tystysgrifau seiberddiogelwch
+- gyrfa diogelwch
+- rolau lefel mynediad
+- rolau lefel ganol
+- rolau lefel uwch
+- sgiliau technegol
+- llwybrau rheoli
 ---
 
 # Proffil

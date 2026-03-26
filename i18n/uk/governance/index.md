@@ -1,6 +1,16 @@
 ---
-title: "Управління кібербезпекою"
-description: "Детальне пояснення управління кібербезпекою, його важливість та методи впровадження."
+title: Управління кібербезпекою
+description: Детальне пояснення управління кібербезпекою, його важливість та методи
+  впровадження.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # Управління кібербезпекою

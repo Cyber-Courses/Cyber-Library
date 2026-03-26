@@ -1,6 +1,15 @@
 ---
-title: "การกำกับดูแลความปลอดภัยทางไซเบอร์"
-description: "การอธิบายเชิงเทคนิคเกี่ยวกับการกำกับดูแลความปลอดภัยทางไซเบอร์และความสำคัญของมัน"
+title: การกำกับดูแลความปลอดภัยทางไซเบอร์
+description: การอธิบายเชิงเทคนิคเกี่ยวกับการกำกับดูแลความปลอดภัยทางไซเบอร์และความสำคัญของมัน
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # การกำกับดูแล

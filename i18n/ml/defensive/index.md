@@ -1,6 +1,15 @@
 ---
-title: "പ്രതിരോധ സൈബർസുരക്ഷ"
-description: "പ്രതിരോധ സൈബർസുരക്ഷയുടെ അടിസ്ഥാനങ്ങൾ, അതിന്റെ പ്രാധാന്യം, നടപ്പാക്കൽ മാർഗങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള വിശദമായ വിവരണം."
+title: പ്രതിരോധ സൈബർസുരക്ഷ
+description: പ്രതിരോധ സൈബർസുരക്ഷയുടെ അടിസ്ഥാനങ്ങൾ, അതിന്റെ പ്രാധാന്യം, നടപ്പാക്കൽ
+  മാർഗങ്ങൾ എന്നിവയെക്കുറിച്ചുള്ള വിശദമായ വിവരണം.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # പ്രതിരോധ

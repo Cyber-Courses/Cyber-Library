@@ -1,6 +1,16 @@
 ---
-title: "Offensiv"
-description: "En dybdegående udforskning af offensiv cybersikkerhed, dens betydning og metoder."
+title: Offensiv
+description: En dybdegående udforskning af offensiv cybersikkerhed, dens betydning
+  og metoder.
+keywords:
+- stødende cybersikkerhed
+- etisk hacking
+- test til indtrængning
+- rød teaming
+- bug bounty
+- social manipulering
+- Privatlivspolitik
+- risikoforvaltning
 ---
 
 # Offensiv

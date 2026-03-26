@@ -1,6 +1,16 @@
 ---
 title: Deallusrwydd
-description: Deallusrwydd mewn seiberddiogelwch yw casglu, prosesu, ac archwilio gwybodaeth i nodi, asesu, a lliniaru bygythiadau seiber.
+description: Deallusrwydd mewn seiberddiogelwch yw casglu, prosesu, ac archwilio gwybodaeth
+  i nodi, asesu, a lliniaru bygythiadau seiber.
+keywords:
+- cudd - wybodaeth seiberddiogelwch
+- deallusrwydd strategol
+- deallusrwydd gweithredol
+- deallusrwydd tactegol
+- Rheoli risg
+- Dangosyddion Cyfaddawdu
+- bwydo bygythiad
+- cylch cudd - wybodaeth
 ---
 
 # Deallusrwydd

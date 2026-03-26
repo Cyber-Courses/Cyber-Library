@@ -1,6 +1,16 @@
 ---
 title: Karir
-description: Karir dalam keamanan siber menawarkan peluang dinamis bagi para profesional di semua tingkatan, dengan permintaan yang terus meningkat seiring berkembangnya dunia digital.
+description: Karir dalam keamanan siber menawarkan peluang dinamis bagi para profesional
+  di semua tingkatan, dengan permintaan yang terus meningkat seiring berkembangnya
+  dunia digital.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karir

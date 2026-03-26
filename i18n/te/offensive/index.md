@@ -1,6 +1,16 @@
 ---
-title: "ఆఫెన్సివ్"
-description: "ఆఫెన్సివ్ సైబర్‌సెక్యూరిటీ అంటే ఏమిటి, దాని ప్రాముఖ్యత మరియు దాన్ని ఎలా అమలు చేయాలి అనే అంశాలపై లోతైన అవగాహన."
+title: ఆఫెన్సివ్
+description: ఆఫెన్సివ్ సైబర్‌సెక్యూరిటీ అంటే ఏమిటి, దాని ప్రాముఖ్యత మరియు దాన్ని ఎలా
+  అమలు చేయాలి అనే అంశాలపై లోతైన అవగాహన.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # ఆఫెన్సివ్

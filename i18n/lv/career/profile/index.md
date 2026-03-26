@@ -1,6 +1,18 @@
 ---
-title: "Profils"
-description: "Izpratne par jūsu kiberdrošības profilu ir būtiska, jo tā palīdz noteikt, kur atrodaties savā profesionālajā ceļojumā un kur vēlaties doties."
+title: Profils
+description: Izpratne par jūsu kiberdrošības profilu ir būtiska, jo tā palīdz noteikt,
+  kur atrodaties savā profesionālajā ceļojumā un kur vēlaties doties.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profils

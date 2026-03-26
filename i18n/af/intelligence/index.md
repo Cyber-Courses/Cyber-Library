@@ -1,6 +1,16 @@
 ---
-title: "Intelligensie"
-description: "Ontdek die rol van intelligensie in kuberveiligheid, insluitend die versameling, verwerking en analise van inligting om kuberbedreigings te identifiseer en te versag."
+title: Intelligensie
+description: Ontdek die rol van intelligensie in kuberveiligheid, insluitend die versameling,
+  verwerking en analise van inligting om kuberbedreigings te identifiseer en te versag.
+keywords:
+- cyber Sekuriteit Intelligensie
+- strategiese intelligensie
+- operasionele intelligensie
+- taktiese intelligensie
+- Risikobestuur
+- Aanwysers van kompromie
+- bedreigingsvoere
+- intelligensie siklus
 ---
 
 # Intelligensie

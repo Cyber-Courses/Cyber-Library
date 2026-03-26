@@ -1,15 +1,16 @@
 ---
 title: Gouvernance
-description: "Guide sur la gouvernance de la cybersécurité : définition, importance et étapes concrètes pour une mise en œuvre efficace."
+description: 'Guide sur la gouvernance de la cybersécurité : définition, importance
+  et étapes concrètes pour une mise en œuvre efficace.'
 keywords:
-  - gouvernance cybersécurité
-  - cadres de gouvernance
-  - gestion des risques
-  - conformité
-  - stratégie d’entreprise
-  - résilience cyber
-  - supervision du conseil
-  - continuité opérationnelle
+- gouvernance de la cybersécurité
+- cadres de gouvernance
+- gestion des risques
+- conformité
+- stratégie commerciale
+- cyber-résilience
+- surveillance du conseil d'administration
+- continuité opérationnelle
 ---
 
 # Gouvernance

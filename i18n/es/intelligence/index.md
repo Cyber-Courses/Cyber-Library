@@ -1,6 +1,16 @@
 ---
 title: Inteligencia
-description: Exploración detallada de la inteligencia en ciberseguridad, su importancia y cómo se implementa.
+description: Exploración detallada de la inteligencia en ciberseguridad, su importancia
+  y cómo se implementa.
+keywords:
+- inteligencia de ciberseguridad
+- inteligencia estratégica
+- inteligencia operativa
+- inteligencia táctica
+- gestión de riesgos
+- Indicadores de compromiso
+- feeds de amenazas
+- ciclo de inteligencia
 ---
 
 # Inteligencia

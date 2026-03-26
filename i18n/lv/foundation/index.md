@@ -1,4 +1,19 @@
-```markdown
+---
+title: Pamati
+description: Kiberdrošības pirmsākumi meklējami 20. gadsimta beigu hakeru kultūrā.
+  No brīža, kad cilvēki sāka eksperimentēt ar datoriem, pastāvēja vēlme izprast, modificēt
+  un paplašināt tehnoloģiju robežas. Šie agrīnie hakeri bieži vien uzskatīja sevi
+  par digitālo robežu pētniekiem, kuri vēlas mācīties un dalīties zināšanās, ne…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Pamati
 
 ## Ievads
@@ -40,4 +55,3 @@ Uzticība ir pamatā gandrīz katram tiešsaistes pasaules aspektam. Mijiedarbī
 Cilvēki joprojām ir lielākais mainīgais kiberdrošībā. Lai gan mašīnas un programmatūra darbojas saskaņā ar loģiku un noteikumiem, kas tajās ieprogrammēti, cilvēki var kļūdīties vai rīkoties ar ļaunprātību veidos, kurus tehnoloģija viena pati nevar pilnībā paredzēt. No aizmirstības pielietot ielāpus līdz klikšķināšanai uz pikšķerēšanas saitēm, cilvēku kļūdas izraisa daudzus no nozīmīgākajiem pārkāpumiem.
 
 Šo jautājumu risināšana bieži ietver regulāru apmācību, skaidras politikas un kultūru, kas vērtē drošības apzinātu uzvedību. Labi izstrādātas izpratnes kampaņas un lietotāju izglītības programmas samazina nejaušu kļūdu iespējamību. Kad cilvēki saprot gan potenciālās sekas, gan labākās prakses drošai uzvedībai, organizācijas var labāk aizsargāt sevi pret draudiem, kurus nevar novērst tikai ar programmatūras ielāpu.
-```

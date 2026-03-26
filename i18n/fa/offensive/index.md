@@ -1,7 +1,16 @@
 ---
 title: تهاجمی
-description: امنیت سایبری تهاجمی شامل شبیه‌سازی اخلاقی حملات واقعی برای کشف آسیب‌پذیری‌ها قبل از بهره‌برداری توسط بازیگران مخرب است.
-keywords: امنیت سایبری تهاجمی، هک اخلاقی، تست نفوذ، تیم قرمز، برنامه‌های باگ بانتی
+description: امنیت سایبری تهاجمی شامل شبیه‌سازی اخلاقی حملات واقعی برای کشف آسیب‌پذیری‌ها
+  قبل از بهره‌برداری توسط بازیگران مخرب است.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # تهاجمی

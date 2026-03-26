@@ -1,6 +1,16 @@
 ---
-title: "बुद्धिमत्ता"
-description: "साइबर सुरक्षा मा बुद्धिमत्ता को भूमिका, महत्व र कार्यान्वयन को एक विस्तृत अन्वेषण।"
+title: बुद्धिमत्ता
+description: साइबर सुरक्षा मा बुद्धिमत्ता को भूमिका, महत्व र कार्यान्वयन को एक विस्तृत
+  अन्वेषण।
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # बुद्धिमत्ता

@@ -1,6 +1,15 @@
 ---
-title: "साइबर सुरक्षा की नींव"
-description: "साइबर सुरक्षा के इतिहास, हैकर संस्कृति, नैतिकता, उद्देश्य, जोखिम और मानव तत्व की गहन व्याख्या।"
+title: साइबर सुरक्षा की नींव
+description: साइबर सुरक्षा के इतिहास, हैकर संस्कृति, नैतिकता, उद्देश्य, जोखिम और मानव
+  तत्व की गहन व्याख्या।
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # नींव

@@ -1,7 +1,15 @@
 ---
 title: Karijera u Kibernetičkoj Sigurnosti
-description: Dinamično putovanje u karijeri kibernetičke sigurnosti s mogućnostima za profesionalce na svim nivoima.
-keywords: kibernetička sigurnost, karijera, profesionalni razvoj, profil, putovanje, pejzaž
+description: Dinamično putovanje u karijeri kibernetičke sigurnosti s mogućnostima
+  za profesionalce na svim nivoima.
+keywords:
+- karijera u oblasti kibernetičke
+- staze karijere
+- ULOGE I ODGOVORNOSTI
+- tehničke i meke vještine
+- CERTIFIKATI
+- akademske diplome
+- Profesionalni razvoj
 ---
 
 # Karijera
