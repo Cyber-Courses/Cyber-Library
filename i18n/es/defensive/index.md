@@ -1,9 +1,17 @@
 ---
+<<<<<<< dev
+title: "Defensiva"
+description: "Exploración técnica de la ciberseguridad defensiva, su importancia y cómo se implementa."
+---
+
+# Defensiva
+=======
 title: "Ciberseguridad Defensiva"
 description: "Exploración técnica de la ciberseguridad defensiva, su importancia y cómo se implementa."
 ---
 
 # Ciberseguridad Defensiva
+>>>>>>> main
 
 ## ¿Qué es la Ciberseguridad Defensiva?
 

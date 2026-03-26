@@ -1,9 +1,17 @@
 ---
+<<<<<<< dev
+title: "Defensif"
+description: "Pendekatan sistematis untuk melindungi data, sistem, dan pengguna organisasi dari ancaman siber."
+---
+
+# Defensif
+=======
 title: "Keamanan Siber Defensif"
 description: "Pendekatan sistematis untuk melindungi data, sistem, dan pengguna organisasi dari ancaman siber."
 ---
 
 # Keamanan Siber Defensif
+>>>>>>> main
 
 ## Apa Itu Keamanan Siber Defensif?
 

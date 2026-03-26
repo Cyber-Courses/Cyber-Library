@@ -1,10 +1,10 @@
 ---
-title: "Hồ Sơ"
+title: "Hồ sơ"
 description: "Hiểu hồ sơ an ninh mạng của bạn là điều cần thiết vì nó giúp bạn xác định vị trí hiện tại trong hành trình nghề nghiệp và nơi bạn muốn đi."
 keywords: "hồ sơ an ninh mạng, con đường sự nghiệp, vai trò và trách nhiệm, kỹ năng, chứng chỉ và bằng cấp"
 ---
 
-# Hồ Sơ
+# Hồ sơ
 
 Hiểu hồ sơ an ninh mạng của bạn là điều cần thiết vì nó giúp bạn xác định vị trí hiện tại trong hành trình nghề nghiệp và nơi bạn muốn đi. Một hồ sơ an ninh mạng kết hợp các kỹ năng hiện tại, kinh nghiệm, sở thích và mục tiêu của bạn, đóng vai trò như một lộ trình để điều chỉnh các lựa chọn nghề nghiệp của bạn với các vai trò, chứng chỉ và cơ hội phát triển phù hợp. Bằng cách xác định hồ sơ của bạn, dù là kỹ thuật, quản lý hay kết hợp, bạn có thể đưa ra quyết định thông minh về các lộ trình đào tạo, thu nhận kỹ năng và cơ hội việc làm phù hợp nhất với thế mạnh và khát vọng của bạn. Sự rõ ràng này không chỉ nâng cao sự phát triển cá nhân mà còn tăng giá trị của bạn đối với các nhà tuyển dụng đang tìm kiếm tài năng phù hợp trong một lĩnh vực phức tạp và phát triển nhanh chóng.
 
