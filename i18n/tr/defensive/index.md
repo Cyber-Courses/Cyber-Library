@@ -1,9 +1,17 @@
 ---
+<<<<<<< dev
+title: Savunmacı
+description: Savunmacı siber güvenlik, kuruluşların verilerini, sistemlerini ve kullanıcılarını siber tehditlerden korumak için kullanılan sistematik bir yaklaşımdır. Bu makale, savunmacı siber güvenliğin önemini ve nasıl uygulanacağını açıklar.
+---
+
+# Savunmacı
+=======
 title: Savunmacı Siber Güvenlik
 description: Savunmacı siber güvenlik, kuruluşların verilerini, sistemlerini ve kullanıcılarını siber tehditlerden korumak için kullanılan sistematik bir yaklaşımdır. Bu makale, savunmacı siber güvenliğin önemini ve nasıl uygulanacağını açıklar.
 ---
 
 # Savunmacı Siber Güvenlik
+>>>>>>> main
 
 ## Savunmacı Siber Güvenlik Nedir?
 
