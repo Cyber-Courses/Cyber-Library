@@ -1,9 +1,9 @@
 ---
-title: "Kaitsev Küberturvalisus"
+title: "Kaitsev"
 description: "Süstemaatiline lähenemine organisatsiooni andmete, süsteemide ja kasutajate kaitsmiseks küberohtude eest."
 ---
 
-# Kaitsev Küberturvalisus
+# Kaitsev
 
 ## Mis on Kaitsev Küberturvalisus?
 

@@ -1,9 +1,9 @@
 ---
-title: "Verdedigende Kuberveiligheid"
+title: "Verdedigend"
 description: "Verstaan die belangrikheid en implementering van verdedigende kuberveiligheid om data en stelsels teen kuberbedreigings te beskerm."
 ---
 
-# Verdedigende Kuberveiligheid
+# Verdedigend
 
 ## Wat Is Verdedigende Kuberveiligheid?
 

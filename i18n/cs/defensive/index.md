@@ -1,5 +1,9 @@
-```markdown
-# Obranná kybernetická bezpečnost
+---
+title: Obranná
+description: Obranná kybernetická bezpečnost je systematický přístup k ochraně dat, systémů a uživatelů organizace před kybernetickými hrozbami.
+---
+
+# Obranná
 
 ## Co je obranná kybernetická bezpečnost?
 
@@ -18,4 +22,3 @@ Ani nejsilnější obrany nemohou zaručit absolutní imunitu. Proto je průbě�
 Když k útoku dojde, stává se kritickým reakce na incident. Organizace musí mít dobře definovaný plán pro omezení hrozby, zmírnění škod a obnovení normálního provozu. Dodržováním zavedených postupů a využíváním nástrojů pro reakci na incidenty mohou týmy efektivně řídit bezpečnostní incidenty a minimalizovat jejich dopad.
 
 Po vyřešení incidentu začíná proces učení. Analýza po incidentu umožňuje organizacím přezkoumat, co se stalo, identifikovat slabiny v jejich obraně a aplikovat získané poznatky k vylepšení jejich bezpečnostního postavení. Neustálým zdokonalováním svých obran a bdělostí vůči nově vznikajícím hrozbám mohou organizace přizpůsobit se vyvíjející se krajině kybernetické bezpečnosti a chránit své kritické aktiva.
-```

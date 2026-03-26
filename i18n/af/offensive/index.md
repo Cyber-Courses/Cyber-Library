@@ -1,10 +1,10 @@
 ---
-title: Aanvallende Kubersekuriteit
+title: Aanvallend
 description: 'Verkenning van etiese aanvalsimulasies om kwesbaarhede in kuberveiligheid te identifiseer en te versterk.'
 keywords: 'aanvallende kubersekuriteit, etiese hacking, penetrasie toetsing, rooi span, kuberveiligheid'
 ---
 
-# Aanvallende Kubersekuriteit
+# Aanvallend
 
 ## Wat is Aanvallende Kubersekuriteit?
 

@@ -1,10 +1,10 @@
 ---
-title: "Mbrojtja Kibernetike"
+title: "Mbrojtëse"
 description: "Një qasje sistematike për mbrojtjen e të dhënave, sistemeve dhe përdoruesve nga kërcënimet kibernetike."
 keywords: "mbrojtja kibernetike, siguria kibernetike, mbrojtja e të dhënave, reagimi ndaj incidenteve, analiza e kërcënimeve"
 ---
 
-# Mbrojtja Kibernetike
+# Mbrojtëse
 
 ## Çfarë Është Mbrojtja Kibernetike?
 

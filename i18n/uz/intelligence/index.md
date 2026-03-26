@@ -1,9 +1,9 @@
 ---
-title: "Aqlli Tahlil"
-description: "Kiberxavfsizlikda aqlli tahlilning ahamiyati va uni amalga oshirish usullari."
+title: "Axborot"
+description: "Kiberxavfsizlikda axborotning ahamiyati va aqlli tahlilni amalga oshirish usullari."
 ---
 
-# Aqlli Tahlil
+# Axborot
 
 ## Aqlli Tahlil Nima?
 
