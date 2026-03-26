@@ -1,6 +1,16 @@
 ---
 title: Karriere
-description: Udforsk en karriere inden for cybersikkerhed, en dynamisk rejse fyldt med muligheder for fagfolk på alle niveauer. Lær om profilopbygning, professionel progression og det komplekse landskab i denne hurtigt voksende branche.
+description: Udforsk en karriere inden for cybersikkerhed, en dynamisk rejse fyldt
+  med muligheder for fagfolk på alle niveauer. Lær om profilopbygning, professionel
+  progression og det komplekse landskab i denne hurtigt voksende branche.
+keywords:
+- karriere inden for cybersikkerhed
+- karriereveje
+- roller og ansvarsområder
+- tekniske og bløde færdigheder
+- Certificeringer
+- akademiske grader
+- faglig udvikling
 ---
 
 # Karriere

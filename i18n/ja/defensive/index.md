@@ -1,6 +1,14 @@
 ---
 title: ディフェンシブ
 description: 組織のデータ、システム、ユーザーをサイバー脅威から保護するための防御的サイバーセキュリティの重要性と実践方法についての詳細な説明。
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ディフェンシブ

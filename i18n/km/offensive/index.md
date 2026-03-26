@@ -1,6 +1,15 @@
 ---
-title: "ការពារប្រឆាំង"
-description: "ការពារប្រឆាំងជាមួយការវាយប្រហារបច្ចេកទេសដើម្បីរកឃើញចំណុចខ្សោយ"
+title: ការពារប្រឆាំង
+description: ការពារប្រឆាំងជាមួយការវាយប្រហារបច្ចេកទេសដើម្បីរកឃើញចំណុចខ្សោយ
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # ការពារប្រឆាំង

@@ -1,6 +1,15 @@
 ---
-title: "Gynybinė kibernetinė sauga"
-description: "Sužinokite apie gynybinės kibernetinės saugos svarbą, metodus ir strategijas, skirtas apsaugoti organizacijas nuo kibernetinių grėsmių."
+title: Gynybinė kibernetinė sauga
+description: Sužinokite apie gynybinės kibernetinės saugos svarbą, metodus ir strategijas,
+  skirtas apsaugoti organizacijas nuo kibernetinių grėsmių.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Gynybinė

@@ -1,7 +1,14 @@
 ---
-title: "הגנת סייבר"
-description: "הבנת הגנת סייבר: חשיבות, תהליכים ודרכים לשיפור ההגנה על נתוני הארגון."
-keywords: "הגנת סייבר, אבטחת מידע, תגובה לאירועים, ניהול סיכונים"
+title: הגנת סייבר
+description: 'הבנת הגנת סייבר: חשיבות, תהליכים ודרכים לשיפור ההגנה על נתוני הארגון.'
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # הגנתי

@@ -1,7 +1,16 @@
 ---
-title: "साइबर सुरक्षा शासन"
-description: "साइबर सुरक्षा शासन की अवधारणा, महत्व और कार्यान्वयन की प्रक्रिया की गहन व्याख्या।"
-keywords: "साइबर सुरक्षा, शासन, जोखिम प्रबंधन, नीतियां, रणनीति"
+title: साइबर सुरक्षा शासन
+description: साइबर सुरक्षा शासन की अवधारणा, महत्व और कार्यान्वयन की प्रक्रिया की गहन
+  व्याख्या।
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # शासन

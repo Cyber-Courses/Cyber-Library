@@ -1,4 +1,18 @@
-```markdown
+---
+title: Career
+description: A thorough overview of diverse cybersecurity career paths, roles and
+  responsibilities, essential skills, and the value of certifications and academic
+  degrees.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
+---
+
 # Career
 
 A career in cybersecurity is a dynamic journey filled with opportunities for professionals at all levels. As the digital world expands, the demand for skilled cybersecurity experts grows accordingly, presenting a vibrant, fast-paced job market. Whether you are just starting out or looking to advance, the cybersecurity field offers ample space for both personal and professional development.
@@ -14,4 +28,3 @@ Professional progression in cybersecurity is more than just a goal; it's a journ
 ### Landscape
 
 The cybersecurity landscape is made up of many different players and sectors. Understanding the ecosystem overview helps you see how everything fits together. There are key influential stakeholders like government bodies, private companies, and tech experts who all play a role in shaping the industry. The organizational landscape includes both public and private sectors, each with its own priorities and challenges, but both are essential for creating a safe and secure digital world.
-```

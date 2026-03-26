@@ -1,6 +1,15 @@
 ---
 title: Кар'єра в кібербезпеці
-description: Дослідження динамічного шляху кар'єри в кібербезпеці, що пропонує можливості для професійного зростання та розвитку.
+description: Дослідження динамічного шляху кар'єри в кібербезпеці, що пропонує можливості
+  для професійного зростання та розвитку.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Кар'єра

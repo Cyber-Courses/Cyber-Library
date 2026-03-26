@@ -1,17 +1,17 @@
 ---
-<<<<<<< dev
-title: "ป้องกัน"
-description: "การรักษาความปลอดภัยทางไซเบอร์เชิงป้องกันคืออะไร? ทำไมถึงสำคัญ? และทำอย่างไร?"
+title: ป้องกัน
+description: การรักษาความปลอดภัยทางไซเบอร์เชิงป้องกันคืออะไร? ทำไมถึงสำคัญ? และทำอย่างไร?
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # ป้องกัน
-=======
-title: "การป้องกัน"
-description: "การรักษาความปลอดภัยทางไซเบอร์เชิงป้องกันคืออะไร? ทำไมถึงสำคัญ? และทำอย่างไร?"
----
-
-# การป้องกัน
->>>>>>> main
 
 ## การรักษาความปลอดภัยทางไซเบอร์เชิงป้องกันคืออะไร?
 

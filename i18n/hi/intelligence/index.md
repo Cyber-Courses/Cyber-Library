@@ -1,7 +1,15 @@
 ---
-title: "इंटेलिजेंस"
-description: "साइबर सुरक्षा में इंटेलिजेंस की भूमिका और महत्व"
-keywords: "इंटेलिजेंस, साइबर सुरक्षा, रणनीतिक इंटेलिजेंस, परिचालन इंटेलिजेंस, सामरिक इंटेलिजेंस"
+title: इंटेलिजेंस
+description: साइबर सुरक्षा में इंटेलिजेंस की भूमिका और महत्व
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # इंटेलिजेंस

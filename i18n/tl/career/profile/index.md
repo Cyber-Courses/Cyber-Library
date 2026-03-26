@@ -1,6 +1,18 @@
 ---
-title: "Profile ng Cybersecurity"
-description: "Alamin ang kahalagahan ng iyong cybersecurity profile at kung paano ito makakatulong sa iyong propesyonal na paglalakbay."
+title: Profile ng Cybersecurity
+description: Alamin ang kahalagahan ng iyong cybersecurity profile at kung paano ito
+  makakatulong sa iyong propesyonal na paglalakbay.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profile

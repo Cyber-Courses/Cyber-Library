@@ -1,6 +1,18 @@
 ---
-title: "Perfil"
-description: "Compreender seu perfil de cibersegurança é essencial para alinhar suas escolhas de carreira com as oportunidades certas."
+title: Perfil
+description: Compreender seu perfil de cibersegurança é essencial para alinhar suas
+  escolhas de carreira com as oportunidades certas.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Perfil

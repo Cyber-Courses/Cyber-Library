@@ -1,6 +1,17 @@
 ---
 title: サイバーセキュリティプロファイル
 description: サイバーセキュリティにおけるプロファイルの重要性、キャリアパス、役割と責任、スキル、認定資格と学位についての詳細な解説。
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # プロファイル

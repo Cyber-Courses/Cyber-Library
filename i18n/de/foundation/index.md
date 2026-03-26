@@ -1,9 +1,17 @@
 ---
-title: "Grundlagen der Cybersicherheit"
-description: "Erforschung der Ursprünge und Entwicklung der Cybersicherheit, einschließlich Hacker-Kultur, Ethik und Risiko."
-keywords: "Cybersicherheit, Hacker-Kultur, Ethik, Risiko, Vertrauen, Menschliches Element"
-author: "Experte für Cybersicherheit"
-date: "2023-10-05"
+title: Grundlagen der Cybersicherheit
+description: Erforschung der Ursprünge und Entwicklung der Cybersicherheit, einschließlich
+  Hacker-Kultur, Ethik und Risiko.
+keywords:
+- cybersecurity foundation
+- hackerkultur
+- cybersicherheitsgeschichte
+- cybersicherheitsethik
+- Risikomanagement
+- vertrauen in digitale Systeme
+- menschliches Element in der Cybersicherheit
+author: Experte für Cybersicherheit
+date: '2023-10-05'
 ---
 
 # Grundlagen

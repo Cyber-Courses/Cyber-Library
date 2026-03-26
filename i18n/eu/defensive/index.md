@@ -1,6 +1,14 @@
 ---
-title: "Defentsiboa"
-description: "Zibersegurtasun defentsiboari buruzko azalpen tekniko eta sakona."
+title: Defentsiboa
+description: Zibersegurtasun defentsiboari buruzko azalpen tekniko eta sakona.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defentsiboa

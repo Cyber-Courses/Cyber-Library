@@ -1,6 +1,15 @@
 ---
-title: "Defensiv"
-description: "En detaljerad utforskning av defensiv cybersäkerhet, dess betydelse och tillvägagångssätt."
+title: Defensiv
+description: En detaljerad utforskning av defensiv cybersäkerhet, dess betydelse och
+  tillvägagångssätt.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defensiv

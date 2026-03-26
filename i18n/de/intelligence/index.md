@@ -1,6 +1,16 @@
 ---
-title: "Intelligenz"
-description: "Eine detaillierte Untersuchung der Rolle der Intelligenz in der Cybersicherheit, ihrer Bedeutung und ihrer Implementierung."
+title: Intelligenz
+description: Eine detaillierte Untersuchung der Rolle der Intelligenz in der Cybersicherheit,
+  ihrer Bedeutung und ihrer Implementierung.
+keywords:
+- cybersicherheitsintelligenz
+- Strategische Intelligenz
+- Operational Intelligence
+- taktische Intelligenz
+- Risikomanagement
+- Indikatoren für eine Gefährdung
+- bedrohungsfeeds
+- intelligenzzyklus
 ---
 
 # Intelligenz

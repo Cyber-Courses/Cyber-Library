@@ -1,7 +1,15 @@
 ---
-title: "Intelligencia"
-description: "A kiberbiztonsági intelligencia szerepe és fontossága"
-keywords: "intelligencia, kiberbiztonság, fenyegetés, stratégiai, operatív, taktikai"
+title: Intelligencia
+description: A kiberbiztonsági intelligencia szerepe és fontossága
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelligencia

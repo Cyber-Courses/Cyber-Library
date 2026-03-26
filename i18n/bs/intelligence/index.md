@@ -1,7 +1,16 @@
 ---
-title: "Inteligencija"
-description: "Razumijevanje inteligencije u sajber sigurnosti: prikupljanje, analiza i primjena za zaštitu od prijetnji."
-keywords: "inteligencija, sajber sigurnost, prijetnje, analiza, strategija"
+title: Inteligencija
+description: 'Razumijevanje inteligencije u sajber sigurnosti: prikupljanje, analiza
+  i primjena za zaštitu od prijetnji.'
+keywords:
+- obavještajni podaci o sajber sigurnosti
+- strateška inteligencija
+- operativna inteligencija
+- taktička inteligencija
+- Upravljanje rizicima
+- Indikatori kompromisa
+- feedovi prijetnji
+- obavještajni ciklus
 ---
 
 # Inteligencija

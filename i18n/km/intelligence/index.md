@@ -1,6 +1,15 @@
 ---
-title: "បញ្ញា"
-description: "ការបកស្រាយអំពីបញ្ញានៅក្នុងសន្តិសុខសាយបឺរ និងសារៈសំខាន់របស់វា"
+title: បញ្ញា
+description: ការបកស្រាយអំពីបញ្ញានៅក្នុងសន្តិសុខសាយបឺរ និងសារៈសំខាន់របស់វា
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # បញ្ញា

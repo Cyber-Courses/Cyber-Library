@@ -1,17 +1,18 @@
 ---
-<<<<<<< dev
-title: "Defensiva"
-description: "Uma abordagem sistemática para proteger dados, sistemas e usuários contra ameaças cibernéticas."
+title: Defensiva
+description: Uma abordagem sistemática para proteger dados, sistemas e usuários contra
+  ameaças cibernéticas.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defensiva
-=======
-title: "Cibersegurança Defensiva"
-description: "Uma abordagem sistemática para proteger dados, sistemas e usuários contra ameaças cibernéticas."
----
-
-# Cibersegurança Defensiva
->>>>>>> main
 
 ## O Que É Cibersegurança Defensiva?
 

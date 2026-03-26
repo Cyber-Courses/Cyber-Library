@@ -1,7 +1,14 @@
 ---
-title: "કેરિયર"
-description: "સાઇબરસિક્યુરિટી ક્ષેત્રમાં કેરિયર વિશેની માહિતી અને માર્ગદર્શિકા."
-keywords: "સાઇબરસિક્યુરિટી, કેરિયર, વ્યાવસાયિક વિકાસ, ડિજિટલ સુરક્ષા"
+title: કેરિયર
+description: સાઇબરસિક્યુરિટી ક્ષેત્રમાં કેરિયર વિશેની માહિતી અને માર્ગદર્શિકા.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # કેરિયર

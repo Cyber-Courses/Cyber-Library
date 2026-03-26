@@ -1,7 +1,15 @@
 ---
-title: "هوش"
-description: "درک و اهمیت هوش در امنیت سایبری"
-keywords: "هوش, امنیت سایبری, تهدیدات سایبری, تحلیل اطلاعات, مدیریت ریسک"
+title: هوش
+description: درک و اهمیت هوش در امنیت سایبری
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # هوش

@@ -1,6 +1,17 @@
 ---
-title: "Offensief"
-description: "Een diepgaande verkenning van offensieve cybersecurity, inclusief het belang, de methodologieën en de rol in het versterken van de beveiligingshouding van een organisatie."
+title: Offensief
+description: Een diepgaande verkenning van offensieve cybersecurity, inclusief het
+  belang, de methodologieën en de rol in het versterken van de beveiligingshouding
+  van een organisatie.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Offensief

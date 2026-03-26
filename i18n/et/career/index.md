@@ -1,6 +1,16 @@
 ---
-title: "Karjäär"
-description: "Küberjulgeoleku karjäär on dünaamiline teekond, mis pakub võimalusi igal tasemel professionaalidele. Digimaailma laienedes kasvab vastavalt ka nõudlus oskuslike küberjulgeoleku ekspertide järele, pakkudes elavat ja kiiretempolist tööturgu."
+title: Karjäär
+description: Küberjulgeoleku karjäär on dünaamiline teekond, mis pakub võimalusi igal
+  tasemel professionaalidele. Digimaailma laienedes kasvab vastavalt ka nõudlus oskuslike
+  küberjulgeoleku ekspertide järele, pakkudes elavat ja kiiretempolist tööturgu.
+keywords:
+- küberturvalisuse karjäär
+- karjäärivõimalused
+- ROLLID JA VASTUTUSALAD
+- tehnilised ja pehmed oskused
+- Sertifikaadid
+- akadeemilised kraadid
+- ametialane areng
 ---
 
 # Karjäär

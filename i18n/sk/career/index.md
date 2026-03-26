@@ -1,6 +1,15 @@
 ---
 title: Kariéra
-description: Dynamická kariéra v oblasti kybernetickej bezpečnosti s príležitosťami pre profesionálov na všetkých úrovniach.
+description: Dynamická kariéra v oblasti kybernetickej bezpečnosti s príležitosťami
+  pre profesionálov na všetkých úrovniach.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Kariéra

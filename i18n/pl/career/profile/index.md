@@ -1,6 +1,19 @@
 ---
-title: "Profil"
-description: "Zrozumienie swojego profilu w zakresie cyberbezpieczeństwa jest kluczowe, ponieważ pomaga określić, gdzie jesteś w swojej zawodowej podróży i dokąd chcesz zmierzać."
+title: Profil
+description: Zrozumienie swojego profilu w zakresie cyberbezpieczeństwa jest kluczowe,
+  ponieważ pomaga określić, gdzie jesteś w swojej zawodowej podróży i dokąd chcesz
+  zmierzać.
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # Profil

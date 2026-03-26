@@ -1,7 +1,15 @@
 ---
-title: "आक्रामक साइबर सुरक्षा"
-description: "आक्रामक साइबर सुरक्षा के महत्व और कार्यप्रणाली की गहन व्याख्या।"
-keywords: "आक्रामक साइबर सुरक्षा, नैतिक हैकिंग, पेनिट्रेशन टेस्टिंग, रेड टीमिंग, बग बाउंटी"
+title: आक्रामक साइबर सुरक्षा
+description: आक्रामक साइबर सुरक्षा के महत्व और कार्यप्रणाली की गहन व्याख्या।
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # आक्रामक

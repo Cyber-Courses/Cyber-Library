@@ -1,6 +1,15 @@
 ---
-title: "Loopbaan"
-description: "Ontdek die dinamiese wêreld van 'n loopbaan in kuberveiligheid, insluitend profielontwikkeling, professionele groei, en die kuberveiligheidslandskap."
+title: Loopbaan
+description: Ontdek die dinamiese wêreld van 'n loopbaan in kuberveiligheid, insluitend
+  profielontwikkeling, professionele groei, en die kuberveiligheidslandskap.
+keywords:
+- cybersecurity loopbaan
+- loopbaanpaaie
+- rol en verantwoordelikheid
+- tegniese en sagte vaardighede
+- Sertifikate
+- akademiese grade
+- professionele ontwikkeling
 ---
 
 # Loopbaan

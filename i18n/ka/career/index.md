@@ -1,6 +1,14 @@
 ---
-title: "კარიერა"
-description: "კიბერუსაფრთხოების კარიერა: შესაძლებლობები და განვითარება"
+title: კარიერა
+description: 'კიბერუსაფრთხოების კარიერა: შესაძლებლობები და განვითარება'
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # კარიერა

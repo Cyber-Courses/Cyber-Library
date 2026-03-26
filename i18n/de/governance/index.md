@@ -1,7 +1,16 @@
 ---
-title: "Governance"
-description: "Eine umfassende Erklärung der Cybersicherheits-Governance und ihrer Bedeutung für Unternehmen."
-keywords: "Cybersicherheits-Governance, Cyber-Risiken, Unternehmensstrategie, Sicherheitsinitiativen, Risikomanagement"
+title: Governance
+description: Eine umfassende Erklärung der Cybersicherheits-Governance und ihrer Bedeutung
+  für Unternehmen.
+keywords:
+- cybersicherheits-Governance
+- governance-Rahmen
+- Risikomanagement
+- Einhaltung, Compliance
+- Unternehmensstrategie
+- cyber-Resilienz
+- Aufsicht des Vorstands
+- Betriebliche Kontinuität
 ---
 
 # Governance

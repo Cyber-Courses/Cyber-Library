@@ -1,17 +1,18 @@
 ---
-<<<<<<< dev
-title: "Наступательная"
-description: "Изучение офенсивной кибербезопасности, её важности и методов реализации."
+title: Наступательная
+description: Изучение офенсивной кибербезопасности, её важности и методов реализации.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Наступательная
-=======
-title: "Офенсивная кибербезопасность"
-description: "Изучение офенсивной кибербезопасности, её важности и методов реализации."
----
-
-# Офенсивная кибербезопасность
->>>>>>> main
 
 ## Что такое офенсивная кибербезопасность?
 

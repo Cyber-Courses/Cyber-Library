@@ -1,6 +1,15 @@
 ---
 title: Защитная кибербезопасность
-description: Техническое руководство по методам защитной кибербезопасности для защиты данных и систем от киберугроз.
+description: Техническое руководство по методам защитной кибербезопасности для защиты
+  данных и систем от киберугроз.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Защитная

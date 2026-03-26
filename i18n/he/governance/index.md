@@ -1,6 +1,15 @@
 ---
-title: "ממשל"
-description: "הבנת ממשל סייבר, חשיבותו ואופן יישומו בארגונים."
+title: ממשל
+description: הבנת ממשל סייבר, חשיבותו ואופן יישומו בארגונים.
+keywords:
+- cybersecurity governance
+- governance frameworks
+- risk management
+- compliance
+- business strategy
+- cyber resilience
+- board oversight
+- operational continuity
 ---
 
 # ממשל

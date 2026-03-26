@@ -1,6 +1,15 @@
 ---
-title: "ઓફેન્સિવ"
-description: "ઓફેન્સિવ સાયબરસિક્યુરિટી વિશેની વિગતવાર સમજણ અને તેની મહત્વતા"
+title: ઓફેન્સિવ
+description: ઓફેન્સિવ સાયબરસિક્યુરિટી વિશેની વિગતવાર સમજણ અને તેની મહત્વતા
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # ઓફેન્સિવ

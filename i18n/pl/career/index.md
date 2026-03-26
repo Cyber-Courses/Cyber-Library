@@ -1,6 +1,15 @@
 ---
-title: "Kariera"
-description: "Dynamiczna podróż w dziedzinie cyberbezpieczeństwa z możliwościami rozwoju zawodowego."
+title: Kariera
+description: Dynamiczna podróż w dziedzinie cyberbezpieczeństwa z możliwościami rozwoju
+  zawodowego.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Kariera

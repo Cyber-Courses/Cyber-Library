@@ -1,6 +1,17 @@
 ---
-title: "โปรไฟล์"
-description: "การทำความเข้าใจโปรไฟล์ด้านความปลอดภัยไซเบอร์ของคุณเป็นสิ่งสำคัญเพราะช่วยให้คุณกำหนดตำแหน่งที่คุณอยู่ในการเดินทางทางอาชีพและที่ที่คุณต้องการไป"
+title: โปรไฟล์
+description: การทำความเข้าใจโปรไฟล์ด้านความปลอดภัยไซเบอร์ของคุณเป็นสิ่งสำคัญเพราะช่วยให้คุณกำหนดตำแหน่งที่คุณอยู่ในการเดินทางทางอาชีพและที่ที่คุณต้องการไป
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # โปรไฟล์

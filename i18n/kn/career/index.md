@@ -1,6 +1,14 @@
 ---
-title: "ವೃತ್ತಿ"
-description: "ಸೈಬರ್‌ಸುರಕ್ಷೆಯಲ್ಲಿ ವೃತ್ತಿ ನಿರ್ಮಾಣದ ಕುರಿತು ಸಮಗ್ರ ವಿವರಣೆ"
+title: ವೃತ್ತಿ
+description: ಸೈಬರ್‌ಸುರಕ್ಷೆಯಲ್ಲಿ ವೃತ್ತಿ ನಿರ್ಮಾಣದ ಕುರಿತು ಸಮಗ್ರ ವಿವರಣೆ
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # ವೃತ್ತಿ

@@ -1,6 +1,16 @@
 ---
-title: "انٹیلیجنس"
-description: "سائبر سیکیورٹی میں انٹیلیجنس کی اہمیت، اس کے فوائد، اور اس کے نفاذ کے طریقے"
+title: انٹیلیجنس
+description: سائبر سیکیورٹی میں انٹیلیجنس کی اہمیت، اس کے فوائد، اور اس کے نفاذ کے
+  طریقے
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # انٹیلیجنس

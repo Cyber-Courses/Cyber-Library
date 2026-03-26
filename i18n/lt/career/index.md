@@ -1,7 +1,15 @@
 ---
-title: "Karjera"
-description: "Karjera kibernetinio saugumo srityje yra dinamiška kelionė, kupina galimybių profesionalams visais lygmenimis."
-keywords: "kibernetinis saugumas, karjera, profesinis tobulėjimas, specializacija, ekosistema"
+title: Karjera
+description: Karjera kibernetinio saugumo srityje yra dinamiška kelionė, kupina galimybių
+  profesionalams visais lygmenimis.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Karjera

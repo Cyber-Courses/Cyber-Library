@@ -1,7 +1,14 @@
 ---
-title: "پایه"
-description: "بررسی تاریخچه و فرهنگ هکرها در امنیت سایبری"
-keywords: "امنیت سایبری, فرهنگ هکر, تاریخچه امنیت سایبری, اخلاق هک"
+title: پایه
+description: بررسی تاریخچه و فرهنگ هکرها در امنیت سایبری
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # پایه

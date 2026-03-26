@@ -1,3 +1,19 @@
+---
+title: Temel
+description: Siber güvenlik, 20. yüzyılın sonlarındaki hacker kültürüne dayanan köklere
+  sahiptir. İnsanlar bilgisayarlarla deney yapmaya başladıkları andan itibaren, teknolojiyi
+  anlamak, değiştirmek ve sınırlarını zorlamak için bir arzu vardı. Bu erken dönem
+  hackerlar, kendilerini dijital sınırların kaşifleri olarak görürlerdi ve…
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
+---
+
 # Temel
 
 ## Giriş

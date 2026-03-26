@@ -1,6 +1,14 @@
 ---
-title: "Defensiv"
-description: "Explorarea conceptelor și importanței securității cibernetice defensive."
+title: Defensiv
+description: Explorarea conceptelor și importanței securității cibernetice defensive.
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # Defensiv

@@ -1,7 +1,14 @@
 ---
-title: "พื้นฐาน"
-description: "บทนำเกี่ยวกับความปลอดภัยทางไซเบอร์ วัฒนธรรมแฮกเกอร์ และประวัติศาสตร์"
-keywords: "ความปลอดภัยทางไซเบอร์, วัฒนธรรมแฮกเกอร์, ประวัติศาสตร์ความปลอดภัยทางไซเบอร์"
+title: พื้นฐาน
+description: บทนำเกี่ยวกับความปลอดภัยทางไซเบอร์ วัฒนธรรมแฮกเกอร์ และประวัติศาสตร์
+keywords:
+- cybersecurity foundation
+- hacker culture
+- cybersecurity history
+- cybersecurity ethics
+- risk management
+- trust in digital systems
+- human element in cybersecurity
 ---
 
 # พื้นฐาน

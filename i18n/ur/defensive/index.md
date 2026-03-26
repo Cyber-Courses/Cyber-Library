@@ -1,6 +1,15 @@
 ---
 title: دفاعی سائبر سیکیورٹی
-description: دفاعی سائبر سیکیورٹی کے بارے میں جانیں، اس کی اہمیت اور اس کے عمل کے طریقے۔
+description: دفاعی سائبر سیکیورٹی کے بارے میں جانیں، اس کی اہمیت اور اس کے عمل کے
+  طریقے۔
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # دفاعی

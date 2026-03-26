@@ -1,6 +1,16 @@
 ---
-title: "Pealetungiv"
-description: "Pealetungiv küberturvalisus hõlmab eetilist rünnakute simuleerimist, et avastada haavatavusi enne, kui pahatahtlikud osapooled neid ära kasutavad."
+title: Pealetungiv
+description: Pealetungiv küberturvalisus hõlmab eetilist rünnakute simuleerimist,
+  et avastada haavatavusi enne, kui pahatahtlikud osapooled neid ära kasutavad.
+keywords:
+- solvav küberturvalisus
+- eetiline häkkimine
+- läbitungimiskatse
+- punane meeskonnatöö
+- bug bounty
+- manipuleerimine
+- andmekaitse,
+- riskijuhtimine
 ---
 
 # Pealetungiv

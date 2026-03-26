@@ -1,6 +1,15 @@
 ---
 title: Kariera
-description: Dinamična pot v kibernetski varnosti z možnostmi za strokovnjake na vseh ravneh.
+description: Dinamična pot v kibernetski varnosti z možnostmi za strokovnjake na vseh
+  ravneh.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Kariera

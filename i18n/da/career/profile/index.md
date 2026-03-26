@@ -1,6 +1,18 @@
 ---
-title: "Profil"
-description: "Forståelse af din cybersikkerhedsprofil er afgørende for at definere din professionelle rejse og fremtidige mål."
+title: Profil
+description: Forståelse af din cybersikkerhedsprofil er afgørende for at definere
+  din professionelle rejse og fremtidige mål.
+keywords:
+- cybersikkerhedsroller
+- karriereveje
+- kompetenceudvikling
+- Cybersikkerhedscertificeringer
+- sikkerhedskarriere
+- entry-level roller
+- roller på mellemniveau
+- roller på seniorniveau
+- Tekniske færdigheder
+- ledelsesstier
 ---
 
 # Profil

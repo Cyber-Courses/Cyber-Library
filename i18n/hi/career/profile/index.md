@@ -1,6 +1,18 @@
 ---
-title: "प्रोफाइल"
-description: "साइबर सुरक्षा प्रोफाइल को समझना आपके पेशेवर यात्रा में आपकी स्थिति को परिभाषित करने और आपके लक्ष्यों को प्राप्त करने में मदद करता है।"
+title: प्रोफाइल
+description: साइबर सुरक्षा प्रोफाइल को समझना आपके पेशेवर यात्रा में आपकी स्थिति को
+  परिभाषित करने और आपके लक्ष्यों को प्राप्त करने में मदद करता है।
+keywords:
+- cybersecurity roles
+- career paths
+- skill development
+- cybersecurity certifications
+- security career
+- entry-level roles
+- mid-level roles
+- senior-level roles
+- technical skills
+- managerial paths
 ---
 
 # प्रोफाइल

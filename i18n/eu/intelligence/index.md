@@ -1,6 +1,16 @@
 ---
 title: Inteligentzia
-description: Inteligentzia zibersegurtasunean, informazioaren bilketa, prozesamendua eta analisia, mehatxuak identifikatzeko, ebaluatzeko eta arintzeko.
+description: Inteligentzia zibersegurtasunean, informazioaren bilketa, prozesamendua
+  eta analisia, mehatxuak identifikatzeko, ebaluatzeko eta arintzeko.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- arriskuen kudeaketa
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Inteligentzia

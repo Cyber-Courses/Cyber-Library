@@ -1,6 +1,15 @@
 ---
-title: "ਇੰਟੈਲੀਜੈਂਸ"
-description: "ਸਾਈਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਇੰਟੈਲੀਜੈਂਸ ਦੀ ਭੂਮਿਕਾ ਅਤੇ ਮਹੱਤਵ"
+title: ਇੰਟੈਲੀਜੈਂਸ
+description: ਸਾਈਬਰਸੁਰੱਖਿਆ ਵਿੱਚ ਇੰਟੈਲੀਜੈਂਸ ਦੀ ਭੂਮਿਕਾ ਅਤੇ ਮਹੱਤਵ
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # ਇੰਟੈਲੀਜੈਂਸ

@@ -1,7 +1,16 @@
 ---
 title: Офенсивна
-description: Дослідження офенсивної кібербезпеки, її важливість та методи реалізації для виявлення вразливостей.
-keywords: офенсивна, етичний злом, тестування на проникнення, червона команда, програми винагород
+description: Дослідження офенсивної кібербезпеки, її важливість та методи реалізації
+  для виявлення вразливостей.
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # Офенсивна

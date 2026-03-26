@@ -1,6 +1,15 @@
 ---
-title: "Odbrambena"
-description: "Sistematski pristup zaštiti podataka, sistema i korisnika organizacije od cyber prijetnji."
+title: Odbrambena
+description: Sistematski pristup zaštiti podataka, sistema i korisnika organizacije
+  od cyber prijetnji.
+keywords:
+- odbrambena kibernetička sigurnost
+- obavještajni podaci o prijet
+- procjene ranjivosti
+- Odgovor na incident
+- kontinuirano praćenje
+- Analiza incidenata
+- kontinuitet poslovanja
 ---
 
 # Odbrambena

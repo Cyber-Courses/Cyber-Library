@@ -1,7 +1,15 @@
 ---
 title: جارحانہ
 description: جارحانہ سائبر سیکیورٹی کی وضاحت، اہمیت، اور عمل درآمد کی تکنیکیں۔
-keywords: جارحانہ سائبر سیکیورٹی، اخلاقی ہیکنگ، خطرات کی نشاندہی، سیکیورٹی جانچ
+keywords:
+- offensive cybersecurity
+- ethical hacking
+- penetration testing
+- red teaming
+- bug bounty
+- social engineering
+- data protection
+- risk management
 ---
 
 # جارحانہ

@@ -1,7 +1,15 @@
 ---
-title: "Carreira"
-description: "Exploração detalhada de uma carreira em cibersegurança, incluindo perfil, jornada e panorama."
-keywords: "carreira, cibersegurança, perfil, jornada, panorama"
+title: Carreira
+description: Exploração detalhada de uma carreira em cibersegurança, incluindo perfil,
+  jornada e panorama.
+keywords:
+- cybersecurity career
+- career paths
+- roles and responsibilities
+- technical and soft skills
+- certifications
+- academic degrees
+- professional development
 ---
 
 # Carreira

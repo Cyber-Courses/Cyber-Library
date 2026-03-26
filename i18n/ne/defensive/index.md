@@ -1,6 +1,15 @@
 ---
-title: "रक्षात्मक साइबरसुरक्षा"
-description: "साइबर खतराबाट संगठनको डेटा, प्रणाली, र प्रयोगकर्ताहरूलाई सुरक्षित गर्ने प्रणालीगत दृष्टिकोण।"
+title: रक्षात्मक साइबरसुरक्षा
+description: साइबर खतराबाट संगठनको डेटा, प्रणाली, र प्रयोगकर्ताहरूलाई सुरक्षित गर्ने
+  प्रणालीगत दृष्टिकोण।
+keywords:
+- defensive cybersecurity
+- threat intelligence
+- vulnerability assessments
+- incident response
+- continuous monitoring
+- post-incident analysis
+- business continuity
 ---
 
 # रक्षात्मक

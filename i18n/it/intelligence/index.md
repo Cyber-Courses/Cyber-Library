@@ -1,6 +1,16 @@
 ---
-title: "Intelligenza"
-description: "Esplorazione dettagliata dell'intelligenza nella sicurezza informatica, dalla raccolta di informazioni all'analisi e mitigazione delle minacce."
+title: Intelligenza
+description: Esplorazione dettagliata dell'intelligenza nella sicurezza informatica,
+  dalla raccolta di informazioni all'analisi e mitigazione delle minacce.
+keywords:
+- cybersecurity intelligence
+- strategic intelligence
+- operational intelligence
+- tactical intelligence
+- risk management
+- Indicators of Compromise
+- threat feeds
+- intelligence cycle
 ---
 
 # Intelligenza
