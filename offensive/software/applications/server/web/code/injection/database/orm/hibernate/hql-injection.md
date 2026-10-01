@@ -1,6 +1,6 @@
 ---
 title: "HQL injection: Hibernate Query Language built from untrusted input"
-description: Concatenating user input into createQuery() HQL/JPQL bypasses Hibernate's parameter binding, exposing entity data through boolean logic and UNION-style object queries.
+description: Concatenating user input into createQuery() HQL/JPQL bypasses Hibernate's parameter binding, exposing entity data through boolean logic and correlated subqueries over mapped entities.
 keywords:
   - Hibernate
   - HQL injection
@@ -33,14 +33,20 @@ HQL operates over **entities and their fields**, not raw tables, which shapes th
 ' OR 1=1 --
 ```
 
-HQL supports subqueries and `UNION`-like retrieval through entity navigation, so you can pivot to other mapped entities:
+Set-based retrieval depends on the Hibernate version. Hibernate ORM 6.1 and newer add `union`/`union all` (and `intersect`/`except`) to HQL, so on a current stack a UNION-style pivot across mapped entities is a valid attack surface:
 
 ```
-' OR username='admin' --
 xyz' UNION SELECT u.password FROM User u WHERE '1'='1
 ```
 
-Because HQL resolves field access against the mapping, you can read sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash` via association paths). HQL lacks some raw-SQL constructs, so where HQL is limited, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
+Older Hibernate and portable JPQL have no set operators, so there retrieval goes through **subqueries and entity navigation** instead:
+
+```
+' OR username='admin' --
+' OR (SELECT u2.password FROM User u2 WHERE u2.username='admin') LIKE 'a%' --
+```
+
+Because HQL resolves field access against the mapping, a correlated subquery or an association path reads sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash`). Where HQL still cannot express a needed construct, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
 
 Blind extraction uses the same boolean/substring inference as SQL injection, craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
 

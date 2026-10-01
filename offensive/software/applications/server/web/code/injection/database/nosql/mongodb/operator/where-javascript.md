@@ -54,16 +54,16 @@ Because `$where` runs real JavaScript, the expression can read other fields of t
 
 Each request tests one condition about another field, and the match/no-match signal recovers the value character by character, the same oracle loop used with `$regex` but expressed in JavaScript.
 
-## Blind time-based via sleep()
+## Blind time-based via a busy loop
 
-Where no result difference is observable but JavaScript is enabled, delay execution and measure response time. A `sleep()` call inside the injected expression makes the server pause once the condition holds:
+Where no result difference is observable but JavaScript is enabled, delay execution and measure response time. The server-side `$where` scope does not expose the shell helper `sleep()` (that global exists only in the mongo shell), so a `sleep(5000)` call raises `ReferenceError` instead of pausing. The portable primitive is a CPU busy-wait that spins until a wall-clock deadline, run only when the probed condition holds:
 
 ```
-' || (this.username=='admin' && sleep(5000)) || '
+' || (this.username=='admin' && (function(){var t=Date.now();while(Date.now()-t<5000){}return true})()) || '
 ```
 
 ```javascript
-{ "$where": "function(){ if (this.role=='admin') { sleep(5000); } return false; }" }
+{ "$where": "function(){ if (this.role=='admin') { var t=Date.now(); while(Date.now()-t<5000){} } return false; }" }
 ```
 
 A slow response means the condition was true. Bound the loop by anchoring on one field at a time (`this.secret[0]=='a'`, then `[1]`, and so on), inferring each character from whether the request hangs. Because `$where` executes against every document in the scan, keep the matched set small (pin a username first) so the delay is attributable and the scan stays cheap.

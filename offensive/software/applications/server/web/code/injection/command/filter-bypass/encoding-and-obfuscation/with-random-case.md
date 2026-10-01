@@ -49,8 +49,8 @@ wh^oa^mi            # caret removed by cmd, case still folded
 On Linux/macOS shells, command resolution is **case-sensitive**: `WHOAMI` is not `whoami` and `PATH` lookup will not find it. Random case alone does **not** work against a POSIX sink, `cat` and `CAT` are different names. Reach the same goal with case-insensitive helpers instead:
 
 ```
-$(tr "[A-Z]" "[a-z]" <<< "WHOAMI")       # downcase, then command substitution runs it
-WHOAMI | tr "[:upper:]" "[:lower:]"      # only after folding does the name resolve
+$(tr "[A-Z]" "[a-z]" <<< "WHOAMI")       # downcase the string first, then run the result
+`echo WHOAMI | tr "[:upper:]" "[:lower:]"`   # same idea with backtick substitution
 ```
 
 Because POSIX does not fold case for you, random case is properly a **Windows** technique; on POSIX, reserve it for arguments that a program parses case-insensitively, not for the command name.
