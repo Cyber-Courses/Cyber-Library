@@ -10,7 +10,7 @@ keywords:
   - WAF bypass
 ---
 
-# Empty backtick splitting
+# Empty backticks
 
 A blocklist that matches a literal keyword such as `whoami` or `cat` can be defeated by inserting an **empty command substitution** inside the word. An empty pair of backticks (`` `` ``) runs "nothing," expands to the empty string, and is deleted during word expansion—leaving the surrounding characters to rejoin into the original keyword. The filter sees `` wh``oami ``; the shell runs `whoami`.
 

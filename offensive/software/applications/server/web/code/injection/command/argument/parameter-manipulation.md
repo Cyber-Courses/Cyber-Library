@@ -10,7 +10,7 @@ keywords:
   - fullwidth characters
 ---
 
-# Argument injection / parameter manipulation
+# Parameter manipulation
 
 When an application spawns a **fixed binary** with an argument array and no shell, metacharacters (`;`, `|`, `$()`) are inert. Argument injection exploits a different seam: the user value lands in `argv` and the **binary itself re-parses it as an option** rather than data. No new process is spawned, yet the existing one is steered into reading files, writing files, or running sub-programs it natively supports.
 
