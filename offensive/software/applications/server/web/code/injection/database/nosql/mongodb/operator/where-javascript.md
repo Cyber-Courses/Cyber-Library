@@ -18,7 +18,7 @@ keywords:
 
 ## Availability precondition
 
-This technique is far narrower than operator injection. Modern MongoDB (4.4 and later) ships with server-side JavaScript **disabled by default**: the `security.javascriptEnabled` server setting must be on for `$where`, `mapReduce`, and `$function` to run, and many deployments leave it off. `$where` also cannot use query operators and must be a JavaScript expression or function, so it is reachable only where the application builds a `$where` string from input. Treat everything below as conditional on JavaScript being enabled on the target; where it is off, these payloads error instead of executing, and the operator techniques elsewhere in this subtree are the path.
+Server-side JavaScript is **enabled by default**: `security.javascriptEnabled` defaults to `true`, so `$where`, `mapReduce`, and `$function` run unless an operator has explicitly turned scripting off. It is deprecated in recent releases and some hardened deployments disable it, so treat execution as the default but confirm it on the target. `$where` cannot use query operators and must be a JavaScript expression or function, so this sink is reachable where the application builds a `$where` string (or passes input into `mapReduce`/`$function`) from input. Where an operator has disabled scripting, these payloads error and the operator techniques elsewhere in this subtree are the path.
 
 ## The sink
 

