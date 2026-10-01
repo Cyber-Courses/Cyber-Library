@@ -31,7 +31,7 @@ A handler that accepts a generic `Any` for a benign purpose, an event, an attach
 
 ## oneof and registry resolution
 
-A `oneof` that the server branches on lets the caller drive which branch, and therefore which code path, executes by setting a different member than the common case. Registry-based resolution has the same shape: where the server looks up a message or handler by a name taken from the request, supplying an unexpected name reaches a different implementation. In both, the vulnerability is that the type or handler is selected by untrusted input rather than fixed by the contract.
+A `oneof` only holds the members its `.proto` declares, so selecting a different member is allowed contract behavior, not dynamic typing by itself. It becomes a flaw when the branches are not held to the same checks: if one branch carries an authorization or validation step that another skips, choosing the weaker branch reaches the action without the control the common path enforced. The genuinely dynamic case is registry-based resolution, where the server looks up a message or handler by a name taken from the request; supplying an unexpected name reaches a different implementation the contract never pinned. The `Any` case above and registry lookups select the type or handler from untrusted input; a `oneof` only matters where a branch is under-protected relative to its siblings.
 
 ## Why strong typing does not prevent it
 
