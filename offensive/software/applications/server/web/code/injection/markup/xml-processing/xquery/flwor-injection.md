@@ -39,14 +39,14 @@ with the payload `x'] | //user | a[''='` closing the predicate, unioning the ful
 
 ## Widening the iterated sequence
 
-Where the input sits in the `for` binding rather than the `where`, the attacker redirects iteration itself. Starting from:
+Where the input sits in the `for` binding predicate, the attacker widens which nodes the loop iterates. Starting from:
 
 ```xquery
 for $x in //user[role='" + role + "']
 return $x/name
 ```
 
-the value `x'] return $x/* for $x in //user[role='admin` reshapes the `return` to emit every child element of each node and re-binds the loop, pulling fields the query never intended to expose (password hashes, tokens, internal flags).
+the value `' or '1'='1` makes the predicate `role='' or '1'='1'`, so the binding selects every `//user` regardless of role and the loop returns all of their names rather than one role's. Pulling fields the query never meant to return (password hashes, tokens, internal flags) needs expression position rather than a wider binding: either a query whose `return` clause is itself built from input, or the escalation to reachable functions covered in library function abuse. When the rows are not reflected at all, the blind inference below recovers them one character at a time.
 
 ## Cross-document reach
 

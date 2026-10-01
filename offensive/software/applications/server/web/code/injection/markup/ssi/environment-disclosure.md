@@ -34,7 +34,7 @@ A reflected value proves the directive was parsed. `DOCUMENT_NAME` and `DATE_LOC
 <!--#echo var="LAST_MODIFIED"-->
 ```
 
-`DOCUMENT_URI` and `DOCUMENT_NAME` disclose the real path of the parsed file, which is useful for locating traversal targets and for confirming where reflected input is being rendered.
+`DOCUMENT_URI` is the request's URL path and `DOCUMENT_NAME` the requested document's name, not the real on-disk path, so they confirm where reflected input is being rendered in URL space. The absolute filesystem path comes from `SCRIPT_FILENAME` or `PATH_TRANSLATED` below, when the server exposes them.
 
 ## CGI and request variables
 
@@ -99,7 +99,7 @@ If the response contains `SSI-ACTIVE` in place of the default error text, the di
 
 ## Chaining disclosure into other primitives
 
-Environment disclosure is usually a stepping stone. `DOCUMENT_URI`, `SCRIPT_FILENAME`, and `PATH_TRANSLATED` give the absolute on-disk location of the parsed page, which lets file inclusion and command payloads use exact paths rather than stacking traversal sequences blindly. `SERVER_SOFTWARE` and `SERVER_PROTOCOL` fingerprint the stack so later payloads match the server. Collect these first, then pivot to `exec` or `include` with the paths and version details already in hand.
+Environment disclosure is usually a stepping stone. `SCRIPT_FILENAME` and `PATH_TRANSLATED` give the absolute on-disk location of the parsed page (while `DOCUMENT_URI` gives only its URL path), which lets file inclusion and command payloads use exact paths rather than stacking traversal sequences blindly. `SERVER_SOFTWARE` and `SERVER_PROTOCOL` fingerprint the stack so later payloads match the server. Collect these first, then pivot to `exec` or `include` with the paths and version details already in hand.
 
 ## References
 

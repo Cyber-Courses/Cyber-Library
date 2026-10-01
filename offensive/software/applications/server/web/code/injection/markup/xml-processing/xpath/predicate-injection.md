@@ -21,27 +21,23 @@ The query assembles a predicate around a quoted value:
 expr = "//user[name='" + username + "' and pass='" + password + "']"
 ```
 
-Supplying a single quote in `username` ends the literal early and leaves the rest of the expression under attacker control. The canonical always-true payload neutralizes the password check:
+Supplying a single quote in `username` ends the literal early and leaves the rest of the expression under attacker control. Operator precedence decides the payload: `and` binds tighter than `or`, so a single trailing `or '1'='1` is not enough. It parses as `name='' or ('1'='1' and pass='anything')`, which still requires the password to equal `anything`. The reliable always-true payload adds a second, standalone `or` clause that dominates the whole predicate:
 
 ```
-username: ' or '1'='1
+username: ' or '1'='1' or '1'='1
 password: anything
 ```
 
-The expression becomes `//user[name='' or '1'='1' and pass='anything']`. Because `'1'='1'` is always true, the predicate matches the first user node, and the application treats the request as authenticated.
+The expression becomes `//user[name='' or '1'='1' or '1'='1' and pass='anything']`. The middle `'1'='1'` is a top-level `or` operand, so the predicate is true no matter what the name or the trailing password clause evaluates to, and the first user node matches.
 
-Operator precedence matters: `and` binds tighter than `or`, so a cleaner, more reliable form forces the whole predicate true regardless of the trailing clause:
-
-```
-' or '1'='1' or '1'='1
-```
-
-To target a specific account rather than the first node, keep the name and defeat only the password:
+To bind to one specific account rather than whichever node sorts first, keep the username literal so its `name` clause stays enforced, and inject in the password so a re-test of `name` dominates:
 
 ```
-username: admin' or 'a'='a
-password: x' or 'a'='a
+username: admin
+password: x' or name='admin
 ```
+
+This yields `//user[name='admin' and pass='x' or name='admin']`. Precedence groups it as `(name='admin' and pass='x') or name='admin'`, so the admin node matches whatever its password is, and no other node does.
 
 ## Selecting by position
 

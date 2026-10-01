@@ -27,14 +27,14 @@ Define the entity in the internal subset (the bracketed DTD) and reference it in
 
 When the parser expands `&xxe;`, the `productId` value becomes the contents of `/etc/passwd`, and the application reflects it back. The `file://` scheme reads any path the service account can open: `file:///etc/passwd`, `file:///etc/hostname`, `file:///proc/self/environ`, `file:///home/user/.ssh/id_rsa`, or a Windows path such as `file:///c:/windows/win.ini`.
 
-To find the injectable field, send a probe entity first and watch for the expanded value:
+To find the injectable field, probe with an **external** entity, not an internal one. An internal replacement entity such as `<!ENTITY test "INJECTED">` expands even when external entity loading is disabled, so seeing it echoed proves only that entities are processed, not that `file://` reads work, a false positive on a hardened parser. Point the probe at a file that reliably exists instead:
 
 ```xml
-<!DOCTYPE foo [ <!ENTITY test "INJECTED"> ]>
+<!DOCTYPE foo [ <!ENTITY test SYSTEM "file:///etc/hostname"> ]>
 <stockCheck><productId>&test;</productId></stockCheck>
 ```
 
-If `INJECTED` appears in the response, external entity resolution against `file://` and `http://` is usually available through the same field.
+If the hostname comes back in the response, the parser is resolving external `file://` entities through that field and the full read above will work.
 
 ## Files that break the parser
 

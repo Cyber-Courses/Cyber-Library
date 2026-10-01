@@ -11,7 +11,7 @@ keywords:
 
 # Error messages
 
-When the parser resolves entities but nothing parsed is reflected, and outbound network access is blocked so out-of-band exfiltration cannot work, the parser's own **error reporting** becomes the channel. Many XML parsers include the offending value in a fatal-error string. If that error text reaches the client, in a stack trace, a JSON error field, or a logged response, the attacker can arrange for the error to contain the contents of a target file.
+When the parser resolves entities but nothing parsed is reflected, the parser's own **error reporting** becomes the extraction channel: a forced failure embeds file contents in a fatal-error string. Many XML parsers include the offending value in that string, and if it reaches the client, in a stack trace, a JSON error field, or a logged response, the attacker can arrange for the error to carry the contents of a target file. The portable form below still retrieves a short external DTD over HTTP, so it needs outbound access for that one fetch; when even that is blocked, the local-DTD variant moves the same declaration chain onto a file already on disk and needs no network at all.
 
 ## The technique
 
@@ -48,7 +48,7 @@ The file's first line (and sometimes more, depending on how the parser truncates
 
 ## Local-only variant
 
-The external DTD can be avoided when any outbound access, even a single HTTP fetch of `evil.dtd`, is impossible. The same declaration structure is placed in the internal subset where the parser permits it, or combined with an on-disk DTD as described in the local-DTD technique. The error-message channel itself does not need the network at all; it only needs the parser to surface the error. That makes it the fallback when both reflection and out-of-band exfiltration are unavailable but verbose errors leak to the client.
+When the single `evil.dtd` fetch is also blocked, the external DTD has to go. The same declaration structure is placed in the internal subset where the parser permits parameter entities in markup declarations there, or, more portably, combined with an on-disk DTD as described in the local-DTD technique. The error-message channel itself never needs the network; it only needs the parser to surface the error. That makes it the fallback when reflection, out-of-band exfiltration, and even a DTD fetch are all unavailable but verbose errors still leak to the client.
 
 ## Practical notes
 

@@ -1,72 +1,67 @@
 ---
 title: "Error-based XPath extraction"
-description: "Forcing XPath type and syntax errors makes the processor leak node text and structure in its error message, turning a verbose parser into a direct data channel."
+description: "Forcing a cast or type failure in an XPath 2.0 processor embeds node text in the error message, turning a verbose engine into a direct, non-blind extraction channel."
 keywords:
   - error-based XPath
   - XPath error message
-  - string coercion
-  - XPath data extraction
+  - cast failure
+  - XPath 2.0 extraction
   - XML error leak
 ---
 
 # Error-based
 
-When an XPath processor returns its error messages to the client, those messages become an extraction channel. By deliberately forcing a type conversion or syntax fault whose message embeds node text, an attacker reads values directly out of the error instead of out of the page, which turns a verbose processor into a fast, non-blind oracle.
+When an XPath processor returns its error messages to the client, a deliberately forced failure can carry node text out inside the error string. The reliable form of this is specific to XPath 2.0 and XQuery engines (Saxon, BaseX, eXist-db, the .NET 2.0 processors): their type constructors validate their argument and name the offending value when it fails. XPath 1.0 engines such as libxml2 do not raise on bad coercions, so against those the error channel confirms and fingerprints injection but does not pull values; the technique below therefore targets a 2.0-capable processor, identified first by the fingerprinting payloads at the end.
 
-## Why errors leak data
+## Why a cast leaks data
 
-Many XPath and XQuery engines include offending content in their diagnostics. An expression that tries to use a node-set where a number is required, or that calls a function with a malformed argument built from node text, raises an error whose text often contains the coerced value. The extraction trick is to arrange the expression so the value you want is what gets interpolated into the message.
+A cast or type constructor like `xs:integer(...)` parses its argument and, on failure, reports what it could not convert. Feeding node text into a numeric constructor where the text is not a valid number raises a dynamic error whose message quotes the value, for example `FORG0001: Cannot convert string "s3cr3t" to xs:integer`. The password is now in the error.
 
-## Forcing a type error with coercion
+## Forcing a cast failure
 
-Coercing a string into a numeric context is the classic trigger. Appending arithmetic to a `string()` of a target node forces the engine to parse that string as a number, and the failed conversion reports the string:
-
-```
-' or string-length(name(//user[1]))=1 and string(//user[1]/pass) + 1 or '
-```
-
-Engines that echo the non-numeric operand surface the password text in the error. A more direct form passes node text into a function that validates its argument:
+Inject so the surrounding expression stays valid up to the constructor, then push the target node into it:
 
 ```
-' and extractvalue(1, concat(0x7e, (//user[1]/pass)))='
+' or xs:integer((//user[1]/pass)) or '
 ```
 
-`extractvalue`, where the backend exposes it, reports its malformed second argument verbatim, prefixed by the `~` (`0x7e`) marker, which cleanly delimits the leaked value in the response.
+When the password is non-numeric, the engine aborts with a `FORG0001`-style message containing the value. Keep each fragment small and unambiguous with `substring`:
+
+```
+' or xs:integer(substring((//user[1]/pass),1,20)) or '
+```
+
+Advance the offset to read past the first twenty characters, and change the path to move between nodes:
+
+```
+' or xs:integer((//user[2]/@role)) or '
+```
+
+Where a value happens to be numeric, cast it to a type it cannot satisfy instead, such as `xs:date(...)` or `xs:QName(...)`, so the conversion still fails and reports the text.
+
+## Placing text directly with fn:error
+
+Engines that expose `fn:error()` let an attacker build the fault string, embedding node text with no reliance on a conversion quirk:
+
+```
+' or error(xs:QName('x'), string(//user[1]/pass)) or '
+```
+
+The processor surfaces the supplied description verbatim, so the node text appears in the error channel directly.
 
 ## Leaking structure
 
-Before pulling values, the same mechanism reveals the shape of the document. `name()` and `local-name()` return the element name of a node, and forcing that name into an error exposes tag names one node at a time:
+Before pulling values, the same mechanism reveals the shape of the document. Forcing `name()` or `local-name()` through a failing cast reports element names one node at a time:
 
 ```
-' or string(name(/*[1])) = error() or '
-' and count(//*) = 'x' or '
+' or xs:integer(name(/*[1])) or '
 ```
 
-Converting a node count to a bad type reports the count; reading `name(/*[1])` names the root element. Walking indices maps the full tree structure, which then guides where to aim value extraction.
+The conversion error names the root element; walking indices with `name(/*[1]/*[position()=N])` maps the tree so value extraction knows where to aim.
 
-## Walking values out
+## Fingerprinting the engine first
 
-With structure known, step through target nodes using `substring` to keep each leaked fragment small and unambiguous, pushing each fragment into the faulting function:
-
-```
-' and extractvalue(1, concat(0x7e, substring((//user[1]/pass),1,20)))='
-```
-
-Advance the `substring` offset to read past the first twenty characters, and change the path to move between nodes:
-
-```
-' and extractvalue(1, concat(0x7e, substring((//user[2]/@role),1,20)))='
-```
-
-Where no `extractvalue`-style function exists, division by a string or an invalid cast still produces a type error that names the operand:
-
-```
-' or 1 div string(//user[1]/pass) or '
-```
-
-## Generic syntax faults for fingerprinting
-
-Even when a message does not carry data, its exact wording identifies the processor (libxml2, MSXML, Saxon, .NET), and that in turn tells you which functions and axes are available. A deliberately malformed expression is the quickest fingerprint:
+Error-based value extraction only works on a 2.0 engine, so confirm the processor before committing to casts. A deliberately malformed expression returns an engine-specific parse error:
 
 ```
 '
@@ -74,7 +69,7 @@ Even when a message does not carry data, its exact wording identifies the proces
 count(//
 ```
 
-An unbalanced quote or bracket returns an engine-specific parse error. Match subsequent payloads, such as whether `extractvalue` or XPath 2.0 functions are usable, to the engine the error names.
+An unbalanced quote or bracket produces a message whose exact wording identifies the engine (libxml2, MSXML, Saxon, .NET). If the fingerprint is a 1.0-only engine such as libxml2, fall back to boolean-blind extraction through the predicate; if it is a 2.0 engine, the cast-failure channel above reads values directly.
 
 ## References
 

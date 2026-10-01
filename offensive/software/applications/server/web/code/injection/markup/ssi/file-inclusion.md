@@ -26,31 +26,25 @@ The `include` directive inserts the contents of another resource into the page a
 
 ## Reading local files
 
-Point the directive at a sensitive file. With `virtual`, an absolute-style path from the document root is the direct route:
-
-```
-<!--#include virtual="/etc/passwd"-->
-<!--#include file="/etc/passwd"-->
-```
-
-When the resolver constrains the path, climb out with traversal sequences:
+`file` is the route to the filesystem, but on the standard `mod_include` it resolves relative to the current document and rejects an absolute path, so reaching a system file means climbing out with traversal rather than naming it directly:
 
 ```
 <!--#include file="../../../../../../etc/passwd"-->
-<!--#include virtual="/../../../../etc/passwd"-->
 ```
 
 On Windows targets, adjust separators and targets:
 
 ```
-<!--#include file="..\..\..\..\windows\win.ini"-->
+<!--#include file="..\..\..\..\..\..\windows\win.ini"-->
 ```
 
 Encoded traversal can slip past input filters that only match literal `../`:
 
 ```
-<!--#include virtual="/%2e%2e/%2e%2e/%2e%2e/etc/passwd"-->
+<!--#include file="..%2f..%2f..%2f..%2f..%2f..%2fetc/passwd"-->
 ```
+
+`virtual` resolves in URL space, not on disk, so it reads an OS path like `/etc/passwd` only where an explicit alias or mapping exposes it; its real reach is the resources the server maps, covered next.
 
 ## Including server-side resources
 
@@ -62,7 +56,7 @@ Because `virtual` is resolved in URL space, it reaches dynamic endpoints rather 
 <!--#include virtual="/server-status"-->
 ```
 
-This is effectively a same-host request from the server itself, so endpoints gated only by source address or internal routing become reachable. Where the included handler reflects its own parameters, the inclusion can also become a pivot to further injection.
+An `include virtual` is an internal subrequest, not a fresh HTTP connection from localhost, and it keeps the original request and client context for access checks, so it does not forge a loopback origin or bypass a source-address restriction. What it gains is reaching resources in URL space that are not linked in normal navigation, pulling their rendered output into the response, and triggering their side effects during page assembly. Where the included handler reflects its own parameters, the inclusion can also become a pivot to further injection.
 
 ## Confirming and iterating
 
@@ -72,7 +66,7 @@ Start with a known-present include to confirm the directive is parsed, then move
 <!--#include virtual="/robots.txt"-->
 ```
 
-A response that now contains the `robots.txt` body confirms resolution. Use the path disclosure from `echo var="DOCUMENT_URI"` or `SCRIPT_FILENAME` to compute the exact number of traversal steps needed, which removes the guesswork from stacking `../` sequences.
+A response that now contains the `robots.txt` body confirms resolution. Use the on-disk path disclosed by `echo var="SCRIPT_FILENAME"` or `PATH_TRANSLATED` to compute the exact number of traversal steps needed, which removes the guesswork from stacking `../` sequences.
 
 If `include` returns an error rather than content (for example `[an error occurred while processing this directive]`), the directive was parsed but the path failed; adjust the path or switch between `file` and `virtual`.
 

