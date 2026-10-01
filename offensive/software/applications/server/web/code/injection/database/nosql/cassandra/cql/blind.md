@@ -13,8 +13,6 @@ keywords:
 
 When an injectable CQL query returns no visible data, only a difference in behavior between a true and a false condition, data is recovered one bit at a time. The attacker supplies a predicate whose truth they want to learn and observes whether the response changes.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Why boolean, not time
 
 CQL has no sleep, benchmark, or deliberately expensive function, so there is no time-based channel to lean on. The only general inference primitive is **boolean**: whether the query returns rows, and how the application reacts to that. The observable signal is usually one of:

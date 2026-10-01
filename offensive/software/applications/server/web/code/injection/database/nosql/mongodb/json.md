@@ -14,8 +14,6 @@ keywords:
 
 MongoDB operator injection is, at root, a **type-confusion** bug. The developer expects a scalar (a string or number) at a given key and compares against it; the attacker supplies a different JSON type (an object or an array) and the meaning of the query changes. Understanding how a value's type is chosen, and how parsers build that type, is what makes the operator payloads elsewhere in this subtree reliable.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## A string expected, an object supplied
 
 A bare value in a filter means equality. The moment the value is an object, MongoDB reads its keys as operators:

@@ -14,8 +14,6 @@ keywords:
 
 Many logs are not free text but delimited records: comma- or tab-separated columns, or a run of `key=value` pairs. A parser downstream splits each line on the delimiter and assigns meaning by position or by key. When attacker input is written into one field without escaping the delimiter or quote character, the input stops being a single value and becomes extra fields, shifting every column after it and letting the attacker set values the application never intended to log.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Shifting columns in CSV and TSV logs
 
 Consider a CSV audit log where columns are `timestamp,user,action,result,source_ip`:

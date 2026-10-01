@@ -14,8 +14,6 @@ keywords:
 
 The Hibernate Criteria API builds queries programmatically and binds **values** as parameters, so the usual `Restrictions.eq("name", userValue)` call is not value-injectable. Two other avenues make it a sink: the raw-SQL escape hatch `Restrictions.sqlRestriction()`, and user-controlled **property or alias names** passed into criteria construction.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 **Raw SQL via `sqlRestriction`**, the fragment is spliced into the generated SQL:

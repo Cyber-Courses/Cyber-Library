@@ -13,8 +13,6 @@ keywords:
 
 CQL groups several write operations into one atomic unit with `BEGIN BATCH ... APPLY BATCH`. Where user input is concatenated into a statement that is, or can be made into, a batch, an attacker smuggles extra `INSERT`, `UPDATE`, or `DELETE` writes alongside the one the application intended.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Why batches matter
 
 Most Cassandra drivers reject multiple semicolon-separated statements in a single `execute`, so the classic SQL stacked-query trick (`; DROP ...`) usually fails. A **batch** is the sanctioned way to run several writes in one statement, and it is a single statement as far as the driver is concerned. If injection can reach the body of a batch, or turn a single write into one, additional writes ride along without needing statement stacking.

@@ -14,8 +14,6 @@ keywords:
 
 A multipart email is a structured container: a top-level `Content-Type: multipart/...; boundary="X"` header declares a delimiter string, and each part is introduced by `--X` followed by its own headers and content, with `--X--` closing the set. When an application lets untrusted input reach the boundary token or a part's headers, the attacker can forge part separators, add their own parts, or make two parsers disagree about where parts begin and end.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Where input reaches the structure
 
 Two sinks dominate. First, header injection (CRLF into a header field) that reaches the `Content-Type` line lets the attacker declare or redefine the boundary. Second, templates that interpolate user data into a hand-built multipart body place attacker bytes directly between part separators. In both cases the attacker needs the boundary string, which is often predictable: static in the source, derived from a timestamp, or echoed in an earlier response.

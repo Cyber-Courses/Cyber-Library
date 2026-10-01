@@ -13,8 +13,6 @@ keywords:
 
 Server-Sent Events push a one-way stream of text from server to client over a single long-lived response with content type `text/event-stream`. The wire format is deliberately simple: each event is a group of lines like `data:`, `event:`, and `id:`, and a blank line terminates one event and starts the next. That simplicity is the weakness. The boundaries between events are plain newlines in the body, so when the server builds those lines from untrusted state without stripping line breaks, attacker input can write its own stream structure.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The stream format
 
 A well-formed event looks like this:

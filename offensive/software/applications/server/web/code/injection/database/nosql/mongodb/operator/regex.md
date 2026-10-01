@@ -14,8 +14,6 @@ keywords:
 
 `$regex` matches a string field against a regular expression. Injected into a filter it is the sharpest tool for reading string data through a boolean oracle, and, with a deliberately expensive pattern, a lever for denial of service.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 The precondition is that the field reaches the filter as an attacker-controlled object, so `{"$regex": "..."}` is parsed as an operator.
 
 ## Anchored prefix extraction

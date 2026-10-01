@@ -14,8 +14,6 @@ keywords:
 
 Local file inclusion occurs when an include/require sink loads a path the attacker controls, pointing it at files already present on the server. The baseline primitive is arbitrary file read; several chains promote it to code execution.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Traversal to read files
 
 Against `include($_GET['page'])`, climb out of the expected directory to reach any readable file:

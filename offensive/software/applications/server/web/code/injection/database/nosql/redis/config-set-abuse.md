@@ -14,8 +14,6 @@ keywords:
 
 Redis persists its dataset to an RDB file whose directory and filename are runtime-configurable. An attacker who can issue commands (directly, or smuggled over RESP, see [Command injection](command.md)) can point that file at any location the Redis process can write, stuff a key with a chosen payload, and trigger a dump. The result is arbitrary file write, which converts to code execution through several well-worn targets.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## The core chain
 
 Four steps: relocate the dump directory, name the dump file, store the payload as a key, and flush to disk. On Redis 7.0 and later, `dir` and `dbfilename` are protected configuration parameters: `CONFIG SET` of them is refused unless the server was started with `enable-protected-configs yes`. The chain applies to older Redis, or to 7.x where protected configs have been enabled.

@@ -14,8 +14,6 @@ keywords:
 
 Email headers are a block of `Name: value` lines separated by `CRLF` (`\r\n`, URL-encoded `%0d%0a`) and terminated by one blank line. When an application drops a user-supplied value straight into a header, a `CRLF` in that value ends the current header early and lets the attacker write further header lines, or an extra blank line that pushes everything after it into the body. One unsanitized field becomes control over the whole header block.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## The classic sink
 
 PHP's `mail()` concatenates its fourth argument (additional headers) verbatim:

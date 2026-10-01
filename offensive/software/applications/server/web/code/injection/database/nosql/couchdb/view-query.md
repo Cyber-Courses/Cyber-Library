@@ -14,8 +14,6 @@ keywords:
 
 Not every CouchDB attack needs a planted function. The view and document-listing API is driven by query-string parameters, and when an application forwards attacker-influenced values into `key`, `startkey`, `endkey`, `include_docs`, or the `_all_docs` and `_find` endpoints, the caller can widen a lookup to read documents outside the range the application intended.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Range parameters
 
 A view query is scoped by key parameters. An application that means to fetch one key may build:

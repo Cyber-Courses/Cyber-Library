@@ -14,8 +14,6 @@ keywords:
 
 CouchDB executes JavaScript server-side. Every design document (`_design/*`) is a JSON document whose fields hold function bodies as strings, and CouchDB ships those strings to a separate **query server** process (SpiderMonkey, historically) that compiles and runs them. Any path that lets an attacker place JavaScript into a design document, or redefine which interpreter the query server uses, runs attacker-controlled code inside the server.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## The design-document surface
 
 A design document is written with an ordinary `PUT`:

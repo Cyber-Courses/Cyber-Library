@@ -14,8 +14,6 @@ keywords:
 
 Structured logging emits one JSON object per line, consumed by aggregators such as Elasticsearch, Loki, or a cloud log service. When the JSON is produced by a real serializer, embedded quotes are escaped and the object is safe. When it is instead assembled by string concatenation, an attacker-controlled value that contains a `"` can close its string, and a following `,` can start a new key, giving the attacker control over the object's structure rather than just one field.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## The primitive
 
 A hand-built JSON log line looks like:

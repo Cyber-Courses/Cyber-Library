@@ -14,8 +14,6 @@ keywords:
 
 Spreadsheet software evaluates a cell as a formula when its text begins with certain characters. If an application exports attacker-controlled data to CSV (or TSV, SYLK, XLS) without neutralizing those cells, opening the file in Excel, LibreOffice Calc, or Google Sheets executes the attacker's formula on the victim's machine.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Trigger characters
 
 A cell is treated as a formula when it starts with any of:

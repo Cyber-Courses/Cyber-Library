@@ -14,8 +14,6 @@ keywords:
 
 Cypher is Neo4j's query language. It supports **parameters** (`$name`, or `{name}` in older drivers) that the driver sends out-of-band from the query text, but when application code builds the query by concatenating user input, the input is parsed as Cypher and the query becomes injectable.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```javascript

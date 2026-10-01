@@ -14,8 +14,6 @@ keywords:
 
 This is an injection into Sequelize's **query builder**, not into raw SQL. Sequelize expresses conditions with operators (`Op.gt`, `Op.ne`, `Op.like`, `Op.or`, …). When a request body or query string is parsed as JSON and passed straight into a `where` clause, an attacker can supply **operator objects** instead of plain scalars, rewriting the condition's logic, similar in spirit to NoSQL operator injection.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```js

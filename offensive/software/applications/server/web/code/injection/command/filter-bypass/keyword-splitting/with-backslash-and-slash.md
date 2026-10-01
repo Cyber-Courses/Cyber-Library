@@ -14,8 +14,6 @@ keywords:
 
 Two normalization quirks let an attacker rewrite a filtered keyword or path so it no longer matches a signature yet still resolves to the same command. A **backslash** escapes the following character, and for an ordinary letter the shell simply drops the backslash and keeps the letter. Redundant **slashes** in a path are collapsed by the kernel's path resolver. Both transformations happen after the filter inspects the raw bytes.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Backslash escaping an ordinary character
 
 Outside quotes, `\x` is treated as a quoted `x`. Since quoting a plain letter changes nothing about the letter, `w\ho\am\i` tokenizes to `whoami`:

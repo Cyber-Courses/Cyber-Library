@@ -14,8 +14,6 @@ keywords:
 
 A single trailing ampersand tells the shell to run the preceding command **in the background** and return immediately, without waiting for it to finish. In OS command injection this detaches a payload from the request, so a long-running or noisy command executes while the HTTP response comes back on time.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Mechanism
 
 In `sh`/`bash`, `cmd &` forks `cmd` into the background and the shell proceeds. Injected into a sink:

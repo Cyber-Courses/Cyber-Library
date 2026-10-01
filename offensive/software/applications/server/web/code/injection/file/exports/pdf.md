@@ -14,8 +14,6 @@ keywords:
 
 Many applications generate PDFs by rendering an HTML template with a browser-grade engine: wkhtmltopdf, headless Chrome, or Puppeteer. When user input is placed into that HTML without encoding, the renderer executes attacker markup and script with the server's network position, giving local file reads, server-side request forgery, and exfiltration.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The sink
 
 A field is concatenated into the template that the renderer loads:

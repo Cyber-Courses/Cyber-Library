@@ -13,8 +13,6 @@ keywords:
 
 Many WebSocket servers authenticate and authorize once, during the upgrade handshake, then treat every frame on the resulting connection as belonging to that authorized principal. The handler reads an action name and a set of identifiers out of each frame and acts on them, trusting that whoever owns the socket is allowed to touch whatever the frame names. That assumption is the opening: the identity was checked, but the specific object, room, or privileged operation named in each frame never is.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Switching the object identifier
 
 A chat or collaboration socket typically carries a document, conversation, or resource id in each frame. If the handler loads that id without re-checking that the connected user owns it, incrementing or swapping the value reaches other users' data over the same authenticated connection.

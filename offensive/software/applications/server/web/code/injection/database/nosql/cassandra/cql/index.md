@@ -13,8 +13,6 @@ keywords:
 
 CQL (Cassandra Query Language) is how applications read and write a Cassandra cluster. It supports **bound parameters**, positional `?` or named `:name`, which the driver sends out-of-band from the statement text. When code instead concatenates user input into the statement string, the input is parsed as CQL and the query becomes injectable.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```python

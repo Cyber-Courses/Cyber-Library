@@ -15,6 +15,4 @@ Neo4j is a graph database queried with **Cypher**, and Cypher is injectable for 
 
 Because Cypher traverses a single property graph with no table boundaries, injection crosses **labels** freely: one injected `MATCH (n) RETURN n` can enumerate every node, label, property, and relationship. Where the `apoc` procedure library is installed, `CALL` injection extends reach to SSRF, outbound exfiltration, and command execution. When no rows are reflected, boolean and time-based inference recover data blindly.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 This subtree covers the core injection mechanics, cross-label extraction, APOC procedure abuse, and blind inference.

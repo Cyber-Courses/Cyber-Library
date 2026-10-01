@@ -14,8 +14,6 @@ keywords:
 
 CouchDB secondary indexes are **views**, and a view is a pair of JavaScript functions stored in a design document: a `map` function that `emit`s key/value pairs, and an optional `reduce` function that aggregates them. The query server runs both over documents in the database. When an attacker controls a view definition, or can influence the map/reduce body an application assembles, that JavaScript runs server-side across the data set.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The map function runs over every document
 
 A map function receives each document and decides what to index:

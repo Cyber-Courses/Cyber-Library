@@ -14,8 +14,6 @@ keywords:
 
 `$exists` tests whether a field is present in a document, returning a pure boolean. Injected into a filter it becomes an oracle for the shape of the data: which fields exist, on which documents, without any value ever being reflected.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 The precondition is that the attacker-controlled object reaches the filter untyped, so `{"$exists": true}` is parsed as an operator rather than matched as data.
 
 ## Field-presence oracle

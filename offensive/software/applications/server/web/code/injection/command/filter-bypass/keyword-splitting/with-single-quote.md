@@ -14,8 +14,6 @@ keywords:
 
 Single quotes in the shell delimit a literal string, but an **empty pair of single quotes** (`''`) delimits nothing. During quote removal the shell deletes the quotes and concatenates whatever surrounds them into one word. Sprinkling `''` through a filtered keyword, `w'h'o'a'm'i`, therefore reassembles to `whoami` at execution time while never appearing as the contiguous keyword in the raw input.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Why the shell removes the quotes
 
 Quote removal is a defined step of shell expansion that runs after the filter has already inspected the bytes. `w''h''o''a''m''i` tokenizes as a single word; each `''` contributes an empty literal segment, and the shell strips all quote characters, joining the segments into `whoami`. A blocklist matching the literal string `whoami` sees only the quoted form and lets it pass. The quotes must stay **balanced**, an odd single quote leaves the shell waiting for a closing quote instead of running the command.

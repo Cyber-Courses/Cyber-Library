@@ -13,8 +13,6 @@ keywords:
 
 Cassandra protects itself by rejecting any query whose `WHERE` does not constrain the partition key, or that filters on a non-key column, because such a query cannot be served from a single partition and must instead touch every node. The escape hatch is the `ALLOW FILTERING` keyword, which tells the coordinator to run that expensive scan anyway. Injected into a string-built query, it converts a narrow partition lookup into a cluster-wide read.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Why it matters for injection
 
 An application usually scopes a query to one partition the current user is allowed to see:

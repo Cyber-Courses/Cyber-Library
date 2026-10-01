@@ -14,8 +14,6 @@ keywords:
 
 PartiQL is DynamoDB's SQL-compatible query language, executed through the `ExecuteStatement`, `BatchExecuteStatement`, and `ExecuteTransaction` APIs. Because the syntax is SQL-like (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `WHERE`, `AND`/`OR`), developers coming from relational databases build statements the same way they always have (with string formatting) and reintroduce the same injection class. The parameterized form uses `?` placeholders supplied in a separate `Parameters` list; injection happens when input is concatenated into the statement text instead.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```python

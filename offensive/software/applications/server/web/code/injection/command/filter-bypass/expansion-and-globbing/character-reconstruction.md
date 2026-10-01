@@ -14,8 +14,6 @@ keywords:
 
 Some filters block **specific characters** rather than whole keywords, most often `/`, but also `.`, `;`, or spaces. The counter is to reconstruct the forbidden character from material the shell already holds: a substring of an environment variable, a translation with `tr`, or a byte emitted by `printf`. The shell produces the character at runtime, so it never appears in the request the filter inspects.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the shell normalizes it away
 
 The filter operates on the literal request bytes. If `/` is on the blocklist, `cat /etc/passwd` is rejected. But `${HOME:0:1}` is a parameter expansion whose *value* is `/`, and the filter sees only the letters `H`, `O`, `M`, `E`, braces, digits, and a colon, none of which is a slash. The shell evaluates the expansion before execution and substitutes the real `/`. The blocked character is manufactured from a variable's contents rather than typed, so the literal blocklist has nothing to match.

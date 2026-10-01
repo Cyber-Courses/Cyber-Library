@@ -13,8 +13,6 @@ keywords:
 
 `EVALSHA <sha1> <numkeys> [key ...] [arg ...]` runs a Lua script that is already cached in the server's script cache, identified by the SHA1 digest of its body. It is the bandwidth-saving twin of `EVAL`: the client sends a 40-character hash instead of the full script, and Redis runs the cached copy with identical semantics.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## Relationship to SCRIPT LOAD and EVAL
 
 A script enters the cache two ways. `EVAL` caches its script as a side effect of running it, and `SCRIPT LOAD <script>` caches a script **without** running it and returns its SHA1 (see [SCRIPT LOAD](script-load.md)). Either way, the digest is deterministic: it is `SHA1(script_body)`, so the same script always has the same key. After a load, the script can be fired repeatedly by digest:

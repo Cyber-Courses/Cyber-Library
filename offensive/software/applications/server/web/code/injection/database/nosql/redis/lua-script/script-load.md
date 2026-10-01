@@ -13,8 +13,6 @@ keywords:
 
 `SCRIPT LOAD <script>` compiles a Lua script, stores it in the server's script cache, and returns its SHA1 digest, all **without executing it**. It is the staging half of the scripting workflow: the script sits ready in the cache, keyed by `SHA1(script_body)`, waiting to be fired by [EVALSHA](evalsha.md).
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## The load-then-exec workflow
 
 Offensively, `SCRIPT LOAD` is valuable precisely because it separates staging from execution. An attacker who reaches a sink that permits `SCRIPT LOAD` can place a malicious, parameterized script into the cache and record the returned digest:

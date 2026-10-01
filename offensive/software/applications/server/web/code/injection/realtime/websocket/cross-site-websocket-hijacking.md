@@ -13,8 +13,6 @@ keywords:
 
 The WebSocket handshake is an ordinary HTTP request, and the browser attaches the target site's cookies to it the same way it would for any other cross-origin request. If the server authorizes the upgrade purely on those ambient cookies and does not validate the `Origin` header, then any page the victim visits can open an authenticated socket to the target on their behalf. Unlike a form-based CSRF, the attacker's page keeps the socket open, so it can both drive actions and read every frame the server sends back.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The handshake condition
 
 The upgrade request carries the session cookie and an `Origin` reflecting the page that opened the socket:

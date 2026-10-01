@@ -15,8 +15,6 @@ keywords:
 
 `Query` and `Scan` narrow their results with a `FilterExpression`, and `Query` selects the partition/sort range with a `KeyConditionExpression`. Both are strings parsed by DynamoDB, and both reference attribute names through `#`-prefixed placeholders resolved from `ExpressionAttributeNames` and values through `:`-prefixed placeholders resolved from `ExpressionAttributeValues`. Injection occurs when attacker input is concatenated into the expression text itself, or when the attacker controls the **keys** of the attribute-name/value maps so that the placeholders resolve to attributes or operators the developer did not intend.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 String-built expression, the obvious sink. Expression strings do not take inline literals the way PartiQL does: values must be `:`-placeholders, so the injectable pattern concatenates a **clause or operator** (not a value) into the expression text:
