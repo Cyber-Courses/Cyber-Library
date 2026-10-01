@@ -31,7 +31,7 @@ Entry.objects.extra(where=[f"headline LIKE '%{q}%'"])
 Entry.objects.extra(select={"val": f"({user_expr})"})
 ```
 
-**`order_by`** — column/direction cannot be parameterized, so interpolation is common:
+**`order_by`** — accepts field or alias names, which Django resolves and quotes through the query compiler (a weaker sink than the raw fragments above):
 
 ```python
 Entry.objects.extra(order_by=[request.GET["sort"]])
@@ -53,13 +53,7 @@ title',(SELECT password FROM auth_user LIMIT 1) AS stolen--
 (SELECT password FROM auth_user WHERE is_superuser=true LIMIT 1)
 ```
 
-**`order_by` injection** is a column-name context — no quotes to break out of. Use it for boolean/error/time inference or, on some backends, subselects in the sort expression:
-
-```
-(CASE WHEN (SELECT 1 FROM auth_user WHERE username='admin' AND SUBSTR(password,1,1)='a') THEN id ELSE headline END)
-```
-
-Because column/`order_by` contexts can't be parameterized at all, they stay injectable even when the developer "added quotes" elsewhere, making `extra()` a high-value target.
+**`order_by` is not a raw-SQL sink.** Unlike `select`/`where`, `extra(order_by=[...])` resolves each entry as a field or alias name and quotes it through the compiler, so an arbitrary expression such as a `CASE` payload raises a field-resolution error rather than executing. Treat it as at most a weak ordering oracle over existing columns; `QuerySet.order_by()` is validated the same way. For raw injection, target the `select` and `where` fragments—those splice your text into SQL directly, which is what makes `extra()` a high-value target.
 
 ## References
 

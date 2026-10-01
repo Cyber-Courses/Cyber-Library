@@ -27,13 +27,11 @@ await sequelize.query(
 );
 ```
 
-**Replacement into an identifier/structural position** — escaping is for values, so a column/table/`ORDER BY` slot stays injectable:
+**Interpolated identifier/structural position** — `replacements` escape *values*, so `:col` would be rendered as a quoted literal (`ORDER BY 'sort'`, which is inert). Identifiers such as a column or `ORDER BY` slot therefore **cannot** be parameterized and are commonly **interpolated** instead — and that interpolation is the injectable sink:
 
 ```js
-await sequelize.query(
-  "SELECT * FROM users ORDER BY :col",
-  { replacements: { col: req.query.sort } }
-);
+// identifier can't be a replacement, so it gets concatenated — injectable
+await sequelize.query(`SELECT * FROM users ORDER BY ${req.query.sort}`);
 ```
 
 **Second-order** — a value stored safely earlier is later concatenated into another raw query without replacements.
@@ -47,7 +45,7 @@ For the concatenated `role` slot, inject as a normal quoted-string context:
 ' UNION SELECT username, password, NULL FROM users --
 ```
 
-For the identifier/`ORDER BY` slot, there is no quote to escape—replacement value-escaping does not neutralize structural SQL, so inject expressions directly:
+For the **interpolated** `ORDER BY`/identifier slot there is no quote to escape, so inject an expression directly—recall this only works when the slot is interpolated, since a value passed through `replacements` would be escaped to an inert quoted literal:
 
 ```
 (CASE WHEN (SELECT 1 FROM users WHERE username='admin' AND SUBSTRING(password,1,1)='a') THEN 1 ELSE 2 END)

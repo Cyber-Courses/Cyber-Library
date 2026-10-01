@@ -18,13 +18,13 @@ Like single quotes, an **empty pair of double quotes** (`""`) delimits nothing a
 
 ## Why the shell removes the quotes
 
-Quote removal runs as a defined expansion step after filtering. `w"h"o"a"m"i` is a single word; each `""` is an empty segment, and the shell deletes every quote character and joins the pieces into `whoami`. A blocklist matching the literal keyword never sees it.
+Quote removal runs as a defined expansion step after filtering. `w""h""o""a""m""i` is a single word; each `""` is an empty segment, and the shell deletes every quote character and joins the pieces into `whoami`. A blocklist matching the literal keyword never sees it. Keep the quotes **balanced**—an odd number leaves an unterminated string and the shell reports a syntax error instead of running the command.
 
 ## Payloads
 
 ```
-w"h"o"a"m"i
-"w"h"o"a"m"i"
+w""h""o""a""m""i
+who""ami
 c"a"t /etc/passwd
 i"d"
 ```

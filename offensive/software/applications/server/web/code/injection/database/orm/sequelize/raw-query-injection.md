@@ -44,7 +44,7 @@ Quoted `name`:
 ' UNION SELECT username, password, NULL FROM users --
 ```
 
-Dialect matters for weaponization: the **MySQL** (`mysql2`) driver and **MSSQL** often allow **stacked queries** by default, enabling `; UPDATE`/`; INSERT` after the `SELECT`; PostgreSQL via `pg` can also run multiple statements in a simple query. Use `SLEEP()`/`pg_sleep()` for time-based blind and dialect string functions for substring extraction. When `query()` is called with `{ type: QueryTypes.SELECT }` the rows are returned directly, making `UNION` read straightforward.
+Dialect matters for weaponization. **MSSQL** (`tedious`) runs **stacked queries** (`; UPDATE`/`; INSERT` after the `SELECT`), and PostgreSQL via `pg` can execute multiple statements in a single simple query. The **MySQL** `mysql2` driver **disables** multiple statements by default, so `;`-stacked payloads only fire when the application explicitly sets `multipleStatements: true`; against a default MySQL-backed app, fall back to `UNION` and boolean/time-based inference. Use `SLEEP()`/`pg_sleep()` for time-based blind and dialect string functions for substring extraction. When `query()` is called with `{ type: QueryTypes.SELECT }` the rows are returned directly, making `UNION` read straightforward.
 
 ## References
 

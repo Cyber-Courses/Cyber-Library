@@ -19,11 +19,11 @@ When an application spawns a **fixed binary** with an argument array and no shel
 ## Mechanism
 
 ```python
-# user_file comes from a request
-subprocess.run(["curl", user_file], shell=False)
+# user_arg is attacker-controlled; a fixed URL follows it in argv
+subprocess.run(["curl", user_arg, "https://report.internal/collect"], shell=False)
 ```
 
-No shell, so `;id` does nothing. But a value of `-o/var/www/html/x.php` is parsed by `curl` as the `-o` output flag—a fetch becomes a write. The root cause is that **positional data and options share the same argv space**, and most parsers accept options anywhere on the line. Any token beginning with `-` (or `@` for some tools) is a candidate flag.
+No shell, so `;id` does nothing. But a value of `-o/var/www/html/x.php` is parsed by `curl` as the `-o` output flag, so the response from the fixed `https://report.internal/collect` URL is **written** into the web root—a fetch becomes a write. The URL matters: `-o <path>` with no URL in argv just errors with "no URL specified," so this primitive needs a URL present (supplied here by the trailing fixed argument, or by a second flag such as `--url`). The root cause is that **positional data and options share the same argv space**, and most parsers accept options anywhere on the line. Any token beginning with `-` (or `@` for some tools) is a candidate flag.
 
 ## Supplying a flag instead of data
 

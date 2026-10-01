@@ -18,15 +18,15 @@ Single quotes in the shell delimit a literal string, but an **empty pair of sing
 
 ## Why the shell removes the quotes
 
-Quote removal is a defined step of shell expansion that runs after the filter has already inspected the bytes. `w'h'o'a'm'i` tokenizes as a single word; each `''` contributes an empty literal segment, and the shell strips all quote characters, joining the segments into `whoami`. A blocklist matching the literal string `whoami` sees only the quoted form and lets it pass.
+Quote removal is a defined step of shell expansion that runs after the filter has already inspected the bytes. `w''h''o''a''m''i` tokenizes as a single word; each `''` contributes an empty literal segment, and the shell strips all quote characters, joining the segments into `whoami`. A blocklist matching the literal string `whoami` sees only the quoted form and lets it pass. The quotes must stay **balanced**—an odd single quote leaves the shell waiting for a closing quote instead of running the command.
 
 ## Payloads
 
-Empty pairs between every character, or just enough to break the signature:
+Empty pairs between characters, or just enough to break the signature:
 
 ```
-w'h'o'a'm'i
-'w'h'o'a'm'i'
+w''h''o''a''m''i
+who''ami
 c'a't /etc/passwd
 i'd'
 ```

