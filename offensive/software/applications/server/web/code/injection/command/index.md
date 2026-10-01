@@ -1,6 +1,6 @@
 ---
 title: "OS command injection"
-description: "Application code builds an operating-system command from untrusted input, letting an attacker change which program runs or with what arguments — usually remote code execution."
+description: "Application code builds an operating-system command from untrusted input, letting an attacker change which program runs or with what arguments, usually remote code execution."
 keywords:
   - OS command injection
   - command injection

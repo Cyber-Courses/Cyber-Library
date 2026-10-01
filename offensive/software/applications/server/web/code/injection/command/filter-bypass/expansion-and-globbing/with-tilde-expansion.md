@@ -1,6 +1,6 @@
 ---
 title: "Command injection filter bypass with tilde expansion"
-description: "Rebuilding filtered paths from the shell's tilde expansion—~ for HOME, ~+ for PWD, ~- for OLDPWD—so directory prefixes are produced by the shell rather than typed as filtered literals."
+description: "Rebuilding filtered paths from the shell's tilde expansion, ~ for HOME, ~+ for PWD, ~- for OLDPWD, so directory prefixes are produced by the shell rather than typed as filtered literals."
 keywords:
   - command injection
   - tilde expansion
@@ -18,7 +18,7 @@ Tilde expansion replaces a leading `~` with a directory path before the command 
 
 ## Why the shell normalizes it away
 
-Tilde expansion happens early in the shell's expansion sequence—alongside brace expansion and parameter expansion, before word splitting and before execution. A word beginning with `~`, `~+`, or `~-` is rewritten to the corresponding directory string. The filter inspecting the request sees only the tilde token; the shell hands the command a fully qualified path. The forbidden literal (for example a home-directory prefix, or a path that would otherwise contain a blocked keyword) is manufactured from shell state rather than supplied by the attacker.
+Tilde expansion happens early in the shell's expansion sequence, alongside brace expansion and parameter expansion, before word splitting and before execution. A word beginning with `~`, `~+`, or `~-` is rewritten to the corresponding directory string. The filter inspecting the request sees only the tilde token; the shell hands the command a fully qualified path. The forbidden literal (for example a home-directory prefix, or a path that would otherwise contain a blocked keyword) is manufactured from shell state rather than supplied by the attacker.
 
 ## Payloads
 
@@ -29,7 +29,7 @@ cat ~+/config/secret.env
 ~+/uploaded_binary
 ```
 
-`~` reaches the service account's home directory—often where application config, SSH keys, or history files live—without naming it:
+`~` reaches the service account's home directory, often where application config, SSH keys, or history files live, without naming it:
 
 ```
 cat ~/.ssh/id_rsa
@@ -61,9 +61,9 @@ It also pairs with variable slicing to rebuild a leading slash elsewhere in the 
 
 ## Operational notes
 
-- Tilde expansion is a feature of Bash and most interactive shells; confirm the sink spawns a shell that performs it. Expansion applies only to an **unquoted** leading `~`—inside quotes it is a literal.
+- Tilde expansion is a feature of Bash and most interactive shells; confirm the sink spawns a shell that performs it. Expansion applies only to an **unquoted** leading `~`, inside quotes it is a literal.
 - `~+`/`~-` depend on `PWD`/`OLDPWD` being set, which they normally are in a shell spawned with an environment. The value reflects wherever the application's child process is running.
-- The technique rebuilds **directory prefixes**, not binary names—pair it with globbing or variable expansion when the command or the forbidden characters themselves are filtered.
+- The technique rebuilds **directory prefixes**, not binary names, pair it with globbing or variable expansion when the command or the forbidden characters themselves are filtered.
 
 ## References
 

