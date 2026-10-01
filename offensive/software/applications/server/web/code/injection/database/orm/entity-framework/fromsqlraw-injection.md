@@ -14,8 +14,6 @@ keywords:
 
 Entity Framework Core parameterizes LINQ queries, but its raw-SQL methods, `FromSqlRaw`, `ExecuteSqlRaw`, and `SqlQueryRaw`, execute whatever string they are given. When that string is built by concatenation or `string.Format`, user input lands directly in the SQL and the result is SQL injection, typically against SQL Server but also PostgreSQL/MySQL via their EF providers.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 ```csharp

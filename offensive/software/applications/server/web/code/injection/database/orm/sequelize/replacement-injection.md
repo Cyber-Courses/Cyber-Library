@@ -14,8 +14,6 @@ keywords:
 
 Sequelize `replacements` substitute `:name`/`?` tokens with **escaped values** before the query runs. That is safe for *values*, but the mechanism is string substitution, not true prepared-statement binding, and several patterns defeat it: concatenating alongside replacements, using replacements for identifiers, and second-order reuse of stored data.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 **Concatenation next to replacements**, the interpolated part is unprotected:

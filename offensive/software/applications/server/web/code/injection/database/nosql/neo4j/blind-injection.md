@@ -14,8 +14,6 @@ keywords:
 
 When an injection point returns no rows to the attacker, data is recovered one bit at a time by making the query's behavior depend on a condition and observing the difference. This is the Cypher analogue of blind SQL injection: the response does not carry the data, but it does carry a signal (a changed result, a different status, or a delay) that answers a yes/no question.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Boolean-based inference
 
 Make a pattern match (hit) or fail to match (no hit) depending on the condition under test. The application's two observable states (a row returned versus none, HTTP 200 versus empty, "found" versus "not found") become the oracle.

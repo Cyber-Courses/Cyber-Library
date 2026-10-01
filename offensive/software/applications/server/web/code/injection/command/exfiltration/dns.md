@@ -14,8 +14,6 @@ keywords:
 
 In **blind** command injection the command runs but its output never reaches the response. DNS out-of-band (OOB) exfiltration recovers that output by making the target **resolve a hostname you control**, with the command's result packed into the subdomain label. Even hosts that block outbound HTTP usually still perform DNS lookups through an internal resolver, so name resolution is the most reliable egress channel.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Mechanism
 
 Splice command output into the label of a domain whose authoritative server you watch. Any DNS tool triggers the lookup:

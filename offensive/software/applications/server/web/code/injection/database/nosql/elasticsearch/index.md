@@ -15,4 +15,3 @@ Elasticsearch and its fork OpenSearch are schema-flexible document stores querie
 
 Because the same APIs back both engines, payloads here apply to Elasticsearch and OpenSearch alike. The child pages split the surface by sink: query-string syntax, Query DSL body, Painless script injection, and boolean-based blind extraction.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.

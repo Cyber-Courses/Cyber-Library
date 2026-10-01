@@ -14,8 +14,6 @@ keywords:
 
 `QuerySet.extra()` is a legacy Django API that injects **raw SQL fragments** into specific parts of a query: `select=`, `where=`, `tables=`, `order_by=`, and `params=`. Each fragment is concatenated into the final statement, so any fragment built from untrusted input is a SQL injection sink. Django's own documentation warns that `extra()` is hard to use safely; in offensive review it is a reliable place to find injection.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 **`where` fragment**, the most direct sink:

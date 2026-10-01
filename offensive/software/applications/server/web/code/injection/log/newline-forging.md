@@ -14,8 +14,6 @@ keywords:
 
 Line-oriented logs use a newline as the record separator, so one logical log statement is one physical line. When attacker input containing a newline (`\n`, `%0a`) or a carriage-return/line-feed pair (`\r\n`, `%0d%0a`) is written into that line unescaped, the log file now contains two lines where the application wrote one. The second line is entirely attacker-controlled and is indistinguishable from a genuine record to anything that parses the file line by line.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## The primitive
 
 A typical access or auth log statement interpolates a field straight into a format string:

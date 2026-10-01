@@ -14,8 +14,6 @@ keywords:
 
 `text()` wraps a literal SQL string so SQLAlchemy will execute it, and it supports **bound parameters** via `:name` placeholders. Injection happens when the string handed to `text()` is assembled from user input instead of using those placeholders, common when a developer adds a dynamic `WHERE`, `ORDER BY`, or `LIMIT` to an otherwise ORM-based query.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 ```python

@@ -14,8 +14,6 @@ keywords:
 
 When a command runs blind, no output reflected, and no out-of-band channel is available (egress fully filtered, DNS blocked), a **measurable delay** becomes the only signal. Forcing the server to pause for a known interval turns response time into a one-bit oracle: slow means *true*, fast means *false*. Gate that delay on a condition and you can read data one character at a time.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Confirming execution
 
 Inject a command that blocks for a fixed time and compare against the baseline response:

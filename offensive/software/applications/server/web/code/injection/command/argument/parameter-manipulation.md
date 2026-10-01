@@ -14,8 +14,6 @@ keywords:
 
 When an application spawns a **fixed binary** with an argument array and no shell, metacharacters (`;`, `|`, `$()`) are inert. Argument injection exploits a different seam: the user value lands in `argv` and the **binary itself re-parses it as an option** rather than data. No new process is spawned, yet the existing one is steered into reading files, writing files, or running sub-programs it natively supports.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Use only against systems you are permitted to test.
-
 ## Mechanism
 
 ```python

@@ -14,8 +14,6 @@ keywords:
 
 Bash parameter expansion reads and transforms environment variables inline: `${VAR}`, substring slices `${VAR:offset:length}`, and pattern substitution `${VAR//find/replace}`. Because the shell resolves these to their values before running the command, an attacker can assemble forbidden characters and even whole command names out of fragments of existing variables, never typing the blocked literal itself.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the shell normalizes it away
 
 Parameter expansion runs before word splitting and execution. `${PATH:0:1}` takes the first character of `$PATH`, almost always `/`, so the shell emits a slash that the attacker never wrote. `${IFS}` expands to the internal field separator (space/tab/newline), providing whitespace where a space filter blocks the literal character. The filter inspects `${PATH:0:1}` or `${IFS}` and sees no `/` and no space; the shell substitutes them at runtime. The payload crosses the filter as variable syntax and arrives at the command as the real characters.

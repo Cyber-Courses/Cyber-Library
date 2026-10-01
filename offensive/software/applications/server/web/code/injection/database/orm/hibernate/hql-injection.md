@@ -14,8 +14,6 @@ keywords:
 
 Hibernate Query Language (HQL), and the JPA equivalent JPQL, is an object-oriented query language that Hibernate translates to SQL. It supports named/positional **parameters**, but when application code concatenates user input into the query string passed to `createQuery()`, those protections are skipped and the query becomes injectable.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```java

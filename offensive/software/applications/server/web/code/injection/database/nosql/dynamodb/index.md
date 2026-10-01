@@ -18,4 +18,3 @@ The first surface is **PartiQL**, a SQL-compatible query language run through `E
 
 The second surface is the **expression** family: `FilterExpression`, `KeyConditionExpression`, and `ConditionExpression`, together with the `ExpressionAttributeNames`/`ExpressionAttributeValues` maps that feed them. When attacker input shapes the expression text or those maps, a filter can be widened to return more items, or a conditional write guard can be made to pass when it should fail.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.

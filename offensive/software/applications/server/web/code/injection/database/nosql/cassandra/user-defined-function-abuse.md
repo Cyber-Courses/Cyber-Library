@@ -13,8 +13,6 @@ keywords:
 
 CQL lets operators define functions in the database with `CREATE FUNCTION` and aggregates with `CREATE AGGREGATE`. When this feature is enabled and the injection point can reach DDL, an attacker defines a function whose body is arbitrary code and runs it inside the Cassandra server's JVM.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The enabling condition
 
 User-defined functions run only when the node's configuration turns them on:

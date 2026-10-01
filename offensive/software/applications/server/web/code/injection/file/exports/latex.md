@@ -14,8 +14,6 @@ keywords:
 
 Applications that build PDFs by compiling a TeX template with `pdflatex` (invoices, certificates, reports) often drop user fields straight into the source. Because TeX is a full macro language, an unescaped field becomes executable markup: file disclosure through include primitives and, when shell-escape is on, operating-system command execution.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The sink
 
 A template interpolates a value with no escaping:

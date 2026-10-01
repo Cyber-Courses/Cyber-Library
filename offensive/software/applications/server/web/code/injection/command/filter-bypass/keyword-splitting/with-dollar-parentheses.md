@@ -14,8 +14,6 @@ keywords:
 
 Modern command substitution uses `$( ... )`. An **empty** substitution, `$()`, runs no command, produces no output, and is removed during expansion, so like empty quotes or backticks it can be slipped inside a filtered keyword to break the signature. `who$()ami` runs an empty command between `who` and `ami`, then collapses to `whoami`.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Why the shell reassembles the word
 
 `$(cmd)` executes `cmd` and substitutes its stdout. With nothing between the parentheses there is nothing to run; the substitution yields the empty string. Because it occurs inside a single word, the surrounding bytes concatenate once the empty result is spliced in. `who$()ami` tokenizes to the one word `whoami`, which the shell then resolves as a command. A literal blocklist inspecting the raw bytes never sees the contiguous keyword.

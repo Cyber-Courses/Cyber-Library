@@ -14,8 +14,6 @@ keywords:
 
 Painless is Elasticsearch's default scripting language, reachable through `script_fields`, `script` queries, script-based sorting, `function_score`, and `_update` / `_update_by_query`. When an application builds a script by **interpolating user input into the script source string** rather than passing it as a bound parameter, the input becomes executable Painless, giving an attacker computed data disclosure and code execution within the scripting sandbox.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 Scripting must be enabled for these sinks. Stored and inline Painless are on by default in many deployments, though `script.allowed_types` / `script.allowed_contexts` may restrict them.
 
 ## Vulnerable pattern

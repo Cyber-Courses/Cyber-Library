@@ -14,8 +14,6 @@ keywords:
 
 Many injectable Elasticsearch endpoints never return the sensitive document; they expose only a binary signal: results appeared, or they did not. A login that succeeds, a "no matches" banner, a differing HTTP status, or a changed `hits.total` is enough. Boolean-based blind extraction turns that one bit into a full read by asking a series of true/false questions whose answers spell out the target value.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The oracle
 
 Any injectable surface that lets you add a condition works. With `query_string`, append a clause and watch whether the known-present document still comes back:

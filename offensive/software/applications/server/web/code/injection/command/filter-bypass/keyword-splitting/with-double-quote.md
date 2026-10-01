@@ -14,8 +14,6 @@ keywords:
 
 Like single quotes, an **empty pair of double quotes** (`""`) delimits nothing and is removed during quote removal, concatenating its neighbors into one word. Inserting `""` through a filtered keyword, `w"h"o"a"m"i`, reassembles to `whoami` at execution while hiding the contiguous keyword from a literal blocklist.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Why the shell removes the quotes
 
 Quote removal runs as a defined expansion step after filtering. `w""h""o""a""m""i` is a single word; each `""` is an empty segment, and the shell deletes every quote character and joins the pieces into `whoami`. A blocklist matching the literal keyword never sees it. Keep the quotes **balanced**, an odd number leaves an unterminated string and the shell reports a syntax error instead of running the command.

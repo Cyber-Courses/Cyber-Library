@@ -14,8 +14,6 @@ keywords:
 
 This is a subtle EF Core footgun. C# interpolated strings (`$"... {x} ..."`) and EF's `FromSqlInterpolated`/`ExecuteSqlInterpolated` look almost identical to `FromSqlRaw`, but they behave very differently, and mixing them is a reliable source of SQL injection.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Why it happens
 
 - `FromSqlInterpolated($"... {userInput} ...")` captures the interpolated string as a `FormattableString`. EF converts each `{...}` hole into a **`DbParameter`**, safe.

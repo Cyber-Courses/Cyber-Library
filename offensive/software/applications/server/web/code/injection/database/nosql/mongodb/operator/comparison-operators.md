@@ -14,8 +14,6 @@ keywords:
 
 The comparison operators (`$ne`, `$gt`, `$lt`, `$gte`, `$lte`, `$eq`) are the workhorses of MongoDB injection. Injected in place of a scalar, they rewrite the comparison a filter performs, which bypasses checks and, through a true/false oracle, extracts data without any rows being reflected.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 The precondition is that the field reaches the filter as an attacker-controlled object, not a string. A value cast with `String(input)` is matched literally and none of the following applies.
 
 ## Bypassing a filter

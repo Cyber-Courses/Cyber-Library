@@ -14,8 +14,6 @@ keywords:
 
 Remote file inclusion occurs when an include/require sink accepts a full URL, so the interpreter fetches code from a host the attacker controls and runs it in the application's context. It is the most direct inclusion-to-RCE path because no local write or poisoning step is needed.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The condition
 
 In PHP, remote inclusion requires `allow_url_include = On` (and, for the fetch, `allow_url_fopen = On`). Both default to `Off` in modern builds, so RFI is mostly found on legacy or deliberately misconfigured stacks. Where the setting is on, a sink like `include($_GET['page'])` loads whatever URL you supply.

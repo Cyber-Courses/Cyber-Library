@@ -14,8 +14,6 @@ keywords:
 
 APOC ("Awesome Procedures On Cypher") is a widely installed Neo4j extension library. Many deployments enable it for data loading and integration, which means a Cypher injection that can reach a `CALL` clause (see [Cypher injection](cypher-injection.md)) often reaches APOC. These procedures make outbound requests, read and write files, and run other Cypher, turning a read-only query flaw into SSRF, exfiltration, and arbitrary graph writes. Operating-system command execution is not a built-in APOC capability; it requires a custom procedure that someone installed (covered below).
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Reaching CALL from an injection point
 
 Close the literal, discard the tail, and append `CALL`:

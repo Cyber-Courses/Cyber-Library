@@ -14,8 +14,6 @@ keywords:
 
 Many command-injection filters block the ASCII space (`0x20`), assuming that without it an attacker cannot separate a command from its arguments. The shell, however, offers several other ways to produce a field separator, and it applies them *after* the filter has inspected the raw bytes. A blocklist that greps for a literal space, or for `cat /etc/passwd` as one token, never sees the separator the shell eventually synthesizes.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Why the shell fills the gap
 
 Word splitting in POSIX shells is driven by the `IFS` variable, which defaults to space, tab, and newline. Any construct that expands to one of those characters, or that separates words structurally, removes the need for a typed space. The filter sees `${IFS}`; the shell sees whitespace.

@@ -14,8 +14,6 @@ keywords:
 
 `$where` and `mapReduce` evaluate JavaScript **server-side** against each document, which makes any user input that reaches their code string a JavaScript injection sink rather than merely an operator sink.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Availability precondition
 
 Server-side JavaScript is **enabled by default**: `security.javascriptEnabled` defaults to `true`, so `$where`, `mapReduce`, and `$function` run unless an operator has explicitly turned scripting off. It is deprecated in recent releases and some hardened deployments disable it, so treat execution as the default but confirm it on the target. `$where` cannot use query operators and must be a JavaScript expression or function, so this sink is reachable where the application builds a `$where` string (or passes input into `mapReduce`/`$function`) from input. Where an operator has disabled scripting, these payloads error and the operator techniques elsewhere in this subtree are the path.
