@@ -12,7 +12,7 @@ keywords:
 
 # HQL injection
 
-Hibernate Query Language (HQL)—and the JPA equivalent JPQL—is an object-oriented query language that Hibernate translates to SQL. It supports named/positional **parameters**, but when application code concatenates user input into the query string passed to `createQuery()`, those protections are skipped and the query becomes injectable.
+Hibernate Query Language (HQL), and the JPA equivalent JPQL, is an object-oriented query language that Hibernate translates to SQL. It supports named/positional **parameters**, but when application code concatenates user input into the query string passed to `createQuery()`, those protections are skipped and the query becomes injectable.
 
 > **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
 
@@ -44,7 +44,7 @@ xyz' UNION SELECT u.password FROM User u WHERE '1'='1
 
 Because HQL resolves field access against the mapping, you can read sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash` via association paths). HQL lacks some raw-SQL constructs, so where HQL is limited, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
 
-Blind extraction uses the same boolean/substring inference as SQL injection—craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
+Blind extraction uses the same boolean/substring inference as SQL injection, craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
 
 ## References
 

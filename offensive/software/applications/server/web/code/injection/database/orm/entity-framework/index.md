@@ -11,4 +11,4 @@ keywords:
 
 # Entity Framework
 
-Entity Framework Core parameterizes LINQ queries, but its raw-SQL family — `FromSqlRaw`, `ExecuteSqlRaw`, `SqlQueryRaw` — runs whatever string it is given, and handing a C# interpolated string to a `*Raw` method bakes user input into the SQL before EF ever sees it.
+Entity Framework Core parameterizes LINQ queries, but its raw-SQL family, `FromSqlRaw`, `ExecuteSqlRaw`, `SqlQueryRaw`, runs whatever string it is given, and handing a C# interpolated string to a `*Raw` method bakes user input into the SQL before EF ever sees it.

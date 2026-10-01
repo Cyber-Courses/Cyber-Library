@@ -1,6 +1,6 @@
 ---
 title: "Argument injection and parameter manipulation without a shell"
-description: "Turning a user value into argv so a called binary parses it as a flag—no shell needed—plus worst-fit and fullwidth-character tricks and the escapeshellarg/escapeshellcmd bypass concept."
+description: "Turning a user value into argv so a called binary parses it as a flag, no shell needed, plus worst-fit and fullwidth-character tricks and the escapeshellarg/escapeshellcmd bypass concept."
 keywords:
   - argument injection
   - parameter manipulation
@@ -23,7 +23,7 @@ When an application spawns a **fixed binary** with an argument array and no shel
 subprocess.run(["curl", user_arg, "https://report.internal/collect"], shell=False)
 ```
 
-No shell, so `;id` does nothing. But a value of `-o/var/www/html/x.php` is parsed by `curl` as the `-o` output flag, so the response from the fixed `https://report.internal/collect` URL is **written** into the web root—a fetch becomes a write. The URL matters: `-o <path>` with no URL in argv just errors with "no URL specified," so this primitive needs a URL present (supplied here by the trailing fixed argument, or by a second flag such as `--url`). The root cause is that **positional data and options share the same argv space**, and most parsers accept options anywhere on the line. Any token beginning with `-` (or `@` for some tools) is a candidate flag.
+No shell, so `;id` does nothing. But a value of `-o/var/www/html/x.php` is parsed by `curl` as the `-o` output flag, so the response from the fixed `https://report.internal/collect` URL is **written** into the web root, a fetch becomes a write. The URL matters: `-o <path>` with no URL in argv just errors with "no URL specified," so this primitive needs a URL present (supplied here by the trailing fixed argument, or by a second flag such as `--url`). The root cause is that **positional data and options share the same argv space**, and most parsers accept options anywhere on the line. Any token beginning with `-` (or `@` for some tools) is a candidate flag.
 
 ## Supplying a flag instead of data
 
@@ -55,18 +55,18 @@ So a value like `？-ｏС:\path` (fullwidth characters) may arrive at the spawn
 
 PHP's two escapers protect different things, and confusing them leaves a hole:
 
-- `escapeshellcmd()` neutralizes shell metacharacters across the **whole command string** but does **not** quote individual arguments—so it stops a new command yet still lets a value be read as a **flag** (`-o`, `--config`). It is not an argument-injection defense.
-- `escapeshellarg()` wraps one argument in quotes to keep it a single positional token. Misuse—escaping the wrong segment, or concatenating an escaped value next to an unescaped `-`—reopens flag injection.
+- `escapeshellcmd()` neutralizes shell metacharacters across the **whole command string** but does **not** quote individual arguments, so it stops a new command yet still lets a value be read as a **flag** (`-o`, `--config`). It is not an argument-injection defense.
+- `escapeshellarg()` wraps one argument in quotes to keep it a single positional token. Misuse, escaping the wrong segment, or concatenating an escaped value next to an unescaped `-`, reopens flag injection.
 
 The offensive takeaway: a sink that calls `escapeshellcmd()` (common, because it "looks" like the right function) is frequently still vulnerable to argument injection even though classic metacharacter injection is blocked. Probe with leading-dash values regardless of visible escaping.
 
 ## Finding the boundary
 
-The defender's canonical fix is a `--` separator ("everything after this is positional"). If your input is placed **before** any `--`, flags are in play; if after, you are limited to positional abuse—path traversal, `@file` inclusion, or protocol smuggling (`file://`, `gopher://`)—rather than flag injection.
+The defender's canonical fix is a `--` separator ("everything after this is positional"). If your input is placed **before** any `--`, flags are in play; if after, you are limited to positional abuse, path traversal, `@file` inclusion, or protocol smuggling (`file://`, `gopher://`), rather than flag injection.
 
 ## Tools
 
-- **[GTFOBins](https://gtfobins.github.io/)** — per-binary file-read/write and command-exec flags.
+- **[GTFOBins](https://gtfobins.github.io/)**, per-binary file-read/write and command-exec flags.
 - **[Burp Suite](https://portswigger.net/burp)** Repeater/Intruder for fuzzing an input slot with candidate flags.
 - Local copies of the target binaries to confirm attached-vs-separate option semantics and `--` handling.
 
