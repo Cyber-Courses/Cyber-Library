@@ -10,7 +10,7 @@ keywords:
   - shell injection
 ---
 
-# Backticks and `$(...)`
+# Backticks and $(...)
 
 Command substitution runs a nested command and **replaces the expression with its standard output**, inline, before the outer command runs. The two forms, `$(cmd)` and `` `cmd` ``, do the same thing. Because substitution is expanded *inside* the existing command line, it fires even when your input lands in the **middle of an argument**, where a separator like `;` would not yet terminate the command.
 
