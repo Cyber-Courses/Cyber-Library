@@ -1,47 +1,44 @@
 ---
 title: "Internationalized domain and normalization bypasses"
-description: "Unicode host labels, punycode, and normalization let a hostname read as an allowed domain to one check and resolve as an attacker domain to another, slipping past string-based allowlists."
+description: "Unicode host labels and normalization sit between the string an SSRF filter inspects and the name the client resolves, so a lookalike that normalizes to a blocked host, or a validator and resolver that normalize differently, defeat a string-based control."
 keywords:
   - internationalized domain
   - punycode
-  - IDN homograph
   - unicode normalization
   - NFKC
-  - hostname allowlist bypass
+  - SSRF blocklist bypass
+  - hostname validation differential
 ---
 
 # Internationalized domain
 
-Internationalized domain names let hostnames contain Unicode. Between the string a validator compares and the name a resolver looks up sit two transformations: normalization (such as NFKC) and the IDNA `toASCII` conversion to punycode. When the validator and the client apply these at different points, a hostname can read as an allowed domain to the check and resolve as an attacker-controlled domain to the fetch.
+Internationalized domain names let hostnames contain Unicode. Between the string a validator compares and the name a resolver looks up sit two transformations: Unicode normalization (such as NFKC) and the IDNA `toASCII` conversion to punycode. SSRF-relevant bypasses come from a mismatch in *when* and *how* those transformations are applied, not from a lookalike by itself: an exact-match control compares strings, and a confusable character simply produces a different string that the check rejects. The useful cases are where normalization maps an attacker string onto a host the policy cares about, or where the validator and the client normalize differently.
 
-## Normalization that rewrites the host
+## Blocklist bypass by normalization
 
-Unicode normalization maps many characters to ASCII equivalents. A host that contains a compatibility character passes a check that runs before normalization, then becomes a different name once the client normalizes it. For example, the fullwidth and compatibility forms below normalize under NFKC toward ASCII letters, so a validator comparing raw bytes sees something other than what the resolver ultimately uses:
-
-```
-ⓔⓧⓐⓜⓟⓛⓔ.com        # enclosed alphanumerics -> example.com under NFKC
-ｅｘａｍｐｌｅ.com        # fullwidth Latin -> example.com under NFKC
-```
-
-If the allowlist check runs on the pre-normalization string and the HTTP client normalizes before resolving, the two disagree.
-
-## Homographs and the allowed-label trick
-
-A confusable character makes a hostname display like an allowed domain while being a distinct name that the attacker registers and controls. A Cyrillic `а` (U+0430) in place of Latin `a` produces a visually identical but different domain that resolves to the attacker:
+The strongest case is a **blocklist** keyed on an ASCII literal such as `localhost` or a blocked internal name. Unicode normalization maps many compatibility characters to ASCII, so a hostname that is not byte-equal to the blocked string can still normalize to it. A validator that matches the raw bytes sees something other than `localhost` and allows it; the client then normalizes and resolves the blocked name, reaching the internal host:
 
 ```
-exаmple.com          # the third letter is Cyrillic U+0430, not Latin a
+ｌｏｃａｌｈｏｓｔ        # fullwidth Latin, NFKC-normalizes to localhost
+ⓛⓞⓒⓐⓛⓗⓞⓢⓣ        # enclosed alphanumerics, NFKC-normalizes to localhost
 ```
 
-Any label with a non-ASCII character has an equivalent `xn--` punycode form produced by `toASCII` (for instance the ASCII-safe encoding of `bücher` is `xn--bcher-kva`). An allowlist comparing against the Unicode form can be satisfied by a homograph; one comparing the punycode form must match the exact `xn--` label. The gap is a mismatch in which form each side uses to compare.
+The same applies to any internal hostname a blocklist tries to exclude: supply a compatibility-character spelling that passes the string check and normalizes back to the forbidden name.
 
-## Punycode and the two-form mismatch
+## Validator and resolver differential
 
-The same host exists as a Unicode string and as its `xn--` punycode encoding, and different components prefer different forms. A validator that lowercases and compares the Unicode form, paired with a resolver that operates on punycode (or vice versa), can be driven to approve one representation and resolve another. Supplying the host in whichever form the validator does not canonicalize is the core move: send the Unicode label where the check expects punycode, or the `xn--` label where it expects Unicode, so the comparison and the resolution disagree.
+Against an **allowlist**, the requirement is a difference in how the two stages canonicalize. When the validator and the HTTP client apply different normalization, different IDNA processing, or compare in different forms (one Unicode, one `xn--`), a single hostname can satisfy the check while resolving elsewhere. The attacker supplies the host in whichever form the validator does not canonicalize the way the client does:
 
-## Combining with the resolved target
+```
+аllowed.example      # a Cyrillic lookalike that a flawed validator folds toward the allowed label
+xn--...              # or the A-label form, where the validator compares Unicode but the client resolves punycode
+```
 
-Internationalized-domain tricks get the request past a *name* check; the host still has to resolve to something useful. Point the attacker-controlled name at an internal address (or pair it with [DNS rebinding](dns-rebinding.md)) so that clearing the allowlist lands the connection on `127.0.0.1`, an RFC1918 host, or the metadata service. Where the allowlist canonicalizes both sides identically to punycode before comparing, this avenue closes and a raw [IP address](../ip-address.md) encoding is the fallback.
+This only works where such a canonicalization gap exists; without it, the lookalike is a distinct name the allowlist rejects. The attacker-registered name must also resolve to the internal target, so pair it with a resolution the attacker controls (or with [DNS rebinding](dns-rebinding.md)).
+
+## Homographs are visual, not a bypass on their own
+
+A confusable such as a Cyrillic `а` (U+0430) for Latin `a` makes a hostname look like an allowed domain, which matters for phishing but not for a string comparison: the homograph is a different name and an exact check rejects it. It aids SSRF only in combination with one of the gaps above (a blocklist that normalizes, or a validator/resolver differential). Treat the lookalike as the delivery and the comparison flaw as the vulnerability.
 
 ## References
 

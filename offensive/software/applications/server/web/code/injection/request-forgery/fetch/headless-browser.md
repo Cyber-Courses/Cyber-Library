@@ -42,13 +42,13 @@ Whether a cross-origin `fetch` can read the response back depends on the engine'
 
 ## Session reuse is the escalation
 
-The dangerous property unique to this client is the **session**. A rendering worker that reuses one browser profile, or that is handed a user's cookies to capture an authenticated view, will attach those credentials to whatever URL it is pointed at. Aiming it at an internal endpoint issues an authenticated request the attacker could never make directly:
+The dangerous property unique to this client is the **session**. A rendering worker that reuses one browser profile, or that is handed a user's cookies to capture an authenticated view, carries those cookies. Cookie scoping still applies: the browser sends a stored cookie only to a URL that matches its `Domain` and `Path`, so this escalates when the profile holds a cookie valid for the target. That is common in practice, a session cookie scoped to a parent corporate domain (`.corp`) or an SSO cookie covers many internal hosts under it, so an attacker-chosen URL within that scope rides the credential:
 
 ```
 http://internal-dashboard.corp/api/users/export
 ```
 
-The browser sends the stored session cookie, and the rendered response returns privileged data. Never mixing an authenticated profile with an attacker-influenced URL is the boundary this abuses.
+Where the profile holds a cookie for `internal-dashboard.corp` (or a parent domain that includes it), the browser attaches it and the rendered response returns privileged data. The boundary this abuses is reusing an authenticated profile whose cookies are scoped to reachable internal hosts while letting the navigation URL be attacker-influenced; a worker whose cookies are scoped only to the intended external target does not leak them inward.
 
 ## Confirming the client
 

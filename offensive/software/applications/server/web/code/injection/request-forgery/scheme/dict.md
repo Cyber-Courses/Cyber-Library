@@ -27,14 +27,14 @@ The client connects to the port and sends the word as a line, then reads the res
 
 ## One command per request
 
-`dict://` sends a single line per request, so it is ideal for probing and one-shot commands rather than multi-step sequences:
+`dict://` sends a single line per request, so it is ideal for probing and one-shot commands rather than multi-step sequences. A command with arguments must percent-encode its spaces, because a curl-backed client rejects a URL containing a literal space before it connects:
 
 ```
-dict://127.0.0.1:6379/CONFIG GET dir
-dict://127.0.0.1:25/HELO test
+dict://127.0.0.1:11211/stats%20items     # memcached: stats items
+dict://127.0.0.1:6379/COMMAND%20DOCS      # Redis: one command, spaces encoded
 ```
 
-Each request is a fresh connection and a single command. Reading a service banner this way fingerprints what is listening on a port discovered through [Port](../authority/port.md) scanning. When a sequence of commands is needed (for example the full Redis write-to-disk chain), the single-line limit is the reason to move to [Gopher](gopher.md), which writes a whole crafted stream in one request.
+Each request is a fresh connection and a single command. Reading a service banner or a one-command reply this way fingerprints what is listening on a port discovered through [Port](../authority/port.md) scanning. When a sequence of commands is needed (for example the full Redis write-to-disk chain, or any value containing newlines), the single-line limit is the reason to move to [Gopher](gopher.md), which writes a whole crafted stream in one request.
 
 ## Probing closed versus open
 
