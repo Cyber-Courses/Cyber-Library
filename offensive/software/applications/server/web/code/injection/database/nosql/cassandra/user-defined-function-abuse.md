@@ -27,7 +27,13 @@ By default this is off, and enabling it is necessary but not sufficient, because
 enable_user_defined_functions_threads: true   # default
 ```
 
-With threads enabled (the default), every UDF body runs in a dedicated thread under a Java `SecurityManager` granted **no** permissions, so `Runtime.exec`, reflection, and file or socket access all throw `AccessControlException`. A plain `LANGUAGE java` body that calls `Runtime.getRuntime().exec` is blocked outright on such a node. Code execution requires the non-default `enable_user_defined_functions_threads: false`, which runs UDFs directly in the daemon thread under a permissioned `SecurityManager`; the reliable primitive there is a scripted (JavaScript/Nashorn) UDF whose body disables the `SecurityManager` through reflection before acting. The Java example below is the shape of the payload, not something that succeeds on a default-sandboxed node.
+With threads enabled (the default), every UDF body runs in a dedicated thread under a Java `SecurityManager` granted **no** permissions, so `Runtime.exec`, reflection, and file or socket access all throw `AccessControlException`. A plain `LANGUAGE java` body that calls `Runtime.getRuntime().exec` is blocked outright on such a node. Code execution requires the non-default `enable_user_defined_functions_threads: false`, which runs UDFs directly in the daemon thread under a permissioned `SecurityManager`. The reliable primitive there is a scripted (JavaScript/Nashorn) UDF whose body disables the `SecurityManager` through reflection before acting, and scripted UDFs need their own non-default flag as well:
+
+```yaml
+enable_scripted_user_defined_functions: true   # default false; required for LANGUAGE javascript
+```
+
+So the full RCE path is three non-default settings together (`enable_user_defined_functions`, `enable_user_defined_functions_threads: false`, `enable_scripted_user_defined_functions`). The Java example below is the shape of the payload, not something that succeeds on a default-sandboxed node.
 
 ## Defining a malicious function
 
@@ -53,7 +59,7 @@ Calling it then runs the command and, because the function returns `text`, can r
 SELECT app.exec('id') FROM system.local;
 ```
 
-`system.local` is a single-row table present on every node, which makes it a convenient driver for a one-shot call. On a node with the default thread sandbox this call returns an `AccessControlException` rather than command output. Where `enable_user_defined_functions_threads` is `false`, the practical body is the deprecated **JavaScript** (Nashorn) form, `LANGUAGE javascript`, which first reaches through reflection to clear the active `SecurityManager` (`System.setSecurityManager(null)`) and only then invokes `Runtime.getRuntime().exec`, so the subsequent command runs unrestricted in the service account's JVM.
+`system.local` is a single-row table present on every node, which makes it a convenient driver for a one-shot call. On a node with the default thread sandbox this call returns an `AccessControlException` rather than command output. Once the three non-default flags above are set, the practical body is the deprecated **JavaScript** (Nashorn) form, `LANGUAGE javascript`, which first reaches through reflection to clear the active `SecurityManager` (`System.setSecurityManager(null)`) and only then invokes `Runtime.getRuntime().exec`, so the subsequent command runs unrestricted in the service account's JVM.
 
 ## Reaching the DDL from injection
 

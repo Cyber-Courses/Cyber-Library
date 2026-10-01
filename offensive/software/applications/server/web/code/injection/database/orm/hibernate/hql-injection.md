@@ -33,14 +33,20 @@ HQL operates over **entities and their fields**, not raw tables, which shapes th
 ' OR 1=1 --
 ```
 
-HQL has no `UNION` (set operators arrived only in Hibernate ORM 6.1, and plain JPQL still lacks them), so retrieval pivots through **subqueries and entity navigation** instead:
+Set-based retrieval depends on the Hibernate version. Hibernate ORM 6.1 and newer add `union`/`union all` (and `intersect`/`except`) to HQL, so on a current stack a UNION-style pivot across mapped entities is a valid attack surface:
+
+```
+xyz' UNION SELECT u.password FROM User u WHERE '1'='1
+```
+
+Older Hibernate and portable JPQL have no set operators, so there retrieval goes through **subqueries and entity navigation** instead:
 
 ```
 ' OR username='admin' --
 ' OR (SELECT u2.password FROM User u2 WHERE u2.username='admin') LIKE 'a%' --
 ```
 
-Because HQL resolves field access against the mapping, a correlated subquery or an association path reads sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash`). For set-based extraction like `UNION SELECT`, which HQL cannot express, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
+Because HQL resolves field access against the mapping, a correlated subquery or an association path reads sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash`). Where HQL still cannot express a needed construct, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
 
 Blind extraction uses the same boolean/substring inference as SQL injection, craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
 
