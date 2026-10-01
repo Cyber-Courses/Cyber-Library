@@ -1,6 +1,6 @@
 ---
 title: "Keyword splitting with double quotes: w\"h\"o\"a\"m\"i"
-description: "Breaking a blocked command keyword with empty double-quote pairs—w\"h\"o\"a\"m\"i—so the shell strips the quotes and reassembles the word, bypassing a literal blocklist."
+description: "Breaking a blocked command keyword with empty double-quote pairs, w\"h\"o\"a\"m\"i, so the shell strips the quotes and reassembles the word, bypassing a literal blocklist."
 keywords:
   - command injection
   - keyword splitting
@@ -10,15 +10,15 @@ keywords:
   - WAF bypass
 ---
 
-# Double-quote splitting
+# Double quotes
 
-Like single quotes, an **empty pair of double quotes** (`""`) delimits nothing and is removed during quote removal, concatenating its neighbors into one word. Inserting `""` through a filtered keyword—`w"h"o"a"m"i`—reassembles to `whoami` at execution while hiding the contiguous keyword from a literal blocklist.
+Like single quotes, an **empty pair of double quotes** (`""`) delimits nothing and is removed during quote removal, concatenating its neighbors into one word. Inserting `""` through a filtered keyword, `w"h"o"a"m"i`, reassembles to `whoami` at execution while hiding the contiguous keyword from a literal blocklist.
 
 > **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 
 ## Why the shell removes the quotes
 
-Quote removal runs as a defined expansion step after filtering. `w""h""o""a""m""i` is a single word; each `""` is an empty segment, and the shell deletes every quote character and joins the pieces into `whoami`. A blocklist matching the literal keyword never sees it. Keep the quotes **balanced**—an odd number leaves an unterminated string and the shell reports a syntax error instead of running the command.
+Quote removal runs as a defined expansion step after filtering. `w""h""o""a""m""i` is a single word; each `""` is an empty segment, and the shell deletes every quote character and joins the pieces into `whoami`. A blocklist matching the literal keyword never sees it. Keep the quotes **balanced**, an odd number leaves an unterminated string and the shell reports a syntax error instead of running the command.
 
 ## Payloads
 
@@ -31,7 +31,7 @@ i"d"
 
 ## Difference from single quotes
 
-Double quotes are "weak": the shell still performs variable expansion, command substitution, and backslash handling inside them. For *splitting*, that makes no difference—empty pairs vanish the same way. But it also means double quotes can do more than single quotes in an injection:
+Double quotes are "weak": the shell still performs variable expansion, command substitution, and backslash handling inside them. For *splitting*, that makes no difference, empty pairs vanish the same way. But it also means double quotes can do more than single quotes in an injection:
 
 ```
 "$(id)"          # substitution still fires inside double quotes
@@ -65,4 +65,4 @@ c"a"t${IFS}/etc/passwd
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

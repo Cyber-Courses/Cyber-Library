@@ -10,7 +10,7 @@ keywords:
   - SQL injection
 ---
 
-# Sequelize raw query injection
+# Raw query injection
 
 `sequelize.query()` executes raw SQL against the configured dialect (PostgreSQL, MySQL/MariaDB, SQLite, SQL Server). It accepts `replacements` and `bind` options for safe parameterization, but when application code concatenates request data into the SQL string, none of that applies and the call is a SQL injection sink.
 

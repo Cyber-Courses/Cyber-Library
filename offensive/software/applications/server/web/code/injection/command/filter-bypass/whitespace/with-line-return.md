@@ -12,7 +12,7 @@ keywords:
 
 # Newline as a command terminator
 
-Filters frequently blocklist the obvious shell separators—`;`, `|`, `&`—while overlooking that a **newline is itself a command terminator**. Inside `sh -c "..."`, every line of the string is parsed as its own command, exactly as in a script file. A single injected line feed ends the intended command and begins an attacker-controlled one, with no banned metacharacter in sight.
+Filters frequently blocklist the obvious shell separators, `;`, `|`, `&`, while overlooking that a **newline is itself a command terminator**. Inside `sh -c "..."`, every line of the string is parsed as its own command, exactly as in a script file. A single injected line feed ends the intended command and begins an attacker-controlled one, with no banned metacharacter in sight.
 
 > **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 

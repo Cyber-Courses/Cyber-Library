@@ -1,6 +1,6 @@
 ---
 title: "Keyword splitting with empty backticks: breaking blocked commands with ``"
-description: "Splitting a filtered command keyword with an empty backtick substitution—wh``oami—so the shell removes the empty command and reassembles the keyword, defeating a literal blocklist."
+description: "Splitting a filtered command keyword with an empty backtick substitution, wh``oami, so the shell removes the empty command and reassembles the keyword, defeating a literal blocklist."
 keywords:
   - command injection
   - keyword splitting
@@ -10,9 +10,9 @@ keywords:
   - WAF bypass
 ---
 
-# Empty backtick splitting
+# Empty backticks
 
-A blocklist that matches a literal keyword such as `whoami` or `cat` can be defeated by inserting an **empty command substitution** inside the word. An empty pair of backticks (`` `` ``) runs "nothing," expands to the empty string, and is deleted during word expansion—leaving the surrounding characters to rejoin into the original keyword. The filter sees `` wh``oami ``; the shell runs `whoami`.
+A blocklist that matches a literal keyword such as `whoami` or `cat` can be defeated by inserting an **empty command substitution** inside the word. An empty pair of backticks (`` `` ``) runs "nothing," expands to the empty string, and is deleted during word expansion, leaving the surrounding characters to rejoin into the original keyword. The filter sees `` wh``oami ``; the shell runs `whoami`.
 
 > **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 
@@ -60,8 +60,8 @@ The same "insert something that expands to nothing" principle also works with em
 ## Context notes
 
 - This is a **shell** technique; the string must reach `sh -c`, `system()`, or backtick execution.
-- Inside double quotes, backticks still trigger substitution, so `` "wh``oami" `` also reassembles—useful when your injection lands in a quoted context.
+- Inside double quotes, backticks still trigger substitution, so `` "wh``oami" `` also reassembles, useful when your injection lands in a quoted context.
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

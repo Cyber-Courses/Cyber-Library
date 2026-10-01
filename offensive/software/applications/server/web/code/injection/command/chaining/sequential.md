@@ -10,9 +10,9 @@ keywords:
   - RCE
 ---
 
-# Sequential chaining (`;`)
+# Sequential execution (`;`)
 
-The semicolon is the shell's plain command separator. In `sh`/`bash`, `a; b` runs `a`, waits for it to finish, then runs `b`—**regardless of whether `a` succeeded or failed**. When a user value is concatenated into a command that a shell interprets, a single `;` lets you terminate the intended command and append one of your own.
+The semicolon is the shell's plain command separator. In `sh`/`bash`, `a; b` runs `a`, waits for it to finish, then runs `b`, **regardless of whether `a` succeeded or failed**. When a user value is concatenated into a command that a shell interprets, a single `;` lets you terminate the intended command and append one of your own.
 
 > **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
 
@@ -77,7 +77,7 @@ When spaces are filtered, pair `;` with `${IFS}` or brace expansion so the appen
 
 ## Blind use
 
-If output is not reflected, the semicolon still delivers a payload whose effect you observe out-of-band—a delay, a DNS hit, or a file written to a served path:
+If output is not reflected, the semicolon still delivers a payload whose effect you observe out-of-band, a delay, a DNS hit, or a file written to a served path:
 
 ```
 127.0.0.1; sleep 10
@@ -86,7 +86,7 @@ If output is not reflected, the semicolon still delivers a payload whose effect 
 
 ## Platform note
 
-On Windows `cmd.exe` the semicolon is **not** a command separator—use `&` instead (`127.0.0.1 & whoami`). In PowerShell, `;` does separate statements, so a host that spawns PowerShell accepts `127.0.0.1; whoami`.
+On Windows `cmd.exe` the semicolon is **not** a command separator, use `&` instead (`127.0.0.1 & whoami`). In PowerShell, `;` does separate statements, so a host that spawns PowerShell accepts `127.0.0.1; whoami`.
 
 ## References
 
