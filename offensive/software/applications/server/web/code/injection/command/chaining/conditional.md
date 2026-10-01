@@ -10,7 +10,7 @@ keywords:
   - shell injection
 ---
 
-# Conditional chaining (`&&` and `||`)
+# Conditional execution (`&&` and `||`)
 
 The shell's logical operators chain commands on the **exit status** of the one before. `a && b` runs `b` only if `a` succeeds (exit code 0); `a || b` runs `b` only if `a` fails (non-zero). In OS command injection these give both a way to run a second command and a ready-made **boolean oracle** for blind extraction.
 

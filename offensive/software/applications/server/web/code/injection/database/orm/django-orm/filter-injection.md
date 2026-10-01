@@ -10,7 +10,7 @@ keywords:
   - boolean logic injection
 ---
 
-# Django filter() injection
+# filter() injection
 
 Unlike `raw()`/`extra()`, `filter()` parameterizes **values**, so classic string-breakout SQL injection does not apply to the value side. The vulnerability class here is **lookup and field abuse**: when application code lets the request control *which field* or *which lookup* is queried—or expands an attacker-controlled dictionary straight into `filter(**data)`—the attacker reaches fields and boolean logic the developer never intended to expose.
 

@@ -10,7 +10,7 @@ keywords:
   - SQL injection
 ---
 
-# SQLAlchemy raw SQL injection
+# Raw SQL injection
 
 SQLAlchemy's Core and ORM layers parameterize queries built with its expression language, but applications frequently drop to raw strings via `connection.execute()`, `engine.execute()`, or `session.execute()`. When the statement string is concatenated or f-string-formatted with user input, SQLAlchemy sends it as-is and the sink is SQL injection.
 

@@ -10,7 +10,7 @@ keywords:
   - SQL injection
 ---
 
-# Django raw SQL injection
+# Raw SQL injection
 
 Django's ORM parameterizes normal queryset operations, but it also exposes **escape hatches** that hand raw SQL to the database: `Model.objects.raw()` and the low-level `connection.cursor()` API. When application code builds the SQL string for either with Python string formatting instead of **parameter placeholders**, the ORM provides no protection and the sink is classic SQL injection.
 
