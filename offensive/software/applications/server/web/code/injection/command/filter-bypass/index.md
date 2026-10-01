@@ -1,6 +1,6 @@
 ---
 title: "Command injection filter bypass"
-description: "Blocklists and WAFs are evaded because the shell normalizes a payload after the filter inspects it — grouped by what each technique defeats."
+description: "Blocklists and WAFs are evaded because the shell normalizes a payload after the filter inspects it, grouped by what each technique defeats."
 keywords:
   - filter bypass
   - WAF bypass

@@ -11,4 +11,4 @@ keywords:
 
 # Substitution
 
-Command substitution — `` `cmd` `` and `$(cmd)` — runs a nested command and splices its output into the surrounding command line. Because it is evaluated even when the injection point sits in the middle of an argument, it is both a primary execution primitive and one of the most reliable confirmation oracles for command injection.
+Command substitution, `` `cmd` `` and `$(cmd)`, runs a nested command and splices its output into the surrounding command line. Because it is evaluated even when the injection point sits in the middle of an argument, it is both a primary execution primitive and one of the most reliable confirmation oracles for command injection.
