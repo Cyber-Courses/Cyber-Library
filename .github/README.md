@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/header.svg" alt="Cyber Library: a community-maintained knowledge base for cybersecurity" width="100%">
+<a href="https://www.cyberlibrary.com"><img src="assets/header.svg" alt="Cyber Library: learn cybersecurity, from the foundations up." width="100%"></a>
 
 <br/>
 
