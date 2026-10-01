@@ -61,7 +61,7 @@ A fully attacker-supplied `EVAL` (for example over an SSRF-smuggled connection, 
 
 ## Sandbox notes
 
-The Lua environment is sandboxed: `os`, `io`, and `loadfile` are removed or restricted, and globals are frozen, so direct shell execution from Lua is not the intended path. Impact instead comes from `redis.call()` reaching powerful commands (`CONFIG`, `KEYS`, `DEBUG`, `SLAVEOF`), which is why `CONFIG SET` remains the reliable route to code execution. The sandbox has historically been escaped on specific versions through interpreter bugs, but the version-independent primitive is simply full command access through `redis.call()`. `redis.call()` raises on error and aborts the script; `redis.pcall()` returns the error as a table, useful when probing which commands are permitted without killing the script.
+The Lua environment is sandboxed: `os`, `io`, and `loadfile` are removed or restricted, and globals are frozen, so direct shell execution from Lua is not the intended path. Impact instead comes from `redis.call()` reaching the data-plane commands (`KEYS`, `MGET`, `GET`, `SET`, `SCAN`), which read and rewrite every key server-side. The administrative commands that drive the disk-write RCE chain (`CONFIG`, `DEBUG`, `SLAVEOF`/`REPLICAOF`) are flagged no-script and are rejected from inside a script, so that route needs direct command execution, not Lua. The sandbox has historically been escaped on specific versions through interpreter bugs, but the version-independent primitive is simply full data-command access through `redis.call()`. `redis.call()` raises on error and aborts the script; `redis.pcall()` returns the error as a table, useful when probing which commands are permitted without killing the script.
 
 ## References
 

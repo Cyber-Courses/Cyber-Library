@@ -27,7 +27,7 @@ a value of `' OR username = 'admin` rewrites the statement to:
 SELECT * FROM users WHERE username = '' OR username = 'admin'
 ```
 
-The trailing `'` from the template closes the literal the attacker opened, leaving valid syntax. CQL has no `--` line comment, but `/* ... */` block comments are accepted and let you discard the rest of the template:
+The trailing `'` from the template closes the literal the attacker opened, leaving valid syntax. CQL accepts `--` and `//` line comments as well as `/* ... */` block comments, so any of them can discard the rest of the template:
 
 ```sql
 ' OR username = 'admin' /*

