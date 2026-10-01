@@ -10,7 +10,7 @@ keywords:
   - WAF bypass
 ---
 
-# Single-quote splitting
+# Single quotes
 
 Single quotes in the shell delimit a literal string, but an **empty pair of single quotes** (`''`) delimits nothing. During quote removal the shell deletes the quotes and concatenates whatever surrounds them into one word. Sprinkling `''` through a filtered keyword—`w'h'o'a'm'i`—therefore reassembles to `whoami` at execution time while never appearing as the contiguous keyword in the raw input.
 

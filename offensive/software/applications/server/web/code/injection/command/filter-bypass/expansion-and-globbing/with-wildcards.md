@@ -10,7 +10,7 @@ keywords:
   - WAF evasion
 ---
 
-# Wildcards and globbing
+# Wildcards
 
 Shell globbing expands pattern characters—`?` (any single character), `*` (any run of characters), and `[...]` (a character class)—into matching filesystem paths **before** the command runs. This lets an attacker name a binary or a target file without typing its literal name: `/???/c?t /???/p?sswd` expands to `/bin/cat /etc/passwd`, yet the request contains neither `cat`, `passwd`, nor `/bin/`. A blocklist matching those literals never fires.
 

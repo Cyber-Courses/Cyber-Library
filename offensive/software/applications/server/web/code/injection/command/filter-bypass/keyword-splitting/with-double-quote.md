@@ -10,7 +10,7 @@ keywords:
   - WAF bypass
 ---
 
-# Double-quote splitting
+# Double quotes
 
 Like single quotes, an **empty pair of double quotes** (`""`) delimits nothing and is removed during quote removal, concatenating its neighbors into one word. Inserting `""` through a filtered keyword—`w"h"o"a"m"i`—reassembles to `whoami` at execution while hiding the contiguous keyword from a literal blocklist.
 

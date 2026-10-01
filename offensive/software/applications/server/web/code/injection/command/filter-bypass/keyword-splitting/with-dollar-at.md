@@ -10,7 +10,7 @@ keywords:
   - filter bypass
 ---
 
-# Positional-parameter splitting
+# Positional parameters (`$@`, `$0`)
 
 The shell's special parameters expand to nothing in a non-interactive context with no arguments, which makes them useful as an invisible separator inside a word. `$@` (all positional parameters) and `$*` expand to the empty string when none are set, so `who$@ami` reassembles to `whoami` after expansion. `$0` is separately useful: it holds the name of the shell itself and can be executed directly.
 

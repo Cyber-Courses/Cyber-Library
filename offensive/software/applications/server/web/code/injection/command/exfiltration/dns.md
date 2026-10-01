@@ -10,7 +10,7 @@ keywords:
   - data exfiltration
 ---
 
-# DNS out-of-band exfiltration
+# DNS out-of-band channel
 
 In **blind** command injection the command runs but its output never reaches the response. DNS out-of-band (OOB) exfiltration recovers that output by making the target **resolve a hostname you control**, with the command's result packed into the subdomain label. Even hosts that block outbound HTTP usually still perform DNS lookups through an internal resolver, so name resolution is the most reliable egress channel.
 

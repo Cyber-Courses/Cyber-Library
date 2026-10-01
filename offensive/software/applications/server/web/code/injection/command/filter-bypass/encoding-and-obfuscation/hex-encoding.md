@@ -10,7 +10,7 @@ keywords:
   - xxd
 ---
 
-# Hex encoding and runtime decoding
+# Hex and runtime decoding
 
 A blocklist matches the literal keyword in the request. If the command is carried as **encoded bytes** and decoded by the shell only at execution time, the keyword is never present as a literal for the filter to see. Hex is the most compact form: Bash ANSI-C quoting (`$'\xNN'`) decodes hex escapes inline, and `echo -e`, `xxd -r`, or `printf` reconstruct bytes that are then piped to a shell.
 

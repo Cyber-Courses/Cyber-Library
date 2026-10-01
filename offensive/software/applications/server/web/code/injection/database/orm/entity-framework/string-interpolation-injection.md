@@ -10,7 +10,7 @@ keywords:
   - SQL injection
 ---
 
-# Entity Framework string interpolation injection
+# String interpolation injection
 
 This is a subtle EF Core footgun. C# interpolated strings (`$"... {x} ..."`) and EF's `FromSqlInterpolated`/`ExecuteSqlInterpolated` look almost identical to `FromSqlRaw`, but they behave very differently—and mixing them is a reliable source of SQL injection.
 

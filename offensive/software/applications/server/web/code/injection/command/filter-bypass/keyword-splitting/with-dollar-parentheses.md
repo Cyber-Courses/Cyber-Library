@@ -10,7 +10,7 @@ keywords:
   - WAF bypass
 ---
 
-# Empty command-substitution splitting
+# Empty command substitution (`$()`)
 
 Modern command substitution uses `$( ... )`. An **empty** substitution, `$()`, runs no command, produces no output, and is removed during expansion—so like empty quotes or backticks it can be slipped inside a filtered keyword to break the signature. `who$()ami` runs an empty command between `who` and `ami`, then collapses to `whoami`.
 
