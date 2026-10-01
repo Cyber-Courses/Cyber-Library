@@ -14,8 +14,6 @@ keywords:
 
 When an application unpacks an uploaded archive without resolving each entry's final path, an entry named with traversal sequences or an absolute path is written **outside** the intended extraction directory. The attacker chooses where bytes land: a web-served script, a binary on the `PATH`, a cron file, or a config the service reads.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The flawed pattern
 
 Vulnerable extractors join the destination directory with the raw entry name and never check the result stays inside the destination. In Java, `ZipInputStream` hands back `entry.getName()` verbatim:

@@ -14,8 +14,6 @@ keywords:
 
 A blocklist matches the literal keyword in the request. If the command is carried as **encoded bytes** and decoded by the shell only at execution time, the keyword is never present as a literal for the filter to see. Hex is the most compact form: Bash ANSI-C quoting (`$'\xNN'`) decodes hex escapes inline, and `echo -e`, `xxd -r`, or `printf` reconstruct bytes that are then piped to a shell.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the shell normalizes it away
 
 The shell decodes the escape sequence or the pipeline **after** the filter has inspected the request. `$'\x77\x68\x6f\x61\x6d\x69'` is, to the filter, the ASCII string `$ ' \ x 7 7 …`, no `w`, `h`, `o`, `a`, `m`, `i` adjacency, no `whoami` substring. Bash's ANSI-C quoting evaluates the hex escapes to the bytes `whoami` only when the word is expanded, and the result is executed. The forbidden keyword materializes inside the shell, past the point where the blocklist looked.

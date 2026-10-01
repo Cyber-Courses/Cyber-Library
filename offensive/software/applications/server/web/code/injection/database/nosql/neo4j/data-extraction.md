@@ -14,8 +14,6 @@ keywords:
 
 A graph has no table boundaries: every node lives in one property graph, so a single injected clause can reach any **label**, **property**, or **relationship** regardless of what the original query selected. Once a Cypher injection point is confirmed (see [Cypher injection](cypher-injection.md)), extraction is a matter of steering the result set to nodes the application never meant to expose.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## UNION extraction
 
 `UNION` appends a second query's rows to the first. The column count and names must match the original `RETURN`, so start by matching its shape. If the query returns a single column, return one value per injected row:

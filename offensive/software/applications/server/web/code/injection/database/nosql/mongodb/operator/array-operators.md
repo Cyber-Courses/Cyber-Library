@@ -14,8 +14,6 @@ keywords:
 
 The array operators (`$in`, `$nin`, `$all`, `$elemMatch`) take an array as their argument, so they are the natural payload when a parser or JSON body lets an attacker supply an array where the application expected a scalar. They widen a match set, enumerate candidate values in one request, and reach into array-valued fields.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 The precondition is the usual one: the value reaches the filter as an attacker-controlled array or object, not a cast string.
 
 ## $in and $nin to widen or invert a match

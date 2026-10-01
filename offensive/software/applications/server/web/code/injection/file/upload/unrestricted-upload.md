@@ -14,8 +14,6 @@ keywords:
 
 An upload endpoint that does not firmly control the stored file's extension, content, and location lets an attacker write an executable script into a directory the web server interprets. Requesting that file then runs attacker code in the service account's context.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## The minimal payload
 
 A one-line PHP shell is enough to turn a stored file into a command endpoint:

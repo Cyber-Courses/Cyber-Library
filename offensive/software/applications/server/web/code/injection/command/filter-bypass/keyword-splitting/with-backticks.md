@@ -14,8 +14,6 @@ keywords:
 
 A blocklist that matches a literal keyword such as `whoami` or `cat` can be defeated by inserting an **empty command substitution** inside the word. An empty pair of backticks (`` `` ``) runs "nothing," expands to the empty string, and is deleted during word expansion, leaving the surrounding characters to rejoin into the original keyword. The filter sees `` wh``oami ``; the shell runs `whoami`.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## Why the shell reassembles the word
 
 Backticks are legacy command substitution: `` `cmd` `` runs `cmd` and splices its stdout into the command line. An empty pair runs an empty command, which produces no output and no error, and substitutes to nothing. Crucially, the substitution happens *within* a single word, so the bytes on either side are concatenated after the empty result is removed. `` wh``oami `` tokenizes to the one word `whoami`, which the shell then looks up as a command. A literal-string filter inspecting the raw input never sees the contiguous keyword.

@@ -14,8 +14,6 @@ keywords:
 
 The canonical MongoDB attack turns a login query into an always-true filter by sending a query **operator** where the application expects a password string. It works whenever the handler builds the filter from request fields without coercing them to strings.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## Vulnerable pattern
 
 ```javascript

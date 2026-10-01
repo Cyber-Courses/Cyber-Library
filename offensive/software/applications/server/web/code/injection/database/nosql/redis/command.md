@@ -20,8 +20,6 @@ Redis clients and servers talk over **RESP** (REdis Serialization Protocol), a t
 
 Redis is also tolerant of **inline commands**: a plain line like `SET foo bar\r\n` is accepted and parsed on its own line. Both facts matter for injection. Because the protocol delimits commands with `\r\n`, any unescaped CRLF that reaches the connection inside attacker-controlled data ends the current command and begins a new one. The attacker does not need to break out of a quoted string; they need a newline in the byte stream.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## Where CRLF reaches the connection
 
 Two sinks dominate.

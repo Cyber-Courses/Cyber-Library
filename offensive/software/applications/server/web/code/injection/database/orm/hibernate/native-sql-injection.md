@@ -14,8 +14,6 @@ keywords:
 
 Hibernate lets applications drop out of HQL and run **native backend SQL** through `createNativeQuery()` (JPA) or the legacy `createSQLQuery()`. These execute the raw string against the underlying JDBC connection, so concatenating user input produces full SQL injection in the database's own dialect, more powerful than [HQL injection](hql-injection.md) because every native construct is available.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```java

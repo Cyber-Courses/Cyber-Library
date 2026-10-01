@@ -14,8 +14,6 @@ keywords:
 
 CouchDB can render documents into arbitrary output formats server-side. A `show` function transforms a single document into an HTTP response; a `list` function transforms the rows of a view into one. Both are JavaScript stored in a design document and executed by the query server at request time. Controlling either function, or the design document that holds it, runs attacker JavaScript during rendering.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## Show functions
 
 A `show` function takes a document and the request object and returns a response body:

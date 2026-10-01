@@ -14,8 +14,6 @@ keywords:
 
 The semicolon is the shell's plain command separator. In `sh`/`bash`, `a; b` runs `a`, waits for it to finish, then runs `b`, **regardless of whether `a` succeeded or failed**. When a user value is concatenated into a command that a shell interprets, a single `;` lets you terminate the intended command and append one of your own.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Mechanism
 
 A typical sink concatenates input into a shell command:

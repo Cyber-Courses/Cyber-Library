@@ -13,8 +13,6 @@ keywords:
 
 When CQL errors propagate back to the response, they carry schema and type detail that the application never meant to expose. An attacker who can trigger errors on demand reads structure directly from the message text instead of inferring it.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## What CQL errors reveal
 
 Cassandra reports precise, structured errors. The useful ones for mapping a schema:

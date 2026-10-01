@@ -14,8 +14,6 @@ keywords:
 
 The Query DSL is Elasticsearch's structured JSON query language. Injection here is not about Lucene operators inside a string; it is about controlling the **structure** of the JSON body. When an application builds the request by string-concatenating user input into a JSON template, or by spreading parsed request JSON directly into a `bool` clause, an attacker supplies extra clauses or replaces the query object, broadening or redirecting the search past the filters the application intended to enforce.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern: string concatenation
 
 ```js

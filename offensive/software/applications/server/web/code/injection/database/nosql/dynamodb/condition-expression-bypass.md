@@ -15,8 +15,6 @@ keywords:
 
 DynamoDB's conditional writes (`PutItem`, `UpdateItem`, `DeleteItem`, and the `ExecuteStatement` write forms) take a `ConditionExpression` that must evaluate true for the write to commit. Applications lean on these guards for correctness and authorization: `attribute_not_exists(pk)` to prevent overwriting an existing item, an equality check to enforce ownership, or a version compare for optimistic locking. When attacker input shapes the condition string or the `ExpressionAttributeNames`/`ExpressionAttributeValues` that feed it, the guard can be made to pass when it should fail, turning a protected write into an unauthorized create, update, delete, or overwrite.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 Guard string built from input. As with filter expressions, values must be `:`-placeholders, so the injectable pattern concatenates a **clause or operator**, not a quoted value:

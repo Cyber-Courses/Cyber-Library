@@ -14,8 +14,6 @@ keywords:
 
 Command substitution runs a nested command and **replaces the expression with its standard output**, inline, before the outer command runs. The two forms, `$(cmd)` and `` `cmd` ``, do the same thing. Because substitution is expanded *inside* the existing command line, it fires even when your input lands in the **middle of an argument**, where a separator like `;` would not yet terminate the command.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Mechanism
 
 The shell evaluates `$(...)` and backticks during expansion, substituting the captured output into the surrounding line. Given `ping -c 1 <host>`:

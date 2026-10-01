@@ -13,8 +13,6 @@ keywords:
 
 A WebSocket frame is just attacker-controlled input that happens to arrive over a persistent channel. When the server takes a value out of a frame and builds a query, renders it into other clients' pages, or passes it to a shell or template engine, every classic injection applies. What makes the channel worth targeting is that the frame usually skips the request-level defenses: the WAF, input filters, and validation middleware that inspect REST bodies frequently never see frame payloads, so the socket carries the payload past them untouched.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## SQL and NoSQL from the frame
 
 If a frame field lands in a query string, the socket becomes a SQL injection vector. A search or filter frame whose term is concatenated into SQL carries the usual payloads:

@@ -14,8 +14,6 @@ keywords:
 
 Tilde expansion replaces a leading `~` with a directory path before the command runs. Plain `~` becomes `$HOME`, `~+` becomes `$PWD` (the current directory), and `~-` becomes `$OLDPWD` (the previous directory). Because the shell produces the path itself, an attacker can rebuild a filesystem prefix without typing the literal directory name a blocklist is watching for.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the shell normalizes it away
 
 Tilde expansion happens early in the shell's expansion sequence, alongside brace expansion and parameter expansion, before word splitting and before execution. A word beginning with `~`, `~+`, or `~-` is rewritten to the corresponding directory string. The filter inspecting the request sees only the tilde token; the shell hands the command a fully qualified path. The forbidden literal (for example a home-directory prefix, or a path that would otherwise contain a blocked keyword) is manufactured from shell state rather than supplied by the attacker.

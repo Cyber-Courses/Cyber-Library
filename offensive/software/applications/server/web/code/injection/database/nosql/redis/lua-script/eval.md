@@ -13,8 +13,6 @@ keywords:
 
 `EVAL` runs a Lua script on the Redis server. Its shape is `EVAL <script> <numkeys> [key ...] [arg ...]`: the script text, a count of key arguments, then the keys (available in Lua as `KEYS[1..n]`) and extra arguments (`ARGV[1..n]`). The script executes atomically and can call back into Redis through `redis.call()` and `redis.pcall()`.
 
-> **Scope.** For authorized penetration tests, CTF labs, and assessment of systems you own or are contracted to test.
-
 ## Vulnerable pattern
 
 Injection appears when application code builds the **script body** from user input instead of passing that input as `ARGV`:

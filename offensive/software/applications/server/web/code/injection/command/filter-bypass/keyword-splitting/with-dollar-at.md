@@ -14,8 +14,6 @@ keywords:
 
 The shell's special parameters expand to nothing in a non-interactive context with no arguments, which makes them useful as an invisible separator inside a word. `$@` (all positional parameters) and `$*` expand to the empty string when none are set, so `who$@ami` reassembles to `whoami` after expansion. `$0` is separately useful: it holds the name of the shell itself and can be executed directly.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## `$@` and `$*` as an empty splitter
 
 In `sh -c "..."` with no extra arguments, `$@` expands to nothing. Placed inside a keyword it vanishes and the neighbors join:

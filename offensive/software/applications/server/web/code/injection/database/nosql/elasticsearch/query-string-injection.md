@@ -14,8 +14,6 @@ keywords:
 
 The `query_string` and `simple_query_string` queries parse a mini-language (Lucene query syntax) directly from the supplied text. When an application drops a user's search term into that query without escaping the reserved characters, the term stops being data and becomes **query logic**. Unlike SQL, there is no out-of-band interpreter to subvert: the parser itself grants field selection, boolean combination, wildcards, ranges, and existence tests.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable pattern
 
 ```json

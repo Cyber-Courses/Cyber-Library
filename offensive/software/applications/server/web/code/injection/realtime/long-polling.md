@@ -13,8 +13,6 @@ keywords:
 
 Long polling emulates a push channel over ordinary HTTP: the client issues a request that the server holds open until data is available or a timeout fires, then the client immediately re-requests. Each cycle is a normal HTTP request, which means long-polling endpoints inherit the full REST attack surface, plus two problems specific to the pattern: the values that drive the poll (cursor, channel, token) travel on every cycle and often sit in the URL, and the held-open, re-request loop exposes ordering and timing behavior an attacker can steer.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Injection through poll parameters
 
 A poll request carries state telling the server what the client wants next, typically a channel name, a cursor, and a since-timestamp:

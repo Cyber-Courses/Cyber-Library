@@ -13,8 +13,6 @@ keywords:
 
 The injectable value most often lands inside a quoted literal in a `WHERE` clause. A single quote closes that literal, and whatever follows is parsed as CQL syntax.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Breaking out of the literal
 
 Given the sink:

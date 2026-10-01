@@ -14,8 +14,6 @@ keywords:
 
 When an application speaks SMTP directly, building `MAIL FROM`, `RCPT TO`, or the `DATA` payload from user input, a `CRLF` in that input ends the current SMTP line and lets the attacker issue their own commands or forge the envelope. Unlike header injection, which manipulates the message, this manipulates the protocol conversation between the application and its mail server.
 
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Unauthorized use is unlawful.
-
 ## The command grammar
 
 SMTP is line-oriented: each command is one `CRLF`-terminated line. A transaction runs `MAIL FROM:<sender>`, one or more `RCPT TO:<recipient>`, then `DATA`, the message, and a line containing only a single dot (`.`) to end it. Any field concatenated into one of these lines without stripping `CRLF` lets the attacker inject the next line of the dialogue.

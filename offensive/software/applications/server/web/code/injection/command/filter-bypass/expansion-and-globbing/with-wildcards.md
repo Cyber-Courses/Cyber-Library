@@ -14,8 +14,6 @@ keywords:
 
 Shell globbing expands pattern characters, `?` (any single character), `*` (any run of characters), and `[...]` (a character class), into matching filesystem paths **before** the command runs. This lets an attacker name a binary or a target file without typing its literal name: `/???/c?t /???/p?sswd` expands to `/bin/cat /etc/passwd`, yet the request contains neither `cat`, `passwd`, nor `/bin/`. A blocklist matching those literals never fires.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the shell normalizes it away
 
 The shell performs **pathname expansion** on any unquoted word containing `?`, `*`, or `[`: it searches the matching directories and replaces the pattern with the real paths that exist. `/???/c?t` matches `/bin/cat` (three-character directory, `c`-any-`t` filename). Because the substitution happens inside the shell after the filter has inspected the input, the request carries only wildcard characters and partial fragments. The blocklist sees `/???/c?t`; the kernel executes `/bin/cat`. The forbidden substring is assembled from the filesystem, not from the payload.

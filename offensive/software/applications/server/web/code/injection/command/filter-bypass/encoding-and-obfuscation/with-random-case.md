@@ -14,8 +14,6 @@ keywords:
 
 A blocklist written in one case, say it blocks `whoami`, is defeated by changing capitalization when the **interpreter resolves commands case-insensitively**. `wHoAmi` is not the string `whoami`, so a naive substring filter passes it, yet Windows `cmd.exe` and PowerShell execute it identically. The trick turns on a mismatch: the filter compares bytes, the shell folds case.
 
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you are contracted to assess. Executing commands without written authorization is unlawful.
-
 ## Why the interpreter normalizes it away
 
 On Windows, command and executable name resolution is **case-insensitive**: the file system, `cmd.exe`, and PowerShell all treat `WHOAMI`, `whoami`, and `wHoAmi` as the same program. The blocklist inspects the literal request and sees `wHoAmi`, which does not equal the blocked `whoami`; it lets the request through. The shell then case-folds the name while locating the binary and runs it. The keyword the filter was protecting never appears in its expected case, but the command still resolves, the normalization happens in the interpreter's lookup, after the filter.
