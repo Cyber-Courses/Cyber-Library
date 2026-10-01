@@ -1,5 +1,5 @@
 ---
-title: "Keyword splitting with empty backticks: breaking blocked commands with ``"
+title: "Keyword splitting with empty backticks: breaking blocked commands"
 description: "Splitting a filtered command keyword with an empty backtick substitution, wh``oami, so the shell removes the empty command and reassembles the keyword, defeating a literal blocklist."
 keywords:
   - command injection

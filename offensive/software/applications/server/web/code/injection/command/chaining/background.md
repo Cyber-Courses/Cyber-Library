@@ -10,7 +10,7 @@ keywords:
   - windows command injection
 ---
 
-# Background execution (`&`)
+# Background execution (&)
 
 A single trailing ampersand tells the shell to run the preceding command **in the background** and return immediately, without waiting for it to finish. In OS command injection this detaches a payload from the request, so a long-running or noisy command executes while the HTTP response comes back on time.
 

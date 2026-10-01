@@ -10,7 +10,7 @@ keywords:
   - RCE
 ---
 
-# Sequential execution (`;`)
+# Sequential execution (;)
 
 The semicolon is the shell's plain command separator. In `sh`/`bash`, `a; b` runs `a`, waits for it to finish, then runs `b`, **regardless of whether `a` succeeded or failed**. When a user value is concatenated into a command that a shell interprets, a single `;` lets you terminate the intended command and append one of your own.
 
