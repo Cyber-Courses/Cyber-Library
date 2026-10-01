@@ -21,11 +21,11 @@ A graph has no table boundaries: every node lives in one property graph, so a si
 `UNION` appends a second query's rows to the first. The column count and names must match the original `RETURN`, so start by matching its shape. If the query returns a single column, return one value per injected row:
 
 ```
-' RETURN u.name UNION MATCH (a:Admin) RETURN a.password //
-' RETURN u.name UNION MATCH (n) RETURN n.secret AS name //
+' RETURN u.name AS x UNION MATCH (a:Admin) RETURN a.password AS x //
+' RETURN u.name AS x UNION MATCH (n) RETURN n.secret AS x //
 ```
 
-Use `AS` to rename columns so they align with the original projection. `UNION ALL` keeps duplicates where `UNION` would collapse them.
+Every branch of a `UNION` must return columns with **identical names**, so alias each projection to the same name (`AS x` above) or the query fails to compile. `UNION ALL` keeps duplicates where `UNION` would collapse them.
 
 ## Pivoting with WITH and MATCH
 

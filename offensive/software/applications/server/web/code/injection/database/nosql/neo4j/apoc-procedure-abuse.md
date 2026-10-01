@@ -1,18 +1,18 @@
 ---
 title: "APOC procedure abuse through Cypher injection in Neo4j"
-description: "Reaching APOC procedures via CALL injection turns a Cypher flaw into SSRF, outbound exfiltration, and command execution on Neo4j."
+description: "Reaching APOC procedures via CALL injection turns a Cypher flaw into SSRF, outbound exfiltration, file access, and arbitrary graph writes on Neo4j."
 keywords:
   - APOC abuse
   - Neo4j CALL injection
   - apoc.load.json SSRF
   - apoc.load.jdbc
   - Cypher exfiltration
-  - command execution
+  - arbitrary graph writes
 ---
 
 # APOC procedure abuse
 
-APOC ("Awesome Procedures On Cypher") is a widely installed Neo4j extension library. Many deployments enable it for data loading and integration, which means a Cypher injection that can reach a `CALL` clause (see [Cypher injection](cypher-injection.md)) often reaches APOC. These procedures make outbound requests, read and write files, run other Cypher, and on some configurations execute operating-system commands, turning a read-only query flaw into SSRF, exfiltration, and code execution.
+APOC ("Awesome Procedures On Cypher") is a widely installed Neo4j extension library. Many deployments enable it for data loading and integration, which means a Cypher injection that can reach a `CALL` clause (see [Cypher injection](cypher-injection.md)) often reaches APOC. These procedures make outbound requests, read and write files, and run other Cypher, turning a read-only query flaw into SSRF, exfiltration, and arbitrary graph writes. Operating-system command execution is not a built-in APOC capability; it requires a custom procedure that someone installed (covered below).
 
 > **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
 
@@ -71,19 +71,16 @@ Where DNS is the only egress, encode data into a hostname and resolve it:
 
 Because these take the sub-query as a string, they also help evade filters that inspect only the outer statement.
 
-## Command execution
+## Writes and reaching the host
 
-Some environments load extensions that run system commands, for example `apoc.util` helpers or custom procedures. Where a command-running procedure is present and permitted, injection reaches OS execution in the database service account:
-
-```
-' CALL apoc.systemdb.execute('...') //
-```
-
-Enumerate first with `apoc.help('apoc')` and `dbms.procedures()` (or `SHOW PROCEDURES` on newer versions) to learn exactly which callable surfaces exist before attempting execution:
+APOC does not ship an operating-system command runner. The `apoc.cypher.*` procedures above already escalate a read-only point to arbitrary graph writes, and `apoc.load.jdbc` / `apoc.load.json` reach internal services and the filesystem. OS command execution requires a **custom** user-defined procedure that someone packaged as a plugin and permitted on the server; where one exists, injection that reaches `CALL` reaches it too. Do not assume a built-in shell procedure such as `apoc.systemdb.execute` runs commands, as it executes Cypher against Neo4j's system database, not the OS. Enumerate the real callable surface first and work from what is actually present:
 
 ```
+' CALL apoc.help('apoc') YIELD name RETURN name //
 ' CALL dbms.procedures() YIELD name, signature RETURN name, signature //
 ```
+
+`dbms.procedures()` is replaced by `SHOW PROCEDURES` on newer versions.
 
 ## References
 

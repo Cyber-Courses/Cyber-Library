@@ -19,15 +19,16 @@ DynamoDB's conditional writes (`PutItem`, `UpdateItem`, `DeleteItem`, and the `E
 
 ## Vulnerable patterns
 
-Guard string built from input:
+Guard string built from input. As with filter expressions, values must be `:`-placeholders, so the injectable pattern concatenates a **clause or operator**, not a quoted value:
 
 ```python
-# owner comes from the request
+# guard is attacker text joined into the condition; :o holds the real owner value
+cond = f"owner = :o AND {guard}"
 table.update_item(
     Key={"id": {"S": item_id}},
     UpdateExpression="SET balance = :b",
-    ConditionExpression=f"owner = '{owner}'",
-    ExpressionAttributeValues={":b": {"N": new_balance}},
+    ConditionExpression=cond,
+    ExpressionAttributeValues={":o": {"S": owner}, ":b": {"N": new_balance}},
 )
 ```
 
@@ -46,13 +47,13 @@ table.update_item(
 
 ## Exploitation
 
-**Neutralize the ownership guard with `OR`.** If `owner` is concatenated into the condition, close it and append a clause that is always true, so the write commits regardless of who owns the item:
+**Neutralize the ownership guard with `OR`.** With a clause concatenated into the condition, append an `OR` to a function tautology so the write commits regardless of owner. Injected into `guard` above:
 
 ```
-anyone' OR attribute_exists(id) OR 'x'='x
+attribute_exists(id) OR attribute_exists(id)
 ```
 
-The condition becomes `owner = 'anyone' OR attribute_exists(id) OR 'x'='x'`, which holds for every existing item, letting the attacker update records they do not own.
+makes the condition `owner = :o AND attribute_exists(id) OR attribute_exists(id)`. Since `AND` binds tighter than `OR`, this is true for every existing item, letting the attacker update records they do not own.
 
 **Force a "create-if-absent" guard to pass and overwrite.** A `PutItem` protected by `attribute_not_exists(pk)` is meant to refuse clobbering an existing item. If the condition text is attacker-influenced, replace the guard with a tautology so the put overwrites the victim's item:
 
@@ -62,7 +63,7 @@ attribute_not_exists(pk) OR attribute_exists(pk)
 
 Either branch now covers every case, so the write always lands and silently overwrites.
 
-**Satisfy the optimistic-lock check.** In the operand-controlled pattern, the attacker supplies `expected_version`. Reading the current version first (via any disclosure path) and echoing it back makes `version = :v` pass, enabling a lost-update that stomps a concurrent writer's change. Where the value is coerced loosely, supplying a value that matches many items (or widening the operator to `>=`) broadens which items the write will touch.
+**Not a bypass: the expected-version operand.** Supplying the `version` you previously read is the *intended* optimistic-lock protocol, not an injection. The key already identifies one item, DynamoDB does not loosely coerce the typed value, and a concurrent write changes the version so the condition then fails. It becomes a problem only if the application separately mistakes the version for authorization. The real bypass in the operand-controlled pattern is operator injection, next.
 
 **Invert the comparison via operator injection.** When only the operand is parameterized but the comparison token comes from input, flip the guard's sense:
 

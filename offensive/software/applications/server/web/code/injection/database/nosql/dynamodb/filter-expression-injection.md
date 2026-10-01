@@ -19,16 +19,18 @@ keywords:
 
 ## Vulnerable patterns
 
-String-built expression, the obvious sink:
+String-built expression, the obvious sink. Expression strings do not take inline literals the way PartiQL does: values must be `:`-placeholders, so the injectable pattern concatenates a **clause or operator** (not a value) into the expression text:
 
 ```python
-# status comes from the request
+# account_id is bound safely with :aid, but extra_filter is attacker text joined in
+expr = f"account_id = :aid AND {extra_filter}"
 resp = table.scan(
-    FilterExpression=f"account_id = '{account_id}' AND status = '{status}'"
+    FilterExpression=expr,
+    ExpressionAttributeValues={":aid": {"S": account_id}},
 )
 ```
 
-Expression strings do not take single-quoted literals the way PartiQL does; real values belong in `ExpressionAttributeValues`. Concatenating them is both wrong and injectable: the attacker's text becomes part of the parsed predicate.
+Whatever `extra_filter` contains becomes part of the parsed predicate.
 
 Attribute-name/value maps driven by request structure, the subtler sink:
 
@@ -46,13 +48,13 @@ Here the client chooses which attributes are compared and can drop the tenant gu
 
 ## Exploitation
 
-**Inject `OR` to defeat the guard.** If `status` lands in the first sink, close the comparison and append an always-true clause so the filter stops scoping results:
+**Inject `OR` to defeat the guard.** There is no quoted-literal breakout (values are placeholders), so the primitive is appending a clause joined with `OR` to a function tautology. Injected into `extra_filter` above:
 
 ```
-active' OR attribute_exists(account_id
+attribute_exists(account_id) OR attribute_exists(account_id)
 ```
 
-The filter becomes `account_id = '...' AND status = 'active' OR attribute_exists(account_id)`, and since every item in the table has that attribute, the `Scan` returns all of it.
+makes the expression `account_id = :aid AND attribute_exists(account_id) OR attribute_exists(account_id)`. Since `AND` binds tighter than `OR`, this evaluates as `(account_id = :aid AND ...) OR attribute_exists(account_id)`, true for every item carrying that attribute, so the `Scan` returns the whole table.
 
 **`attribute_exists` / `attribute_not_exists` as tautologies.** These functions are the expression-language equivalent of `1=1`. `attribute_exists(<partition key>)` is true for every item; `attribute_not_exists(<any always-present attribute>)` is reliably false and useful for negative tests and boolean inference.
 

@@ -78,7 +78,7 @@ yields `... AND category = 'books' OR user_id <> 'x'`, returning the whole table
 ' OR attribute_exists(ssn) OR '1'='1
 ```
 
-**Multi-statement note.** DynamoDB does not chain multiple statements from one `ExecuteStatement` call the way stacked SQL queries work, so injection is confined to the single statement's clause. But within a `SELECT` that is enough to exfiltrate the full table, and within an `UPDATE`/`DELETE` built from input, a widened `WHERE` turns a single-row write into a mass modification.
+**Scope of impact.** DynamoDB does not chain multiple statements from one `ExecuteStatement` call the way stacked SQL queries do, so injection is confined to the single statement. Within a `SELECT` that is still enough to exfiltrate the full table. On the write side the impact is bounded: PartiQL `UPDATE` and `DELETE` must identify a single item by its complete primary key, so a widened `WHERE` is rejected rather than becoming a mass modification, and the attacker can only reach items whose full key they can address.
 
 Because PartiQL is SQL-compatible, standard boolean and relational payloads transfer directly; adjust quoting and attribute names to the target table's schema.
 
