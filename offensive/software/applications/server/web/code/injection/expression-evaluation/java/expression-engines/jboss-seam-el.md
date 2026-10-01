@@ -27,31 +27,19 @@ When `input` carries attacker EL, Seam's resolver walks it against the full appl
 
 ## Reaching the runtime
 
-EL property and method resolution reaches `java.lang.Runtime`. A single expression obtains the runtime and executes a command:
+Unified EL has no `import`, no `new`, and no class-literal syntax, so it cannot name `java.lang.Runtime` directly. The reachable path uses Seam's method-call support to go through reflection from a string literal: get `Class` via `forName`, look up the static `getRuntime` method, invoke it with a null receiver, then call `exec`:
 
 ```
-#{''.getClass().forName('java.lang.Runtime').getMethods()[6].invoke(''.getClass().forName('java.lang.Runtime'))}
+#{''.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id')}
 ```
 
-A cleaner form uses the static `getRuntime()` then `exec`, chaining Seam's method-call support:
-
-```
-#{Runtime.getRuntime().exec('id')}
-```
-
-Reading output back wraps the returned `Process` stream through EL, constructing a reader/scanner over `getInputStream()` so the command result lands in whatever value Seam renders.
+Reading output back wraps the returned `Process` stream through further reflective EL calls, constructing a reader or scanner over `getInputStream()` so the command result lands in whatever value Seam renders.
 
 Historically this surface was reached through unauthenticated entry points such as the `actionOutcome` request parameter on Seam's default pages, where the parameter value is taken as an EL outcome and evaluated during navigation, so no application code has to opt in for the expression to run.
 
-## Shell features need an argument vector
+## Shell features
 
-`Runtime.exec(String)` tokenizes on whitespace with no shell, so `$(...)`, pipes, and redirection do not expand. For shell behavior, invoke the array overload with an explicit `/bin/bash -c`:
-
-```
-#{Runtime.getRuntime().exec(new String[]{'/bin/bash','-c','id > /tmp/o 2>&1'})}
-```
-
-On Windows substitute `new String[]{'cmd.exe','/c','whoami'}`.
+`Runtime.exec(String)` tokenizes on whitespace with no shell, so `$(...)`, pipes, and redirection do not expand, and the single-string form above runs one binary. Unified EL cannot write a `String[]` literal (no `new`, no array syntax), so shaping a `/bin/bash -c` invocation means building the argument array reflectively through `java.lang.reflect.Array` and passing it to the `exec(String[])` overload, which is far more verbose than the single-command form. In practice, redirect the single command's output to a file and read it back, or use the one-shot command where no shell features are required.
 
 ## References
 

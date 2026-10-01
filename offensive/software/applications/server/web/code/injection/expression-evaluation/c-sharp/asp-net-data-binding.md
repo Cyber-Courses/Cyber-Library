@@ -16,17 +16,21 @@ ASP.NET Web Forms data-binding expressions, written `<%# ... %>`, are evaluated 
 
 ## The condition that matters
 
-The dangerous case is narrow and specific: the attacker has to control the expression text, not merely a value that is bound into a property. A value flowing through `Eval("Name")` into a label is ordinary output and renders as data. The vulnerability appears when the application builds the binding expression itself from input, for example by composing a template, a report column formula, or a user-defined display expression that is then compiled and bound.
+The dangerous case is narrow and specific: the attacker has to control the expression **text**, the content between `<%#` and `%>`, not merely a value bound into a property, and not merely the string argument handed to `Eval`. Controlling only the `Eval` argument is weak: `Eval(attackerString)` still treats that string as a property/indexer navigation path against the data item, so the most it yields is reading other properties of the bound object graph, not code execution. Code execution appears only when the application assembles the expression text itself from input and then compiles it.
 
 ```
 # Benign: the value is data, the expression is fixed
 <%# Eval("DisplayName") %>
 
-# Dangerous: the expression STRING is assembled from input
+# Weak: only the Eval ARGUMENT is attacker-controlled -> property-path
+# navigation of the data item, not compiled code
 <%# Eval(userSuppliedPath) %>
+
+# Dangerous: the attacker controls the EXPRESSION TEXT that gets compiled
+<%# {attacker-controlled .NET expression} %>
 ```
 
-When `userSuppliedPath` (or a larger expression fragment) comes from a template field, a saved report definition, or any store an attacker can write, it is parsed and compiled as a .NET expression against the page.
+When the attacker-writable store feeds the expression text (a template field, a saved report definition, persisted markup, a runtime-composed `.aspx` fragment), that text is parsed and compiled as a .NET expression against the page, which is the code-execution condition.
 
 ## Reaching the sink
 

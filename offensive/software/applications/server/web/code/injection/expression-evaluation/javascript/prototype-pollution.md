@@ -75,7 +75,7 @@ Because `user` does not define `isAdmin`, the lookup falls through to the pollut
 
 Command execution requires a reachable gadget: a place where the application or a dependency reads a polluted property and passes it into a dangerous sink. Pollution supplies the value; the gadget supplies the path to execution. The most-cited server-side gadget is `child_process` option handling, where a polluted option controls how a command is spawned.
 
-`child_process.spawn`, `exec`, and `execSync` consult an options object, and options like `shell`, `env`, and `NODE_OPTIONS` are read from the prototype when the caller did not set them:
+`child_process.spawn`, `exec`, and `execSync` consult an options object for `shell`, `env`, and related settings. Whether a polluted prototype reaches them is version-dependent: current Node releases normalize the options into a null-prototype object by copying own properties before reading `shell`/`env`, so inherited values from `Object.prototype` no longer flow in. On older Node versions (and in libraries that spawn with their own option handling that reads inherited properties), the polluted defaults are picked up when the caller did not set them:
 
 ```json
 {"__proto__": {"shell": "/proc/self/exe", "argv0": "node", "NODE_OPTIONS": "--require /proc/self/environ"}}
@@ -85,7 +85,7 @@ Command execution requires a reachable gadget: a place where the application or 
 {"__proto__": {"env": {"NODE_OPTIONS": "--require=/tmp/evil.js"}}}
 ```
 
-When application code later calls a spawn helper without an explicit `env` or `shell`, the polluted defaults flow in, and `NODE_OPTIONS=--require` forces Node to load an attacker-chosen module, which executes its top-level code. Template engines are the other classic gadget family: several (for example older EJS and Pug/Jade configurations) read compilation options such as `outputFunctionName`, `escapeFunction`, or a client/compileDebug flag from the options object, and a polluted option is concatenated into the generated function source, turning render into code execution.
+Where the gadget applies, a spawn helper called without an explicit `env` or `shell` picks up the polluted defaults, and `NODE_OPTIONS=--require` forces Node to load an attacker-chosen module, which executes its top-level code. Confirm the target's Node version and the specific spawn path rather than assuming the gadget fires everywhere. Template engines are the other classic gadget family: several (for example older EJS and Pug/Jade configurations) read compilation options such as `outputFunctionName`, `escapeFunction`, or a client/compileDebug flag from the options object, and a polluted option is concatenated into the generated function source, turning render into code execution.
 
 ```json
 {"__proto__": {"outputFunctionName": "x;process.mainModule.require('child_process').execSync('id');x"}}

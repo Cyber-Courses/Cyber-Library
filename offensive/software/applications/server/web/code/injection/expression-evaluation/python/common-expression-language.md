@@ -32,18 +32,17 @@ Here `role` lands inside a CEL string literal exactly as a SQL or JavaScript str
 
 ## Forcing the decision
 
-The highest-value outcome is making a policy evaluate to the attacker's advantage. Close the literal and short-circuit the boolean so the whole expression is true regardless of the real values:
+The highest-value outcome is making a policy evaluate to the attacker's advantage. Close the literal and short-circuit the boolean so the whole expression is true regardless of the real values. CEL static-type-checks every operand, so the injection has to leave the trailing template text well-typed: end it so the template's own closing quote completes a boolean comparison, not a bare string:
 
 ```
-' || true || '
-admin' || 'x' == 'x
-' || 1 == 1 || '
+' || true || 'x'=='x
+' || 1==1 || 'x'=='x
 ```
 
-The first turns the predicate into `user.role == '' || true || '' && user.tenant == 'acme'`, and because `||` short-circuits, the authorization returns true for any caller. The inverse is just as useful against a rule that is supposed to reject something: force the validation expression false so the guard never fires.
+The first turns the predicate into `user.role == '' || true || 'x'=='x' && user.tenant == 'acme'`. Every operand is boolean, so it type-checks, and because `||` short-circuits on `true`, the authorization returns true for any caller. The inverse is just as useful against a rule meant to reject something: force the validation expression false so the guard never fires, again keeping the tail well-typed:
 
 ```
-' && false || '
+' && false || 'x'!='x
 ```
 
 Where the expression is a function or macro rather than a flat comparison, CEL's own constructs rewrite the logic. Macros like `has()`, `size()`, and the list/map comprehensions (`all`, `exists`, `exists_one`, `map`, `filter`) are the levers:
@@ -86,11 +85,10 @@ Nothing in base CEL provides these, so the technique is to first enumerate what 
 
 ## Resource and complexity abuse
 
-CEL caps cost in principle, but where the host did not set a cost limit or set it generously, a crafted expression inflates evaluation work. Nested comprehensions over attacker-sized lists, large string multiplications, and deeply nested macros raise CPU and memory during evaluation:
+CEL caps cost in principle, but where the host did not set a cost limit or set it generously, a crafted expression inflates evaluation work. Nested comprehensions over lists, which multiply the per-element work, and deeply nested macros raise CPU and memory during evaluation (CEL has no string-repetition operator, so cost comes from iteration, not from inflating a single value):
 
 ```
-[0,1,2,3,4,5,6,7,8,9].map(a, [0,1,2,3,4,5,6,7,8,9].map(b, [0,1,2,3,4,5,6,7,8,9]))
-'A' * 1000000
+[0,1,2,3,4,5,6,7,8,9].map(a, [0,1,2,3,4,5,6,7,8,9].map(b, [0,1,2,3,4,5,6,7,8,9].map(c, c)))
 ```
 
 An unbounded or weakly bounded evaluation is a denial-of-service lever against the admission or authorization path that runs the expression, which is often in the request hot path for every API call.
