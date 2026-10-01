@@ -59,7 +59,7 @@ Long-poll clients often carry the session or a per-channel token in the poll URL
 /poll?channel=user:42&access_token=eyJhbGciOi...
 ```
 
-A token in the query string leaks through every layer that records URLs: proxy and server access logs, the `Referer` header sent to any third-party resource loaded by the page, browser history, and analytics. Any of those is a harvesting point. A page that loads an external script or image after a poll leaks the token in `Referer` to that external origin, and a shared or ingested access log hands it to anyone who can read the logs.
+A token in the query string leaks through every layer that records request URLs: proxy and server access logs, and APM or analytics that capture full URLs. These are real harvesting points, and a shared or ingested access log hands the token to anyone who can read the logs. The browser-side leaks (history and `Referer` to third-party resources) apply only when the token sits in the **top-level page URL**: for an XHR or `fetch` poll the request URL is never navigated to, so it is not added to history, and a later third-party resource receives the containing page's URL as `Referer`, not the poll URL.
 
 ## Ordering and timing
 
@@ -67,4 +67,4 @@ The held-open, re-request loop creates a race surface. Because the client fires 
 
 ## Finding the sinks
 
-Capture one poll cycle, then enumerate each parameter against the same payloads used for REST routes, and separately swap the channel and cursor to neighboring and privileged values. Check whether the session or a token rides in the URL rather than a cookie or header, and whether the page loads any cross-origin resource after a poll that would carry that URL in `Referer`.
+Capture one poll cycle, then enumerate each parameter against the same payloads used for REST routes, and separately swap the channel and cursor to neighboring and privileged values. Check whether the session or a token rides in the URL rather than a cookie or header; if so it leaks to server and proxy logs, and additionally through browser history or `Referer` only when that same token also appears in the top-level page URL.

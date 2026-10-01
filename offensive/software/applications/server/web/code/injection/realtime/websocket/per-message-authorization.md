@@ -70,9 +70,8 @@ Because the per-message layer checks only that the connection is authenticated, 
 Capture the client's own traffic to learn the frame schema, then mutate it. Browser developer tools expose every frame under the network panel's WS view, and the same frames can be replayed and fuzzed from a standalone client:
 
 ```javascript
-const ws = new WebSocket('wss://target.example/stream', [], {
-  headers: { Cookie: document.cookie }
-});
+// run in the authenticated user's browser console; the handshake sends cookies automatically
+const ws = new WebSocket('wss://target.example/stream');
 ws.onopen = () => {
   for (let id = 4000; id < 4100; id++) {
     ws.send(JSON.stringify({ action: 'message.list', conversationId: id }));
@@ -81,7 +80,7 @@ ws.onopen = () => {
 ws.onmessage = (e) => console.log(e.data);
 ```
 
-Frames that return data for ids outside the connected user's own set confirm that authorization lives only at the handshake.
+From a standalone Node `ws` client there is no ambient cookie, so pass a captured session string explicitly: `new WebSocket(url, { headers: { Cookie: 'session=...' } })`. Frames that return data for ids outside the connected user's own set confirm that authorization lives only at the handshake.
 
 ## References
 

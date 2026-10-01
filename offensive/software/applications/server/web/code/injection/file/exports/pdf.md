@@ -50,7 +50,7 @@ fetch('file:///etc/passwd')
 </script>
 ```
 
-wkhtmltopdf honors `file://` by default; older versions ignore same-origin limits entirely.
+These `file://` reads work only when the renderer allows local file access. wkhtmltopdf 0.12.6 enables `--disable-local-file-access` by default, so this payload fires against an older build or a configuration that re-enabled it with `--enable-local-file-access`; headless Chrome and Puppeteer similarly gate `file://` behind flags. The SSRF paths below need no local-file access and work against default renderers.
 
 ## SSRF to internal and metadata endpoints
 
