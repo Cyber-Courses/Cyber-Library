@@ -22,7 +22,7 @@ The subcategories group by service class, so a technique sits next to the protoc
 - **Directory**: identity and directory services (LDAP, Active Directory), where enumeration and privilege abuse dominate.
 - **Messaging**, **File Share**, **Remote Access**, **Monitoring**, **Versioning**, **Security**: the supporting services an environment runs, each attacked through its own protocol and trust assumptions.
 - **Cloud**, **Containers**, **Virtualization**: the hosting and isolation layers, where misconfiguration and escapes cross tenant and workload boundaries.
-- **Network**: server-side network services as a target in their own right, distinct from the medium-level work in the top-level [network](../../../../network/index.md) category.
+- **Network**: server-side network services as a target in their own right, distinct from the medium-level work in the top-level [network](../../../network/index.md) category.
 
 Splitting by service type matches how an operator triages a host: enumerate what is listening, identify each service, then reach for the techniques specific to it. Keeping the classes separate stops a database technique from being filed next to a message-queue one, since the query languages, authentication models, and abuse primitives have nothing in common. The web subtree is split further by layer (platform, runtime, and code) because a single web service combines all three.
 

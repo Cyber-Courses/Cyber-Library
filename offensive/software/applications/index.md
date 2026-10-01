@@ -11,7 +11,7 @@ keywords:
 
 # Applications
 
-The applications category covers offensive work against the programs that implement an organization's behavior, as opposed to the [operating systems](../index.md) that host them. It is the densest part of the library, because applications expose the most surface to untrusted input and change the most often.
+The applications category covers offensive work against the programs that implement an organization's behavior, as opposed to the operating systems that host them (its sibling under [Software](../index.md)). It is the densest part of the library, because applications expose the most surface to untrusted input and change the most often.
 
 ## Why it is split this way
 
