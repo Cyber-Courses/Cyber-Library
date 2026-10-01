@@ -1,6 +1,6 @@
 ---
 title: "HQL injection: Hibernate Query Language built from untrusted input"
-description: Concatenating user input into createQuery() HQL/JPQL bypasses Hibernate's parameter binding, exposing entity data through boolean logic and UNION-style object queries.
+description: Concatenating user input into createQuery() HQL/JPQL bypasses Hibernate's parameter binding, exposing entity data through boolean logic and correlated subqueries over mapped entities.
 keywords:
   - Hibernate
   - HQL injection
@@ -33,14 +33,14 @@ HQL operates over **entities and their fields**, not raw tables, which shapes th
 ' OR 1=1 --
 ```
 
-HQL supports subqueries and `UNION`-like retrieval through entity navigation, so you can pivot to other mapped entities:
+HQL has no `UNION` (set operators arrived only in Hibernate ORM 6.1, and plain JPQL still lacks them), so retrieval pivots through **subqueries and entity navigation** instead:
 
 ```
 ' OR username='admin' --
-xyz' UNION SELECT u.password FROM User u WHERE '1'='1
+' OR (SELECT u2.password FROM User u2 WHERE u2.username='admin') LIKE 'a%' --
 ```
 
-Because HQL resolves field access against the mapping, you can read sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash` via association paths). HQL lacks some raw-SQL constructs, so where HQL is limited, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
+Because HQL resolves field access against the mapping, a correlated subquery or an association path reads sensitive properties of related entities the query never intended to expose (e.g. `user.credentials.passwordHash`). For set-based extraction like `UNION SELECT`, which HQL cannot express, pivot to the native-query sink (see [Native SQL Injection](native-sql-injection.md)) if the application also exposes one.
 
 Blind extraction uses the same boolean/substring inference as SQL injection, craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
 
