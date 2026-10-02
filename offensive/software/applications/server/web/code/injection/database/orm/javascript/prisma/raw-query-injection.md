@@ -37,6 +37,19 @@ const rows = await prisma.$queryRaw`
 
 The two are one word apart, which is why the `Unsafe` call is often reached for when a query needs to be built dynamically and then fed concatenated input.
 
+## Raw fragments defeat the safe method too
+
+The `Unsafe` methods are not the only way in. The tagged-template `$queryRaw` accepts `Sql` fragments built with `Prisma.raw()` (and `Prisma.sql`), and `Prisma.raw()` inserts its string verbatim, unparameterized. Splicing an attacker string through `Prisma.raw()` injects even though the outer call is the safe `$queryRaw`:
+
+```js
+// UNSAFE: Prisma.raw inside the safe tagged template is not parameterized
+const rows = await prisma.$queryRaw(
+  Prisma.sql`SELECT * FROM "User" WHERE email = ${Prisma.raw("'" + req.query.email + "'")}`
+);
+```
+
+So the sink is any unparameterized raw text, whether it arrives through `$queryRawUnsafe` or through a `Prisma.raw()` fragment handed to `$queryRaw`; only a value interpolated directly as `${}` is bound.
+
 ## Dynamic SQL and identifiers
 
 `$queryRawUnsafe` also accepts positional parameters (`$queryRawUnsafe(query, ...values)`), and code that uses those for values but still concatenates an identifier, a table name, a column, an `ORDER BY` direction, remains injectable through the concatenated part, because identifiers cannot be parameterized. Any place the query string itself is assembled from input, rather than passed as a bound value, is the thing to find.
