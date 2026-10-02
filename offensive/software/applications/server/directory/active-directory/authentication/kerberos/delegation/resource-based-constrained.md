@@ -30,7 +30,7 @@ getST.py -spn cifs/target.example.local -impersonate Administrator \
   -hashes :<EVIL$-hash> example.local/EVIL$
 ```
 
-The write permission in step 2 typically comes from an ACL finding ([ACL enumeration](../../../enumeration/acl-enumeration.md)): `GenericWrite`, `GenericAll`, `WriteProperty`, or `WriteDacl` over the computer object.
+The write permission in step 2 typically comes from an ACL finding ([ACL enumeration](../../../dacl/acl-enumeration.md)): `GenericWrite`, `GenericAll`, `WriteProperty`, or `WriteDacl` over the computer object.
 
 ## Two common sources of the write
 
