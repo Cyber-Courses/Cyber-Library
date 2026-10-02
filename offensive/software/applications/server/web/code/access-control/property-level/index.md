@@ -1,6 +1,6 @@
 ---
 title: "Property-level access control: mass assignment, overposting, and writable sensitive fields"
-description: Unauthorized modification of object fields through APIs: mass assignment, overposting, and filter bypasses on which columns may change.
+description: "Unauthorized modification of object fields through APIs: mass assignment, overposting, and filter bypasses on which columns may change."
 keywords:
   - property level authorization
   - mass assignment

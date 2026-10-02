@@ -1,6 +1,6 @@
 ---
 title: "Application trust boundaries: proxy headers, TLS client certs, and upstream identity"
-description: When server-side code trusts client-supplied or upstream identity signals: forwarded headers, mTLS identity mapping, or proxy context, without sound binding to the request.
+description: "When server-side code trusts client-supplied or upstream identity signals: forwarded headers, mTLS identity mapping, or proxy context, without sound binding to the request."
 keywords:
   - trust boundary
   - forwarded header abuse
