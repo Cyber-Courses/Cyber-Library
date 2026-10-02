@@ -1,44 +1,29 @@
 ---
-title: Profile
-description: Explore roles, career paths, skills, and certifications in cybersecurity
-  profiles.
+title: Cybersecurity Professional Profile, Roles, Paths, and Skills
+description: An overview of the cybersecurity professional profile, covering roles, career paths, certifications, and skill development.
 keywords:
-- cybersecurity roles
-- career paths
-- skill development
-- cybersecurity certifications
-- security career
-- entry-level roles
-- mid-level roles
-- senior-level roles
-- technical skills
-- managerial paths
+  - cybersecurity roles
+  - security career paths
+  - security certifications
+  - cybersecurity skills
+  - security specialization
 ---
 
 # Profile
 
-Understanding your cybersecurity profile is essential because it helps you define where you stand in your professional journey and where you want to go. A cybersecurity profile combines your current skills, experiences, interests, and goals, serving as a roadmap to align your career choices with the right roles, certifications, and development opportunities. By identifying your profile, whether technical, managerial or hybrid, you can make informed decisions about training paths, skill acquisition, and job opportunities that best match your strengths and aspirations. This clarity not only enhances personal growth but also increases your value to employers looking for well-aligned talent in a complex and rapidly evolving field.
+The Profile part of the Career pillar describes who you are professionally. It covers the shape of your working identity in security: the role you fill, the path you follow, the credentials you hold, and the skills you bring. Where Journey tracks movement over time and Landscape maps the surrounding ecosystem, Profile is about defining and developing yourself as a practitioner so that your strengths match the work you want.
 
-## Diverse Career Paths
+The sections below outline the building blocks of a security professional's profile.
 
-Cybersecurity encompasses a wide array of specializations, allowing you to align your career path with your interests, skills, and ambitions. Entry-level roles may focus on foundational security concepts, such as monitoring systems or handling basic incidents. More advanced positions can require deep technical expertise—penetration testing, reverse engineering, and complex incident response are just a few examples. By exploring these varied tracks, you can discover the opportunities that best match your aspirations.
+**Roles and functional areas** cover the distinct jobs across the field, from security operations and incident response to offensive testing, governance, and architecture, each with its own daily work and expectations.
 
-For a comprehensive guide to career paths, you can dive deeper by visiting [Cybersecurity Career Paths](career/profile/career_paths).
+**Career paths and specialization tracks** describe how roles connect over time, how a generalist foundation can branch into deep expertise, and how people move between technical and leadership directions.
 
-## Roles and Responsibilities
+**Certifications and credentialing** explain the industry qualifications that validate knowledge, help with hiring screens, and signal commitment to a specialization.
 
-As cybersecurity matures, positions within the field have become increasingly specialized. This specialization means each role has well-defined responsibilities and skill requirements, making it easier to map out your career progression. Understanding these responsibilities—ranging from security administration to threat analysis—helps you identify the capabilities you need to develop and the directions in which you can grow.
+**Skill development** addresses both the technical abilities that underpin the work and the soft skills, such as communication and judgment, that determine how far those abilities carry you.
 
-For more detailed information on roles, visit [Cybersecurity Roles](career/profile/roles).
+## References
 
-## Skills
-
-Skills play a crucial role in shaping a successful career in cybersecurity. While technical skills are essential for executing security tasks effectively, soft skills are equally important for collaborating with colleagues, communicating with stakeholders, and solving complex problems. By honing a combination of technical and soft skills, you can position yourself as a well-rounded professional capable of navigating the diverse challenges of the cybersecurity landscape.
-
-For a more nuanced understanding of skill development, visit [Skill Development in Cybersecurity](career/profile/skill_development).
-
-## Certifications and Degrees
-
-In addition to skills, certifications and academic degrees are valuable assets that can enhance your career prospects in cybersecurity. Certifications provide tangible proof of your expertise in specific areas of cybersecurity, while academic degrees offer a broader understanding of foundational concepts and principles. By pursuing relevant certifications and degrees, you can demonstrate your commitment to professional development and open doors to new career opportunities.
-
-For additional details on certifications, you can refer to [Cybersecurity Certifications](career/profile/certifications).
+- [NICE Workforce Framework for Cybersecurity](https://niccs.cisa.gov/workforce-development/nice-framework)
+- [NIST National Initiative for Cybersecurity Education](https://www.nist.gov/itl/applied-cybersecurity/nice)
