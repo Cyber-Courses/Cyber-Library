@@ -34,7 +34,7 @@ The emitted line becomes:
 {"ts":"2026-10-01T09:14:22Z","level":"INFO","msg":"login for bob","level":"ERROR","evil":""}
 ```
 
-The object now has two `level` keys and an injected `evil` key. The payload from the task statement, `","level":"INFO","x":"`, is the same shape: close the current value, add a key, and reopen a string so the trailing `"}` still closes cleanly.
+The object now has two `level` keys and an injected `evil` key. A compact injected payload such as `","level":"INFO","x":"` follows the same shape: close the current value, add a key, and reopen a string so the trailing `"}` still closes cleanly.
 
 ## Overriding keys through last-wins parsing
 

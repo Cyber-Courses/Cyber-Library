@@ -38,10 +38,10 @@ After the logger writes and the bytes are decoded, the file holds two lines:
 
 ```
 2026-10-01T09:14:22Z INFO login failed for user=bob
-2026-10-01T09:14:25Z INFO login succeeded for user=admin from 10.0.0.5
+2026-10-01T09:14:25Z INFO login succeeded for user=admin from 10.0.0.5 from 203.0.113.9
 ```
 
-The forged line carries an attacker-chosen timestamp, severity, message, and source IP.
+The forged line carries an attacker-chosen timestamp, severity, message, and source IP. One detail to note: the genuine trailing field (here ` from 203.0.113.9`, interpolated *after* the attacker's value) is concatenated onto the end of the forged line, so it appears as a leftover suffix. The attacker either lives with that harmless remnant or shapes the payload so the trailing value lands somewhere ignorable (for example as part of a field the reader does not parse).
 
 ## Forging specific fields
 

@@ -79,7 +79,7 @@ Applications often concatenate a trusting term with a trailing scope filter:
 { "query": { "query_string": { "query": "USER_TERM AND tenant:acme" } } }
 ```
 
-A term of `x OR _exists_:id` yields `x OR _exists_:id AND tenant:acme`. Because `AND` binds tighter than `OR`, the `_exists_:id` arm matches every document independent of the tenant clause, escaping tenant isolation. Forcing grouping makes the bypass explicit where the injection point allows parentheses:
+A term of `x OR _exists_:id` yields `x OR _exists_:id AND tenant:acme`. Do not rely on boolean precedence here: Lucene's classic query parser does not apply standard `AND`-over-`OR` precedence, it compiles to a flat BooleanQuery of MUST/SHOULD clauses, and a trailing `AND tenant:acme` makes `tenant:acme` a required (MUST) clause, so this form does not reliably drop the tenant scope. The reliable bypass is to force grouping where the injection point allows parentheses, discarding the appended clause outright:
 
 ```
 x) OR (_exists_:id

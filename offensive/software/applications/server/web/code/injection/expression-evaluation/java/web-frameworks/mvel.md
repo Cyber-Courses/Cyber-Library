@@ -24,10 +24,10 @@ Object result = MVEL.eval(expr);
 
 ## Code execution
 
-MVEL reads fully qualified Java types and calls their static methods, so `java.lang.Runtime` is reachable with no preamble. `Runtime.exec(String)` tokenizes the command on whitespace and runs it with no shell, so it suits a single program with simple arguments:
+MVEL reads fully qualified Java types and calls their static methods, so `java.lang.Runtime` is reachable with no preamble. Use the fully qualified name: stock MVEL does not auto-import `java.lang` (unlike Java source, and unlike Drools which adds default imports), so a bare `Runtime` fails to resolve on a default parser context. `Runtime.exec(String)` tokenizes the command on whitespace and runs it with no shell, so it suits a single program with simple arguments:
 
 ```java
-Runtime.getRuntime().exec("id")
+java.lang.Runtime.getRuntime().exec("id")
 ```
 
 Because `exec(String)` has no shell, pipes, `$(...)`, redirection, and `;` separators do not work. For anything needing shell features, construct a `ProcessBuilder` with an explicit argument array where the shell is the program and the chained command is a single element:

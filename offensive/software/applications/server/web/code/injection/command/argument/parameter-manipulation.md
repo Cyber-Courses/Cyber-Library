@@ -29,7 +29,7 @@ The payoff depends on the target binary's option grammar:
 
 ```
 -o/var/www/html/p.php        # curl: write to web root
---config @/etc/passwd        # curl -K: read attacker-named file
+-K/etc/passwd                # curl: parse an attacker-named file as a config (one argv element)
 --use-askpass=/tmp/x.sh      # wget: command execution
 -c core.sshCommand=id        # git: run a command during clone/fetch
 --checkpoint-action=exec=id  # tar: command execution
