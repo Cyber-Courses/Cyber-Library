@@ -15,7 +15,7 @@ An XML bomb needs no external resource and no network at all. It abuses **intern
 
 ## Billion laughs
 
-The canonical form chains ten entities, each defined as ten copies of the previous one:
+The canonical form chains entities, each defined as ten copies of the previous one (this payload defines nine levels):
 
 ```xml
 <?xml version="1.0"?>
@@ -33,7 +33,7 @@ The canonical form chains ten entities, each defined as ten copies of the previo
 <lolz>&lol9;</lolz>
 ```
 
-Each level multiplies by ten, so `&lol9;` expands to 10^9 copies of the three-byte string `lol`, roughly three gigabytes, from a document under a kilobyte. The reference is `&lol9;` placed once in the body. Expansion is exponential in the number of declared levels, so adding entities grows the payload geometrically while the source file barely changes size.
+Each level multiplies by ten, so with nine levels `&lol9;` expands to 10^8 copies of the three-byte string `lol`, roughly 300 megabytes, from a document under a kilobyte (adding a tenth level reaches the 10^9 / ~3 GB that gives the attack its "billion laughs" name). The reference is `&lol9;` placed once in the body. Expansion is exponential in the number of declared levels, so adding entities grows the payload geometrically while the source file barely changes size.
 
 The same structure with fewer levels still demonstrates the mechanism while staying easy to reason about:
 

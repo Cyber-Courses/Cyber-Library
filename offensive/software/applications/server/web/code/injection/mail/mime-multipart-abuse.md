@@ -26,7 +26,7 @@ Once the boundary is known, injecting a `CRLF` sequence plus a fresh `--boundary
 x@evil.test%0d%0aContent-Type: multipart/mixed; boundary="AaB03x"%0d%0a%0d%0a--AaB03x%0d%0aContent-Type: text/html%0d%0a%0d%0a<h1>Phish</h1>%0d%0a--AaB03x--
 ```
 
-The same shape carries an attachment by setting `Content-Disposition: attachment; filename="invoice.html"` and a base64 body, turning a plain notification mailer into a malware or phishing-document delivery channel sent from the trusted domain.
+The same shape carries an attachment by setting `Content-Disposition: attachment; filename="invoice.html"`, declaring `Content-Transfer-Encoding: base64`, and a base64 body (the `Content-Transfer-Encoding` header is required, or the client treats the base64 text as literal content and never decodes it into a file). This turns a plain notification mailer into a malware or phishing-document delivery channel sent from the trusted domain.
 
 ## Smuggling an alternative body past a filter
 

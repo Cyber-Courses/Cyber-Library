@@ -16,7 +16,7 @@ gRPC carries protobuf messages over HTTP/2 to strongly typed service methods. Th
 ## The three surfaces
 
 - **[Server reflection abuse](server-reflection-abuse.md)**: the reflection service handing out the full list of services, methods, and message descriptors, turning an opaque binary API into a browsable one with a tool like `grpcurl`.
-- **[Metadata abuse](metadata-abuse.md)**: the per-call metadata map (`:authority`, custom headers, `grpc-metadata-*`) trusted for authorization, routing, or tenant selection even though the client sets it freely.
+- **[Metadata abuse](metadata-abuse.md)**: the per-call metadata map (`:authority`, custom headers, and, behind grpc-gateway/grpc-web, HTTP headers mapped in via the `Grpc-Metadata-` prefix) trusted for authorization, routing, or tenant selection even though the client sets it freely.
 - **[Dynamic message confusion](dynamic-message-confusion.md)**: `google.protobuf.Any`, type registries, and `oneof` handling where the server decodes an attacker-chosen type into an unsafe handler, a confused deputy between message types.
 
 ## Why binary does not mean safe

@@ -1,6 +1,6 @@
 ---
 title: "Application code vulnerabilities"
-description: "Flaws that originate in the application source the development team controls — unsafe query and command composition, broken authorization, and business-logic errors."
+description: "Flaws that originate in the application source the development team controls: unsafe query and command composition, broken authorization, and business-logic errors."
 keywords:
   - application code
   - business logic

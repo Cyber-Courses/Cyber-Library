@@ -60,7 +60,7 @@ Structured text logs often use space-separated `key=value` pairs:
 ts=2026-10-01T09:14:22Z user=bob action=login result=fail ip=203.0.113.9
 ```
 
-A space and an `=` in the `user` value inject additional keys. Many parsers and log-query languages keep the last value for a repeated key, so appending a key overrides the real one:
+A space and an `=` in the `user` value inject additional keys. Whether an injected key overrides the real one depends on the parser's duplicate-key rule (first-wins vs last-wins) and where the injected field sits relative to the genuine one:
 
 ```
 bob result=success role=admin
@@ -72,7 +72,7 @@ The line becomes:
 ts=... user=bob result=success role=admin action=login result=fail ip=...
 ```
 
-A last-wins parser resolves `result=success`, and `role=admin` appears from nowhere. A first-wins parser is instead attacked by placing the override before the legitimate key, which requires controlling a field earlier in the line.
+Because the attacker-controlled `user` field precedes `result`, the injected `result=success` sits *before* the genuine `result=fail`. A **first-wins** parser keeps the first occurrence, so it resolves `result=success` (and `role=admin` appears from nowhere); that is the case this example exploits. A **last-wins** parser keeps the trailing genuine `result=fail`, so to beat it the attacker must instead control a field written *after* the real key, typically the final field on the line.
 
 ## Breaking downstream regex parsers
 

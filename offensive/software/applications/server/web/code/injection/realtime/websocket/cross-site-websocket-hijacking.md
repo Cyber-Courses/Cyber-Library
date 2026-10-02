@@ -11,7 +11,7 @@ keywords:
 
 # Cross-site WebSocket hijacking
 
-The WebSocket handshake is an ordinary HTTP request, and the browser attaches the target site's cookies to it the same way it would for any other cross-origin request. If the server authorizes the upgrade purely on those ambient cookies and does not validate the `Origin` header, then any page the victim visits can open an authenticated socket to the target on their behalf. Unlike a form-based CSRF, the attacker's page keeps the socket open, so it can both drive actions and read every frame the server sends back.
+The WebSocket handshake is an ordinary HTTP request, and the browser attaches the target site's cookies to it, subject to each cookie's `SameSite` attribute (a key precondition covered under the handshake condition below). If the server authorizes the upgrade purely on those ambient cookies and does not validate the `Origin` header, then any page the victim visits can open an authenticated socket to the target on their behalf. Unlike a form-based CSRF, the attacker's page keeps the socket open, so it can both drive actions and read every frame the server sends back.
 
 ## The handshake condition
 
@@ -28,7 +28,9 @@ Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
 Sec-WebSocket-Version: 13
 ```
 
-If the server answers `101 Switching Protocols` despite the foreign `Origin`, the connection is hijackable. WebSocket handshakes are not protected by the same-origin policy for the open itself, and `WebSocket` does not send or require a CSRF token, so the cookie alone decides whether the socket is authenticated.
+If the server answers `101 Switching Protocols` despite the foreign `Origin`, the connection is hijackable. WebSocket handshakes are not protected by the same-origin policy for the open itself, and `WebSocket` does not send or require a CSRF token, so the server-side authentication rests on the cookie.
+
+The crucial precondition is how that cookie is delivered. A WebSocket open is not a top-level navigation, so with the modern default `SameSite=Lax` the session cookie is **not** attached to a genuinely cross-site handshake (for example `attacker.example` opening a socket to `target.example`). CSWSH therefore requires the auth cookie to be `SameSite=None`, or the attacker page to be *same-site* with the target (a sibling subdomain, since SameSite is scoped to the registrable domain, not the origin). A `SameSite=Lax`/`Strict` session cookie breaks the ambient delivery and is itself a mitigation. Note also that replaying the handshake from a raw HTTP tool (passing the cookie explicitly) bypasses SameSite entirely, so a `101` there does not by itself prove a *browser-driven* cross-site hijack is viable; confirm the cookie's SameSite attribute as well.
 
 ## The attacker page
 

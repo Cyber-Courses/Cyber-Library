@@ -40,7 +40,7 @@ Recognize pickle on the wire by its opcodes and trailing `.` (protocol 0 is ASCI
   !!python/object/apply:os.system ["id"]
   ```
 
-  `yaml.load(data)` on older PyYAML (or with `Loader=yaml.Loader`/`FullLoader` gaps) executes it; `yaml.safe_load` does not. Test both the sink and the loader in use.
+  `yaml.load(data)` executes this under `yaml.Loader`/`UnsafeLoader` (and the pre-5.1 default `yaml.load` with no loader). `FullLoader` was specifically designed to reject arbitrary callable application and does not run it by default; it was only exploitable through specific historical bypasses that current PyYAML has patched. `yaml.safe_load` never runs it. Test both the sink and the exact loader in use.
 
 - **`jsonpickle.decode`** reconstructs Python objects from JSON that carries `py/object` and `py/reduce` keys, giving the same `__reduce__` primitive through a JSON-looking payload.
 

