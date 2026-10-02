@@ -45,12 +45,12 @@ Set-DomainObjectOwner -Identity victim -OwnerIdentity user   # PowerView
 
 ## The Owner Rights limit (why WriteOwner can be a dead end now)
 
-The implicit-owner-rights behaviour has been tightened, and up-to-date environments may not grant a new owner `WRITE_DAC` at all:
+Taking ownership does not always grant `WRITE_DAC`. Two mechanisms constrain it:
 
-- The **`OWNER RIGHTS` SID (`S-1-3-4`)**: if the object's DACL contains an ACE for this SID, it **replaces** the owner's implicit rights with exactly what that ACE allows. An `OWNER RIGHTS` ACE granting only read effectively removes the owner's implicit `WRITE_DAC`.
-- **`BlockOwnerImplicitRights`** (the **28th character of `dsHeuristics`**): when set, an owner that is **not** a member of Domain Admins or Enterprise Admins gets only limited implicit rights, not `WRITE_DAC`. So on a hardened domain, taking ownership as a normal principal does not let you rewrite the DACL.
+- The **`OWNER RIGHTS` SID (`S-1-3-4`)**: if the object's DACL contains an ACE for this SID, it **replaces** the owner's implicit rights with exactly what that ACE allows. An `OWNER RIGHTS` ACE granting only read effectively removes the owner's implicit `WRITE_DAC`. This applies to any object class.
+- **`BlockOwnerImplicitRights`** (the **29th character of `dSHeuristics`**): when enabled, a non-admin owner's implicit rights are blocked specifically when the modified object is a **computer** (or a subclass of it). It was introduced to curb computer-object takeovers, so it mainly neuters `WriteOwner` against **machine accounts**, not users or groups.
 
-BloodHound reflects this with the **`WriteOwnerLimitedRights`** / **`OwnsLimitedRights`** edges: ownership is still writable, but the follow-on DACL rewrite is not guaranteed. Before relying on a `WriteOwner` path, read `dsHeuristics` and the target's `OWNER RIGHTS` ACEs; where implicit rights are blocked, you need a direct `WriteDacl` edge instead, and `WriteOwner` alone is not enough.
+In practice: `WriteOwner` over a **user or group** still lets you take ownership and then rewrite the DACL, unless an `OWNER RIGHTS` ACE restricts it. `WriteOwner` over a **computer** may be a dead end on domains with `BlockOwnerImplicitRights` set. BloodHound marks the constrained case with the **`WriteOwnerLimitedRights`** / **`OwnsLimitedRights`** edges. Read the target's `OWNER RIGHTS` ACEs (and, for computers, `dSHeuristics`) before relying on the path; where implicit rights are blocked you need a direct `WriteDacl` edge instead.
 
 ## Exploitation notes
 

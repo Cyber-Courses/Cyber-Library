@@ -33,7 +33,7 @@ Membership of a high-value group usually takes effect on the next logon/ticket (
 ## Details that decide whether it works
 
 - **Nested groups**: AD group membership is transitive, so you do not need an edge to the target group itself. A write over any group that is (even indirectly) a member of a privileged group is enough. BloodHound already resolves this.
-- **`primaryGroupID` trick**: instead of writing `member`, writing a user's **`primaryGroupID`** to a group's RID makes that user a member without appearing in the group's `member` list, a quieter variant where you control the user object.
+- **`primaryGroupID` (stealth, not a way in)**: this does **not** grant a new membership. AD only allows setting a user's `primaryGroupID` to a group the user is **already** a member of, and the update then removes the explicit `member` entry (primary-group membership is implicit). So it can only **hide** a membership you already have, keeping a privileged membership out of the group's `member` list after the fact, not join a group you were not in.
 - **Account Operators**: members can modify most non-protected groups and accounts but **not** protected groups ([AdminSDHolder](adminsdholder.md)-guarded ones like Domain Admins). It is a common "almost admin" foothold: use it to reach any unprotected account, not the protected ones directly.
 - **Builtin vs domain groups**: adding to `Administrators` (builtin, domain-local) grants domain-controller local admin; adding to `Domain Admins` (global) is broader. Pick the group that matches the access you need.
 

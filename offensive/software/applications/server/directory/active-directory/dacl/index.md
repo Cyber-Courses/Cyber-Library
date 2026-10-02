@@ -56,6 +56,7 @@ Several edges reach the same goal with very different footprints, which is the p
 - **BloodHound**: transitive ACL path analysis and edge identification.
 - **Impacket** (`dacledit.py`, `owneredit.py`): read/write ACEs and change ownership from Linux.
 - **bloodyAD**: set owner, grant rights, reset passwords, add key credentials and group members from Linux.
+- **NetExec (`nxc`)**: `-M daclread` to read ACEs, `-M maq` for the machine-account quota, and `--ntds` once a DCSync grant lands, over LDAP/SMB.
 - **PowerView** (`Add-DomainObjectAcl`, `Set-DomainObjectOwner`): on-host ACE and ownership edits.
 
 ## References

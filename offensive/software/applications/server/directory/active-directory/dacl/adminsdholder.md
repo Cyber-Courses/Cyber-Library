@@ -11,7 +11,7 @@ keywords:
 
 # AdminSDHolder
 
-`AdminSDHolder` is a container (`CN=AdminSDHolder,CN=System,DC=...`) whose DACL is a **template**. A background process, the **Security Descriptor Propagator (SDProp)**, copies that DACL onto every **protected** object (the privileged groups and their members, marked `adminCount=1`) roughly every **60 minutes**, overwriting their individual DACLs. That design, meant to keep privileged objects consistently locked down, is a persistence primitive: write one ACE into the AdminSDHolder template and SDProp grants you rights over **all** protected principals, and re-grants them every cycle even if a defender strips them off the group.
+`AdminSDHolder` is a container (`CN=AdminSDHolder,CN=System,DC=...`) whose DACL is a **template**. A background process, the **Security Descriptor Propagator (SDProp)**, copies that DACL roughly every **60 minutes** onto the domain's **protected** groups and their current members, resolved recursively (Domain Admins, Administrators, Enterprise Admins, and the rest of the protected set), overwriting their individual DACLs and stamping `adminCount=1` on them. That design, meant to keep privileged objects consistently locked down, is a persistence primitive: write one ACE into the AdminSDHolder template and SDProp grants you rights over **all** of those principals, and re-grants them every cycle even if a defender strips them off an individual object.
 
 ## Planting the backdoor
 
@@ -38,13 +38,13 @@ Within one SDProp cycle, `user` holds `GenericAll` over Domain Admins, Administr
 ## Why it is durable
 
 - The grant lives on the **template**, not the group, so removing your rights from Domain Admins is undone at the next cycle; the defender has to find and clean the AdminSDHolder DACL itself.
-- It covers the whole **protected set** at once (anything with `adminCount=1`), so a single ACE is forest-domain-wide privileged access.
+- It covers the whole **protected set** of the domain at once, so a single ACE grants access over every protected group and its current members. AdminSDHolder is maintained **per domain**, so the backdoor is domain-wide (repeat it in each domain for forest-wide reach).
 - It survives membership changes and password resets of the protected accounts, because it regrants the *permission*, not a credential.
 
 ## Exploitation notes
 
 - This is **post-compromise persistence**: you already need high privilege to write AdminSDHolder, so it is about keeping access, not gaining it.
-- Orphaned `adminCount=1` objects (accounts removed from a privileged group keep the flag) are a related tell and a hunting ground; the attribute lingers after demotion.
+- Orphaned `adminCount=1` objects are a related tell: an account removed from the protected groups keeps the flag, but SDProp **stops** refreshing its DACL, so it no longer receives the template (and so is not where the backdoor lands); the stale flag just lingers after demotion.
 - Writing AdminSDHolder's DACL generates directory-service change events on the DC, so it is not stealthy at write time; its value is the durable, quietly-reapplied access afterwards.
 
 ## Tools
