@@ -22,7 +22,7 @@ X-HTTP-Method-Override: DELETE
 
 Verb tampering abuses incomplete method handling. If an access rule is written for specific verbs (`GET` and `POST`), an uncommon method such as `HEAD`, `PUT`, or an arbitrary token can slip past the rule while the application still processes the request, a classic misconfiguration in container and framework authorization filters.
 
-Request-line injection proper arises when an application builds an outbound request line from input (an HTTP client or proxy constructing `GET <input> HTTP/1.1`), where unescaped spaces or CR/LF let the attacker alter the method, path, or version, or append headers. This overlaps with server-side request forgery when the influenced request reaches an internal service, so it is often chained there.
+Request-line injection proper arises when an application builds an outbound request line from input (an HTTP client or proxy constructing `GET <input> HTTP/1.1`). Because the method token precedes the input, unescaped spaces or CR/LF cannot change the method of that request, but they can alter the target path or version, append headers, or, with complete request framing, inject a separate later request whose method does differ. This overlaps with server-side request forgery when the influenced request reaches an internal service, so it is often chained there.
 
 The test is to resend a request with each override header and each unusual verb and watch for a changed authorization or routing outcome.
 
