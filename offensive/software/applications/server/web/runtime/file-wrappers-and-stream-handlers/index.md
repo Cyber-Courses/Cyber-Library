@@ -20,7 +20,7 @@ A path-handling bug that would otherwise be a limited local file read becomes mu
 
 - `php://filter` reads and transforms file contents, dumping source code, and chained filters can synthesize executable PHP from no file at all.
 - `phar://` deserializes archive metadata when any file function touches the path, reaching object injection without an `unserialize()` call.
-- `data://` and `php://input` supply attacker-controlled content directly to an `include`, giving code execution when remote URL inclusion is off.
+- `data://` and `php://input` supply attacker-controlled content directly to an `include` (both require `allow_url_include=On`); when that setting is off, `php://filter` chains still reach code execution with no config dependency.
 
 ## Pages
 

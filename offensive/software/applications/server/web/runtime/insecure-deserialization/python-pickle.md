@@ -44,7 +44,7 @@ Recognize pickle on the wire by its opcodes and trailing `.` (protocol 0 is ASCI
 
 - **`jsonpickle.decode`** reconstructs Python objects from JSON that carries `py/object` and `py/reduce` keys, giving the same `__reduce__` primitive through a JSON-looking payload.
 
-- **`feedparser`, `numpy.load(allow_pickle=True)`, and various caching layers** reach `pickle` internally.
+- **`numpy.load(allow_pickle=True)`, `pandas.read_pickle`, `joblib.load`, and `torch.load`** deserialize with `pickle` under the hood, so loading an untrusted `.npy`/`.pkl`/model file is the same primitive.
 
 ## Exploitation notes
 

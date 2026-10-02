@@ -18,7 +18,7 @@ keywords:
 Some bypasses stay within PHP by abusing how the check resolves paths:
 
 - **`chdir()` plus relative traversal**: walking in and out of permitted directories with sequences of `chdir()` and `..` has historically desynchronized the resolved base from the checked base on some versions, allowing access outside the tree.
-- **Symlinks**: if you can create a symlink inside an allowed directory pointing outside it (via an unzip, upload, or a reachable shell), following it through PHP file functions reads the target.
+- **Symlink races (TOCTOU), not plain symlinks**: PHP resolves a symlink to its real target *before* applying `open_basedir`, so a static link under an allowed directory that points outside it is rejected like any outside path. The version-specific vector is a race: swap the path from a legitimate in-base target to a symlink pointing outside between PHP's check and its open. This needs a concrete resolution or race bug on the target's PHP build; do not expect a plain symlink to work.
 - **`glob://` and wrapper quirks**: enumeration wrappers sometimes list entries the direct check would deny.
 
 These are version-sensitive; test against the exact PHP build.
