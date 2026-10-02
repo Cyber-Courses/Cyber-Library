@@ -25,7 +25,7 @@ The high-value rights, in rough order of power:
 
 ## Enumerating ACEs
 
-BloodHound is the practical tool because it resolves *transitive* ACL paths (A can write B, B is admin of C) rather than one object at a time; collect with ACLs enabled (see [BloodHound](bloodhound.md)) and run the dangerous-rights queries. For targeted reads:
+BloodHound is the practical tool because it resolves *transitive* ACL paths (A can write B, B is admin of C) rather than one object at a time; collect with ACLs enabled (see [BloodHound](../authentication/reconnaissance/bloodhound.md)) and run the dangerous-rights queries. For targeted reads:
 
 ```
 # PowerView: who has rights over a specific object, resolved to names

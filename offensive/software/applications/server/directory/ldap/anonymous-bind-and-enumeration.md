@@ -36,7 +36,7 @@ A true **null bind** (a bind with a username but an empty password) is a related
 
 ## Per-product notes
 
-- **Active Directory**: the rootDSE (naming contexts, supported controls) is almost always anonymously readable, which is enough for [host and domain discovery](../active-directory/enumeration/host-and-domain-discovery.md); object data is anonymous only if `dsHeuristics` has been loosened or the pre-Windows-2000 compatibility group includes Anonymous.
+- **Active Directory**: the rootDSE (naming contexts, supported controls) is almost always anonymously readable, which is enough for [host and domain discovery](../active-directory/authentication/reconnaissance/host-and-domain-discovery.md); object data is anonymous only if `dsHeuristics` has been loosened or the pre-Windows-2000 compatibility group includes Anonymous.
 - **OpenLDAP / 389 DS**: anonymous read of the whole tree is a frequent default or misconfiguration; `userPassword` hashes may even be returned anonymously on a poorly ACL'd server.
 - **Appliances** (storage, network gear, apps with embedded LDAP) often ship with permissive anonymous access.
 
