@@ -1,29 +1,38 @@
 ---
-title: Offensive
-description: Discover how ethical hacking, red teaming, bug bounty programs, and other offensive security techniques help identify and address vulnerabilities across physical, network, software, and human layers.
+title: "Offensive security"
+description: Penetration testing, red teaming, bug bounty, and adversary emulation—methodology, tradecraft, and how this library maps attack-relevant topics.
 keywords:
-  - offensive cybersecurity
-  - ethical hacking
+  - offensive security
   - penetration testing
   - red teaming
+  - adversary emulation
   - bug bounty
   - social engineering
-  - data protection
-  - risk management
 ---
 
 # Offensive
 
-## What Is Offensive Cybersecurity?
+**Offensive** work means acting as an **authorized** adversary: you probe systems the way real attackers do—recon, exploitation, lateral movement, persistence—so weaknesses show up as **evidence** (reproducible steps, impact, blast radius), not as abstract “risk scores.”
 
-Offensive cybersecurity involves ethically simulating real-world attacks to uncover vulnerabilities before malicious actors can exploit them. By acting as authorized adversaries, security teams expose weak points in an organization’s defenses, allowing those issues to be addressed proactively. This process not only identifies potential threats but also confirms whether existing protections, from physical barriers to software safeguards, truly stand up to adversarial tactics. When carried out responsibly—often referred to as “ethical hacking”—offensive security efforts follow established guidelines and maintain respect for the systems and data under examination.
+This branch is written for **operators and readers of findings**: what to try, how techniques chain, and where the library keeps the detail (web code, injection, access control, workflow flaws, and more).
 
-## Why Is Offensive Cybersecurity Important?
+## Methodologies (how engagements differ)
 
-Offensive cybersecurity plays a critical role in reducing risk and validating an organization’s overall security posture. Testing defenses under realistic attack scenarios reveals how well incident response processes hold up when confronted with genuine threats. By pinpointing critical vulnerabilities, security teams can prioritize remediation measures that bolster protection where it’s needed most. This proactive strategy is also more cost-effective than coping with the fallout of a successful breach, which can include disruption to business operations, reputational damage, and steep financial penalties. Furthermore, by thoroughly examining the physical, network, software, and human layers of an information system, organizations gain a holistic understanding of their vulnerabilities—insights that empower them to develop targeted, efficient security solutions.
+| Style | What you optimize for |
+|-------|------------------------|
+| **Penetration test** | Time-boxed coverage, clear **PoCs**, severity-rated issues, often scoped systems. |
+| **Red team** | Longer campaign, stealth and **detection** pressure, goals (e.g. domain objective) over raw CVE count. |
+| **Bug bounty** | Public or private programs, out-of-scope rules, payout-driven **signal** on high-impact bugs. |
+| **Assumed breach / tabletop** | Sometimes paired with offensive work; this library focuses on **technical** tradecraft more than IR exercises. |
 
-## How Is Offensive Cybersecurity Done?
+Techniques evolve constantly; the library favors **durable patterns** (classes of bug and how code mishandles trust) over one-off exploit names.
 
-Implementing offensive cybersecurity starts with identifying the layers that comprise an organization’s environment. The human layer, often the weakest link, can be tested through social engineering exercises designed to gauge awareness and compliance with security protocols. The physical layer focuses on access controls and hardware, determining how easily an unauthorized individual could infiltrate a facility or tamper with devices. At the network layer, security professionals examine firewalls, routers, and other infrastructure components to see if attackers can breach the perimeter or pivot laterally within a compromised system. The software layer, meanwhile, undergoes assessments for coding flaws, misconfigurations, and logic gaps that might let an intruder escalate privileges or exfiltrate data. Offensive teams may also explore data protection mechanisms—like encryption and encoding—to verify their resilience to tampering or bypass efforts.
+## Where to start in this library
 
-Within these layers, a variety of methodologies guide offensive operations. Penetration testing focuses on targeted attacks against specific systems to unearth vulnerabilities in a controlled manner, providing concrete proof-of-concept exploits. Red teaming employs a broader, more holistic approach that imitates sophisticated, persistent adversaries, testing not just technological defenses but also the organization’s incident response, communication, and decision-making processes. Many companies additionally employ bug bounty programs, which invite independent researchers to probe systems and report security flaws for rewards. Each offensive initiative requires technical expertise, adaptability, and creativity, as real attackers are constantly evolving their methods. Ultimately, these ethically driven attack simulations serve as a fundamental pillar of a comprehensive cybersecurity strategy, illuminating blind spots and driving continuous improvement.
+- **[Software](software/index.md)** — Vulnerabilities that live in **application code**, APIs, and how programs process untrusted input. Server-side **web** material is organized under *Software → Applications → Server → Web → Code*.
+
+Physical, pure network, or org-policy topics may live elsewhere in the wider wiki; this subtree is biased toward **software and web application** offensive content.
+
+## Scope
+
+Use the linked pages for **authorized** testing, research on systems you own, CTFs, and training labs. Legal and policy boundaries are on you and your engagement rules—not this documentation.
