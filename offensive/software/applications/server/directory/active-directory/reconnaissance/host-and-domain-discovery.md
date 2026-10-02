@@ -71,7 +71,7 @@ enum4linux-ng -A <dc-ip>
 ## Exploitation notes
 
 - The rootDSE read usually works unauthenticated, so domain discovery often precedes having any credentials.
-- A mismatch between `defaultNamingContext` and `rootDomainNamingContext` means you are in a child domain, which changes trust and escalation options (see [trust enumeration](../../trusts/trust-enumeration.md)).
+- A mismatch between `defaultNamingContext` and `rootDomainNamingContext` means you are in a child domain, which changes trust and escalation options (see [trust enumeration](../trusts/trust-enumeration.md)).
 - Record the DC that answers and whether LDAPS is available, since signing and channel-binding posture decides whether relay to LDAP is viable later.
 
 ## Tools

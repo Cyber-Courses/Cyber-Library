@@ -30,6 +30,8 @@ A compromised Windows host and the directory itself hold several credential stor
 - **[DPAPI secrets](dpapi-secrets.md)**: browser, vault, and application credentials.
 - **[NTDS and DCSync](ntds-and-dcsync.md)**: the whole domain's hashes from the DC or by replication.
 - **[Cracking](cracking.md)**: turning recovered hashes into passwords offline.
+- **[User and group enumeration](user-and-group-enumeration.md)**: building the account list to target.
+- **[Password policy](password-policy.md)**: reading the policy that bounds safe spraying.
 - **[Password spraying](password-spraying.md)**: guessing valid credentials without lockout.
 
 ## References
