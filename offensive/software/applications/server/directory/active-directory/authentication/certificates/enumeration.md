@@ -26,8 +26,10 @@ AD CS configuration lives in the **Configuration partition** of the directory, r
 # Certipy: collect everything and flag vulnerable configurations
 certipy find -u user@example.local -p pass -dc-ip <dc> -stdout -vulnerable
 
-# NetExec from Linux: find CAs/templates, or run Certipy's triage inline
+# NetExec from Linux: -M adcs lists the enrolment servers (CAs); pass SERVER to
+# enumerate that CA's templates; certipy-find runs Certipy's triage inline
 nxc ldap <dc> -u user -p pass -M adcs
+nxc ldap <dc> -u user -p pass -M adcs -o SERVER=<CA-CN>
 nxc ldap <dc> -u user -p pass -M certipy-find
 
 # BloodHound (with AD CS collection) graphs CA/template relationships and ESC paths
