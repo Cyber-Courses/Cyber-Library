@@ -54,5 +54,7 @@ A captured NetNTLMv2 response has two uses:
 
 ## References
 
-- The Hacker Recipes: LLMNR/NBT-NS/mDNS poisoning
-- Microsoft: name-resolution order and LLMNR
+- [Responder (lgandx): the maintained LLMNR/NBT-NS/mDNS poisoner](https://github.com/lgandx/Responder)
+- [Inveigh (Kevin-Robertson): .NET IPv4/IPv6 MITM poisoner](https://github.com/Kevin-Robertson/Inveigh)
+- [mitm6 (dirkjanm): IPv6 DNS takeover](https://github.com/dirkjanm/mitm6)
+- [The Hacker Recipes: LLMNR/NBT-NS/mDNS poisoning](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications/llmnr-nbtns-mdns-spoofing)

@@ -31,5 +31,6 @@ Capture and coercion produce the authentication; relay and pass-the-hash consume
 
 ## References
 
-- The Hacker Recipes: abusing NTLM
-- Microsoft: NTLM authentication
+- [SpecterOps: the renaissance of NTLM relay attacks](https://posts.specterops.io/the-renaissance-of-ntlm-relay-attacks-everything-you-need-to-know-abfc3677c34e)
+- [Microsoft (MS-NLMP): NTLM authentication protocol](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-nlmp/b38c36ed-2804-4868-a9ff-8dd3182128e4)
+- [The Hacker Recipes: NTLM](https://www.thehacker.recipes/ad/movement/ntlm/)
