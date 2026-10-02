@@ -25,6 +25,7 @@ Every trust in that chain is a target: the account key (roasting, pass-the-key),
 
 ## Pages
 
+- **[SPN discovery](spn-discovery.md)**: finding the service accounts that Kerberoasting targets.
 - **[Roasting](roasting.md)**: Kerberoasting, AS-REP roasting, and timeroasting, obtaining crackable material from the protocol.
 - **[Pass-the-key and overpass-the-hash](pass-the-key-and-overpass-the-hash.md)**: turning a key or hash into a TGT.
 - **[Pass-the-ticket](pass-the-ticket.md)**: extracting and injecting tickets to reuse them.

@@ -1,6 +1,6 @@
 ---
 title: "Active Directory: attacking the Windows domain and its authentication ecosystem"
-description: "The Active Directory attack surface organized by mechanism: enumeration, authentication and credential abuse (NTLM, Kerberos, certificates), DACL abuse, Group Policy, trusts, and persistence."
+description: "The Active Directory attack surface organized by what is attacked: authentication and credentials (NTLM, Kerberos, certificates) with domain reconnaissance, DACL abuse, Group Policy, and trusts."
 keywords:
   - active directory
   - kerberos
@@ -16,27 +16,24 @@ Active Directory (AD) is the identity and authorization backbone of most Windows
 
 ## How this area is organized
 
-After **enumeration**, AD is organized by the **mechanism being abused**, because that is the durable primitive and how a technique is looked up (Kerberoasting is a Kerberos technique regardless of which engagement phase you use it in). The heart of the tree is a single **authentication and credentials** section, since passwords, NTLM hashes, Kerberos tickets, and certificates are all just different forms of the same thing, authentication material you obtain and reuse. Permission-based privilege escalation (DACLs, Group Policy), lateral trust abuse, and domain persistence follow.
+This area is organized by the **attack surface**, the thing being abused, because that is the durable primitive and how a technique is looked up: Kerberoasting is a Kerberos technique regardless of which engagement phase you use it in. Each topic covers its own lifecycle, from finding it to abusing it to persisting through it, rather than splitting those into separate kill-chain sections. The largest surface by far is **authentication**, since passwords, NTLM hashes, Kerberos tickets, and certificates are all forms of the same thing, authentication material you obtain and reuse; it also holds the general domain reconnaissance that precedes every other attack. Permission-based escalation (DACLs, Group Policy) and cross-boundary trust abuse are their own surfaces.
 
 ## The attack arc
 
-A typical path, which these sections support in order:
+A typical path cuts across these surfaces in order:
 
-1. **Enumerate** the domain from any authenticated (often any network) position to map users, groups, computers, delegations, ACLs, and trusts.
+1. **Reconnaissance**: read the domain from any authenticated (often any network) position to map users, groups, computers, delegations, ACLs, and trusts (under Authentication).
 2. **Obtain authentication material**: spray or roast for crackable secrets, dump credentials from a foothold, relay coerced authentication, or abuse certificate templates.
 3. **Escalate** by abusing object permissions (DACLs) and Group Policy that let a controlled principal rewrite privileged objects.
 4. **Cross boundaries** by abusing domain and forest trusts.
-5. **Persist** with forged tickets, replication abuse, and privileged-object backdoors.
+5. **Persist** with forged tickets, replication abuse, and privileged-object backdoors, covered within each surface it belongs to.
 
-## Sections
+## Topics
 
-- **[Enumeration](enumeration/index.md)**: mapping the domain, its objects, permissions, and trusts.
-- **Authentication and credentials**: NTLM, Kerberos, certificates (AD CS), and credential dumping and cracking.
-- **DACL abuse**: abusing object permissions to control privileged principals.
-- **Group Policy**: abusing GPOs to run code and change configuration.
-- **Trusts**: intra-forest and cross-forest trust abuse.
-- **Built-ins and settings**: default quotas, legacy settings, and privileged groups.
-- **Persistence**: maintaining domain control after compromise.
+- **[Authentication](authentication/index.md)**: domain reconnaissance, then credential dumping and cracking, NTLM, Kerberos, and certificates (AD CS).
+- **[DACL](dacl/index.md)**: abusing object permissions to control privileged principals.
+- **[Group Policy](group-policy/index.md)**: abusing GPOs to run code and change configuration.
+- **[Trusts](trusts/index.md)**: intra-forest and cross-forest trust abuse.
 
 ## References
 

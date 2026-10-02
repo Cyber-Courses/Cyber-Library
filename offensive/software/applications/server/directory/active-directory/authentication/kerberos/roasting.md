@@ -61,7 +61,7 @@ Machine-account passwords are usually strong, so timeroasting mainly finds non-d
 
 - A cracked service account is immediately reusable: it often has local admin on its application servers and feeds [pass-the-ticket](pass-the-ticket.md) and [silver tickets](forged-tickets.md).
 - Request **RC4** tickets wherever possible; a domain that enforces AES-only keys on service accounts blunts the crack speed, though the ticket is still issued.
-- Kerberoasting needs only one valid credential, AS-REP roasting can need none, so both belong at the very start of an engagement alongside [enumeration](../../enumeration/spn-discovery.md).
+- Kerberoasting needs only one valid credential, AS-REP roasting can need none, so both belong at the very start of an engagement alongside [enumeration](spn-discovery.md).
 
 ## Tools
 

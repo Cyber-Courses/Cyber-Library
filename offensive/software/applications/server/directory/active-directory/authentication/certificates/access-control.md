@@ -51,7 +51,7 @@ certipy ca -u user@example.local -p pass -ca <ca> -issue-request <id>       # ap
 
 ## Exploitation notes
 
-- ESC4 is the cleanest: one writable template becomes ESC1, so hunt for write access over templates during [ACL enumeration](../../enumeration/acl-enumeration.md).
+- ESC4 is the cleanest: one writable template becomes ESC1, so hunt for write access over templates during [ACL enumeration](../../dacl/acl-enumeration.md).
 - ESC7's ManageCA path can also **enable the web enrolment endpoint**, opening the door to [ESC8 relay](relay-to-adcs.md).
 - Always restore a reconfigured template or CA setting afterward to limit disruption and keep the change inconspicuous.
 

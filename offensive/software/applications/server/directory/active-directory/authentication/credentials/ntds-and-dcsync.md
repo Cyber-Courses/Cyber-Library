@@ -47,7 +47,7 @@ secretsdump.py -ntds NTDS.dit -system system.save LOCAL
 ## Exploitation notes
 
 - The `krbtgt` hash is the crown jewel: it signs every ticket, so possessing it enables golden-ticket forgery and domain-wide persistence. Extract it specifically even when a full dump is noisy.
-- Prefer DCSync over touching the DC filesystem; it is quieter and needs only the replication right, which is exactly why hunting for non-DA principals with that right (see [ACL enumeration](../../enumeration/acl-enumeration.md)) is worthwhile.
+- Prefer DCSync over touching the DC filesystem; it is quieter and needs only the replication right, which is exactly why hunting for non-DA principals with that right (see [ACL enumeration](../../dacl/acl-enumeration.md)) is worthwhile.
 - The dump includes historical hashes and, with `-just-dc`, the Kerberos AES keys; keep the AES keys for pass-the-key and ticket forgery.
 
 ## Tools

@@ -57,7 +57,7 @@ Without credentials, there are still ways to build a user list:
 
 - `kerbrute userenum` is the safest bulk validator because it never submits a password, so it does not increment the bad-password count or trigger lockout.
 - Resolve group membership **recursively**: privileged access is often inherited through nested groups rather than direct membership.
-- Feed the validated user list to [SPN discovery](spn-discovery.md) and to password spraying, and the privileged accounts to [BloodHound](bloodhound.md) as high-value targets.
+- Feed the validated user list to [SPN discovery](../kerberos/spn-discovery.md) and to password spraying, and the privileged accounts to [BloodHound](bloodhound.md) as high-value targets.
 
 ## Tools
 
