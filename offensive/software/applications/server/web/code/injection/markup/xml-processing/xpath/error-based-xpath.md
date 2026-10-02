@@ -11,7 +11,7 @@ keywords:
 
 # Error-based
 
-When an XPath processor returns its error messages to the client, a deliberately forced failure can carry node text out inside the error string. The reliable form of this is specific to XPath 2.0 and XQuery engines (Saxon, BaseX, eXist-db, the .NET 2.0 processors): their type constructors validate their argument and name the offending value when it fails. XPath 1.0 engines such as libxml2 do not raise on bad coercions, so against those the error channel confirms and fingerprints injection but does not pull values; the technique below therefore targets a 2.0-capable processor, identified first by the fingerprinting payloads at the end.
+When an XPath processor returns its error messages to the client, a deliberately forced failure can carry node text out inside the error string. The reliable form of this is specific to XPath 2.0 and XQuery engines (Saxon, BaseX, eXist-db): their XSD type constructors validate their argument and name the offending value when it fails. XPath 1.0 engines such as libxml2, MSXML, and the native .NET `System.Xml.XPath` engine have no XSD type constructors and do not raise on bad coercions, so against those the error channel confirms and fingerprints injection but does not pull values; the technique below therefore targets a 2.0-capable processor, identified first by the fingerprinting payloads at the end.
 
 ## Why a cast leaks data
 
@@ -69,7 +69,7 @@ Error-based value extraction only works on a 2.0 engine, so confirm the processo
 count(//
 ```
 
-An unbalanced quote or bracket produces a message whose exact wording identifies the engine (libxml2, MSXML, Saxon, .NET). If the fingerprint is a 1.0-only engine such as libxml2, fall back to boolean-blind extraction through the predicate; if it is a 2.0 engine, the cast-failure channel above reads values directly.
+An unbalanced quote or bracket produces a message whose exact wording identifies the engine (libxml2, MSXML, Saxon, .NET). If the fingerprint is a 1.0 engine (libxml2, MSXML, or the native .NET XPath engine), fall back to boolean-blind extraction through the predicate; only a 2.0 engine (Saxon, BaseX, eXist-db) exposes the cast-failure channel above that reads values directly.
 
 ## References
 

@@ -30,12 +30,14 @@ Because the digest depends only on the body, an attacker can precompute it offli
 The common offensive flow is load-then-exec across two reachable sinks. Where one injection point allows `SCRIPT LOAD` (or an earlier `EVAL`) and another allows `EVALSHA`, the attacker stages a malicious script once and triggers it later:
 
 ```
-SCRIPT LOAD "return redis.call('CONFIG','SET',KEYS[1],ARGV[1])"
-# cache now holds the config-writing script under its SHA1
-EVALSHA <sha1> 1 dir /var/www/html
+SCRIPT LOAD "return redis.call('SET', KEYS[1], ARGV[1])"
+# cache now holds a key-writing script under its SHA1
+EVALSHA <sha1> 1 sessions:admin "forged-value"
 ```
 
-The staged script is parameterized through `KEYS`/`ARGV`, so a single cached body drives multiple actions by varying the arguments on each `EVALSHA`. This chains cleanly into the write-to-disk sequence in [CONFIG SET abuse](../config-set-abuse.md).
+The staged script is parameterized through `KEYS`/`ARGV`, so a single cached body drives multiple actions by varying the arguments on each `EVALSHA`.
+
+Note the ceiling: `EVAL`/`EVALSHA` can only invoke **script-allowed** commands. `CONFIG` (SET/GET), `SLAVEOF`/`REPLICAOF`, and `DEBUG` carry the `noscript` flag and are rejected inside a Lua script with "This Redis command is not allowed from script", so the write-to-disk RCE sequence in [CONFIG SET abuse](../config-set-abuse.md) cannot be staged through Lua and must be issued as **direct** commands. What `EVALSHA` stages is data-plane manipulation (`GET`/`SET`/`KEYS`/`MGET`/`SCAN`) over a blind or split sink.
 
 ## NOSCRIPT and re-seeding
 

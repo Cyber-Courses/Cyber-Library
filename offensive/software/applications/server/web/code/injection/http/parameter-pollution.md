@@ -13,7 +13,7 @@ keywords:
 
 HTTP parameter pollution (HPP) supplies the same parameter more than once (`?id=1&id=2`) and exploits the fact that platforms resolve duplicates differently. When two components in the stack pick different occurrences, a value that passes one check is the one that is not used downstream.
 
-Resolution varies by platform: PHP/Apache and many frameworks take the **last** occurrence, others take the **first**, ASP.NET classic **concatenates** them with a comma (`1,2`), and JSP/servlets expose them as an **array** where code often reads index 0. Knowing the target's rule decides which copy to weaponize.
+Resolution varies by platform: PHP/Apache and many frameworks take the **last** occurrence, others take the **first**, ASP.NET/IIS (and classic ASP) **concatenate** them with a comma (`1,2`), and JSP/servlets expose them as an **array** where code often reads index 0. Knowing the target's rule decides which copy to weaponize.
 
 Two abuses follow. A WAF or input filter that inspects the first occurrence can be bypassed when the application uses the last, so a benign first value hides a malicious second (useful for slipping an injection payload past a filter):
 

@@ -33,7 +33,7 @@ HQL operates over **entities and their fields**, not raw tables, which shapes th
 ' OR 1=1 --
 ```
 
-Set-based retrieval depends on the Hibernate version. Hibernate ORM 6.1 and newer add `union`/`union all` (and `intersect`/`except`) to HQL, so on a current stack a UNION-style pivot across mapped entities is a valid attack surface:
+Set-based retrieval depends on the Hibernate version. Hibernate ORM 6.0 and newer add `union`/`union all` (and `intersect`/`except`) to HQL (introduced with the Semantic Query Model), so on a current stack a UNION-style pivot is a valid attack surface. HQL set operations require **type-compatible** select items on both arms, so the host query must project a scalar matching the injected one (here the query is assumed to select `u.username`, unioned with `u.password`, both strings):
 
 ```
 xyz' UNION SELECT u.password FROM User u WHERE '1'='1

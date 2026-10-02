@@ -51,7 +51,7 @@ For the single-quoted `name`/`username` context, break out of the string first:
 
 Column count and types must match the original `SELECT` for a `UNION` to succeed; enumerate with `ORDER BY n` or incremental `NULL` columns as with any union-based injection. Django runs on PostgreSQL, MySQL, SQLite, and Oracle, so tailor comment syntax (`--`, `#`) and string functions to the backend in use.
 
-Stacked queries are generally **not** available through the default DB-API cursor (one statement per `execute`), so prefer `UNION` and boolean/time-based inference over `; DROP ...`.
+Stacked queries are generally **not** available through the default DB-API cursor (one statement per `execute`), with a notable exception: on PostgreSQL via psycopg2 (a common Django backend) multiple `;`-separated statements in one `execute()` are permitted, so stacked queries are viable there. On other backends prefer `UNION` and boolean/time-based inference over `; DROP ...`.
 
 ## Notes on `raw()` specifics
 

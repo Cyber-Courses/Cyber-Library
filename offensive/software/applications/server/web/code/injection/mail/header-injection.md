@@ -45,7 +45,7 @@ A `Cc:` works the same way and is visible to the real recipient, so `Bcc:` is us
 x@evil.test%0d%0aBcc:a@evil.test,b@evil.test,c@evil.test
 ```
 
-This turns a contact form or password-reset mailer into an open relay for spam or phishing sent from the victim's own domain, inheriting its SPF and DKIM reputation.
+This turns a contact form or password-reset mailer into an attacker-controlled mail-sending channel (not an open relay, which is an MTA that relays for arbitrary third parties; here the app is repurposed as a sender) for spam or phishing from the victim's own domain, inheriting its SPF and DKIM reputation.
 
 ## Forging and overriding headers
 

