@@ -36,8 +36,8 @@ ldapsearch ... '(objectClass=trustedDomain)' name trustDirection trustType trust
 Three attributes decide abusability:
 
 - **`trustDirection`**: inbound, outbound, or bidirectional. Attacks flow along the direction of trust (you abuse a trust that trusts *your* domain).
-- **`trustType`**: within a forest (automatic, transitive, and the most abusable) versus a forest trust or external trust to a separate forest.
-- **`trustAttributes`**: flags such as `WITHIN_FOREST`, `FOREST_TRANSITIVE`, and whether **SID filtering** / quarantine is enabled. SID filtering is the control that blocks SID-history injection across the trust, so its presence or absence decides whether the cross-forest escalation is viable.
+- **`trustAttributes`**: this is the attribute that defines the topology, through flags such as `WITHIN_FOREST` (an intra-forest parent-child or tree-root trust), `FOREST_TRANSITIVE` (a forest trust), and whether **SID filtering** / quarantine (`TREAT_AS_EXTERNAL`, `QUARANTINED_DOMAIN`) is enabled. SID filtering is the control that blocks SID-history injection across the trust, so its presence or absence decides whether the cross-forest escalation is viable.
+- **`trustType`**: the trust *protocol and partner type* (an up-level Windows/AD trust versus, for example, an MIT Kerberos realm), not the parent-child versus external versus forest distinction. Intra-forest, external, and forest trusts can all report the same up-level type, so read the topology from `trustAttributes` above, not from `trustType`.
 
 ## Intra-forest versus cross-forest
 

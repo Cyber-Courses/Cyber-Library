@@ -48,7 +48,7 @@ Key values:
 - **`defaultNamingContext`** (for example `DC=example,DC=local`) is the search base for every object query.
 - **`rootDomainNamingContext`** identifies the forest root, which matters for cross-domain and cross-forest work.
 - **`configurationNamingContext`** and **`schemaNamingContext`** hold the forest-wide configuration (sites, services, the AD CS enrollment services) and the schema.
-- **`dnsHostName`** confirms the DC's name, and **`supportedSASLMechanisms`** hints at whether LDAP signing or channel binding is likely enforced.
+- **`dnsHostName`** confirms the DC's name, and **`supportedSASLMechanisms`** lists the SASL authentication mechanisms the DC offers (it does not reveal signing or channel-binding posture, which needs a separate policy or behavioral check).
 
 ## Identifying the domain from a foothold
 

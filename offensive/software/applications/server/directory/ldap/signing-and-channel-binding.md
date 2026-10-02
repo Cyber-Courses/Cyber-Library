@@ -40,7 +40,7 @@ Three states matter: signing not required (relay to 389 works), channel binding 
 
 - The check gates the attack: there is no point coercing authentication toward LDAP if the directory enforces both signing and channel binding.
 - Even with LDAP hardened, the **AD CS web enrollment** endpoint (HTTP) is a common relay target that signing/channel-binding on LDAP does not protect, so a hardened directory does not close relay entirely.
-- Signing/channel-binding posture is a domain-wide setting on the DCs, so one check against any DC characterizes the whole domain.
+- Signing and channel binding are **per-DC** machine settings, not a single domain-wide switch, and they drift (staged hardening, registry overrides, failed Group Policy application). Check every reachable DC rather than treating one result as domain-wide; a single unhardened DC is enough to relay to.
 
 ## Tools
 

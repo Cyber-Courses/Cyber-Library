@@ -32,8 +32,9 @@ ldapsearch ... '(memberOf=CN=Domain Admins,CN=Users,DC=example,DC=local)' sAMAcc
 UAC bit filters surface the highest-value targets directly:
 
 ```
-# Kerberoastable: user accounts with a servicePrincipalName
-(&(objectClass=user)(servicePrincipalName=*)(!(sAMAccountName=krbtgt)))
+# Kerberoastable: user accounts with a servicePrincipalName (objectCategory=person
+# excludes computer accounts, which are a subclass of user and do not crack)
+(&(objectClass=user)(objectCategory=person)(servicePrincipalName=*)(!(sAMAccountName=krbtgt)))
 
 # AS-REP roastable: DONT_REQ_PREAUTH (0x400000)
 (&(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=4194304))
@@ -41,8 +42,8 @@ UAC bit filters surface the highest-value targets directly:
 # Unconstrained delegation: TRUSTED_FOR_DELEGATION (0x80000)
 (userAccountControl:1.2.840.113556.1.4.803:=524288)
 
-# Accounts with password never expires (0x10000), or password not required (0x20)
-(userAccountControl:1.2.840.113556.1.4.803:=65536)
+# Password never expires (0x10000) OR password not required (0x20): one bit test per flag
+(|(userAccountControl:1.2.840.113556.1.4.803:=65536)(userAccountControl:1.2.840.113556.1.4.803:=32))
 ```
 
 The OID `1.2.840.113556.1.4.803` is the bitwise-AND matching rule, essential for reading UAC flags.

@@ -18,8 +18,9 @@ A **service principal name** (SPN) maps a service instance to the account that r
 The query is a single LDAP filter: user objects that have a `servicePrincipalName` set.
 
 ```bash
-# LDAP filter for kerberoastable users (exclude the krbtgt account)
-ldapsearch ... '(&(objectClass=user)(servicePrincipalName=*)(!(sAMAccountName=krbtgt)))' \
+# LDAP filter for kerberoastable users. objectCategory=person excludes computer
+# accounts (computer is a subclass of user, and machine-account hashes do not crack)
+ldapsearch ... '(&(objectClass=user)(objectCategory=person)(servicePrincipalName=*)(!(sAMAccountName=krbtgt)))' \
   sAMAccountName servicePrincipalName memberOf
 
 # Tooling that lists SPNs and their accounts
