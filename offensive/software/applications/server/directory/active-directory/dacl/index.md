@@ -15,11 +15,12 @@ Every Active Directory object carries a discretionary access control list (DACL)
 
 ## The rights that matter
 
-- **GenericAll / GenericWrite**: full or broad write over an object, the master keys that enable every abuse below.
-- **WriteDacl / WriteOwner**: rewrite the object's ACL or take ownership, then grant yourself the rights you need.
-- **ForceChangePassword**: reset a user's password without knowing the old one.
-- **AddMember / Self (membership)**: add yourself (or a controlled account) to a group.
-- **AllExtendedRights**: includes the replication rights that enable DCSync.
+- **GenericAll**: full control of the object, which includes every write and control-access right below (password reset, property writes, ACL changes).
+- **GenericWrite**: write the object's **properties** (SPN, `msDS-KeyCredentialLink`, the delegation attribute, group membership), but **not** control-access rights: it does not grant ForceChangePassword, WriteDacl, or the replication rights.
+- **WriteDacl / WriteOwner**: rewrite the object's ACL or take ownership, then grant yourself any right you lack, the usual way a GenericWrite-only edge is escalated to full control.
+- **ForceChangePassword**: a control-access right that resets a user's password without knowing the old one.
+- **AddMember / Self**: write a group's membership (AddMember as a property write, or the Self right to add only yourself).
+- **AllExtendedRights on the domain root**: includes the `DS-Replication-Get-Changes` rights that enable DCSync. Over an ordinary user or group it does **not** grant DCSync; the rights must apply to the domain naming-context root.
 
 ## What a write becomes
 
@@ -30,7 +31,7 @@ A DACL edge is only useful for what it lets you do; the common conversions route
 - **Write an SPN** on a user to make it roastable, then crack it ([roasting](../authentication/kerberos/roasting.md)).
 - **Write `msDS-KeyCredentialLink`** to authenticate as the object ([shadow credentials](../authentication/kerberos/shadow-credentials.md)).
 - **Write the delegation attribute** to impersonate to it ([resource-based delegation](../authentication/kerberos/delegation/resource-based-constrained.md)).
-- **Grant replication rights** to a principal to enable [DCSync](../authentication/credentials/ntds-and-dcsync.md).
+- **Grant replication rights on the domain object** to a principal to enable [DCSync](../authentication/credentials/ntds-and-dcsync.md) (this requires control over the domain root, not an ordinary object).
 
 ## Pages
 
