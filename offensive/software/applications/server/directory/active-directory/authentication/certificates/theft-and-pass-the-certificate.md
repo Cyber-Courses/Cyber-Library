@@ -61,5 +61,6 @@ PKINIT returns the account's NT hash alongside the TGT via [UnPAC-the-hash](../k
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (theft and persistence)
-- The Hacker Recipes: pass the certificate
+- [Certipy (ly4k): auth, shadow, and certificate theft](https://github.com/ly4k/Certipy)
+- [PKINITtools (dirkjanm): PKINIT and UnPAC](https://github.com/dirkjanm/PKINITtools)
+- [SpecterOps: Certified Pre-Owned (theft and persistence)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
