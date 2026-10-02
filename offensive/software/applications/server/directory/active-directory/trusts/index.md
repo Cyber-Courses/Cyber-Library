@@ -1,6 +1,6 @@
 ---
-title: "Trusts: abusing Active Directory domain and forest trusts"
-description: "Abusing Active Directory trust relationships to move between domains and forests: using trust keys, SID history and cross-domain tickets inside a forest, and the narrower paths across forest trusts bounded by SID filtering."
+title: "Trusts: moving across Active Directory domains and forests"
+description: "Active Directory trust relationships as a path between domains and forests: trust keys and inter-realm tickets, SID history inside a forest, and the narrower paths across forest trusts bounded by SID filtering."
 keywords:
   - active directory trusts
   - forest trust
@@ -19,15 +19,18 @@ A trust lets principals in one domain authenticate to resources in another. Trus
 - **Cross-forest trusts** are meant to be stronger, bounded by **SID filtering**, but misconfiguration, SID-history allowances, and shared accounts open paths across them.
 - **Trust direction and transitivity** decide who can reach whom; a trusted domain's compromise often flows into the trusting one.
 
-## How trusts are abused
+## How trusts are crossed
 
-- **Trust keys**: the shared key of an inter-domain trust forges inter-realm referral tickets to move across the trust.
-- **SID history**: injecting a privileged SID from the target domain into a ticket grants that domain's access where SID filtering does not strip it; within a forest it typically is not stripped.
-- **Cross-domain tickets**: a golden/forged ticket in a child domain, carrying an Enterprise Admin SID, escalates to the forest root where intra-forest filtering is absent.
+- **SID history**: a privileged SID from the target domain, placed in a forged ticket's `extraSids`, grants that domain's access wherever SID filtering does not strip it; within a forest it typically is not stripped.
+- **Trust keys**: the shared key of an inter-domain trust forges the inter-realm referral tickets that move a principal across the trust.
+- **Guardrails**: cross-forest trusts enforce SID filtering and selective authentication by default, so crossing them relies on granted access or relaxed configuration rather than SID injection.
 
 ## Pages
 
 - **[Trust enumeration](trust-enumeration.md)**: mapping trusts, their direction, transitivity, and filtering posture.
+- **[Intra-forest trusts](intra-forest-trusts.md)**: reaching the forest root from any domain via SID history.
+- **[Cross-forest trusts](cross-forest-trusts.md)**: moving between forests under SID filtering and selective authentication.
+- **[Trust keys and inter-realm tickets](trust-keys.md)**: forging referral tickets from the trust key.
 
 ## References
 
