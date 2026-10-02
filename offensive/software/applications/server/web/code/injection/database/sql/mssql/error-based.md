@@ -22,10 +22,12 @@ The response carries `Conversion failed when converting the varchar value 'Micro
 
 ```sql
 ' AND 1=CONVERT(int,(SELECT TOP 1 name FROM sys.tables))-- 
-' AND 1=CONVERT(int,(SELECT TOP 1 name+':'+CAST(password_hash AS varchar(max)) FROM sys.sql_logins))-- 
+' AND 1=CONVERT(int,(SELECT TOP 1 name+':'+master.dbo.fn_varbintohexstr(password_hash) FROM sys.sql_logins))-- 
 ```
 
-Unlike MySQL's XPath channel, SQL Server does not truncate the value, so a whole row or an aggregated dump comes back in one error. Keep the inner query to a single value with `TOP 1` or an aggregate, since a multi-row subquery used as a scalar raises a different error that carries no data. The same technique drives blind error-based extraction when only the presence or absence of the conversion error is observable.
+Note that a password hash is `varbinary`: render it with `fn_varbintohexstr` (or `CONVERT(varchar(max), hash, 2)`) rather than a plain `CAST` to `varchar`, which would reinterpret the raw bytes as text and produce unusable, NUL-containing output.
+
+Unlike MySQL's XPath channel, SQL Server does not cap the value at ~32 characters, so a row usually returns in one error. It is not unlimited, though: error messages have a finite length and a very long value or aggregate can be truncated, so for large dumps read in windows with `SUBSTRING((SELECT ...),1,2000)` and page through. Keep the inner query to a single value with `TOP 1` or an aggregate, since a multi-row subquery used as a scalar raises a different error that carries no data.
 
 ## References
 
