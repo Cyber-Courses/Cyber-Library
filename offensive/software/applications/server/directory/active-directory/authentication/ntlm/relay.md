@@ -34,7 +34,12 @@ ntlmrelayx.py -t http://<ca>/certsrv/certfnsh.asp --adcs --template DomainContro
 
 # Relay to SMB on a non-signing host and execute
 ntlmrelayx.py -t smb://<host> -c 'whoami'
+
+# Relay to LDAP to add Shadow Credentials on a victim (no RBCD computer needed)
+ntlmrelayx.py -t ldap://<dc> --shadow-credentials --shadow-target 'victim$'
 ```
+
+`ntlmrelayx` also relays to **MSSQL** and Exchange HTTP endpoints, and supports **multi-relay**: after the first authentication it issues an HTTP **307 redirect** so one coerced auth can be relayed to several targets in turn.
 
 - **Relay to LDAP + RBCD**: configure resource-based constrained delegation on a computer object you can then impersonate any user to, a common path from coerced machine authentication to local admin on that machine.
 - **Relay to AD CS (ESC8)**: relay a coerced DC or user HTTP authentication to the CA web enrollment and obtain a certificate as that principal; a DC certificate is domain compromise.
@@ -49,14 +54,17 @@ Coercion and relay combine into the canonical unauthenticated-to-domain path: **
 - You cannot relay an authentication back to the host that produced it in modern Windows (the reflection fix), so relay is always to a *different* target.
 - Machine-account authentications are fully relayable even though their passwords are uncrackable, which is why coercing `DC$` and relaying beats trying to crack it.
 - Pair relay with `mitm6` (IPv6 DNS takeover) to source authentications broadly and relay to LDAP for domain-wide RBCD.
+- **Windows Server 2025 narrows the classics**: it enables LDAP channel binding and SMB signing more widely, turns on EPA by default, and encrypts AD CS web enrolment, so the familiar relay-to-LDAPS and ESC8 paths often die against a 2025 DC. New reflective techniques (abusing the SMB sign/seal negotiation flags) keep relay alive, so test the target's actual posture rather than assuming either way.
 
 ## Tools
 
-- **ntlmrelayx.py** (Impacket): the relay engine, with `--delegate-access` (RBCD), `--adcs` (ESC8), SMB exec, and LDAP dump.
+- **ntlmrelayx.py** (Impacket): the relay engine, with `--delegate-access` (RBCD), `--shadow-credentials`, `--adcs` (ESC8), SMB exec, LDAP dump, and multi-relay.
 - **Responder / mitm6**: source the authentications to relay.
-- **krbrelayx**: related Kerberos/unconstrained-delegation relay paths.
+- **krbrelayx**: related Kerberos / unconstrained-delegation relay paths.
 
 ## References
 
-- The Hacker Recipes: NTLM relay
-- Microsoft: SMB signing, LDAP channel binding and signing
+- [SpecterOps: the renaissance of NTLM relay attacks](https://posts.specterops.io/the-renaissance-of-ntlm-relay-attacks-everything-you-need-to-know-abfc3677c34e)
+- [SecureAuth: a technical guide to relaying credentials everywhere](https://secureauth.com/resources/blog/we-love-relaying-credentials-technical-guide)
+- [Impacket ntlmrelayx](https://github.com/fortra/impacket)
+- [The Hacker Recipes: NTLM relay](https://www.thehacker.recipes/ad/movement/ntlm/relay)

