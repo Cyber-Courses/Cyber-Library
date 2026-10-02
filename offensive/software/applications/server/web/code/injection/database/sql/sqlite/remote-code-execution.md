@@ -13,7 +13,7 @@ keywords:
 
 SQLite has two routes to code execution from injection, both with clear preconditions.
 
-`load_extension(path)` loads a shared library and calls its entry point, which runs native code. This is the direct route, but it is off by default at two levels: many builds compile with loadable extensions disabled entirely, and even when compiled in, extension loading must be enabled at runtime through the C API (`sqlite3_enable_load_extension`) or the `enable_load_extension` PRAGMA before the SQL `load_extension()` function will work. Where an application has enabled it, a malicious library reached through a writable or attacker-supplied path gives execution:
+`load_extension(path)` loads a shared library and calls its entry point, which runs native code. This is the direct route, but it is off by default at two levels: many builds compile with loadable extensions disabled entirely, and even when compiled in, extension loading must be turned on by the embedding application through the C API (`sqlite3_enable_load_extension()` or `sqlite3_db_config()`). There is no SQL pragma that enables it, so injection cannot unlock this path itself; it works only where the application has already enabled extension loading. Where it has, a malicious library reached through a writable or attacker-supplied path gives execution:
 
 ```sql
 ' ; SELECT load_extension('/tmp/evil')-- 

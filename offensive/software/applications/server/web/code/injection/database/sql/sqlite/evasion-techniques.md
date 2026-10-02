@@ -26,7 +26,7 @@ Inline comments `/**/` replace whitespace to break space-separated token signatu
 ' UNION/**/SELECT/**/name/**/FROM/**/sqlite_master-- 
 ```
 
-Keywords are case-insensitive, so case variation (`UnIoN SeLeCt`) bypasses naive case-sensitive blocklists. Hex and blob literals (`x'7573657273'`) provide another quote-free way to supply bytes, and `CAST`/`unicode`/`char` conversions reconstruct filtered substrings.
+Keywords are case-insensitive, so case variation (`UnIoN SeLeCt`) bypasses naive case-sensitive blocklists. Blob literals (`x'7573657273'`) help against keyword and string-value signatures, but note they still use single quotes, so unlike MySQL's unquoted `0x...` they do not defeat a quote filter; for genuinely quote-free construction use the `char()` form above. `CAST`/`unicode`/`char` conversions reconstruct filtered substrings.
 
 Because SQLite is loosely typed and has a minimal parser, it also tolerates some oddities that confuse filters tuned for stricter engines, such as missing `FROM` clauses (`UNION SELECT 1,2`) and flexible literal forms. As with the other engines, the goal is to express the same query through synonyms and encodings the filter does not recognize rather than to defeat it head-on, combining several of these where a filter blocks more than one pattern.
 
