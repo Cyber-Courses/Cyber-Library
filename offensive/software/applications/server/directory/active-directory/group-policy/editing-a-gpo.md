@@ -11,7 +11,9 @@ keywords:
 
 # Editing a GPO
 
-A GPO you can **write** (a `GenericWrite`/`GenericAll`/`WriteProperty` edge over the GPO object, or write access to its SYSVOL folder) is code execution on everything the GPO is linked to. You add a policy item, the client machines fetch it on their next refresh, and it runs. The highest-impact item is an **immediate scheduled task**, which runs once as soon as the policy applies, as **SYSTEM** on computers in scope.
+A GPO you can **write at the directory object** (a `GenericWrite`/`GenericAll`/`WriteProperty` edge) is code execution on everything the GPO is linked to. You add a policy item, the client machines fetch it on their next refresh, and it runs. The highest-impact item is an **immediate scheduled task**, which runs once as soon as the policy applies, as **SYSTEM** on computers in scope.
+
+Injecting a **new** item takes more than the SYSVOL files: a client only processes a policy area whose client-side extension is registered in the GPO object's **`gPCMachineExtensionNames`** (or `gPCUserExtensionNames`), and only when the object's **`versionNumber`** increments. Those are LDAP attributes on the GPO object, so a brand-new scheduled task needs the directory-object write, not just the SYSVOL folder. Write access to **only** the SYSVOL folder is weaker: it lets you tamper with content the GPO **already** references (an existing script or task), not add a new policy area. The tools below perform both the SYSVOL write and the directory updates, so they assume object write.
 
 ## What you can push
 

