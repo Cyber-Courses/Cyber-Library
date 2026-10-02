@@ -57,6 +57,11 @@ field = groups__permissions__codename
 
 The `__regex` / `__iregex` lookups additionally expose the backend regular-expression engine, which can be driven toward catastrophic backtracking.
 
+## Tools
+
+- **Burp Repeater**: swapping lookups and field names to traverse relations and build oracles.
+- **Burp Intruder**: automating __startswith character-by-character enumeration.
+
 ## References
 
 - [Django docs: Field lookups](https://docs.djangoproject.com/en/stable/ref/models/querysets/#field-lookups)

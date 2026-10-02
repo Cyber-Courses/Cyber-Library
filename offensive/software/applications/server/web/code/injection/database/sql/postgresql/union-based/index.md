@@ -24,6 +24,11 @@ The flow is the same as elsewhere: detect the column count, find a reflected tex
 - **[Detect column count](detect-column-count.md)**: `ORDER BY` and `UNION SELECT NULL` probing, with casts.
 - **[Extract schema and data](extract-schema.md)**: enumerate and dump via `information_schema` and `pg_catalog`.
 
+## Tools
+
+- **sqlmap**: automated union-based detection and extraction.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: UNION, type casts, `string_agg`

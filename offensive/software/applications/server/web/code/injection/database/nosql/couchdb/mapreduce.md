@@ -85,6 +85,11 @@ Content-Type: application/json
 
 Where an application builds a view definition from user input (a field name to index, a filter expression) and concatenates it into the function string, the attacker closes the intended expression and appends their own JavaScript, exactly as with any string-built code sink. Probe by submitting a value that would break the surrounding function syntax and watching for a query-server compilation error in the response.
 
+## Tools
+
+- **curl**: submit crafted view definitions and query the resulting index.
+- **Burp Repeater**: deliver the injected map or reduce body through the sink.
+
 ## References
 
 - [Apache CouchDB: Views and MapReduce](https://docs.couchdb.org/en/stable/ddocs/views/intro.html)

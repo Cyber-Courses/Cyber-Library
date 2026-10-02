@@ -25,6 +25,12 @@ A quieter option is a dormant account or grant: creating a low-profile user with
 
 Each of these is a post-compromise action that assumes DBA already, so it follows privilege escalation and command execution rather than standing alone. The value is durability: a single job or trigger re-creates the access an incident responder removes elsewhere.
 
+## Tools
+
+- **ODAT** (Oracle Database Attacking Tool): schedules jobs and runs code on a compromised instance.
+- **sqlplus** (or SQLcl): the Oracle client for installing scheduler jobs, triggers, and backdoor procedures.
+- Manual testing with Burp Repeater and the Oracle client.
+
 ## References
 
 - Oracle Database PL/SQL Packages and Types Reference: DBMS_SCHEDULER; SQL Language Reference: CREATE TRIGGER

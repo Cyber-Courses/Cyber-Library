@@ -29,6 +29,12 @@ The attacker's name server for `collab.example` logs `<current_user>.collab.exam
 
 Because it runs a real command, this is also a stepping stone to full command execution: the same `COPY ... TO PROGRAM` that resolves a name can start a reverse shell. Out-of-band is simply the lowest-footprint use of that primitive for a blind target.
 
+## Tools
+
+- **sqlmap**: automates out-of-band exfiltration with `--dns-domain`.
+- **Burp Collaborator**: logging name server that records the exfiltrated DNS labels.
+- **psql**: official client to build the `COPY ... TO PROGRAM` payload.
+
 ## References
 
 - PostgreSQL Documentation: COPY ... TO PROGRAM, DO, EXECUTE

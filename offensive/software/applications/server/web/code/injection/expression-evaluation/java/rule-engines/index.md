@@ -22,6 +22,11 @@ Every engine in this group reaches code execution, though through a different la
 
 The JVM engines here share the `Runtime.exec(String)` shell caveat: the single-string form tokenizes on whitespace with no shell, so shell features require an explicit `String[]{"/bin/bash","-c","..."}` vector through `ProcessBuilder`. The Logstash page covers the Ruby equivalent.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting into route, rule, and pipeline expressions.
+- **J2EEScan**: Burp extension with checks for Java EL and OGNL injection.
+
 ## References
 
 - [Apache Camel: expression languages](https://camel.apache.org/components/latest/languages/index.html)

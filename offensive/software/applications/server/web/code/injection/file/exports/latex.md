@@ -85,6 +85,11 @@ Package-specific vectors widen the surface: `\usepackage{verbatim}` with `\verba
 
 Submit the payload through whatever field the template renders (name, address, invoice line item, profile bio). The attack fires server-side the moment the application runs `pdflatex`, so the output PDF, or a compilation error leaking file contents, is returned to you or stored for later retrieval.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for submitting TeX macro payloads.
+- Manual `\input` and `\write18` payloads compiled by the target engine.
+
 ## References
 
 - [OWASP Testing Guide: server-side injection](https://owasp.org/www-project-web-security-testing-guide/)

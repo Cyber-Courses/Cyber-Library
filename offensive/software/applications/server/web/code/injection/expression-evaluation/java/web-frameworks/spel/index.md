@@ -18,6 +18,11 @@ SpEL is a full object language. The `T(...)` operator is a type reference that n
 - **[Code execution](code-execution.md)**: the type reference and reflection routes from a SpEL expression to the host runtime.
 - **[WAF bypass](waf-bypass.md)**: rewriting the code-execution payload to defeat signature filters while keeping it valid SpEL.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for SpEL injection into Spring sinks.
+- **J2EEScan**: Burp extension with SpEL injection checks.
+
 ## References
 
 - [Spring Framework: Spring Expression Language](https://docs.spring.io/spring-framework/reference/core/expressions.html)

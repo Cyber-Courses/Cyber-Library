@@ -51,6 +51,11 @@ The specific code returned (`XPTY0004` for a type mismatch, `XPST0017` for an un
 
 Engine-specific messages frequently disclose filesystem paths, module URIs, and internal variable names. A deliberately malformed `doc()` or `file:read-text()` call provokes a not-found error whose text echoes the resolved absolute path, mapping the deployment layout for a follow-up file-read payload.
 
+## Tools
+
+- **Burp Repeater**: forcing cast and division-by-zero faults and reading error text.
+- Manual testing with `cast as xs:integer` and `fn:error()` payloads.
+
 ## References
 
 - [W3C XQuery 3.1: Error Handling](https://www.w3.org/TR/xquery-31/#id-error-handling)

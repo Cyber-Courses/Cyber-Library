@@ -53,6 +53,12 @@ file:///usr/share/xml/scrollkeeper/dtds/scrollkeeper-omf.dtd
 
 On Windows and Java stacks, runtime and application directories hold their own DTDs. Confirm a file exists first with a plain local read that succeeds or fails distinguishably, then match the redefined entity name to one the chosen DTD actually declares and references. Once a present DTD and a valid entity name are found, the leak proceeds with no outbound connection at all.
 
+## Tools
+
+- **dtd-finder (GoSecure)**: listing on-disk DTDs and generating local-DTD payloads.
+- **Burp Repeater**: iterating candidate DTD paths and entity names.
+- Manual testing with a local-DTD redefinition payload for no-egress targets.
+
 ## References
 
 - [OWASP: XML External Entity (XXE) Processing](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing)

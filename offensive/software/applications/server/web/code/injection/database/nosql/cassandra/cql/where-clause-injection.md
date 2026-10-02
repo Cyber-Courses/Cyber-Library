@@ -72,6 +72,11 @@ turns a lookup for the submitted name into a lookup for `admin`, with the block 
 
 Submit a lone `'` and watch for a CQL parse error surfacing in the response (`SyntaxException`, `line 1:...`), a reliable signal the value reaches query text. Compare a benign value against `existing_value' /*` to confirm the comment and breakout parse. Where no rows are reflected and errors are suppressed, fall back to [Blind inference](blind.md); where errors leak, see [Error-based](error-based.md).
 
+## Tools
+
+- **cqlsh**: test quoted-value breakouts and predicate additions directly.
+- **Burp Repeater**: craft and resend the breakout payload through the parameter.
+
 ## References
 
 - [Apache Cassandra: SELECT and the WHERE clause](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#select)

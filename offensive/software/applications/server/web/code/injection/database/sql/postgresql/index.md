@@ -35,6 +35,12 @@ Power depends on the role. A superuser can read files with `pg_read_file()`, wri
 - **[Command execution](command-execution/index.md)**: run OS commands through `COPY PROGRAM` or an untrusted-language function.
 - **[WAF bypass](waf-bypass.md)**: `CHR()`, dollar-quoting, and catalog alternatives past filters.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation of PostgreSQL injection across all techniques.
+- **ghauri**: fast alternative with strong WAF evasion.
+- **psql**: official client for validating payloads and catalog queries directly.
+
 ## References
 
 - PostgreSQL Documentation: system catalogs, functions, and COPY

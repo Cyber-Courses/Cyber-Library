@@ -24,6 +24,11 @@ Timing is noisier than a boolean oracle because network jitter and server load a
 - **[SLEEP](sleep.md)**: conditional `IF(..., SLEEP(n), 0)` extraction.
 - **[BENCHMARK](benchmark.md)**: CPU-based delay when `SLEEP` is filtered.
 
+## Tools
+
+- **sqlmap**: automated time-based blind extraction with SLEEP and BENCHMARK.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: SLEEP, BENCHMARK, IF

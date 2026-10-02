@@ -57,6 +57,11 @@ Stacked queries are generally **not** available through the default DB-API curso
 
 `raw()` maps rows to model instances, so the first columns must align with the model's primary key and fields for the rows to map, a `UNION` payload should select columns in the model's order, padding with `NULL`. Extra trailing columns can be pulled out through annotated attributes.
 
+## Tools
+
+- **sqlmap**: automating extraction against raw() and cursor.execute() sinks.
+- **Burp Repeater and Intruder**: delivering context-specific breakout and UNION payloads.
+
 ## References
 
 - [Django docs: Performing raw SQL queries](https://docs.djangoproject.com/en/stable/topics/db/sql/)

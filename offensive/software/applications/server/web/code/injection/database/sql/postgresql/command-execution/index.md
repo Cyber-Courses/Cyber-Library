@@ -22,6 +22,11 @@ The second route defines a function in an untrusted language. Creating functions
 - **[COPY FROM PROGRAM](copy-from-program.md)**: run a command and read its output through a table.
 - **[Untrusted language function](language-function.md)**: define a `plpythonu`, `plperlu`, or C function that executes commands.
 
+## Tools
+
+- **sqlmap**: automates command execution with `--os-shell` over COPY FROM PROGRAM.
+- **Metasploit Framework**: `postgres_payload` module for command execution on privileged roles.
+
 ## References
 
 - PostgreSQL Documentation: COPY ... FROM PROGRAM, CREATE FUNCTION, procedural languages

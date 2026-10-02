@@ -56,7 +56,14 @@ MTAs, gateways, and clients each implement boundary matching slightly differentl
 - Part separators and part headers both need real `CRLF`s; on the wire from a web request that is `%0d%0a`, and the blank line before a part's content is a double `%0d%0a%0d%0a`.
 - A part must end with `CRLF` immediately before the next `--boundary`, and the final delimiter needs its trailing `--`.
 
+## Tools
+
+- **swaks**: Swiss Army Knife for SMTP, scripting crafted multipart messages.
+- **Burp Repeater**: injecting boundary and part-header payloads into mail fields.
+- **curl**: sending crafted CRLF and boundary payloads into mail-composition fields.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
-- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11-Testing_for_HTTP_Splitting_Smuggling)
+- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_IMAP_SMTP_Injection)
 - [PayloadsAllTheThings: CRLF Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CRLF%20Injection)

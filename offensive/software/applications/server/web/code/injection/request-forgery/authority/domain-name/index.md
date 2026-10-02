@@ -18,6 +18,12 @@ When the SSRF target is supplied as a hostname rather than a literal IP, a secon
 
 Both widen the same gap the whole [Authority](../index.md) subtree targets, between the host a filter sees and the host the request reaches, but they do it at the naming layer rather than through raw IP encodings.
 
+## Tools
+
+- **Singularity of Origin**: DNS rebinding attack framework for serving attacker-controlled resolution.
+- **Burp Collaborator**: detecting when the server resolves and reaches an out-of-band hostname.
+- **curl**: confirming which supplied hostname form the client resolves and connects to.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

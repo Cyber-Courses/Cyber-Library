@@ -25,6 +25,11 @@ Each `>` test halves the candidate range, so a printable character resolves in a
 
 When comparison operators are filtered, `substring(...) = 't'` tests equality directly, and the SQL-standard `substring(value FROM pos FOR 1)` form avoids the comma that some filters block. Against an unprivileged role that cannot read `pg_shadow`, point the subquery at an application table instead. Like all blind extraction, this is heavily automated, but the per-request comparison is the reliable primitive underneath the tooling.
 
+## Tools
+
+- **sqlmap**: automated boolean-based blind extraction with binary search.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: `substring`, `ascii`

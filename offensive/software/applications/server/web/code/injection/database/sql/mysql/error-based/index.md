@@ -23,6 +23,11 @@ Both XPath functions truncate the reflected text to about 32 characters. Longer 
 - **[UPDATEXML](updatexml.md)**: the same channel through the three-argument function.
 - **[FLOOR double-query](floor-double-query.md)**: duplicate-key error for servers without the XPath functions.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through EXTRACTVALUE, UPDATEXML, and double-query.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: EXTRACTVALUE, UPDATEXML, XPath functions

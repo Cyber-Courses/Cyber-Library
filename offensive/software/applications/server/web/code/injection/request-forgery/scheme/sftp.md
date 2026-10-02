@@ -35,6 +35,11 @@ sftp://user:pass@10.0.0.5/home/user/.ssh/id_rsa
 
 Where no credential is available, treat `sftp://` as a service-presence and reachability oracle rather than a disclosure primitive.
 
+## Tools
+
+- **curl**: manual `sftp://` probing to test whether an internal host speaks SSH on port 22.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

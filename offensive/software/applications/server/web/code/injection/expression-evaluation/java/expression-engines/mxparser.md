@@ -48,6 +48,11 @@ sum(i, 1, 100000000, i^2)
 
 Deeply nested functions, large factorials and gamma evaluations, and expressions engineered to return `NaN` or infinite values push computation cost and can propagate degenerate numbers into downstream application logic. The impact is availability and corrupted results, contained within the evaluator.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate user-defined arguments, constants, and functions by name.
+
 ## References
 
 - [mXparser documentation](https://mathparser.org/)

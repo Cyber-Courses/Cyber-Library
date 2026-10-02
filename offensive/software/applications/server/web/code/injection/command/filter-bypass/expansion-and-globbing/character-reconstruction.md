@@ -82,6 +82,11 @@ Each slash, each space, and each keyword fragment is produced by the shell, leav
 - Choose a source variable guaranteed to be present, `HOME`, `PATH`, and `PWD` reliably start with `/`.
 - The method reconstructs **characters**; combine it with brace/glob/variable techniques when whole command names are also filtered.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting reconstructed-character payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate character and space bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass without specific characters](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

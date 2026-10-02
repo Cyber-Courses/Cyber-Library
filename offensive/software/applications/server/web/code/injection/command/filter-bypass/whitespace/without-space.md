@@ -68,6 +68,11 @@ cat%09/etc/passwd
 
 `%09` (tab) and, in some contexts, `%0b`/`%0c` reach the shell as whitespace. Combine with keyword-splitting tricks where the keyword itself is filtered.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting space-free payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate no-space bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

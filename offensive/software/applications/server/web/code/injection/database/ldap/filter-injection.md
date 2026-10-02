@@ -36,6 +36,13 @@ filter: (&(objectClass=person)(cn=*)(|(objectClass=*))
 
 Exactly how an injected extra filter after the outer `)` is handled depends on the client library and server: some use only the first complete filter, which still matches broadly, while others reject a malformed string. The reliable primitive is the wildcard plus injected clauses inside the existing group. Because the filter is prefix-structured, the attacker works by closing groups with `)` and opening new ones with `(`, mirroring how SQL injection closes quotes, and the same unescaped input feeds the authentication-bypass and blind techniques.
 
+## Tools
+
+- **ldapsearch**: test injected filter strings directly against the directory.
+- **windapsearch**: enumerate directory objects and attributes worth targeting.
+- **Burp Repeater**: craft operator-payload requests and compare responses.
+- **python-ldap**: script filter payloads programmatically.
+
 ## References
 
 - RFC 4515: LDAP search filter string representation

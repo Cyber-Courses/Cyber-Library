@@ -18,6 +18,11 @@ Read both pages together, because the practical mistake is treating one like the
 - [eval() and exec()](python-eval.md) covers genuine arbitrary code execution through the interpreter, builtins abuse, the class-traversal gadget walk that survives restricted builtins, and why `ast.literal_eval` is the safe sibling.
 - [Common Expression Language](common-expression-language.md) covers the sandboxed case: manipulating authorization and admission decisions, disclosing context exposed to the expression, and abusing any dangerous host-registered functions.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for reaching eval/exec and CEL sinks.
+- **tplmap**: detects and exploits Python eval()/exec() code-injection sinks.
+
 ## References
 
 - [Python: eval built-in](https://docs.python.org/3/library/functions.html#eval)

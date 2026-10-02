@@ -26,6 +26,13 @@ The pages group by what the handler buys an attacker:
 
 Before building a scheme-specific payload, confirm the handler exists. Point each scheme at an attacker-controlled listener or an obviously invalid target and watch the error or interaction: a connection attempt, a protocol-specific error, or a timeout each distinguish a registered handler from one the library rejects outright. The handler set depends on the language, the URL library, and its configuration, so enumeration precedes exploitation.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation across internal targets with per-scheme modules.
+- **Gopherus**: crafts gopher payloads for Redis, FastCGI, and SMTP via SSRF.
+- **Burp Collaborator**: out-of-band interaction detection for blind SSRF.
+- **curl**: manual probing of which schemes a handler resolves.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

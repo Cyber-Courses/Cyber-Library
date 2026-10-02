@@ -61,6 +61,11 @@ c"a"t${IFS}/etc/passwd
 - Quotes must be **balanced**; an unmatched `"` leaves an open string and breaks the command.
 - If your injection already sits inside a double-quoted context, remember that `$`, `` ` ``, and `\` remain active there—useful for breaking out, but also means a stray `$` or backtick in your payload may be interpreted.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting quote-split payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

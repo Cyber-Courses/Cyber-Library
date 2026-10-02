@@ -63,6 +63,12 @@ Even a stylesheet the attacker cannot edit is exploitable when the application p
 
 Setting `src` to `file:///etc/hostname` or an internal URL reuses the same primitives without touching the stylesheet body, the common case in report and template features that let users point a transform at a chosen data source.
 
+## Tools
+
+- **Burp Suite**: injecting `document()` and `unparsed-text()` payloads in Repeater.
+- **Burp Collaborator**: confirming blind SSRF from transform-time fetches.
+- Manual testing with `file://` and internal `http://` URI payloads.
+
 ## References
 
 - [W3C XSLT 2.0: The document() Function](https://www.w3.org/TR/xslt20/#document)

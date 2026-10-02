@@ -38,6 +38,13 @@ Oracle's most powerful primitives live in supplied PL/SQL packages, and from 11g
 - **[Persistence](persistence-techniques.md)**: scheduler jobs, triggers, and backdoors.
 - **[Evasion techniques](evasion-techniques.md)**: comments, `CHR()`, and case tricks past filters.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation (`--dbms=Oracle`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **ODAT** (Oracle Database Attacking Tool): post-exploitation (file, command, and privilege abuse).
+- **sqlplus** (or SQLcl): the Oracle client for a direct session once credentials are recovered.
+
 ## References
 
 - Oracle Database SQL Language Reference and PL/SQL Packages and Types Reference

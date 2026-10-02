@@ -93,6 +93,12 @@ This splits one object into a broken fragment and a second partial object, and i
 - Over HTTP form or query input, send the quote and comma literally; where the sink is itself JSON, supply them as `\"` and `,` so they decode to raw structure at the logger.
 - A real serializer defeats all of the above, so this technique applies specifically to string-concatenated or format-string JSON logging.
 
+## Tools
+
+- **Burp Repeater**: injecting quote-and-comma payloads into JSON-logged fields.
+- **curl**: sending crafted values that close strings and append keys.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [OWASP: Log Injection](https://owasp.org/www-community/attacks/Log_Injection)

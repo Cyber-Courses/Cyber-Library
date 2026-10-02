@@ -80,6 +80,11 @@ yields `... AND category = 'books' OR user_id <> 'x'`, returning the whole table
 
 Because PartiQL is SQL-compatible, standard boolean and relational payloads transfer directly; adjust quoting and attribute names to the target table's schema.
 
+## Tools
+
+- **AWS CLI**: run `aws dynamodb execute-statement` to test PartiQL breakout payloads.
+- **Burp Repeater**: deliver single-quote breakout and OR payloads through the parameter.
+
 ## References
 
 - [AWS DynamoDB: PartiQL for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ql-reference.html)

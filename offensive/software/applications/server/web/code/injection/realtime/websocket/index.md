@@ -16,3 +16,14 @@ A WebSocket starts life as an HTTP request with an `Upgrade: websocket` header, 
 That handler is where the interesting attack surface lives. The handshake may have been authenticated and origin-checked, yet each frame after it is often trusted implicitly: the server reads an `action`, an `id`, or a `room` out of the frame and acts, without re-running the checks that guarded the upgrade. Frame bodies also flow into the same backends as any other input, so a frame can carry a SQL fragment, a script payload, or a template expression straight to a sink while bypassing the HTTP-layer filtering that would have caught it on a REST route.
 
 This section covers per-message authorization gaps, cross-site WebSocket hijacking, and message injection into downstream sinks.
+
+## Tools
+
+- **Burp Suite**: WebSockets history and repeater for intercepting, editing, and replaying frames.
+- **wsrepl**: interactive WebSocket REPL built for penetration testing.
+- **websocat**: command-line WebSocket client for scripting and fuzzing raw frames.
+
+## References
+
+- PortSwigger Web Security Academy: WebSocket security vulnerabilities
+- OWASP Web Security Testing Guide: Testing WebSockets

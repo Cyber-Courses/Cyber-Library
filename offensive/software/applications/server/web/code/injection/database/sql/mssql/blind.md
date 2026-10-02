@@ -29,6 +29,11 @@ Confirm the oracle with a known true/false pair (`' AND 1=1--` versus `' AND 1=2
 
 Because this generates many near-identical requests it is almost always automated, but the single-request comparison is the primitive that lets you adapt when a tool stalls, and it falls back cleanly to time-based inference when no boolean difference is visible.
 
+## Tools
+
+- **sqlmap**: automated boolean-based blind extraction with binary search.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - Microsoft SQL Server Documentation: SUBSTRING, ASCII, LEN, TOP

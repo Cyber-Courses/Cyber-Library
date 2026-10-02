@@ -18,6 +18,11 @@ The advantage over MySQL's XPath channel is that PostgreSQL does not truncate th
 
 - **[Cast error](cast-error.md)**: leak values through `CAST(... AS int)` conversion failures.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through type-cast failures.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: type casts, error messages

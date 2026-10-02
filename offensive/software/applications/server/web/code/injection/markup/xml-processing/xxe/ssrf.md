@@ -59,6 +59,12 @@ A connection that is accepted, refused, or times out produces a different error 
 
 For fully blind targets, combine this with the out-of-band pattern so the fetched internal response is exfiltrated to an attacker server rather than inferred from errors.
 
+## Tools
+
+- **Burp Suite**: pointing SYSTEM entities at internal hosts and metadata endpoints.
+- **Burp Collaborator**: confirming blind SSRF reach out-of-band.
+- **XXEinjector**: automating entity-driven internal requests.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

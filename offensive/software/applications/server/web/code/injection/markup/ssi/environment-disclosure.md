@@ -101,6 +101,11 @@ If the response contains `SSI-ACTIVE` in place of the default error text, the di
 
 Environment disclosure is usually a stepping stone. `SCRIPT_FILENAME` and `PATH_TRANSLATED` give the absolute on-disk location of the parsed page (while `DOCUMENT_URI` gives only its URL path), which lets file inclusion and command payloads use exact paths rather than stacking traversal sequences blindly. `SERVER_SOFTWARE` and `SERVER_PROTOCOL` fingerprint the stack so later payloads match the server. Collect these first, then pivot to `exec` or `include` with the paths and version details already in hand.
 
+## Tools
+
+- **Burp Repeater**: submitting `echo var` probes and reading reflected values.
+- Manual testing with crafted `<!--#echo var-->` and `<!--#config-->` directives.
+
 ## References
 
 - [OWASP: Server-Side Includes (SSI) Injection](https://owasp.org/www-community/attacks/Server-Side_Includes_(SSI)_Injection)

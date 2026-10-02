@@ -63,6 +63,11 @@ Globbing also helps when only the *argument* is filtered: expanding a directory 
 
 Treat wildcard reconstruction of a binary name as a POSIX technique; on Windows, rely on 8.3 names, case tricks, or environment-variable assembly instead.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting glob-based payloads.
+- **[GTFOBins](https://gtfobins.github.io/)**: binaries callable by glob for file read and exec.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass without specific characters](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

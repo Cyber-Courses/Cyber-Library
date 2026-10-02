@@ -23,3 +23,8 @@ Robust designs expose an opaque workflow token or server-generated step URL afte
 ## Tools
 
 - **Burp Suite**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

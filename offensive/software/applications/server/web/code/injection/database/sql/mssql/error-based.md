@@ -29,6 +29,11 @@ Note that a password hash is `varbinary`: render it with `fn_varbintohexstr` (or
 
 Unlike MySQL's XPath channel, SQL Server does not cap the value at ~32 characters, so a row usually returns in one error. It is not unlimited, though: error messages have a finite length and a very long value or aggregate can be truncated, so for large dumps read in windows with `SUBSTRING((SELECT ...),1,2000)` and page through. Keep the inner query to a single value with `TOP 1` or an aggregate, since a multi-row subquery used as a scalar raises a different error that carries no data.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through conversion failures.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - Microsoft SQL Server Documentation: CONVERT and CAST, data type conversion

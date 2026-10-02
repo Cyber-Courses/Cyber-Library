@@ -28,6 +28,12 @@ Forwarding and override headers carry trust the attacker can forge. `X-Forwarded
 
 The test is to send each header with an attacker value and watch for it in a link, a routing decision, or an authorization outcome. Reach depends on the framework and proxy chain, so confirm which headers the back end actually honors.
 
+## Tools
+
+- **Burp Suite / Burp Repeater**: inject `Host` and forwarding/override headers and watch links, routing, and auth outcomes.
+- **curl**: send arbitrary `Host`, `X-Forwarded-*`, and `X-Original-URL` headers from the command line.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - PortSwigger Web Security Academy: HTTP Host header attacks

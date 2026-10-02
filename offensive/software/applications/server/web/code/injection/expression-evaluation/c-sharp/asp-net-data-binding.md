@@ -60,6 +60,11 @@ Prove the expression is compiled rather than echoed with an arithmetic or string
 
 A response containing `54439000` or `aabb` confirms the fragment was evaluated as an expression, not emitted literally. From there, move to type instantiation and method calls as above, scoping payloads to the namespaces the page imports (`System`, and whatever the application adds).
 
+## Tools
+
+- **Burp Suite**: Repeater to inject and confirm compiled data-binding expressions.
+- Manual testing with Burp Repeater; payloads crafted per engine.
+
 ## References
 
 - [Microsoft: Data-binding expression syntax](https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178366(v=vs.100))

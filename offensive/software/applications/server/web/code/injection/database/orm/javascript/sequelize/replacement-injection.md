@@ -51,6 +51,11 @@ For the **interpolated** `ORDER BY`/identifier slot there is no quote to escape,
 
 Second-order payloads are stored benign and triggered when the later concatenating query runs; they bypass input-time inspection entirely. The lesson for exploitation is that the presence of `replacements` does **not** guarantee safety, inspect every slot for whether it is a value (escaped) or a structural/concatenated position (injectable).
 
+## Tools
+
+- **sqlmap**: exploiting the concatenated and interpolated-identifier slots alongside replacements.
+- **Burp Repeater**: probing each slot for value versus structural context.
+
 ## References
 
 - [Sequelize docs: Raw queries, replacements vs bind](https://sequelize.org/docs/v6/core-concepts/raw-queries/#replacements)

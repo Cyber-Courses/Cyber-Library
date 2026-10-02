@@ -59,6 +59,11 @@ T(java.lang.Runtime) .getRuntime() .exec('id')
 
 At the transport layer the surrounding request field carries its own decoding, so URL encoding, double URL encoding, or JSON unicode escapes (`\u0052` for `R`) on the keywords are decoded before the string reaches the parser, letting an encoded `Runtime` pass a filter that inspects the raw body. Stacking a character-built command with a concatenated class name and transport encoding leaves no single signature token intact.
 
+## Tools
+
+- **Burp Suite**: Intruder to fuzz obfuscated SpEL variants and Repeater to iterate bypasses.
+- Manual obfuscation: string concatenation, char construction, and transport encoding.
+
 ## References
 
 - [Spring Framework: Spring Expression Language](https://docs.spring.io/spring-framework/reference/core/expressions.html)

@@ -37,3 +37,13 @@ A further constraint shapes every `WHERE` payload: Cassandra normally requires t
 Statement separation with `;` depends on the driver. Many client libraries reject multiple statements in one `execute`, so the reliable surface is a single rewritten statement, with `BEGIN BATCH` being the way to bundle several writes into one (see [Batch statement injection](../batch-statement-injection.md)).
 
 This section covers the core `WHERE` mechanics, `ALLOW FILTERING` abuse, and blind and error-based inference.
+
+## Tools
+
+- **cqlsh**: issue and verify CQL payloads against the cluster.
+- **Burp Suite**: intercept and tamper with CQL-backed web requests.
+
+## References
+
+- [Apache Cassandra: CQL reference](https://cassandra.apache.org/doc/latest/cassandra/cql/)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

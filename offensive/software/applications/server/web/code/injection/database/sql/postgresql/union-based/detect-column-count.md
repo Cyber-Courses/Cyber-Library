@@ -32,6 +32,11 @@ The `UNION SELECT NULL` probe appends increasing `NULL` lists until the counts m
 
 `NULL` is used because it is compatible with any column type, so only the count matters. The wrong count fails with `each UNION query must have the same number of columns`. Once the counts align, replace each `NULL` in turn with a cast value such as `'a'::text` to learn which columns are rendered on the page; those positions are where extracted data goes. Because PostgreSQL enforces types in a `UNION`, keep non-reflected columns as `NULL` and cast the reflected one to `text`.
 
+## Tools
+
+- **sqlmap**: automates column-count detection and union alignment with casts.
+- **Burp Repeater**: run `ORDER BY` and `UNION SELECT NULL` probes by hand.
+
 ## References
 
 - PostgreSQL Documentation: UNION, ORDER BY, type casts

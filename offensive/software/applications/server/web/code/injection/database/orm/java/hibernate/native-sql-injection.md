@@ -43,6 +43,11 @@ Depending on the backend and JDBC settings, **stacked queries** may be available
 
 When the native query maps results to an entity via `addEntity()`, the selected column order must match the entity mapping; with `createNativeQuery(sql)` returning `Object[]`, a `UNION` can project arbitrary columns for direct read.
 
+## Tools
+
+- **sqlmap**: automating extraction against the createNativeQuery raw-SQL sink.
+- **Burp Repeater and Intruder**: delivering dialect-specific UNION and blind payloads.
+
 ## References
 
 - [Hibernate ORM: Native SQL queries](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#sql)

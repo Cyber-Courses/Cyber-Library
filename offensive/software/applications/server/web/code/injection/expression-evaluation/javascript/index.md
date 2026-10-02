@@ -17,6 +17,11 @@ Server-side JavaScript runs attacker-reachable values in Node.js, and two classe
 
 Browser-side DOM prototype pollution shares the root cause but has a different sink surface and gadget set, and is covered separately.
 
+## Tools
+
+- **Burp Suite**: Repeater to send polluting JSON and probe downstream gadgets.
+- **Server-Side Prototype Pollution Scanner**: PortSwigger Burp extension detecting server-side pollution.
+
 ## References
 
 - [OWASP: Prototype Pollution](https://owasp.org/www-community/attacks/Prototype_pollution)

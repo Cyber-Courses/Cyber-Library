@@ -23,6 +23,11 @@ The route from an injected expression to impact is engine-specific, so the subtr
 - **[OGNL](ognl/index.md)**: the Object-Graph Navigation Language of Struts2, covering a [directory listing](ognl/directory-listing.md) evaluation probe, [remote code execution](ognl/remote-code-execution.md), and [remote file inclusion](ognl/remote-file-inclusion.md).
 - **[SpEL](spel/index.md)**: the Spring Expression Language, covering [code execution](spel/code-execution.md) and [WAF bypass](spel/waf-bypass.md).
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting SpEL, OGNL, MVEL, and unified EL.
+- **J2EEScan**: Burp extension with active EL and OGNL injection checks.
+
 ## References
 
 - [OWASP: Expression Language Injection](https://owasp.org/www-community/vulnerabilities/Expression_Language_Injection)

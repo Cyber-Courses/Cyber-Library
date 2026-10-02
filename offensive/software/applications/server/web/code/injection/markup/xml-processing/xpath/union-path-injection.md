@@ -67,6 +67,12 @@ When the injection point sits deep in the tree, the parent (`..`) and ancestor a
 
 The recurring pattern is `<close> | <injected path> | <reopen>`, where the closing fragment terminates the original literal and predicate and the reopening fragment supplies a dummy predicate the parser can finish. If the application rejects the request outright rather than returning extra nodes, the balance is wrong; count the open quotes and brackets in the original query and mirror them. A malformed union typically yields a parser error, which error-based extraction can then exploit in its own right.
 
+## Tools
+
+- **Burp Repeater**: appending `|` union paths and reading the extra nodes.
+- **xcat**: automating node-set enumeration across the document.
+- Manual testing with `|//*` and axis-based union payloads.
+
 ## References
 
 - [OWASP: XPATH Injection](https://owasp.org/www-community/attacks/XPATH_Injection)

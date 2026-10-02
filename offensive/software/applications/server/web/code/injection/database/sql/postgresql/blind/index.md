@@ -38,6 +38,11 @@ The same oracle reads `current_user`, `current_database()`, and table data by sw
 
 - **[Boolean extraction](boolean-based.md)**: the `substring`/`ascii` character oracle with binary search.
 
+## Tools
+
+- **sqlmap**: automated boolean-based blind extraction.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: `substring`, `ascii`, `length`

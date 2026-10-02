@@ -63,6 +63,11 @@ SELECT column_name, type FROM system_schema.columns WHERE keyspace_name = 'app' 
 
 Error-based extraction depends on messages surviving to the response. Submitting a lone `'` to confirm a `SyntaxException` is echoed is the first check; if it is swallowed, the channel is boolean-only. Where messages are reflected, they are the fastest way to map structure before data recovery begins.
 
+## Tools
+
+- **cqlsh**: reproduce type-mismatch and unknown-identifier errors to read schema.
+- **Burp Repeater**: submit error-provoking payloads and inspect returned messages.
+
 ## References
 
 - [Apache Cassandra: system_schema tables](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html)

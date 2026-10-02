@@ -31,6 +31,12 @@ This one is network-related, so on 11g and later it is gated by a fine-grained A
 
 Keep the inner query to a single value with `ROWNUM=1` or an aggregate. Because these raise distinct ORA codes on success, the same functions also drive blind error-based extraction when only the presence of the error, not its text, is observable.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction with Oracle payloads (`--dbms=Oracle --technique=E`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlplus** (or SQLcl): the Oracle client for replaying and refining the error-raising functions.
+
 ## References
 
 - Oracle Database PL/SQL Packages and Types Reference: UTL_INADDR; Oracle Text Reference

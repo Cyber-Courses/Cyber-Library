@@ -106,6 +106,12 @@ ast.literal_eval("().__class__")       # raises ValueError: malformed node
 
 Every payload on this page fails against `literal_eval` because none of them are pure literals. An application that uses `literal_eval` to turn a user-supplied list or dict string into an object is not an expression-evaluation sink; one that uses `eval` for the same convenience is. The distinction is the whole exposure, so confirm which function the target actually calls before assuming execution.
 
+## Tools
+
+- **Burp Suite**: Repeater for delivering eval/exec payloads and reading results.
+- **tplmap**: detects and exploits Python eval()/exec() code injection.
+- Manual `__subclasses__()` gadget payloads when builtins are stripped.
+
 ## References
 
 - [Python: eval built-in](https://docs.python.org/3/library/functions.html#eval)

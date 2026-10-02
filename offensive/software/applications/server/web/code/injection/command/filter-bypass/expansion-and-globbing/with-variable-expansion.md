@@ -84,6 +84,11 @@ Each piece is produced by the shell, so a literal blocklist for `/`, spaces, or 
 - `${IFS}` defaults to space-tab-newline; a single `${IFS}` typically word-splits into one separator, which is enough between a command and its argument.
 - Variable values depend on the child process environment, `PATH`, `HOME`, and `PWD` are reliably present; others may not be.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting parameter-expansion payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate space and character bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass without space / characters](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

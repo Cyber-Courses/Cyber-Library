@@ -25,6 +25,13 @@ Unlike SQL, LDAP has no `UNION` or comments, and errors are usually terse, so ex
 - **[DN injection](dn-injection.md)**: alter the distinguished name used for bind or modify.
 - **[Search base injection](search-base-injection.md)**: widen or move the search base to read more of the tree.
 
+## Tools
+
+- **ldapsearch**: manual filter, DN, and base testing against the directory.
+- **windapsearch**: enumerate users, groups, and attributes over LDAP.
+- **python-ldap**: script bind and search operations for custom payloads.
+- **Burp Suite**: intercept and manipulate directory-backed requests.
+
 ## References
 
 - RFC 4515 (LDAP search filters) and RFC 4514 (distinguished names)

@@ -31,6 +31,12 @@ Privileges decide which primitives are reachable, so list the session's roles an
 
 Seeing `DBA`, or specific grants such as `CREATE ANY PROCEDURE`, `CREATE ANY JOB`, or execute on the `UTL_` packages, tells you whether command execution, file access, and out-of-band channels are open. With the version, context, and privileges known, the remaining techniques apply with the right expectations.
 
+## Tools
+
+- **sqlmap**: automated fingerprinting and enumeration (`--banner`, `--current-user`, `--privileges`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlplus** (or SQLcl): the Oracle client for reading `SYS_CONTEXT` and the data dictionary directly.
+
 ## References
 
 - Oracle Database SQL Language Reference: SYS_CONTEXT, data dictionary views

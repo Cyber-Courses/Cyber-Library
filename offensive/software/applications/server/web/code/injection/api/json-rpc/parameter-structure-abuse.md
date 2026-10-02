@@ -42,6 +42,11 @@ Lenient binders coerce types (a string where a number was expected, an object wh
 
 Send each procedure both as an array and as an object, omit required fields to observe defaulting, supply unexpected types, and add extra named fields. A call that succeeds with a shape or a field the documented form did not allow, or that returns a revealing error, shows the binder is guessing rather than validating against a fixed parameter schema. Strict per-method schema validation of the params shape before dispatch is the control this is probing for.
 
+## Tools
+
+- **Burp Repeater**: sending each procedure as both an array and an object and omitting fields.
+- **curl**: scripting type and extra-field variations of the params structure.
+
 ## References
 
 - [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)

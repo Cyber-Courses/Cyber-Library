@@ -33,6 +33,12 @@ Confirm the oracle with a known true/false pair (`' AND 1=1--` versus `' AND 1=2
 
 `LIKE` is case-insensitive for ASCII by default; use `GLOB` (`GLOB 'a*'`) for a case-sensitive match. The schema is read the same way from `sqlite_master`. Blind extraction is slow and usually automated, but the single-request comparison is what lets you adapt when a tool stalls, and it is the primary channel for SQLite given the limited error surface.
 
+## Tools
+
+- **sqlmap**: automated boolean-based extraction (`--technique=B`).
+- **ghauri**: fast boolean inference with strong WAF evasion.
+- **Burp Intruder**: scripts the per-character comparison requests by hand.
+
 ## References
 
 - SQLite Documentation: substr, unicode, length, LIKE, GLOB

@@ -32,6 +32,11 @@ When `information_schema` is blocklisted, the native `pg_catalog` reaches the sa
 
 Numeric and encoding tricks also help: `CHR()` and `convert_from(decode('...','hex'),'UTF8')` reconstruct filtered strings, and casting with `::text` avoids explicit `CAST` keywords. As with other engines, the approach is to reach the same object or value through a synonym the filter does not know, rather than to defeat the filter head-on.
 
+## Tools
+
+- **sqlmap**: tamper scripts (`charencode`, `chardoubleencode`) for filter and WAF evasion.
+- **Burp Repeater**: craft `CHR()` and dollar-quoted bypass payloads by hand.
+
 ## References
 
 - PostgreSQL Documentation: `chr`, dollar-quoted strings, `current_setting`, system catalogs

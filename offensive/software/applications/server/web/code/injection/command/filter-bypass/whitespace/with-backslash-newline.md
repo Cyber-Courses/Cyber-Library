@@ -64,6 +64,11 @@ The continuation only hides a keyword; you still need to start the second comman
 - Backslash-continuation differs from plain backslash keyword splitting (`w\ho\ami`): there the backslash escapes the next *character*; here it specifically escapes the *newline* to fold lines together.
 - `cmd.exe` uses `^` at end of line for continuation rather than `\`.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting line-continuation payloads.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

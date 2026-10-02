@@ -55,7 +55,14 @@ A related desynchronization exploits disagreement over what ends `DATA`. The sta
 - Pipelining tolerance varies; if the server rejects commands sent before it replies, pace the injection to the responses.
 - Envelope recipients added via `RCPT TO` leave no header trace, which is what makes this distinct from a `Bcc:` added through header injection.
 
+## Tools
+
+- **swaks**: Swiss Army Knife for SMTP, scripting crafted envelopes and DATA payloads.
+- **Burp Repeater**: injecting CRLF and SMTP command payloads into mail fields.
+- **curl**: sending crafted CRLF payloads into mail-composition fields.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
-- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11-Testing_for_HTTP_Splitting_Smuggling)
+- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_IMAP_SMTP_Injection)
 - [PayloadsAllTheThings: CRLF Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CRLF%20Injection)

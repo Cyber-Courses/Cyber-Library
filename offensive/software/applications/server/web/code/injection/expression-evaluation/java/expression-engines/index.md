@@ -20,6 +20,11 @@ Two of the engines here reach the JVM runtime and give code execution; two are m
 - [JEXL](jexl.md): Apache Commons JEXL expressions can construct classes and invoke methods, reaching `ProcessBuilder` and the runtime.
 - [mXparser](mxparser.md): a scientific math parser with user-defined functions and constants. Like Exp4j it has no runtime access and no inherent code execution.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for probing embedded evaluator sinks.
+- **J2EEScan**: Burp extension with Java EL and expression-injection checks.
+
 ## References
 
 - [Apache Commons JEXL](https://commons.apache.org/proper/commons-jexl/)

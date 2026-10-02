@@ -54,6 +54,12 @@ If the resolver loads the target by `id` and applies the change without confirmi
 
 The reliable test uses two identities. Capture a query that returns one user's object graph, then replay it as a second, unrelated user with the first user's IDs substituted. A response that returns the first user's fields, rather than an authorization error or null, proves the resolver trusts the query shape over the caller's identity. Introspection, where it is enabled, maps the fields and edges worth probing; where it is disabled, the schema is still recoverable from error messages and client bundles. Each resolver that fetches by a caller-supplied ID or navigates an edge is a candidate, so enumerate them rather than testing only the top-level operation.
 
+## Tools
+
+- **InQL**: enumerating fields and edges to probe for missing authorization in Burp.
+- **clairvoyance**: recovering the schema when introspection is disabled.
+- **Burp Repeater**: replaying a captured query under a second identity with substituted IDs.
+
 ## References
 
 - [OWASP API Security Top 10: Broken Object Level Authorization](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)

@@ -52,6 +52,12 @@ To write either result to the client regardless of how the value stack handles i
 
 Writing out of band through `URL` to an attacker-controlled host exfiltrates the file content without needing the response body, by placing the read data into the query path of an outbound request, which is useful where the injection point discards its evaluation result.
 
+## Tools
+
+- **Burp Suite**: Repeater to construct File/URL reads inside OGNL and return content.
+- **J2EEScan**: Burp extension flagging OGNL and Struts injection.
+- Manual OGNL payloads building java.io.File and java.net.URL.
+
 ## References
 
 - [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)

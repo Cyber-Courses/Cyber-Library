@@ -25,6 +25,12 @@ Logic bypass overrides a value after it has been validated: supply the allowed v
 
 HPP is a precedence bug, not a payload by itself, so it is usually combined with another technique (SQL injection, access control) whose payload rides the occurrence the vulnerable component reads. Confirm the target's duplicate-resolution rule first by observing which value takes effect.
 
+## Tools
+
+- **Burp Suite**: duplicate parameters across query and body and observe which occurrence takes effect.
+- **Param Miner**: Burp extension for discovering hidden and duplicated parameters.
+- **curl**: send repeated parameters and cross-scope duplicates from the command line.
+
 ## References
 
 - OWASP Testing Guide: Testing for HTTP Parameter Pollution

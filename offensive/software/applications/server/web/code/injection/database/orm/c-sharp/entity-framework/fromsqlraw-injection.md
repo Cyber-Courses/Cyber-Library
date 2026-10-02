@@ -48,6 +48,11 @@ SQL Server's command separator `;` allows **stacked queries** over the same conn
 
 Error-based extraction via `CONVERT()`/`CAST()` type errors is reliable on SQL Server when exceptions surface to the response.
 
+## Tools
+
+- **sqlmap**: automating extraction once a FromSqlRaw or ExecuteSqlRaw parameter is injectable.
+- **Burp Repeater and Intruder**: delivering breakout and UNION payloads to the raw-SQL parameter.
+
 ## References
 
 - [EF Core docs: Raw SQL queries](https://learn.microsoft.com/en-us/ef/core/querying/sql-queries)

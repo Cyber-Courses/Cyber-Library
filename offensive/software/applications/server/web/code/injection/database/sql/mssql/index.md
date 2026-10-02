@@ -36,6 +36,12 @@ Impact depends on the login's server role. A member of `sysadmin` can enable and
 - **[Command execution](command-execution.md)**: run OS commands with `xp_cmdshell` or OLE automation.
 - **[Trusted links](trusted-links.md)**: pivot to linked servers with `openquery` and RPC.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation of SQL Server injection across all techniques.
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlcmd**: official client for validating T-SQL payloads directly.
+
 ## References
 
 - Microsoft SQL Server Documentation: system catalog views, functions, configuration

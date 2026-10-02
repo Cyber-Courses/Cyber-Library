@@ -97,6 +97,11 @@ tenant-acme,tenant-globex/_search
 
 The tell for all of these is any request body or index path assembled from user input without a typed builder: field values, clause objects, or index names that are never constrained to an allow-list.
 
+## Tools
+
+- **curl**: post crafted JSON bodies to _search to test clause and query replacement.
+- **Burp Repeater**: inject sibling clauses and index-path payloads into the request.
+
 ## References
 
 - [Elasticsearch: Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)

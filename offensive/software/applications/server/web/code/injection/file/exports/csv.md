@@ -84,6 +84,12 @@ E
 
 Real `.xls` and `.xlsx` exports carry formulas natively, so any attacker string written into a formula-typed cell evaluates with no leading-character trick required.
 
+## Tools
+
+- **LibreOffice Calc / Excel**: open the exported file to verify formula execution.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for submitting formula payloads into stored fields.
+- Manual payloads using the trigger characters (`=`, `+`, `-`, `@`).
+
 ## References
 
 - [OWASP: CSV Injection](https://owasp.org/www-community/attacks/CSV_Injection)

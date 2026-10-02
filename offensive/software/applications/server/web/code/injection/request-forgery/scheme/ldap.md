@@ -40,6 +40,12 @@ The application performs the lookup against the attacker's server, receives the 
 
 Use `ldap://` to reach and fingerprint internal directory services, and treat an input that flows into a Java JNDI lookup as the high-value case, where the scheme is the delivery path for a reference that escalates beyond request forgery. Where the client is not Java or does not use JNDI, `ldap://` remains a directory-reach and port-probe primitive.
 
+## Tools
+
+- **curl**: manual `ldap://` probing to reach and fingerprint an internal directory service.
+- **interactsh**: open-source out-of-band interaction server to catch a JNDI lookup against a controlled host.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

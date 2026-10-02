@@ -66,6 +66,12 @@ x' return proc:system('id') (: '
 
 The `(:` opens an XQuery comment that swallows the trailing fragment of the original query, keeping the whole expression parseable while the injected `proc:system` executes.
 
+## Tools
+
+- **Burp Suite**: delivering function-abuse payloads and reading returned output.
+- **Burp Collaborator**: confirming blind SSRF from `doc()` and `unparsed-text()`.
+- Manual testing with `unparsed-text()`, `file:read-text`, and `proc:system` payloads.
+
 ## References
 
 - [W3C XPath/XQuery Functions 3.1: fn:unparsed-text](https://www.w3.org/TR/xpath-functions-31/#func-unparsed-text)

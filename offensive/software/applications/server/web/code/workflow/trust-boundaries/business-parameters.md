@@ -23,3 +23,8 @@ Treat business parameters as hints: always re-fetch authoritative rows by ID on 
 ## Tools
 
 - **Burp Suite**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

@@ -59,6 +59,12 @@ Where the application lets attacker input become the pattern (rather than the su
 
 Matched against a sufficiently long stored (or attacker-supplied) value that almost satisfies the pattern, these expressions explode into exponential backtracking, pinning CPU on the query path and starving other requests. A single such query, or a handful fired in parallel, is enough to degrade a service. The same pattern class is effective wherever user input reaches a regex, so an endpoint that feeds the pattern into `$regex` is a direct denial-of-service primitive as well as an extraction one.
 
+## Tools
+
+- **Burp Intruder**: automate the anchored per-character $regex extraction walk.
+- **nosqli**: detect $regex injection points in parameters.
+- **NoSQLMap**: automate regex-based blind extraction.
+
 ## References
 
 - [MongoDB: $regex](https://www.mongodb.com/docs/manual/reference/operator/query/regex/)

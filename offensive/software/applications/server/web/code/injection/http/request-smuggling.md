@@ -35,6 +35,13 @@ The back-end treats `0\r\n\r\n` as the end and leaves `G`, which prefixes the ne
 
 The payloads are byte-sensitive (exact CR/LF, chunk sizes), and HTTP/2 downgrade smuggling extends the idea where a front-end rewrites h2 to h1. Confirm a desync with timing or a benign prefix before weaponizing, since a wrong length can break the shared connection.
 
+## Tools
+
+- **Burp HTTP Request Smuggler**: Burp extension for automated detection and exploitation of request desync.
+- **Turbo Intruder**: high-volume and single-packet request sending for smuggling and timing probes.
+- **smuggler.py**: command-line scanner for CL.TE, TE.CL, and TE.TE desync variants.
+- **Burp Repeater**: manually craft byte-sensitive CL/TE payloads and confirm desync.
+
 ## References
 
 - PortSwigger Web Security Academy: HTTP request smuggling

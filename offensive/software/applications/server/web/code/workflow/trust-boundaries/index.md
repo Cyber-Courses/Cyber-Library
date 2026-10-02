@@ -17,3 +17,13 @@ Trust boundaries are the **edges** where data leaves one enforcement context and
 | [Numeric integrity](numeric-integrity.md) | Prices, fees, tax lines, quantities |
 | [Business parameters](business-parameters.md) | Product SKU, shipping tier, entitlement tier |
 
+## Tools
+
+- **Burp Suite (Repeater)**: tamper numeric and business parameters as they cross steps, then replay to commit.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic
+

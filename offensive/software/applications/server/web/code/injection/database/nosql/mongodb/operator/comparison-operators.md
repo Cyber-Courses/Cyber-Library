@@ -66,6 +66,12 @@ username=admin&secret[$regex]=^sec
 
 Escape regex metacharacters (`.`, `*`, `+`, `?`, `(`, `)`, `[`, `]`, `\`, `^`, `$`) in candidate characters so each matches literally. The result is full recovery of string fields (password hashes, tokens, recovery answers) from a single boolean signal, one request per character tested. See [Regex](regex.md) for anchoring detail and [Exists](exists.md) for discovering which fields to target.
 
+## Tools
+
+- **Burp Intruder**: automate the $gt/$lt binary search and $regex character walk.
+- **nosqli**: detect comparison-operator injection in parameters.
+- **NoSQLMap**: automate boolean-oracle extraction.
+
 ## References
 
 - [MongoDB: Query comparison operators](https://www.mongodb.com/docs/manual/reference/operator/query-comparison/)

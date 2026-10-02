@@ -50,6 +50,12 @@ Because HQL resolves field access against the mapping, a correlated subquery or 
 
 Blind extraction uses the same boolean/substring inference as SQL injection, craft conditions on `SUBSTRING(u.password,1,1)='a'` and observe result differences. Hibernate underneath runs on any JDBC backend (PostgreSQL, MySQL, Oracle, SQL Server), so the generated SQL dialect follows the configured database.
 
+## Tools
+
+- **Burp Repeater**: crafting boolean and subquery HQL breakouts and reading responses.
+- **Burp Intruder**: automating blind substring inference over entity fields.
+- **sqlmap**: automating extraction after pivoting to a native-SQL sink.
+
 ## References
 
 - [Hibernate ORM: HQL/JPQL](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html#hql)

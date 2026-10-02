@@ -56,6 +56,11 @@ Because predicates are just boolean expressions, an injected one can pivot to ot
 
 When rows are not reflected, a controllable predicate still leaks one bit per request. The payload `' or substring((//user[1]/password),1,1)='a` returns the full set only when the guessed character matches, so a scripted binary or linear search over `substring()` and `string-length()` reconstructs any value character by character. `fn:string-to-codepoints()` narrows each position with a numeric comparison instead of an alphabet walk.
 
+## Tools
+
+- **Burp Intruder**: iterating boolean FLWOR and predicate payloads for blind extraction.
+- Manual testing with `or`-tautology and `substring()` breakout payloads.
+
 ## References
 
 - [W3C XQuery 3.1: FLWOR Expressions](https://www.w3.org/TR/xquery-31/#id-flwor-expressions)

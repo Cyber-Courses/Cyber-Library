@@ -15,3 +15,13 @@ Elasticsearch and its fork OpenSearch are schema-flexible document stores querie
 
 Because the same APIs back both engines, payloads here apply to Elasticsearch and OpenSearch alike. The child pages split the surface by sink: query-string syntax, Query DSL body, Painless script injection, and boolean-based blind extraction.
 
+## Tools
+
+- **curl**: send raw _search and script requests to the cluster HTTP API.
+- **Burp Suite**: intercept and tamper with search-backed web requests.
+
+## References
+
+- [Elasticsearch: Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
+

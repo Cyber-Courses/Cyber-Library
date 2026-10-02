@@ -16,3 +16,14 @@ XQuery is the query language for XML databases such as **BaseX**, **eXist-db**, 
 Because an XQuery processor walks a document or collection with no column boundaries, a single injected expression such as `//*` can enumerate every node in scope. The language also ships a rich function library: `doc()`, `fn:collection()`, and `fn:unparsed-text()` reach files and URLs, and vendor extensions (BaseX `proc:system`, `file:read-text`) reach the filesystem and shell. Where no data is reflected, dynamic and static errors surfaced to the client support blind inference.
 
 This subtree covers FLWOR and predicate breakout, library and extension function abuse, and error-based extraction.
+
+## Tools
+
+- **Burp Suite**: fuzzing XQuery injection points with Intruder and Repeater.
+- **Burp Collaborator**: confirming blind SSRF and out-of-band reach from built-in functions.
+- Manual testing with FLWOR breakout and function-abuse payloads.
+
+## References
+
+- OWASP WSTG: Testing for XPath Injection
+- OWASP WSTG: Testing for XML Injection

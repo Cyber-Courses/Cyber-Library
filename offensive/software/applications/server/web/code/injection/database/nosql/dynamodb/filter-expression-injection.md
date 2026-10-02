@@ -76,6 +76,11 @@ with `:empty` set to `""` matches every sort key under the partition.
 
 Note that `FilterExpression` is applied **after** items are read and counted, so a widened filter still consumes and returns everything the key condition selected, making it an effective path to bulk disclosure via repeated paginated `Scan`/`Query` calls.
 
+## Tools
+
+- **AWS CLI**: run Scan and Query with widened FilterExpression payloads against the table.
+- **Burp Repeater**: inject OR clauses and operator swaps through the request.
+
 ## References
 
 - [AWS DynamoDB: Filter expressions for Scan](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression)

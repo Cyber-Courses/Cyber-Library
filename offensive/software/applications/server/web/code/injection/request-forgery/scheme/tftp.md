@@ -30,6 +30,11 @@ The client sends a read request for the named file in octet mode and returns the
 
 TFTP has no listing and no authentication, so success depends on naming a file the server exposes; the common config filenames above are the usual guesses. The scheme is UDP, so a non-response is ambiguous (dropped versus absent), making it less reliable as a port oracle than the TCP schemes, but a returned file is unambiguous disclosure. Use it when a [Port](../authority/port.md) probe or network context suggests TFTP is present, typically alongside network infrastructure.
 
+## Tools
+
+- **curl**: manual `tftp://` read requests for common config filenames over UDP port 69.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

@@ -47,6 +47,12 @@ new java.util.Scanner(T(java.lang.Runtime).getRuntime().exec(new String[]{'/bin/
 
 Here `exec(String[])` passes the argument array straight through without tokenization, so the `bash -c` command runs intact and the `Scanner` returns the whole output in one token.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver T()/reflection payloads under StandardEvaluationContext.
+- **J2EEScan**: Burp extension with SpEL injection checks.
+- Manual SpEL reflection payloads reaching Runtime and ProcessBuilder.
+
 ## References
 
 - [Spring Framework: Spring Expression Language](https://docs.spring.io/spring-framework/reference/core/expressions.html)

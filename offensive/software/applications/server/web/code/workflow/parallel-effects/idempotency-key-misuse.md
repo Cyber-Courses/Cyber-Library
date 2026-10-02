@@ -24,3 +24,8 @@ Correct behavior: same key + same body → same effect; same key + different bod
 
 - **curl** with custom headers
 - **Burp Suite**
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- OWASP WSTG: Testing for Business Logic

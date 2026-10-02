@@ -23,6 +23,12 @@ Pointing the entity at `file:///etc/passwd` reads a file, and at an internal URL
 
 Separately, the XML query functions are injection sinks when input is concatenated into their XPath or XQuery argument. `EXTRACTVALUE(xml, xpath)`, `XMLQuery`, and `XMLTABLE` evaluate an expression built from input, so an attacker who controls part of the XPath can redirect the selection or trigger errors that leak data, the same class of flaw as XPath injection applied inside the database.
 
+## Tools
+
+- **sqlmap**: detects injection into XML functions such as `EXTRACTVALUE`.
+- **Burp Collaborator**: captures the external-entity DNS and HTTP callbacks.
+- Manual testing with Burp Repeater and the Oracle client (sqlplus or SQLcl).
+
 ## References
 
 - Oracle Database XML DB Developer's Guide: XMLType, XMLQuery, external entities

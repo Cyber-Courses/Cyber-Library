@@ -21,6 +21,11 @@ JVM persistence runs through Hibernate and the JPA it implements. Queries are sa
 
 HQL and JPQL operate over mapped entities and their fields rather than raw tables, which shapes the payloads but does not make them safe: a concatenated `createQuery()` string accepts the same boolean and subquery breakouts as SQL. Native queries drop to raw SQL and carry the full injection surface, including `UNION` and stacked statements where the driver allows them. Dynamic criteria assembled by selecting operators or fields from input is the ORM-API form of the same flaw. The fix in every case is `setParameter` binding and a fixed query shape, so the absence of those is the signal.
 
+## Tools
+
+- **sqlmap**: exploiting Hibernate native-query and raw-fragment sinks.
+- **Burp Repeater and Intruder**: crafting HQL, native-SQL, and criteria payloads.
+
 ## References
 
 - [OWASP: SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)

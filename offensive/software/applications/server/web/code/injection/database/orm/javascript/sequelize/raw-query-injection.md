@@ -44,6 +44,11 @@ Quoted `name`:
 
 Dialect matters for weaponization. **MSSQL** (`tedious`) runs **stacked queries** (`; UPDATE`/`; INSERT` after the `SELECT`), and PostgreSQL via `pg` can execute multiple statements in a single simple query. The **MySQL** `mysql2` driver **disables** multiple statements by default, so `;`-stacked payloads only fire when the application explicitly sets `multipleStatements: true`; against a default MySQL-backed app, fall back to `UNION` and boolean/time-based inference. Use `SLEEP()`/`pg_sleep()` for time-based blind and dialect string functions for substring extraction. When `query()` is called with `{ type: QueryTypes.SELECT }` the rows are returned directly, making `UNION` read straightforward.
 
+## Tools
+
+- **sqlmap**: automating extraction against concatenated sequelize.query() calls.
+- **Burp Repeater and Intruder**: delivering dialect-specific UNION and blind payloads.
+
 ## References
 
 - [Sequelize docs: Raw queries](https://sequelize.org/docs/v6/core-concepts/raw-queries/)

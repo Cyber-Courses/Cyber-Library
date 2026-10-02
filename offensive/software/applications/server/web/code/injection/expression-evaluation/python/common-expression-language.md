@@ -93,6 +93,11 @@ CEL caps cost in principle, but where the host did not set a cost limit or set i
 
 An unbounded or weakly bounded evaluation is a denial-of-service lever against the admission or authorization path that runs the expression, which is often in the request hot path for every API call.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: iterate boolean-oracle probes to recover context values character by character.
+
 ## References
 
 - [CEL specification](https://github.com/google/cel-spec)

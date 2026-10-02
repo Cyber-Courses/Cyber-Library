@@ -41,6 +41,11 @@ Dump the rows. Separate fields with a hex delimiter so the concatenated output s
 
 `GROUP_CONCAT` truncates at `group_concat_max_len` (1024 bytes by default). When a table is larger than that, raise the limit if the account allows it with `SET SESSION group_concat_max_len=1000000`, or page through the rows with `LIMIT offset,1` and read them one at a time.
 
+## Tools
+
+- **sqlmap**: automated union extraction walking information_schema.
+- **mysql**: official client to confirm catalog queries directly.
+
 ## References
 
 - MySQL Reference Manual: `information_schema` tables, GROUP_CONCAT, group_concat_max_len

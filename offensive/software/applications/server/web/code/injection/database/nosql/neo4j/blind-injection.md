@@ -66,6 +66,11 @@ Where APOC is present, `apoc.util.sleep()` gives a cleaner fixed delay, but it i
 
 Blind extraction is request-heavy, so script it: one request per character per guess for naive boolean, far fewer with binary search or timing. Confirm the two baseline states first, keep the delay well above network jitter (seconds, not milliseconds) for time-based probes, and repeat timing measurements to filter noise. Combine with [Data extraction](data-extraction.md) techniques to first enumerate labels and property keys, so the blind phase targets known fields instead of guessing names.
 
+## Tools
+
+- **Burp Intruder**: automate boolean and time-based character extraction.
+- **cypher-shell**: validate conditional and sleep-gated probes against the database.
+
 ## References
 
 - [APOC: apoc.util.sleep](https://neo4j.com/labs/apoc/current/overview/apoc.util/apoc.util.sleep/)

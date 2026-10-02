@@ -33,6 +33,12 @@ File access is gated. `LOAD_FILE()` and `SELECT ... INTO OUTFILE/DUMPFILE` requi
 - **[Command execution](command-execution/index.md)**: write web shells or load a UDF for OS commands.
 - **[WAF bypass](waf-bypass/index.md)**: reach `information_schema`, `version()`, and keywords past filters.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation of MySQL injection across the union, error, blind, time, and file techniques.
+- **ghauri**: fast alternative with strong WAF evasion.
+- **mysql**: official client for validating payloads and running extracted queries directly.
+
 ## References
 
 - MySQL Reference Manual: `information_schema` tables and string functions

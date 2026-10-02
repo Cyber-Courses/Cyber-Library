@@ -79,6 +79,11 @@ Where the application reflects only the first row, aggregate the whole result in
 
 When no rows return at all, extraction shifts to [Blind injection](blind-injection.md).
 
+## Tools
+
+- **cypher-shell**: run UNION and schema-enumeration queries against the database.
+- **Burp Repeater**: deliver cross-label extraction payloads through the sink.
+
 ## References
 
 - [Neo4j: Built-in procedures (db.labels, db.schema)](https://neo4j.com/docs/operations-manual/current/reference/procedures/)

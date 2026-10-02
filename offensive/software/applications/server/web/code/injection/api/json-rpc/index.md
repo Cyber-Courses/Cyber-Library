@@ -23,6 +23,11 @@ JSON-RPC is minimal: a request names a `method`, carries `params`, and the serve
 
 There is no framework of routes, verbs, and content negotiation to lean on; a JSON-RPC server is a dispatch table and a parameter binder written by the application. If that table is built with dynamic attribute lookup instead of an explicit map, the method name reaches more functions than intended. If the binder guesses at params shape instead of validating it, the caller picks the code path. The test is to probe how a method name resolves and how params are parsed, before assuming either is constrained.
 
+## Tools
+
+- **Burp Suite**: intercepting and replaying JSON-RPC method and params payloads.
+- **curl**: scripting method-name and params-shape probes against the endpoint.
+
 ## References
 
 - [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)

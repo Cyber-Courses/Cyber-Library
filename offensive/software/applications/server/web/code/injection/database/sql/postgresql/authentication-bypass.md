@@ -36,6 +36,11 @@ query:    SELECT * FROM users WHERE username='admin' AND password='' OR username
 
 Because `AND` binds tighter than `OR`, this evaluates as `(username='admin' AND password='') OR username='admin'`, which returns the admin row regardless of the password. Because PostgreSQL permits stacked queries more often than MySQL, a login injection point can sometimes do more than bypass, for example appending `; UPDATE users SET password=...` where the driver allows it, but the bypass itself needs only the row to be returned.
 
+## Tools
+
+- **sqlmap**: automated detection of the injectable login parameter.
+- **Burp Repeater**: craft comment-termination and OR-based login payloads by hand.
+
 ## References
 
 - PostgreSQL Documentation: comments, SELECT, WHERE

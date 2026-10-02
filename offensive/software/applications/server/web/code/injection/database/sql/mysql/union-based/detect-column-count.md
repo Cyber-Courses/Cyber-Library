@@ -34,6 +34,11 @@ The `UNION SELECT NULL` method appends increasing lists of `NULL` until the colu
 
 With the count known, replace the `NULL`s one at a time with a marker such as a number or a string to learn which positions are echoed back on the page. Those reflected positions are where extracted data must go.
 
+## Tools
+
+- **sqlmap**: automates column-count detection and union alignment.
+- **Burp Repeater**: run `ORDER BY` and `UNION SELECT NULL` probes by hand.
+
 ## References
 
 - MySQL Reference Manual: UNION clause, ORDER BY

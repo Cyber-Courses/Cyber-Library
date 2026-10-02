@@ -23,6 +23,12 @@ Dangerous system privileges held directly are the other route. `CREATE ANY PROCE
 
 Java permissions are a further path: a schema granted `java.io.FilePermission` or `java.lang.RuntimePermission` can load and run code with the database server's OS privileges. The pattern throughout is to find one over-granted privilege or one injectable privileged procedure, then use it to grant yourself `DBA`, after which command execution, file access, and persistence all open up.
 
+## Tools
+
+- **ODAT** (Oracle Database Attacking Tool): tests and abuses dangerous privileges and definer-rights packages.
+- **sqlplus** (or SQLcl): the Oracle client for running `GRANT` and reading `session_privs`.
+- Manual testing with Burp Repeater and the Oracle client.
+
 ## References
 
 - Oracle Database Security Guide: system privileges, definer's rights

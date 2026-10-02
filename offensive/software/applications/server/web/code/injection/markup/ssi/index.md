@@ -18,3 +18,14 @@ Injection happens when attacker-controlled input is written into a page that the
 The practical reach depends on which directives the server permits. `exec` reaches operating-system commands and is the highest-impact primitive. `echo` leaks server state through built-in and CGI environment variables. `include` reads files and pulls in server-side resources, with path traversal extending its scope. `config`, `set`, and `fsize` round out the directive set and support fingerprinting and chaining.
 
 This subtree covers command execution through `exec`, environment disclosure through `echo`, and file inclusion through `include`.
+
+## Tools
+
+- **Burp Suite**: reflecting and iterating injected SSI directives through Repeater and Intruder.
+- **Burp Collaborator**: confirming blind directive execution out-of-band.
+- Manual testing with crafted `<!--#...-->` directives.
+
+## References
+
+- OWASP: Server-Side Includes (SSI) Injection
+- OWASP WSTG: Testing for Server-Side Includes (SSI) Injection

@@ -33,6 +33,12 @@ The same pattern dumps actual rows by pointing the aggregate at the target table
 
 `CHR(10)` is a newline separator. `LISTAGG` has a result-length limit (it errors when the aggregate overflows the result type), so for large tables raise the output type, switch to `XMLAGG`, or page with `FETCH FIRST`. DIOS is a convenience built on the same `SYSCAT` and aggregation primitives as ordinary union extraction, not a separate vulnerability.
 
+## Tools
+
+- **sqlmap**: automates aggregated extraction once the injection is mapped.
+- **db2** (or clpplus): the Db2 client for building and testing `XMLAGG`/`LISTAGG` payloads.
+- Manual testing with Burp Repeater and the Db2 client.
+
 ## References
 
 - IBM Db2 SQL Reference: LISTAGG, XMLAGG, XMLELEMENT, XMLSERIALIZE

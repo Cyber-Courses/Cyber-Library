@@ -78,7 +78,14 @@ The injection must arrive as real carriage-return and line-feed bytes at the sin
 
 Folding rules also matter: a line beginning with a space or tab is a continuation of the previous header, so leading whitespace after your `CRLF` may merge your line into the one above instead of starting a new header.
 
+## Tools
+
+- **swaks**: Swiss Army Knife for SMTP, scripting crafted mail envelopes.
+- **Burp Repeater**: injecting CRLF sequences into Subject, From, and To header fields.
+- **curl**: sending crafted CRLF payloads into mail form fields.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
-- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11-Testing_for_HTTP_Splitting_Smuggling)
+- [OWASP: Testing for IMAP SMTP Injection (WSTG)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05-Testing_for_IMAP_SMTP_Injection)
 - [PayloadsAllTheThings: CRLF Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CRLF%20Injection)

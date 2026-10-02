@@ -82,6 +82,12 @@ db.collection.mapReduce(
 
 An injected `map` that emits sensitive fields turns the reduce output into a bulk extraction channel when the result is reflected.
 
+## Tools
+
+- **mongosh**: test $where and mapReduce JavaScript payloads against a database.
+- **Burp Repeater**: deliver JavaScript breakout and time-based payloads through the sink.
+- **NoSQLMap**: automate $where injection detection and extraction.
+
 ## References
 
 - [MongoDB: $where](https://www.mongodb.com/docs/manual/reference/operator/query/where/)

@@ -24,3 +24,8 @@ Weak isolation shows up when validation and mutation are separate HTTP handlers 
 
 - **Burp Suite** (Turbo Intruder or parallel repeater tabs)
 - **custom scripts** (httpx, parallel curl)
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- OWASP WSTG: Testing for Business Logic

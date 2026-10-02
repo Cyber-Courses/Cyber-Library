@@ -35,6 +35,11 @@ Writing uses `COPY ... TO`, which drops attacker content at a chosen path (a web
 
 For binary content, large objects give byte-level control: `lo_import('/path')` loads a file into a large object, `lo_from_bytea`/`lo_put` build one from supplied bytes, and `lo_export(oid,'/path')` writes it out. As with command execution, `COPY ... TO` and large-object export need write permission for the PostgreSQL process user at the destination, so knowing the data directory and web root (read from `postgresql.conf` first) guides where a write will land.
 
+## Tools
+
+- **sqlmap**: reads and writes host files with `--file-read` and `--file-write`.
+- **psql**: official client to run `pg_read_file`, `COPY`, and large-object functions directly.
+
 ## References
 
 - PostgreSQL Documentation: `pg_read_file`, `pg_ls_dir`, COPY, large objects

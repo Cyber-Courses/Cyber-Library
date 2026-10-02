@@ -40,6 +40,11 @@ Passing a value where Prisma expects a scalar can also change behavior: a field 
 
 Send operator objects where the endpoint expects a scalar and compare the result set: a body of `{ "not": null }`, `{ "gt": 0 }`, or a nested `OR` that returns more rows than a plain value would proves the filter shape is attacker-controlled. The fix is to validate and pick specific fields and operators rather than spreading the request, so an endpoint that forwards the raw object is the pattern to look for.
 
+## Tools
+
+- **Burp Repeater**: sending operator objects where a scalar is expected and comparing result sets.
+- **Burp Intruder**: enumerating filterable fields and operators the endpoint forwards.
+
 ## References
 
 - [Prisma: Filtering and sorting](https://www.prisma.io/docs/orm/prisma-client/queries/filtering-and-sorting)

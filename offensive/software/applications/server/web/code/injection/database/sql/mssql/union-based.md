@@ -45,6 +45,11 @@ Then dump rows, concatenating with `+` and casting where needed:
 
 There is no `LIMIT`; use `TOP n` or `OFFSET ... FETCH` when you need a single row (for example `SELECT TOP 1 name FROM sys.tables`).
 
+## Tools
+
+- **sqlmap**: automated union-based detection and extraction.
+- **sqlcmd**: official client to confirm catalog queries directly.
+
 ## References
 
 - Microsoft SQL Server Documentation: UNION, system catalog views, STRING_AGG, FOR XML

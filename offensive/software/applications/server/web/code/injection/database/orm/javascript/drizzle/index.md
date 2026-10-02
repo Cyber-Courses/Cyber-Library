@@ -22,6 +22,11 @@ Drizzle is parameterized on its normal paths: the `sql` tagged template binds ev
 
 The `sql` template is the safe primitive: `sql\`... ${value} ...\`` binds `value`. The escape hatch is `sql.raw(string)`, which inserts the string literally, intended for trusted dynamic SQL and dangerous the moment the string carries input. The operator functions are safe for the values they compare, but Drizzle lets a query be composed dynamically, so code that decides which column or which operator to use from the request is handing the caller part of the query shape. The template and the operator values are safe; `sql.raw`, concatenation inside a fragment, and input-chosen columns or operators are the sinks.
 
+## Tools
+
+- **sqlmap**: exploiting sql.raw and concatenated-fragment sinks.
+- **Burp Repeater**: testing input-chosen columns, operators, and raw fragments.
+
 ## References
 
 - [Drizzle: Magic sql operator](https://orm.drizzle.team/docs/sql)

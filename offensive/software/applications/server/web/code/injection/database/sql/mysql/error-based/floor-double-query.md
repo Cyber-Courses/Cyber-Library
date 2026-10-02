@@ -27,6 +27,11 @@ The response carries `Duplicate entry '8.0.36:1' for key '<group_key>'`, leaking
 
 The aggregate needs several rows to trigger the collision reliably, so `information_schema.tables` (or `information_schema.columns`) is used as the row source because it always has enough rows. Keep the leaking subquery to one row, as with the XPath channels.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction including the FLOOR/RAND double-query technique.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: GROUP BY, aggregate functions, RAND

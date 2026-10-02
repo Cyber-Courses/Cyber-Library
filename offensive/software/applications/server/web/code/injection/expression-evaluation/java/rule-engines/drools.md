@@ -56,6 +56,11 @@ new java.lang.ProcessBuilder(new String[]{"/bin/bash","-c","id > /tmp/o 2>&1"}).
 
 On Windows use `new String[]{"cmd.exe","/c","whoami"}`. If the application pinned the dialect to `java` instead of `mvel`, the consequence is compiled Java rather than MVEL but reaches the same `Runtime`/`ProcessBuilder` API, so the command sink is unchanged.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver MVEL condition and consequence payloads.
+- Manual MVEL payloads reaching Runtime and ProcessBuilder.
+
 ## References
 
 - [Drools documentation](https://docs.drools.org/)

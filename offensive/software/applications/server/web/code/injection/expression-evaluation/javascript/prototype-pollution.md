@@ -93,6 +93,12 @@ Where the gadget applies, a spawn helper called without an explicit `env` or `sh
 
 The chain is always two parts: a pollution sink that writes the prototype, and a separate gadget that reads an unset property into a sink. Confirm the pollution first with a harmless marker property, then enumerate which libraries in the target read option objects without defaulting their fields, and match the payload to one of those gadgets. Where no gadget is reachable, the realistic ceiling is logic and authorization bypass and denial of service (for example polluting a property that later throws or forces an unexpected branch across every request).
 
+## Tools
+
+- **Burp Suite**: Repeater to send __proto__/constructor payloads and confirm polluted defaults.
+- **Server-Side Prototype Pollution Scanner**: PortSwigger Burp extension detecting server-side pollution sinks.
+- Manual gadget hunting for unset option properties read by libraries.
+
 ## References
 
 - [OWASP: Prototype Pollution](https://owasp.org/www-community/attacks/Prototype_pollution)

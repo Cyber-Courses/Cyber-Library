@@ -37,6 +37,12 @@ The `sql` column gives the column names directly, after which data is read from 
 
 `char(10)` is a newline separator (SQLite `char()` is like other engines' `CHR()`). Row limiting uses `LIMIT` (SQLite does support it, unlike Oracle or SQL Server), so `LIMIT 1 OFFSET n` pages through rows when `group_concat` output is truncated by the application.
 
+## Tools
+
+- **sqlmap**: automates column-count detection and UNION extraction (`--technique=U`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlite3**: the engine CLI for validating payloads against `sqlite_master`.
+
 ## References
 
 - SQLite Documentation: UNION, `sqlite_master`, group_concat, char

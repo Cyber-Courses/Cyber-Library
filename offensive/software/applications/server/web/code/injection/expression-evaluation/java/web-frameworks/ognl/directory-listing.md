@@ -53,6 +53,11 @@ Once evaluation is confirmed, the same sandbox-safe grammar reads the stack to l
 
 `#context` enumerates the OGNL context keys, including the member-access entry that the [remote code execution](remote-code-execution.md) page clears, and `user.dir` returns the working directory that frames later file paths. Reaching `@java.lang.System@getProperty` without an error already indicates a relaxed or already-cleared sandbox on that version.
 
+## Tools
+
+- **Burp Suite**: Repeater to send arithmetic and string-replace evaluation probes.
+- **J2EEScan**: Burp extension whose OGNL probe uses the "zkz".replace marker.
+
 ## References
 
 - [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)

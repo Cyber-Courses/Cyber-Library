@@ -53,6 +53,11 @@ title',(SELECT password FROM auth_user LIMIT 1) AS stolen--
 
 **`order_by` is not a raw-SQL sink.** Unlike `select`/`where`, `extra(order_by=[...])` resolves each entry as a field or alias name and quotes it through the compiler, so an arbitrary expression such as a `CASE` payload raises a field-resolution error rather than executing. Treat it as at most a weak ordering oracle over existing columns; `QuerySet.order_by()` is validated the same way. For raw injection, target the `select` and `where` fragments, those splice your text into SQL directly, which is what makes `extra()` a high-value target.
 
+## Tools
+
+- **sqlmap**: automating extraction against the extra() select and where fragments.
+- **Burp Repeater and Intruder**: delivering breakout and subquery payloads to the fragments.
+
 ## References
 
 - [Django docs: extra()](https://docs.djangoproject.com/en/stable/ref/models/querysets/#extra)

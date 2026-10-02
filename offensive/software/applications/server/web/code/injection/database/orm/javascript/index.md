@@ -23,6 +23,11 @@ JavaScript and TypeScript back ends reach for an ORM or query builder, and each 
 
 Two sinks recur across all of them. The first is the **raw escape hatch**: a method that accepts a string instead of a parameterized template, so concatenated input becomes SQL. The second is **operator or filter injection**: because these ORMs express query predicates as plain objects, an endpoint that spreads a JSON body into a filter lets the caller supply operator keys (`not`, `gt`, nested relation filters) that widen or bypass the intended query without any raw SQL at all. The typed query API and the parameterized template are safe; the `Unsafe`-suffixed method, the raw fragment, and the unvalidated filter object are where to look.
 
+## Tools
+
+- **sqlmap**: exploiting the raw-query escape hatches in Sequelize, Prisma, and Drizzle.
+- **Burp Repeater and Intruder**: crafting raw-SQL payloads and operator or filter objects.
+
 ## References
 
 - [OWASP: SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)
