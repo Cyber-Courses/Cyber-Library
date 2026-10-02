@@ -23,16 +23,15 @@ When `EVAL_PERL` is enabled, the `PERL` and `RAWPERL` blocks execute arbitrary P
 
 `RAWPERL` behaves the same with less wrapping. Backticks, `system`, and `exec` inside the block all run commands.
 
-When `EVAL_PERL` is off, look to plugins and filters. TT2 can load plugins by name, and some expose dangerous behavior. The `redirect` and `Datafile` features write files, and filters can be chained to the shell where the configuration permits:
+When `EVAL_PERL` is off, look to filters and plugins. The `redirect` filter writes its block content to a file, which drops a webshell when the output path is web-served:
 
 ```tt
-[% USE Datafile('/var/www/html/shell.txt') %]
 [% FILTER redirect('shell.php') %]<?php system($_GET['c']); ?>[% END %]
 ```
 
-The `redirect` filter writes the filtered content to a path relative to the processor's `OUTPUT_PATH`, which drops a webshell when that path is web-served and writable. TT2 also historically allowed calling methods on objects placed in the stash, so an application that exposes an object with a command-running or file-touching method widens the reachable surface.
+`redirect` writes relative to the processor's `OUTPUT_PATH`, so it requires that option to be set and the resulting path to be writable and served. (The `Datafile` plugin, by contrast, only reads a delimited input file and is not a write primitive.) TT2 also historically allowed calling methods on objects placed in the stash, so an application that exposes an object with a command-running or file-touching method widens the reachable surface.
 
-The practical order is: confirm with `[% 7*7 %]`, try a `PERL` block (works only under `EVAL_PERL`), and if that is blocked, enumerate loadable plugins and attempt the `redirect`/`Datafile` file-write to plant a shell. The injection requires the attacker input to be processed as template text; values passed into a fixed template are data. Because the high-impact path is gated on `EVAL_PERL` and on a writable, served `OUTPUT_PATH`, assess those conditions before rating the finding.
+The practical order is: confirm with `[% 7*7 %]`, try a `PERL` block (works only under `EVAL_PERL`), and if that is blocked, enumerate loadable plugins and attempt the `redirect` file-write to plant a shell. The injection requires the attacker input to be processed as template text; values passed into a fixed template are data. Because the high-impact path is gated on `EVAL_PERL` and on a writable, served `OUTPUT_PATH`, assess those conditions before rating the finding.
 
 ## Tools
 

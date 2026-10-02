@@ -30,7 +30,9 @@ The classic longer form walks the class hierarchy to find a subclass that spawns
 
 then index the resulting list to `subprocess.Popen` and call it. The globals forms above are shorter and more reliable on current Flask.
 
-When the application uses Jinja2's `SandboxedEnvironment`, attributes beginning with `_` are blocked. Escape it by reaching those attributes without writing the underscores literally: the `|attr()` filter with an encoded name (`|attr('\x5f\x5fclass\x5f\x5f')`), `request.args` to smuggle the string from a parameter, or `.__getitem__`-style access through allowed objects. The presence of the sandbox is the difference between a one-liner and a bypass, so test a plain `{{ ''.__class__ }}` first: if it is rejected, the sandbox is on.
+Two distinct obstacles are often conflated. The first is an application input filter or WAF that blocks the literal strings (`__class__`, `os`, backticks). These are defeated with obfuscation that does not change what the sandbox sees: the `|attr()` filter with an encoded name (`|attr('\x5f\x5fclass\x5f\x5f')`), smuggling the string from a request parameter (`request.args.c`), or concatenating it from pieces. This obfuscation only helps against filtering: in a default (non-sandboxed) Flask environment it lets the globals walk above through.
+
+The second obstacle is a real `SandboxedEnvironment`, and the obfuscation above does not beat it. The sandbox decodes the attribute name and runs it through `is_safe_attribute`, so `|attr('\x5f\x5fclass\x5f\x5f')` resolves to `__class__` and is rejected exactly like the plain form, returning undefined or raising `SecurityError`; `__getitem__` is checked the same way. A genuine sandbox escape therefore does not come from encoding tricks but from a flaw in the sandbox of a specific Jinja2 version: historically the reachable `str.format`/`format_map` methods leaked format-string access to the object graph, and similar method-level gaps were patched over time. Test `{{ ''.__class__ }}` first: if it is rejected, the sandbox is on, and the task is finding a version-specific method the sandbox still allows, not re-encoding the underscores.
 
 ## Tools
 

