@@ -27,7 +27,8 @@ Build the account list from [user enumeration](../../enumeration/user-and-group-
 ## Spraying safely
 
 ```bash
-# Kerberos pre-auth spray: does NOT increment badPwdCount, so it is lockout-safe
+# Kerberos pre-auth spray: fast and quiet, but a wrong password still counts
+# toward lockout, so observe the policy and badPwdCount exactly as with SMB
 kerbrute passwordspray -d example.local --dc <dc> users.txt 'Autumn2026!'
 
 # NetExec over SMB/LDAP (watch lockout; use --continue-on-success for a full sweep)
@@ -42,12 +43,14 @@ The rules that keep accounts unlocked:
 - **Read `badPwdCount` first** so you do not push an account already near the threshold over.
 - **Spray through a single DC**, because `badPwdCount` is not replicated between DCs, so counting across several DCs undercounts and risks lockout.
 
-## Lockout-safe channels
+## Avoiding lockout and guessing altogether
 
-Prefer methods that never increment the bad-password counter:
+A wrong password increments `badPwdCount` no matter the protocol, Kerberos pre-authentication included, so there is no "free" sprayer that guesses without lockout risk. What is actually free is anything that does not submit a password:
 
-- **Kerberos pre-authentication** (kerbrute): a wrong password returns a distinct error without counting as a logon failure in the same way, and is the safest high-volume sprayer.
-- **AS-REP roasting** sidesteps guessing entirely for accounts without pre-auth (see the Kerberos section).
+- **Username enumeration** (kerbrute `userenum`): sends an AS-REQ without pre-auth data and reads whether the account exists, so it never touches `badPwdCount`. Use it to trim the list to valid accounts before spraying a single password.
+- **AS-REP roasting** sidesteps guessing entirely for accounts that do not require pre-authentication, recovering a crackable hash with no logon attempt (see the Kerberos section).
+
+For the guessing itself, Kerberos pre-auth is fast and quiet, but it is governed by the same lockout policy as SMB: one attempt per account per window, below the threshold.
 
 ## Exploitation notes
 
@@ -57,7 +60,7 @@ Prefer methods that never increment the bad-password counter:
 
 ## Tools
 
-- **kerbrute**: lockout-safe Kerberos pre-auth spraying and user validation.
+- **kerbrute**: fast Kerberos pre-auth spraying, plus lockout-free username enumeration (`userenum`) to validate accounts first.
 - **NetExec (nxc)**: spraying over SMB, LDAP, WinRM, MSSQL, with lockout awareness.
 - **Spray / DomainPasswordSpray**: alternative sprayers that read the policy first.
 

