@@ -27,7 +27,7 @@ user: *)(uid=*))(|(uid=*
 filter: (&(uid=*)(uid=*))(|(uid=*)(userPassword=...))
 ```
 
-Here the injected `)` closes the `&` group early and the trailing `(|(uid=*)...)` broadens the match, so the search returns entries and the application authenticates. A single-clause filter `(uid=$user)` is even easier: `user=*` returns the first entry.
+This leaves two adjacent top-level filters (`(&(uid=*)(uid=*))` and `(|...)`) rather than one valid RFC 4515 filter, so it works only against a permissive client library that uses the first complete filter and ignores the rest; a client that validates the whole string rejects it with a bad-filter error. A single-clause filter `(uid=$user)` is easier and always valid: `user=*` returns the first entry.
 
 The wildcard-password form is the most reliable, and it works only when the application compares the password inside the filter rather than performing a separate bind with the supplied password (a bind-based login hashes and checks server-side, so the wildcard does not help there). Establish which pattern the app uses by testing the wildcard first.
 

@@ -22,7 +22,7 @@ input: jane,ou=admins
 DN: uid=jane,ou=admins,ou=people,dc=example,dc=com
 ```
 
-This shifts the DN into a different subtree, so a bind or lookup resolves to an entry the developer did not intend. A multi-valued RDN via `+` can attach an extra attribute to the name, and an injected `=` can redefine the attribute type of the RDN.
+This shifts the DN into a different subtree, so a bind or lookup resolves to an entry the developer did not intend. A multi-valued RDN via `+` attaches another attribute-value assertion to the name (for example `uid=jane+cn=admin`). Note that an extra `=` in the value does not redefine the RDN's attribute type: RFC 4514 splits the type at the first `=` only, so any later `=` stays part of the `uid` value. The comma (reparenting) and `+` (multi-valued RDN) are the effective primitives.
 
 DN injection is narrower than filter injection because a DN must still resolve to a real entry, so it is used to pivot to a neighbouring or higher-privileged entry (for example moving a bind DN into an administrative OU) rather than to match broadly. Where the input feeds the bind DN of an authentication step, controlling it can select which account the application binds as.
 
