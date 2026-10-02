@@ -14,7 +14,7 @@ keywords:
 
 **Authentication** is how server-side code establishes *who* the caller is before any authorization decision is made. For an attacker it is the highest-value target in the application: break it and you usually get **account takeover or full administrative access** outright, with no further chaining required. This section covers application-level weaknesses in that logic (credentials, federated logins, multi-factor checks, sessions, and tokens) as implemented in the target's own code and dependencies.
 
-Authentication answers "who are you?"; [authorization](../access-control/index.md) answers "what may you do?". They break differently and are attacked differently, and this subtree is strictly the former. When you can *become* another user, you rarely need to defeat access control at all.
+Authentication answers "who are you?"; authorization (access control) answers "what may you do?". They break differently and are attacked differently, and this subtree is strictly the former. When you can *become* another user, you rarely need to defeat access control at all.
 
 ## Where it breaks (your openings)
 
