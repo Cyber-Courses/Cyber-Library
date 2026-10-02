@@ -29,7 +29,8 @@ Each abusable right, the attribute or control-access right behind it, and where 
 | `AddKeyCredentialLink` | write `msDS-KeyCredentialLink` | [shadow credentials](../authentication/kerberos/shadow-credentials.md) |
 | `AddAllowedToAct` / `WriteAccountRestrictions` | write `msDS-AllowedToActOnBehalfOfOtherIdentity` | [resource-based delegation](../authentication/kerberos/delegation/resource-based-constrained.md) |
 | `DCSync` | `DS-Replication-Get-Changes` + `-All` on the domain | [DCSync](../authentication/credentials/ntds-and-dcsync.md) |
-| `ReadGMSAPassword` / `ReadLAPSPassword` | read `msDS-ManagedPassword` / `ms-Mcs-AdmPwd` | [recover managed secrets](../authentication/credentials/index.md) |
+| `ReadGMSAPassword` | read `msDS-ManagedPassword` | [recover the gMSA password](../managed-accounts/gmsa.md) |
+| `ReadLAPSPassword` | read `ms-Mcs-AdmPwd` / `msLAPS-*` | [recover the LAPS password](../managed-accounts/laps.md) |
 | `WriteGPLink` | write `gPLink` on an OU | [link a GPO to the OU](../group-policy/index.md) |
 
 The right only matters for what it lets you do, so the table is the fast path: find the edge in BloodHound, jump to the technique.

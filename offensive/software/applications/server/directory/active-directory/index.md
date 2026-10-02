@@ -34,6 +34,7 @@ A typical path cuts across these surfaces in order:
 - **[DACL](dacl/index.md)**: abusing object permissions to control privileged principals.
 - **[Group Policy](group-policy/index.md)**: abusing GPOs to run code and change configuration.
 - **[Trusts](trusts/index.md)**: intra-forest and cross-forest trust abuse.
+- **[Managed accounts](managed-accounts/index.md)**: gMSA and LAPS secrets in the directory, and dMSA (BadSuccessor) escalation.
 
 ## References
 
