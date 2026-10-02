@@ -11,16 +11,16 @@ keywords:
 
 # Privileges
 
-The authorities held by the current authorization ID decide how far an injection goes, so privilege enumeration follows fingerprinting. Database-level authorities are in `SYSCAT.DBAUTH`:
+The authorities held by the current authorization ID decide how far an injection goes, so privilege enumeration follows fingerprinting. Database-level authorities are in `SYSCAT.DBAUTH`. Authority can be granted to the user directly, to a group or role it belongs to, or to `PUBLIC`, so filtering on the user alone misses inherited grants; include those grantees:
 
 ```sql
-' UNION SELECT DBADMAUTH,CREATETABAUTH,BINDADDAUTH FROM SYSCAT.DBAUTH WHERE GRANTEE=CURRENT USER-- 
+' UNION SELECT GRANTEE,GRANTEETYPE,DBADMAUTH FROM SYSCAT.DBAUTH WHERE GRANTEE=CURRENT USER OR GRANTEE='PUBLIC' OR GRANTEETYPE='R'-- 
 ```
 
-`DBADMAUTH='Y'` means the ID holds `DBADM` (database administration), which is broad. The instance-level `SYSADM`, `SYSCTRL`, and `SYSMAINT` authorities come from the database manager configuration rather than the catalog, and `SECADM` governs security objects. Object grants are in `SYSCAT.TABAUTH` (table privileges) and `SYSCAT.ROUTINEAUTH` (execute on routines):
+The effective-authority routine `SYSPROC.AUTH_LIST_AUTHORITIES_FOR_AUTHID(CURRENT USER,'U')` resolves the full set including role and group inheritance, which is the reliable check. `DBADMAUTH='Y'` means the ID holds `DBADM` (database administration), which is broad. The instance-level `SYSADM`, `SYSCTRL`, and `SYSMAINT` authorities come from the database manager configuration rather than the catalog, and `SECADM` governs security objects. Object grants are in `SYSCAT.TABAUTH` (table privileges) and `SYSCAT.ROUTINEAUTH` (execute on routines):
 
 ```sql
-' UNION SELECT TABSCHEMA,TABNAME,SELECTAUTH FROM SYSCAT.TABAUTH WHERE GRANTEE=CURRENT USER-- 
+' UNION SELECT TABSCHEMA,TABNAME,SELECTAUTH FROM SYSCAT.TABAUTH WHERE GRANTEE=CURRENT USER OR GRANTEE='PUBLIC' OR GRANTEETYPE='R'-- 
 ```
 
 The authorities that matter for escalation are those allowing routine creation and execution. `CREATE_EXTERNAL_ROUTINE` (and `DBADM`) let the ID create external C or Java routines, which is the Db2 path to command execution; `IMPLICIT_SCHEMA` and broad `GRANT` rights help plant objects. An ID with `DBADM` or `SYSADM` can also grant itself further authorities.

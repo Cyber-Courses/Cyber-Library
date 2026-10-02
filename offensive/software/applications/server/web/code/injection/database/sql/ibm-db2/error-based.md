@@ -21,10 +21,10 @@ An invalid conversion is the simplest error. Casting a non-numeric string to a n
 
 Where the value is non-numeric the cast fails; whether the failing value appears in the returned message depends on the driver and error verbosity, so this cannot be relied on to echo arbitrary data the way other engines do.
 
-`SIGNAL` raises a custom error whose message text can be built from a subquery, which is the closest Db2 offers to a value-echoing channel, though it generally needs a compound-statement or routine context rather than a plain injected expression:
+`SIGNAL` raises a custom error whose message text can carry a value, which is the closest Db2 offers to a value-echoing channel, though it needs a compound-statement or routine context rather than a plain injected expression. `MESSAGE_TEXT` accepts a simple value, not a scalar fullselect, so the result is first assigned to a declared variable and that variable is supplied:
 
 ```sql
-BEGIN SIGNAL SQLSTATE '75001' SET MESSAGE_TEXT = (SELECT CURRENT SERVER FROM SYSIBM.SYSDUMMY1); END
+BEGIN DECLARE v VARCHAR(128); SET v = (SELECT CURRENT SERVER FROM SYSIBM.SYSDUMMY1); SIGNAL SQLSTATE '75001' SET MESSAGE_TEXT = v; END
 ```
 
 Because the message length is bounded and clean echoing is inconsistent, the practical approach against Db2 is to use errors to confirm and fingerprint (a distinct `SQLCODE`/`SQLSTATE` proves injection and can itself act as a boolean oracle), and to extract the data with the boolean and time-based techniques, which are the dependable channels here.

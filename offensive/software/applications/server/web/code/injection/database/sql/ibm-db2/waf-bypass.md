@@ -26,13 +26,13 @@ Hex can supply bytes through a cast, avoiding quoted literals in some positions:
 CAST(x'5553455253' AS VARCHAR(5))
 ```
 
-Inline comments `/**/` replace whitespace to break space-separated token signatures, and concatenation splits a keyword a filter matches as one string:
+SQL keywords are split with inline comments `/**/` (which replace whitespace) and with case variation, not with concatenation: `||`/`CONCAT` build string values inside expressions, and the result is not reparsed as a keyword, so they cannot reconstruct `UNION` or `SELECT`. Use comments and case for keywords:
 
 ```sql
-' UNION/**/SELECT/**/TABNAME/**/FROM/**/SYSCAT.TABLES-- 
+' UnIoN/**/SeLeCt/**/TABNAME/**/FROM/**/SYSCAT.TABLES-- 
 ```
 
-Keywords are case-insensitive, so case variation (`UnIoN SeLeCt`) bypasses naive case-sensitive blocklists. Values can also be reconstructed with `CONCAT`, `TRANSLATE`, or `REPLACE` to avoid filtered substrings, and the special registers (`CURRENT USER`, `CURRENT SERVER`) provide data without function-call syntax a filter might flag.
+Concatenation instead defeats filters on string literal values (a table name, a payload string), reconstructing a blocked substring from pieces with `CONCAT`, `CHR()`, `TRANSLATE`, or `REPLACE`. The special registers (`CURRENT USER`, `CURRENT SERVER`) also provide data without function-call syntax a filter might flag.
 
 As with the other engines, the goal is to express the same query through synonyms and encodings the filter does not recognize rather than to defeat it head-on, combining several of these where a filter blocks more than one pattern. Note that a Db2 hex literal (`x'...'`) still uses quotes, so for genuinely quote-free construction rely on `CHR()` concatenation.
 
