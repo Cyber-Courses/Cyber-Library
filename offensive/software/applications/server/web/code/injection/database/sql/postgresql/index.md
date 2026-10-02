@@ -18,7 +18,7 @@ Comments are `--` and `/* */`. Strings concatenate with the standard `||` operat
 
 Unlike the common MySQL drivers, PostgreSQL commonly allows stacked queries: a `;`-separated second statement often executes, which opens `CREATE`, `COPY`, and DDL from a single injection. The catalog lives in both the SQL-standard `information_schema` and the native `pg_catalog` (`pg_tables`, `pg_class`, `pg_namespace`, `pg_roles`, `pg_database`), and `pg_catalog` is often reachable when `information_schema` is filtered.
 
-Power depends on the role. A superuser (or a role granted `pg_read_server_files`/`pg_execute_server_program` in version 11 and later) can read files with `pg_read_file()`, write them with `COPY ... TO`, and run OS commands with `COPY ... FROM PROGRAM`. Checking `current_setting('is_superuser')` early decides which of those routes are open.
+Power depends on the role. A superuser can read files with `pg_read_file()`, write them with `COPY ... TO`, and run OS commands with `COPY ... FROM PROGRAM`. On version 11 and later a non-superuser reaches each primitive only through the matching predefined role: `pg_read_server_files` for reads, `pg_write_server_files` for `COPY ... TO` writes, and `pg_execute_server_program` for program execution. Checking `current_setting('is_superuser')` and these role memberships early decides which routes are open.
 
 ## Techniques
 

