@@ -1,43 +1,65 @@
 ---
-title: "DACL: abusing Active Directory object permissions"
-description: "Abusing discretionary access control lists on Active Directory objects: turning rights like GenericAll, GenericWrite, WriteDacl, WriteOwner, and ForceChangePassword over a principal into control of it, through password resets, group membership, targeted roasting, shadow credentials, delegation, and replication rights."
+title: "DACL: turning object permissions into control"
+description: "Active Directory DACL attacks: the complete map of abusable access-control entries (GenericAll, GenericWrite, WriteDacl, WriteOwner, WriteSPN, AddKeyCredentialLink, ForceChangePassword, AddMember, replication and managed-password rights) and the Linux and Windows tooling that turns each into control of a privileged principal."
 keywords:
   - DACL
   - ACL abuse
   - GenericAll
   - WriteDacl
-  - bloodhound
+  - bloodyAD
 ---
 
 # DACL
 
-Every Active Directory object carries a discretionary access control list (DACL) that says who may read and modify it. Because administrators delegate rights liberally and rarely audit them, these ACLs are riddled with edges that let an ordinary principal modify a privileged one. DACL abuse is the art of turning a **write** over an object into **control** of it, and BloodHound exists largely to find these edges and chain them into a path to Domain Admin.
+Every Active Directory object carries a discretionary access control list (DACL): a list of access-control entries (ACEs) saying which principals may read or modify it. Administrators delegate these rights liberally and almost never audit them, so AD is full of ACEs that let an ordinary principal modify a privileged one. DACL work is turning a **write** over an object into **control** of it, and BloodHound exists largely to find these edges and chain them (A can write B, B is admin of C) into a path to Domain Admin.
 
-## The rights that matter
+## The complete edge map
 
-- **GenericAll**: full control of the object, which includes every write and control-access right below (password reset, property writes, ACL changes).
-- **GenericWrite**: write the object's **properties** (SPN, `msDS-KeyCredentialLink`, the delegation attribute, group membership), but **not** control-access rights: it does not grant ForceChangePassword, WriteDacl, or the replication rights.
-- **WriteDacl / WriteOwner**: rewrite the object's ACL or take ownership, then grant yourself any right you lack, the usual way a GenericWrite-only edge is escalated to full control.
-- **ForceChangePassword**: a control-access right that resets a user's password without knowing the old one.
-- **AddMember / Self**: write a group's membership (AddMember as a property write, or the Self right to add only yourself).
-- **AllExtendedRights on the domain root**: includes the `DS-Replication-Get-Changes` rights that enable DCSync. Over an ordinary user or group it does **not** grant DCSync; the rights must apply to the domain naming-context root.
+Each abusable right, the attribute or control-access right behind it, and where the technique is documented:
 
-## What a write becomes
+| Right (BloodHound edge) | Backed by | Turns into |
+| --- | --- | --- |
+| `GenericAll` | full control | anything below |
+| `GenericWrite` / `WriteProperty` | property writes | SPN, key credential, delegation, membership |
+| `WriteDacl` | `WRITE_DAC` | [grant yourself any right](ownership-and-acl-rewrite.md) |
+| `WriteOwner` / `Owns` | `WRITE_OWNER` | [take ownership, then rewrite the DACL](ownership-and-acl-rewrite.md) |
+| `ForceChangePassword` | `User-Force-Change-Password` | [reset the password](password-reset.md) |
+| `AddMember` / `AddSelf` | write `member` | [join a privileged group](group-membership.md) |
+| `WriteSPN` | write `servicePrincipalName` | [targeted Kerberoasting](targeted-kerberoasting.md) |
+| `AddKeyCredentialLink` | write `msDS-KeyCredentialLink` | [shadow credentials](../authentication/kerberos/shadow-credentials.md) |
+| `AddAllowedToAct` / `WriteAccountRestrictions` | write `msDS-AllowedToActOnBehalfOfOtherIdentity` | [resource-based delegation](../authentication/kerberos/delegation/resource-based-constrained.md) |
+| `DCSync` | `DS-Replication-Get-Changes` + `-All` on the domain | [DCSync](../authentication/credentials/ntds-and-dcsync.md) |
+| `ReadGMSAPassword` / `ReadLAPSPassword` | read `msDS-ManagedPassword` / `ms-Mcs-AdmPwd` | [recover managed secrets](../authentication/credentials/index.md) |
+| `WriteGPLink` | write `gPLink` on an OU | [link a GPO to the OU](../group-policy/index.md) |
 
-A DACL edge is only useful for what it lets you do; the common conversions route into the authentication techniques:
+The right only matters for what it lets you do, so the table is the fast path: find the edge in BloodHound, jump to the technique.
 
-- **Reset the password** (ForceChangePassword) to take over the account directly.
-- **Add to a privileged group** (AddMember) to inherit its rights.
-- **Write an SPN** on a user to make it roastable, then crack it ([roasting](../authentication/kerberos/roasting.md)).
-- **Write `msDS-KeyCredentialLink`** to authenticate as the object ([shadow credentials](../authentication/kerberos/shadow-credentials.md)).
-- **Write the delegation attribute** to impersonate to it ([resource-based delegation](../authentication/kerberos/delegation/resource-based-constrained.md)).
-- **Grant replication rights on the domain object** to a principal to enable [DCSync](../authentication/credentials/ntds-and-dcsync.md) (this requires control over the domain root, not an ordinary object).
+## Choosing the quietest conversion
+
+Several edges reach the same goal with very different footprints, which is the practical decision once you hold a write:
+
+- **Shadow credentials** (where PKINIT is available) and **targeted Kerberoasting** are **non-destructive**: they do not change the victim's password or lock anyone out, so prefer them over a password reset when the account is in use.
+- A **password reset** is loud and disruptive (the legitimate user loses access), so keep it for computer or stale accounts, or when nothing quieter is available.
+- **RBCD** and **adding replication rights** leave a durable configuration change; **adding yourself to a group** is trivially visible in membership. Weigh persistence value against detectability.
 
 ## Pages
 
-- **[ACL enumeration](acl-enumeration.md)**: finding the abusable rights with BloodHound and LDAP.
+- **[ACL enumeration](acl-enumeration.md)**: finding the abusable ACEs with BloodHound and from Linux.
+- **[Password reset](password-reset.md)**: `ForceChangePassword` / `GenericAll` to take an account over.
+- **[Group membership](group-membership.md)**: `AddMember` / `AddSelf` to join a privileged group.
+- **[Targeted Kerberoasting](targeted-kerberoasting.md)**: `WriteSPN` to make a target roastable.
+- **[Ownership and ACL rewrite](ownership-and-acl-rewrite.md)**: `WriteOwner` / `WriteDacl`, and the Owner Rights limits that now constrain them.
+- **[AdminSDHolder](adminsdholder.md)**: DACL persistence through SDProp.
+
+## Tools
+
+- **BloodHound**: transitive ACL path analysis and edge identification.
+- **Impacket** (`dacledit.py`, `owneredit.py`): read/write ACEs and change ownership from Linux.
+- **bloodyAD**: set owner, grant rights, reset passwords, add key credentials and group members from Linux.
+- **NetExec (`nxc`)**: `-M daclread` to read ACEs, `-M maq` for the machine-account quota, and `--ntds` once a DCSync grant lands, over LDAP/SMB.
+- **PowerView** (`Add-DomainObjectAcl`, `Set-DomainObjectOwner`): on-host ACE and ownership edits.
 
 ## References
 
+- SpecterOps: An ACE Up the Sleeve, and the BloodHound edge reference
 - The Hacker Recipes: DACL abuse
-- SpecterOps: BloodHound and AD ACL attack paths
