@@ -39,7 +39,7 @@ ntlmrelayx.py -t smb://<host> -c 'whoami'
 ntlmrelayx.py -t ldap://<dc> --shadow-credentials --shadow-target 'victim$'
 ```
 
-`ntlmrelayx` also relays to **MSSQL** and Exchange HTTP endpoints, and supports **multi-relay**: after the first authentication it issues an HTTP **307 redirect** so one coerced auth can be relayed to several targets in turn.
+`ntlmrelayx` also relays to **MSSQL** and Exchange HTTP endpoints, and supports **multi-relay**: it answers the victim with an HTTP **307 redirect** so the client re-authenticates for each additional target. A single captured challenge-response cannot satisfy several server challenges, so this is one **coercion trigger** driving repeated fresh authentications, not one authentication reused many times, and it only works when the coerced client follows the redirects.
 
 - **Relay to LDAP + RBCD**: configure resource-based constrained delegation on a computer object you can then impersonate any user to, a common path from coerced machine authentication to local admin on that machine.
 - **Relay to AD CS (ESC8)**: relay a coerced DC or user HTTP authentication to the CA web enrollment and obtain a certificate as that principal; a DC certificate is domain compromise.
@@ -54,7 +54,7 @@ Coercion and relay combine into the canonical unauthenticated-to-domain path: **
 - You cannot relay an authentication back to the host that produced it in modern Windows (the reflection fix), so relay is always to a *different* target.
 - Machine-account authentications are fully relayable even though their passwords are uncrackable, which is why coercing `DC$` and relaying beats trying to crack it.
 - Pair relay with `mitm6` (IPv6 DNS takeover) to source authentications broadly and relay to LDAP for domain-wide RBCD.
-- **Windows Server 2025 narrows the classics**: it enables LDAP channel binding and SMB signing more widely, turns on EPA by default, and encrypts AD CS web enrolment, so the familiar relay-to-LDAPS and ESC8 paths often die against a 2025 DC. New reflective techniques (abusing the SMB sign/seal negotiation flags) keep relay alive, so test the target's actual posture rather than assuming either way.
+- **Windows Server 2025 narrows the classics, but per host and per service**: a 2025 **DC** enables LDAP channel binding and SMB signing more widely, so relay-to-LDAP(S) against it dies. **ESC8 depends on the AD CS web-enrolment host, not the DC**: it closes only if the CA's host runs a build/configuration with EPA and HTTPS enforced, so in a mixed estate (2025 DC, older CA with EPA still off) ESC8 remains viable. Check the CA host's version and EPA state separately from the DC's. New reflective techniques (abusing the SMB sign/seal negotiation flags) keep relay alive regardless, so test the actual posture rather than assuming.
 
 ## Tools
 
