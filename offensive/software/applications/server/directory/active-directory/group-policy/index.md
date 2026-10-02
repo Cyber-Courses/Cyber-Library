@@ -1,6 +1,6 @@
 ---
-title: "Group Policy: abusing GPOs for code execution and configuration change"
-description: "Abusing Active Directory Group Policy: editing a GPO you can write, or linking one to an OU you control, to run code and change security configuration on every computer and user the policy applies to."
+title: "Group Policy: code execution and configuration across the domain"
+description: "Active Directory Group Policy as an attack surface: editing a GPO you can write, linking one to an OU you control, and recovering the credentials left in SYSVOL, to run code on every computer and user the policy applies to."
 keywords:
   - group policy
   - GPO abuse
@@ -29,8 +29,18 @@ Group Policy applies configuration and scripts from the domain to the computers 
 ## Pages
 
 - **[GPO and OU enumeration](gpo-and-ou-enumeration.md)**: finding writable GPOs, their links, and the OUs you can affect.
+- **[Editing a GPO](editing-a-gpo.md)**: immediate scheduled tasks, scripts, and local admin on everything in scope.
+- **[Linking a GPO](linking-a-gpo.md)**: `WriteGPLink` over an OU to bring its objects into a policy.
+- **[Group Policy Preferences](group-policy-preferences.md)**: recovering `cpassword` and autologon credentials from SYSVOL.
+
+## Tools
+
+- **pyGPOAbuse** (Linux) / **SharpGPOAbuse** (Windows): inject immediate tasks, scripts, and local-admin changes into a writable GPO.
+- **NetExec (`nxc`)**: `ldap --gpo` to list GPOs, `-M gpp_password` / `-M gpp_autologin` for SYSVOL credentials.
+- **PowerView** (`New-GPOImmediateTask`, `Set-DomainObject` for `gPLink`), **Group3r / Grouper2**: GPO edits and vulnerable-setting audits.
+- **bloodyAD**: set an OU's `gPLink` from Linux.
 
 ## References
 
-- The Hacker Recipes: GPO abuse
+- The Hacker Recipes: Group policies
 - Microsoft: Group Policy and SYSVOL
