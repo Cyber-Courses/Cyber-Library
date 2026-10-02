@@ -11,7 +11,7 @@ keywords:
 
 # Manager and Host-Manager
 
-Tomcat bundles management web apps, `/manager/html` (and the text API `/manager/text`) and `/host-manager/html`, that can **deploy a web application**. Deploying a WAR runs its code, so access to Manager is direct RCE. The usual way in is default or weak credentials, or reaching the endpoint when it is not locked to an admin network.
+Tomcat bundles two different management web apps. The **Manager** app (`/manager/html` and the text API `/manager/text`, roles `manager-gui`/`manager-script`) can **deploy a web application**; deploying a WAR runs its code, so access to Manager is direct RCE. The **Host-Manager** app (`/host-manager/html`, roles `admin-gui`/`admin-script`) administers *virtual hosts*, it does **not** upload or deploy WARs. They are reached the same way (default/weak credentials, or the endpoint not being locked to an admin network), but only Manager gives the clean WAR-to-RCE path below.
 
 ## Getting access
 
@@ -35,7 +35,7 @@ curl -u tomcat:tomcat -T shell.war \
 curl "http://target:8080/shell/"
 ```
 
-The GUI (`/manager/html`) offers the same via a file-upload form. `host-manager` creates virtual hosts and can be abused similarly where Manager is locked down.
+The GUI (`/manager/html`) offers the same via a file-upload form. Host-Manager is not a WAR-deploy route; where you only have Host-Manager, its abuse is virtual-host administration: create or reconfigure a host (`appBase`/`docBase`) and deploy-on-startup behavior so a context serves from an attacker-influenced directory, or remove a host to disrupt the app. That is weaker than Manager's direct deploy and depends on what else you can write on disk, so treat Host-Manager access as a pivot, not instant RCE.
 
 ## Exploitation
 

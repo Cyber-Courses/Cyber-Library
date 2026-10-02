@@ -15,38 +15,36 @@ Apache maps URL prefixes to directories with `Alias`/`AliasMatch` and rewrites t
 
 ## Alias and AliasMatch
 
-A directory alias with permissive traversal handling, or an `AliasMatch` whose regex does not anchor or sanitize the captured path, lets `..` sequences reach the parent:
+Plain `Alias` is **not** vulnerable to the nginx off-by-slash: Apache matches `Alias` on complete path segments and normalizes the URL path (collapsing `../`) before alias processing, so `/downloads../x` does not match `Alias /downloads` and decoded dot-segments are already resolved. The Apache vector is instead an **`AliasMatch` or `RewriteRule` whose regex capture is substituted into a filesystem path without constraint**, combined with encoded separators that survive normalization:
 
 ```apache
-Alias /downloads /var/data
 AliasMatch "^/files/(.*)$" "/srv/files/$1"
 ```
 
-The captured group (`$1`) is unconstrained, so traversal in the URL maps above the intended root:
+Here `$1` is unconstrained. Because Apache decodes and normalizes `../` in the path before matching, a literal `/files/../../etc/passwd` is collapsed first; the working payload relies on **encoded** separators that are not normalized when `AllowEncodedSlashes` is `On`/`NoDecode`, so the encoded `..%2f` reaches the capture and then the filesystem:
 
 ```
-GET /downloads../httpd.conf HTTP/1.1
-GET /files/../../etc/passwd HTTP/1.1
-GET /files/..%2f..%2fetc%2fpasswd HTTP/1.1
+GET /files/..%2f..%2f..%2fetc%2fpasswd HTTP/1.1
 ```
 
-As with the nginx off-by-slash, an alias prefix without a trailing slash concatenates the following characters (including `..`) straight onto the target path.
+Without `AllowEncodedSlashes NoDecode` (the default is `Off`, which rejects `%2f`), test whether the server accepts encoded slashes at all first; if it rejects them, this `AliasMatch` path is not exploitable and the `RewriteRule` cases below (or a proxy mismatch) are the remaining avenues.
 
 ## mod_rewrite
 
-`RewriteRule` that composes a path from captured segments is the same class:
+`RewriteRule` that composes a path from captured segments is the same class, with the same caveat: a rule matching the normalized `REQUEST_URI` never sees a literal `../` (it was collapsed), so the traversal must come from an unnormalized source or encoded separators:
 
 ```apache
 RewriteRule ^/static/(.*)$ /srv/static/$1 [L]
 ```
 
-With `$1` unconstrained, `/static/../../etc/passwd` resolves above `/srv/static`. Rules using `%{REQUEST_URI}` or passthrough to the filesystem without a `..` guard, and proxying rewrites (`[P]`) that build an upstream path, extend the surface (the proxy case overlaps [reverse proxy and edge](../reverse-proxy-and-edge/index.md)).
+The exploitable variants are rules that match against `%{THE_REQUEST}` (the raw request line, which is not decoded or normalized, so raw and encoded `../` both survive into the capture), rules that run with `AllowEncodedSlashes NoDecode` so `..%2f` reaches `$1`, and proxying rewrites (`[P]`) that build an upstream path (the proxy case overlaps [reverse proxy and edge](../reverse-proxy-and-edge/index.md)).
 
 ## Exploitation
 
-- Start from a known mapped prefix (from asset URLs or a leaked `.htaccess`/config), then append `..`, `../`, and encoded variants (`..%2f`, `%2e%2e%2f`) directly after the prefix.
+- Start from a known mapped prefix (from asset URLs or a leaked `.htaccess`/config), then put traversal inside the captured path, favoring encoded separators (`..%2f`, `%2e%2e%2f`, `%2e%2e/`) since Apache collapses literal `../` before matching.
+- First confirm the server accepts encoded slashes at all (`AllowEncodedSlashes`); if `%2f` is rejected, this path is closed and the `%{THE_REQUEST}`/proxy cases remain.
 - Target the parent first (source and config usually sit one level up: `../config.php`, `../.env`), then climb toward `/etc`.
-- Combine with [double-decode](../iis/double-decode-and-unicode-traversal.md)-style encoding when a single `..` is filtered.
+- Combine with [double-decode](../iis/double-decode-and-unicode-traversal.md)-style encoding when a single encoded `..` is filtered.
 - Send with `curl --path-as-is` so the client does not pre-normalize the payload.
 
 ## Tools

@@ -19,31 +19,35 @@ Using a variable in `proxy_pass` disables nginx's normal upstream resolution-at-
 
 ```nginx
 location /proxy/ {
-    proxy_pass http://$host$request_uri;      # attacker-controlled Host -> arbitrary upstream
+    proxy_pass http://$host$request_uri;      # Host chooses the upstream HOST (port dropped)
+}
+location /raw/ {
+    proxy_pass http://$http_host$request_uri; # $http_host keeps the port from the Host header
 }
 location /fetch/ {
     set $target $arg_url;
-    proxy_pass http://$target;                # ?url=169.254.169.254/... -> cloud metadata
+    proxy_pass http://$target;                # ?url=169.254.169.254/... -> full host:port control
 }
 ```
 
-Setting `Host:` or the `url` argument to an internal address makes nginx connect there:
+A detail that trips people up: `$host` is the normalized server name **without** the port, so `Host: 127.0.0.1:6379` with `$host` connects to `127.0.0.1:80`, not Redis on 6379. To control the port from the Host header you need `$http_host` (the raw header value), and to control host and port freely the `$arg_url` form is simplest:
 
 ```
+GET /fetch/?url=127.0.0.1:6379/ HTTP/1.1
 GET /fetch/?url=169.254.169.254/latest/meta-data/iam/security-credentials/ HTTP/1.1
-GET /proxy/ HTTP/1.1
-Host: 127.0.0.1:6379
+GET /raw/ HTTP/1.1
+Host: 127.0.0.1:9000
 ```
 
-Classic targets: cloud metadata (`169.254.169.254`), localhost-only admin panels, and internal APIs (Elasticsearch, Consul, Docker, Kubernetes, actuator).
+Classic targets: cloud metadata (`169.254.169.254`), localhost-only admin panels, and internal HTTP APIs (Elasticsearch, Consul, Docker, Kubernetes, actuator).
 
 ## Path and join issues
 
 Even without a variable upstream, a trailing-slash mismatch between `location` and `proxy_pass`, or characters forwarded unescaped, can alter the upstream path, reaching unintended backend routes. Encoded CRLF or spaces that nginx passes through have, on some versions, injected into the upstream request line.
 
-## Pivoting to raw protocols
+## Reach is HTTP(S) only
 
-Where an SSRF-reachable component speaks more than HTTP, escalate with `gopher://` to send arbitrary bytes to an internal TCP service: a FastCGI packet to reach [PHP-FPM](fastcgi-and-php-fpm.md) on `:9000`, or a Redis/SMTP command sequence, crafted with **Gopherus**.
+nginx's HTTP `proxy_pass` speaks only HTTP and HTTPS, so this primitive cannot emit raw bytes to a non-HTTP service: you cannot turn a variable `proxy_pass` into a `gopher://` FastCGI/Redis/SMTP payload. It reaches internal **HTTP** services and cloud metadata, which is already high-impact. Raw-byte pivots (a FastCGI packet to [PHP-FPM](fastcgi-and-php-fpm.md), a Redis command stream) require a *different* SSRF sink whose URL client supports `gopher://`, such as an application-level `curl`/library fetch, not nginx itself. Many internal services (Redis, Memcached) are still reachable here if they tolerate an HTTP request line, but the clean raw-protocol route needs the gopher-capable sink.
 
 ## Exploitation
 
@@ -53,7 +57,7 @@ Where an SSRF-reachable component speaks more than HTTP, escalate with `gopher:/
 
 ## Tools
 
-- **Gopherus**, Burp Collaborator.
+- Burp Repeater/Collaborator (confirm blind SSRF out-of-band). Gopherus applies only to a separate gopher-capable SSRF sink, not to nginx `proxy_pass`.
 
 ## References
 

@@ -32,18 +32,19 @@ With merging off, `//admin` may not match a `location = /admin` or a prefix rule
 
 ## Encoded slashes and dot-segments
 
-nginx does not decode `%2f` into a path separator for `location` matching by default, so `%2f` and `%2e%2e%2f` behave differently from literal `/` and `..`. This is the nginx side of a proxy [normalization mismatch](../reverse-proxy-and-edge/normalization-mismatch.md): when nginx fronts an origin that *does* decode `%2f`, an encoded traversal passes the nginx rule and resolves at the origin.
+nginx normalizes the request URI before `location` matching: it percent-decodes `%XX`, resolves `.`/`..` dot-segments, and (unless `merge_slashes off`) collapses repeated slashes. So a plain encoded traversal does **not** survive on the nginx side for its own matching, and `%2e%2e%2f` is resolved like `../` before a rule is chosen.
+
+The encoded-slash trick therefore belongs to a proxy [normalization mismatch](../reverse-proxy-and-edge/normalization-mismatch.md), not to nginx matching its own file paths: it works when nginx forwards to an **origin that decodes differently**. The relevant nginx detail is how `proxy_pass` passes the URI: with no URI part in `proxy_pass`, nginx forwards the normalized request URI; with a URI part, it forwards the matched-and-rewritten path. A mismatch between what nginx normalized and what the upstream re-decodes is where an encoded `..%2f` lands at the origin:
 
 ```
-GET /public/..%2f..%2fadmin HTTP/1.1
-GET /protected%2f..%2fsecret HTTP/1.1
+GET /public/..%2f..%2fadmin HTTP/1.1     # exploitable at the origin behind nginx, per the proxy page
 ```
 
 ## Exploitation
 
-- Against a `location`-protected path (401/403 at `/admin`, `/internal`), replay with doubled slashes, encoded slashes, dot-segments, and trailing variants; a `200` on the protected resource confirms a matching gap.
+- Against a `location`-protected path (401/403 at `/admin`, `/internal`), the nginx-side wins are doubled slashes (where `merge_slashes off`) and trailing variants; a `200` on the protected resource confirms a matching gap.
 - Enumerate prefix-match over-reach by probing sibling paths that share a protected prefix.
-- When nginx proxies an origin, pair encoded-slash payloads with the [reverse-proxy normalization mismatch](../reverse-proxy-and-edge/normalization-mismatch.md) technique.
+- Encoded slashes and dot-segments are normalized by nginx itself, so save those for when nginx proxies an origin: pair them with the [reverse-proxy normalization mismatch](../reverse-proxy-and-edge/normalization-mismatch.md) technique against the backend.
 
 ## Tools
 
