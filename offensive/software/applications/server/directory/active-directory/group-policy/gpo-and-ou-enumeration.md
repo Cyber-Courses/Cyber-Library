@@ -47,14 +47,15 @@ BloodHound draws this as a `GenericWrite`/`GPOAbuse` edge from the principal to 
 ## Exploitation notes
 
 - Prioritize GPOs linked to OUs that contain **privileged or many** computers; editing a GPO linked to a Domain Controllers OU is domain-critical.
-- A readable `SYSVOL` policy tree is worth grepping for `cpassword` (Group Policy Preferences) and for scripts referencing credentials.
-- Enumeration identifies the editable, high-reach GPO; the actual abuse (immediate scheduled task, script, or group membership push) is covered in the Group Policy section.
+- A readable `SYSVOL` policy tree is worth grepping for `cpassword` and autologon secrets ([Group Policy Preferences](group-policy-preferences.md)) and for scripts referencing credentials.
+- Enumeration identifies the editable, high-reach GPO; turning it into execution is covered by [editing a GPO](editing-a-gpo.md), and reaching objects through a writable OU by [linking a GPO](linking-a-gpo.md).
 
 ## Tools
 
 - **PowerView `Get-DomainGPO` / `Get-DomainOU`**: GPO and OU mapping with ACLs.
-- **NetExec (nxc) ldap --gpo**: GPO listing from Linux.
-- **BloodHound**: GPO-to-target reach and editable-GPO edges.
+- **NetExec (`nxc`) `ldap --gpo`**: GPO listing from Linux (plus `-M gpp_password` on SYSVOL).
+- **Group3r / Grouper2**: audit GPO contents and ACEs for abusable settings.
+- **BloodHound**: GPO-to-target reach, `GenericWrite`-over-GPO and `WriteGPLink` edges.
 
 ## References
 
