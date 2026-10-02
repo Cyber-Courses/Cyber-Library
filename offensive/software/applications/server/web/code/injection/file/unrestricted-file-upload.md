@@ -1,6 +1,6 @@
 ---
 title: "Unrestricted file upload: type-check bypasses and the path to web-shell execution"
-description: Exploiting multipart uploads where extension, content type, magic bytes, or storage location are attacker-controlled—extension tricks, MIME spoofing, magic-byte and polyglot bypasses—leading to stored web shells, XSS, and SSRF/XXE follow-ons.
+description: Exploiting multipart uploads where extension, content type, magic bytes, or storage location are attacker-controlled, extension tricks, MIME spoofing, magic-byte and polyglot bypasses, leading to stored web shells, XSS, and SSRF/XXE follow-ons.
 keywords:
   - file upload
   - web shell
@@ -13,13 +13,11 @@ keywords:
 
 # Unrestricted file upload
 
-**Unrestricted file upload** exploits code that accepts a user-supplied file whose **name, extension, content type, content, or storage location** is attacker-influenced, and later stores or serves it in a way that grants the attacker capability. The headline outcome is a **stored web shell**—an executable file written into a served directory—yielding remote code execution as the service account. Weaker configurations still give stored XSS, client-side code execution, or a server-side parsing follow-on (SSRF, XXE, decompression abuse).
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Use only against systems you are permitted to test.
+**Unrestricted file upload** exploits code that accepts a user-supplied file whose **name, extension, content type, content, or storage location** is attacker-influenced, and later stores or serves it in a way that grants the attacker capability. The headline outcome is a **stored web shell**, an executable file written into a served directory, yielding remote code execution as the service account. Weaker configurations still give stored XSS, client-side code execution, or a server-side parsing follow-on (SSRF, XXE, decompression abuse).
 
 ## Overview
 
-An upload is dangerous when three independent facts line up: the server **accepts** the file, **stores** it somewhere reachable, and later **serves or interprets** it as something active. A filter that inspects only one signal—say, the declared `Content-Type`—leaves the others free:
+An upload is dangerous when three independent facts line up: the server **accepts** the file, **stores** it somewhere reachable, and later **serves or interprets** it as something active. A filter that inspects only one signal, say, the declared `Content-Type`, leaves the others free:
 
 ```
 POST /upload  (multipart/form-data)
@@ -28,7 +26,7 @@ Content-Type: image/png        <-- attacker-set header, trusted by a naive check
 <?php system($_GET['c']); ?>
 ```
 
-If the handler trusts the header, writes to `/var/www/html/uploads/avatar.php`, and the web server maps `.php` there to the PHP interpreter, requesting the stored URL executes the payload. The attacker never bypassed the filesystem—they defeated a **type decision** that looked at a value they controlled.
+If the handler trusts the header, writes to `/var/www/html/uploads/avatar.php`, and the web server maps `.php` there to the PHP interpreter, requesting the stored URL executes the payload. The attacker never bypassed the filesystem, they defeated a **type decision** that looked at a value they controlled.
 
 ## The signals a filter checks (and how each fails)
 
@@ -64,7 +62,7 @@ PHP ignores content before `<?php`, so the file is a valid GIF *and* executable.
 
 ### Polyglots
 
-A **polyglot** is a single file valid under two formats at once—commonly a real image that also carries script. A JPEG with a PHP payload in a comment segment (`COM` marker) survives magic-byte checks and even some re-encoders, while still executing if the server runs the file. Polyglots also enable stored XSS where the file is served inline: an "image" that a browser renders as HTML (content-type sniffing) runs the embedded script.
+A **polyglot** is a single file valid under two formats at once, commonly a real image that also carries script. A JPEG with a PHP payload in a comment segment (`COM` marker) survives magic-byte checks and even some re-encoders, while still executing if the server runs the file. Polyglots also enable stored XSS where the file is served inline: an "image" that a browser renders as HTML (content-type sniffing) runs the embedded script.
 
 ### Server-side parsing follow-ons
 

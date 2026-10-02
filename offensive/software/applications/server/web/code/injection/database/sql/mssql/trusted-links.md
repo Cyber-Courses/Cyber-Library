@@ -1,6 +1,6 @@
 ---
 title: "MSSQL trusted links and linked servers: OPENQUERY and lateral movement"
-description: Linked servers in SQL Server as a trust boundary—how injection may pivot when OPENQUERY or EXECUTE AT is available.
+description: Linked servers in SQL Server as a trust boundary, how injection may pivot when OPENQUERY or EXECUTE AT is available.
 keywords:
   - linked servers
   - OPENQUERY
@@ -18,7 +18,7 @@ Linked servers let you `EXEC ('...') AT [link]` or `OPENQUERY` to hit remote SQL
 Enumerate **`sys.servers`**, **`sp_linkedservers`**, then test `OPENQUERY` for code execution on the remote hop.
 ## Practice
 
-- Map **login mappings**—misconfigured `rpc out` can widen impact.
+- Map **login mappings**, misconfigured `rpc out` can widen impact.
 
 ## Tools
 
@@ -29,8 +29,3 @@ Enumerate **`sys.servers`**, **`sp_linkedservers`**, then test `OPENQUERY` for c
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Privileges](privileges/index.md)

@@ -1,6 +1,6 @@
 ---
 title: "Object-level access control: IDOR, BOLA, and per-record authorization in APIs"
-description: Insecure direct object references and related issues—unauthorized access to data identified by IDs, slugs, or relationships between records.
+description: Insecure direct object references and related issues, unauthorized access to data identified by IDs, slugs, or relationships between records.
 keywords:
   - object level authorization
   - BOLA
@@ -21,7 +21,3 @@ keywords:
 - [Predictable encoded IDs](predictable-encoded-ids.md)
 - [Public identifier guessing](public-identifier-guessing.md)
 - [Relationship trust mischeck](relationship-trust-mischeck.md)
-
-## See also
-
-- [Access control (parent)](../index.md)

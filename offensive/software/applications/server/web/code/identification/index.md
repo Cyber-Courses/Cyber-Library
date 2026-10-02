@@ -18,7 +18,3 @@ This area covers how **application** behavior reveals whether accounts exist, ea
 | [Account enumeration](account-enumeration.md) | Errors, timing, registration and reset branches |
 | [Rate limits and automation](rate-limit-and-automation.md) | Throttling gaps and stuffing surfaces |
 | [Identifier exposure](identifier-exposure-in-urls-and-exports.md) | IDs in URLs, exports, and public fields |
-
-## See also
-
-- [Web application code (parent)](../index.md)

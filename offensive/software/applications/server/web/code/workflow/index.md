@@ -1,6 +1,6 @@
 ---
 title: "Web application workflow testing: sequencing, concurrency, races, and business-parameter integrity"
-description: Business-logic and state integrity in multi-step and multi-service web flows—sequencing, concurrency, and parameter integrity.
+description: Business-logic and state integrity in multi-step and multi-service web flows, sequencing, concurrency, and parameter integrity.
 keywords:
   - business logic
   - workflow security
@@ -14,10 +14,6 @@ keywords:
 
 ## Structure (library map)
 
-- **[Flow integrity](flow-integrity/index.md)** — Sequencing vs state alignment across UI, records, and sessions.
-- **[Parallel effects](parallel-effects/index.md)** — Concurrency and integration handoff (TOCTOU, replay, idempotency misuse).
-- **[Trust boundaries](trust-boundaries/index.md)** — Numeric and business-parameter integrity across steps.
-
-## See also
-
-- [Web application code (parent)](../index.md)
+- **[Flow integrity](flow-integrity/index.md)**, Sequencing vs state alignment across UI, records, and sessions.
+- **[Parallel effects](parallel-effects/index.md)**, Concurrency and integration handoff (TOCTOU, replay, idempotency misuse).
+- **[Trust boundaries](trust-boundaries/index.md)**, Numeric and business-parameter integrity across steps.

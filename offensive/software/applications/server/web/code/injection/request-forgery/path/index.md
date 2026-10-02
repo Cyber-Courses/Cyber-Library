@@ -1,6 +1,6 @@
 ---
 title: "SSRF URL path: encoding, semicolon parameters, and parser-normalization bypasses"
-description: Path component of attacker-influenced URLs in server-side fetches—encoded slashes, path parameters, and differences between what the filter sees and what the HTTP client requests.
+description: Path component of attacker-influenced URLs in server-side fetches, encoded slashes, path parameters, and differences between what the filter sees and what the HTTP client requests.
 keywords:
   - SSRF
   - URL path
@@ -14,16 +14,10 @@ The **path** facet is everything after the authority up to `?` or `#`. Filters t
 ## Topics to test (in scope)
 
 - Compare **allowlist** matching on **raw** input vs **normalized** URL the client library builds before connect.
-- Path joining when the application **prefixes** a **base** URL with a user fragment—`..`, absolute-path references, and encoded separators.
+- Path joining when the application **prefixes** a **base** URL with a user fragment, `..`, absolute-path references, and encoded separators.
 
 ## Pages
 
 | Page | Focus |
 |------|--------|
 | [Encoded slashes](encoded-slash-and-normalization.md) | `%2F`, double encoding, normalization |
-
-## See also
-
-- [Request forgery (parent)](../index.md)
-- [Authority](../authority/index.md)
-- [Query](../query/index.md)

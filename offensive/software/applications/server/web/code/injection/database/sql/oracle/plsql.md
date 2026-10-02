@@ -1,6 +1,6 @@
 ---
 title: "Oracle PL/SQL injection: anonymous blocks, EXECUTE IMMEDIATE, and definer rights"
-description: PL/SQL-specific injection—dynamic SQL, definer versus invoker rights, and procedure boundaries in application schemas.
+description: PL/SQL-specific injection, dynamic SQL, definer versus invoker rights, and procedure boundaries in application schemas.
 keywords:
   - PL/SQL injection
   - EXECUTE IMMEDIATE
@@ -12,7 +12,7 @@ keywords:
 
 ## Context
 
-PL/SQL injection hits dynamic SQL inside procedures—`EXECUTE IMMEDIATE` with attacker-controlled fragments runs as **definer** if the proc is definer-rights.
+PL/SQL injection hits dynamic SQL inside procedures, `EXECUTE IMMEDIATE` with attacker-controlled fragments runs as **definer** if the proc is definer-rights.
 ## Technique
 
 Chain nested quotes to break out of string literals inside PL/SQL blocks passed through the app.
@@ -29,7 +29,3 @@ Chain nested quotes to break out of string literals inside PL/SQL blocks passed 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](index.md)

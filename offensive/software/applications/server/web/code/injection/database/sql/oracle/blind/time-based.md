@@ -8,7 +8,7 @@ keywords:
 ---
 # Time-based (Oracle)
 
-**Time-based** channels use deliberate **waits** tied to boolean conditions—package calls such as **`DBMS_LOCK.SLEEP`** or **`DBMS_PIPE.RECEIVE_MESSAGE`** when executable by the session. Availability depends on **privileges** and **package grants**.
+**Time-based** channels use deliberate **waits** tied to boolean conditions, package calls such as **`DBMS_LOCK.SLEEP`** or **`DBMS_PIPE.RECEIVE_MESSAGE`** when executable by the session. Availability depends on **privileges** and **package grants**.
 
 ## Context
 
@@ -29,7 +29,3 @@ Gate delay behind boolean: `CASE WHEN <bit> THEN dbms_lock.sleep(5) ELSE 0 END` 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Blind (Oracle)](index.md)

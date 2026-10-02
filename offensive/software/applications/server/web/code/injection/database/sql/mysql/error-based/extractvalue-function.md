@@ -15,7 +15,7 @@ keywords:
 
 ## Theory
 
-**Works** **best** **when** **stacked** **queries** **or** **expression** **contexts** **allow** **functions**; **disabled** **on** **some** **hardened** **MySQL** **configs**. **Length** **limits** **truncate** **error** **messages**—**use** **`SUBSTRING`** **in** **chunks**.
+**Works** **best** **when** **stacked** **queries** **or** **expression** **contexts** **allow** **functions**; **disabled** **on** **some** **hardened** **MySQL** **configs**. **Length** **limits** **truncate** **error** **messages**, **use** **`SUBSTRING`** **in** **chunks**.
 
 ## Practice
 

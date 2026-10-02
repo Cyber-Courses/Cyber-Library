@@ -1,6 +1,6 @@
 ---
 title: "SQLite blind SQL injection: boolean and time-based inference"
-description: Blind SQLi in SQLite—substr/unicode inference and delay-like heavy operations when SLEEP is unavailable.
+description: Blind SQLi in SQLite, substr/unicode inference and delay-like heavy operations when SLEEP is unavailable.
 keywords:
   - SQLite blind SQLi
 ---
@@ -18,7 +18,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [SQLite (SQLi)](../index.md)

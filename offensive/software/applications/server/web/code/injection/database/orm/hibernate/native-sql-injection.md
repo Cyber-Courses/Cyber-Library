@@ -12,9 +12,7 @@ keywords:
 
 # Hibernate native SQL injection
 
-Hibernate lets applications drop out of HQL and run **native backend SQL** through `createNativeQuery()` (JPA) or the legacy `createSQLQuery()`. These execute the raw string against the underlying JDBC connection, so concatenating user input produces full SQL injection in the database's own dialect—more powerful than [HQL injection](hql-injection.md) because every native construct is available.
-
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
+Hibernate lets applications drop out of HQL and run **native backend SQL** through `createNativeQuery()` (JPA) or the legacy `createSQLQuery()`. These execute the raw string against the underlying JDBC connection, so concatenating user input produces full SQL injection in the database's own dialect, more powerful than [HQL injection](hql-injection.md) because every native construct is available.
 
 ## Vulnerable pattern
 
@@ -41,7 +39,7 @@ String context:
 ' UNION SELECT username, password FROM users --
 ```
 
-Depending on the backend and JDBC settings, **stacked queries** may be available (`; UPDATE ...`), and DBMS-specific primitives apply—`pg_sleep()` / `BENCHMARK()` for time-based blind, `CONVERT()`/`CAST()` for error-based extraction, and file or command primitives where the database and privileges allow. Confirm the backend first (via error strings, version functions such as `@@version` / `version()`), then select the matching dialect payloads.
+Depending on the backend and JDBC settings, **stacked queries** may be available (`; UPDATE ...`), and DBMS-specific primitives apply, `pg_sleep()` / `BENCHMARK()` for time-based blind, `CONVERT()`/`CAST()` for error-based extraction, and file or command primitives where the database and privileges allow. Confirm the backend first (via error strings, version functions such as `@@version` / `version()`), then select the matching dialect payloads.
 
 When the native query maps results to an entity via `addEntity()`, the selected column order must match the entity mapping; with `createNativeQuery(sql)` returning `Object[]`, a `UNION` can project arbitrary columns for direct read.
 

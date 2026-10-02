@@ -10,8 +10,4 @@ keywords:
 
 ## Context
 
-Library Structure **Conditional Comments**: `/*!50000SELECT*/` style tokens executed only on compatible servers—use in **authorized** fuzzing only.
-
-## See also
-
-- [WAF bypass (parent)](index.md)
+Library Structure **Conditional Comments**: `/*!50000SELECT*/` style tokens executed only on compatible servers, use in **authorized** fuzzing only.

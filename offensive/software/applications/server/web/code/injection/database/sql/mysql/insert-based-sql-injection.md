@@ -10,8 +10,4 @@ keywords:
 
 ## Context
 
-Library Structure **INSERT** topic—**ON DUPLICATE KEY UPDATE** can change **password** hashes when unique keys collide. Requires injectable **INSERT** surface.
-
-## See also
-
-- [MySQL (parent)](index.md)
+Library Structure **INSERT** topic, **ON DUPLICATE KEY UPDATE** can change **password** hashes when unique keys collide. Requires injectable **INSERT** surface.

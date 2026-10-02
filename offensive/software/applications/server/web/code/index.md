@@ -1,6 +1,6 @@
 ---
 title: "Web application code security: authorization, injection, business logic, and framework misuse in the app layer"
-description: Vulnerabilities in server-side web application code—business rules, authorization, unsafe data composition, and framework misuse in the app layer.
+description: Vulnerabilities in server-side web application code, business rules, authorization, unsafe data composition, and framework misuse in the app layer.
 keywords:
   - application code vulnerabilities
   - business logic security
@@ -18,7 +18,6 @@ Readers should know how HTTP requests reach a route handler, then progress from 
 
 ## Major branches
 
-
 | Branch                                    | Focus                                                                                                                    |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | [Access control](access-control/index.md) | Who may invoke which function and which object; endpoint, object, and property levels; trust toward proxies and headers. |
@@ -26,8 +25,3 @@ Readers should know how HTTP requests reach a route handler, then progress from 
 | [Identification](identification/index.md) | Account discovery, brute-force surfaces, and identifier exposure in application behavior.                                |
 | [Injection](injection/index.md)           | Where untrusted data is bound into something the process executes, parses, stores, or sends.                             |
 | [Workflow](workflow/index.md)             | Sequencing, parallel effects, and integrity of business parameters across multi-step and multi-service flows.            |
-
-
-## See also
-
-- [Web (parent)](../index.md)

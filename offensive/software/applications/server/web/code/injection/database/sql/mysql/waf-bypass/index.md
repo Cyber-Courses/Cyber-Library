@@ -18,7 +18,3 @@ keywords:
 | [Conditional comments](conditional-comments.md) | /*!version*/ execution |
 | [Scientific notation](scientific-notation.md) | 1e1 numeric tricks |
 | [Wide byte / GBK](wide-byte-gbk.md) | Multibyte escape confusion |
-
-## See also
-
-- [MySQL (parent)](../index.md)

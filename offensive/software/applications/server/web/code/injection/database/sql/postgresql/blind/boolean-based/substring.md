@@ -11,8 +11,4 @@ keywords:
 
 ## Context
 
-**SUBSTRING(x FROM i FOR 1)** and **substr** extract one character for comparison to ASCII ranges or literals—standard blind workflow. Maps to Library Structure **Boolean with Substring**.
-
-## See also
-
-- [Boolean based (parent)](index.md)
+**SUBSTRING(x FROM i FOR 1)** and **substr** extract one character for comparison to ASCII ranges or literals, standard blind workflow. Maps to Library Structure **Boolean with Substring**.

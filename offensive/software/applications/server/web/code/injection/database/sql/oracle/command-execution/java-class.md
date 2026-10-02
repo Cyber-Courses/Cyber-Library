@@ -1,17 +1,17 @@
 ---
 title: "Oracle Java class execution in database context"
-description: Java stored procedures in Oracle—risk when definer rights and grants allow runtime.exec-style behavior from SQL contexts.
+description: Java stored procedures in Oracle, risk when definer rights and grants allow runtime.exec-style behavior from SQL contexts.
 keywords:
   - java stored procedure
   - Oracle Java
 ---
 # Java class (Oracle)
 
-**Java** stored in the database can reach **`Runtime.exec`**-class behavior when JVM **policy** and **grants** allow—typically a **DBA-tier** story, but worth the check when your SQLi runs as a fat schema.
+**Java** stored in the database can reach **`Runtime.exec`**-class behavior when JVM **policy** and **grants** allow, typically a **DBA-tier** story, but worth the check when your SQLi runs as a fat schema.
 
 ## Context
 
-Java stored procedures can call `Runtime.exec` when JVM permissions allow—often a **`sys`/`SYSTEM`** class of issue.
+Java stored procedures can call `Runtime.exec` when JVM permissions allow, often a **`sys`/`SYSTEM`** class of issue.
 ## Technique
 
 Load or invoke classes via SQL once **`CREATE PROCEDURE`** / Java perms exist.
@@ -28,7 +28,3 @@ Load or invoke classes via SQL once **`CREATE PROCEDURE`** / Java perms exist.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Command execution (Oracle)](index.md)

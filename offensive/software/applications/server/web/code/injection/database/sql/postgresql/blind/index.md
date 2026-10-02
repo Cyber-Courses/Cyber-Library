@@ -15,7 +15,3 @@ Blind SQLi uses **boolean** or **timing** channels when union or error output is
 | Page | Focus |
 |------|--------|
 | [Boolean based](boolean-based/index.md) | CASE, substring, NULLIF, pg_backend_pid |
-
-## See also
-
-- [PostgreSQL (parent)](../index.md)

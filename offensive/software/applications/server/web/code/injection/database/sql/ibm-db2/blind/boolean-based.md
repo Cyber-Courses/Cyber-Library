@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 boolean-based blind SQL injection: CASE and string functions"
-description: Inference using Db2 string and conditional functions—SUBSTR, LENGTH, and EXISTS-style tests.
+description: Inference using Db2 string and conditional functions, SUBSTR, LENGTH, and EXISTS-style tests.
 keywords:
   - CASE WHEN
   - SUBSTR
@@ -12,7 +12,7 @@ keywords:
 
 ## Context
 
-Blind SQLi infers bytes or tokens when the app returns the same shape for true/false branches—no row data, no SQL text in errors.
+Blind SQLi infers bytes or tokens when the app returns the same shape for true/false branches, no row data, no SQL text in errors.
 ## Technique
 
 Drive **boolean** conditions (`AND`, `OR`, `CASE`) so one branch matches application logic (200 vs empty, price change, etc.). Slice secrets with substring/length primitives; switch to **time** channels when boolean oracles are noisy.
@@ -31,7 +31,3 @@ Drive **boolean** conditions (`AND`, `OR`, `CASE`) so one branch matches applica
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Blind (IBM Db2)](index.md)

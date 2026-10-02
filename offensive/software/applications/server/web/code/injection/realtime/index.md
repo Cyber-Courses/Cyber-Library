@@ -18,7 +18,3 @@ keywords:
 | [WebSocket per-message authorization](websocket-per-message-authorization.md) | BOLA on frames |
 | [SSE and long poll](sse-and-long-poll.md) | Caching and session scope |
 | [Message injection to sinks](message-injection-to-downstream-sinks.md) | SQL/command/file via realtime JSON |
-
-## See also
-
-- [Injection (parent)](../index.md)

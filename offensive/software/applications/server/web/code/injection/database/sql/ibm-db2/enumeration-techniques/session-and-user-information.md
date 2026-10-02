@@ -1,7 +1,7 @@
 ---
 
 ## title: "IBM Db2 session and user metadata: SESSION_USER and authorization IDs"
-description: Session-level identifiers in Db2—SESSION_USER, SYSTEM_USER—for orienting SQLi chains and impersonation paths.
+description: Session-level identifiers in Db2, SESSION_USER, SYSTEM_USER, for orienting SQLi chains and impersonation paths.
 keywords:
   - SESSION_USER
   - CURRENT USER
@@ -31,7 +31,3 @@ Cross-check `SYSCAT.DBAUTH` for unexpected grants.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Enumeration techniques (IBM Db2)](index.md)

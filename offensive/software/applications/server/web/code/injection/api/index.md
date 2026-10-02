@@ -1,6 +1,6 @@
 ---
 title: "API dispatch abuse: GraphQL query shape, schema authorization gaps, and gRPC reflection"
-description: Structured API entry points—GraphQL resolver graphs and gRPC/protobuf dispatch—where the query shape, the schema, and the request envelope steer which resolvers and downstream calls run, with which objects, and at what cost.
+description: Structured API entry points, GraphQL resolver graphs and gRPC/protobuf dispatch, where the query shape, the schema, and the request envelope steer which resolvers and downstream calls run, with which objects, and at what cost.
 keywords:
   - GraphQL
   - gRPC
@@ -12,9 +12,7 @@ keywords:
 
 # API dispatch
 
-**Structured APIs** replace hand-rolled HTTP routing with a schema and a dispatch layer. A GraphQL server exposes one endpoint and lets the *client* describe the shape of the response; a gRPC server exposes typed methods and unmarshals protobuf into handlers. In both cases the attacker's leverage is not a string spliced into a backend command but the **envelope itself**—the query tree, the selected fields, the method name, the metadata headers—which the server trusts to decide what work to do and whose data to touch.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Probing APIs you are not permitted to test is unlawful.
+**Structured APIs** replace hand-rolled HTTP routing with a schema and a dispatch layer. A GraphQL server exposes one endpoint and lets the *client* describe the shape of the response; a gRPC server exposes typed methods and unmarshals protobuf into handlers. In both cases the attacker's leverage is not a string spliced into a backend command but the **envelope itself**, the query tree, the selected fields, the method name, the metadata headers, which the server trusts to decide what work to do and whose data to touch.
 
 ## Overview
 
@@ -25,13 +23,13 @@ A schema-driven API moves decisions that a REST service hard-codes into server-c
 - **Which methods exist** can be enumerated at runtime from the schema (GraphQL introspection, gRPC server reflection) rather than guessed.
 - **Who the caller is** often rides in a metadata header or a resolver-local check rather than a single gate at the edge.
 
-Each of those shifts creates an offensive surface that the three pages below cover. The decisive question when assessing a structured API is always: *what does the client control about dispatch, and where—if anywhere—is the authorization and cost decision actually enforced?*
+Each of those shifts creates an offensive surface that the three pages below cover. The decisive question when assessing a structured API is always: *what does the client control about dispatch, and where, if anywhere, is the authorization and cost decision actually enforced?*
 
 This hub is for structured API entry: GraphQL query shape and resolver graphs, gRPC and protobuf unmarshaling, and similar schema-driven envelopes. Raw HTTP line parsing is **[HTTP](../http/index.md)**; string-built SQL is **[Database](../database/index.md)**; object-level authorization failures on resolvers, when the root cause is a missing ownership check rather than injection, cross into **[Access control](../../access-control/index.md)**.
 
 ## Why it reaches sensitive work
 
-- **The schema is a map.** Introspection and reflection hand the attacker the full type system, every query, mutation, and method—turning blind enumeration into a lookup.
+- **The schema is a map.** Introspection and reflection hand the attacker the full type system, every query, mutation, and method, turning blind enumeration into a lookup.
 - **Cost is client-chosen.** Nesting, aliases, and batched operations let one HTTP request fan out into thousands of resolver invocations or database round-trips.
 - **Authorization is diffuse.** A single "is logged in" middleware at the edge says nothing about whether the *specific object* a nested resolver loads belongs to the caller.
 - **Envelopes are trusted.** gRPC metadata and GraphQL context are frequently read as authoritative identity or tenant routing, the same trust-boundary mistake made with HTTP headers.

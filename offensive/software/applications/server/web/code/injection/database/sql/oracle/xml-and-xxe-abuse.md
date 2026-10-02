@@ -1,6 +1,6 @@
 ---
 title: "Oracle XML and XXE abuse: EXTRACTVALUE, XMLTABLE, and external entities"
-description: XML features in Oracle that overlap with XXE—entity resolution, external DTDs, and network egress from XML pipelines.
+description: XML features in Oracle that overlap with XXE, entity resolution, external DTDs, and network egress from XML pipelines.
 keywords:
   - EXTRACTVALUE
   - XMLTABLE
@@ -29,8 +29,3 @@ Chain external DTDs or `UTL_HTTP` feeds inside XML constructors for OOB or file 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](index.md)
-- [Out of band](out-of-band/index.md)

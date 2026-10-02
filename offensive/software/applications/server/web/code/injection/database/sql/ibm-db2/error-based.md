@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 error-based SQL injection: XML helpers, casts, and SQLSTATE"
-description: Error-driven extraction in Db2—invalid casts, XML functions, and SIGNAL patterns that echo controlled expressions.
+description: Error-driven extraction in Db2, invalid casts, XML functions, and SIGNAL patterns that echo controlled expressions.
 keywords:
   - SQLSTATE
   - XMLAGG
@@ -12,7 +12,7 @@ keywords:
 
 ## Context
 
-Db2 error channels: forced casts, `XML*` helpers, `SIGNAL`, divide-by-zero—mirror Oracle-style error SQLi.
+Db2 error channels: forced casts, `XML*` helpers, `SIGNAL`, divide-by-zero, mirror Oracle-style error SQLi.
 ## Technique
 
 Embed scalar subqueries in expressions that surface in `SQLCODE`/`SQLSTATE` text returned to the client.
@@ -29,7 +29,3 @@ Embed scalar subqueries in expressions that surface in `SQLCODE`/`SQLSTATE` text
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [IBM Db2 (SQLi)](index.md)

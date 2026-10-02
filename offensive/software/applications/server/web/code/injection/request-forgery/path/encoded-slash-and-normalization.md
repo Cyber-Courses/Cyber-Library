@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 Some stacks normalize `%2f` to `/` **before** host checks; others compare the **raw** string. **Double-encoding** and **path join** with user fragments can produce a **different** final path on the wire than the allowlist regex saw.
-
-## See also
-
-- [Path (parent)](index.md)

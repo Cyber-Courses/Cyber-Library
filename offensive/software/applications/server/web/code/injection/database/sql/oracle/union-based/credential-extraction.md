@@ -1,6 +1,6 @@
 ---
 title: "Oracle credential extraction via UNION: all_users and data dictionary"
-description: High-sensitivity extraction paths—password hashes and account metadata when overly broad SELECT exists.
+description: High-sensitivity extraction paths, password hashes and account metadata when overly broad SELECT exists.
 keywords:
   - all_users
   - sys.user$
@@ -28,7 +28,3 @@ Use `NULL` placeholders, `TO_CHAR` casts, and `ORDER BY` index probing.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Union-based (Oracle)](index.md)

@@ -1,6 +1,6 @@
 ---
 title: "MSSQL file read and write via SQL: BULK, OPENROWSET, and bulk operations"
-description: File-oriented features in SQL Server that attackers may reach through injection—bulk insert, ad hoc distributed queries, and operational prerequisites.
+description: File-oriented features in SQL Server that attackers may reach through injection, bulk insert, ad hoc distributed queries, and operational prerequisites.
 keywords:
   - BULK INSERT
   - OPENROWSET
@@ -19,7 +19,7 @@ Pick the primitive that matches grants: bulk roles for file read, `xp_cmdshell`/
 ## Practice
 
 - Test `OPENROWSET(BULK...)` for UNC or local paths the service account can read.
-- Write webshells only where the web root is co-located and writable—validate layout first.
+- Write webshells only where the web root is co-located and writable, validate layout first.
 
 ## Tools
 
@@ -30,8 +30,3 @@ Pick the primitive that matches grants: bulk roles for file read, `xp_cmdshell`/
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Command execution](command-execution.md)

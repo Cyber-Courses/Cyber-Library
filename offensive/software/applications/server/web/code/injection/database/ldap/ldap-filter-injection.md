@@ -14,7 +14,3 @@ Filters like `(uid=%s)` become `(uid=*)(uid=*))(|(uid=*` when **parentheses** an
 ## Theory
 
 Use **parameterized** LDAP filters or strict **escape** routines for DN and filter **assertion** values per RFC 4515.
-
-## See also
-
-- [LDAP injection (parent)](index.md)

@@ -20,7 +20,3 @@ Nest comparisons: `CASE WHEN substr(version(),1,1)='5' THEN true ELSE false END`
 ## Practice
 
 - Pair with application-visible differences (row present vs empty, 200 vs 500) in a staging database.
-
-## See also
-
-- [Boolean based (parent)](index.md)

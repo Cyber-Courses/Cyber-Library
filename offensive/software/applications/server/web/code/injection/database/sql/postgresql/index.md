@@ -1,5 +1,5 @@
 ---
-title: "PostgreSQL SQL injection: Library Structure map—blind, error, time, file, command, privileges"
+title: "PostgreSQL SQL injection: Library Structure map, blind, error, time, file, command, privileges"
 description: Engine-specific SQL injection aligned with the Library Structure PostgreSQL subtree (topic id 1943 in the structure database).
 keywords:
   - PostgreSQL SQL injection
@@ -26,8 +26,3 @@ Portable SQL notes live under [SQL (parent)](../index.md).
 | Time-based | [Time-based](time-based.md) |
 | WAF bypass | [WAF bypass](waf-bypass.md) |
 | Union-based (app layer) | [Union-based](union-based/index.md) |
-
-## See also
-
-- [SQL (parent)](../index.md)
-- [MySQL](../mysql/index.md)

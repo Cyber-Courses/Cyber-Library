@@ -10,7 +10,7 @@ keywords:
 
 ## Context
 
-Unescaped `\r\n` in user fields **terminates** the current header and **starts** new headers or **body** separation—adding **Bcc**, changing **Subject**, or splitting **MIME** parts. Impact depends on MTA and whether the app builds **raw** SMTP vs API envelopes.
+Unescaped `\r\n` in user fields **terminates** the current header and **starts** new headers or **body** separation, adding **Bcc**, changing **Subject**, or splitting **MIME** parts. Impact depends on MTA and whether the app builds **raw** SMTP vs API envelopes.
 
 ## Theory
 
@@ -19,7 +19,3 @@ Separate **envelope** recipients (SMTP `MAIL FROM` / `RCPT TO`) from **message**
 ## Practice
 
 - Inject newline sequences into contact-form email fields in a mailhog or staging MTA and inspect the received message structure.
-
-## See also
-
-- [Mail injection (parent)](index.md)

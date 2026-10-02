@@ -10,7 +10,7 @@ keywords:
 
 ## Context
 
-Two callbacks reference the same business key but arrive on different connections. If the handler applies “last write wins” without a monotonic state version, **capture** may be processed before **authorize**, or a refund before a charge settles—leaving accounts inconsistent.
+Two callbacks reference the same business key but arrive on different connections. If the handler applies “last write wins” without a monotonic state version, **capture** may be processed before **authorize**, or a refund before a charge settles, leaving accounts inconsistent.
 
 ## Theory
 

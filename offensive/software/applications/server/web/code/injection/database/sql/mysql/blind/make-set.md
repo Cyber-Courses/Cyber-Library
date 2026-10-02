@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`MAKE_SET(bits, str1, str2, ...)` returns a comma-separated list of strings where the **bit** is set in **bits**. In injection, `MAKE_SET` can turn **bit** **tests** on `ASCII(SUBSTRING(...))` into **distinct** **strings** that change **sort** **order** or **GROUP** **CONCAT** **output** shape—another **oracle** when **boolean** **AND** is **filtered**.
+`MAKE_SET(bits, str1, str2, ...)` returns a comma-separated list of strings where the **bit** is set in **bits**. In injection, `MAKE_SET` can turn **bit** **tests** on `ASCII(SUBSTRING(...))` into **distinct** **strings** that change **sort** **order** or **GROUP** **CONCAT** **output** shape, another **oracle** when **boolean** **AND** is **filtered**.
 
 ## Theory
 

@@ -1,6 +1,6 @@
 ---
 title: "Step skip in multi-step web flows: forced browsing to later endpoints without prerequisites"
-description: Invoking a later workflow endpoint or state without completing prerequisite steps—onboarding, checkout, KYC, publishing gates.
+description: Invoking a later workflow endpoint or state without completing prerequisite steps, onboarding, checkout, KYC, publishing gates.
 keywords:
   - step skip
   - workflow bypass

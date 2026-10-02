@@ -11,8 +11,3 @@ keywords:
 ## Context
 
 **Refund** APIs may not be **idempotent**; **parallel** refund and **capture** requests can **double-credit** when ledger updates are not atomic. **Chargeback** webhooks may be **replayed** if event ids are not stored.
-
-## See also
-
-- [Sequencing (parent)](index.md)
-- [Parallel effects](../../parallel-effects/index.md)

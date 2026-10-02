@@ -12,9 +12,7 @@ keywords:
 
 # Time-based blind extraction
 
-When a command runs blind—no output reflected—and no out-of-band channel is available (egress fully filtered, DNS blocked), a **measurable delay** becomes the only signal. Forcing the server to pause for a known interval turns response time into a one-bit oracle: slow means *true*, fast means *false*. Gate that delay on a condition and you can read data one character at a time.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Executing commands without written authorization is unlawful.
+When a command runs blind, no output reflected, and no out-of-band channel is available (egress fully filtered, DNS blocked), a **measurable delay** becomes the only signal. Forcing the server to pause for a known interval turns response time into a one-bit oracle: slow means *true*, fast means *false*. Gate that delay on a condition and you can read data one character at a time.
 
 ## Confirming execution
 
@@ -68,7 +66,7 @@ Iterate position `1..n` and candidate over the charset. A **binary search** on t
 
 ## Reducing cost
 
-Time-based extraction is the slowest channel—one request per bit or per guess. Keep it practical by:
+Time-based extraction is the slowest channel, one request per bit or per guess. Keep it practical by:
 
 - **Binary search** on ordinals rather than linear charset scans.
 - **Short delays** (2–3s) once you've measured baseline variance.
@@ -81,8 +79,8 @@ Time-based extraction is the slowest channel—one request per bit or per guess.
 
 ## Tools
 
-- **[Burp Suite](https://portswigger.net/burp)** Intruder/Repeater — send timed payloads and sort by response time.
-- **[commix](https://github.com/commixproject/commix)** — `--technique=t` automates time-based blind extraction.
+- **[Burp Suite](https://portswigger.net/burp)** Intruder/Repeater, send timed payloads and sort by response time.
+- **[commix](https://github.com/commixproject/commix)**, `--technique=t` automates time-based blind extraction.
 
 ## References
 

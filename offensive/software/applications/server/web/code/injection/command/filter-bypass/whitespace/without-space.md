@@ -1,6 +1,6 @@
 ---
 title: "Spaceless command injection: executing shell commands without the space character"
-description: "Producing whoami/id when the space character is filtered—using ${IFS}, $IFS$9, brace expansion, input redirection, and tab substitutes to separate a command from its arguments."
+description: "Producing whoami/id when the space character is filtered, using ${IFS}, $IFS$9, brace expansion, input redirection, and tab substitutes to separate a command from its arguments."
 keywords:
   - command injection
   - filter bypass
@@ -12,9 +12,7 @@ keywords:
 
 # Spaceless payloads
 
-Many command-injection filters block the ASCII space (`0x20`), assuming that without it an attacker cannot separate a command from its arguments. The shell, however, offers several other ways to produce a field separator, and it applies them *after* the filter has inspected the raw bytes. A blocklist that greps for a literal space—or for `cat /etc/passwd` as one token—never sees the separator the shell eventually synthesizes.
-
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
+Many command-injection filters block the ASCII space (`0x20`), assuming that without it an attacker cannot separate a command from its arguments. The shell, however, offers several other ways to produce a field separator, and it applies them *after* the filter has inspected the raw bytes. A blocklist that greps for a literal space, or for `cat /etc/passwd` as one token, never sees the separator the shell eventually synthesizes.
 
 ## Why the shell fills the gap
 
@@ -72,5 +70,5 @@ cat%09/etc/passwd
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
 - [GTFOBins](https://gtfobins.github.io/)

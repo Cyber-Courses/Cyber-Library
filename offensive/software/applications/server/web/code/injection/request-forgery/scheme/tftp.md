@@ -9,7 +9,3 @@ keywords:
 # TFTP (SSRF)
 
 TFTP over `tftp://` is uncommon in application HTTP clients. Document the scheme for completeness when a **custom** or **embedded** client lists it in supported protocols. Test only in isolated environments.
-
-## See also
-
-- [Scheme (parent)](index.md)

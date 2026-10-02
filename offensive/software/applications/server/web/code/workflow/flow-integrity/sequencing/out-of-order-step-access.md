@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-**Out-of-order** access means the **user** returns to an **earlier** **step** **after** **later** **state** **advanced**—**browser** **back**, **bookmarked** **mid**-**flow** **POST**, or **replayed** **intermediate** **request**—and the **server** **accepts** **changes** that **invalidate** **later** **commitments** (price, inventory hold, approval). Distinct from **step skip** (jump to **end** **without** **context**): here **context** **exists** but **order** **is** **wrong**.
+**Out-of-order** access means the **user** returns to an **earlier** **step** **after** **later** **state** **advanced**, **browser** **back**, **bookmarked** **mid**-**flow** **POST**, or **replayed** **intermediate** **request**, and the **server** **accepts** **changes** that **invalidate** **later** **commitments** (price, inventory hold, approval). Distinct from **step skip** (jump to **end** **without** **context**): here **context** **exists** but **order** **is** **wrong**.
 
 ## Theory
 
@@ -21,7 +21,7 @@ Weak patterns: **session** **flags** that **only** **increment**, **no** **versi
 
 ### Back-button after price change
 
-- Advance to a **review** step showing **total** **T**. Use **back** to **edit** **cart**, **add** **items**, **return** **forward**—if **T** **is** **not** **recomputed** or **locked**, capture the **inconsistency** in a **lab**.
+- Advance to a **review** step showing **total** **T**. Use **back** to **edit** **cart**, **add** **items**, **return** **forward**, if **T** **is** **not** **recomputed** or **locked**, capture the **inconsistency** in a **lab**.
 
 ### Replay mid-flow POST
 

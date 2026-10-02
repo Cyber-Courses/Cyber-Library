@@ -1,6 +1,6 @@
 ---
 title: "HTTP request smuggling and desynchronization: CL.TE, TE.CL, and front-back disagreements"
-description: Exploiting inbound HTTP framing where a reverse proxy and origin server disagree on request boundaries—CL.TE, TE.CL, and TE.TE desync, confirmation probes, and weaponization into request hijacking and cache poisoning, for lab reproduction only.
+description: Exploiting inbound HTTP framing where a reverse proxy and origin server disagree on request boundaries, CL.TE, TE.CL, and TE.TE desync, confirmation probes, and weaponization into request hijacking and cache poisoning, for lab reproduction only.
 keywords:
   - HTTP request smuggling
   - desync
@@ -12,16 +12,14 @@ keywords:
 
 # Request smuggling
 
-**HTTP request smuggling** exploits two HTTP agents in line—typically a **front end** (CDN, load balancer, reverse proxy, or WAF) and a **back end** origin server—that disagree about where one request ends and the next begins. HTTP/1.1 keeps connections alive and pipelines requests back-to-back on the same socket, so the boundary between messages is purely a matter of byte counting. If the front end thinks a request ends at byte *N* while the back end thinks it ends at byte *M*, the bytes in between are read by the back end as the **start of the next request**. That attacker-supplied prefix is prepended to whichever request arrives next on that connection—often a different user's.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Smuggling corrupts requests belonging to other users of the shared connection, so reproduce it only in an isolated lab with pinned component versions. Testing third-party infrastructure without written authorization is unlawful.
+**HTTP request smuggling** exploits two HTTP agents in line, typically a **front end** (CDN, load balancer, reverse proxy, or WAF) and a **back end** origin server, that disagree about where one request ends and the next begins. HTTP/1.1 keeps connections alive and pipelines requests back-to-back on the same socket, so the boundary between messages is purely a matter of byte counting. If the front end thinks a request ends at byte *N* while the back end thinks it ends at byte *M*, the bytes in between are read by the back end as the **start of the next request**. That attacker-supplied prefix is prepended to whichever request arrives next on that connection, often a different user's.
 
 ## Overview
 
 The body of an HTTP/1.1 request is delimited one of two ways:
 
-- **`Content-Length`** — an exact byte count of the body.
-- **`Transfer-Encoding: chunked`** — a series of hex-prefixed chunks terminated by a `0` chunk and a trailing `\r\n\r\n`.
+- **`Content-Length`**, an exact byte count of the body.
+- **`Transfer-Encoding: chunked`**, a series of hex-prefixed chunks terminated by a `0` chunk and a trailing `\r\n\r\n`.
 
 The specification says a message must not carry both, and that `Transfer-Encoding` wins if it does. Real deployments routinely receive both anyway, and the two servers in the chain do not always resolve the conflict identically. Every smuggling primitive is a way to make the front end and back end pick **different** delimiters for the same bytes.
 
@@ -47,7 +45,7 @@ X: X[\n]Transfer-Encoding: chunked
 
 Blind confirmation uses a **timing** probe that is safe because it only delays the attacker's own socket.
 
-**CL.TE detection** — the front end forwards all `Content-Length` bytes; the back end sees a chunked body that ends at `0`, then waits for the rest of a request that never comes, producing a delay:
+**CL.TE detection**, the front end forwards all `Content-Length` bytes; the back end sees a chunked body that ends at `0`, then waits for the rest of a request that never comes, producing a delay:
 
 ```
 POST / HTTP/1.1
@@ -60,7 +58,7 @@ A
 X
 ```
 
-**TE.CL detection** — the reverse: the back end reads a short `Content-Length` and hangs waiting for more chunk data.
+**TE.CL detection**, the reverse: the back end reads a short `Content-Length` and hangs waiting for more chunk data.
 
 ```
 POST / HTTP/1.1
@@ -115,7 +113,7 @@ Cookie: session=...
 comment=
 ```
 
-The next user's full request—headers, session cookie, CSRF token—lands in the `comment` field and is echoed back when the attacker views it.
+The next user's full request, headers, session cookie, CSRF token, lands in the `comment` field and is echoed back when the attacker views it.
 
 ### Web cache poisoning and response queue desync
 

@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 hex literals and string obfuscation"
-description: Hex notation and CHR-style assembly of strings—useful context for detection rules and code review.
+description: Hex notation and CHR-style assembly of strings, useful context for detection rules and code review.
 keywords:
   - HEX
   - x literal
@@ -28,7 +28,3 @@ Use when signatures match literal `UNION` / `SELECT` tokens.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [WAF bypass (IBM Db2)](index.md)

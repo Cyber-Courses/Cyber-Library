@@ -15,7 +15,7 @@ The URL authority includes an optional port. Applications that block `http://127
 
 ## Theory
 
-Some stacks default missing ports; others preserve explicit `:0` or reject it. Redirect responses may change host and port together; the fetcher may re-apply policy on each hop or only the first URL—behavior is library-specific.
+Some stacks default missing ports; others preserve explicit `:0` or reject it. Redirect responses may change host and port together; the fetcher may re-apply policy on each hop or only the first URL, behavior is library-specific.
 
 ## Practice
 

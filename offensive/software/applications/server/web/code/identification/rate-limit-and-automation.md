@@ -10,8 +10,3 @@ keywords:
 # Rate limits and automation
 
 Weak throttling (**per IP** only, **no** account lockout coordination, **large** OTP space with **fast** resend) shapes whether credential stuffing or **OTP guessing** is practical. Mobile and web clients may hit **different** endpoints with **different** limits.
-
-## See also
-
-- [Identification (parent)](index.md)
-- [Account enumeration](account-enumeration.md)

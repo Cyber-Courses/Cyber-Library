@@ -1,6 +1,6 @@
 ---
 title: "Oracle package OS command: scheduler and external job abuse"
-description: OS-oriented abuse paths through scheduler and external job features—overlap with file and command execution topics.
+description: OS-oriented abuse paths through scheduler and external job features, overlap with file and command execution topics.
 keywords:
   - external_job
   - dbms_scheduler
@@ -11,7 +11,7 @@ Some **packages** and **job types** bridge SQL to **host** behavior. Treat these
 
 ## Context
 
-Some packaged procedures shell out or spawn jobs—vendor-specific; hunt in `ALL_PROCEDURES` for suspicious names.
+Some packaged procedures shell out or spawn jobs, vendor-specific; hunt in `ALL_PROCEDURES` for suspicious names.
 ## Technique
 
 Often overlaps scheduler external job setup.
@@ -28,8 +28,3 @@ Often overlaps scheduler external job setup.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [File manipulation (Oracle)](index.md)
-- [Command execution](../command-execution/index.md)

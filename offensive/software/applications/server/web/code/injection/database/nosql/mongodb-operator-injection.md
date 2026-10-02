@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 **Login** lookups that match `{"username": user, "password": pass}` fail open when `user` is replaced with **`{"$ne": null}`** and operators are not stripped. **$regex** enables blind extraction.
-
-## See also
-
-- [NoSQL injection (parent)](index.md)

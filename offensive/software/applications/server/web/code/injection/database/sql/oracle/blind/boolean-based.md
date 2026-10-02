@@ -1,6 +1,6 @@
 ---
 title: "Oracle boolean-based blind SQL injection: CASE, SUBSTR, and EXISTS"
-description: Inference techniques on Oracle without verbose errors—conditional expressions against DUAL and metadata-free probing.
+description: Inference techniques on Oracle without verbose errors, conditional expressions against DUAL and metadata-free probing.
 keywords:
   - CASE WHEN
   - SUBSTR
@@ -30,7 +30,3 @@ Compare response differences (HTTP size, JSON field presence) for `AND (SELECT C
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Blind (Oracle)](index.md)

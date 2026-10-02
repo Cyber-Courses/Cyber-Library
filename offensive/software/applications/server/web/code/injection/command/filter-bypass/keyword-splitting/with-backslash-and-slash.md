@@ -1,6 +1,6 @@
 ---
 title: "Keyword splitting with backslash and slash: w\\ho\\am\\i and /bin/c\\at"
-description: "Breaking a blocked keyword with backslash escapes—w\\ho\\am\\i—and inserting redundant slashes into paths—/bin/c\\at, //bin//cat—so the shell normalizes the token and a literal blocklist misses it."
+description: "Breaking a blocked keyword with backslash escapes, w\\ho\\am\\i, and inserting redundant slashes into paths, /bin/c\\at, //bin//cat, so the shell normalizes the token and a literal blocklist misses it."
 keywords:
   - command injection
   - keyword splitting
@@ -13,8 +13,6 @@ keywords:
 # Backslash and slash insertion
 
 Two normalization quirks let an attacker rewrite a filtered keyword or path so it no longer matches a signature yet still resolves to the same command. A **backslash** escapes the following character, and for an ordinary letter the shell simply drops the backslash and keeps the letter. Redundant **slashes** in a path are collapsed by the kernel's path resolver. Both transformations happen after the filter inspects the raw bytes.
-
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 
 ## Backslash escaping an ordinary character
 
@@ -65,5 +63,5 @@ These tricks hide the keyword or path only. Add a space substitute or separator 
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
 - [GTFOBins](https://gtfobins.github.io/)

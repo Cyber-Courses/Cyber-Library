@@ -22,10 +22,5 @@ keywords:
 | [Microsoft SQL Server](mssql/index.md) | Union, blind, time-based, error-based, stacked queries, file, OOB, privileges, linked servers |
 | [MySQL](mysql/index.md) | Union-based, blind, error-based, time-based, and related leaves |
 | [Oracle](oracle/index.md) | Union, blind, PL/SQL, file and scheduler surfaces, OOB (UTL packages), XML/XXE overlap |
-| [PostgreSQL](postgresql/index.md) | Blind (boolean-based leaves), error-based, time-based, file, command execution, WAF—mirrors Library Structure |
+| [PostgreSQL](postgresql/index.md) | Blind (boolean-based leaves), error-based, time-based, file, command execution, WAF, mirrors Library Structure |
 | [SQLite](sqlite/index.md) | sqlite_master/PRAGMA enumeration, file attach/export, `load_extension` risk |
-
-## See also
-
-- [Database injection (parent)](../index.md)
-

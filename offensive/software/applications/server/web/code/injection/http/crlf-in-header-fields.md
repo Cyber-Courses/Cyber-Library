@@ -1,6 +1,6 @@
 ---
 title: "CRLF injection in HTTP header fields: newline abuse in request and response headers"
-description: Exploiting carriage-return and line-feed bytes in header values built from user input—the shared primitive behind response splitting, cookie and log injection, and newline smuggling into application-generated outbound requests.
+description: Exploiting carriage-return and line-feed bytes in header values built from user input, the shared primitive behind response splitting, cookie and log injection, and newline smuggling into application-generated outbound requests.
 keywords:
   - CRLF injection
   - header injection
@@ -12,9 +12,7 @@ keywords:
 
 # CRLF in header fields
 
-**CRLF injection** is the root primitive behind HTTP header manipulation: a header value, which must be a single line, is built from user input that still contains a carriage return (`\r`, `%0d`) or line feed (`\n`, `%0a`). Because HTTP delimits headers with `\r\n` and ends the header block with `\r\n\r\n`, any attacker-controlled newline that survives into the stream is read as **structure**, not text. The same injection primitive surfaces in two directions—reflected into **response** headers the server sends to the client, and injected into **request** headers when application code builds its own outbound HTTP messages.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Use only against systems you are permitted to test.
+**CRLF injection** is the root primitive behind HTTP header manipulation: a header value, which must be a single line, is built from user input that still contains a carriage return (`\r`, `%0d`) or line feed (`\n`, `%0a`). Because HTTP delimits headers with `\r\n` and ends the header block with `\r\n\r\n`, any attacker-controlled newline that survives into the stream is read as **structure**, not text. The same injection primitive surfaces in two directions, reflected into **response** headers the server sends to the client, and injected into **request** headers when application code builds its own outbound HTTP messages.
 
 ## Overview
 
@@ -33,7 +31,7 @@ The vulnerability is identical to [HTTP response splitting](http-response-splitt
 ## The two directions
 
 - **Outbound responses (common).** Values copied into `Set-Cookie`, `Location`, `Content-Disposition`, or custom `X-` headers. This is the response-splitting surface: injected headers, forged bodies, and cache poisoning.
-- **App-generated requests (rarer, high value).** When server code constructs an HTTP request to an internal service and places user input into a **request** header (an API key header, a forwarded `Host`, a `X-Forwarded-For`), an injected `\r\n` can add request headers or a body the internal service honors—pairing CRLF injection with server-side request forgery to reach internal endpoints with attacker-chosen headers.
+- **App-generated requests (rarer, high value).** When server code constructs an HTTP request to an internal service and places user input into a **request** header (an API key header, a forwarded `Host`, a `X-Forwarded-For`), an injected `\r\n` can add request headers or a body the internal service honors, pairing CRLF injection with server-side request forgery to reach internal endpoints with attacker-chosen headers.
 
 ## Injection payloads
 
@@ -57,7 +55,7 @@ A value reflected into `Set-Cookie` lets the attacker set or overwrite cookies, 
 
 ### Log injection
 
-Headers like `User-Agent` or `Referer`, and reflected values written to application logs, carry newlines straight into the log file. Injected lines can forge log entries, break log parsers, or—when logs are rendered in a web dashboard—deliver stored payloads to whoever reviews them:
+Headers like `User-Agent` or `Referer`, and reflected values written to application logs, carry newlines straight into the log file. Injected lines can forge log entries, break log parsers, or, when logs are rendered in a web dashboard, deliver stored payloads to whoever reviews them:
 
 ```
 User-Agent: Mozilla/5.0%0d%0a[CRITICAL] forged admin login from 10.0.0.9
@@ -69,7 +67,7 @@ Where application code forwards a user-supplied value into an internal HTTP call
 
 ## Finding the primitive
 
-1. **Enumerate sinks.** Identify every parameter, path segment, and inbound header whose value reaches an outbound header—response or app-generated request.
+1. **Enumerate sinks.** Identify every parameter, path segment, and inbound header whose value reaches an outbound header, response or app-generated request.
 2. **Test newline survival.** Submit `%0d%0a`, `%0a` alone, and encoded/obfuscated variants, then read the **raw** bytes of the response (or capture the outbound request on the internal socket) to see whether a second header line materializes.
 3. **Characterize the context.** Determine whether you can append headers only, or also inject a blank line and a body; whether a bare LF is enough; and whether a downstream cache or internal service will act on the injected structure.
 4. **Escalate** to cookie fixation, log forgery, response splitting, or request-header smuggling per the sink.

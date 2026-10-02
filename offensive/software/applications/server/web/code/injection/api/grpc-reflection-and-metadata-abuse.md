@@ -10,12 +10,8 @@ keywords:
 
 ## Context
 
-**Server reflection** exposes service definitions in production if left enabled. **Metadata** (`:authority`, custom headers) may be **trusted** like HTTP headers for tenant routing—same **[Trust boundary](../../../access-control/trust-boundary/index.md)** pitfalls.
+**Server reflection** exposes service definitions in production if left enabled. **Metadata** (`:authority`, custom headers) may be **trusted** like HTTP headers for tenant routing, same **[Trust boundary](../../../access-control/trust-boundary/index.md)** pitfalls.
 
 ## Theory
 
 Map unary vs streaming handlers; unbounded **message** size and **streaming** fan-out can amplify abuse.
-
-## See also
-
-- [API dispatch (parent)](index.md)

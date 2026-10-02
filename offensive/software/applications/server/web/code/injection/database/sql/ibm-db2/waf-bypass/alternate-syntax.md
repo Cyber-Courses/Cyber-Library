@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 alternate SQL syntax for filter evasion"
-description: CONCAT variants, CASE, and UNION NULL probes—documented for WAF rule authors, not as a substitute for binds.
+description: CONCAT variants, CASE, and UNION NULL probes, documented for WAF rule authors, not as a substitute for binds.
 keywords:
   - CONCAT
   - UNION SELECT NULL
@@ -14,7 +14,7 @@ Attackers vary **keyword** **casing**, **comment** placement, and **function** c
 Rotate **`CONCAT`**, `CHR`, hex literals, and `UNION SELECT NULL,NULL` probes to slip past immature filters.
 ## Technique
 
-Db2 tolerates varied quoting—fuzz keyword split points.
+Db2 tolerates varied quoting, fuzz keyword split points.
 ## Practice
 
 - Automate with Burp payload lists tuned to Db2.
@@ -28,7 +28,3 @@ Db2 tolerates varied quoting—fuzz keyword split points.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [WAF bypass (IBM Db2)](index.md)

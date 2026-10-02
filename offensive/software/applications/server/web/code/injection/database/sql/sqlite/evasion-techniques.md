@@ -1,6 +1,6 @@
 ---
 title: "SQLite SQL injection evasion: comments, delimiters, and encoding"
-description: Comment and delimiter tricks in SQLite—inline comments, semicolons, and null-byte edge cases in APIs that concatenate strings.
+description: Comment and delimiter tricks in SQLite, inline comments, semicolons, and null-byte edge cases in APIs that concatenate strings.
 keywords:
   - SQLite comment
   - null byte
@@ -11,10 +11,10 @@ SQLite accepts **`--`**, **`/* */`**, and **`;`** statement separators. Some **l
 
 ## Context
 
-SQLite accepts `--`, `/**/`, `;` statement separators—useful when filters key on spaces or keywords.
+SQLite accepts `--`, `/**/`, `;` statement separators, useful when filters key on spaces or keywords.
 ## Technique
 
-Some APIs accidentally allow multi-statement strings—probe with benign second `SELECT`.
+Some APIs accidentally allow multi-statement strings, probe with benign second `SELECT`.
 ## Practice
 
 - Try URL-encoding, double-encoding, and unicode homoglyphs against weak WAFs.
@@ -28,7 +28,3 @@ Some APIs accidentally allow multi-statement strings—probe with benign second 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [SQLite (SQLi)](index.md)

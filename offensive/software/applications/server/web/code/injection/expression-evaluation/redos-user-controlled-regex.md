@@ -19,7 +19,3 @@ Use **linear-time** matchers where possible, **timeout** regex execution, or **a
 ## Practice
 
 - Fuzz report or search endpoints that accept `regex=` parameters in a staging environment with CPU monitoring.
-
-## See also
-
-- [Expression evaluation (parent)](index.md)

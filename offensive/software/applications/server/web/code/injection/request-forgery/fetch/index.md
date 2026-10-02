@@ -1,6 +1,6 @@
 ---
 title: "SSRF fetch clients: programmatic HTTP, headless browsers, and document pipelines compared"
-description: How the application performs outbound requests—programmatic HTTP clients, headless browsers, and document converters—and why the same URL behaves differently per stack.
+description: How the application performs outbound requests, programmatic HTTP clients, headless browsers, and document converters, and why the same URL behaves differently per stack.
 keywords:
   - SSRF
   - HttpClient
@@ -18,9 +18,3 @@ The **fetch** facet is the code path that actually opens the socket: `HttpURLCon
 | [Programmatic HTTP client](programmatic-client.md) | Library stacks, redirects, connection pools |
 | [Headless browser](headless-browser.md) | Playwright / Puppeteer navigation vs thin clients |
 | [Document pipeline](document-pipeline.md) | PDF, previews, image proxies |
-
-## See also
-
-- [Request forgery (parent)](../index.md)
-- [Scheme](../scheme/index.md) — alternate URL handlers
-- [Authority](../authority/index.md)

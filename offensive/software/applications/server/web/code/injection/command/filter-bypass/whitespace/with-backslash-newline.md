@@ -11,9 +11,7 @@ keywords:
 
 # Backslash + newline continuation
 
-A backslash immediately followed by a newline is a **line continuation**: the shell removes both characters and joins the two physical lines into one logical line before any other parsing. This gives an attacker a way to split a filtered keyword—or a whole command—across lines so that no blocked token appears contiguously in the raw input, while the shell silently reassembles it at runtime.
-
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
+A backslash immediately followed by a newline is a **line continuation**: the shell removes both characters and joins the two physical lines into one logical line before any other parsing. This gives an attacker a way to split a filtered keyword, or a whole command, across lines so that no blocked token appears contiguously in the raw input, while the shell silently reassembles it at runtime.
 
 ## Why the shell erases the split
 

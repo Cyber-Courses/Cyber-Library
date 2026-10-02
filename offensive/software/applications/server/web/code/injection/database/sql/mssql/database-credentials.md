@@ -1,6 +1,6 @@
 ---
 title: "MSSQL database credential exposure via SQL injection: syslogins and hash metadata"
-description: How SQL Server login metadata can be queried through injection—and why application accounts should not be able to read password hashes or legacy catalog views.
+description: How SQL Server login metadata can be queried through injection, and why application accounts should not be able to read password hashes or legacy catalog views.
 keywords:
   - sys.syslogins
   - LOGINPROPERTY
@@ -16,7 +16,7 @@ Attackers with **SELECT** access to catalog views may enumerate **logins**, **ro
 MSSQL stores login metadata in `sys.server_principals` / legacy catalogs; password hashes may be reachable for offline cracking depending on version and rights.
 ## Technique
 
-Select from **`sys.sql_logins`** with `LOGINPROPERTY` for hash material when `CONTROL SERVER` or similar is not required—often you need elevated rights.
+Select from **`sys.sql_logins`** with `LOGINPROPERTY` for hash material when `CONTROL SERVER` or similar is not required, often you need elevated rights.
 ## Practice
 
 - Map effective privileges before burning time on hash pulls.
@@ -31,8 +31,3 @@ Select from **`sys.sql_logins`** with `LOGINPROPERTY` for hash material when `CO
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Privileges](privileges/index.md)

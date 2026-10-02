@@ -21,7 +21,7 @@ Double encoding, URL encoding, and short fixed-width schemes reduce online guess
 
 ### Decode and replay in a lab
 
-- Copy an id from traffic, Base64-decode or reverse the visible scheme, modify the integer or string inside, re-encode, and substitute in the same API call. If access tracks the modified target, the server never enforced ownership—only obscurity.
+- Copy an id from traffic, Base64-decode or reverse the visible scheme, modify the integer or string inside, re-encode, and substitute in the same API call. If access tracks the modified target, the server never enforced ownership, only obscurity.
 
 ## Tools
 

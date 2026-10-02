@@ -1,6 +1,6 @@
 ---
 title: "Oracle blind SQL injection: boolean and time-based inference"
-description: Blind SQL injection in Oracle—CASE, SUBSTR, DUAL, and delay primitives when errors and union output are not visible.
+description: Blind SQL injection in Oracle, CASE, SUBSTR, DUAL, and delay primitives when errors and union output are not visible.
 keywords:
   - Oracle blind SQLi
   - DUAL
@@ -19,7 +19,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](../index.md)

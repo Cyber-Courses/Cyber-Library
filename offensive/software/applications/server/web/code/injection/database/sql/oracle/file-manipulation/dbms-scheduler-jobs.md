@@ -1,6 +1,6 @@
 ---
 title: "Oracle DBMS_SCHEDULER jobs and external execution risk"
-description: Scheduler jobs as a persistence and execution path—create_job and external job types under strict operational control.
+description: Scheduler jobs as a persistence and execution path, create_job and external job types under strict operational control.
 keywords:
   - DBMS_SCHEDULER.create_job
   - external job
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`DBMS_SCHEDULER.CREATE_JOB` schedules PL/SQL or external jobs—powerful persistence and execution.
+`DBMS_SCHEDULER.CREATE_JOB` schedules PL/SQL or external jobs, powerful persistence and execution.
 ## Technique
 
 External job types need credential objects; PL/SQL jobs run as job owner.
@@ -28,7 +28,3 @@ External job types need credential objects; PL/SQL jobs run as job owner.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [File manipulation (Oracle)](index.md)

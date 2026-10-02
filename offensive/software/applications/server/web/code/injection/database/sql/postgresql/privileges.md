@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 Library Structure **Privileges** covers **has_table_privilege**, **pg_roles**, **session_user**, and similar. Useful for **post-exploitation** mapping when SELECT on catalogs is possible through injection.
-
-## See also
-
-- [PostgreSQL (parent)](index.md)

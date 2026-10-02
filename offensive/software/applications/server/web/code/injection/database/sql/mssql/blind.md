@@ -1,6 +1,6 @@
 ---
 title: "MSSQL blind SQL injection: substring and Unicode inference without verbose errors"
-description: Boolean and content inference in Microsoft SQL Server when errors are suppressed—SUBSTRING, ASCII, and related T-SQL primitives.
+description: Boolean and content inference in Microsoft SQL Server when errors are suppressed, SUBSTRING, ASCII, and related T-SQL primitives.
 keywords:
   - MSSQL blind SQLi
   - SUBSTRING
@@ -31,8 +31,3 @@ Build `AND ASCII(SUBSTRING(@@version,1,1))>N` style tests, or compare hashes of 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Time-based](time-based.md)

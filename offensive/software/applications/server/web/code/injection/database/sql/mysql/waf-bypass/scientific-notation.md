@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 Library Structure **Scientific Notation** tricks for numeric contexts when digit filters apply to strings but not numeric literals.
-
-## See also
-
-- [WAF bypass (parent)](index.md)

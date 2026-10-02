@@ -10,7 +10,7 @@ keywords:
 
 ## Context
 
-Some Java and enterprise clients resolve `ldap://` and `ldaps://` through JNDI-style code paths (distinct from log4j-specific issues). A fetch to `ldap://attacker/` can be used for blind SSRF, or in older chains for remote classloading where the environment is vulnerable—treat as **environment-specific** and **lab-only**.
+Some Java and enterprise clients resolve `ldap://` and `ldaps://` through JNDI-style code paths (distinct from log4j-specific issues). A fetch to `ldap://attacker/` can be used for blind SSRF, or in older chains for remote classloading where the environment is vulnerable, treat as **environment-specific** and **lab-only**.
 
 ## Theory
 

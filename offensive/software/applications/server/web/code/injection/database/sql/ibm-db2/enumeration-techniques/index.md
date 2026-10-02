@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 enumeration: SYSCAT, SYSIBM, and session metadata"
-description: Schema and environment discovery in Db2—catalog views and session identifiers for SQL injection reconnaissance.
+description: Schema and environment discovery in Db2, catalog views and session identifiers for SQL injection reconnaissance.
 keywords:
   - SYSCAT
   - SYSIBM
@@ -20,7 +20,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [IBM Db2 (SQLi)](../index.md)

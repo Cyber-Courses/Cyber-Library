@@ -17,7 +17,3 @@ keywords:
 - [EXTRACTVALUE function](extractvalue-function.md)
 - [UPDATEXML function](updatexml-function.md)
 - [GROUP BY duplicate entry](group-by.md)
-
-## See also
-
-- [MySQL (parent)](../index.md)

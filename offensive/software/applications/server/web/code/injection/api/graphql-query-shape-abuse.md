@@ -1,6 +1,6 @@
 ---
 title: "GraphQL query shape abuse: introspection, deep nesting, alias fan-out, and batching"
-description: Exploiting client-controlled query shape in GraphQL—schema introspection for recon, deeply nested cyclic selections, alias multiplication, and batched operations that turn one HTTP request into thousands of resolver and database calls.
+description: Exploiting client-controlled query shape in GraphQL, schema introspection for recon, deeply nested cyclic selections, alias multiplication, and batched operations that turn one HTTP request into thousands of resolver and database calls.
 keywords:
   - GraphQL
   - introspection
@@ -12,16 +12,14 @@ keywords:
 
 # GraphQL query shape
 
-GraphQL inverts who decides the response. The server publishes a schema; the **client** sends a selection set describing exactly which fields, how deeply nested, and how many times it wants them resolved. Every field in that set is backed by a **resolver**—often a function that hits a database, a cache, or another service. Because the cost of a query is set by its shape and the shape is attacker-controlled, a single well-formed request can be made arbitrarily expensive, and the schema that makes this possible can usually be read back in full.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Issuing resource-exhausting queries against systems without written authorization is unlawful.
+GraphQL inverts who decides the response. The server publishes a schema; the **client** sends a selection set describing exactly which fields, how deeply nested, and how many times it wants them resolved. Every field in that set is backed by a **resolver**, often a function that hits a database, a cache, or another service. Because the cost of a query is set by its shape and the shape is attacker-controlled, a single well-formed request can be made arbitrarily expensive, and the schema that makes this possible can usually be read back in full.
 
 ## Overview
 
 Two properties combine into the attack surface:
 
 1. **The client picks the field tree.** There is no fixed handler whose cost the server controls; the resolver graph runs whatever the selection set asks for.
-2. **The schema is self-describing.** Unless disabled, introspection returns every type, field, argument, and relationship—the exact map needed to build an expensive or sensitive query.
+2. **The schema is self-describing.** Unless disabled, introspection returns every type, field, argument, and relationship, the exact map needed to build an expensive or sensitive query.
 
 The result is that reconnaissance and amplification feed each other: introspection reveals the cyclic relationships and list fields, and those are precisely what a denial-of-service or fan-out query exploits.
 
@@ -75,7 +73,7 @@ query {
 }
 ```
 
-If every `posts` resolver issues its own database query, a tree a dozen levels deep expands into an exponential number of round-trips from a single request. Where the server enforces a **depth limit** but no **complexity/cost limit**, you stay just under the depth cap and widen instead—selecting many expensive fields and lists at each permitted level so total work still blows up.
+If every `posts` resolver issues its own database query, a tree a dozen levels deep expands into an exponential number of round-trips from a single request. Where the server enforces a **depth limit** but no **complexity/cost limit**, you stay just under the depth cap and widen instead, selecting many expensive fields and lists at each permitted level so total work still blows up.
 
 ## Alias fan-out
 
@@ -114,11 +112,11 @@ Many GraphQL servers accept a **JSON array** of operations in one HTTP request a
 ]
 ```
 
-When depth, complexity, and alias limits are enforced **per operation** but batching is unbounded, the per-operation ceilings are irrelevant—send a thousand modest operations in one request. Batching stacks with aliasing: each batched operation carries its own alias fan-out, and the product of the two is the real amplification factor. For throttling that keys on HTTP requests, both aliasing and batching collapse an attack that should take thousands of requests into one.
+When depth, complexity, and alias limits are enforced **per operation** but batching is unbounded, the per-operation ceilings are irrelevant, send a thousand modest operations in one request. Batching stacks with aliasing: each batched operation carries its own alias fan-out, and the product of the two is the real amplification factor. For throttling that keys on HTTP requests, both aliasing and batching collapse an attack that should take thousands of requests into one.
 
 ## Measuring the effect
 
-Query-shape abuse is confirmed the same way as any resource attack—by differential timing and error behavior:
+Query-shape abuse is confirmed the same way as any resource attack, by differential timing and error behavior:
 
 - **Baseline vs. payload timing.** Send a shallow query, then the nested/aliased variant, and compare response time; a steep nonlinear climb as you add levels or aliases confirms per-level resolver multiplication.
 - **Partial failures.** Batches that return some results and time out on others reveal the cost ceiling and where it sits (per operation vs. per request).

@@ -1,6 +1,6 @@
 ---
 title: "Union-based SQL injection (MySQL): column alignment, metadata, and data extraction"
-description: UNION-based extraction in MySQL—column alignment, information_schema use, and blind column naming tricks.
+description: UNION-based extraction in MySQL, column alignment, information_schema use, and blind column naming tricks.
 keywords:
   - union SQL injection
   - MySQL union
@@ -17,7 +17,3 @@ keywords:
 - [Extract database with information_schema](extract-database-with-information-schema.md)
 - [Extract column names without information_schema](extract-column-names-without-information-schema.md)
 - [Extract data without column names](extract-data-without-column-names.md)
-
-## See also
-
-- [MySQL (parent)](../index.md)

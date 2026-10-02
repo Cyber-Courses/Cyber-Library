@@ -1,6 +1,6 @@
 ---
 title: "Trust boundaries in web workflows: tampering with prices, SKUs, tiers, and cross-step business parameters"
-description: Numeric and business parameters that cross steps—amounts, quantities, roles—must stay consistent with server-side policy.
+description: Numeric and business parameters that cross steps, amounts, quantities, roles, must stay consistent with server-side policy.
 keywords:
   - business logic
   - parameter tampering
@@ -16,9 +16,3 @@ Trust boundaries are the **edges** where data leaves one enforcement context and
 |------|--------|
 | [Numeric integrity](numeric-integrity.md) | Prices, fees, tax lines, quantities |
 | [Business parameters](business-parameters.md) | Product SKU, shipping tier, entitlement tier |
-
-## See also
-
-- [Workflow (parent)](index.md)
-- [Access control](../access-control/index.md)
-- [Parallel effects](parallel-effects/index.md)

@@ -1,6 +1,6 @@
 ---
 title: "Inferring column names without information_schema in MySQL UNION SQL injection"
-description: Fallback techniques when information_schema is unavailable or filtered—subqueries, error channels, and brute patterns in MySQL UNION SQLi.
+description: Fallback techniques when information_schema is unavailable or filtered, subqueries, error channels, and brute patterns in MySQL UNION SQLi.
 keywords:
   - MySQL SQL injection
   - no information_schema

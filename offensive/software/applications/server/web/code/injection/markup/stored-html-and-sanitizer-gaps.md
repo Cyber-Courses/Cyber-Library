@@ -15,7 +15,3 @@ keywords:
 ## Theory
 
 Treat sanitization as **versioned** configuration; fuzz with **mutation** payloads appropriate to the allowed tag set.
-
-## See also
-
-- [Markup injection (parent)](index.md)

@@ -17,8 +17,3 @@ State alignment asks whether the **surface** (what the user sees), the **record*
 | [Surface vs version](surface-version.md) | Client step counter vs server workflow version |
 | [Record status](record-status.md) | Row status fields vs side effects already executed |
 | [Session checkpoint](session-checkpoint.md) | Session keys that gate steps without DB corroboration |
-
-## See also
-
-- [Flow integrity (parent)](../index.md)
-- [Sequencing](../sequencing/index.md)

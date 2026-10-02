@@ -1,6 +1,6 @@
 ---
 title: "Oracle EXTRACTVALUE and out-of-band XML fetches"
-description: XPath and XMLType surfaces that can trigger network resolution—ACLs and egress controls for XML-enabled schemas.
+description: XPath and XMLType surfaces that can trigger network resolution, ACLs and egress controls for XML-enabled schemas.
 keywords:
   - EXTRACTVALUE
   - XMLType
@@ -12,13 +12,13 @@ keywords:
 
 ## Context
 
-`EXTRACTVALUE` on `XMLType` can be weaponized for OOB when entity resolution or URL fetches occur—version-dependent.
+`EXTRACTVALUE` on `XMLType` can be weaponized for OOB when entity resolution or URL fetches occur, version-dependent.
 ## Technique
 
 Use Collaborator to see if the parser hits your endpoint.
 ## Practice
 
-- Overlaps XXE-style issues—tag for combined XML injection findings.
+- Overlaps XXE-style issues, tag for combined XML injection findings.
 
 ## Tools
 
@@ -29,8 +29,3 @@ Use Collaborator to see if the parser hits your endpoint.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Out of band (Oracle)](index.md)
-- [XML and XXE abuse](../xml-and-xxe-abuse.md)

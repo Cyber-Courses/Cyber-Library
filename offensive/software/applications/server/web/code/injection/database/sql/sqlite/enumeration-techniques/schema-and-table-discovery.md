@@ -1,6 +1,6 @@
 ---
 title: "SQLite schema discovery: sqlite_master and sqlite_schema"
-description: Listing tables and indexes from sqlite_master—core reconnaissance for SQLi against SQLite backends.
+description: Listing tables and indexes from sqlite_master, core reconnaissance for SQLi against SQLite backends.
 keywords:
   - sqlite_master
   - sqlite_schema
@@ -28,7 +28,3 @@ Filter `type='table'` for user objects; follow with `pragma_table_info` for colu
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Enumeration techniques (SQLite)](index.md)

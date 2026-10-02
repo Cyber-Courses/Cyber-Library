@@ -14,8 +14,6 @@ keywords:
 
 Django's ORM parameterizes normal queryset operations, but it also exposes **escape hatches** that hand raw SQL to the database: `Model.objects.raw()` and the low-level `connection.cursor()` API. When application code builds the SQL string for either with Python string formatting instead of **parameter placeholders**, the ORM provides no protection and the sink is classic SQL injection.
 
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
-
 ## Vulnerable patterns
 
 `raw()` with an f-string or `%`/`.format()` interpolation:
@@ -57,7 +55,7 @@ Stacked queries are generally **not** available through the default DB-API curso
 
 ## Notes on `raw()` specifics
 
-`raw()` maps rows to model instances, so the first columns must align with the model's primary key and fields for the rows to map—a `UNION` payload should select columns in the model's order, padding with `NULL`. Extra trailing columns can be pulled out through annotated attributes.
+`raw()` maps rows to model instances, so the first columns must align with the model's primary key and fields for the rows to map, a `UNION` payload should select columns in the model's order, padding with `NULL`. Extra trailing columns can be pulled out through annotated attributes.
 
 ## References
 

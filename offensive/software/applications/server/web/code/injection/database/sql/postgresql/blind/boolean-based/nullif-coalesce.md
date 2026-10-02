@@ -12,7 +12,3 @@ keywords:
 ## Context
 
 **NULLIF(x,x)** yields NULL; **COALESCE(NULL,1)** yields 1. These build **conditional nullness** useful when keyword filters block other primitives. Maps to Library Structure **Boolean with NULLIF COALESCE**.
-
-## See also
-
-- [Boolean based (parent)](index.md)

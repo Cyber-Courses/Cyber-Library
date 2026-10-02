@@ -1,6 +1,6 @@
 ---
 title: "Oracle out-of-band SQL injection: UTL_HTTP, UTL_INADDR, and XML callbacks"
-description: Out-of-band channels in Oracle—HTTP requests, DNS-style host resolution, and XML-driven fetches when packages are granted.
+description: Out-of-band channels in Oracle, HTTP requests, DNS-style host resolution, and XML-driven fetches when packages are granted.
 keywords:
   - UTL_HTTP
   - UTL_INADDR
@@ -21,7 +21,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](../index.md)

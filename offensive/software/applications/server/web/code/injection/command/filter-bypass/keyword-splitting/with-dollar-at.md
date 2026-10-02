@@ -1,6 +1,6 @@
 ---
 title: "Keyword splitting with positional parameters: who$@ami and $0"
-description: "Breaking a blocked keyword by inserting positional-parameter expansions that evaluate to nothing—who$@ami, who${@}ami—and abusing $0 as a shell invocation, so a literal blocklist misses the keyword."
+description: "Breaking a blocked keyword by inserting positional-parameter expansions that evaluate to nothing, who$@ami, who${@}ami, and abusing $0 as a shell invocation, so a literal blocklist misses the keyword."
 keywords:
   - command injection
   - keyword splitting
@@ -13,8 +13,6 @@ keywords:
 # Positional-parameter splitting
 
 The shell's special parameters expand to nothing in a non-interactive context with no arguments, which makes them useful as an invisible separator inside a word. `$@` (all positional parameters) and `$*` expand to the empty string when none are set, so `who$@ami` reassembles to `whoami` after expansion. `$0` is separately useful: it holds the name of the shell itself and can be executed directly.
-
-> **Scope.** For authorized penetration tests, red-team engagements, and CTF labs against systems you own or are contracted to assess. Unauthorized use is unlawful.
 
 ## `$@` and `$*` as an empty splitter
 
@@ -64,8 +62,8 @@ c$@at${IFS}/etc/passwd
 ## Context and caveats
 
 - This is a **shell** technique (`sh -c`, `system()`, backticks); in a pure `argv` call `$@` is a literal string.
-- If the sink passes user-controlled positional arguments to the shell, `$@`/`$1` may not be empty—prefer a positional known to be unset such as `$9`.
+- If the sink passes user-controlled positional arguments to the shell, `$@`/`$1` may not be empty, prefer a positional known to be unset such as `$9`.
 
 ## References
 
-- [PayloadsAllTheThings: Command Injection — bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)
+- [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

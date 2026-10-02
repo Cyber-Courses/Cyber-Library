@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 blind SQL injection: boolean and time-based inference"
-description: Blind SQLi in Db2—CASE, SUBSTR, and timing-oriented primitives when verbose errors are hidden.
+description: Blind SQLi in Db2, CASE, SUBSTR, and timing-oriented primitives when verbose errors are hidden.
 keywords:
   - Db2 blind SQLi
 ---
@@ -18,7 +18,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [IBM Db2 (SQLi)](../index.md)

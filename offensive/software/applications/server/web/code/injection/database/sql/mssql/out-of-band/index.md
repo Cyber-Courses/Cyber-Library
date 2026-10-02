@@ -1,6 +1,6 @@
 ---
 title: "MSSQL out-of-band SQL injection: DNS and UNC-style network callbacks"
-description: Out-of-band channels in SQL Server—DNS labels and UNC paths that can trigger network activity when injection can influence string arguments to privileged functions.
+description: Out-of-band channels in SQL Server, DNS labels and UNC paths that can trigger network activity when injection can influence string arguments to privileged functions.
 keywords:
   - DNS exfiltration
   - UNC path
@@ -22,7 +22,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](../index.md)

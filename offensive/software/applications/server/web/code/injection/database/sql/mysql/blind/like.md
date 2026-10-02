@@ -25,7 +25,7 @@ keywords:
 
 ### Wildcard pitfalls
 
-- `%` and `_` in user-controlled **data** can **match** too much; in **injection** you control the **pattern** string—escape literals if the app adds backslashes.
+- `%` and `_` in user-controlled **data** can **match** too much; in **injection** you control the **pattern** string, escape literals if the app adds backslashes.
 
 ## Tools
 

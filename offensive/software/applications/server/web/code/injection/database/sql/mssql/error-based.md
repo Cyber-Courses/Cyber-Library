@@ -12,7 +12,7 @@ When the database returns **detailed errors** to the client, failed **conversion
 
 ## Context
 
-Verbose SQL Server errors echo conversion failures—embed subqueries inside `CONVERT`/`CAST` targets so the message leaks scalar data.
+Verbose SQL Server errors echo conversion failures, embed subqueries inside `CONVERT`/`CAST` targets so the message leaks scalar data.
 ## Technique
 
 Force type mismatches or out-of-range conversions where the error text includes your expression result.
@@ -30,8 +30,3 @@ Force type mismatches or out-of-range conversions where the error text includes 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Union-based](union-based.md)

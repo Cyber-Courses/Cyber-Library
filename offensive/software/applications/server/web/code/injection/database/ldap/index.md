@@ -8,7 +8,7 @@ keywords:
 
 # LDAP injection
 
-LDAP injection appears where **filter** strings or **distinguished names** are built from **concatenated** fragments so attacker input lands **inside** the filter grammar. Closing parentheses and boolean operators can change the filter’s logic so the query matches **more** entries than the developer intended—classic auth bypass and data exfil patterns.
+LDAP injection appears where **filter** strings or **distinguished names** are built from **concatenated** fragments so attacker input lands **inside** the filter grammar. Closing parentheses and boolean operators can change the filter’s logic so the query matches **more** entries than the developer intended, classic auth bypass and data exfil patterns.
 
 ## Typical sinks
 
@@ -20,8 +20,3 @@ LDAP injection appears where **filter** strings or **distinguished names** are b
 | Page | Focus |
 |------|--------|
 | [LDAP filter injection](ldap-filter-injection.md) | Parentheses and boolean abuse |
-
-## See also
-
-- [Database injection (parent)](../index.md)
-- [SQL](../sql/index.md)

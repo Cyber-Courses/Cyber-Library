@@ -16,7 +16,3 @@ keywords:
 | [NULLIF and COALESCE](nullif-coalesce.md) | Null-handling predicates |
 | [Substring](substring.md) | SUBSTR / SUBSTRING character extraction |
 | [pg_backend_pid](pg-backend-pid.md) | Process id in boolean tests |
-
-## See also
-
-- [Blind (parent)](../index.md)

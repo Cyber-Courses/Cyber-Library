@@ -1,6 +1,6 @@
 ---
 title: "Flow integrity in web applications: sequencing versus UI, record, and session state alignment"
-description: Workflow coherence—sequencing of steps versus alignment of state across clients, records, and sessions.
+description: Workflow coherence, sequencing of steps versus alignment of state across clients, records, and sessions.
 keywords:
   - flow integrity
   - business logic
@@ -13,12 +13,8 @@ keywords:
 
 ## Child topics
 
-- **[Sequencing](sequencing/index.md)** — Step skip, out-of-order access, approval bypass, parameter omission, entitlement renewal, reversal workflows.
-- **[State alignment](state-alignment/index.md)** — UI vs record vs session checkpoints.
-- **[Parallel effects](../parallel-effects/index.md)** — Races, double spend, callback replay (sibling under workflow).
+- **[Sequencing](sequencing/index.md)**, Step skip, out-of-order access, approval bypass, parameter omission, entitlement renewal, reversal workflows.
+- **[State alignment](state-alignment/index.md)**, UI vs record vs session checkpoints.
+- **[Parallel effects](../parallel-effects/index.md)**, Races, double spend, callback replay (sibling under workflow).
 
 **Trust boundaries** for numeric and business parameters: **[Trust boundaries](../trust-boundaries/index.md)**.
-
-## See also
-
-- [Workflow (parent)](../index.md)

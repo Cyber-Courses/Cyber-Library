@@ -1,6 +1,6 @@
 ---
 title: "SQLite SQL injection: embedded databases, PRAGMA, and extension loading"
-description: SQLite-specific SQL injection—blind inference, sqlite_master introspection, file-oriented abuse, and load_extension risk in application deployments.
+description: SQLite-specific SQL injection, blind inference, sqlite_master introspection, file-oriented abuse, and load_extension risk in application deployments.
 keywords:
   - SQLite SQL injection
   - sqlite_master
@@ -28,7 +28,3 @@ Use only in **authorized** penetration tests, red-team engagements, CTFs, and is
 | Evasion techniques | [Evasion techniques](evasion-techniques.md) |
 | File manipulation | [File manipulation](file-manipulation/index.md) |
 | Remote code execution | [Remote code execution](remote-code-execution/index.md) |
-
-## See also
-
-- [SQL injection (parent)](../index.md)

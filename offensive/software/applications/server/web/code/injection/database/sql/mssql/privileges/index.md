@@ -1,6 +1,6 @@
 ---
 title: "MSSQL privileges in SQL injection: effective permissions and role abuse"
-description: Listing and escalating privileges on SQL Server—relevant when injection can query security catalog functions or alter server roles.
+description: Listing and escalating privileges on SQL Server, relevant when injection can query security catalog functions or alter server roles.
 keywords:
   - HAS_PERMS_BY_NAME
   - fn_my_permissions
@@ -22,7 +22,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](../index.md)

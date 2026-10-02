@@ -1,6 +1,6 @@
 ---
 title: "Workflow sequencing attacks: step skip, out-of-order access, approvals, omission, and reversals"
-description: Abuse of ordered workflows—skipping steps, calling steps out of order, bypassing approvals, omitting parameters, and renewal or reversal paths.
+description: Abuse of ordered workflows, skipping steps, calling steps out of order, bypassing approvals, omitting parameters, and renewal or reversal paths.
 keywords:
   - step skip
   - workflow bypass
@@ -21,7 +21,3 @@ keywords:
 | [Approval bypass](approval-bypass.md) | Maker-checker and approvals |
 | [Entitlement renewal bypass](entitlement-renewal-bypass.md) | Trials, renewals, re-verification gaps |
 | [Reversal and refund abuse](reversal-and-refund-workflow-abuse.md) | Refunds, chargebacks, settlement races |
-
-## See also
-
-- [Flow integrity (parent)](../index.md)

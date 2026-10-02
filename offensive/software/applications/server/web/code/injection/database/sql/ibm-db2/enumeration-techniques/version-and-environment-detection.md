@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 version and environment fingerprinting"
-description: Product and instance information exposure—patch tracking and inventory for Db2 deployments.
+description: Product and instance information exposure, patch tracking and inventory for Db2 deployments.
 keywords:
   - sysibm.sysversions
   - Db2 version
@@ -11,7 +11,7 @@ Db2 exposes **version** and **environment** information through **catalog** and 
 
 ## Context
 
-Fingerprint Db2 level and fix pack via `sysibm.sysversions` / admin UDFs—pick exploit reliability and XML function availability.
+Fingerprint Db2 level and fix pack via `sysibm.sysversions` / admin UDFs, pick exploit reliability and XML function availability.
 ## Technique
 
 Environment detection guides whether `ADMIN_CMD` exists in your build.
@@ -28,7 +28,3 @@ Environment detection guides whether `ADMIN_CMD` exists in your build.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Enumeration techniques (IBM Db2)](index.md)

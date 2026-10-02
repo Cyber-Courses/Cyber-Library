@@ -1,6 +1,6 @@
 ---
 title: "Dynamic file inclusion: LFI, RFI, and template path injection in server-side code"
-description: include(), import, or template partial resolution driven by request parameters—local and remote file inclusion patterns in PHP, Java, and Node stacks.
+description: include(), import, or template partial resolution driven by request parameters, local and remote file inclusion patterns in PHP, Java, and Node stacks.
 keywords:
   - LFI
   - RFI

@@ -11,8 +11,3 @@ keywords:
 ## Context
 
 JSON over WebSocket often feeds the same **service layer** as HTTP. **SQL**, **command**, and **path** injection classes apply when message handlers build strings unsafely.
-
-## See also
-
-- [Realtime channels (parent)](index.md)
-- [Injection (parent)](../index.md)

@@ -1,6 +1,6 @@
 ---
 title: "XML External Entity (XXE): file disclosure, SSRF, and out-of-band exfiltration via DTDs"
-description: Exploiting XML parsers that resolve external and parameter entities—reading local files, reaching internal services, and exfiltrating data out-of-band through a malicious DTD when parsed results are blind.
+description: Exploiting XML parsers that resolve external and parameter entities, reading local files, reaching internal services, and exfiltrating data out-of-band through a malicious DTD when parsed results are blind.
 keywords:
   - XXE
   - XML external entity
@@ -13,9 +13,7 @@ keywords:
 
 # XML External Entity (XXE)
 
-An **XXE** vulnerability exists when an application parses attacker-controlled XML with a parser that resolves **external entities**. XML's DTD syntax lets a document declare entities whose value is the contents of a URI—`file://`, `http://`, `ftp://`, PHP wrappers—and an unhardened parser faithfully dereferences them. The attacker's entity reference is spliced into the parsed document, turning an XML endpoint into a primitive for **local file read**, **server-side request forgery**, and **data exfiltration**.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Submitting crafted XML against systems without written authorization is unlawful.
+An **XXE** vulnerability exists when an application parses attacker-controlled XML with a parser that resolves **external entities**. XML's DTD syntax lets a document declare entities whose value is the contents of a URI, `file://`, `http://`, `ftp://`, PHP wrappers, and an unhardened parser faithfully dereferences them. The attacker's entity reference is spliced into the parsed document, turning an XML endpoint into a primitive for **local file read**, **server-side request forgery**, and **data exfiltration**.
 
 ## Overview
 
@@ -37,7 +35,7 @@ If the `item` value is echoed back, the response contains the file. The vulnerab
 
 ### Local file read
 
-`file://` entities disclose any file the service account can read—`/etc/passwd`, application source, configuration with database credentials, cloud SDK credential files. On platforms with extra URI schemes the reach widens:
+`file://` entities disclose any file the service account can read, `/etc/passwd`, application source, configuration with database credentials, cloud SDK credential files. On platforms with extra URI schemes the reach widens:
 
 - **PHP wrappers:** `php://filter/convert.base64-encode/resource=index.php` base64-encodes source so binary or XML-breaking bytes survive the parse.
 - **Java:** `file:///` directory listings on some parsers, and `jar:`/`netdoc:` handlers.
@@ -95,7 +93,7 @@ The target's base64-encoded file contents arrive as a query-string parameter in 
 
 ### Local DTD reuse
 
-Where outbound network access is blocked, an **existing local DTD** on the filesystem can be repurposed: load a known system DTD, then redefine one of its internal parameter entities to trigger error-based leakage—no attacker-hosted file required.
+Where outbound network access is blocked, an **existing local DTD** on the filesystem can be repurposed: load a known system DTD, then redefine one of its internal parameter entities to trigger error-based leakage, no attacker-hosted file required.
 
 ## Delivery variants
 
@@ -107,7 +105,7 @@ Where outbound network access is blocked, an **existing local DTD** on the files
 ## Exploitation workflow
 
 1. **Confirm XML is parsed.** Submit well-formed XML and a deliberately malformed document; a parser error distinguishes XML handling from opaque passthrough.
-2. **Test entity resolution** with a harmless in-band entity, then an OOB entity that pings an interaction server—a callback confirms external resolution even when nothing is reflected.
+2. **Test entity resolution** with a harmless in-band entity, then an OOB entity that pings an interaction server, a callback confirms external resolution even when nothing is reflected.
 3. **Escalate** to file read via `file://`/`php://filter`, or to SSRF via `http://` against internal targets.
 4. **Go blind** with error-based or OOB DTD techniques when no output returns.
 

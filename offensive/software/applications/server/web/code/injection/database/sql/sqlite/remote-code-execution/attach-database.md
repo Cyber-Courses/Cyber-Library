@@ -1,6 +1,6 @@
 ---
 title: "SQLite ATTACH DATABASE as a pivot: path control and trust boundaries"
-description: Attaching additional database files—risk when SQL injection can supply filesystem paths or influence backup flows.
+description: Attaching additional database files, risk when SQL injection can supply filesystem paths or influence backup flows.
 keywords:
   - ATTACH DATABASE
 ---
@@ -10,7 +10,7 @@ keywords:
 
 ## Context
 
-`ATTACH 'c:/windows/temp/x.db' AS p` merges another DB into the session—read/write across trust boundaries if paths are injectable.
+`ATTACH 'c:/windows/temp/x.db' AS p` merges another DB into the session, read/write across trust boundaries if paths are injectable.
 ## Technique
 
 Use to pull secrets from a second on-disk DB the app should not touch.
@@ -27,7 +27,3 @@ Use to pull secrets from a second on-disk DB the app should not touch.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Remote code execution (SQLite)](index.md)

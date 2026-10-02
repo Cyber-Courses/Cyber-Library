@@ -1,6 +1,6 @@
 ---
 title: "XPath injection: predicate concatenation, authentication bypass, and blind node extraction"
-description: Exploiting application code that builds XPath queries by concatenating user input—closing predicates with injected quotes, adding or clauses to bypass authentication, and extracting document nodes character by character with boolean and blind techniques.
+description: Exploiting application code that builds XPath queries by concatenating user input, closing predicates with injected quotes, adding or clauses to bypass authentication, and extracting document nodes character by character with boolean and blind techniques.
 keywords:
   - XPath injection
   - XPath
@@ -12,9 +12,7 @@ keywords:
 
 # XPath injection
 
-**XPath injection** occurs when an application builds an XPath query by concatenating untrusted input into the expression string and evaluates it against an XML document or XML database. Because XPath has no equivalent of prepared statements in most naive usage, an injected quote and logical operator rewrite the query's **predicate**—the filter inside `[...]`—letting an attacker bypass authentication or walk the document node by node. The technique mirrors SQL injection almost exactly, adapted to XPath's grammar.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Testing login forms and data lookups this way is lawful only with explicit permission.
+**XPath injection** occurs when an application builds an XPath query by concatenating untrusted input into the expression string and evaluates it against an XML document or XML database. Because XPath has no equivalent of prepared statements in most naive usage, an injected quote and logical operator rewrite the query's **predicate**, the filter inside `[...]`, letting an attacker bypass authentication or walk the document node by node. The technique mirrors SQL injection almost exactly, adapted to XPath's grammar.
 
 ## Overview
 
@@ -58,15 +56,15 @@ Where only the username is injectable and the password check is a separate step,
 
 The first exploitation step is identifying how the literal is wrapped, because the breakout character differs:
 
-- **Single-quoted literal** — `'...'` — supply a `'` to escape, e.g. `' or '1'='1`.
-- **Double-quoted literal** — `"..."` — supply a `"` instead, e.g. `" or "1"="1`.
-- **Numeric or unquoted context** — rarer in XPath, but a value spliced outside quotes needs no escape at all; operators work directly.
+- **Single-quoted literal**, `'...'`, supply a `'` to escape, e.g. `' or '1'='1`.
+- **Double-quoted literal**, `"..."`, supply a `"` instead, e.g. `" or "1"="1`.
+- **Numeric or unquoted context**, rarer in XPath, but a value spliced outside quotes needs no escape at all; operators work directly.
 
-XPath 1.0 has no string-escaping mechanism inside a literal, so a value containing both quote types often cannot be represented as a single literal—an asymmetry worth probing when one quote style is filtered.
+XPath 1.0 has no string-escaping mechanism inside a literal, so a value containing both quote types often cannot be represented as a single literal, an asymmetry worth probing when one quote style is filtered.
 
 ## Blind and boolean extraction
 
-When the query result is not reflected—only a success/failure signal, such as "login succeeded" versus "failed"—data is recovered by asking true/false questions, exactly as in blind SQL injection.
+When the query result is not reflected, only a success/failure signal, such as "login succeeded" versus "failed", data is recovered by asking true/false questions, exactly as in blind SQL injection.
 
 ### Confirming a boolean oracle
 
@@ -92,7 +90,7 @@ XPath exposes functions to inspect structure and content, which an attacker quer
 ' and substring((//user[1]/password),1,1)='a' and '1'='1
 ```
 
-Iterating `substring(...)` over positions and candidate characters extracts arbitrary node text—usernames, password hashes, any element in the document. `name(...)`, `count(...)`, and `local-name(...)` enumerate unknown structure first, so the extraction targets real paths.
+Iterating `substring(...)` over positions and candidate characters extracts arbitrary node text, usernames, password hashes, any element in the document. `name(...)`, `count(...)`, and `local-name(...)` enumerate unknown structure first, so the extraction targets real paths.
 
 ### Blind without a visible boolean
 
@@ -101,7 +99,7 @@ If no explicit success/failure text differs, a secondary signal substitutes: res
 ## XPath version differences
 
 - **XPath 1.0** is the most common target: string functions `substring`, `string-length`, `contains`, `starts-with`, `concat`, and `count` are the extraction toolkit. There is no `lower-case` or regex.
-- **XPath 2.0 / 3.1** add `matches()` (regex), `lower-case()`, `string-join()`, and richer sequence handling, which streamline extraction and case-insensitive matching when the engine supports them. Fingerprinting the version—by testing whether a 2.0-only function evaluates—decides which payloads are available.
+- **XPath 2.0 / 3.1** add `matches()` (regex), `lower-case()`, `string-join()`, and richer sequence handling, which streamline extraction and case-insensitive matching when the engine supports them. Fingerprinting the version, by testing whether a 2.0-only function evaluates, decides which payloads are available.
 
 ## Exploitation workflow
 

@@ -1,6 +1,6 @@
 ---
 title: "Oracle Java execution grants: loadjava and DBMS_JAVA policy"
-description: Operational controls for Java in Oracle—loadjava, permissions, and minimizing EXECUTE paths from SQL injection.
+description: Operational controls for Java in Oracle, loadjava, permissions, and minimizing EXECUTE paths from SQL injection.
 keywords:
   - loadjava
   - dbms_java.grant_permission
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-Java stored procedures can call `Runtime.exec` when JVM permissions allow—often a **`sys`/`SYSTEM`** class of issue.
+Java stored procedures can call `Runtime.exec` when JVM permissions allow, often a **`sys`/`SYSTEM`** class of issue.
 ## Technique
 
 Load or invoke classes via SQL once **`CREATE PROCEDURE`** / Java perms exist.
@@ -28,7 +28,3 @@ Load or invoke classes via SQL once **`CREATE PROCEDURE`** / Java perms exist.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Command execution (Oracle)](index.md)

@@ -1,6 +1,6 @@
 ---
 title: "GraphQL authorization gaps: resolver-level BOLA, nested traversal, and dataloader batching"
-description: Exploiting GraphQL APIs where the HTTP route is authenticated but individual resolvers never scope the object to the caller—reaching other tenants' rows through nested selections, mutations, and dataloader-batched fields.
+description: Exploiting GraphQL APIs where the HTTP route is authenticated but individual resolvers never scope the object to the caller, reaching other tenants' rows through nested selections, mutations, and dataloader-batched fields.
 keywords:
   - GraphQL
   - BOLA
@@ -12,13 +12,11 @@ keywords:
 
 # GraphQL authorization
 
-A GraphQL endpoint usually sits behind a single authentication gate: a middleware that verifies the session or token and rejects anonymous callers. That gate answers *"is this a valid user?"*—it says nothing about *"is this user allowed to see this particular object?"* Because every field is resolved by its own function, object-level authorization has to be enforced **per resolver**, on the specific row being loaded. Where it is not, an authenticated attacker simply asks for objects that are not theirs, and the server returns them. This is **broken object-level authorization (BOLA / IDOR)** expressed through the resolver graph.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Accessing other users' data without permission is unlawful.
+A GraphQL endpoint usually sits behind a single authentication gate: a middleware that verifies the session or token and rejects anonymous callers. That gate answers *"is this a valid user?"*, it says nothing about *"is this user allowed to see this particular object?"* Because every field is resolved by its own function, object-level authorization has to be enforced **per resolver**, on the specific row being loaded. Where it is not, an authenticated attacker simply asks for objects that are not theirs, and the server returns them. This is **broken object-level authorization (BOLA / IDOR)** expressed through the resolver graph.
 
 ## Overview
 
-The core mismatch: authentication is enforced **once at the edge**, authorization must be enforced **many times in the graph**. A resolver that takes an `id` argument and loads that row—without checking the row belongs to the caller's tenant—is a direct object reference under a different name:
+The core mismatch: authentication is enforced **once at the edge**, authorization must be enforced **many times in the graph**. A resolver that takes an `id` argument and loads that row, without checking the row belongs to the caller's tenant, is a direct object reference under a different name:
 
 ```graphql
 query { invoice(id: "INV-2041") { total customerEmail lineItems { sku } } }
@@ -30,9 +28,9 @@ If `invoice` resolves straight from the `id` with no ownership predicate, increm
 
 Pull the schema first (see [GraphQL query shape](graphql-query-shape-abuse.md) for introspection). From the types, catalogue:
 
-- **Queries and mutations that take an object identifier** (`id`, `uuid`, `slug`, `accountId`)—each a candidate for direct reference.
-- **Fields that return other objects**—relationships let you reach a protected type *through* an unprotected parent.
-- **Mutations hidden in the same schema as reads**—`updateUser`, `deleteInvoice`, `setRole`—which frequently receive far less authorization scrutiny than the queries.
+- **Queries and mutations that take an object identifier** (`id`, `uuid`, `slug`, `accountId`), each a candidate for direct reference.
+- **Fields that return other objects**, relationships let you reach a protected type *through* an unprotected parent.
+- **Mutations hidden in the same schema as reads**, `updateUser`, `deleteInvoice`, `setRole`, which frequently receive far less authorization scrutiny than the queries.
 
 Node-style globally unique IDs are often base64 of `Type:id`; decoding them reveals the format and lets you forge references to adjacent objects:
 
@@ -44,7 +42,7 @@ echo -n 'VXNlcjoxMDI0' | base64 -d      # => User:1024  →  try User:1025, Invo
 
 ### Direct object reference
 
-The simplest case: a top-level resolver returns any object by id regardless of owner. Authenticate as a low-privilege user, then request another user's object by id and confirm the data comes back. Use two test accounts you control—fetch account A's object id while logged in as B—to prove cross-tenant read rather than guessing blindly.
+The simplest case: a top-level resolver returns any object by id regardless of owner. Authenticate as a low-privilege user, then request another user's object by id and confirm the data comes back. Use two test accounts you control, fetch account A's object id while logged in as B, to prove cross-tenant read rather than guessing blindly.
 
 ### Nested traversal around the gate
 
@@ -73,7 +71,7 @@ mutation { updateInvoice(id: "INV-2041", input: { status: PAID }) { id status } 
 mutation { addOrgMember(orgId: "ORG-7", userId: "me", role: ADMIN) { ok } }
 ```
 
-A mutation that succeeds against an object you do not own, or that lets you set a privileged field (`role`, `isAdmin`, `ownerId`) the server should control, is a direct finding. Mass-assignment through the `input` object—setting fields the client should not be able to—often rides alongside the missing ownership check.
+A mutation that succeeds against an object you do not own, or that lets you set a privileged field (`role`, `isAdmin`, `ownerId`) the server should control, is a direct finding. Mass-assignment through the `input` object, setting fields the client should not be able to, often rides alongside the missing ownership check.
 
 ### Dataloader batching masking checks
 

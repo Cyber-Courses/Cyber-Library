@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 schema discovery: SYSIBM tables and SYSCAT views"
-description: Enumerating tables, columns, and privileges through Db2 catalogs—scope SELECT grants carefully for application roles.
+description: Enumerating tables, columns, and privileges through Db2 catalogs, scope SELECT grants carefully for application roles.
 keywords:
   - SYSIBM.SYSTABLES
   - SYSCAT.TABLES
@@ -28,7 +28,3 @@ Filter by `TABSCHEMA` to stay inside the app schema first.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Enumeration techniques (IBM Db2)](index.md)

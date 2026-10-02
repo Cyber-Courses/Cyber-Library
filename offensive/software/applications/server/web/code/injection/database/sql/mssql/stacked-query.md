@@ -1,6 +1,6 @@
 ---
 title: "MSSQL stacked queries in SQL injection: semicolons, batches, and driver behavior"
-description: How multiple T-SQL batches interact with SQL injection—semicolon chaining, EXEC, and client support for multiple statements.
+description: How multiple T-SQL batches interact with SQL injection, semicolon chaining, EXEC, and client support for multiple statements.
 keywords:
   - stacked query
   - sp_executesql
@@ -12,10 +12,10 @@ keywords:
 
 ## Context
 
-Stacked batches separate statements with `;` — works only if the driver/API allows multiple statements in one call.
+Stacked batches separate statements with `;`, works only if the driver/API allows multiple statements in one call.
 ## Technique
 
-After confirmation, chain `EXEC`, `sp_executesql`, or DDL/DML in sequence; some ORMs strip semicolons—test raw HTTP.
+After confirmation, chain `EXEC`, `sp_executesql`, or DDL/DML in sequence; some ORMs strip semicolons, test raw HTTP.
 ## Practice
 
 - Probe with `;SELECT 1--` vs error; watch ORM parameter binding.
@@ -30,8 +30,3 @@ After confirmation, chain `EXEC`, `sp_executesql`, or DDL/DML in sequence; some 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Command execution](command-execution.md)

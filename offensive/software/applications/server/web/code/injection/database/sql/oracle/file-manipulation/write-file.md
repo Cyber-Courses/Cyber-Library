@@ -1,6 +1,6 @@
 ---
 title: "Oracle write file via SQL: UTL_FILE and LOB write primitives"
-description: File creation through Oracle packages—relevant to webshell-style drops when the process can write web roots (operational layout dependent).
+description: File creation through Oracle packages, relevant to webshell-style drops when the process can write web roots (operational layout dependent).
 keywords:
   - UTL_FILE.PUT_LINE
   - DBMS_LOB.WRITE
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`UTL_FILE.PUT_LINE` / `DBMS_LOB.WRITE` drops content to mapped directories—webshell only if web tier shares a writable path.
+`UTL_FILE.PUT_LINE` / `DBMS_LOB.WRITE` drops content to mapped directories, webshell only if web tier shares a writable path.
 ## Technique
 
 Combine with `DBMS_SCHEDULER` for execute-after-write if policy allows.
@@ -28,7 +28,3 @@ Combine with `DBMS_SCHEDULER` for execute-after-write if policy allows.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [File manipulation (Oracle)](index.md)

@@ -1,6 +1,6 @@
 ---
 title: "Oracle privilege escalation: DBA roles, grants, and Java privileges"
-description: Role and grant abuse in Oracle—why application schemas must start minimal and how dangerous privileges are audited.
+description: Role and grant abuse in Oracle, why application schemas must start minimal and how dangerous privileges are audited.
 keywords:
   - GRANT DBA
   - CREATE ANY JOB
@@ -18,7 +18,7 @@ Oracle privesc chains: `GRANT DBA`, abuse `CREATE ANY JOB`, Java privileges, or 
 Start from current user → role tab → `DBA_ROLE_PRIVS` / `USER_SYS_PRIVS` for paths to `DBA`.
 ## Practice
 
-- Java and scheduler abuse often needs packages your user can execute—enumerate grants aggressively.
+- Java and scheduler abuse often needs packages your user can execute, enumerate grants aggressively.
 
 ## Tools
 
@@ -29,7 +29,3 @@ Start from current user → role tab → `DBA_ROLE_PRIVS` / `USER_SYS_PRIVS` for
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](index.md)

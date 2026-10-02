@@ -12,9 +12,7 @@ keywords:
 
 # Entity Framework Core FromSqlRaw injection
 
-Entity Framework Core parameterizes LINQ queries, but its raw-SQL methods—`FromSqlRaw`, `ExecuteSqlRaw`, and `SqlQueryRaw`—execute whatever string they are given. When that string is built by concatenation or `string.Format`, user input lands directly in the SQL and the result is SQL injection, typically against SQL Server but also PostgreSQL/MySQL via their EF providers.
-
-> **Scope.** For authorized penetration tests, CTF labs, and code review of systems you own or are contracted to assess.
+Entity Framework Core parameterizes LINQ queries, but its raw-SQL methods, `FromSqlRaw`, `ExecuteSqlRaw`, and `SqlQueryRaw`, execute whatever string they are given. When that string is built by concatenation or `string.Format`, user input lands directly in the SQL and the result is SQL injection, typically against SQL Server but also PostgreSQL/MySQL via their EF providers.
 
 ## Vulnerable patterns
 
@@ -46,7 +44,7 @@ For a numeric `Id` context:
 0 UNION SELECT Id, Username, PasswordHash FROM Users
 ```
 
-SQL Server's command separator `;` allows **stacked queries** over the same connection, so `UPDATE`/`INSERT`/`EXEC` after a `SELECT` are often viable—unlike many MySQL driver configurations. `FromSqlRaw` expects the projected columns to match the entity's mapped properties, so align a `UNION` select with the entity's column order (pad with `NULL`/`CAST`).
+SQL Server's command separator `;` allows **stacked queries** over the same connection, so `UPDATE`/`INSERT`/`EXEC` after a `SELECT` are often viable, unlike many MySQL driver configurations. `FromSqlRaw` expects the projected columns to match the entity's mapped properties, so align a `UNION` select with the entity's column order (pad with `NULL`/`CAST`).
 
 Error-based extraction via `CONVERT()`/`CAST()` type errors is reliable on SQL Server when exceptions surface to the response.
 

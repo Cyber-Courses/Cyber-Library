@@ -1,6 +1,6 @@
 ---
 title: "MSSQL union-based SQL injection: column alignment, NULL padding, and TOP"
-description: Union-based extraction in SQL Server—matching column types and counts, using NULL, and pagination with TOP or OFFSET-FETCH.
+description: Union-based extraction in SQL Server, matching column types and counts, using NULL, and pagination with TOP or OFFSET-FETCH.
 keywords:
   - UNION ALL
   - MSSQL union SQLi
@@ -30,8 +30,3 @@ Union requires matching column count and compatible types; SQL Server uses `TOP`
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Error-based](error-based.md)

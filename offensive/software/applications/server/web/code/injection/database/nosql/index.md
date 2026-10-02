@@ -1,6 +1,6 @@
 ---
 title: "NoSQL injection in web applications: operator objects, JavaScript evaluation, and unsafe filters"
-description: Attacker-controlled structures passed to document databases and ODM query builders—MongoDB operators, `$where`, and aggregation pipelines.
+description: Attacker-controlled structures passed to document databases and ODM query builders, MongoDB operators, `$where`, and aggregation pipelines.
 keywords:
   - NoSQL injection
   - MongoDB
@@ -25,8 +25,3 @@ NoSQL injection arises when application code passes **objects** or **strings** f
 |------|--------|
 | [MongoDB operators](mongodb-operator-injection.md) | `$ne`, `$regex`, auth bypass |
 | [Document query JSON](document-query-json-injection.md) | Raw JSON into find/aggregate |
-
-## See also
-
-- [Database injection (parent)](../index.md)
-- [SQL](../sql/index.md)

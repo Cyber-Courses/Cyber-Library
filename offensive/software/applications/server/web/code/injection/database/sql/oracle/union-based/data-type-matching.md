@@ -1,6 +1,6 @@
 ---
 title: "Oracle UNION data type matching: TO_CHAR, CAST, and ORA-01790"
-description: Aligning column types in UNION—CAST and TO_CHAR to satisfy all branches and avoid type mismatch errors.
+description: Aligning column types in UNION, CAST and TO_CHAR to satisfy all branches and avoid type mismatch errors.
 keywords:
   - ORA-01790
   - TO_CHAR
@@ -29,8 +29,3 @@ Use `NULL` placeholders, `TO_CHAR` casts, and `ORDER BY` index probing.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Union-based (Oracle)](index.md)
-- [Error-based](../error-based.md)

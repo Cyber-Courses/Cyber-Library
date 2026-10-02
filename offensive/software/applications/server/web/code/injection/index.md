@@ -16,9 +16,9 @@ keywords:
 
 | Area | Path |
 |------|------|
-| Database | [Database](database/index.md) — SQL, NoSQL, ORM, LDAP |
-| HTTP (inbound) | [HTTP](http/index.md) — Smuggling / desync when front and back disagree |
-| Outbound fetch | [Request forgery](request-forgery/index.md) — SSRF and URL-layer abuse |
+| Database | [Database](database/index.md), SQL, NoSQL, ORM, LDAP |
+| HTTP (inbound) | [HTTP](http/index.md), Smuggling / desync when front and back disagree |
+| Outbound fetch | [Request forgery](request-forgery/index.md), SSRF and URL-layer abuse |
 | Command | [Command](command/index.md) |
 | Template engine | [Template engine](template-engine/index.md) |
 | Markup | [Markups](markup/index.md) |
@@ -28,7 +28,3 @@ keywords:
 | Realtime | [Realtime](realtime/index.md) |
 | API dispatch | [API](api/index.md) |
 | Expressions | [Expression evaluation](expression-evaluation/index.md) |
-
-## See also
-
-- [Web application code (parent)](../index.md)

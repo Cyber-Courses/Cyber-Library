@@ -10,8 +10,4 @@ keywords:
 
 ## Context
 
-**query_to_xml**, **database_to_xml**, **xmlagg** can produce **huge** or **invalid** XML that surfaces in errors. Use only on **lab** schemas; some payloads risk **DoS** from memory pressure—aligns with Library Structure **XML Helpers**.
-
-## See also
-
-- [Error-based (parent)](index.md)
+**query_to_xml**, **database_to_xml**, **xmlagg** can produce **huge** or **invalid** XML that surfaces in errors. Use only on **lab** schemas; some payloads risk **DoS** from memory pressure, aligns with Library Structure **XML Helpers**.

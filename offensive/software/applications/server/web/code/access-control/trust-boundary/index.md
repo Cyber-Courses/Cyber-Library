@@ -1,6 +1,6 @@
 ---
 title: "Application trust boundaries: proxy headers, TLS client certs, and upstream identity"
-description: When server-side code trusts client-supplied or upstream identity signals—forwarded headers, mTLS identity mapping, or proxy context—without sound binding to the request.
+description: When server-side code trusts client-supplied or upstream identity signals, forwarded headers, mTLS identity mapping, or proxy context, without sound binding to the request.
 keywords:
   - trust boundary
   - forwarded header abuse
@@ -18,7 +18,3 @@ Inbound HTTP smuggling (parsing mismatch between hops) is a different family und
 
 - [Proxy header trust abuse](proxy-header-trust-abuse.md)
 - [Client certificate misbinding](client-certificate-misbinding.md)
-
-## See also
-
-- [Access control (parent)](../index.md)

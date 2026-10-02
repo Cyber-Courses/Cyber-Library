@@ -17,7 +17,3 @@ keywords:
 |------|--------|
 | [SMTP header injection](smtp-header-injection-crlf.md) | CRLF and header smuggling |
 | [MIME multipart](mime-multipart-and-attachment-handling.md) | Boundaries and attachments |
-
-## See also
-
-- [Injection (parent)](../index.md)

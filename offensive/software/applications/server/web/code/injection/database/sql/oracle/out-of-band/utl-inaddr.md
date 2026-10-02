@@ -1,6 +1,6 @@
 ---
 title: "Oracle UTL_INADDR and DNS-style out-of-band channels"
-description: Host resolution functions that can encode data in DNS lookups—egress and package grants.
+description: Host resolution functions that can encode data in DNS lookups, egress and package grants.
 keywords:
   - UTL_INADDR.get_host_name
   - DNS exfiltration
@@ -17,7 +17,7 @@ keywords:
 Resolver must reach the internet or internal DNS that forwards to you.
 ## Practice
 
-- Label length limits apply—design chunking accordingly.
+- Label length limits apply, design chunking accordingly.
 
 ## Tools
 
@@ -28,7 +28,3 @@ Resolver must reach the internet or internal DNS that forwards to you.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Out of band (Oracle)](index.md)

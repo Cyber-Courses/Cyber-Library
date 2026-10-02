@@ -16,8 +16,3 @@ Libraries build `multipart/mixed` with **attacker-controlled** filenames or **bo
 ## Theory
 
 Use library APIs that generate **random** boundaries and **encode** filenames; never concatenate raw MIME with unescaped user text.
-
-## See also
-
-- [Mail injection (parent)](index.md)
-- [SMTP header injection](smtp-header-injection-crlf.md)

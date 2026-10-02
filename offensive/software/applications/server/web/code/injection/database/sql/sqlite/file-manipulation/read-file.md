@@ -1,6 +1,6 @@
 ---
 title: "SQLite read file context: attached databases and schema disclosure"
-description: Reading content indirectly via sqlite_master and ATTACH—path traversal risk when SQL can change ATTACH targets.
+description: Reading content indirectly via sqlite_master and ATTACH, path traversal risk when SQL can change ATTACH targets.
 keywords:
   - ATTACH
   - sqlite_master
@@ -11,7 +11,7 @@ SQLite “**read file**” in web contexts often means **reading another databas
 
 ## Context
 
-`ATTACH DATABASE '/path/file.db' AS x` then query `x.sqlite_master`—path traversal if the app builds ATTACH from user input.
+`ATTACH DATABASE '/path/file.db' AS x` then query `x.sqlite_master`, path traversal if the app builds ATTACH from user input.
 ## Technique
 
 Also read sensitive rows once the DB file is world-readable on the host.
@@ -28,7 +28,3 @@ Also read sensitive rows once the DB file is world-readable on the host.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [File manipulation (SQLite)](index.md)

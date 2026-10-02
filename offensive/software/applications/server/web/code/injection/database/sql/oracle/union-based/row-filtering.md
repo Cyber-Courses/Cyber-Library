@@ -1,6 +1,6 @@
 ---
 title: "Oracle row filtering with ROWNUM for UNION output"
-description: Limiting rows in Oracle without LIMIT—ROWNUM in WHERE for top-N union results.
+description: Limiting rows in Oracle without LIMIT, ROWNUM in WHERE for top-N union results.
 keywords:
   - ROWNUM
   - top-N
@@ -28,7 +28,3 @@ Use `NULL` placeholders, `TO_CHAR` casts, and `ORDER BY` index probing.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Union-based (Oracle)](index.md)

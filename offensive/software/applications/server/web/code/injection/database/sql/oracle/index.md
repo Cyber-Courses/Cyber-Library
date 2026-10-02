@@ -1,6 +1,6 @@
 ---
 title: "Oracle SQL injection: PL/SQL, dictionary views, and XML surfaces"
-description: Oracle Database–specific SQL injection patterns—union and blind techniques, UTL packages, scheduler abuse, and XML/XXE-relevant functions in application contexts.
+description: Oracle Database–specific SQL injection patterns, union and blind techniques, UTL packages, scheduler abuse, and XML/XXE-relevant functions in application contexts.
 keywords:
   - Oracle SQL injection
   - PL/SQL
@@ -22,8 +22,8 @@ Use only in **authorized** penetration tests, red-team engagements, CTFs, and is
 
 | Topic | Path |
 |-------|------|
-| Blind | [Blind](blind/index.md) — boolean and time-based inference |
-| Command execution | [Command execution](command-execution/index.md) — Java and job-related surfaces |
+| Blind | [Blind](blind/index.md), boolean and time-based inference |
+| Command execution | [Command execution](command-execution/index.md), Java and job-related surfaces |
 | Error-based | [Error-based](error-based.md) |
 | Evasion techniques | [Evasion techniques](evasion-techniques.md) |
 | File manipulation | [File manipulation](file-manipulation/index.md) |
@@ -35,7 +35,3 @@ Use only in **authorized** penetration tests, red-team engagements, CTFs, and is
 | Session and user enumeration | [Session and user enumeration](session-and-user-enumeration.md) |
 | Union-based | [Union-based](union-based/index.md) |
 | XML and XXE abuse | [XML and XXE abuse](xml-and-xxe-abuse.md) |
-
-## See also
-
-- [SQL injection (parent)](../index.md)

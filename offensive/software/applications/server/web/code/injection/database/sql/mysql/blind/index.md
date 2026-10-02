@@ -18,7 +18,3 @@ Blind SQL injection returns no direct query output: you infer true vs false from
 - [MAKE SET](make-set.md)
 - [REGEXP](regexp.md)
 - [Substring equivalent](substring-equivalent.md)
-
-## See also
-
-- [MySQL (parent)](../index.md)

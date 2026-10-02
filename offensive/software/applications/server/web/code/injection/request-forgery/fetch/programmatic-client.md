@@ -1,6 +1,6 @@
 ---
 title: "Programmatic HTTP clients in SSRF: redirects, connection reuse, and library-specific URL handling"
-description: Server-side SSRF through HttpURLConnection, requests, fetch(), and language HTTP stacks—behavior that differs from curl and browsers.
+description: Server-side SSRF through HttpURLConnection, requests, fetch(), and language HTTP stacks, behavior that differs from curl and browsers.
 keywords:
   - SSRF
   - HttpClient
@@ -14,8 +14,3 @@ Application code usually calls a **library** HTTP client with a URL string. Redi
 ## Practice
 
 - Inventory **every** outbound HTTP entry point (SDKs, job runners, microservice clients) and note redirect and scheme behavior for the same SSRF payload.
-
-## See also
-
-- [Fetch client (parent)](index.md)
-- [Scheme](../scheme/index.md)

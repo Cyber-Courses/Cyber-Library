@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`sqlite_version()` and `pragma compile_options` fingerprint build flags—`load_extension` presence matters for RCE chains.
+`sqlite_version()` and `pragma compile_options` fingerprint build flags, `load_extension` presence matters for RCE chains.
 ## Technique
 
 Check whether `ENABLE_LOAD_EXTENSION` is on in deployment.
@@ -28,8 +28,3 @@ Check whether `ENABLE_LOAD_EXTENSION` is on in deployment.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Enumeration techniques (SQLite)](index.md)
-- [Remote code execution](../remote-code-execution/index.md)

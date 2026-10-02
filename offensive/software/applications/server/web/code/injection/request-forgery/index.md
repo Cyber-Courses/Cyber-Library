@@ -1,6 +1,6 @@
 ---
 title: "Server-side request forgery (SSRF): steering outbound fetches to internal hosts, metadata URLs, and non-HTTP schemes"
-description: Outbound HTTP or other fetches in application code steered by attacker-influenced URLs—internal hosts, metadata endpoints, alternate schemes.
+description: Outbound HTTP or other fetches in application code steered by attacker-influenced URLs, internal hosts, metadata endpoints, alternate schemes.
 keywords:
   - SSRF
   - server side request forgery
@@ -15,13 +15,8 @@ The topic tree splits the URL into **Authority** (host, port, DNS tricks), **Pat
 
 | Area | Start here |
 |------|------------|
-| Authority | [Authority](authority/index.md) — host, port, DNS rebinding |
-| Path | [Path](path/index.md) — encoding, normalization, path parameters |
-| Query | [Query](query/index.md) — redirects, parameter pollution |
-| Scheme | [Scheme](scheme/index.md) — `gopher`, `file`, `ldap`, and related handlers |
-| Fetch | [Fetch client](fetch/index.md) — programmatic HTTP vs headless browser |
-
-## See also
-
-- [Injection (parent)](../index.md)
-- [HTTP (inbound)](http/index.md) — Not the same as outbound fetch abuse.
+| Authority | [Authority](authority/index.md), host, port, DNS rebinding |
+| Path | [Path](path/index.md), encoding, normalization, path parameters |
+| Query | [Query](query/index.md), redirects, parameter pollution |
+| Scheme | [Scheme](scheme/index.md), `gopher`, `file`, `ldap`, and related handlers |
+| Fetch | [Fetch client](fetch/index.md), programmatic HTTP vs headless browser |

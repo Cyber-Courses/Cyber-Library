@@ -1,6 +1,6 @@
 ---
 title: "Oracle file read and write: UTL_FILE, DBMS_LOB, and scheduler jobs"
-description: Oracle file read/write and job surfaces—UTL_FILE, DBMS_LOB, DBMS_SCHEDULER—for data theft and execution chains from SQL injection.
+description: Oracle file read/write and job surfaces, UTL_FILE, DBMS_LOB, DBMS_SCHEDULER, for data theft and execution chains from SQL injection.
 keywords:
   - UTL_FILE
   - DBMS_LOB
@@ -24,7 +24,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](../index.md)

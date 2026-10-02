@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 **CAST(x AS numeric)** when **x** is non-numeric surfaces **text** in the error. Useful when **UPDATEXML**-style XML errors are unavailable. Aligns with Library Structure **CAST** under PostgreSQL error-based.
-
-## See also
-
-- [Error-based (parent)](index.md)

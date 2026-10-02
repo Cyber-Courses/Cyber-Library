@@ -1,6 +1,6 @@
 ---
 title: "Expression and script evaluation: OGNL, SpEL, and user-controlled regex sinks"
-description: How attacker-influenced strings reach server-side expression engines—OGNL, SpEL, and other object-graph languages—where they execute code, and how user-controlled regular expressions exhaust CPU through catastrophic backtracking.
+description: How attacker-influenced strings reach server-side expression engines, OGNL, SpEL, and other object-graph languages, where they execute code, and how user-controlled regular expressions exhaust CPU through catastrophic backtracking.
 keywords:
   - expression language injection
   - EL injection
@@ -12,9 +12,7 @@ keywords:
 
 # Expression evaluation
 
-**Expression evaluation** vulnerabilities arise when application code hands an attacker-influenced string to a server-side expression engine that then *evaluates* it instead of treating it as data. Unlike a template engine that renders a file, these sinks sit in business logic: a rule DSL, a `@Value` binding, a framework that evaluates object-graph navigation strings from request parameters, or a regular-expression API compiling a user pattern. The expression language is usually a full member of the host runtime—Java, in the common cases—so a successful injection reaches class loaders and process execution, yielding **remote code execution (RCE)** in the service account's context.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Evaluating expressions against systems without written authorization is unlawful.
+**Expression evaluation** vulnerabilities arise when application code hands an attacker-influenced string to a server-side expression engine that then *evaluates* it instead of treating it as data. Unlike a template engine that renders a file, these sinks sit in business logic: a rule DSL, a `@Value` binding, a framework that evaluates object-graph navigation strings from request parameters, or a regular-expression API compiling a user pattern. The expression language is usually a full member of the host runtime, Java, in the common cases, so a successful injection reaches class loaders and process execution, yielding **remote code execution (RCE)** in the service account's context.
 
 ## Overview
 
@@ -28,14 +26,14 @@ The decisive question for the first family is: *does this string get parsed as a
 
 ## Why it reaches the engine
 
-- **Expressions are a convenient extension point.** Frameworks expose expression evaluation so that non-code configuration—validation rules, access-control conditions, dynamic field mappings—can be expressed as short strings. Developers then feed those strings from a database, a header, or a form without recognizing them as a code sink.
+- **Expressions are a convenient extension point.** Frameworks expose expression evaluation so that non-code configuration, validation rules, access-control conditions, dynamic field mappings, can be expressed as short strings. Developers then feed those strings from a database, a header, or a form without recognizing them as a code sink.
 - **Concatenation into a parser.** Building an expression by string concatenation (`parser.parseExpression("user." + field)`) places attacker bytes directly into the grammar, exactly as SQL and shell injection do.
-- **Framework internals evaluate silently.** Some stacks evaluate OGNL/SpEL on values the developer never explicitly passed to a parser—error messages, tag attributes, parameter names—so the sink is invisible in application code.
+- **Framework internals evaluate silently.** Some stacks evaluate OGNL/SpEL on values the developer never explicitly passed to a parser, error messages, tag attributes, parameter names, so the sink is invisible in application code.
 - **Regex from user input.** Search, reporting, and filter features that accept a `regex=` parameter, or that interpolate a user fragment into a larger pattern, turn the matcher into an attacker-tunable workload.
 
 ## Impact
 
-For OGNL and SpEL the ceiling is full RCE: file read and write, environment and credential harvesting, internal network access, and a foothold for lateral movement, all bounded only by the service account's privileges and the host's network position. For ReDoS the impact is availability—a single request, or a handful, can saturate worker threads and stall the application—plus its use as an amplifier against rate-limited or asynchronous endpoints where one cheap request buys expensive server work.
+For OGNL and SpEL the ceiling is full RCE: file read and write, environment and credential harvesting, internal network access, and a foothold for lateral movement, all bounded only by the service account's privileges and the host's network position. For ReDoS the impact is availability, a single request, or a handful, can saturate worker threads and stall the application, plus its use as an amplifier against rate-limited or asynchronous endpoints where one cheap request buys expensive server work.
 
 ## Pages
 

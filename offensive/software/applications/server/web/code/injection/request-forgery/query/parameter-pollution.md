@@ -10,7 +10,7 @@ keywords:
 
 ## Context
 
-If the application concatenates base URL, path, and query from different sources, duplicate keys (`next=`, `url=`, `dest=`) may let the last or first value win in ways the developer did not intend—changing the effective host the HTTP client requests after parsing.
+If the application concatenates base URL, path, and query from different sources, duplicate keys (`next=`, `url=`, `dest=`) may let the last or first value win in ways the developer did not intend, changing the effective host the HTTP client requests after parsing.
 
 ## Theory
 

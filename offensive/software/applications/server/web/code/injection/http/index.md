@@ -12,15 +12,13 @@ keywords:
 
 # HTTP injection
 
-**HTTP injection** is the class of attacks in which an attacker manipulates the *structure* of an HTTP message—its request line, headers, body, and the boundaries between them—rather than the data a single endpoint processes. HTTP is a text protocol whose framing is defined by exact byte sequences: a blank line (`\r\n\r\n`) ends the headers, `Content-Length` and `Transfer-Encoding` delimit the body, and a single `\r\n` separates one header from the next. When an attacker controls those bytes, or when two servers in a chain disagree about where a message ends, the result is request smuggling, response splitting, and header injection.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Request smuggling in particular can corrupt requests belonging to other users, so reproduce it only in an isolated lab with components you control. Testing third-party infrastructure without written authorization is unlawful.
+**HTTP injection** is the class of attacks in which an attacker manipulates the *structure* of an HTTP message, its request line, headers, body, and the boundaries between them, rather than the data a single endpoint processes. HTTP is a text protocol whose framing is defined by exact byte sequences: a blank line (`\r\n\r\n`) ends the headers, `Content-Length` and `Transfer-Encoding` delimit the body, and a single `\r\n` separates one header from the next. When an attacker controls those bytes, or when two servers in a chain disagree about where a message ends, the result is request smuggling, response splitting, and header injection.
 
 ## Overview
 
 Modern deployments chain several HTTP agents: a CDN, a load balancer, a reverse proxy, a WAF, and finally the application server. Each one re-parses the byte stream, and the specification leaves enough ambiguity (duplicate headers, obsolete line folding, conflicting length indicators) that two implementations can legitimately disagree. Two broad primitives follow:
 
-1. **Framing disagreement between hops.** When a front end and a back end compute the end of a request differently, bytes the front end treats as body are read by the back end as the start of a *new* request. That smuggled prefix is glued onto the next connection, letting an attacker influence someone else's request—bypassing front-end access controls, poisoning caches, or capturing victim data. See [Request smuggling](request-smuggling.md).
+1. **Framing disagreement between hops.** When a front end and a back end compute the end of a request differently, bytes the front end treats as body are read by the back end as the start of a *new* request. That smuggled prefix is glued onto the next connection, letting an attacker influence someone else's request, bypassing front-end access controls, poisoning caches, or capturing victim data. See [Request smuggling](request-smuggling.md).
 
 2. **Newline injection into a single message.** When application code builds a response header (or an app-generated forward request) by concatenating user input, an unescaped `\r\n` lets the attacker end the current header early and inject their own headers or an entire second message. See [HTTP response splitting](http-response-splitting.md) and [CRLF in header fields](crlf-in-header-fields.md).
 
@@ -28,14 +26,14 @@ The unifying observation is that the control plane (framing, header boundaries) 
 
 ## Why hops disagree
 
-- **Specification latitude.** RFC 7230 forbids sending both `Content-Length` and `Transfer-Encoding`, but implementations still receive such requests and must pick one—and they do not all pick the same one.
+- **Specification latitude.** RFC 7230 forbids sending both `Content-Length` and `Transfer-Encoding`, but implementations still receive such requests and must pick one, and they do not all pick the same one.
 - **Normalization order.** A proxy may rewrite header names, strip whitespace, or downcase tokens before forwarding; the origin sees a subtly different message than the one the proxy validated.
 - **Obsolete features.** Line folding, chunk extensions, and unusual `Transfer-Encoding` spellings (`Transfer-Encoding:\tchunked`, duplicated headers) are handled inconsistently across the chain.
 - **Reflected newlines.** Values copied into `Location`, `Set-Cookie`, or custom headers without CR/LF stripping carry the attacker's framing straight into the response.
 
 ## Impact
 
-Smuggling yields request hijacking (capturing another user's full request, including credentials), front-end security-control bypass, and web cache poisoning that serves attacker content to every subsequent visitor. Response splitting and CRLF injection yield reflected header injection, cookie fixation, open redirect with injected headers, and cache poisoning. The common denominator is that a single crafted request affects messages beyond the attacker's own session—which is what makes these bugs high-impact and why they must be contained to a lab.
+Smuggling yields request hijacking (capturing another user's full request, including credentials), front-end security-control bypass, and web cache poisoning that serves attacker content to every subsequent visitor. Response splitting and CRLF injection yield reflected header injection, cookie fixation, open redirect with injected headers, and cache poisoning. The common denominator is that a single crafted request affects messages beyond the attacker's own session, which is what makes these bugs high-impact and why they must be contained to a lab.
 
 ## Pages
 

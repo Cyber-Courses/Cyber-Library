@@ -15,8 +15,3 @@ When **boolean** **oracles** are **noisy** or **missing**, **delay** **injection
 
 - [Using conditional statements](using-conditional-statements.md)
 - [Using SLEEP in a subselect](using-sleep-in-a-subselect.md)
-
-## See also
-
-- [MySQL (parent)](../index.md)
-- [Blind (boolean)](../blind/index.md)

@@ -1,6 +1,6 @@
 ---
 title: "SSRF query string: redirects, duplicate parameters, and outbound URL construction bugs"
-description: Query parameters in outbound URL fetches—redirect chains, parameter pollution, and filter bypass on the query facet of SSRF.
+description: Query parameters in outbound URL fetches, redirect chains, parameter pollution, and filter bypass on the query facet of SSRF.
 keywords:
   - SSRF
   - query string
@@ -15,8 +15,3 @@ The query facet covers what happens after `?` in the URL: attacker-controlled ke
 
 - [Bypassing using a redirect](bypassing-using-a-redirect.md)
 - [Parameter pollution](parameter-pollution.md)
-
-## See also
-
-- [Request forgery (parent)](../index.md)
-- [Authority](../authority/index.md)

@@ -1,6 +1,6 @@
 ---
 title: "SQLite write file: export, backup, and crafted database files"
-description: Writing artifacts through SQLite backup/export features—overlap with application file upload and web root placement.
+description: Writing artifacts through SQLite backup/export features, overlap with application file upload and web root placement.
 keywords:
   - backup
   - export
@@ -11,10 +11,10 @@ keywords:
 
 ## Context
 
-`VACUUM INTO`, backup APIs, or export features write `.db` or SQL dumps—weaponize if you control destination path.
+`VACUUM INTO`, backup APIs, or export features write `.db` or SQL dumps, weaponize if you control destination path.
 ## Technique
 
-Webshell via `SELECT '<?php ...' INTO OUTFILE` style only exists when the engine exposes file output primitives—SQLite itself is usually attach/dump oriented.
+Webshell via `SELECT '<?php ...' INTO OUTFILE` style only exists when the engine exposes file output primitives, SQLite itself is usually attach/dump oriented.
 ## Practice
 
 - Map app export features that shell out to `sqlite3 .dump`.
@@ -28,7 +28,3 @@ Webshell via `SELECT '<?php ...' INTO OUTFILE` style only exists when the engine
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [File manipulation (SQLite)](index.md)

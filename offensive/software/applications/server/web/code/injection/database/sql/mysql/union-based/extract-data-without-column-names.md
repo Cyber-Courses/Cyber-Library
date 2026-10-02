@@ -1,6 +1,6 @@
 ---
 title: "Extracting data without known column names using MySQL UNION and positional tricks"
-description: Dumping cell values when table names are suspected but column names are unknown—positional subselects and concat tricks in MySQL.
+description: Dumping cell values when table names are suspected but column names are unknown, positional subselects and concat tricks in MySQL.
 keywords:
   - MySQL SQL injection
   - union injection
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-Sometimes the **table** name leaks (`users`) but **column** names do not. Union and error channels may still move bytes out by selecting **positional** tuples or by **subqueries** that return a single scalar once you discover arity (e.g., `(SELECT * FROM users LIMIT 1)` in contexts that coerce row to scalar—MySQL behavior depends on **sql_mode** and query shape). Work in labs; validate legality for each target.
+Sometimes the **table** name leaks (`users`) but **column** names do not. Union and error channels may still move bytes out by selecting **positional** tuples or by **subqueries** that return a single scalar once you discover arity (e.g., `(SELECT * FROM users LIMIT 1)` in contexts that coerce row to scalar, MySQL behavior depends on **sql_mode** and query shape). Work in labs; validate legality for each target.
 
 ## Theory
 

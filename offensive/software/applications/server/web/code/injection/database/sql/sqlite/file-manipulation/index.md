@@ -1,6 +1,6 @@
 ---
 title: "SQLite file read and write: ATTACH, export, and .dump surfaces"
-description: File-oriented behavior in SQLite—reading databases from disk, attaching databases, and writing content via export APIs.
+description: File-oriented behavior in SQLite, reading databases from disk, attaching databases, and writing content via export APIs.
 keywords:
   - ATTACH DATABASE
   - .dump
@@ -19,7 +19,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [SQLite (SQLi)](../index.md)

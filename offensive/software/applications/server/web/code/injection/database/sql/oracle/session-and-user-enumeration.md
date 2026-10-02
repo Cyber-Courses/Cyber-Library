@@ -1,6 +1,6 @@
 ---
 title: "Oracle session and user enumeration: SYS_CONTEXT and USERENV"
-description: Oracle session metadata—current user, schema, host, and IP—for orienting SQLi chains and pivot planning.
+description: Oracle session metadata, current user, schema, host, and IP, for orienting SQLi chains and pivot planning.
 keywords:
   - SYS_CONTEXT
   - USERENV
@@ -29,7 +29,3 @@ Use results to pick OOB domains, file paths, or credential reuse hypotheses.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Oracle Database (SQLi)](index.md)

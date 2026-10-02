@@ -11,8 +11,3 @@ keywords:
 ## Context
 
 Library Structure places **Time Based** as a single PostgreSQL topic. Combine **pg_sleep** with predicates for **bit** extraction when **boolean** responses are too noisy.
-
-## See also
-
-- [PostgreSQL (parent)](index.md)
-- [Blind](blind/index.md)

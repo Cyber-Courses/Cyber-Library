@@ -14,7 +14,3 @@ keywords:
 |------|--------|
 | [CAST](cast.md) | Type cast and numeric cast errors |
 | [XML helpers](xml-helpers.md) | query_to_xml, database_to_xml, xmlagg |
-
-## See also
-
-- [PostgreSQL (parent)](../index.md)

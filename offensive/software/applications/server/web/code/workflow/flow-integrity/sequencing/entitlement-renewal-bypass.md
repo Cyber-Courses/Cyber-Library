@@ -11,7 +11,3 @@ keywords:
 ## Context
 
 **Renew** or **extend** endpoints may assume the **account** is already trusted and skip **card** or **identity** checks that **initial** purchase required. Attackers **downgrade** then **renew** to regain benefits without meeting full criteria.
-
-## See also
-
-- [Sequencing (parent)](index.md)

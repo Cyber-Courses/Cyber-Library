@@ -1,6 +1,6 @@
 ---
 title: "Server-Sent Events and long polling: auth gaps, session scope, and stream injection"
-description: Exploiting SSE and long-poll transports—connect-time-only authorization, cross-user response sharing through proxy and CDN caching, topic/tenant parameter tampering, and injection carried through event-stream payloads.
+description: Exploiting SSE and long-poll transports, connect-time-only authorization, cross-user response sharing through proxy and CDN caching, topic/tenant parameter tampering, and injection carried through event-stream payloads.
 keywords:
   - Server-Sent Events
   - SSE
@@ -12,9 +12,7 @@ keywords:
 
 # SSE and long polling
 
-Server-Sent Events (SSE) and long polling are the HTTP-native realtime transports. Both ride ordinary requests, so they inherit the web's caching, proxying, and session machinery—and they inherit its failure modes. SSE opens a single `GET` whose response stays open as `text/event-stream`, pushing `data:` events until the connection drops. Long polling issues a `GET` that the server holds until data is ready, then the client immediately reissues it. Because the authorization decision tends to be made **once**, when the stream opens, and because the responses look cacheable to intermediaries, these endpoints expose a distinct set of offensive opportunities.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Testing streams without written authorization is unlawful.
+Server-Sent Events (SSE) and long polling are the HTTP-native realtime transports. Both ride ordinary requests, so they inherit the web's caching, proxying, and session machinery, and they inherit its failure modes. SSE opens a single `GET` whose response stays open as `text/event-stream`, pushing `data:` events until the connection drops. Long polling issues a `GET` that the server holds until data is ready, then the client immediately reissues it. Because the authorization decision tends to be made **once**, when the stream opens, and because the responses look cacheable to intermediaries, these endpoints expose a distinct set of offensive opportunities.
 
 ## Overview
 
@@ -28,13 +26,13 @@ app.get("/events", (req, res) => {
 });
 ```
 
-The user is known from the session cookie, but `topic` is never checked against that user. Whoever can reach the endpoint streams whatever topic they name. The long-poll variant has the same shape—`GET /poll?channel=...&since=...`—and the same question applies to every open: *is tenant and topic ownership re-resolved on this request, or assumed from a prior one?*
+The user is known from the session cookie, but `topic` is never checked against that user. Whoever can reach the endpoint streams whatever topic they name. The long-poll variant has the same shape, `GET /poll?channel=...&since=...`, and the same question applies to every open: *is tenant and topic ownership re-resolved on this request, or assumed from a prior one?*
 
 ## Attack surface
 
 ### Connect-time-only authorization and parameter tampering
 
-The `EventSource` URL and the long-poll URL carry the routing parameters—`topic`, `channel`, `room`, `tenant`, `since`—in the query string. Because authorization is usually evaluated at open and not re-bound to the authenticated principal, tampering with those parameters is the primary primitive:
+The `EventSource` URL and the long-poll URL carry the routing parameters, `topic`, `channel`, `room`, `tenant`, `since`, in the query string. Because authorization is usually evaluated at open and not re-bound to the authenticated principal, tampering with those parameters is the primary primitive:
 
 ```
 # authenticated as a low-privilege user
@@ -42,7 +40,7 @@ GET /events?topic=user.<VICTIM_ID>.feed
 GET /poll?channel=tenant/<OTHER_TENANT>/alerts&since=0
 ```
 
-If the victim's events arrive on your stream, topic authorization is missing. This is the SSE/long-poll form of BOLA: one open yields a continuous feed rather than a single record. The `since`/cursor parameter is worth tampering with too—setting it to `0` or an old value often replays historical events the current session would never otherwise see.
+If the victim's events arrive on your stream, topic authorization is missing. This is the SSE/long-poll form of BOLA: one open yields a continuous feed rather than a single record. The `since`/cursor parameter is worth tampering with too, setting it to `0` or an old value often replays historical events the current session would never otherwise see.
 
 ### Cross-user caching and buffering
 
@@ -54,15 +52,15 @@ SSE and long-poll responses pass through forward proxies, reverse proxies, and C
 
 ### Session scope and long-poll deduplication
 
-Long-poll backends frequently **deduplicate** identical in-flight requests or **share** a pending response across clients to save work. If the dedup key is the channel alone and ignores the session, two users polling the same channel name can be served the same held response—so a guessed or shared channel id leaks events across accounts. Confirm by having two lab sessions poll an identical channel and watching whether a single server event is delivered to the wrong principal.
+Long-poll backends frequently **deduplicate** identical in-flight requests or **share** a pending response across clients to save work. If the dedup key is the channel alone and ignores the session, two users polling the same channel name can be served the same held response, so a guessed or shared channel id leaks events across accounts. Confirm by having two lab sessions poll an identical channel and watching whether a single server event is delivered to the wrong principal.
 
 ## Exploitation
 
-### Step 1 — map the transport and its parameters
+### Step 1, map the transport and its parameters
 
 Open the client with a proxy attached. For SSE, capture the `EventSource` URL and note every routing parameter; for long poll, capture the `GET` loop and its cursor parameter. Record the response headers that govern caching (`Cache-Control`, `Vary`, `Age`, CDN cache markers).
 
-### Step 2 — tamper for cross-tenant reads
+### Step 2, tamper for cross-tenant reads
 
 Swap `topic`/`channel`/`tenant` values to another lab user's identifiers and rewind the cursor:
 
@@ -73,7 +71,7 @@ GET /poll?channel=user.<VICTIM>.dm&since=0
 
 A stream of foreign events confirms connect-time-only authorization.
 
-### Step 3 — probe the caching layer
+### Step 3, probe the caching layer
 
 Request the per-user stream twice from different sessions and diff the bodies; a match plus a cache-hit header indicates cross-user cache exposure. Try web-cache-deception suffixes to force caching under an attacker-fetchable key.
 
@@ -82,7 +80,7 @@ Request the per-user stream twice from different sessions and diff the bodies; a
 SSE and long-poll payloads are just another path into the application's **service layer**: the JSON the client sends to establish filters, and the data the server reflects into `data:` events, feed the same sinks as REST handlers. Two directions matter:
 
 - **Inbound filter/parameter → sink.** Where the subscription accepts a filter expression, search term, or `since` token that the handler concatenates into a query or command, the usual SQL, command, and path primitives apply. See [Message injection to downstream sinks](message-injection-to-downstream-sinks.md).
-- **Outbound event → client-side sink.** Attacker-influenced content streamed back as `data:` is parsed and often rendered by the client. If the client injects event payloads into the DOM without encoding, a stored value echoed through the stream becomes DOM-based XSS—delivered over a channel defenders rarely inspect. The `event:` and `id:` fields are equally attacker-reachable when they derive from stored data.
+- **Outbound event → client-side sink.** Attacker-influenced content streamed back as `data:` is parsed and often rendered by the client. If the client injects event payloads into the DOM without encoding, a stored value echoed through the stream becomes DOM-based XSS, delivered over a channel defenders rarely inspect. The `event:` and `id:` fields are equally attacker-reachable when they derive from stored data.
 
 ## Practical notes
 
@@ -92,9 +90,9 @@ SSE and long-poll payloads are just another path into the application's **servic
 
 ## Tools
 
-- **[Burp Suite](https://portswigger.net/burp)** — intercept the `EventSource`/long-poll requests, replay with tampered parameters, and inspect cache headers.
-- **[curl](https://curl.se/)** — `curl -N https://target/events?topic=...` streams SSE raw for scripted parameter fuzzing and header inspection.
-- **[Param Miner](https://github.com/PortSwigger/param-miner)** — discover unkeyed inputs and cache-key quirks relevant to cross-user cache exposure.
+- **[Burp Suite](https://portswigger.net/burp)**, intercept the `EventSource`/long-poll requests, replay with tampered parameters, and inspect cache headers.
+- **[curl](https://curl.se/)**, `curl -N https://target/events?topic=...` streams SSE raw for scripted parameter fuzzing and header inspection.
+- **[Param Miner](https://github.com/PortSwigger/param-miner)**, discover unkeyed inputs and cache-key quirks relevant to cross-user cache exposure.
 - A second authenticated session to diff per-user responses and confirm shared-cache or dedup leakage.
 
 ## References

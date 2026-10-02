@@ -1,6 +1,6 @@
 ---
 title: "SSRF URL schemes: gopher, file, dict, ldap, and handlers beyond HTTP in server-side fetches"
-description: Non-http schemes in server-side fetches—gopher, dict, file, ldap, and legacy URL handlers that change the protocol handler.
+description: Non-http schemes in server-side fetches, gopher, dict, file, ldap, and legacy URL handlers that change the protocol handler.
 keywords:
   - SSRF
   - URL scheme
@@ -25,8 +25,3 @@ The scheme (`http:`, `https:`, `gopher:`, `file:`, …) selects which handler ru
 | [JAR](jar.md) | Java-specific handler chains |
 | [Netdoc](netdoc.md) | Legacy / platform-specific |
 | [HTTP SSRF port scanning](http-ssrf-port-scanning.md) | Using `http` to probe ports on one host |
-
-## See also
-
-- [Request forgery (parent)](../index.md)
-- [Authority](../authority/index.md)

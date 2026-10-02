@@ -29,7 +29,3 @@ Boolean oracle: same row count / same JSON shape for true vs false injected pred
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Blind (SQLite)](index.md)

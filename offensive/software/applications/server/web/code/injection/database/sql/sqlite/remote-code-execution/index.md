@@ -1,6 +1,6 @@
 ---
 title: "SQLite remote code execution: load_extension and ATTACH abuse"
-description: High-impact SQLite primitives—ATTACH DATABASE and load_extension—for code execution and cross-database reads during SQL injection.
+description: High-impact SQLite primitives, ATTACH DATABASE and load_extension, for code execution and cross-database reads during SQL injection.
 keywords:
   - load_extension
   - ATTACH DATABASE
@@ -21,7 +21,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [SQLite (SQLi)](../index.md)

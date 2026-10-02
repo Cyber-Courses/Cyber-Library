@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 time-based blind SQL injection: delays and heavy operations"
-description: Timing inference in Db2—WAIT FOR, benchmark-style constructs, and conditional delays where permitted.
+description: Timing inference in Db2, WAIT FOR, benchmark-style constructs, and conditional delays where permitted.
 keywords:
   - WAIT FOR
   - time-based SQLi
@@ -8,7 +8,7 @@ keywords:
 ---
 # Time-based (IBM Db2)
 
-Db2 supports **deliberate waits** in some contexts (for example **`WAIT FOR`** in procedures) and may use **expensive** **predicates** as weaker timing signals—exact primitives vary by **edition** and **configuration**.
+Db2 supports **deliberate waits** in some contexts (for example **`WAIT FOR`** in procedures) and may use **expensive** **predicates** as weaker timing signals, exact primitives vary by **edition** and **configuration**.
 
 ## Context
 
@@ -30,7 +30,3 @@ Wrap a **sleep/wait** primitive in a conditional so only one branch pays the del
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Blind (IBM Db2)](index.md)

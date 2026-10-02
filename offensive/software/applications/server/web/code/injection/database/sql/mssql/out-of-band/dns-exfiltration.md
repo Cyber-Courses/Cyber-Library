@@ -1,6 +1,6 @@
 ---
 title: "MSSQL DNS exfiltration in SQL injection: privileged metadata and DNS labels"
-description: How attackers may encode data in DNS queries when SQL Server functions or audit interfaces can build hostnames—defensive egress and privilege controls.
+description: How attackers may encode data in DNS queries when SQL Server functions or audit interfaces can build hostnames, defensive egress and privilege controls.
 keywords:
   - DNS exfiltration
   - VIEW SERVER STATE
@@ -19,7 +19,7 @@ Concatenate hex chunks into `master..fn_varbintohexstr`-style labels or use erro
 ## Practice
 
 - Keep labels under DNS length limits; chunk aggressively.
-- Requires functions that perform name resolution or error paths that trigger DNS—validate in staging.
+- Requires functions that perform name resolution or error paths that trigger DNS, validate in staging.
 
 ## Tools
 
@@ -30,7 +30,3 @@ Concatenate hex chunks into `master..fn_varbintohexstr`-style labels or use erro
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Out of band (MSSQL)](index.md)

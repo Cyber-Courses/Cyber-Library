@@ -1,6 +1,6 @@
 ---
 title: "Oracle DUAL table in UNION probes and subqueries"
-description: The DUAL dummy table for expression evaluation in Oracle—common in union probe payloads.
+description: The DUAL dummy table for expression evaluation in Oracle, common in union probe payloads.
 keywords:
   - FROM dual
   - Oracle DUAL
@@ -28,7 +28,3 @@ Use `NULL` placeholders, `TO_CHAR` casts, and `ORDER BY` index probing.
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Union-based (Oracle)](index.md)

@@ -9,11 +9,11 @@ keywords:
 ---
 # Command execution (MSSQL)
 
-**Command execution** on SQL Server usually means **`xp_cmdshell`**, **`sp_OACreate`** (COM), or **external script** endpoints on supported editions. What you get depends on **feature state** (`sp_configure`), **patch level**, and the **privilege** of the session your injection runs in—web apps are often low-priv, but misconfig and chained privesc are common stories.
+**Command execution** on SQL Server usually means **`xp_cmdshell`**, **`sp_OACreate`** (COM), or **external script** endpoints on supported editions. What you get depends on **feature state** (`sp_configure`), **patch level**, and the **privilege** of the session your injection runs in, web apps are often low-priv, but misconfig and chained privesc are common stories.
 
 ## Context
 
-Host command execution on SQL Server usually means **`xp_cmdshell`** (if on), COM via **`sp_OACreate`**, or external script endpoints—requires high privilege and enabled features.
+Host command execution on SQL Server usually means **`xp_cmdshell`** (if on), COM via **`sp_OACreate`**, or external script endpoints, requires high privilege and enabled features.
 ## Technique
 
 Workflow: confirm **sysadmin** or equivalent → check `xp_cmdshell` config → `EXEC xp_cmdshell 'cmd /c ...'`. If disabled, hunt misconfig, agent jobs, or linked-server hop.
@@ -31,8 +31,3 @@ Workflow: confirm **sysadmin** or equivalent → check `xp_cmdshell` config → 
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [File manipulation](file-manipulation.md)

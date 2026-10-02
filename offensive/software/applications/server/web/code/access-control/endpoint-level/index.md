@@ -23,7 +23,3 @@ keywords:
 - [Admin panels](admin-panels.md)
 - [Test resources in production](test-resources.md)
 - [Hidden admin function](hidden-admin-function.md)
-
-## See also
-
-- [Access control (parent)](../index.md)

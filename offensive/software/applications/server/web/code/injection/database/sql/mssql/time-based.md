@@ -1,6 +1,6 @@
 ---
 title: "MSSQL time-based SQL injection: WAITFOR DELAY and conditional timing"
-description: Inferring data through deliberate delays in SQL Server—WAITFOR and conditional branches when blind inference is possible.
+description: Inferring data through deliberate delays in SQL Server, WAITFOR and conditional branches when blind inference is possible.
 keywords:
   - WAITFOR DELAY
   - time-based SQLi
@@ -15,7 +15,7 @@ keywords:
 `WAITFOR DELAY '0:0:5'` is the canonical pause; stack it behind `IF`/`CASE` when you control a full statement.
 ## Technique
 
-Conditional delay: `IF (condition) WAITFOR DELAY ...` — measure p50/p95 response time over several runs.
+Conditional delay: `IF (condition) WAITFOR DELAY ...`, measure p50/p95 response time over several runs.
 ## Practice
 
 - Escalate delay duration if the app server buffers or pools connections oddly.
@@ -30,8 +30,3 @@ Conditional delay: `IF (condition) WAITFOR DELAY ...` — measure p50/p95 respon
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [MSSQL (SQLi)](index.md)
-- [Blind](blind.md)

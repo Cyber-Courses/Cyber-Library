@@ -15,7 +15,3 @@ Embedding `"` or `}` in a free-text field can **terminate** JSON early or add **
 ## Theory
 
 Use a logging API that **serializes** objects with a real JSON encoder, not string templates.
-
-## See also
-
-- [Log injection (parent)](index.md)

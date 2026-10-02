@@ -1,6 +1,6 @@
 ---
 title: "SQLite enumeration: sqlite_master, PRAGMA, and version fingerprinting"
-description: Schema and environment discovery in SQLite—master tables, pragma_table_info, and compile options.
+description: Schema and environment discovery in SQLite, master tables, pragma_table_info, and compile options.
 keywords:
   - sqlite_master
   - pragma_table_info
@@ -21,7 +21,3 @@ Map the injection class (reflection in page, errors, timing), then pick the bran
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [SQLite (SQLi)](../index.md)

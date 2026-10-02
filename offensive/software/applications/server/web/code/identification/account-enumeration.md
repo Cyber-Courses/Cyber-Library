@@ -13,8 +13,3 @@ Applications leak **existence** of accounts through **different** error strings 
 ## Practice
 
 - In authorized tests, compare responses for known-valid vs known-invalid identifiers across login, reset, and registration with **identical** request shapes where possible.
-
-## See also
-
-- [Identification (parent)](index.md)
-- [Authentication](../authentication/index.md)

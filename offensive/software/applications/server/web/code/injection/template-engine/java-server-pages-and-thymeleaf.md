@@ -1,6 +1,6 @@
 ---
 title: "Java JSP, Thymeleaf, and SpEL SSTI: expression preprocessing to Runtime.exec"
-description: Exploiting server-side template injection in Java view layers—Thymeleaf expression preprocessing, SpEL and OGNL reflection via T(), and JSP EL sinks that reach java.lang.Runtime for command execution.
+description: Exploiting server-side template injection in Java view layers, Thymeleaf expression preprocessing, SpEL and OGNL reflection via T(), and JSP EL sinks that reach java.lang.Runtime for command execution.
 keywords:
   - SSTI
   - Thymeleaf
@@ -12,9 +12,7 @@ keywords:
 
 # JSP, Thymeleaf, and similar
 
-Java web applications render views through several expression-driven layers—**Thymeleaf** `th:*` attributes, **JSP** Expression Language (EL), **Spring Expression Language (SpEL)**, **OGNL**, **Freemarker**, and **Velocity**. Each is a small language that resolves properties and invokes methods on a backing object model. Server-side template injection appears when user input is composed into the *expression or fragment source* these layers parse, rather than bound as a value. Because the object model is the Java runtime, a successful climb reaches `java.lang.Runtime` and command execution.
-
-> **Scope.** For authorized penetration tests, red-team engagements, CTF labs, and code review of systems you own or are contracted to assess. Use only against systems you are permitted to test.
+Java web applications render views through several expression-driven layers, **Thymeleaf** `th:*` attributes, **JSP** Expression Language (EL), **Spring Expression Language (SpEL)**, **OGNL**, **Freemarker**, and **Velocity**. Each is a small language that resolves properties and invokes methods on a backing object model. Server-side template injection appears when user input is composed into the *expression or fragment source* these layers parse, rather than bound as a value. Because the object model is the Java runtime, a successful climb reaches `java.lang.Runtime` and command execution.
 
 ## Overview
 
@@ -25,22 +23,9 @@ Thymeleaf's most dangerous sink is the **fragment expression** built from reques
 return "welcome :: " + section;   // section is user-controlled
 ```
 
-A value such as `__${T(java.lang.Runtime).getRuntime().exec("id")}__::x` causes Thymeleaf to **preprocess** the inner `${...}` as a SpEL expression before rendering—running `exec` on the server. The developer intended `section` to select a fragment; the engine parsed it as code.
+A value such as `__${T(java.lang.Runtime).getRuntime().exec("id")}__::x` causes Thymeleaf to **preprocess** the inner `${...}` as a SpEL expression before rendering, running `exec` on the server. The developer intended `section` to select a fragment; the engine parsed it as code.
 
 The same class of bug surrounds **JSP EL** in tag files and dynamic includes that bypass MVC separation, and any controller that hands user input to a `SpelExpressionParser` or OGNL evaluator in the request lifecycle. These SpEL/OGNL sinks overlap heavily with [expression evaluation](../expression-evaluation/index.md); the SSTI framing applies when the expression rides inside a template or view fragment.
-
-## Detection and fingerprinting
-
-As with other engines, start with an arithmetic probe and watch which syntax evaluates:
-
-```
-${7*7}      → 49   (JSP EL, Thymeleaf standard expressions, Freemarker)
-#{7*7}      → 49   (Thymeleaf message/selection variants, some EL)
-*{7*7}      → 49   (Thymeleaf selection expressions on a bound object)
-@{...}       →      (Thymeleaf link expressions — context clue, not arithmetic)
-```
-
-A `${7*7}` that returns `49` points at a Java EL-family engine. To separate them, Freemarker reacts to `${"freemarker.template.utility.Execute"?new()("id")}`-style probes, Velocity to `#set($x = ...)` directives, and Thymeleaf to the `__${...}__` preprocessing marker. An engine-specific parse error from a broken polyglot (`${{<%[%'"}}%\`) usually names the library and version in the stack trace.
 
 ## Thymeleaf: expression preprocessing to RCE
 
@@ -76,7 +61,7 @@ OGNL (historically reachable through Struts and some tag libraries) offers a par
 @java.lang.Runtime@getRuntime().exec("id")
 ```
 
-Reflection provides a filter-evasion route when class names are blocklisted—resolve `Class.forName` dynamically and invoke methods by reflection so the literal `Runtime` never appears:
+Reflection provides a filter-evasion route when class names are blocklisted, resolve `Class.forName` dynamically and invoke methods by reflection so the literal `Runtime` never appears:
 
 ```
 T(java.lang.Class).forName("java.lang.Runtime").getMethod("exec",T(java.lang.String)) ...
@@ -102,7 +87,7 @@ These are high-impact when present because JSP runs with the full servlet contai
 
 ## Tools
 
-- **[tplmap](https://github.com/epinna/tplmap)** — detects and exploits SSTI across Freemarker, Velocity, and related Java engines (use only where authorized).
+- **[tplmap](https://github.com/epinna/tplmap)**, detects and exploits SSTI across Freemarker, Velocity, and related Java engines (use only where authorized).
 - **[Burp Suite](https://portswigger.net/burp)** (Repeater, Intruder) for arithmetic probes, preprocessing markers, and `T()`/`@...@` payload fuzzing.
 - **A local Spring/Thymeleaf test harness** pinned to the target's library versions to validate `T()`, preprocessing, and reflection chains before firing at the application.
 
@@ -111,4 +96,4 @@ These are high-impact when present because JSP runs with the full servlet contai
 - [PortSwigger Web Security Academy: Server-side template injection](https://portswigger.net/web-security/server-side-template-injection)
 - [Spring Framework: Spring Expression Language (SpEL) reference](https://docs.spring.io/spring-framework/reference/core/expressions.html)
 - [CWE-1336: Improper Neutralization of Special Elements Used in a Template Engine](https://cwe.mitre.org/data/definitions/1336.html)
-- [PayloadsAllTheThings: Server Side Template Injection — Java](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection)
+- [PayloadsAllTheThings: Server Side Template Injection, Java](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection)

@@ -1,6 +1,6 @@
 ---
 title: "SQLite load_extension and native code execution"
-description: Native extension loading in SQLite—disable in production and audit custom builds.
+description: Native extension loading in SQLite, disable in production and audit custom builds.
 keywords:
   - load_extension
   - SQLite RCE
@@ -11,7 +11,7 @@ keywords:
 
 ## Context
 
-`load_extension('/path/evil.so')` loads a shared object—native code execution in the app process.
+`load_extension('/path/evil.so')` loads a shared object, native code execution in the app process.
 ## Technique
 
 Requires compile-time enablement and runtime permission; many mobile builds disable it.
@@ -28,7 +28,3 @@ Requires compile-time enablement and runtime permission; many mobile builds disa
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Remote code execution (SQLite)](index.md)

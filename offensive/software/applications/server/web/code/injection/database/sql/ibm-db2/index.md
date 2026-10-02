@@ -1,6 +1,6 @@
 ---
 title: "IBM Db2 SQL injection: SYSCAT, XML helpers, and administrative interfaces"
-description: IBM Db2–specific SQL injection patterns—blind inference, catalog enumeration, error-based XML helpers, and WAF-oriented obfuscation.
+description: IBM Db2–specific SQL injection patterns, blind inference, catalog enumeration, error-based XML helpers, and WAF-oriented obfuscation.
 keywords:
   - Db2 SQL injection
   - SYSCAT
@@ -28,7 +28,3 @@ Use only in **authorized** penetration tests, red-team engagements, CTFs, and is
 | Enumeration techniques | [Enumeration techniques](enumeration-techniques/index.md) |
 | Error-based | [Error-based](error-based.md) |
 | WAF bypass | [WAF bypass](waf-bypass/index.md) |
-
-## See also
-
-- [SQL injection (parent)](../index.md)

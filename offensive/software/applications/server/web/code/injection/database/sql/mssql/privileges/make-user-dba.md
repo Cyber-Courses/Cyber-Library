@@ -1,6 +1,6 @@
 ---
 title: "MSSQL role escalation to sysadmin: ALTER SERVER ROLE and server principals"
-description: How membership in server roles like sysadmin can be granted—and why application accounts must never hold this capability.
+description: How membership in server roles like sysadmin can be granted, and why application accounts must never hold this capability.
 keywords:
   - sysadmin
   - sp_addsrvrolemember
@@ -12,7 +12,7 @@ keywords:
 
 ## Context
 
-Escalation to **sysadmin** via `ALTER SERVER ROLE serveradmin ADD MEMBER` style ops—requires existing high privilege, not typical web users.
+Escalation to **sysadmin** via `ALTER SERVER ROLE serveradmin ADD MEMBER` style ops, requires existing high privilege, not typical web users.
 ## Technique
 
 If you already hold `securityadmin`/`sysadmin`, add your low-priv login or enable dormant principals.
@@ -29,7 +29,3 @@ If you already hold `securityadmin`/`sysadmin`, add your low-priv login or enabl
 ## Scope
 
 Use only in **authorized** penetration tests, red-team engagements, CTFs, and isolated lab systems.
-
-## See also
-
-- [Privileges (MSSQL)](index.md)

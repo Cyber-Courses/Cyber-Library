@@ -1,6 +1,6 @@
 ---
 title: "SSTI sandbox escape patterns: object graph, gadget chains, and template-specific primitives"
-description: Moving from template data to host objects and code execution in server-side template engines—context-dependent escape primitives.
+description: Moving from template data to host objects and code execution in server-side template engines, context-dependent escape primitives.
 keywords:
   - SSTI
   - sandbox escape
