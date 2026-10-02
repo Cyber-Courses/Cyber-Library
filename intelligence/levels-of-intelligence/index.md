@@ -1,12 +1,12 @@
 ---
 title: "Levels of Cyber Threat Intelligence"
-description: "Strategic, operational, and tactical intelligence explained, including what each level covers and which audiences consume it."
+description: "Strategic, operational, tactical, and technical intelligence explained, including what each level covers and which audiences consume it."
 keywords:
   - levels of intelligence
   - strategic intelligence
   - operational intelligence
   - tactical intelligence
-  - cyber threat intelligence
+  - technical intelligence
 ---
 
 # Levels of intelligence
@@ -17,7 +17,8 @@ The levels of intelligence described in this area include the following.
 
 - **Strategic intelligence**: high level analysis of threat trends, actor motivations, and risk, written for executives and board members who set direction and allocate resources.
 - **Operational intelligence**: insight into specific campaigns, actor behavior, and likely future activity, consumed by security leaders and incident response planners.
-- **Tactical intelligence**: adversary tactics, techniques, and procedures together with the granular, often short lived indicators such as addresses, hashes, and domains, used by defenders and automated tooling to shape detection, hunting, and response.
+- **Tactical intelligence**: detail on adversary tactics, techniques, and procedures, used by defenders to shape detection, hunting, and response.
+- **Technical intelligence**: granular, often short lived indicators such as addresses, hashes, and domains, consumed by analysts and automated tooling.
 
 ## References
 

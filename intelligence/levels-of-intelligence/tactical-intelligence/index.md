@@ -1,10 +1,10 @@
 ---
-title: "Tactical Threat Intelligence: IOCs, TTPs, and SOC Support"
-description: "How tactical intelligence delivers immediate, actionable detail to frontline defenders. A reference overview of the most granular level of cyber threat intelligence."
+title: "Tactical Threat Intelligence: TTPs and Defensive Detection"
+description: "How tactical intelligence describes adversary tactics, techniques, and procedures so frontline defenders can detect and respond. A reference overview within the four levels of cyber threat intelligence."
 keywords:
   - tactical threat intelligence
-  - indicators of compromise
   - tactics techniques procedures
+  - adversary behavior
   - soc threat intelligence
   - detection engineering
   - frontline defense intelligence
@@ -12,11 +12,11 @@ keywords:
 
 # Tactical Intelligence
 
-Tactical intelligence is the most granular and immediate level of cyber threat intelligence. It delivers the concrete detail that frontline defenders use to detect and block activity: indicators of compromise such as file hashes, domains, and addresses, along with the tactics, techniques, and procedures that describe how adversaries behave. Its audience is the security operations center, detection engineers, and analysts who act in minutes and hours rather than weeks.
+Tactical intelligence describes how adversaries operate: the tactics, techniques, and procedures they use to gain access, move through an environment, and reach their objectives. It gives frontline defenders the behavioral detail needed to build detections and shape response. It sits just above technical intelligence, which supplies the most atomic and short lived indicators such as hashes, addresses, and domains. Its audience is the security operations center, detection engineers, and analysts who act in minutes and hours rather than weeks.
 
-Within the three levels of intelligence, tactical work is the layer closest to the keyboard. It feeds detection rules, alerting logic, and triage decisions, and it often arrives in machine-readable form so tools can consume it directly. Frameworks such as MITRE ATT&CK help analysts organize techniques consistently, which makes tactical intelligence easier to map to defensive coverage and to share across teams.
+Within the four levels of intelligence, tactical work is among the layers closest to the keyboard. It feeds detection rules, hunting hypotheses, and triage decisions, and it is most useful when expressed as repeatable adversary behavior rather than one-off artifacts. Frameworks such as MITRE ATT&CK help analysts organize techniques consistently, which makes tactical intelligence easier to map to defensive coverage and to share across teams.
 
-Tactical intelligence matters because it shortens the time between an adversary's action and a defender's response. It supports faster detection, more accurate triage, and better prioritization of alerts. Its sources include telemetry, malware analysis output, sandbox results, and shared indicator feeds. Its central limitation is short shelf life: indicators change quickly, and low-context feeds can generate noise, so tactical intelligence works best when tied to the broader behavior described at the operational level.
+Tactical intelligence matters because it shortens the time between an adversary's action and a defender's response, and because behavior is harder for an adversary to change than an individual indicator. It supports more durable detection, more accurate triage, and better prioritization of alerts. Its sources include telemetry, malware and tooling analysis, incident reporting, and structured technique libraries. Its central limitation is that techniques still evolve and can be obscured, so tactical intelligence works best when tied to the broader campaign context described at the operational level and enriched with the concrete indicators from the technical level.
 
 ## References
 
