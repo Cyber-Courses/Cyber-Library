@@ -31,8 +31,8 @@ The only reason to use `netdoc:` over `file:` is evasion. A scheme allowlist or 
 
 ## Tools
 
-- **curl**: manual `netdoc:` probing to read a local path on a JVM stack.
-- Manual testing with Burp Repeater and crafted payloads.
+- **Java URL client**: `new URL("netdoc:/etc/passwd").openStream()` exercises this JVM-only handler directly, since curl does not support the `netdoc:` scheme.
+- **Burp Repeater**: submit the `netdoc:` URL through the target's JVM fetch sink and read the reflected contents.
 
 ## References
 

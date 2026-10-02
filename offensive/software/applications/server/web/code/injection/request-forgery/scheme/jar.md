@@ -31,9 +31,9 @@ Resolving a remote `jar:` URL downloads the nested archive to a temporary file o
 
 ## Tools
 
-- **curl**: manual `jar:` probing with the nested URL pointed at a controlled listener.
+- **Java URL client**: a short program using `new URL("jar:...").openConnection()` exercises the handler directly, since curl does not support the `jar:` scheme.
 - **interactsh**: open-source out-of-band interaction server to confirm the nested fetch on blind cases.
-- Manual testing with Burp Repeater and crafted payloads.
+- **Burp Repeater**: submit the `jar:` value through the vulnerable application and observe the nested fetch.
 
 ## References
 

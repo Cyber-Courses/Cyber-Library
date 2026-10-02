@@ -46,7 +46,7 @@ Reaching `file://` often requires getting past a scheme allowlist. A client that
 
 - **SSRFmap**: automated SSRF exploitation with a module for `file://` local read.
 - **curl**: manual `file://` probing to read a local path and inspect the reflected contents.
-- **Burp Collaborator**: out-of-band confirmation that the scheme is honored when the read is blind.
+- **Burp Repeater**: for blind reads, use the timing or existing-versus-missing-path error oracle; a local filesystem read produces no out-of-band interaction, so an interaction server cannot confirm it.
 
 ## References
 
