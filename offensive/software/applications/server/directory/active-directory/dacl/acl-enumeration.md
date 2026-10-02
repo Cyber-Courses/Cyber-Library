@@ -20,8 +20,11 @@ The high-value rights, in rough order of power:
 - **`GenericAll`**: full control (reset password, add to group, write any attribute).
 - **`WriteDacl`**: rewrite the object's DACL, then grant yourself `GenericAll`.
 - **`WriteOwner`**: take ownership, then rewrite the DACL.
-- **`GenericWrite` / `WriteProperty`**: write specific attributes (SPN for targeted roasting, `msDS-KeyCredentialLink` for shadow credentials, `scriptPath` for logon-script abuse).
-- **Extended rights**: `User-Force-Change-Password` (reset without knowing the old one), `DS-Replication-Get-Changes` + `...-All` (the DCSync right), `AddMember` on a group.
+- **`GenericWrite` / `WriteProperty`**: write specific attributes, `servicePrincipalName` (targeted roasting), `msDS-KeyCredentialLink` (shadow credentials), `msDS-AllowedToActOnBehalfOfOtherIdentity` (RBCD), `member` / `primaryGroupID` (group membership).
+- **Extended and read rights**: `User-Force-Change-Password` (reset without the old one), `DS-Replication-Get-Changes` + `...-All` (the DCSync right, on the domain object), and the read rights over `msDS-ManagedPassword` / `ms-Mcs-AdmPwd` that expose gMSA and LAPS secrets.
+- **`WriteGPLink`** on an OU: link a GPO to it (covered under [Group Policy](../group-policy/index.md)).
+
+The [DACL overview](index.md) maps each of these edges to the page that abuses it.
 
 ## Enumerating ACEs
 
@@ -41,6 +44,7 @@ Get-DomainObjectAcl -ResolveGUIDs |
 # From Linux
 nxc ldap <dc> -u user -p pass -M daclread -o TARGET=krbtgt
 dacledit.py -action read -target 'Domain Admins' example.local/user:pass
+bloodyAD --host <dc> -d example.local -u user -p pass get writable      # objects you can write
 ```
 
 `-ResolveGUIDs` (and the equivalent) is important: extended rights and property writes are identified by schema GUIDs, so without resolution you cannot tell `DS-Replication-Get-Changes` (DCSync) from a harmless property write.
@@ -48,7 +52,7 @@ dacledit.py -action read -target 'Domain Admins' example.local/user:pass
 ## Exploitation notes
 
 - Enumerate from the perspective of **every** principal you control, including groups you are a member of and machine accounts you own; the abusable ACE is often on a group, not your user directly.
-- The DACL read is the enumeration; actually abusing the ACE (reset, add-member, shadow credentials, DCSync) is covered in the DACL abuse section.
+- The DACL read is the enumeration; turning each ACE into control (reset, add-member, shadow credentials, DCSync) is covered by the technique pages in this topic, mapped from the [DACL overview](index.md).
 - Pay special attention to ACEs on `AdminSDHolder`, the domain root, the `krbtgt` account, and Domain/Enterprise Admins, where a single writable ACE is domain-critical.
 
 ## Tools
