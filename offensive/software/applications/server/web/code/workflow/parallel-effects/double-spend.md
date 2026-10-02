@@ -18,7 +18,7 @@ Fails when redemption is not atomic with the debit, or when idempotency keys are
 
 ## Practice
 
-- Capture a successful redemption request; replay it in parallel from two sessions or two TCP connections before the first response completes.
+- Prepare a single unconsumed redemption (a fresh coupon, token, or reservation that has never been applied), capture the redemption request without sending it, then dispatch several identical copies concurrently (Turbo Intruder single-packet attack, or parallel connections). The goal is for all copies to pass the "is it still valid?" check before any one of them marks the artifact consumed. Replaying an already-completed redemption only tests post-commit reuse; the race requires the duplicates to arrive while the artifact is still unconsumed.
 
 ## Tools
 

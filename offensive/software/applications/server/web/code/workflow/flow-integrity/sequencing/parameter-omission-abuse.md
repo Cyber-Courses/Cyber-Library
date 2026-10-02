@@ -15,7 +15,7 @@ Parameter omission exploits multi-action handlers and default branch logic: if `
 
 ## Theory
 
-JSON merge, PATCH, and form encoding differ on null vs missing vs empty string. Server code that does `if (body.approve === true)` without an `else` reject may treat omitted `approve` as not false.
+JSON merge, PATCH, and form encoding differ on null vs missing vs empty string. The exploitable pattern is a deny-only or fall-through check rather than an explicit allow: `if (body.approve === false) return deny()` followed by an approve branch treats an omitted `approve` (which is `undefined`, not `false`) as not-denied and falls through to approval. Likewise `if (body.amount) chargeFee()` skips the fee entirely when `amount` is omitted, and a validator that only runs when a field is present is simply not run for the omitted field.
 
 ## Practice
 
