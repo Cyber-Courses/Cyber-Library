@@ -15,7 +15,7 @@ A certificate template defines what a certificate is for and who may request it.
 
 ## ESC1: enrollee-supplied subject
 
-The classic case. A template that (1) grants enrolment to low-privileged users, (2) has a **client-authentication EKU** (Client Authentication, Smart Card Logon, PKINIT Client Authentication, or Any Purpose), and (3) lets the **enrollee supply the subject** (`CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT`). You request a certificate and specify a **SAN** naming a Domain Admin:
+The classic case. A template that (1) grants enrolment to low-privileged users, (2) has a **client-authentication EKU** (Client Authentication, Smart Card Logon, PKINIT Client Authentication, or Any Purpose), and (3) lets the **enrollee supply the subject** (`CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT`). Two issuance gates must also be open: **manager approval disabled** (otherwise the request is held pending a certificate manager) and **no authorized signatures required** (otherwise the request needs a co-signing enrollment-agent certificate). With all of these, you request a certificate and specify a **SAN** naming a Domain Admin:
 
 ```bash
 certipy req -u user@example.local -p pass -ca <ca-name> -template <vuln-template> \
@@ -41,7 +41,7 @@ A template with an **issuance policy** whose OID is linked to an AD group (`msDS
 
 ## ESC15: application-policy injection (EKUwu)
 
-On **version 1** templates, the requester can inject **application policies** into the CSR that the CA includes in the certificate, even when the template's EKU would not permit client authentication. Adding a Client Authentication application policy produces an auth-capable certificate from a template that looked safe:
+On **version 1** schema templates served by a **CA that is still vulnerable to the application-policy injection flaw** (patched CAs ignore injected policies), the requester can inject **application policies** into the CSR that the CA includes in the certificate, even when the template's EKU would not permit client authentication. Adding a Client Authentication application policy produces an auth-capable certificate from a template that looked safe. Naming another principal still requires the template to let the enrollee supply the subject; otherwise the injected policy only upgrades a certificate for yourself:
 
 ```bash
 certipy req -u user@example.local -p pass -ca <ca> -template <v1-template> \

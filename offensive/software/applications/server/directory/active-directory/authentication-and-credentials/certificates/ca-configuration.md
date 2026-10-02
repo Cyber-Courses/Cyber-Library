@@ -29,7 +29,7 @@ Note the SID security extension complicates naive ESC6 on patched domains: where
 
 ## ESC16: security extension disabled on the CA
 
-ESC16 is the CA-wide version of [ESC9](certificate-mapping.md): the CA is configured to **omit the SID security extension** from every certificate it issues (the extension OID is in the CA's disabled-extensions list). With no SID binding on any certificate, the DC maps by UPN, so the UPN-swap impersonation works against the whole CA rather than a single template:
+ESC16 is the CA-wide version of [ESC9](certificate-mapping.md): the CA is configured to **omit the SID security extension** from every certificate it issues (the extension OID is in the CA's disabled-extensions list). As with ESC9, this only yields impersonation where the DC still permits weak mapping (`StrongCertificateBindingEnforcement` at `0` or `1`); under full enforcement (`2`) a certificate without the SID binding is rejected. On a weakly-mapping DC the UPN-swap impersonation then works against the whole CA rather than a single template:
 
 ```bash
 # Enrol after setting a controlled account's UPN to the victim; the issued cert

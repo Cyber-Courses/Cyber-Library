@@ -15,7 +15,7 @@ When an account authenticates with a certificate, the domain controller must dec
 
 ## ESC9: no security extension
 
-A template flagged `CT_FLAG_NO_SECURITY_EXTENSION` produces certificates **without** the SID binding. The DC then falls back to mapping by the certificate's UPN. If you can control a principal's UPN (for example you have write over a low-privileged user and can set its UPN to a target's), you enrol with that account, set its UPN to the victim, and the issued certificate maps to the victim:
+A template flagged `CT_FLAG_NO_SECURITY_EXTENSION` produces certificates **without** the SID binding. This only helps where the DC still permits weak mapping: with `StrongCertificateBindingEnforcement` at `0` (disabled) or `1` (compatibility), a certificate lacking the SID extension falls back to **UPN** mapping, but at `2` (full enforcement) it is **rejected** outright. On a weakly-mapping DC, if you can control a principal's UPN (for example you have write over a low-privileged user and can set its UPN to a target's), you enrol with that account, set its UPN to the victim, and the issued certificate maps to the victim:
 
 ```bash
 # With GenericWrite over 'puppet': set its UPN to the target, enrol, then restore
