@@ -28,12 +28,12 @@ Without protocol transition, S4U2self still works but the resulting ticket is no
 
 ## The SPN-substitution trick
 
-S4U2proxy constrains the *service class* loosely: the returned ticket's **service name** can be swapped to another SPN **on the same host** (the KDC does not bind the ticket tightly to the exact SPN string). So delegation allowed to `http/host` can be turned into `cifs/host` or `host/host`, converting a limited-looking delegation into full control of that machine.
+S4U2proxy constrains the *service class* loosely: the returned ticket's **service name** can be swapped to another SPN (the KDC does not bind the ticket tightly to the exact SPN string). The catch is the key: the ticket is encrypted with the back-end account's key, so the substituted SPN only works if it is **registered to that same account**. In practice a host's own service SPNs (`cifs/`, `host/`, `http/`, `ldap/` on a DC, and so on) are all backed by the **computer account**, so delegation allowed to one of them can be swapped to the others on that host, turning a limited-looking delegation into full control of that machine. It does **not** reach an SPN registered to a *different*, dedicated service account, because that account's key cannot decrypt the ticket.
 
 ## Exploitation notes
 
 - Impersonate a privileged user (Domain Admin) to a `cifs/` or `host/` SPN on the target to get file access or code execution as that user on that host.
-- The SPN-substitution trick means the listed SPN matters less than the **target host**: any delegation to a host is effectively delegation to all of that host's services.
+- The SPN-substitution trick means the listed SPN matters less than the **target account**: delegation to one computer-account SPN is effectively delegation to all of that machine's own services, though not to SPNs held by separate service accounts on the same host.
 - You need the delegating account's secret; recover it by [cracking](../../credentials/cracking.md) (it is often a service account) or dumping, then drive S4U with its hash or AES key.
 - Accounts marked "sensitive, cannot be delegated" and members of Protected Users cannot be impersonated this way.
 
