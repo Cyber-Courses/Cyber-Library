@@ -15,8 +15,8 @@ A forest trust connects two separate forests, and unlike an intra-forest trust i
 
 ## What the guardrails do
 
-- **SID filtering / quarantine**: removes foreign SIDs (including `extraSids`) from inbound tickets, so a privileged SID forged in forest A is stripped before forest B honours it.
-- **Selective authentication**: when enabled, principals from the trusted forest get no access unless explicitly granted "Allowed to authenticate" on specific resources, tightening the boundary further.
+- **SID filtering / quarantine**: enforced by default on a forest trust, it removes foreign SIDs (including `extraSids`) from inbound tickets, so a privileged SID forged in forest A is stripped before forest B honours it.
+- **Selective authentication**: an **opt-in** setting (`/selectiveauth:Yes`), not a default. The default is **forest-wide authentication**, where principals from the trusted forest can authenticate and access is governed by ordinary resource ACLs. With selective authentication enabled, foreign principals get nothing unless explicitly granted "Allowed to authenticate" on each resource.
 - **Trust direction and transitivity**: a forest trust can be one-way and is non-transitive to third forests, limiting reach.
 
 ## Paths that still work

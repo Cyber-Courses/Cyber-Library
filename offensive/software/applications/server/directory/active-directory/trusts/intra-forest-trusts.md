@@ -16,7 +16,7 @@ The security boundary in Active Directory is the **forest**, not the domain. Eve
 ## Why one domain owns the forest
 
 - A Kerberos ticket carries the holder's SIDs in its PAC, including an **`extraSids`** field (the mechanism behind SID history) for SIDs from other domains.
-- Intra-forest trusts pass these SIDs through unfiltered, because within a forest they are assumed legitimate.
+- Intra-forest trusts pass these SIDs through unfiltered **by default**, because within a forest they are assumed legitimate. (The exception is a trust explicitly marked `QuarantinedWithinForest`, where only the enterprise-DC SID and the SIDs listed on the trusted-domain object pass, filtering out a forged `-519`; check for this during enumeration.)
 - The **Enterprise Admins** group (RID 519, in the forest root) and the root domain's **Domain Admins** are forest-wide. A child-domain compromise that can forge tickets can therefore add those SIDs and act as a forest administrator.
 
 ## The technique
