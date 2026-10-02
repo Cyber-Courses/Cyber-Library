@@ -18,11 +18,11 @@ keywords:
 Offensively, `SCRIPT LOAD` is valuable precisely because it separates staging from execution. An attacker who reaches a sink that permits `SCRIPT LOAD` can place a malicious, parameterized script into the cache and record the returned digest:
 
 ```
-SCRIPT LOAD "return redis.call(ARGV[1], ARGV[2], ARGV[3])"
+SCRIPT LOAD "return redis.call(unpack(ARGV))"
 # -> "5f2e...c8"
 ```
 
-The loaded body is a generic command dispatcher: it calls whatever command name and arguments are passed at execution time. A single cached script then drives many **script-allowed** commands through `EVALSHA`:
+The loaded body is a generic command dispatcher: `unpack(ARGV)` spreads however many arguments are supplied into `redis.call`, so it invokes whatever command name and arguments are passed at execution time with the correct arity (a fixed `ARGV[1],ARGV[2],ARGV[3]` form would pass a trailing `nil` and Redis rejects nil arguments). A single cached script then drives many **script-allowed** commands through `EVALSHA`:
 
 ```
 EVALSHA 5f2e...c8 0 KEYS *
