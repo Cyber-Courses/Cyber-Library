@@ -23,6 +23,12 @@ SOAP wraps each call in an XML envelope with a header and a body, and the server
 
 A REST call has one place that says what it is: the method and path. A SOAP call says it in several, the action header, the body's operation element, and the WS-* headers, and a framework may trust one while executing from another. The envelope is also parsed by a general XML stack, so the raw markup concerns from [XML processing](../../markup/xml-processing/index.md) apply underneath; the pages here focus on what is specific to SOAP operation binding rather than generic XML parsing. The test is to make the action header, the body operation, and the security headers disagree, and see which one the server believes.
 
+## Tools
+
+- **Burp Suite**: intercepting and tampering SOAP envelopes, headers, and the SOAPAction.
+- **SoapUI**: generating requests from a WSDL and exercising operations.
+- **Wsdler (Burp extension)**: parsing WSDL definitions into editable Burp requests.
+
 ## References
 
 - [OWASP: Testing for SOAP](https://owasp.org/www-project-web-security-testing-guide/)

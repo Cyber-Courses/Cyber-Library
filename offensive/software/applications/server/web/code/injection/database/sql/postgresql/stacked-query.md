@@ -23,6 +23,11 @@ Stacked execution is what makes the strongest PostgreSQL primitives reachable fr
 
 Availability is driver-specific. Prepared-statement interfaces and drivers that send one statement per request reject the second statement, so stacking is confirmed by observing a side effect (a created table, an updated row) rather than assumed. When it is blocked, fall back to in-query techniques (union, error, blind) that work within the single original statement.
 
+## Tools
+
+- **sqlmap**: exploits stacked queries with `--technique=S`.
+- **psql**: official client to confirm multi-statement execution.
+
 ## References
 
 - PostgreSQL Documentation: multi-statement simple query, COPY

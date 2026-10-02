@@ -32,6 +32,11 @@ On PostgreSQL 11 and later, file and program access is also granted through the 
 
 Object-level grants come from the `has_*_privilege` functions and `information_schema.role_table_grants`, for example `has_table_privilege('users','SELECT')`. Knowing the role and its grants tells you whether to pursue file read, file write, command execution, or to stay with pure data extraction.
 
+## Tools
+
+- **sqlmap**: reads the current role and its privileges with `--privileges`.
+- **psql**: official client to query `pg_roles`, `is_superuser`, and `pg_has_role` directly.
+
 ## References
 
 - PostgreSQL Documentation: `pg_roles`, predefined roles, access privilege functions

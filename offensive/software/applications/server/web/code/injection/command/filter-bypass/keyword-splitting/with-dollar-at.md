@@ -64,6 +64,11 @@ c$@at${IFS}/etc/passwd
 - This is a **shell** technique (`sh -c`, `system()`, backticks); in a pure `argv` call `$@` is a literal string.
 - If the sink passes user-controlled positional arguments to the shell, `$@`/`$1` may not be empty, prefer a positional known to be unset such as `$9`.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting positional-parameter payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

@@ -22,3 +22,13 @@ keywords:
 | [Entitlement renewal bypass](entitlement-renewal-bypass.md) | Trials, renewals, re-verification gaps |
 | [Reversal and refund abuse](reversal-and-refund-workflow-abuse.md) | Refunds, chargebacks, settlement races |
 
+## Tools
+
+- **Burp Suite (Repeater)**: replay and reorder captured steps to force sequencing bugs.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic
+

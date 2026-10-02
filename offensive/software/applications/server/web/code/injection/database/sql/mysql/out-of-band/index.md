@@ -22,6 +22,12 @@ Every OOB path here needs the `FILE` privilege and a `secure_file_priv` setting 
 - **[DNS exfiltration](dns-exfiltration.md)**: encode data into a UNC hostname so a DNS lookup leaks it.
 - **[UNC and NTLM capture](unc-ntlm.md)**: force SMB authentication to capture the service account hash.
 
+## Tools
+
+- **sqlmap**: automates out-of-band DNS exfiltration with `--dns-domain`.
+- **Burp Collaborator**: logging name server for DNS-based exfiltration.
+- **Responder**: capture the SMB authentication the UNC path triggers.
+
 ## References
 
 - MySQL Reference Manual: LOAD_FILE, `secure_file_priv`, FILE privilege

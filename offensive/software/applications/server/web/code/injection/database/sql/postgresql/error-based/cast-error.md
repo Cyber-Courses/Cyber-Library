@@ -32,6 +32,11 @@ Any single-value subquery leaks through the same slot, and because there is no l
 
 `pg_shadow` requires a superuser; against an unprivileged role, aggregate an application table instead (`SELECT string_agg(username||':'||password,',') FROM users`). Keep the inner query to a single value (an aggregate, or `LIMIT 1`), since a multi-row subquery used as a scalar raises a different error that carries no data.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through cast failures.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: type casts, `string_agg`, system catalogs

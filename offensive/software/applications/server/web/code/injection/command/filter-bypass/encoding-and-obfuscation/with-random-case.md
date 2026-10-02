@@ -61,6 +61,11 @@ Because POSIX does not fold case for you, random case is properly a **Windows** 
 - Random case pairs well with caret escaping (`cmd`), backtick/quote insertion (PowerShell), and environment-variable assembly for layered obfuscation.
 - The technique defeats only **case-sensitive** matching; a filter that lowercases input before comparing is unaffected, so vary the surrounding structure too.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Intruder for case-varied payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate casing and obfuscation.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass case sensitive](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

@@ -49,6 +49,11 @@ T(java.lang.Runtime).getRuntime().exec(new String[]{'/bin/bash','-c','id > /tmp/
 
 and equivalently in OGNL with `new java.lang.String[]{...}`. On Windows use `{'cmd.exe','/c','whoami'}`. Because the reach is language-dependent, confirm which expression language the route evaluates before committing: a Simple-only sink limits you to the exposed beans and their methods, while an OGNL or SpEL sink gives direct class resolution and the full runtime.
 
+## Tools
+
+- **Burp Suite**: Repeater to inject into Simple, OGNL, or SpEL route expressions.
+- **J2EEScan**: Burp extension flagging OGNL and SpEL expression injection.
+
 ## References
 
 - [Apache Camel: Simple language](https://camel.apache.org/components/latest/languages/simple-language.html)

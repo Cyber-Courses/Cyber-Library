@@ -56,6 +56,12 @@ query {
 
 Send a benign field under a growing number of aliases and watch response time and any limit counters: if the server processes all of them and the per-request control registers once, the amplification is real. For brute force, the proof is a throttled flow (login, coupon, one-time code) succeeding in far fewer HTTP requests than the limit should allow. Defenses that would stop this, per-resolver cost accounting, alias and depth caps, live in code and are often absent, which is why the per-request assumption is worth testing first.
 
+## Tools
+
+- **graphql-cop**: auditing an endpoint for batching and alias-based amplification.
+- **InQL**: mapping queryable fields and generating operations inside Burp.
+- **Burp Repeater and Intruder**: crafting aliased and batched requests and measuring amplification.
+
 ## References
 
 - [OWASP: GraphQL Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html)

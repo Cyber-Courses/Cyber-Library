@@ -71,6 +71,11 @@ A returned `48968` proves evaluation. `expr` also exposes builtins such as `map`
 len(filter(1..10000000, {# > 0}))
 ```
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate the reachable environment variables and exported methods.
+
 ## References
 
 - [expr-lang documentation](https://expr-lang.org/)

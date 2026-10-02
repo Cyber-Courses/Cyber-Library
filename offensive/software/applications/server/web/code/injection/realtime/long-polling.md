@@ -66,3 +66,13 @@ The held-open, re-request loop creates a race surface. Because the client fires 
 ## Finding the sinks
 
 Capture one poll cycle, then enumerate each parameter against the same payloads used for REST routes, and separately swap the channel and cursor to neighboring and privileged values. Check whether the session or a token rides in the URL rather than a cookie or header; if so it leaks to server and proxy logs, and additionally through browser history or `Referer` only when that same token also appears in the top-level page URL.
+
+## Tools
+
+- **Burp Suite**: intercept a poll cycle, then fuzz and replay parameters with Burp Repeater.
+- **curl**: issue poll requests directly to swap channel, cursor, and token values.
+
+## References
+
+- PortSwigger Web Security Academy: Access control vulnerabilities and privilege escalation
+- OWASP Web Security Testing Guide: Testing for Insecure Direct Object References

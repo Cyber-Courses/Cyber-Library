@@ -26,6 +26,12 @@ A recurring theme is that modern servers and frameworks have hardened many of th
 - **[Request line](request-line.md)**: method override and request-line abuse.
 - **[Request body](request-body.md)**: content-type and body-parsing confusion.
 
+## Tools
+
+- **Burp Suite**: core platform for crafting and replaying malformed HTTP messages across these techniques.
+- **Burp HTTP Request Smuggler**: Burp extension for detecting and exploiting request desync.
+- **curl**: send raw headers, CRLF, and alternate content types from the command line.
+
 ## References
 
 - RFC 9110/9112 (HTTP semantics and HTTP/1.1 messaging)

@@ -85,6 +85,11 @@ Content-Type: application/json
 
 Compare a scoped request against one with widened bounds: if `startkey`/`endkey` or a `$gt: null` selector returns more rows than the application's normal view, the parameter is attacker-reachable. A `key` that accepts a JSON array or object where a string was expected, without error, signals the value lands in the query unescaped.
 
+## Tools
+
+- **curl**: issue view, _all_docs, and _find requests with widened parameters.
+- **Burp Repeater**: tamper with startkey, endkey, include_docs, and selector values.
+
 ## References
 
 - [Apache CouchDB: View query parameters](https://docs.couchdb.org/en/stable/api/ddoc/views.html)

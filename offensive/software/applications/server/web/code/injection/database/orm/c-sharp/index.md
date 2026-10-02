@@ -21,6 +21,11 @@ keywords:
 
 EF Core offers two raw methods that read almost identically: `FromSqlInterpolated` captures an interpolated string as a parameterized `FormattableString` and is safe, while `FromSqlRaw` takes a plain `string` and runs it verbatim. A developer who builds a `$"..."` interpolated string and passes it to `FromSqlRaw` (or concatenates into it) has written injectable code that looks like the safe call. Identifiers are the one case the safe method cannot help with, but it fails closed: `FromSqlInterpolated` turns each hole into a `DbParameter`, and since a parameter cannot stand in for a table or column name, an interpolated identifier makes the database reject the query rather than execute it. Identifier injection therefore needs `FromSqlRaw`, concatenation, or a pre-formatted string. The tell is `Raw` fed anything the caller influenced, or an identifier built into the SQL text by hand.
 
+## Tools
+
+- **sqlmap**: automating exploitation of EF Core raw-SQL sinks.
+- **Burp Repeater**: crafting payloads for FromSqlRaw and interpolated-string sinks.
+
 ## References
 
 - [OWASP: SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)

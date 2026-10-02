@@ -46,6 +46,11 @@ The `ruby` filter can also load a standalone script through its `path` option, s
 
 Logstash pipeline conditionals (`if [field] == "..."`) support a comparison and boolean grammar over event fields but are not a scripting language. Injection into a conditional lets an attacker alter routing and filter logic, drop or misroute events, or branch on crafted field values, but it does not by itself execute code. Treat conditionals as a logic-tampering surface and the `ruby` filter as the code-execution path.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Suite**: Repeater to inject into pipeline or ruby-filter fields exposed over HTTP.
+
 ## References
 
 - [Logstash: ruby filter plugin](https://www.elastic.co/guide/en/logstash/current/plugins-filters-ruby.html)

@@ -51,6 +51,11 @@ The faces context exposes the live request and session, so an expression navigat
 
 From the same `externalContext`, `getRequestParameterMap()` and the session map let the expression copy an attacker-chosen value into a session attribute that downstream code trusts, so a privilege held only in the request is promoted into the session.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate scoped attribute names an access check compares against.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

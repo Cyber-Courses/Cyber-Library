@@ -24,6 +24,11 @@ The primary sink is `eval()`, which executes a string as PHP. The same class of 
 
 Because the injected string is executed as PHP, the attacker inherits the entire language and runtime: filesystem functions, process execution via `system`, `exec`, `shell_exec`, and the backtick operator, network functions, and whatever extensions and credentials the process holds. Unlike the .NET and Go evaluators elsewhere in this section, there is no narrower ceiling to describe. The only variables are what the PHP process can do on the host and how the input reaches the sink.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for reaching eval, assert, and create_function sinks.
+- **tplmap**: detects and exploits PHP eval()-based code injection.
+
 ## References
 
 - [PHP manual: eval](https://www.php.net/manual/en/function.eval.php)

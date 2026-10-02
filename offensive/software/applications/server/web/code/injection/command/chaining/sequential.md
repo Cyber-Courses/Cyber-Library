@@ -86,6 +86,11 @@ If output is not reflected, the semicolon still delivers a payload whose effect 
 
 On Windows `cmd.exe` the semicolon is **not** a command separator, use `&` instead (`127.0.0.1 & whoami`). In PowerShell, `;` does separate statements, so a host that spawns PowerShell accepts `127.0.0.1; whoami`.
 
+## Tools
+
+- **[commix](https://github.com/commixproject/commix)**: automated command-injection exploitation.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Intruder for separator injection.
+
 ## References
 
 - [OWASP: OS Command Injection](https://owasp.org/www-community/attacks/Command_Injection)

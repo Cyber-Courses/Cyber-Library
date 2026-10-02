@@ -78,6 +78,12 @@ Harvesting that token promotes the hijack: the attacker now holds a value that u
 
 Replay a captured handshake with the `Origin` header removed, then with an arbitrary foreign value, and watch for the `101` response in each case. A server that upgrades when `Origin` is absent or foreign, while still attaching the session, is open to hijacking. A socket that carries an unguessable token in the URL or in a subprotocol value, rather than relying on cookies, does not exhibit the same behavior.
 
+## Tools
+
+- **Burp Suite**: capture the handshake, then replay it with the `Origin` removed or set to a foreign value.
+- **Crafted attacker HTML page**: a `WebSocket` script that opens the socket and exfiltrates returned frames.
+- **websocat**: replay the handshake from the command line to confirm upgrade behavior.
+
 ## References
 
 - PortSwigger Web Security Academy, "Cross-site WebSocket hijacking"

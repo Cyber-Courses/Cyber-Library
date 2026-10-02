@@ -26,6 +26,11 @@ The error returns `XPATH syntax error: '~root@localhost'`. Swap in any single-va
 
 The same ~32-character truncation applies, so page through long values with `SUBSTRING` exactly as with `EXTRACTVALUE`, and keep the inner query to a single row.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through the XPath functions.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: UPDATEXML, XPath functions

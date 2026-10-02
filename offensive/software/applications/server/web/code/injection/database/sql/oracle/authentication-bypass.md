@@ -35,6 +35,11 @@ password: ' OR username='admin'--
 
 Because `AND` binds tighter than `OR`, this evaluates as `(username='admin' AND password='') OR username='admin'`, returning the admin row. Oracle does not allow stacked queries through the usual drivers, so a login injection cannot append a second statement, but the row-returning bypass needs only the one query.
 
+## Tools
+
+- **sqlmap**: confirms and fingerprints the injectable login field.
+- Manual testing with Burp Repeater and the Oracle client (sqlplus or SQLcl).
+
 ## References
 
 - Oracle Database SQL Language Reference: comments, SELECT, conditions

@@ -29,6 +29,11 @@ The single most important fact is whether the role is a superuser, since that de
 
 A value of `on` means the full file and program primitives are available. On version 11 and later a non-superuser can still reach some of them if it belongs to the `pg_read_server_files`, `pg_write_server_files`, or `pg_execute_server_program` roles, which the privileges page enumerates. With the version and role known, the remaining techniques apply with the right expectations.
 
+## Tools
+
+- **sqlmap**: fingerprints the engine and reads version, role, and superuser status.
+- **psql**: official client to confirm `version()`, `current_user`, and `is_superuser` directly.
+
 ## References
 
 - PostgreSQL Documentation: system information functions, `current_setting`

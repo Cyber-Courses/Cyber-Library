@@ -36,6 +36,12 @@ Concatenation instead defeats filters on string literal values (a table name, a 
 
 As with the other engines, the goal is to express the same query through synonyms and encodings the filter does not recognize rather than to defeat it head-on, combining several of these where a filter blocks more than one pattern. Note that a Db2 hex literal (`x'...'`) still uses quotes, so for genuinely quote-free construction rely on `CHR()` concatenation.
 
+## Tools
+
+- **sqlmap**: tamper scripts automate `CHR()`, comment, and case rewrites.
+- **ghauri**: built-in WAF evasion for Db2 payloads.
+- **Burp Repeater**: hand-tune encodings and special registers until the filter is bypassed.
+
 ## References
 
 - IBM Db2 SQL Reference: CHR, CONCAT, CAST, comments, special registers

@@ -60,6 +60,11 @@ The same "insert something that expands to nothing" principle also works with em
 - This is a **shell** technique; the string must reach `sh -c`, `system()`, or backtick execution.
 - Inside double quotes, backticks still trigger substitution, so `` "wh``oami" `` also reassembles, useful when your injection lands in a quoted context.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting empty-backtick payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

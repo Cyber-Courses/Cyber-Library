@@ -28,6 +28,11 @@ A slow response means the character's code point is above 77; a prompt response 
 
 Where stacked queries are not available, `WAITFOR` cannot be injected as its own statement. The fallback is a heavy expression whose cost is conditional, for example forcing a large cross join only on a true branch, though this is far less precise than `WAITFOR`. Because timing is sensitive to load and jitter, keep delays several seconds long and repeat a positive hit before trusting it.
 
+## Tools
+
+- **sqlmap**: automated time-based blind extraction with `WAITFOR DELAY`.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - Microsoft SQL Server Documentation: WAITFOR, IF, control-of-flow

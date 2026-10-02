@@ -23,3 +23,8 @@ Defense in depth uses HMAC with timestamp, unique event IDs stored server-side, 
 ## Tools
 
 - **Burp Suite Repeater**
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- OWASP WSTG: Testing for Business Logic

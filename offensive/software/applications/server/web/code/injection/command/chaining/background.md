@@ -68,6 +68,12 @@ On Windows `cmd.exe` the ampersand does **not** background, it is the unconditio
 
 This dual meaning is why `&` is one of the most portable injection characters: it chains on `cmd.exe` and backgrounds on POSIX shells, so a probe containing `&` often triggers execution on either platform.
 
+## Tools
+
+- **[commix](https://github.com/commixproject/commix)**: automated command-injection detection and exploitation.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Intruder for injecting and chaining separators.
+- **[interactsh](https://github.com/projectdiscovery/interactsh)**: out-of-band callback capture for detached payloads.
+
 ## References
 
 - [OWASP: OS Command Injection](https://owasp.org/www-community/attacks/Command_Injection)

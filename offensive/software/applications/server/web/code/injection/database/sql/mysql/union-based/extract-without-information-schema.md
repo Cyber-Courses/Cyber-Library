@@ -42,6 +42,11 @@ Table names are harder without the catalog, but a privileged account can read th
 
 Once names are known, extraction proceeds exactly as with `information_schema`, selecting the columns directly from the target table.
 
+## Tools
+
+- **sqlmap**: automated union extraction with catalog alternatives.
+- **Burp Repeater**: drive the self-join duplicate-column error walk by hand.
+
 ## References
 
 - MySQL Reference Manual: JOIN, error 1060, `mysql.innodb_table_stats`

@@ -34,6 +34,12 @@ When `xp_cmdshell` is blocked or removed, OLE Automation procedures run a comman
 
 A third route, where Machine Learning Services is installed, is `sp_execute_external_script` running Python or R, whose process can spawn commands. All of these require `sysadmin` (or a carefully configured proxy), so enumerate the role first; without it, pursue file, credential, or linked-server routes instead. Commands run as the SQL Server service account, so its privileges determine the foothold.
 
+## Tools
+
+- **sqlmap**: automates `xp_cmdshell` re-enablement and command execution with `--os-shell`.
+- **Metasploit Framework**: `mssql_payload` module for command execution as the service account.
+- **PowerUpSQL**: `Invoke-SQLOSCmd` for xp_cmdshell and OLE automation command execution.
+
 ## References
 
 - Microsoft SQL Server Documentation: xp_cmdshell, sp_configure, OLE Automation procedures

@@ -33,6 +33,12 @@ Two properties of the engine decide the outcome. First, what the language can re
 
 Regular-expression engine abuse (catastrophic backtracking, user-controlled patterns) is a related but separate concern and lives in its own cross-language pages rather than here, and template-file rendering (SSTI) lives under Template Engine.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting and iterating expression payloads across sinks.
+- **J2EEScan**: Burp extension with active checks for Java EL and OGNL expression injection.
+- **tplmap**: detects and exploits eval-based code injection in PHP, Python, and JavaScript sinks.
+
 ## References
 
 - [OWASP: Expression Language Injection](https://owasp.org/www-community/vulnerabilities/Expression_Language_Injection)

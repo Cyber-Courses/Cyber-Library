@@ -123,6 +123,11 @@ GET /uploads/shell.gif.php?c=cat%20/etc/passwd HTTP/1.1
 
 For non-PHP stacks, swap the payload: a `.jsp`, `.aspx`, or `.jspx` shell on Java/.NET, or a `.svg` with an embedded script for stored XSS when execution is not reachable.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Intruder for fuzzing extensions, Content-Type, and magic bytes.
+- **[exiftool](https://exiftool.org/)**: embed payloads in image metadata to build polyglots.
+
 ## References
 
 - [OWASP: Unrestricted File Upload](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload)

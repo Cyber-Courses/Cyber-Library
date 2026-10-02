@@ -27,6 +27,12 @@ When the test is true, SQLite hashes and compares a ~100 MB random blob (a secon
 
 Binary-search each character on the delay exactly as in boolean extraction. Because the delay is CPU-bound rather than a fixed sleep, it is noisier than `WAITFOR` or `pg_sleep`, so keep the work large enough for a distinct delay and repeat a positive hit before trusting it. Each probe loads a CPU core, so use the smallest size that still reads clearly.
 
+## Tools
+
+- **sqlmap**: automated time-based extraction with `randomblob` heavy-query payloads (`--technique=T`).
+- **ghauri**: fast time-based inference with strong WAF evasion.
+- **Burp Repeater**: measure the conditional delay by hand to tune the blob size.
+
 ## References
 
 - SQLite Documentation: randomblob, hex, recursive common table expressions

@@ -41,6 +41,12 @@ Historically this surface was reached through unauthenticated entry points such 
 
 `Runtime.exec(String)` tokenizes on whitespace with no shell, so `$(...)`, pipes, and redirection do not expand, and the single-string form above runs one binary. Unified EL cannot write a `String[]` literal (no `new`, no array syntax), so shaping a `/bin/bash -c` invocation means building the argument array reflectively through `java.lang.reflect.Array` and passing it to the `exec(String[])` overload, which is far more verbose than the single-command form. In practice, redirect the single command's output to a file and read it back, or use the one-shot command where no shell features are required.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver EL payloads through actionOutcome and other sinks.
+- **J2EEScan**: Burp extension that flags Java EL injection.
+- Manual unified-EL reflection payloads reaching Runtime.
+
 ## References
 
 - [Jakarta Expression Language specification](https://jakarta.ee/specifications/expression-language/)

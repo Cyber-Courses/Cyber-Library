@@ -69,6 +69,12 @@ This is handy when the target cannot reach back out to your infrastructure but s
 
 The same shape appears in other ecosystems whenever a template or module loader takes a remote location: server-side template engines that fetch includes over HTTP, JSP/JSF resource loaders, and Node loaders that `require` a dynamically built path. The pivot is identical, redirect the loader to attacker-controlled code, and the payload language follows the platform.
 
+## Tools
+
+- **[fimap](https://github.com/kurobeats/fimap)**: automated remote and local file-inclusion exploitation.
+- **[kadimus](https://github.com/P0cL4bs/Kadimus)**: RFI and LFI detection and exploitation.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for pointing the sink at attacker-hosted code.
+
 ## References
 
 - [OWASP: Testing for Remote File Inclusion](https://owasp.org/www-project-web-security-testing-guide/)

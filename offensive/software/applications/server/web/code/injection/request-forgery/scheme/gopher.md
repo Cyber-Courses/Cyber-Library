@@ -62,6 +62,12 @@ A crafted HTTP request to an internal service (including a `POST` with a body, w
 
 Gopher converts SSRF from a read primitive into a write primitive against internal services, which is the step from information disclosure to code execution. When a [Port](../authority/port.md) scan finds Redis, memcached, or an unauthenticated SMTP or HTTP service, gopher is the scheme that acts on it. It depends on the client honoring `gopher://` (curl-backed clients commonly do), so confirm the handler first.
 
+## Tools
+
+- **Gopherus**: crafts gopher payloads for Redis, FastCGI, and SMTP via SSRF.
+- **SSRFmap**: automated SSRF exploitation that builds gopher payloads against internal services.
+- **curl**: manual `gopher://` delivery of a URL-encoded raw byte stream to a chosen port.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

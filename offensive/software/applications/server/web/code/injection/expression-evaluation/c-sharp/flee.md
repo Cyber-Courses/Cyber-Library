@@ -64,6 +64,11 @@ Environment.MachineName
 
 Once a reachable type with a useful method is confirmed, call it. If nothing dangerous is imported, Flee is still an arithmetic and logic surface: flip a boolean rule, skew a computed price, or drive an expensive computation for resource abuse. The step up to code execution is gated entirely by the import list, so report the impact against the types actually in context rather than assuming the worst.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: probe which .NET types are imported into the ExpressionContext.
+
 ## References
 
 - [Flee project (Fast Lightweight Expression Evaluator)](https://github.com/mparlak/Flee)

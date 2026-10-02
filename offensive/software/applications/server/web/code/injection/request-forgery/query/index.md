@@ -18,6 +18,12 @@ Many fetch sinks take their target from a query parameter: `?url=`, `?target=`, 
 
 Both live at the query layer because they manipulate how the parameter is parsed and followed, not how the host or path is written. They frequently combine with the [Authority](../authority/index.md) tricks: the final, post-redirect or post-pollution target is still an internal host written with one of those encodings.
 
+## Tools
+
+- **Burp Suite**: manipulating `?url=` style parameters and replaying the built request.
+- **SSRFmap**: automating query-parameter payload delivery against the sink.
+- **curl**: issuing duplicated and redirecting parameter values to observe the final target.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

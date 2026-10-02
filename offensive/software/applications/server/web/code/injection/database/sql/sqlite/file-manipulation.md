@@ -29,6 +29,12 @@ Requesting `/s.php?0=id` then runs commands. `VACUUM INTO 'file'` (SQLite 3.27+)
 
 Reading arbitrary host files is generally not possible: SQLite has no `LOAD_FILE` equivalent, and `ATTACH` only reads valid SQLite database files. So file manipulation against SQLite is mainly a write-to-web-root path to a shell, which the remote-code-execution page builds on, rather than a file-disclosure primitive.
 
+## Tools
+
+- **sqlmap**: automates stacked `ATTACH` file writes where the API allows them.
+- **sqlite3**: the engine CLI for testing `ATTACH DATABASE` and `VACUUM INTO` writes.
+- Manual testing with Burp Repeater and the sqlite3 client.
+
 ## References
 
 - SQLite Documentation: ATTACH DATABASE, VACUUM INTO

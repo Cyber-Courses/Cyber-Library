@@ -81,6 +81,11 @@ Submit a lone quote (`'`) and watch for a Cypher parse error (`Neo.ClientError.S
 
 Cypher string literals also accept escapes (`'` for a quote, `\n`), useful where a filter strips raw quotes but passes the escaped form to the parser.
 
+## Tools
+
+- **cypher-shell**: test literal breakouts and clause chaining directly.
+- **Burp Repeater**: craft and resend breakout payloads through the parameter.
+
 ## References
 
 - [Neo4j: Cypher parameters](https://neo4j.com/docs/cypher-manual/current/syntax/parameters/)

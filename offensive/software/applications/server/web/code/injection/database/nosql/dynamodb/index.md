@@ -18,3 +18,13 @@ The first surface is **PartiQL**, a SQL-compatible query language run through `E
 
 The second surface is the **expression** family: `FilterExpression`, `KeyConditionExpression`, and `ConditionExpression`, together with the `ExpressionAttributeNames`/`ExpressionAttributeValues` maps that feed them. When attacker input shapes the expression text or those maps, a filter can be widened to return more items, or a conditional write guard can be made to pass when it should fail.
 
+## Tools
+
+- **AWS CLI**: drive the ExecuteStatement, Scan, and Query APIs with crafted input.
+- **Burp Suite**: intercept and tamper with DynamoDB-backed web requests.
+
+## References
+
+- [AWS DynamoDB: Developer guide](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
+

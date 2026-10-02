@@ -82,6 +82,11 @@ Querying `/app/_design/run/_view/z` drives CouchDB to invoke the attacker-suppli
 
 Probe for write access to design documents and to `_config`: a `GET /_config` that returns the configuration tree, or a `PUT /app/_design/test` that succeeds, confirms the primitive. An application that forwards JSON bodies into CouchDB writes without constraining the `_id` prefix can be steered toward `_design/` by supplying that prefix in the injected document identifier.
 
+## Tools
+
+- **curl**: PUT design documents and reach the _config query_servers API directly.
+- **Burp Repeater**: craft the design-document and configuration write requests.
+
 ## References
 
 - [Apache CouchDB: Design documents](https://docs.couchdb.org/en/stable/ddocs/ddocs.html)

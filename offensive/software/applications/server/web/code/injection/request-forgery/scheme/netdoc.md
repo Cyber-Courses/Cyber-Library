@@ -29,6 +29,11 @@ On a Java client that still exposes the handler, this returns the file contents 
 
 The only reason to use `netdoc:` over `file:` is evasion. A scheme allowlist or blocklist written for `http`/`https`/`file` commonly omits the legacy handler, so when `file://` is rejected but the stack is Java, `netdoc:` reaches the filesystem anyway. It belongs in the rotation alongside [File](file.md) and [JAR](jar.md): when one Java-reachable local scheme is filtered, try the others before concluding local read is unavailable.
 
+## Tools
+
+- **curl**: manual `netdoc:` probing to read a local path on a JVM stack.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

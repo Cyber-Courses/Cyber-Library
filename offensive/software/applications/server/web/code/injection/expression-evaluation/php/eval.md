@@ -78,6 +78,11 @@ usleep(10000000);//
 
 A ten-second delay confirms execution where no reflection and no egress are available, and pairing the delay with a condition turns it into a boolean oracle over host state.
 
+## Tools
+
+- **Burp Suite**: Repeater for delivering eval payloads and reading command output.
+- **tplmap**: detects and exploits PHP eval()-based code injection.
+
 ## References
 
 - [PHP manual: eval](https://www.php.net/manual/en/function.eval.php)

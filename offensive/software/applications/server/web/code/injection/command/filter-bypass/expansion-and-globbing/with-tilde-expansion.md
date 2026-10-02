@@ -63,6 +63,11 @@ It also pairs with variable slicing to rebuild a leading slash elsewhere in the 
 - `~+`/`~-` depend on `PWD`/`OLDPWD` being set, which they normally are in a shell spawned with an environment. The value reflects wherever the application's child process is running.
 - The technique rebuilds **directory prefixes**, not binary names, pair it with globbing or variable expansion when the command or the forbidden characters themselves are filtered.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting tilde-expansion payloads.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

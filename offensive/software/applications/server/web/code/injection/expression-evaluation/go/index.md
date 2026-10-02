@@ -24,6 +24,11 @@ That design shapes the whole attack model. When the expression string is attacke
 
 Everything reachable in an `expr` expression comes from the `env` the host passes at compile and run time. The grammar can read those variables, index those maps, and call the methods those objects expose, and nothing else. The assessment of any Go expression target is therefore an enumeration of the environment: which variables, which types, and which of their methods are in scope. That boundary is the entire surface.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate the variables, types, and methods exposed in the env.
+
 ## References
 
 - [expr-lang documentation](https://expr-lang.org/)

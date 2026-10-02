@@ -61,6 +61,12 @@ To read the result into the response rather than firing blind, keep the sandbox-
 
 `redirectErrorStream(true)` folds stderr into the captured stream so failing commands still return a diagnostic, and the `Scanner` with the `\A` delimiter reads the whole output in one token. Pulling the response from `ServletActionContext` writes the result directly to the client even when the value stack result is otherwise discarded.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver the sandbox-clearing preamble and runtime call.
+- **struts-pwn**: PoC tool exercising Struts2 OGNL remote-code-execution vectors.
+- **Metasploit Framework**: Struts2 OGNL exploitation modules.
+
 ## References
 
 - [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)

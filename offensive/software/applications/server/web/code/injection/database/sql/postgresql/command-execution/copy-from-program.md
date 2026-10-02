@@ -32,6 +32,12 @@ The command runs as the operating-system account that owns the PostgreSQL server
 
 If stacked queries are unavailable, this route is closed because `COPY` cannot run inside a `SELECT`, so confirm stacking (a created table appears) before relying on it. When the role lacks `pg_execute_server_program` and is not a superuser, fall back to the untrusted-language function route only if superuser is reachable, or stay with data extraction.
 
+## Tools
+
+- **sqlmap**: automates `COPY ... FROM PROGRAM` command execution with `--os-shell`.
+- **Metasploit Framework**: `postgres_copy_from_program_cmd_exec` module.
+- **psql**: official client to stage the command table and read output.
+
 ## References
 
 - PostgreSQL Documentation: COPY ... FROM PROGRAM, predefined roles

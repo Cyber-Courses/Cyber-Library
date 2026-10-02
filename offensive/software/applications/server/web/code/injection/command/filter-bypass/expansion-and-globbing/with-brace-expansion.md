@@ -61,6 +61,11 @@ The brace group here keeps the whole invocation space-free while still issuing a
 - No spaces, no tabs, and no `${IFS}` are required, which makes brace groups useful when the filter strips or encodes whitespace.
 - Keep the group to `command,arg1,arg2…`; each comma becomes a word boundary, so flags and paths each get their own element.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting brace-expansion payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate no-space bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass without space](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

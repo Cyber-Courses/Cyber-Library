@@ -16,3 +16,14 @@ Blind XXE covers the common case where the application parses attacker XML with 
 The vulnerability is still fully exploitable; the data just has to leave through a side channel. Three channels do the work. **Out-of-band** retrieval makes the parser send file contents to an attacker-controlled server over HTTP or FTP. **Error messages** provoke the parser into including file contents inside a fatal-error string that the application happens to surface. **Timing** distinguishes outcomes when even errors are suppressed. All of them rely on **parameter entities** and, in the portable form, an external DTD, because general-entity nesting is rejected inside the internal subset by most parsers.
 
 This subtree covers the error-based channel and the local-DTD technique for environments where outbound network access is blocked.
+
+## Tools
+
+- **XXEinjector**: automating blind XXE through out-of-band and error-based channels.
+- **Burp Collaborator**: capturing out-of-band callbacks that confirm blind XXE.
+- **Burp Suite**: crafting parameter-entity payloads in Repeater.
+
+## References
+
+- PortSwigger Web Security Academy: Blind XXE injection
+- OWASP: XML External Entity Prevention Cheat Sheet

@@ -31,6 +31,12 @@ Map the schema through `SYSCAT`. List tables, then columns:
 
 Catalog names are stored upper-case, so match them in upper case. The older `SYSIBM.SYSTABLES` and `SYSIBM.SYSCOLUMNS` are alternatives when `SYSCAT` is filtered. Grants for the current authorization ID come from `SYSCAT.DBAUTH` and `SYSCAT.TABAUTH`, which the privileges page uses to decide what the rest of the attack can reach. With the service level, identity, and schema known, extraction proceeds with union, blind, or time-based techniques.
 
+## Tools
+
+- **sqlmap**: automated fingerprinting and schema enumeration (`--banner`, `--tables`, `--columns`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **db2** (or clpplus): the Db2 client for reading the special registers and `SYSCAT` catalog.
+
 ## References
 
 - IBM Db2 SQL Reference: special registers, SYSIBMADM administrative views, SYSCAT catalog

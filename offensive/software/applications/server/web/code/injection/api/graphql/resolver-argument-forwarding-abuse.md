@@ -41,6 +41,12 @@ and one that passes an argument into an internal service path reaches that servi
 
 Forwarding abuse is easy to miss because the schema looks like validation. A reviewer sees typed arguments and assumes safety, while the resolver quietly interpolates them. Nested and relationship resolvers deepen the problem: an argument on a nested field may reach a different backend than the top-level query implies, so the sink is not where the query appears to point. The test is to trace each argument from the schema definition to the code that consumes it, and to send type-valid values carrying backend-specific metacharacters, watching for the downstream behavior rather than a schema error.
 
+## Tools
+
+- **InQL**: mapping resolver arguments worth tracing to a backend sink.
+- **Burp Repeater**: sending type-valid arguments carrying backend metacharacters.
+- **sqlmap**: confirming SQL injection where a resolver forwards an argument into a query.
+
 ## References
 
 - [OWASP: GraphQL Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html)

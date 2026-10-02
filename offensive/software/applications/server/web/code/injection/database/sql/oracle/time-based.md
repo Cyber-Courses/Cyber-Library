@@ -23,6 +23,12 @@ When the test is true, `RECEIVE_MESSAGE` waits five seconds before returning; wh
 
 Where `DBMS_PIPE` is not executable, a heavy query gives a coarse delay: a large cartesian join (for example `(SELECT COUNT(*) FROM all_objects a, all_objects b, all_objects c)`) burns measurable time, gated by a `CASE`, though it is far less precise than `RECEIVE_MESSAGE`. Keep delays several seconds long and repeat a positive hit before trusting it.
 
+## Tools
+
+- **sqlmap**: automated time-based extraction with Oracle `DBMS_PIPE.RECEIVE_MESSAGE` payloads (`--technique=T`).
+- **ghauri**: fast time-based inference with strong WAF evasion.
+- **Burp Repeater**: measure the conditional delay by hand to confirm the primitive.
+
 ## References
 
 - Oracle Database PL/SQL Packages and Types Reference: DBMS_PIPE, DBMS_LOCK

@@ -42,6 +42,11 @@ Quoted `name`:
 
 SQLAlchemy runs on PostgreSQL, MySQL, SQLite, Oracle, and SQL Server, so match the dialect: `--`/`#` comments, `pg_sleep()`/`SLEEP()` for time-based blind, and backend-specific string functions for substring extraction. The DBAPI driver usually permits one statement per `execute()`, so favor `UNION` and inference over stacked queries unless the driver is configured otherwise (e.g. `psycopg2` with multiple statements).
 
+## Tools
+
+- **sqlmap**: automating extraction against execute() and engine.execute() sinks.
+- **Burp Repeater and Intruder**: delivering dialect-specific UNION and blind payloads.
+
 ## References
 
 - [SQLAlchemy docs: Working with raw SQL (text())](https://docs.sqlalchemy.org/en/20/core/connections.html#using-textual-sql)

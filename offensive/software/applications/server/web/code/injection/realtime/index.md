@@ -16,3 +16,14 @@ Realtime transports keep a channel open long after the initial HTTP request, and
 That gap is the target. A frame that reaches a query builder, a broadcast buffer, a command runner, or a stream serializer is attacker-controlled input that frequently skips the WAF rules, auth middleware, and validation applied to REST routes. Per-message authorization is routinely weaker than per-request authorization, origins are often unchecked at the handshake, and newline-delimited stream formats invite record forging.
 
 This subtree is organized by transport: WebSocket message handling, Server-Sent Events, and long polling.
+
+## Tools
+
+- **Burp Suite**: WebSockets history and repeater for intercepting and replaying frames.
+- **websocat**: command-line WebSocket client for crafting raw messages.
+- **curl -N**: stream a Server-Sent Events endpoint to inspect unparsed bytes.
+
+## References
+
+- PortSwigger Web Security Academy: WebSocket security vulnerabilities
+- OWASP Web Security Testing Guide: Testing WebSockets

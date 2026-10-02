@@ -44,6 +44,12 @@ A true result says a live reset token exists for that account, a signal worth ac
 
 Combined with the operators in [Comparison operators](comparison-operators.md) and [Array operators](array-operators.md), `$exists` first decides where data lives, then those operators read it.
 
+## Tools
+
+- **Burp Repeater**: submit $exists probes to map which fields are present.
+- **nosqli**: scan parameters for operator-object injection.
+- **NoSQLMap**: automate field-presence enumeration.
+
 ## References
 
 - [MongoDB: $exists](https://www.mongodb.com/docs/manual/reference/operator/query/exists/)

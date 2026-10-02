@@ -56,6 +56,11 @@ The newline only supplies the separator. If the command keyword is also filtered
 - `cmd.exe` does not treat a bare line feed as a separator the same way; prefer `&` there. Newline termination is a POSIX-shell technique.
 - Where the response reflects nothing, confirm with a timing or out-of-band second command on the new line.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for injecting raw and encoded newlines.
+- **[commix](https://github.com/commixproject/commix)**: automated command-injection exploitation.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

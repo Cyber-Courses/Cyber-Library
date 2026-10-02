@@ -35,6 +35,11 @@ password: ' OR username='admin'--
 
 Because `AND` binds tighter than `OR`, this evaluates as `(username='admin' AND password='') OR username='admin'`, returning the admin row. Whether a stacked statement can be appended depends on the API (`sqlite3_exec` allows it, a prepared statement does not), but the bypass needs only the one query to return a row.
 
+## Tools
+
+- **sqlmap**: confirms and fingerprints the injectable login field.
+- Manual testing with Burp Repeater and the sqlite3 client.
+
 ## References
 
 - SQLite Documentation: comments, SELECT, expressions

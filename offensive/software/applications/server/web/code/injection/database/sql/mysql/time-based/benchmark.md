@@ -22,6 +22,11 @@ Unlike `SLEEP`, the delay is not a fixed number of seconds; it depends on server
 
 Because it holds a CPU core busy for every probe, high iteration counts across many characters put real load on the server. Keep the count only as high as needed for a distinguishable delay.
 
+## Tools
+
+- **sqlmap**: automated time-based extraction, falling back to BENCHMARK when SLEEP is filtered.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: BENCHMARK, SHA1, IF

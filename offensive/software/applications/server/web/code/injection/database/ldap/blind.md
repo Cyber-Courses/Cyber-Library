@@ -30,6 +30,12 @@ filter: (&(objectClass=user)(cn=admin)(mail=*))
 
 A match means `admin` has a `mail` attribute. Blind LDAP works only on attributes the bound account may read and that are not write-only: hashed `userPassword` is typically not returned or matchable this way, but descriptive, contact, and group attributes usually are. Like blind SQL injection, it is slow and almost always automated, but the single wildcard comparison is the reliable primitive underneath.
 
+## Tools
+
+- **ldapsearch**: verify prefix wildcard matches that drive the boolean oracle.
+- **Burp Intruder**: automate per-character prefix extraction across the alphabet.
+- **python-ldap**: script the character-by-character inference loop.
+
 ## References
 
 - RFC 4515: LDAP search filters (substring and presence matching)

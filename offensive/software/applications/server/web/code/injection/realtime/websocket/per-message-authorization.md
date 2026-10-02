@@ -80,6 +80,12 @@ ws.onmessage = (e) => console.log(e.data);
 
 From a standalone Node `ws` client there is no ambient cookie, so pass a captured session string explicitly: `new WebSocket(url, { headers: { Cookie: 'session=...' } })`. Frames that return data for ids outside the connected user's own set confirm that authorization lives only at the handshake.
 
+## Tools
+
+- **Burp Suite**: WebSockets history and repeater for replaying frames with swapped ids, rooms, and actions.
+- **wsrepl**: interactive WebSocket REPL for enumerating action names and object identifiers.
+- **websocat**: command-line WebSocket client for passing a captured cookie and fuzzing frames.
+
 ## References
 
 - PortSwigger Web Security Academy, "Testing for WebSockets security vulnerabilities"

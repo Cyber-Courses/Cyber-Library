@@ -29,6 +29,12 @@ Resolving a remote `jar:` URL downloads the nested archive to a temporary file o
 
 `jar:` is specific to JVM HTTP clients and URL handling. It is worth trying when the stack is Java and a direct [HTTP](http-and-https.md) or [File](file.md) scheme is filtered but `jar:` is not, since the nested URL smuggles the same targets past a prefix check. Confirm the handler by pointing the inner URL at an attacker-controlled listener and watching for the fetch.
 
+## Tools
+
+- **curl**: manual `jar:` probing with the nested URL pointed at a controlled listener.
+- **interactsh**: open-source out-of-band interaction server to confirm the nested fetch on blind cases.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

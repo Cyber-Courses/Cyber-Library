@@ -43,6 +43,12 @@ To return command output into the rendered response rather than running blind, w
 
 The `Runtime` reflection form (`getMethod('getRuntime').invoke(null)`) is interchangeable with the `ProcessBuilder` form; pick whichever the filtering in front of the sink leaves intact.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver #{...} reflection payloads and read output.
+- **J2EEScan**: Burp extension that flags Java EL injection.
+- Manual unified-EL reflection to ScriptEngineManager or ProcessBuilder.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

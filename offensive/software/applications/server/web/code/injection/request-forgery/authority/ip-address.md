@@ -60,6 +60,12 @@ Where the client supports IPv6, loopback has its own representations, and a bloc
 
 Parsers differ in which formats they accept and how they combine, so a value that one component rejects another folds. Combine a dotless decimal host with an unexpected scheme or port to clear both a host filter and a scheme filter at once, for example `http://2130706433:80/` or `http://0x7f000001/latest/meta-data/`. When a literal is blocked, work through decimal, hex, octal, shorthand, and IPv6-mapped forms in turn; a client that connects at all confirms which the stack normalizes.
 
+## Tools
+
+- **curl**: probing each encoded form directly to see which the HTTP client folds to the internal address.
+- **SSRFmap**: automated SSRF exploitation that cycles alternate IP encodings against internal targets.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

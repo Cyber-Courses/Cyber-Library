@@ -91,6 +91,12 @@ Deeply prefixed names (`....//....//`) defeat naive single-pass `../` stripping,
 
 The same entry names work across zip, tar, jar, war, and many language-specific unpackers, since the flaw is in the extraction code, not the format.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for uploading crafted archives.
+- **[evilarc](https://github.com/ptoomey3/evilarc)**: generates archives with path-traversal entries.
+- Manual archive crafting with Python `zipfile` and `tarfile`.
+
 ## References
 
 - [OWASP: Path Traversal](https://owasp.org/www-community/attacks/Path_Traversal)

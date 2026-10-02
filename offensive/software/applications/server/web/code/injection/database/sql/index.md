@@ -24,6 +24,12 @@ That is why this area is organized by database engine rather than by technique a
 - **SQLite**: `sqlite_master` enumeration, no `information_schema`, and API-dependent stacked queries.
 - **IBM Db2**: `SYSIBM.SYSDUMMY1`, special registers, and `SYSCAT` catalog views.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation across all the major engines, with per-engine payloads.
+- **ghauri**: fast alternative with strong WAF evasion.
+- **Burp Suite**: Scanner flags injection points and Repeater refines payloads by hand.
+
 ## References
 
 - OWASP Testing Guide: Testing for SQL Injection

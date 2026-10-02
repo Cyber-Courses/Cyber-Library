@@ -16,3 +16,15 @@ XML external entity injection abuses the parts of the XML specification that mos
 Three outcomes follow from that single primitive. **Disclosure** reads local files and returns them in the response or through a side channel. **SSRF and out-of-band** retrieval point the entity at internal hosts, cloud metadata, or an attacker server, reaching resources the parser's network can see. **Amplification** nests entities so a tiny document expands into gigabytes, exhausting memory for denial of service.
 
 This subtree covers in-band file disclosure, out-of-band exfiltration, SSRF, entity-expansion attacks, and the blind variants that leak data through parser errors when nothing is reflected.
+
+## Tools
+
+- **XXEinjector**: automating XXE exploitation including OOB and error-based file retrieval.
+- **Burp Suite**: crafting XXE payloads and scanning parameters.
+- **Burp Collaborator**: confirming blind and out-of-band XXE.
+- **oxml_xxe**: embedding XXE payloads into OOXML and other file uploads.
+
+## References
+
+- PortSwigger Web Security Academy: XML external entity (XXE) injection
+- OWASP: XML External Entity Prevention Cheat Sheet

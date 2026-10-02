@@ -84,6 +84,12 @@ Where input lands in a numeric predicate with no surrounding quotes, no literal 
 
 payload: `1 or 1=1`.
 
+## Tools
+
+- **xcat**: automating boolean-based node extraction through the predicate.
+- **Burp Intruder**: iterating boolean predicate payloads for blind extraction.
+- Manual testing with `or`-tautology and `substring()` payloads.
+
 ## References
 
 - [OWASP: XPATH Injection](https://owasp.org/www-community/attacks/XPATH_Injection)

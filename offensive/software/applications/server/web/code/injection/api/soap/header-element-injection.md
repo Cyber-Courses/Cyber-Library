@@ -46,6 +46,12 @@ The `mustUnderstand` attribute tells the server whether a header is mandatory. T
 
 Manipulate each header class and watch the decision: strip or make the security header optional and see if the call still processes; alter an unsigned element while keeping a valid signature over a signed one and see if the change takes effect; set `wsa:ReplyTo` to an attacker endpoint and watch for an out-of-band hit; replay a captured signed message and see if it is accepted twice. Each success shows the middleware trusts header content it did not bind to the request's identity or integrity.
 
+## Tools
+
+- **Burp Repeater**: stripping security headers, toggling mustUnderstand, and replaying signed messages.
+- **SoapUI**: composing and manipulating WS-Security and WS-Addressing headers.
+- **Wsdler (Burp extension)**: turning a WSDL into requests to edit in Burp.
+
 ## References
 
 - [OASIS: WS-Security](https://docs.oasis-open.org/wss/v1.1/)

@@ -62,6 +62,12 @@ PHP's libxslt exposes the parallel `php:function` binding when `registerPHPFunct
 
 Full code execution needs stylesheet control, but where only a parameter is attacker-supplied the reachable surface is still large: an injected parameter spliced into an `xsl:value-of select` attribute runs attacker-chosen XPath, which reaches every registered extension function the stylesheet already imports. If that stylesheet declares a Java or PHP binding, the parameter alone calls it, and otherwise the parameter drives `document()` and `unparsed-text()` for file read and SSRF. Enumerating the declared namespaces with `system-property()` and probing which prefixes resolve shows which runtime bridge is live before committing to a full payload.
 
+## Tools
+
+- **Burp Repeater**: delivering extension-function and embedded-script stylesheets.
+- Manual testing with Xalan Java-binding, `msxsl:script`, and `php:function` payloads.
+- Manual engine fingerprinting with `system-property('xsl:vendor')`.
+
 ## References
 
 - [Apache Xalan: Extension Functions](https://xml.apache.org/xalan-j/extensions.html)

@@ -40,6 +40,11 @@ const rows = await db.execute(sql`SELECT * FROM users WHERE email = ${req.query.
 
 `sql.raw` exists for parts that cannot be parameterized, an identifier, a sort direction, a whole clause chosen at runtime. Those parts must come from a fixed allowlist, not from input, because they are the one place binding cannot protect. A common slip is parameterizing the value correctly but building the `ORDER BY column direction` from the request with `sql.raw`, which leaves an injection in the ordering clause even though the filter is safe. Any `sql.raw` whose argument traces back to input is the thing to find.
 
+## Tools
+
+- **sqlmap**: automating extraction once input reaches sql.raw.
+- **Burp Repeater and Intruder**: delivering breakout and stacked-statement payloads.
+
 ## References
 
 - [Drizzle: Magic sql operator](https://orm.drizzle.team/docs/sql)

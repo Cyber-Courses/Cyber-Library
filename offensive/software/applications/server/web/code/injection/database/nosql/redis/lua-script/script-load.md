@@ -42,6 +42,12 @@ The load and the execution need not share a connection or an injection point. Wh
 
 `SCRIPT EXISTS <sha1> [sha1 ...]` reports whether given digests are cached (returning `1` or `0` for each), useful to confirm a stage landed before firing it. The cache is in-memory and cleared by `SCRIPT FLUSH` or a server restart, so a staged digest may need re-loading after either. Loading the same body again is idempotent: it returns the same SHA1 and leaves the cache state unchanged, so re-seeding is cheap.
 
+## Tools
+
+- **redis-cli**: stage a script with SCRIPT LOAD and confirm it with SCRIPT EXISTS.
+- **Gopherus**: smuggle the SCRIPT LOAD over an SSRF RESP connection.
+- **Burp Repeater**: deliver the load request through the sink.
+
 ## References
 
 - [Redis: SCRIPT LOAD](https://redis.io/docs/latest/commands/script-load/)

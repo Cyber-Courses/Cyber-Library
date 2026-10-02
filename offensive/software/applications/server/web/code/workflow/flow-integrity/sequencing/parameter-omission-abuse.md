@@ -31,3 +31,8 @@ JSON merge, PATCH, and form encoding differ on null vs missing vs empty string. 
 
 - **Burp Suite**
 - **curl**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

@@ -65,6 +65,11 @@ Prove the input is evaluated with arithmetic that is not a coincidental echo.
 
 A returned `63938` confirms the string is parsed as an NCalc expression. Beyond logic and function abuse, the grammar also supports resource abuse: a deeply nested or large arithmetic expression forces CPU and memory work during parse and evaluation, giving a denial-of-service lever where no stronger impact is reachable.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate registered parameters and custom functions by name.
+
 ## References
 
 - [NCalc documentation](https://ncalc.github.io/ncalc/)

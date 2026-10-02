@@ -90,6 +90,11 @@ If the application builds the `source` from input (for example a "set field X to
 
 Safe code passes values through `params` (`"source": "doc['price'].value * params.m", "params": { "m": userInput }`) so input never reaches source. Offensively, the indicator is any `script.source` containing string concatenation, template literals, or format placeholders fed from request data.
 
+## Tools
+
+- **curl**: submit script_fields and _update_by_query bodies with injected Painless source.
+- **Burp Repeater**: craft requests that interpolate Painless payloads into the sink.
+
 ## References
 
 - [Elasticsearch: How to use scripts](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting-using.html)

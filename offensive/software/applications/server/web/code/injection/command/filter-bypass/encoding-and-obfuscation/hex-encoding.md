@@ -79,6 +79,11 @@ Every keyword in the pipeline is either absent (carried as hex) or itself split 
 - Append a newline (`\x0a`) when piping into an interpreter so the decoded command executes.
 - Hex avoids not only the keyword but also awkward characters (spaces, slashes) since those bytes are encoded too.
 
+## Tools
+
+- **[commix](https://github.com/commixproject/commix)**: tamper modules apply encoding and obfuscation bypasses.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Decoder for crafting and encoding payloads.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, Bypass with encoding](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

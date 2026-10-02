@@ -50,6 +50,12 @@ http://allowed.example\@127.0.0.1/         # the reverse, depending on which par
 
 The attack is a differential: the validator parses the URL one way (seeing `allowed.example` as the host) while the HTTP client parses it another (connecting to `127.0.0.1`). WHATWG-style parsers treat backslash as a path separator and resolve userinfo differently from older RFC 3986 parsers, so a sink that validates with one library and fetches with another is the vulnerable combination. Which payload works depends on the exact pair, so cycle through the `@`, `#`, and `\` forms and watch which host the request reaches.
 
+## Tools
+
+- **Burp Repeater**: cycling encoded traversal and `@`/`#`/`\` authority payloads against the sink.
+- **curl**: probing raw path and authority forms to see which host the request reaches.
+- **SSRFmap**: automating prefix-allowlist and traversal payload delivery.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

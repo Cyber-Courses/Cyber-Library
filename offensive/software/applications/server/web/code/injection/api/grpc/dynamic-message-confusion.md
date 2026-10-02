@@ -37,6 +37,12 @@ A `oneof` only holds the members its `.proto` declares, so selecting a different
 
 The promise of protobuf is that a field has one type, so untrusted bytes cannot be reinterpreted. `Any`, `oneof`, and registries break that promise deliberately, to support extensibility, and in doing so they recreate the classic "decode attacker bytes as an attacker-chosen type" problem. The server must pin the set of types it will unpack and reject unknown `type_url` values; where it does not, the caller's type choice is the vulnerability. The test is to send a valid outer message whose `Any` or `oneof` selects an internal or unexpected type and observe whether the server unpacks and acts on it rather than rejecting the type.
 
+## Tools
+
+- **grpcurl**: sending a crafted message whose Any or oneof selects an unexpected type.
+- **blackboxprotobuf (Burp extension)**: editing protobuf fields in intercepted gRPC traffic.
+- **grpcui**: exercising methods interactively against a reflecting server.
+
 ## References
 
 - [Protocol Buffers: Any](https://protobuf.dev/programming-guides/proto3/#any)

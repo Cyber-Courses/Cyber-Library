@@ -40,6 +40,11 @@ This only works where such a canonicalization gap exists; without it, the lookal
 
 A confusable such as a Cyrillic `а` (U+0430) for Latin `a` makes a hostname look like an allowed domain, which matters for phishing but not for a string comparison: the homograph is a different name and an exact check rejects it. It aids SSRF only in combination with one of the gaps above (a blocklist that normalizes, or a validator/resolver differential). Treat the lookalike as the delivery and the comparison flaw as the vulnerability.
 
+## Tools
+
+- Manual payload crafting of Unicode, punycode, and compatibility-character hostnames.
+- **curl**: submitting each crafted host form to observe how the client normalizes and resolves it.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

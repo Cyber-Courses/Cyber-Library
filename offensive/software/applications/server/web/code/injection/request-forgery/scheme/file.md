@@ -42,6 +42,12 @@ Any file the service account can open is reachable: configuration with embedded 
 
 Reaching `file://` often requires getting past a scheme allowlist. A client that validates the submitted scheme but follows a [redirect](../query/bypassing-using-a-redirect.md) whose `Location` is `file:///etc/passwd`, or a URL parser that misreads the scheme, lands the read even when `file://` is nominally blocked. Java clients expose `file:` alongside [JAR](jar.md) and [Netdoc](netdoc.md), so if one is filtered the others are worth trying.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation with a module for `file://` local read.
+- **curl**: manual `file://` probing to read a local path and inspect the reflected contents.
+- **Burp Collaborator**: out-of-band confirmation that the scheme is honored when the read is blind.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

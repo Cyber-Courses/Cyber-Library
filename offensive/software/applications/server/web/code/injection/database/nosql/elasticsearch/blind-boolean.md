@@ -89,6 +89,11 @@ print(known)
 
 `hit()` encapsulates whatever distinguishes true from false for the target: presence in `hits`, a non-zero `hits.total.value`, a redirect, or a timing delta where only latency differs. Starting from a document you control (one you created, or a guessable public record) gives a stable anchor so every question isolates a single unknown field.
 
+## Tools
+
+- **curl**: issue search requests and read the hit-or-no-hit signal driving the oracle.
+- **Burp Intruder**: automate per-character prefix and range probes.
+
 ## References
 
 - [Elasticsearch: Prefix query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html)

@@ -30,6 +30,12 @@ The attacker's name server for `attacker.tld` logs `<user>.attacker.tld`. HTTP e
 
 The critical precondition is the Access Control List. From Oracle 11g, `UTL_HTTP`, `UTL_INADDR`, `UTL_TCP`, and `UTL_SMTP` require a fine-grained ACL (managed by `DBMS_NETWORK_ACL_ADMIN`) granting the current user access to the target host, in addition to execute on the package. Without the ACL grant the call raises `ORA-24247: network access denied by access control list`. On 10g there is no ACL and these work with just the execute privilege. Long or non-DNS-safe values are hex-encoded and split across requests. A listener such as Burp Collaborator captures both the DNS and HTTP interactions.
 
+## Tools
+
+- **sqlmap**: automates DNS exfiltration (`--dns-domain`) through the Oracle `UTL` packages.
+- **ODAT** (Oracle Database Attacking Tool): exploits `UTL_HTTP` and `UTL_INADDR` out-of-band channels.
+- **Burp Collaborator**: captures the DNS and HTTP interactions the payload triggers.
+
 ## References
 
 - Oracle Database PL/SQL Packages and Types Reference: UTL_HTTP, UTL_INADDR, DBMS_NETWORK_ACL_ADMIN

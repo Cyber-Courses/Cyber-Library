@@ -18,6 +18,11 @@ The reachable surface matches the servlet EL grammar. The implicit scope objects
 - **[Authorization bypass](authorization-bypass.md)**: reaching the scope maps and `pageContext` to read and force the values a check depends on.
 - **[Code execution](code-execution.md)**: using method invocation and reflection to reach a script engine or `ProcessBuilder`.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting into ${...} JSP expressions.
+- **J2EEScan**: Burp extension with Java EL injection checks.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

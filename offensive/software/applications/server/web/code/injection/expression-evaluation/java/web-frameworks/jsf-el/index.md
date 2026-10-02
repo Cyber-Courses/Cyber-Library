@@ -18,6 +18,11 @@ Two impacts follow from what the EL grammar reaches. The implicit scope objects 
 - **[Authorization bypass](authorization-bypass.md)**: reaching the scoped attribute maps and the faces context to read and force the values a decision checks.
 - **[Code execution](code-execution.md)**: using method invocation and reflection to reach a script engine or `ProcessBuilder`.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting into #{...} JSF expressions.
+- **J2EEScan**: Burp extension with Java EL injection checks.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

@@ -33,6 +33,11 @@ Once `sysadmin` is held or reached, promote a controlled login to be an administ
 
 Knowing the role and its escalation options decides whether to go straight for command execution or to chain an impersonation or trustworthy-database step first.
 
+## Tools
+
+- **sqlmap**: reads the login's roles and privileges with `--privileges`.
+- **PowerUpSQL**: `Invoke-SQLAudit` to enumerate roles and escalation paths.
+
 ## References
 
 - Microsoft SQL Server Documentation: IS_SRVROLEMEMBER, fn_my_permissions, EXECUTE AS, TRUSTWORTHY

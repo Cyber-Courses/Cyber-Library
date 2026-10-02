@@ -28,6 +28,11 @@ When the injection sits where a full subquery fits, a correlated `SELECT` over a
 
 Avoid the common broken form `AND (SELECT SLEEP(5) WHERE <test>)`: MySQL allows a `SELECT` with no `FROM` only when it returns constants, and adding a `WHERE` without a `FROM` is a syntax error (unlike PostgreSQL and SQLite, which accept it), so this raises error 1064 rather than delaying. Keep the inner query to one row so `SLEEP` is evaluated predictably, and repeat any positive hit once to rule out a slow network.
 
+## Tools
+
+- **sqlmap**: automated time-based extraction using conditional SLEEP.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: SLEEP, IF, subqueries

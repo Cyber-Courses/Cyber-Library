@@ -25,6 +25,13 @@ The pages here follow the three places a GraphQL server misplaces its trust:
 
 In REST, one route maps to one handler with one place to check access. In GraphQL, a single request can touch dozens of resolvers across many types, and each resolver is its own trust boundary. A schema that type-checks arguments proves they are well-formed, not that they are authorized or safe to forward. The recurring test is to run the same query as two different identities, and to trace each argument from the schema down to the backend it reaches.
 
+## Tools
+
+- **graphw00f**: fingerprinting the GraphQL engine behind an endpoint.
+- **InQL**: schema introspection and query generation inside Burp.
+- **clairvoyance**: reconstructing a schema when introspection is disabled.
+- **graphql-cop**: quick security audit for batching, introspection, and field suggestions.
+
 ## References
 
 - [OWASP: GraphQL Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html)

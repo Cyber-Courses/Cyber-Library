@@ -54,6 +54,12 @@ Where the profile holds a cookie for `internal-dashboard.corp` (or a parent doma
 
 Behavior that reveals a headless browser rather than a [programmatic](programmatic.md) client: execution of injected `<script>`, loading of subresources and redirects like a browser, a recognizable headless user agent, and rendering of non-HTML responses as images. Once confirmed, invest in session reuse and rendered-script exfiltration rather than raw-scheme payloads. Host tricks such as [DNS rebinding](../authority/domain-name/dns-rebinding.md) apply here too, and bridge the browser's origin boundary as well as the server's.
 
+## Tools
+
+- **Burp Suite**: submitting rendering jobs and inspecting the returned screenshot or PDF.
+- **Burp Collaborator**: catching blind `file://` and internal subresource loads from the browser.
+- **interactsh**: OOB server for confirming server-side navigation and injected-script callbacks.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

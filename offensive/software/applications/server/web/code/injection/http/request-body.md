@@ -30,6 +30,12 @@ Multipart bodies add their own surface: inconsistent boundary parsing, duplicate
 
 The approach is to resend a request with the body re-encoded under a different content type, with parameters duplicated across scopes, and with multipart parts manipulated, watching for a validation or binding difference. Reach depends on which parsers the framework enables, so confirm what the target accepts.
 
+## Tools
+
+- **Burp Repeater**: re-encode bodies under different content types and manipulate multipart parts.
+- **Turbo Intruder**: script high-volume variations of content type and parameter scope.
+- **curl**: resend requests with alternate `Content-Type` headers and crafted bodies.
+
 ## References
 
 - OWASP Testing Guide: Testing for Content Type and parameter handling

@@ -27,6 +27,11 @@ A C-language function is the fallback when no untrusted procedural language is p
 
 Every variant here runs as the PostgreSQL process account and needs a superuser, so enumerate the role first; against a non-superuser, `COPY ... FROM PROGRAM` through the `pg_execute_server_program` role is the only command route.
 
+## Tools
+
+- **sqlmap**: automates command execution against privileged PostgreSQL roles.
+- **psql**: official client to create and call the untrusted-language function.
+
 ## References
 
 - PostgreSQL Documentation: CREATE FUNCTION, procedural languages, C-language functions

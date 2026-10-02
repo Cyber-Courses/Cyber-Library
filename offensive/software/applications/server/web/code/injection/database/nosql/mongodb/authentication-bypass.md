@@ -87,6 +87,12 @@ username=admin&password[$regex]=^adm
 
 Escape regex metacharacters in candidate characters (`.`, `*`, `+`, `$`, `\`) so they match literally. This recovers passwords stored in cleartext or reversible form; against a hashed field the regex matches the hash string, which is still useful where the hash is predictable or where the field holds a token.
 
+## Tools
+
+- **NoSQLMap**: automate operator-injection login bypass against the endpoint.
+- **nosqli**: scan the login parameters for injectable operator objects.
+- **Burp Repeater**: send $ne, $gt, or $regex payloads as JSON or bracketed form fields.
+
 ## References
 
 - [MongoDB: Query comparison operators](https://www.mongodb.com/docs/manual/reference/operator/query-comparison/)

@@ -74,3 +74,14 @@ Every subscriber whose client acts on `priceUpdate` receives the forged record. 
 ## Finding the sink
 
 Identify any field that the server reflects into the stream: usernames, chat bodies, status strings, resource names. Submit a value carrying `\n`, `\r\n`, a blank line, and a second `data:`/`event:`/`id:` block, then watch the raw stream (a plain `curl -N` against the endpoint shows the unparsed bytes). A stream where your injected lines appear as their own events, rather than escaped inside the original `data:` value, confirms the sink.
+
+## Tools
+
+- **curl -N**: stream the `text/event-stream` response to watch the raw, unparsed bytes.
+- **Burp Suite**: intercept and tamper with the requests that feed reflected fields into the stream.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- OWASP Web Security Testing Guide: Testing for HTTP Splitting and Smuggling
+- PortSwigger Web Security Academy: HTTP response header injection

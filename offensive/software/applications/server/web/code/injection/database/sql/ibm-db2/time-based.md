@@ -23,6 +23,12 @@ When the test is true, Db2 evaluates the triple cross join (often seconds on a n
 
 Binary-search each character on the delay exactly as in boolean extraction. Because the delay is CPU-bound rather than a fixed sleep, it is noisier than `pg_sleep` or `WAITFOR`, so keep the work large enough to read clearly and repeat a positive hit before trusting it. Given Db2's weak error channel, boolean inference is usually preferred, with this heavy-query timing as the fallback when no boolean difference is visible.
 
+## Tools
+
+- **sqlmap**: automated time-based extraction with heavy cross-join payloads (`--technique=T`).
+- **ghauri**: fast time-based inference with strong WAF evasion.
+- **Burp Repeater**: measure the conditional delay by hand to tune the join count.
+
 ## References
 
 - IBM Db2 SQL Reference: subselect, joins, CASE, catalog views

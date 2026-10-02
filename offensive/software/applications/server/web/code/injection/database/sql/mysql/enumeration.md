@@ -30,6 +30,11 @@ Privileges decide how far the injection goes. The account's grants are in `infor
 
 Seeing `FILE` in the privilege list, and a `secure_file_priv` that is empty rather than a restrictive path or `NULL`, is what tells you the file-read, out-of-band, and command-execution routes are reachable. A `SUPER` or admin privilege similarly signals that the UDF route and server-variable changes are possible. With the engine, version, and privileges known, the rest of the techniques apply with the right expectations.
 
+## Tools
+
+- **sqlmap**: fingerprints the engine and reads version, current user, and privileges (`--fingerprint`, `--current-user`, `--privileges`).
+- **mysql**: official client to confirm `@@version`, `current_user()`, and `secure_file_priv` directly.
+
 ## References
 
 - MySQL Reference Manual: information functions, `information_schema.user_privileges`, `secure_file_priv`

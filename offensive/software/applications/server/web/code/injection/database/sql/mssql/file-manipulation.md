@@ -35,6 +35,11 @@ OLE Automation streams write a file through a COM object when `xp_cmdshell` is u
 
 `bcp` (run via `xp_cmdshell`) also exports query results to a file. Writing to a web-served directory drops a shell that runs over HTTP; knowing the web root (read `web.config` or IIS config first) guides where the write should land. All routes require the file path to be writable by the SQL Server service account.
 
+## Tools
+
+- **sqlmap**: reads and writes host files with `--file-read` and `--file-write`.
+- **PowerUpSQL**: helpers for OPENROWSET BULK reads and command-based file writes.
+
 ## References
 
 - Microsoft SQL Server Documentation: OPENROWSET BULK, bcp Utility, OLE Automation

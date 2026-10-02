@@ -24,6 +24,11 @@ The external library must exist on the server (in the instance `function` direct
 
 Because defining and running external routines requires high authority and usually a statement/compound context (Db2 does not stack plain statements through standard drivers), command execution is the final step after privilege enumeration confirms the authorities are present. Where they are not, the reachable impact stays at data extraction and the administrative actions `ADMIN_CMD` genuinely allows.
 
+## Tools
+
+- **db2** (or clpplus): the Db2 client for defining and calling the external C or Java routine.
+- Manual testing with Burp Repeater and the Db2 client.
+
 ## References
 
 - IBM Db2 SQL Reference: CREATE PROCEDURE (external), SYSPROC.ADMIN_CMD

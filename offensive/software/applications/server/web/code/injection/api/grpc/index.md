@@ -23,6 +23,12 @@ gRPC carries protobuf messages over HTTP/2 to strongly typed service methods. Th
 
 The protobuf wire format and the generated client suggest a sealed contract, but nothing about binary framing enforces authorization or restricts which methods a caller may invoke. Reflection advertises the surface, metadata is attacker-controlled input that looks like infrastructure, and dynamic typing reintroduces the exact "decode untrusted bytes into a chosen type" problem that strong typing was meant to remove. The test for each is the same: assume the caller can name any method, set any metadata, and supply any type URL, then find where the server acts on that without checking.
 
+## Tools
+
+- **grpcurl**: listing services and invoking methods over gRPC.
+- **grpcui**: interactive browser client for a gRPC server.
+- **blackboxprotobuf (Burp extension)**: decoding and tampering protobuf messages in Burp.
+
 ## References
 
 - [gRPC: Server Reflection](https://grpc.io/docs/guides/reflection/)

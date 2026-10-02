@@ -26,6 +26,11 @@ Plain inline comments `/**/` replace whitespace, so a filter looking for the spa
 
 The two combine freely, and comments can also be inserted mid-keyword only inside the versioned form (a bare `UN/**/ION` is not valid, but `/*!UNION*/` is). Because the version gate silently drops the payload on servers below the number, set it low (or omit it) unless you are deliberately fingerprinting the version by toggling execution on and off.
 
+## Tools
+
+- **sqlmap**: `versionedkeywords` and `versionedmorekeywords` tamper scripts for comment-based evasion.
+- **Burp Repeater**: craft versioned and inline comment payloads by hand.
+
 ## References
 
 - MySQL Reference Manual: comment syntax, versioned comments

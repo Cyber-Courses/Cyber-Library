@@ -25,6 +25,12 @@ The instance and service identity come from the `V$` views and `SYS_CONTEXT`:
 
 Beyond the injection, the Oracle TNS listener on TCP 1521 is itself a target: it answers service and version queries, and where the SID or service name is unknown it can be brute-forced against the listener. A legacy, unauthenticated listener may disclose status directly. These are network interactions against the listener rather than SQL injection, but they pair with the in-band identity above: the injection confirms the SID and service name, and the listener is then the route for a direct, higher-bandwidth session once credentials or a hash have been recovered.
 
+## Tools
+
+- **ODAT** (sidguesser module): brute-forces the SID and service name against the TNS listener.
+- **Nmap** (`oracle-sid-brute`, `oracle-tns-version` NSE scripts): query the listener on TCP 1521.
+- **sqlplus** (or SQLcl): connects directly once the SID and credentials are known.
+
 ## References
 
 - Oracle Database Reference: V$INSTANCE, GLOBAL_NAME, SYS_CONTEXT

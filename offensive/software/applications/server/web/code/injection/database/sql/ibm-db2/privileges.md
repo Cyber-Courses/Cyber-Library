@@ -27,6 +27,12 @@ The authorities that matter for escalation are those allowing routine creation a
 
 Knowing the authorities tells you whether to pursue command execution through an external routine, stay with data extraction, or first escalate by granting missing authorities where the current ID is permitted to. The special register `CURRENT USER` identifies whose grants these are.
 
+## Tools
+
+- **sqlmap**: enumerates the current user's privileges (`--privileges`) against Db2.
+- **db2** (or clpplus): the Db2 client for reading `SYSCAT.DBAUTH` and `AUTH_LIST_AUTHORITIES_FOR_AUTHID`.
+- Manual testing with Burp Repeater and the Db2 client.
+
 ## References
 
 - IBM Db2 SQL Reference and Administration Guide: authorities, SYSCAT.DBAUTH, SYSCAT.ROUTINEAUTH

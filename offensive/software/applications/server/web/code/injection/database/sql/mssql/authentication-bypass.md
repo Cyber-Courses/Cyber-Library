@@ -35,6 +35,11 @@ password: ' OR username='admin'--
 
 Because `AND` binds tighter than `OR`, this evaluates as `(username='admin' AND password='') OR username='admin'`, returning the admin row. Since MSSQL permits stacked queries, a login injection can sometimes go further (for example `; UPDATE users SET ...`), but the bypass itself needs only the row to be returned.
 
+## Tools
+
+- **sqlmap**: automated detection of the injectable login parameter.
+- **Burp Repeater**: craft comment-termination and OR-based login payloads by hand.
+
 ## References
 
 - Microsoft SQL Server Documentation: comments, SELECT, operator precedence

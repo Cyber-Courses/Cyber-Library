@@ -12,3 +12,13 @@ keywords:
 
 Renew or extend endpoints may assume the account is already trusted and skip card or identity checks that initial purchase required. Attackers downgrade then renew to regain benefits without meeting full criteria.
 
+## Tools
+
+- **Burp Suite (Repeater)**: replay renewal and upgrade requests to drop re-verification or payment steps.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic
+

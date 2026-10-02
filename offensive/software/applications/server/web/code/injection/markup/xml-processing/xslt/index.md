@@ -16,3 +16,14 @@ XSLT transforms an XML source into HTML, text, or another XML document using a s
 The reach of an XSLT injection depends on the processor and its configuration. Every engine resolves URIs through `document()`, giving file read and SSRF. `xsl:import` and `xsl:include` pull in remote stylesheets. Extension functions and embedded `xsl:script` or `msxsl:script` blocks run Java, JScript, or C# directly, escalating a transform to code execution. Engine fingerprinting through `system-property()` picks the right payload.
 
 This subtree covers document-function abuse, extension-function and embedded-script abuse, and remote stylesheet import.
+
+## Tools
+
+- **Burp Suite**: injecting stylesheet fragments and parameters, scanning for XSLT injection.
+- **Burp Collaborator**: confirming blind SSRF from transform-time fetches.
+- Manual testing with `document()`, extension-function, and `system-property()` payloads.
+
+## References
+
+- PortSwigger: XSLT injection
+- PayloadsAllTheThings: XSLT Injection

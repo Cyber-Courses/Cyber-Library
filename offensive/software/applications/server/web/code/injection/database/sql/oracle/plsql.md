@@ -25,6 +25,12 @@ Where the injection point is itself a PL/SQL block, an attacker can run a full b
 
 Inside a definer-rights `SYS` context, that `GRANT` succeeds and makes the current user a DBA. The same `EXECUTE IMMEDIATE` runs DDL, calls packages, and creates objects, so PL/SQL injection is the pivot from a data-read bug to full database control. Finding which reachable procedure is definer-rights and over-privileged is the key step.
 
+## Tools
+
+- **sqlmap**: detects injectable parameters that reach dynamic SQL.
+- **ODAT** (Oracle Database Attacking Tool): abuses definer-rights procedures and PL/SQL for escalation.
+- Manual testing with Burp Repeater and the Oracle client (sqlplus or SQLcl).
+
 ## References
 
 - Oracle Database PL/SQL Language Reference: dynamic SQL, invoker's and definer's rights

@@ -18,3 +18,15 @@ At the **parse** stage, a parser configured to resolve external entities turns a
 The shared root cause is that XML blurs the line between data and instruction more readily than most formats, because entities, location paths, and stylesheet directives all travel inside the same document the application treats as input.
 
 This section covers XPath query injection in depth, alongside the wider XML parsing and transformation attacks.
+
+## Tools
+
+- **Burp Suite**: scanning and crafting payloads across XML parse, query, and transform stages.
+- **XXEinjector**: automating XXE file retrieval and out-of-band exfiltration.
+- **xcat**: automating XPath data extraction.
+- **Burp Collaborator**: confirming blind and out-of-band XML attacks.
+
+## References
+
+- PortSwigger Web Security Academy: XML external entity (XXE) injection
+- OWASP WSTG: Testing for XML Injection

@@ -72,6 +72,12 @@ As with any shell separator, mind quoting and filtered spaces:
 
 PowerShell 7+ also supports `&&`/`||`; older Windows PowerShell does not, so fall back to `if`/`;` there.
 
+## Tools
+
+- **[commix](https://github.com/commixproject/commix)**: automates boolean and blind command-injection extraction.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Intruder for conditional-oracle probing.
+- **[interactsh](https://github.com/projectdiscovery/interactsh)**: out-of-band confirmation of a true condition.
+
 ## References
 
 - [OWASP: OS Command Injection](https://owasp.org/www-community/attacks/Command_Injection)

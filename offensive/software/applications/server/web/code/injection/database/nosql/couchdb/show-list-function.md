@@ -80,6 +80,11 @@ An injected function can register a handler that emits attacker-chosen content, 
 
 Show and list execution is a simple `GET`, so no write is needed once the function exists. To confirm an injection point when an application builds these functions dynamically, submit input that breaks the surrounding JavaScript and watch for a query-server compilation error, or supply a benign branch (`provides('txt', function(){ return 'marker'; })`) and request that format to see the injected code run. An injected function that reads `req` turns the render endpoint into a parameter-driven read primitive over documents the caller can name.
 
+## Tools
+
+- **curl**: invoke _show and _list endpoints to trigger the rendered functions.
+- **Burp Repeater**: craft requests that drive parameter-controlled rendering.
+
 ## References
 
 - [Apache CouchDB: Show functions](https://docs.couchdb.org/en/stable/ddocs/ddocs.html#show-functions)

@@ -54,6 +54,12 @@ On Windows the equivalent vector is `['cmd.exe','/c','whoami > C:\\Windows\\Temp
 
 The reachable grammar depends on the JEXL major version and how the host configured the engine. JEXL 2 evaluates this class-resolving, method-calling grammar by default. JEXL 3 introduced a more explicit permissions and sandbox model (`JexlPermissions`, restricted `JexlContext` and namespace resolvers), so whether `new` and arbitrary class resolution are reachable depends on whether the application left the permissive defaults or locked the engine down. Where a JEXL 3 engine is restricted, the reachable surface collapses to the methods and objects the host explicitly permitted, so enumerate what resolves (class construction, `getClass`, registered namespace functions) before committing to a full command payload. The template flavor (`JxltEngine`, `${...}` / `#{...}`) wraps the same expression grammar, so a `${...}` sink carries the same reach.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver JEXL new()/reflection payloads.
+- **J2EEScan**: Burp extension with Java expression-injection checks.
+- Manual JEXL payloads building ProcessBuilder or reflecting to Runtime.
+
 ## References
 
 - [Apache Commons JEXL](https://commons.apache.org/proper/commons-jexl/)

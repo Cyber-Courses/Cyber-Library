@@ -36,6 +36,12 @@ Each `>` test halves the candidate range, so a printable character is pinned in 
 
 Because this generates many near-identical requests, it is almost always automated (for example with Burp Intruder or sqlmap), but understanding the single-request oracle is what lets you adapt it when a tool stalls.
 
+## Tools
+
+- **sqlmap**: automated boolean-based blind extraction with binary search.
+- **ghauri**: fast alternative for boolean inference with WAF evasion.
+- **Burp Intruder**: automate the character oracle manually over each position.
+
 ## References
 
 - MySQL Reference Manual: SUBSTRING, ASCII, LENGTH

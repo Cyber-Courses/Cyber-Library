@@ -24,3 +24,9 @@ Fails when redemption is not atomic with the debit, or when idempotency keys are
 
 - **Burp Suite**
 - **OWASP ZAP**
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

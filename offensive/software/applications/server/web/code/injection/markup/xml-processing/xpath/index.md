@@ -25,3 +25,14 @@ With `username` set to `' or '1'='1`, the predicate always holds and the query r
 XPath injection is in several ways more permissive than SQL injection. There is no concept of a privileged versus unprivileged connection, comments are rarely needed because expressions are short, and the `|` union operator joins arbitrary location paths with no schema to satisfy. Where results are not reflected, boolean and error-based inference reconstruct the document character by character.
 
 This subtree covers predicate injection and authentication bypass, union path injection across the tree, and error-based extraction.
+
+## Tools
+
+- **xcat**: automating boolean and error-based XPath data retrieval.
+- **Burp Suite**: fuzzing XPath injection points with Intruder.
+- Manual testing with boolean and union payloads in Burp Repeater.
+
+## References
+
+- PortSwigger Web Security Academy: XPath injection
+- OWASP WSTG: Testing for XPath Injection

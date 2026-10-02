@@ -22,6 +22,11 @@ escaped: %bf%5c%27 OR 1=1--     (0xBF5C = one GBK character, quote survives)
 
 The preconditions are specific: the connection charset is GBK (or another vulnerable multibyte encoding), and the escaping is charset-unaware, such as `addslashes()` or `mysql_real_escape_string()` called before the charset is set correctly. Properly setting the charset with `mysqli_set_charset('gbk')` makes `mysql_real_escape_string` charset-aware and closes the gap, so this mainly affects older or misconfigured stacks. Other lead bytes such as `%bf`, `%df`, and `%a1` work on the same principle.
 
+## Tools
+
+- **sqlmap**: `unmagicquotes` tamper script for wide-byte escaping bypass.
+- **Burp Repeater**: craft the `%bf%27` multibyte payload manually.
+
 ## References
 
 - MySQL Reference Manual: character sets, `mysql_real_escape_string` charset handling

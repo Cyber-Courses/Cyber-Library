@@ -12,3 +12,13 @@ keywords:
 # Entity Framework
 
 Entity Framework Core parameterizes LINQ queries, but its raw-SQL family, `FromSqlRaw`, `ExecuteSqlRaw`, `SqlQueryRaw`, runs whatever string it is given, and handing a C# interpolated string to a `*Raw` method bakes user input into the SQL before EF ever sees it.
+
+## Tools
+
+- **sqlmap**: exploiting FromSqlRaw and ExecuteSqlRaw sinks against the backend.
+- **Burp Repeater**: hand-crafting payloads for the raw and interpolated-string sinks.
+
+## References
+
+- Microsoft EF Core documentation: Raw SQL queries
+- OWASP: SQL Injection

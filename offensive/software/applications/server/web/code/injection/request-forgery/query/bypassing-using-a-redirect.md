@@ -50,6 +50,13 @@ Some clients allow the scheme to change on a redirect, which upgrades a redirect
 
 The flaw is validating the request target once, at submission, and trusting every subsequent hop. Re-validating the destination of each redirect against the policy (or disabling redirect following on the sink) closes it. Until then, redirecting is the most reliable way past an allowlist that only inspects the URL the user typed. The final internal target still uses the [Authority](../authority/index.md) encodings when its literal form is filtered.
 
+## Tools
+
+- **Attacker-controlled redirect endpoint**: a hosted `3xx` responder that returns a `Location` pointing at the internal target.
+- **curl -L**: following redirects from the command line to confirm the second hop is fetched.
+- **Burp Suite**: submitting the first-hop URL and watching the followed request in the HTTP history.
+- **Burp Collaborator**: hosting the redirecting endpoint and confirming the inward hop out-of-band.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

@@ -30,6 +30,12 @@ Case is free to vary since Oracle keywords are case-insensitive (`UnIoN SeLeCt`)
 
 `CASE WHEN`/`DECODE` restructure a condition so it no longer matches a pattern while keeping the same logic, which helps when a specific comparison operator or keyword is filtered. As with the other engines, the goal is to express the same query through synonyms and encodings the filter does not recognize, rather than to defeat the filter head-on, and these combine freely since a filter usually blocks several patterns at once.
 
+## Tools
+
+- **sqlmap**: tamper scripts (for example `space2comment`, `charencode`) automate these rewrites.
+- **ghauri**: built-in WAF evasion for Oracle payloads.
+- **Burp Repeater**: hand-tune comments, `CHR()`, and case until the filter is bypassed.
+
 ## References
 
 - Oracle Database SQL Language Reference: CHR, comments, expressions

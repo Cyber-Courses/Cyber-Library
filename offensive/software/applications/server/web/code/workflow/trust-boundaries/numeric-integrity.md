@@ -23,3 +23,8 @@ Compare every fee and tax field against authoritative catalog and jurisdiction r
 ## Tools
 
 - **Burp Suite**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

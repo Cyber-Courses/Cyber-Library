@@ -112,6 +112,14 @@ When uploads are allowed but land outside the web root or with a non-executable 
 
 The inclusion sink executes any PHP in the referenced file, so storage without a `.php` extension no longer protects the server.
 
+## Tools
+
+- **[LFISuite](https://github.com/D35m0nd142/LFISuite)**: automated LFI detection and exploitation.
+- **[kadimus](https://github.com/P0cL4bs/Kadimus)**: LFI scanning and exploitation.
+- **[fimap](https://github.com/kurobeats/fimap)**: automated file-inclusion testing.
+- **[php_filter_chain_generator](https://github.com/synacktiv/php_filter_chain_generator)**: builds `php://filter` chains for code execution.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for traversal and wrapper payloads.
+
 ## References
 
 - [OWASP: Testing for Local File Inclusion](https://owasp.org/www-project-web-security-testing-guide/)

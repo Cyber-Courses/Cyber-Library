@@ -23,6 +23,11 @@ More elaborate DIOS payloads add formatting (HTML line breaks, delimiters) so th
 
 The practical limit is `group_concat_max_len` (1024 bytes by default), which truncates large dumps. Raise it with `SET SESSION group_concat_max_len=1000000` where the account allows, or fall back to paged extraction for tables that overflow. DIOS is a convenience built on the same `information_schema` and `GROUP_CONCAT` primitives as ordinary union extraction, not a separate vulnerability.
 
+## Tools
+
+- **sqlmap**: automated union extraction that replaces hand-built DIOS payloads.
+- **Burp Repeater**: tune and replay the single-request DIOS payload manually.
+
 ## References
 
 - MySQL Reference Manual: GROUP_CONCAT, `group_concat_max_len`, `information_schema`

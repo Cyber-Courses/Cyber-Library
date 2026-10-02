@@ -62,6 +62,11 @@ A rows-returned response confirms the record exists. Iterating over candidate va
 
 Each character typically costs a handful of requests under binary search. Scripting the probe loop, submitting the payload, classifying the response as true or false, and advancing the search, makes extraction of a multi-character secret practical. Error text, where it leaks, gives a faster channel; see [Error-based](error-based.md).
 
+## Tools
+
+- **cqlsh**: verify the true/false predicate pair before scripting inference.
+- **Burp Intruder**: automate the per-character boolean probe loop.
+
 ## References
 
 - [Apache Cassandra: SELECT and operators](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#select)

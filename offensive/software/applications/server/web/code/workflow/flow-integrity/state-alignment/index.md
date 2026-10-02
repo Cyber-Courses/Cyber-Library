@@ -18,3 +18,13 @@ State alignment asks whether the **surface** (what the user sees), the **record*
 | [Record status](record-status.md) | Row status fields vs side effects already executed |
 | [Session checkpoint](session-checkpoint.md) | Session keys that gate steps without DB corroboration |
 
+## Tools
+
+- **Burp Suite (Repeater)**: replay steps while mutating the backing record to surface surface, record, and session drift.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic
+

@@ -57,6 +57,12 @@ An empty array passed to `$all` matches no documents, a handy false branch when 
 
 Because the inner object accepts comparison and regex operators, `$elemMatch` extends blind extraction (see [Comparison operators](comparison-operators.md) and [Regex](regex.md)) to data held inside array-of-subdocument fields, one element condition per request. Combine with `$exists` to first confirm an element-level field is present (see [Exists](exists.md)).
 
+## Tools
+
+- **Burp Repeater**: craft $in, $nin, and $all arrays as JSON or repeated bracket keys.
+- **nosqli**: scan parameters for array-operator injection.
+- **NoSQLMap**: automate array-payload enumeration.
+
 ## References
 
 - [MongoDB: $in](https://www.mongodb.com/docs/manual/reference/operator/query/in/)

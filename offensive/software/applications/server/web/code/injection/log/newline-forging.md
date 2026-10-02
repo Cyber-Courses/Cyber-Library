@@ -96,6 +96,12 @@ The log file is the delivery vector and the analyst's authenticated browser sess
 - Bare `%0d` alone can overwrite the start of the visible line on terminal `tail`, hiding the real prefix behind your text.
 - Where input is JSON, a literal `\n` inside a string value is decoded to a real newline by the time it reaches a plaintext logger.
 
+## Tools
+
+- **Burp Repeater**: injecting CRLF (`%0d%0a`) sequences into logged request fields.
+- **curl**: sending crafted newline payloads to forge log records.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [OWASP: Log Injection](https://owasp.org/www-community/attacks/Log_Injection)
