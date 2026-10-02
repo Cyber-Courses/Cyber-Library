@@ -22,7 +22,7 @@ Enumerate the configured links:
 Run a query on a link with `OPENQUERY`, which reveals the remote context:
 
 ```sql
-' UNION SELECT NULL,NULL,* FROM OPENQUERY([REMOTE],'SELECT @@version, SYSTEM_USER, IS_SRVROLEMEMBER(''sysadmin'')')-- 
+' UNION SELECT * FROM OPENQUERY([REMOTE],'SELECT @@version, SYSTEM_USER, IS_SRVROLEMEMBER(''sysadmin'')')-- 
 ```
 
 If the link is configured to run as a privileged remote login, command execution on the remote follows. Links that have RPC Out enabled accept `EXEC ... AT`, which runs an arbitrary statement remotely:

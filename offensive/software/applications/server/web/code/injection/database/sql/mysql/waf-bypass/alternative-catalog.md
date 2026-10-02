@@ -23,8 +23,7 @@ When `version()` is blocked, the server version is in several system variables:
 
 ```sql
 ' UNION SELECT @@version,NULL,NULL-- 
-' UNION SELECT @@global.version,NULL,NULL-- 
-' UNION SELECT @@version_comment,NULL,NULL-- 
+' UNION SELECT @@global.version,NULL,NULL--  
 ```
 
 When `GROUP_CONCAT` is blocked, `JSON_ARRAYAGG` (MySQL 5.7.22+) aggregates rows into one value:
