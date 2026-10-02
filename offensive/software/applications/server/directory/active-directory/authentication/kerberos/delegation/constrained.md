@@ -45,5 +45,6 @@ S4U2proxy constrains the *service class* loosely: the returned ticket's **servic
 
 ## References
 
-- The Hacker Recipes: constrained delegation
-- Microsoft: S4U2self, S4U2proxy, and protocol transition
+- [Elad Shamir: Wagging the Dog](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html)
+- [Impacket getST (-impersonate)](https://github.com/fortra/impacket)
+- [GhostPack Rubeus (s4u)](https://github.com/GhostPack/Rubeus)

@@ -58,5 +58,6 @@ The resulting TGT is indistinguishable from a normal logon's: this is a legitima
 
 ## References
 
-- The Hacker Recipes: pass the key / overpass the hash
-- Microsoft: Kerberos key types and etypes
+- [GhostPack Rubeus (asktgt)](https://github.com/GhostPack/Rubeus)
+- [Impacket getTGT](https://github.com/fortra/impacket)
+- [Microsoft: Kerberos authentication](https://learn.microsoft.com/en-us/windows-server/security/kerberos/)

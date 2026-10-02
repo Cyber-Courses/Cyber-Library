@@ -59,5 +59,6 @@ Note the difference between user SPNs (roastable) and the SPNs on computer accou
 
 ## References
 
-- The Hacker Recipes: Kerberoast
-- Microsoft: Service principal names
+- [GhostPack Rubeus (kerberoast)](https://github.com/GhostPack/Rubeus)
+- [Impacket GetUserSPNs](https://github.com/fortra/impacket)
+- [Microsoft: service principal names](https://learn.microsoft.com/en-us/windows/win32/ad/service-principal-names)

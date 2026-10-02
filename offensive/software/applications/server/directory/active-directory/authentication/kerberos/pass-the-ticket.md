@@ -59,5 +59,6 @@ psexec.py -k -no-pass example.local/victim@<host>
 
 ## References
 
-- The Hacker Recipes: pass the ticket
-- Microsoft: Kerberos ticket lifetimes and renewal
+- [GhostPack Rubeus (ptt / dump / monitor)](https://github.com/GhostPack/Rubeus)
+- [Impacket ticketConverter and -k](https://github.com/fortra/impacket)
+- [The Hacker Recipes: pass the ticket](https://www.thehacker.recipes/ad/movement/kerberos/ptt)

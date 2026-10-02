@@ -37,5 +37,6 @@ Every trust in that chain is a target: the account key (roasting, pass-the-key),
 
 ## References
 
-- The Hacker Recipes: Kerberos
-- Microsoft: Kerberos authentication and the PAC
+- [GhostPack Rubeus: raw Kerberos abuse toolkit](https://github.com/GhostPack/Rubeus)
+- [Impacket: Kerberos example scripts](https://github.com/fortra/impacket)
+- [Microsoft: Kerberos authentication](https://learn.microsoft.com/en-us/windows-server/security/kerberos/)
