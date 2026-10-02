@@ -52,5 +52,7 @@ The edge you need is write access to the gMSA's `msDS-GroupMSAMembership`, or me
 
 ## References
 
-- The Hacker Recipes: ReadGMSAPassword
-- Microsoft: group Managed Service Accounts and msDS-ManagedPassword
+- [SpecterOps: BloodHound ReadGMSAPassword edge](https://bloodhound.specterops.io/resources/edges/read-gmsa-password)
+- [Microsoft (MS-ADTS): msDS-ManagedPassword](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/9cd2fc5e-7305-4fb8-b233-2a60bc3eec68)
+- [gMSADumper (micahvandeusen)](https://github.com/micahvandeusen/gMSADumper)
+- [NetExec: dumping gMSA over LDAP](https://github.com/Pennyw0rth/NetExec-Wiki/blob/main/ldap-protocol/dump-gmsa.md)

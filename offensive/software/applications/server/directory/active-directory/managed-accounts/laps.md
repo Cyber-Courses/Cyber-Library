@@ -47,5 +47,7 @@ bloodyAD --host <dc> -d example.local -u user -p pass get object 'WKSTN01$' --at
 
 ## References
 
-- The Hacker Recipes: ReadLAPSPassword
-- Microsoft: Windows LAPS and the msLAPS attributes
+- [SpecterOps: BloodHound ReadLAPSPassword edge](https://bloodhound.specterops.io/resources/edges/read-laps-password)
+- [Microsoft: Windows LAPS overview](https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview)
+- [Microsoft (MS-ADA2): ms-LAPS-Password attribute](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-ada2/b2e01af2-3ff5-4c64-8ef3-d0d8a545945b)
+- [NetExec LAPS module source](https://github.com/Pennyw0rth/NetExec/blob/main/nxc/modules/laps.py)

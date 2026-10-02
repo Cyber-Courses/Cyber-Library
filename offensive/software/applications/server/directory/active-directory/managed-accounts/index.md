@@ -31,5 +31,6 @@ All three are **directory-driven**: the secret or the trust decision lives in an
 
 ## References
 
-- The Hacker Recipes: ReadGMSAPassword, ReadLAPSPassword
-- Akamai: BadSuccessor (dMSA privilege escalation)
+- [Akamai: BadSuccessor, abusing dMSA for privilege escalation](https://www.akamai.com/blog/security-research/abusing-dmsa-for-privilege-escalation-in-active-directory)
+- [SpecterOps: ReadGMSAPassword](https://bloodhound.specterops.io/resources/edges/read-gmsa-password) and [ReadLAPSPassword](https://bloodhound.specterops.io/resources/edges/read-laps-password) edges
+- [Microsoft: Delegated Managed Service Accounts overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/delegated-managed-service-accounts/delegated-managed-service-accounts-overview)
