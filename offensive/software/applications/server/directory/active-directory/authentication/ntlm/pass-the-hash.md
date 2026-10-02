@@ -61,5 +61,7 @@ Using the **AES key** instead of the RC4/NT hash for this is stealthier where RC
 
 ## References
 
-- The Hacker Recipes: pass the hash
-- Microsoft: NTLM and Kerberos authentication
+- [The Hacker Recipes: pass the hash](https://www.thehacker.recipes/ad/movement/ntlm/pth)
+- [Impacket (fortra): psexec/wmiexec/smbexec and -hashes](https://github.com/fortra/impacket)
+- [NetExec: authenticating with -H across protocols](https://www.netexec.wiki/)
+- [Microsoft (MS-NLMP): NTLM authentication protocol](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-nlmp/b38c36ed-2804-4868-a9ff-8dd3182128e4)

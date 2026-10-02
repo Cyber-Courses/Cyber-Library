@@ -1,6 +1,6 @@
 ---
 title: "Authentication: the Active Directory credential and identity attack surface"
-description: "The core of Active Directory attacks: domain reconnaissance, then obtaining and abusing authentication material in all its forms, passwords and NTLM hashes, Kerberos tickets, and certificates, through dumping, cracking, roasting, relay, and forgery."
+description: "The core of Active Directory attacks: obtaining and abusing authentication material in all its forms, passwords and NTLM hashes, Kerberos tickets, and certificates, through dumping, cracking, roasting, relay, and forgery."
 keywords:
   - credential access
   - NTLM
@@ -11,7 +11,7 @@ keywords:
 
 # Authentication
 
-This is the heart of Active Directory attacks. Passwords, NTLM hashes, Kerberos tickets, and certificates are all the same thing seen from different angles: **authentication material** that proves who you are to the domain. An attacker's central loop is to obtain some form of it, convert between forms, and reuse it to authenticate as a more privileged principal. That is why these are treated together rather than split apart: a cracked hash becomes a password, a password becomes a Kerberos ticket, a ticket or certificate becomes code execution, and code execution dumps more hashes. This surface also holds the general **reconnaissance** that precedes everything else, since reading the directory is how you find the accounts, services, and trusts to attack.
+This is the heart of Active Directory attacks. Passwords, NTLM hashes, Kerberos tickets, and certificates are all the same thing seen from different angles: **authentication material** that proves who you are to the domain. An attacker's central loop is to obtain some form of it, convert between forms, and reuse it to authenticate as a more privileged principal. That is why these are treated together rather than split apart: a cracked hash becomes a password, a password becomes a Kerberos ticket, a ticket or certificate becomes code execution, and code execution dumps more hashes.
 
 ## The forms of authentication material
 
@@ -22,8 +22,7 @@ This is the heart of Active Directory attacks. Passwords, NTLM hashes, Kerberos 
 
 ## How this section is organized
 
-- **[Reconnaissance](reconnaissance/index.md)**: mapping the domain, its objects, sessions, and policy from any foothold.
-- **[Credentials](credentials/index.md)**: dumping secrets from hosts and the directory, cracking them, and guessing them through spraying.
+- **[Credentials](credentials/index.md)**: dumping secrets from hosts and the directory, cracking them, and guessing them through spraying, with the user and policy enumeration that targets spraying.
 - **[NTLM](ntlm/index.md)**: capturing, relaying, and replaying NTLM authentication (pass-the-hash).
 - **[Kerberos](kerberos/index.md)**: roasting, ticket forgery, delegation abuse, and ticket reuse.
 - **[Certificates](certificates/index.md)**: abusing AD Certificate Services for authentication and escalation.
