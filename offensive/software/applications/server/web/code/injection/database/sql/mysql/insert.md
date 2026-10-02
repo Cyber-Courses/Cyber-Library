@@ -27,6 +27,11 @@ admin@site.com','x') ON DUPLICATE KEY UPDATE password='$2y$10$attackerhash'--
 
 The `email` value `admin@site.com` duplicates the existing admin row, so instead of adding an account the statement runs `UPDATE ... SET password='$2y$10$attackerhash'` on the admin row, a direct takeover. The exact payload depends on the real column list and which column carries the unique constraint, both recovered first with the enumeration techniques.
 
+## Tools
+
+- **sqlmap**: detects and exploits the injectable INSERT parameter, including error-based leaks.
+- **Burp Repeater**: craft `ON DUPLICATE KEY UPDATE` and error-function payloads by hand.
+
 ## References
 
 - MySQL Reference Manual: INSERT, INSERT ... ON DUPLICATE KEY UPDATE

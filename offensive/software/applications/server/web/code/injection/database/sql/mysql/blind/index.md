@@ -28,6 +28,11 @@ Blind extraction is slow but reliable, and it is the fallback whenever richer ch
 - **[Boolean extraction](boolean-based.md)**: the `SUBSTRING`/`ASCII` character oracle with binary search.
 - **[Comma-free extraction](comma-free-extraction.md)**: `LIKE` and `SUBSTRING ... FROM ... FOR` when commas are blocked.
 
+## Tools
+
+- **sqlmap**: automated boolean-based blind extraction.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: SUBSTRING, ASCII, string comparison

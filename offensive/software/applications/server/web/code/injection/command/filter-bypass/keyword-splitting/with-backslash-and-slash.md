@@ -61,6 +61,11 @@ These tricks hide the keyword or path only. Add a space substitute or separator 
 - Inside single quotes a backslash is literal, so this splitting form requires an unquoted or double-quoted context.
 - Backslash-escaping a *letter* is distinct from backslash-**newline** continuation, which folds two lines together; see the dedicated continuation page.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting backslash and slash payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

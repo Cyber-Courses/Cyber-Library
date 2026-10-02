@@ -21,6 +21,11 @@ The main families are: comment tricks that split or conditionally run keywords, 
 - **[Wide-byte injection](wide-byte-gbk.md)**: GBK multibyte sequences that swallow escaping backslashes.
 - **[Alternative catalog and functions](alternative-catalog.md)**: reach schema and version without the blocked names.
 
+## Tools
+
+- **sqlmap**: extensive tamper scripts for filter and WAF evasion.
+- **Burp Repeater**: craft and iterate bypass payloads manually.
+
 ## References
 
 - MySQL Reference Manual: comment syntax, character sets

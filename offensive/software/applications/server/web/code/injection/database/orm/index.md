@@ -21,3 +21,13 @@ Object-relational mappers parameterize ordinary queries, but every ORM exposes *
 - **[C#](c-sharp/index.md)**: Entity Framework, where raw-SQL APIs and unsafe string interpolation reach the database unparameterized.
 
 Across all of them the pattern is the same: the ORM is safe on its typed, parameterized path, and injection lives in the API a developer reaches for when that path is inconvenient.
+
+## Tools
+
+- **sqlmap**: exploiting raw-SQL escape hatches exposed by any ORM.
+- **Burp Repeater and Intruder**: crafting payloads for ORM sinks and operator or filter objects.
+
+## References
+
+- OWASP: SQL Injection
+- OWASP Web Security Testing Guide: Testing for ORM Injection

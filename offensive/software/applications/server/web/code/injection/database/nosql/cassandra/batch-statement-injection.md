@@ -75,6 +75,11 @@ An `UPDATE` in CQL is an upsert, so an `UPDATE` to a non-existent primary key cr
 
 Logged batches span partitions but are not isolated transactions, and lightweight-transaction conditions (`IF`) apply per statement. For injection the key fact is simpler: anything the application's database role is permitted to write, a smuggled batch statement can also write. Mapping that role's privileges, via [Error-based](cql/error-based.md) schema probing, tells you which tables are reachable before you craft the extra writes.
 
+## Tools
+
+- **cqlsh**: confirm smuggled INSERT, UPDATE, or DELETE writes land in the target tables.
+- **Burp Repeater**: craft requests carrying the batch-breakout payload.
+
 ## References
 
 - [Apache Cassandra: BATCH](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#batch)

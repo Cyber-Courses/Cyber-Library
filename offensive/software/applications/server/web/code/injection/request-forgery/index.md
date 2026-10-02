@@ -31,6 +31,13 @@ Orthogonal to the URL grammar is **[Fetch](fetch/index.md)**, the question of *h
 
 A bare fetch that returns nothing visible is still useful: response timing and error differences turn it into a port scanner and a service oracle. When the response *is* reflected, the metadata service hands back instance credentials, internal admin panels return their contents, and `file://` returns local files. When the scheme allows raw bytes on the wire, `gopher://` writes a crafted Redis or SMTP command and converts a read primitive into code execution or mail relay. The facets below are the routes to each of those outcomes.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation across loopback, metadata, and internal targets.
+- **Burp Suite**: crafting and replaying fetch requests while swapping URL facets and clients.
+- **Burp Collaborator**: confirming blind and out-of-band SSRF through DNS and HTTP callbacks.
+- **interactsh**: self-hosted OOB interaction server for detecting blind outbound requests.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

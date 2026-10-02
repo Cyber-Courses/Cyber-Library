@@ -63,6 +63,11 @@ Define one entity holding a large block (for example 50,000 characters), then re
 
 Parameter-entity variants of both forms exist for DTD-processing contexts, and the same multiplication applies when the expanded value is copied into a parameter entity instead of the document body.
 
+## Tools
+
+- **Burp Repeater**: delivering nested-entity payloads and measuring parser impact.
+- Manual testing with crafted billion-laughs and quadratic-blowup documents.
+
 ## References
 
 - [OWASP: XML External Entity (XXE) Processing](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing)

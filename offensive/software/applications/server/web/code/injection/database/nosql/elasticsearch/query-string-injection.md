@@ -91,6 +91,11 @@ This closes the intended group early and opens an unscoped one, discarding the a
 
 Fuzzy (`term~`), proximity (`"a b"~5`), and boost (`term^10`) operators confirm the parser is live when reconnaissance is needed: a response that treats `test~2` differently from the literal string `test~2` proves `query_string` parsing rather than a `match` query.
 
+## Tools
+
+- **curl**: run query_string searches with injected Lucene operators.
+- **Burp Repeater**: deliver field-targeting and grouping payloads through the search parameter.
+
 ## References
 
 - [Elasticsearch: Query string query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html)

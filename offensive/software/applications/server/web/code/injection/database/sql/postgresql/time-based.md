@@ -35,6 +35,11 @@ Where the injection permits stacked queries, a second statement with a guarded `
 
 Timing is sensitive to network jitter and load, so keep delays several seconds long and repeat a positive hit before trusting it.
 
+## Tools
+
+- **sqlmap**: automated time-based blind extraction with `pg_sleep`.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - PostgreSQL Documentation: `pg_sleep`, CASE, set-returning functions

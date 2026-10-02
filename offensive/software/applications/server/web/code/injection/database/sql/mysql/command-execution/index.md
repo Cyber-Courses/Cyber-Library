@@ -23,6 +23,11 @@ The second route extends the server itself with a user-defined function. Writing
 - **[INTO DUMPFILE](into-dumpfile.md)**: write exact bytes, used for binaries such as a UDF library.
 - **[UDF sys_exec](udf-sys-exec.md)**: load `lib_mysqludf_sys` for direct command execution.
 
+## Tools
+
+- **sqlmap**: automates web-shell write and UDF command execution with `--os-shell`.
+- **Metasploit Framework**: `mysql_udf_payload` module to deploy the sys_exec UDF.
+
 ## References
 
 - MySQL Reference Manual: SELECT INTO, user-defined functions, `secure_file_priv`

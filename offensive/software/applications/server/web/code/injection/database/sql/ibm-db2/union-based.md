@@ -35,6 +35,12 @@ Collapse rows into one cell with `LISTAGG` (Db2 9.7+):
 
 Catalog names are upper-case, so match `TABNAME='USERS'` in upper case. For a single row use `FETCH FIRST 1 ROWS ONLY`. Where `LISTAGG` is unavailable, `XMLAGG` performs the same aggregation, which the DIOS page builds on.
 
+## Tools
+
+- **sqlmap**: automates column-count detection and UNION extraction (`--technique=U`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **db2** (or clpplus): the Db2 client for validating `UNION SELECT ... FROM SYSIBM.SYSDUMMY1`.
+
 ## References
 
 - IBM Db2 SQL Reference: fullselect, SYSCAT catalog, LISTAGG, SYSIBM.SYSDUMMY1

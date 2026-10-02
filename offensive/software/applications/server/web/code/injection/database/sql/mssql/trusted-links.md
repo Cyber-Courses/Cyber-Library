@@ -33,6 +33,12 @@ If the link is configured to run as a privileged remote login, command execution
 
 Links can be chained: `OPENQUERY` nested through several hops reaches instances not directly linked to the entry point, and the effective privilege on each hop is whatever that link's configured login holds. This makes linked-server abuse a primary lateral-movement path in SQL Server estates, independent of whether the entry instance's own login is privileged.
 
+## Tools
+
+- **PowerUpSQL**: `Get-SQLServerLinkCrawl` to enumerate and pivot through linked servers.
+- **Metasploit Framework**: `mssql_linkcrawler` module for linked-server command execution.
+- **sqlcmd**: official client to run `OPENQUERY` and `EXEC ... AT` by hand.
+
 ## References
 
 - Microsoft SQL Server Documentation: linked servers, OPENQUERY, sp_serveroption (RPC Out)

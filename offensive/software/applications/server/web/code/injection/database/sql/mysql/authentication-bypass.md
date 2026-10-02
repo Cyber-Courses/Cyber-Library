@@ -31,6 +31,11 @@ query:    SELECT * FROM users WHERE username='' OR '1'='1' LIMIT 1-- ' AND passw
 
 The same payloads go in the password field when the username is fixed. The bypass depends only on the row being returned, so it works regardless of how the password is later checked, as long as the application equates a non-empty result set with a successful login.
 
+## Tools
+
+- **sqlmap**: automated detection of the injectable login parameter.
+- **Burp Repeater**: craft and replay comment-termination and OR-based login payloads by hand.
+
 ## References
 
 - MySQL Reference Manual: comment syntax, WHERE, LIMIT

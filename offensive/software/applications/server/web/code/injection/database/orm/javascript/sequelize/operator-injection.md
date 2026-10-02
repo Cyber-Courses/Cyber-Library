@@ -50,6 +50,11 @@ Response differences leak the secret character by character.
 
 The fix pattern (coercing fields to primitives / never spreading request JSON into `where`) is defensive and out of scope here; offensively, the tell is any `where: <user-controlled object>` where field values aren't coerced to scalars.
 
+## Tools
+
+- **Burp Repeater**: substituting operator objects such as $ne and $gt for scalar field values.
+- **Burp Intruder**: automating boolean enumeration through $like prefix oracles.
+
 ## References
 
 - [Sequelize docs: Operators](https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#operators)

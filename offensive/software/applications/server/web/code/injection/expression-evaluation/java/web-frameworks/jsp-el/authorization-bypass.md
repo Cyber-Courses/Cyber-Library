@@ -47,6 +47,11 @@ ${pageContext.request.isUserInRole('admin')}
 
 From `pageContext.request` the expression also reads `getParameter(...)` and `getRemoteUser()`, so an access value that the application copies from the request into a session attribute is observed, and the comparison that later trusts it is understood before it is targeted.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate scope-map attribute names a guard compares against.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

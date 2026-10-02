@@ -39,6 +39,11 @@ Dump the rows, casting to `text` and joining fields with a delimiter:
 
 When `information_schema` is filtered, `pg_catalog` gives the same data under different names: `pg_tables` lists tables, `pg_namespace` lists schemas, and `pg_attribute` joined to `pg_class` lists columns. The credential store itself is `pg_shadow` (or `pg_authid`), readable only by a superuser, which holds role password hashes.
 
+## Tools
+
+- **sqlmap**: automated union extraction walking information_schema and pg_catalog.
+- **psql**: official client to confirm catalog queries directly.
+
 ## References
 
 - PostgreSQL Documentation: `information_schema`, system catalogs, `string_agg`

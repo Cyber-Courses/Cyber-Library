@@ -79,6 +79,11 @@ Even when the result is not reflected, the side effect (the command running) sti
 
 `CREATE AGGREGATE` combines a state function with a final function over a result set, which lets a body run once per row and accumulate state across a scan. This is useful where a single call is constrained but a scan over a table is reachable, turning each processed row into another execution of the injected body.
 
+## Tools
+
+- **cqlsh**: define and invoke the CREATE FUNCTION payload against the cluster.
+- **Burp Repeater**: deliver the DDL and the follow-up call through the sink.
+
 ## References
 
 - [Apache Cassandra: CREATE FUNCTION](https://cassandra.apache.org/doc/latest/cassandra/cql/functions.html#create-function)

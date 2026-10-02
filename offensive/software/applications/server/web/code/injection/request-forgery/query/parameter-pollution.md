@@ -44,6 +44,11 @@ The validator sees one opaque value; a later decode splits it into two, and the 
 
 Send the duplicated parameter with one value pointing at an attacker-controlled listener and the other at an allowed host, and watch which one receives the connection. That identifies whether the fetcher takes first or last, which fixes the ordering for the real internal target. The selected internal value still uses the [Authority](../authority/index.md) encodings when its literal form is blocked, and pairs naturally with a [redirect](bypassing-using-a-redirect.md) when a single clean internal URL is needed.
 
+## Tools
+
+- **Burp Repeater**: sending the parameter twice and reordering duplicates to find which occurrence the fetcher uses.
+- **curl**: issuing raw duplicated and encoded-delimiter parameters to probe first-wins versus last-wins behavior.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

@@ -32,6 +32,11 @@ This section is organized into three child groups:
 - [Rule engines](rule-engines/index.md): rule, routing, and workflow products whose expressions and consequences execute on untrusted input: Apache Camel, Camunda, Drools, and ELK Logstash.
 - Web frameworks: the expression surfaces embedded in server-side MVC and view layers.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting EL, OGNL, and MVEL payloads.
+- **J2EEScan**: Burp extension with active checks for Java EL and OGNL injection.
+
 ## References
 
 - [Jakarta Expression Language specification](https://jakarta.ee/specifications/expression-language/)

@@ -26,6 +26,12 @@ Request-line injection proper arises when an application builds an outbound requ
 
 The test is to resend a request with each override header and each unusual verb and watch for a changed authorization or routing outcome.
 
+## Tools
+
+- **Burp Repeater**: swap methods, add override headers, and watch authorization and routing changes.
+- **Turbo Intruder**: iterate across override headers and unusual verbs at scale.
+- **curl**: send arbitrary methods and method-override headers from the command line.
+
 ## References
 
 - OWASP Testing Guide: Testing for HTTP Verb Tampering

@@ -40,6 +40,12 @@ Each request is a fresh connection and a single command. Reading a service banne
 
 Because the reply (or the connection error) comes back, `dict://` distinguishes an open port that speaks a known protocol from one that does not, refining a port scan into service identification. Point it at each candidate port and read whether a recognizable banner returns.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation across common internal targets such as Redis and memcached.
+- **curl**: manual `dict://` probing of a port and reading the single-line reply.
+- **Burp Collaborator**: out-of-band interaction detection when the service reply is not reflected.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)

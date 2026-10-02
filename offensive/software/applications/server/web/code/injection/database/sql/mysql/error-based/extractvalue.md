@@ -34,6 +34,11 @@ The reflected text is capped near 32 characters, so longer values arrive truncat
 
 A subquery that returns more than one row raises `Subquery returns more than 1 row` instead of the XPath error, so keep the inner query to one row with `LIMIT 1` or an aggregate.
 
+## Tools
+
+- **sqlmap**: automated error-based extraction through the XPath functions.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: EXTRACTVALUE, SUBSTRING

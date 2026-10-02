@@ -31,6 +31,12 @@ This leaves two adjacent top-level filters (`(&(uid=*)(uid=*))` and `(|...)`) ra
 
 The wildcard-password form is the most reliable, and it works only when the application compares the password inside the filter rather than performing a separate bind with the supplied password (a bind-based login hashes and checks server-side, so the wildcard does not help there). Establish which pattern the app uses by testing the wildcard first.
 
+## Tools
+
+- **ldapsearch**: replay candidate filters against the directory to confirm a wildcard or boolean bypass.
+- **python-ldap**: script bind and search attempts to find a working bypass payload.
+- **Burp Repeater**: craft and resend tampered username/password login requests.
+
 ## References
 
 - RFC 4515: LDAP search filters

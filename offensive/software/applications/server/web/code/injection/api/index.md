@@ -30,6 +30,13 @@ Each protocol parses and routes requests differently, so the abuse patterns grou
 
 Across all four, the strongest attacks exploit a boundary that the framework made invisible: authorization enforced at the HTTP edge but not at the resolver, a dispatch keyed on one field while execution reads another, a validator that saw a different structure than the one the handler finally consumed. Each page ties the abuse to the handler or resolver code and the validation boundary it slips past.
 
+## Tools
+
+- **Burp Suite**: intercepting and replaying structured API requests across protocols.
+- **InQL**: GraphQL schema introspection and query generation in Burp.
+- **grpcurl**: enumerating and calling gRPC services.
+- **Postman**: composing SOAP, JSON-RPC, and REST style requests for dispatch testing.
+
 ## References
 
 - [OWASP API Security Top 10](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)

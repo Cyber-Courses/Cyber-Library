@@ -46,6 +46,11 @@ The safe form is `text("... LIKE :term")` with `.params(term=...)`; the value th
 
 Mixed usage is the classic trap: a query that binds most values with `:params` but appends one interpolated clause is still fully exploitable through that clause. Match payloads to the configured backend dialect (PostgreSQL/MySQL/SQLite/etc.).
 
+## Tools
+
+- **sqlmap**: exploiting value-context text() sinks for extraction.
+- **Burp Repeater and Intruder**: delivering payloads to interpolated ORDER BY and identifier slots.
+
 ## References
 
 - [SQLAlchemy docs: Using textual SQL](https://docs.sqlalchemy.org/en/20/core/connections.html#using-textual-sql)

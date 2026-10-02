@@ -31,6 +31,12 @@ The job runs as the OS account configured for external jobs. Older Oracle also o
 
 All of these need an injectable PL/SQL context (Oracle does not stack plain SQL statements) and DBA-level privilege, so they are the final step after escalation. Commands run with the Oracle server's OS privileges, so that account determines the foothold.
 
+## Tools
+
+- **ODAT** (Oracle Database Attacking Tool): automates Java and `DBMS_SCHEDULER` external-job command execution.
+- **sqlplus** (or SQLcl): the Oracle client for defining and invoking the external routine.
+- Manual testing with Burp Repeater and the Oracle client.
+
 ## References
 
 - Oracle Database Java Developer's Guide; PL/SQL Packages and Types Reference: DBMS_SCHEDULER

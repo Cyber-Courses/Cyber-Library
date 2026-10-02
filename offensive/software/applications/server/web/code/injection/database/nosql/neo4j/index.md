@@ -16,3 +16,13 @@ Neo4j is a graph database queried with **Cypher**, and Cypher is injectable for 
 Because Cypher traverses a single property graph with no table boundaries, injection crosses **labels** freely: one injected `MATCH (n) RETURN n` can enumerate every node, label, property, and relationship. Where the `apoc` procedure library is installed, `CALL` injection extends reach to SSRF, outbound exfiltration, and command execution. When no rows are reflected, boolean and time-based inference recover data blindly.
 
 This subtree covers the core injection mechanics, cross-label extraction, APOC procedure abuse, and blind inference.
+
+## Tools
+
+- **cypher-shell**: the native Cypher shell for testing payloads against a database.
+- **Burp Suite**: intercept and tamper with Cypher-backed web requests.
+
+## References
+
+- [Neo4j: Cypher manual](https://neo4j.com/docs/cypher-manual/current/)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

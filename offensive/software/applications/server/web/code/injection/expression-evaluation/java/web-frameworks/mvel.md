@@ -44,6 +44,12 @@ new java.util.Scanner(new java.lang.ProcessBuilder(new String[]{"/bin/bash","-c"
 
 MVEL accepts the leading-`@` import syntax as well, and unqualified class names resolve when the type is already imported into the parser context, which shortens payloads when the application preloads common packages. Where only a property navigation is evaluated rather than a full statement, the same reflection route used by the unified EL dialects applies: reach `getClass().forName(...)` from any in-scope object and build the `ProcessBuilder` through its declared constructors.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver MVEL.eval payloads and read output.
+- **J2EEScan**: Burp extension with Java expression-injection checks.
+- Manual MVEL payloads naming java.lang.Runtime and ProcessBuilder.
+
 ## References
 
 - [MVEL Language Guide](http://mvel.documentnode.com/)

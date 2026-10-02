@@ -48,6 +48,11 @@ Batches also leak behavior through ordering and errors. Observing which entries 
 
 Send a batch whose entries would be throttled or blocked individually and compare the outcome to sending them one at a time. If a per-request limit registers once for the whole batch, or a restricted method executes when paired with an allowed one, the controls are applied at the wrong granularity. The fix, authorizing and accounting for each entry independently and defining an atomic failure policy, is the property this test is checking for.
 
+## Tools
+
+- **Burp Repeater**: assembling batch arrays and comparing per-entry outcomes.
+- **curl**: posting batched JSON-RPC requests to compare against single calls.
+
 ## References
 
 - [JSON-RPC 2.0 Specification: Batch](https://www.jsonrpc.org/specification#batch)

@@ -24,3 +24,8 @@ Compare with distributed-systems version vectors; many CRUD apps omit them on we
 
 - **Burp Suite** with **Throttling**
 - **tc** / **netem** in a lab network
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- OWASP WSTG: Testing for Business Logic

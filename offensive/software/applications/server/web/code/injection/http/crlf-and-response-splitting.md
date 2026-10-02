@@ -31,6 +31,12 @@ This is response-body injection: the double CRLF only starts the body of the one
 
 The major caveat is that most modern servers and HTTP libraries reject or strip CR and LF in header-setting APIs (Java's `HttpServletResponse`, Node, and current application servers), so response splitting largely survives on older stacks, custom header writers, or components that build raw response text. Where the framework blocks raw CRLF, the same CRLF primitive may still matter inside other protocols the app speaks (for example SMTP or log lines), covered under their own topics.
 
+## Tools
+
+- **Burp Suite / Burp Repeater**: craft requests with CRLF payloads and inspect reflected response headers.
+- **curl**: send raw header and CRLF (`%0d%0a`) payloads directly from the command line.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - PortSwigger Web Security Academy: HTTP response header injection

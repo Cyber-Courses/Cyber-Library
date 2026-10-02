@@ -56,6 +56,12 @@ HTTP query strings are length-limited and stop at the first newline in many pars
 
 The parser opens an FTP connection to the attacker's host and places the file contents in the requested path, which a simple listener records. FTP also sidesteps some outbound HTTP egress filtering. When all outbound network is blocked, move to an error-based or local-DTD technique instead.
 
+## Tools
+
+- **XXEinjector**: automating out-of-band exfiltration with a hosted DTD and FTP listener.
+- **Burp Collaborator**: capturing out-of-band HTTP and DNS callbacks.
+- Manual testing with a hosted external DTD and an FTP listener for larger data.
+
 ## References
 
 - [OWASP: XML External Entity (XXE) Processing](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing)

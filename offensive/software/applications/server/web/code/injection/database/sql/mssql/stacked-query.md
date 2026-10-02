@@ -24,6 +24,11 @@ Stacking is what enables `EXEC` of stored and extended procedures, the `sp_confi
 
 Availability still depends on the driver and API: a parameterized call that sends one statement rejects the second. Confirm stacking by observing a side effect (a changed row, a created object) rather than assuming it. When it is blocked, fall back to in-query techniques (union, error, blind, error-based) that complete within the single original statement.
 
+## Tools
+
+- **sqlmap**: exploits stacked queries with `--technique=S`.
+- **sqlcmd**: official client to confirm multi-statement batch execution.
+
 ## References
 
 - Microsoft SQL Server Documentation: batches, EXECUTE, sp_executesql

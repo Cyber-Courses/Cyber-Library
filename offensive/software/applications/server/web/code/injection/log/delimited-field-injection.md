@@ -89,6 +89,12 @@ Flooding a field with the delimiter can also force the parser into its slow back
 - Comma is literal in most contexts; tab is `%09`, and a field-splitting space is literal or `%20` depending on the surrounding format.
 - Combine with a newline (`%0a`) to both break the current line's parse and forge a fresh record, since many delimited parsers are also line-oriented.
 
+## Tools
+
+- **Burp Repeater**: crafting delimiter, quote, and `key=value` payloads into logged parameters.
+- **curl**: sending requests with embedded commas, tabs (`%09`), and `=` characters into fields.
+- Manual testing with Burp Repeater and crafted payloads.
+
 ## References
 
 - [OWASP: Log Injection](https://owasp.org/www-community/attacks/Log_Injection)

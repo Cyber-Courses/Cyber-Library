@@ -60,6 +60,11 @@ ca$()t${IFS}/etc/passwd
 - `$()` substitution also fires inside **double** quotes, so `"who$()ami"` reassembles too, handy when your injection lands in a double-quoted context.
 - A **non-empty** `$()` is the execution primitive itself (`$(id)`); here the empty form is used purely for concealment.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting empty-substitution payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

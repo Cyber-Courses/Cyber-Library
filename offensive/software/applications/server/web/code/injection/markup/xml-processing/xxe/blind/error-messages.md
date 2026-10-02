@@ -54,6 +54,12 @@ When the single `evil.dtd` fetch is also blocked, the external DTD has to go. Th
 
 The leak is partial and path-shaped: newlines and characters illegal in a filename often truncate the captured content, so this recovers short files or line-by-line fragments rather than whole binaries. Reading `/etc/hostname`, `/etc/passwd`, short config files, and the first lines of credentials files is the typical use. Where the full file is needed and any egress exists, prefer out-of-band exfiltration with `php://filter` base64 encoding instead.
 
+## Tools
+
+- **XXEinjector**: automating error-based extraction through a hosted DTD.
+- **Burp Repeater**: injecting the DTD reference and reading leaked error strings.
+- Manual testing with a parameter-entity payload that forces a parse error.
+
 ## References
 
 - [OWASP: XML External Entity (XXE) Processing](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing)

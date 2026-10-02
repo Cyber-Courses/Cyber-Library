@@ -39,6 +39,12 @@ The returned `CREATE TABLE users (id INTEGER, username TEXT, password TEXT)` rev
 
 There are no database users or roles to enumerate, since SQLite has none; the injection simply has whatever access the application's file handle has. With the version and schema known, extraction proceeds with union, blind, or time-based techniques.
 
+## Tools
+
+- **sqlmap**: automated fingerprinting and schema enumeration (`--banner`, `--tables`, `--columns`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlite3**: the engine CLI for reading `sqlite_master` directly.
+
 ## References
 
 - SQLite Documentation: `sqlite_master`, `sqlite_version`, PRAGMA functions

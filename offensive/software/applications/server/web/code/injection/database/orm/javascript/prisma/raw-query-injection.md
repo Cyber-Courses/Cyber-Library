@@ -54,6 +54,11 @@ So the sink is any unparameterized raw text, whether it arrives through `$queryR
 
 `$queryRawUnsafe` also accepts positional parameters (`$queryRawUnsafe(query, ...values)`), and code that uses those for values but still concatenates an identifier, a table name, a column, an `ORDER BY` direction, remains injectable through the concatenated part, because identifiers cannot be parameterized. Any place the query string itself is assembled from input, rather than passed as a bound value, is the thing to find.
 
+## Tools
+
+- **sqlmap**: automating extraction against $queryRawUnsafe and Prisma.raw sinks.
+- **Burp Repeater and Intruder**: delivering breakout and stacked-statement payloads.
+
 ## References
 
 - [Prisma: Raw queries](https://www.prisma.io/docs/orm/prisma-client/using-raw-sql/raw-queries)

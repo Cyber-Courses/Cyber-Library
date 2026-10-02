@@ -74,6 +74,11 @@ The keyword must come after the `WHERE` predicates and before any `LIMIT` the en
 
 Where output is not reflected, the same full-scan predicates drive row-count inference in [Blind inference](blind.md).
 
+## Tools
+
+- **cqlsh**: validate ALLOW FILTERING and token-range payloads directly against the cluster.
+- **Burp Repeater**: deliver the broadened predicate through the web parameter.
+
 ## References
 
 - [Apache Cassandra: ALLOW FILTERING](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#allow-filtering)

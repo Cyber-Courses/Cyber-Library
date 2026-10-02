@@ -23,6 +23,12 @@ The entry point (named for the file, for example `sqlite3_evil_init`) runs when 
 
 The second route does not need `load_extension` at all: it chains the file-write primitive with the web layer. Writing a PHP (or other server-side) payload into the document root with `ATTACH DATABASE`, as shown on the file-manipulation page, produces a script the web server executes on request, giving command execution through HTTP rather than through SQLite itself. This is often the more practical path, since `load_extension` is usually disabled, while a writable web root plus stacked execution is a common configuration in the small apps that embed SQLite.
 
+## Tools
+
+- **sqlmap**: chains stacked writes toward a web-root shell where the API allows them.
+- **sqlite3**: the engine CLI for building the `load_extension` library and testing `ATTACH` writes.
+- Manual testing with Burp Repeater and the sqlite3 client.
+
 ## References
 
 - SQLite Documentation: load_extension, enable_load_extension, run-time loadable extensions

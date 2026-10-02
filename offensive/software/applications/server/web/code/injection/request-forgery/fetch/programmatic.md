@@ -46,6 +46,12 @@ A programmatic client exposes whatever schemes its runtime registers. A Java cli
 
 Unlike a [headless browser](headless-browser.md), a programmatic client does not execute returned HTML or script, and it does not carry an interactive session unless the code explicitly attaches credentials. So there is no rendered-script exfiltration, but also no automatic cookie reuse. The payoffs are reading internal responses, scanning via [Port](../authority/port.md) timing, and raw-byte interaction through a capable [Scheme](../scheme/index.md). Host tricks like [DNS rebinding](../authority/domain-name/dns-rebinding.md) apply because the client re-resolves names.
 
+## Tools
+
+- **SSRFmap**: automated exploitation against library HTTP-client sinks.
+- **curl**: reproducing the client fetch and testing redirect and scheme handling directly.
+- **Burp Repeater**: replaying the sink request while varying URL, scheme, and redirect targets.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

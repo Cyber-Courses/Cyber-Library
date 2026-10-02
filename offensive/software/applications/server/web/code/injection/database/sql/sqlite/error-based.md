@@ -26,6 +26,12 @@ Several operations raise a usable error:
 
 These confirm injection and fingerprint the engine, but SQLite does not offer a clean, general way to splice an arbitrary query result into an error message the way PostgreSQL's cast error or SQL Server's conversion error do. Its error surface is narrow and the messages do not reliably include a full attacker-chosen value. In practice, therefore, error output is used here to prove the point is live (an `unrecognized token`, `no such column`, or `no such function` error), and the actual data is extracted with boolean or time-based inference, which are the dependable channels against SQLite.
 
+## Tools
+
+- **sqlmap**: automated detection and extraction (`--dbms=SQLite`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlite3**: the engine CLI for reproducing the error-raising primitives locally.
+
 ## References
 
 - SQLite Documentation: core functions, JSON1, error messages

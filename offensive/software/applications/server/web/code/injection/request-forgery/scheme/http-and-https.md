@@ -42,6 +42,12 @@ Where the response is reflected, the credential document comes straight back. Eq
 
 HTTP is the baseline and the first thing to try, but it is a read of whatever the service returns. When a discovered service needs a crafted multi-line request or a raw command (Redis, SMTP, a `POST` with a precise body), escalate to [Gopher](gopher.md). For local files, switch to [File](file.md). Pair HTTP probing with [Port](../authority/port.md) scanning to find the services worth aiming a scheme payload at, and with the [Authority](../authority/index.md) encodings when the internal address is filtered.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation across internal web targets and the cloud metadata endpoint.
+- **Burp Collaborator**: out-of-band interaction detection for blind SSRF.
+- **curl**: manual probing of internal `http://` and `https://` targets and metadata URLs.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

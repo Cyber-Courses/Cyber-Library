@@ -33,6 +33,12 @@ Confirm the oracle with a known true/false pair (`' AND 1=1--` versus `' AND 1=2
 
 Because this generates many near-identical requests it is almost always automated, but the single-request comparison is the primitive that lets you adapt when a tool stalls. It is the primary channel against Db2 given the limited error surface, with time-based inference as the fallback when no boolean difference is visible.
 
+## Tools
+
+- **sqlmap**: automated boolean-based extraction (`--technique=B`).
+- **ghauri**: fast boolean inference with strong WAF evasion.
+- **Burp Intruder**: scripts the per-character comparison requests by hand.
+
 ## References
 
 - IBM Db2 SQL Reference: SUBSTR, ASCII, LENGTH, FETCH FIRST

@@ -29,6 +29,12 @@ The decisive check is server-role membership, since `sysadmin` unlocks `xp_cmdsh
 
 `IS_SRVROLEMEMBER('sysadmin')` returns `1` when the login is a full administrator, which is the single most useful fact for planning the rest of the attack. A non-sysadmin can still be escalated in some configurations (a trustworthy database with an elevated owner, or impersonation via `EXECUTE AS`), which the privileges page covers. With the version and role known, the remaining techniques apply with the right expectations.
 
+## Tools
+
+- **sqlmap**: fingerprints the engine and reads version, login, and server role.
+- **PowerUpSQL**: `Get-SQLServerInfo` for instance and role enumeration.
+- **sqlcmd**: official client to confirm `@@version` and `IS_SRVROLEMEMBER` directly.
+
 ## References
 
 - Microsoft SQL Server Documentation: SERVERPROPERTY, IS_SRVROLEMEMBER, system functions

@@ -52,6 +52,12 @@ The file is base64-encoded, so it contains only `[A-Za-z0-9+/=]` and always pars
 
 Other schemes extend reach depending on the platform and installed extensions: `expect://id` for command execution where the expect wrapper is loaded, `data://` for inlining a crafted payload, and `netdoc://` on some Java stacks as an alternative file reader. When the file contents are not reflected at all, switch to an out-of-band or error-based channel.
 
+## Tools
+
+- **XXEinjector**: automating in-band file retrieval through XXE.
+- **Burp Suite**: crafting and iterating SYSTEM entity payloads in Repeater.
+- Manual testing with `php://filter` base64 payloads for non-XML files.
+
 ## References
 
 - [OWASP: XML External Entity (XXE) Processing](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing)

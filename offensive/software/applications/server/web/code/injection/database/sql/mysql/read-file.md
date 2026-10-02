@@ -27,6 +27,11 @@ Three conditions must all hold, or `LOAD_FILE` silently returns `NULL`:
 
 Because a blocked read and a missing file both yield `NULL`, confirm the privilege first by reading a file that is known to exist and be world-readable. Binary or non-UTF-8 files come back garbled through a text column, so wrap them in `HEX(LOAD_FILE(...))` and decode client-side.
 
+## Tools
+
+- **sqlmap**: reads server files over the injection with `--file-read` using `LOAD_FILE`.
+- **mysql**: official client to confirm `secure_file_priv` and test `LOAD_FILE` directly.
+
 ## References
 
 - MySQL Reference Manual: LOAD_FILE, `secure_file_priv`, FILE privilege

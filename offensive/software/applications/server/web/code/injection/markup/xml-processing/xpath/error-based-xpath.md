@@ -71,6 +71,12 @@ count(//
 
 An unbalanced quote or bracket produces a message whose exact wording identifies the engine (libxml2, MSXML, Saxon, .NET). If the fingerprint is a 1.0 engine (libxml2, MSXML, or the native .NET XPath engine), fall back to boolean-blind extraction through the predicate; only a 2.0 engine (Saxon, BaseX, eXist-db) exposes the cast-failure channel above that reads values directly.
 
+## Tools
+
+- **xcat**: automating error-based extraction against XPath 2.0 engines.
+- **Burp Repeater**: forcing cast failures and reading leaked node text.
+- Manual testing with `xs:integer()` cast and `fn:error()` payloads.
+
 ## References
 
 - [OWASP: XPATH Injection](https://owasp.org/www-community/attacks/XPATH_Injection)

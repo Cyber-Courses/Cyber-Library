@@ -44,6 +44,12 @@ These cover SSH, web front ends, the Docker API, common databases, Redis, Elasti
 
 Point the scan at `127.0.0.1` to find services bound only to loopback (admin panels, debug servers, databases listening locally), which are invisible from outside the host but reachable through the server itself. Then pivot to RFC1918 neighbors (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to map adjacent hosts. Combine with the [IP address](ip-address.md) encodings when the literal address is filtered.
 
+## Tools
+
+- **SSRFmap**: automated internal port scanning and service discovery through an SSRF sink.
+- **curl**: iterating a port list against an internal host and reading timing or error differences by hand.
+- **nmap**: building a common-service port list to feed into the sink (for example `22,80,443,3306,6379,8080`).
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

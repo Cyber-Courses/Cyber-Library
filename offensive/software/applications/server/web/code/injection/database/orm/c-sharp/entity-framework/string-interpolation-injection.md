@@ -50,6 +50,11 @@ Quoted `Name`:
 
 SQL Server stacked queries (`;`) are available over the EF connection, enabling data modification and, where configured and privileged, command execution. Identifying which overload is in use (`Raw` vs `Interpolated`) during review tells you immediately whether the `$"..."` is a vulnerability or a safe parameterization.
 
+## Tools
+
+- **sqlmap**: extracting data once an interpolated string reaches FromSqlRaw.
+- **Burp Repeater and Intruder**: delivering context-specific breakout and UNION payloads.
+
 ## References
 
 - [EF Core docs: Raw SQL queries, parameterization](https://learn.microsoft.com/en-us/ef/core/querying/sql-queries#passing-parameters)

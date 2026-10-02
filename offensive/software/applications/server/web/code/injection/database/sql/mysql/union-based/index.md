@@ -23,6 +23,11 @@ The workflow is: detect the column count, find which columns are reflected, then
 - **[Extract with information_schema](extract-with-information-schema.md)**: enumerate and dump via the catalog.
 - **[Extract without information_schema](extract-without-information-schema.md)**: when the catalog is filtered.
 
+## Tools
+
+- **sqlmap**: automated union-based detection and extraction.
+- **ghauri**: fast alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: UNION clause and `information_schema`

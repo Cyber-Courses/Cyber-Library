@@ -31,3 +31,8 @@ The weak patterns are session flags that only ever increment, no per-form versio
 
 - **Burp Suite**
 - **browser**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

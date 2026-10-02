@@ -45,6 +45,12 @@ The flaw appears wherever action-based routing sits in front of body-based execu
 
 Send a request whose `SOAPAction` names a permitted, low-privilege operation and whose Body names a restricted one, and observe which executes. If the restricted operation runs, the server dispatches from the body while something upstream authorized from the header. Variations include an empty or omitted `SOAPAction` (some stacks then fall back to the body, others reject), and a header that names a nonexistent action to probe whether routing fails open to the body. The underlying fix is to require the action header and the body operation to match before dispatch, so a mismatch is the signal to look for.
 
+## Tools
+
+- **Burp Repeater**: setting a permitted SOAPAction while the body names a restricted operation.
+- **SoapUI**: building per-operation requests from the WSDL to pair against mismatched actions.
+- **Wsdler (Burp extension)**: enumerating operations from the WSDL to target.
+
 ## References
 
 - [OWASP: Testing for SOAP](https://owasp.org/www-project-web-security-testing-guide/)

@@ -43,6 +43,12 @@ ${''.getClass().forName('java.util.Scanner').getConstructor(''.getClass().forNam
 
 The `Runtime` form (`getMethod('getRuntime').invoke(null).exec(...)`) and the `ProcessBuilder` form are interchangeable; choose whichever survives the filtering in front of the sink.
 
+## Tools
+
+- **Burp Suite**: Repeater to deliver ${...} reflection payloads and read output.
+- **J2EEScan**: Burp extension that flags Java EL injection.
+- Manual unified-EL reflection to ScriptEngineManager or ProcessBuilder.
+
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)

@@ -38,6 +38,12 @@ grpcurl -authority 'internal-admin.svc.cluster.local' -plaintext \
 
 Metadata feels like transport plumbing, so developers treat it as trustworthy the way they might treat a server-set environment variable. But on the wire it is just client input with a different name. A gateway that injects verified claims must also strip any client-supplied copies of the same keys, and downstream services must distinguish metadata they signed from metadata a caller provided. The test is to add or overwrite the authorization, tenant, and authority metadata on a direct call and see whether the server acts on it; if an interceptor reads a key without verifying its origin, the call is authorized on forged input.
 
+## Tools
+
+- **grpcurl**: setting custom metadata and the authority with -H and -authority on a direct call.
+- **grpcui**: adding or overriding metadata through an interactive client.
+- **Burp Repeater**: tampering mapped Grpc-Metadata- headers behind grpc-gateway or grpc-web.
+
 ## References
 
 - [gRPC: Metadata](https://grpc.io/docs/guides/metadata/)

@@ -23,3 +23,8 @@ Model idempotent side effects with unique business keys and append-only event lo
 ## Tools
 
 - Application logs and staging DB queries
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

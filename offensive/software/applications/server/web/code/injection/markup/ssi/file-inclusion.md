@@ -70,6 +70,11 @@ A response that now contains the `robots.txt` body confirms resolution. Use the 
 
 If `include` returns an error rather than content (for example `[an error occurred while processing this directive]`), the directive was parsed but the path failed; adjust the path or switch between `file` and `virtual`.
 
+## Tools
+
+- **Burp Suite**: injecting `include` directives and iterating traversal depth with Intruder.
+- Manual testing with crafted `<!--#include file-->` and `<!--#include virtual-->` payloads.
+
 ## References
 
 - [OWASP: Server-Side Includes (SSI) Injection](https://owasp.org/www-community/attacks/Server-Side_Includes_(SSI)_Injection)

@@ -59,6 +59,11 @@ c'a't${IFS}/etc/passwd
 - If your injection point already sits **inside** single quotes (e.g. `sh -c 'ping '$x''`), you must first close that literal with a `'` before this trick applies; see the quoting-context discussion on the shell-metacharacter page.
 - Single quotes are stronger than double quotes: inside `'...'` no expansion occurs, so this form is purely for splitting, not for triggering substitution.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater for crafting quote-split payloads.
+- **[commix](https://github.com/commixproject/commix)**: tamper scripts automate keyword-splitting bypasses.
+
 ## References
 
 - [PayloadsAllTheThings: Command Injection, bypass techniques](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection)

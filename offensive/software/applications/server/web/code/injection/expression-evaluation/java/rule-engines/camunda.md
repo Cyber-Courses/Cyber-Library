@@ -54,6 +54,11 @@ A JavaScript (Nashorn/Graal) script task reaches `java.lang.Runtime` the same wa
 
 On Windows the list is `["cmd.exe","/c","whoami"]`.
 
+## Tools
+
+- **Burp Suite**: Repeater to submit EL and script-task payloads through the REST API.
+- Manual JUEL reflection payloads; script tasks run Groovy or JavaScript directly.
+
 ## References
 
 - [Camunda: expression language](https://docs.camunda.org/manual/latest/user-guide/process-engine/expression-language/)

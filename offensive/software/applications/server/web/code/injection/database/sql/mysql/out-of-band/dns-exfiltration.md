@@ -22,6 +22,11 @@ When MySQL resolves `<hexpassword>.attacker.tld`, the authoritative name server 
 
 This requires the `FILE` privilege, a Windows host, and a `secure_file_priv` that does not forbid `LOAD_FILE`. Because it needs no reflected output at all, it is the fastest channel against an otherwise blind Windows target, often paired with a tool like Burp Collaborator acting as the logging name server.
 
+## Tools
+
+- **sqlmap**: automates DNS exfiltration with `--dns-domain` using LOAD_FILE UNC paths.
+- **Burp Collaborator**: acts as the logging name server that records the exfiltrated labels.
+
 ## References
 
 - MySQL Reference Manual: LOAD_FILE, HEX, CONCAT

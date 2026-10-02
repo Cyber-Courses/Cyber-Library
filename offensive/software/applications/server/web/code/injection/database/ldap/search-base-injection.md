@@ -24,6 +24,12 @@ The impactful case is when the application takes the whole base DN, or the scope
 
 Search-base injection does not change the filter logic (that is filter injection) but changes the *region* the filter runs over, so a benign filter suddenly matches across the entire directory. It leads to horizontal information disclosure, reading entries in partitions the application was scoped away from. The defense, worth noting only to explain the bug, is that the base DN and scope should be fixed server-side and never taken from the client; where they are not, this is the primitive.
 
+## Tools
+
+- **ldapsearch**: issue searches with varied base DN and scope to confirm widening.
+- **windapsearch**: enumerate the tree reachable from a redirected base.
+- **Burp Repeater**: craft requests that control the base or scope parameter.
+
 ## References
 
 - RFC 4511: LDAP search operation (baseObject, scope)

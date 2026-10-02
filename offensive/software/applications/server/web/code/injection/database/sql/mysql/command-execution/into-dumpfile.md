@@ -27,6 +27,11 @@ Find the plugin directory first so the library lands where `CREATE FUNCTION` wil
 
 `DUMPFILE` writes only one row, so it cannot dump a multi-row result, and like `OUTFILE` it requires `FILE` privilege, a permissive `secure_file_priv`, a writable destination, and a non-existent target file. With the library in place, the UDF is registered and called as shown in the `sys_exec` page.
 
+## Tools
+
+- **sqlmap**: writes exact bytes to the host with `--file-write` using `INTO DUMPFILE`.
+- **mysql**: official client to confirm `@@plugin_dir` and the write path.
+
 ## References
 
 - MySQL Reference Manual: SELECT INTO DUMPFILE, `plugin_dir`, `secure_file_priv`

@@ -57,6 +57,11 @@ Because evaluation is pure arithmetic over `double`, the abuse that does not dep
 
 Deeply nested parentheses and very long operator chains push parsing and tree construction, and expressions that drive results to `Infinity` or `NaN` (division by zero, `log(0)`, massive factorials where exposed) can propagate a surprising value into whatever the application does with the returned `double` downstream. None of this escapes the evaluator; the impact is availability and corrupted computed values, not execution.
 
+## Tools
+
+- Manual testing with Burp Repeater; payloads crafted per engine.
+- **Burp Intruder**: enumerate registered variables and custom functions by name.
+
 ## References
 
 - [Exp4j documentation](https://www.objecthunter.net/exp4j/)

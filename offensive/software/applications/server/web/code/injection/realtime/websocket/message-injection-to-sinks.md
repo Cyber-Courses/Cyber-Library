@@ -63,6 +63,12 @@ A `49` in the result confirms evaluation; the payload then escalates to the engi
 
 The common denominator is bypass. Length limits, character filters, and WAF rules are frequently wired into the HTTP request pipeline and never re-applied to decoded frames, so a payload rejected on a REST route often sails through the same application's socket. Map the frame schema from the client's own traffic, identify which fields reach which backend, and deliver the sink-appropriate payload directly over the socket.
 
+## Tools
+
+- **Burp Suite**: WebSockets history and repeater for editing frame payloads and delivering sink-specific injections.
+- **wsrepl**: interactive WebSocket REPL for pentesting frame fields.
+- **websocat**: command-line WebSocket client for scripting and fuzzing raw messages.
+
 ## References
 
 - PortSwigger Web Security Academy, "Manipulating WebSocket messages to exploit vulnerabilities"

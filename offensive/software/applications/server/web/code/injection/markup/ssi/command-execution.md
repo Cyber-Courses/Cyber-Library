@@ -90,6 +90,12 @@ A response that hangs for ten seconds confirms the file exists; an immediate res
 
 The directive grammar is portable, but the enabling configuration differs. nginx evaluates SSI only when `ssi on` is set for the location and does not provide an `exec cmd` equivalent by default, so `include` and `echo` are the usable primitives there. Apache `mod_include` is where `exec cmd` is most commonly reachable, gated by the `Includes` option (as opposed to `IncludesNOEXEC`, which keeps `echo` and `include` but strips `exec`). On IIS, the `#exec` directive is disabled in default configurations and has to be explicitly enabled, so confirm with `echo` before assuming command execution is available.
 
+## Tools
+
+- **Burp Suite**: injecting and iterating SSI directives through Repeater and Intruder.
+- **Burp Collaborator**: confirming blind `exec` execution via DNS and HTTP callbacks.
+- Manual testing with crafted `<!--#exec cmd-->` payloads.
+
 ## References
 
 - [OWASP: Server-Side Includes (SSI) Injection](https://owasp.org/www-community/attacks/Server-Side_Includes_(SSI)_Injection)

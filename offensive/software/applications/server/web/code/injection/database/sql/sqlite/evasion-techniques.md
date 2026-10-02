@@ -30,6 +30,12 @@ Keywords are case-insensitive, so case variation (`UnIoN SeLeCt`) bypasses naive
 
 Because SQLite is loosely typed and has a minimal parser, it also tolerates some oddities that confuse filters tuned for stricter engines, such as missing `FROM` clauses (`UNION SELECT 1,2`) and flexible literal forms. As with the other engines, the goal is to express the same query through synonyms and encodings the filter does not recognize rather than to defeat it head-on, combining several of these where a filter blocks more than one pattern.
 
+## Tools
+
+- **sqlmap**: tamper scripts (for example `space2comment`, `charencode`) automate these rewrites.
+- **ghauri**: built-in WAF evasion for SQLite payloads.
+- **Burp Repeater**: hand-tune comments, `char()`, and blob literals until the filter is bypassed.
+
 ## References
 
 - SQLite Documentation: char, literals, comments, expressions

@@ -77,6 +77,12 @@ Most JSON parsers keep the last value, yielding the operator object, while a sca
 
 Send the same field three ways and compare responses: a plain string (baseline), an always-true operator (`{"$ne": null}` or `{"$gt": ""}`), and a malformed operator (`{"$ne":` left open, or `{"$foo": 1}`). A behavior change between the string and the operator, or a BSON/cast error from the malformed form, confirms the value lands in the query untyped and the operators in the rest of this subtree apply.
 
+## Tools
+
+- **Burp Repeater**: submit the field as string, operator object, and array to confirm the type sink.
+- **nosqli**: scan parameters for type-juggling injection points.
+- **NoSQLMap**: automate operator and array payload delivery.
+
 ## References
 
 - [MongoDB: Query and projection operators](https://www.mongodb.com/docs/manual/reference/operator/query/)

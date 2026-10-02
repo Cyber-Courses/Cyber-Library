@@ -77,6 +77,11 @@ combined with a key the attacker controls, this reliably commits writes the equa
 
 Match attribute names and types to the target table; where the condition's outcome is observable only through success/failure of the write, use it as a boolean oracle to infer attribute presence and values before committing the final bypassing write.
 
+## Tools
+
+- **AWS CLI**: issue PutItem, UpdateItem, or DeleteItem with a crafted ConditionExpression to confirm the bypass.
+- **Burp Repeater**: tamper with the guard clause or operand in the application request.
+
 ## References
 
 - [AWS DynamoDB: Condition expressions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)

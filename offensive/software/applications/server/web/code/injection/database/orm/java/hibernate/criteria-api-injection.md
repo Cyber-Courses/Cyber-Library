@@ -44,6 +44,11 @@ x' OR (SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a
 
 For **property/column** contexts (`addOrder`, dynamic `eq`), there is no string to break out of, abuse it as a column-name injection: steer sorting to reveal ordering oracles, or reach association paths/columns the query never meant to expose. Modern code using the JPA **Criteria** (`CriteriaBuilder`) is safer for values but can still concatenate column names or fall back to `sqlRestriction`-style raw fragments.
 
+## Tools
+
+- **sqlmap**: exploiting the raw SQL spliced through Restrictions.sqlRestriction.
+- **Burp Repeater and Intruder**: testing sqlRestriction fragments and property-name selection.
+
 ## References
 
 - [Hibernate ORM: Legacy Criteria / Restrictions](https://docs.jboss.org/hibernate/orm/current/userguide/html_single/Hibernate_User_Guide.html)

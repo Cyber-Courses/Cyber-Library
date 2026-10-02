@@ -17,3 +17,15 @@ A MongoDB filter expresses conditions through **query operators**: special keys 
 The precondition throughout this section is that the application passes an attacker-controlled object into the query without casting it to a string, so the injected `$`-key is parsed as an operator instead of matched as literal data. Request JSON spread into a filter, and query-string or body parsers that build nested objects from bracket notation, are the common routes.
 
 The pages here cover the operator families worth reaching for: comparison operators (`$ne`, `$gt`, `$lt`, `$gte`) for bypass and blind extraction, array operators (`$in`, `$nin`, `$all`, `$elemMatch`) driven from attacker arrays, `$exists` as a field-presence oracle, `$regex` for anchored character-by-character extraction and ReDoS, and `$where`/`mapReduce` for server-side JavaScript where it is enabled.
+
+## Tools
+
+- **NoSQLMap**: automated operator injection and blind extraction.
+- **nosqli**: scanner for MongoDB operator injection in web parameters.
+- **mongosh**: validate operator filters directly against a database.
+- **Burp Suite**: intercept and tamper with query-backed requests.
+
+## References
+
+- [MongoDB: Query and projection operators](https://www.mongodb.com/docs/manual/reference/operator/query/)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

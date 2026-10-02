@@ -27,6 +27,11 @@ Requesting `/s.php?c=id` then runs commands as the web server user. Several cond
 
 `INTO OUTFILE` applies row and column formatting (line terminators, escaping), which is fine for a text script but corrupts exact binary content. For raw bytes use `INTO DUMPFILE` instead. If the exact web root is unknown, writing to several common candidates or reading the server config first is usually quicker than guessing blindly.
 
+## Tools
+
+- **sqlmap**: writes a web shell with `--file-write` using `INTO OUTFILE`.
+- **Burp Repeater**: craft and place the `INTO OUTFILE` payload by hand.
+
 ## References
 
 - MySQL Reference Manual: SELECT INTO OUTFILE, `secure_file_priv`

@@ -80,6 +80,11 @@ APOC does not ship an operating-system command runner. The `apoc.cypher.*` proce
 
 `dbms.procedures()` is replaced by `SHOW PROCEDURES` on newer versions.
 
+## Tools
+
+- **cypher-shell**: enumerate and invoke APOC procedures directly against the database.
+- **Burp Repeater**: deliver CALL payloads through the vulnerable parameter.
+
 ## References
 
 - [APOC: load.json / load.jsonParams](https://neo4j.com/labs/apoc/current/import/load-json/)

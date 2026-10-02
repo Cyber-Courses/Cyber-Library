@@ -24,6 +24,11 @@ The distinction that decides outcome is what the engine can reach. NCalc parses 
 
 Each page maps the engine's parse and evaluation entry point, what its grammar reaches, and the realistic escalation from a benign-looking formula to the engine's maximum impact.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for injecting formula and data-binding payloads.
+- Manual testing with Burp Repeater; payloads crafted per .NET engine.
+
 ## References
 
 - [OWASP: Expression Language Injection](https://owasp.org/www-community/vulnerabilities/Expression_Language_Injection)

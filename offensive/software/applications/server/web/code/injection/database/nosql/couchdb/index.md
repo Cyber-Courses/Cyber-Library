@@ -15,3 +15,13 @@ keywords:
 Apache CouchDB is a document database with an HTTP REST API and JSON documents. Every operation is an HTTP verb against a URL: `GET /db/doc`, `PUT /db/_design/app`, `POST /db/_find`. What makes CouchDB a distinct injection target is that its design documents carry **JavaScript** that runs server-side in a query server process: map and reduce functions, `show` and `list` transforms, `update` handlers, and `validate_doc_update` filters.
 
 Injection here takes two shapes. The first targets the JavaScript surface: when an attacker can write a design document, or reach the `_config`/`query_servers` configuration, attacker-controlled code executes inside the server. The second targets the query and view API: key, range, and `include_docs` parameters passed into `_all_docs`, `_find`, and `_view` requests can be manipulated to read documents outside the intended scope.
+
+## Tools
+
+- **curl**: send raw HTTP/JSON requests to the CouchDB REST API.
+- **Burp Suite**: intercept and tamper with document and view requests.
+
+## References
+
+- [Apache CouchDB: HTTP API reference](https://docs.couchdb.org/en/stable/api/index.html)
+- [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

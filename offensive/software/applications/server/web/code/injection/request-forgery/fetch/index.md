@@ -20,6 +20,12 @@ The [Authority](../authority/index.md), [Path](../path.md), [Query](../query/ind
 
 A programmatic client that refuses redirects and rejects non-`http` schemes is a narrow target. A headless browser pointed at the same URL is far wider: it renders attacker markup (so injected HTML and script run in a privileged context), it loads `file://` and internal subresources, and it may attach a real session cookie to the request. Deciding which one the application uses tells you whether to invest in raw-byte scheme payloads (programmatic) or in session reuse and rendered-script exfiltration (headless). Host-level tricks such as [DNS rebinding](../authority/domain-name/dns-rebinding.md) apply to both, because both resolve names.
 
+## Tools
+
+- **SSRFmap**: driving payloads once the client type is known.
+- **Burp Suite**: fingerprinting client behavior (redirects, user agent, script execution) per request.
+- **Burp Collaborator**: distinguishing clients by observing which out-of-band loads fire.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

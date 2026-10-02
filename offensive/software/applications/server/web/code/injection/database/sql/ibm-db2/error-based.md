@@ -29,6 +29,12 @@ BEGIN DECLARE v VARCHAR(128); SET v = (SELECT CURRENT SERVER FROM SYSIBM.SYSDUMM
 
 Because the message length is bounded and clean echoing is inconsistent, the practical approach against Db2 is to use errors to confirm and fingerprint (a distinct `SQLCODE`/`SQLSTATE` proves injection and can itself act as a boolean oracle), and to extract the data with the boolean and time-based techniques, which are the dependable channels here.
 
+## Tools
+
+- **sqlmap**: automated detection and extraction (`--dbms=Db2`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **db2** (or clpplus): the Db2 client for reproducing `CAST` and `SIGNAL` errors.
+
 ## References
 
 - IBM Db2 SQL Reference: CAST, SIGNAL, SQLSTATE and SQLCODE values

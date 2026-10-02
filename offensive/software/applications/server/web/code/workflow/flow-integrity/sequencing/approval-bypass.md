@@ -31,3 +31,8 @@ Map states (for example pending → approved → settled) and which credential m
 
 - **Burp Suite**
 - **curl**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

@@ -19,6 +19,12 @@ OGNL is a full object language: it names classes, constructs objects, and calls 
 - **[Remote code execution](remote-code-execution.md)**: restoring member access and reaching `Runtime` and `ProcessBuilder`.
 - **[Remote file inclusion](remote-file-inclusion.md)**: constructing `java.io.File` and `java.net.URL` to read local files and fetch remote content.
 
+## Tools
+
+- **Burp Suite**: Repeater and Intruder for OGNL injection into Struts2 sinks.
+- **J2EEScan**: Burp extension that detects OGNL and Struts expression injection.
+- **struts-pwn**: PoC tool for Struts2 OGNL vectors.
+
 ## References
 
 - [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)

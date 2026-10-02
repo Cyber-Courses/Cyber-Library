@@ -32,6 +32,12 @@ The high-impact primitives are `ATTACH DATABASE`, which can write a file, and `l
 - **[Remote code execution](remote-code-execution.md)**: `load_extension()` and the ATTACH web-shell.
 - **[Evasion techniques](evasion-techniques.md)**: comments, hex, and encoding past filters.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation (`--dbms=SQLite`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **sqlite3**: the engine CLI for reproducing `sqlite_master`, `ATTACH`, and `load_extension` behavior.
+
 ## References
 
 - SQLite Documentation: `sqlite_master`, core functions, ATTACH, load_extension

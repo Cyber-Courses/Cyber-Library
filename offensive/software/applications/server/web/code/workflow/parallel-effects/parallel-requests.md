@@ -24,3 +24,8 @@ Effectiveness depends on connection pool size, app server threading, and whether
 
 - **Burp Suite** Turbo Intruder
 - **Python asyncio** or **GNU parallel** with curl
+
+## References
+
+- PortSwigger Web Security Academy: Race conditions
+- OWASP WSTG: Testing for Business Logic

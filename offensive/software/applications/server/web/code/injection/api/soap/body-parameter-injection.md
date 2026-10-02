@@ -46,6 +46,12 @@ When an element's type is inferred or loosely bound (a wrapped document/literal 
 
 Send structurally valid envelopes that stress the unmarshaler: duplicate a security-relevant element with conflicting values, mark a constraint field `xsi:nil`, and override a type with `xsi:type`. A response that reflects the second duplicate, honors the nil by skipping a check, or processes the overridden type shows the unmarshaler and the validator saw different structures. Strict schema validation before business logic closes this, so leniency in how the body is parsed is what the test is probing. Raw XML parsing concerns such as entity expansion live in [XML processing](../../markup/xml-processing/index.md); this page is about how the unmarshaled parameters drive the operation.
 
+## Tools
+
+- **Burp Repeater**: crafting duplicate elements, xsi:nil, and xsi:type overrides in the body.
+- **SoapUI**: generating valid envelopes from the WSDL to mutate.
+- **Wsdler (Burp extension)**: parsing a WSDL into editable requests inside Burp.
+
 ## References
 
 - [OWASP: Testing for SOAP](https://owasp.org/www-project-web-security-testing-guide/)

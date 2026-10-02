@@ -29,6 +29,12 @@ The most general route is Java. A schema granted `java.io.FilePermission` can lo
 
 Because `UTL_FILE` and `CREATE DIRECTORY` are statements and PL/SQL, this route generally needs an injectable PL/SQL context or stacked execution (which Oracle grants only inside PL/SQL), plus the directory and execute privileges. Enumerate existing directories first with `SELECT directory_name, directory_path FROM all_directories` to find one already pointing somewhere useful.
 
+## Tools
+
+- **ODAT** (Oracle Database Attacking Tool): reads and writes server files via `UTL_FILE`, `DBMS_LOB`, and Java.
+- **sqlplus** (or SQLcl): the Oracle client for creating directory objects and calling `UTL_FILE`.
+- Manual testing with Burp Repeater and the Oracle client.
+
 ## References
 
 - Oracle Database PL/SQL Packages and Types Reference: UTL_FILE, DBMS_LOB; CREATE DIRECTORY

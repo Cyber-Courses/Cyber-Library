@@ -24,6 +24,12 @@ Targeting the authority covers three moves:
 
 Host allowlists and blocklists operate on a string, but the network connects to a resolved IP. Every page in this subtree widens the gap between the two: the string the validator inspects and the address the socket actually reaches. A check that compares the literal host, normalizes differently from the HTTP client, or resolves the name once for validation and again for the connection is defeated by one of the techniques here.
 
+## Tools
+
+- **SSRFmap**: automated SSRF exploitation across common internal targets and authority bypasses.
+- **Burp Collaborator**: detecting blind SSRF reach via out-of-band DNS and HTTP callbacks.
+- **curl**: manual probing of hosts, ports, and schemes to confirm which authority forms connect.
+
 ## References
 
 - [OWASP: Server Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

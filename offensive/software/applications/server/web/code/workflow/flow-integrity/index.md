@@ -19,3 +19,13 @@ keywords:
 
 **Trust boundaries** for numeric and business parameters: **[Trust boundaries](../trust-boundaries/index.md)**.
 
+## Tools
+
+- **Burp Suite (Repeater)**: replay and reorder captured workflow steps to probe sequencing and state alignment.
+- Manual testing with Burp Repeater and crafted payloads.
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic
+

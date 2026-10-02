@@ -22,6 +22,11 @@ Prisma Client is parameterized by default. The typed query methods (`findMany`, 
 
 Prisma makes the boundary unusually visible: the dangerous methods carry `Unsafe` in their names. `$queryRaw\`...\`` binds every `${}`; `$queryRawUnsafe(str)` runs `str` as given. The subtler case is the typed API itself, which is injection-safe for values but trusts the shape of the `where` object, so an endpoint that forwards attacker JSON into it is handing the caller control of the query structure rather than just a value.
 
+## Tools
+
+- **sqlmap**: exploiting $queryRawUnsafe and $executeRawUnsafe sinks.
+- **Burp Repeater**: testing raw methods and untrusted objects spread into where.
+
 ## References
 
 - [Prisma: Raw queries](https://www.prisma.io/docs/orm/prisma-client/using-raw-sql/raw-queries)

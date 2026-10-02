@@ -73,6 +73,11 @@ $(/???/c?t /???/p?sswd)        # globbing to avoid literal keywords
 
 `$(...)` and backticks are **POSIX/bash** constructs. Windows `cmd.exe` has no equivalent, use `%VAR%` expansion and `for /f` instead, or shift to PowerShell, where `$(...)` is the substitution operator (`ping 127.0.0.1; $(whoami)`).
 
+## Tools
+
+- **[commix](https://github.com/commixproject/commix)**: automated command-injection exploitation.
+- **[Burp Suite](https://portswigger.net/burp)**: Repeater and Collaborator for inline substitution and out-of-band confirmation.
+
 ## References
 
 - [OWASP: OS Command Injection](https://owasp.org/www-community/attacks/Command_Injection)

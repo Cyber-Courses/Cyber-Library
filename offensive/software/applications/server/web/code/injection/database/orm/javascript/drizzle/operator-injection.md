@@ -39,6 +39,11 @@ A body naming privileged columns (`isAdmin`, `role`) filters on them; a body who
 
 Vary the `field`/operator and the filter keys and watch the result set and errors: filtering on a column the endpoint never offered, or flipping the operator to widen the match, shows the query structure is caller-controlled. The safe form selects the column and operator from a fixed allowlist and validates the filter keys, so an endpoint that maps request keys straight onto columns is the pattern to find.
 
+## Tools
+
+- **Burp Repeater**: varying the field, operator, and filter keys and comparing result sets.
+- **Burp Intruder**: enumerating column names accepted by the dynamic filter.
+
 ## References
 
 - [Drizzle: Filters](https://orm.drizzle.team/docs/operators)

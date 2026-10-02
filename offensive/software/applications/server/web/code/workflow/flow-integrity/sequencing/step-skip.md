@@ -31,3 +31,8 @@ Servers often trust client-visible step order and store weak progress flags (`st
 
 - **Burp Suite**
 - **browser**
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

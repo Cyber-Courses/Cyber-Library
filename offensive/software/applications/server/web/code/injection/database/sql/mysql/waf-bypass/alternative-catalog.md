@@ -34,6 +34,11 @@ When `GROUP_CONCAT` is blocked, `JSON_ARRAYAGG` (MySQL 5.7.22+) aggregates rows 
 
 Numeric literals also have filter-friendly forms: scientific notation (`1e0` for `1`) and hex (`0x...`) slip past filters that only match plain digits or quoted strings. The theme is that MySQL usually offers a synonym, so enumeration adapts to whatever the filter blocks rather than being stopped by it.
 
+## Tools
+
+- **sqlmap**: tamper scripts reach schema and version past blocked names.
+- **Burp Repeater**: test alternative catalog and function payloads by hand.
+
 ## References
 
 - MySQL Reference Manual: system variables, `mysql.innodb_table_stats`, JSON_ARRAYAGG

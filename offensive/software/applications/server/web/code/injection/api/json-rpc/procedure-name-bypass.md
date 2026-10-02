@@ -37,6 +37,11 @@ Delimiter and namespace tricks exploit the same split: where names are `namespac
 
 Enumerate method names by probing: common admin and internal prefixes (`admin`, `internal`, `debug`, `__`), reflection-reachable attributes, and case and separator variants of known methods. A method that executes, or that returns a different error (an argument error rather than method-not-found) when it should be blocked, reveals that the name resolved to a real function past the name filter. The safe design, an explicit string-to-function map with no dynamic lookup, is the thing whose absence this probes.
 
+## Tools
+
+- **Burp Intruder**: fuzzing method names with admin, internal, and reflection-reachable prefixes.
+- **curl**: probing case, separator, and whitespace variants of a method name.
+
 ## References
 
 - [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification)

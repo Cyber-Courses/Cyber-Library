@@ -33,6 +33,12 @@ Two limits shape technique choice. Db2 has no `SLEEP`/`WAITFOR`, so time-based i
 - **[DIOS](dios.md)**: single-request dumps with `XMLAGG`/`LISTAGG`.
 - **[WAF bypass](waf-bypass.md)**: `CHR()`, concatenation, and hex past filters.
 
+## Tools
+
+- **sqlmap**: automated detection and exploitation (`--dbms=Db2`).
+- **ghauri**: fast alternative with strong WAF evasion.
+- **db2** (or clpplus): the Db2 client for a direct session once credentials are recovered.
+
 ## References
 
 - IBM Db2 SQL Reference: special registers, catalog views, built-in functions

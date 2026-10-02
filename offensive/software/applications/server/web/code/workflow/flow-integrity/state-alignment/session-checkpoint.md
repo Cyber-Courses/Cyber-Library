@@ -23,3 +23,8 @@ Every mutating step should validate a server-stored token or order ID that ties 
 ## Tools
 
 - Two browsers or incognito windows (distinct sessions) against the same account in staging
+
+## References
+
+- PortSwigger Web Security Academy: Business logic vulnerabilities
+- OWASP WSTG: Testing for Business Logic

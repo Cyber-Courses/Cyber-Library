@@ -39,6 +39,11 @@ By default `LIKE` on a non-binary column is case-insensitive, so add `COLLATE ut
 
 These forms also help against keyword filters, since `FROM ... FOR` and `LIKE` avoid the heavily-filtered `SUBSTRING(,,)` and `MID` signatures.
 
+## Tools
+
+- **sqlmap**: boolean extraction with tamper scripts that remove commas from payloads.
+- **ghauri**: fast blind extraction alternative with strong WAF evasion.
+
 ## References
 
 - MySQL Reference Manual: SUBSTRING, LIKE, LIMIT, string collations

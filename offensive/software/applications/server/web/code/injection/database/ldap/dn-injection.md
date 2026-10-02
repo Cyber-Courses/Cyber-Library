@@ -26,6 +26,12 @@ This shifts the DN into a different subtree, so a bind or lookup resolves to an 
 
 DN injection is narrower than filter injection because a DN must still resolve to a real entry, so it is used to pivot to a neighbouring or higher-privileged entry (for example moving a bind DN into an administrative OU) rather than to match broadly. Where the input feeds the bind DN of an authentication step, controlling it can select which account the application binds as.
 
+## Tools
+
+- **ldapsearch**: resolve candidate DNs to confirm reparenting lands on a real entry.
+- **windapsearch**: enumerate OUs and entries to pick a higher-privileged target DN.
+- **Burp Repeater**: craft requests that feed the injected DN fragment.
+
 ## References
 
 - RFC 4514: LDAP string representation of distinguished names

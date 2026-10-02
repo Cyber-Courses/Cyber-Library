@@ -29,6 +29,11 @@ On a Java client that still exposes the handler, this returns the file contents 
 
 The only reason to use `netdoc:` over `file:` is evasion. A scheme allowlist or blocklist written for `http`/`https`/`file` commonly omits the legacy handler, so when `file://` is rejected but the stack is Java, `netdoc:` reaches the filesystem anyway. It belongs in the rotation alongside [File](file.md) and [JAR](jar.md): when one Java-reachable local scheme is filtered, try the others before concluding local read is unavailable.
 
+## Tools
+
+- **Java URL client**: `new URL("netdoc:/etc/passwd").openStream()` exercises this JVM-only handler directly, since curl does not support the `netdoc:` scheme.
+- **Burp Repeater**: submit the `netdoc:` URL through the target's JVM fetch sink and read the reflected contents.
+
 ## References
 
 - [PayloadsAllTheThings: Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)
