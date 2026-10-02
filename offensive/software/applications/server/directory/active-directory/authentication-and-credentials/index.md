@@ -24,10 +24,10 @@ This is the heart of Active Directory attacks. Passwords, NTLM hashes, Kerberos 
 
 - **[Credentials](credentials/index.md)**: dumping secrets from hosts and the directory, cracking them, and guessing them through spraying.
 - **[NTLM](ntlm/index.md)**: capturing, relaying, and replaying NTLM authentication (pass-the-hash).
-- **Kerberos**: roasting, ticket forgery, delegation abuse, and ticket reuse.
+- **[Kerberos](kerberos/index.md)**: roasting, ticket forgery, delegation abuse, and ticket reuse.
 - **Certificates**: abusing AD Certificate Services for authentication and escalation.
 
-*(This section is built in phases; Credentials and NTLM are available now, with Kerberos and Certificates following.)*
+*(This section is built in phases; Credentials, NTLM, and Kerberos are available now, with Certificates following.)*
 
 ## References
 
