@@ -54,5 +54,6 @@ This matters where the web-enrolment endpoint is absent or EPA-protected but the
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (ESC8)
-- The Hacker Recipes: AD CS relay (ESC8, ESC11)
+- [SpecterOps: Certified Pre-Owned (ESC8)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
+- [SpecterOps: the renaissance of NTLM relay attacks](https://posts.specterops.io/the-renaissance-of-ntlm-relay-attacks-everything-you-need-to-know-abfc3677c34e)
+- [Impacket ntlmrelayx](https://github.com/fortra/impacket)

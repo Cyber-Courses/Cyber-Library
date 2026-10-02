@@ -62,5 +62,6 @@ certipy ca -u user@example.local -p pass -ca <ca> -issue-request <id>       # ap
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (ESC4, ESC5, ESC7)
-- The Hacker Recipes: AD CS access control
+- [SpecterOps: Certified Pre-Owned (ESC4, ESC5, ESC7)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
+- [Certipy (ly4k)](https://github.com/ly4k/Certipy)
+- [SpecterOps: Certify 2.0](https://specterops.io/blog/2025/08/11/certify-2-0/)

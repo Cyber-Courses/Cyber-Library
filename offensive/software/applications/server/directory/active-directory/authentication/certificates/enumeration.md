@@ -26,6 +26,10 @@ AD CS configuration lives in the **Configuration partition** of the directory, r
 # Certipy: collect everything and flag vulnerable configurations
 certipy find -u user@example.local -p pass -dc-ip <dc> -stdout -vulnerable
 
+# NetExec from Linux: find CAs/templates, or run Certipy's triage inline
+nxc ldap <dc> -u user -p pass -M adcs
+nxc ldap <dc> -u user -p pass -M certipy-find
+
 # BloodHound (with AD CS collection) graphs CA/template relationships and ESC paths
 # Certutil, on a domain-joined host
 certutil -config - -ping
@@ -54,10 +58,12 @@ The conditions that make a template or CA abusable, and the page that covers eac
 ## Tools
 
 - **Certipy** (`find -vulnerable`): the primary AD CS enumeration and triage tool.
+- **NetExec (`nxc`) `-M adcs` / `-M certipy-find`**: CA and template discovery, and Certipy triage, over LDAP from Linux.
 - **BloodHound** (AD CS collection): graphs CA/template/enrolment relationships.
 - **certutil / PSPKIAudit**: native and PowerShell enumeration.
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (enumeration)
-- The Hacker Recipes: AD CS enumeration
+- [Certipy wiki: privilege escalation (ESC triage)](https://github.com/ly4k/Certipy/wiki/06-%E2%80%90-Privilege-Escalation)
+- [NetExec adcs module source](https://github.com/Pennyw0rth/NetExec/blob/main/nxc/modules/adcs.py)
+- [SpecterOps: Certified Pre-Owned](https://specterops.io/blog/2021/06/17/certified-pre-owned/)

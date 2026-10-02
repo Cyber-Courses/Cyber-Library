@@ -41,5 +41,6 @@ Every AD CS attack is a variation on this: get a certificate you should not have
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (AD CS abuse)
-- The Hacker Recipes: AD CS
+- [SpecterOps: Certified Pre-Owned](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
+- [Certipy (ly4k): AD CS enumeration and abuse](https://github.com/ly4k/Certipy)
+- [Microsoft: Active Directory Certificate Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/)

@@ -61,5 +61,6 @@ certipy req -u user@example.local -p pass -ca <ca> -template <v1-template> \
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (ESC1-ESC3)
-- The Hacker Recipes: AD CS domain escalation
+- [SpecterOps: Certified Pre-Owned (ESC1-ESC3)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
+- [TrustedSec: EKUwu, not just another AD CS ESC (ESC15)](https://trustedsec.com/blog/ekuwu-not-just-another-ad-cs-esc)
+- [Certipy (ly4k)](https://github.com/ly4k/Certipy)

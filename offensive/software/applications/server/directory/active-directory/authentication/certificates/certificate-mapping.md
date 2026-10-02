@@ -59,5 +59,6 @@ This is a pure ACL abuse: a write primitive over `altSecurityIdentities` (from B
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (ESC9, ESC10)
-- The Hacker Recipes: AD CS certificate mapping
+- [Certipy wiki: privilege escalation (ESC9/ESC10)](https://github.com/ly4k/Certipy/wiki/06-%E2%80%90-Privilege-Escalation)
+- [SpecterOps: BloodHound ADCSESC9 edge](https://bloodhound.specterops.io/resources/edges/adcs-esc9a)
+- [SpecterOps: Certified Pre-Owned](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
