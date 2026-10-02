@@ -15,7 +15,7 @@ A low-privileged Oracle account rarely stops an attacker, because Oracle ships m
 
 The classic route is injecting a definer-rights procedure owned by a privileged schema. A vulnerable `SYS`-owned package that builds dynamic SQL from input runs the injected statement as `SYS`, so a payload of `GRANT DBA TO SCOTT` succeeds. Over the years a long list of supplied packages has been exploitable this way, which is why patching and least privilege on PL/SQL matter.
 
-Dangerous system privileges held directly are the other route. `CREATE ANY PROCEDURE` lets you create a definer-rights procedure in a privileged schema and then run it. `CREATE ANY TRIGGER` lets you plant a trigger that fires as a privileged owner. `CREATE ANY JOB` or `CREATE EXTERNAL JOB` reaches OS command execution through `DBMS_SCHEDULER`. `EXECUTE ANY PROCEDURE` plus a vulnerable package combines into escalation. Enumerate what the session holds first:
+Dangerous system privileges held directly are the other route. `CREATE ANY PROCEDURE` lets you create a definer-rights procedure in a privileged schema, but creating it is not enough on its own: you also need a way to invoke it as that owner, through `EXECUTE ANY PROCEDURE`, an explicit execute grant, or a gadget that runs it (a scheduler job or a trigger the owner fires). `CREATE ANY TRIGGER` lets you plant a trigger that fires as a privileged owner, which is itself such an invocation gadget. `CREATE ANY JOB` or `CREATE EXTERNAL JOB` reaches OS command execution through `DBMS_SCHEDULER`. `EXECUTE ANY PROCEDURE` plus a vulnerable package combines into escalation. Enumerate what the session holds first:
 
 ```sql
 ' UNION SELECT privilege,NULL,NULL FROM session_privs-- 

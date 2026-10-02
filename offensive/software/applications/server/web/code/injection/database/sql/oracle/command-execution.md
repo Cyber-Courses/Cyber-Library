@@ -21,7 +21,7 @@ SELECT DBMS_JAVA.RUNJAVA('oracle/aurora/util/Wrapper /bin/sh -c id') FROM dual;
 
 or, more commonly, by loading a small Java source that exposes an `exec` method and publishing it as a PL/SQL function. This requires the Java permissions and the ability to create Java sources, both DBA-tier.
 
-The `DBMS_SCHEDULER` route runs an external program directly. With `CREATE JOB`/`CREATE EXTERNAL JOB`, create a job whose `job_type` is `EXECUTABLE`:
+The `DBMS_SCHEDULER` route runs an external program directly. An `EXECUTABLE` job needs both `CREATE JOB` and `CREATE EXTERNAL JOB` (not either one alone), or `CREATE ANY JOB` to create it in another schema. Create a job whose `job_type` is `EXECUTABLE`:
 
 ```sql
 BEGIN DBMS_SCHEDULER.CREATE_JOB(job_name=>'x',job_type=>'EXECUTABLE',job_action=>'/bin/sh',number_of_arguments=>2,enabled=>FALSE); ... DBMS_SCHEDULER.ENABLE('x'); END;
