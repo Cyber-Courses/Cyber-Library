@@ -22,6 +22,8 @@ File access is gated. `LOAD_FILE()` and `SELECT ... INTO OUTFILE/DUMPFILE` requi
 
 ## Techniques
 
+- **[Enumeration](enumeration.md)**: fingerprint the engine, version, current context, and privileges.
+- **[Authentication bypass](authentication-bypass.md)**: subvert a login built from the credential fields.
 - **[Union-based](union-based/index.md)**: append a `UNION SELECT` to pull data into the visible response.
 - **[Error-based](error-based/index.md)**: force query output into a reflected error message.
 - **[Boolean blind](blind/index.md)**: infer data one bit at a time from true/false response differences.

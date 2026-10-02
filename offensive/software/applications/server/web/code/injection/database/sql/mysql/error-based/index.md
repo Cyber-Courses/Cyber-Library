@@ -21,6 +21,7 @@ Both XPath functions truncate the reflected text to about 32 characters. Longer 
 
 - **[EXTRACTVALUE](extractvalue.md)**: leak via an invalid XPath in a two-argument function.
 - **[UPDATEXML](updatexml.md)**: the same channel through the three-argument function.
+- **[FLOOR double-query](floor-double-query.md)**: duplicate-key error for servers without the XPath functions.
 
 ## References
 
