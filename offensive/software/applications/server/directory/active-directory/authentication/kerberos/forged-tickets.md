@@ -13,6 +13,8 @@ keywords:
 
 Kerberos trusts a ticket because it can be decrypted with the right key and its PAC is signed by the KDC. If you hold the relevant key, you can **forge** a ticket with any identity and privileges you like, because you can produce exactly what the verifier expects. Which key you hold decides what you can forge and how broad it is.
 
+**Lineage.** The golden ticket was introduced in 2014 and relied on the PAC being trusted once the ticket decrypts. Later PAC signature hardening and enforcement set out to detect wholesale forgeries, which is exactly what the diamond and sapphire variants evade by modifying a real, KDC-issued ticket instead of fabricating one from scratch.
+
 ## Golden ticket (the krbtgt key)
 
 The `krbtgt` account's key encrypts and signs every TGT in the domain. With it (from [DCSync](../credentials/ntds-and-dcsync.md) or an NTDS dump), you forge a TGT for **any** user with **any** group membership, valid until the `krbtgt` password changes twice:

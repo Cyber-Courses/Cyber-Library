@@ -13,6 +13,8 @@ keywords:
 
 NTLM has no binding between the authentication and the service it was meant for. So an authentication produced for server A can be **forwarded** to server B, where you complete it and act as the victim, all without ever knowing their password. Relay turns a [captured](net-ntlm-capture-and-poisoning.md) or [coerced](coercion.md) authentication directly into access on another system. What you can relay to is decided entirely by the target's signing posture.
 
+**Lineage.** Relay began as SMBRelay in 2001, reflecting authentication straight back to the origin host. Microsoft blocked the self-relay and then raised SMB and LDAP signing, the MIC, and channel binding over successive releases, each closing a path. Modern relay answers by crossing protocols, forwarding to LDAP, to AD CS web enrollment, and even back into Kerberos, wherever signing or channel binding is still unenforced.
+
 ## What stops a relay
 
 Signing and channel binding bind the authentication to the session or the TLS channel, breaking the forward:

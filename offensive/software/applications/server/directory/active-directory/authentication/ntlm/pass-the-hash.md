@@ -13,6 +13,8 @@ keywords:
 
 The NTLM response is computed from the NT hash, not the password, so the **hash is the credential**. If you recover an account's NT hash ([LSASS](../credentials/lsass-dumping.md), [SAM](../credentials/sam-and-lsa-secrets.md), or [NTDS/DCSync](../credentials/ntds-and-dcsync.md)), you can authenticate as that account anywhere NTLM is accepted without ever cracking it. This is the primary lateral-movement technique on NTLM.
 
+**Lineage.** The flaw is as old as the protocol: LanMan stored passwords as two DES-encrypted seven-character halves that fell fast, and an empty LM half exposed the NT hash, so hash reuse became practical in the late 1990s and a standard toolkit through the 2000s. In-memory credential theft industrialised it, and Restricted Admin mode, Protected Users, and Credential Guard are the later answers that push today's operators toward AES overpass-the-hash and Kerberos pivots where the raw NT hash is refused.
+
 ## Executing with a hash
 
 ```bash

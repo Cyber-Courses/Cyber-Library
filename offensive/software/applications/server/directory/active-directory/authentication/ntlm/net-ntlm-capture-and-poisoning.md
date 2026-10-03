@@ -13,6 +13,8 @@ keywords:
 
 When a Windows host tries to reach a name that DNS cannot resolve (a typo, a decommissioned share, a WPAD lookup), it falls back to **broadcast** name-resolution protocols: LLMNR, NBT-NS, and mDNS. These have no authentication: any host on the segment can answer "that's me". By answering, you make the victim connect to you and authenticate, handing you a **NetNTLMv2** challenge-response you can crack offline or relay.
 
+**Lineage.** The poisoning surface is a relic of WINS and NetBIOS name resolution, whose broadcast fallback LLMNR and NBT-NS inherited. Responder made abusing it routine from 2012, and mDNS and IPv6 (mitm6, rogue DHCPv6 and WPAD) are the same idea carried onto newer stacks.
+
 ## Why it works
 
 - **LLMNR** (UDP 5355) and **NBT-NS** (UDP 137) are multicast/broadcast fallbacks with no source validation.

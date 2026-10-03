@@ -13,6 +13,8 @@ keywords:
 
 Roasting abuses the fact that parts of the Kerberos exchange are encrypted with an account's long-term key. Any domain user can *ask* the KDC for these encrypted blobs, then crack them offline to recover the account's password. No code runs on a target and no admin rights are needed, which makes roasting one of the first things to try with a single domain credential, and in one case with none at all.
 
+**Lineage.** Kerberoasting was published in 2014 and traded on RC4 service tickets cracking quickly offline. Stronger AES encryption types, group-managed service accounts, and fine-grained password policies raised the bar, and AS-REP roasting and timeroasting are the lower-requirement offshoots that followed, needing one credential or none.
+
 ## Kerberoasting
 
 When you request a service ticket (TGS) for an account that has a **Service Principal Name**, part of the ticket is encrypted with that service account's password-derived key. Request tickets for every SPN-bearing account and crack the blobs offline:

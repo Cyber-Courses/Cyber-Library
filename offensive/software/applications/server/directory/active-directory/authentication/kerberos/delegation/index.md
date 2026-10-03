@@ -13,6 +13,8 @@ keywords:
 
 Kerberos delegation lets a service act **on behalf of** a user toward another service, so a front-end (a web app, say) can reach a back-end (a database) as the user. The feature necessarily lets one account obtain tickets for another identity, and every delegation type is therefore an impersonation primitive when the delegating account is compromised or its configuration is writable.
 
+**Lineage.** Unconstrained delegation was the original, coarse mechanism and is still the most dangerous. Constrained delegation and protocol transition (S4U) were added to narrow it, and resource-based constrained delegation, formalised offensively in 2018, moved the control onto the target object, which is what makes a single writable computer object a takeover today.
+
 ## The three types
 
 - **Unconstrained**: the delegating host receives and stores the user's **TGT**, so it can act as that user *anywhere*. Compromise such a host (or coerce a DC to authenticate to it) and you capture TGTs, including a DC's.
