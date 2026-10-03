@@ -13,7 +13,7 @@ keywords:
 
 The `NTDS.dit` database on every domain controller holds the NTLM hash of **every** account in the domain, including the `krbtgt` account whose hash signs all Kerberos tickets. Obtaining it is effectively full domain compromise: it enables pass-the-hash as any user and golden-ticket forgery. There are two ways to get it, one requiring access to a DC and one requiring only a specific replication permission.
 
-**Lineage.** Pulling NTDS once meant grabbing the database file through a volume shadow copy or IFM install media on the DC. DCSync, released in 2015, replaced that with directory replication over DRSUAPI, needing only the replication rights and leaving no file artefact, and it remains the standard post-domain-admin harvest and the parent of the DCShadow and ZeroLogon replication-path offshoots.
+**Lineage.** Pulling NTDS once meant grabbing the database file through a volume shadow copy or IFM install media on the DC. DCSync, released in 2015, replaced that with directory replication over DRSUAPI, needing only the replication rights and leaving no file artefact, and it remains the standard post-domain-admin harvest and the parent of the DCShadow replication-path offshoot. (ZeroLogon is a separate Netlogon flaw that resets the DC account and then feeds into DCSync, not a replication offshoot of it.)
 
 ## DCSync (replication abuse)
 
