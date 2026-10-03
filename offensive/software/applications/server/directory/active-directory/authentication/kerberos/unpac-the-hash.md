@@ -48,5 +48,6 @@ Any path that yields a certificate for the account feeds UnPAC:
 
 ## References
 
-- The Hacker Recipes: UnPAC the hash
-- Microsoft: PKINIT and the NTLM_SUPPLEMENTAL_CREDENTIAL in the PAC
+- [PKINITtools (dirkjanm): gettgtpkinit and getnthash](https://github.com/dirkjanm/PKINITtools)
+- [Certipy (ly4k): auth and hash recovery](https://github.com/ly4k/Certipy)
+- [SpecterOps: Shadow Credentials](https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab)

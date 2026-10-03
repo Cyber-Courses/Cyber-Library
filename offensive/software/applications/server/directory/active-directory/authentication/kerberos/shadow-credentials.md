@@ -47,5 +47,6 @@ The write permission on the target's `msDS-KeyCredentialLink` is the prerequisit
 
 ## References
 
-- The Hacker Recipes: shadow credentials
-- SpecterOps: Shadow Credentials (Key Trust abuse)
+- [SpecterOps: Shadow Credentials (Elad Shamir)](https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab)
+- [Whisker (eladshamir)](https://github.com/eladshamir/Whisker)
+- [Certipy (ly4k): shadow and PKINIT](https://github.com/ly4k/Certipy)

