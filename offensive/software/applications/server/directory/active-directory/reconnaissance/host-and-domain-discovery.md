@@ -85,4 +85,4 @@ enum4linux-ng -A <dc-ip>
 - [NetExec (Pennyw0rth)](https://github.com/Pennyw0rth/NetExec)
 - [ldapdomaindump (dirkjanm)](https://github.com/dirkjanm/ldapdomaindump)
 - [Microsoft: Active Directory Domain Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/active-directory-domain-services)
-- [The Hacker Recipes: Active Directory movement](https://www.thehacker.recipes/ad/movement/)
+- [The Hacker Recipes: Active Directory movement](https://www.thehacker.recipes/ad/recon/)

@@ -57,4 +57,4 @@ BloodHound's session and local-admin collection is exactly this data at scale: `
 - [NetExec: sessions and logged-on users](https://github.com/Pennyw0rth/NetExec)
 - [Impacket (fortra): netview and NetSessionEnum](https://github.com/fortra/impacket)
 - [SpecterOps: BloodHound session collection](https://bloodhound.specterops.io/)
-- [The Hacker Recipes: Active Directory movement](https://www.thehacker.recipes/ad/movement/)
+- [The Hacker Recipes: Active Directory movement](https://www.thehacker.recipes/ad/recon/)
