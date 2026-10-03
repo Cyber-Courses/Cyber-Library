@@ -34,6 +34,13 @@ A compromised Windows host and the directory itself hold several credential stor
 - **[Password policy](password-policy.md)**: reading the policy that bounds safe spraying.
 - **[Password spraying](password-spraying.md)**: guessing valid credentials without lockout.
 
+Once you hold the directory's secrets, the same access supports **domain persistence**:
+
+- **[DCShadow](dcshadow.md)**: push arbitrary changes through a rogue domain controller.
+- **[DSRM](dsrm.md)**: the domain controller's local backdoor account.
+- **[Skeleton Key](skeleton-key.md)**: a master password patched into LSASS.
+- **[Custom SSP](custom-ssp.md)**: logging cleartext credentials on the host.
+
 ## References
 
 - [adsecurity: Mimikatz and command reference](https://adsecurity.org/?page_id=1821)
