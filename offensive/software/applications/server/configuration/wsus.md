@@ -31,7 +31,8 @@ SharpWSUS.exe approve /updateid:<guid> /computername:<target> /groupname:"Group"
 Where WSUS is configured over **HTTP** rather than HTTPS, a man-in-the-middle can inject a malicious update to clients, since the metadata is not authenticated at the transport. Positioned between client and server, deliver a signed-binary "update" to every client that checks in:
 
 ```text
-# PyWSUS / WSUSpect: serve a malicious update to clients whose WSUS URL is http://
+# PyWSUS: serve a malicious update to clients whose WSUS URL is http:// (works on modern clients)
+# WSUSpect is legacy (tested on Windows 7/8, not Windows 10/11), so prefer PyWSUS for modern targets
 # combine with an MITM primitive (ARP, rogue DHCP/WPAD, mitm6) to reach the client's update traffic
 ```
 
@@ -46,7 +47,8 @@ Where WSUS is configured over **HTTP** rather than HTTPS, a man-in-the-middle ca
 
 - **SharpWSUS** (LRQA/Nettitude): inspect, create, approve, and delete malicious updates from a compromised server.
 - **WSUSpendu**: PowerShell injection of an approval into the WSUS database.
-- **PyWSUS / WSUSpect**: in-path injection against HTTP WSUS clients.
+- **PyWSUS**: in-path injection against HTTP WSUS clients, including modern Windows.
+- **WSUSpect**: the original in-path proxy, legacy only (Windows 7/8).
 
 ## References
 
