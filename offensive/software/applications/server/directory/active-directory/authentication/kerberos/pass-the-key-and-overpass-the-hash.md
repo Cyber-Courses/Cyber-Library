@@ -60,4 +60,4 @@ The resulting TGT is indistinguishable from a normal logon's: this is a legitima
 
 - [GhostPack Rubeus (asktgt)](https://github.com/GhostPack/Rubeus)
 - [Impacket getTGT](https://github.com/fortra/impacket)
-- [Microsoft: Kerberos authentication](https://learn.microsoft.com/en-us/windows-server/security/kerberos/)
+- [Microsoft: Kerberos authentication](https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview)

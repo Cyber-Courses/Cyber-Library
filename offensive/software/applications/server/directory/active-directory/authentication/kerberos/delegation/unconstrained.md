@@ -54,4 +54,5 @@ The DC authenticates with its **machine account**, so you capture `DC$`'s TGT, w
 
 - [Elad Shamir: Wagging the Dog](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html)
 - [GhostPack Rubeus (monitor / dump)](https://github.com/GhostPack/Rubeus)
-- [Impacket (printerbug / PetitPotam to source auth)](https://github.com/fortra/impacket)
+- [krbrelayx (dirkjanm): printerbug.py](https://github.com/dirkjanm/krbrelayx)
+- [PetitPotam (topotam)](https://github.com/topotam/PetitPotam)
