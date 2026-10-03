@@ -44,6 +44,9 @@ UAC bit filters surface the highest-value targets directly:
 
 # Password never expires (0x10000) OR password not required (0x20): one bit test per flag
 (|(userAccountControl:1.2.840.113556.1.4.803:=65536)(userAccountControl:1.2.840.113556.1.4.803:=32))
+
+# MachineAccountQuota: computers any user may create; read ms-DS-MachineAccountQuota on the
+# domain root (a non-zero value gates RBCD, noPac, shadow-credentials-on-new-computer, Certifried)
 ```
 
 The OID `1.2.840.113556.1.4.803` is the bitwise-AND matching rule, essential for reading UAC flags.

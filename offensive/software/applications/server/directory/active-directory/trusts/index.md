@@ -31,6 +31,7 @@ A trust lets principals in one domain authenticate to resources in another. Trus
 - **[Intra-forest trusts](intra-forest-trusts.md)**: reaching the forest root from any domain via SID history.
 - **[Cross-forest trusts](cross-forest-trusts.md)**: moving between forests under SID filtering and selective authentication.
 - **[Trust keys and inter-realm tickets](trust-keys.md)**: forging referral tickets from the trust key.
+- **[Entra hybrid](entra-hybrid.md)**: pivoting on-premises AD to the Entra ID tenant and back through Entra Connect.
 
 ## References
 

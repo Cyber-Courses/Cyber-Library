@@ -25,6 +25,7 @@ A compromised Windows host and the directory itself hold several credential stor
 
 ## Pages
 
+- **[Token impersonation](token-impersonation.md)**: SeImpersonate to SYSTEM from a service-account foothold (the potato family).
 - **[LSASS dumping](lsass-dumping.md)**: extracting live credentials and tickets from LSASS memory.
 - **[SAM and LSA secrets](sam-and-lsa-secrets.md)**: local hashes and cached machine and service secrets.
 - **[DPAPI secrets](dpapi-secrets.md)**: browser, vault, and application credentials.
