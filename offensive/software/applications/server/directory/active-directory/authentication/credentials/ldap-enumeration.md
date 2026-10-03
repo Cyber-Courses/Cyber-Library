@@ -66,13 +66,13 @@ nxc ldap <dc> -u user -p pass --kerberoasting out.txt --asreproast out.txt
 
 ## Anonymous and null reads
 
-Some DCs permit anonymous LDAP binds or expose data through null SMB sessions. Where allowed, the rootDSE, schema, and sometimes object data read without credentials (see [LDAP anonymous bind](../../ldap/anonymous-bind-and-enumeration.md)). Even when object reads require auth, the rootDSE discovery of naming contexts does not.
+Some DCs permit anonymous LDAP binds or expose data through null SMB sessions. Where allowed, the rootDSE, schema, and sometimes object data read without credentials (see [LDAP anonymous bind](../../../ldap/anonymous-bind-and-enumeration.md)). Even when object reads require auth, the rootDSE discovery of naming contexts does not.
 
 ## Exploitation notes
 
-- Read the interesting attributes, not just names: `description` and `info` fields frequently contain passwords; `ms-MCS-AdmPwd` (LAPS) and `msDS-ManagedPassword` (gMSA) hold machine and service credentials for principals allowed to read them (see [credentials in attributes](../../ldap/credentials-in-attributes.md)).
+- Read the interesting attributes, not just names: `description` and `info` fields frequently contain passwords; `ms-MCS-AdmPwd` (LAPS) and `msDS-ManagedPassword` (gMSA) hold machine and service credentials for principals allowed to read them (see [credentials in attributes](../../../ldap/credentials-in-attributes.md)).
 - Query the Global Catalog (port 3268) for a forest-wide view across all domains in one search.
-- Everything you pull here feeds [BloodHound](bloodhound.md); the targeted filters above are for when you want a specific answer fast.
+- Everything you pull here feeds [BloodHound](../../dacl/bloodhound.md); the targeted filters above are for when you want a specific answer fast.
 
 ## Tools
 

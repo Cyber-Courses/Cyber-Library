@@ -37,7 +37,7 @@ The XML files that carry `cpassword` are `Groups.xml` (local users), `Services.x
 
 - Microsoft removed the ability to **create** new GPP passwords in 2014 (MS14-025), but it did **not** scrub existing ones, so legacy `cpassword` entries persist in SYSVOL for years.
 - The recovered account is frequently a **local administrator** pushed to many machines with the same password, so one find enables [pass-the-hash](../authentication/ntlm/pass-the-hash.md)/password reuse across the fleet.
-- It needs only a single low-privileged domain account (SYSVOL read), making it a first-move credential hunt alongside [reconnaissance](../reconnaissance/index.md).
+- It needs only a single low-privileged domain account (SYSVOL read), making it a first-move credential hunt alongside [reconnaissance](../authentication/credentials/index.md).
 
 ## Exploitation notes
 

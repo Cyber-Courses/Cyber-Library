@@ -52,7 +52,7 @@ Other dumpers (a renamed procdump, nanodump, direct syscall tools) exist precise
 
 ## Exploitation notes
 
-- Target hosts chosen from [session enumeration](../../reconnaissance/session-enumeration.md): a host where a Domain Admin is logged on yields a Domain Admin credential.
+- Target hosts chosen from [session enumeration](session-enumeration.md): a host where a Domain Admin is logged on yields a Domain Admin credential.
 - On modern Windows, LSASS may run as a protected process (PPL) or behind Credential Guard, which blocks naive reads; bypasses (a PPL-removal driver, or dumping without the standard API) are needed, and Credential Guard removes the plaintext and constrains NTLM reuse.
 - Prefer AES keys over the NTLM hash where available, since AES pass-the-key avoids the weaker RC4 path that some environments monitor or restrict.
 
