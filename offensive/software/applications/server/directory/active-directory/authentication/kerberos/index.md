@@ -31,6 +31,7 @@ Every trust in that chain is a target: the account key (roasting, pass-the-key),
 - **[Pass-the-ticket](pass-the-ticket.md)**: extracting and injecting tickets to reuse them.
 - **[Forged tickets](forged-tickets.md)**: golden, silver, diamond, and sapphire ticket forgery.
 - **[Delegation](delegation/index.md)**: unconstrained, constrained, and resource-based constrained delegation abuse.
+- **[Kerberos relay](kerberos-relay.md)**: capturing TGTs via unconstrained delegation and relaying Kerberos to LDAP or AD CS.
 - **[Shadow credentials](shadow-credentials.md)**: adding key credentials to impersonate via PKINIT.
 - **[UnPAC-the-hash](unpac-the-hash.md)**: recovering the NT hash from a PKINIT authentication.
 - **[sAMAccountName spoofing](samaccountname-spoofing.md)**: the noPac privilege-escalation path.
