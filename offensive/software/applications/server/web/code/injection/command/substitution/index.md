@@ -13,6 +13,10 @@ keywords:
 
 Command substitution, `` `cmd` `` and `$(cmd)`, runs a nested command and splices its output into the surrounding command line. Because it is evaluated even when the injection point sits in the middle of an argument, it is both a primary execution primitive and one of the most reliable confirmation oracles for command injection.
 
+## Pages
+
+- **[Backticks and $(...)](inside-command.md)**: Using $(...) and backtick command substitution to run a nested command and splice its output into the current command line, working even when the injection p...
+
 ## Tools
 
 - **[commix](https://github.com/commixproject/commix)**: automated command-injection exploitation.

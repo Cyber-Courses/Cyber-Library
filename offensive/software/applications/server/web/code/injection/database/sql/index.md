@@ -24,6 +24,14 @@ That is why this area is organized by database engine rather than by technique a
 - **SQLite**: `sqlite_master` enumeration, no `information_schema`, and API-dependent stacked queries.
 - **IBM Db2**: `SYSIBM.SYSDUMMY1`, special registers, and `SYSCAT` catalog views.
 
+## Subtopics
+
+- **[IBM Db2](ibm-db2/index.md)**: Exploiting SQL injection against IBM Db2 (LUW): the SYSIBM.SYSDUMMY1 single-row table, SYSCAT catalog, special registers, LISTAGG extraction, and the lack of...
+- **[MSSQL](mssql/index.md)**: Exploiting SQL injection against Microsoft SQL Server: stacked queries, conversion-error leaks, WAITFOR timing, xp_cmdshell, linked servers, and the sys cata...
+- **[Oracle](oracle/index.md)**: Exploiting SQL injection against Oracle Database: the mandatory FROM DUAL, ACL-gated UTL packages, DBMS_PIPE timing, PL/SQL blocks, and the ALL_ catalog views.
+- **[PostgreSQL](postgresql/index.md)**: Exploiting SQL injection against PostgreSQL: dollar-quoting, string casts for error leaks, pg_sleep timing, stacked queries, pg_read_file, and COPY ...
+- **[SQLite](sqlite/index.md)**: Exploiting SQL injection against SQLite: sqlite_master enumeration, loose typing, real error primitives, randomblob timing, ATTACH file writes, and load_exte...
+
 ## Tools
 
 - **sqlmap**: automated detection and exploitation across all the major engines, with per-engine payloads.

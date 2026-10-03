@@ -17,6 +17,13 @@ Because Cypher traverses a single property graph with no table boundaries, injec
 
 This subtree covers the core injection mechanics, cross-label extraction, APOC procedure abuse, and blind inference.
 
+## Pages
+
+- **[APOC procedure abuse](apoc-procedure-abuse.md)**: Reaching APOC procedures via CALL injection turns a Cypher flaw into SSRF, outbound exfiltration, file access, and arbitrary graph writes on Neo4j.
+- **[Blind injection](blind-injection.md)**: Recover data through a Neo4j Cypher injection that returns no rows, using conditional patterns and apoc.util.sleep() for boolean and time-based inference.
+- **[Cypher injection](cypher-injection.md)**: Concatenating user input into MATCH/WHERE clauses lets an attacker escape string literals, flip predicates, and chain Cypher clauses against Neo4j.
+- **[Data extraction](data-extraction.md)**: Cross-label extraction through injected UNION, WITH, and MATCH (n) RETURN n clauses, plus schema enumeration with db.labels() and db.schema in Neo4j.
+
 ## Tools
 
 - **cypher-shell**: the native Cypher shell for testing payloads against a database.

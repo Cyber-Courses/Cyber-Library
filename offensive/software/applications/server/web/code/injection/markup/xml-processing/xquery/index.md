@@ -17,6 +17,12 @@ Because an XQuery processor walks a document or collection with no column bounda
 
 This subtree covers FLWOR and predicate breakout, library and extension function abuse, and error-based extraction.
 
+## Pages
+
+- **[Error-based](error-based-xquery.md)**: XQuery static and dynamic errors returned to the client leak content, types, and structure through controlled error conditions and embedded data in error str...
+- **[FLWOR injection](flwor-injection.md)**: Untrusted input inside for/let/where/order by clauses changes which nodes are iterated and which predicates hold, enabling literal breakout and tautologies.
+- **[Library function abuse](library-function-abuse.md)**: Reachable built-in and vendor functions like doc(), fn:collection(), fn:unparsed-text(), and BaseX proc:system turn an injection into file read, SSRF, and RCE.
+
 ## Tools
 
 - **Burp Suite**: fuzzing XQuery injection points with Intruder and Repeater.

@@ -33,6 +33,12 @@ File access is gated. `LOAD_FILE()` and `SELECT ... INTO OUTFILE/DUMPFILE` requi
 - **[Command execution](command-execution/index.md)**: write web shells or load a UDF for OS commands.
 - **[WAF bypass](waf-bypass/index.md)**: reach `information_schema`, `version()`, and keywords past filters.
 
+## Pages
+
+- **[Dump in one shot](dios.md)**: Building a single MySQL union payload that concatenates schema and data into one response with nested subqueries and GROUP_CONCAT.
+- **[INSERT-based](insert.md)**: Exploiting injection inside a MySQL INSERT statement: leaking data through error functions in VALUES and overwriting rows with ON DUPLICATE KEY UPDATE.
+- **[Truncation](truncation.md)**: Abusing MySQL string truncation and trailing-space trimming to collide with an existing account such as admin, when strict SQL mode is off.
+
 ## Tools
 
 - **sqlmap**: automated detection and exploitation of MySQL injection across the union, error, blind, time, and file techniques.

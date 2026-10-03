@@ -15,6 +15,14 @@ OS command injection occurs when application code builds an operating-system com
 
 The subtree separates the mechanisms from everything built on top of them: chaining with shell separators, command **substitution**, and **argument** (argv/flag) injection with no shell are the ways in; **exfiltration** covers blind, out-of-band data recovery; and **filter bypass** covers evading blocklists and WAFs.
 
+## Subtopics
+
+- **[Argument](argument/index.md)**: A user value lands in argv and the called binary re-parses it as an option rather than data, no shell, no new process, yet file read/write and code execution.
+- **[Chaining](chaining/index.md)**: Shell control operators that let an injected value terminate the intended command and start another: ; && || and &.
+- **[Exfiltration](exfiltration/index.md)**: Recovering output when none is returned: time-based oracles and out-of-band DNS/HTTP channels.
+- **[Filter bypass](filter-bypass/index.md)**: Blocklists and WAFs are evaded because the shell normalizes a payload after the filter inspects it, grouped by what each technique defeats.
+- **[Substitution](substitution/index.md)**: Backticks and $(...) run a nested command and splice its output into the current command line, even mid-argument.
+
 ## Tools
 
 - **[commix](https://github.com/commixproject/commix)**: automated command-injection detection and exploitation.

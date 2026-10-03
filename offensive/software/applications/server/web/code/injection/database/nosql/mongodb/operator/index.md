@@ -18,6 +18,14 @@ The precondition throughout this section is that the application passes an attac
 
 The pages here cover the operator families worth reaching for: comparison operators (`$ne`, `$gt`, `$lt`, `$gte`) for bypass and blind extraction, array operators (`$in`, `$nin`, `$all`, `$elemMatch`) driven from attacker arrays, `$exists` as a field-presence oracle, `$regex` for anchored character-by-character extraction and ReDoS, and `$where`/`mapReduce` for server-side JavaScript where it is enabled.
 
+## Pages
+
+- **[Array operators](array-operators.md)**: Injecting $in, $nin, $all, and $elemMatch from attacker-controlled arrays widens matches, enumerates candidate values, and probes array fields.
+- **[Comparison operators](comparison-operators.md)**: Injecting $ne, $gt, $lt, and $gte replaces the intended comparison to bypass filters, and pairs with $regex to extract data one character at a time blindly.
+- **[Exists](exists.md)**: The $exists operator tests whether a field is present, giving a true/false oracle to map document schema and infer data when no rows are reflected.
+- **[Regex](regex.md)**: The $regex operator anchors patterns to recover string fields character by character and, with catastrophic patterns, drives regex denial of service.
+- **[Where JavaScript](where-javascript.md)**: $where and mapReduce evaluate server-side JavaScript; where enabled, injected JS strings break out of expressions, force always-true conditions, and time out...
+
 ## Tools
 
 - **NoSQLMap**: automated operator injection and blind extraction.

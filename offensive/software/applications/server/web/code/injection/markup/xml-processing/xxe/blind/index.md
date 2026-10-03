@@ -17,6 +17,11 @@ The vulnerability is still fully exploitable; the data just has to leave through
 
 This subtree covers the error-based channel and the local-DTD technique for environments where outbound network access is blocked.
 
+## Pages
+
+- **[Error messages](error-messages.md)**: A parameter entity that feeds file contents into an invalid SYSTEM path forces a parse error whose message leaks the file.
+- **[Local DTD](local-dtd.md)**: Repurposing a DTD file already on disk lets a blind XXE redefine an internal entity and trigger an error-based leak when outbound network is blocked.
+
 ## Tools
 
 - **XXEinjector**: automating blind XXE through out-of-band and error-based channels.

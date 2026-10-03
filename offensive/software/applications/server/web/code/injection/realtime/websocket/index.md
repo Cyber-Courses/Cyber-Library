@@ -17,6 +17,12 @@ That handler is where the interesting attack surface lives. The handshake may ha
 
 This section covers per-message authorization gaps, cross-site WebSocket hijacking, and message injection into downstream sinks.
 
+## Pages
+
+- **[Cross-site WebSocket hijacking](cross-site-websocket-hijacking.md)**: A WebSocket handshake that relies on ambient cookies and skips Origin validation lets an attacker page open an authenticated socket as the victim.
+- **[Message injection to sinks](message-injection-to-sinks.md)**: WebSocket frame content flowing unsanitized into SQL, NoSQL, stored XSS broadcast, and command or template sinks, carried past HTTP-layer filtering.
+- **[Per-message authorization](per-message-authorization.md)**: WebSocket connections authorized only at the handshake, so individual frames are trusted and can act as other users or invoke privileged actions.
+
 ## Tools
 
 - **Burp Suite**: WebSockets history and repeater for intercepting, editing, and replaying frames.

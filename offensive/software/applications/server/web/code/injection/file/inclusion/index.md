@@ -16,6 +16,11 @@ Inclusion flaws live in dynamic `include`/`require` style sinks, where a request
 
 Classic PHP code like `include($_GET['page'] . '.php')` hands the attacker control over the loaded path. Two directions follow. **Local** inclusion points the sink at files already on the server: traversal to read source and secrets, wrappers to disclose or decode, and poisoning tricks (logs, `/proc`, session files, prior uploads) that convert a read primitive into code execution. **Remote** inclusion points the sink at an attacker-hosted URL so the interpreter fetches and runs external code directly, subject to the engine's URL-include settings. The two pages cover the payloads and the chains that promote a mere file read to full execution.
 
+## Pages
+
+- **[Local](local.md)**: LFI through traversal and PHP wrappers for source disclosure, plus log, environ, session, and upload poisoning chains that escalate a file read into code exe...
+- **[Remote](remote.md)**: RFI points an include sink at an attacker-controlled URL so the interpreter fetches and executes external code, gated by allow_url_include and allow_url_fopen.
+
 ## Tools
 
 - **[LFISuite](https://github.com/D35m0nd142/LFISuite)**: automated LFI detection and exploitation.

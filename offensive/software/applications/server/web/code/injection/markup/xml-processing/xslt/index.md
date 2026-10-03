@@ -17,6 +17,12 @@ The reach of an XSLT injection depends on the processor and its configuration. E
 
 This subtree covers document-function abuse, extension-function and embedded-script abuse, and remote stylesheet import.
 
+## Pages
+
+- **[Document function abuse](document-function-abuse.md)**: The XSLT document() function resolves attacker-controlled URIs at transform time, giving local file read and server-side request forgery against internal end...
+- **[Extension function abuse](extension-function-abuse.md)**: Java and .NET extension functions and embedded xsl:script / msxsl:script blocks run host-runtime code when a stylesheet or its parameters are attacker-influe...
+- **[Stylesheet import abuse](stylesheet-import-abuse.md)**: xsl:import and xsl:include resolve attacker-controlled href URIs at compile time, pulling a remote stylesheet that supplies templates, extension calls, and S...
+
 ## Tools
 
 - **Burp Suite**: injecting stylesheet fragments and parameters, scanning for XSLT injection.

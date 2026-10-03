@@ -17,6 +17,15 @@ That gap is the target. A frame that reaches a query builder, a broadcast buffer
 
 This subtree is organized by transport: WebSocket message handling, Server-Sent Events, and long polling.
 
+## Subtopics
+
+- **[WebSocket](websocket/index.md)**: Abusing WebSocket message handling after the HTTP upgrade, where individual frames drive authorization, routing, and server-side sinks.
+
+## Pages
+
+- **[Long polling](long-polling.md)**: Held-open and poll endpoints where JSON notifications, poll query params, and session tokens in the poll URL reach server-side queries and authorization.
+- **[Server-Sent Events](server-sent-events.md)**: Newline injection into a text/event-stream where server-built data, event, and id lines come from untrusted state, forging events and poisoning shared streams.
+
 ## Tools
 
 - **Burp Suite**: WebSockets history and repeater for intercepting and replaying frames.

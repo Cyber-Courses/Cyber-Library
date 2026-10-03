@@ -13,6 +13,10 @@ keywords:
 
 Argument injection targets the no-shell case: a fixed binary is spawned with an argument array, so shell metacharacters are inert, but a user-controlled value lands in `argv` where the program re-parses it as an **option** instead of data. No *separate shell command* is introduced, yet the spawned binary is steered into reading files, writing files, or launching helper programs it natively supports (`curl -o`, `git -c`, `tar --checkpoint-action`, and so on).
 
+## Pages
+
+- **[Parameter manipulation](parameter-manipulation.md)**: Turning a user value into argv so a called binary parses it as a flag, no shell needed, plus worst-fit and fullwidth-character tricks and the escapeshellarg/...
+
 ## Tools
 
 - **[GTFOBins](https://gtfobins.github.io/)**: per-binary file-read, file-write, and command-exec flags.
