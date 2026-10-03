@@ -49,6 +49,7 @@ CREATE FUNCTION sys(cstring) RETURNS int AS '/tmp/evil.so', 'sys' LANGUAGE C STR
 ## Exploitation notes
 
 - `COPY ... FROM PROGRAM` is the first thing to try as superuser: one statement, no extra objects to compile.
+- It is **not superuser-only**: a role granted `pg_execute_server_program` can run it without full superuser, so check role memberships (`\du`) during [access](access.md) rather than assuming you need `sa`-equivalent rights.
 - Commands run as the **PostgreSQL service account** (`postgres` on most Linux hosts), so the payoff is host access as that user, often a pivot to further local escalation.
 - `plpythonu`/`plperlu` must already be installed as *untrusted* variants; the trusted `plpython3u` is restricted.
 - `pgsql_shell` (metasploit `postgres_payload`/`postgres_copy_from_program_cmd_exec`) automates the COPY path.
