@@ -65,5 +65,7 @@ Other dumpers (a renamed procdump, nanodump, direct syscall tools) exist precise
 
 ## References
 
-- The Hacker Recipes: LSASS secrets
-- Microsoft: LSA and credential protection (Credential Guard, PPL)
+- [adsecurity: how attackers extract credentials from LSASS](https://adsecurity.org/?p=462)
+- [lsassy (Hackndo): remote LSASS extraction](https://github.com/Hackndo/lsassy)
+- [pypykatz (skelsec): offline minidump parsing](https://github.com/skelsec/pypykatz)
+- [Microsoft: configure added LSA protection (PPL)](https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection)

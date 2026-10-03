@@ -36,5 +36,7 @@ A compromised Windows host and the directory itself hold several credential stor
 
 ## References
 
-- The Hacker Recipes: credential dumping and cracking
-- Microsoft: credential storage and protection
+- [adsecurity: Mimikatz and command reference](https://adsecurity.org/?page_id=1821)
+- [Impacket (fortra): secretsdump and the credential toolkit](https://github.com/fortra/impacket)
+- [NetExec (Pennyw0rth)](https://github.com/Pennyw0rth/NetExec)
+- [The Hacker Recipes: Active Directory movement](https://www.thehacker.recipes/ad/movement/)

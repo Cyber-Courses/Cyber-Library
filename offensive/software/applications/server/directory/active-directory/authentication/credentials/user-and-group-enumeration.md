@@ -68,5 +68,7 @@ Without credentials, there are still ways to build a user list:
 
 ## References
 
-- The Hacker Recipes: user enumeration
-- Microsoft: SAMR and LDAP object model
+- [NetExec: users, groups, and RID brute](https://github.com/Pennyw0rth/NetExec)
+- [windapsearch (ropnop)](https://github.com/ropnop/windapsearch)
+- [ldapdomaindump (dirkjanm)](https://github.com/dirkjanm/ldapdomaindump)
+- [enum4linux-ng (cddmp)](https://github.com/cddmp/enum4linux-ng)

@@ -68,5 +68,6 @@ With the policy known:
 
 ## References
 
-- The Hacker Recipes: password spraying
-- Microsoft: account lockout and fine-grained password policies
+- [NetExec: --pass-pol](https://github.com/Pennyw0rth/NetExec)
+- [Microsoft: Account Policies (password, lockout, Kerberos)](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/account-policies)
+- [enum4linux-ng (cddmp)](https://github.com/cddmp/enum4linux-ng)

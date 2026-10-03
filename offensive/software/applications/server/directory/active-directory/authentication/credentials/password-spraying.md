@@ -66,5 +66,7 @@ For the guessing itself, Kerberos pre-auth is fast and quiet, but it is governed
 
 ## References
 
-- The Hacker Recipes: password spraying
-- Microsoft: account lockout policy
+- [kerbrute (ropnop)](https://github.com/ropnop/kerbrute)
+- [TREVORspray (blacklanternsecurity)](https://github.com/blacklanternsecurity/TREVORspray)
+- [NetExec: password spraying](https://github.com/Pennyw0rth/NetExec)
+- [Microsoft: Account Policies (lockout)](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/account-policies)
