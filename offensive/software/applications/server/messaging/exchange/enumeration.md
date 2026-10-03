@@ -18,9 +18,10 @@ Exchange exposes several web endpoints to the internet, and each leaks informati
 OWA and EWS reveal the Exchange build in headers and static resources, which tells you whether a server is in range for a given [RCE chain](rce-chains.md):
 
 ```bash
-# Build number from a static OWA resource
+# Build number from response headers, then from the versioned resource path in the
+# login HTML: OWA serves its static assets under /owa/auth/<build>/..., which is the build
 curl -sk https://<exch>/owa/auth/logon.aspx -I | grep -i 'X-OWA-Version\|X-FEServer'
-curl -sk https://<exch>/owa/version/  # version path leaks the build
+curl -sk https://<exch>/owa/auth/logon.aspx | grep -oE '/owa/auth/[0-9.]+/' | head -1
 ```
 
 Key paths: `/owa`, `/ecp`, `/ews`, `/autodiscover`, `/mapi`, `/rpc`, `/powershell`, `/activesync`.

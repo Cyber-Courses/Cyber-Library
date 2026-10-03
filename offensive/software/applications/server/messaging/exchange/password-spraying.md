@@ -23,7 +23,7 @@ Invoke-PasswordSprayEWS -ExchHostname <exch> -UserList users.txt -Password 'Autu
 
 ```bash
 # ActiveSync is another sprayable endpoint and sometimes bypasses OWA lockout tracking
-# tools: MailSniper Invoke-PasswordSprayActiveSync, or a custom O365/EAS sprayer
+# tools: MailSniper Invoke-PasswordSprayEAS, or a custom O365/EAS sprayer
 ```
 
 ## Staying under lockout
@@ -42,7 +42,7 @@ The same rules as domain [password spraying](../../directory/active-directory/au
 
 ## Tools
 
-- **MailSniper** (`Invoke-PasswordSprayOWA` / `-EWS` / `-ActiveSync`): endpoint spraying.
+- **MailSniper** (`Invoke-PasswordSprayOWA` / `-EWS` / `Invoke-PasswordSprayEAS`): endpoint spraying.
 - **ruler / o365spray / TREVORspray**: alternative sprayers for Exchange and hybrid endpoints.
 
 ## References
