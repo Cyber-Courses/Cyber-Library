@@ -17,6 +17,11 @@ Markup processing languages sit between the request and the response, and many o
 
 This section covers SSI directive injection and the XML processing family, including XPath query injection and the entity-level attacks that follow from permissive parsers.
 
+## Subtopics
+
+- **[SSI](ssi/index.md)**: Server-Side Includes expand <!--#...--> directives before a page is served; user input that reaches an SSI-parsed page runs directives for command execution,...
+- **[XML processing](xml-processing/index.md)**: Injection across the XML pipeline: parsing, querying with XPath/XQuery, and transforming with XSLT, plus the external-entity abuse that permissive parsers al...
+
 ## Tools
 
 - **Burp Suite**: injecting and iterating SSI and XML payloads through Repeater and Intruder.

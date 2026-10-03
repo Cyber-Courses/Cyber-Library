@@ -15,6 +15,15 @@ Redis is an in-memory key-value store spoken over **RESP**, a simple CRLF-delimi
 
 Once commands can be smuggled, Redis offers high-impact primitives: `FLUSHALL` and `KEYS` for mass access, `CONFIG SET` to relocate the dump file and write arbitrary content to disk, `SLAVEOF`/`REPLICAOF` to pull a dataset from a rogue master, `MODULE LOAD` where modules are permitted, and the `EVAL` family for server-side Lua. This subtree covers command smuggling over RESP, the `CONFIG SET` write-to-disk RCE chain, and Lua scripting via `EVAL`, `EVALSHA`, and `SCRIPT LOAD`.
 
+## Subtopics
+
+- **[Lua script](lua-script/index.md)**: Redis runs server-side Lua through the EVAL family, giving an attacker who controls a script body or its arguments a scripting engine inside the database.
+
+## Pages
+
+- **[Command injection](command.md)**: Unescaped CRLF in user input, or SSRF to a Redis port, lets an attacker append extra RESP commands and reach FLUSHALL, CONFIG, SLAVEOF, and MODULE LOAD.
+- **[CONFIG SET abuse](config-set-abuse.md)**: Relocating the Redis dump file with CONFIG SET dir and dbfilename, then SAVE, writes a controlled payload to disk: webshell, authorized_keys, or a cron job.
+
 ## Tools
 
 - **redis-cli**: the native Redis client for issuing and testing commands.

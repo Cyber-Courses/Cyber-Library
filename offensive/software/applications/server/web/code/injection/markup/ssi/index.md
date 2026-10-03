@@ -19,6 +19,12 @@ The practical reach depends on which directives the server permits. `exec` reach
 
 This subtree covers command execution through `exec`, environment disclosure through `echo`, and file inclusion through `include`.
 
+## Pages
+
+- **[Command execution](command-execution.md)**: The exec directive runs operating-system commands when attacker input reaches an SSI-parsed page, turning reflected markup into remote code execution as the...
+- **[Environment disclosure](environment-disclosure.md)**: The echo directive prints SSI and CGI environment variables into the page, leaking paths, client data, and server configuration when input reaches an SSI-par...
+- **[File inclusion](file-inclusion.md)**: The include directive pulls files and server-side resources into an SSI-parsed page; file and virtual paths plus traversal let an attacker read local files a...
+
 ## Tools
 
 - **Burp Suite**: reflecting and iterating injected SSI directives through Repeater and Intruder.

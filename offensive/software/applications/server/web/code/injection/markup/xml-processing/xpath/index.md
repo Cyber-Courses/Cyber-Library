@@ -26,6 +26,12 @@ XPath injection is in several ways more permissive than SQL injection. There is 
 
 This subtree covers predicate injection and authentication bypass, union path injection across the tree, and error-based extraction.
 
+## Pages
+
+- **[Error-based](error-based-xpath.md)**: Forcing a cast or type failure in an XPath 2.0 processor embeds node text in the error message, turning a verbose engine into a direct, non-blind extraction...
+- **[Predicate injection](predicate-injection.md)**: Breaking out of a string literal inside an XPath predicate rewrites the filter condition for authentication bypass and node extraction using boolean logic an...
+- **[Union path injection](union-path-injection.md)**: The | union operator appends arbitrary location paths to a string-built XPath, selecting nodes outside the intended subtree and dumping the whole document.
+
 ## Tools
 
 - **xcat**: automating boolean and error-based XPath data retrieval.

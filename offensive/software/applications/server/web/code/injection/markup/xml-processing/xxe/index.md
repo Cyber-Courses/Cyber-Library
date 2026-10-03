@@ -17,6 +17,17 @@ Three outcomes follow from that single primitive. **Disclosure** reads local fil
 
 This subtree covers in-band file disclosure, out-of-band exfiltration, SSRF, entity-expansion attacks, and the blind variants that leak data through parser errors when nothing is reflected.
 
+## Subtopics
+
+- **[Blind](blind/index.md)**: When the parser resolves entities but returns nothing parsed, data is recovered through error messages, timing, and out-of-band channels.
+
+## Pages
+
+- **[Local file disclosure](local-file-disclosure.md)**: A SYSTEM entity reads a local file and the application reflects the expanded value back in its response, returning file contents directly.
+- **[Out of band](out-of-band.md)**: When nothing is reflected, parameter entities and an external DTD exfiltrate file contents to an attacker server over HTTP or FTP.
+- **[SSRF](ssrf.md)**: Pointing a SYSTEM entity at internal hosts or cloud metadata turns an XML parser into a server-side request forgery primitive.
+- **[XML bomb](xml-bomb.md)**: Nested internal entities expand exponentially, turning a few kilobytes of XML into gigabytes in memory and exhausting the parser.
+
 ## Tools
 
 - **XXEinjector**: automating XXE exploitation including OOB and error-based file retrieval.

@@ -26,6 +26,13 @@ The subcategories group by service class, so a technique sits next to the protoc
 
 Splitting by service type matches how an operator triages a host: enumerate what is listening, identify each service, then reach for the techniques specific to it. Keeping the classes separate stops a database technique from being filed next to a message-queue one, since the query languages, authentication models, and abuse primitives have nothing in common. The web subtree is split further by layer (platform, runtime, and code) because a single web service combines all three.
 
+## Subtopics
+
+- **[Configuration management](configuration/index.md)**: Offensive scope for enterprise configuration-management platforms: systems that push software, scripts, and settings to managed endpoints at scale, and there...
+- **[Directory](directory/index.md)**: Offensive techniques against directory services: the Active Directory attack surface (enumeration, authentication and credential abuse, ACLs, trusts, persist...
+- **[Messaging servers](messaging/index.md)**: Offensive scope for enterprise messaging and mail servers: systems that authenticate users, sit on the perimeter, and hold both credentials and the trust to...
+- **[Network services](network/index.md)**: Offensive scope for the network-facing services and RPC interfaces that Windows and infrastructure hosts expose, where a single reachable service can coerce...
+
 ## References
 
 - [OWASP Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
