@@ -53,5 +53,6 @@ The account to delegate *from* needs an SPN; the usual trick is creating a new c
 
 ## References
 
-- The Hacker Recipes: resource-based constrained delegation
-- Microsoft: msDS-AllowedToActOnBehalfOfOtherIdentity
+- [Elad Shamir: Wagging the Dog (RBCD)](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html)
+- [Impacket rbcd.py / addcomputer.py / getST.py](https://github.com/fortra/impacket)
+- [ntlmrelayx --delegate-access](https://github.com/fortra/impacket)

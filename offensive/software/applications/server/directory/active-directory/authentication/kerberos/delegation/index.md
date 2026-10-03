@@ -36,5 +36,6 @@ Whether the resulting ticket is **forwardable** (and so usable onward) depends o
 
 ## References
 
-- The Hacker Recipes: Kerberos delegations
-- Microsoft: S4U2self, S4U2proxy, and delegation
+- [Elad Shamir: Wagging the Dog (delegation primitives)](https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html)
+- [The Hacker Recipes: Kerberos delegations](https://www.thehacker.recipes/ad/movement/kerberos/delegations)
+- [GhostPack Rubeus (s4u)](https://github.com/GhostPack/Rubeus)

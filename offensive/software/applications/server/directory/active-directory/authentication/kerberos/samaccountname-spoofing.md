@@ -46,5 +46,6 @@ The flaw is that the KDC, handling S4U2self, resolves the client by name and, wh
 
 ## References
 
-- The Hacker Recipes: sAMAccountName spoofing
-- Microsoft: S4U2self and PAC validation
+- [Sophos: noPac, a tale of two vulnerabilities](https://www.sophos.com/en-us/blog/nopac-a-tale-of-two-vulnerabilities-that-could-end-in-ransomware)
+- [Impacket (addcomputer / renameMachine / getST)](https://github.com/fortra/impacket)
+- [The Hacker Recipes: sAMAccountName spoofing](https://www.thehacker.recipes/ad/movement/kerberos/samaccountname-spoofing)

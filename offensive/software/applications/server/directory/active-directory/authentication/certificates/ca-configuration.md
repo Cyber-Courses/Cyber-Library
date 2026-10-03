@@ -51,5 +51,6 @@ certipy req -u puppet@example.local -p pass2 -ca <ca> -template User
 
 ## References
 
-- SpecterOps: Certified Pre-Owned (ESC6)
-- The Hacker Recipes: AD CS CA configuration
+- [SpecterOps: Certified Pre-Owned (ESC6)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
+- [Certipy (ly4k)](https://github.com/ly4k/Certipy)
+- [Microsoft: Active Directory Certificate Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/)

@@ -62,5 +62,6 @@ Rubeus.exe diamond /krbkey:<krbtgt-aes> /user:user /password:pass /ticketuser:Ad
 
 ## References
 
-- The Hacker Recipes: golden, silver, diamond, sapphire tickets
-- Microsoft: the Kerberos PAC and krbtgt
+- [Impacket ticketer (golden / silver)](https://github.com/fortra/impacket)
+- [GhostPack Rubeus (golden / silver / diamond)](https://github.com/GhostPack/Rubeus)
+- [Microsoft (MS-PAC): the Kerberos PAC](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/166d8064-c863-41e1-9c23-edaaa5f36962)
