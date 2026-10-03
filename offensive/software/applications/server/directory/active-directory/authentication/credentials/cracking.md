@@ -50,5 +50,7 @@ hashcat -m 5600 netntlmv2.hash wordlist.txt                             # captur
 
 ## References
 
-- The Hacker Recipes: cracking
-- hashcat: example hashes and modes
+- [hashcat: example hashes and modes](https://hashcat.net/wiki/doku.php?id=example_hashes)
+- [hashcat: rule-based attack](https://hashcat.net/wiki/doku.php?id=rule_based_attack)
+- [John the Ripper (jumbo)](https://github.com/openwall/john)
+- [Name-That-Hash (HashPals): identify hash types](https://github.com/HashPals/Name-That-Hash)

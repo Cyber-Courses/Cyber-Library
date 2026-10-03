@@ -58,5 +58,7 @@ secretsdump.py -ntds NTDS.dit -system system.save LOCAL
 
 ## References
 
-- The Hacker Recipes: DCSync and NTDS secrets
-- Microsoft: directory replication (DRSUAPI) and NTDS
+- [adsecurity: Mimikatz DCSync usage, exploitation, detection](https://adsecurity.org/?p=1729)
+- [The Hacker Recipes: DCSync](https://www.thehacker.recipes/ad/movement/credentials/dumping/dcsync)
+- [Impacket secretsdump (fortra)](https://github.com/fortra/impacket)
+- [NetExec: domain NTDS dump](https://github.com/Pennyw0rth/NetExec)

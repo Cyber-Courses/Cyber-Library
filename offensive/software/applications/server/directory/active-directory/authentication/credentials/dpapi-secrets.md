@@ -56,5 +56,7 @@ Browser credential stores (Chrome/Edge `Login Data`, cookies) are DPAPI-protecte
 
 ## References
 
-- The Hacker Recipes: DPAPI secrets
-- Microsoft: Data Protection API
+- [DonPAPI (login-securite): automated DPAPI looting](https://github.com/login-securite/DonPAPI)
+- [SharpDPAPI (GhostPack)](https://github.com/GhostPack/SharpDPAPI)
+- [Impacket dpapi.py (fortra)](https://github.com/fortra/impacket)
+- [Microsoft: Windows Data Protection (DPAPI)](https://learn.microsoft.com/en-us/previous-versions/ms995355%28v=msdn.10%29)
