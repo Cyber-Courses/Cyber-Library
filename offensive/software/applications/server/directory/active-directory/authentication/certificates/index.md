@@ -13,6 +13,8 @@ keywords:
 
 Active Directory Certificate Services (AD CS) issues certificates that Windows accepts as **authentication material**: a certificate with a client-authentication purpose can be used with PKINIT to obtain a Kerberos TGT, so holding the right certificate *is* holding the identity it names. AD CS is widely deployed, frequently misconfigured, and rarely monitored, which is why the "Certified Pre-Owned" family of techniques turns it into one of the most reliable escalation paths to Domain Admin.
 
+**Lineage.** The offensive map of AD CS arrived in 2021 with Certified Pre-Owned (ESC1 through ESC8). The SID security extension and strong certificate-binding enforcement were added in 2022 to tie certificates to accounts more firmly, and ESC9, ESC10, ESC13, ESC14, ESC15, and ESC16 are all children of the gaps left in that mapping and enforcement.
+
 ## Why a certificate is an identity
 
 - A certificate binds a **subject** (often a UPN or, since the security-extension update, a SID) to a key pair.
