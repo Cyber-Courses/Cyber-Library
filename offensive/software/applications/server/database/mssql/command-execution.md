@@ -34,6 +34,7 @@ nxc mssql <target> -u sa -p pass --local-auth -x "whoami"   # -X for a PowerShel
 When `xp_cmdshell` is unavailable, the OLE automation procedures instantiate a WScript shell to run commands:
 
 ```sql
+EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
 EXEC sp_configure 'Ole Automation Procedures', 1; RECONFIGURE;
 DECLARE @o INT;
 EXEC sp_OACreate 'WScript.Shell', @o OUT;
@@ -53,12 +54,12 @@ A sysadmin can load a .NET assembly that exposes a procedure running code in-pro
 
 - Commands run as the **SQL Server service account**, so the payoff depends on that account: often a low service account (pivot via [token impersonation](../../directory/active-directory/authentication/credentials/token-impersonation.md), since it usually holds `SeImpersonate`) or sometimes `LocalSystem` or a domain account.
 - Prefer **CLR or OLE** where `xp_cmdshell` is monitored or policy-blocked; all three need sysadmin, so reach sysadmin first via impersonation or linked servers.
-- `PowerUpSQL` `Invoke-SQLOSCmd` picks an available sink automatically, which is convenient across hardened instances.
+- `PowerUpSQL` `Invoke-SQLOSCmd` executes specifically through **xp_cmdshell**; where that is blocked but OLE or CLR is usable, run those statements directly rather than relying on it.
 - Command execution plus the service account's `SeImpersonate` is the standard **MSSQL-to-SYSTEM** chain on the host.
 
 ## Tools
 
-- **PowerUpSQL** (`Invoke-SQLOSCmd`): sink-agnostic OS command execution.
+- **PowerUpSQL** (`Invoke-SQLOSCmd`): OS command execution through xp_cmdshell (use the OLE/CLR statements directly where xp_cmdshell is blocked).
 - **Impacket `mssqlclient.py`** (`enable_xp_cmdshell`): interactive enable-and-run.
 - **NetExec `mssql`** (`-x`/`-X`): command and PowerShell execution from the network.
 

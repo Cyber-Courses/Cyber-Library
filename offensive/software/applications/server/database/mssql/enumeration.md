@@ -36,9 +36,9 @@ SELECT name, type_desc FROM sys.server_principals; -- principals (logins, Window
 ```sql
 SELECT SUSER_SNAME();                               -- who am I (login)
 SELECT IS_SRVROLEMEMBER('sysadmin');                -- 1 if already sysadmin
--- logins I can impersonate (an escalation primitive)
+-- logins I can actually impersonate (tests the IMPERSONATE permission, not mere visibility)
 SELECT name FROM sys.server_principals
-WHERE type IN ('S','U') AND name <> SUSER_SNAME();
+WHERE type IN ('S','U') AND HAS_PERMS_BY_NAME(name, 'LOGIN', 'IMPERSONATE') = 1;
 SELECT * FROM fn_my_permissions(NULL, 'SERVER');    -- my server-level permissions
 ```
 
