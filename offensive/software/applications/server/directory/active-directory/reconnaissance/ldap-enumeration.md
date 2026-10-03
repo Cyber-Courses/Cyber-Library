@@ -80,5 +80,7 @@ Some DCs permit anonymous LDAP binds or expose data through null SMB sessions. W
 
 ## References
 
-- Microsoft: LDAP matching rules and userAccountControl flags
-- The Hacker Recipes: LDAP enumeration
+- [NetExec: LDAP enumeration](https://github.com/Pennyw0rth/NetExec)
+- [ldapdomaindump (dirkjanm)](https://github.com/dirkjanm/ldapdomaindump)
+- [windapsearch (ropnop)](https://github.com/ropnop/windapsearch)
+- [Microsoft: userAccountControl attribute flags](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/useraccountcontrol-manipulate-account-properties)
