@@ -52,6 +52,13 @@ Several edges reach the same goal with very different footprints, which is the p
 - **[Ownership and ACL rewrite](ownership-and-acl-rewrite.md)**: `WriteOwner` / `WriteDacl`, and the Owner Rights limits that now constrain them.
 - **[AdminSDHolder](adminsdholder.md)**: DACL persistence through SDProp.
 
+Once an edge lands you in a built-in **privileged group**, membership itself is the escalation:
+
+- **[Privileged groups](privileged-groups.md)**: what membership of DnsAdmins, Backup/Server/Print Operators, and others grants.
+- **[DnsAdmins](dnsadmins.md)**: a DLL loaded into the DNS service as SYSTEM.
+- **[Backup Operators](backup-operators.md)**: `SeBackupPrivilege` reads NTDS.dit.
+- **[Server Operators](server-operators.md)**: reconfigure a service to run as SYSTEM.
+
 ## Tools
 
 - **BloodHound**: transitive ACL path analysis and edge identification.
