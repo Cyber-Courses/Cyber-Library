@@ -26,6 +26,8 @@ This area organises attacks per engine, because the query language, privilege mo
 ## Engines
 
 - **[MSSQL](mssql/index.md)**: Microsoft SQL Server, the richest and most AD-integrated target: xp_cmdshell, linked servers, impersonation, and coercion to NTLM relay.
+- **[PostgreSQL](postgresql/index.md)**: superuser command execution through COPY FROM PROGRAM and untrusted languages, plus file read and write.
+- **[MySQL and MariaDB](mysql/index.md)**: file write to a webshell with INTO OUTFILE and OS command execution through a user-defined function.
 
 ## References
 
