@@ -29,6 +29,7 @@ A compromised Windows host and the directory itself hold several credential stor
 - **[SAM and LSA secrets](sam-and-lsa-secrets.md)**: local hashes and cached machine and service secrets.
 - **[DPAPI secrets](dpapi-secrets.md)**: browser, vault, and application credentials.
 - **[NTDS and DCSync](ntds-and-dcsync.md)**: the whole domain's hashes from the DC or by replication.
+- **[ZeroLogon](zerologon.md)**: resetting the DC machine account over Netlogon for unauthenticated domain takeover.
 - **[Cracking](cracking.md)**: turning recovered hashes into passwords offline.
 - **[User and group enumeration](user-and-group-enumeration.md)**: building the account list to target.
 - **[Password policy](password-policy.md)**: reading the policy that bounds safe spraying.
