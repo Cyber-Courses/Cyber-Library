@@ -32,8 +32,7 @@ This was the original SCCM "easy win". Microsoft's **Enhanced HTTP** and the mov
 A distribution point configured for **PXE** (operating-system deployment) will hand out boot media whose variables package can carry the NAA and task-sequence credentials. If PXE is not password-protected, or the password is weak, this is **unauthenticated**:
 
 ```bash
-# PXEthief / SharpSCCM: pull and decrypt secrets from PXE boot media
-SharpSCCM.exe get naa -pxe
+# PXEThief: pull and decrypt secrets from PXE boot media
 python3 pxethief.py 2 <distribution-point-ip>
 ```
 
@@ -49,7 +48,7 @@ Task sequences and collection variables frequently embed service-account or loca
 
 ## Tools
 
-- **SharpSCCM** (`get naa`, `get naa -pxe`): policy and PXE credential recovery.
+- **SharpSCCM** (`get naa`): policy credential recovery.
 - **sccmhunter** (`http` module): register a device and pull policy secrets.
 - **PXEthief**: extract and decrypt secrets from PXE media.
 

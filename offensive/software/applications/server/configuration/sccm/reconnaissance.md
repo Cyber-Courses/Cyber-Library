@@ -34,7 +34,7 @@ SPNs: MSSQLSvc/... on the site database, HTTP/... on management points
 ```bash
 # SharpSCCM: identify the management point and site code from a client's perspective
 SharpSCCM.exe local site-info
-SharpSCCM.exe get site-info -mp <management-point> -sc <site-code>
+SharpSCCM.exe get site-info -d example.local   # queries a DC over LDAP
 ```
 
 ## Exploitation notes
