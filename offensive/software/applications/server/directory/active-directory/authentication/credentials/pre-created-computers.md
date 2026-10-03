@@ -11,7 +11,7 @@ keywords:
 
 # Pre-created computer accounts
 
-When an administrator pre-stages a computer object (the "assign this computer account as a pre-Windows 2000 computer" option, or any created-but-never-joined machine), Active Directory sets its password to a **predictable default: the computer name in lowercase**, first 14 characters, without the trailing `$`. If that object has never authenticated, the default usually still stands, which hands you a working **computer-account credential** for free.
+When an administrator pre-stages a computer object with the **"assign this computer account as a pre-Windows 2000 computer"** option, Active Directory sets its password to a **predictable default: the computer name in lowercase**, first 14 characters, without the trailing `$`. (Objects created without that option get a random password, so this applies specifically to the pre-Windows 2000 case.) If such an object has never authenticated, the default usually still stands, which hands you a working **computer-account credential** for free.
 
 ## Finding them
 
@@ -30,21 +30,22 @@ pre2k auth -d example.local -dc-ip <dc> -u user -p pass
 
 ## From a pre-created account to takeover
 
-The guessed password authenticates as the computer. Reset it to a known value and the computer object is yours to use:
+The guessed password authenticates as the computer. Reset it to a value you control, using the RPC or kpasswd transport (the `smb-samr` default fails for a never-logged-on machine account):
 
 ```bash
-# Set a password you control, then use the computer for delegation or key credentials
-changepasswd.py 'example.local/WKSTN01$:wkstn01@<dc>' -newpass 'Password123!'
+# -protocol rpc-samr (or kpasswd) changes the initial password; the smb-samr default
+# fails on an unused computer account with STATUS_NOLOGON_WORKSTATION_TRUST_ACCOUNT
+changepasswd.py -protocol rpc-samr 'example.local/WKSTN01$:wkstn01@<dc>' -newpass 'Password123!'
 ```
 
-- A controlled computer account is exactly what [resource-based constrained delegation](../kerberos/delegation/resource-based-constrained.md) and [shadow credentials](../kerberos/shadow-credentials.md) need, so a pre-created machine is a direct route to impersonating users on a target.
-- It is also a plain authenticated foothold for [LDAP enumeration](../../reconnaissance/ldap-enumeration.md) and [roasting](../kerberos/roasting.md) when you started with nothing.
+- The result is an attacker-controlled, SPN-bearing **computer identity**. That is the account you nominate as the delegated principal in a [resource-based constrained delegation](../kerberos/delegation/resource-based-constrained.md) chain, but completing it still needs a separate write over the **target's** `msDS-AllowedToActOnBehalfOfOtherIdentity`; the pre-created account supplies the controlled principal, not the write over the target.
+- On its own it is a plain authenticated foothold for [LDAP enumeration](../../reconnaissance/ldap-enumeration.md) and [roasting](../kerberos/roasting.md) when you started with nothing.
 
 ## Exploitation notes
 
 - This is a **legacy default** that survives for years: the pre-Windows 2000 compatibility option predates modern joins, but admins still pre-stage machines and leave the predictable password in place.
 - `logonCount=0` with the `PASSWD_NOTREQD` flag is the strong signal; a machine that has logged on will have rotated its password.
-- The owned computer account rarely has special rights by itself, so the value is in using it as the **delegation or shadow-credential primitive**, not the account's own access.
+- The owned computer account rarely has special rights by itself, so the value is as a **controlled principal for a delegation chain** (given a separate target-write) and as an authenticated foothold, not the account's own access.
 
 ## Tools
 
