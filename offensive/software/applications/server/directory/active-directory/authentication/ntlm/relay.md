@@ -13,6 +13,8 @@ keywords:
 
 NTLM has no binding between the authentication and the service it was meant for. So an authentication produced for server A can be **forwarded** to server B, where you complete it and act as the victim, all without ever knowing their password. Relay turns a [captured](net-ntlm-capture-and-poisoning.md) or [coerced](coercion.md) authentication directly into access on another system. What you can relay to is decided entirely by the target's signing posture.
 
+**Lineage.** Relay began as SMBRelay in 2001, reflecting authentication straight back to the origin host. Microsoft blocked the self-relay and then raised SMB and LDAP signing, the MIC, and channel binding over successive releases, each closing a path. Modern relay answers by crossing protocols, forwarding to LDAP, to AD CS web enrollment, and even back into Kerberos, wherever signing or channel binding is still unenforced.
+
 ## What stops a relay
 
 Signing and channel binding bind the authentication to the session or the TLS channel, breaking the forward:
@@ -39,7 +41,7 @@ ntlmrelayx.py -t smb://<host> -c 'whoami'
 ntlmrelayx.py -t ldap://<dc> --shadow-credentials --shadow-target 'victim$'
 ```
 
-`ntlmrelayx` also relays to **MSSQL** and Exchange HTTP endpoints, and supports **multi-relay**: it answers the victim with an HTTP **307 redirect** so the client re-authenticates for each additional target. A single captured challenge-response cannot satisfy several server challenges, so this is one **coercion trigger** driving repeated fresh authentications, not one authentication reused many times, and it only works when the coerced client follows the redirects.
+`ntlmrelayx` also relays to **MSSQL** (for example a coerced SCCM site server to its site database, see [SCCM site takeover](../../../../configuration/sccm/site-takeover.md)) and Exchange HTTP endpoints, and supports **multi-relay**: it answers the victim with an HTTP **307 redirect** so the client re-authenticates for each additional target. A single captured challenge-response cannot satisfy several server challenges, so this is one **coercion trigger** driving repeated fresh authentications, not one authentication reused many times, and it only works when the coerced client follows the redirects.
 
 - **Relay to LDAP + RBCD**: configure resource-based constrained delegation on a computer object you can then impersonate any user to, a common path from coerced machine authentication to local admin on that machine.
 - **Relay to AD CS (ESC8)**: relay a coerced DC or user HTTP authentication to the CA web enrollment and obtain a certificate as that principal; a DC certificate is domain compromise.

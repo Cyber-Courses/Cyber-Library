@@ -13,6 +13,8 @@ keywords:
 
 Every trust is backed by a shared secret: a **trust key**, stored as the password of an inter-domain **trust account** (`<DOMAIN>$`) and used to encrypt the **referral tickets** that let a principal in one domain request service tickets in another. Holding that key lets you forge those referral tickets directly, moving across the trust without the forged privilege living inside a golden ticket. It is the lower-level mechanism underneath both intra-forest and cross-forest movement.
 
+**Lineage.** SID history began as a legitimate migration feature, letting a migrated account keep its old access. SID filtering and quarantine were added as the boundary against abuse, and forging inter-realm tickets with the trust key, together with extraSids injection, are the modern ways across a trust where that filtering is loose.
+
 ## Extracting the trust key
 
 The trust key is the trust account's key, recoverable by [DCSync](../authentication/credentials/ntds-and-dcsync.md) once a domain is compromised:

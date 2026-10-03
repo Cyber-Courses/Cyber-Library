@@ -13,6 +13,8 @@ keywords:
 
 `AdminSDHolder` is a container (`CN=AdminSDHolder,CN=System,DC=...`) whose DACL is a **template**. A background process, the **Security Descriptor Propagator (SDProp)**, copies that DACL roughly every **60 minutes** onto the domain's **protected** groups and their current members, resolved recursively (Domain Admins, Administrators, Enterprise Admins, and the rest of the protected set), overwriting their individual DACLs and stamping `adminCount=1` on them. That design, meant to keep privileged objects consistently locked down, is a persistence primitive: write one ACE into the AdminSDHolder template and SDProp grants you rights over **all** of those principals, and re-grants them every cycle even if a defender strips them off an individual object.
 
+**Lineage.** AdminSDHolder and SDProp shipped as a protection, keeping privileged objects consistently locked down. It was repurposed as stealth persistence from around 2015, and the tell has not changed since: an orphaned `adminCount=1` carrying an unexpected ACE ties the original design to its abuse.
+
 ## Planting the backdoor
 
 With control of the AdminSDHolder object (owner, `WriteDacl`, or `GenericAll` over it, usually only reachable once you are already highly privileged), add an ACE granting a principal you control full control:

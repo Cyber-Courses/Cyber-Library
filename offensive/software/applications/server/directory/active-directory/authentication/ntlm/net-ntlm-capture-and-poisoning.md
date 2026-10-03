@@ -13,6 +13,8 @@ keywords:
 
 When a Windows host tries to reach a name that DNS cannot resolve (a typo, a decommissioned share, a WPAD lookup), it falls back to **broadcast** name-resolution protocols: LLMNR, NBT-NS, and mDNS. These have no authentication: any host on the segment can answer "that's me". By answering, you make the victim connect to you and authenticate, handing you a **NetNTLMv2** challenge-response you can crack offline or relay.
 
+**Lineage.** The poisoning surface is a relic of WINS and NetBIOS name resolution, whose broadcast fallback LLMNR and NBT-NS inherited. Responder made abusing it routine from 2012, and mDNS and IPv6 (mitm6, rogue DHCPv6 and WPAD) are the same idea carried onto newer stacks.
+
 ## Why it works
 
 - **LLMNR** (UDP 5355) and **NBT-NS** (UDP 137) are multicast/broadcast fallbacks with no source validation.
@@ -39,6 +41,18 @@ A captured NetNTLMv2 response has two uses:
 
 - **Crack it** (`-m 5600`) to recover the plaintext, then reuse the credential for [spraying](../credentials/password-spraying.md) and authenticated access. Feasible only if the password is weak.
 - **[Relay](relay.md) it** without cracking: forward the authentication in real time to another service and act as the victim there. This is the higher-value path, because it works regardless of password strength, as long as the target does not enforce signing.
+
+## Downgrading to NetNTLMv1
+
+Where a host still negotiates the older **NetNTLMv1**, the response is derived with weak DES and, against a **known server challenge**, cracks back to the **NT hash itself** (not merely the password) in hours on a dedicated DES service. Serve a fixed challenge, capture a v1 response, and convert it:
+
+```bash
+# Responder.conf: set Challenge = 1122334455667788 to force a static, crackable challenge
+# then coerce a host (ideally a machine account) to authenticate and capture NetNTLMv1
+# submit the captured NetNTLMv1 to crack.sh, which returns the NT hash near-instantly
+```
+
+A coerced **machine-account** NetNTLMv1 cracked to its NT hash is immediately reusable as [pass-the-hash](pass-the-hash.md) for that computer, which is why downgrading a domain controller's response is a known route to its hash. This needs the target to still accept NetNTLMv1, so it is a legacy-host technique, but it upgrades a one-off capture into a durable credential.
 
 ## Exploitation notes
 

@@ -22,6 +22,7 @@ The high-value rights, in rough order of power:
 - **`WriteOwner`**: take ownership, then rewrite the DACL.
 - **`GenericWrite` / `WriteProperty`**: write specific attributes, `servicePrincipalName` (targeted roasting), `msDS-KeyCredentialLink` (shadow credentials), `msDS-AllowedToActOnBehalfOfOtherIdentity` (RBCD), `member` / `primaryGroupID` (group membership).
 - **Extended and read rights**: `User-Force-Change-Password` (reset without the old one), `DS-Replication-Get-Changes` + `...-All` (the DCSync right, on the domain object), and the read rights over `msDS-ManagedPassword` / `ms-Mcs-AdmPwd` that expose gMSA and LAPS secrets.
+- **All extended rights**: an ACE that grants an extended right with the **all-zero GUID** (`00000000-0000-0000-0000-000000000000`) means *every* extended right at once, silently including DCSync, the password reset, and the LAPS read, so read a single such ACE as equal to all of them combined.
 - **`WriteGPLink`** on an OU: link a GPO to it (covered under [Group Policy](../group-policy/index.md)).
 
 The [DACL overview](index.md) maps each of these edges to the page that abuses it.

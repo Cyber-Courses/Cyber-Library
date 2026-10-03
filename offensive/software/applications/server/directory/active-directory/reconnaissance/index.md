@@ -23,6 +23,7 @@ Almost everything in Active Directory is readable by any authenticated account, 
 ## Pages
 
 - **[Host and domain discovery](host-and-domain-discovery.md)**: finding domain controllers, naming contexts, and the lay of the domain.
+- **[Null sessions](null-sessions.md)**: anonymous SMB/LDAP enumeration and RID cycling, before any credential.
 - **[LDAP enumeration](ldap-enumeration.md)**: querying the directory for objects and attributes.
 - **[BloodHound](bloodhound.md)**: collecting and graphing attack paths.
 - **[Session enumeration](session-enumeration.md)**: locating logged-on users for targeting.
