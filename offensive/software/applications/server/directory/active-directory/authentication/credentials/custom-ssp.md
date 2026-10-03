@@ -11,7 +11,7 @@ keywords:
 
 # Custom SSP
 
-Windows authentication is pluggable: **Security Support Providers (SSPs)** are DLLs loaded into LSASS that handle authentication exchanges. Registering a **malicious SSP** makes LSASS hand every authentication, interactive logons, service starts, machine-account activity, to your code, which records the **cleartext** password. On a domain controller that is a steady stream of credentials, including service and computer account passwords, captured as users and services authenticate.
+Windows authentication is pluggable: **Security Support Providers (SSPs)** are DLLs loaded into LSASS that handle authentication exchanges. Registering a **malicious SSP** makes LSASS hand the authentications that happen **on that host**, interactive and service logons, to your code, which records the **cleartext** password supplied during them. It does **not** reveal the password behind every domain authentication: a user signing in from another machine gives the DC only a Kerberos pre-authentication blob or an NTLM response, not their cleartext. What it does catch on a DC is the accounts that actually log on there, interactive admin sessions and the service and machine accounts starting locally, in cleartext.
 
 ## Installing it
 
@@ -29,14 +29,16 @@ mimikatz: privilege::debug ; misc::memssp
 Captured credentials are written in cleartext to a local log:
 
 ```text
-# Both mimilib and memssp log to:
+# mimilib.dll (registered SSP) logs to:
 C:\Windows\System32\kiwissp.log
+# misc::memssp (in-memory) logs to:
+C:\Windows\System32\mimilsa.log
 ```
 
 ## Why it is valuable
 
 - It yields **plaintext** passwords, not hashes, so no cracking is needed, and it catches credentials that are never in a dumpable hash form at rest.
-- On a **DC**, it harvests high-value service and machine account passwords continuously as the domain operates.
+- On a **DC** it still catches the service and machine accounts that log on locally, and any interactive admin logon, in cleartext, which is high value even though it is not every domain authentication.
 - The **registry (`Security Packages`)** form reloads on reboot, making it durable; the `memssp` form is stealthier (no disk artifact) but clears on reboot.
 
 ## Exploitation notes

