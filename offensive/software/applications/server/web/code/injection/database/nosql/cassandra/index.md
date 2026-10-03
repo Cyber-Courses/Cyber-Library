@@ -21,7 +21,7 @@ CQL is deliberately narrow. It has no `UNION`, no subqueries, no `OR` across arb
 
 ## Pages
 
-- **[Batch statement injection](batch-statement-injection.md)**: Injecting into or forming a BEGIN BATCH ...
+- **[Batch statement injection](batch-statement-injection.md)**: Injecting into or forming a `BEGIN BATCH ... APPLY BATCH` block to bundle extra INSERT, UPDATE, and DELETE writes into a single Cassandra statement.
 - **[User-defined function abuse](user-defined-function-abuse.md)**: Where user-defined functions are enabled, injected CREATE FUNCTION or CREATE AGGREGATE with a Java body runs attacker code inside the Cassandra JVM.
 
 ## Tools
