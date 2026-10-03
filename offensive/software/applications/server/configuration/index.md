@@ -18,6 +18,7 @@ This area covers the offensive surface of those platforms: how to find them, pul
 ## Products
 
 - **[SCCM / MECM](sccm/index.md)**: Microsoft Configuration Manager, the dominant on-premises platform and the richest attack surface of the group.
+- **[WSUS](wsus.md)**: Windows Server Update Services, abused to push a malicious update that runs as SYSTEM on managed clients.
 
 ## References
 
