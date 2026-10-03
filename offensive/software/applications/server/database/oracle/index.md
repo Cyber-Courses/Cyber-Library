@@ -17,6 +17,8 @@ Oracle Database is reached through the **TNS listener** (port 1521), which route
 
 - **[Access and enumeration](access-and-enumeration.md)**: TNS and SID enumeration, default and weak accounts, schema and hash extraction.
 - **[Command execution](command-execution.md)**: OS commands through `DBMS_SCHEDULER`, Java stored procedures, and external tables.
+- **[File access](file-access.md)**: reading and writing host files through `UTL_FILE` and a directory object.
+- **[Out-of-band](out-of-band.md)**: SSRF, NetNTLM capture on Windows, and blind exfiltration through the outbound packages.
 
 ## References
 

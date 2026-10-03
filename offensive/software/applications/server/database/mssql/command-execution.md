@@ -56,6 +56,7 @@ A sysadmin can load a .NET assembly that exposes a procedure running code in-pro
 - Prefer **CLR or OLE** where `xp_cmdshell` is monitored or policy-blocked; all three need sysadmin, so reach sysadmin first via impersonation or linked servers.
 - `PowerUpSQL` `Invoke-SQLOSCmd` executes specifically through **xp_cmdshell**; where that is blocked but OLE or CLR is usable, run those statements directly rather than relying on it.
 - Command execution plus the service account's `SeImpersonate` is the standard **MSSQL-to-SYSTEM** chain on the host.
+- Beyond execution, a sysadmin can read and write the Windows registry with `xp_regread`/`xp_regwrite` (service-account secrets, stored credentials, autoruns), a quieter credential-access and persistence primitive.
 
 ## Tools
 
