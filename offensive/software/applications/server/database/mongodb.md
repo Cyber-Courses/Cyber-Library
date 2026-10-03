@@ -37,7 +37,7 @@ db.coll.mapReduce(function(){ /* JS */ }, function(k,v){return v}, {out:"o"});
 
 - The default-no-auth exposure is the headline: enumerate `show dbs` and dump collections directly where authentication was never enabled.
 - Even with auth, check for an over-privileged application user and for **`__system`** or admin roles reachable with weak credentials.
-- Server-side JavaScript (`security.javascriptEnabled`) is off by default on current builds, so treat `$where`/`mapReduce` abuse as version- and config-dependent.
+- Server-side JavaScript (`security.javascriptEnabled`) still defaults to **enabled** (deprecated as of MongoDB 8.0 but not disabled by default), so `$where`/`mapReduce` are usually available unless an operator turned them off.
 - MongoDB exposed with no auth has been mass-ransomed in the wild, so an open instance is both a data-theft and an integrity concern on an engagement.
 
 ## Tools

@@ -15,10 +15,12 @@ With a privileged account (DBA or the right `CREATE`/`EXECUTE` grants), Oracle r
 
 ## DBMS_SCHEDULER external jobs
 
-The scheduler can run an external executable as a job:
+The scheduler can run an external executable as a job. It needs both `CREATE JOB` **and** `CREATE EXTERNAL JOB`; the external-job privilege is what actually lets the OS command run:
 
 ```bash
-odat dbmsscheduler -s <target> -d <SID> -U user -P pass --exec "/bin/bash -c 'id>/tmp/o'"
+# ODAT splits the value on whitespace and does not support shell metacharacters (>, |, quotes),
+# so point it at a plain executable or a pre-positioned wrapper script, not an inline one-liner
+odat dbmsscheduler -s <target> -d <SID> -U user -P pass --exec "/tmp/run.sh"
 ```
 
 ## Java stored procedures
@@ -35,14 +37,14 @@ An external table with a **preprocessor** directive runs a program when the tabl
 
 ```bash
 odat externaltable -s <target> -d <SID> -U user -P pass --exec "/path" "id"
-# also: externaltable can read and write host files (--getfile / --putfile)
+# externaltable can also read host files with --getFile (case-sensitive); it has no write option
 ```
 
 ## Exploitation notes
 
 - Commands run as the **Oracle service account** (`oracle` on Linux, often a privileged service account on Windows), so the payoff is host access as that account.
-- The three sinks need different privileges: pick based on what [enumeration](access-and-enumeration.md) showed (`CREATE JOB`/`CREATE PROCEDURE`/`CREATE ANY DIRECTORY`), and let `odat` try them in turn.
-- The **external-table** route doubles as a file read/write primitive, useful when you only need to drop a payload or steal a file.
+- The three sinks need different privileges: pick based on what [enumeration](access-and-enumeration.md) showed (`CREATE JOB` **and** `CREATE EXTERNAL JOB` for the scheduler, `CREATE PROCEDURE` for Java, `CREATE ANY DIRECTORY` for external tables), and let `odat` try them in turn.
+- The **external-table** route also reads host files (`--getFile`), useful when you only need to steal a file rather than run a command.
 - PL/SQL injection in a `DEFINER`-rights package can supply the missing privilege, turning a low account into one that reaches these sinks.
 
 ## Tools
