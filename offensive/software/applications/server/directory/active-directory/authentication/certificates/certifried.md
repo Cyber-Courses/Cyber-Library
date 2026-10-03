@@ -11,7 +11,7 @@ keywords:
 
 # Certifried
 
-Certifried turns the default **machine-account quota** into a domain controller takeover. By default any user can create computer accounts, and an enrolled machine certificate is mapped back to an account by its **`dNSHostName`**. If you create a computer, set its `dNSHostName` to match a **domain controller's**, and enroll on a machine template, the issued certificate maps to the **DC**, so you can authenticate as the DC and DCSync. It needs only a standard domain user and a reachable enterprise CA.
+Certifried turns the default **machine-account quota** into a domain controller takeover. By default any user can create computer accounts, and an enrolled machine certificate is mapped back to an account by its **`dNSHostName`**. If you create a computer, set its `dNSHostName` to match a **domain controller's**, and enroll on a machine template, the issued certificate maps to the **DC**, so you can authenticate as the DC and DCSync. It needs a standard domain user and a reachable enterprise CA, and it works where **strong certificate mapping is not enforced**: the 2022 strong-mapping enforcement embeds the requesting machine's SID in the certificate and the KDC rejects the mismatched DC mapping, so scope this to systems without that enforcement or with explicitly weakened mapping.
 
 ## The attack
 
