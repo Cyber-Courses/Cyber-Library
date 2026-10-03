@@ -30,6 +30,7 @@ Every trust in that chain is a target: the account key (roasting, pass-the-key),
 - **[Pass-the-key and overpass-the-hash](pass-the-key-and-overpass-the-hash.md)**: turning a key or hash into a TGT.
 - **[Pass-the-ticket](pass-the-ticket.md)**: extracting and injecting tickets to reuse them.
 - **[Forged tickets](forged-tickets.md)**: golden, silver, diamond, and sapphire ticket forgery.
+- **[MS14-068](ms14-068.md)**: forging a privileged PAC, any user to Domain Admin on an unpatched DC.
 - **[Delegation](delegation/index.md)**: unconstrained, constrained, and resource-based constrained delegation abuse.
 - **[Kerberos relay](kerberos-relay.md)**: capturing TGTs via unconstrained delegation and relaying Kerberos to LDAP or AD CS.
 - **[Shadow credentials](shadow-credentials.md)**: adding key credentials to impersonate via PKINIT.
