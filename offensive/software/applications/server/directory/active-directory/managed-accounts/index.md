@@ -28,6 +28,7 @@ All three are **directory-driven**: the secret or the trust decision lives in an
 - **[gMSA](gmsa.md)**: reading `msDS-ManagedPassword` to recover a service account's key.
 - **[LAPS](laps.md)**: reading local-administrator passwords from the directory.
 - **[BadSuccessor](badsuccessor.md)**: dMSA migration abuse for privilege escalation on Server 2025.
+- **[Golden gMSA](golden-gmsa.md)**: forge any gMSA password offline from the KDS root key.
 
 ## References
 
