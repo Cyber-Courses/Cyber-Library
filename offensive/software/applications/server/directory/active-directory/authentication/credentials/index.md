@@ -35,6 +35,7 @@ A compromised Windows host and the directory itself hold several credential stor
 - **[User and group enumeration](user-and-group-enumeration.md)**: building the account list to target.
 - **[Password policy](password-policy.md)**: reading the policy that bounds safe spraying.
 - **[Password spraying](password-spraying.md)**: guessing valid credentials without lockout.
+- **[Pre-created computers](pre-created-computers.md)**: taking over pre-staged computer objects with their default name-as-password.
 
 Once you hold the directory's secrets, the same access supports **domain persistence**:
 

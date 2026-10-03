@@ -41,7 +41,7 @@ ntlmrelayx.py -t smb://<host> -c 'whoami'
 ntlmrelayx.py -t ldap://<dc> --shadow-credentials --shadow-target 'victim$'
 ```
 
-`ntlmrelayx` also relays to **MSSQL** and Exchange HTTP endpoints, and supports **multi-relay**: it answers the victim with an HTTP **307 redirect** so the client re-authenticates for each additional target. A single captured challenge-response cannot satisfy several server challenges, so this is one **coercion trigger** driving repeated fresh authentications, not one authentication reused many times, and it only works when the coerced client follows the redirects.
+`ntlmrelayx` also relays to **MSSQL** (for example a coerced SCCM site server to its site database, see [SCCM site takeover](../../../../configuration/sccm/site-takeover.md)) and Exchange HTTP endpoints, and supports **multi-relay**: it answers the victim with an HTTP **307 redirect** so the client re-authenticates for each additional target. A single captured challenge-response cannot satisfy several server challenges, so this is one **coercion trigger** driving repeated fresh authentications, not one authentication reused many times, and it only works when the coerced client follows the redirects.
 
 - **Relay to LDAP + RBCD**: configure resource-based constrained delegation on a computer object you can then impersonate any user to, a common path from coerced machine authentication to local admin on that machine.
 - **Relay to AD CS (ESC8)**: relay a coerced DC or user HTTP authentication to the CA web enrollment and obtain a certificate as that principal; a DC certificate is domain compromise.
