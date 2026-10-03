@@ -39,6 +39,8 @@ Every AD CS attack is a variation on this: get a certificate you should not have
 - **[Relay to AD CS](relay-to-adcs.md)**: ESC8, ESC11.
 - **[Theft and pass-the-certificate](theft-and-pass-the-certificate.md)**: stealing certificates and authenticating with them.
 - **[Schannel](schannel.md)**: authenticating with a certificate over TLS/LDAPS instead of PKINIT.
+- **[Certifried](certifried.md)**: a machine certificate for a domain controller's identity via dNSHostName.
+- **[Golden Certificate](golden-certificate.md)**: forging certificates offline with a stolen CA private key.
 
 ## References
 
