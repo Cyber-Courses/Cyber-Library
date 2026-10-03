@@ -25,6 +25,7 @@ Capture and coercion produce the authentication; relay and pass-the-hash consume
 ## Pages
 
 - **[Net-NTLM capture and poisoning](net-ntlm-capture-and-poisoning.md)**: harvesting authentication with LLMNR/NBT-NS/mDNS poisoning.
+- **[ADIDNS spoofing](adidns.md)**: adding AD-integrated DNS records to poison name resolution domain-wide.
 - **[Coercion](coercion.md)**: forcing privileged machines to authenticate (PetitPotam, PrinterBug, and others).
 - **[Relay](relay.md)**: forwarding authentication to SMB, LDAP, and HTTP targets.
 - **[Pass-the-hash](pass-the-hash.md)**: authenticating and executing with a stolen NT hash.
