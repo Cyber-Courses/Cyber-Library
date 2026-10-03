@@ -57,5 +57,7 @@ Every edge BloodHound draws corresponds to a concrete technique in the sections 
 
 ## References
 
-- SpecterOps: BloodHound documentation
-- The Hacker Recipes: BloodHound
+- [SpecterOps: BloodHound Community Edition docs](https://bloodhound.specterops.io/)
+- [BloodHound (SpecterOps, GitHub)](https://github.com/SpecterOps/BloodHound)
+- [BloodHound.py (dirkjanm): Python collector](https://github.com/dirkjanm/BloodHound.py)
+- [SpecterOps: An ACE Up the Sleeve (AD DACL paths)](https://specterops.io/wp-content/uploads/sites/3/2022/06/an_ace_up_the_sleeve.pdf)

@@ -56,5 +56,7 @@ secretsdump.py -sam sam.save -system system.save -security security.save LOCAL
 
 ## References
 
-- The Hacker Recipes: SAM and LSA secrets
-- Microsoft: LSA secrets and cached credentials
+- [The Hacker Recipes: SAM & LSA secrets](https://www.thehacker.recipes/ad/movement/credentials/dumping/sam-and-lsa-secrets)
+- [Impacket secretsdump (fortra)](https://github.com/fortra/impacket)
+- [NetExec: SAM and LSA dumping](https://github.com/Pennyw0rth/NetExec)
+- [hashcat: example hashes (DCC2 is mode 2100)](https://hashcat.net/wiki/doku.php?id=example_hashes)
