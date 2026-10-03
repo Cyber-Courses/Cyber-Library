@@ -38,6 +38,19 @@ If Seamless SSO is enabled, a computer account **`AZUREADSSOACC$`** exists in on
 
 On a joined endpoint, the **primary refresh token (PRT)** is the device's cloud SSO credential. Stealing it (with the matching session key) gives cloud access as that user without their password or MFA, a direct on-prem-to-cloud pivot from a workstation.
 
+## AD FS: Golden SAML
+
+Where the tenant federates through on-premises **AD FS**, the AD FS **token-signing certificate** signs the SAML tokens the cloud trusts. Steal that certificate's private key and you **forge SAML tokens for any user**, with any claims, bypassing the password and MFA and generating no authentication event at the identity provider. This is **Golden SAML**, the technique used in the 2020 SolarWinds intrusions.
+
+The signing certificate is stored encrypted, protected by the **DKM** (Distributed Key Manager) master key held in Active Directory, so forging it needs admin on the AD FS server (or the DKM key plus the encrypted configuration from AD):
+
+```powershell
+# AADInternals: export the AD FS signing certificate, then forge a SAML token for any user
+Export-AADIntADFSSigningCertificate -Server adfs.example.local
+New-AADIntSAMLToken -ImmutableID <user-immutableid> -PfxFileName signing.pfx -Issuer "http://adfs.example.local/adfs/services/trust"
+# ADFSDump + ADFSpoof are the equivalent standalone toolchain
+```
+
 ## Exploitation notes
 
 - The Connect server is effectively **both a domain controller and a tenant admin** in reach, so compromising it is the shortest hybrid takeover; treat it as Tier-0 when scoping.
@@ -55,3 +68,4 @@ On a joined endpoint, the **primary refresh token (PRT)** is the device's cloud 
 - [AADInternals (o365blog)](https://github.com/Gerenios/AADInternals)
 - [Cloud-Architekt: Entra Connect sync service account attack and defense](https://github.com/Cloud-Architekt/AzureAD-Attack-Defense/blob/main/AADCSyncServiceAccount.md)
 - [Reversec: Entra Connect exploitation in 2025](https://labs.reversec.com/posts/2025/10/entra-connect-exploitation-in-2025-an-overview)
+- [inversecos: backdooring Office 365 and Active Directory with Golden SAML](https://www.inversecos.com/2021/09/backdooring-office-365-and-active.html)
