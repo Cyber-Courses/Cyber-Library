@@ -15,13 +15,15 @@ Most domains are no longer islands: **Entra Connect** (formerly Azure AD Connect
 
 ## The sync account holds DCSync
 
-Entra Connect creates an on-premises connector account (named `MSOL_` or `AAD_`) that has **`Replicate Directory Changes`** and **`Replicate Directory Changes All`** on the domain, which is [DCSync](../authentication/credentials/ntds-and-dcsync.md). From local admin on the Connect server, recover that account's cleartext credentials from the sync configuration, then DCSync the whole domain (including krbtgt):
+Entra Connect creates an on-premises connector account (named `MSOL_` or `AAD_`). **When password hash synchronization is enabled**, it holds **`Replicate Directory Changes`** and **`Replicate Directory Changes All`** on the domain, which is [DCSync](../authentication/credentials/ntds-and-dcsync.md). From local admin on the Connect server, recover that account's cleartext credentials from the sync configuration, then DCSync the whole domain (including krbtgt):
 
 ```powershell
 # AADInternals: extract the sync credentials from the Connect server
 Get-AADIntSyncCredentials
 # -> on-prem connector (MSOL_) account + cloud sync account creds; use the MSOL_ cred for DCSync
 ```
+
+A basic-synchronization, pass-through-authentication, or federated install without hash sync may not grant the connector `Replicate Directory Changes All`, so confirm the account's rights before relying on the DCSync path.
 
 ## Seamless SSO: the AZUREADSSOACC$ account
 
