@@ -23,12 +23,12 @@ krbrelayx.py -aesKey <host-aes-key>
 # then coerce a DC to authenticate to this host and capture DC$'s TGT
 ```
 
-## Relaying to a controlled service name
+## Relaying to the target's own service name
 
-To relay Kerberos (rather than capture a TGT), the victim must request a service ticket for an **SPN that resolves to you**. You arrange that by controlling name resolution and the SPN:
+You cannot relay a ticket built for an SPN you own: it is encrypted for your account's key, so the real target rejects it. krbrelayx instead requires the incoming ticket's **hostname to match the relay target**, and you make the victim authenticate to the *target's* name by **redirecting name resolution**:
 
-- Spoof a name via [ADIDNS](../ntlm/adidns.md) or `mitm6` so the victim's target resolves to your host, and coerce it; the victim requests a ticket for that host's SPN, which you relay.
-- Relay the Kerberos authentication to **LDAP** (for RBCD or shadow credentials) or to **AD CS** web enrolment (ESC8):
+- Point the target's own hostname at your listener with [ADIDNS](../ntlm/adidns.md) or `mitm6`, then coerce the victim; it requests a ticket for the real target's SPN but sends the authentication to you, and krbrelayx forwards it to the actual target.
+- Relay that Kerberos authentication to **LDAP** (for RBCD or shadow credentials) or to **AD CS** web enrolment (ESC8):
 
 ```bash
 # Relay coerced Kerberos auth to AD CS web enrolment for a certificate
@@ -38,7 +38,7 @@ krbrelayx.py --target 'http://<ca>/certsrv/' --adcs --template Machine
 ## Exploitation notes
 
 - Kerberos relay sidesteps NTLM-hardening: where NTLM is disabled or SMB/LDAP signing blocks NTLM relay, a Kerberos path may still reach LDAP or AD CS.
-- The constraint is the **SPN**: you need the victim to authenticate to a name you control, so it pairs tightly with [ADIDNS](../ntlm/adidns.md)/`mitm6` and [coercion](../ntlm/coercion.md).
+- The constraint is the ticket's **SPN hostname**: it must match the relay target, so you redirect the target's name to your listener with [ADIDNS](../ntlm/adidns.md)/`mitm6` rather than owning the SPN, and pair with [coercion](../ntlm/coercion.md).
 - Unconstrained-delegation capture remains the most reliable krbrelayx use: coerce a DC to a delegation host you own and take `DC$`'s TGT, then DCSync.
 
 ## Tools

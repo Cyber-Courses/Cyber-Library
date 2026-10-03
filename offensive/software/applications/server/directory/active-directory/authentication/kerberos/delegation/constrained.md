@@ -45,7 +45,7 @@ S4U2proxy constrains the *service class* loosely: the returned ticket's **servic
 - Impersonate a privileged user (Domain Admin) to a `cifs/` or `host/` SPN on the target to get file access or code execution as that user on that host.
 - The SPN-substitution trick means the listed SPN matters less than the **target account**: delegation to one computer-account SPN is effectively delegation to all of that machine's own services, though not to SPNs held by separate service accounts on the same host.
 - You need the delegating account's secret; recover it by [cracking](../../credentials/cracking.md) (it is often a service account) or dumping, then drive S4U with its hash or AES key.
-- Accounts marked "sensitive, cannot be delegated" and members of Protected Users cannot be impersonated this way.
+- Accounts marked "sensitive, cannot be delegated" and members of Protected Users cannot be impersonated this way **under normal (patched) behaviour**; the Bronze Bit attack above lifts exactly this restriction on unpatched DCs.
 
 ## Tools
 
