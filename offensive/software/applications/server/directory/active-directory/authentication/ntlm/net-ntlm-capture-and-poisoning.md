@@ -42,6 +42,18 @@ A captured NetNTLMv2 response has two uses:
 - **Crack it** (`-m 5600`) to recover the plaintext, then reuse the credential for [spraying](../credentials/password-spraying.md) and authenticated access. Feasible only if the password is weak.
 - **[Relay](relay.md) it** without cracking: forward the authentication in real time to another service and act as the victim there. This is the higher-value path, because it works regardless of password strength, as long as the target does not enforce signing.
 
+## Downgrading to NetNTLMv1
+
+Where a host still negotiates the older **NetNTLMv1**, the response is derived with weak DES and, against a **known server challenge**, cracks back to the **NT hash itself** (not merely the password) in hours on a dedicated DES service. Serve a fixed challenge, capture a v1 response, and convert it:
+
+```bash
+# Responder.conf: set Challenge = 1122334455667788 to force a static, crackable challenge
+# then coerce a host (ideally a machine account) to authenticate and capture NetNTLMv1
+# submit the captured NetNTLMv1 to crack.sh, which returns the NT hash near-instantly
+```
+
+A coerced **machine-account** NetNTLMv1 cracked to its NT hash is immediately reusable as [pass-the-hash](pass-the-hash.md) for that computer, which is why downgrading a domain controller's response is a known route to its hash. This needs the target to still accept NetNTLMv1, so it is a legacy-host technique, but it upgrades a one-off capture into a durable credential.
+
 ## Exploitation notes
 
 - NetNTLMv2 is **not** reusable like an NT hash: it is bound to a server challenge, so it only cracks or relays, never pass-the-hash.

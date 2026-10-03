@@ -16,7 +16,7 @@ The Local Administrator Password Solution (LAPS) randomises each machine's local
 ## Legacy LAPS vs Windows LAPS
 
 - **Legacy LAPS**: the password is **cleartext** in **`ms-Mcs-AdmPwd`** (expiry in `ms-Mcs-AdmPwdExpirationTime`). Any principal with read access to that attribute gets the password as-is.
-- **Windows LAPS** (built into current Windows): uses **`msLAPS-Password`** (cleartext JSON when encryption is off) and **`msLAPS-EncryptedPassword`** (DPAPI-NG encrypted to a chosen principal/group), plus password **history** attributes. The encrypted form requires you to be (or reach) the authorised decryptor.
+- **Windows LAPS** (built into current Windows): uses **`msLAPS-Password`** (cleartext JSON when encryption is off) and **`msLAPS-EncryptedPassword`** (DPAPI-NG encrypted to a chosen principal/group), plus password **history** attributes. The encrypted form requires you to be (or reach) the authorised decryptor. BloodHound models the control that yields the encrypted value as the **`SyncLAPSPassword`** edge, distinct from **`ReadLAPSPassword`** for the legacy cleartext attribute.
 
 ## Reading it
 

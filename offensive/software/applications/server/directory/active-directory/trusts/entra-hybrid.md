@@ -1,0 +1,55 @@
+---
+title: "Entra hybrid: pivoting between on-premises AD and the cloud"
+description: "Abusing Microsoft Entra Connect and hybrid identity to move between on-premises Active Directory and the Entra ID tenant: the sync account's DCSync rights, the Seamless SSO computer account for cloud impersonation, and primary refresh token theft."
+keywords:
+  - Entra Connect
+  - Azure AD Connect
+  - MSOL account
+  - AZUREADSSOACC
+  - primary refresh token
+---
+
+# Entra hybrid
+
+Most domains are no longer islands: **Entra Connect** (formerly Azure AD Connect) synchronises on-premises AD into an Entra ID (Azure AD) tenant, and that bridge is a two-way attack path. The **Connect server** is a Tier-0 asset that is routinely protected like an ordinary member server, yet it holds the keys to both directories. Owning it, or the accounts it creates, pivots from on-premises Domain Admin to cloud Global Administrator and back.
+
+## The sync account holds DCSync
+
+Entra Connect creates an on-premises connector account (named `MSOL_` or `AAD_`) that has **`Replicate Directory Changes`** and **`Replicate Directory Changes All`** on the domain, which is [DCSync](../authentication/credentials/ntds-and-dcsync.md). From local admin on the Connect server, recover that account's cleartext credentials from the sync configuration, then DCSync the whole domain (including krbtgt):
+
+```powershell
+# AADInternals: extract the sync credentials from the Connect server
+Get-AADIntSyncCredentials
+# -> on-prem connector (MSOL_) account + cloud sync account creds; use the MSOL_ cred for DCSync
+```
+
+## Seamless SSO: the AZUREADSSOACC$ account
+
+If Seamless SSO is enabled, a computer account **`AZUREADSSOACC$`** exists in on-premises AD. Its key signs Kerberos tickets for the cloud SSO service, so its NT hash (via DCSync) lets you forge a **silver ticket** impersonating **any synced user to the cloud**:
+
+```powershell
+# With the AZUREADSSOACC$ hash, forge a ticket for the Azure AD SSO SPN and ride it into the tenant
+# (AADInternals Open-AADIntOffice365Portal / ticket forging against the aadg.windows.net.nsatc.net SPN)
+```
+
+## Primary refresh tokens
+
+On a joined endpoint, the **primary refresh token (PRT)** is the device's cloud SSO credential. Stealing it (with the matching session key) gives cloud access as that user without their password or MFA, a direct on-prem-to-cloud pivot from a workstation.
+
+## Exploitation notes
+
+- The Connect server is effectively **both a domain controller and a tenant admin** in reach, so compromising it is the shortest hybrid takeover; treat it as Tier-0 when scoping.
+- The `MSOL_` DCSync path means the Connect server is an alternative route to the whole domain even when the DCs themselves are hard to reach.
+- In **pass-through authentication** tenants, the PTA agent on the Connect server can be backdoored to intercept or validate any cloud logon, a durable authentication backdoor.
+- `AADInternals` is the established toolkit once you hold local admin on the sync server.
+
+## Tools
+
+- **AADInternals** (Nestori Syynimaa): sync-credential extraction, token forging, PTA and SSO abuse.
+- **Impacket / mimikatz**: DCSync with the recovered `MSOL_` or `AZUREADSSOACC$` material.
+
+## References
+
+- [AADInternals (o365blog)](https://github.com/Gerenios/AADInternals)
+- [Cloud-Architekt: Entra Connect sync service account attack and defense](https://github.com/Cloud-Architekt/AzureAD-Attack-Defense/blob/main/AADCSyncServiceAccount.md)
+- [Reversec: Entra Connect exploitation in 2025](https://labs.reversec.com/posts/2025/10/entra-connect-exploitation-in-2025-an-overview)
