@@ -38,7 +38,7 @@ Find-DomainUserLocation -UserGroupIdentity 'Domain Admins'   # hunt a group's se
 
 ## BloodHound sessions
 
-BloodHound's session and local-admin collection is exactly this data at scale: `HasSession` edges come from `NetSessionEnum`, and `AdminTo` edges from local-group membership. Collecting it (see [BloodHound](bloodhound.md)) lets the graph compute "owned principal to Domain Admin via a session on host X" automatically.
+BloodHound's session and local-admin collection is exactly this data at scale: `HasSession` edges come from `NetSessionEnum`, and `AdminTo` edges from local-group membership. Collecting it (see [BloodHound](../../dacl/bloodhound.md)) lets the graph compute "owned principal to Domain Admin via a session on host X" automatically.
 
 ## Exploitation notes
 
