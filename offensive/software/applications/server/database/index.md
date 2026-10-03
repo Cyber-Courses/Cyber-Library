@@ -28,6 +28,9 @@ This area organises attacks per engine, because the query language, privilege mo
 - **[MSSQL](mssql/index.md)**: Microsoft SQL Server, the richest and most AD-integrated target: xp_cmdshell, linked servers, impersonation, and coercion to NTLM relay.
 - **[PostgreSQL](postgresql/index.md)**: superuser command execution through COPY FROM PROGRAM and untrusted languages, plus file read and write.
 - **[MySQL and MariaDB](mysql/index.md)**: file write to a webshell with INTO OUTFILE and OS command execution through a user-defined function.
+- **[Oracle Database](oracle/index.md)**: TNS and SID enumeration, default accounts, and command execution through the scheduler, Java, and external tables.
+- **[Redis](redis.md)**: unauthenticated access and the file-write and module-load paths to code execution.
+- **[MongoDB](mongodb.md)**: unauthenticated exposure, enumeration, and server-side JavaScript where enabled.
 
 ## References
 
