@@ -1,26 +1,37 @@
 ---
 title: "AWS data"
-description: "Reaching data in AWS managed data stores: RDS databases and their snapshots, DynamoDB tables, and the queues and analytics stores, through API access, snapshot sharing, and over-broad resource policies."
+description: "Attacking AWS data services: RDS snapshots and access, DynamoDB, Redshift, SageMaker, Glue, Athena, Lake Formation, DocumentDB, ElastiCache, EMR, Neptune, Timestream, and Keyspaces."
 keywords:
   - RDS
   - DynamoDB
-  - snapshot
-  - resource policy
-  - data stores
+  - Redshift
+  - SageMaker
+  - Glue
+  - Athena
+  - Lake Formation
 ---
 
 # Data
 
-Beyond object storage, AWS holds data in managed **databases** and stores: RDS, DynamoDB, Redshift, and the messaging and analytics services. These are reached through the API with the right permissions, and often through **snapshots** and over-broad **resource policies** rather than the database network port.
-
-The pages here cover dumping **DynamoDB** tables through the API, recovering **RDS** data by **sharing or restoring a snapshot** into a controlled account (the managed-service analogue of stealing an EBS snapshot), and spotting over-broad resource policies that expose a store cross-account.
+The managed data stores are where the engagement pays off: the database, the warehouse, the lake, and the cache hold what the account exists to protect. Reaching them splits into two moves that recur across every service here. Either the **data plane** is exposed directly (a publicly reachable endpoint, weak or shared credentials, an over-broad grant), or the **control plane** hands you the data offline (a shared snapshot, an export to S3, a credential-vending call). Several of these services also run jobs under an attached role, so they double as compute and are cross-referenced into [identity](../identity/index.md) where that role is the prize.
 
 ## What folds in here
 
-- **Exfiltration** from managed data stores.
-- Network-level database attacks (authenticating to the engine over its port) live in the [Database](../../../database/index.md) area; this surface is about the AWS control-plane paths to the same data.
+- **[RDS](rds/index.md)**: snapshot sharing and restore, and reaching the instance through weak network and auth controls.
+- **[DynamoDB](dynamodb.md)**: `Scan`, `Query`, and table export to S3.
+- **[SageMaker](sagemaker.md)**: notebooks, training jobs, and endpoints, and the attached role.
+- **[Redshift](redshift.md)**: exposed clusters, temporary credentials, and database grants.
+- **[Glue](glue.md)**: the Data Catalog, job scripts, and running jobs under the Glue role.
+- **[DocumentDB](documentdb.md)**: exposed Mongo-compatible clusters.
+- **[ElastiCache](elasticache.md)**: unauthenticated Redis and Memcached.
+- **[Athena](athena.md)**: querying S3 data through the catalog.
+- **[Lake Formation](lake-formation.md)**: governed-table permissions and credential vending.
+- **[EMR](emr.md)**: clusters, steps, and the instance role.
+- **[Neptune](neptune.md)**: exposed graph-database clusters.
+- **[Timestream](timestream.md)**: querying time-series databases.
+- **[Keyspaces](keyspaces.md)**: Cassandra-compatible tables.
 
 ## References
 
-- [HackTricks Cloud: AWS RDS and DynamoDB](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
-- [AWS: sharing a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
+- [HackTricks Cloud: AWS databases](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [AWS: security in Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.html)

@@ -1,6 +1,6 @@
 ---
 title: "AWS"
-description: "Offensive techniques against Amazon Web Services, broken down by surface: identity, credentials, and the compute, storage, serverless, data, and networking resource classes, with enumeration folded into each. Attacks center on the IAM graph and the AWS API, reached with keys or roles rather than host exploits."
+description: "Offensive techniques against Amazon Web Services, broken down by surface: identity, credentials, and the compute, storage, serverless, data, networking, logging, and messaging classes, with enumeration folded into each. Attacks center on the IAM graph and the AWS API, reached with keys or roles rather than host exploits."
 keywords:
   - AWS
   - IAM
@@ -19,16 +19,19 @@ Enumeration is not a separate surface: each surface below covers enumerating its
 
 ## Surfaces
 
-- **[Identity](identity/index.md)**: the IAM graph, role assumption and `PassRole`, policy abuse, and privilege-escalation paths.
-- **[Credentials](credentials/index.md)**: access keys, STS session tokens, instance metadata (IMDS), and secret stores as credential sources.
-- **[Compute](compute/index.md)**: EC2, ECS, and EKS abuse, user-data, and the run-command and snapshot paths.
-- **[Storage](storage/index.md)**: S3 bucket and object exposure, and EBS snapshots.
-- **[Serverless](serverless/index.md)**: Lambda function and layer abuse through its execution role.
-- **[Data](data/index.md)**: RDS, DynamoDB, and the managed data stores.
-- **[Networking](networking/index.md)**: security groups, exposed services, and VPC reachability.
+- **[Identity](identity/index.md)**: the IAM graph, role assumption and `PassRole`, policy abuse, federation, and the privilege-escalation paths, plus the Cognito, Identity Center, and Organizations identity layers.
+- **[Credentials](credentials/index.md)**: access keys, STS session tokens, instance metadata (IMDS), the secret stores, and the service credential brokers.
+- **[Compute](compute/index.md)**: EC2 user data and instance profiles, SSM, containers and ECR, and the Beanstalk, Image Builder, App Runner, Batch, and Lightsail runtimes.
+- **[Storage](storage/index.md)**: S3 bucket and object exposure, EBS and EFS recovery, FSx and Storage Gateway, and AWS Backup.
+- **[Serverless](serverless/index.md)**: Lambda execution roles and code, API Gateway, Function URLs, Step Functions, and EventBridge.
+- **[Data](data/index.md)**: RDS, DynamoDB, Redshift, SageMaker, Glue, Athena, Lake Formation, and the other managed data stores.
+- **[Networking](networking/index.md)**: security groups and VPC reachability, Route53 and CloudFront, dangling-DNS takeover, and the edge services.
+- **[Logging and detection](logging-and-detection/index.md)**: disabling, diverting, and evading CloudTrail, GuardDuty, Config, and CloudWatch.
+- **[Messaging](messaging/index.md)**: SES mail sending and phishing, and SNS and SQS topic and queue abuse.
 
 ## References
 
 - [HackTricks Cloud: AWS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [Rhino Security Labs: AWS IAM privilege escalation methods](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
+- [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
 - [PayloadsAllTheThings: AWS](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Cloud%20-%20AWS%20Pentest.md)

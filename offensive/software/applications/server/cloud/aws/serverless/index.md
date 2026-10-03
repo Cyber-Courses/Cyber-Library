@@ -1,24 +1,28 @@
 ---
 title: "AWS serverless"
-description: "Abusing AWS Lambda and serverless services: extracting the function execution role and environment secrets, tampering with function code and layers, and using over-permissioned functions as a privilege-escalation and persistence foothold."
+description: "Attacking AWS serverless: Lambda execution roles, code and layers, API Gateway resource policies and authorizer bypass, Function URLs, Step Functions, and EventBridge."
 keywords:
   - Lambda
   - execution role
-  - environment variables
-  - layers
+  - API Gateway
+  - Function URL
   - serverless
 ---
 
 # Serverless
 
-A Lambda function runs with an **execution role** and carries **environment variables** that frequently hold secrets, so reaching a function is reaching its role and its config. Over-permissioned functions are also a privilege-escalation lever (through [iam:PassRole](../identity/index.md)) and a quiet persistence spot.
-
-The pages here cover reading a function's **environment variables** and role credentials, modifying **function code or layers** to run attacker code with the role, invoking functions to reach internal resources, and planting a function or layer for **persistence**.
+A serverless component runs with a role and holds configuration that frequently carries secrets, so reaching one is reaching its **role** and its **config**. Lambda is the center of gravity: a function runs under an **execution role**, its environment variables often hold credentials, and its code is attacker-replaceable. Around it, API Gateway fronts functions and other AWS services, Function URLs expose them directly, and Step Functions and EventBridge orchestrate privileged actions under their own roles.
 
 ## What folds in here
 
-- **Privilege escalation** via creating or updating a function that assumes a more powerful role is cross-referenced to [identity](../identity/index.md).
-- **Persistence** through a deployed function or a poisoned shared layer.
+- **[Execution role](execution-role.md)**: stealing a Lambda function's role credentials from the runtime.
+- **[Code and layers](code-and-layers.md)**: reading source and layers for secrets, and overwriting them to run under the role.
+- **[API Gateway](api-gateway/index.md)**: resource-policy exposure, authorizer bypass, and the integration role.
+- **[Function URL](function-url.md)**: a Lambda Function URL with lax auth, invoked directly over HTTPS.
+- **[Step Functions](step-functions.md)**: state machines and their execution role.
+- **[EventBridge](eventbridge.md)**: rules, buses, and targets fired under a privileged role.
+
+Creating or updating a function to assume a more powerful role is the [iam:PassRole](../identity/privilege-escalation/pass-role/lambda.md) path and lives under identity; the pages here cover abusing the services themselves.
 
 ## References
 

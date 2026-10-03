@@ -1,26 +1,30 @@
 ---
 title: "AWS storage"
-description: "Reaching data in AWS storage: S3 bucket and object exposure through public access, ACLs, and bucket policies, bucket enumeration and takeover, and EBS snapshot exposure as a route to disk contents and secrets."
+description: "Attacking AWS storage: S3 bucket enumeration, public access and bucket-policy and ACL abuse, EBS and EFS data recovery, FSx and Storage Gateway access, and AWS Backup vaults."
 keywords:
   - S3
+  - EBS
+  - EFS
   - bucket policy
-  - public access
-  - EBS snapshot
-  - exfiltration
+  - snapshots
 ---
 
 # Storage
 
-S3 is the most common cloud data-exposure surface: buckets made public, over-broad **bucket policies** and ACLs, and predictable names that enumerate. Storage is also where **exfiltration** lands, so data theft is documented here rather than as a separate phase.
-
-The pages here cover finding and reading public and misconfigured **S3** buckets, enumerating bucket names and objects, **bucket takeover** of dangling references, and recovering disk contents and secrets from exposed or shared **EBS snapshots**.
+Storage is where the data lives, so it is the usual objective once a principal is held. AWS storage breaks into object storage (S3), block storage (EBS, exposed through its snapshots), shared file systems (EFS, FSx), the backup plane (AWS Backup), and the hybrid bridge (Storage Gateway). Most storage compromise is not an exploit but a permission or exposure problem: a world-readable bucket, a snapshot shared to all accounts, a mount target reachable from a subnet you control.
 
 ## What folds in here
 
-- **Exfiltration** of account data (objects, snapshots) is treated as a storage outcome.
-- Snapshot theft overlaps with [compute](../compute/index.md); the snapshot-sharing mechanics live there, the data-recovery angle here.
+- **[S3](s3/index.md)**: bucket and object discovery, public access, and bucket-policy and ACL abuse.
+- **[EBS snapshots](ebs-snapshots.md)**: public or shared block-storage snapshots restored to read their volumes.
+- **[EFS](efs.md)**: exposed NFS file systems mounted through permissive security groups or file-system policy.
+- **[Backup](backup.md)**: recovery points read and restored out of AWS Backup vaults.
+- **[FSx](fsx.md)**: Windows, Lustre, and NetApp file systems reached through share permissions.
+- **[Storage Gateway](storage-gateway.md)**: file shares and cached volumes bridging on-premises access to S3 and EBS.
+
+Enumeration is folded into each page: finding the resource is the first half of reaching its data.
 
 ## References
 
-- [HackTricks Cloud: AWS S3](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
-- [AWS: S3 bucket policies and access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-policy-language-overview.html)
+- [HackTricks Cloud: AWS S3](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
+- [Rhino Security Labs: penetration testing AWS storage](https://rhinosecuritylabs.com/aws/penetration-testing-aws-storage/)

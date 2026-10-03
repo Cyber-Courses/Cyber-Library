@@ -1,27 +1,31 @@
 ---
 title: "AWS compute"
-description: "Abusing AWS compute services: EC2 instance user-data and role credentials, remote command execution through SSM, EBS snapshot theft, and the container services ECS and EKS as paths to credentials and code execution."
+description: "Attacking AWS compute: EC2 user data and instance profiles, SSM run command and Session Manager, ECS and EKS containers and ECR images, and the Elastic Beanstalk, Image Builder, App Runner, Batch, and Lightsail runtimes."
 keywords:
   - EC2
   - SSM
-  - user-data
-  - EBS snapshot
-  - ECS
+  - ECR
+  - containers
+  - instance profile
 ---
 
 # Compute
 
-Compute instances run with an **instance role**, hold **user-data** that often contains secrets, and can frequently be driven remotely through **SSM**, so compute access is both a credential source and a code-execution surface. The role an instance carries is usually the quickest pivot from a single box to the account.
+Compute in AWS is where IAM meets code execution. Almost every compute service runs with an attached **role**, so taking over a workload, or launching one you control, yields that role's credentials and whatever it can reach. The same services also hold secrets at rest: user-data scripts, snapshots, images, and environment configuration. The pages here work both angles, stealing the role and reading the data.
 
-The pages here cover reading and abusing **user-data** and the instance role (via [IMDS](../credentials/index.md)), running commands on instances with **`ssm:SendCommand`** / Run Command, stealing data by **sharing or mounting EBS snapshots** into an account you control, and reaching workloads through **ECS** task roles and **EKS** (cross-referenced to the container internals in the Containers area).
+## Surfaces
 
-## What folds in here
-
-- **Code execution** on instances (SSM, user-data) and the credential theft that follows.
-- **Persistence** on compute (modified user-data, launch templates) is noted here.
-- **EKS/container** specifics beyond the AWS control plane are cross-referenced, not duplicated.
+- **[EC2](ec2/index.md)**: user-data secrets and code, the instance profile role, and data recovery from EBS snapshots and shared AMIs.
+- **[SSM](ssm/index.md)**: Systems Manager run command and Session Manager shells on managed instances, under the instance role.
+- **[Containers](containers.md)**: ECS and EKS task-role theft, task-definition abuse, and the container runtime.
+- **[ECR](ecr/index.md)**: pulling from exposed repositories and poisoning images that downstream compute will run.
+- **[Elastic Beanstalk](elastic-beanstalk.md)**: environments, their instance-profile role, and secrets in configuration.
+- **[Image Builder](image-builder.md)**: pipelines and components that bake code into golden AMIs.
+- **[App Runner](app-runner.md)**: services and their instance role, and source or image deployment.
+- **[Batch](batch.md)**: job definitions and compute environments running containers under a job role.
+- **[Lightsail](lightsail.md)**: instances, keys, and snapshots that sit outside the main VPC and IAM visibility.
 
 ## References
 
-- [HackTricks Cloud: AWS EC2, SSM, and compute](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
-- [AWS: Systems Manager Run Command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
+- [HackTricks Cloud: AWS EC2, SSM and compute](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-ebs-elb-ssm-vpc-and-vpn-enum/index.html)
+- [Rhino Security Labs: AWS privilege escalation methods](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)

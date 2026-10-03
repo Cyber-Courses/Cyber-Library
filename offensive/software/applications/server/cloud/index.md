@@ -15,16 +15,19 @@ Cloud platforms are attacked through their **control-plane APIs**, not through h
 
 ## How each provider is organized
 
-The same seven surfaces recur under every provider, so a technique sits next to the resource or primitive it abuses:
+The same nine surfaces recur under every provider, so a technique sits next to the resource or primitive it abuses:
 
-- **Identity** and **Credentials** are the control-plane core (obtain a principal, then escalate).
-- **Compute**, **Storage**, **Serverless**, **Data**, and **Networking** are the resource surfaces.
+- **Identity** and **Credentials** are the control-plane core: obtain a principal, then escalate it.
+- **Compute**, **Storage**, **Serverless**, **Data**, **Networking**, and **Messaging** are the resource surfaces.
+- **Logging and detection** is the audit plane, attacked to blind and evade it.
 
 Enumeration, privilege escalation, lateral movement, persistence, and exfiltration are not separate topics: each lives in the surface it works through. Enumeration is folded into every surface (mapping the IAM graph under identity, finding public buckets under storage); privilege escalation lives under identity, exfiltration under storage and data, and so on. The account-wide inventory tooling that spans surfaces is covered as methodology in each provider's index.
 
 ## Providers
 
 - **[AWS](aws/index.md)**: Amazon Web Services, the template for the surface breakdown above.
+
+Azure (resource plane) and GCP follow the same nine-surface shape and are built on the same lines.
 
 ## Scope and boundaries
 
