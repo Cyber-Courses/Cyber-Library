@@ -19,6 +19,13 @@ The shared root cause is that XML blurs the line between data and instruction mo
 
 This section covers XPath query injection in depth, alongside the wider XML parsing and transformation attacks.
 
+## Subtopics
+
+- **[XPath](xpath/index.md)**: String-built XPath over an XML document lets an attacker rewrite predicates and location paths to bypass authentication, select unintended nodes, and extract...
+- **[XQuery](xquery/index.md)**: String-built XQuery against XML databases lets an attacker rewrite path expressions and predicates, reach the filesystem and network through built-in functio...
+- **[XSLT](xslt/index.md)**: Attacker-influenced stylesheets or transform parameters let an attacker read files, reach internal services, pull remote stylesheets, and run code in the tra...
+- **[XXE](xxe/index.md)**: XML parsers that resolve DTDs and external entities let an attacker read local files, reach internal services, and amplify input into denial of service.
+
 ## Tools
 
 - **Burp Suite**: scanning and crafting payloads across XML parse, query, and transform stages.

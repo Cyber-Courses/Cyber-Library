@@ -15,6 +15,15 @@ Apache Cassandra is a distributed wide-column store queried with **CQL**, a SQL-
 
 CQL is deliberately narrow. It has no `UNION`, no subqueries, no `OR` across arbitrary columns, and no sleep or benchmark function, so the relational tricks that drive classic SQLi do not apply here. The real primitives are quoted-value breakout, extra predicates, and `ALLOW FILTERING` to turn a partition read into a full-cluster scan. Where the data store runs user-defined functions, injected `CREATE FUNCTION` can reach code execution inside the Cassandra JVM. This subtree covers the CQL mechanics, batch and UDF abuse, and blind and error-based inference.
 
+## Subtopics
+
+- **[CQL](cql/index.md)**: Untrusted input concatenated into Cassandra Query Language statements is parsed as syntax, letting an attacker escape quoted values, add predicates, and wide...
+
+## Pages
+
+- **[Batch statement injection](batch-statement-injection.md)**: Injecting into or forming a `BEGIN BATCH ... APPLY BATCH` block to bundle extra INSERT, UPDATE, and DELETE writes into a single Cassandra statement.
+- **[User-defined function abuse](user-defined-function-abuse.md)**: Where user-defined functions are enabled, injected CREATE FUNCTION or CREATE AGGREGATE with a Java body runs attacker code inside the Cassandra JVM.
+
 ## Tools
 
 - **cqlsh**: the native CQL shell for testing payloads against a cluster.

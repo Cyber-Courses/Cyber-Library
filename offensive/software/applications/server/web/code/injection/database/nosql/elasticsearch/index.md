@@ -15,6 +15,13 @@ Elasticsearch and its fork OpenSearch are schema-flexible document stores querie
 
 Because the same APIs back both engines, payloads here apply to Elasticsearch and OpenSearch alike. The child pages split the surface by sink: query-string syntax, Query DSL body, Painless script injection, and boolean-based blind extraction.
 
+## Pages
+
+- **[Blind boolean extraction](blind-boolean.md)**: When only hit-or-no-hit is observable, crafted field conditions on query_string, Query DSL, or script queries let an attacker infer and extract document valu...
+- **[Query DSL injection](query-dsl-injection.md)**: When user input is concatenated into the JSON Query DSL or spread into a bool clause, an attacker injects should/must_not clauses or replaces the query to re...
+- **[Query string injection](query-string-injection.md)**: When a search term flows unescaped into query_string or simple_query_string, Lucene operators let an attacker retarget fields, flip boolean logic, and widen...
+- **[Script injection](script-injection.md)**: When user input is interpolated into Painless script source in script_fields, script queries, sorts, or updates, an attacker reads arbitrary document data an...
+
 ## Tools
 
 - **curl**: send raw _search and script requests to the cluster HTTP API.

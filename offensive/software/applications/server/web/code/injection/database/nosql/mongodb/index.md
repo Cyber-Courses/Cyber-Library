@@ -16,6 +16,15 @@ MongoDB stores documents and is queried with BSON/JSON query objects rather than
 
 The decisive precondition is that the app passes attacker-controlled objects into the query without coercing them to strings. This reaches the query when request JSON is spread straight into a filter, or when a query-string or form body parser (qs, body-parser, PHP) turns bracketed keys like `password[$ne]=` into nested objects. This subtree covers authentication bypass, JSON type-juggling, and the individual query operators abused for bypass, blind extraction, and denial of service.
 
+## Subtopics
+
+- **[Operator](operator/index.md)**: When attacker-controlled objects reach a MongoDB filter, query operators replace the intended comparison, enabling bypass, blind extraction, and denial of se...
+
+## Pages
+
+- **[Authentication bypass](authentication-bypass.md)**: Replacing a password string with an operator object such as {\"$ne\":null} turns a login lookup into an always-true filter, logging in without credentials.
+- **[JSON injection](json.md)**: A value expected as a string arriving as an object or array turns MongoDB comparisons into operator injection; duplicate keys and parser-built nesting widen...
+
 ## Tools
 
 - **NoSQLMap**: automated MongoDB operator injection and enumeration.

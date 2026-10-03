@@ -32,6 +32,10 @@ This section is organized into three child groups:
 - [Rule engines](rule-engines/index.md): rule, routing, and workflow products whose expressions and consequences execute on untrusted input: Apache Camel, Camunda, Drools, and ELK Logstash.
 - Web frameworks: the expression surfaces embedded in server-side MVC and view layers.
 
+## Subtopics
+
+- **[Web frameworks](web-frameworks/index.md)**: Java web frameworks evaluate expression language drawn from request data, from the unified EL of JSP and JSF to the framework engines SpEL, OGNL, and MVEL th...
+
 ## Tools
 
 - **Burp Suite**: Repeater and Intruder for injecting EL, OGNL, and MVEL payloads.

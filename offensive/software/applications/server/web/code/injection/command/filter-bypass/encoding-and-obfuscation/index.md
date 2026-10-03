@@ -13,6 +13,11 @@ keywords:
 
 Hide the payload from naive parsers and case-sensitive blocklists: decode hex or ANSI-C sequences at runtime so the keyword never appears in the request, or vary casing where the target shell is case-insensitive, so the inspected bytes do not match the command that executes.
 
+## Pages
+
+- **[Hex and runtime decoding](hex-encoding.md)**: Carrying a command as hex or ANSI-C escapes, $'\\x77\\x68\\x6f\\x61\\x6d\\x69', echo -e, xxd -r, and decoding it at runtime so the filtered keyword never app...
+- **[Random case](with-random-case.md)**: Evading case-sensitive blocklists by varying capitalization, wHoAmi, CeRTutil, where the interpreter is case-insensitive (Windows cmd, PowerShell) so the com...
+
 ## Tools
 
 - **[commix](https://github.com/commixproject/commix)**: tamper modules automate encoding and case obfuscation.
