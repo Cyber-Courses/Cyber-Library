@@ -101,7 +101,7 @@ The chain is always two parts: a pollution sink that writes the prototype, and a
 
 ## References
 
-- [OWASP: Prototype Pollution](https://owasp.org/www-community/attacks/Prototype_pollution)
+- [OWASP: Prototype Pollution](https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html)
 - [PortSwigger: Server-side prototype pollution](https://portswigger.net/web-security/prototype-pollution/server-side)
 - [PayloadsAllTheThings: Prototype Pollution](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Prototype%20Pollution)
 - [Node.js: child_process](https://nodejs.org/api/child_process.html)

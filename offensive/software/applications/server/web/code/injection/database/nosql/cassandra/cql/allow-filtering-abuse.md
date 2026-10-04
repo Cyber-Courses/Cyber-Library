@@ -81,6 +81,6 @@ Where output is not reflected, the same full-scan predicates drive row-count inf
 
 ## References
 
-- [Apache Cassandra: ALLOW FILTERING](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#allow-filtering)
-- [Apache Cassandra: SELECT](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#select)
+- [Apache Cassandra: ALLOW FILTERING](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html#allow-filtering)
+- [Apache Cassandra: SELECT](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html#select-statement)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

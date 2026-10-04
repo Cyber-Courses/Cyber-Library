@@ -82,6 +82,6 @@ Logged batches span partitions but are not isolated transactions, and lightweigh
 
 ## References
 
-- [Apache Cassandra: BATCH](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#batch)
-- [Apache Cassandra: INSERT, UPDATE, DELETE](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html)
+- [Apache Cassandra: BATCH](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html#batch_statement)
+- [Apache Cassandra: INSERT, UPDATE, DELETE](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
