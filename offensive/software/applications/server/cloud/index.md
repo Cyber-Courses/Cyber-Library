@@ -31,7 +31,7 @@ Enumeration, privilege escalation, lateral movement, persistence, and exfiltrati
 
 ## Scope and boundaries
 
-- **Entra ID** (Microsoft's cloud directory) is attacked like a directory, so it lives under [Directory](../directory/index.md) next to Active Directory, not here; the Azure area here covers the **resource plane** (subscriptions, VMs, storage, managed identities).
+- **Entra ID** (Microsoft's cloud directory) is attacked like a directory, so it lives under [Entra ID](../directory/entra-id/index.md) next to Active Directory, not here; the Azure area here covers the **resource plane** (subscriptions, VMs, storage, managed identities).
 - **Kubernetes and container escapes** are their own area; the cloud pages cover only the managed-service control plane and cross-reference container internals.
 - The on-premises to cloud bridge (Entra Connect, AD FS, PRT) lives with [hybrid identity](../directory/active-directory/trusts/entra-hybrid.md).
 
