@@ -46,6 +46,7 @@ Several edges reach the same goal with very different footprints, which is the p
 ## Pages
 
 - **[ACL enumeration](acl-enumeration.md)**: finding the abusable ACEs with BloodHound and from Linux.
+- **[BloodHound](bloodhound.md)**: collecting and graphing the ACL and privilege attack paths across the domain.
 - **[Password reset](password-reset.md)**: `ForceChangePassword` / `GenericAll` to take an account over.
 - **[Group membership](group-membership.md)**: `AddMember` / `AddSelf` to join a privileged group.
 - **[Targeted Kerberoasting](targeted-kerberoasting.md)**: `WriteSPN` to make a target roastable.

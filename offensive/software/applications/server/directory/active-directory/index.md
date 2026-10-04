@@ -30,7 +30,6 @@ A typical path cuts across these surfaces in order:
 
 ## Topics
 
-- **[Reconnaissance](reconnaissance/index.md)**: reading the directory to map hosts, objects, sessions, and attack paths.
 - **[Authentication](authentication/index.md)**: credential dumping and cracking, NTLM, Kerberos, and certificates (AD CS).
 - **[DACL](dacl/index.md)**: abusing object permissions to control privileged principals.
 - **[Group Policy](group-policy/index.md)**: abusing GPOs to run code and change configuration.

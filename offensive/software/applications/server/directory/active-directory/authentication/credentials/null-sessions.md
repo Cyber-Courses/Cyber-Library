@@ -38,10 +38,10 @@ ldapsearch -x -H ldap://<dc> -b "DC=example,DC=local" "(objectClass=user)" sAMAc
 
 ## Exploitation notes
 
-- The payoff is a **user list and domain policy with zero credentials**, which seeds [password spraying](../authentication/credentials/password-spraying.md) and [AS-REP roasting](../authentication/kerberos/roasting.md).
+- The payoff is a **user list and domain policy with zero credentials**, which seeds [password spraying](password-spraying.md) and [AS-REP roasting](../kerberos/roasting.md).
 - **RID cycling** works even when `enumdomusers` is blocked, because resolving SID-500, SID-1000, SID-1001 ... by hand still returns names where SAMR/LSARPC answer anonymously.
 - Domain controllers frequently leak more anonymously than member servers, so always test the DC directly.
-- A [null-session](../authentication/credentials/user-and-group-enumeration.md) user list is often indistinguishable in value from an authenticated one for the next step, so this is a genuine pre-credential foothold, not just a curiosity.
+- A [null-session](user-and-group-enumeration.md) user list is often indistinguishable in value from an authenticated one for the next step, so this is a genuine pre-credential foothold, not just a curiosity.
 
 ## Tools
 
