@@ -1,5 +1,5 @@
 ---
-title: "Database servers"
+title: "Database"
 description: "Offensive scope for database servers reached as a service: authenticating, enumerating, and escalating inside the engine, executing operating-system commands from it, reading and writing host files, and pivoting across trust links, with Microsoft SQL Server as the AD-integrated flagship."
 keywords:
   - database
@@ -9,7 +9,7 @@ keywords:
   - Oracle
 ---
 
-# Database servers
+# Database
 
 A database server is reached as a network service, and once you can authenticate it is far more than a data store: the major engines can **run operating-system commands**, **read and write files on the host**, **impersonate other database principals**, and **pivot across trust links** to other servers. In a Windows estate the database service also runs as a privileged account and speaks NTLM, so it is a first-class foothold and lateral-movement target, not just a source of data.
 
