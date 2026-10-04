@@ -67,4 +67,4 @@ At the transport layer the surrounding request field carries its own decoding, s
 ## References
 
 - [Spring Framework: Spring Expression Language](https://docs.spring.io/spring-framework/reference/core/expressions.html)
-- [PayloadsAllTheThings: Java SpEL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Java)
+- [PayloadsAllTheThings: Java SpEL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings)

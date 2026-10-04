@@ -53,4 +53,4 @@ MVEL accepts the leading-`@` import syntax as well, and unqualified class names 
 ## References
 
 - [MVEL Language Guide](http://mvel.documentnode.com/)
-- [PayloadsAllTheThings: Java EL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Java)
+- [PayloadsAllTheThings: Java EL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings)

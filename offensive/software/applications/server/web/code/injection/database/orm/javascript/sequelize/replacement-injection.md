@@ -28,7 +28,7 @@ await sequelize.query(
 **Interpolated identifier/structural position**, `replacements` escape *values*, so `:col` would be rendered as a quoted literal (`ORDER BY 'sort'`, which is inert). Identifiers such as a column or `ORDER BY` slot therefore **cannot** be parameterized and are commonly **interpolated** instead, and that interpolation is the injectable sink:
 
 ```js
-// identifier can't be a replacement, so it gets concatenated — injectable
+// identifier can't be a replacement, so it gets concatenated, injectable
 await sequelize.query(`SELECT * FROM users ORDER BY ${req.query.sort}`);
 ```
 

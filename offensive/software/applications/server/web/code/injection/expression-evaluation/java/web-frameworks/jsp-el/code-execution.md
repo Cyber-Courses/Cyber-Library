@@ -52,4 +52,4 @@ The `Runtime` form (`getMethod('getRuntime').invoke(null).exec(...)`) and the `P
 ## References
 
 - [Jakarta Expression Language Specification](https://jakarta.ee/specifications/expression-language/)
-- [PayloadsAllTheThings: Java EL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Java)
+- [PayloadsAllTheThings: Java EL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings)

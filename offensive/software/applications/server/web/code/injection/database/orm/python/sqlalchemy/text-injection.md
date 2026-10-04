@@ -23,7 +23,7 @@ from sqlalchemy import text
 stmt = text(f"SELECT * FROM products WHERE name LIKE '%{term}%'")
 session.execute(stmt)
 
-# dynamic ORDER BY — cannot be a bound parameter, so often interpolated
+# dynamic ORDER BY, cannot be a bound parameter, so often interpolated
 session.execute(text(f"SELECT * FROM products ORDER BY {sort}"))
 ```
 

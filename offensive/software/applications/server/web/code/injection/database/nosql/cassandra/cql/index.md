@@ -45,5 +45,5 @@ This section covers the core `WHERE` mechanics, `ALLOW FILTERING` abuse, and bli
 
 ## References
 
-- [Apache Cassandra: CQL reference](https://cassandra.apache.org/doc/latest/cassandra/cql/)
+- [Apache Cassandra: CQL reference](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

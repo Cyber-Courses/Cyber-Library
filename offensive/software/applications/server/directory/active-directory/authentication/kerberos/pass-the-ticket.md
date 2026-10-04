@@ -61,4 +61,4 @@ psexec.py -k -no-pass example.local/victim@<host>
 
 - [GhostPack Rubeus (ptt / dump / monitor)](https://github.com/GhostPack/Rubeus)
 - [Impacket ticketConverter and -k](https://github.com/fortra/impacket)
-- [The Hacker Recipes: pass the ticket](https://www.thehacker.recipes/ad/movement/kerberos/ptt)
+- [The Hacker Recipes: pass the ticket](https://www.thehacker.recipes/ad/movement/kerberos/pass-the/ptt)

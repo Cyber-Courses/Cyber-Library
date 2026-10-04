@@ -59,7 +59,7 @@ c"a"t${IFS}/etc/passwd
 
 - This is a **shell** technique (`sh -c`, `system()`, backticks).
 - Quotes must be **balanced**; an unmatched `"` leaves an open string and breaks the command.
-- If your injection already sits inside a double-quoted context, remember that `$`, `` ` ``, and `\` remain active there—useful for breaking out, but also means a stray `$` or backtick in your payload may be interpreted.
+- If your injection already sits inside a double-quoted context, remember that `$`, `` ` ``, and `\` remain active there, useful for breaking out, but also means a stray `$` or backtick in your payload may be interpreted.
 
 ## Tools
 

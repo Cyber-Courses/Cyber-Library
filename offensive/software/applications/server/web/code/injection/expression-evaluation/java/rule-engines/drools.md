@@ -65,4 +65,4 @@ On Windows use `new String[]{"cmd.exe","/c","whoami"}`. If the application pinne
 
 - [Drools documentation](https://docs.drools.org/)
 - [MVEL language guide](http://mvel.documentnode.com/)
-- [Drools: rule language reference (DRL)](https://docs.drools.org/latest/drools-docs/html_single/#drl-rules-con_drl-rules)
+- [Drools: rule language reference (DRL)](https://docs.drools.org/latest/drools-docs/drools/language-reference/index.html)

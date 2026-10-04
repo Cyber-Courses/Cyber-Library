@@ -86,6 +86,6 @@ Even when the result is not reflected, the side effect (the command running) sti
 
 ## References
 
-- [Apache Cassandra: CREATE FUNCTION](https://cassandra.apache.org/doc/latest/cassandra/cql/functions.html#create-function)
-- [Apache Cassandra: CREATE AGGREGATE](https://cassandra.apache.org/doc/latest/cassandra/cql/functions.html#aggregate-functions)
+- [Apache Cassandra: CREATE FUNCTION](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/functions.html#create-function-statement)
+- [Apache Cassandra: CREATE AGGREGATE](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/functions.html#aggregate-functions)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)
