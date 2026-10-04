@@ -26,8 +26,9 @@ Enumeration, privilege escalation, lateral movement, persistence, and exfiltrati
 ## Providers
 
 - **[AWS](aws/index.md)**: Amazon Web Services, the template for the surface breakdown above.
+- **[Azure](azure/index.md)**: the Microsoft Azure resource and management plane (ARM, RBAC, managed identities).
 
-Azure (resource plane) and GCP follow the same nine-surface shape and are built on the same lines.
+GCP follows the same nine-surface shape and is built on the same lines.
 
 ## Scope and boundaries
 
