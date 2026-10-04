@@ -37,3 +37,5 @@ aws iam get-role --role-name <role> --query 'Role.AssumeRolePolicyDocument'
 
 - [AWS: identity providers and federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html)
 - [HackTricks Cloud: AWS federation](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/aws-sts-privesc.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

@@ -21,8 +21,11 @@ When a resource already runs with a privileged role, you do not need `iam:PassRo
 - **[UpdateFunctionCode](update-function-code.md)**: overwrite a Lambda that already runs a privileged execution role.
 - **[Presigned URL](presigned-url.md)**: mint time-limited signed access to resources under your own permissions.
 - **[Instance Connect](instance-connect.md)**: push a temporary SSH key to an instance carrying a privileged profile.
+- **[AssociateInstanceProfile](associate-instance-profile.md)**: attach a privileged instance profile to an instance you already control.
 
 ## References
 
 - [Rhino Security Labs: AWS privilege escalation (resource update paths)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

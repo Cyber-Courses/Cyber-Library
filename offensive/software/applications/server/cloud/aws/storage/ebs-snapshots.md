@@ -50,3 +50,6 @@ sudo mkdir /mnt/loot && sudo mount /dev/xvdf1 /mnt/loot
 
 - [HackTricks Cloud: EBS snapshots](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-ebs-ssm-and-vpc.html)
 - [dsnap (RhinoSecurityLabs)](https://github.com/RhinoSecurityLabs/dsnap)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

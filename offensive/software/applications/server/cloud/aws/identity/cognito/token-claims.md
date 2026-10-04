@@ -38,3 +38,5 @@ echo "<jwt>" | cut -d. -f2 | base64 -d 2>/dev/null
 
 - [HackTricks Cloud: AWS Cognito](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-cognito-enum/index.html)
 - [AWS: Cognito identity-pool role mapping](https://docs.aws.amazon.com/cognito/latest/developerguide/role-based-access-control.html)
+- [cognito-scanner](https://pypi.org/project/cognito-scanner/)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

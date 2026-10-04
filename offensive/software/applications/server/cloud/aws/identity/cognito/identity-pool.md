@@ -37,3 +37,5 @@ aws cognito-identity get-credentials-for-identity --identity-id <id>
 
 - [HackTricks Cloud: AWS Cognito identity pools](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-cognito-enum/index.html)
 - [AWS: Cognito identity pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html)
+- [cognito-scanner](https://pypi.org/project/cognito-scanner/)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

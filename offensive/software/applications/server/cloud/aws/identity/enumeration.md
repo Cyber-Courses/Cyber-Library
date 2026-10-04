@@ -42,6 +42,10 @@ enumerate-iam --access-key AKIA... --secret-key ...
 
 # Pacu's permission enumeration and privesc scan
 pacu > run iam__enum_permissions ; run iam__privesc_scan
+
+# where your own policies are readable, confirm what they grant without calling the actions
+aws iam simulate-principal-policy --policy-source-arn <your-arn> \
+  --action-names iam:CreateAccessKey sts:AssumeRole s3:GetObject
 ```
 
 ## Graphing paths to admin
@@ -63,11 +67,16 @@ pmapper visualize
 
 - **Pacu** (`iam__enum_permissions`, `iam__privesc_scan`): session-based enumeration and privesc detection.
 - **PMapper**: IAM graph construction and path queries to administrator.
+- **CloudFox**: fast attacker-focused inventory of principals, roles, secrets, and reachable resources.
+- **Cloudsplaining**: IAM policy analysis for privilege-escalation and resource-exposure findings.
 - **enumerate-iam**: probe-based discovery of the allowed API surface.
 - **ScoutSuite** / **Prowler**: account-wide posture and principal inventory.
+- **weirdAAL** / **SkyArk**: unauthenticated-to-low-privilege API discovery and shadow-admin hunting.
 
 ## References
 
 - [PMapper (NCC Group)](https://github.com/nccgroup/PMapper)
 - [enumerate-iam (Andres Riancho)](https://github.com/andresriancho/enumerate-iam)
 - [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

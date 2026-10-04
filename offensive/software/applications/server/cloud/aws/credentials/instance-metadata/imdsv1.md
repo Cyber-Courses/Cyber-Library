@@ -38,3 +38,5 @@ Export the three values (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESS
 
 - [AWS: instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 - [HackTricks Cloud: IMDSv1](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

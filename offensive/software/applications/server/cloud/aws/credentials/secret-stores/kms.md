@@ -44,3 +44,5 @@ aws kms get-key-policy --key-id <id> --policy-name default --output text
 
 - [AWS: KMS Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html)
 - [HackTricks Cloud: KMS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-kms-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

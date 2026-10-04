@@ -36,9 +36,11 @@ aws sts assume-role --role-arn arn:aws:iam::<acct>:role/<privileged-role> \
 ## Tools
 
 - **AWS CLI** (`iam update-assume-role-policy`, `sts assume-role`).
-- **Pacu** (`iam__privesc_scan`).
+- **Pacu** (`iam__privesc_scan`, `iam__backdoor_assume_role`): detects the path and backdoors role trust across roles at scale.
 
 ## References
 
 - [Rhino Security Labs: AWS privilege escalation (UpdateAssumeRolePolicy)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

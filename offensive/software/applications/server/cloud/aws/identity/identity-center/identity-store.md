@@ -36,3 +36,5 @@ aws identitystore create-group-membership --identity-store-id <store-id> \
 
 - [HackTricks Cloud: AWS Identity Center](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-iam-and-sts-enum.html)
 - [AWS: Identity Store](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

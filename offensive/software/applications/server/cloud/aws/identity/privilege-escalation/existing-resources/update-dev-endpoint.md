@@ -37,3 +37,5 @@ ssh glue@<endpoint-address>
 
 - [Rhino Security Labs: AWS privilege escalation (Glue dev endpoint)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [HackTricks Cloud: AWS Glue](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-glue-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

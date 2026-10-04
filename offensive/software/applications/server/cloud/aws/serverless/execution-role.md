@@ -47,3 +47,6 @@ aws lambda list-functions \
 
 - [HackTricks Cloud: AWS Lambda](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: Lambda runtime environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Rhino Security Labs: AWS privilege escalation](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

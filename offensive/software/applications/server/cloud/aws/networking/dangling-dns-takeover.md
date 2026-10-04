@@ -43,3 +43,5 @@ aws route53 list-resource-record-sets --hosted-zone-id <zone-id> \
 
 - [HackTricks Cloud: subdomain takeover](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-route53-enum.html)
 - [Can I take over XYZ (second-order takeover fingerprints)](https://github.com/EdOverflow/can-i-take-over-xyz)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)
+- [fwd:cloudsec: cloud security conference talks](https://fwdcloudsec.org/)

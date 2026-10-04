@@ -37,3 +37,5 @@ ssh ec2-user@<instance-ip>        # within 60s of the push
 
 - [AWS: EC2 Instance Connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-methods.html)
 - [HackTricks Cloud: AWS EC2 privesc](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-ebs-ssm-and-vpc-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

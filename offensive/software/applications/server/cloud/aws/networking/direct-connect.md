@@ -37,3 +37,5 @@ aws directconnect describe-direct-connect-gateways
 
 - [AWS: Direct Connect virtual interfaces](https://docs.aws.amazon.com/directconnect/latest/UserGuide/WorkingWithVirtualInterfaces.html)
 - [HackTricks Cloud: AWS hybrid networking](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
+- [CloudFox: mapping reachable cloud network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

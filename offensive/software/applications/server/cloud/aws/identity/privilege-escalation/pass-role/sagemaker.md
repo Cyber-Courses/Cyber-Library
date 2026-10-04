@@ -42,3 +42,5 @@ aws sagemaker create-presigned-notebook-instance-url --notebook-instance-name x
 
 - [Rhino Security Labs: AWS privilege escalation (SageMaker)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

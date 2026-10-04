@@ -24,6 +24,8 @@ The pattern is always: find a passable privileged role (`iam:ListRoles`, or the 
 - **[Data Pipeline](data-pipeline.md)**: a pipeline whose activities run as a passed role.
 - **[CodeBuild](codebuild.md)**: a build project running as a passed service role.
 - **[SageMaker](sagemaker.md)**: a notebook or training job running as a passed role.
+- **[Step Functions](step-functions.md)**: a state machine whose tasks run as a passed role.
+- **[CodeStar](codestar.md)**: a project toolchain deployed as a passed role, or self-adding as project owner.
 
 ## Finding passable roles
 
@@ -37,3 +39,5 @@ aws iam get-role --role-name <r> --query 'Role.AssumeRolePolicyDocument'
 
 - [Rhino Security Labs: AWS privilege escalation (PassRole paths)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [HackTricks Cloud: iam:PassRole](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/aws-iam-privesc.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

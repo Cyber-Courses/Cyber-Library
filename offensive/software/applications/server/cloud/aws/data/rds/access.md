@@ -46,3 +46,5 @@ psql "host=<ep> port=5432 dbname=app user=admin password=<pw>"
 
 - [AWS: IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 - [HackTricks Cloud: AWS RDS access](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable RDS instances](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

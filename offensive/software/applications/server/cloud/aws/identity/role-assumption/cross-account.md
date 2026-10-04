@@ -47,3 +47,5 @@ aws sts assume-role \
 
 - [HackTricks Cloud: cross-account trust abuse](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/aws-sts-privesc.html)
 - [PMapper (NCC Group)](https://github.com/nccgroup/PMapper)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

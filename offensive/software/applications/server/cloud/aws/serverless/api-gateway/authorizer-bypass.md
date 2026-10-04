@@ -50,3 +50,6 @@ X-Forwarded-For, X-Original-Url, or a crafted token the handler parses loosely
 
 - [AWS: API Gateway Lambda authorizers](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
 - [HackTricks Cloud: AWS API Gateway](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [fwd:cloudsec talks](https://fwdcloudsec.org/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

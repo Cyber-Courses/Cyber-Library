@@ -45,3 +45,5 @@ aws route53 change-resource-record-sets --hosted-zone-id <zone-id> \
 
 - [HackTricks Cloud: AWS Route53](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-route53-enum.html)
 - [AWS: ChangeResourceRecordSets](https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html)
+- [can-i-take-over-xyz: dangling-record takeover fingerprints](https://github.com/EdOverflow/can-i-take-over-xyz)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

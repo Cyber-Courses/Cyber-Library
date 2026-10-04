@@ -41,3 +41,6 @@ Force the pull by triggering a new deployment (`ecs update-service --force-new-d
 
 - [HackTricks Cloud: ECR image poisoning](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ecr-enum.html)
 - [AWS: ECR image tag mutability](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

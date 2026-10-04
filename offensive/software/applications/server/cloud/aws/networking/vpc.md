@@ -47,3 +47,5 @@ aws ec2 describe-vpc-endpoints \
 
 - [HackTricks Cloud: AWS VPC and networking](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
 - [AWS: VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html)
+- [CloudFox: mapping reachable cloud network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

@@ -47,3 +47,6 @@ trufflehog filesystem x/
 
 - [HackTricks Cloud: ECR](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ecr-enum.html)
 - [TruffleHog (Truffle Security)](https://github.com/trufflesecurity/trufflehog)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

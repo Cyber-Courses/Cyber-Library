@@ -33,3 +33,5 @@ curl http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
 
 - [AWS: instance metadata service (IMDSv2)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html)
 - [HackTricks Cloud: AWS IMDS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

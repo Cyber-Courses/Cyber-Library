@@ -42,3 +42,5 @@ A development endpoint is a long-lived box you can SSH into; `glue:CreateDevEndp
 
 - [Rhino Security Labs: AWS privilege escalation (Glue)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [HackTricks Cloud: AWS Glue privesc](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-glue-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

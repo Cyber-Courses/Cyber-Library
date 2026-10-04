@@ -41,3 +41,6 @@ aws elasticbeanstalk update-environment --environment-name <e> --version-label x
 
 - [HackTricks Cloud: Elastic Beanstalk](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-elastic-beanstalk-enum.html)
 - [AWS: Elastic Beanstalk environment configuration](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

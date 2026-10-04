@@ -40,3 +40,5 @@ Then retrieve credentials through the SSO portal or `aws sso login`.
 
 - [HackTricks Cloud: AWS SSO and Identity Center](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-iam-and-sts-enum.html)
 - [AWS: permission sets](https://docs.aws.amazon.com/singlesignon/latest/userguide/permissionsetsconcept.html)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

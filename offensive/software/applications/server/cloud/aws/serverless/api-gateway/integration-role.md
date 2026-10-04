@@ -46,3 +46,6 @@ aws apigateway create-deployment --rest-api-id <id> --stage-name <stage>
 
 - [AWS: API Gateway AWS service integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-s3.html)
 - [HackTricks Cloud: AWS API Gateway](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [fwd:cloudsec talks](https://fwdcloudsec.org/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

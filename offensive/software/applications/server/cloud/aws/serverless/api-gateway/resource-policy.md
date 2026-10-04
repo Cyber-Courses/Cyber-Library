@@ -38,3 +38,6 @@ For a `PRIVATE` API tied to a VPC endpoint, invoke it from inside the VPC (or th
 
 - [AWS: API Gateway resource policy examples](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies-examples.html)
 - [HackTricks Cloud: AWS API Gateway](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [fwd:cloudsec talks](https://fwdcloudsec.org/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

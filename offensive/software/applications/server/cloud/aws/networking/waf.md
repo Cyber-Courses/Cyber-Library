@@ -46,3 +46,5 @@ id=1%2f%2a%2a%2funion%2f%2a%2a%2fselect   # comment/whitespace obfuscation
 
 - [HackTricks: WAF bypass](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-web/waf-bypass.html)
 - [AWS: WAF web ACL rules](https://docs.aws.amazon.com/waf/latest/developerguide/waf-rules.html)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)
+- [CloudFox: finding origins exposed behind the edge](https://github.com/BishopFox/cloudfox)

@@ -25,9 +25,17 @@ API Gateway fronts Lambda functions and other AWS services behind an HTTP API, a
 aws apigateway get-rest-apis
 aws apigatewayv2 get-apis
 aws apigateway get-resources --rest-api-id <id>
+aws apigateway get-method --rest-api-id <id> --resource-id <rid> --http-method GET
+# steal usable API keys, values included
+aws apigateway get-api-keys --include-values
 ```
+
+A key returned with its value is used directly as the `x-api-key` header against the stage, so `get-api-keys --include-values` turns read access into working calls.
 
 ## References
 
 - [HackTricks Cloud: AWS API Gateway](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: API Gateway resource policies](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-resource-policies.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [fwd:cloudsec talks](https://fwdcloudsec.org/)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

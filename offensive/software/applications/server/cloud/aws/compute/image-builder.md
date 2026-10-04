@@ -48,3 +48,6 @@ Run the pipeline (`start-image-pipeline-execution`) to build the poisoned image,
 
 - [HackTricks Cloud: EC2 Image Builder](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/index.html)
 - [AWS: Image Builder components](https://docs.aws.amazon.com/imagebuilder/latest/userguide/manage-components.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

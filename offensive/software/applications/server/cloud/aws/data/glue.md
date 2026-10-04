@@ -45,3 +45,5 @@ aws glue create-dev-endpoint --endpoint-name x --role-arn <glue-role> \
 
 - [HackTricks Cloud: AWS Glue privesc](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/aws-glue-privesc.html)
 - [AWS: Glue connections](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html)
+- [Pacu: AWS exploitation framework](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

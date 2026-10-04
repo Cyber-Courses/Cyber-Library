@@ -50,3 +50,5 @@ aws ec2 describe-instances \
 
 - [HackTricks Cloud: AWS EC2 and VPC](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
 - [AWS: security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html)
+- [CloudFox: finding internet-exposed resources and network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

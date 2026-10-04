@@ -43,3 +43,5 @@ echo -e 'stats items\nquit' | nc <endpoint> 11211
 
 - [AWS: ElastiCache in-transit encryption and AUTH](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/encryption.html)
 - [HackTricks Cloud: AWS ElastiCache](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

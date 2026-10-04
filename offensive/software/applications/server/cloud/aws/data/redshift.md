@@ -47,3 +47,5 @@ aws redshift-data get-statement-result --id <stmt-id>
 
 - [AWS: GetClusterCredentials](https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html)
 - [HackTricks Cloud: AWS Redshift](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable warehouses and data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

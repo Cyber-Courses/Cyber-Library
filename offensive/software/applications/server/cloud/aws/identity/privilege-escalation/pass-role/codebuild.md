@@ -40,3 +40,5 @@ The build runs your commands as the service role; dump its credentials from the 
 
 - [Rhino Security Labs: AWS privilege escalation (CodeBuild)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [HackTricks Cloud: AWS CodeBuild privesc](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-codebuild-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

@@ -38,7 +38,7 @@ aws stepfunctions start-execution --state-machine-arn <arn> --input '{}'
 ## Exploitation notes
 
 - The SDK integration (`arn:aws:states:::aws-sdk:<service>:<action>`) lets a state machine call almost any AWS API as its role, so the role's permissions are the blast radius.
-- `create-state-machine` with `--role-arn` needs `iam:PassRole`, making this a PassRole privilege path scoped to Step Functions.
+- `create-state-machine` with `--role-arn` needs `iam:PassRole`, making this a PassRole privilege path scoped to Step Functions; the identity-side write-up is [pass-role/step-functions](../identity/privilege-escalation/pass-role/step-functions.md).
 - A machine that already carries a broad role is exploitable with `start-execution` alone.
 
 ## Tools
@@ -49,3 +49,6 @@ aws stepfunctions start-execution --state-machine-arn <arn> --input '{}'
 
 - [AWS: Step Functions AWS SDK service integrations](https://docs.aws.amazon.com/step-functions/latest/dg/supported-services-awssdk.html)
 - [HackTricks Cloud: AWS Step Functions](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Rhino Security Labs: AWS privilege escalation](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

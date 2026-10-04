@@ -29,6 +29,7 @@ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
 - The `PUT` plus custom-header requirement blocks the simplest SSRF primitives; a full request-smuggling or header-controllable SSRF still satisfies it.
 - Token TTL can be up to six hours, so one token covers a long session of reads.
 - A hop-limit of 1 is common; an SSRF from a container on the host may fail the hop check while an on-host shell succeeds.
+- Recovered role credentials then unlock the credential-returning APIs (`sts:AssumeRole`, `ecr:GetAuthorizationToken`, `sso:GetRoleCredentials`, and the rest) to widen access; see [credential brokers](../credential-brokers.md).
 
 ## Tools
 
@@ -39,3 +40,5 @@ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
 
 - [AWS: how IMDSv2 works](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html)
 - [HackTricks Cloud: IMDSv2](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

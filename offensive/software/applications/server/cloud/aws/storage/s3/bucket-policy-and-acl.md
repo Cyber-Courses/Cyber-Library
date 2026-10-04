@@ -53,3 +53,7 @@ aws s3api put-bucket-policy --bucket <bucket> --policy file://p.json
 
 - [HackTricks Cloud: S3 bucket policy and ACL abuse](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
 - [AWS: bucket policy and ACL evaluation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-policy-language-overview.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [GrayhatWarfare: public buckets](https://buckets.grayhatwarfare.com/)
+- [S3Scanner](https://github.com/sa7mon/S3Scanner)
+- [cloud_enum](https://github.com/initstring/cloud_enum)

@@ -51,3 +51,5 @@ aws sqs receive-message --queue-url <url> | jq -r .Messages[].ReceiptHandle | \
 
 - [HackTricks Cloud: AWS SQS abuse](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-sqs-enum.html)
 - [AWS: SQS access policy](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html)
+- [Rhino Security Labs: AWS offensive research](https://rhinosecuritylabs.com/aws/)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

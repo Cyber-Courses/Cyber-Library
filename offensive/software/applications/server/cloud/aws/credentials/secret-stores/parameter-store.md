@@ -39,3 +39,5 @@ aws ssm get-parameters-by-path --path / --recursive --with-decryption \
 
 - [AWS: SSM GetParameter](https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_GetParameter.html)
 - [HackTricks Cloud: SSM Parameter Store](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ssm-enum.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

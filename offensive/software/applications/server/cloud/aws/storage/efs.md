@@ -46,3 +46,6 @@ ls -la /mnt/efs
 
 - [HackTricks Cloud: EFS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-efs-enum.html)
 - [AWS: EFS mount targets and security groups](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

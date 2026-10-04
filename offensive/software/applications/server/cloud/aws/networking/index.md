@@ -33,3 +33,4 @@ Network-layer lateral movement lives here; the identity-based cross-account move
 - [HackTricks Cloud: AWS VPC and networking](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
 - [AWS: security groups for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html)
 - [can-i-take-over-xyz (subdomain takeover fingerprints)](https://github.com/EdOverflow/can-i-take-over-xyz)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

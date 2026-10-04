@@ -37,3 +37,5 @@ aws network-firewall describe-rule-group --rule-group-name <rg> --type STATEFUL
 
 - [AWS: Network Firewall rule groups](https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups.html)
 - [HackTricks Cloud: AWS Network Firewall](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
+- [CloudFox: mapping reachable cloud network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

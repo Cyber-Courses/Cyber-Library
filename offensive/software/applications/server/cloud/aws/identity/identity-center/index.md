@@ -23,3 +23,5 @@ AWS IAM Identity Center (formerly AWS SSO) is the front door to an entire organi
 
 - [HackTricks Cloud: AWS IAM Identity Center](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-iam-and-sts-enum.html)
 - [AWS: IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

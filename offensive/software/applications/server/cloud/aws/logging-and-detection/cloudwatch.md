@@ -50,3 +50,5 @@ aws events disable-rule --name <rule>
 - [HackTricks Cloud: AWS defense evasion](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-defense-evasion/index.html)
 - [AWS: DeleteLogGroup API](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteLogGroup.html)
 - [AWS: disable-alarm-actions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisableAlarmActions.html)
+- [Stratus Red Team: AWS defense-evasion techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Datadog Security Labs: AWS defense-evasion research](https://securitylabs.datadoghq.com/)

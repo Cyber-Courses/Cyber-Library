@@ -25,3 +25,7 @@ A writable bucket that backs a website or a software distribution turns into cod
 
 - [HackTricks Cloud: S3 enumeration](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
 - [PayloadsAllTheThings: AWS S3](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Cloud%20-%20AWS%20Pentest.md)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [GrayhatWarfare: public buckets](https://buckets.grayhatwarfare.com/)
+- [S3Scanner](https://github.com/sa7mon/S3Scanner)
+- [cloud_enum](https://github.com/initstring/cloud_enum)

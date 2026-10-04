@@ -45,3 +45,5 @@ aws sagemaker list-models ; aws sagemaker describe-model --model-name <m>
 
 - [HackTricks Cloud: AWS SageMaker](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: SageMaker notebook instance security](https://docs.aws.amazon.com/sagemaker/latest/dg/security.html)
+- [CloudFox: enumerating roles and data behind compute services](https://github.com/BishopFox/cloudfox)
+- [Datadog Security Labs: AWS attack research](https://securitylabs.datadoghq.com/)

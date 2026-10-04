@@ -46,3 +46,6 @@ sudo mount -t lustre <dns-name>@tcp:/<mountname> /mnt/fsx
 
 - [HackTricks Cloud: FSx](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-fsx-enum.html)
 - [AWS: accessing FSx file systems](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-file-shares.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

@@ -42,3 +42,6 @@ Target many hosts at once with a tag filter: `--targets Key=tag:Env,Values=prod`
 
 - [HackTricks Cloud: ssm:SendCommand](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-ebs-elb-ssm-vpc-and-vpn-enum/index.html)
 - [AWS: Run Command](https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

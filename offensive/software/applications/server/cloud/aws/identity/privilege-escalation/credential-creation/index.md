@@ -24,3 +24,5 @@ If you can create or reset credentials on a more privileged principal, you becom
 
 - [Rhino Security Labs: AWS privilege escalation (credential paths)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

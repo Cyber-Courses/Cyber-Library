@@ -42,8 +42,11 @@ aws cognito-idp update-user-attributes --access-token <token> \
 ## Tools
 
 - **AWS CLI** (`cognito-idp sign-up` / `initiate-auth` / `update-user-attributes`).
+- **cognito-scanner** (`pip install cognito-scanner`): automates unwanted account creation and the username-existence oracle against a user pool.
 
 ## References
 
 - [HackTricks Cloud: AWS Cognito user pools](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-cognito-enum/index.html)
 - [AWS: Cognito user pools](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html)
+- [cognito-scanner](https://pypi.org/project/cognito-scanner/)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

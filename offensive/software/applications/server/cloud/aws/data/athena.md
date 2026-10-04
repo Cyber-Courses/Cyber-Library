@@ -45,3 +45,5 @@ SELECT * FROM loot;
 
 - [AWS: Athena and S3 permissions](https://docs.aws.amazon.com/athena/latest/ug/security-iam-athena.html)
 - [HackTricks Cloud: AWS Athena](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: finding exploitable paths across cloud data services](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

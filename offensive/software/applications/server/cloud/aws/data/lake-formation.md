@@ -45,3 +45,5 @@ aws lakeformation grant-permissions \
 
 - [AWS: Lake Formation credential vending](https://docs.aws.amazon.com/lake-formation/latest/dg/credential-vending.html)
 - [HackTricks Cloud: AWS Lake Formation](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating exploitable cloud data services](https://github.com/BishopFox/cloudfox)
+- [Datadog Security Labs: AWS attack research](https://securitylabs.datadoghq.com/)

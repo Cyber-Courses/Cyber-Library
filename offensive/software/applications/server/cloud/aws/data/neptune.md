@@ -39,3 +39,5 @@ curl -s https://<endpoint>:8182/gremlin \
 
 - [AWS: Neptune IAM authentication](https://docs.aws.amazon.com/neptune/latest/userguide/iam-auth.html)
 - [HackTricks Cloud: AWS Neptune](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

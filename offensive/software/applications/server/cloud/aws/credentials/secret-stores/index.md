@@ -30,3 +30,5 @@ aws ssm describe-parameters --query 'Parameters[].Name'
 
 - [HackTricks Cloud: AWS secrets](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: Secrets Manager GetSecretValue](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

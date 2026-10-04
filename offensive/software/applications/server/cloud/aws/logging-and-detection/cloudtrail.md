@@ -56,3 +56,4 @@ aws cloudtrail update-trail --name <trail> --s3-bucket-name <attacker-or-expirin
 - [HackTricks Cloud: CloudTrail evasion](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-defense-evasion/aws-cloudtrail-enum.html)
 - [Stratus Red Team: stop CloudTrail trail](https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.cloudtrail-stop/)
 - [AWS: StopLogging API](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html)
+- [Datadog Security Labs: AWS defense-evasion research](https://securitylabs.datadoghq.com/)

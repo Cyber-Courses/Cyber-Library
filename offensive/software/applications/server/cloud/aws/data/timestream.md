@@ -36,3 +36,5 @@ aws timestream-query query \
 
 - [AWS: Timestream access control](https://docs.aws.amazon.com/timestream/latest/developerguide/security-iam.html)
 - [HackTricks Cloud: AWS Timestream](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

@@ -23,3 +23,5 @@ AWS Organizations binds many accounts under one management account. That structu
 
 - [HackTricks Cloud: AWS Organizations](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-organizations-enum.html)
 - [AWS: Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

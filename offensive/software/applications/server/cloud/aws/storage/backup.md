@@ -51,3 +51,6 @@ The restored EBS volume, RDS instance, or DynamoDB table is yours to read.
 
 - [HackTricks Cloud: AWS Backup](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-backup-enum.html)
 - [AWS: restoring a backup](https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-a-backup.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

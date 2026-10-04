@@ -48,3 +48,5 @@ curl -s -H "X-aws-ec2-metadata-token: $TOKEN" \
 
 - [AWS: EMR IAM roles](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-roles.html)
 - [HackTricks Cloud: AWS EMR](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Pacu: AWS exploitation framework](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

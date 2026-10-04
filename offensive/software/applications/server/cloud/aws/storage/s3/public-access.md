@@ -52,3 +52,7 @@ aws s3api get-bucket-acl --bucket <bucket>
 
 - [HackTricks Cloud: S3 public access](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
 - [Rhino Security Labs: penetration testing AWS storage](https://rhinosecuritylabs.com/aws/penetration-testing-aws-storage/)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [GrayhatWarfare: public buckets](https://buckets.grayhatwarfare.com/)
+- [S3Scanner](https://github.com/sa7mon/S3Scanner)
+- [cloud_enum](https://github.com/initstring/cloud_enum)

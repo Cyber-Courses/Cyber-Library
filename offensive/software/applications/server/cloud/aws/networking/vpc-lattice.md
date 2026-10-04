@@ -37,3 +37,5 @@ aws vpc-lattice get-auth-policy --resource-identifier <service-or-network-arn>
 
 - [AWS: VPC Lattice auth policies](https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html)
 - [HackTricks Cloud: AWS networking services](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
+- [CloudFox: mapping reachable cloud network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

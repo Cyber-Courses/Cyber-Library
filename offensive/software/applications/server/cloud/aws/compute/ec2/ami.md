@@ -41,3 +41,6 @@ An AMI references EBS snapshots; mounting those snapshots (see [snapshots](snaps
 
 - [HackTricks Cloud: AMIs](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-ebs-elb-ssm-vpc-and-vpn-enum/index.html)
 - [AWS: describe-images](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

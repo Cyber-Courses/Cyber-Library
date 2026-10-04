@@ -31,3 +31,5 @@ The quietest paths require no new resource: a `CreatePolicyVersion` or `AttachUs
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
 - [Rhino Security Labs: 21 ways to escalate privileges in AWS](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [HackTricks Cloud: AWS privilege escalation](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/index.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

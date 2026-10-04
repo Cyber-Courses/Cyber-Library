@@ -44,3 +44,5 @@ curl -H 'Host: app.example.com' https://<origin-domain-from-config>/
 
 - [HackTricks Cloud: AWS CloudFront](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-cloudfront-enum.html)
 - [AWS: restricting access to an origin](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html)
+- [can-i-take-over-xyz: CloudFront and subdomain takeover fingerprints](https://github.com/EdOverflow/can-i-take-over-xyz)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

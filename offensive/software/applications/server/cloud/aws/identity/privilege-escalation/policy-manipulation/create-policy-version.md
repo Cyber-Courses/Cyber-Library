@@ -41,3 +41,5 @@ Your principal now holds `*:*` because the edited policy is attached to it.
 
 - [Rhino Security Labs: AWS privilege escalation (CreatePolicyVersion)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [AWS: managed policy versions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-versioning.html)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

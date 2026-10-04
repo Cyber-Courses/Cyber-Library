@@ -37,3 +37,5 @@ mongosh "mongodb://<user>:<pw>@<endpoint>:27017/?tls=true&tlsCAFile=global-bundl
 
 - [AWS: connecting to a DocumentDB cluster](https://docs.aws.amazon.com/documentdb/latest/developerguide/connect.html)
 - [HackTricks Cloud: AWS DocumentDB](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

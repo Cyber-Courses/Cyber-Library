@@ -37,3 +37,5 @@ aws globalaccelerator list-endpoint-groups --listener-arn <listener-arn> \
 
 - [AWS: Global Accelerator components](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-components.html)
 - [HackTricks Cloud: AWS networking services](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-ec2-vpc-and-network-security.html)
+- [CloudFox: mapping reachable cloud network paths](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

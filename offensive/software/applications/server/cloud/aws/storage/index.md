@@ -28,3 +28,5 @@ Enumeration is folded into each page: finding the resource is the first half of 
 
 - [HackTricks Cloud: AWS S3](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
 - [Rhino Security Labs: penetration testing AWS storage](https://rhinosecuritylabs.com/aws/penetration-testing-aws-storage/)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)

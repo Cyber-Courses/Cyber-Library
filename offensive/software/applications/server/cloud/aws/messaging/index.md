@@ -25,3 +25,5 @@ AWS messaging services carry mail and application events, and each one is useful
 
 - [HackTricks Cloud: AWS SES, SNS, SQS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: Amazon SES sending authorization](https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
+- [Rhino Security Labs: AWS offensive research](https://rhinosecuritylabs.com/aws/)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

@@ -23,9 +23,11 @@ The quietest moves are selective (narrow a trail's event selectors, archive a fi
 - **[GuardDuty](guardduty.md)**: disabling detectors and auto-archiving findings, and staying inside the analytics' blind spots.
 - **[Config](config.md)**: stopping configuration recorders and deleting rules and delivery channels.
 - **[CloudWatch](cloudwatch.md)**: deleting log groups, metric filters, and alarms, and disabling alarm actions.
+- **[Security services](security-services.md)**: disabling Macie, Security Hub, Detective, and Inspector, the posture and finding-aggregation layer.
 
 ## References
 
 - [HackTricks Cloud: AWS defense evasion](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-defense-evasion/index.html)
 - [Stratus Red Team: AWS defense evasion](https://stratus-red-team.cloud/attack-techniques/AWS/)
 - [AWS: CloudTrail concepts](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html)
+- [Datadog Security Labs: AWS defense-evasion research](https://securitylabs.datadoghq.com/)

@@ -44,3 +44,5 @@ aws configservice delete-config-rule --config-rule-name <rule>
 
 - [HackTricks Cloud: AWS defense evasion](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-defense-evasion/index.html)
 - [AWS: stop-configuration-recorder](https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html)
+- [Stratus Red Team: AWS defense-evasion techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Datadog Security Labs: AWS defense-evasion research](https://securitylabs.datadoghq.com/)

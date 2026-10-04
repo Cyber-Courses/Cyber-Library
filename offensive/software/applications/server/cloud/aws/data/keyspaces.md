@@ -39,3 +39,5 @@ cqlsh cassandra.<region>.amazonaws.com 9142 --ssl \
 
 - [AWS: Keyspaces access and credentials](https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_service-with-iam.html)
 - [HackTricks Cloud: AWS Keyspaces](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating reachable cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

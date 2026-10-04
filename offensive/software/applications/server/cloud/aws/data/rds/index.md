@@ -22,3 +22,5 @@ RDS and Aurora hold relational data behind two separable surfaces. The **control
 
 - [HackTricks Cloud: AWS RDS](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: sharing a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
+- [Pacu: AWS exploitation framework](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

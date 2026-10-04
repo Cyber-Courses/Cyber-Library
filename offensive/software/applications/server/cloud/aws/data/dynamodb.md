@@ -46,3 +46,5 @@ aws dynamodb export-table-to-point-in-time \
 
 - [AWS: exporting DynamoDB to S3](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/S3DataExport.html)
 - [HackTricks Cloud: AWS DynamoDB](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
+- [CloudFox: enumerating and looting cloud data stores](https://github.com/BishopFox/cloudfox)
+- [Datadog Security Labs: AWS attack research](https://securitylabs.datadoghq.com/)

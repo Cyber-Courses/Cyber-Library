@@ -54,3 +54,5 @@ mysql -h <loot-endpoint> -u admin -p   # or psql for Postgres/Aurora
 
 - [AWS: sharing a DB snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html)
 - [Rhino Security Labs: RDS snapshot exfiltration](https://rhinosecuritylabs.com/aws/exploiting-aws-iam-permissions-rds/)
+- [Pacu: AWS exploitation framework](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

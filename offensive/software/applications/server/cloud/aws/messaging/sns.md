@@ -49,3 +49,5 @@ aws sns publish --topic-arn <arn> --message '{"event":"forged"}'
 
 - [HackTricks Cloud: AWS SNS abuse](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-sns-enum.html)
 - [AWS: SNS access control](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-language-overview.html)
+- [Rhino Security Labs: AWS offensive research](https://rhinosecuritylabs.com/aws/)
+- [Hacking the Cloud: AWS offensive techniques](https://hackingthe.cloud/)

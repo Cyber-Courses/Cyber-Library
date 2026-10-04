@@ -31,6 +31,16 @@ aws guardduty create-filter --detector-id <id> --name quiet --action ARCHIVE \
   --finding-criteria '{"Criterion":{"type":{"Eq":["UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration"]}}}'
 ```
 
+## Allowlist your source IP
+
+GuardDuty suppresses findings that originate from a **trusted IP set**. Uploading one that contains your source address quietly removes a whole class of findings without the detector ever looking disabled:
+
+```bash
+# a trusted IP list (one CIDR per line in the S3 object) excludes those IPs from analysis
+aws guardduty create-ip-set --detector-id <id> --name ops --format TXT \
+  --location https://s3.amazonaws.com/<bucket>/trusted.txt --activate
+```
+
 ## Stay in the blind spots
 
 - Call the API from inside the account's expected regions and from an EC2 role rather than external keys, so credential-exfiltration analytics do not trip.
@@ -52,5 +62,6 @@ aws guardduty create-filter --detector-id <id> --name quiet --action ARCHIVE \
 ## References
 
 - [HackTricks Cloud: GuardDuty evasion](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-defense-evasion/index.html)
-- [Stratus Red Team: delete GuardDuty detector](https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.guardduty-disable/)
+- [Stratus Red Team: delete GuardDuty detector](https://stratus-red-team.cloud/attack-techniques/AWS/)
 - [AWS: GuardDuty finding types](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html)
+- [Datadog Security Labs: AWS defense-evasion research](https://securitylabs.datadoghq.com/)

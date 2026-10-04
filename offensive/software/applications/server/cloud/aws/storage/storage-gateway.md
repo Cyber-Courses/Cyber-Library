@@ -47,3 +47,6 @@ sudo mount -t nfs <gateway-ip>:/<bucket> /mnt/gw
 
 - [HackTricks Cloud: Storage Gateway](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/index.html)
 - [AWS: Storage Gateway file shares](https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateFileShare.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Datadog Security Labs](https://securitylabs.datadoghq.com/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

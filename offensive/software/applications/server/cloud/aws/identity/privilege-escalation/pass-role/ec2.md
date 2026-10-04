@@ -57,3 +57,5 @@ Those keys are the privileged role's; export them and continue as that role.
 
 - [Rhino Security Labs: AWS privilege escalation (PassRole to EC2)](https://rhinosecuritylabs.com/aws/aws-privilege-escalation-methods-mitigation/)
 - [BishopFox: iam-vulnerable PassRole scenarios](https://github.com/BishopFox/iam-vulnerable)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

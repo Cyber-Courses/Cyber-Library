@@ -32,6 +32,12 @@ aws s3 ls s3://target-backups --no-sign-request
 # permutation + wordlist scanning
 s3scanner scan --bucket-file names.txt
 cloud_enum -k target -k target-prod            # S3 + GCP + Azure in one pass
+bucket-finder names.txt                        # classic read/list prober
+# GrayhatWarfare: search already-indexed public buckets and their files by keyword (web UI/API)
+
+# resolve a bucket's region from the endpoint redirect
+dig +short <bucket>.s3.amazonaws.com
+curl -sI https://<bucket>.s3.amazonaws.com | grep -i x-amz-bucket-region
 ```
 
 ## Authenticated listing
@@ -40,6 +46,17 @@ cloud_enum -k target -k target-prod            # S3 + GCP + Azure in one pass
 aws s3api list-buckets --query 'Buckets[].Name'
 aws s3 ls s3://<bucket> --recursive
 aws s3api list-objects-v2 --bucket <bucket> --query 'Contents[].Key'
+```
+
+## Recovering deleted and overwritten objects
+
+A versioned bucket keeps every prior and deleted object; `ListBucket` hides them but `s3:ListBucketVersions` and `GetObjectVersion` pull them back, which often resurfaces secrets that were "removed":
+
+```bash
+aws s3api list-object-versions --bucket <bucket> \
+  --query '{v:Versions[].{k:Key,id:VersionId},d:DeleteMarkers[].Key}'
+# fetch a specific old or delete-marked version
+aws s3api get-object --bucket <bucket> --key <key> --version-id <VersionId> out.bin
 ```
 
 ## Exploitation notes
@@ -52,10 +69,15 @@ aws s3api list-objects-v2 --bucket <bucket> --query 'Contents[].Key'
 
 - **s3scanner**: bucket existence and permission scanning from a name list.
 - **cloud_enum**: cross-provider public-resource discovery.
-- **AWS CLI** (`--no-sign-request`): anonymous list and get.
+- **bucket-finder**: read and list probing across a name wordlist.
+- **GrayhatWarfare**: searchable index of already-public buckets and files.
+- **AWS CLI** (`--no-sign-request`, `list-object-versions`): anonymous list/get and version recovery.
+- **Pacu** (`s3__bucket_finder`, `s3__download_bucket`): find and pull readable buckets across the account.
 
 ## References
 
 - [s3scanner](https://github.com/sa7mon/S3Scanner)
 - [cloud_enum (initstring)](https://github.com/initstring/cloud_enum)
+- [GrayhatWarfare: public buckets](https://buckets.grayhatwarfare.com/)
 - [HackTricks Cloud: S3 enumeration](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/aws-s3-athena-and-glacier-enum.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)

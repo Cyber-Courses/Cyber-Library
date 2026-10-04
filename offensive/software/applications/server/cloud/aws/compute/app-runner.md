@@ -40,3 +40,6 @@ aws apprunner create-service --service-name x \
 
 - [AWS: App Runner instance roles](https://docs.aws.amazon.com/apprunner/latest/dg/security-iam-roles.html)
 - [HackTricks Cloud: AWS services](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-services/index.html)
+- [Hacking the Cloud: AWS](https://hackingthe.cloud/)
+- [Stratus Red Team: AWS techniques](https://stratus-red-team.cloud/attack-techniques/AWS/)
+- [Pacu (Rhino Security Labs)](https://github.com/RhinoSecurityLabs/pacu)

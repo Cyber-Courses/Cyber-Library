@@ -33,3 +33,4 @@ Enumeration is folded into each surface across AWS, but the IAM graph that drive
 - [BishopFox: iam-vulnerable](https://github.com/BishopFox/iam-vulnerable)
 - [PMapper (NCC Group)](https://github.com/nccgroup/PMapper)
 - [HackTricks Cloud: AWS IAM privilege escalation](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/aws-privilege-escalation/index.html)
+- [CloudFox (Bishop Fox)](https://github.com/BishopFox/cloudfox)

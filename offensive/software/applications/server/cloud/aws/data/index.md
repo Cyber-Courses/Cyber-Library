@@ -35,3 +35,5 @@ The managed data stores are where the engagement pays off: the database, the war
 
 - [HackTricks Cloud: AWS databases](https://cloud.hacktricks.wiki/en/pentesting-cloud/aws-security/index.html)
 - [AWS: security in Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.html)
+- [CloudFox: enumerating exploitable cloud data services](https://github.com/BishopFox/cloudfox)
+- [Prowler: AWS data-exposure and misconfiguration checks](https://github.com/prowler-cloud/prowler)
