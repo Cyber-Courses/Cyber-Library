@@ -33,7 +33,11 @@ A compromised Windows host and the directory itself hold several credential stor
 - **[ZeroLogon](zerologon.md)**: resetting the DC machine account over Netlogon for unauthenticated domain takeover.
 - **[RODC](rodc.md)**: cached-credential extraction and the scoped golden ticket from a Read-Only Domain Controller.
 - **[Cracking](cracking.md)**: turning recovered hashes into passwords offline.
+- **[Host and domain discovery](host-and-domain-discovery.md)**: finding domain controllers, naming contexts, and the lay of the domain.
+- **[LDAP enumeration](ldap-enumeration.md)**: querying the directory for objects, attributes, and abusable flags.
 - **[User and group enumeration](user-and-group-enumeration.md)**: building the account list to target.
+- **[Session enumeration](session-enumeration.md)**: locating logged-on users to target for credential theft and lateral movement.
+- **[Null sessions](null-sessions.md)**: anonymous SMB/LDAP enumeration and RID cycling, before any credential.
 - **[Password policy](password-policy.md)**: reading the policy that bounds safe spraying.
 - **[Password spraying](password-spraying.md)**: guessing valid credentials without lockout.
 - **[Pre-created computers](pre-created-computers.md)**: taking over pre-staged computer objects with their default name-as-password.

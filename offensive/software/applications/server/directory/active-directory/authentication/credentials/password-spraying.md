@@ -54,7 +54,7 @@ For the guessing itself, Kerberos pre-auth is fast and quiet, but it is governed
 
 ## Exploitation notes
 
-- A single valid credential, however unprivileged, unlocks full [LDAP enumeration](../../reconnaissance/ldap-enumeration.md), [Kerberoasting](../kerberos/spn-discovery.md), and BloodHound collection, so one hit transforms the engagement.
+- A single valid credential, however unprivileged, unlocks full [LDAP enumeration](ldap-enumeration.md), [Kerberoasting](../kerberos/spn-discovery.md), and BloodHound collection, so one hit transforms the engagement.
 - Spraying is noisy on the authentication logs even when it avoids lockout; pace it and prefer Kerberos to reduce footprint.
 - Where a domain sets `lockoutThreshold = 0`, spraying carries no lockout risk at all and can be more aggressive.
 

@@ -39,7 +39,7 @@ changepasswd.py -protocol rpc-samr 'example.local/WKSTN01$:wkstn01@<dc>' -newpas
 ```
 
 - The result is an attacker-controlled, SPN-bearing **computer identity**. That is the account you nominate as the delegated principal in a [resource-based constrained delegation](../kerberos/delegation/resource-based-constrained.md) chain, but completing it still needs a separate write over the **target's** `msDS-AllowedToActOnBehalfOfOtherIdentity`; the pre-created account supplies the controlled principal, not the write over the target.
-- On its own it is a plain authenticated foothold for [LDAP enumeration](../../reconnaissance/ldap-enumeration.md) and [roasting](../kerberos/roasting.md) when you started with nothing.
+- On its own it is a plain authenticated foothold for [LDAP enumeration](ldap-enumeration.md) and [roasting](../kerberos/roasting.md) when you started with nothing.
 
 ## Exploitation notes
 
