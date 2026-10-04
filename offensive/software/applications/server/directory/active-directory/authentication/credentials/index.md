@@ -21,7 +21,7 @@ A compromised Windows host and the directory itself hold several credential stor
 - **The SAM and LSA secrets**: local account hashes and cached service-account and machine-account secrets in the registry.
 - **DPAPI-protected stores**: saved browser and application passwords, and credentials in the Windows vault.
 - **The NTDS database**: on a domain controller (or via DCSync from any host with the replication right), the NTLM hashes of every account in the domain, including `krbtgt`.
-- **The directory**: passwords in attributes, LAPS and gMSA managed passwords (covered under [credentials in attributes](../../../ldap/credentials-in-attributes.md)).
+- **The directory**: passwords in attributes, LAPS and gMSA managed passwords (covered under [credentials in attributes](../../../ldap/protocol/credentials-in-attributes.md)).
 
 ## Pages
 
