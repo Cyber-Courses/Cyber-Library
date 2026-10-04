@@ -87,7 +87,7 @@ APOC does not ship an operating-system command runner. The `apoc.cypher.*` proce
 
 ## References
 
-- [APOC: load.json / load.jsonParams](https://neo4j.com/labs/apoc/current/import/load-json/)
-- [APOC: load.jdbc](https://neo4j.com/labs/apoc/current/database-integration/load-jdbc/)
-- [APOC: apoc.cypher.* procedures](https://neo4j.com/labs/apoc/current/cypher-execution/)
+- [APOC: load.json / load.jsonParams](https://neo4j.com/docs/apoc/current/import/load-json/)
+- [APOC: load.jdbc](https://neo4j.com/labs/apoc/4.4/database-integration/load-jdbc/)
+- [APOC: apoc.cypher.* procedures](https://neo4j.com/docs/apoc/current/cypher-execution/)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

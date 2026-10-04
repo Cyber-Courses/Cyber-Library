@@ -78,4 +78,4 @@ If `include` returns an error rather than content (for example `[an error occurr
 ## References
 
 - [OWASP: Server-Side Includes (SSI) Injection](https://owasp.org/www-community/attacks/Server-Side_Includes_(SSI)_Injection)
-- [PayloadsAllTheThings: Server Side Inclusion / Edge Side Inclusion Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Inclusion)
+- [PayloadsAllTheThings: Server Side Inclusion / Edge Side Inclusion Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Include%20Injection)

@@ -26,4 +26,4 @@ The sections below outline the main stages and habits that shape a security care
 ## References
 
 - [NICE Workforce Framework for Cybersecurity](https://niccs.cisa.gov/workforce-development/nice-framework)
-- [CISA Cyber Career Pathways](https://www.cisa.gov/cyber-career-pathways-tool)
+- [CISA Cyber Career Pathways](https://niccs.cisa.gov/workforce-development/cyber-career-pathways-tool)

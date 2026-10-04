@@ -79,6 +79,6 @@ Submit a lone `'` and watch for a CQL parse error surfacing in the response (`Sy
 
 ## References
 
-- [Apache Cassandra: SELECT and the WHERE clause](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#select)
-- [Apache Cassandra: Data definition and partition keys](https://cassandra.apache.org/doc/latest/cassandra/cql/ddl.html)
+- [Apache Cassandra: SELECT and the WHERE clause](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html#select-statement)
+- [Apache Cassandra: Data definition and partition keys](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/ddl.html)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

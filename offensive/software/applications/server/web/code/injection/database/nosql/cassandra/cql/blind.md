@@ -69,5 +69,5 @@ Each character typically costs a handful of requests under binary search. Script
 
 ## References
 
-- [Apache Cassandra: SELECT and operators](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html#select)
+- [Apache Cassandra: SELECT and operators](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html#select-statement)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

@@ -73,6 +73,6 @@ Blind extraction is request-heavy, so script it: one request per character per g
 
 ## References
 
-- [APOC: apoc.util.sleep](https://neo4j.com/labs/apoc/current/overview/apoc.util/apoc.util.sleep/)
+- [APOC: apoc.util.sleep](https://neo4j.com/docs/apoc/current/overview/apoc.util/apoc.util.sleep/)
 - [Neo4j: Cypher CASE expression](https://neo4j.com/docs/cypher-manual/current/queries/case/)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

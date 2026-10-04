@@ -70,6 +70,6 @@ Error-based extraction depends on messages surviving to the response. Submitting
 
 ## References
 
-- [Apache Cassandra: system_schema tables](https://cassandra.apache.org/doc/latest/cassandra/cql/dml.html)
-- [Apache Cassandra: CQL data types](https://cassandra.apache.org/doc/latest/cassandra/cql/types.html)
+- [Apache Cassandra: system_schema tables](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/dml.html)
+- [Apache Cassandra: CQL data types](https://cassandra.apache.org/doc/latest/cassandra/developing/cql/types.html)
 - [PayloadsAllTheThings: NoSQL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection)

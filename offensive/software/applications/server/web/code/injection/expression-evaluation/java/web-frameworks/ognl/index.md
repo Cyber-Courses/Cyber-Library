@@ -27,6 +27,6 @@ OGNL is a full object language: it names classes, constructs objects, and calls 
 
 ## References
 
-- [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)
+- [Apache Commons OGNL Language Guide](https://commons.apache.org/dormant/commons-ognl/language-guide.html)
 - [Apache Struts2 Security](https://struts.apache.org/security/)
-- [PayloadsAllTheThings: Java OGNL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Java)
+- [PayloadsAllTheThings: Java OGNL Injection](https://github.com/swisskyrepo/PayloadsAllTheThings)

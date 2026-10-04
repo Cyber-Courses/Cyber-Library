@@ -60,5 +60,5 @@ Record the cookie issued **pre-login**, submit valid credentials, and inspect th
 ## References
 
 - OWASP: [Session fixation](https://owasp.org/www-community/attacks/Session_fixation) and the [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
-- OWASP WSTG: [Testing for Session Fixation (WSTG-SESS-03)](https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/06-Session_Management_Testing/03-Testing_for_Session_Fixation.html)
+- OWASP WSTG: [Testing for Session Fixation (WSTG-SESS-03)](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/06-Session_Management_Testing/03-Testing_for_Session_Fixation)
 - Mitja Kolšek / ACROS Security: [Session Fixation Vulnerability in Web-based Applications](https://acrossecurity.com/papers/session_fixation.pdf) (the seminal paper)

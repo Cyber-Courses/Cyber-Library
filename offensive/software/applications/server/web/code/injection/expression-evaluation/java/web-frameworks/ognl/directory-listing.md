@@ -60,5 +60,5 @@ Once evaluation is confirmed, the same sandbox-safe grammar reads the stack to l
 
 ## References
 
-- [Apache Commons OGNL Language Guide](https://commons.apache.org/proper/commons-ognl/language-guide.html)
+- [Apache Commons OGNL Language Guide](https://commons.apache.org/dormant/commons-ognl/language-guide.html)
 - [Apache Struts2 Security](https://struts.apache.org/security/)

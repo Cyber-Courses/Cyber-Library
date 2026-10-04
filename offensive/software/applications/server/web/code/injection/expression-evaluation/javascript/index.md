@@ -24,6 +24,6 @@ Browser-side DOM prototype pollution shares the root cause but has a different s
 
 ## References
 
-- [OWASP: Prototype Pollution](https://owasp.org/www-community/attacks/Prototype_pollution)
+- [OWASP: Prototype Pollution](https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html)
 - [PortSwigger: Prototype pollution](https://portswigger.net/web-security/prototype-pollution)
 - [MDN: Object.prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto)
