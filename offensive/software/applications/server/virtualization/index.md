@@ -20,13 +20,10 @@ The area is organized by product, because escapes are specific to each hyperviso
 - **[VMware](vmware/index.md)**: ESXi and vCenter, plus the Workstation and Fusion desktop hypervisors.
 - **[Hyper-V](hyper-v/index.md)**: the Windows hypervisor and its management stack.
 - **[VirtualBox](virtualbox/index.md)**: the Oracle desktop hypervisor.
-- **[KVM and QEMU](kvm-and-qemu/index.md)**: Linux virtualization and the QEMU device models.
+- **[KVM](kvm/index.md)**: the Linux KVM ecosystem: QEMU, the kernel module, Proxmox VE, Nutanix AHV, and the Firecracker and Cloud Hypervisor microVM monitors.
 - **[Xen](xen/index.md)**: the Xen hypervisor and its control domain.
-- **[Proxmox VE](proxmox-ve/index.md)**: the Debian, KVM, and LXC platform.
-- **[Nutanix AHV](nutanix-ahv/index.md)**: the KVM-based hypervisor in Nutanix HCI.
 - **[Parallels Desktop](parallels-desktop/index.md)**: the macOS desktop hypervisor.
 - **[bhyve](bhyve/index.md)**: the FreeBSD hypervisor.
-- **[microVM monitors](microvm-monitors/index.md)**: Firecracker and Cloud Hypervisor.
 
 ## References
 

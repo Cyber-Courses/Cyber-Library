@@ -24,7 +24,7 @@ Cloud Hypervisor attack surface:
 
 - Memory safety raises the bar on traditional overflow bugs, pushing attention to logic flaws, `unsafe` blocks, and shared rust-vmm components.
 - An escape lands in the Cloud Hypervisor process, bounded by whatever seccomp and user confinement the deployment applies.
-- Like Firecracker, it backs microVM-isolated containers; the container-side view is [Kata Containers](../../containers/container-escape/sandboxed-runtime-escapes/kata-containers.md).
+- Like Firecracker, it backs microVM-isolated containers; the container-side view is [Kata Containers](../../../containers/container-escape/sandboxed-runtime-escapes/kata-containers.md).
 
 ## References
 

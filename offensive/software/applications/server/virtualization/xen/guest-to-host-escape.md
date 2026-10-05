@@ -24,7 +24,7 @@ Xen escape surfaces reachable from a guest:
 ## Exploitation notes
 
 - Hypercall and grant-table flaws land in the hypervisor or dom0 kernel, the most powerful outcome; backend-driver bugs land in dom0.
-- HVM guests add the full QEMU device surface, so the [KVM and QEMU guest to host escape](../kvm-and-qemu/guest-to-host-escape.md) techniques apply to Xen HVM.
+- HVM guests add the full QEMU device surface, so the [KVM and QEMU guest to host escape](../kvm/qemu/guest-to-host-escape.md) techniques apply to Xen HVM.
 - Named instances tracked as Xen Security Advisories are under [Known escape exploits](known-escape-exploits.md).
 
 ## References

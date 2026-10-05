@@ -24,7 +24,7 @@ Firecracker attack surface:
 
 - The guest-to-host surface is small by design, so escapes target the virtio device implementations; a bug there lands in the Firecracker process.
 - The jailer wraps Firecracker in seccomp, cgroups, and a chroot, so an escape is bounded by that confinement, enumerate it before assuming host access.
-- Firecracker backs sandboxed container runtimes; the container-side view is [Kata Containers](../../containers/container-escape/sandboxed-runtime-escapes/kata-containers.md).
+- Firecracker backs sandboxed container runtimes; the container-side view is [Kata Containers](../../../containers/container-escape/sandboxed-runtime-escapes/kata-containers.md).
 
 ## References
 
