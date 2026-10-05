@@ -20,7 +20,7 @@ NTLM is the legacy Windows challenge-response authentication protocol, still ena
 - **Relay**: forward a captured or coerced authentication to a third service in real time and act as the victim there, without ever knowing the password.
 - **Replay (pass-the-hash)**: authenticate directly using a stolen NT hash, since the protocol never needs the plaintext.
 
-Capture and coercion produce the authentication; relay and pass-the-hash consume it. The relay target's protections (SMB signing, [LDAP signing and channel binding](../../../ldap/signing-and-channel-binding.md)) decide whether relay is possible.
+Capture and coercion produce the authentication; relay and pass-the-hash consume it. The relay target's protections (SMB signing, [LDAP signing and channel binding](../../../ldap/protocol/signing-and-channel-binding.md)) decide whether relay is possible.
 
 ## Pages
 

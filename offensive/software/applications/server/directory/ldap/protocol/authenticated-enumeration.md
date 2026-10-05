@@ -25,7 +25,7 @@ ldapsearch -x -H ldap://<dc> -D 'EXAMPLE\user' -w 'password' \
   -b 'DC=example,DC=local' "(objectClass=user)" sAMAccountName
 ```
 
-For AD, the object-model-aware queries (UAC bit filters, SPNs, delegation) are covered under [LDAP enumeration](../active-directory/authentication/credentials/ldap-enumeration.md); the mechanics below apply to any directory.
+For AD, the object-model-aware queries (UAC bit filters, SPNs, delegation) are covered under [LDAP enumeration](../../active-directory/authentication/credentials/ldap-enumeration.md); the mechanics below apply to any directory.
 
 ## Paging large results
 
