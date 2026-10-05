@@ -15,7 +15,7 @@ Nutanix is managed through Prism: Prism Element runs per cluster, and Prism Cent
 
 ```bash
 # Prism REST API with recovered credentials
-curl -sk -u 'admin:pass' https://<prism>:9440/api/nutanix/v3/vms/list -X POST -d '{"kind":"vm"}'
+curl -sk -u 'admin:pass' -H 'Content-Type: application/json' https://<prism>:9440/api/nutanix/v3/vms/list -X POST -d '{"kind":"vm"}'
 curl -sk -u 'admin:pass' https://<prism>:9440/PrismGateway/services/rest/v2.0/vms/
 ```
 

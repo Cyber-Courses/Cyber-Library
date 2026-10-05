@@ -17,7 +17,7 @@ Proxmox is driven by a REST API on `8006`, exposed through the web UI, the `pves
 # Ticket auth, then drive the API
 curl -sk -d 'username=root@pam&password=<pw>' https://<node>:8006/api2/json/access/ticket
 pvesh get /cluster/resources --type vm        # all VMs across the cluster
-pvesh create /nodes/<node>/qemu/<vmid>/agent/exec -command 'id'   # run in a guest via agent
+pvesh create /nodes/<node>/qemu/<vmid>/agent/exec -command 'id'   # run in a guest (qemu-guest-agent required; returns a pid to poll)
 ```
 
 ## Exploitation notes

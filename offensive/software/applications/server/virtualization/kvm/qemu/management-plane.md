@@ -22,7 +22,7 @@ curl -sk -u 'admin@internal:pass' https://<engine>/ovirt-engine/api/vms
 
 ## Exploitation notes
 
-- The oVirt engine is the high-value target: its admin (`admin@internal`) and database reach every managed host and VM.
+- The oVirt engine is the high-value target: its admin (`admin@internal`) and database reach every managed host and VM; newer versions issue an SSO bearer token from /ovirt-engine/sso/oauth/token rather than accepting basic auth.
 - Remote libvirt over `qemu+tcp` with weak or no authentication is a direct network control path; `qemu+ssh` reuses SSH trust.
 - Engine compromise yields host root through the management agent (VDSM) on each host.
 
