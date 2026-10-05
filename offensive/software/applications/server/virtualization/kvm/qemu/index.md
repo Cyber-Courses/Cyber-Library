@@ -1,27 +1,35 @@
 ---
-title: "QEMU: attacking the base KVM virtualization stack"
-description: "Attacking KVM-based virtualization on Linux: reaching the host and the libvirt control socket, escaping a guest to the host through QEMU device-model flaws, abusing the libvirt and oVirt management plane, and stealing qcow2 disks and snapshots. KVM underpins Proxmox, Nutanix, OpenStack, and most VPS providers."
+title: "QEMU: attacking the device emulator behind KVM"
+description: "QEMU provides the device emulation for KVM virtual machines and underlies most Linux virtualization products. Its offensive surface is the guest-to-host escape through device models, the QMP/HMP monitor control interface, theft of qcow2 disk images and snapshots, and obtaining a shell on the host QEMU runs on. The device-model bugs recur across every KVM-based product."
 keywords:
-  - KVM
-  - QEMU
-  - libvirt
-  - VM escape
+  - qemu
+  - kvm
+  - device model
+  - qmp
   - qcow2
 ---
 
 # QEMU
 
-QEMU is the user-space virtual machine monitor that provides device emulation for KVM guests, and it is the base of the Linux virtualization stack that Proxmox, Nutanix AHV, and OpenStack build on. The targets here are the host and its libvirt control, the QEMU device models that back guest-to-host escapes, the libvirt management plane, and the qcow2 disks at rest. The KVM kernel accelerator beneath it is a separate target.
+QEMU is the user-space device emulator that pairs with the KVM kernel module to run virtual machines, and it underlies most Linux virtualization: libvirt, Proxmox, OpenStack, oVirt, cloud platforms, and more. Its offensive surface is therefore the common denominator of KVM-based products. The central concern is the guest-to-host escape through QEMU's device models; alongside it are the QMP/HMP monitor that controls a running VM, the qcow2 disk images and snapshots that hold guest data, and the host QEMU runs on. Because every KVM product reuses these device models, a QEMU escape bug tends to apply everywhere.
+
+```bash
+# from the guest: the emulated device inventory (escape surface)
+lspci -nn; lsusb; cat /proc/ioports | head
+# from the host: QEMU processes and their monitor sockets
+ps aux | grep qemu; ls -l /var/lib/libvirt/qemu/*.monitor 2>/dev/null
+```
 
 ## Subtopics
 
-- **[Host access and shell](host-access-and-shell.md)**: reaching the host and libvirt.
-- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out through QEMU device models.
-- **[Management plane](management-plane.md)**: libvirt, oVirt, and RHV.
-- **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: qcow2 and raw images.
-- **[Known escape exploits](known-escape-exploits.md)**: named QEMU device breakouts.
+- **[Guest-to-host escape](guest-to-host-escape/index.md)**: breaking out through QEMU device models.
+- **[Management plane](management-plane.md)**: the QMP/HMP monitor and libvirt control.
+- **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: stealing qcow2 images and snapshots.
+- **[Host access and shell](host-access-and-shell.md)**: execution on the QEMU host.
+- **[Known escape exploits](known-escape-exploits.md)**: the recurring device-model escapes.
 
 ## References
 
+- [QEMU documentation](https://www.qemu.org/docs/master/)
 - [QEMU security](https://www.qemu.org/docs/master/system/security.html)
-- [libvirt documentation](https://libvirt.org/docs.html)
+- [Awesome VM/hypervisor escape research](https://github.com/WinMin/Awesome-VM-Exploit)

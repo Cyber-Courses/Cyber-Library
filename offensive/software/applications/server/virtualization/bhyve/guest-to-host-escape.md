@@ -1,33 +1,46 @@
 ---
-title: "Guest to host escape: breaking out of a bhyve guest"
-description: "Escaping a bhyve guest to the FreeBSD host by exploiting its device models: the virtio devices, the e1000 network adapter, the framebuffer, and the USB and block emulation, which run in the host bhyve process and parse guest-controlled input."
+title: "Guest-to-host escape: breaking out of a bhyve virtual machine"
+description: "A bhyve guest escapes by corrupting the userspace bhyve process that emulates its devices. The reachable surface is bhyve's device models, the virtio family, the AHCI storage controller, the e1000 NIC, the USB controllers, and the framebuffer, each parsing guest-driven register writes and DMA descriptors, with a flaw yielding code execution in the bhyve process on the FreeBSD host."
 keywords:
   - bhyve escape
-  - device model
   - virtio
+  - ahci
   - e1000
-  - guest to host
+  - device model
 ---
 
-# Guest to host escape
+# Guest-to-host escape
 
-Each bhyve guest is served by a `bhyve` process on the host that emulates its devices in user space, much like QEMU. Those device models parse guest-controlled input, so memory-corruption flaws in the virtio devices, the e1000 network adapter, the framebuffer, or the USB and block emulation let a guest execute code in the host bhyve process.
+bhyve emulates a VM's devices in a per-VM userspace process, with the `vmm.ko` kernel module accelerating the CPU. Escaping a bhyve guest means making that `bhyve` process mishandle guest-controlled data in a device model. The surface is bhyve's device set: the virtio devices (virtio-blk, virtio-net, virtio-9p, virtio-console), the AHCI SATA controller, the e1000 NIC, the USB (XHCI) controller, and the framebuffer. Each reads guest register writes and DMA descriptors, so a memory-safety flaw gives code execution in the `bhyve` process on the FreeBSD host.
 
-```text
-bhyve guest escape surfaces (reachable from a guest):
-- virtio devices (net, block, console)
-- e1000 network adapter
-- The framebuffer / display
-- USB and AHCI/block emulation
+```bash
+# the emulated devices visible in the guest (escape surface)
+pciconf -lv 2>/dev/null | grep -iE 'virtio|ahci|e1000|xhci'   # (FreeBSD guest)
+lspci -nn 2>/dev/null | grep -iE 'virtio|ahci|intel|usb'      # (Linux guest)
 ```
+
+## The device surface
+
+```c
+// bhyve device models parse guest-controlled structures:
+//  - virtio (blk/net/9p/console): virtqueue descriptors (addr/len/flags), indirect
+//    descriptors, and per-device headers; a trusted length/index -> OOB in bhyve
+//  - AHCI: command list + PRD tables with guest addresses/counts for DMA
+//  - e1000: TX/RX descriptors and offload fields
+//  - XHCI: command/transfer rings of TRBs with link/length fields
+// the mechanisms match the equivalent QEMU device models
+```
+
+The bug classes are the standard device-emulation ones, a length or count the model trusts, an index it does not bound, a use-after-free on a request object, and because bhyve emphasises virtio, the virtqueue handling (shared mechanism, see [QEMU virtio devices](../kvm/qemu/guest-to-host-escape/virtio-devices.md)) is a primary surface.
 
 ## Exploitation notes
 
-- Code execution lands in the host `bhyve` process; FreeBSD mitigations and Capsicum capability-mode confinement, where used, limit the outcome, so check the host's confinement.
-- The device set is configured per VM, so reachable surface depends on which emulated devices the guest has.
-- Named instances are under [Known escape exploits](known-escape-exploits.md).
+- Code execution lands in the userspace `bhyve` process on the FreeBSD host; it runs with the privileges of whoever launched the VM, so a further local privilege escalation may be needed for full host control, as with other type-2 setups.
+- bhyve's lean, virtio-focused design means the virtio and AHCI paths are the primary surfaces; the mechanisms mirror QEMU's, so that device analysis transfers.
+- The guest drives the device models from a controlled driver, posting crafted descriptors directly; primitives land in the bhyve heap and are version-specific.
+- FreeBSD security advisories track bhyve device bugs; fingerprint the FreeBSD/bhyve version.
 
 ## References
 
-- [bhyve man page](https://man.freebsd.org/cgi/man.cgi?bhyve)
-- [FreeBSD security advisories](https://www.freebsd.org/security/advisories/)
+- [bhyve(8) and device models](https://man.freebsd.org/cgi/man.cgi?query=bhyve)
+- [FreeBSD security advisories (bhyve)](https://www.freebsd.org/security/advisories/)

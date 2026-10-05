@@ -1,31 +1,44 @@
 ---
-title: "USB controllers: escaping VirtualBox through USB emulation"
-description: "Escaping a VirtualBox guest through its USB controller emulation (OHCI, EHCI, XHCI), which parses guest-issued transfer descriptors and device requests in the host-side VM process, reachable when a USB controller is attached to the guest."
+title: "USB controllers: escaping VirtualBox through emulated OHCI, EHCI, and xHCI"
+description: "VirtualBox emulates OHCI, EHCI, and xHCI USB host controllers whose guest drivers build transfer descriptors and rings in guest memory that the host VM process walks via DMA. Flaws in descriptor-chain and xHCI ring and device-context handling give out-of-bounds access in the host process, a recurring VirtualBox escape surface including at Pwn2Own."
 keywords:
-  - USB controller
-  - OHCI
-  - XHCI
-  - VirtualBox escape
-  - device emulation
+  - usb controller
+  - xhci
+  - ehci
+  - ohci
+  - transfer descriptor
 ---
 
 # USB controllers
 
-VirtualBox emulates OHCI, EHCI, and XHCI USB host controllers in the host-side VM process. They process the guest's transfer descriptors and schedules, and the emulated devices handle guest requests. Flaws in the controller or device handling corrupt host memory, a recurring VirtualBox escape surface.
+VirtualBox emulates OHCI (USB 1.1), EHCI (USB 2.0), and xHCI (USB 3.0) host controllers. The guest driver programs a controller through registers and builds its data structures, endpoint and transfer descriptors for OHCI/EHCI, and the command, event, and transfer rings of TRBs for xHCI, in guest memory, which the host VM process reads by DMA to perform transfers. Walking those guest-built structures is the escape surface, and the xHCI model in particular has been a VirtualBox escape vector, including at Pwn2Own.
 
-```text
-USB escape surface:
-- Host controllers: OHCI, EHCI, XHCI (transfer descriptor / schedule parsing)
-- Emulated USB device models
+## The surface
+
+```c
+// xHCI: the guest sets ring base registers and writes TRBs (type, flags, ptr, len).
+// the host walks the command/transfer rings following link TRBs and tracks per-slot
+// device contexts and endpoints. Primitives:
+//  - a link TRB forming a cycle or pointing out of range -> over-read when walked
+//  - a transfer length the host uses for a copy beyond the mapped buffer
+//  - a slot/endpoint index used to index context arrays without bounds -> OOB/UAF
+// OHCI/EHCI: endpoint/transfer descriptor lists with the same descriptor-walk classes
+```
+
+```bash
+lspci -nn | grep -i usb       # OHCI/EHCI/xHCI present (xHCI needs the extension pack era config)
+# an attacker guest USB driver programs the rings/descriptors directly
 ```
 
 ## Exploitation notes
 
-- The XHCI controller has the richest surface; reachability requires a USB controller on the guest, which is commonly present.
-- VirtualBox's open-source device code makes these controllers heavily audited, with public findings.
-- Code execution lands in the host VM process, then escalates.
+- xHCI is the richest target because the host tracks substantial per-slot and per-endpoint state, giving type-confusion and use-after-free opportunities on context setup/teardown in addition to ring-walk over-reads.
+- The guest controls the ring/descriptor base and contents from its driver; exploitation programs the controller directly rather than attaching a device normally.
+- The same controller models appear in QEMU and VMware, so xHCI bugs recur across hypervisors; see [QEMU USB controllers](../../kvm/qemu/guest-to-host-escape/usb-controllers.md).
+- Primitives land in the VM process; version-specific, pair with a leak.
 
 ## References
 
-- [Oracle VirtualBox manual](https://www.virtualbox.org/manual/)
-- [Zero Day Initiative: VirtualBox research](https://www.zerodayinitiative.com/blog)
+- [xHCI specification](https://www.intel.com/content/dam/www/public/us/en/documents/technical-specifications/extensible-host-controller-interface-usb-xhci.pdf)
+- [Zero Day Initiative: VirtualBox USB research](https://www.zerodayinitiative.com/blog)
+- [Oracle security alerts](https://www.oracle.com/security-alerts/)

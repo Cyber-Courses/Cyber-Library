@@ -1,25 +1,31 @@
 ---
-title: "Guest to host escape: breaking out of a Hyper-V child partition"
-description: "Escaping a Hyper-V guest to the host by exploiting the synthetic device stack that bridges child and parent partitions: the virtual switch in the host kernel, the synthetic devices serviced by the VM worker process, and the VMBus channel transport underneath them."
+title: "Guest-to-host escape: breaking out of a Hyper-V virtual machine"
+description: "A Hyper-V guest escapes by corrupting the root partition code that services its requests: the VMBus channel transport and the synthetic devices (storage, network, video, HID) backed by Virtualization Service Providers, and the emulated devices and virtual switch in the worker process. A memory-safety flaw there executes in the root partition, which controls every VM."
 keywords:
-  - Hyper-V escape
-  - vmswitch
-  - vmwp.exe
-  - VMBus
-  - guest to host
+  - hyper-v escape
+  - vmbus
+  - vsp
+  - synthetic devices
+  - root partition
 ---
 
-# Guest to host escape
+# Guest-to-host escape
 
-A Hyper-V child partition talks to the host through synthetic devices over VMBus. The virtual switch parses guest network frames in the host kernel, the VM worker process (`vmwp.exe`) services synthetic storage, video, and input devices in the parent partition, and VMBus carries all of it. Each parses guest-controlled data, so flaws there run code in the host, in the kernel or the worker process depending on the component.
+A Hyper-V guest is isolated by the hypervisor, so it cannot touch the host directly; it reaches host functionality through VMBus, over which synthetic devices talk to Virtualization Service Providers (VSPs) in the root partition, and through the worker process (`vmwp.exe`) that handles emulated devices and the virtual switch. Escaping means making one of those root-partition components mishandle guest-controlled data: a VMBus packet, a synthetic-device request, or an emulated-device access. Code execution lands in the root partition or the worker process, which is effectively host control because the root partition administers all guests.
+
+```powershell
+# the VMBus devices and channels visible from the guest
+Get-PnpDevice | Where-Object InstanceId -like 'VMBUS*'
+# synthetic storage/net/video/HID are the high-level targets; the transport is VMBus
+```
 
 ## Subtopics
 
-- **[Virtual switch](virtual-switch.md)**: guest network frames parsed in the host kernel.
-- **[Synthetic devices](synthetic-devices.md)**: storage, video, and input in the worker process.
-- **[VMBus](vmbus.md)**: the channel and ring-buffer transport.
+- **[VMBus](vmbus.md)**: the ring-buffer channel transport between guest and root partition.
+- **[Synthetic devices](synthetic-devices.md)**: the VSP-backed storage, network, video, and HID devices.
+- **[Virtual switch](virtual-switch.md)**: the networking datapath in the root partition.
 
 ## References
 
-- [Microsoft Security Research: attacking the VM worker process](https://microsoft.github.io/Attacking-the-VM-Worker-Process/)
-- [Microsoft Hyper-V bug bounty](https://www.microsoft.com/en-us/msrc/bounty-hyper-v)
+- [Microsoft: Hyper-V architecture and VMBus](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-architecture)
+- [MSRC: Hyper-V security research](https://www.microsoft.com/en-us/msrc)

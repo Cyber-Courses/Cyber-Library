@@ -1,31 +1,48 @@
 ---
-title: "Guest to host escape: breaking out of a Nutanix AHV guest"
-description: "Escaping a Nutanix AHV guest to the host: AHV runs guests on QEMU/KVM, so a breakout is a QEMU device-model escape that lands on the AHV host, from which the Controller VM and the storage fabric, and through them the cluster, become reachable."
+title: "Guest-to-host escape: breaking out of a Nutanix AHV virtual machine"
+description: "AHV runs VMs under KVM with QEMU-derived device emulation, so a guest-to-host escape targets the same QEMU device models, virtio, NICs, storage, USB, and lands in the per-VM QEMU process on the AHV host. From there the attacker reaches the node and, through the Controller VM relationship, the storage fabric and management plane."
 keywords:
-  - Nutanix escape
-  - AHV
-  - QEMU
-  - CVM
-  - guest to host
+  - nutanix ahv escape
+  - qemu
+  - kvm
+  - device model
+  - controller vm
 ---
 
-# Guest to host escape
+# Guest-to-host escape
 
-AHV runs its guests on QEMU and KVM, so escaping an AHV VM is a QEMU device-model escape, identical in surface and technique to any KVM host. Code execution lands in the QEMU process on the AHV host. From the host, the local Controller VM and the storage fabric it serves are reachable, which is the path from one VM to cluster-wide impact.
+Because AHV uses KVM with QEMU-derived device emulation, escaping an AHV guest is the QEMU problem: corrupt the per-VM QEMU process on the AHV node through a device model. The reachable surface and mechanisms are the QEMU ones, virtio virtqueues, the emulated NICs, the storage controllers, USB, so the per-device detail lives on the QEMU pages. What differs is the landing environment and the onward pivot: code execution lands on an AHV node whose storage and management flow through a Controller VM, so the escape is a step toward the node, the CVM, and the cluster.
 
-```text
-Nutanix AHV guest escape surface:
-- The QEMU device models (virtio, NICs, USB, SCSI) -> see KVM/QEMU
-- From the AHV host: the local CVM and the storage fabric
+```bash
+# from the guest: the QEMU-emulated device inventory (escape surface)
+lspci -nn; lsusb; dmesg | grep -i virtio
+```
+
+The device-model mechanisms are shared with QEMU:
+
+- virtio virtqueue and indirect-descriptor handling, see [virtio devices](../qemu/guest-to-host-escape/virtio-devices.md).
+- emulated NIC descriptor and offload handling, see [Network adapters](../qemu/guest-to-host-escape/network-adapters.md).
+- storage controller command/PRD handling, see [Block and SCSI](../qemu/guest-to-host-escape/block-and-scsi.md).
+- USB controller ring handling, see [USB controllers](../qemu/guest-to-host-escape/usb-controllers.md).
+
+## What differs on AHV
+
+```bash
+# after landing in the QEMU process on the AHV node:
+#  - the node's storage I/O is served by the local Controller VM; reaching the CVM
+#    (over its internal network, typically 192.168.5.0/24) is the pivot to the fabric
+#  - node and CVM credentials/keys enable moving to Prism and other nodes
+ip route; ip -4 addr   # the internal CVM network is reachable from the host
 ```
 
 ## Exploitation notes
 
-- The technique and surface are the [KVM and QEMU guest to host escape](../qemu/guest-to-host-escape/index.md), bounded by the AHV host's QEMU confinement.
-- The escape's value is the pivot: AHV host to CVM to the distributed storage, which holds every VM's disks for [Disk and snapshot theft](disk-and-snapshot-theft.md).
-- Nutanix-specific and QEMU named issues are under [Known escape exploits](known-escape-exploits.md).
+- The escape primitive and per-device mechanics are QEMU's; fingerprint the AHV (and thus QEMU) version and match to the device advisory, exactly as for [QEMU known escape exploits](../qemu/known-escape-exploits.md).
+- The AHV-specific value is the onward path: from the node, the local Controller VM mediates all storage and runs management services, so a node foothold is a step toward the whole cluster via the CVM internal network.
+- Nutanix adds its own confinement and services around QEMU; assess the node's sandboxing as with any KVM host, see [Host access and shell](host-access-and-shell.md).
 
 ## References
 
-- [Nutanix AHV architecture](https://www.nutanix.dev/)
-- [QEMU security](https://www.qemu.org/docs/master/system/security.html)
+- [Nutanix AHV architecture](https://www.nutanix.com/products/ahv)
+- [QEMU security advisories](https://www.qemu.org/docs/master/system/security.html)
+- [Nutanix security advisories](https://www.nutanix.com/support-services/security-advisories)

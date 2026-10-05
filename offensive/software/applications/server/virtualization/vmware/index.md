@@ -1,25 +1,33 @@
 ---
 title: "VMware: attacking ESXi, vCenter, and the desktop hypervisors"
-description: "Attacking VMware virtualization: the ESXi hypervisor host, the vCenter management plane that controls many ESXi hosts, and the Workstation and Fusion desktop hypervisors. Covers host access, guest-to-host escapes, SSO and token abuse, and virtual disk theft."
+description: "VMware's virtualization stack spans the bare-metal ESXi hypervisor, the vCenter management plane that controls fleets of hosts, and the desktop products Workstation and Fusion. The offensive themes are consistent: guest-to-host escapes through shared device-emulation code, theft of virtual disks, and compromise of the management plane."
 keywords:
-  - VMware
-  - ESXi
-  - vCenter
-  - vSphere
-  - VM escape
+  - vmware
+  - esxi
+  - vcenter
+  - workstation
+  - fusion
 ---
 
 # VMware
 
-VMware vSphere is the enterprise virtualization benchmark: ESXi hosts run the VMs, and vCenter manages fleets of them. Offensively they are different targets. ESXi is a hardened appliance reached through its shell and API, with guest-to-host escapes in its device emulation. vCenter is a web and API appliance whose SSO and management flaws grant control of every host it manages. The Workstation and Fusion desktop products share much of ESXi's device-emulation code.
+VMware's products share a lineage and much of their code, so their attack surfaces rhyme. ESXi is the type-1 hypervisor running VMs on bare metal; vCenter is the management plane controlling many ESXi hosts; and Workstation and Fusion are the type-2 desktop hypervisors on Windows and macOS. The same device-emulation code (SVGA, USB, NICs, the GuestRPC and VMCI channels) appears across them, so a guest-to-host escape bug class in one often applies to the others. Alongside escapes, the recurring targets are virtual-disk theft and the management plane.
+
+```bash
+# which VMware product and build is in front of you?
+vmware -v 2>/dev/null                              # Workstation/Fusion/ESXi version
+esxcli system version get 2>/dev/null              # ESXi
+curl -sk https://<host>/sdk/vimServiceVersions.xml # vCenter/ESXi API
+```
 
 ## Subtopics
 
-- **[ESXi](esxi/index.md)**: the hypervisor host.
-- **[vCenter](vcenter/index.md)**: the management plane.
+- **[ESXi](esxi/index.md)**: the bare-metal hypervisor and its guest-to-host escapes.
+- **[vCenter](vcenter/index.md)**: the vSphere management plane.
 - **[Workstation and Fusion](workstation-and-fusion/index.md)**: the desktop hypervisors.
 
 ## References
 
-- [VMware vSphere security](https://docs.vmware.com/en/VMware-vSphere/index.html)
+- [VMware security advisories](https://www.vmware.com/security/advisories.html)
 - [Zero Day Initiative: VMware research](https://www.zerodayinitiative.com/blog)
+- [VMware vSphere documentation](https://docs.vmware.com/en/VMware-vSphere/index.html)
