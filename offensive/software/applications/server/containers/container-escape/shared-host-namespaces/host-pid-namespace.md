@@ -41,7 +41,7 @@ The environment-variable sweep alone frequently returns cloud credentials, datab
 
 - Reading `environ`, `cmdline`, `fd`, and `root` of host processes needs only visibility plus, for other UIDs, sufficient privilege; it is low-noise information disclosure.
 - Code injection into a host process additionally needs ptrace permission; pair with [CAP_SYS_PTRACE](../privileged-configuration/capability-abuse/cap-sys-ptrace.md). The mechanics are the same as the ptrace injection route, here enabled by the host processes being visible.
-- In Kubernetes, `hostPID` pods commonly run alongside node daemons whose memory and environment hold kubelet or cloud credentials; see [hostPID and hostNetwork](../../../orchestration/kubernetes/pod-escape-to-node/hostpid-hostnetwork.md).
+- In Kubernetes, `hostPID` pods commonly run alongside node daemons whose memory and environment hold kubelet or cloud credentials; see [Host namespaces](../../../orchestration/kubernetes/pod-escape-to-node/host-namespaces.md).
 
 ## References
 

@@ -45,7 +45,7 @@ cat /host/etc/shadow /host/root/.ssh/id_* /host/etc/kubernetes/admin.conf 2>/dev
 
 - A read-only host mount blocks writes but still exposes secrets; prioritise private keys, `/etc/shadow`, kubeconfig and kubelet files, and cloud credential files for onward movement.
 - Prefer a deterministic persistence write (cron, sudoers, authorized_keys) over editing a live binary or config that a running service holds open.
-- In Kubernetes, a `hostPath` of `/` or `/var/lib/kubelet` is a node takeover; see [hostPath volume](../../../orchestration/kubernetes/pod-escape-to-node/hostpath-volume.md) for the pod-delivery view.
+- In Kubernetes, a `hostPath` of `/` or `/var/lib/kubelet` is a node takeover; see [hostPath mount](../../../orchestration/kubernetes/pod-escape-to-node/hostpath-mount.md) for the pod-delivery view.
 
 ## References
 

