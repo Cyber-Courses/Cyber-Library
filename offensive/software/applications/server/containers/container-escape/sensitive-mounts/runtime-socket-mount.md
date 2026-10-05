@@ -35,7 +35,7 @@ crictl --runtime-endpoint unix:///run/crio/crio.sock ps
 
 - The new container does the escaping: it is created with `--privileged` and `-v /:/host`, so the socket itself needs no special flags on the container you start from.
 - The engine runs as root on the host, so the spawned container's mounts and devices are the host's; this is why a mounted socket is root-equivalent regardless of the caller's privileges.
-- Reaching the same daemon over the network rather than a mounted socket is covered under the runtime's own surface, for example Docker's exposed daemon API in the runtimes area.
+- Reaching the same daemon over the network rather than a mounted socket is covered under the runtime's own surface, for example Docker's [Exposed daemon API](../../runtimes/docker/exposed-daemon-api/index.md).
 
 ## References
 

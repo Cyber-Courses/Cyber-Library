@@ -18,8 +18,9 @@ The subject splits into three layers, each with its own attack model.
 ## Subtopics
 
 - **[Container escape](container-escape/index.md)**: breaking out of a single container to its host. These primitives are runtime-agnostic: a privileged flag, a dangerous mount, a shared host namespace, or a runtime or kernel exploit works the same from a Docker container, a Podman container, or a Kubernetes pod.
+- **[Runtimes](runtimes/index.md)**: attacking the container engines themselves rather than escaping a container, through the daemon or API sockets they expose and the image and registry supply chain behind them.
 
-Two sibling layers complete the subject and are covered in their own areas: the **Runtimes** (the container engines and their control planes and image supply chain) and **Orchestration** (the Kubernetes cluster control plane).
+The third layer, **Orchestration** (the Kubernetes cluster control plane), is covered in its own area.
 
 ## References
 
