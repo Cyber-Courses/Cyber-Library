@@ -1,5 +1,5 @@
 ---
-title: "Messaging servers"
+title: "Messaging"
 description: "Offensive scope for enterprise messaging and mail servers: systems that authenticate users, sit on the perimeter, and hold both credentials and the trust to send as real people, with Microsoft Exchange as the primary on-premises target."
 keywords:
   - messaging
@@ -9,7 +9,7 @@ keywords:
   - collaboration
 ---
 
-# Messaging servers
+# Messaging
 
 Messaging and mail servers are high-value targets: they authenticate every user, they are usually reachable from the internet, they are often privileged in the surrounding directory, and the mailboxes they hold are full of credentials and sensitive intel. Compromising one frequently yields both a domain foothold and the ability to send as trusted employees.
 

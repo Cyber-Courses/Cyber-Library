@@ -1,5 +1,5 @@
 ---
-title: "Network services"
+title: "Network"
 description: "Offensive scope for the network-facing services and RPC interfaces that Windows and infrastructure hosts expose, where a single reachable service can coerce authentication or run code, with the Windows Print Spooler as a long-standing example."
 keywords:
   - network services
@@ -9,7 +9,7 @@ keywords:
   - Windows services
 ---
 
-# Network services
+# Network
 
 Windows and infrastructure hosts expose a wide range of network-reachable services and RPC interfaces, and many of them were designed for a trusted LAN rather than a hostile one. A single reachable service can be enough to **coerce a machine into authenticating** to an attacker, or to **load code as SYSTEM**, which is why these interfaces are a staple of internal compromise.
 

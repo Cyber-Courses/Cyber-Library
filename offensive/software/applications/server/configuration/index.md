@@ -1,5 +1,5 @@
 ---
-title: "Configuration management"
+title: "Configuration"
 description: "Offensive scope for enterprise configuration-management platforms: systems that push software, scripts, and settings to managed endpoints at scale, and therefore hand an attacker code execution across the estate once abused."
 keywords:
   - configuration management
@@ -9,7 +9,7 @@ keywords:
   - software deployment
 ---
 
-# Configuration management
+# Configuration
 
 Configuration-management platforms exist to push software, scripts, and settings to thousands of managed machines from one console. That is also precisely what an attacker wants: **code execution across the whole estate** from a single compromised component. These systems are deeply trusted, run agents as SYSTEM on every client, hold or broker credentials, and are usually integrated with Active Directory, so abusing one is often equivalent to owning the domain's endpoints.
 
