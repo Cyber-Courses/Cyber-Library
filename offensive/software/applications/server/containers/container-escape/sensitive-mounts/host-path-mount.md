@@ -34,7 +34,7 @@ Even a partial mount is useful: `/etc` lets you add a user or cron job, a mounte
 ## Exploitation notes
 
 - A read-write host-root mount is immediate host takeover; prefer a cron job or SSH key over chroot if you need persistence rather than an interactive shell.
-- In Kubernetes this is the `hostPath` volume; a pod that can mount `hostPath: /` reaches the node the same way, as the pod-delivery view in the Kubernetes area.
+- In Kubernetes this is the `hostPath` volume; a pod that can mount `hostPath: /` reaches the node the same way, as the pod-delivery view in [Pod escape to node](../../orchestration/kubernetes/pod-escape-to-node/hostpath-mount.md).
 - A mounted `/var/run/docker.sock` is a special case covered under [Runtime socket mount](runtime-socket-mount.md).
 
 ## References
