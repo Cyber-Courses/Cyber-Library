@@ -1,12 +1,11 @@
 ---
 title: "Server: offensive techniques by server service type"
-description: "The server category organizes attacks by the kind of service under test, from web and database to directory, messaging, and cloud, because each service class has its own protocols, primitives, and abuse patterns."
+description: "The server category organizes attacks by the kind of service under test, from web and database to directory and messaging, because each service class has its own protocols, primitives, and abuse patterns."
 keywords:
   - server security
   - web application security
   - database attacks
   - directory services
-  - cloud security
 ---
 
 # Server
@@ -22,14 +21,13 @@ The subcategories group by service class, so a technique sits next to the protoc
 - **Database**: SQL and NoSQL engines, their query languages, authentication, and exposed management surfaces.
 - **Directory**: identity and directory services (LDAP, Active Directory), where enumeration and privilege abuse dominate.
 - **Messaging**, **File Share**, **Remote Access**, **Monitoring**, **Versioning**, **Security**: the supporting services an environment runs, each attacked through its own protocol and trust assumptions.
-- **Cloud**, **Containers**, **Virtualization**: the hosting and isolation layers, where misconfiguration and escapes cross tenant and workload boundaries.
+- **Containers**, **Virtualization**: the isolation layers, where escapes cross workload and tenant boundaries. Vendor-hosted platforms (cloud, SaaS) are a separate category, [Online](../online/index.md).
 - **Network**: server-side network services as a target in their own right, distinct from the medium-level work in the top-level [network](../../../network/index.md) category.
 
 Splitting by service type matches how an operator triages a host: enumerate what is listening, identify each service, then reach for the techniques specific to it. Keeping the classes separate stops a database technique from being filed next to a message-queue one, since the query languages, authentication models, and abuse primitives have nothing in common. The web subtree is split further by layer (platform, runtime, and code) because a single web service combines all three.
 
 ## Subtopics
 
-- **[Cloud](cloud/index.md)**: Offensive techniques against cloud platforms, organized by provider because each one's identity model, services, APIs, and tooling differ. A cloud account...
 - **[Configuration](configuration/index.md)**: Offensive scope for enterprise configuration-management platforms: systems that push software, scripts, and settings to managed endpoints at scale, and...
 - **[Containers](containers/index.md)**: Offensive techniques against containerized workloads across three layers: the runtime-agnostic escape from a container to its host, the container runtimes and the control planes...
 - **[Database](database/index.md)**: Offensive scope for database servers reached as a service: authenticating, enumerating, and escalating inside the engine, executing operating-system...

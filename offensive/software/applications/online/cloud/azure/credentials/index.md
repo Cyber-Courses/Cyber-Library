@@ -22,7 +22,7 @@ Every ARM and data-plane call needs a token or key, so harvesting them is how ac
 - **[Automation assets](automation-assets.md)**: Automation Account credential, variable, and connection assets.
 - **[App settings and connection strings](app-settings-and-connection-strings.md)**: Function and Web App config secrets.
 
-The IMDS pages are the Azure end of the web [server-side request forgery](../../../web/code/injection/request-forgery/index.md) technique, cross-referenced rather than duplicated.
+The IMDS pages are the Azure end of the web [server-side request forgery](../../../../server/web/code/injection/request-forgery/index.md) technique, cross-referenced rather than duplicated.
 
 ## References
 

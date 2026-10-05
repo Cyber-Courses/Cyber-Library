@@ -23,7 +23,7 @@ Every AWS API call needs a credential, so obtaining one is the first move and ha
 - **[Secret stores](secret-stores/index.md)**: Secrets Manager, SSM Parameter Store, and KMS as credential sources.
 - **[Credential brokers](credential-brokers.md)**: services that mint credentials for other principals.
 
-The IMDS pages are the AWS end of the web [server-side request forgery](../../../web/code/injection/request-forgery/index.md) technique, cross-referenced rather than duplicated.
+The IMDS pages are the AWS end of the web [server-side request forgery](../../../../server/web/code/injection/request-forgery/index.md) technique, cross-referenced rather than duplicated.
 
 ## References
 
