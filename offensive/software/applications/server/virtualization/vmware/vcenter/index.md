@@ -1,25 +1,33 @@
 ---
-title: "vCenter: attacking the VMware management plane"
-description: "Attacking VMware vCenter, the appliance that manages fleets of ESXi hosts: enumerating the inventory, abusing the SSO and SAML token system to forge administrator access, and exploiting the known management-service vulnerabilities, any of which grants control of every managed host and VM."
+title: "vCenter: attacking the vSphere management plane"
+description: "vCenter Server manages a fleet of ESXi hosts and is the central control plane of a vSphere environment. Compromising it yields control of every managed host and VM. The surface is enumeration of the inventory and services, the Single Sign-On token and identity system, and a history of pre-authentication management-service vulnerabilities."
 keywords:
-  - vCenter
-  - vSphere SSO
-  - SAML
-  - vmdir
+  - vcenter
+  - vsphere
+  - sso
   - management plane
+  - esxi fleet
 ---
 
 # vCenter
 
-vCenter Server manages many ESXi hosts, so compromising it is compromising the whole virtual estate. It is a web and API appliance built on a photon-OS base with a single sign-on (SSO) system, an identity store (vmdir), and a history of critical management-service flaws. Control of vCenter yields the `vpxuser` credential for every host and the ability to run on any VM.
+vCenter Server is the management plane for a vSphere environment: it inventories and controls many ESXi hosts and all their virtual machines through a web UI and API. Compromising vCenter is compromising the whole estate, because it can run commands in guests, access every datastore, and administer every host. The offensive surface is the management services themselves: enumerating the inventory and exposed endpoints, abusing the Single Sign-On token and identity system, and exploiting the recurring pre-authentication vulnerabilities in vCenter's many bundled services.
+
+```bash
+# vCenter exposes a web UI/API and several supporting services
+nmap -p 443,5480,902,2012,2014 <vcenter>        # UI/API, VAMI, authd, vpxd services
+curl -sk https://<vcenter>/ui/                   # vSphere client
+curl -sk https://<vcenter>/sdk/vimServiceVersions.xml   # API version/discovery
+```
 
 ## Subtopics
 
-- **[Enumeration](enumeration.md)**: mapping the inventory and identities.
-- **[SSO and token abuse](sso-and-token-abuse.md)**: forging administrator access.
-- **[Known management exploits](known-management-exploits.md)**: critical service vulnerabilities.
+- **[Enumeration](enumeration.md)**: mapping the inventory, hosts, and services.
+- **[SSO and token abuse](sso-and-token-abuse.md)**: the Single Sign-On identity and token system.
+- **[Known management exploits](known-management-exploits.md)**: the recurring pre-auth service vulnerabilities.
 
 ## References
 
-- [VMware vCenter Server security](https://docs.vmware.com/en/VMware-vSphere/index.html)
+- [VMware vCenter Server documentation](https://docs.vmware.com/en/VMware-vSphere/index.html)
 - [VMware security advisories](https://www.vmware.com/security/advisories.html)
+- [vSphere Web Services API reference](https://developer.vmware.com/apis/vsphere-automation/latest/)
