@@ -1,32 +1,46 @@
 ---
-title: "Nested virtualization: escaping through the KVM nested state machine"
-description: "Abusing KVM nested virtualization, where the KVM module emulates Intel VMX or AMD SVM so a guest can itself run a hypervisor, exercising the complex nested-state handling (VMCS and VMCB shadowing) that has produced host kernel escapes from a nested guest."
+title: "Nested virtualization: the VMX and SVM emulation surface"
+description: "Nested virtualization lets a KVM guest run its own hypervisor, which requires KVM to emulate the hardware virtualization instructions (Intel VMX, AMD SVM) and structures (VMCS/VMCB, nested paging) in the host kernel. That emulation is complex and guest-controlled, so when nesting is enabled it is a large additional KVM-module attack surface reachable from the guest."
 keywords:
   - nested virtualization
-  - VMX
-  - SVM
-  - VMCS shadowing
-  - KVM
+  - vmx
+  - svm
+  - vmcs
+  - nested paging
 ---
 
 # Nested virtualization
 
-Nested virtualization lets a KVM guest run its own hypervisor by having the KVM module emulate the hardware virtualization extensions (Intel VMX, AMD SVM) for that guest. Emulating VMX or SVM means shadowing the control structures (VMCS, VMCB) and handling nested exits, a large and intricate state machine. Flaws there let a nested guest corrupt host kernel state, escaping both its own hypervisor and the host.
+Nested virtualization allows a guest to itself be a hypervisor running sub-guests. To support it, KVM must emulate the CPU's hardware-virtualization layer: the Intel VMX or AMD SVM instructions (`VMLAUNCH`/`VMRESUME`, `VMREAD`/`VMWRITE`, `VMRUN`), the control structures (the VMCS on Intel, the VMCB on AMD), and nested paging (EPT/NPT) translation. This emulation is intricate and driven by guest-supplied structures, so enabling nesting exposes a large additional surface in the KVM kernel module, where a flaw lands in the host kernel.
 
-```text
-Nested-virtualization surface:
-- VMCS / VMCB shadowing and consistency checks
-- Nested VM-exit and VM-entry handling
-- Emulation of the virtualization instructions (VMREAD/VMWRITE, VMRUN)
+## The surface
+
+```bash
+# is nesting enabled on the host? (prerequisite for this surface)
+cat /sys/module/kvm_intel/parameters/nested 2>/dev/null   # Y/1 => VMX nesting on
+cat /sys/module/kvm_amd/parameters/nested 2>/dev/null      # AMD SVM nesting
 ```
+
+```c
+// with nesting on, an attacker guest acts as an L1 hypervisor and feeds KVM:
+//  - a crafted VMCS/VMCB (control and guest-state fields) that KVM parses to set up
+//    the nested entry; field handling and consistency-check bugs are reachable
+//  - nested EPT/NPT paging structures KVM must shadow/translate; bad entries drive
+//    the translation logic into out-of-bounds or type-confusion conditions
+//  - VMREAD/VMWRITE to emulated VMCS fields and nested interrupt/event injection
+```
+
+Because KVM must interpret the L1-supplied virtualization structures to run L2, the guest controls complex inputs to kernel code, and the historically productive areas are VMCS field handling and the nested paging emulation.
 
 ## Exploitation notes
 
-- Nested virtualization must be enabled (`kvm_intel.nested` / `kvm_amd.nested`), so its reachability depends on the host configuration; cloud instances that offer nested virt expose it.
-- The attacker runs a hypervisor inside the guest to drive the nested paths, reaching code that non-nested guests never touch.
-- Like a direct [Kernel module escape](kernel-module-escape.md), success lands in the host kernel, below the VMM sandbox.
+- This surface exists only when nesting is enabled; it is off by default on some distributions, so check the module parameter first. When on, it substantially enlarges the [Kernel module escape](kernel-module-escape.md) surface.
+- The attacker drives it by running a minimal L1 hypervisor in the guest that issues the VMX/SVM operations with crafted VMCS/VMCB and paging structures, rather than a full nested OS.
+- As with other KVM-module bugs, success is host-kernel code execution, bypassing any user-space monitor sandbox entirely.
+- Version-specific to the running kernel; the VMX and SVM paths are separate code, so the applicable bug depends on the host CPU vendor.
 
 ## References
 
-- [KVM: nested virtualization](https://www.kernel.org/doc/html/latest/virt/kvm/nested-vmx.html)
-- [KVM API documentation](https://www.kernel.org/doc/html/latest/virt/kvm/api.html)
+- [KVM nested VMX documentation](https://docs.kernel.org/virt/kvm/x86/nested-vmx.html)
+- [Intel SDM: VMX](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)
+- [Google Project Zero: nested virtualization research](https://googleprojectzero.blogspot.com/)

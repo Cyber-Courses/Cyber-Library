@@ -1,33 +1,50 @@
 ---
-title: "Host access and shell: reaching a Proxmox node"
-description: "Reaching a Proxmox VE node: root on the Debian host and the web interface on 8006, which together control every VM and container on the node and, through the cluster, the others. The pmxcfs filesystem at /etc/pve exposes the whole cluster configuration."
+title: "Host access and shell: execution on the Proxmox node"
+description: "A Proxmox node is a Debian host running the VMs, containers, and management daemons as root. Access comes from a guest or container escape, SSH, or the management API and web shell. With it, an attacker controls every VM and container through qm/pct, reads all disks and backups, and in a cluster reaches the other nodes through the shared corosync-backed configuration."
 keywords:
-  - Proxmox host
-  - 8006
-  - pmxcfs
-  - /etc/pve
-  - host access
+  - proxmox node
+  - pvedaemon
+  - qm pct
+  - corosync
+  - cluster
 ---
 
 # Host access and shell
 
-A Proxmox node is a Debian host with a web UI on `8006` and a shell. Root on the host owns every VM and container on it, and the clustered configuration filesystem `pmxcfs` (mounted at `/etc/pve`) exposes the whole cluster's definitions, users, and tokens. Reaching the node is ordinary Linux compromise or a management-plane pivot.
+A Proxmox node is a Debian server where the management daemons (`pvedaemon`, `pveproxy`, `pve-cluster`) and the VM/container processes run as root. Reaching a shell comes from a guest or container escape landing on the node, from SSH with node credentials, or from the management interface, which includes a built-in web shell (noVNC/xterm.js) and command execution via the API. Node root is control of every VM and container on it through `qm` and `pct`, access to all disks and backups, and, in a cluster, reach to the other nodes because the cluster filesystem and corosync tie them together.
+
+## Reach and use the node
 
 ```bash
-qm list                                   # KVM guests on this node
-pct list                                  # LXC containers on this node
-qm terminal <vmid>                         # guest serial console
-cat /etc/pve/user.cfg                      # users and roles (cluster-wide)
-ls /etc/pve/qemu-server/                   # VM configs, disk references
+# SSH with node credentials, or the web-UI shell
+ssh root@<proxmox-node>
+qm list; pct list                         # VMs and containers
+# run inside a VM via the guest agent, or in a container directly
+qm guest exec <vmid> -- id 2>/dev/null
+pct exec <ctid> -- id
 ```
+
+## Cluster reach
+
+```bash
+# the cluster filesystem (pmxcfs) is shared across nodes under /etc/pve
+pvecm status; pvecm nodes
+cat /etc/pve/corosync.conf                 # cluster members
+ls /etc/pve/nodes/                         # per-node config, shared cluster-wide
+# node root on one member, plus the shared /etc/pve and SSH trust, reaches peers
+ssh root@<other-node>                      # cluster nodes commonly trust each other
+```
+
+`/etc/pve` is the corosync-backed cluster filesystem (pmxcfs) replicated to every node, and cluster members typically share root SSH trust, so compromising one node commonly extends to the whole cluster.
 
 ## Exploitation notes
 
-- `/etc/pve` is a cluster-wide view: user and token definitions, VM configs, and storage, readable with root on any node.
-- `qm` and `pct` give console and full control of guests, and the storage is directly readable for [Disk and backup theft](disk-and-backup-theft.md).
-- LXC containers are local to the node, so a container escape (standard Linux container-escape primitives) lands directly on the node.
+- Node root subsumes everything: `qm`/`pct` control all guests, the guest agent runs commands inside VMs, and `pct exec` enters containers directly.
+- The shared cluster filesystem under `/etc/pve` and the usual inter-node SSH trust make a single-node compromise a cluster compromise; enumerate peers via `pvecm nodes` and the shared config.
+- The web UI's shell and the API's command execution are legitimate node-access paths with management credentials, an alternative to a guest escape.
+- Persistence is standard Debian (systemd, cron, SSH keys); the cluster filesystem offers a replicated location visible to all nodes.
 
 ## References
 
-- [Proxmox VE: pmxcfs](https://pve.proxmox.com/wiki/Proxmox_Cluster_File_System_(pmxcfs))
-- [Proxmox VE administration guide](https://pve.proxmox.com/pve-docs/)
+- [Proxmox VE: cluster manager (pmxcfs/corosync)](https://pve.proxmox.com/pve-docs/chapter-pvecm.html)
+- [Proxmox VE administration](https://pve.proxmox.com/pve-docs/)
