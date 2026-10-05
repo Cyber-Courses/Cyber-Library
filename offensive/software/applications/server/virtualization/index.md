@@ -15,6 +15,23 @@ A hypervisor runs untrusted guest operating systems and is supposed to keep them
 
 The area is organized by product, because escapes are specific to each hypervisor's device-emulation code, with a consistent set of aspects under each.
 
+## Which hypervisor am I in
+
+From a guest, identify the hypervisor before choosing a product page; the emulated devices and signatures give it away:
+
+```bash
+# CPUID hypervisor vendor and DMI/BIOS strings are the quickest tells
+systemd-detect-virt 2>/dev/null                 # kvm/vmware/microsoft/xen/oracle/parallels/bhyve
+dmidecode -s system-product-name 2>/dev/null    # "VMware Virtual Platform", "VirtualBox", "KVM"...
+lscpu | grep -i hypervisor; grep -o hypervisor /proc/cpuinfo | head -1
+# emulated devices confirm it
+lspci -nn                                        # virtio => KVM/bhyve; vmxnet/SVGA => VMware;
+                                                 # Hyper-V VMBus; Parallels/VirtualBox PCI IDs
+dmesg | grep -iE 'vmware|hyper-v|kvm|xen|virtualbox|parallels|bhyve'
+```
+
+The three attack aspects recur under every product: the **guest-to-host escape** through emulated devices (needs an exploit, device-model-specific), the **management plane** that controls many hosts (often just needs credentials or a reachable API), and **disk and snapshot theft** that reads guest data offline (needs host, storage, or management access, no guest exploit). Pick the aspect that matches the access you already have.
+
 ## Subtopics
 
 - **[VMware](vmware/index.md)**: ESXi and vCenter, plus the Workstation and Fusion desktop hypervisors.
