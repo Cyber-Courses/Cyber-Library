@@ -1,29 +1,40 @@
 ---
-title: "procfs and sysfs: escaping through writable host kernel interfaces"
-description: "Container escape through host /proc and /sys paths bind-mounted into the container: writable kernel interfaces such as core_pattern, the modprobe path, uevent_helper, binfmt_misc, and sysrq-trigger that each cause the kernel to run an attacker-chosen program on the host, plus kcore and host process reads."
+title: "procfs and sysfs: kernel pseudo-files the host executes as root"
+description: "Several files under /proc/sys and /sys are usermode-helper paths or triggers: the host kernel reads them and runs the referenced program as root in the host namespaces, or exposes host memory. When a container has the real host procfs or sysfs mounted writable, writing core_pattern, modprobe, or uevent_helper, or reading kcore, leads straight to the host."
 keywords:
-  - sensitive mounts
-  - core_pattern escape
-  - uevent_helper
   - procfs sysfs
+  - usermode helper
+  - core_pattern
+  - uevent_helper
   - container escape
 ---
 
 # procfs and sysfs
 
-Several files under `/proc` and `/sys` are not data but control knobs: write a path into them and the kernel runs that program later, in the host's context, as root. These are safe only because a normal container does not get a writable host `/proc` or `/sys`. When one is bind-mounted in (a surprisingly common misconfiguration) or the container holds `CAP_SYS_ADMIN` in the initial namespaces, each knob becomes an escape. The catch shared by the executable-handler knobs is that the path must be reachable in the host filesystem namespace, so the helper is dropped on a host-visible path such as the container's overlay upperdir.
+`/proc` and `/sys` are not ordinary files: many entries are control points the kernel reads back and acts on. A handful name a program the kernel runs, as root in the host's init namespaces, when some event occurs: a crash (`core_pattern`), an auto-load of a kernel module (`modprobe`), or a device uevent (`uevent_helper`). Others expose host memory directly (`kcore`) or let a process poke the host kernel (`sysrq-trigger`). These are escapes only when the container has the host's real procfs or sysfs mounted and writable, which happens with a careless `-v /proc:/host/proc`, a procfs remount, or a privileged container.
+
+Check what is exposed and writable:
+
+```bash
+mount | grep -E 'proc|sys'                       # look for host proc/sys without "ro"
+ls -l /proc/sys/kernel/core_pattern /proc/sys/kernel/modprobe 2>/dev/null
+ls -l /sys/kernel/uevent_helper 2>/dev/null
+for f in /proc/sys/kernel/core_pattern /proc/sys/kernel/modprobe /sys/kernel/uevent_helper; do
+  [ -w "$f" ] && echo "writable: $f"; done
+```
 
 ## Subtopics
 
-- **[core_pattern](core_pattern.md)**: the program the kernel pipes core dumps to.
-- **[modprobe path](modprobe-path.md)**: the helper the kernel runs to auto-load a module.
-- **[uevent_helper](uevent-helper.md)**: the program the kernel runs on a device uevent.
-- **[sysrq-trigger](sysrq-trigger.md)**: magic SysRq actions against the host.
-- **[binfmt_misc](binfmt-misc.md)**: registering an interpreter for a file format.
-- **[kcore memory read](kcore-memory-read.md)**: reading host kernel memory.
-- **[Host process access](host-process-access.md)**: reading host processes through /proc.
+- **[core_pattern](core_pattern.md)**: pipe a crashing process's core dump to a host program.
+- **[modprobe path](modprobe-path.md)**: hijack the module auto-loader the kernel runs as root.
+- **[uevent_helper](uevent-helper.md)**: run a program on a device uevent.
+- **[binfmt_misc](binfmt-misc.md)**: register an interpreter for a file format.
+- **[sysrq-trigger](sysrq-trigger.md)**: invoke host kernel magic-sysrq actions.
+- **[host process access](host-process-access.md)**: read host process memory and environment.
+- **[kcore memory read](kcore-memory-read.md)**: dump host kernel memory through /proc/kcore.
 
 ## References
 
 - [man 5 proc](https://man7.org/linux/man-pages/man5/proc.5.html)
-- [Trail of Bits: Understanding Docker container escapes](https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/)
+- [HackTricks: sensitive mounts](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/sensitive-mounts)
+- [Kernel docs: call_usermodehelper interfaces](https://docs.kernel.org/admin-guide/sysctl/kernel.html)
