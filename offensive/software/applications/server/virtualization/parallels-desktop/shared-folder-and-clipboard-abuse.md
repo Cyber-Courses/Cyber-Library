@@ -1,32 +1,45 @@
 ---
-title: "Shared folder and clipboard abuse: reaching macOS from Parallels"
-description: "Abusing Parallels Desktop integration, Shared Folders, Shared Profile, the shared clipboard, and drag-and-drop, to read and write macOS host files or move data across the boundary from inside a guest when these features are enabled."
+title: "Shared folder and clipboard abuse: escaping Parallels through Tools integration"
+description: "Parallels Tools provides shared folders, a shared clipboard, and drag-and-drop between the guest and the macOS host over Parallels' guest-host communication channels. The host-side handlers parse guest-supplied integration requests, and shared folders expose host paths, so both the request parsing and the shared-folder path handling have produced guest-to-host escapes and host file access."
 keywords:
-  - Parallels shared folders
-  - Shared Profile
+  - parallels tools
+  - shared folders
   - clipboard
   - drag and drop
-  - Parallels Tools
+  - integration
 ---
 
 # Shared folder and clipboard abuse
 
-Parallels integration, provided by Parallels Tools, shares the macOS home folders with the guest (Shared Folders and Shared Profile), and syncs the clipboard and drag-and-drop. When enabled, Shared Folders is a direct read and write path into the macOS filesystem from the guest, and the clipboard and drag-and-drop channels move data and files across the boundary.
+Parallels Tools, the guest integration package, provides shared folders, a shared clipboard, and drag-and-drop between the guest and the macOS host. These travel over Parallels' guest-host communication channels, and the host-side handlers parse the guest's integration requests in the Parallels processes. As with VMware's GuestRPC/HGFS and VirtualBox's HGCM, this is a prominent escape surface: the request parsing has yielded memory-corruption escapes, and shared-folder path handling has allowed host file access beyond the shared directory.
+
+## The surface
+
+```text
+Integration surface (Parallels Tools channels):
+- shared folders: a host directory exposed into the guest; path resolution runs
+  host-side, so traversal/symlink/name-parsing flaws reach host files outside the share
+- shared clipboard and drag-and-drop: the host parses guest-supplied formats, sizes,
+  and transfer objects; a trusted length/size or a transfer-object lifecycle bug
+  (use-after-free) corrupts the host process
+- the Tools control channel: integration requests parsed host-side with the same classes
+```
 
 ```bash
-# Inside a Linux guest with Parallels Tools and sharing enabled
-ls /media/psf/                              # macOS host folders exposed to the guest
-ls /media/psf/Home/                          # the user's macOS home (Shared Profile)
-# Writing here reaches the macOS filesystem
+# Parallels Tools and the shared-folder mount (Linux guest)
+lsmod 2>/dev/null | grep -i prl
+mount 2>/dev/null | grep -i prl_fs       # shared folders via the Parallels filesystem
+ls /media/psf 2>/dev/null                 # "psf" = Parallels Shared Folders mount point
 ```
 
 ## Exploitation notes
 
-- Shared Profile maps the user's entire macOS home into the guest, turning a guest foothold into broad host file access with no exploit.
-- Writing into a shared path can plant a macOS launch agent or payload for execution on the host.
-- These features require Parallels Tools and explicit sharing settings, so their presence is the precondition to check.
+- Two impacts, as on the comparable hypervisors: request parsing bugs give code execution in the host Parallels process, while shared-folder path handling can give host file read/write within and beyond the shared directory.
+- Drag-and-drop and clipboard transfer-object handling are frequent loci (version negotiation, in-progress transfer tracking), the Parallels analogue of VMware DnD/CP and VirtualBox HGCM bugs.
+- The feature must be enabled for the richest surface (a configured shared folder, clipboard/DnD allowed), common on desktop VMs; check the `psf` mount and Tools modules.
+- Drive the channels from a controlled guest Tools client; the device escapes are under [Guest-to-host escape](guest-to-host-escape.md). Version-specific.
 
 ## References
 
-- [Parallels Desktop: sharing between macOS and the guest](https://www.parallels.com/products/desktop/resources/)
-- [Parallels Tools overview](https://kb.parallels.com/)
+- [Parallels Desktop: shared folders and Tools](https://www.parallels.com/products/desktop/)
+- [Zero Day Initiative: Parallels Tools research](https://www.zerodayinitiative.com/blog)

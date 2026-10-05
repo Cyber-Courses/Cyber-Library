@@ -1,27 +1,36 @@
 ---
-title: "Xen: attacking the Xen hypervisor and its control domain"
-description: "Attacking Xen virtualization: reaching the privileged control domain (dom0), escaping a guest to the hypervisor through hypercalls, grant tables, and backend drivers or QEMU device models, abusing the XCP-ng and XenServer management plane, and stealing guest virtual disks."
+title: "Xen: attacking the bare-metal paravirtualization hypervisor"
+description: "Xen is a type-1 hypervisor where a privileged dom0 hosts the control stack and the backend drivers for guest I/O. The guest-to-host escape targets the hypercall interface, the grant tables and event channels, and the paravirtual backend drivers running in dom0, alongside theft of guest disks and the toolstack management plane."
 keywords:
-  - Xen
+  - xen
   - dom0
   - hypercall
-  - XCP-ng
-  - VM escape
+  - grant tables
+  - paravirtual
 ---
 
 # Xen
 
-Xen is a type-1 hypervisor with a privileged control domain, dom0, that manages the unprivileged guest domains (domU). Offensive targets are dom0 itself, the guest-to-host escape surface (hypercalls, grant tables, paravirtualized backend drivers, and the QEMU device models used for HVM guests), the XCP-ng and XenServer management plane, and the virtual disks on the storage repository. Xen powers cloud platforms and Citrix products.
+Xen is a type-1 hypervisor: a thin hypervisor runs on the hardware, and a privileged control domain (dom0) hosts the toolstack and, for most configurations, the backend halves of the guests' paravirtual devices. Guests (domUs) reach host functionality through hypercalls to the hypervisor and through the split paravirtual driver model, where a frontend in the guest talks to a backend in dom0 (or a driver domain) using shared memory via grant tables and notifications via event channels. The escape surface is therefore the hypercall interface, the grant-table and event-channel machinery, and the backend drivers, plus the usual guest-disk theft and the management toolstack.
+
+```bash
+# in a Xen guest
+dmesg | grep -i xen; ls /sys/bus/xen* 2>/dev/null
+cat /sys/hypervisor/type 2>/dev/null       # "xen"
+# in dom0: the toolstack and domains
+xl list 2>/dev/null
+```
 
 ## Subtopics
 
-- **[Host access and shell](host-access-and-shell.md)**: reaching dom0.
-- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out to dom0 or the hypervisor.
-- **[Management plane](management-plane.md)**: XCP-ng, XenServer, and xapi.
-- **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: reading guest disks.
-- **[Known escape exploits](known-escape-exploits.md)**: named Xen breakouts.
+- **[Guest-to-host escape](guest-to-host-escape/index.md)**: hypercalls, grant tables and event channels, and backend drivers.
+- **[Host access and shell](host-access-and-shell.md)**: execution in dom0.
+- **[Management plane](management-plane.md)**: the Xen toolstack and XAPI.
+- **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: taking guest virtual disks.
+- **[Known escape exploits](known-escape-exploits.md)**: the recurring hypercall and backend bugs.
 
 ## References
 
-- [Xen Project documentation](https://xenproject.org/help/documentation/)
-- [Xen security advisories](https://xenbits.xen.org/xsa/)
+- [Xen Project documentation](https://xenbits.xen.org/docs/)
+- [Xen security advisories (XSA)](https://xenbits.xen.org/xsa/)
+- [Xen architecture](https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview)

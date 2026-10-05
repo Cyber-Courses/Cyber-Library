@@ -1,25 +1,32 @@
 ---
-title: "Guest to host escape: breaking out of a Xen guest"
-description: "Escaping a Xen guest to dom0 or the hypervisor through the interfaces a guest can reach: hypercalls into the hypervisor, the grant-table and event-channel mechanisms, and the paravirtualized backend drivers in dom0. HVM guests additionally reach the QEMU device models."
+title: "Guest-to-host escape: breaking out of a Xen domU"
+description: "A Xen guest escapes toward the hypervisor or the privileged dom0 through three surfaces: the hypercall interface the guest calls into the hypervisor, the grant-table and event-channel mechanisms that share memory and signals between domains, and the paravirtual backend drivers in dom0 that parse guest ring requests. Each is guest-reachable and has produced breakouts."
 keywords:
-  - Xen escape
+  - xen escape
   - hypercall
-  - grant table
-  - backend driver
-  - guest to host
+  - grant tables
+  - event channels
+  - pv backend
 ---
 
-# Guest to host escape
+# Guest-to-host escape
 
-A Xen guest reaches the host through several interfaces, each an escape surface with a different impact. Hypercalls enter the hypervisor directly; grant tables and event channels mediate shared memory with dom0; paravirtualized guests talk to backend drivers in dom0. HVM guests additionally use a QEMU device-model process, inheriting the [QEMU device surface](../../kvm/qemu/guest-to-host-escape/index.md).
+A Xen domU reaches outside itself through well-defined interfaces, and each is an escape surface. Hypercalls are the guest's direct calls into the hypervisor, so a flaw in hypercall handling corrupts or subverts the hypervisor itself. Grant tables and event channels are how domains share memory pages and signal each other; mismanagement there bridges a guest into dom0 or hypervisor memory. And the paravirtual backend drivers (block, network) running in dom0 parse the ring requests a guest frontend posts, so a backend bug gives code execution in the privileged dom0. The target is whichever of these the configuration exposes, PV, PVH, and HVM guests reach somewhat different mixes.
+
+```bash
+# the PV interfaces visible in a Xen guest
+ls /sys/bus/xen-backend 2>/dev/null; ls /dev/xen 2>/dev/null
+cat /proc/xen/capabilities 2>/dev/null
+dmesg | grep -iE 'grant|event channel|xenbus'
+```
 
 ## Subtopics
 
-- **[Hypercalls](hypercalls.md)**: the direct guest-to-hypervisor interface.
-- **[Grant tables and event channels](grant-tables-and-event-channels.md)**: shared memory and signalling with dom0.
-- **[PV backend drivers](pv-backend-drivers.md)**: blkback and netback in dom0.
+- **[Hypercalls](hypercalls.md)**: the guest-to-hypervisor call interface.
+- **[Grant tables and event channels](grant-tables-and-event-channels.md)**: the inter-domain memory and signal machinery.
+- **[PV backend drivers](pv-backend-drivers.md)**: the dom0 backend halves of paravirtual devices.
 
 ## References
 
-- [Xen Project documentation](https://xenproject.org/help/documentation/)
-- [Xen security advisories](https://xenbits.xen.org/xsa/)
+- [Xen hypercall interface](https://xenbits.xen.org/docs/)
+- [Xen security advisories (XSA)](https://xenbits.xen.org/xsa/)

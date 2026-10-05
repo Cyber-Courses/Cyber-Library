@@ -1,24 +1,32 @@
 ---
-title: "Kernel module: attacking the KVM acceleration layer"
-description: "Attacking the KVM kernel module, the hardware-acceleration layer shared by every KVM-based VMM: escaping to the host kernel through flaws reachable from guest exits and the KVM ioctl interface, and through the complex nested-virtualization state machine."
+title: "Kernel module: attacking the KVM kernel interface"
+description: "The KVM kernel module accelerates guest execution and exposes the /dev/kvm ioctl interface and in-kernel device emulation (such as the local APIC and the coalesced MMIO path). Bugs here run in the host kernel rather than a user-space monitor, so a KVM module flaw is a direct host-kernel compromise, and nested virtualization expands the exposed emulation surface."
 keywords:
-  - KVM kernel module
-  - guest exit
-  - KVM ioctl
+  - kvm module
+  - /dev/kvm
+  - in-kernel emulation
   - nested virtualization
   - host kernel
 ---
 
 # Kernel module
 
-QEMU and the other VMMs emulate devices in user space, but the CPU and memory virtualization runs in the KVM kernel module. That module is a different, higher-value target than the VMM: a bug there lands in the host kernel directly, bypassing the seccomp and sVirt confinement that boxes in QEMU. The surface is small but severe, and it is shared by every KVM-based VMM, QEMU, Firecracker, Cloud Hypervisor, and the rest.
+Most KVM escapes target the user-space monitor, but the KVM kernel module itself is a surface, and a far more severe one, because its code runs in the host kernel. KVM accelerates guest instruction, MMU, and interrupt handling, and emulates a few devices in-kernel for speed (the local APIC, the I/O APIC and PIT, the coalesced MMIO ring, and MSR/CPUID handling). A guest reaches this code through the operations KVM accelerates, and a memory-safety or logic flaw in the module is host-kernel code execution, bypassing any monitor sandbox entirely. Nested virtualization, where a guest runs its own hypervisor, adds the VMX/SVM emulation paths and greatly widens this surface.
+
+```bash
+# in-kernel emulation and nested support
+lsmod | grep -E 'kvm_intel|kvm_amd'
+cat /sys/module/kvm_intel/parameters/nested 2>/dev/null   # nested VMX enabled?
+cat /sys/module/kvm_amd/parameters/nested 2>/dev/null
+```
 
 ## Subtopics
 
-- **[Kernel module escape](kernel-module-escape.md)**: host kernel code execution through the KVM module.
-- **[Nested virtualization](nested-virtualization.md)**: escapes through the nested VMX and SVM state machine.
+- **[Kernel module escape](kernel-module-escape.md)**: flaws in the in-kernel emulation reachable from a guest.
+- **[Nested virtualization](nested-virtualization.md)**: the VMX/SVM emulation surface a nested guest exposes.
 
 ## References
 
-- [KVM API documentation](https://www.kernel.org/doc/html/latest/virt/kvm/api.html)
-- [KVM documentation](https://www.linux-kvm.org/page/Documents)
+- [KVM API documentation](https://docs.kernel.org/virt/kvm/api.html)
+- [Google Project Zero: KVM research](https://googleprojectzero.blogspot.com/)
+- [KVM nested virtualization](https://docs.kernel.org/virt/kvm/x86/nested-vmx.html)

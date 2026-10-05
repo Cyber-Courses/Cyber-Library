@@ -1,31 +1,44 @@
 ---
-title: "Audio devices: escaping through QEMU audio emulation"
-description: "Escaping a KVM guest through the QEMU audio device models (AC97, Intel HDA, ES1370), which process guest-controlled DMA engines and buffer descriptors in the host QEMU process."
+title: "Audio devices: escaping QEMU through emulated sound cards"
+description: "QEMU emulates sound cards, the Intel HD Audio controller, AC97, Sound Blaster 16, and ES1370, whose guest drivers program buffer descriptors and registers that QEMU reads to move audio data. Flaws in buffer-descriptor handling and DMA length processing, notably in the Intel HDA controller, give out-of-bounds access in the QEMU process."
 keywords:
-  - AC97
-  - Intel HDA
-  - ES1370
-  - audio device
-  - QEMU escape
+  - intel hda
+  - ac97
+  - sound blaster
+  - audio
+  - buffer descriptor
 ---
 
 # Audio devices
 
-QEMU's audio devices (AC97, Intel High Definition Audio, ES1370) drive DMA engines that move sample data between guest memory and the host audio backend. The guest controls the buffer descriptors and DMA parameters, so flaws in the descriptor processing or stream handling corrupt memory in the host QEMU process.
+Audio is an easily overlooked escape surface. QEMU emulates several sound cards, the Intel HD Audio controller (`intel-hda`), AC97, Sound Blaster 16, and ES1370, each driven by guest register writes and, for HDA, buffer descriptor lists in guest memory. The HDA controller uses a ring of buffer descriptors (a BDL) describing DMA buffers for stream data, and QEMU walks those descriptors to move audio, so a guest-controlled descriptor length or DMA setup that QEMU trusts is an out-of-bounds primitive. The simpler cards expose register and DMA handling with the same class of length-trust bugs.
 
-```text
-Audio escape surface:
-- Intel HDA: command/response rings and stream DMA descriptors
-- AC97 and ES1370: buffer-descriptor and DMA handling
+## The surface
+
+```c
+// Intel HDA: the guest programs stream descriptors and a buffer descriptor list
+// (BDL) base; each BDL entry gives a guest address and length for a DMA buffer.
+// QEMU walks the BDL to transfer stream data. Primitives:
+//  - a BDL entry length/count QEMU uses for a transfer beyond the buffer -> OOB
+//  - stream/position registers driving an index the model does not bound
+// AC97/SB16/ES1370: DMA buffer registers and lengths with the same trusted-length class
+```
+
+```bash
+lspci -nn | grep -i audio       # intel-hda / AC97 / ES1370 present
+# the guest audio driver programs the controller; an attacker driver sets the BDL
+# and stream registers directly with controlled addresses and lengths
 ```
 
 ## Exploitation notes
 
-- The Intel HDA model has the richest surface (command rings plus stream DMA), and has produced escapes.
-- Reachability requires an audio device on the guest, which analysis and desktop VMs commonly have.
-- As with other device models, code execution lands in the host QEMU process.
+- The Intel HDA controller is the richest audio target because of its buffer-descriptor-list DMA model; a crafted BDL with trusted lengths drives an out-of-bounds transfer in QEMU.
+- Audio devices are frequently present in default desktop-style VM configurations, so the surface exists without special setup; confirm with `lspci`.
+- The guest controls the descriptor and register programming from its driver; exploitation sets up the DMA structures directly rather than playing sound normally.
+- Primitives land in the QEMU process; QEMU-version-specific, pair with a leak and groom.
 
 ## References
 
-- [QEMU system emulation](https://www.qemu.org/docs/master/system/index.html)
-- [QEMU security](https://www.qemu.org/docs/master/system/security.html)
+- [QEMU audio documentation](https://www.qemu.org/docs/master/system/devices/)
+- [Intel High Definition Audio specification](https://www.intel.com/content/www/us/en/standards/high-definition-audio-specification.html)
+- [QEMU security advisories](https://www.qemu.org/docs/master/system/security.html)

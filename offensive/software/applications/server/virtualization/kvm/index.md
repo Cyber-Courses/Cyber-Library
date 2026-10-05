@@ -1,27 +1,34 @@
 ---
-title: "KVM: attacking the Linux KVM virtualization ecosystem"
-description: "Attacking the KVM virtualization ecosystem on Linux: the QEMU VMM and its device models, the KVM kernel acceleration module, and the platforms and monitors built on them, Proxmox VE, Nutanix AHV, and the Firecracker and Cloud Hypervisor microVM monitors."
+title: "KVM: attacking the Linux kernel hypervisor and its products"
+description: "KVM turns the Linux kernel into a hypervisor, accelerating VMs while a user-space monitor (QEMU, Firecracker, Cloud Hypervisor) emulates devices. The attack surface spans the KVM kernel module itself, the device-emulating monitors, and the products built on KVM, QEMU-based platforms, Proxmox VE, and Nutanix AHV, each adding its own management plane."
 keywords:
-  - KVM
-  - QEMU
-  - Proxmox
-  - Nutanix
-  - virtualization
+  - kvm
+  - qemu
+  - firecracker
+  - proxmox
+  - nutanix ahv
 ---
 
 # KVM
 
-KVM is the Linux kernel's hardware-acceleration layer for virtualization, and it underpins most of the Linux virtualization world. A VMM in user space (usually QEMU, sometimes a minimal monitor) provides the device emulation, while the KVM kernel module provides the CPU and memory acceleration. The same core powers Proxmox, Nutanix AHV, OpenStack, and the serverless microVM monitors, so this grouping collects every KVM-based platform.
+KVM (Kernel-based Virtual Machine) is the Linux kernel's virtualization engine: it uses hardware virtualization to run guest CPUs efficiently while a user-space Virtual Machine Monitor emulates the devices. That split defines the attack surface. The KVM kernel module exposes an interface (the `/dev/kvm` ioctls and the in-kernel acceleration of instructions, MMU, and some devices) that is itself an escape and privilege-escalation surface. The monitors, QEMU, the microVM monitors Firecracker and Cloud Hypervisor, provide the device models a guest escapes through. And the products built on KVM, QEMU-based platforms, Proxmox VE, and Nutanix AHV, each wrap it with a management plane that is its own target.
+
+```bash
+# host: KVM in use and which monitor
+ls -l /dev/kvm; lsmod | grep kvm
+ps -ef | grep -E 'qemu|firecracker|cloud-hypervisor' | grep -v grep
+```
 
 ## Subtopics
 
-- **[QEMU](qemu/index.md)**: the base VMM, its device-model escapes, and the libvirt host and management.
-- **[Kernel module](kernel-module/index.md)**: the KVM accelerator itself and nested virtualization.
-- **[Proxmox VE](proxmox-ve/index.md)**: the Debian, KVM, and LXC platform.
-- **[Nutanix AHV](nutanix-ahv/index.md)**: the KVM-based hypervisor in Nutanix HCI.
+- **[QEMU](qemu/index.md)**: the dominant device emulator behind KVM.
+- **[Kernel module](kernel-module/index.md)**: the KVM kernel interface and nested virtualization.
 - **[microVM monitors](microvm-monitors/index.md)**: Firecracker and Cloud Hypervisor.
+- **[Proxmox VE](proxmox-ve/index.md)**: the KVM-based virtualization platform.
+- **[Nutanix AHV](nutanix-ahv/index.md)**: the KVM-based hyperconverged hypervisor.
 
 ## References
 
-- [KVM documentation](https://www.linux-kvm.org/page/Documents)
+- [KVM documentation (kernel)](https://docs.kernel.org/virt/kvm/index.html)
 - [QEMU security](https://www.qemu.org/docs/master/system/security.html)
+- [Awesome VM/hypervisor escape](https://github.com/WinMin/Awesome-VM-Exploit)

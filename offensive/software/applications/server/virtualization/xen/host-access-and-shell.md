@@ -1,33 +1,49 @@
 ---
-title: "Host access and shell: reaching the Xen control domain"
-description: "Reaching the Xen control domain (dom0), the privileged Linux domain that manages the hypervisor and every guest, through its shell and the xl or xe toolstack, from where guest consoles, configuration, and virtual disks are fully exposed."
+title: "Host access and shell: execution in the Xen dom0"
+description: "The Xen control domain, dom0, is a privileged Linux (or other) domain that runs the toolstack and, usually, the device backends. Reaching a shell in dom0, through a guest escape, the toolstack, or SSH, is host control: it administers every domain, accesses all guest disks, and can inject into or recreate guests through the Xen tools."
 keywords:
-  - Xen dom0
-  - xl toolstack
-  - xe
-  - control domain
+  - dom0
+  - xen toolstack
+  - xl
+  - xenstore
   - host access
 ---
 
 # Host access and shell
 
-Xen's dom0 is a privileged Linux domain that drives the hypervisor and owns the guests. Control of dom0 is control of everything: the `xl` toolstack (or `xe` on XCP-ng/XenServer) lists, consoles, and reconfigures domains, and the guest disks live on dom0's storage. Reaching dom0 is ordinary Linux compromise or a management-plane pivot.
+dom0 is Xen's control domain: a privileged OS (commonly Linux) that boots first, runs the toolstack (`xl`/libxl, or XAPI on XenServer/XCP-ng), hosts the device backends, and administers all other domains. Reaching a shell in dom0 is host control. It comes from a guest-to-host escape that lands in dom0 (via a backend) or in the hypervisor, from toolstack or XAPI access, or from SSH with dom0 credentials. From dom0 an attacker controls every domain through the tools, reads all guest disks, manipulates the XenStore configuration database, and persists on the host.
+
+## Reach and use dom0
 
 ```bash
+# SSH into dom0, or arrive via a backend/hypervisor escape
 xl list                                   # all domains
-xl console <domU>                          # guest console
-xl vcpu-list; xl info                      # hypervisor and host info
-# XCP-ng / XenServer toolstack
-xe vm-list; xe vm-disk-list vm=<name>
+xl console <domid>                        # attach to a guest console
+# XenStore holds domain configuration and PV device wiring
+xenstore-ls /local/domain                 # per-domain config visible from dom0
+# run against guest disks (see disk theft) and recreate/modify domains
+xl create /etc/xen/<guest>.cfg
+```
+
+## What dom0 gives
+
+```text
+dom0 control includes:
+- lifecycle control of every domain (create, destroy, pause, console)
+- access to all guest virtual disks through the backends/storage (offline theft)
+- the XenStore database wiring devices and config for all domains
+- on XenServer/XCP-ng, the XAPI management plane and pool-wide control
+Persistence is standard for the dom0 OS (systemd/cron/keys), plus domain config under /etc/xen.
 ```
 
 ## Exploitation notes
 
-- dom0 compromise is total: it can start, stop, console, and reconfigure every guest and read their disks for [Disk and snapshot theft](disk-and-snapshot-theft.md).
-- On XCP-ng and XenServer, the `xe` toolstack and the xapi service are the control path, often reachable from the [Management plane](management-plane.md).
-- dom0 also holds the storage repository metadata, so it maps where every guest disk lives.
+- dom0 is the privileged domain, so dom0 root is host-level control of the whole Xen system, equivalent to compromising the hypervisor host.
+- The toolstack (`xl`) and XenStore are the control surfaces from dom0; XenStore exposes and configures every domain's device wiring, useful for both enumeration and tampering.
+- On XenServer/XCP-ng, dom0 also runs XAPI and participates in a resource pool, so dom0 access extends pool-wide; see [Management plane](management-plane.md).
+- Persistence follows the dom0 OS; domain configuration files under `/etc/xen` are an additional, virtualization-specific location.
 
 ## References
 
-- [Xen: the xl command](https://xenbits.xen.org/docs/unstable/man/xl.1.html)
-- [XCP-ng documentation](https://docs.xcp-ng.org/)
+- [Xen toolstack (xl/libxl)](https://xenbits.xen.org/docs/)
+- [XenStore documentation](https://wiki.xenproject.org/wiki/XenStore)
