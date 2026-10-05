@@ -33,7 +33,7 @@ mount -t cgroup -o rdma cgroup /tmp/cg 2>/dev/null && echo "v1 release_agent ava
 
 - Privileged is a superset: anything under [Capability abuse](capability-abuse/index.md), [Device access](device-access/index.md), and [cgroups release_agent](cgroups-release-agent.md) is available at once.
 - Mounting the host block device is usually the quickest interactive route; `release_agent` is the most reliable one-liner.
-- In Kubernetes this is `securityContext.privileged: true`, the privileged-pod delivery view in the Kubernetes area.
+- In Kubernetes this is `securityContext.privileged: true`, the delivery view in [Privileged pod](../../orchestration/kubernetes/pod-escape-to-node/privileged-pod.md).
 
 ## References
 

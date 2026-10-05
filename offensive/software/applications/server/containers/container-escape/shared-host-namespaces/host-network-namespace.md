@@ -23,7 +23,7 @@ curl -sk https://127.0.0.1:10250/pods     # e.g. the kubelet read API on a node
 
 - The highest-value targets are localhost-trusting services: the kubelet (`10250`), cloud agents, and local admin sockets that skip authentication for loopback.
 - Combined with [CAP_NET_RAW](../privileged-configuration/capability-abuse/cap-net-raw.md), it allows sniffing and spoofing on the host's real segments.
-- It also exposes the cloud metadata service as the node sees it, covered under cloud metadata access in the Kubernetes area.
+- It also exposes the cloud metadata service as the node sees it, covered under [Cloud metadata from pod](../../orchestration/kubernetes/cluster-enumeration/cloud-metadata-from-pod.md).
 
 ## References
 
