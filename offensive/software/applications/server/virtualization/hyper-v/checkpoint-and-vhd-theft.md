@@ -23,7 +23,7 @@ Mount-VHD -Path .\loot.vhdx -ReadOnly               # mount offline
 ## Exploitation notes
 
 - Offline disk access sidesteps the guest OS entirely: pull `SAM`/`SYSTEM` from a member, or `NTDS.dit` from a domain controller VM, then crack or pass the hashes.
-- Checkpoints capture point-in-time state, including memory in `.vmrs`/`.bin` files, which can hold secrets from a running guest.
+- Standard checkpoints capture point-in-time state including memory (`.vmrs`/`.bin`), which can hold secrets from a running guest; production checkpoints (the default on current Hyper-V) are application-consistent and disk-only, so they do not.
 - A mounted disk is also a write primitive: plant a payload or clear a password before the guest next boots.
 
 ## References

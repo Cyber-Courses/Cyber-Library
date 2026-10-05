@@ -15,7 +15,7 @@ vCenter authentication runs through SSO, which issues SAML tokens signed by the 
 
 ```bash
 # On a compromised vCenter appliance: the SSO IDP signing key and vmdir data
-ls /storage/vmware-vmdir/        # vmdir database
+ls /storage/db/vmware-vmdir/     # vmdir database (data.mdb)
 # Extract the IDP signing certificate/key, then mint a SAML token for administrator@vsphere.local
 ```
 
@@ -23,7 +23,7 @@ ls /storage/vmware-vmdir/        # vmdir database
 
 - Forged SSO tokens grant `administrator@vsphere.local`, which is control of every managed host and VM, and they are not tied to a password, so password resets do not revoke them.
 - The signing key is recovered from the appliance, so this follows an initial foothold on vCenter, often via a [Known management exploit](known-management-exploits.md).
-- vmdir also stores the `vpxuser` passwords vCenter uses to manage each ESXi host, a direct pivot to every host shell.
+- The vCenter database (not vmdir) holds the per-host `vpxuser` passwords vCenter uses to manage each ESXi host, so the same appliance compromise is a direct pivot to every host shell.
 
 ## References
 
