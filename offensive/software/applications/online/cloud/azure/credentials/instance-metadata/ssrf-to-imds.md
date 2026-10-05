@@ -11,7 +11,7 @@ keywords:
 
 # SSRF to IMDS
 
-When an application on an Azure resource can be coerced into fetching an attacker-chosen URL, point it at the metadata token endpoint and the response is the host's managed-identity token. This is the bridge from a web vulnerability to full Azure credentials, which is why [SSRF](../../../../web/code/injection/request-forgery/index.md) is treated as a cloud-credential technique.
+When an application on an Azure resource can be coerced into fetching an attacker-chosen URL, point it at the metadata token endpoint and the response is the host's managed-identity token. This is the bridge from a web vulnerability to full Azure credentials, which is why [SSRF](../../../../../server/web/code/injection/request-forgery/index.md) is treated as a cloud-credential technique.
 
 ## The core request
 
@@ -37,7 +37,7 @@ http://169.254.169.254/   ->  http://[::ffff:169.254.169.254]/   (IPv6-mapped)
 
 ## Exploitation notes
 
-- The web SSRF mechanics (sinks, filters, redirect and rebinding bypasses) live in [request forgery](../../../../web/code/injection/request-forgery/index.md); this page is only the Azure payload and the `Metadata: true` constraint.
+- The web SSRF mechanics (sinks, filters, redirect and rebinding bypasses) live in [request forgery](../../../../../server/web/code/injection/request-forgery/index.md); this page is only the Azure payload and the `Metadata: true` constraint.
 - Mint the `management.azure.com` token first to map the identity's RBAC, then re-request for `graph.microsoft.com` or `vault.azure.net` as needed.
 - App Service SSRF cannot reach 169.254.169.254 (no IMDS there); target the `IDENTITY_ENDPOINT` env value instead, which an SSRF that leaks environment or hits the local port can reach.
 
