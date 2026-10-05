@@ -21,7 +21,7 @@ A cluster runs many services, and several are dangerous when reachable without a
 - **[etcd](etcd.md)**: the cluster datastore, holding every secret.
 - **[Dashboard](dashboard.md)**: the web dashboard with a privileged account.
 - **[cAdvisor and metrics](cadvisor-and-metrics.md)**: container and node telemetry.
-- **[kube-proxy](kube-proxy.md)**: reaching services through an exposed proxy.
+- **[API server proxy](api-server-proxy.md)**: reaching internal services through the API proxy.
 - **[Helm Tiller](helm-tiller.md)**: the legacy Helm v2 server with broad rights.
 - **[Exposed kubeconfig](exposed-kubeconfig.md)**: recovered admin credentials.
 

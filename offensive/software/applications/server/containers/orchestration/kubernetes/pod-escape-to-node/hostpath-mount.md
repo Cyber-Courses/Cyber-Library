@@ -14,7 +14,14 @@ keywords:
 A `hostPath` volume binds a node directory into the pod. Mounting the node root, or sensitive paths like the kubelet directory, reads node credentials and writes host files, which is node compromise without needing a privileged pod at all.
 
 ```yaml
-# Pod spec fragment: mount the node root filesystem
+# Pod spec fragment: mount the node root filesystem INTO the container
+containers:
+  - name: c
+    image: alpine
+    command: ["sleep", "1d"]
+    volumeMounts:
+      - name: host
+        mountPath: /host
 volumes:
   - name: host
     hostPath: { path: / }

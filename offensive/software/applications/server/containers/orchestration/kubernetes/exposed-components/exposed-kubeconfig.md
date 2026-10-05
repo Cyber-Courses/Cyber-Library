@@ -14,7 +14,7 @@ keywords:
 A kubeconfig bundles the API endpoint and a credential, a client certificate, a token, or an exec plugin. They leak constantly: in home directories, baked into images, in CI secrets and logs, and on bastion hosts. A recovered kubeconfig is direct API access as its identity, which is often a cluster or namespace admin.
 
 ```bash
-find / -name '*.kube/config' -o -name 'kubeconfig' 2>/dev/null
+find / -path '*/.kube/config' -o -name 'kubeconfig' 2>/dev/null
 # Inspect what identity and cluster it holds, then use it
 kubectl --kubeconfig ./found.config config view --minify
 kubectl --kubeconfig ./found.config auth can-i --list

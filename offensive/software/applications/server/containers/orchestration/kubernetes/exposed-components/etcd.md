@@ -11,7 +11,7 @@ keywords:
 
 # etcd
 
-etcd stores the entire cluster state, and it stores Secrets unencrypted unless encryption-at-rest is configured. Reaching it, on `2379` without client-certificate enforcement or with recovered certs, reads every secret and token in the cluster at once, and writing to it changes cluster state behind the API server's back.
+etcd stores the entire cluster state, and it stores Secrets unencrypted unless encryption-at-rest is configured. Reaching it, on `2379` without client-certificate enforcement or with recovered certs, reads every Secret object and all other stored state at once, and writing to it changes cluster state behind the API server's back. Projected service-account tokens are issued on demand through TokenRequest and are not stored here, so currently-mounted tokens come from pods or nodes rather than etcd.
 
 ```bash
 export ETCDCTL_API=3
@@ -24,7 +24,7 @@ etcdctl ... get /registry/secrets/<ns>/<name>        # the secret's raw value
 
 ## Exploitation notes
 
-- Every Secret and service-account token is here; one etcd read can hand over cluster-admin through a privileged token.
+- Every Secret object is here, including legacy service-account token secrets; a privileged one among them is cluster-admin. Short-lived projected tokens are not in etcd, so recover those through [Token and secret theft](../lateral-movement/token-and-secret-theft.md).
 - Client certificates are found on control-plane nodes under `/etc/kubernetes/pki/etcd/`; recovering them is etcd access.
 - Where encryption-at-rest is on, Secret values are ciphertext, but tokens and other objects are still exposed.
 
