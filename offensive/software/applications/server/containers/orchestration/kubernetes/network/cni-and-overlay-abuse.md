@@ -1,31 +1,47 @@
 ---
-title: "CNI and overlay abuse: spoofing and sniffing on the pod network"
-description: "Abusing the Kubernetes CNI plugin and overlay network to spoof pod identities, sniff cross-node traffic on the overlay, and reach the node from the pod network, exploiting that many overlays provide confidentiality and identity only by convention."
+title: "CNI and overlay abuse: weaknesses in the pod-network implementation"
+description: "The CNI plugin and its overlay (VXLAN, IP-in-IP, or eBPF datapath) implement pod networking, and their behaviour can be abused: ARP and overlay spoofing on the pod network for man-in-the-middle, reaching the CNI's own management interfaces, and exploiting datapath configurations that fail to isolate or that trust pod-supplied addressing."
 keywords:
-  - CNI
+  - cni
   - overlay network
-  - pod spoofing
-  - traffic sniffing
-  - kubernetes network
+  - vxlan
+  - arp spoofing
+  - eBPF datapath
 ---
 
 # CNI and overlay abuse
 
-The CNI plugin wires pods into the cluster network, usually through an overlay (VXLAN, IP-in-IP) or direct routing. Overlays typically carry traffic unencrypted and identify pods by IP, so a pod with enough network capability can sniff traffic traversing its node, spoof another pod's source address, or reach the node and the underlay.
+Pod networking is implemented by a CNI plugin (Calico, Flannel, Cilium, Weave, and others), usually over an overlay such as VXLAN or IP-in-IP, or an eBPF datapath. That implementation is an attack surface. On a shared layer-2 or overlay segment an attacker performs ARP or overlay spoofing to man-in-the-middle traffic between pods; the CNI's own agents and management interfaces may be reachable; and some datapaths trust pod-supplied addressing or fail to isolate certain traffic, which lets a pod impersonate another or escape the intended segmentation.
+
+Identify the CNI and the segment:
 
 ```bash
-# With CAP_NET_RAW or a host-network pod: observe overlay traffic on the node
-tcpdump -i any -n 'udp port 4789' 2>/dev/null | head        # VXLAN
-ip route; ip neigh                                           # overlay and node routes
+kubectl get pods -n kube-system -o wide | grep -iE 'calico|flannel|cilium|weave|canal'
+ip -4 addr; ip route; ip neigh                          # overlay interface and neighbours
+cat /etc/cni/net.d/* 2>/dev/null                        # CNI config, if reachable on a node
+```
+
+## Routes
+
+```bash
+# ARP spoofing on a shared pod segment for man-in-the-middle (needs CAP_NET_RAW,
+# which is in the default set) - identical to the container network-raw technique
+sysctl -w net.ipv4.ip_forward=1 2>/dev/null
+arpspoof -i eth0 -t <victim-pod-ip> <gateway-ip> &
+tcpdump -i eth0 -w loot.pcap host <victim-pod-ip>
+# reach a CNI agent's API/metrics if exposed on the node or pod network
+curl -s http://<node>:9099/ 2>/dev/null                 # example CNI health/metrics port
 ```
 
 ## Exploitation notes
 
-- Unencrypted overlays expose cross-pod traffic to anyone who can capture on the node, so pair this with a node foothold or a [Host network namespace](../../../container-escape/shared-host-namespaces/host-network-namespace.md) pod.
-- IP-based identity lets a spoofed source impersonate a trusted pod to services that authorize by network origin.
-- The underlay and node are reachable from the overlay on many setups, widening a pod foothold toward the node.
+- ARP/overlay spoofing is the most portable abuse because `CAP_NET_RAW` is in the default container capability set; it intercepts intra-segment pod traffic to harvest tokens and credentials in transit, matching the runtime-agnostic [CAP_NET_RAW](../../../container-escape/privileged-configuration/capability-abuse/cap-net-raw.md) technique.
+- CNI agents sometimes expose unauthenticated health, metrics, or management endpoints on the node network; these leak topology and occasionally allow configuration reads.
+- Datapath-specific weaknesses (trusting pod-chosen source IPs, missing isolation on hairpin or node-origin traffic) are implementation and version dependent; fingerprint the CNI and test whether source-IP spoofing between pods is filtered.
+- Encryption in the overlay (WireGuard or IPsec, offered by some CNIs) defeats passive interception; check whether it is enabled before relying on sniffing.
 
 ## References
 
-- [Kubernetes: cluster networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 - [CNI specification](https://github.com/containernetworking/cni/blob/main/SPEC.md)
+- [Kubernetes: cluster networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+- [HackTricks: network interception](https://book.hacktricks.xyz/generic-methodologies-and-resources/pentesting-network)

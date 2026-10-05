@@ -1,31 +1,40 @@
 ---
-title: "Build-arg secret leak: recovering secrets from build arguments and layers"
-description: "Recovering secrets that were passed to a Docker build as build arguments or written into intermediate layers, which persist in the image config and history even when a later step deletes the file, exposing credentials to anyone who pulls the image."
+title: "Build-arg secret leak: credentials that survive in the built image"
+description: "Secrets passed to a build with --build-arg are recorded in the image history and are present in the filesystem of any layer that used them. An attacker who can read the resulting image recovers tokens, keys, and passwords that the author passed as build arguments believing they were transient to the build."
 keywords:
   - build-arg
-  - ARG secret
   - docker history
-  - intermediate layer
-  - credential leak
+  - build secret
+  - baked credentials
+  - image layers
 ---
 
 # Build-arg secret leak
 
-Passing a secret with `--build-arg` or `ARG` bakes it into the image: `ARG` values are recorded in the image history, and anything written to the filesystem during a `RUN` persists in that layer even if a later step removes it. The result is credentials readable by anyone who pulls the image.
+Developers often pass a secret into a build with `--build-arg TOKEN=...` to clone a private repository or download a dependency, assuming it vanishes when the build ends. It does not. The `ARG` value is recorded in the image's build history, and any file created with it is in that layer. Anyone who can read the image, from a registry pull or a running container, recovers the secret.
+
+## Recovering the value
 
 ```bash
-docker history --no-trunc <image> | grep -iE 'ARG|token|key|secret'
-# Files written then deleted still live in the layer tarballs
-docker save <image> -o img.tar && tar -xf img.tar && grep -rniE 'BEGIN PRIVATE KEY|aws_secret' .
+# build history prints the build-arg value in the RUN/ARG step
+docker history --no-trunc <image> | grep -iE 'ARG|TOKEN|PASSWORD|KEY'
+# the config blob also carries build args and env; via the registry API:
+curl -s $R/v2/<repo>/blobs/<config-digest> | jq '.history[].created_by' | grep -i arg
+# and any file written with the secret survives in its layer
+docker save <image> -o i.tar && tar -xf i.tar -C i && \
+  for l in i/*/layer.tar i/blobs/sha256/*; do tar -xf "$l" -C x 2>/dev/null; done
+grep -rIE 'token|secret|password' x/root/.netrc x/root/.git-credentials 2>/dev/null
 ```
+
+The `created_by` field in the config history is literally the command line that ran, including the interpolated build argument, so a `RUN git clone https://$TOKEN@...` exposes the token verbatim.
 
 ## Exploitation notes
 
-- `ARG` is not a secret mechanism; its value is visible in `docker history`. The intended mechanism is BuildKit `--mount=type=secret`, which does not persist.
-- The highest-value leaks are cloud keys, registry credentials, and private deploy keys baked during dependency installation.
-- This overlaps [Secrets in image layers](../images-and-registries/secrets-in-image-layers.md); the difference is the build-time origin.
+- `--build-arg` is the leak; the correct build-secret mechanism (`RUN --mount=type=secret`) does not persist, but many images predate or ignore it, so history mining remains productive.
+- Check both the history (`created_by`) and the extracted layer filesystem: a token may appear in the command line, in a `.netrc` or `.git-credentials` file, or in a cached download.
+- Recovered build credentials often have repository or registry scope that unlocks source code or further images; see [Secrets in image layers](../images-and-registries/secrets-in-image-layers.md) for the general layer-mining workflow.
 
 ## References
 
-- [Docker build secrets](https://docs.docker.com/build/building/secrets/)
+- [Docker: build secrets vs build args](https://docs.docker.com/build/building/secrets/)
 - [Docker: image history](https://docs.docker.com/reference/cli/docker/image/history/)

@@ -1,31 +1,45 @@
 ---
-title: "Exposed components: reaching unauthenticated Kubernetes services"
-description: "Reaching Kubernetes control-plane and node components that are exposed or misconfigured: the API server with anonymous access or a legacy insecure port, the kubelet API, etcd, the dashboard, metrics and cAdvisor, kube-proxy, a legacy Helm Tiller, and recovered kubeconfigs."
+title: "Exposed components: attacking reachable cluster control-plane services"
+description: "Kubernetes clusters run many services that are dangerous when reachable: the API server with anonymous access or an insecure port, the kubelet API on every node, etcd holding all cluster state, the dashboard, cAdvisor and metrics endpoints, leaked kubeconfig files, and legacy Helm Tiller. Each exposed component is a route to secrets, node control, or full cluster compromise."
 keywords:
-  - kubernetes exposed components
-  - kubelet API
+  - kubernetes exposed
+  - api server
+  - kubelet
   - etcd
-  - anonymous API
-  - kubernetes dashboard
+  - dashboard
 ---
 
 # Exposed components
 
-A cluster runs many services, and several are dangerous when reachable without authentication. Some are control-plane (the API server, etcd), some are node-local (the kubelet, cAdvisor), and some are add-ons (the dashboard, Tiller). Each can be a direct path to secrets, code execution, or full cluster control.
+A Kubernetes cluster is many networked services, several of which grant broad control when they are reachable without proper authentication. Some are exposed by misconfiguration (an anonymous-auth API server, an insecure API port, a read-write kubelet), some by design on the node network (cAdvisor, metrics), and some are credentials left where an attacker finds them (a kubeconfig). etcd is the extreme case: it holds the entire cluster state, including every secret, so reaching it is total compromise.
+
+Probe the common exposed surfaces:
+
+```bash
+# API server anonymous and insecure port
+curl -sk https://<api>:6443/version; curl -s http://<api>:8080/version
+# kubelet read-write and read-only ports on a node
+curl -sk https://<node>:10250/pods | head; curl -s http://<node>:10255/pods | head
+# etcd client port
+curl -sk https://<node>:2379/version
+# dashboard and metrics
+curl -sk https://<node>:30000/ ; curl -s http://<node>:4194/metrics | head
+```
 
 ## Subtopics
 
-- **[Anonymous API access](anonymous-api-access.md)**: the API server accepting unauthenticated requests.
-- **[Insecure apiserver port](insecure-apiserver-port.md)**: the legacy unauthenticated port.
-- **[Kubelet API](kubelet-api.md)**: the node agent's API, often able to exec in pods.
-- **[etcd](etcd.md)**: the cluster datastore, holding every secret.
-- **[Dashboard](dashboard.md)**: the web dashboard with a privileged account.
-- **[cAdvisor and metrics](cadvisor-and-metrics.md)**: container and node telemetry.
-- **[API server proxy](api-server-proxy.md)**: reaching internal services through the API proxy.
-- **[Helm Tiller](helm-tiller.md)**: the legacy Helm v2 server with broad rights.
-- **[Exposed kubeconfig](exposed-kubeconfig.md)**: recovered admin credentials.
+- **[Anonymous API access](anonymous-api-access.md)**: unauthenticated requests the API server accepts.
+- **[Insecure apiserver port](insecure-apiserver-port.md)**: the legacy unauthenticated API port.
+- **[API server proxy](api-server-proxy.md)**: reaching nodes and services through the API proxy.
+- **[Kubelet API](kubelet-api.md)**: the node agent's read-write and read-only APIs.
+- **[etcd](etcd.md)**: the datastore holding all cluster secrets.
+- **[Dashboard](dashboard.md)**: the web UI and its service account.
+- **[cAdvisor and metrics](cadvisor-and-metrics.md)**: container stats endpoints leaking environment data.
+- **[Exposed kubeconfig](exposed-kubeconfig.md)**: leaked cluster credentials files.
+- **[Helm Tiller](helm-tiller.md)**: the legacy cluster-admin Tiller service.
 
 ## References
 
 - [Kubernetes: controlling access to the API](https://kubernetes.io/docs/concepts/security/controlling-access/)
-- [Kubernetes: ports and protocols](https://kubernetes.io/docs/reference/networking/ports-and-protocols/)
+- [kube-hunter knowledge base](https://aquasecurity.github.io/kube-hunter/)
+- [HackTricks: Kubernetes](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)

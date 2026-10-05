@@ -1,26 +1,34 @@
 ---
-title: "Lateral movement: spreading across a Kubernetes cluster"
-description: "Moving laterally in a Kubernetes cluster after a foothold: pivoting across the flat pod network to other workloads, stealing tokens and secrets to assume new identities, reusing service-account tokens against the API, and pivoting into the cloud through a pod or node identity."
+title: "Lateral movement: spreading across a cluster and into the cloud"
+description: "After a foothold, movement across a Kubernetes cluster follows its trust relationships: a service-account token used against the API server, secrets and tokens stolen from other namespaces, pivoting pod to pod across the flat network, and following a pod's workload identity out into the cloud account. Each step reuses credentials the cluster hands out."
 keywords:
-  - kubernetes lateral movement
+  - lateral movement
+  - service account token
   - pod pivoting
-  - token theft
-  - service account
-  - cloud pivot
+  - workload identity
+  - kubernetes
 ---
 
 # Lateral movement
 
-A single pod rarely holds everything. Lateral movement spreads the foothold: across the flat network to other pods, through stolen tokens and secrets into stronger identities, and out of the cluster into the cloud account the nodes and pods are tied to.
+Lateral movement in Kubernetes is credential reuse along the cluster's own trust edges. A pod holds a service-account token that authenticates to the API server; the API exposes secrets and more tokens; the flat pod network reaches other workloads directly; and a pod's cloud workload identity reaches the surrounding cloud account. Each move takes a credential the cluster issued for a legitimate purpose and uses it to reach the next target, so movement rarely needs an exploit, only enumeration and reuse.
+
+```bash
+# the token you hold, what it reaches, and the network around you
+kubectl auth can-i --list
+kubectl get secrets --all-namespaces 2>/dev/null | head
+kubectl get endpoints -A 2>/dev/null | head
+```
 
 ## Subtopics
 
-- **[Pod to pod pivoting](pod-to-pod-pivoting.md)**: reaching other workloads over the pod network.
-- **[Token and secret theft](token-and-secret-theft.md)**: collecting identities from pods and the node.
-- **[Service account token to API](service-account-token-to-api.md)**: using a stolen token against the API.
-- **[Cloud IAM via workload identity](cloud-iam-via-workload-identity.md)**: pivoting into the cloud account.
+- **[Service account token to API](service-account-token-to-api.md)**: authenticating and acting with a pod token.
+- **[Token and secret theft](token-and-secret-theft.md)**: harvesting credentials across namespaces.
+- **[Pod-to-pod pivoting](pod-to-pod-pivoting.md)**: reaching other workloads over the flat network.
+- **[Cloud IAM via workload identity](cloud-iam-via-workload-identity.md)**: following a pod identity into the cloud account.
 
 ## References
 
-- [Kubernetes: cluster networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+- [Kubernetes: controlling access](https://kubernetes.io/docs/concepts/security/controlling-access/)
 - [MITRE ATT&CK: Containers matrix](https://attack.mitre.org/matrices/enterprise/containers/)
+- [HackTricks: Kubernetes lateral movement](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)

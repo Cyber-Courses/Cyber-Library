@@ -1,26 +1,33 @@
 ---
-title: "Podman: attacking the daemonless container engine"
-description: "Attacking Podman, the daemonless and rootless-capable container engine: reaching its optional API service socket, abusing the rootless user-namespace model and its limits, and using the companion tools skopeo and buildah with the user's stored registry credentials."
+title: "Podman: attacking a rootless, daemonless runtime"
+description: "Podman runs containers without a central daemon and defaults to rootless operation, which changes its attack surface. The optional API socket still grants container control, the rootless user-namespace model determines what an escape actually yields, and the companion tools skopeo and buildah handle images and builds with their own credential exposure."
 keywords:
   - podman
   - rootless containers
-  - podman API socket
-  - skopeo buildah
-  - container runtime
+  - podman socket
+  - skopeo
+  - buildah
 ---
 
 # Podman
 
-Podman runs containers without a central daemon: each `podman` invocation forks the runtime directly, and it can run fully rootless under a user's own account. That changes the attack surface from Docker's: there is no always-on root daemon, but there is an optional API service socket, a rootless model with its own escape limits, and the same OCI image and runtime primitives underneath.
+Podman is a container engine designed to run without a central privileged daemon and, by default, without root. That reshapes its offensive surface. There is no always-on root daemon to take over, but Podman can expose a Docker-compatible API socket that grants container control; its rootless model, built on user namespaces, decides whether a container escape lands as an unprivileged user or as root; and its companion tools, `skopeo` for image transport and `buildah` for builds, carry the same registry-credential and image-secret exposure as Docker.
+
+```bash
+podman info 2>/dev/null | grep -iE 'rootless|graphRoot|runRoot'
+ls -l /run/podman/podman.sock /run/user/*/podman/podman.sock 2>/dev/null
+cat /proc/self/uid_map                               # rootless => mapped range, not 0 0
+```
 
 ## Subtopics
 
-- **[API service socket](api-service-socket.md)**: the optional Podman REST API.
-- **[systemd socket activation](systemd-socket-activation.md)**: the socket exposed through systemd.
-- **[Rootless model](rootless-model.md)**: the rootless user-namespace mapping and its limits.
-- **[skopeo and buildah](skopeo-and-buildah.md)**: the companion image tools and their credentials.
+- **[Rootless model](rootless-model.md)**: how the user-namespace design constrains or enables escapes.
+- **[API service socket](api-service-socket.md)**: the optional Docker-compatible control socket.
+- **[systemd socket activation](systemd-socket-activation.md)**: on-demand API activation and its exposure.
+- **[skopeo and buildah](skopeo-and-buildah.md)**: image transport and build tooling credential exposure.
 
 ## References
 
 - [Podman documentation](https://docs.podman.io/)
-- [Podman REST API](https://docs.podman.io/en/latest/markdown/podman-system-service.1.html)
+- [Podman: rootless containers](https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md)
+- [Rootless containers](https://rootlesscontaine.rs/)
