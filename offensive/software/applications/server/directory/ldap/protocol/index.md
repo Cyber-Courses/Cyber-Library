@@ -1,6 +1,6 @@
 ---
 title: "LDAP protocol attacks"
-description: "Implementation-agnostic LDAP attacks that work against any directory server: anonymous and authenticated binds and enumeration, bind brute force, credentials stored in object attributes, and LDAP signing and channel-binding weaknesses."
+description: "LDAP attacks that target the protocol rather than a product's object model: anonymous and authenticated binds and enumeration, credentials stored in object attributes, and LDAP signing and channel-binding weaknesses (the last specific to NTLM-authenticating directories such as Active Directory)."
 keywords:
   - LDAP
   - anonymous bind
@@ -11,7 +11,7 @@ keywords:
 
 # LDAP protocol attacks
 
-These attacks target the LDAP service itself and work against any directory that speaks the protocol, whether it is Active Directory, OpenLDAP, 389 Directory Server, or an appliance's embedded directory. They turn on reading the directory with or without credentials, harvesting the secrets administrators leave in object attributes, and the transport weaknesses that let a captured authentication be relayed into the directory.
+These attacks target the LDAP service itself rather than a product's object model. Reading the directory with or without credentials, and harvesting the secrets administrators leave in object attributes, work against any directory that speaks the protocol, whether Active Directory, OpenLDAP, 389 Directory Server, or an appliance's embedded directory. The transport weaknesses are narrower: LDAP signing and channel binding gate an NTLM relay into the directory, so they apply to Active Directory and other Windows-integrated directories, not to OpenLDAP or 389 Directory Server as such.
 
 The product-specific object models and attack chains live elsewhere: [Active Directory](../../active-directory/index.md) for AD, and the per-implementation sections under [LDAP](../index.md) for OpenLDAP, 389 Directory Server, and eDirectory.
 
