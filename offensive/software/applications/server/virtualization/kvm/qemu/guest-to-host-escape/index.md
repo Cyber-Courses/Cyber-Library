@@ -1,30 +1,36 @@
 ---
-title: "Guest to host escape: breaking out of a KVM guest through QEMU"
-description: "Escaping a KVM guest to the host by exploiting QEMU device-model flaws. Each emulated device runs in the host QEMU process and parses guest-controlled input: virtio, the legacy network adapters, USB and storage controllers, the floppy controller, and audio."
+title: "Guest-to-host escape: breaking out of a QEMU/KVM virtual machine"
+description: "A QEMU guest escapes by corrupting the QEMU process on the host, which emulates the VM's devices while KVM accelerates the CPU. The reachable surface is QEMU's device models: virtio devices, emulated NICs, USB controllers, block and SCSI controllers, audio devices, and the legacy floppy controller, each parsing guest-driven register writes and DMA descriptors."
 keywords:
-  - QEMU escape
+  - qemu escape
+  - kvm
   - device model
   - virtio
-  - VENOM
-  - guest to host
+  - guest-to-host
 ---
 
-# Guest to host escape
+# Guest-to-host escape
 
-Each KVM guest is served by a QEMU process on the host that emulates its devices in user space. Those device models parse guest-controlled input, so a memory-corruption flaw in one runs code in the host QEMU process. The surface splits by device, and which models are reachable depends on the guest's configured hardware.
+QEMU provides the device emulation for a KVM virtual machine while the KVM kernel module accelerates CPU and memory virtualization. A guest cannot touch the host CPU path, so escapes target the QEMU user-space process: its device models read guest-driven I/O (port and MMIO register writes) and walk DMA descriptors and ring buffers the guest places in its own memory. A memory-safety flaw in any device model yields code execution in the QEMU process, which runs on the host with the privileges of whoever launched the VM (often reduced by seccomp and sometimes confined, but still a host process). Because the device models are shared, these bugs recur across every KVM-based product.
 
-Code execution lands in the host QEMU process, whose reach depends on the host's confinement (seccomp, sVirt, non-root QEMU). A flaw in the [KVM kernel module](../../kernel-module/kernel-module-escape.md) beneath QEMU bypasses that confinement entirely. The same QEMU code backs [Proxmox](../../proxmox-ve/guest-to-host-escape.md) and [Nutanix AHV](../../nutanix-ahv/guest-to-host-escape.md).
+```bash
+# from the guest: enumerate the emulated devices (the escape surface)
+lspci -nn                       # virtio, e1000/rtl8139, USB controllers, audio
+lsusb; cat /proc/ioports        # I/O-port devices incl. the legacy floppy (0x3f0-)
+dmesg | grep -i virtio
+```
 
 ## Subtopics
 
-- **[virtio devices](virtio-devices.md)**: the virtqueue-based paravirtualized devices.
-- **[Network adapters](network-adapters.md)**: the e1000 and rtl8139 models.
-- **[USB controllers](usb-controllers.md)**: UHCI, EHCI, and XHCI emulation.
-- **[Block and SCSI](block-and-scsi.md)**: AHCI, IDE, and emulated SCSI.
-- **[Floppy controller](floppy-controller.md)**: the VENOM class.
-- **[Audio devices](audio-devices.md)**: AC97, Intel HDA, and ES1370.
+- **[virtio devices](virtio-devices.md)**: the paravirtual virtqueue device family.
+- **[Network adapters](network-adapters.md)**: emulated e1000, rtl8139, and virtio-net.
+- **[USB controllers](usb-controllers.md)**: emulated UHCI, EHCI, and XHCI.
+- **[Block and SCSI](block-and-scsi.md)**: the IDE/AHCI and virtio-blk/SCSI storage paths.
+- **[Audio devices](audio-devices.md)**: the emulated sound cards.
+- **[Floppy controller](floppy-controller.md)**: the legacy floppy disk controller.
 
 ## References
 
-- [QEMU security](https://www.qemu.org/docs/master/system/security.html)
-- [QEMU device emulation](https://www.qemu.org/docs/master/system/devices.html)
+- [QEMU documentation](https://www.qemu.org/docs/master/)
+- [QEMU security process and advisories](https://www.qemu.org/docs/master/system/security.html)
+- [Awesome VM/hypervisor escape research](https://github.com/WinMin/Awesome-VM-Exploit)
