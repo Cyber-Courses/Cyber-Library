@@ -1,31 +1,39 @@
 ---
-title: "Credential brute force: guessing FTP logins"
-description: "Brute-forcing FTP credentials against the cleartext login on port 21, using common and default username and password combinations, since FTP has no lockout by default and transmits credentials in the clear."
+title: "Credential brute force: attacking the FTP plaintext login"
+description: "FTP authentication is plaintext username and password with no built-in rate limiting in many servers, so it is a straightforward brute-force and password-spray target. Valid credentials give access to that user's files and, where the FTP user maps to a system account, often a foothold reusable over SSH or other services."
 keywords:
-  - FTP brute force
+  - ftp brute force
+  - password spray
   - hydra
-  - medusa
-  - weak passwords
   - cleartext
+  - credential reuse
 ---
 
 # Credential brute force
 
-FTP authenticates over a cleartext channel with no built-in lockout, so it is a straightforward brute-force and spray target. Vendor defaults and weak user passwords are common, and because the channel is unencrypted, credentials are also recoverable by sniffing an existing session.
+FTP logins are plaintext user/password pairs, and many FTP servers apply no lockout or rate limiting, which makes online brute force and password spraying practical. Valid credentials give access to that account's files; crucially, FTP users are frequently mapped to real system accounts, so a working FTP credential is often reusable for SSH, SMB, or the OS login, turning file access into a system foothold.
 
 ```bash
-hydra -L users.txt -P passwords.txt ftp://<target>
-medusa -h <target> -U users.txt -P passwords.txt -M ftp
-# Captured FTP traffic reveals USER/PASS in cleartext
+# spray a known user list with common passwords (quieter), or brute one account
+hydra -L users.txt -p 'Winter2025!' ftp://<target>        # spray one password
+hydra -l admin -P rockyou.txt ftp://<target> -t 4 -f      # brute one user, stop on hit
+# netexec supports FTP too
+nxc ftp <target> -u users.txt -p passwords.txt
 ```
 
 ## Exploitation notes
 
-- No default lockout means aggressive brute force is viable, but still rate-limit to avoid tripping monitoring.
-- Try device and application defaults first; appliances and embedded FTP servers ship with known credentials.
-- Sniffing a legitimate FTP session recovers the credentials without guessing, since USER and PASS are plaintext.
+- Prefer spraying one common password across many users over hammering one account, both to find weak accounts and to avoid any lockout that does exist; derive the user list from other enumeration (SMB RID cycling, OSINT).
+- FTP accounts commonly are system accounts, so test any working credential against SSH and other services immediately; credential reuse is the main payoff.
+- Cleartext login also means a sniffing position captures credentials with no brute force at all; on a shared segment, capture beats guessing.
+- A found account's file access may itself be the goal (a backup or data FTP), independent of system reuse.
+
+## Tools
+
+- [hydra](https://github.com/vanhauser-thc/thc-hydra)
+- [NetExec](https://github.com/Pennyw0rth/NetExec)
 
 ## References
 
-- [HackTricks: pentesting FTP](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-ftp/index.html)
-- [Hydra](https://github.com/vanhauser-thc/thc-hydra)
+- [HackTricks: FTP brute force](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ftp)
+- [RFC 959: authentication](https://datatracker.ietf.org/doc/html/rfc959)

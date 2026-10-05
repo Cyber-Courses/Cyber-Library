@@ -1,31 +1,43 @@
 ---
-title: "Discovery and methods: enumerating WebDAV"
-description: "Detecting WebDAV on a web server and enumerating its allowed methods with OPTIONS and PROPFIND, and probing which directories accept writes, to map whether PUT, MOVE, and traversal are available before exploiting them."
+title: "Discovery and methods: finding WebDAV and its enabled verbs"
+description: "WebDAV is detected from the DAV response header and the verbs an OPTIONS request reports. PROPFIND then lists collections and files, and testing PUT reveals whether writes are allowed and which uploaded extensions the server will execute. This enumeration defines exactly which WebDAV attack applies to a target."
 keywords:
-  - WebDAV discovery
-  - OPTIONS
-  - PROPFIND
-  - DAV header
+  - options
+  - propfind
+  - dav header
   - davtest
+  - allowed methods
 ---
 
 # Discovery and methods
 
-The first step is confirming WebDAV and learning what it allows. An OPTIONS request returns the `DAV` header and the `Allow` list of methods, and PROPFIND lists resources. Tools then probe which extensions can be uploaded and executed in each writable directory, which determines whether the server is exploitable through PUT.
+WebDAV enumeration establishes whether DAV is present, which verbs are enabled, and what writes achieve. The `DAV` header in an OPTIONS response confirms WebDAV and its compliance class; the `Allow` header lists the verbs. PROPFIND enumerates collections and files (WebDAV's listing), and a controlled PUT test shows whether uploads are accepted and, crucially, which uploaded extensions the server executes versus serves inert. That last point decides whether an upload is code execution or just a file.
 
 ```bash
-curl -s -X OPTIONS http://<target>/ -i | grep -iE 'DAV|Allow'
-curl -s -X PROPFIND http://<target>/ -H 'Depth: 1' --data ''   # list resources
-davtest -url http://<target>/                                   # test uploadable/executable types
+# verbs and DAV support
+curl -s -X OPTIONS http://<target>/ -i | grep -iE 'allow:|dav:'
+# PROPFIND listing (Depth: 1 lists the immediate collection)
+curl -s -X PROPFIND http://<target>/ -H 'Depth: 1' --data '' | grep -oE '<D:href>[^<]+'
+# automated: which extensions can be uploaded and which execute
+davtest -url http://<target>/
+cadaver http://<target>/                       # interactive DAV client (ls, put, move)
 ```
+
+Read the `davtest` output specifically for which extensions both uploaded successfully and executed; that is the list of usable payload types for [PUT upload to RCE](put-upload-to-rce.md).
 
 ## Exploitation notes
 
-- The `Allow` header reveals whether PUT, MOVE, DELETE, and MKCOL are available, shaping the attack.
-- `davtest` reports which file types upload successfully and which then execute, directly flagging the RCE path.
-- A directory that accepts PUT is the target for [PUT upload to RCE](put-upload-to-rce.md); MOVE can rename a disallowed extension to an executable one.
+- The `DAV` header presence and a verb list including `PUT`/`MKCOL`/`MOVE` mark a writable WebDAV worth attacking; a read-only DAV (only PROPFIND/GET) still enables listing and traversal.
+- `davtest` is the fastest way to learn the executable-extension set; where PUT of `.php`/`.jsp`/`.aspx` is blocked but another executable type (or MOVE-rename) works, that is the path.
+- PROPFIND listing reveals files and collections that are not otherwise linked, like a directory listing, feeding both looting and the traversal/upload targets.
+- Enumerate as each identity you have (anonymous and any credentials), since verb availability often differs by authentication, which motivates the [authentication bypass](authentication-bypass.md) step.
+
+## Tools
+
+- [davtest](https://github.com/cldrn/davtest)
+- [cadaver](http://www.webdav.org/cadaver/)
 
 ## References
 
-- [davtest](https://github.com/cldrn/davtest)
-- [HackTricks: pentesting WebDAV](https://book.hacktricks.wiki/en/network-services-pentesting/put-method-webdav.html)
+- [RFC 4918: OPTIONS and PROPFIND](https://datatracker.ietf.org/doc/html/rfc4918)
+- [HackTricks: WebDAV](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/put-method-webdav)

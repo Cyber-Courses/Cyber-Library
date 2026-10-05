@@ -1,32 +1,36 @@
 ---
-title: "Authentication bypass: reaching WebDAV past weak auth"
-description: "Bypassing WebDAV authentication: default and weak Basic or Digest credentials, directories where authentication is enforced for GET but not for WebDAV methods like PUT, and server-specific flaws that expose the DAV interface without valid credentials."
+title: "Authentication bypass: reaching WebDAV verbs past weak auth"
+description: "WebDAV authentication is frequently inconsistent: some verbs are protected while others are not, HTTP verb tampering reaches a protected path through an unchecked method, and weak or default credentials guard the rest. Bypassing or guessing past this access control exposes the write verbs that lead to file planting and code execution."
 keywords:
-  - WebDAV authentication
-  - Basic auth
-  - method-based bypass
-  - IIS WebDAV
-  - unauthorized
+  - webdav auth
+  - verb tampering
+  - http method
+  - default credentials
+  - access control
 ---
 
 # Authentication bypass
 
-WebDAV authentication frequently has gaps. Basic and Digest credentials are often weak or default; some configurations enforce authentication on GET but not on the WebDAV write methods, so PUT or MOVE succeed unauthenticated; and server implementations have had flaws that expose the DAV interface regardless of configured auth.
+WebDAV access control is often applied unevenly, and that inconsistency is the bypass. A common flaw is method-scoped protection: a server configured to require authentication for `GET`/`POST` may leave `PUT`, `MOVE`, or `PROPFIND` unprotected, so an attacker reaches a protected resource through an unchecked verb (HTTP verb tampering). Where authentication is enforced, it is frequently Basic auth with weak or default credentials that yield to spraying. Getting past this exposes the write verbs that make WebDAV dangerous.
 
 ```bash
-# Weak/default Basic auth
-curl -u admin:admin -X PROPFIND http://<target>/ -H 'Depth: 1'
-# Method gap: GET is protected but PUT is not
-curl -X PUT http://<target>/test.txt --data 'x' -i
+# verb tampering: a protected path reachable via an unprotected method
+curl -s -X GET http://<target>/protected/        # 401
+curl -s -X PROPFIND http://<target>/protected/ -H 'Depth:1' --data ''   # 207 => PROPFIND unguarded
+curl -s -X PUT http://<target>/protected/x.txt --data 'test' -i        # does PUT skip auth?
+# weak/default Basic auth
+curl -s -u admin:admin -X OPTIONS http://<target>/ -i | grep -i allow
+hydra -L users.txt -P pass.txt http-get://<target>/protected/
 ```
 
 ## Exploitation notes
 
-- Test whether write methods are protected independently of GET; access-control that only covers read is a common misconfiguration.
-- Try vendor defaults and reused credentials from elsewhere in the environment against the DAV realm.
-- Unauthenticated PUT leads straight to [PUT upload to RCE](put-upload-to-rce.md).
+- Test each verb against a protected path independently: a 401 on `GET` with a 207 on `PROPFIND` or success on `PUT` reveals method-scoped protection, the classic WebDAV verb-tampering bypass.
+- IIS and Apache WebDAV misconfigurations historically allowed exactly this uneven enforcement; always probe `PUT`/`MOVE`/`PROPFIND` even when `GET` is locked.
+- Where auth is actually enforced on all verbs, fall back to credential attacks (default/weak Basic auth) or credentials found elsewhere.
+- A successful bypass that reaches `PUT`/`MOVE` leads straight to [PUT upload to RCE](put-upload-to-rce.md); one that reaches only `PROPFIND`/`GET` still enables listing and traversal.
 
 ## References
 
-- [HackTricks: pentesting WebDAV](https://book.hacktricks.wiki/en/network-services-pentesting/put-method-webdav.html)
-- [RFC 4918: WebDAV](https://www.rfc-editor.org/rfc/rfc4918)
+- [HackTricks: WebDAV and verb tampering](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/put-method-webdav)
+- [OWASP: testing HTTP methods](https://owasp.org/www-project-web-security-testing-guide/)

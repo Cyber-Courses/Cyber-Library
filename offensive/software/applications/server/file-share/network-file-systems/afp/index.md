@@ -1,25 +1,32 @@
 ---
-title: "AFP: attacking Apple Filing Protocol shares"
-description: "Attacking the Apple Filing Protocol (AFP) and its common open-source server Netatalk: enumerating and mounting shares with guest access, weak and default credentials, and named remote code execution flaws in Netatalk reachable from an unauthenticated client."
+title: "AFP: attacking the Apple Filing Protocol"
+description: "AFP serves Apple file shares on TCP 548, natively on older macOS and via Netatalk on Linux and NAS devices. The offensive surface is guest access that many servers leave enabled, default and weak credentials on appliances, and the Netatalk implementation's history of serious pre-authentication remote code execution vulnerabilities."
 keywords:
-  - AFP
-  - Apple Filing Protocol
-  - Netatalk
-  - Time Machine
+  - afp
+  - apple filing protocol
+  - netatalk
   - port 548
+  - guest access
 ---
 
 # AFP
 
-The Apple Filing Protocol serves macOS file sharing and Time Machine backups, usually on port 548, most often through the open-source Netatalk server on Linux and NAS devices. Offensive interest is reaching shares without proper credentials (guest access, defaults) and exploiting Netatalk, which has a history of unauthenticated remote code execution.
+AFP (Apple Filing Protocol) serves Apple-style file shares on TCP 548. It was macOS's native file sharing before SMB took over, and it persists on older macOS servers, Time Machine targets, and especially on NAS appliances and Linux servers running Netatalk, the open-source AFP implementation. Offensively there are three threads: guest access, which many AFP servers enable by default and which exposes volumes without credentials; default and weak credentials on appliances; and Netatalk's implementation, which has carried several serious pre-authentication remote code execution bugs that make an exposed Netatalk a direct compromise target.
+
+```bash
+# discover AFP and enumerate server info/volumes
+nmap -p548 --script afp-serverinfo,afp-showmount,afp-ls <target>
+# afp-serverinfo reveals the server name, version, and supported auth (incl. "No User Authent" = guest)
+```
 
 ## Subtopics
 
-- **[Guest access](guest-access.md)**: anonymous mounting and share listing.
-- **[Default credentials](default-credentials.md)**: weak and shipped credentials.
-- **[Netatalk exploits](netatalk-exploits.md)**: named RCE in the AFP server.
+- **[Guest access](guest-access.md)**: unauthenticated access to AFP volumes.
+- **[Default credentials](default-credentials.md)**: weak and vendor-default accounts on appliances.
+- **[Netatalk exploits](netatalk-exploits.md)**: the implementation's pre-auth RCE history.
 
 ## References
 
 - [Netatalk project](https://netatalk.io/)
-- [Apple Filing Protocol overview](https://developer.apple.com/library/archive/documentation/Networking/Conceptual/AFP/Introduction/Introduction.html)
+- [nmap AFP scripts](https://nmap.org/nsedoc/)
+- [Apple Filing Protocol reference](https://developer.apple.com/library/archive/documentation/Networking/Conceptual/AFP/)

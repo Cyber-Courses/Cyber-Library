@@ -1,25 +1,31 @@
 ---
-title: "Writable share poisoning: abusing a writable SMB share"
-description: "Abusing a writable SMB share to act on other users: planting SCF, LNK, and URL files whose icons coerce authentication, poisoning Office documents and templates that run code when opened, and planting executables and DLLs that users or services run."
+title: "Writable share poisoning: planting payloads and credential-coercion files"
+description: "A writable SMB share is an execution and credential-capture primitive. An attacker plants executables or DLLs where they will be run, poisons Office documents and templates users open, and drops SCF and LNK files whose icons force the viewer to authenticate to an attacker host. Write access turns a file server into code execution and captured credentials."
 keywords:
   - writable share
-  - SCF
-  - LNK
-  - DLL planting
-  - share poisoning
+  - dll planting
+  - scf lnk
+  - template poisoning
+  - credential coercion
 ---
 
 # Writable share poisoning
 
-A writable share is a staging ground for attacks on everyone who uses it. Three families matter: icon-loading files (SCF, LNK, URL) that coerce a browsing user's machine to authenticate to the attacker, Office documents and templates that run code when a user opens them, and executables and DLLs that users or services on the share run directly.
+Write access to a share is far more than the ability to store files: it is a way to get code executed and credentials captured when other users or systems interact with the share. Three techniques follow. Planting executables or DLLs where an application or user will run them gives code execution in that context. Poisoning Office documents and their templates runs macros or external references when a user opens them. And dropping SCF or LNK files whose icon or target points at an attacker host forces the viewer's machine to authenticate there as soon as the folder is browsed, capturing or relaying the credential. The common thread is that write access converts normal use of the share into attacker advantage.
+
+```bash
+# confirm writable, then plant (null/guest/creds per the enumeration)
+smbclient //<target>/<share> -U 'user%pass' -c 'put payload'
+nxc smb <target> -u user -p 'pass' --shares     # WRITE flag confirms the target
+```
 
 ## Subtopics
 
-- **[SCF and LNK coercion](scf-and-lnk-coercion.md)**: coerce authentication on browse.
-- **[Office and template poisoning](office-and-template-poisoning.md)**: run code on open.
-- **[Executable and DLL planting](executable-and-dll-planting.md)**: replace or sideload binaries.
+- **[Executable and DLL planting](executable-and-dll-planting.md)**: getting planted code run.
+- **[Office and template poisoning](office-and-template-poisoning.md)**: macro and template execution on open.
+- **[SCF and LNK coercion](scf-and-lnk-coercion.md)**: forcing authentication on folder browse.
 
 ## References
 
-- [HackTricks: pentesting SMB](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-smb/index.html)
-- [The Hacker Recipes: forced authentication](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications)
+- [MITRE ATT&CK: taint shared content](https://attack.mitre.org/techniques/T1080/)
+- [NetExec: SMB](https://www.netexec.wiki/smb-protocol)
