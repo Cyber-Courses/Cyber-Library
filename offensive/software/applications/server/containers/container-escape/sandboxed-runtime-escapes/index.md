@@ -1,24 +1,33 @@
 ---
-title: "Sandboxed runtime escapes: breaking out of interposing sandboxes"
-description: "Escaping sandboxed container runtimes that interpose on the kernel instead of sharing it directly: gVisor, which reimplements the kernel in userspace, and microVM runtimes such as Kata Containers, where the escape is from the sandbox or guest VM back to the host."
+title: "Sandboxed runtime escapes: breaking out of gVisor and Kata isolation"
+description: "Sandboxed runtimes add a layer between the container and the host kernel: gVisor interposes a userspace kernel, and Kata Containers runs each container in a lightweight virtual machine. Escaping them means defeating that added layer, through a bug in the userspace kernel's syscall emulation and file proxy, or a VM escape and the Kata agent, before the usual host compromise."
 keywords:
-  - gVisor
-  - Kata Containers
+  - gvisor
+  - kata containers
   - sandbox escape
-  - microVM
+  - sandboxed runtime
   - container escape
 ---
 
 # Sandboxed runtime escapes
 
-Sandboxed runtimes change the escape problem. Instead of sharing the host kernel directly, they put something in between: gVisor runs a userspace kernel that emulates syscalls, and Kata and other microVM runtimes run each workload in a lightweight virtual machine. A classic container escape does not apply; the target is a flaw in the sandbox's own interface back to the host.
+Standard containers share the host kernel directly, so a kernel bug is a host bug. Sandboxed runtimes insert a barrier. gVisor runs a userspace kernel (the Sentry) that intercepts the container's syscalls so they never reach the host kernel directly, with a separate file proxy (the Gofer) mediating filesystem access. Kata Containers runs each container inside a lightweight virtual machine with its own guest kernel, so the container is isolated from the host by the hypervisor. Escaping either requires defeating the added layer first, and only then do the familiar host techniques apply.
+
+Detect which runtime is in use:
+
+```bash
+dmesg 2>/dev/null | grep -i gvisor
+cat /proc/version 2>/dev/null                 # gVisor reports a distinctive version string
+mount | grep -i kata; ls /dev | grep -i kata  # Kata guest artefacts
+uname -a                                       # a minimal guest kernel suggests a VM-based sandbox
+```
 
 ## Subtopics
 
-- **[gVisor](gvisor.md)**: escaping the userspace kernel and its host interface.
-- **[Kata Containers](kata-containers.md)**: escaping the guest VM to the host.
+- **[gVisor](gvisor.md)**: escaping the userspace kernel and its file proxy.
+- **[Kata Containers](kata-containers.md)**: escaping the guest VM and reaching the host through the agent.
 
 ## References
 
 - [gVisor security model](https://gvisor.dev/docs/architecture_guide/security/)
-- [Kata Containers architecture](https://katacontainers.io/learn/)
+- [Kata Containers architecture](https://github.com/kata-containers/kata-containers/blob/main/docs/design/architecture/README.md)

