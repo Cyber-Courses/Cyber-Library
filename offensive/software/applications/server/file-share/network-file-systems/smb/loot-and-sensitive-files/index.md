@@ -1,24 +1,33 @@
 ---
-title: "Loot and sensitive files: harvesting secrets from SMB shares"
-description: "Harvesting secrets from readable SMB shares: credentials in scripts, configs, and SYSVOL Group Policy Preferences, and the backups, disk images, and password databases left on shares that contain data and credentials in bulk."
+title: "Loot and sensitive files: mining readable SMB shares"
+description: "Readable SMB shares routinely hold the credentials and data that advance an intrusion: scripts and config files with embedded passwords, backups and disk images, Group Policy data in SYSVOL, and keys and tokens. Systematically spidering shares and pattern-matching their contents turns read access into credentials and sensitive data."
 keywords:
-  - SMB loot
-  - credential hunting
-  - GPP cpassword
-  - backups
+  - smb loot
   - sensitive files
+  - credential hunting
+  - sysvol
+  - spider
 ---
 
 # Loot and sensitive files
 
-Readable shares are where credentials and data leak at scale. Two veins are most productive: credentials scattered through scripts, configuration files, and SYSVOL Group Policy Preferences, and the bulk artifacts, backups, disk images, and password databases, that teams leave on shares and that contain everything at once.
+A readable share is rarely just files; it is where an organization leaves the credentials and data that move an attacker forward. Scripts and configuration files embed service passwords and connection strings, backups and disk images contain whole systems to crack offline, the domain `SYSVOL` share holds Group Policy (and sometimes cached credentials), and developers and admins leave keys, tokens, and password lists in share directories. The method is to spider the readable shares and pattern-match their contents at scale rather than browsing by hand.
+
+```bash
+# inventory and search readable shares for likely loot
+nxc smb <target> -u user -p 'pass' -M spider_plus -o DOWNLOAD_FLAG=True
+# pattern-match downloaded content for secrets
+grep -rinE 'password|passwd|pwd|secret|connectionstring|api[_-]?key' ./loot | head
+# high-value filetypes to pull selectively
+#   *.config *.ini *.xml *.ps1 *.bat *.vbs *.kdbx *.ppk *.pem id_rsa *.vmdk *.bak
+```
 
 ## Subtopics
 
-- **[Credential hunting](credential-hunting.md)**: passwords in scripts, configs, and SYSVOL.
-- **[Backups and archives](backups-and-archives.md)**: backups, images, and password databases.
+- **[Credential hunting](credential-hunting.md)**: finding passwords, keys, and tokens in share content.
+- **[Backups and archives](backups-and-archives.md)**: mining backups, images, and archives for whole systems.
 
 ## References
 
-- [NetExec: spidering and modules](https://www.netexec.wiki/smb-protocol/enumeration)
-- [HackTricks: pentesting SMB](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-smb/index.html)
+- [NetExec: spidering shares](https://www.netexec.wiki/smb-protocol)
+- [MITRE ATT&CK: unsecured credentials in files](https://attack.mitre.org/techniques/T1552/001/)

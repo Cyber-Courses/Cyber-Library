@@ -1,32 +1,43 @@
 ---
-title: "Enumeration: discovering NFS exports and access"
-description: "Enumerating an NFS server through the portmapper (rpcbind) and mount service to list exported directories, the hosts allowed to mount them, and their options, then mounting world-accessible exports to read their contents."
+title: "Enumeration: NFS exports, options, and mounting"
+description: "NFS enumeration lists the exported paths, the clients allowed to mount them, and, where readable, the export options that decide squashing and access. Mounting an export exposes its files under the client-asserted identity, and the file ownership seen after mounting reveals which UIDs and GIDs to spoof for fuller access."
 keywords:
-  - NFS enumeration
   - showmount
-  - rpcbind
-  - portmapper
   - exports
+  - mount
+  - nfsstat
+  - uid mapping
 ---
 
 # Enumeration
 
-NFS registers with the portmapper (`rpcbind`, port 111), which points to the mount and NFS services. `showmount` lists the exported directories and the hosts allowed to mount each, and mounting a world-accessible export reveals its files and permissions.
+Enumerating NFS answers what is exported, to whom, and under what options, and then mounting reveals the file ownership that drives the spoofing and squash attacks. The export list and allowed-client specification come from the server; the critical options (`root_squash` vs `no_root_squash`, `all_squash`, `sec=`) are not always visible remotely, so mounting and inspecting ownership is how you learn the effective model.
 
 ```bash
-rpcinfo -p <target>                         # RPC services (mountd, nfs)
-showmount -e <target>                        # exported directories and allowed hosts
-nmap -p 111,2049 --script nfs-ls,nfs-showmount,nfs-statfs <target>
-mount -t nfs -o vers=3 <target>:/export /mnt/nfs    # mount and read
+# list exports and permitted clients
+showmount -e <target>                          # e.g. /srv/share *  (world) or 10.0.0.0/8
+rpcinfo -p <target>                            # confirm mountd/nfs reachable
+# mount an export and inspect
+mkdir /mnt/nfs && mount -t nfs -o vers=3 <target>:/srv/share /mnt/nfs
+ls -lan /mnt/nfs                               # numeric UID/GID ownership of files
+mount -t nfs -o vers=4 <target>:/ /mnt/nfs     # NFSv4 presents a single pseudo-root
 ```
+
+Read `ls -lan` numerically: the UID/GID that owns each file is what you must present to read or write it under `AUTH_SYS`. Files owned by UID 0 test whether root is squashed; files owned by other UIDs name the identities to spoof.
 
 ## Exploitation notes
 
-- `showmount -e` is the fastest map; exports allowed to `*` or a broad subnet are mountable by anyone who can reach the server.
-- The options behind each export (`no_root_squash`, `rw`, `insecure`) determine the next step; `nfs-ls` reads files without a full mount.
-- A readable export is immediate loot; a `no_root_squash` or writable one is a write primitive.
+- `showmount -e` with a wildcard or broad client spec means anyone who can reach 2049 can mount; a restricted client list may be bypassable by spoofing the source address on a flat network.
+- The export options are the real security; since they are often not visible remotely, mount and test, create a file and see what UID it lands as, and read a root-owned file, to learn whether `root_squash`/`all_squash` apply.
+- NFSv4 uses a single exported pseudo-filesystem and name-based id mapping rather than NFSv3's per-export numeric model; mount both versions to see what each exposes.
+- The ownership map feeds [UID and GID spoofing](uid-and-gid-spoofing.md) and the [no_root_squash](no-root-squash-abuse.md) test.
+
+## Tools
+
+- [nfs-common (showmount, mount.nfs)](https://man7.org/linux/man-pages/man8/showmount.8.html)
+- [nmap nfs scripts](https://nmap.org/nsedoc/)
 
 ## References
 
-- [man 8 showmount](https://man7.org/linux/man-pages/man8/showmount.8.html)
-- [HackTricks: pentesting NFS](https://book.hacktricks.wiki/en/network-services-pentesting/nfs-service-pentesting.html)
+- [exports(5)](https://man7.org/linux/man-pages/man5/exports.5.html)
+- [HackTricks: NFS](https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting)

@@ -1,24 +1,34 @@
 ---
 title: "TFTP: attacking the Trivial File Transfer Protocol"
-description: "Attacking TFTP, the trivial, unauthenticated UDP file-transfer protocol used by network devices and PXE boot: reading and writing files with no authentication, and directory traversal where the server fails to confine requests to its root."
+description: "TFTP is a minimal UDP file-transfer protocol on port 69 with no authentication whatsoever. Any client can read and, where the server allows, write files. The offensive surface is reading sensitive files the server exposes (configs, firmware, PXE boot files), writing to influence a device that consumes them, and directory traversal to escape the TFTP root."
 keywords:
-  - TFTP
-  - UDP 69
-  - PXE
-  - unauthenticated
-  - directory traversal
+  - tftp
+  - port 69
+  - udp
+  - no authentication
+  - pxe
 ---
 
 # TFTP
 
-TFTP is a minimal file-transfer protocol over UDP port 69 with no authentication at all, used for network-device configs, firmware, and PXE boot. Attacks are simple by nature: read and write files directly, and traverse outside the TFTP root where the server does not confine requests. It leaks device configurations that frequently contain credentials.
+TFTP (Trivial File Transfer Protocol) is a deliberately minimal file-transfer protocol over UDP port 69. It has no authentication, no directory listing, and only two real operations: read a file (RRQ) and write a file (WRQ). It is used where simplicity matters, PXE network boot, router and phone firmware and configuration, backup of device configs, so the files it serves are often sensitive, and a writable TFTP server lets an attacker influence whatever device consumes those files. Because there is no auth, reaching port 69 is the only precondition.
+
+```bash
+# connect (no listing exists; you request known/guessed filenames)
+tftp <target>
+#   tftp> get <filename>      # read
+#   tftp> put <localfile> <remote>   # write (if allowed)
+# scripted
+curl -s tftp://<target>/<filename> -o out
+nmap -sU -p69 --script tftp-enum <target>     # probe for common filenames
+```
 
 ## Subtopics
 
-- **[File read and write](file-read-and-write.md)**: unauthenticated GET and PUT.
-- **[Directory traversal](directory-traversal.md)**: escaping the TFTP root.
+- **[File read and write](file-read-and-write.md)**: reading sensitive files and writing to the server.
+- **[Directory traversal](directory-traversal.md)**: escaping the TFTP root with path traversal.
 
 ## References
 
-- [HackTricks: pentesting TFTP](https://book.hacktricks.wiki/en/network-services-pentesting/69-udp-tftp.html)
-- [RFC 1350: TFTP](https://www.rfc-editor.org/rfc/rfc1350)
+- [RFC 1350 (TFTP)](https://datatracker.ietf.org/doc/html/rfc1350)
+- [HackTricks: TFTP (69)](https://book.hacktricks.xyz/network-services-pentesting/69-udp-tftp)

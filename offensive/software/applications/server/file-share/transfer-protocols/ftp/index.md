@@ -1,25 +1,30 @@
 ---
 title: "FTP: attacking the File Transfer Protocol"
-description: "Attacking FTP: anonymous access that exposes files without credentials, credential brute force against the cleartext login, and the FTP bounce trick that uses the PORT command to proxy connections and scan hosts the attacker cannot reach directly."
+description: "FTP serves files on TCP 21 in cleartext, with a control channel and separate data connections. The offensive surface is anonymous access that many servers allow, credential brute force against its plaintext login, the FTP bounce feature that proxies port scans through the server, and credential capture from its unencrypted traffic."
 keywords:
-  - FTP
-  - anonymous FTP
-  - brute force
-  - FTP bounce
+  - ftp
   - port 21
+  - anonymous
+  - ftp bounce
+  - cleartext
 ---
 
 # FTP
 
-FTP serves files over a cleartext control channel on port 21, with a separate data channel. It is attacked through anonymous access (a common default), brute force against its unencrypted login, and the FTP bounce quirk that abuses the PORT command to make the server open connections on the attacker's behalf.
+FTP (File Transfer Protocol) serves files on TCP 21 using a cleartext control channel and separate data connections (active or passive). Its age shows in its security: credentials and data travel unencrypted, anonymous access is a built-in feature frequently left enabled, and the `PORT` command enables the bounce technique that turns the server into a scan proxy. The surface is therefore anonymous access, brute force against the plaintext login, the bounce quirk, and passive capture of credentials and files from the unencrypted stream.
+
+```bash
+nmap -p21 --script ftp-anon,ftp-syst,ftp-bounce <target>
+ftp <target>                                  # interactive; try anonymous first
+```
 
 ## Subtopics
 
-- **[Anonymous access](anonymous-access.md)**: reading files with no credentials.
-- **[Credential brute force](credential-brute-force.md)**: guessing the cleartext login.
-- **[FTP bounce scan](ftp-bounce-scan.md)**: proxying connections through the server.
+- **[Anonymous access](anonymous-access.md)**: the built-in anonymous login.
+- **[Credential brute force](credential-brute-force.md)**: attacking the plaintext login.
+- **[FTP bounce scan](ftp-bounce-scan.md)**: proxying port scans through the server.
 
 ## References
 
-- [HackTricks: pentesting FTP](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-ftp/index.html)
-- [RFC 959: FTP](https://www.rfc-editor.org/rfc/rfc959)
+- [RFC 959 (FTP)](https://datatracker.ietf.org/doc/html/rfc959)
+- [HackTricks: FTP (21)](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ftp)

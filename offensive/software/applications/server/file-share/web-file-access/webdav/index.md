@@ -1,26 +1,32 @@
 ---
-title: "WebDAV: attacking the HTTP file-management extension"
-description: "Attacking WebDAV, the HTTP extension that adds file management to a web server: discovering it and enumerating its methods, bypassing weak authentication, traversing outside the DAV root, and abusing the PUT method to upload a web shell for code execution."
+title: "WebDAV: attacking the read-write HTTP extension"
+description: "WebDAV extends HTTP with verbs for listing, creating, moving, and writing files, turning a web server into a mountable, writable filesystem. The offensive surface is discovering the enabled verbs, bypassing weak authentication, traversing outside the intended collection, and using PUT or MOVE to place an executable file in a web-interpreted path for code execution."
 keywords:
-  - WebDAV
-  - PROPFIND
-  - PUT
-  - mod_dav
-  - IIS WebDAV
+  - webdav
+  - propfind
+  - put
+  - dav verbs
+  - move
 ---
 
 # WebDAV
 
-WebDAV extends HTTP with methods (PROPFIND, MKCOL, PUT, MOVE, COPY) that let clients manage files on the server, implemented by IIS WebDAV and Apache `mod_dav`. It is attacked by discovering it and its allowed methods, bypassing weak authentication, traversing outside its root, and, most directly, using PUT to upload an executable file.
+WebDAV (Web Distributed Authoring and Versioning) adds verbs to HTTP, PROPFIND (list and read properties), PUT (write a file), MKCOL (make a collection), MOVE, COPY, DELETE, LOCK, so a web server becomes a mountable, writable filesystem. That read-write capability is the attack surface. The moves are discovering which verbs are enabled and what they expose, bypassing authentication that is often weak or inconsistently applied, traversing outside the intended collection, and, most impactful, using PUT (sometimes combined with MOVE to dodge an extension filter) to plant a server-executable file for code execution.
+
+```bash
+# detect WebDAV and its verbs
+curl -s -X OPTIONS http://<target>/ -i | grep -iE 'allow|dav'   # DAV header + verbs
+davtest -url http://<target>/                 # tests PUT and which extensions execute
+```
 
 ## Subtopics
 
-- **[Discovery and methods](discovery-and-methods.md)**: detecting DAV and its allowed methods.
-- **[Authentication bypass](authentication-bypass.md)**: reaching DAV past weak auth.
-- **[Directory traversal](directory-traversal.md)**: escaping the DAV root.
-- **[PUT upload to RCE](put-upload-to-rce.md)**: uploading a web shell.
+- **[Discovery and methods](discovery-and-methods.md)**: finding WebDAV and its enabled verbs.
+- **[Authentication bypass](authentication-bypass.md)**: reaching DAV verbs past weak auth.
+- **[Directory traversal](directory-traversal.md)**: escaping the intended collection.
+- **[PUT upload to RCE](put-upload-to-rce.md)**: planting an executable file via PUT/MOVE.
 
 ## References
 
-- [HackTricks: pentesting WebDAV](https://book.hacktricks.wiki/en/network-services-pentesting/put-method-webdav.html)
-- [RFC 4918: WebDAV](https://www.rfc-editor.org/rfc/rfc4918)
+- [RFC 4918 (WebDAV)](https://datatracker.ietf.org/doc/html/rfc4918)
+- [HackTricks: WebDAV](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/put-method-webdav)
