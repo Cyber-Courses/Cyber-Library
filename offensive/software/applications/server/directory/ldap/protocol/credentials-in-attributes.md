@@ -55,7 +55,7 @@ AD stores machine and service secrets in the directory for principals granted re
   gMSADumper.py -u user -p pass -d example.local
   ```
 
-Who can read these is an [ACL](../active-directory/dacl/acl-enumeration.md) question, so enumerating the read rights on LAPS/gMSA-bearing objects tells you which secrets are within reach.
+Who can read these is an [ACL](../../active-directory/dacl/acl-enumeration.md) question, so enumerating the read rights on LAPS/gMSA-bearing objects tells you which secrets are within reach.
 
 ## Exploitation notes
 

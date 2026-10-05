@@ -20,7 +20,7 @@ NTLM has no binding between the authentication and the service it was meant for.
 Signing and channel binding bind the authentication to the session or the TLS channel, breaking the forward:
 
 - **SMB signing**: if the SMB target requires signing, SMB relay to it fails. DCs require it; member servers often do not.
-- **[LDAP signing and channel binding](../../../ldap/signing-and-channel-binding.md)**: LDAP relay needs signing **not** enforced; LDAPS relay additionally needs channel binding (EPA) off. DCs with both enforced cannot be relayed to over LDAP.
+- **[LDAP signing and channel binding](../../../ldap/protocol/signing-and-channel-binding.md)**: LDAP relay needs signing **not** enforced; LDAPS relay additionally needs channel binding (EPA) off. DCs with both enforced cannot be relayed to over LDAP.
 - **HTTP (EPA)**: AD CS web enrollment and other HTTP endpoints are relayable when Extended Protection for Authentication is not enforced.
 
 The job is to find a path where the *source* can be coerced and the *target* does not enforce the relevant protection.
