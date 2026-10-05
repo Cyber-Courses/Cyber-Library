@@ -1,28 +1,36 @@
 ---
-title: "Persistence: keeping access to a Kubernetes cluster"
-description: "Persisting in a Kubernetes cluster after compromise: running attacker workloads as deployments and cronjobs, hiding static pods on nodes, backdooring RBAC with hidden roles and bindings, and registering admission webhooks that reinfect or re-privilege every new workload."
+title: "Persistence: holding access to a compromised cluster"
+description: "After gaining control, an attacker keeps it by planting mechanisms that survive credential rotation and pod restarts: RBAC bindings granting a durable identity, malicious workloads and cronjobs that re-establish access, static pods the kubelet runs directly, and admission webhooks that inject backdoors or mint credentials on every relevant API request."
 keywords:
   - kubernetes persistence
-  - malicious workload
+  - rbac backdoor
   - static pod
-  - RBAC backdoor
   - admission webhook
+  - cronjob
 ---
 
 # Persistence
 
-Persistence in Kubernetes hides in the cluster's own mechanisms: controllers that keep workloads running, cronjobs that fire on a schedule, static pods the API never sees, RBAC objects that quietly restore access, and admission webhooks that touch every new object. The best footholds look like ordinary cluster configuration.
+Holding a Kubernetes cluster means surviving the obvious responses: a rotated token, a deleted pod, a patched node. The durable mechanisms plant themselves in cluster state or on nodes so they outlast those. An RBAC binding grants a long-lived identity that no token rotation removes; a workload or cronjob re-creates access on a schedule; a static pod runs from a node's manifest directory with no API object to delete; and an admission webhook sits in the request path, injecting backdoors or minting credentials whenever a matching object is created.
+
+```bash
+# what can the current identity create for persistence?
+kubectl auth can-i create clusterrolebindings
+kubectl auth can-i create mutatingwebhookconfigurations
+kubectl auth can-i create cronjobs -A
+```
 
 ## Subtopics
 
-- **[Malicious workloads](malicious-workloads.md)**: deployments and daemonsets that self-heal.
-- **[CronJobs](cronjobs.md)**: scheduled attacker execution.
-- **[Static pods](static-pods.md)**: node-level pods outside the API.
-- **[RBAC backdoor](rbac-backdoor.md)**: hidden roles, bindings, and accounts.
-- **[Admission webhooks](admission-webhooks.md)**: intercepting cluster operations.
-- **[Mutating webhook backdoor](mutating-webhook-backdoor.md)**: injecting into every new workload.
+- **[RBAC backdoor](rbac-backdoor.md)**: a durable identity through bindings.
+- **[Malicious workloads](malicious-workloads.md)**: deployments and daemonsets that re-establish access.
+- **[CronJobs](cronjobs.md)**: scheduled re-entry.
+- **[Static pods](static-pods.md)**: pods the kubelet runs from a node manifest directory.
+- **[Admission webhooks](admission-webhooks.md)**: intercepting the API request path.
+- **[Mutating webhook backdoor](mutating-webhook-backdoor.md)**: injecting into every matching object.
 
 ## References
 
-- [Kubernetes: controllers](https://kubernetes.io/docs/concepts/architecture/controller/)
-- [MITRE ATT&CK: Containers matrix](https://attack.mitre.org/matrices/enterprise/containers/)
+- [Kubernetes: RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [MITRE ATT&CK: persistence (containers)](https://attack.mitre.org/tactics/TA0003/)
+- [Microsoft: threat matrix for Kubernetes](https://www.microsoft.com/en-us/security/blog/2021/03/23/secure-containerized-environments-with-updated-threat-matrix-for-kubernetes/)
