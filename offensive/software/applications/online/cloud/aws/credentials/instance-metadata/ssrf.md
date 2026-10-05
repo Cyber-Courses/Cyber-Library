@@ -11,7 +11,7 @@ keywords:
 
 # SSRF
 
-When a web application running on EC2 can be coerced into making a request to an attacker-chosen URL, point it at the metadata endpoint and the response hands back the instance role's credentials. This is the bridge between a web vulnerability and full cloud credentials, and it is why [SSRF](../../../../web/code/injection/request-forgery/index.md) is treated as a cloud-credential technique.
+When a web application running on EC2 can be coerced into making a request to an attacker-chosen URL, point it at the metadata endpoint and the response hands back the instance role's credentials. This is the bridge between a web vulnerability and full cloud credentials, and it is why [SSRF](../../../../../server/web/code/injection/request-forgery/index.md) is treated as a cloud-credential technique.
 
 ## The core request
 
@@ -45,7 +45,7 @@ curl -s "http://169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
 
 ## Exploitation notes
 
-- The web SSRF mechanics (sinks, filters, redirect and DNS-rebinding bypasses) live in [request forgery](../../../../web/code/injection/request-forgery/index.md); this page is only the AWS payload.
+- The web SSRF mechanics (sinks, filters, redirect and DNS-rebinding bypasses) live in [request forgery](../../../../../server/web/code/injection/request-forgery/index.md); this page is only the AWS payload.
 - Once the role credentials are exported, the role's own rights may mint more: `sts:AssumeRole`, `iam:CreateAccessKey`, `ecr:GetAuthorizationToken`, `cognito-identity:GetCredentialsForIdentity`, `redshift:GetClusterCredentials`, `sso:GetRoleCredentials`, `lightsail:GetInstanceAccessDetails`, and `rds-db` connect tokens; see [credential brokers](../credential-brokers.md).
 
 ## Tools

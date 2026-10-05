@@ -30,7 +30,7 @@ az ad app credential reset --id <privileged-appId> --append
 ## Exploitation notes
 
 - The Global Administrator roleDefinitionId is `62e90394-69f5-4237-9190-012177145e10`; assigning it at scope `/` is full takeover.
-- A Global Admin can cross into Azure by toggling `elevateAccess` to seize User Access Administrator over every subscription, bridging to the [Azure resource plane](../../../cloud/azure/identity/privilege-escalation/elevate-access.md).
+- A Global Admin can cross into Azure by toggling `elevateAccess` to seize User Access Administrator over every subscription, bridging to the [Azure resource plane](../../../../online/cloud/azure/identity/privilege-escalation/elevate-access.md).
 - Prefer the quietest chain: adding an app secret (Application Administrator) blends into normal app management better than a direct role grant.
 
 ## Tools
