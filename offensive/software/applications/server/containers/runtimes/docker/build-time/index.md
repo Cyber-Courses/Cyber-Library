@@ -1,24 +1,29 @@
 ---
-title: "Build-time: attacking the Docker image build"
-description: "Attacking the image build rather than a running container: recovering secrets passed as build arguments or baked into intermediate layers, and executing code on the build host through BuildKit flaws or a malicious Dockerfile and build context."
+title: "Build-time attacks: abusing the image build process"
+description: "The container build is an execution environment with its own attack surface. Build arguments and mounted secrets leak into the final image or the build cache, and the BuildKit frontend and daemon have had flaws letting a crafted Dockerfile or build context read files outside the context or execute on the build host."
 keywords:
   - docker build
   - buildkit
-  - build-arg secret
-  - build host RCE
-  - supply chain
+  - build-arg
+  - build secret
+  - build host
 ---
 
-# Build-time
+# Build-time attacks
 
-The build is a privileged step that runs commands and pulls dependencies, often in CI on a host that also builds other projects. Two things go wrong there: secrets handed to the build persist in the image, and the build itself can be made to run attacker code on the build host.
+Building an image runs commands, resolves a context, and caches intermediate results, all on a build host that frequently has more access than the eventual runtime: registry credentials, cloud roles for pushing, and the source repository. Two problems follow. Secrets supplied to the build leak into the image or cache where they can be recovered later. And the build tooling itself, BuildKit and the daemon, processes an attacker-influenced Dockerfile and context, so flaws there read host files or execute on the build host.
+
+```bash
+docker version | grep -i buildkit            # BuildKit frontend in use
+env | grep -iE 'BUILD|REGISTRY|AWS|GITHUB_TOKEN'   # build-host credentials worth stealing
+```
 
 ## Subtopics
 
-- **[Build-arg secret leak](build-arg-secret-leak.md)**: secrets in build args and intermediate layers.
-- **[BuildKit RCE](buildkit-rce.md)**: code execution on the build host.
+- **[Build-arg secret leak](build-arg-secret-leak.md)**: secrets passed as build arguments persisting in the image.
+- **[BuildKit RCE](buildkit-rce.md)**: crafted builds reading outside the context or executing on the build host.
 
 ## References
 
-- [Docker build secrets](https://docs.docker.com/build/building/secrets/)
-- [BuildKit](https://github.com/moby/buildkit)
+- [Docker: build secrets](https://docs.docker.com/build/building/secrets/)
+- [BuildKit security advisories](https://github.com/moby/buildkit/security/advisories)
