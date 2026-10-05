@@ -21,7 +21,7 @@ Proxmox guest escape surfaces:
 
 ## Exploitation notes
 
-- For VMs, the technique and surface are identical to [KVM and QEMU guest to host escape](../qemu/guest-to-host-escape.md), bounded by the node's QEMU confinement.
+- For VMs, the technique and surface are identical to [KVM and QEMU guest to host escape](../qemu/guest-to-host-escape/index.md), bounded by the node's QEMU confinement.
 - For LXC, especially privileged containers, the breakout is the generic [Container escape](../../../containers/container-escape/index.md), and it lands directly on the node.
 - Once on the node, `/etc/pve` and the cluster communication give lateral movement to other nodes; see [Management plane](management-plane.md).
 

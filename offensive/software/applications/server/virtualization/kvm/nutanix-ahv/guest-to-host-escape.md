@@ -21,7 +21,7 @@ Nutanix AHV guest escape surface:
 
 ## Exploitation notes
 
-- The technique and surface are the [KVM and QEMU guest to host escape](../qemu/guest-to-host-escape.md), bounded by the AHV host's QEMU confinement.
+- The technique and surface are the [KVM and QEMU guest to host escape](../qemu/guest-to-host-escape/index.md), bounded by the AHV host's QEMU confinement.
 - The escape's value is the pivot: AHV host to CVM to the distributed storage, which holds every VM's disks for [Disk and snapshot theft](disk-and-snapshot-theft.md).
 - Nutanix-specific and QEMU named issues are under [Known escape exploits](known-escape-exploits.md).
 

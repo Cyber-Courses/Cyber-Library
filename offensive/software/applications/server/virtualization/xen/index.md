@@ -16,7 +16,7 @@ Xen is a type-1 hypervisor with a privileged control domain, dom0, that manages 
 ## Subtopics
 
 - **[Host access and shell](host-access-and-shell.md)**: reaching dom0.
-- **[Guest to host escape](guest-to-host-escape.md)**: breaking out to dom0 or the hypervisor.
+- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out to dom0 or the hypervisor.
 - **[Management plane](management-plane.md)**: XCP-ng, XenServer, and xapi.
 - **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: reading guest disks.
 - **[Known escape exploits](known-escape-exploits.md)**: named Xen breakouts.

@@ -22,7 +22,7 @@ KVM kernel-module surface:
 
 ## Exploitation notes
 
-- A KVM-module bug bypasses the QEMU confinement (seccomp, sVirt, non-root) entirely, because the code runs in the host kernel rather than the VMM process; this is why it is higher impact than a [QEMU device escape](../qemu/guest-to-host-escape.md).
+- A KVM-module bug bypasses the QEMU confinement (seccomp, sVirt, non-root) entirely, because the code runs in the host kernel rather than the VMM process; this is why it is higher impact than a [QEMU device escape](../qemu/guest-to-host-escape/index.md).
 - The instruction emulator is a recurring source of bugs, reached by making the CPU take an exit on a crafted instruction.
 - These flaws are rarer than device-model bugs but affect every KVM-based VMM at once, since they all share the module.
 

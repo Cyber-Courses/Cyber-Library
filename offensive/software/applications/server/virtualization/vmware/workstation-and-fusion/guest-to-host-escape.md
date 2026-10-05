@@ -24,7 +24,7 @@ Shared escape surface with ESXi:
 
 - Because the device code is shared, escapes often affect ESXi, Workstation, and Fusion together; the difference is the host OS the escape lands on.
 - Analysis sandboxes commonly leave 3D acceleration and Shared Folders enabled, widening the surface; see [Shared folder and drag-drop abuse](shared-folder-and-drag-drop-abuse.md).
-- Named instances are under [Known escape exploits](known-escape-exploits.md); the ESXi view is [ESXi guest to host escape](../esxi/guest-to-host-escape.md).
+- Named instances are under [Known escape exploits](known-escape-exploits.md); the ESXi view is [ESXi guest to host escape](../esxi/guest-to-host-escape/index.md).
 
 ## References
 

@@ -16,7 +16,7 @@ ESXi is a thin, hardened hypervisor managed through a host client, SSH, and the 
 ## Subtopics
 
 - **[Host access and shell](host-access-and-shell.md)**: reaching the ESXi shell and API.
-- **[Guest to host escape](guest-to-host-escape.md)**: breaking out through VMX device emulation.
+- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out through VMX device emulation.
 - **[Datastore and VMDK theft](datastore-and-vmdk-theft.md)**: stealing guest disks offline.
 - **[Known escape exploits](known-escape-exploits.md)**: named ESXi breakouts.
 

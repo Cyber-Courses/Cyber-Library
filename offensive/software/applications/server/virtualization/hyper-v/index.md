@@ -16,7 +16,7 @@ Hyper-V is a type-1 hypervisor that runs the Windows host as a privileged parent
 ## Subtopics
 
 - **[Host access and shell](host-access-and-shell.md)**: reaching the parent partition.
-- **[Guest to host escape](guest-to-host-escape.md)**: breaking out of a child partition.
+- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out of a child partition.
 - **[Management plane and WMI abuse](management-plane-and-wmi-abuse.md)**: controlling guests through management interfaces.
 - **[Checkpoint and VHD theft](checkpoint-and-vhd-theft.md)**: lifting guest disks and checkpoints.
 - **[Known escape exploits](known-escape-exploits.md)**: named Hyper-V breakouts.

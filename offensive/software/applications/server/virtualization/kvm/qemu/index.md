@@ -16,7 +16,7 @@ QEMU is the user-space virtual machine monitor that provides device emulation fo
 ## Subtopics
 
 - **[Host access and shell](host-access-and-shell.md)**: reaching the host and libvirt.
-- **[Guest to host escape](guest-to-host-escape.md)**: breaking out through QEMU device models.
+- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out through QEMU device models.
 - **[Management plane](management-plane.md)**: libvirt, oVirt, and RHV.
 - **[Disk and snapshot theft](disk-and-snapshot-theft.md)**: qcow2 and raw images.
 - **[Known escape exploits](known-escape-exploits.md)**: named QEMU device breakouts.

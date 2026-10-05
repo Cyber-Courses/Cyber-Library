@@ -15,7 +15,7 @@ VirtualBox is Oracle's hosted (type-2) hypervisor, widely used on desktops and i
 
 ## Subtopics
 
-- **[Guest to host escape](guest-to-host-escape.md)**: breaking out through emulated devices.
+- **[Guest to host escape](guest-to-host-escape/index.md)**: breaking out through emulated devices.
 - **[Shared folder and clipboard abuse](shared-folder-and-clipboard-abuse.md)**: reaching host files through integration.
 - **[Known escape exploits](known-escape-exploits.md)**: named VirtualBox breakouts.
 
