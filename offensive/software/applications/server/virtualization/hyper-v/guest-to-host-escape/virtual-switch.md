@@ -1,31 +1,39 @@
 ---
-title: "Virtual switch: escaping Hyper-V through vmswitch"
-description: "Escaping Hyper-V through the virtual switch (vmswitch), which parses guest network frames in the host kernel, the most dangerous Hyper-V escape surface because it is reachable from any guest with a virtual NIC and a flaw there yields host kernel code execution."
+title: "Virtual switch: escaping Hyper-V through the networking datapath"
+description: "The Hyper-V virtual switch forwards VM network traffic in the root partition, with an extensible filter stack and the synthetic and emulated NIC paths feeding it. Guest-controlled packets and the synthetic network VSP requests are parsed there, so flaws in the switch, its extensions, or the network VSP give memory corruption in the root-partition networking stack."
 keywords:
+  - hyper-v virtual switch
   - vmswitch
-  - virtual switch
-  - host kernel
-  - Hyper-V escape
-  - network
+  - netvsp
+  - packet parsing
+  - root partition
 ---
 
 # Virtual switch
 
-The Hyper-V virtual switch, `vmswitch`, runs in the host kernel and processes the network frames guests send. Because it parses guest-controlled packet data in the most privileged context, a memory-corruption flaw there is host kernel code execution, reached from any guest that has a virtual network adapter. This makes it the highest-impact Hyper-V escape surface.
+The Hyper-V virtual switch (`vmswitch`) forwards network traffic for every VM, running in the root partition kernel. Guest traffic reaches it through the synthetic network VSP (`netvsp`) over VMBus or through an emulated NIC, and the switch applies an extensible filter stack before forwarding. Because the switch and the network VSP parse guest-controlled packets and request structures in the privileged root partition, flaws there, in packet parsing, offload handling, or the VSP's ring and descriptor processing, corrupt the root-partition networking stack and have been a notable Hyper-V escape surface.
 
-```text
-vmswitch escape surface:
-- Guest frame parsing and header handling in the host kernel
-- Offload and extension processing
+## The surface
+
+```c
+// netvsp receives send/receive buffer descriptors and RNDIS control/data messages
+// from the guest over VMBus. Primitives:
+//  - an RNDIS message with a length or offset field vmswitch/netvsp trusts
+//  - send/receive buffer section descriptors with out-of-range offsets or counts
+//  - offload (checksum/segmentation) metadata the switch parses from guest packets
+// a trusted length used for a copy, or an index not bounded, -> OOB in the root partition
 ```
+
+RNDIS is the control protocol the synthetic NIC uses; its messages (set/query OIDs, packet descriptors) are parsed host-side, and malformed RNDIS has been a recurring source of `vmswitch` bugs.
 
 ## Exploitation notes
 
-- It is reachable from any guest with a virtual NIC, with no special configuration, which is what makes it so dangerous.
-- Success lands directly in the host kernel, bypassing the worker-process boundary that bounds synthetic-device bugs.
-- This is a recurring high-severity Hyper-V class in Microsoft's advisories.
+- The synthetic NIC path (netvsp plus vmswitch) is the richer target than the emulated NIC, because it parses the RNDIS protocol and the send/receive buffer descriptor model in the root-partition kernel.
+- `vmswitch` runs in the root partition kernel, so corruption is a kernel-level primitive on the host, among the highest-impact Hyper-V escapes.
+- The guest drives this by sending crafted RNDIS messages and buffer descriptors from its NIC driver; an attacker guest driver controls them directly.
+- The transport is [VMBus](vmbus.md); the network VSP is one of the [synthetic devices](synthetic-devices.md), and this page is the switch and RNDIS specifics.
 
 ## References
 
-- [Microsoft Hyper-V bug bounty](https://www.microsoft.com/en-us/msrc/bounty-hyper-v)
-- [Microsoft: Hyper-V architecture](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-architecture)
+- [Microsoft: Hyper-V virtual switch](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v-virtual-switch/hyper-v-virtual-switch)
+- [MSRC: vmswitch research](https://www.microsoft.com/en-us/msrc)

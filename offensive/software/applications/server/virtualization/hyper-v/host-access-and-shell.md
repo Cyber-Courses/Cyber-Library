@@ -1,33 +1,49 @@
 ---
-title: "Host access and shell: reaching the Hyper-V parent partition"
-description: "Reaching the Hyper-V host, the Windows parent partition, which has full control of every guest: through normal Windows access to the host, the Hyper-V Manager and PowerShell, or a management service, from where guest disks and consoles are available."
+title: "Host access and shell: execution on the Hyper-V host"
+description: "A Hyper-V host is a Windows Server (or client) machine, so host access is Windows access: administrative credentials, the management interfaces, or a guest escape landing in the root partition. With it, an attacker controls every VM through Hyper-V management, reads VM disks, injects into guests, and persists on the host like any Windows system."
 keywords:
-  - Hyper-V host
-  - parent partition
-  - Hyper-V Manager
-  - PowerShell Direct
-  - host access
+  - hyper-v host
+  - root partition
+  - windows server
+  - hyper-v manager
+  - persistence
 ---
 
 # Host access and shell
 
-The Hyper-V host is a Windows machine (the parent partition), and control of it is control of every guest. Reaching it is ordinary Windows compromise: credentials for the host, the `Hyper-V Administrators` group, or a management service. Once on the host, guests are fully exposed through PowerShell and the console.
+A Hyper-V host is a Windows machine running the role, so reaching the host is reaching Windows: through administrative credentials and the usual remote interfaces (RDP, WinRM, SMB, WMI), through the Hyper-V management stack, or through a guest escape that lands in the root partition. The root partition is a privileged Windows partition that administers every guest, so host code execution means full control of all VMs, their disks, and the virtualization configuration, with persistence options identical to any Windows server.
+
+## Reach and use the host
 
 ```powershell
-Get-VM                                   # every guest on this host
-Get-VMHost | fl                          # host and hypervisor settings
-# Interact with a guest OS directly from the host (no network needed)
-Enter-PSSession -VMName <guest> -Credential <cred>   # PowerShell Direct
-Get-VMHardDiskDrive -VMName <guest>      # locate its VHDs
+# remote execution with host admin credentials
+Enter-PSSession -ComputerName <host> -Credential <admin>
+winrs -r:<host> cmd                              # or WinRM / PsExec / WMI
+# once on the host, Hyper-V management controls every VM
+Get-VM; Get-VMHardDiskDrive -VMName *
+# run commands inside a guest from the host (with guest creds or via PowerShell Direct)
+Invoke-Command -VMName <guest> -ScriptBlock { whoami } -Credential <guestcred>
+```
+
+PowerShell Direct (`-VMName`) runs commands in a guest from the host without network access to the guest, using the host's privileged position, which is a clean host-to-guest pivot.
+
+## Persistence
+
+```powershell
+# the host is Windows: standard persistence applies
+#  - a service, scheduled task, or Run key
+#  - a WMI event subscription (see management-plane-and-wmi-abuse)
+# plus virtualization-specific leverage: modify a VM's config or inject via its disk
 ```
 
 ## Exploitation notes
 
-- Membership in `Hyper-V Administrators` is host-level control of all guests without local admin on the host itself.
-- PowerShell Direct reaches a guest OS from the host over VMBus with no guest network, useful for guests isolated on the network.
-- The host holds every guest's VHD and checkpoints, so host access leads directly to [Checkpoint and VHD theft](checkpoint-and-vhd-theft.md).
+- Host access subsumes everything else: from the root partition you read and modify VM disks ([Checkpoint and VHD theft](checkpoint-and-vhd-theft.md)) and run inside guests via PowerShell Direct without needing guest network reach.
+- A guest-to-host escape lands code in the root partition or worker process; from there, local privilege escalation to full host admin follows the normal Windows playbook if not already SYSTEM.
+- Persistence is standard Windows persistence; the virtualization-specific addition is tampering with VM configurations and disks so a target VM runs attacker content on next boot.
+- The management plane (WMI/PowerShell) is both a remote entry and a persistence surface; see [Management plane and WMI abuse](management-plane-and-wmi-abuse.md).
 
 ## References
 
-- [Microsoft: manage Hyper-V with PowerShell](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/manage-hyper-v-with-powershell)
+- [Microsoft: Hyper-V management](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/manage/)
 - [Microsoft: PowerShell Direct](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/powershell-direct)
