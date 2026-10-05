@@ -1,32 +1,44 @@
 ---
-title: "Restricted shell and chroot escape: breaking out of an SFTP jail"
-description: "Escaping a restricted SFTP-only account confined by an OpenSSH internal-sftp chroot or a ForceCommand, to reach a full shell or files outside the jail, by abusing writable paths, misconfigured chroot ownership, or features like ProxyJump and local port forwarding the server still permits."
+title: "Restricted shell and chroot escape: breaking out of SFTP-only confinement"
+description: "SFTP-only accounts are confined by OpenSSH's internal-sftp subsystem and usually a ChrootDirectory, meant to allow file transfer but not command execution. Escapes come from writable paths inside the chroot that the system acts on, SFTP features that reach outside, misconfigured chroot ownership, and chaining an SFTP write to a key or cron that the host executes with a real shell."
 keywords:
-  - SFTP chroot
   - internal-sftp
-  - ForceCommand
+  - chrootdirectory
   - restricted shell
-  - jailbreak
+  - escape
+  - forcecommand
 ---
 
 # Restricted shell and chroot escape
 
-Admins confine SFTP users with `ForceCommand internal-sftp` and a `ChrootDirectory`, intending a file-only jail. The confinement leaks when the chroot is misconfigured (writable by the user, or wrong ownership breaks the chroot entirely), when the account can still open SSH channels the config did not disable (port forwarding, ProxyJump), or when a writable path inside the chroot maps to execution outside it.
+Accounts meant only for file transfer are confined two ways in OpenSSH: `ForceCommand internal-sftp` (or the `sftp` subsystem) limits them to the SFTP protocol with no shell, and `ChrootDirectory` locks their filesystem view to a subtree. The goal of an escape is to turn that transfer-only access into command execution on the host. The routes exploit what the confinement does not cover: writable locations inside the chroot that a process outside acts on, SFTP operations that reach beyond the intended area, and chroot misconfigurations.
+
+## Routes
 
 ```bash
-# Can the "SFTP-only" account still forward or tunnel?
-ssh -N -L 8080:127.0.0.1:80 user@<target>     # local forward, if not disabled
-ssh -J user@<target> internal-host             # ProxyJump through the jail
-# Writable chroot: upload to a path the host executes (cron, web root bound in)
+# 1. the account also has shell access despite SFTP intent? test it:
+ssh user@<target> id                      # if a shell returns, there is nothing to escape
+# 2. write a key/cron/script the HOST executes with a real shell, via SFTP write:
+#    - if your chroot home maps to a real user home, upload .ssh/authorized_keys then SSH
+sftp user@<target> <<'E'
+put authorized_keys .ssh/authorized_keys
+E
+ssh -i attacker_key user@<target>         # now a full session if the key is honoured
+# 3. chroot misconfiguration: ChrootDirectory must be root-owned and not writable by
+#    the user; if the chroot root (or a parent) is user-writable, it can be abused,
+#    and writable system paths inside the chroot (cron.d, scripts run by root) execute
+# 4. SFTP symlink/hardlink tricks to reference files outside the intended subtree
+sftp> symlink / escape        # then browse "escape" if the server resolves it host-side
 ```
 
 ## Exploitation notes
 
-- OpenSSH requires the ChrootDirectory and its path to be root-owned and not writable; a violation disables the chroot, exposing the full filesystem over SFTP.
-- Even a correct SFTP chroot does not restrict SSH port forwarding unless `AllowTcpForwarding no` and `PermitTunnel no` are set, so tunneling into the internal network often still works.
-- A writable directory inside the chroot that is bind-mounted from a host-executed path (web root, cron) turns file write into code execution outside the jail.
+- First confirm the confinement is real: many "SFTP-only" accounts actually still grant a shell (`ssh user@host id`), in which case there is no escape to perform.
+- The most reliable escape is indirect: use the SFTP write to drop something the host executes with a real shell, an `authorized_keys` (if the chroot home is the actual home), a file in a writable `cron.d`/script path, or a web file if the chroot overlaps a webroot.
+- A correctly configured `ChrootDirectory` is owned by root and not writable by the user up the whole path; violations of that (user-writable chroot or parent) are a direct weakness.
+- Where the account maps to a system user whose home or scheduled jobs you can write, the transfer access converts to execution as that user; chain with the [key](weak-and-stolen-ssh-keys.md) technique.
 
 ## References
 
-- [OpenSSH sshd_config: ChrootDirectory](https://man.openbsd.org/sshd_config#ChrootDirectory)
-- [HackTricks: pentesting SSH](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-ssh.html)
+- [OpenSSH: ChrootDirectory and internal-sftp](https://man.openbsd.org/sshd_config#ChrootDirectory)
+- [HackTricks: SSH restricted shell escape](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh)
