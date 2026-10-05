@@ -72,7 +72,13 @@ swaks --to target.user@recipient.com \
 # ... -> 250 2.0.0 Ok: queued           <- accepted; check the delivered Authentication-Results
 ```
 
-Read the result in the delivered message's `Authentication-Results:` header: `spf=pass` on `~all`/`+all`/permerror confirms the envelope domain is yours to use. Here `swaks --from` sets both the envelope and the header `From:` to `victim.com`, so this is a direct envelope spoof that stands or falls on SPF alone (and then DMARC). To separate the two identities (SPF-pass on a domain you control while the header spoofs the victim), see [Sender spoofing](sender-spoofing.md).
+Read the `Authentication-Results:` header in the delivered message, and read the SPF outcome exactly, because only one of them is an aligned pass:
+
+- `spf=pass`: the sending IP matched a mechanism (`ip4`/`ip6`/`a`/`mx`/`include`) or the record ends in `+all`. This is the only aligned pass, and on its own it satisfies SPF-based DMARC.
+- `spf=softfail` (`~all`) and `spf=neutral` (`?all`): not a pass. Many receivers still deliver these, but they are not an aligned SPF result, so they do not satisfy DMARC through SPF. The spoof then lands only where DMARC is absent or set to `p=none` (confirm on [DMARC](dmarc.md)).
+- `spf=permerror` (more than ten DNS lookups) and `spf=none` (no record): also not a pass, with the same caveat.
+
+Here `swaks --from` sets both the envelope and the header `From:` to `victim.com`, so this stands or falls on SPF alone and then DMARC. To separate the two identities (an SPF pass on a domain you control while the header `From:` spoofs the victim), see [Sender spoofing](sender-spoofing.md).
 
 ## Follow-on
 

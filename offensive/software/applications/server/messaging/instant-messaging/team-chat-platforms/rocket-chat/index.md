@@ -1,6 +1,6 @@
 ---
 title: "Rocket.Chat: attacking the /api/v1 REST server and its integration scripts"
-description: "Attacking a self-hosted Rocket.Chat server: a Node/Meteor process on 3000 exposing the /api/v1 REST API and DDP over MongoDB. Fingerprint the build from /api/info and the Meteor /sockjs/ transport, then move through user and channel enumeration, the NoSQL operator-injection login bypass, and server exploitation by chaining that bypass to an admin token and the integration-script sandbox escape for code execution."
+description: "Attacking a self-hosted Rocket.Chat server: a Node/Meteor process on 3000 exposing the /api/v1 REST API and DDP over MongoDB. Fingerprint the build from /api/info and the Meteor /sockjs/ transport, then move through user and channel enumeration, the NoSQL injection that takes over an admin account, and server exploitation by chaining that to an admin token and the integration-script sandbox escape for code execution."
 keywords:
   - rocket.chat
   - rocket.chat api
@@ -29,7 +29,7 @@ curl -skI http://<target>:3000/ | grep -i x-instance-id   # X-Instance-Id header
 ## Pages
 
 - **[Enumeration](enumeration.md)**: harvesting users and channels through `/api/v1/users.list`, `/api/v1/channels.list`, and `/api/v1/spotlight`, reading `settings.public`, and using the Meteor DDP methods; interpreting the JSON returned with `X-Auth-Token`/`X-User-Id` headers.
-- **[Authentication](authentication.md)**: the NoSQL operator-injection login bypass where `POST /api/v1/login` and the Meteor `login` method accept an object for `user`/`password`, plus the password-reset token weakness, returning an `authToken` and `userId`.
+- **[Authentication](authentication.md)**: why the REST `/api/v1/login` resists a naive operator object, the blind NoSQL injection in the account and reset methods that extracts a stored password-reset token to take over an admin, and the Enterprise `ddp-streamer` username-lookup bypass.
 - **[Server exploitation](server-exploitation.md)**: chaining the auth bypass to an admin token, then the incoming/outgoing integration "script" and webhook sandbox escape to `require`/`process` for code execution, the file-upload sink, and the message-parser SSRF; ending in a shell as the node user.
 
 ## References

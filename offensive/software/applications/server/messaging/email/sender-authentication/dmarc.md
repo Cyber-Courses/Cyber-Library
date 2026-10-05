@@ -61,7 +61,7 @@ swaks --to target@recipient.com \
       --server mx.recipient.com
 ```
 
-Read the delivered `Authentication-Results:`: `dmarc=pass (p=reject sp=none)` or a bare `dmarc=none` for the subdomain confirms the subdomain carries no enforcing policy, and the recipient sees a `victim.com` subdomain in `From:`. Because relaxed alignment is the default, the subdomain still reads as the trusted organization to a human.
+Read the delivered `Authentication-Results:`. The message still shows `dmarc=fail`, because neither SPF nor DKIM aligns with the `From:` domain; what changes is the disposition. The subdomain's applicable policy is `none` (set explicitly by `sp=none`, or inherited when the parent is `p=none`), so the receiver's requested action is to deliver anyway. The spoof lands not because DMARC passed but because the policy for that subdomain asks for no action on failure. The recipient sees a `victim.com` subdomain in `From:`, and because relaxed alignment is the default it still reads as the trusted organization to a human.
 
 ## Worked: ride relaxed alignment from a sibling
 
