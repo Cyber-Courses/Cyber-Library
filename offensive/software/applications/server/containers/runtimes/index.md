@@ -1,25 +1,34 @@
 ---
-title: "Container runtimes: attacking the engines and their control planes"
-description: "Attacking the container engines themselves rather than escaping a container: the daemon and API sockets each exposes, which are root-equivalent control planes, and the image and registry supply chain that feeds them, across Docker, Podman, and the low-level containerd and CRI-O runtimes."
+title: "Runtimes: attacking the engines that build and run containers"
+description: "The container runtimes themselves are an attack surface distinct from the container boundary: the Docker engine and its network API, the Kubernetes node runtimes containerd and CRI-O with their control sockets, and Podman's rootless and socket-activated model. Each exposes control planes, credentials, and image handling that lead to host or node compromise."
 keywords:
   - container runtime
-  - docker daemon
-  - podman
+  - docker
   - containerd
-  - CRI-O
+  - cri-o
+  - podman
 ---
 
 # Runtimes
 
-A container engine is a privileged service that builds images, pulls them from registries, and starts containers as root. Attacking the engine is distinct from escaping a container: the targets are the control plane it exposes (a daemon API or a control socket, almost always root-equivalent) and the image and registry supply chain behind it. The actual host breakout, once you can start a container, is the same everywhere and lives under [Container escape](../container-escape/index.md).
+A container runtime does far more than start processes: it exposes a control API, pulls and stores images with cached registry credentials, builds images, and runs as root (or near-root) on the host. That machinery is an attack surface in its own right, separate from escaping the container boundary, which is a shared-kernel property documented under container escape. The runtimes differ in how they expose this surface: Docker through a root-equivalent daemon API, containerd and CRI-O through node control sockets under Kubernetes, and Podman through a deliberately rootless, socket-activated design.
+
+```bash
+# identify the runtimes present and their control surfaces
+docker info 2>/dev/null | grep -iE 'rootless|server version'
+ls -l /run/containerd/containerd.sock /run/crio/crio.sock 2>/dev/null
+ls -l /run/podman/podman.sock /run/user/*/podman/podman.sock 2>/dev/null
+ps -ef | grep -E 'dockerd|containerd|crio|podman' | grep -v grep
+```
 
 ## Subtopics
 
-- **[Docker](docker/index.md)**: the daemon API and the image and registry and build supply chain.
-- **[Podman](podman/index.md)**: the daemonless, rootless-capable engine and its API socket.
-- **[containerd and CRI-O](containerd-and-cri-o/index.md)**: the low-level OCI runtimes under Docker and Kubernetes.
+- **[Docker](docker/index.md)**: the engine API, images and registries, and the build process.
+- **[containerd and CRI-O](containerd-and-cri-o/index.md)**: the Kubernetes node runtimes and their sockets.
+- **[Podman](podman/index.md)**: the rootless, daemonless, socket-activated model.
 
 ## References
 
-- [Docker engine security](https://docs.docker.com/engine/security/)
-- [OCI distribution specification](https://github.com/opencontainers/distribution-spec)
+- [Docker: security](https://docs.docker.com/engine/security/)
+- [Kubernetes: container runtimes](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+- [Podman documentation](https://docs.podman.io/)
