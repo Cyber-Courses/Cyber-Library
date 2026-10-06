@@ -30,6 +30,7 @@ A reachable service binary you could exploit is a [Server](../server/index.md) t
 ## Subtopics
 
 - **[Cloud](cloud/index.md)**: the cloud provider platforms (AWS, Azure, GCP), attacked through the control-plane API and the IAM graph.
+- **[Identity](identity/index.md)**: vendor-hosted identity providers and directories (Microsoft Entra ID), attacked through sign-in, tokens, OAuth consent, directory roles, and cross-tenant access.
 
 ## References
 

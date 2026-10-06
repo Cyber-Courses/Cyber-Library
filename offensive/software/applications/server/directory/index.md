@@ -4,7 +4,6 @@ description: "Offensive techniques against directory services: the Active Direct
 keywords:
   - active directory
   - LDAP
-  - Entra ID
   - directory services
   - domain compromise
   - AD attacks
@@ -18,7 +17,6 @@ This area splits by the directory product, because the attack surface is product
 
 - **[Active Directory](active-directory/index.md)**, the Windows directory and its authentication ecosystem (Kerberos, NTLM, LDAP, AD CS). This is the dominant target in enterprise networks and the largest subtree.
 - **[LDAP](ldap/index.md)**, the generic directory protocol as it appears on non-Windows directories (OpenLDAP, 389 Directory Server, and others) and as the LDAP layer that AD itself exposes.
-- **[Entra ID](entra-id/index.md)**, Microsoft's cloud directory (formerly Azure AD): the tenant identity plane behind Microsoft 365 and Azure, attacked through sign-in, applications and service principals, directory roles, and devices.
 
 ## Scope and seams
 
@@ -26,11 +24,12 @@ Directory attacks sit at the service layer: you are attacking the directory *as 
 
 Several named attacks that pass *through* a domain actually target separate products, so they live in their own server areas and are cross-referenced from Active Directory: the Netlogon protocol, the Print Spooler service, Exchange, and configuration-management platforms such as SCCM.
 
+**Microsoft Entra ID** (formerly Azure AD), the cloud tenant that Active Directory commonly synchronizes into, is a vendor-hosted directory and is attacked under [Online > Identity](../../online/identity/entra-id/index.md). The on-premises Active Directory side and the Entra Connect sync bridge stay here and cross-reference it.
+
 ## Sections
 
 - **[Active Directory](active-directory/index.md)**: enumeration, authentication and credential abuse, DACL abuse, Group Policy, trusts, and persistence.
 - **[LDAP](ldap/index.md)**: anonymous and authenticated enumeration, credentials exposed in attributes, and signing and channel-binding weaknesses.
-- **[Entra ID](entra-id/index.md)**: authentication and token abuse, application and service-principal takeover, directory-role and group escalation, device identity, and cross-tenant and guest access.
 
 ## References
 

@@ -21,7 +21,7 @@ A hybrid-joined device is an on-prem Active Directory computer that is also regi
 Set-AADIntDeviceRegKeys ; Get-AADIntUserPRTToken
 ```
 
-See [hybrid identity](../../active-directory/trusts/entra-hybrid.md) for the Entra Connect sync internals this abuses.
+See [hybrid identity](../../../../server/directory/active-directory/trusts/entra-hybrid.md) for the Entra Connect sync internals this abuses.
 
 ## Exploitation notes
 
