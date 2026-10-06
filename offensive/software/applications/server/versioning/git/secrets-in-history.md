@@ -11,7 +11,7 @@ keywords:
 
 # Secrets in history
 
-Removing a secret in a later commit does not remove it from the repository. Git keeps every version of every file as an immutable object keyed by its content hash, so a key, token, or password that was ever committed stays reachable through history, through objects no branch points to any more, and through the reflog, as long as you hold the repository. Any repository you have cloned or recovered (a dumped `.git`, an anonymous clone) carries that full object store with it.
+Removing a secret in a later commit does not remove it from the repository. Git keeps every version of every file as an immutable object keyed by its content hash, so a key, token, or password that was ever committed stays reachable through history, through objects no branch points to any more, and through the reflog, as long as you hold the repository. A `.git` you copied or dumped carries that full object store with it; a fresh anonymous clone carries only the objects reachable from the published refs, not the unreferenced ones or the origin's reflogs.
 
 ## Search the committed history
 

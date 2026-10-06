@@ -43,7 +43,7 @@ Read `local_relpath` for the original tree layout and `checksum` to locate the c
 For the pre-1.7 layout, pull each directory's `.svn/entries` to learn the filenames, then fetch `.svn/text-base/<file>.svn-base`. In both cases a dedicated extractor walks this for you:
 
 ```bash
-svn-extractor --url https://target/           # recovers the working copy into a local tree
+python svn_extractor.py --url https://target/   # recovers the working copy into a local tree
 ```
 
 ## Follow-on
