@@ -60,7 +60,7 @@ Read the output as a valid/invalid split keyed on the `250` vs `550` difference.
 
 ## Variants and follow-on
 
-- Exchange and Microsoft 365 do not behave like a classic MTA here: `RCPT TO` is often uniform and VRFY is gone. Enumerate those through their web endpoints and login timing instead, see [Exchange enumeration](../../../exchange/enumeration.md) and [Entra ID account enumeration](../../../../directory/entra-id/authentication/enumeration.md).
+- Exchange and Microsoft 365 do not behave like a classic MTA here: `RCPT TO` is often uniform and VRFY is gone. Enumerate those through their web endpoints and login timing instead, see [Exchange enumeration](../../../exchange/enumeration.md) and [Entra ID account enumeration](../../../../../online/identity/entra-id/authentication/enumeration.md).
 - A catch-all domain accepts every `RCPT TO`, defeating the method. Confirm by probing an obviously-bogus random address first; if it returns `250`, stop trusting `RCPT TO`.
 - Feed every validated address straight into [authentication](authentication.md) for password spraying, and into any [open relay](open-relay.md) or [SMTP smuggling](smtp-smuggling.md) payload as real internal recipients.
 

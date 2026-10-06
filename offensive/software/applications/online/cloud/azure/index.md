@@ -13,7 +13,7 @@ keywords:
 
 Azure is driven through the Azure Resource Manager (**ARM**) API, authorized by **Azure RBAC** role assignments and reached with a user token, a service-principal secret, or a resource's **managed identity**. Almost every attack is an RBAC question: what scope does my principal hold, which role lets it escalate, and which resource's managed identity can it borrow. The surfaces below follow that shape, with **privilege escalation** living inside [identity](identity/index.md) and credential theft inside [credentials](credentials/index.md).
 
-This area is the **resource and management plane only**. Microsoft Entra ID (the tenant directory, formerly Azure AD) is attacked like a directory and lives under [Entra ID](../../../server/directory/entra-id/index.md) next to Active Directory; user and application identity attacks (device code, PRT, consent, Entra roles) are there, not here.
+This area is the **resource and management plane only**. Microsoft Entra ID (the tenant directory, formerly Azure AD) is attacked like a directory and lives under [Entra ID](../../identity/entra-id/index.md) next to Active Directory; user and application identity attacks (device code, PRT, consent, Entra roles) are there, not here.
 
 ## Enumeration
 

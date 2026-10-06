@@ -11,7 +11,7 @@ keywords:
 
 # Identity
 
-Azure authorization is **Azure RBAC**: role assignments bind a principal to a role at a scope (management group, subscription, resource group, or resource). Attacks here are about turning a write over the authorization plane, or control of a resource that carries a managed identity, into a higher role. This is the Azure **resource plane** only; tenant and directory attacks (Entra roles, users, applications) live under [Entra ID](../../../../server/directory/entra-id/index.md) in the Directory area.
+Azure authorization is **Azure RBAC**: role assignments bind a principal to a role at a scope (management group, subscription, resource group, or resource). Attacks here are about turning a write over the authorization plane, or control of a resource that carries a managed identity, into a higher role. This is the Azure **resource plane** only; tenant and directory attacks (Entra roles, users, applications) live under [Entra ID](../../../identity/entra-id/index.md) in the Directory area.
 
 The core moves are writing a role assignment to grant yourself Owner, crafting a custom role with a wildcard action, flipping on `elevateAccess` to seize User Access Administrator at the root, and attaching or borrowing a privileged **managed identity** to mint its token.
 

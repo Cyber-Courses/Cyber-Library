@@ -17,7 +17,7 @@ Entra attacks move from outside-in: enumerate the tenant and its users, get a fi
 
 ## Boundary with the Azure resource plane
 
-This area is the **tenant and directory** plane. The Azure **resource** plane (subscriptions, VMs, storage, Azure RBAC, managed identities) is attacked separately and lives under [Cloud > Azure](../../../online/cloud/azure/index.md). The two meet at the `elevateAccess` seam, where a Global Administrator grants itself User Access Administrator over all subscriptions; that crossing is noted where it belongs. The on-premises bridge (Entra Connect, AD FS, PRT, pass-through auth) lives with [hybrid identity](../active-directory/trusts/entra-hybrid.md).
+This area is the **tenant and directory** plane. The Azure **resource** plane (subscriptions, VMs, storage, Azure RBAC, managed identities) is attacked separately and lives under [Cloud > Azure](../../../online/cloud/azure/index.md). The two meet at the `elevateAccess` seam, where a Global Administrator grants itself User Access Administrator over all subscriptions; that crossing is noted where it belongs. The on-premises bridge (Entra Connect, AD FS, PRT, pass-through auth) lives with [hybrid identity](../../../server/directory/active-directory/trusts/entra-hybrid.md).
 
 ## Enumeration
 
