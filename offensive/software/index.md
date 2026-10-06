@@ -18,7 +18,7 @@ The software category covers offensive work against code and the systems that ex
 The two subcategories divide by what the code is and who controls it:
 
 - **[Applications](applications/index.md)**: the programs that implement behavior, whether they run on a user's device or on a server. These flaws live in what developers wrote and in how they composed frameworks and libraries.
-- **Operating systems**: the platforms that host applications, where attacks target the kernel, system services, drivers, and the privilege and isolation model that everything above depends on.
+- **[Operating systems](operating-systems/index.md)**: the platforms that host applications, where attacks target the kernel, system services, drivers, and the privilege and isolation model that everything above depends on.
 
 The split reflects a real boundary in both ownership and technique. Application flaws are usually fixed by changing the application's own code or configuration, and they are reached through the interfaces the application exposes. Operating-system flaws are fixed by the platform vendor or the system administrator, and they are reached through system calls, local privilege boundaries, and services. An assessment typically moves between the two, using an application foothold to reach the host and then the operating system to deepen control, but the techniques and the people who remediate them are distinct, which is why the category branches here first.
 

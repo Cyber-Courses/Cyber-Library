@@ -17,7 +17,7 @@ The applications category covers offensive work against the programs that implem
 
 The three subcategories divide by where the application code runs, which decides who controls it and what an attacker can reach:
 
-- **Client**: code that runs on the user's own device (browsers, desktop, and mobile apps). The attacker frequently controls the execution environment, so the questions are about what the client trusts, what secrets it holds, and how it can be turned against its own user or used to reach the server.
+- **[Client](client/index.md)**: code that runs on the user's own device (browsers, desktop, and mobile apps). The attacker frequently controls the execution environment, so the questions are about what the client trusts, what secrets it holds, and how it can be turned against its own user or used to reach the server.
 - **[Server](server/index.md)**: code that runs on infrastructure the operator controls. The attacker reaches it only through the interfaces it exposes, so the questions are about input handling, authentication and authorization, and the services the server stitches together.
 - **[Online](online/index.md)**: services a vendor operates (cloud platforms and SaaS). There is no reachable binary to exploit, so the attacker works through the account: identities, credentials and tokens, OAuth and federation, and the tenant configuration reached through the provider's own APIs.
 
