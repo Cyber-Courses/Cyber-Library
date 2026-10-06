@@ -8,7 +8,7 @@ keywords:
   - insecure direct object reference
 ---
 
-# Object-level access control
+# Object-level
 
 **Object-level** access control (BOLA / IDOR) is the failure to verify that the authenticated subject may access **this specific** resource. The server accepts a reference (ID, UUID, slug) but does not enforce ownership, tenancy, or role on **that** instance.
 

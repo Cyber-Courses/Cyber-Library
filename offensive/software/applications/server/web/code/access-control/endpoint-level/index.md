@@ -9,7 +9,7 @@ keywords:
   - vertical privilege escalation
 ---
 
-# Endpoint-level access control
+# Endpoint-level
 
 **Function-level** (endpoint) authorization governs *which* operations a caller may use: admin APIs, internal tools exposed over HTTP, debug routes, and GraphQL fields or resolvers. The application may authenticate the user and still be wrong if **authorization** for the **action** is missing, inconsistent, or only enforced on the client.
 
