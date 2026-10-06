@@ -50,7 +50,7 @@ Hydra prints `[587][smtp] host: ... login: jsmith password: Spring2026!` only on
 
 - Authenticated relay: once logged in, the server sends as your account's domain with full authorization, so the mail passes SPF/DKIM/DMARC and lands as a genuine internal sender. This is the clean path to CEO-fraud phishing without needing an [open relay](open-relay.md).
 - The same credential typically unlocks the mailbox over IMAP/POP/OWA and the wider directory; spray it against other services immediately.
-- For Microsoft 365, legacy SMTP AUTH is often disabled; spray the identity platform instead, see [Entra ID password spraying](../../../../directory/entra-id/authentication/password-spraying.md).
+- For Microsoft 365, legacy SMTP AUTH is often disabled; spray the identity platform instead, see [Entra ID password spraying](../../../../../online/identity/entra-id/authentication/password-spraying.md).
 
 ## Tools
 
