@@ -17,8 +17,21 @@ This area covers the offensive surface of those platforms: how to find them, pul
 
 ## Products
 
+The Windows-native platforms:
+
 - **[SCCM / MECM](sccm/index.md)**: Microsoft Configuration Manager, the dominant on-premises platform and the richest attack surface of the group.
 - **[WSUS](wsus.md)**: Windows Server Update Services, abused to push a malicious update that runs as SYSTEM on managed clients.
+
+The cross-platform configuration-management tools, each of which runs its agent or connection as root on every managed node:
+
+- **[Ansible](ansible.md)**: agentless push over SSH; abuse the control node, Vault secrets, playbooks, and AWX/Tower.
+- **[SaltStack](saltstack.md)**: master and minions over ZeroMQ; command the fleet from the master and exploit the unauthenticated request server.
+- **[Puppet](puppet.md)**: pull model from the Puppet server; inject into the control repository and loot Hiera and PuppetDB.
+- **[Chef](chef.md)**: pull model driven by knife credentials, cookbooks, data bags, and run lists.
+
+## Scope
+
+Microsoft Intune is a cloud-hosted endpoint manager, the cloud counterpart of SCCM. It is attacked as a vendor-hosted service and belongs with the cloud identity and endpoint-management surface under Online, not here.
 
 ## References
 
