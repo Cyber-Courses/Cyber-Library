@@ -27,15 +27,15 @@ A successful `svn ls`/`svn info` with no credentials confirms anonymous read.
 
 ## Walk the history
 
-`svn log` enumerates revisions and `svn cat` retrieves any file at any revision, which recovers content that no longer exists at HEAD:
+`svn log` enumerates revisions and `svn cat` retrieves a file at any revision. For a path that still exists at HEAD, `-r` alone works; for a path that was deleted, pin the peg revision with `@<rev>` so Subversion locates it in the revision where it existed rather than at HEAD (the implicit peg for a URL):
 
 ```bash
 svn log -v svn://<target>/repo                      # revisions, with the paths each one changed
-svn cat -r 42 svn://<target>/repo/config/db.ini     # a file as it existed at revision 42
+svn cat 'svn://<target>/repo/config/db.ini@42'      # peg at r42: recovers the file even if deleted at HEAD
 svn export svn://<target>/repo ./repo-head          # the full current tree in one step
 ```
 
-Read the `-v` log for paths marked `D` (deleted): the file is gone from HEAD but `svn cat -r <before-delete>` brings it back. A "remove the password" commit is recovered exactly this way.
+Read the `-v` log for paths marked `D` (deleted): the file is gone from HEAD, but `svn cat <url>@<rev>` pegged at a revision before the delete brings it back. A "remove the password" commit is recovered exactly this way.
 
 ## Cached credentials
 

@@ -31,10 +31,11 @@ Client-side hooks (`pre-commit`, `post-checkout`, and so on) are deliberately **
 
 ## The ext transport and submodule URLs
 
-Git's `ext::` transport runs an arbitrary command as the way it reaches a remote. Cloning such a URL executes it:
+Git's `ext::` transport runs the named program as the way it reaches a remote, so cloning such a URL executes it. Modern Git gates this behind `protocol.ext.allow` (restricted by default), and `git-remote-ext` splits the string after `ext::` into arguments on spaces, with `% ` standing for a literal space:
 
 ```bash
-git clone 'ext::sh -c "id>/tmp/pwned"'
+# protocol.ext.allow must permit it (historical lax default, or set explicitly); % encodes a space
+git -c protocol.ext.allow=always clone 'ext::sh -c touch% /tmp/pwned'
 ```
 
 The danger is indirect: a repository's `.gitmodules` can point a submodule at an `ext::` (or other command-bearing) URL, so a victim running `git clone --recurse-submodules` or `git submodule update` on a hostile repository runs the command. Git now restricts which protocols submodules may use (`protocol.ext.allow` defaults to blocking this in the submodule context), so this lands on older clients or where an administrator loosened `protocol.*.allow`.
