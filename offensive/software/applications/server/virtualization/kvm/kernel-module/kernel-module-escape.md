@@ -9,7 +9,7 @@ keywords:
   - host kernel
 ---
 
-# Kernel module escape
+# Escape
 
 The KVM module emulates a performance-critical subset of the platform in the host kernel, and that code is reachable from the guest. The in-kernel local APIC and I/O APIC, the PIT timer, the coalesced MMIO ring buffer, and the handling of certain MSRs, CPUID, and instruction emulation all process guest-triggered events in kernel context. A flaw there, an out-of-bounds access in APIC register handling, a bad index in the coalesced MMIO ring, a logic error in instruction emulation, is host-kernel code execution or memory corruption, which is strictly more powerful than a user-space monitor escape because it skips the monitor sandbox and lands in ring 0 on the host.
 

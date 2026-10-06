@@ -11,7 +11,7 @@ keywords:
   - Rocket.Chat
 ---
 
-# Instant messaging
+# Chat
 
 Real-time messaging servers split into two attack models. The open protocols (IRC, XMPP, Matrix) are attacked on the wire: you speak the protocol to enumerate the server, abuse its services and federation, and exploit the daemon. The self-hosted team-chat platforms (Mattermost, Rocket.Chat) are attacked as web applications: REST and websocket APIs where the weaknesses are authentication bypass, authorization gaps, injection, and integration or plugin code execution.
 

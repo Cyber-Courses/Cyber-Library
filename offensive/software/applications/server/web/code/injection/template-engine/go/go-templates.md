@@ -9,7 +9,7 @@ keywords:
   - method invocation
 ---
 
-# Go Templates
+# Templates
 
 Go templates use `{{ }}`, but `{{7*7}}` does not render `49`: arithmetic is not expression syntax in Go templates, and `{{7*7}}` produces a parse error. The reliable probes are `{{.}}`, which prints the entire data object passed to the template, and `{{printf "%d" (len "aaa")}}` style calls using the built-in functions. A parse error mentioning `template:` on malformed input also fingerprints the engine.
 
