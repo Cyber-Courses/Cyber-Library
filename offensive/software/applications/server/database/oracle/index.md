@@ -9,7 +9,7 @@ keywords:
   - default credentials
 ---
 
-# Oracle Database
+# Oracle
 
 Oracle Database is reached through the **TNS listener** (port 1521), which routes a client to a database instance named by a **SID** or service name. The attack path is staged: enumerate the listener and valid SIDs, test accounts (Oracle is notorious for **default credentials**), then, with a database account, reach operating-system command execution through Java, the scheduler, or external tables. `odat` automates most of it.
 

@@ -8,7 +8,7 @@ keywords:
   - BOLA property
 ---
 
-# Property-level access control
+# Property-level
 
 **Property-level** issues occur when a user may change **fields** they should not: `role`, `ownerId`, `price`, `isAdmin`, or internal status flags. The route may be allowed for the user, and the object ID may even be theirs, but the update must still **restrict** which properties are legal for that role and operation.
 
