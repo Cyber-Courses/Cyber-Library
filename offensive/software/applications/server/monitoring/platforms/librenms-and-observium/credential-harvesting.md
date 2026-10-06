@@ -23,7 +23,7 @@ curl -sk -H 'X-Auth-Token: <token>' https://<target>/api/v0/devices | jq '.devic
 
 ## Exploitation notes
 
-- The `devices` table holds each monitored host's SNMP community and v3 credentials; reading it yields working access to the whole monitored network for [SNMP enumeration and write](../../../protocols/snmp/index.md).
+- The `devices` table holds each monitored host's SNMP community and v3 credentials; reading it yields working access to the whole monitored network for [SNMP enumeration and write](../../protocols/snmp/index.md).
 - Database access (from [command injection](command-injection.md) or SQLi) is the cleanest bulk harvest; the API and UI expose the same per device.
 - Harvested read-write community strings enable device reconfiguration (and Cisco config exfiltration); v3 credentials and any other collector logins pivot to those services.
 - This makes the platform valuable even without onward RCE: its stored credentials are access to the network it monitors.

@@ -24,7 +24,7 @@ Cacti must authenticate to the devices it polls, so it stores their credentials,
 
 ## Exploitation notes
 
-- The `host` table (and host templates) hold the per-device SNMP community strings and SNMPv3 credentials Cacti uses to poll; these are immediately reusable against the devices for [SNMP enumeration and write](../../../protocols/snmp/index.md).
+- The `host` table (and host templates) hold the per-device SNMP community strings and SNMPv3 credentials Cacti uses to poll; these are immediately reusable against the devices for [SNMP enumeration and write](../../protocols/snmp/index.md).
 - Reaching the database (through [code execution](known-exploits.md) or SQLi) gives the cleanest bulk harvest; the admin UI exposes the same per-device.
 - The harvested SNMP strings often include read-write strings (for interface/config control), and any other stored data-source credentials pivot further.
 - This makes Cacti valuable even without onward RCE: the stored credentials are access to the whole monitored network.

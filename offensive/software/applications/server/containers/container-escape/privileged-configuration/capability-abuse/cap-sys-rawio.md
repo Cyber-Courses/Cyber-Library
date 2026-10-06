@@ -42,7 +42,7 @@ Translating a kernel virtual address to a physical offset for `/dev/mem` require
 
 - Modern kernels build with `CONFIG_STRICT_DEVMEM` and often `CONFIG_IO_STRICT_DEVMEM`, which confine `/dev/mem` to device ranges and block RAM access; check `zcat /proc/config.gz | grep DEVMEM` or `/boot/config-$(uname -r)`. Where RAM is blocked this capability loses most of its escape value.
 - This route is hardware- and offset-sensitive and is best reserved for cases where cleaner capabilities ([CAP_SYS_MODULE](cap-sys-module.md), [CAP_SYS_ADMIN](cap-sys-admin.md)) are absent but a raw memory device is exposed.
-- Exposed raw memory devices usually mean a `--privileged` container or an explicit `--device=/dev/mem`; see [Kernel memory devices](device-access/kernel-memory-devices.md).
+- Exposed raw memory devices usually mean a `--privileged` container or an explicit `--device=/dev/mem`; see [Kernel memory devices](../device-access/kernel-memory-devices.md).
 
 ## References
 
