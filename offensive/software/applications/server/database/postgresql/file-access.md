@@ -9,7 +9,7 @@ keywords:
   - PostgreSQL file read
 ---
 
-# PostgreSQL file access
+# File access
 
 PostgreSQL can read and write arbitrary files as its service account, which is useful on its own (stealing configuration, keys, and hashes) and as the staging step for a [C extension](command-execution.md). Superuser gives all of it; some functions are reachable through the `pg_read_server_files` and `pg_write_server_files` roles without full superuser.
 

@@ -9,7 +9,7 @@ keywords:
   - sys_exec
 ---
 
-# MySQL command execution
+# Command execution
 
 MySQL has no built-in command shell, so execution goes through a **user-defined function (UDF)**: a shared library placed in the server's plugin directory and registered as a SQL function that runs OS commands. The classic library is `lib_mysqludf_sys`, exposing `sys_exec` and `sys_eval`.
 

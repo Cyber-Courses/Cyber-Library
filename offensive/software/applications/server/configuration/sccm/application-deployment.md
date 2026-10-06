@@ -9,7 +9,7 @@ keywords:
   - SYSTEM execution
 ---
 
-# SCCM application deployment
+# Application deployment
 
 This is the payoff of [site takeover](site-takeover.md): SCCM exists to deliver software to clients, so a Full Administrator (or anyone with the right deployment rights) can point that machinery at chosen targets and execute **as SYSTEM** on them. No exploit is involved; you are using the product as designed, against the estate.
 

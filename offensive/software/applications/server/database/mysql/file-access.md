@@ -9,7 +9,7 @@ keywords:
   - webshell
 ---
 
-# MySQL file access
+# File access
 
 With the **`FILE`** privilege, MySQL reads and writes files as its service account. The write primitive is the more valuable: dropping a webshell under a web root is a direct path to code execution, and writing a library into the plugin directory sets up a [UDF](command-execution.md).
 

@@ -9,7 +9,7 @@ keywords:
   - psql
 ---
 
-# PostgreSQL access
+# Access
 
 The target is any authenticated session, ideally as a **superuser** role. The default administrative role is `postgres`, and misconfigured `pg_hba.conf` entries frequently make access trivial.
 

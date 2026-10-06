@@ -9,7 +9,7 @@ keywords:
   - public role
 ---
 
-# MSSQL access
+# Access
 
 SQL Server accepts two authentication modes, and both are routes in: **SQL logins** (username and password stored in the instance) and **Windows authentication** (local or domain accounts). The goal here is any authenticated session, however low-privileged, because `public` alone is enough to begin enumeration and often coercion.
 

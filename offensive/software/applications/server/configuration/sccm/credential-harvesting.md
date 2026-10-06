@@ -9,7 +9,7 @@ keywords:
   - SharpSCCM
 ---
 
-# SCCM credential harvesting
+# Credential harvesting
 
 Configuration Manager has to give clients credentials to do their jobs, and it has historically stored them where a client, or anyone who can register as one, can retrieve and decrypt them. This was the first SCCM attack class to be weaponised and it still works wherever the legacy settings remain.
 

@@ -9,7 +9,7 @@ keywords:
   - NetExec
 ---
 
-# MSSQL enumeration
+# Enumeration
 
 Before executing anything, map the server and your position in it: the version (to match behaviour), the logins and databases present, and, critically, **what the current principal can already do**. Much of this is readable by the default `public` role.
 

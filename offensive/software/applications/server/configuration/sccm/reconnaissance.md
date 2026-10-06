@@ -9,7 +9,7 @@ keywords:
   - SharpSCCM
 ---
 
-# SCCM reconnaissance
+# Reconnaissance
 
 Before anything else you need to know whether SCCM is present and which machines play which role: the **site server** (the prize), the **management points** (where clients fetch policy), the **distribution points** (content, including PXE), and the **site database** (MSSQL). Most of this is discoverable with a single domain credential, because SCCM publishes itself into Active Directory.
 
