@@ -1,5 +1,6 @@
 ---
 title: "Container Registry"
+order: 3
 description: "Abusing Azure Container Registry: admin credentials and repository access, ACR Tasks that run as a managed identity, and image poisoning."
 keywords:
   - ACR

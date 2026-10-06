@@ -1,5 +1,6 @@
 ---
 title: "Redis"
+order: 5
 description: "The offensive surface of Redis reached as a service: unauthenticated access by default, and the file-write and module-load paths that turn it into code execution, from authorized_keys and cron drops to malicious modules and replication-based RCE."
 keywords:
   - Redis

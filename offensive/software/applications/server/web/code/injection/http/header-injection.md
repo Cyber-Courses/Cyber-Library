@@ -1,5 +1,6 @@
 ---
 title: "HTTP header injection: Host and forwarding headers"
+order: 1
 description: "Abusing attacker-controlled HTTP headers the application trusts: Host header for password-reset poisoning and cache poisoning, and X-Forwarded / override headers for access-control bypass and SSRF."
 keywords:
   - host header injection

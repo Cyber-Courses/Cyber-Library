@@ -1,5 +1,6 @@
 ---
 title: "Kubelet credential theft: stealing the node identity to pivot to the cluster"
+order: 4
 description: "Each node's kubelet authenticates to the API server with a client certificate and holds the bootstrap and node credentials on disk. An attacker who reaches the node filesystem steals the kubelet client certificate and the projected tokens of every pod on the node, pivoting from node root to broad cluster access through the node's own identity and its pods' identities."
 keywords:
   - kubelet

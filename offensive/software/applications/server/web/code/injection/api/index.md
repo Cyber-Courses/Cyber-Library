@@ -1,5 +1,6 @@
 ---
 title: "API injection: abusing structured request dispatch"
+order: 9
 description: "Server code that parses and dispatches structured API requests decides what runs, for whom, and against which backend. When untrusted input shapes that dispatch, the contract itself becomes the attack surface, organized here by dispatch style."
 keywords:
   - API injection

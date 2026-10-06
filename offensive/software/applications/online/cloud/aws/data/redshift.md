@@ -1,5 +1,6 @@
 ---
 title: "Redshift: reaching the warehouse through temporary credentials and exposure"
+order: 4
 description: "Accessing Redshift clusters through exposed endpoints, temporary credentials, and over-broad database grants."
 keywords:
   - Redshift

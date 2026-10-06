@@ -1,5 +1,6 @@
 ---
 title: "Null session: anonymous access to SMB shares and RPC"
+order: 1
 description: "A null session is an unauthenticated SMB connection (empty username and password) that, where permitted, grants access to the IPC$ pipe and sometimes shares. Through IPC$ it reaches the RPC interfaces that enumerate users, groups, shares, and the password policy, making an allowed null session a rich pre-credential reconnaissance foothold."
 keywords:
   - null session

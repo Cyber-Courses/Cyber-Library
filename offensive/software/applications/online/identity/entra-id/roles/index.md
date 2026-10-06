@@ -1,5 +1,6 @@
 ---
 title: "Entra roles"
+order: 3
 description: "Escalating directory privilege in Entra: abusing privileged roles such as Privileged Role Administrator and Application Administrator, PIM activation, and administrative-unit scoping."
 keywords:
   - Entra roles

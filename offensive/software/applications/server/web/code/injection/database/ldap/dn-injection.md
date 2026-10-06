@@ -1,5 +1,6 @@
 ---
 title: "LDAP DN injection"
+order: 2
 description: "Altering the distinguished name an application builds for a bind or modify operation by injecting RDN separators and unescaped DN metacharacters."
 keywords:
   - DN injection

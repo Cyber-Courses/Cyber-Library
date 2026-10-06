@@ -1,5 +1,6 @@
 ---
 title: "Privilege escalation"
+order: 2
 description: "The full catalog of AWS IAM privilege-escalation paths: iam:PassRole into a service, policy and credential manipulation, trust-policy and existing-resource rewrites, and group-membership abuse."
 keywords:
   - IAM privilege escalation

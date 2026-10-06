@@ -1,5 +1,6 @@
 ---
 title: "Item command execution: system.run and command items"
+order: 1
 description: "Zabbix items with the system.run key run a shell command on the Zabbix agent when the item is checked, and command-type items similarly execute. An attacker with rights to create or modify items on a host adds a system.run item and triggers its evaluation, executing commands on the agent host, which is a monitored system across the estate."
 keywords:
   - system.run

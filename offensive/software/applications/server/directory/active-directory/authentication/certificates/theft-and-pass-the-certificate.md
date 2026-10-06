@@ -1,5 +1,6 @@
 ---
 title: "Theft and pass-the-certificate: stealing and using certificates"
+order: 5
 description: "Stealing certificates and private keys from Windows hosts (user and machine stores, DPAPI-protected keys, exported PFX) and authenticating with them via PKINIT and Schannel (pass-the-certificate), including recovering the NT hash."
 keywords:
   - pass the certificate

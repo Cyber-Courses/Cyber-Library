@@ -1,5 +1,6 @@
 ---
 title: "Directory traversal: escaping the intended WebDAV collection"
+order: 2
 description: "WebDAV operations should stay within the configured collection, but servers that fail to canonicalise the request path or the Destination header allow traversal. Traversal in a GET/PROPFIND reads files outside the collection, and traversal in a PUT or the MOVE/COPY Destination writes outside it, placing files into web-executable or sensitive host paths."
 keywords:
   - webdav traversal

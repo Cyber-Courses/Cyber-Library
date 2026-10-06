@@ -1,5 +1,6 @@
 ---
 title: "Network: abusing cluster networking, policies, and the mesh"
+order: 7
 description: "Kubernetes networking offers several offensive surfaces: the flat default network with no isolation, NetworkPolicies that can be bypassed or are absent, CNI and overlay implementations with their own weaknesses, and service meshes whose sidecars and control planes can be abused to intercept or misroute traffic and to bypass the controls the mesh is supposed to enforce."
 keywords:
   - kubernetes network

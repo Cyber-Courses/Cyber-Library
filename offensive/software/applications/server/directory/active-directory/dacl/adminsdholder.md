@@ -1,5 +1,6 @@
 ---
 title: "AdminSDHolder: DACL persistence through SDProp"
+order: 6
 description: "Backdooring Active Directory by writing an ACE to the AdminSDHolder container, which SDProp stamps onto every protected group and account on its timer, re-granting attacker rights over Domain Admins and other protected principals even after they are removed."
 keywords:
   - AdminSDHolder

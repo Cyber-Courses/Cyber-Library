@@ -1,5 +1,6 @@
 ---
 title: "Perl server-side template injection"
+order: 5
 description: "SSTI in Perl's Template Toolkit: the PERL and RAWPERL blocks gated by EVAL_PERL, and the system/exec plugins that reach command execution."
 keywords:
   - Perl SSTI

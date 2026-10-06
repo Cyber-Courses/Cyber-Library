@@ -1,5 +1,6 @@
 ---
 title: "SSRF and federation abuse: reaching internal services from Prometheus"
+order: 2
 description: "Prometheus makes server-side HTTP requests for federation, remote-read/write, and probe targets, and the blackbox exporter fetches attacker-specified URLs. An attacker who can influence these turns Prometheus into a server-side request forgery proxy that reaches internal-only services, cloud metadata, and otherwise-unreachable endpoints from the Prometheus host."
 keywords:
   - prometheus ssrf

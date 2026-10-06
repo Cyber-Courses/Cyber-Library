@@ -1,5 +1,6 @@
 ---
 title: "Password policy enumeration: thresholds for safe spraying"
+order: 8
 description: "Reading the Active Directory domain password policy and fine-grained password policies to learn lockout thresholds and observation windows before password spraying, avoiding account lockouts."
 keywords:
   - password policy

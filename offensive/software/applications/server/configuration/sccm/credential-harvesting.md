@@ -1,5 +1,6 @@
 ---
 title: "SCCM credential harvesting: NAA, PXE, and policy secrets"
+order: 2
 description: "Pulling credentials that Configuration Manager hands to clients: the Network Access Account from machine policy, secrets from unauthenticated PXE boot media, and task-sequence variables, turning any client or any computer account into domain credentials."
 keywords:
   - Network Access Account

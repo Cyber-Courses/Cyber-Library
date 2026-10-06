@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: discovering S3 buckets and their objects"
+order: 1
 description: "Discovering S3 buckets and objects through naming guesses, DNS, and permission probing, then listing readable contents."
 keywords:
   - S3 enumeration

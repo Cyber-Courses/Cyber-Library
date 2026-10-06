@@ -1,5 +1,6 @@
 ---
 title: "LDAP enumeration: querying Active Directory objects directly"
+order: 18
 description: "Reading Active Directory over LDAP: authenticated and anonymous queries, useful search filters for users, computers, groups, and service accounts, and bulk dumps of the directory."
 keywords:
   - LDAP enumeration

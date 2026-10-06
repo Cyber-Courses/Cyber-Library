@@ -1,5 +1,6 @@
 ---
 title: "Cloud SQL: reaching databases through the proxy, public IP, and built-in users"
+order: 1
 description: "Attacking Cloud SQL: database access through the SQL Auth Proxy, public IP and authorized networks, and the built-in database users."
 keywords:
   - Cloud SQL

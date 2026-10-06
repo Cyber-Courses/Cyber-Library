@@ -1,5 +1,6 @@
 ---
 title: "Dump in one shot (DIOS) for IBM Db2 injection"
+order: 3
 description: "Building a single IBM Db2 union payload that concatenates schema and data into one response with XMLAGG or LISTAGG."
 keywords:
   - DIOS

@@ -1,5 +1,6 @@
 ---
 title: "EventBridge: triggering actions under a target role"
+order: 6
 description: "Abusing EventBridge rules, buses, and targets to trigger actions or exfiltrate events under a privileged role."
 keywords:
   - EventBridge

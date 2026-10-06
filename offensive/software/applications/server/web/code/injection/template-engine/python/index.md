@@ -1,5 +1,6 @@
 ---
 title: "Python server-side template injection"
+order: 6
 description: "SSTI in Python template engines: Jinja2 (Flask) object-graph walks to RCE and its sandbox, and Mako's direct Python evaluation."
 keywords:
   - Python SSTI

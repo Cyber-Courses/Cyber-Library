@@ -1,5 +1,6 @@
 ---
 title: "Virtualization: attacking hypervisors and their management planes"
+order: 9
 description: "Attacking virtualization platforms: escaping a guest VM to the host through hypervisor and device-emulation flaws, taking over the management plane that controls many hosts, and stealing virtual disks and snapshots offline, across VMware, Hyper-V, KVM, Xen, Proxmox, Nutanix, and more."
 keywords:
   - virtualization security

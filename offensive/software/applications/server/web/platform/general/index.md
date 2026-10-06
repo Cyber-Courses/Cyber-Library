@@ -1,5 +1,6 @@
 ---
 title: "General server exposure: source, secrets, and deployment detail on any server"
+order: 1
 description: "Product-agnostic platform exposures that apply whatever the web server: status endpoints, version-control directories, backup and temporary files, directory listings, and leaked config files."
 keywords:
   - information disclosure

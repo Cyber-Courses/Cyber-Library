@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass: minting and abusing Zimbra auth tokens"
+order: 2
 description: "Obtaining a valid Zimbra token without the account password: admin-to-user impersonation through the SOAP DelegateAuthRequest with an admin token, the preauth mechanism and its domain preauth key, and the token-handling flaws that return a usable ZM_AUTH_TOKEN or ZM_ADMIN_AUTH_TOKEN from a crafted request. Worked SOAP envelopes with response interpretation."
 keywords:
   - zimbra authentication bypass

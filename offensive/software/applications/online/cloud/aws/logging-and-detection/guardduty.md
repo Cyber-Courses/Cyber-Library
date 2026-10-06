@@ -1,5 +1,6 @@
 ---
 title: "GuardDuty: disabling detectors and archiving findings"
+order: 2
 description: "Disabling detectors, suspending findings, and evading GuardDuty analytics to avoid threat detection."
 keywords:
   - GuardDuty

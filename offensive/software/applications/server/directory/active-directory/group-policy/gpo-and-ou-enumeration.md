@@ -1,5 +1,6 @@
 ---
 title: "GPO and OU enumeration: Group Policy objects, links, and scope"
+order: 1
 description: "Enumerating Active Directory Group Policy objects and organizational units: which GPOs exist, where they are linked, who they apply to, and who can edit them, to find policy-based privilege-escalation paths."
 keywords:
   - GPO enumeration

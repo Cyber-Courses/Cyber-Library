@@ -1,5 +1,6 @@
 ---
 title: "CNI and overlay abuse: weaknesses in the pod-network implementation"
+order: 2
 description: "The CNI plugin and its overlay (VXLAN, IP-in-IP, or eBPF datapath) implement pod networking, and their behaviour can be abused: ARP and overlay spoofing on the pod network for man-in-the-middle, reaching the CNI's own management interfaces, and exploiting datapath configurations that fail to isolate or that trust pod-supplied addressing."
 keywords:
   - cni

@@ -1,5 +1,6 @@
 ---
 title: "LDAP filter injection"
+order: 1
 description: "Injecting parentheses, boolean operators, and wildcards into an unescaped LDAP search filter to change its logic and read unintended entries."
 keywords:
   - LDAP filter injection

@@ -1,5 +1,6 @@
 ---
 title: "Server: offensive techniques by server service type"
+order: 1
 description: "The server category organizes attacks by the kind of service under test, from web and database to directory and messaging, because each service class has its own protocols, primitives, and abuse patterns."
 keywords:
   - server security

@@ -1,5 +1,6 @@
 ---
 title: "Secret Manager: reading stored secrets with versions.access"
+order: 2
 description: "Reading stored secrets with secretmanager.versions.access when a principal or service account holds Secret Manager access."
 keywords:
   - Secret Manager

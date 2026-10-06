@@ -1,5 +1,6 @@
 ---
 title: "Executable and DLL planting: getting planted code run from a share"
+order: 3
 description: "Writing executables or DLLs to a share leads to code execution when something runs them: replacing or adding programs in a deployment or application share, and DLL planting where an application loads a library by name from a share-relative path. The payload runs in the context of whatever executes it, often a service account or an administrator."
 keywords:
   - dll planting

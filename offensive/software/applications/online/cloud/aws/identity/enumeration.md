@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: mapping the IAM graph and your effective permissions"
+order: 1
 description: "Mapping an AWS account's IAM principals, policies, and trust relationships from a foothold: iam:List and Get calls, enumerate-iam, Pacu, and PMapper to find effective permissions and reachable roles."
 keywords:
   - IAM enumeration

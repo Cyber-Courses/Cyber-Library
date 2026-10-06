@@ -1,5 +1,6 @@
 ---
 title: "Automation assets: reading cleartext Automation Account secrets"
+order: 5
 description: "Reading Automation Account credential, variable, and connection assets, often stored in cleartext, for stored secrets."
 keywords:
   - Automation Account

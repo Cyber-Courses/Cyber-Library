@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: mapping Zabbix through the API and UI"
+order: 3
 description: "Zabbix exposes a JSON-RPC API and a web UI that reveal the version (often unauthenticated), the user accounts, and the monitored hosts. The version drives exploit selection, the user list drives credential attacks, and the monitored-host inventory is a map of the internal estate with the IPs and services Zabbix reaches, all obtained through api_jsonrpc.php once authenticated or, for the version, before."
 keywords:
   - zabbix enumeration

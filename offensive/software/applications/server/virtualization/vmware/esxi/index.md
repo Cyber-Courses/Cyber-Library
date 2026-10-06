@@ -1,5 +1,6 @@
 ---
 title: "ESXi: attacking the bare-metal VMware hypervisor"
+order: 2
 description: "ESXi runs virtual machines directly on hardware under the vmkernel, with each VM backed by a vmx process. The offensive surface is the guest-to-host escape through emulated devices, theft of virtual disks and data from datastores, obtaining a host shell through the management services, and the recurring named escape exploits from device-model flaws."
 keywords:
   - esxi

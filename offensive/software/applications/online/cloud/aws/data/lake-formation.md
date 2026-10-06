@@ -1,5 +1,6 @@
 ---
 title: "Lake Formation: credential vending for governed tables"
+order: 9
 description: "Abusing Lake Formation permissions and credential vending to read governed data-lake tables."
 keywords:
   - Lake Formation

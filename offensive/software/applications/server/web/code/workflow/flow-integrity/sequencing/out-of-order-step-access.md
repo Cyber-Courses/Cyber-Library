@@ -1,5 +1,6 @@
 ---
 title: "Out-of-order workflow steps: revisiting intermediate states after later transitions (replay and branch bugs)"
+order: 1
 description: "Revisiting or repeating intermediate workflow steps after later steps advanced, breaking monotonic progression assumptions in server code."
 keywords:
   - workflow

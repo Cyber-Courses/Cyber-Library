@@ -1,5 +1,6 @@
 ---
 title: "Directory listing: mapping the served file tree"
+order: 1
 description: "When an HTTP file server has no index file or has autoindex enabled, it renders a directory listing that exposes every file and subdirectory. An attacker uses that listing, or forces it, to map the served tree, discover files not meant to be linked (backups, configs, source), and find the upload or traversal points to attack next."
 keywords:
   - directory listing

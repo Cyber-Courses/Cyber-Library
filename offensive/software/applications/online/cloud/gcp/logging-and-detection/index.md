@@ -1,5 +1,6 @@
 ---
 title: "GCP logging and detection"
+order: 8
 description: "Blinding GCP detection: tampering with Cloud Logging sinks, disabling data-access audit logs, and weakening Security Command Center."
 keywords:
   - Cloud Logging

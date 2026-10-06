@@ -1,5 +1,6 @@
 ---
 title: "Identity: attacking vendor-hosted identity providers"
+order: 2
 description: "Attacking cloud-hosted identity providers and directories: tenants reached through authentication and token abuse, OAuth application and consent abuse, directory-role and group privilege escalation, and cross-tenant access. There is no directory server to reach, only the provider's sign-in surface and APIs."
 keywords:
   - cloud identity

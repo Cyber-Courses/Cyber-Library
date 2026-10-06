@@ -1,5 +1,6 @@
 ---
 title: "Spaceless and whitespace bypass"
+order: 1
 description: "Defeating space- and line-based filters with ${IFS}, brace expansion, and newline or backslash-newline continuations."
 keywords:
   - spaceless

@@ -1,5 +1,6 @@
 ---
 title: "Shared folder and drag-drop abuse: escaping through desktop integration"
+order: 2
 description: "Workstation and Fusion integration features, shared folders (HGFS), drag-and-drop, and copy-paste, are implemented as GuestRPC handlers in vmware-vmx that parse complex guest-supplied requests. Shared folders also expose host paths into the guest. Both the path handling and the RPC parsing have repeatedly yielded guest-to-host escapes and host file access."
 keywords:
   - hgfs

@@ -1,5 +1,6 @@
 ---
 title: "L2TP and SSTP: inherited IPsec-PSK and TLS weaknesses"
+order: 5
 description: "L2TP provides no encryption itself and is paired with IPsec, so it inherits the IPsec pre-shared-key weaknesses, a weak or default L2TP/IPsec PSK is captured and cracked like any IKE PSK. SSTP tunnels PPP over TLS, so it inherits TLS configuration weaknesses: weak ciphers, downgrade, and certificate-validation gaps enabling interception."
 keywords:
   - l2tp

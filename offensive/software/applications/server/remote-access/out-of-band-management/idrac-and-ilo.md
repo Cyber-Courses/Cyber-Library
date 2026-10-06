@@ -1,5 +1,6 @@
 ---
 title: "iDRAC and iLO: Dell and HPE controller exploits and virtual media"
+order: 4
 description: "Dell iDRAC and HPE iLO are the vendor BMC stacks, and both have had serious flaws: authentication bypasses and remote code execution reachable on the management interface. Beyond exploits, their legitimate virtual-media and console features let an attacker with access mount an attacker ISO and boot the host from it, compromising the OS directly."
 keywords:
   - idrac

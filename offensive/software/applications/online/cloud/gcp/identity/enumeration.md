@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: mapping the IAM graph and reachable service accounts"
+order: 1
 description: "Mapping a GCP project's IAM bindings, members, custom roles, and service accounts from a foothold: getIamPolicy calls, gcloud, and tooling like ScoutSuite to find reachable identities and permissions."
 keywords:
   - IAM enumeration

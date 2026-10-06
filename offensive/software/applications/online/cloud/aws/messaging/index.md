@@ -1,5 +1,6 @@
 ---
 title: "AWS messaging"
+order: 9
 description: "Abusing AWS messaging: SES for mail sending and phishing, and SNS and SQS topic and queue access for data capture and message injection."
 keywords:
   - SES

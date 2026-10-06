@@ -1,5 +1,6 @@
 ---
 title: "JSON log injection: injecting keys into string-built structured logs"
+order: 3
 description: "When a JSON log line is assembled by string concatenation, injecting a quote and comma to add or override keys like level, user, and trace, break the aggregator schema, or smuggle nested objects into ELK or Loki."
 keywords:
   - log injection

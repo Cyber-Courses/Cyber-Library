@@ -1,5 +1,6 @@
 ---
 title: "NRPE abuse: the Nagios remote plugin executor"
+order: 2
 description: "NRPE on TCP 5666 runs predefined check commands on a monitored host for the Nagios server. Where the agent allows command arguments (dont_blame_nrpe) and a command passes them to a shell, an attacker who reaches 5666 injects arguments and shell metacharacters to run arbitrary commands on the host, turning a monitoring agent into remote code execution."
 keywords:
   - nrpe

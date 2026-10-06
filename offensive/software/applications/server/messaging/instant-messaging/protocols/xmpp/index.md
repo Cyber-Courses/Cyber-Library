@@ -1,5 +1,6 @@
 ---
 title: "XMPP: attacking Jabber servers and their XML streams"
+order: 2
 description: "XMPP on TCP 5222 (client, STARTTLS), 5223 (legacy TLS), and 5269 (server-to-server federation), served by ejabberd, Prosody, or Openfire. The surface is unauthenticated service discovery over an open XML stream, SASL and in-band registration abuse for account access, mechanism downgrade to cleartext, and server flaws such as the Openfire admin-console path-traversal auth bypass."
 keywords:
   - XMPP

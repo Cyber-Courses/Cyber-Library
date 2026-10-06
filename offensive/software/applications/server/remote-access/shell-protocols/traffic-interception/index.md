@@ -1,5 +1,6 @@
 ---
 title: "Traffic interception: capturing and replaying cleartext r-commands"
+order: 1
 description: "The r-commands encrypt nothing, so a positioned attacker captures the passwords rexec/rlogin send, every command and its output, and whole sessions. The cleartext, setup-only-authenticated streams can be hijacked to inject commands and replayed, giving credentials, data, and execution without defeating authentication."
 keywords:
   - traffic interception

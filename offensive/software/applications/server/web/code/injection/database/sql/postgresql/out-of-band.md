@@ -1,5 +1,6 @@
 ---
 title: "Out-of-band exfiltration from PostgreSQL injection"
+order: 5
 description: "Exfiltrating PostgreSQL data over DNS using COPY ... TO PROGRAM and a dynamic command built in a DO block, for blind injections with program execution rights."
 keywords:
   - out of band

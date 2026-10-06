@@ -1,5 +1,6 @@
 ---
 title: "Data extraction via Cypher injection in Neo4j"
+order: 2
 description: "Cross-label extraction through injected UNION, WITH, and MATCH (n) RETURN n clauses, plus schema enumeration with db.labels() and db.schema in Neo4j."
 keywords:
   - Neo4j data extraction

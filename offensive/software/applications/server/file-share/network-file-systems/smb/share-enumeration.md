@@ -1,5 +1,6 @@
 ---
 title: "Share enumeration: listing SMB shares and permissions"
+order: 3
 description: "Enumerating the shares an SMB server exposes and the read/write access the current identity has to each, with a null, guest, or valid session. The access map separates readable shares to loot from writable shares to poison, and the share comments and names reveal the server's role and data, directing every subsequent SMB action."
 keywords:
   - smb share enumeration

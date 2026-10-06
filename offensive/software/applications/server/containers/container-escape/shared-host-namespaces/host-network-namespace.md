@@ -1,5 +1,6 @@
 ---
 title: "Host network namespace: reaching node-local services and traffic"
+order: 2
 description: "A container sharing the host network namespace uses the host's interfaces, routing, and loopback. That exposes services bound to 127.0.0.1 on the node, such as the kubelet read-write API, the cloud metadata service, and local admin daemons, and allows sniffing and binding on host interfaces, turning network reach into credential theft and node compromise."
 keywords:
   - hostnetwork

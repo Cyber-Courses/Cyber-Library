@@ -1,5 +1,6 @@
 ---
 title: "Kubelet API: node control through the agent on every worker"
+order: 1
 description: "The kubelet on each node exposes an HTTPS API on 10250 and often a read-only HTTP API on 10255. Where the read-write API allows anonymous or unauthorized access, it lists pods and runs commands in any container on the node; the read-only port leaks pod specs and environment secrets. Either turns reach to a node into container execution and secret theft."
 keywords:
   - kubelet

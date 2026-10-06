@@ -1,5 +1,6 @@
 ---
 title: "NetworkPolicy bypass: reaching targets a policy was meant to isolate"
+order: 1
 description: "NetworkPolicies are allowlists enforced by the CNI, and they fail in predictable ways: namespaces with no policy are fully open, policies often omit egress or only cover some pods, DNS and the API server are commonly left reachable, and node-level or host-network paths sidestep pod-scoped rules. An attacker maps the gaps and routes around the intended isolation."
 keywords:
   - networkpolicy

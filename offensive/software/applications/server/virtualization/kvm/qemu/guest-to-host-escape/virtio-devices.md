@@ -1,5 +1,6 @@
 ---
 title: "virtio devices: escaping QEMU through the virtqueue family"
+order: 1
 description: "virtio is QEMU's paravirtual device framework: the guest driver and QEMU share virtqueues, ring structures in guest memory holding descriptors that point at guest buffers. QEMU walks these descriptor chains to perform I/O, so flaws in descriptor handling, chain length, indirect descriptors, or the virtio configuration, give out-of-bounds access in the QEMU process."
 keywords:
   - virtio

@@ -1,5 +1,6 @@
 ---
 title: "Session and token theft: replaying stolen Zabbix sessions"
+order: 6
 description: "A Zabbix session is a zbx_sessionid cookie, and newer versions add long-lived API tokens; either authenticates without a password. Stolen from a browser, captured in transit over plain HTTP, or read from the sessions table in the Zabbix database, a session or token is replayed directly to assume the user's access, bypassing the login entirely."
 keywords:
   - zbx_sessionid

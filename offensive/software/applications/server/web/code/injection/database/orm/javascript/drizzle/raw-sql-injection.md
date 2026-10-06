@@ -1,5 +1,6 @@
 ---
 title: "Drizzle raw SQL injection"
+order: 1
 description: "Drizzle's sql template parameterizes its interpolations, but sql.raw() and string building inside a fragment reach the database unparameterized when fed untrusted input."
 keywords:
   - Drizzle sql.raw

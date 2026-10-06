@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of a QEMU/KVM virtual machine"
+order: 2
 description: "A QEMU guest escapes by corrupting the QEMU process on the host, which emulates the VM's devices while KVM accelerates the CPU. The reachable surface is QEMU's device models: virtio devices, emulated NICs, USB controllers, block and SCSI controllers, audio devices, and the legacy floppy controller, each parsing guest-driven register writes and DMA descriptors."
 keywords:
   - qemu escape

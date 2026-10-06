@@ -1,5 +1,6 @@
 ---
 title: "Exposed kubeconfig: cluster credentials left where an attacker finds them"
+order: 9
 description: "A kubeconfig file holds the server address and the credentials to authenticate to it, often a client certificate or token for a powerful user. These files leak into home directories, CI variables, container images, repositories, and backups. A found kubeconfig is direct cluster access at whatever privilege the embedded credential carries, frequently cluster-admin."
 keywords:
   - kubeconfig

@@ -1,5 +1,6 @@
 ---
 title: "From MySQL injection to command execution"
+order: 2
 description: "The two routes from a privileged MySQL injection to code execution: writing a web shell with INTO OUTFILE/DUMPFILE, or loading a sys_exec UDF."
 keywords:
   - MySQL command execution

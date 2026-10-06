@@ -1,5 +1,6 @@
 ---
 title: "Unauthenticated daemon access: full control over an open port 2375"
+order: 1
 description: "Docker's daemon on TCP 2375 serves its API in plain HTTP with no authentication. Any client that can reach the port issues API calls as if it were local root: listing and exec-ing into containers, reading environment secrets, and launching a new privileged container that mounts the host root, giving complete host compromise."
 keywords:
   - docker 2375

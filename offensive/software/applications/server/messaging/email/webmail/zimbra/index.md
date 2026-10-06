@@ -1,5 +1,6 @@
 ---
 title: "Zimbra: attacking the Collaboration Suite web client, admin console, and SOAP"
+order: 3
 description: "Zimbra Collaboration Suite as an attack surface: the mailboxd (Jetty) application behind an nginx proxy, the web client on 443 and admin console on 7071, and the SOAP API at /service/soap and /service/admin/soap. Fingerprint the build, then move through account enumeration, admin-token abuse, and the unauthenticated RCE chains."
 keywords:
   - zimbra

@@ -1,5 +1,6 @@
 ---
 title: "Enumerating and escalating privileges in MSSQL injection"
+order: 7
 description: "Reading the SQL Server login's server and database roles, and the common escalation paths: impersonation, trustworthy databases, and sysadmin membership."
 keywords:
   - IS_SRVROLEMEMBER

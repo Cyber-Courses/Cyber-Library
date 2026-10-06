@@ -1,5 +1,6 @@
 ---
 title: "Service Bus: reading and injecting queue and topic messages"
+order: 1
 description: "Reading and injecting Azure Service Bus queues and topics through SAS or RBAC access."
 keywords:
   - Service Bus

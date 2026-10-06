@@ -1,5 +1,6 @@
 ---
 title: "Apache Alias and mod_rewrite traversal: mapping outside the intended directory"
+order: 2
 description: "Exploiting Apache Alias, AliasMatch, and mod_rewrite rules that build filesystem paths from unconstrained URL captures, letting a request escape the mapped directory into source, config, or system files."
 keywords:
   - apache alias

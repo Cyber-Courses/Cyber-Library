@@ -1,5 +1,6 @@
 ---
 title: "Weak MAC algorithms: broken SSH integrity protection"
+order: 2
 description: "SSH protects each packet with a message authentication code, and servers that offer weak MACs, MD5-based, 96-bit truncated, or non-encrypt-then-MAC modes, weaken the integrity guarantee. A positioned attacker exploits weak or truncated MACs to tamper with or forge packets, undermining the protection that prevents session manipulation."
 keywords:
   - weak mac

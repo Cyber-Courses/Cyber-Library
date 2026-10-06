@@ -1,5 +1,6 @@
 ---
 title: "Anonymous file access: reading rsync module contents without credentials"
+order: 3
 description: "rsync daemon modules without an auth users directive are readable by anyone, so an attacker downloads their entire contents anonymously. Because rsync modules frequently back up or publish server directories, those contents hold configurations, source, keys, and whole backups, making an anonymous module a direct data-theft foothold."
 keywords:
   - rsync anonymous

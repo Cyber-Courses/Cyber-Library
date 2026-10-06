@@ -1,5 +1,6 @@
 ---
 title: "Delegation: abusing Kerberos impersonation"
+order: 5
 description: "Abusing Kerberos delegation in Active Directory: unconstrained delegation TGT capture, constrained delegation with protocol transition (S4U2self/S4U2proxy), and resource-based constrained delegation configured from a writable computer object."
 keywords:
   - kerberos delegation

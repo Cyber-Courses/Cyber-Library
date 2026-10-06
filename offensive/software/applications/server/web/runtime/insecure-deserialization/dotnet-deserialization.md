@@ -1,5 +1,6 @@
 ---
 title: ".NET deserialization: BinaryFormatter, TypeNameHandling, and ViewState"
+order: 5
 description: "Exploiting .NET deserialization: BinaryFormatter/LosFormatter sinks, Json.NET TypeNameHandling, ASP.NET ViewState, and gadget generation with ysoserial.net."
 keywords:
   - .NET deserialization

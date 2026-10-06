@@ -1,5 +1,6 @@
 ---
 title: "Authentication: attacking VNC access control"
+order: 1
 description: "VNC access control is frequently weak: servers run with no authentication, with vendor or guessable passwords, or with the classic VNC scheme whose eight-character DES password is brute-forceable. Specific implementations add outright authentication bypasses. Gaining access yields a full interactive desktop on the target."
 keywords:
   - vnc authentication

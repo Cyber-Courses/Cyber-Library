@@ -1,5 +1,6 @@
 ---
 title: "Cacti: attacking the graphing and monitoring platform"
+order: 4
 description: "Cacti is a PHP network graphing and monitoring application. It has a recurring history of serious vulnerabilities, unauthenticated and authenticated command injection and SQL injection reaching remote code execution, and it stores the SNMP strings and device credentials it uses to poll. Default credentials, the known RCE chains, and credential harvesting are the surface."
 keywords:
   - cacti

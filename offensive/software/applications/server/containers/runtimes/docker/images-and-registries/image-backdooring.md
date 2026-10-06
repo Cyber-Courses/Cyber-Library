@@ -1,5 +1,6 @@
 ---
 title: "Image backdooring: modifying an image to run attacker code on launch"
+order: 2
 description: "An attacker with write access to an image or its registry tag rebuilds or repacks it to add a persistent payload: an altered entrypoint that launches a backdoor alongside the real process, an injected layer, or modified binaries. Every container started from the backdoored image runs the attacker's code, usually without visibly changing the application's behaviour."
 keywords:
   - image backdoor

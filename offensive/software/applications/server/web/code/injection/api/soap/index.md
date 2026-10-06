@@ -1,5 +1,6 @@
 ---
 title: "SOAP abuse: dispatch, headers, and body unmarshaling"
+order: 3
 description: "SOAP routes XML envelopes by action and body to operation handlers. The attack surface is action-versus-body dispatch confusion, header processing such as WS-Security, and body parameter unmarshaling."
 keywords:
   - SOAP injection

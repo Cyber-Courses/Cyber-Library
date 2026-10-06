@@ -1,5 +1,6 @@
 ---
 title: "Host IPC namespace: reading shared memory and message queues of host processes"
+order: 3
 description: "A container sharing the host IPC namespace accesses the host's System V and POSIX inter-process communication objects: shared memory segments, semaphores, and message queues. Host daemons and databases that keep sensitive data or coordination state in shared memory become readable and writable, exposing secrets and allowing interference with host services."
 keywords:
   - hostipc

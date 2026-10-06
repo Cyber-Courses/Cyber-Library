@@ -1,5 +1,6 @@
 ---
 title: "Prometheus: attacking the metrics platform"
+order: 7
 description: "Prometheus and its ecosystem (exporters, Pushgateway, Alertmanager) are unauthenticated by default, so their interfaces expose scrape targets, configuration, and secrets, and the server's own request features (federation, remote endpoints, probe targets) are server-side request forgery primitives. The exporters and Pushgateway add further disclosure and pivot surfaces across the monitoring network."
 keywords:
   - prometheus

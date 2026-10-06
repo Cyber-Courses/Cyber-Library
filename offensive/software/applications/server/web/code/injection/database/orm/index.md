@@ -1,5 +1,6 @@
 ---
 title: "ORM injection"
+order: 2
 description: "Object-relational mappers parameterize normal queries, but every one exposes escape hatches that reopen injection, organized by framework."
 keywords:
   - ORM injection

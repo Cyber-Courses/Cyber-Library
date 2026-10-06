@@ -1,5 +1,6 @@
 ---
 title: "SSM"
+order: 2
 description: "Running commands on managed instances through Systems Manager: ssm:SendCommand and Session Manager shells under the instance's role."
 keywords:
   - SSM

@@ -1,5 +1,6 @@
 ---
 title: "Union-based SQL injection in PostgreSQL"
+order: 10
 description: "Appending UNION SELECT in PostgreSQL to extract data, handling its strict type matching with explicit casts and reading the pg_catalog and information_schema catalogs."
 keywords:
   - union based SQL injection

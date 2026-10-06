@@ -1,5 +1,6 @@
 ---
 title: "Malicious workloads: deployments and daemonsets that re-establish access"
+order: 1
 description: "A controller-managed workload persists because the controller recreates its pods. An attacker deploys a Deployment or DaemonSet that beacons out or opens a backdoor, and the ReplicaSet or DaemonSet controller restarts it whenever it is killed. A DaemonSet additionally lands a pod on every node, giving node-wide, self-healing presence."
 keywords:
   - deployment

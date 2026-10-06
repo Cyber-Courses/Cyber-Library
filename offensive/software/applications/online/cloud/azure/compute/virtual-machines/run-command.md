@@ -1,5 +1,6 @@
 ---
 title: "Run command: SYSTEM or root execution with runCommand"
+order: 1
 description: "Running commands as SYSTEM or root on an Azure VM with the runCommand action, without stored credentials."
 keywords:
   - run command

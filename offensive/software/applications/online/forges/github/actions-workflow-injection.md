@@ -1,5 +1,6 @@
 ---
 title: "Actions workflow injection: running attacker code in a privileged CI pipeline"
+order: 2
 description: "Turning GitHub Actions into code execution through pull_request_target and workflow_run triggers that check out attacker PR code with a read-write GITHUB_TOKEN, and shell script injection from untrusted context expressions, with secret exfiltration and cache poisoning."
 keywords:
   - pull_request_target

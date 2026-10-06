@@ -1,5 +1,6 @@
 ---
 title: "Token abuse"
+order: 3
 description: "Reusing leaked GitLab personal, project, and group access tokens, deploy tokens, and the pipeline CI job token against the v4 API: resolving each token's identity and scope, reading and writing repositories, and pivoting across projects through the job-token allowlist."
 keywords:
   - personal access token

@@ -1,5 +1,6 @@
 ---
 title: "Management plane: the Proxmox API, web UI, and cluster"
+order: 3
 description: "Proxmox is managed through a REST API and web UI on port 8006, authenticated with tickets or API tokens and authorized by a role system. Access controls every VM and container: console and guest-agent command execution, disk and backup operations, and node shell. Ticket, token, or privilege-escalation flaws in this surface give estate control without a guest escape."
 keywords:
   - proxmox api

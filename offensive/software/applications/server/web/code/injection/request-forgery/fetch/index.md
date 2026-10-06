@@ -1,5 +1,6 @@
 ---
 title: "Fetch: the client that performs the SSRF request"
+order: 5
 description: "Orthogonal to URL grammar, the client that issues the outbound request decides what a malicious URL can do. A programmatic HTTP library and a headless browser behave very differently for the same URL."
 keywords:
   - SSRF client

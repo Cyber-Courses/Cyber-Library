@@ -1,5 +1,6 @@
 ---
 title: "Images and registries: attacking the container supply chain"
+order: 2
 description: "Container images are distributed through registries and assembled from base images, both of which are supply-chain attack surfaces. An attacker enumerates and pulls from exposed or unauthenticated registries, extracts secrets baked into image layers, and poisons or backdoors base images so that every downstream build runs attacker code."
 keywords:
   - container registry

@@ -1,5 +1,6 @@
 ---
 title: "AWS credentials"
+order: 2
 description: "Harvesting AWS credentials: long-term access keys, STS session tokens, the EC2 and ECS instance metadata service (IMDSv1/v2 and SSRF), Secrets Manager, Parameter Store, and KMS, and the service credential brokers that mint them."
 keywords:
   - AWS credentials

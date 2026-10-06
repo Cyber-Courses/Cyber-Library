@@ -1,5 +1,6 @@
 ---
 title: "Roundcube: stored XSS in message rendering and file-write to PHP"
+order: 1
 description: "Attacking Roundcube webmail: fingerprinting the build, stored cross-site scripting through the rcube_washtml HTML sanitizer (the style, SVG, and attribute bypasses) that fires when the victim opens a crafted message, skin and plugin path traversal, and the installto and plugin paths that write PHP under the webroot for code execution."
 keywords:
   - roundcube xss

@@ -1,5 +1,6 @@
 ---
 title: "sysrq-trigger: driving host kernel magic-sysrq actions from a container"
+order: 3
 description: "Writing a character to /proc/sysrq-trigger invokes the kernel's magic-sysrq handler on the host: syncing disks, killing processes, thawing filesystems, or crashing and rebooting the machine. A container with the host procfs mounted writable uses it to disrupt the host or to combine process kills with other primitives, though its direct code-execution value is limited."
 keywords:
   - sysrq-trigger

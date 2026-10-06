@@ -1,5 +1,6 @@
 ---
 title: "Versions: SNMP version weaknesses"
+order: 3
 description: "SNMP has three versions with very different security. v1 and v2c authenticate with a cleartext community string and no encryption, so they are sniffable and trivially abused. v3 adds user-based authentication and privacy, but it still leaks usernames before authentication and can be attacked offline or downgraded. Detecting the version decides the attack."
 keywords:
   - snmp version

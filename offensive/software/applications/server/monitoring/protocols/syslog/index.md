@@ -1,5 +1,6 @@
 ---
 title: "Syslog: attacking log ingestion"
+order: 2
 description: "Syslog carries log events to collectors and SIEMs, usually over unauthenticated UDP 514, and the pipeline trusts what it receives. That trust is the attack surface: spoofing the source of records, injecting forged and newline-split entries to poison the record and exploit downstream parsers, and flooding the collector to drown real events or disrupt alerting."
 keywords:
   - syslog

@@ -1,5 +1,6 @@
 ---
 title: "Log injection"
+order: 10
 description: "Untrusted input written into log lines or fields, letting an attacker forge events, shift fields, and confuse the parsers, aggregators, and SIEM pipelines that read the logs downstream."
 keywords:
   - log injection

@@ -1,5 +1,6 @@
 ---
 title: "Business parameter tampering: SKU, plan tier, shipping, and role codes in multi-step requests"
+order: 2
 description: "SKU, service tier, region, or role codes carried across steps that the server should resolve from the authenticated identity and inventory service."
 keywords:
   - business logic

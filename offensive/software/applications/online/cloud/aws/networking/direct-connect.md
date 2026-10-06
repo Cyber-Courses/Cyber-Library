@@ -1,5 +1,6 @@
 ---
 title: "Direct Connect: bridging on-premises networks into the VPC"
+order: 8
 description: "Abusing Direct Connect links and virtual interfaces that bridge on-premises networks into the VPC."
 keywords:
   - Direct Connect

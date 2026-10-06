@@ -1,5 +1,6 @@
 ---
 title: "Apache MultiViews and content negotiation: file enumeration and source disclosure"
+order: 3
 description: "Abusing Apache mod_negotiation MultiViews to enumerate files by base name, discover unreferenced variants, and disclose source or backups the server offers as negotiated representations."
 keywords:
   - MultiViews

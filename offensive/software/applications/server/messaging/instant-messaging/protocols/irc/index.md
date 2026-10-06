@@ -1,5 +1,6 @@
 ---
 title: "IRC: attacking Internet Relay Chat servers"
+order: 1
 description: "IRC on TCP 6667 plaintext and 6697 over TLS, served by ircd implementations such as UnrealIRCd, InspIRCd, and Charybdis. The surface is unauthenticated enumeration through registered sessions, NickServ/ChanServ services and the OPER operator privilege, and server-side flaws including the backdoored UnrealIRCd 3.2.8.1 distribution."
 keywords:
   - IRC

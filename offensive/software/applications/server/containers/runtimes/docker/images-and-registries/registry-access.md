@@ -1,5 +1,6 @@
 ---
 title: "Registry access: using found or weak credentials to reach private images"
+order: 3
 description: "Registry credentials turn up in config.json files, CI environment variables, and Kubernetes image-pull secrets. With them, an attacker authenticates to a private registry to pull every image and, depending on the credential's scope, push modified ones. Weak or reused registry passwords extend the same access by guessing."
 keywords:
   - registry credentials

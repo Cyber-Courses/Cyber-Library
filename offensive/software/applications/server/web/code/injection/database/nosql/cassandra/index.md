@@ -1,5 +1,6 @@
 ---
 title: "Cassandra injection"
+order: 1
 description: "String-built CQL against Apache Cassandra lets an attacker break out of quoted values, add predicates, force cluster-wide scans, and smuggle extra writes into a wide-column store."
 keywords:
   - Cassandra injection

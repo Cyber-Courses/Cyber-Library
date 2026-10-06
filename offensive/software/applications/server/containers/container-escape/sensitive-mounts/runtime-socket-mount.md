@@ -1,5 +1,6 @@
 ---
 title: "Runtime socket mount: controlling the host daemon through a mounted container socket"
+order: 2
 description: "A container with the Docker, containerd, or CRI-O control socket bind-mounted talks to the host container daemon directly. Through that API an attacker launches a new, fully privileged container that bind-mounts the host root, giving root code execution on the host. Shown with the Docker CLI, the raw Docker HTTP API over the socket, containerd ctr, and CRI-O crictl."
 keywords:
   - docker.sock

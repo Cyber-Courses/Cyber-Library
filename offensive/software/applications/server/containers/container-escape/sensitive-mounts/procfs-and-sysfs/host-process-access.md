@@ -1,5 +1,6 @@
 ---
 title: "Host process access: reading host memory and secrets through a mounted proc"
+order: 6
 description: "When the host's /proc is visible in a container, through a bind mount or a shared PID namespace, every host process is reachable. An attacker reads command lines and environment variables for secrets, follows /proc/pid/root into other containers' filesystems, and reads or writes /proc/pid/mem to extract keys or inject into a host process."
 keywords:
   - host proc

@@ -1,5 +1,6 @@
 ---
 title: "From PostgreSQL injection to command execution"
+order: 2
 description: "The two routes from a privileged PostgreSQL injection to OS command execution: COPY ... FROM PROGRAM, and functions in an untrusted procedural or C language."
 keywords:
   - PostgreSQL command execution

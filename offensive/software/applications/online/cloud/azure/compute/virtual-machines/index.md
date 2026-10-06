@@ -1,5 +1,6 @@
 ---
 title: "Virtual machines"
+order: 1
 description: "Taking over Azure VMs: run command and Custom Script Extension for SYSTEM or root execution, managed-identity token theft, and user-data and cloud-init secrets."
 keywords:
   - virtual machines

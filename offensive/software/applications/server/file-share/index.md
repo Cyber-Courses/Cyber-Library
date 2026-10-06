@@ -1,5 +1,6 @@
 ---
 title: "File Share: attacking file-sharing and transfer services"
+order: 4
 description: "Attacking file-sharing and transfer services: network file systems (SMB, NFS, AFP) reached by mounting or protocol clients, transfer protocols (FTP, FTPS, SFTP, TFTP, rsync), and web-based file access (HTTP file servers, WebDAV, managed file transfer appliances). Covers anonymous and weak access, writable-share abuse, and loot."
 keywords:
   - file sharing

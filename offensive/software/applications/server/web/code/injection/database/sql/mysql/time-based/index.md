@@ -1,5 +1,6 @@
 ---
 title: "Time-based blind SQL injection in MySQL"
+order: 8
 description: "Inferring MySQL data from conditional response delays using SLEEP and BENCHMARK when the response is otherwise identical for true and false."
 keywords:
   - time based blind

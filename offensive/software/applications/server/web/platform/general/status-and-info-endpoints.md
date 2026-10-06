@@ -1,5 +1,6 @@
 ---
 title: "Status and info endpoints: server-status, server-info, and stub_status exposure"
+order: 1
 description: "Harvesting operational dashboards left public: Apache mod_status and mod_info, nginx stub_status, and PHP-FPM status pages, which leak live requests, internal paths, and configuration."
 keywords:
   - server-status

@@ -1,5 +1,6 @@
 ---
 title: "Reverse proxy and edge: edge/origin mismatches, backend exposure, and header trust"
+order: 6
 description: "Platform attacks that belong to the proxy role rather than one product: path normalization mismatch between edge and origin, reaching the origin directly, and header trust injected by the edge."
 keywords:
   - reverse proxy

@@ -1,5 +1,6 @@
 ---
 title: "Server-side template injection (SSTI)"
+order: 8
 description: "Exploiting server-side template injection: detecting the engine, escalating from a template expression to the host language runtime, and the sandbox limits that decide whether RCE is reachable, organized by language."
 keywords:
   - server-side template injection

@@ -1,5 +1,6 @@
 ---
 title: "Blind Cypher injection: boolean and time-based inference in Neo4j"
+order: 4
 description: "Recover data through a Neo4j Cypher injection that returns no rows, using conditional patterns and apoc.util.sleep() for boolean and time-based inference."
 keywords:
   - blind Cypher injection

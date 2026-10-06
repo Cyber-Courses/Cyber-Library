@@ -1,5 +1,6 @@
 ---
 title: "Shadow credentials: impersonation via key credentials"
+order: 6
 description: "Abusing the msDS-KeyCredentialLink attribute to add attacker-controlled key credentials to a user or computer, then authenticating as that principal with PKINIT certificates without knowing or changing its password."
 keywords:
   - shadow credentials

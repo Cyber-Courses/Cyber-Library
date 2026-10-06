@@ -1,5 +1,6 @@
 ---
 title: "Authentication: gaining Zabbix access"
+order: 1
 description: "Zabbix access is gained through the web login or the API: the default Admin/zabbix credentials, weak passwords and brute force, an enabled guest account, API authentication-bypass flaws, and reuse of stolen session cookies or API tokens. Any of these yields a session whose privilege, especially Super admin, determines the path to code execution."
 keywords:
   - zabbix authentication

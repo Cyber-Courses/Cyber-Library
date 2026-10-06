@@ -1,5 +1,6 @@
 ---
 title: "Prisma raw query injection"
+order: 1
 description: "queryRawUnsafe and executeRawUnsafe take a plain string, so untrusted input concatenated into them runs as SQL; the tagged-template queryRaw parameterizes and is the safe form."
 keywords:
   - queryRawUnsafe

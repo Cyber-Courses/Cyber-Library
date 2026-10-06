@@ -1,5 +1,6 @@
 ---
 title: "Config: stopping recorders and deleting rules"
+order: 3
 description: "Stopping AWS Config recorders and deleting rules to hide configuration changes from auditing."
 keywords:
   - AWS Config

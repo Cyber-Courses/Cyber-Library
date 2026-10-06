@@ -1,5 +1,6 @@
 ---
 title: "GCP storage"
+order: 4
 description: "Attacking GCP storage: Cloud Storage bucket enumeration and IAM and ACL access, persistent-disk snapshots, and Filestore shares."
 keywords:
   - Cloud Storage

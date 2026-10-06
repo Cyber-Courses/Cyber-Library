@@ -1,5 +1,6 @@
 ---
 title: "CAP_DAC_OVERRIDE: writing host files past permission checks"
+order: 5
 description: "CAP_DAC_OVERRIDE bypasses all discretionary read, write, and execute permission checks. Inside a container it becomes dangerous when any host file is reachable through a bind mount or a mounted host device: the capability lets an attacker overwrite root-owned files such as sudoers, cron entries, or authorized_keys regardless of their mode bits."
 keywords:
   - cap_dac_override

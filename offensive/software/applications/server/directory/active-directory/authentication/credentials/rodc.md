@@ -1,5 +1,6 @@
 ---
 title: "RODC: cached credentials and the scoped golden ticket"
+order: 16
 description: "Compromising a Read-Only Domain Controller to extract the credentials its Password Replication Policy allows it to cache, and forging a scoped golden ticket with the RODC's own krbtgt key that a writable DC will accept for the allowed principals."
 keywords:
   - RODC

@@ -1,5 +1,6 @@
 ---
 title: "CloudWatch: deleting log groups, metric filters, and alarms"
+order: 4
 description: "Deleting log groups, alarms, and metric filters to suppress CloudWatch alerting and evidence."
 keywords:
   - CloudWatch

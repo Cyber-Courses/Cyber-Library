@@ -1,5 +1,6 @@
 ---
 title: "GraphQL abuse: resolver trust and query shape"
+order: 1
 description: "A GraphQL endpoint executes a client-shaped query against per-field resolvers. The attack surface is where authorization lives, how resolver arguments reach backends, and how aliases and batching amplify a single request."
 keywords:
   - GraphQL injection

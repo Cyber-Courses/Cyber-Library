@@ -1,5 +1,6 @@
 ---
 title: "Disk and snapshot theft: taking Xen guest virtual disks"
+order: 4
 description: "Xen guest disks are virtual block devices backed by files (raw, VHD) or block storage (LVM, local or shared SRs on XenServer/XCP-ng). With dom0, storage, or XAPI access, an attacker reads the backing image offline or exports the VDI, extracting any guest's data without entering it, and reads snapshots for point-in-time state."
 keywords:
   - vdi

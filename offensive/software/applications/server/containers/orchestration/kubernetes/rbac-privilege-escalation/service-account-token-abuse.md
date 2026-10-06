@@ -1,5 +1,6 @@
 ---
 title: "Service account token abuse: reusing and mounting powerful identities"
+order: 2
 description: "Service-account tokens are bearer credentials: whoever holds one is that account. An attacker reuses tokens found in secrets, on nodes, or in pods, and where they can create pods, mounts a powerful service account into a pod they control to inherit its permissions, converting token access into action as that identity."
 keywords:
   - service account token

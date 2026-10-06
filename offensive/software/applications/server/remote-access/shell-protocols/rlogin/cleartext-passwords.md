@@ -1,5 +1,6 @@
 ---
 title: "Cleartext passwords: capturing the rlogin login"
+order: 1
 description: "When host trust does not apply, rlogin falls back to a password prompt sent in cleartext. A positioned attacker captures the username and password directly from the traffic, and the entire interactive session along with it, yielding a reusable credential with no guessing and nothing logged as a failed attempt."
 keywords:
   - cleartext password

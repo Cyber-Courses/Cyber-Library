@@ -1,5 +1,6 @@
 ---
 title: "PRTG Network Monitor: attacking the monitoring server"
+order: 3
 description: "PRTG is a Windows monitoring platform with a web interface and a default prtgadmin account. Its signature weakness is the notification feature: an authenticated administrator configures a notification that executes a program or script, and a crafted command parameter runs as the PRTG service account, which is SYSTEM, giving remote code execution from a web login."
 keywords:
   - prtg

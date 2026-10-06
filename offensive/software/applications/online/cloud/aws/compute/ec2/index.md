@@ -1,5 +1,6 @@
 ---
 title: "EC2"
+order: 1
 description: "Attacking EC2 instances: user-data secrets and code, the attached instance profile and its role, and data recovery from EBS snapshots and shared AMIs."
 keywords:
   - EC2

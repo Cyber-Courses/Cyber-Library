@@ -1,5 +1,6 @@
 ---
 title: "Error-based: leaking Cassandra schema through CQL errors"
+order: 2
 description: "CQL error messages name tables, columns, and expected types, letting an attacker map a Cassandra schema by deliberately provoking type mismatches and unknown-identifier errors."
 keywords:
   - error-based CQL injection

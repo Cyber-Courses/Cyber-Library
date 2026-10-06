@@ -1,5 +1,6 @@
 ---
 title: "Credential creation"
+order: 2
 description: "Minting new credentials for an IAM principal you can write to: additional access keys and new or reset console login profiles."
 keywords:
   - CreateAccessKey

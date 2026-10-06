@@ -1,5 +1,6 @@
 ---
 title: "Entra applications"
+order: 2
 description: "Abusing Entra app registrations and service principals: consent phishing, Microsoft Graph permission abuse, added credentials, federated identity credentials, and ownership takeover."
 keywords:
   - app registration

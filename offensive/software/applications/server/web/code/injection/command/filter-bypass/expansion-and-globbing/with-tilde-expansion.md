@@ -1,5 +1,6 @@
 ---
 title: "Command injection filter bypass with tilde expansion"
+order: 3
 description: "Rebuilding filtered paths from the shell's tilde expansion, ~ for HOME, ~+ for PWD, ~- for OLDPWD, so directory prefixes are produced by the shell rather than typed as filtered literals."
 keywords:
   - command injection

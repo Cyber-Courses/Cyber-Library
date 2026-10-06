@@ -1,5 +1,6 @@
 ---
 title: "Service account and token discovery: finding and using pod identities"
+order: 3
 description: "Every pod runs as a service account whose token is mounted into it. An attacker decodes the mounted token to learn its identity and namespace, hunts for additional tokens in other mounted secrets and on the node, and uses the TokenRequest API where permitted to mint tokens for other service accounts, expanding from one identity to many."
 keywords:
   - service account

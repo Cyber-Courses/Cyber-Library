@@ -1,5 +1,6 @@
 ---
 title: "APOC procedure abuse through Cypher injection in Neo4j"
+order: 3
 description: "Reaching APOC procedures via CALL injection turns a Cypher flaw into SSRF, outbound exfiltration, file access, and arbitrary graph writes on Neo4j."
 keywords:
   - APOC abuse

@@ -1,5 +1,6 @@
 ---
 title: "vCenter: attacking the vSphere management plane"
+order: 1
 description: "vCenter Server manages a fleet of ESXi hosts and is the central control plane of a vSphere environment. Compromising it yields control of every managed host and VM. The surface is enumeration of the inventory and services, the Single Sign-On token and identity system, and a history of pre-authentication management-service vulnerabilities."
 keywords:
   - vcenter

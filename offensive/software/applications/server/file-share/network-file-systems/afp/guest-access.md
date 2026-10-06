@@ -1,5 +1,6 @@
 ---
 title: "Guest access: unauthenticated access to AFP volumes"
+order: 3
 description: "Many AFP servers, especially NAS appliances and Netatalk installs, enable guest access, advertised as the No User Authent capability. A client logging in as guest mounts and browses the exposed volumes with no credentials, reading (and sometimes writing) shared data, making guest-enabled AFP an immediate pre-credential foothold."
 keywords:
   - afp guest

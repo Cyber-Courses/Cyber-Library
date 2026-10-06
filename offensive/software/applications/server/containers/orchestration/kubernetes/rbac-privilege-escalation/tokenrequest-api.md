@@ -1,5 +1,6 @@
 ---
 title: "TokenRequest API: minting tokens for other service accounts"
+order: 7
 description: "The TokenRequest API issues a bound token for a service account through the serviceaccounts/token subresource. An identity that can create tokens for a service account more privileged than itself mints that account's token and acts as it, escalating by borrowing the identity of any service account it is allowed to request tokens for."
 keywords:
   - tokenrequest

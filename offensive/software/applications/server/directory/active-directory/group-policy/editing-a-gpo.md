@@ -1,5 +1,6 @@
 ---
 title: "Editing a GPO: code execution across its scope"
+order: 2
 description: "Turning write access over an Active Directory Group Policy Object into code execution on every computer or user it applies to, by injecting an immediate scheduled task, startup or logon script, or a local-administrator membership, with pyGPOAbuse and SharpGPOAbuse."
 keywords:
   - GPO abuse

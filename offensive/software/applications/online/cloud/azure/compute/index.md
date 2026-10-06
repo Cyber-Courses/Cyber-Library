@@ -1,5 +1,6 @@
 ---
 title: "Azure compute"
+order: 3
 description: "Attacking Azure compute: VM run command and extensions, managed identities, AKS cluster access and node identity, Container Registry images and tasks, and Container Instances and scale sets."
 keywords:
   - Azure compute

@@ -1,5 +1,6 @@
 ---
 title: "Drizzle injection"
+order: 3
 description: "Drizzle's sql template binds its interpolations as parameters and its operator functions are value-safe, so injection appears through sql.raw and raw fragments, and through filters whose column or operator comes from input."
 keywords:
   - Drizzle

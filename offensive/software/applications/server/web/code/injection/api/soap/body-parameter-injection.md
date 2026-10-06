@@ -1,5 +1,6 @@
 ---
 title: "SOAP body parameter injection"
+order: 2
 description: "Body children and wrapped document parameters built from input let type confusion, duplicate elements, and xsi:nil tricks change how the server unmarshals and authorizes a SOAP call."
 keywords:
   - SOAP body injection

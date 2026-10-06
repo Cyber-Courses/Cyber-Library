@@ -1,5 +1,6 @@
 ---
 title: "SCCM site takeover: relaying to Full Administrator"
+order: 3
 description: "Taking control of a Configuration Manager site by coercing the site server's authentication and relaying it to the site database (MSSQL) or the SMS Provider, granting the Full Administrator role and with it SYSTEM execution on every managed device."
 keywords:
   - SCCM site takeover

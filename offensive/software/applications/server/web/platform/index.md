@@ -1,5 +1,6 @@
 ---
 title: "Platform: attacking the web server and hosting layer, by product"
+order: 3
 description: "Offensive techniques against the web platform organized the way an audit works: general exposures that apply to any server, then per-product misconfiguration checklists for Apache, nginx, IIS, and Tomcat/Java, plus reverse-proxy and edge behavior."
 keywords:
   - web server exploitation

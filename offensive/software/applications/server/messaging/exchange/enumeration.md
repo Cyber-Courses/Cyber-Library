@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: build, users, and the address book"
+order: 1
 description: "Enumerating on-premises Exchange from outside: reading the build from OWA and ECP static paths, Autodiscover domain and user discovery, timing-based username validation on OWA and EWS, the NTLM type-2 internal-name leak from /rpc and /ews, and dumping the Global Address List."
 keywords:
   - Exchange enumeration

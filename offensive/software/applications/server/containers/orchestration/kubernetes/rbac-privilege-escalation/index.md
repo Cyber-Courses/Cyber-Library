@@ -1,5 +1,6 @@
 ---
 title: "RBAC privilege escalation: turning a weak identity into cluster admin"
+order: 3
 description: "Kubernetes RBAC grants verbs on resources, and several verb-and-resource combinations let a limited identity grant itself more: over-permissive roles, the escalate and bind verbs, impersonation, certificate signing, the TokenRequest API, and the ability to create pods. Each converts a modest service account into broad or full cluster control."
 keywords:
   - kubernetes rbac

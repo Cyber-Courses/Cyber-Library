@@ -1,5 +1,6 @@
 ---
 title: "FSx: reaching Windows, Lustre, and NetApp file systems"
+order: 5
 description: "Accessing FSx for Windows, Lustre, or NetApp file systems exposed through share permissions and security groups."
 keywords:
   - FSx

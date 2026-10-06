@@ -1,5 +1,6 @@
 ---
 title: "Roasting: extracting crackable material from Kerberos"
+order: 1
 description: "Obtaining offline-crackable Kerberos material without touching a host: Kerberoasting service accounts, AS-REP roasting accounts without pre-authentication, and timeroasting through unauthenticated time sync."
 keywords:
   - kerberoasting

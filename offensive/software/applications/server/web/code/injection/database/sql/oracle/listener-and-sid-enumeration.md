@@ -1,5 +1,6 @@
 ---
 title: "Instance and SID enumeration in Oracle injection"
+order: 6
 description: "Identifying the Oracle instance, SID, and service name from a SQL injection, and how listener information complements it for targeting."
 keywords:
   - Oracle SID

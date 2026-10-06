@@ -1,5 +1,6 @@
 ---
 title: "sAMAccountName spoofing: the noPac escalation"
+order: 8
 description: "Escalating from a standard domain user to domain admin by renaming a controlled computer account to match a domain controller, exploiting how the KDC resolves principals during the S4U2self TGS exchange (noPac)."
 keywords:
   - sAMAccountName spoofing

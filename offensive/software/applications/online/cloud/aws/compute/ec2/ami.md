@@ -1,5 +1,6 @@
 ---
 title: "AMI: secrets in shared and public machine images"
+order: 4
 description: "Finding secrets in shared or public AMIs and launching instances from them to inherit baked-in access."
 keywords:
   - AMI

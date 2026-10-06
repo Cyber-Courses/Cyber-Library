@@ -1,5 +1,6 @@
 ---
 title: "Shared host namespaces: escapes from a container that shares the host's namespaces"
+order: 4
 description: "Each --host namespace flag removes one layer of isolation between container and host. Sharing the PID namespace exposes and lets you inject into host processes, the network namespace exposes host-local services and the node's loopback, the IPC namespace exposes shared memory and semaphores, and a shared or mapped user namespace can mean container root is host root."
 keywords:
   - host namespace

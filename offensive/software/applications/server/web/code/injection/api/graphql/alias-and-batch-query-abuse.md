@@ -1,5 +1,6 @@
 ---
 title: "GraphQL alias and batch query abuse"
+order: 3
 description: "Aliases, batched operations, and nested duplicate fields let one request run the same work many times, amplifying cost and brute-forcing values past limits that were only enforced per HTTP request."
 keywords:
   - GraphQL alias

@@ -1,5 +1,6 @@
 ---
 title: "Authorizer bypass: defeating a Lambda or JWT authorizer"
+order: 2
 description: "Bypassing a Lambda or JWT authorizer through caching, header handling, or logic flaws to reach protected routes."
 keywords:
   - authorizer

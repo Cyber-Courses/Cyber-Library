@@ -1,5 +1,6 @@
 ---
 title: "LDAP injection: filter, DN, and search-base abuse"
+order: 4
 description: "Exploiting LDAP injection when application code builds directory filters, distinguished names, or search bases from untrusted input, including authentication bypass and blind extraction."
 keywords:
   - LDAP injection

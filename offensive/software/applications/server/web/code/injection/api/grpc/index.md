@@ -1,5 +1,6 @@
 ---
 title: "gRPC abuse: reflection, metadata, and dynamic typing"
+order: 2
 description: "gRPC dispatches protobuf messages to service methods. The attack surface is server reflection exposing the RPC map, metadata trusted for authorization, and dynamic message typing that decodes attacker-chosen types."
 keywords:
   - gRPC injection

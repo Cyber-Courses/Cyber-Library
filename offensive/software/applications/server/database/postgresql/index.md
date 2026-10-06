@@ -1,5 +1,6 @@
 ---
 title: "PostgreSQL"
+order: 2
 description: "The offensive surface of PostgreSQL reached as a service: authenticating, executing operating-system commands through COPY FROM PROGRAM and untrusted procedural languages, reading and writing host files, and escalating to superuser."
 keywords:
   - PostgreSQL

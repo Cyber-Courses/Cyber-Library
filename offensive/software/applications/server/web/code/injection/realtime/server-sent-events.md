@@ -1,5 +1,6 @@
 ---
 title: "Server-Sent Events"
+order: 2
 description: "Newline injection into a text/event-stream where server-built data, event, and id lines come from untrusted state, forging events and poisoning shared streams."
 keywords:
   - Server-Sent Events

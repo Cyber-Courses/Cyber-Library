@@ -1,5 +1,6 @@
 ---
 title: "Xen: attacking the bare-metal paravirtualization hypervisor"
+order: 4
 description: "Xen is a type-1 hypervisor where a privileged dom0 hosts the control stack and the backend drivers for guest I/O. The guest-to-host escape targets the hypercall interface, the grant tables and event channels, and the paravirtual backend drivers running in dom0, alongside theft of guest disks and the toolstack management plane."
 keywords:
   - xen

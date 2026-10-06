@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of a bhyve virtual machine"
+order: 2
 description: "A bhyve guest escapes by corrupting the userspace bhyve process that emulates its devices. The reachable surface is bhyve's device models, the virtio family, the AHCI storage controller, the e1000 NIC, the USB controllers, and the framebuffer, each parsing guest-driven register writes and DMA descriptors, with a flaw yielding code execution in the bhyve process on the FreeBSD host."
 keywords:
   - bhyve escape

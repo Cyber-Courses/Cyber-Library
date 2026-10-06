@@ -1,5 +1,6 @@
 ---
 title: "Telnet: attacking the unencrypted terminal protocol"
+order: 5
 description: "Telnet on TCP 23 provides remote terminal access with no encryption, so credentials, commands, and output cross the network in cleartext. Its surface is weak authentication (defaults, no-auth, brute force), a verbose banner that discloses the OS, memory-corruption RCE in old telnetd implementations, and interception of the cleartext session for credentials and hijacking."
 keywords:
   - telnet

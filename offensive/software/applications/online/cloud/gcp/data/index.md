@@ -1,5 +1,6 @@
 ---
 title: "GCP data"
+order: 6
 description: "Attacking GCP data services: Cloud SQL, BigQuery, Vertex AI, Dataproc, Dataflow, Firestore, Spanner, and Bigtable."
 keywords:
   - Cloud SQL

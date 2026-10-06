@@ -1,5 +1,6 @@
 ---
 title: "Authentication: the default prtgadmin and weak credentials"
+order: 1
 description: "PRTG ships with a default administrator account, prtgadmin/prtgadmin, that is frequently unchanged, and otherwise accepts weak passwords. A web login as an administrator is the whole precondition for the notification-based SYSTEM code execution, so default or sprayed credentials against the PRTG login are the direct path to compromising the server."
 keywords:
   - prtgadmin

@@ -1,5 +1,6 @@
 ---
 title: "Build-time attacks: abusing the image build process"
+order: 3
 description: "The container build is an execution environment with its own attack surface. Build arguments and mounted secrets leak into the final image or the build cache, and the BuildKit frontend and daemon have had flaws letting a crafted Dockerfile or build context read files outside the context or execute on the build host."
 keywords:
   - docker build

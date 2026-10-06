@@ -1,5 +1,6 @@
 ---
 title: "NFSv4 and Kerberos: the stronger configuration and its weak points"
+order: 4
 description: "NFSv4 adds a single pseudo-filesystem, name-based identity mapping, and optional Kerberos security (sec=krb5). Kerberos authenticates the user and, with krb5i/krb5p, protects integrity and privacy, defeating UID spoofing. The weak points are servers that still allow sec=sys fallback, misconfigured id mapping, and reliance on stolen Kerberos tickets or keytabs."
 keywords:
   - nfsv4

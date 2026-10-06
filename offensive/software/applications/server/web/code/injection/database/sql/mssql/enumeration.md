@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in MSSQL injection"
+order: 12
 description: "Orienting an MSSQL injection: confirming the engine, reading version and current context, and checking whether the login is a sysadmin."
 keywords:
   - MSSQL fingerprinting

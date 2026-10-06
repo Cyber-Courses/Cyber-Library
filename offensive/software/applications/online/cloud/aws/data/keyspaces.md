@@ -1,5 +1,6 @@
 ---
 title: "Keyspaces: reaching Cassandra-compatible tables"
+order: 13
 description: "Accessing Keyspaces (Cassandra-compatible) tables through exposed credentials and over-broad grants."
 keywords:
   - Keyspaces

@@ -1,5 +1,6 @@
 ---
 title: "Authentication: NoSQL injection and account takeover in Rocket.Chat"
+order: 2
 description: "Attacking Rocket.Chat authentication: why the REST /api/v1/login does not fall to a naive operator object, the blind NoSQL injection in the account and password-reset methods that extracts a stored reset token character by character to take over an admin, and the Enterprise ddp-streamer username-lookup injection that becomes a bypass only with the separate missing-await password flaw."
 keywords:
   - rocket.chat nosql injection

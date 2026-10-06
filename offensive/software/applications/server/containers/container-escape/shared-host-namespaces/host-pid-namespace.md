@@ -1,5 +1,6 @@
 ---
 title: "Host PID namespace: operating on host processes from the container"
+order: 1
 description: "A container sharing the host PID namespace sees every host process in its own /proc. That exposes host command lines, environment variables, open file descriptors, and process roots for secret harvesting, and, combined with ptrace permission, allows injecting code into a root-owned host process to execute on the host."
 keywords:
   - hostpid

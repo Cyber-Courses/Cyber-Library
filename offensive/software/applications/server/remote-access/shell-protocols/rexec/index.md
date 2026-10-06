@@ -1,5 +1,6 @@
 ---
 title: "rexec: attacking the remote execution service"
+order: 3
 description: "rexec (rexecd on TCP 512) executes a command on a remote host, authenticating with a username and password sent in cleartext, and can also honour host trust. Attacks are capturing the cleartext credential, abusing trusted-host relationships for passwordless execution, and command injection where the executed command is built unsafely."
 keywords:
   - rexec

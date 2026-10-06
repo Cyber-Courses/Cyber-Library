@@ -1,5 +1,6 @@
 ---
 title: "Disk snapshots: exporting a managed disk to read it offline"
+order: 3
 description: "Creating and exporting Azure managed-disk snapshots to read a VM's OS disk offline."
 keywords:
   - disk snapshot

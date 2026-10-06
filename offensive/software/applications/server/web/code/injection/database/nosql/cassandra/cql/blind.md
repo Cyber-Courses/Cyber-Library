@@ -1,5 +1,6 @@
 ---
 title: "Blind inference: boolean extraction from CQL queries"
+order: 1
 description: "When a Cassandra query reflects no data, an attacker reads it one fact at a time by crafting predicates whose truth changes whether any rows return."
 keywords:
   - blind CQL injection

@@ -1,5 +1,6 @@
 ---
 title: "HTTP method and request-line abuse"
+order: 3
 description: "Abusing the HTTP request line: method override headers and verb tampering to bypass method-based access control, and request-line injection."
 keywords:
   - method override

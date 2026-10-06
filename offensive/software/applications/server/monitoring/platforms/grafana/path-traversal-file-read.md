@@ -1,5 +1,6 @@
 ---
 title: "Path traversal file read: the unauthenticated Grafana plugin traversal"
+order: 2
 description: "A Grafana flaw in the plugin asset endpoint allowed directory traversal in the plugin path, so an unauthenticated request reads arbitrary files from the Grafana server. Reading grafana.ini and the database recovers the admin password hash, the secret key that decrypts stored data-source credentials, and other secrets, from no authentication on a vulnerable version."
 keywords:
   - grafana path traversal

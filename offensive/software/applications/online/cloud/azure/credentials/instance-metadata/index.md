@@ -1,5 +1,6 @@
 ---
 title: "Instance metadata"
+order: 1
 description: "Reading the Azure Instance Metadata Service to mint managed-identity tokens, including through SSRF against a victim resource."
 keywords:
   - IMDS

@@ -1,5 +1,6 @@
 ---
 title: "Kerberos: roasting, forging, and reusing tickets"
+order: 3
 description: "Abusing Kerberos in Active Directory: roasting service and pre-auth-less accounts for crackable material, reusing keys and tickets, forging tickets outright, abusing delegation, and the shadow-credentials and sAMAccountName-spoofing paths to impersonation."
 keywords:
   - kerberos

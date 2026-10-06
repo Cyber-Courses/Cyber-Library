@@ -1,5 +1,6 @@
 ---
 title: "Resource policy: invoking a private API through a permissive policy"
+order: 1
 description: "Abusing a permissive API Gateway resource policy to invoke private or internal APIs."
 keywords:
   - API Gateway

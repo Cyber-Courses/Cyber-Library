@@ -1,5 +1,6 @@
 ---
 title: "Java ORM injection"
+order: 3
 description: "Hibernate and JPA bind parameters on their query APIs, but HQL/JPQL string building, native queries, and dynamic criteria construction from untrusted input defeat that binding."
 keywords:
   - Java ORM

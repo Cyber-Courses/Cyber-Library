@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass through PostgreSQL injection"
+order: 12
 description: "Bypassing a login whose SQL is built from the username and password fields in PostgreSQL, using comment termination and always-true conditions."
 keywords:
   - authentication bypass

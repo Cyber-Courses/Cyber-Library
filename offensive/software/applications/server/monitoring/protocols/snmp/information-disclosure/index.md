@@ -1,5 +1,6 @@
 ---
 title: "Information disclosure: what an SNMP walk reveals"
+order: 5
 description: "A read community string turns into real value through what the agent discloses: the system and network topology, a device's full running configuration (exfiltrated on Cisco via SNMP and TFTP), extended Windows host data through the host-resources and LanMgr MIBs, and credentials and secrets stored in standard and custom OIDs."
 keywords:
   - snmp disclosure

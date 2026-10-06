@@ -1,5 +1,6 @@
 ---
 title: "DNS takeover: claiming dangling Azure DNS records"
+order: 4
 description: "Claiming dangling Azure DNS records left by deleted App Service, Traffic Manager, CDN, or public-IP resources."
 keywords:
   - DNS takeover

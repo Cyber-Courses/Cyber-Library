@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting a Telnet service"
+order: 3
 description: "Telnet enumeration reads the service banner and login prompt, which are often verbose, disclosing the operating system, device model, and software version, and sometimes a pre-login warning or configuration detail. That identification maps the target to default credentials and to the telnetd memory-corruption flaws it may carry."
 keywords:
   - telnet enumeration

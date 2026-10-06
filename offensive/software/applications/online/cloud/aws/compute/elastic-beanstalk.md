@@ -1,5 +1,6 @@
 ---
 title: "Elastic Beanstalk: environment role and configuration secrets"
+order: 5
 description: "Abusing Elastic Beanstalk environments and their instance-profile role, plus secrets exposed in environment configuration."
 keywords:
   - Elastic Beanstalk

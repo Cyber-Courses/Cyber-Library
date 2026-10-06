@@ -1,5 +1,6 @@
 ---
 title: "XPath predicate injection"
+order: 1
 description: "Breaking out of a string literal inside an XPath predicate rewrites the filter condition for authentication bypass and node extraction using boolean logic and position functions."
 keywords:
   - XPath predicate injection

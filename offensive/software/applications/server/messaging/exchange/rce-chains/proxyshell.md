@@ -1,5 +1,6 @@
 ---
 title: "ProxyShell: Autodiscover path confusion to a mailbox-export shell"
+order: 2
 description: "The pre-authentication Exchange chain that abuses Autodiscover URL path confusion to reach the remote PowerShell back end without credentials, computes the target mailbox SID to build a valid PowerShell remoting session, then runs New-MailboxExportRequest to write a mailbox export as an aspx web shell to a web-served path."
 keywords:
   - ProxyShell

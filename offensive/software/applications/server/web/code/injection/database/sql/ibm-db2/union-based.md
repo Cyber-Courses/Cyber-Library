@@ -1,5 +1,6 @@
 ---
 title: "Union-based SQL injection in IBM Db2"
+order: 7
 description: "Appending UNION SELECT in IBM Db2 to extract data, using SYSIBM.SYSDUMMY1, strict type matching, the SYSCAT catalog, and LISTAGG."
 keywords:
   - union based SQL injection

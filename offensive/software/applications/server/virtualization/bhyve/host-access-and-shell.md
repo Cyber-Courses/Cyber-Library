@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the bhyve host"
+order: 1
 description: "A bhyve host is a FreeBSD machine running the bhyve processes. Access comes from a guest escape landing in a bhyve process, from SSH with host credentials, or from the management tooling (bhyve/bhyvectl, or a wrapper like vm-bhyve). With host access an attacker controls every VM, reads the guest disk images, and persists on the FreeBSD host."
 keywords:
   - bhyve host

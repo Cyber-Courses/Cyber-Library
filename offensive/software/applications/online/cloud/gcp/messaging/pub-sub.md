@@ -1,5 +1,6 @@
 ---
 title: "Pub/Sub: capturing and injecting topic messages"
+order: 1
 description: "Reading or publishing to Pub/Sub topics and subscriptions through broad IAM to capture or inject messages."
 keywords:
   - Pub/Sub

@@ -1,5 +1,6 @@
 ---
 title: "Datastore and VMDK theft: taking virtual disks and their data"
+order: 2
 description: "ESXi stores each VM's virtual disks as VMDK files on datastores (VMFS or NFS). With host or datastore access, an attacker copies the VMDK files and reads their filesystems offline, extracting every guest's data, credentials, and secrets without ever entering the running VMs, and can also tamper with disks or snapshots before a VM boots."
 keywords:
   - vmdk

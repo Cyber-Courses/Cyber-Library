@@ -1,5 +1,6 @@
 ---
 title: "Credential harvesting: stored SNMP strings and device credentials"
+order: 3
 description: "Cacti stores the credentials it uses to poll devices, SNMP community strings and SNMPv3 users, and credentials for other data collectors, in its database and settings. With admin access or code execution, an attacker reads these to obtain working credentials for every monitored device, turning a Cacti compromise into broad access across the network it watches."
 keywords:
   - cacti credentials

@@ -1,5 +1,6 @@
 ---
 title: "VPC Lattice: reaching services across VPCs through auth policies"
+order: 7
 description: "Abusing VPC Lattice service networks and auth policies to reach services across VPCs and accounts."
 keywords:
   - VPC Lattice

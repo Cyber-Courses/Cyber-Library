@@ -1,5 +1,6 @@
 ---
 title: "Authentication: the Active Directory credential and identity attack surface"
+order: 1
 description: "The core of Active Directory attacks: obtaining and abusing authentication material in all its forms, passwords and NTLM hashes, Kerberos tickets, and certificates, through dumping, cracking, roasting, relay, and forgery."
 keywords:
   - credential access

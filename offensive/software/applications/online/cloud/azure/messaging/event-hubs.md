@@ -1,5 +1,6 @@
 ---
 title: "Event Hubs: tapping a stream to capture telemetry and events"
+order: 2
 description: "Tapping Azure Event Hubs streams to capture telemetry and event data."
 keywords:
   - Event Hubs

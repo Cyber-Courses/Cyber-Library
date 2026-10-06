@@ -1,5 +1,6 @@
 ---
 title: "GCP serverless"
+order: 5
 description: "Attacking GCP serverless and CI: Cloud Functions and Cloud Run service accounts, and Cloud Build service-account and trigger abuse."
 keywords:
   - Cloud Functions

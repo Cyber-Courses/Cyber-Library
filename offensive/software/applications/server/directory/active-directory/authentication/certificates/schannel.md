@@ -1,5 +1,6 @@
 ---
 title: "Schannel: authenticating with a certificate over TLS"
+order: 6
 description: "Using a certificate to authenticate through Windows Schannel (TLS) to LDAPS instead of Kerberos PKINIT, the path that matters when PKINIT is unavailable or when weak Schannel certificate mapping (ESC10) lets a certificate impersonate another account."
 keywords:
   - Schannel

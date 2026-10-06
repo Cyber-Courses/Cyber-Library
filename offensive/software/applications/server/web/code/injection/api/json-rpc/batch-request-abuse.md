@@ -1,5 +1,6 @@
 ---
 title: "JSON-RPC batch request abuse"
+order: 2
 description: "A batch array where one entry fails authorization open while another performs a sensitive method exploits per-item handling and error policy to smuggle privileged calls past per-request controls."
 keywords:
   - JSON-RPC batch

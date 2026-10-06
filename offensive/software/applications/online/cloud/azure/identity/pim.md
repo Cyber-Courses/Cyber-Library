@@ -1,5 +1,6 @@
 ---
 title: "PIM: activating eligible privileged roles"
+order: 4
 description: "Activating eligible privileged Azure resource roles through Privileged Identity Management and abusing weak activation or approval settings."
 keywords:
   - PIM

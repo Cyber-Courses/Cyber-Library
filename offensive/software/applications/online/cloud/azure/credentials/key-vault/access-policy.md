@@ -1,5 +1,6 @@
 ---
 title: "Access policy: granting yourself vault access"
+order: 3
 description: "Granting yourself vault access by writing a Key Vault access policy or RBAC role to reach its secrets and keys."
 keywords:
   - Key Vault

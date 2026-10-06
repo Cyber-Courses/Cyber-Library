@@ -1,5 +1,6 @@
 ---
 title: "Pass-the-hash: authenticating with the NT hash alone"
+order: 4
 description: "Authenticating to Windows services directly with a stolen NT hash instead of a password, and executing remotely over SMB, WMI, and WinRM, because NTLM derives its response from the hash and never needs the plaintext."
 keywords:
   - pass the hash

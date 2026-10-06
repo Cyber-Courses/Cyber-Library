@@ -1,5 +1,6 @@
 ---
 title: "MITM and trust: abusing SSH host-key and certificate trust"
+order: 4
 description: "SSH authenticates the server by its host key, trusted on first use and pinned in known_hosts, or signed by a CA for certificate-based SSH. Where that trust is weak, users who ignore host-key warnings, clients set to accept any key, or certificate validation flaws, a positioned attacker performs a machine-in-the-middle to capture credentials and hijack the session."
 keywords:
   - ssh mitm

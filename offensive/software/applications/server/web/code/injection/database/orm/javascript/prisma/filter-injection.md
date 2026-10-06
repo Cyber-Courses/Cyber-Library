@@ -1,5 +1,6 @@
 ---
 title: "Prisma filter injection"
+order: 2
 description: "Spreading an untrusted object into a Prisma where argument lets a caller inject operators and relation filters, widening or bypassing the intended query without any raw SQL."
 keywords:
   - Prisma where

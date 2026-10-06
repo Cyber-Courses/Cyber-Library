@@ -1,5 +1,6 @@
 ---
 title: "CloudTrail: stopping, deleting, and diverting the API audit trail"
+order: 1
 description: "Disabling, deleting, or diverting CloudTrail trails and stopping logging to blind account-level auditing."
 keywords:
   - CloudTrail

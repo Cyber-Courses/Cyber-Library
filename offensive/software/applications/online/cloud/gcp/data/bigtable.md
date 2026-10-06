@@ -1,5 +1,6 @@
 ---
 title: "Bigtable: reading tables through bigtable.tables access"
+order: 8
 description: "Attacking Cloud Bigtable: reading tables through bigtable.tables access with broad instance roles."
 keywords:
   - Bigtable

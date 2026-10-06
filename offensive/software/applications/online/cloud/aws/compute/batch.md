@@ -1,5 +1,6 @@
 ---
 title: "Batch: job definitions running under a job role"
+order: 8
 description: "Abusing AWS Batch job definitions and compute environments to run containers under a privileged job role."
 keywords:
   - Batch

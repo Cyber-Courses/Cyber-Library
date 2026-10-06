@@ -1,5 +1,6 @@
 ---
 title: "Ownership and ACL rewrite: WriteOwner and WriteDacl"
+order: 5
 description: "Escalating a partial Active Directory write to full control: WriteDacl to add an ACE granting yourself rights, and WriteOwner to take ownership, plus the modern Owner Rights and BlockOwnerImplicitRights limits that stop ownership from implying WriteDacl on hardened domains."
 keywords:
   - WriteDacl

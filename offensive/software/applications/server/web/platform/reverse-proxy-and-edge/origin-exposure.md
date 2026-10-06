@@ -1,5 +1,6 @@
 ---
 title: "Origin exposure: reaching the backend directly past the proxy, WAF, or CDN"
+order: 2
 description: "Finding and hitting the origin server behind a reverse proxy, WAF, or CDN to bypass edge access control, rate limiting, and filtering: origin IP discovery, default-vhost confirmation, and direct-to-origin requests."
 keywords:
   - origin exposure

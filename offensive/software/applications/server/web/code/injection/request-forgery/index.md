@@ -1,5 +1,6 @@
 ---
 title: "Request forgery: server-side URL abuse (SSRF)"
+order: 6
 description: "When untrusted input steers an outbound request, an attacker reaches internal services, cloud metadata, and alternative URL schemes. This hub decomposes the attack by URL facet and by the client that performs the fetch."
 keywords:
   - SSRF

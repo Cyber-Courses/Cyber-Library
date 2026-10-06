@@ -1,5 +1,6 @@
 ---
 title: "Pod-to-pod pivoting: reaching other workloads over the flat network"
+order: 2
 description: "By default every pod can reach every other pod and service in the cluster, because Kubernetes applies no network isolation without a NetworkPolicy. An attacker in one pod scans the pod network and connects directly to other workloads and their backing services, which are frequently unauthenticated internally, to steal data and credentials and expand the foothold."
 keywords:
   - pod pivoting

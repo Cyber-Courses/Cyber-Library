@@ -1,5 +1,6 @@
 ---
 title: "Reading and writing files through Oracle injection"
+order: 5
 description: "Oracle file access from injection: UTL_FILE with a directory object, DBMS_LOB for reads, and Java for arbitrary file operations, with the privileges each needs."
 keywords:
   - UTL_FILE

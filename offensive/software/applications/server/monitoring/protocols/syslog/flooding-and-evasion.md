@@ -1,5 +1,6 @@
 ---
 title: "Flooding and evasion: drowning and disrupting the log pipeline"
+order: 3
 description: "Syslog collectors have finite throughput and storage, so an attacker floods them with high-volume records to drown real events in noise, trigger rotation that ages out evidence, exhaust storage, or overwhelm the SIEM's ingestion and alerting. Flooding is used to hide activity within the surge and to degrade detection while an attack proceeds."
 keywords:
   - log flooding

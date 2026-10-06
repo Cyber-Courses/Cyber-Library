@@ -1,5 +1,6 @@
 ---
 title: "Skeleton Key: a master password patched into LSASS"
+order: 10
 description: "Patching the LSASS process on a domain controller so that every account authenticates with an attacker-chosen master password in addition to its real one, giving domain-wide access until the DC reboots."
 keywords:
   - skeleton key
