@@ -31,11 +31,11 @@ A successful `svn ls`/`svn info` with no credentials confirms anonymous read.
 
 ```bash
 svn log -v svn://<target>/repo                      # revisions, with the paths each one changed
-svn cat -r 42 svn://<target>/repo/config/db.ini     # a file as it existed at revision 42
+svn cat svn://<target>/repo/config/db.ini@42        # the file as it existed at revision 42
 svn export svn://<target>/repo ./repo-head          # the full current tree in one step
 ```
 
-Read the `-v` log for paths marked `D` (deleted): the file is gone from HEAD but `svn cat -r <before-delete>` brings it back. A "remove the password" commit is recovered exactly this way.
+Read the `-v` log for paths marked `D` (deleted): the file is gone from HEAD, so pin the URL to a revision where it still existed with a peg revision (`@42`), not just `-r`. A plain `svn cat -r 42 <url>` resolves the URL's peg at HEAD first, where the path no longer exists, and fails; `<url>@42` (optionally `-r 42` as well) locates the deleted node and brings it back. A "remove the password" commit is recovered exactly this way.
 
 ## Cached credentials
 

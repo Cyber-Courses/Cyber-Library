@@ -11,7 +11,7 @@ keywords:
 
 # Secrets in history
 
-Removing a secret in a later commit does not remove it from the repository. Git keeps every version of every file as an immutable object keyed by its content hash, so a key, token, or password that was ever committed stays reachable through history, through objects no branch points to any more, and through the reflog, as long as you hold the repository. Any repository you have cloned or recovered (a dumped `.git`, an anonymous clone) carries that full object store with it.
+Removing a secret in a later commit does not remove it from the repository. Git keeps every version of every file as an immutable object keyed by its content hash, so a key, token, or password that was ever committed stays reachable through the committed history, through objects no branch points to any more, and through the reflog, as long as you hold the repository that contains them. What you hold matters: a directly copied or dumped `.git` directory carries the complete object store and the origin's reflogs, so every route below applies. A fresh anonymous clone carries only the objects reachable from the refs the server advertises, which is the full committed history (the pickaxe search below works) but **not** unreferenced objects or the server's reflogs, both of which are local to the origin.
 
 ## Search the committed history
 
@@ -27,7 +27,7 @@ git log --all --oneline -- config/secrets.yml  # every revision of a sensitive p
 
 ## Recover dangling and force-pushed objects
 
-Commits removed by `git rebase`, `git commit --amend`, or a force-push become unreferenced but remain in the object database of a repository you already hold. `git fsck` surfaces them, and the local reflog records where branches used to point:
+Commits removed by `git rebase`, `git commit --amend`, or a force-push become unreferenced. They survive in a `.git` you copied directly, or in a working clone that already held the old commit before the rewrite, but a fresh clone never fetches them: the server advertises only reachable refs, and reflogs are local. Where you hold such a repository, `git fsck` surfaces the orphaned objects and the local reflog records where branches used to point:
 
 ```bash
 git fsck --lost-found --dangling 2>/dev/null   # dangling commit/blob SHAs in this repo
