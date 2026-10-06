@@ -27,15 +27,15 @@ git log --all --oneline -- config/secrets.yml  # every revision of a sensitive p
 
 ## Recover dangling and force-pushed objects
 
-Commits removed by `git rebase`, `git commit --amend`, or a force-push become unreferenced but remain in the object database of a repository you already hold. `git fsck` surfaces them, and the local reflog records where branches used to point:
+Commits removed by `git rebase`, `git commit --amend`, or a force-push become unreferenced but remain in the object database of a repository that held them before the rewrite: your own long-lived working clone, or a `.git` you dumped while the objects were still present. `git fsck` surfaces them, and the local reflog records where your branches pointed before a reset or amend:
 
 ```bash
-git fsck --lost-found --dangling 2>/dev/null   # dangling commit/blob SHAs in this repo
+git fsck --lost-found --dangling 2>/dev/null   # dangling commit/blob SHAs present in THIS repo
 git cat-file -p <dangling-sha>                 # read the content directly
-git reflog --all                               # SHAs branches pointed to before a reset/amend/force-push
+git reflog --all                               # your local ref history (not the server's)
 ```
 
-A dangling blob that `git log` cannot reach is exactly where a rewritten "fix: remove secret" commit left the original value.
+A dangling blob that `git log` cannot reach is where a rewritten "fix: remove secret" commit left the original value. Note the limit: a clone taken after the server force-pushed does not receive the dropped objects, and its reflog holds only your own updates, so recover these from a repository you held earlier or from a dumped `.git`, not from a fresh clone.
 
 ## Automate it
 
