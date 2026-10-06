@@ -77,7 +77,7 @@ crictl start $cid && crictl exec -it $cid chroot /host sh
 
 - The socket is unauthenticated: anyone who can write to it has full daemon control, so group membership or file mode on the socket inside the container is the only gate. `ls -l` on the socket shows whether your UID can write it.
 - Launching a fresh privileged container is cleaner than trying to escape the current one: the new container is root on the host by construction, independent of the current container's capabilities and seccomp.
-- The containerd and CRI routes matter in Kubernetes, where the node socket is sometimes mounted into a workload; combine with [Kubernetes pod escape to node](../../../orchestration/kubernetes/pod-escape-to-node/index.md).
+- The containerd and CRI routes matter in Kubernetes, where the node socket is sometimes mounted into a workload; combine with [Kubernetes pod escape to node](../../orchestration/kubernetes/pod-escape-to-node/index.md).
 - To avoid pulling an image, reuse one already on the host (`/images/json`, `ctr image ls`, `crictl images`); any Linux image works since you immediately `chroot` the host root.
 
 ## References

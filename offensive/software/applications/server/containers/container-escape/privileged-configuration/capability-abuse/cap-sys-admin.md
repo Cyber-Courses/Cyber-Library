@@ -54,13 +54,13 @@ The subtlety in step 3 is that the kernel runs `release_agent` from the host's r
 
 ## Route: pivot_root and direct host mounts
 
-If a host device is reachable (for example because the container also has device access) `CAP_SYS_ADMIN` lets you mount it and `pivot_root` into it, giving an interactive host root shell without the release_agent dance. This overlaps with [Host block device](device-access/host-block-device.md).
+If a host device is reachable (for example because the container also has device access) `CAP_SYS_ADMIN` lets you mount it and `pivot_root` into it, giving an interactive host root shell without the release_agent dance. This overlaps with [Host block device](../device-access/host-block-device.md).
 
 ## Exploitation notes
 
 - The release_agent route needs a cgroup v1 hierarchy. On a cgroup-v2-only host, `mount -t cgroup` has nothing to attach; check `ls /sys/fs/cgroup/release_agent` and `mount | grep cgroup2`. Fall back to a module load or a device mount.
 - Some hardened runtimes keep `CAP_SYS_ADMIN` but add a seccomp filter that blocks `mount`; verify with `grep Seccomp /proc/self/status` and test a throwaway `mount -t tmpfs none /mnt`.
-- This capability is implied by `--privileged`; see [Privileged flag](privileged-flag.md) and the standalone [cgroups release_agent](cgroups-release-agent.md) page for the full handler technique.
+- This capability is implied by `--privileged`; see [Privileged flag](../privileged-flag.md) and the standalone [cgroups release_agent](../cgroups-release-agent.md) page for the full handler technique.
 
 ## References
 

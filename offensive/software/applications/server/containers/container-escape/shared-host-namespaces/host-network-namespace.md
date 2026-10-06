@@ -43,7 +43,7 @@ The kubelet and metadata routes are the highest value: the kubelet API can exec 
 
 - This is a reachability escape: it does not by itself run code on the host, but it unlocks services whose own weak authentication (an anonymous kubelet, an open etcd, a token-vending metadata endpoint) completes the compromise.
 - Sharing the namespace also permits binding to host ports and sniffing host interfaces, enabling interception of node-local plaintext traffic.
-- In Kubernetes, `hostNetwork` pods are a standard node-credential path; combine with the metadata and kubelet routes under [Pod escape to node](../../../orchestration/kubernetes/pod-escape-to-node/index.md).
+- In Kubernetes, `hostNetwork` pods are a standard node-credential path; combine with the metadata and kubelet routes under [Pod escape to node](../../orchestration/kubernetes/pod-escape-to-node/index.md).
 
 ## References
 
