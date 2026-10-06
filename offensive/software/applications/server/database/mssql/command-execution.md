@@ -9,7 +9,7 @@ keywords:
   - MSSQL RCE
 ---
 
-# MSSQL command execution
+# Command execution
 
 With sysadmin (or a path to it through [impersonation](impersonation.md) or [linked servers](linked-servers.md)), SQL Server will run **operating-system commands as its service account**. There are three main sinks; `xp_cmdshell` is the direct one, OLE automation and CLR are the fallbacks when it is locked down or watched.
 

@@ -9,7 +9,7 @@ keywords:
   - PostgreSQL RCE
 ---
 
-# PostgreSQL command execution
+# Command execution
 
 As a superuser (or a role with `pg_execute_server_program`), PostgreSQL runs operating-system commands as its **service account**. `COPY ... FROM PROGRAM` is the direct route; untrusted languages and C extensions are the alternatives.
 

@@ -9,7 +9,7 @@ keywords:
   - Oracle file read
 ---
 
-# Oracle file access
+# File access
 
 Oracle reads and writes host files as its **service account** through the **`UTL_FILE`** package, which operates on a **directory object** (a named server path). This is a primitive in its own right (stealing configuration and secrets) and the staging step for [command execution](command-execution.md): write a wrapper script for a scheduler job, or a webshell under a served path.
 

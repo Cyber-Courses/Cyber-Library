@@ -9,7 +9,7 @@ keywords:
   - Full Administrator
 ---
 
-# SCCM site takeover
+# Site takeover
 
 Taking the **Full Administrator** role in a site is the top prize: it is remote code execution as SYSTEM on **every device in the site**. The modern path does not need an SCCM credential at all. It coerces the **site server's** machine account into authenticating and [relays](../../directory/active-directory/authentication/ntlm/relay.md) that authentication to a component that trusts it, either the site database or the SMS Provider.
 

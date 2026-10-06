@@ -9,7 +9,7 @@ keywords:
   - sysadmin
 ---
 
-# MSSQL impersonation
+# Impersonation
 
 SQL Server's privilege model has two well-worn escalation chains from an ordinary login to **sysadmin**, both abusing features working as designed: the **IMPERSONATE** permission with `EXECUTE AS`, and a **TRUSTWORTHY** database owned by a login you control.
 

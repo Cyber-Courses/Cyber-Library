@@ -9,7 +9,7 @@ keywords:
   - ODAT
 ---
 
-# Oracle access and enumeration
+# Access and enumeration
 
 Oracle access is a two-stage problem: first find a valid **SID** behind the TNS listener, then find an account that works against it. Both are automated by `odat`, and default credentials make the second stage succeed far more often than it should.
 
