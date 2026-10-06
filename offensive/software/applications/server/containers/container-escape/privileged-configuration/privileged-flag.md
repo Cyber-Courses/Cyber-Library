@@ -62,7 +62,7 @@ If you prefer ring-0 directly (useful when the disk mount is awkward or you want
 - `--privileged` is a superset: anything under [Capability abuse](capability-abuse/index.md), [Device access](device-access/index.md), and [cgroups release_agent](cgroups-release-agent.md) is available. Route 1 is quickest for a shell; route 2 is the most copy-pasteable and does not depend on knowing the disk device.
 - On a cgroup-v2-only host (no v1 hierarchy to mount), route 2's `mount -t cgroup` fails; fall back to route 1 (disk) or route 3 (module). Check with `mount | grep cgroup2` and the absence of `release_agent` files.
 - These routes run as real root on the host only when the container is not in a user namespace; `cat /proc/self/uid_map` showing `0 0 4294967295` confirms it, which is the default for rootful Docker and most Kubernetes pods.
-- In Kubernetes this is `securityContext.privileged: true`; obtaining such a pod is [Pod creation to node](../../../orchestration/kubernetes/rbac-privilege-escalation/pod-creation-to-node.md), and the delivery view is [Privileged pod](../../../orchestration/kubernetes/pod-escape-to-node/privileged-pod.md).
+- In Kubernetes this is `securityContext.privileged: true`; obtaining such a pod is [Pod creation to node](../../orchestration/kubernetes/rbac-privilege-escalation/pod-creation-to-node.md), and the delivery view is [Privileged pod](../../orchestration/kubernetes/pod-escape-to-node/privileged-pod.md).
 
 ## References
 

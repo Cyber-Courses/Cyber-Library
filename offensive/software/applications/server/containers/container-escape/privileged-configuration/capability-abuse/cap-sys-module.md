@@ -67,8 +67,8 @@ If `insmod` is not in the image, call the syscall directly: open the `.ko` and i
 
 - `MODULE_LICENSE("GPL")` avoids a tainting refusal on some configurations; the module still loads without it but may log a taint warning.
 - The reverse-shell command runs via `call_usermodehelper` in the host's init (PID 1) namespace set, so it is not confined by the container's namespaces or cgroups even though `insmod` was run inside the container.
-- Secure Boot with enforced module signing (`CONFIG_MODULE_SIG_FORCE`) rejects an unsigned module; check `cat /sys/module/module/parameters/sig_enforce` and `dmesg | grep -i 'module verification'`. Where enforced, fall back to [CAP_SYS_ADMIN](cap-sys-admin.md) or [Host block device](device-access/host-block-device.md).
-- This capability is included in `--privileged`; it is route 3 on [Privileged flag](privileged-flag.md).
+- Secure Boot with enforced module signing (`CONFIG_MODULE_SIG_FORCE`) rejects an unsigned module; check `cat /sys/module/module/parameters/sig_enforce` and `dmesg | grep -i 'module verification'`. Where enforced, fall back to [CAP_SYS_ADMIN](cap-sys-admin.md) or [Host block device](../device-access/host-block-device.md).
+- This capability is included in `--privileged`; it is route 3 on [Privileged flag](../privileged-flag.md).
 
 ## References
 

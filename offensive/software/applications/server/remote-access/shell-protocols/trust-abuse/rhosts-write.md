@@ -25,7 +25,7 @@ rlogin -l victim <target>
 
 ## Exploitation notes
 
-- The enabling primitive is a home-directory write; the classic pairing is an [NFS export with AUTH_SYS](../../../../file-share/network-file-systems/nfs/uid-and-gid-spoofing.md), where spoofing the victim's UID lets you write their `.rhosts` as them.
+- The enabling primitive is a home-directory write; the classic pairing is an [NFS export with AUTH_SYS](../../../file-share/network-file-systems/nfs/uid-and-gid-spoofing.md), where spoofing the victim's UID lets you write their `.rhosts` as them.
 - `+ +` is maximal (any host, any user) and obvious; a targeted `host user` entry trusting only your identity is quieter and still durable.
 - This is both access and persistence: the planted trust grants repeated passwordless re-entry; include it when establishing a durable foothold on legacy Unix.
 - Root's trust lives in `/.rhosts` (not covered by `hosts.equiv`); writing it grants passwordless root where you can reach that file.
