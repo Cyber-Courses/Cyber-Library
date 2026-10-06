@@ -9,7 +9,7 @@ keywords:
   - channel binding
 ---
 
-# LDAP protocol attacks
+# Protocol attacks
 
 These attacks target the LDAP service itself rather than a product's object model. Reading the directory with or without credentials, and harvesting the secrets administrators leave in object attributes, work against any directory that speaks the protocol, whether Active Directory, OpenLDAP, 389 Directory Server, or an appliance's embedded directory. The transport weaknesses are narrower: LDAP signing and channel binding gate an NTLM relay into the directory, so they apply to Active Directory and other Windows-integrated directories, not to OpenLDAP or 389 Directory Server as such.
 
