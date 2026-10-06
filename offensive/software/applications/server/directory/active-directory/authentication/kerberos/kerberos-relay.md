@@ -9,7 +9,7 @@ keywords:
   - SPN
 ---
 
-# Kerberos relay
+# Relay
 
 [NTLM relay](../ntlm/relay.md) works because NTLM is not bound to a target. Kerberos is harder to relay because a service ticket is **encrypted for a specific SPN**, so you cannot simply forward one authentication to an arbitrary service. **krbrelayx** solves this two ways: it captures TGTs via **unconstrained delegation**, and, where you can make a victim authenticate to a **service name you control**, it relays that Kerberos authentication onward.
 

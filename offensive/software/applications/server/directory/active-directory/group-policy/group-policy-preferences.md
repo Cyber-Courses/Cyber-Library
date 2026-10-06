@@ -9,7 +9,7 @@ keywords:
   - MS14-025
 ---
 
-# Group Policy Preferences
+# Preferences
 
 Group Policy Preferences (GPP) let administrators push local users, scheduled tasks, mapped drives, and services to machines, and older ones store a password in the policy XML as a **`cpassword`** field. That field is AES-encrypted with a key Microsoft **published**, so anyone who can read the XML can decrypt it. Because the policy files live in **SYSVOL**, which every authenticated domain user can read, a single `cpassword` is a domain-user-to-local-admin (and often reused-everywhere) credential handed out for free.
 

@@ -33,7 +33,7 @@ Open mail ports with a Postfix/Exim/Sendmail banner route to [Email](email/index
 
 - **[Email](email/index.md)**: the mail protocols (SMTP, IMAP, POP3), the SPF/DKIM/DMARC sender-authentication gaps that let a domain be spoofed, and the webmail applications that front a mailbox over HTTP.
 - **[Exchange](exchange/index.md)**: on-premises Microsoft Exchange, from enumeration and spraying through the pre- and post-auth RCE chains, directory relay, and mailbox and client abuse.
-- **[Instant messaging](instant-messaging/index.md)**: the open chat protocols (IRC, XMPP, Matrix) and the self-hosted team-chat platforms (Mattermost, Rocket.Chat).
+- **[Chat](instant-messaging/index.md)**: the open chat protocols (IRC, XMPP, Matrix) and the self-hosted team-chat platforms (Mattermost, Rocket.Chat).
 
 ## References
 
