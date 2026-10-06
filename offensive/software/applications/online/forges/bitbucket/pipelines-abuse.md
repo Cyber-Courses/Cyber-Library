@@ -110,7 +110,7 @@ aws sts assume-role-with-web-identity \
 
 - Masking is exact-match only; even `echo "${SECRET:0:20}"; echo "${SECRET:20}"` prints both halves unmasked because neither half equals the stored value.
 - The OIDC token is per step and short-lived; capture and use it within the same build window, or exfiltrate and assume the role immediately.
-- A step only receives a deployment environment's variables when it declares `deployment: <env>`; declaring it for an environment you are not normally allowed to deploy to is exactly the point, so try it.
+- A step receives a deployment environment's variables only when it declares `deployment: <env>` and the environment has no deployment restriction you fail to meet. An unrestricted environment hands its variables to any branch that declares it, which is the common misconfiguration to look for; an environment with branch, admin, or custom restrictions pauses or blocks the deployment and the step gets no variables, so confirm the environment is unrestricted (or that your branch satisfies the restriction) before relying on this.
 - Bitbucket Data Center/Server has no Pipelines; the equivalent CI abuse there targets the connected Bamboo or external runner, not this file.
 
 ## Tools

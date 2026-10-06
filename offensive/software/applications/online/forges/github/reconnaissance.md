@@ -79,18 +79,33 @@ git log -p --all | grep -iE 'password|secret|token|api[_-]?key|BEGIN .*PRIVATE K
 
 `-S` (the "pickaxe") surfaces the exact commit that introduced or removed a string, with `--source` naming the ref it lives on. This is where `git rebase`/`git filter-branch` "cleanups" fail: the old commit is unreferenced but still in the pack.
 
-## Dangling and pack objects
+## Dangling and deleted objects
 
-A rewritten or force-pushed secret becomes a dangling object, invisible to `git log` of any branch but still present in the clone. `git fsck` surfaces it:
+`git fsck` surfaces objects present in a repository you already hold but no longer referenced by any branch or tag, for example after a local amend, rebase, or force-push where the old objects are still in your object store:
 
 ```bash
-git fsck --lost-found --dangling 2>/dev/null       # lists dangling commit/blob SHAs
-git cat-file -p <dangling-blob-sha>                # dump its contents
-# Dump every blob in the object store, regardless of reachability
+git fsck --lost-found --dangling 2>/dev/null       # dangling commit/blob SHAs in THIS local repo
+git cat-file -p <dangling-blob-sha>                # dump a dangling blob's contents
+# Walk every object reachable from refs (branches, tags, HEAD, stashes) and grep it
 git rev-list --objects --all | awk '{print $1}' | while read o; do git cat-file -p "$o" 2>/dev/null; done | grep -iE 'AKIA|secret|token'
 ```
 
-On SaaS `github.com`, note a sharper variant: a commit pushed to a public repo (or a fork) stays fetchable by its SHA even after deletion, because forks of one repo share an object store. A secret SHA leaked anywhere (a PR comment, a CI log) can be fetched from the parent repo.
+Know the limit: a plain clone transfers only objects reachable from the server's refs, so a secret already unreachable on the server (force-pushed over before you cloned) is not in your clone, and `git rev-list --all` walks refs, not the whole object store. `git fsck` therefore recovers only what dangles in a repo you already have. Reaching objects the server itself dropped is a GitHub-specific trick, below.
+
+## Fetching deleted commits by SHA
+
+On `github.com`, a repository and all its forks share one object store (a "repository network"), so a commit pushed to any of them stays retrievable by its full SHA even after the branch or fork is deleted. A dangling-commit SHA is routinely exposed in a pull request's timeline (the `PushEvent` force-push `before` field, closed-PR events), and any object in the network is then served by the Git Data API from the parent repo:
+
+```bash
+# dangling commit SHAs surface in events even after a force-push rewrote the branch
+curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/repos/ACME/service/events \
+  | jq -r '.[]|.payload.before? // empty'
+# fetch any object in the network by SHA from the parent, even after deletion
+curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/repos/ACME/service/commits/<full-sha>
+curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/repos/ACME/service/git/blobs/<blob-sha> | jq -r .content | base64 -d
+```
+
+This is how a secret committed then force-pushed away, or pushed to a since-deleted fork, stays readable: the object survives in the network and the API hands it to anyone who knows or can enumerate the SHA.
 
 ## Automated scanning
 
