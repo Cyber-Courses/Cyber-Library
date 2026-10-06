@@ -24,13 +24,15 @@ The files that matter are `client.pem` (a node's or user's key), `knife.rb` (the
 
 ## Run commands across nodes
 
-With valid knife credentials, `knife ssh` (or `knife winrm`) runs a command on every node matching a search, in one step:
+With valid knife credentials you can search the Chef server and drive convergence. `knife ssh` (or `knife winrm`) additionally runs a command on every matching node, but it authenticates to those nodes over SSH, so it needs node SSH credentials of its own (a key or password), not just the Chef API key:
 
 ```bash
-knife node list                                   # inventory
+knife node list                                   # inventory (Chef API key alone)
 knife search node 'role:web' -i                   # nodes by role/attribute
-knife ssh 'name:*' 'id' -x root                   # run as root on all nodes over SSH
+knife ssh 'name:*' 'id' -x root -i ~/.ssh/id_rsa  # -x sets the SSH user, -i the key to the nodes
 ```
+
+If you hold only the Chef API key and no node SSH credentials, the reliable execution path is the cookbook and run-list route below, which converges through the agent regardless of SSH.
 
 ## Upload a cookbook and edit the run list
 
@@ -56,7 +58,7 @@ Chef data bags hold shared secrets; encrypted data bags are protected by a key t
 knife data bag list
 knife data bag show secrets credentials                              # plaintext bag
 knife data bag show secrets credentials --secret-file /etc/chef/encrypted_data_bag_secret  # encrypted bag
-knife node show web1 -a default                                      # attributes, which often carry secrets
+knife node show web1 --long                                          # all attributes, which often carry secrets
 ```
 
 ## Follow-on

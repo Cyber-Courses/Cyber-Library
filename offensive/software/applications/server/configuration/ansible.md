@@ -69,7 +69,7 @@ curl -sk -H "Authorization: Bearer $TOKEN" https://awx/api/v2/credentials/ | jq 
 curl -sk -H "Authorization: Bearer $TOKEN" -X POST https://awx/api/v2/job_templates/<id>/launch/
 ```
 
-An admin session (default `admin` credentials, SSO gaps, or a leaked token) lets you launch a template, add a malicious one, or export credentials; a foothold on the AWX host with the database and `SECRET_KEY` decrypts every stored credential. Either way the payoff is code execution on the templates' target hosts with their stored credentials.
+An admin session (default `admin` credentials, SSO gaps, or a leaked token) lets you launch a template, add a malicious one, or use a stored credential inside a job that prints or exfiltrates it; the API never returns the secret values directly. A foothold on the AWX host with the database and `SECRET_KEY` decrypts every stored credential offline. Either way the payoff is code execution on the templates' target hosts with their stored credentials.
 
 ## Follow-on
 
