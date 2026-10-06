@@ -9,7 +9,7 @@ keywords:
   - nmap -b
 ---
 
-# FTP bounce scan
+# Bounce scan
 
 The FTP data connection in active mode is set up with the `PORT` command, where the client tells the server which IP and port to connect to for the transfer. The protocol does not require that address to be the client's own, so a server that fails to restrict `PORT` to the control-connection's peer can be instructed to open data connections to any host and port. By observing whether the data connection succeeds, an attacker uses the FTP server as a proxy to scan hosts and ports it can reach but the attacker cannot, typically internal systems behind the FTP server.
 

@@ -9,7 +9,7 @@ keywords:
   - message boundary
 ---
 
-# SMTP smuggling
+# Smuggling
 
 The DATA phase of SMTP ends at a single canonical sequence: `<CR><LF>.<CR><LF>` (a line containing only a dot). SMTP smuggling, published by Timo Longin at SEC Consult, exploits the fact that implementations disagree about what else counts as that boundary. Some servers also end the message on `<LF>.<LF>`, or `<CR>.<CR>`, or `<CR><LF>.<CR>`, accepting a lone-LF or lone-CR dot-line that the standard would not. If you relay a message through an outbound provider that is SPF- and DKIM-aligned for its own domain, and embed an end-of-data variant that the outbound relay forwards *literally* (it does not treat it as the end) but the inbound server *does* treat as the end, then the inbound server closes your intended message early and parses whatever you put after it as a fresh `MAIL FROM`/`RCPT TO`/`DATA` on the same connection. That connection is still the outbound provider's authenticated, reputation-bearing session, so the smuggled message inherits its SPF and DKIM alignment and passes DMARC with a sender you chose.
 
