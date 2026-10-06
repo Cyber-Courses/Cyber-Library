@@ -9,7 +9,7 @@ keywords:
   - Oracle RCE
 ---
 
-# Oracle command execution
+# Command execution
 
 With a privileged account (DBA or the right `CREATE`/`EXECUTE` grants), Oracle runs operating-system commands as its **service account** through several subsystems. `odat` wraps all three; pick whichever the account's privileges and the database version allow.
 

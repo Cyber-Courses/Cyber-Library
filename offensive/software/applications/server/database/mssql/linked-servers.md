@@ -9,7 +9,7 @@ keywords:
   - lateral movement
 ---
 
-# MSSQL linked servers
+# Linked servers
 
 A **linked server** lets one SQL Server run queries against another, authenticating with credentials stored in the link. Those credentials are frequently **more privileged** than your own, and links often form chains between instances, so enumerating and hopping them is a reliable lateral-movement and escalation path, sometimes straight to command execution on a server you never logged into.
 

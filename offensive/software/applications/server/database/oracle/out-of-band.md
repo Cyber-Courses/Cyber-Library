@@ -9,7 +9,7 @@ keywords:
   - out-of-band
 ---
 
-# Oracle out-of-band
+# Out-of-band
 
 Oracle can be made to **initiate outbound connections**, which turns a database session (or a blind injection) into **server-side request forgery**, a **credential-capture** primitive on Windows, and an **exfiltration** channel when you cannot read query output directly. The outbound is made by the Oracle service account, so it reaches internal services the attacker cannot.
 

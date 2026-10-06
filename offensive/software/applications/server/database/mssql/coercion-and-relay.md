@@ -9,7 +9,7 @@ keywords:
   - service account
 ---
 
-# MSSQL coercion and relay
+# Coercion and relay
 
 SQL Server will reach out to a **UNC path** on command, and any `public` login can usually make it do so through `xp_dirtree` or `xp_fileexist`. Point that path at an attacker listener and the instance **authenticates with its service account** over SMB, handing you a NetNTLM response to [capture](../../directory/active-directory/authentication/ntlm/net-ntlm-capture-and-poisoning.md) and crack or, far better, to [relay](../../directory/active-directory/authentication/ntlm/relay.md). This turns a low-privilege database session into movement across instances or into the domain, without any sysadmin right.
 
