@@ -1,5 +1,6 @@
 ---
 title: "Boolean-based blind SQL injection in SQLite"
+order: 1
 description: "Inferring SQLite data one character at a time from true/false response differences using substr and unicode over sqlite_master and tables."
 keywords:
   - boolean based blind

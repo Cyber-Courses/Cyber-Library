@@ -1,5 +1,6 @@
 ---
 title: "Exporter and Pushgateway abuse: disclosure, pivot, and injection"
+order: 3
 description: "Prometheus exporters expose detailed host data unauthenticated (node_exporter reveals the system in depth), the textfile collector reads attacker-writable files into metrics, the blackbox exporter is an SSRF proxy, and an open Pushgateway accepts arbitrary pushed metrics. Together they disclose host information, provide a pivot, and let an attacker inject false metrics to mislead monitoring."
 keywords:
   - node_exporter

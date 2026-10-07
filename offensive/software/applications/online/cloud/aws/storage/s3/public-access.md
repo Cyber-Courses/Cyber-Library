@@ -1,5 +1,6 @@
 ---
 title: "Public access: reading and writing world-exposed buckets"
+order: 2
 description: "Reading and writing objects in buckets left world-accessible by ACLs or by Block Public Access being disabled."
 keywords:
   - S3

@@ -1,5 +1,6 @@
 ---
 title: "Cross-site WebSocket hijacking"
+order: 2
 description: "A WebSocket handshake that relies on ambient cookies and skips Origin validation lets an attacker page open an authenticated socket as the victim."
 keywords:
   - cross-site WebSocket hijacking

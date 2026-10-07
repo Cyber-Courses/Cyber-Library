@@ -1,5 +1,6 @@
 ---
 title: "Dump in one shot (DIOS) for MySQL injection"
+order: 3
 description: "Building a single MySQL union payload that concatenates schema and data into one response with nested subqueries and GROUP_CONCAT."
 keywords:
   - DIOS

@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting an SSH service"
+order: 3
 description: "SSH enumeration gathers what directs every later attack: the version banner that identifies the implementation and its vulnerabilities, the offered algorithms that reveal weak-crypto exposure, the host-key fingerprint, and valid usernames. None requires authentication, and the results select which authentication, crypto, or exploit path applies."
 keywords:
   - ssh enumeration

@@ -1,5 +1,6 @@
 ---
 title: "Network security groups: exposing and reaching filtered resources"
+order: 1
 description: "Reading and rewriting Azure network security group rules to expose or reach otherwise filtered resources."
 keywords:
   - NSG

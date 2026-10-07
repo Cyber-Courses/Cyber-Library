@@ -1,5 +1,6 @@
 ---
 title: "User data: secrets and boot-time code execution"
+order: 1
 description: "Reading EC2 user-data scripts for embedded secrets, or setting user data to run code on the next boot."
 keywords:
   - user data

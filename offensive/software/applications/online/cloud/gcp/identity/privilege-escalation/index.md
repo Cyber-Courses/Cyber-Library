@@ -1,5 +1,6 @@
 ---
 title: "Privilege escalation"
+order: 2
 description: "The GCP IAM privilege-escalation catalog: resourcemanager setIamPolicy grants, custom-role edits, org-policy loosening, instance-metadata injection, and the actAs deploy-as-service-account paths."
 keywords:
   - privilege escalation

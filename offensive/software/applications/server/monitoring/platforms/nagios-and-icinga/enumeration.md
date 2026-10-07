@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting Nagios and Icinga"
+order: 5
 description: "Identify whether a target runs Nagios Core, Nagios XI, or Icinga, and its version, from the web interface paths, page content, and the NRPE agent's version response. The product and version decide the attack: Nagios XI's web-application exploits versus Core's file-based configuration versus Icinga Web 2, and the exact build maps to known vulnerabilities."
 keywords:
   - nagios enumeration

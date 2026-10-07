@@ -1,5 +1,6 @@
 ---
 title: "Management plane: the Prism API and Controller VM services"
+order: 3
 description: "Nutanix is managed through Prism Element (per cluster) and Prism Central (multi-cluster), REST APIs and web interfaces served by the Controller VMs. Access to Prism controls every VM and the storage fabric: creating and reconfiguring VMs, attaching and cloning vdisks, and reading cluster secrets, so Prism credentials or an API flaw is control of the estate."
 keywords:
   - prism

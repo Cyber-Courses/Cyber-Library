@@ -1,5 +1,6 @@
 ---
 title: "XPath injection"
+order: 2
 description: "String-built XPath over an XML document lets an attacker rewrite predicates and location paths to bypass authentication, select unintended nodes, and extract the whole document."
 keywords:
   - XPath injection

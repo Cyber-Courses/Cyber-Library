@@ -1,5 +1,6 @@
 ---
 title: "SQL Database"
+order: 1
 description: "Attacking Azure SQL Database: Entra and SQL authentication, firewall reach, contained users, and the server's managed identity."
 keywords:
   - Azure SQL

@@ -1,5 +1,6 @@
 ---
 title: "DMARC: policy and alignment gaps that let a From: spoof through"
+order: 3
 description: "Reading a _dmarc record and deciding the spoofing path by its policy: no record, p=none, pct below 100, a missing or weak sp= that leaves subdomains open, relaxed alignment that lets a sibling identity pass, and cousin domains outside DMARC scope entirely. Includes dig fingerprinting and a worked subdomain spoof."
 keywords:
   - DMARC

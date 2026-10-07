@@ -1,5 +1,6 @@
 ---
 title: "Instance metadata"
+order: 1
 description: "Reading the GCP metadata server (metadata.google.internal) for the attached service account's token and SSH keys, including via SSRF to the metadata endpoint."
 keywords:
   - instance metadata

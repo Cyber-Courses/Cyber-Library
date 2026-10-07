@@ -1,5 +1,6 @@
 ---
 title: "Cloud DNS: hijacking dangling records for subdomain takeover"
+order: 3
 description: "Hijacking dangling Cloud DNS records that point to released GCP resources for subdomain takeover."
 keywords:
   - Cloud DNS

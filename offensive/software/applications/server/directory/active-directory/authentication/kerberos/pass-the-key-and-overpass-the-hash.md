@@ -1,5 +1,6 @@
 ---
 title: "Pass-the-key and overpass-the-hash: turning a key into a ticket"
+order: 2
 description: "Requesting a Kerberos TGT directly from an account's secret key (NT hash or AES key) instead of its plaintext password, so a recovered hash becomes a full Kerberos identity (overpass-the-hash / pass-the-key)."
 keywords:
   - overpass the hash

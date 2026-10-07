@@ -1,5 +1,6 @@
 ---
 title: "Audio devices: escaping QEMU through emulated sound cards"
+order: 6
 description: "QEMU emulates sound cards, the Intel HD Audio controller, AC97, Sound Blaster 16, and ES1370, whose guest drivers program buffer descriptors and registers that QEMU reads to move audio data. Flaws in buffer-descriptor handling and DMA length processing, notably in the Intel HDA controller, give out-of-bounds access in the QEMU process."
 keywords:
   - intel hda

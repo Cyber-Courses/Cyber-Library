@@ -1,5 +1,6 @@
 ---
 title: "Error-based SQL injection in PostgreSQL"
+order: 3
 description: "Forcing PostgreSQL to leak query results inside error messages through type-cast failures, which echo the offending value in full with no length limit."
 keywords:
   - error based SQL injection

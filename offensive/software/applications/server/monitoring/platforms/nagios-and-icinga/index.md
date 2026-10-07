@@ -1,5 +1,6 @@
 ---
 title: "Nagios and Icinga: attacking the monitoring servers"
+order: 2
 description: "Nagios (Core and the commercial XI) and the Icinga fork monitor hosts through plugins and the NRPE remote executor. The surface is the web interface authentication, the NRPE agent on 5666 which runs check plugins and is prone to argument and command injection, injection into Nagios command and macro definitions, and the recurring Nagios XI authentication-bypass-to-RCE chains."
 keywords:
   - nagios

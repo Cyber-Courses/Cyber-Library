@@ -1,5 +1,6 @@
 ---
 title: "Storage Gateway: abusing the on-premises to S3 and EBS bridge"
+order: 6
 description: "Abusing Storage Gateway file shares and cached volumes that bridge on-premises access to S3 and EBS."
 keywords:
   - Storage Gateway

@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of an ESXi virtual machine"
+order: 3
 description: "Escaping an ESXi guest means corrupting the host-side vmx process that emulates the virtual machine's devices. The reachable surface is the set of emulated devices a guest can drive: the SVGA 3D graphics device, USB controllers, virtual NICs, and the backdoor and VMCI control channels, each parsing guest-controlled data in the host process."
 keywords:
   - esxi escape

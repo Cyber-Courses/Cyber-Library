@@ -1,5 +1,6 @@
 ---
 title: "Go server-side template injection"
+order: 1
 description: "SSTI in Go's text/template and html/template: what the engine does and does not expose, method calls on injected data, and why command execution usually is not reachable from the template alone."
 keywords:
   - Go SSTI

@@ -1,5 +1,6 @@
 ---
 title: "Synthetic devices: escaping Hyper-V through the VSP-backed devices"
+order: 2
 description: "Hyper-V synthetic devices (storage, network, video, HID, and others) are paravirtual devices whose guest-side drivers talk to Virtualization Service Providers in the root partition over VMBus. The VSPs parse guest-supplied requests and descriptors, so a memory-safety flaw in a VSP, notably the synthetic video and storage providers, gives code execution in the privileged root partition."
 keywords:
   - synthetic devices

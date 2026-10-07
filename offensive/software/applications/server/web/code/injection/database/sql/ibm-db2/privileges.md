@@ -1,5 +1,6 @@
 ---
 title: "Enumerating authorities and privileges in IBM Db2 injection"
+order: 10
 description: "Reading the current IBM Db2 authorization ID's authorities and grants from SYSCAT.DBAUTH to decide which primitives, including routine creation, are reachable."
 keywords:
   - Db2 privileges

@@ -1,5 +1,6 @@
 ---
 title: "Cloud Hypervisor: attacking the Rust VMM"
+order: 2
 description: "Cloud Hypervisor is a Rust KVM monitor with a modern but still limited device set, virtio devices, optional PCI and device passthrough, and an HTTP control API. The guest-to-host surface is its virtio and VFIO handling and the shared rust-vmm components; the host surface is the API and the configuration of passthrough and sandboxing."
 keywords:
   - cloud hypervisor

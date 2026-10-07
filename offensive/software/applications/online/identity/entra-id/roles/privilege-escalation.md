@@ -1,5 +1,6 @@
 ---
 title: "Privilege escalation: directory roles that chain to Global Admin"
+order: 1
 description: "Escalating through Entra directory roles: abusing Privileged Role Administrator, Application Administrator, and similar roles to grant roles, reset credentials, or add app secrets."
 keywords:
   - Entra privilege escalation

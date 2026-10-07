@@ -1,5 +1,6 @@
 ---
 title: "BigQuery: reading datasets and exfiltrating through queries and exports"
+order: 2
 description: "Attacking BigQuery: reading datasets and tables, exfiltrating via queries and exports, and abusing dataset IAM."
 keywords:
   - BigQuery

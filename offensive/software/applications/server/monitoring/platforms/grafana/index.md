@@ -1,5 +1,6 @@
 ---
 title: "Grafana: attacking the observability dashboards"
+order: 6
 description: "Grafana is a web dashboarding platform that connects to data sources holding credentials for databases and internal services. The surface is default and anonymous access, the unauthenticated plugin path-traversal that reads server files, server-side request forgery through data-source proxying with the stored data-source credentials, and known plugin and server vulnerabilities."
 keywords:
   - grafana

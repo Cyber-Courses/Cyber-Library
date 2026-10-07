@@ -1,5 +1,6 @@
 ---
 title: "Public repository: mining secrets from exposed ECR images"
+order: 1
 description: "Pulling images from public or loosely-scoped ECR repositories to mine secrets and understand internal services."
 keywords:
   - ECR

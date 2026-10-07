@@ -1,5 +1,6 @@
 ---
 title: "BloodHound: collecting and graphing Active Directory attack paths"
+order: 11
 description: "Using BloodHound to collect Active Directory objects, sessions, ACLs, and trusts with SharpHound or bloodhound-python, then analyzing the graph to find privilege-escalation paths to high-value targets."
 keywords:
   - BloodHound

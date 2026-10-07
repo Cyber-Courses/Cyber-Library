@@ -1,5 +1,6 @@
 ---
 title: "Apache httpd misconfiguration: handlers, aliases, and content negotiation"
+order: 2
 description: "Apache-specific platform misconfigurations: over-broad handler and type mappings, .htaccess override abuse, Alias and mod_rewrite traversal, and MultiViews content negotiation disclosure."
 keywords:
   - apache misconfiguration

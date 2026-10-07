@@ -1,5 +1,6 @@
 ---
 title: "Detection Improvement: Measuring Coverage and Tuning Over Time"
+order: 7
 description: "How detection improvement measures coverage and tunes detections over time, often using frameworks such as MITRE ATT&CK."
 keywords:
   - detection improvement

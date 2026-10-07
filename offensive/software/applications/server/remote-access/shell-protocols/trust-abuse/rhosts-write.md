@@ -1,5 +1,6 @@
 ---
 title: "rhosts write: planting a trusting .rhosts entry"
+order: 4
 description: "Writing an entry into a target user's ~/.rhosts grants the attacker passwordless r-command access as that user and persists as a backdoor. The precondition is a write to the target's home directory, obtained through a writable NFS home, a file-write vulnerability, or an existing foothold as another user or root."
 keywords:
   - rhosts write

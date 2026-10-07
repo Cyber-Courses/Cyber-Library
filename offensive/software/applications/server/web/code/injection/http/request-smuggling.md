@@ -1,5 +1,6 @@
 ---
 title: "HTTP request smuggling (desync)"
+order: 5
 description: "Desynchronizing a front-end and back-end that measure request length differently, using Content-Length and Transfer-Encoding in the CL.TE, TE.CL, and TE.TE variants."
 keywords:
   - HTTP request smuggling

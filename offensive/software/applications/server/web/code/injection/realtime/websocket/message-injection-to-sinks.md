@@ -1,5 +1,6 @@
 ---
 title: "Message injection to sinks"
+order: 3
 description: "WebSocket frame content flowing unsanitized into SQL, NoSQL, stored XSS broadcast, and command or template sinks, carried past HTTP-layer filtering."
 keywords:
   - WebSocket injection

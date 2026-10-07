@@ -1,5 +1,6 @@
 ---
 title: "Mail injection"
+order: 2
 description: "Application-layer email abuse where untrusted input reaches message headers, the body, or the SMTP hand-off and is interpreted as part of the message rather than treated as data."
 keywords:
   - mail injection

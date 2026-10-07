@@ -1,5 +1,6 @@
 ---
 title: "Disk and backup theft: taking Proxmox VM disks and vzdump archives"
+order: 4
 description: "Proxmox stores VM disks on configurable backends (local qcow2/raw, LVM, ZFS, Ceph) and backups as vzdump archives. With node, storage, or API access, an attacker reads the disks offline with the usual tools or restores and mounts a vzdump backup, extracting any VM's or container's data without entering it."
 keywords:
   - vzdump

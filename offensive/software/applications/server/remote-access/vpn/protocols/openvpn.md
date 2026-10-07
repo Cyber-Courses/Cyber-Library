@@ -1,5 +1,6 @@
 ---
 title: "OpenVPN: configuration, credential, and key-handling attacks"
+order: 2
 description: "OpenVPN's cryptography is sound, so attacks target its configuration and key handling: stolen client profiles and embedded keys, a missing or weak tls-auth/tls-crypt HMAC that exposes the control channel, username/password auth sprayed against the server, and reused or poorly protected client certificates and static keys."
 keywords:
   - openvpn

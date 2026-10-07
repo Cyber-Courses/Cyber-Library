@@ -1,5 +1,6 @@
 ---
 title: "Service account token to API: acting on the cluster with a pod identity"
+order: 4
 description: "A pod's service-account token authenticates to the API server. The attacker enumerates exactly what that identity may do with SelfSubjectRulesReview, then exercises it: reading secrets, listing workloads, or using an escalation verb. This is the pivot from a container foothold to operating against the cluster control plane as the pod's identity."
 keywords:
   - service account token

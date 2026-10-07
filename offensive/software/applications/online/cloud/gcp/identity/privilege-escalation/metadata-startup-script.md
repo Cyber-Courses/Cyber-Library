@@ -1,5 +1,6 @@
 ---
 title: "Metadata startup script: run code on an existing instance"
+order: 3
 description: "Running code on an existing instance by writing compute.instances.setMetadata (startup-script) or injecting an SSH key, and project-wide metadata for fleet-wide reach."
 keywords:
   - setMetadata

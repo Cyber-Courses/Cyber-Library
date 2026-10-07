@@ -1,5 +1,6 @@
 ---
 title: "Certificate mapping: ESC9, ESC10, ESC14"
+order: 2
 description: "Abusing weak certificate-to-account mapping in Active Directory: the missing SID security extension (ESC9), weak Kerberos and Schannel mapping registry settings (ESC10), and attacker-written explicit mappings via altSecurityIdentities (ESC14)."
 keywords:
   - ESC9

@@ -1,5 +1,6 @@
 ---
 title: "Security services: disabling Macie, Security Hub, Detective, and Inspector"
+order: 5
 description: "Disabling and degrading the AWS posture services, Macie, Security Hub, Detective, and Inspector, to blind data-exposure, aggregated-finding, and vulnerability detection before and after noisy actions."
 keywords:
   - Macie

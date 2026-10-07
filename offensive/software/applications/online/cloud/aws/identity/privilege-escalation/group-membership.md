@@ -1,5 +1,6 @@
 ---
 title: "Group membership: add yourself to a more privileged group"
+order: 3
 description: "iam:AddUserToGroup to join a group that carries more permissions than your current principal."
 keywords:
   - AddUserToGroup

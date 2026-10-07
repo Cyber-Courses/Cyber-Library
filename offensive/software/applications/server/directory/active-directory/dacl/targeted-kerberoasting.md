@@ -1,5 +1,6 @@
 ---
 title: "Targeted Kerberoasting: writing an SPN to roast a user"
+order: 4
 description: "Using WriteSPN (or GenericWrite) over an Active Directory user to set a temporary servicePrincipalName, request and crack its service ticket, then remove the SPN, turning a write over an account into its password offline."
 keywords:
   - targeted kerberoasting

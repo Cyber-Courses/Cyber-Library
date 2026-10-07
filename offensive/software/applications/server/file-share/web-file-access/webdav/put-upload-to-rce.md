@@ -1,5 +1,6 @@
 ---
 title: "PUT upload to RCE: planting an executable file via WebDAV"
+order: 3
 description: "WebDAV's PUT verb writes a file directly to the server, and where that file lands in a web-interpreted directory it executes when requested. Extension restrictions are bypassed by uploading an allowed type then MOVE-renaming it, or by server quirks, turning a writable WebDAV into reliable remote code execution."
 keywords:
   - webdav put

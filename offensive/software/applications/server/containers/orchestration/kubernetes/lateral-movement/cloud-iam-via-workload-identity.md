@@ -1,5 +1,6 @@
 ---
 title: "Cloud IAM via workload identity: following a pod identity into the cloud"
+order: 3
 description: "Workload identity features (IRSA on EKS, GKE Workload Identity, Azure AD workload identity) map a Kubernetes service account to a cloud IAM role. A pod using such a service account can obtain the cloud role's credentials through the projected token exchange, so compromising that pod reaches the cloud account at the role's permission level."
 keywords:
   - workload identity

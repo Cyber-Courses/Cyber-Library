@@ -1,5 +1,6 @@
 ---
 title: "MongoDB comparison-operator injection for bypass and blind extraction"
+order: 3
 description: "Injecting $ne, $gt, $lt, and $gte replaces the intended comparison to bypass filters, and pairs with $regex to extract data one character at a time blindly."
 keywords:
   - comparison operators

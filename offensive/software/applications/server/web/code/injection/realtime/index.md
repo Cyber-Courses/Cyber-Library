@@ -1,5 +1,6 @@
 ---
 title: "Realtime injection"
+order: 11
 description: "Long-lived channels where message bodies and metadata drive routing, authorization, and sinks, so individual frames carry injection past the HTTP request boundary."
 keywords:
   - realtime injection

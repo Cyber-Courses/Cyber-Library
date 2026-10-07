@@ -1,5 +1,6 @@
 ---
 title: "Ruby server-side template injection"
+order: 7
 description: "SSTI in Ruby template engines: ERB (and the ERB-compatible Erubi/Erubis) evaluating embedded Ruby directly for immediate command execution."
 keywords:
   - Ruby SSTI

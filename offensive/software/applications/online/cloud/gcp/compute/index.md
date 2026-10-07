@@ -1,5 +1,6 @@
 ---
 title: "GCP compute"
+order: 3
 description: "Attacking GCP compute: Compute Engine metadata, SSH, and service-account scopes, and GKE cluster access and node identity."
 keywords:
   - Compute Engine

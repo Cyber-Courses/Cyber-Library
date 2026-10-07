@@ -1,5 +1,6 @@
 ---
 title: "Authentication: default and weak Orion console credentials"
+order: 1
 description: "The SolarWinds Orion web console authenticates with an Admin account (default blank or weak password) and integrates with Active Directory. Default, weak, or reused credentials grant console access, which exposes the managed-device inventory and the stored credentials, and admin access reaches the configuration and features behind the platform's higher-impact issues."
 keywords:
   - solarwinds admin

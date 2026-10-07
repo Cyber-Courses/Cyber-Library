@@ -1,5 +1,6 @@
 ---
 title: "IPsec IKE: aggressive-mode PSK disclosure and IKE weaknesses"
+order: 1
 description: "IPsec key exchange via IKE exposes several attacks: aggressive mode discloses a hash of the pre-shared key to an unauthenticated initiator for offline cracking, the gateway can be fingerprinted and enumerated through IKE, and weak transforms (small DH groups, DES, SHA-1) negotiated in Phase 1 weaken the tunnel. XAUTH, where added, is a further credential target."
 keywords:
   - ipsec

@@ -1,5 +1,6 @@
 ---
 title: "PPTP: the broken MS-CHAPv2 authentication"
+order: 3
 description: "PPTP (TCP 1723) authenticates with MS-CHAPv2, whose security reduces to a single DES key that is brute-forced in bounded time, so a captured PPTP handshake is cracked to recover the password or the MPPE key. PPTP is considered cryptographically broken, and a captured authentication reliably yields the credential offline."
 keywords:
   - pptp

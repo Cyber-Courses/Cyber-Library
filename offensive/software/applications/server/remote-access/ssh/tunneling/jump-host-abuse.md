@@ -1,5 +1,6 @@
 ---
 title: "Jump host abuse: chaining through bastions into segmented networks"
+order: 1
 description: "SSH jump-host support (ProxyJump / -J) transparently chains connections through one or more intermediate hosts, which is how bastions provide access to segmented networks. An attacker with access to or through a bastion uses the same mechanism to reach otherwise-isolated internal hosts, and a compromised bastion exposes every network it bridges."
 keywords:
   - proxyjump

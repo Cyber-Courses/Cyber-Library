@@ -1,5 +1,6 @@
 ---
 title: "GCP credentials"
+order: 2
 description: "Harvesting GCP credentials: the instance metadata server, Secret Manager, service-account keys, cached gcloud and ADC tokens, Cloud KMS, HMAC keys, and API keys."
 keywords:
   - GCP credentials

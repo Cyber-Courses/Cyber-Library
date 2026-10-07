@@ -1,5 +1,6 @@
 ---
 title: "HTTP injection: headers, CRLF, smuggling, and parameter pollution"
+order: 4
 description: "Exploiting the HTTP message itself: header-value abuse, CRLF response splitting, request smuggling when front and back ends disagree, and HTTP parameter pollution."
 keywords:
   - HTTP injection

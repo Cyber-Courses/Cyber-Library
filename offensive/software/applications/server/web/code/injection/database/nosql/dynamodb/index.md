@@ -1,5 +1,6 @@
 ---
 title: "DynamoDB injection"
+order: 7
 description: "Amazon DynamoDB is schemaless and key-value, but the APIs that query it (PartiQL statements and filter/condition expressions) are still injectable when built from untrusted input."
 keywords:
   - DynamoDB injection

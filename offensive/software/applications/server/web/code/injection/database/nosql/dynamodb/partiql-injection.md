@@ -1,5 +1,6 @@
 ---
 title: "DynamoDB PartiQL injection: breaking out of ExecuteStatement string concatenation"
+order: 1
 description: "PartiQL statements run via ExecuteStatement and built by string concatenation are injectable like SQL: break out of the WHERE value, widen with OR, and read other items."
 keywords:
   - PartiQL injection

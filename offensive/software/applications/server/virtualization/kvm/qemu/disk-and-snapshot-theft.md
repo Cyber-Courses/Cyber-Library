@@ -1,5 +1,6 @@
 ---
 title: "Disk and snapshot theft: taking qcow2 images and saved state"
+order: 4
 description: "KVM guests use qcow2 (or raw) disk images and store snapshots inside the qcow2 or as external overlays, with saved VM state holding memory. Access to the image files lets an attacker read the guest filesystem offline with libguestfs or qemu-nbd, extracting credentials and data without entering the VM, and read saved-state memory for secrets captured at snapshot time."
 keywords:
   - qcow2

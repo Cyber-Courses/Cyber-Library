@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: walking an SNMP agent"
+order: 2
 description: "SNMP enumeration reads the agent's OID tree with a valid community string: the basic system group for device identity, then a full walk of the MIB to dump everything the agent exposes. The walk is where the value is, so efficient bulk walking and targeting the right vendor subtrees turn a read string into a complete picture of the device."
 keywords:
   - snmp enumeration

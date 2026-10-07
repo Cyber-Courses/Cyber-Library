@@ -1,5 +1,6 @@
 ---
 title: "Cleartext interception: capturing the unencrypted rsh session"
+order: 1
 description: "rsh encrypts nothing, so a positioned attacker captures the executed commands, their output, and any data in the session directly from the wire. Where password-style authentication is used rather than host trust, the credential is captured too, and the session can be hijacked as with other cleartext remote-shell protocols."
 keywords:
   - cleartext

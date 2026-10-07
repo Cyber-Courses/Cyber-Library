@@ -1,5 +1,6 @@
 ---
 title: "Zip Slip: path traversal through archive extraction"
+order: 1
 description: "Archive entries with traversal sequences or absolute paths write outside the unpack directory during extraction, overwriting web assets or binaries and planting shells."
 keywords:
   - zip slip

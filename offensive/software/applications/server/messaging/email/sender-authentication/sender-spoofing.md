@@ -1,5 +1,6 @@
 ---
 title: "Sender spoofing: crafting mail that appears to come from a target domain"
+order: 4
 description: "The payoff page for sender authentication: craft and send a spoofed message with swaks once SPF, DKIM, or DMARC is missing or weak, and the header and lookalike tricks that need no record gap at all, display-name spoofing, RFC5322.From versus RFC5321.MailFrom mismatch, Reply-To redirection, and homoglyph punycode cousin domains, delivered through open relays or SMTP smuggling."
 keywords:
   - sender spoofing

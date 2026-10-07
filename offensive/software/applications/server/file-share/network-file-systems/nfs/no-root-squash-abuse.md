@@ -1,5 +1,6 @@
 ---
 title: "no_root_squash abuse: acting as root on an NFS export"
+order: 2
 description: "By default NFS maps a client's root (UID 0) to an unprivileged user (root squash). An export set with no_root_squash disables that, so a client mounting it as root creates and modifies files as real root on the server. The standard abuse writes a root-owned SUID binary to the export, then executes it on the server for local root."
 keywords:
   - no_root_squash

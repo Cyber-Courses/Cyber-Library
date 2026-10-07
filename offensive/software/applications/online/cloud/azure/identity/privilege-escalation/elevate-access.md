@@ -1,5 +1,6 @@
 ---
 title: "Elevate access: User Access Administrator at the root scope"
+order: 3
 description: "Toggling User Access Administrator at the root scope with elevateAccess to gain management-group-wide control over every subscription in the tenant."
 keywords:
   - elevateAccess

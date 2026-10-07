@@ -1,5 +1,6 @@
 ---
 title: "Azure Blob storage"
+order: 1
 description: "Attacking Azure Blob storage: finding public containers and reading blobs through account keys, RBAC, or anonymous access."
 keywords:
   - blob storage

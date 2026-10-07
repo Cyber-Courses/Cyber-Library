@@ -1,5 +1,6 @@
 ---
 title: "AKS"
+order: 2
 description: "Attacking Azure Kubernetes Service from the cloud plane: admin credentials, command invoke, and node-pool managed identity through IMDS."
 keywords:
   - AKS

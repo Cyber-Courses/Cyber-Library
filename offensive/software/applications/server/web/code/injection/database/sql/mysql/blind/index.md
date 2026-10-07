@@ -1,5 +1,6 @@
 ---
 title: "Boolean-based blind SQL injection in MySQL"
+order: 1
 description: "Inferring MySQL data one character at a time from true/false differences in the response when no rows or errors are reflected."
 keywords:
   - boolean based blind

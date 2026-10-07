@@ -1,5 +1,6 @@
 ---
 title: "Escalate and bind verbs: granting yourself permissions you lack"
+order: 4
 description: "Kubernetes normally stops an identity from creating a role with more permissions than it holds, but the escalate verb on roles and the bind verb on rolebindings switch that check off. An identity with either can author a cluster-admin role or bind itself to one, escalating to full control from a narrow starting grant."
 keywords:
   - escalate verb

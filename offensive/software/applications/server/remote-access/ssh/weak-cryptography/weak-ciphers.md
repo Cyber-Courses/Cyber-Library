@@ -1,5 +1,6 @@
 ---
 title: "Weak ciphers: legacy and CBC-mode SSH encryption weaknesses"
+order: 3
 description: "SSH servers that still offer legacy ciphers, single-DES, RC4/arcfour, or CBC-mode ciphers, expose the session to known weaknesses. CBC mode in SSH was subject to a plaintext-recovery attack, and the stream and legacy ciphers are cryptographically weak, so a server advertising them lets a positioned attacker weaken or tamper with the encrypted channel."
 keywords:
   - weak cipher

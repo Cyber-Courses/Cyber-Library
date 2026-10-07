@@ -1,5 +1,6 @@
 ---
 title: "Cloud Build"
+order: 3
 description: "Abusing Cloud Build as a privilege-escalation and persistence surface: the build service account's broad roles and attacker-controlled build triggers."
 keywords:
   - Cloud Build

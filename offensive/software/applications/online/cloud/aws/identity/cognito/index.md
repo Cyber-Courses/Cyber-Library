@@ -1,5 +1,6 @@
 ---
 title: "Cognito"
+order: 5
 description: "Abusing Amazon Cognito: unauthenticated identity-pool role assumption, user-pool self-signup and attribute abuse, and forged or elevated token claims."
 keywords:
   - Cognito

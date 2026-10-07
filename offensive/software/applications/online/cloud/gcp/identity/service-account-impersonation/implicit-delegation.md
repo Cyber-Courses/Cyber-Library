@@ -1,5 +1,6 @@
 ---
 title: "Implicit delegation: chain impersonation through an intermediary"
+order: 2
 description: "Chaining impersonation through an intermediate service account with iam.serviceAccounts.implicitDelegation to reach a target you cannot call directly."
 keywords:
   - implicit delegation

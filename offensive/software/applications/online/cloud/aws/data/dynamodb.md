@@ -1,5 +1,6 @@
 ---
 title: "DynamoDB: reading and exporting tables through Scan and export"
+order: 2
 description: "Reading and tampering with DynamoDB tables through Scan and Query, and exporting tables to S3."
 keywords:
   - DynamoDB

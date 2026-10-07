@@ -1,5 +1,6 @@
 ---
 title: "Key Vault"
+order: 2
 description: "Reading Azure Key Vault material: secrets, keys, and certificates, reached through data-plane access or an access-policy or RBAC grant."
 keywords:
   - Key Vault

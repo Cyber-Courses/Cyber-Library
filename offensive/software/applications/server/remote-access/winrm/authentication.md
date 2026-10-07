@@ -1,5 +1,6 @@
 ---
 title: "Authentication: WinRM passwords, NTLM, and pass-the-hash"
+order: 2
 description: "WinRM authenticates with Windows credentials over Negotiate/NTLM, Kerberos, or Basic. Because it accepts NTLM, an attacker authenticates with an NT hash (pass-the-hash) as well as a password, and a Kerberos ticket also works. Spraying and reusing credentials against WinRM is a standard lateral-movement step; only authorised accounts can connect."
 keywords:
   - winrm authentication

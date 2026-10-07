@@ -1,5 +1,6 @@
 ---
 title: "Host path mount: using a bind-mounted host directory to reach the host"
+order: 1
 description: "A container given a bind mount of a host directory, or the entire host root at a path like /host, can read and write those host files directly. Depending on which directory is exposed, an attacker reads secrets, writes a cron job or SSH key, edits a systemd unit, or escalates through a mounted /etc or /root, with the full host root being an immediate takeover."
 keywords:
   - hostpath mount

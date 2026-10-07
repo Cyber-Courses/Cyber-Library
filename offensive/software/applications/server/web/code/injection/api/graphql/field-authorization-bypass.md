@@ -1,5 +1,6 @@
 ---
 title: "GraphQL field authorization bypass"
+order: 1
 description: "When authorization is enforced at the operation or HTTP edge instead of on individual field and edge resolvers, a caller reads or mutates objects outside their tenancy by navigating the graph to them."
 keywords:
   - GraphQL BOLA

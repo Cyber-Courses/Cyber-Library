@@ -1,5 +1,6 @@
 ---
 title: "DKIM: forging, appending to, and replaying DomainKeys signatures"
+order: 2
 description: "Reading a DKIM-Signature header and the selector's published key to find the gap: no signing at all, a short factorable RSA key, a l= body-length tag that allows content append, a replayable signed message, or a stale selector. Includes dig fingerprinting, key-length extraction, append, and replay."
 keywords:
   - DKIM

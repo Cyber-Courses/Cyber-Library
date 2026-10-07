@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting PRTG"
+order: 4
 description: "PRTG is identified by its web interface, login page, and version string, exposed on the core server ports. The version matters because the notification command-injection weakness and specific vulnerabilities are version-dependent, so reading the build from the login page or API directs the attack."
 keywords:
   - prtg enumeration

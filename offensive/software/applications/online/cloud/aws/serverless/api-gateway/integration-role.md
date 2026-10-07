@@ -1,5 +1,6 @@
 ---
 title: "Integration role: acting as the credentials role behind the gateway"
+order: 3
 description: "Abusing the API Gateway integration credentials role that proxied backend calls execute under."
 keywords:
   - integration role

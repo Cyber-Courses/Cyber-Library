@@ -1,5 +1,6 @@
 ---
 title: "WAF and filter bypass for PostgreSQL injection"
+order: 9
 description: "Evading filters in PostgreSQL injection with CHR() string building, dollar-quoting, concatenation, and pg_catalog alternatives to blocked names."
 keywords:
   - WAF bypass

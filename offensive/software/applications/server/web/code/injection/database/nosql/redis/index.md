@@ -1,5 +1,6 @@
 ---
 title: "Redis injection"
+order: 4
 description: "Command injection via the RESP protocol and abuse of dangerous commands in a Redis key-value store, from CRLF smuggling to CONFIG SET RCE and server-side Lua."
 keywords:
   - Redis injection

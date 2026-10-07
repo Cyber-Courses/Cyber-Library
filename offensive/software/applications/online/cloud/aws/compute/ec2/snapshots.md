@@ -1,5 +1,6 @@
 ---
 title: "Snapshots: reading another instance's volumes offline"
+order: 3
 description: "Creating, sharing, and mounting EBS snapshots to read another instance's volumes offline."
 keywords:
   - EBS

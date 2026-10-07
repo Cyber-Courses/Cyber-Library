@@ -1,5 +1,6 @@
 ---
 title: "Zabbix: attacking the monitoring platform"
+order: 1
 description: "Zabbix is a web-and-agent monitoring platform: a PHP frontend and an API, a server on 10051, and agents on 10050. It is a high-value target because it stores credentials for monitored systems and executes commands by design. The surface is enumeration through the API, authentication (defaults, weak passwords, session theft), code execution through items, scripts, the agent, and SQLi, and configuration abuse."
 keywords:
   - zabbix

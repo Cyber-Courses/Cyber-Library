@@ -1,5 +1,6 @@
 ---
 title: "SOCKS proxy: arbitrary onward access through dynamic forwarding"
+order: 2
 description: "SSH dynamic forwarding (-D) runs a SOCKS proxy on the attacker's side that routes any TCP connection through the SSH host into the networks it can reach. Combined with proxychains, this lets arbitrary tools, scanners, and clients operate against an internal network from a single SSH foothold, without forwarding each port individually."
 keywords:
   - socks proxy

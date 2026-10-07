@@ -1,5 +1,6 @@
 ---
 title: "Secrets: dumping Key Vault secret values"
+order: 1
 description: "Dumping secrets from an Azure Key Vault with get and list over the vault data plane."
 keywords:
   - Key Vault

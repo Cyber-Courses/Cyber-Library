@@ -1,5 +1,6 @@
 ---
 title: "Insecure deserialization: turning attacker-controlled objects into code execution"
+order: 1
 description: "How deserialization sinks become RCE: engine callbacks that fire during object reconstruction, gadget chains, and where attacker-controlled serialized data enters, organized by language."
 keywords:
   - insecure deserialization

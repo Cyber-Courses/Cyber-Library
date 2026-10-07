@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass through LDAP injection"
+order: 4
 description: "Bypassing an LDAP-backed login that builds its search filter from the username and password, using the wildcard and injected boolean logic."
 keywords:
   - LDAP authentication bypass

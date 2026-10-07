@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting Grafana"
+order: 4
 description: "Grafana exposes its version on the login page, the /api/health endpoint, and static resources, usually on port 3000. The version is decisive because the unauthenticated path-traversal and other vulnerabilities are version-specific, so reading the exact build directs the choice of exploit before any authentication."
 keywords:
   - grafana enumeration

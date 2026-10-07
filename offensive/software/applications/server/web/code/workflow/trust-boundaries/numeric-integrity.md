@@ -1,5 +1,6 @@
 ---
 title: "Numeric integrity across checkout and payment: hidden prices, quantities, fees, and stale session totals"
+order: 1
 description: "Tampering with hidden prices, quantities, or fee lines when the server recomputes totals inconsistently between cart review and payment capture."
 keywords:
   - price tampering

@@ -1,5 +1,6 @@
 ---
 title: "Static pods: pods the kubelet runs from a node manifest directory"
+order: 5
 description: "The kubelet runs any pod manifest placed in its static-pod directory (commonly /etc/kubernetes/manifests), directly and without the API server. An attacker with node file access drops a manifest there for a privileged backdoor pod that the kubelet starts and keeps alive, with no corresponding API object for a defender to see or delete through kubectl."
 keywords:
   - static pod

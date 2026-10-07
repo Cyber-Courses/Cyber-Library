@@ -1,5 +1,6 @@
 ---
 title: "Event Grid: intercepting and injecting events through subscriptions"
+order: 3
 description: "Abusing Azure Event Grid topics and subscriptions to intercept or inject events."
 keywords:
   - Event Grid

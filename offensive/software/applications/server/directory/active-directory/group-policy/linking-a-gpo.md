@@ -1,5 +1,6 @@
 ---
 title: "Linking a GPO: applying policy through gPLink"
+order: 3
 description: "Abusing write access to an organizational unit's gPLink attribute (the WriteGPLink right) to link a controlled or editable Group Policy Object to the OU, bringing every user and computer under it into the policy's scope."
 keywords:
   - WriteGPLink

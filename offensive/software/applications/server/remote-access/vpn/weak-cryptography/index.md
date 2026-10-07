@@ -1,5 +1,6 @@
 ---
 title: "Weak cryptography: VPN cipher and key-exchange weaknesses"
+order: 2
 description: "VPN gateways that negotiate weak ciphers or key-exchange parameters, legacy ciphers, small Diffie-Hellman groups, SHA-1, let a positioned attacker select or downgrade to breakable crypto. This enables decryption of captured tunnel traffic or attacks on the key agreement, undermining the confidentiality the VPN exists to provide."
 keywords:
   - vpn crypto

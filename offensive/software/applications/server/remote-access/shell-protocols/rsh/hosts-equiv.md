@@ -1,5 +1,6 @@
 ---
 title: "hosts.equiv: system-wide r-command trust abuse"
+order: 3
 description: "/etc/hosts.equiv grants passwordless r-command access system-wide for the listed trusted hosts, applying to all non-root users. A permissive or attacker-modified hosts.equiv, especially a wildcard entry, lets an attacker from a trusted (or spoofed) host log in as any user without a password, a broader trust than per-user .rhosts."
 keywords:
   - hosts.equiv

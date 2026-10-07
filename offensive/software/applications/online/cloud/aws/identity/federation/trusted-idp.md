@@ -1,5 +1,6 @@
 ---
 title: "Trusted IdP: riding third-party identity trust into AWS"
+order: 4
 description: "Abusing trust placed in a third-party identity provider or SaaS vendor to obtain federated AWS access."
 keywords:
   - identity provider

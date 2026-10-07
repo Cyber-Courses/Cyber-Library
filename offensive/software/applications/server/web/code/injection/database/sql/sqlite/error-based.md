@@ -1,5 +1,6 @@
 ---
 title: "Error-based SQL injection in SQLite"
+order: 3
 description: "Leaking SQLite data through primitives that genuinely raise errors, since divide-by-zero returns NULL and casts coerce silently rather than erroring."
 keywords:
   - error based SQL injection

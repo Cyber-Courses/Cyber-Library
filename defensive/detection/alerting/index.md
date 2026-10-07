@@ -1,5 +1,6 @@
 ---
 title: "Detection Alerting: Routing Findings and Reducing Fatigue"
+order: 1
 description: "How alerting routes detection findings with context to the right responders while tuning to reduce alert fatigue."
 keywords:
   - security alerting

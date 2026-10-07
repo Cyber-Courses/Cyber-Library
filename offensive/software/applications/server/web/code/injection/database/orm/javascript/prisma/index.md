@@ -1,5 +1,6 @@
 ---
 title: "Prisma injection"
+order: 2
 description: "Prisma Client parameterizes its typed queries and its tagged-template raw API, so injection lives at the Unsafe raw methods and where untrusted objects are spread into a where argument."
 keywords:
   - Prisma

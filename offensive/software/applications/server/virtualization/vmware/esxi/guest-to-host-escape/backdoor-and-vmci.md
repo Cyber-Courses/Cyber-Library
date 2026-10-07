@@ -1,5 +1,6 @@
 ---
 title: "Backdoor and VMCI: escaping ESXi through the control channels"
+order: 4
 description: "The VMware backdoor is an I/O port the guest uses to issue GuestRPC commands to the vmx process, backing Tools features like shared folders and drag-and-drop; VMCI is a paravirtual device for datagrams and vSockets. Both parse guest-controlled requests inside vmx, so flaws in the RPC command handlers or VMCI datagram processing give code execution in the host process."
 keywords:
   - backdoor port

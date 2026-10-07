@@ -1,5 +1,6 @@
 ---
 title: "XSLT injection"
+order: 4
 description: "Attacker-influenced stylesheets or transform parameters let an attacker read files, reach internal services, pull remote stylesheets, and run code in the transform engine."
 keywords:
   - XSLT injection

@@ -1,5 +1,6 @@
 ---
 title: "SSL-VPN appliances: pre-authentication exploits on remote-access gateways"
+order: 6
 description: "SSL-VPN and remote-access gateway appliances are internet-facing, hold a route into the internal network, and run complex closed firmware, making their pre-authentication vulnerabilities the leading initial-access vector. The major products, Fortinet FortiOS, Ivanti Connect Secure, Palo Alto GlobalProtect, Citrix Gateway, and Cisco ASA, have each had unauthenticated exploit chains used at scale."
 keywords:
   - ssl-vpn

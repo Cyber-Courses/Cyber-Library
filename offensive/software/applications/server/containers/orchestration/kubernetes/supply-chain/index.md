@@ -1,5 +1,6 @@
 ---
 title: "Supply chain: compromising what the cluster installs and trusts"
+order: 8
 description: "Clusters install software through Helm charts and operators, both of which run with elevated rights and pull manifests and images an attacker may influence. A malicious or tampered chart, or an operator and its custom resources, executes attacker-defined objects with the installer's permissions, turning the cluster's own provisioning tooling into an execution and persistence path."
 keywords:
   - kubernetes supply chain

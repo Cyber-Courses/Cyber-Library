@@ -1,5 +1,6 @@
 ---
 title: "Out-of-band exfiltration and hash capture from MSSQL injection"
+order: 6
 description: "Using xp_dirtree and related UNC procedures in SQL Server to exfiltrate data over DNS and capture the service account's NetNTLM hash."
 keywords:
   - out of band

@@ -1,5 +1,6 @@
 ---
 title: "Network"
+order: 7
 description: "Offensive scope for the network-facing services and RPC interfaces that Windows and infrastructure hosts expose, where a single reachable service can coerce authentication or run code, with the Windows Print Spooler as a long-standing example."
 keywords:
   - network services

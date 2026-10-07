@@ -1,5 +1,6 @@
 ---
 title: "VirtualBox: attacking the Oracle desktop hypervisor"
+order: 3
 description: "VirtualBox is a type-2 hypervisor running each VM inside a VBoxSVC/VirtualBox process on the host. Guest-to-host escapes target its emulated devices, 3D acceleration, audio, network, and USB, and the Guest Additions integration (shared folders and clipboard over HGCM). It is a frequent research and Pwn2Own target with a broad device surface."
 keywords:
   - virtualbox

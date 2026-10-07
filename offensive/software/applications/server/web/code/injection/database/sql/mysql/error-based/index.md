@@ -1,5 +1,6 @@
 ---
 title: "Error-based SQL injection in MySQL"
+order: 4
 description: "Forcing MySQL to leak query results inside error messages using XPath functions EXTRACTVALUE and UPDATEXML and the FLOOR/RAND double-query technique."
 keywords:
   - error based SQL injection

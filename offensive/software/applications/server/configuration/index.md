@@ -1,5 +1,6 @@
 ---
 title: "Configuration"
+order: 11
 description: "Offensive scope for enterprise configuration-management platforms: systems that push software, scripts, and settings to managed endpoints at scale, and therefore hand an attacker code execution across the estate once abused."
 keywords:
   - configuration management

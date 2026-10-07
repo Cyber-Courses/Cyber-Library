@@ -1,5 +1,6 @@
 ---
 title: "Command injection filter bypass with wildcards and globbing"
+order: 2
 description: "Reconstructing filtered binary names and paths with shell glob characters, /???/c?t /???/p?sswd, /bin/c*, so the blocked literal never appears in the request; includes Windows wildcard behavior."
 keywords:
   - command injection

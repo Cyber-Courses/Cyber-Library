@@ -1,5 +1,6 @@
 ---
 title: "Credential harvesting: stored device and network credentials in Orion"
+order: 2
 description: "To poll and manage devices, Orion stores their credentials, SNMP strings, SSH and WMI logins, and API secrets, encrypted in its database with keys on the Orion server. With admin access or server/database compromise, an attacker recovers and decrypts these to obtain working credentials for the whole managed estate, including domain accounts Orion uses for WMI."
 keywords:
   - solarwinds credentials

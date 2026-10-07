@@ -1,5 +1,6 @@
 ---
 title: "Exposed version control directories: reconstructing source from .git, .svn, and .hg"
+order: 2
 description: "Finding and dumping web-served version-control directories to recover full application source, history, and secrets, then reconstructing the working tree offline."
 keywords:
   - git exposure

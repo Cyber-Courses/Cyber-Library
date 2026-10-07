@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: mapping role assignments, custom roles, and managed identities"
+order: 1
 description: "Mapping an Azure subscription's role assignments, custom roles, managed identities, and resource inventory with Azure Resource Graph, az cli, and ROADtools."
 keywords:
   - Azure enumeration

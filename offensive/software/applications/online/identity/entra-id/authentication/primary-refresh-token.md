@@ -1,5 +1,6 @@
 ---
 title: "Primary refresh token: stealing and forging the PRT"
+order: 4
 description: "Stealing and replaying the primary refresh token: extracting the PRT and session key from a joined device and forging PRT cookies with ROADtoken and AADInternals."
 keywords:
   - primary refresh token

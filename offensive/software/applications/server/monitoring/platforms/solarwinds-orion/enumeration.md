@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting SolarWinds Orion"
+order: 4
 description: "Orion is identified by its web console (Orion/Login.aspx), page branding, and version in the interface and resources. The version and installed modules decide which known bypass and RCE chains apply, so reading the build before attacking directs the choice between an unauthenticated exploit and the credential route."
 keywords:
   - solarwinds enumeration

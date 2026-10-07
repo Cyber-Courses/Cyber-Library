@@ -1,5 +1,6 @@
 ---
 title: "Service account keys: exported JSON keys and creating new ones"
+order: 3
 description: "Finding and using exported service-account JSON key files, and creating new keys for durable access."
 keywords:
   - service account key

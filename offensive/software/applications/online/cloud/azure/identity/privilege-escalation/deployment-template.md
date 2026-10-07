@@ -1,5 +1,6 @@
 ---
 title: "Deployment template: run as a privileged identity through an ARM deployment"
+order: 5
 description: "Deploying an ARM template or deploymentScripts resource that runs as a privileged managed identity through Microsoft.Resources/deployments/write."
 keywords:
   - ARM template

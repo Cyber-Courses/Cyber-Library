@@ -1,5 +1,6 @@
 ---
 title: "File shares: reaching Azure Files over SMB"
+order: 4
 description: "Reaching Azure Files SMB shares through storage keys or identity-based access for stored data."
 keywords:
   - Azure Files

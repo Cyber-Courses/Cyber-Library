@@ -1,5 +1,6 @@
 ---
 title: "Storage Queues: reading and injecting queue messages"
+order: 4
 description: "Reading and writing Azure Storage Queues through account keys or SAS for message capture and injection."
 keywords:
   - Storage Queues

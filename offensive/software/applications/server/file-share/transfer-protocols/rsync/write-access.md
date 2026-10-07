@@ -1,5 +1,6 @@
 ---
 title: "Write access: planting files through a writable rsync module"
+order: 1
 description: "An rsync module configured read-write (read only = false) lets an attacker upload files to the server directory it maps. Where that directory is consumed by the host, a webroot, a home directory, a cron or scripts path, the write becomes code execution or credential planting, bounded by the daemon's chroot, uid, and whether it preserves permissions."
 keywords:
   - rsync write

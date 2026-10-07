@@ -1,5 +1,6 @@
 ---
 title: "Global Accelerator: fronting endpoints through listeners and endpoint groups"
+order: 6
 description: "Abusing Global Accelerator listeners and endpoint groups to reach or front internal endpoints."
 keywords:
   - Global Accelerator

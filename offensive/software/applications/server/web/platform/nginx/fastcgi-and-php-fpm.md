@@ -1,5 +1,6 @@
 ---
 title: "nginx FastCGI and PHP-FPM: upload execution and SCRIPT_FILENAME control"
+order: 2
 description: "Exploiting nginx+PHP-FPM wiring: the fastcgi_split_path_info plus cgi.fix_pathinfo gap that executes uploads via path/.php, exposed FPM sockets, and controlling SCRIPT_FILENAME for arbitrary execution."
 keywords:
   - fastcgi_split_path_info

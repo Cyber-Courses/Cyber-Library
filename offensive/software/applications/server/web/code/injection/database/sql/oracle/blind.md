@@ -1,5 +1,6 @@
 ---
 title: "Boolean-based blind SQL injection in Oracle"
+order: 1
 description: "Inferring Oracle data one character at a time from true/false response differences using SUBSTR, ASCII, and LENGTH over DUAL."
 keywords:
   - boolean based blind

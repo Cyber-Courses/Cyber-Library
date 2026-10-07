@@ -1,5 +1,6 @@
 ---
 title: "Execution role: stealing a Lambda's credentials from the runtime"
+order: 1
 description: "Stealing a Lambda function's execution-role credentials from the runtime environment variables and metadata endpoint."
 keywords:
   - Lambda

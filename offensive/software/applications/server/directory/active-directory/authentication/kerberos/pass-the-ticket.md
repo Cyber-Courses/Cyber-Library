@@ -1,5 +1,6 @@
 ---
 title: "Pass-the-ticket: extracting and reusing Kerberos tickets"
+order: 3
 description: "Stealing Kerberos tickets (TGTs and service tickets) from memory or a ccache and injecting them into another session to authenticate as the victim, including harvesting tickets from a compromised host."
 keywords:
   - pass the ticket

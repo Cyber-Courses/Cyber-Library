@@ -1,5 +1,6 @@
 ---
 title: "Weak passwords: common and reused Zabbix credentials"
+order: 4
 description: "Where the Admin password is changed, Zabbix has no strong password policy by default, so the replacement is often weak or reused: zabbix123, the company name, a season-and-year pattern, or a password reused from elsewhere. Combined with the enumerated user list, a short targeted spray frequently recovers a working account."
 keywords:
   - weak password

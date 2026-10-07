@@ -1,5 +1,6 @@
 ---
 title: "Trust enumeration: mapping domain and forest trusts"
+order: 1
 description: "Enumerating Active Directory trust relationships: intra-forest and cross-forest trusts, their direction and transitivity, and the attributes that decide whether a trust is abusable for lateral movement."
 keywords:
   - trust enumeration

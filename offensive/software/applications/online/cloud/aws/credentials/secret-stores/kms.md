@@ -1,5 +1,6 @@
 ---
 title: "KMS: Decrypt and permissive key policies"
+order: 3
 description: "Abusing kms:Decrypt and permissive key policies to decrypt protected data and envelope-encrypted secrets."
 keywords:
   - KMS

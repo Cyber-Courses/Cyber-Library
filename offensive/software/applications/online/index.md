@@ -1,5 +1,6 @@
 ---
 title: "Online: attacking vendor-hosted infrastructure and services"
+order: 2
 description: "Attacking services a third party operates: cloud provider platforms (IaaS) and SaaS applications, reached through identity, OAuth, API, and tenant configuration rather than by exploiting a binary you can reach. The attack model is the control-plane and the identity graph, not host exploitation."
 keywords:
   - cloud security

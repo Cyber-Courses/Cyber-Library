@@ -1,5 +1,6 @@
 ---
 title: "Sensitive mounts: escaping through host paths and kernel interfaces bind-mounted into a container"
+order: 1
 description: "Container escapes that come from a host path exposed inside the container: a bind mount of a host directory or the full host root, a mounted runtime control socket such as docker.sock, and writable procfs or sysfs kernel interfaces like core_pattern, modprobe, and uevent_helper that the host kernel executes as root."
 keywords:
   - sensitive mounts

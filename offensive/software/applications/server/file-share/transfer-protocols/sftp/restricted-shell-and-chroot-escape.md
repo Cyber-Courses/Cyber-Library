@@ -1,5 +1,6 @@
 ---
 title: "Restricted shell and chroot escape: breaking out of SFTP-only confinement"
+order: 4
 description: "SFTP-only accounts are confined by OpenSSH's internal-sftp subsystem and usually a ChrootDirectory, meant to allow file transfer but not command execution. Escapes come from writable paths inside the chroot that the system acts on, SFTP features that reach outside, misconfigured chroot ownership, and chaining an SFTP write to a key or cron that the host executes with a real shell."
 keywords:
   - internal-sftp

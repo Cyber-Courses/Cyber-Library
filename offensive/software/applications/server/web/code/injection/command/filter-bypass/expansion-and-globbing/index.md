@@ -1,5 +1,6 @@
 ---
 title: "Expansion and globbing bypass"
+order: 3
 description: "Rebuilding commands and paths through brace expansion, wildcard globbing, tilde expansion, and variable expansion."
 keywords:
   - brace expansion

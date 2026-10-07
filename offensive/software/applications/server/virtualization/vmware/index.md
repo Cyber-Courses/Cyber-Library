@@ -1,5 +1,6 @@
 ---
 title: "VMware: attacking ESXi, vCenter, and the desktop hypervisors"
+order: 2
 description: "VMware's virtualization stack spans the bare-metal ESXi hypervisor, the vCenter management plane that controls fleets of hosts, and the desktop products Workstation and Fusion. The offensive themes are consistent: guest-to-host escapes through shared device-emulation code, theft of virtual disks, and compromise of the management plane."
 keywords:
   - vmware

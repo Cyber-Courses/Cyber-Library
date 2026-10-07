@@ -1,5 +1,6 @@
 ---
 title: "gRPC metadata abuse"
+order: 2
 description: "When a gRPC server trusts per-call metadata such as the authority or custom headers for authorization, routing, or tenant selection, a client that sets those values freely spoofs identity or reaches internal endpoints."
 keywords:
   - gRPC metadata

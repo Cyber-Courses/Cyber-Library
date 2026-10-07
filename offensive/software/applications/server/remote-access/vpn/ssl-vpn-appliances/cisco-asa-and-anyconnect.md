@@ -1,5 +1,6 @@
 ---
 title: "Cisco ASA and AnyConnect: WebVPN traversal and portal credential attacks"
+order: 5
 description: "Cisco ASA and Firepower remote-access VPN have had a WebVPN path-traversal giving unauthenticated file disclosure, and the AnyConnect SSL-VPN portal is a persistent target for credential brute force and password spraying. Combined, file disclosure and valid credentials grant access to the VPN and the internal network it fronts."
 keywords:
   - cisco asa

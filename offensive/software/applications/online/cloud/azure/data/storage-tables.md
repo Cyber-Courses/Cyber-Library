@@ -1,5 +1,6 @@
 ---
 title: "Storage Tables: reading Table storage with keys or SAS"
+order: 5
 description: "Reading Azure Table storage through account keys or SAS for structured data."
 keywords:
   - Storage Tables

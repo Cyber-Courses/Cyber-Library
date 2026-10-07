@@ -1,5 +1,6 @@
 ---
 title: "Audio devices: escaping VirtualBox through emulated sound controllers"
+order: 4
 description: "VirtualBox emulates the AC97, SB16, and Intel HD Audio controllers, whose guest drivers program buffer descriptors and DMA that the host VM process reads to move audio. Flaws in buffer-descriptor and DMA length handling, particularly in the Intel HDA controller, give out-of-bounds access in the host process from the guest audio stack."
 keywords:
   - intel hda

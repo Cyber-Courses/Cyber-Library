@@ -1,5 +1,6 @@
 ---
 title: "Authentication: default and weak Nagios/Icinga credentials"
+order: 1
 description: "The Nagios and Icinga web interfaces authenticate with a password, and the defaults and weak choices are the way in: nagiosadmin with an install-time password on Core, admin or nagiosadmin on Nagios XI, and weak or reused passwords generally. A web login grants access to the monitoring data and, on XI, to the features and vulnerabilities that lead to code execution."
 keywords:
   - nagiosadmin

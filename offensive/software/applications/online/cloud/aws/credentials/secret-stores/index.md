@@ -1,5 +1,6 @@
 ---
 title: "Secret stores"
+order: 4
 description: "Reading secrets from AWS secret stores: Secrets Manager, SSM Parameter Store SecureString values, and KMS-encrypted material."
 keywords:
   - Secrets Manager

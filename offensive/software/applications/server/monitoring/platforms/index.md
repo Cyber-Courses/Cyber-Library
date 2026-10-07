@@ -1,5 +1,6 @@
 ---
 title: "Platforms: attacking monitoring and observability platforms"
+order: 2
 description: "Monitoring platforms are web-facing applications that store credentials for the estate and often execute commands on monitored hosts by design. The attack flow is consistent across them: fingerprint and enumerate, gain access through default or weak credentials or an auth bypass, then reach code execution or harvest the credentials they hold, turning one platform into reach across the environment."
 keywords:
   - monitoring platforms

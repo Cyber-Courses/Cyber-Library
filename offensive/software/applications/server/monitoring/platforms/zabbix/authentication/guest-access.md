@@ -1,5 +1,6 @@
 ---
 title: "Guest access: the built-in read-only Zabbix account"
+order: 3
 description: "Zabbix has a built-in guest account that, when enabled, grants unauthenticated read access to whatever the guest user group is permitted to see, commonly dashboards and host data. Historically enabled by default, guest access exposes the monitored-host inventory and configuration without any credential, and over-broad guest permissions can widen that to sensitive data."
 keywords:
   - guest access

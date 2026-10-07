@@ -1,5 +1,6 @@
 ---
 title: "rhosts bypass: passwordless rlogin via host trust"
+order: 4
 description: "rlogin accepts a passwordless login when the target user's .rhosts or the system hosts.equiv trusts the connecting host and user. Abusing existing trust, or planting a .rhosts entry where the home directory is writable, grants an interactive shell as the target with no password, the same host-trust weakness as rsh applied to interactive login."
 keywords:
   - rhosts

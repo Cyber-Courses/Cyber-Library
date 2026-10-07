@@ -1,5 +1,6 @@
 ---
 title: "ProxyNotShell: authenticated Autodiscover SSRF to PowerShell"
+order: 3
 description: "The Exchange chain that needs one valid mailbox credential: an authenticated Autodiscover SSRF reaches the remote PowerShell back end for code execution, with the OWASSRF variant pivoting to the /owa/.../ecp path after the URL-rewrite mitigation and a later ApprovedApplicationCollection bypass to reach PowerShell again."
 keywords:
   - ProxyNotShell

@@ -1,5 +1,6 @@
 ---
 title: "PHP server-side template injection"
+order: 4
 description: "SSTI in PHP template engines: Twig (Symfony) filter-callback RCE and Smarty's PHP execution constructs."
 keywords:
   - PHP SSTI

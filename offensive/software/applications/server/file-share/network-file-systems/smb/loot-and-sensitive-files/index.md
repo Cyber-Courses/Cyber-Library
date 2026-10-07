@@ -1,5 +1,6 @@
 ---
 title: "Loot and sensitive files: mining readable SMB shares"
+order: 5
 description: "Readable SMB shares routinely hold the credentials and data that advance an intrusion: scripts and config files with embedded passwords, backups and disk images, Group Policy data in SYSVOL, and keys and tokens. Systematically spidering shares and pattern-matching their contents turns read access into credentials and sensitive data."
 keywords:
   - smb loot

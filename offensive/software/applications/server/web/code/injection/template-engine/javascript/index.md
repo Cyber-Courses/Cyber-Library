@@ -1,5 +1,6 @@
 ---
 title: "JavaScript server-side template injection"
+order: 3
 description: "SSTI in Node.js template engines: Handlebars prototype/constructor escapes and Pug's inline JavaScript to reach require('child_process')."
 keywords:
   - JavaScript SSTI

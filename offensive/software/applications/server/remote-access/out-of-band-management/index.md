@@ -1,5 +1,6 @@
 ---
 title: "Out-of-band management: attacking server BMCs below the OS"
+order: 9
 description: "Out-of-band management gives remote control of a server's hardware independent of its OS, through the baseboard management controller (BMC) speaking IPMI and vendor stacks (iDRAC, iLO) with the Redfish API. The surface is devastating: IPMI's cipher 0 and RAKP flaws, near-universal default credentials, and vendor exploits grant power, console, and virtual-media control that compromises the host OS."
 keywords:
   - out-of-band management

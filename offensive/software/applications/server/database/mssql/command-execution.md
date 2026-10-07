@@ -1,5 +1,6 @@
 ---
 title: "MSSQL command execution: xp_cmdshell and other sinks"
+order: 3
 description: "Running operating-system commands from SQL Server as the service account through xp_cmdshell, OLE automation procedures, and CLR assemblies, the main sinks that turn a sysadmin session into code execution on the host."
 keywords:
   - xp_cmdshell

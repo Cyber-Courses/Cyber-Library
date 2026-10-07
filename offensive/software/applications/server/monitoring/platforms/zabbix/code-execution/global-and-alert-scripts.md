@@ -1,5 +1,6 @@
 ---
 title: "Global and alert scripts: command execution on the Zabbix server"
+order: 2
 description: "Zabbix global scripts and alert (action) scripts of type Script run attacker-defined commands, executed on the Zabbix server or a chosen agent. A Super admin creates a script of type Script with a command and runs it from the UI or via the API's script.execute, giving code execution as the Zabbix server's service account, the classic authenticated Zabbix RCE."
 keywords:
   - global scripts

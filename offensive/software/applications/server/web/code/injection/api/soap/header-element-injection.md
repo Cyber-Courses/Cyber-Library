@@ -1,5 +1,6 @@
 ---
 title: "SOAP header element injection"
+order: 3
 description: "WS-Addressing, WS-Security, and custom SOAP headers parsed from a partially trusted message expose replay, signature stripping, and mustUnderstand handling bugs in application middleware."
 keywords:
   - SOAP header injection

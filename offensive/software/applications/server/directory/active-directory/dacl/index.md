@@ -1,5 +1,6 @@
 ---
 title: "DACL: turning object permissions into control"
+order: 2
 description: "Active Directory DACL attacks: the complete map of abusable access-control entries (GenericAll, GenericWrite, WriteDacl, WriteOwner, WriteSPN, AddKeyCredentialLink, ForceChangePassword, AddMember, replication and managed-password rights) and the Linux and Windows tooling that turns each into control of a privileged principal."
 keywords:
   - DACL

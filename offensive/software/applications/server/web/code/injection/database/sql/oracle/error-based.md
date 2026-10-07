@@ -1,5 +1,6 @@
 ---
 title: "Error-based SQL injection in Oracle"
+order: 3
 description: "Leaking Oracle query results through ORA errors that echo attacker input, using CTXSYS.DRITHSX.SN and UTL_INADDR, with version and ACL caveats."
 keywords:
   - error based SQL injection

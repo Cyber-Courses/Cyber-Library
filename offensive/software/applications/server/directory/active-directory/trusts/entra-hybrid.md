@@ -1,5 +1,6 @@
 ---
 title: "Entra hybrid: pivoting between on-premises AD and the cloud"
+order: 5
 description: "Abusing Microsoft Entra Connect and hybrid identity to move between on-premises Active Directory and the Entra ID tenant: the sync account's DCSync rights, the Seamless SSO computer account for cloud impersonation, and primary refresh token theft."
 keywords:
   - Entra Connect

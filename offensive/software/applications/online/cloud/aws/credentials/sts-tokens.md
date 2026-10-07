@@ -1,5 +1,6 @@
 ---
 title: "STS tokens: capturing and replaying temporary session credentials"
+order: 3
 description: "Capturing and replaying short-lived STS session tokens (AccessKeyId, SecretAccessKey, SessionToken) lifted from processes, logs, and environment variables."
 keywords:
   - STS

@@ -1,5 +1,6 @@
 ---
 title: "Time-based blind SQL injection in Oracle"
+order: 15
 description: "Inferring Oracle data from conditional response delays with the inline DBMS_PIPE.RECEIVE_MESSAGE function, since DBMS_LOCK.SLEEP is a procedure usable only in PL/SQL."
 keywords:
   - time based blind

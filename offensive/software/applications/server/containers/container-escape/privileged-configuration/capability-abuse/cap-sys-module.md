@@ -1,5 +1,6 @@
 ---
 title: "CAP_SYS_MODULE: loading a kernel module that executes on the host"
+order: 3
 description: "CAP_SYS_MODULE lets a container call init_module and finit_module to insert arbitrary code into the host kernel. A short kernel module whose init function calls call_usermodehelper runs a chosen program as root in the host's init namespace, giving a reliable container escape that does not depend on cgroups or device access."
 keywords:
   - cap_sys_module

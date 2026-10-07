@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the ESXi host"
+order: 1
 description: "Beyond a guest escape, an ESXi host is reached through its management surface: the authenticated host API and shell, SSH where enabled, and the SLP/CIM and vmx authd services. With host credentials or a management flaw, an attacker gets a vmkernel shell, from which they control every VM, read datastores, and establish persistence on the hypervisor itself."
 keywords:
   - esxi shell

@@ -1,5 +1,6 @@
 ---
 title: "IPMI RAKP hash disclosure: pre-auth password-hash retrieval"
+order: 2
 description: "The IPMI 2.0 RAKP authentication exchange returns a salted HMAC of the requested user's password before authentication completes, by design. An attacker requests the exchange for a username and receives a crackable hash, so any BMC speaking IPMI 2.0 leaks a password hash for every account to an unauthenticated attacker for offline cracking."
 keywords:
   - rakp

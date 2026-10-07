@@ -1,5 +1,6 @@
 ---
 title: "Conditional access: slipping past sign-in policies"
+order: 5
 description: "Bypassing Entra conditional-access policies: user-agent and device-platform spoofing, legacy-auth protocols, and location or compliant-device gaps."
 keywords:
   - conditional access

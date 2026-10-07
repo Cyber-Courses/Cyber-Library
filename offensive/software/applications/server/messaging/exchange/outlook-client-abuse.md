@@ -1,5 +1,6 @@
 ---
 title: "Outlook client abuse: rules, forms, and home pages over MAPI"
+order: 6
 description: "Turning a valid mailbox credential into code execution on the victim workstation with no server RCE: weaponizing client-side Outlook rules that launch a payload on message receipt, custom VbScript forms triggered by a crafted message, and the folder home page WebView that loads attacker HTML when the folder is opened, all pushed over MAPI/EWS with ruler."
 keywords:
   - Outlook rules

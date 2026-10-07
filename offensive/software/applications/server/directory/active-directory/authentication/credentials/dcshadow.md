@@ -1,5 +1,6 @@
 ---
 title: "DCShadow: pushing changes through a rogue domain controller"
+order: 9
 description: "Registering a rogue domain controller to inject arbitrary changes into Active Directory over the replication protocol (DCShadow), writing SID history, group membership, or ACLs directly into the directory while bypassing most logging."
 keywords:
   - DCShadow

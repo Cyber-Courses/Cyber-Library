@@ -1,5 +1,6 @@
 ---
 title: "Apache handler and type mapping: executing or disclosing the wrong files"
+order: 1
 description: "Exploiting Apache AddHandler/AddType/SetHandler mistakes: inner-extension execution, SetHandler over a directory, missing-handler source disclosure, .htaccess override abuse, and double-extension upload execution."
 keywords:
   - AddHandler

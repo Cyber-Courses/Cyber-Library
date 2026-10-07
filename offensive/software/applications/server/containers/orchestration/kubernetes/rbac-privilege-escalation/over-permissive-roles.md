@@ -1,5 +1,6 @@
 ---
 title: "Over-permissive roles: escalation through broad grants"
+order: 1
 description: "Roles that grant wildcard verbs or resources, or the ability to read secrets across namespaces, hand an identity far more than intended. Reading all secrets yields other identities' tokens and application credentials, and a wildcard role on a namespace or the cluster is effectively admin over that scope, needing no further trick."
 keywords:
   - rbac

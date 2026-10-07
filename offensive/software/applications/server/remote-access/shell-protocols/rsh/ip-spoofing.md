@@ -1,5 +1,6 @@
 ---
 title: "IP spoofing: impersonating a trusted host to rsh"
+order: 2
 description: "The r-commands authenticate by source IP against the trust files, so spoofing the address of a trusted host can satisfy the check without controlling it. Because rsh/rlogin need the server's responses, the attack requires either an on-path position or predicting TCP sequence numbers, the classic blind-spoofing attack against address-based trust."
 keywords:
   - ip spoofing

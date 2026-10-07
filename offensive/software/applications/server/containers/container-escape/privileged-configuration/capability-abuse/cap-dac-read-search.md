@@ -1,5 +1,6 @@
 ---
 title: "CAP_DAC_READ_SEARCH: reading any host file by brute-forcing inode handles"
+order: 4
 description: "CAP_DAC_READ_SEARCH bypasses file read and directory search permission checks and, more importantly, authorises open_by_handle_at. The Shocker technique uses it to open files by raw inode handle rather than by path, escaping the container's chroot/mount view to read arbitrary host files such as /etc/shadow."
 keywords:
   - cap_dac_read_search

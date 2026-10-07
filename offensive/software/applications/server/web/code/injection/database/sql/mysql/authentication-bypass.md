@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass through MySQL injection"
+order: 13
 description: "Bypassing a login whose SQL is built from the username and password fields, using comment termination and always-true conditions in MySQL."
 keywords:
   - authentication bypass

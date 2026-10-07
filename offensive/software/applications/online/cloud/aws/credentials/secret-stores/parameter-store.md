@@ -1,5 +1,6 @@
 ---
 title: "Parameter Store: GetParameter over SecureString and plaintext"
+order: 2
 description: "ssm:GetParameter and GetParameters to read SecureString and plaintext parameters holding credentials and configuration."
 keywords:
   - Parameter Store

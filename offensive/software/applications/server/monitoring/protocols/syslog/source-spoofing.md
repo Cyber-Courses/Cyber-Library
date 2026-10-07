@@ -1,5 +1,6 @@
 ---
 title: "Source spoofing: forging the origin of syslog records"
+order: 1
 description: "UDP syslog has no authentication and the recorded source of an event is taken from the packet, so an attacker spoofs the source IP to attribute forged log entries to another host. This frames other systems, plants misleading evidence, and, because the collector trusts the apparent origin, poisons host-attributed detection and correlation."
 keywords:
   - source spoofing

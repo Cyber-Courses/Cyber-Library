@@ -1,5 +1,6 @@
 ---
 title: "Floppy controller: escaping QEMU through the legacy FDC"
+order: 5
 description: "QEMU's emulated floppy disk controller processes guest commands through a fixed-size internal FIFO. A guest that issues certain read/write commands can drive the FIFO index past the buffer, the VENOM class of bug, giving an out-of-bounds read and write in the QEMU process. The controller is present even when no floppy drive is attached."
 keywords:
   - floppy controller

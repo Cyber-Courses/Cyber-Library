@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: finding public containers and storage accounts"
+order: 1
 description: "Discovering public Azure blob containers and storage accounts through naming guesses and anonymous listing."
 keywords:
   - blob enumeration

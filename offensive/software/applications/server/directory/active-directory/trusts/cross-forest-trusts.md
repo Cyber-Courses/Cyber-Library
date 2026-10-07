@@ -1,5 +1,6 @@
 ---
 title: "Cross-forest trusts: moving between forests"
+order: 3
 description: "Moving across an Active Directory forest trust, where SID filtering and selective authentication are enforced by default: using access explicitly granted to foreign principals, trusts with SID filtering relaxed, and TGT delegation to unconstrained-delegation hosts across the trust."
 keywords:
   - forest trust

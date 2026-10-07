@@ -1,5 +1,6 @@
 ---
 title: "LSASS dumping: extracting live credentials and tickets from memory"
+order: 1
 description: "Dumping the LSASS process to recover the NTLM hashes, Kerberos tickets, and sometimes plaintext passwords of every principal with a session on a compromised Windows host."
 keywords:
   - LSASS

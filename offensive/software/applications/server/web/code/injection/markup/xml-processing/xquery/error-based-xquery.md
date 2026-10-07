@@ -1,5 +1,6 @@
 ---
 title: "Error-based XQuery: inferring data from surfaced errors"
+order: 3
 description: "XQuery static and dynamic errors returned to the client leak content, types, and structure through controlled error conditions and embedded data in error strings."
 keywords:
   - error-based XQuery

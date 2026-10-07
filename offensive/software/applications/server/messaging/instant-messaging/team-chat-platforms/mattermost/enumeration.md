@@ -1,5 +1,6 @@
 ---
 title: "Enumeration"
+order: 1
 description: "Harvesting a Mattermost server through the REST API: paging /api/v4/users and /api/v4/users/search for the full member roster, listing /api/v4/teams and /api/v4/channels, confirming account existence through /api/v4/users/email/{email} and login-error differences, and reading X-Version-Id to scope later exploitation. Worked curl with a session token and interpretation of the JSON."
 keywords:
   - mattermost enumeration

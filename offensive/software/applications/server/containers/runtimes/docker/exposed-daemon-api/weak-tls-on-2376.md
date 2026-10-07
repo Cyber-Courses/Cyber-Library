@@ -1,5 +1,6 @@
 ---
 title: "Weak TLS on 2376: reaching the daemon despite transport security"
+order: 3
 description: "Port 2376 is meant to protect the Docker API with mutual TLS, but it is often misconfigured: TLS verification disabled, client-certificate authentication not enforced, or private keys left readable. Where any of these holds, an attacker reaches the same root-equivalent daemon API that 2375 exposes, just over an encrypted channel."
 keywords:
   - docker 2376

@@ -1,5 +1,6 @@
 ---
 title: "Cosmos DB: primary keys, resource tokens, and RBAC document access"
+order: 2
 description: "Abusing Azure Cosmos DB: primary and read-only keys, resource tokens, and RBAC for document access."
 keywords:
   - Cosmos DB

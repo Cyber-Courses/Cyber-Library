@@ -1,5 +1,6 @@
 ---
 title: "Time-based blind SQL injection in MSSQL"
+order: 9
 description: "Inferring SQL Server data from conditional response delays with WAITFOR DELAY, and why it generally needs a statement (stacked) context."
 keywords:
   - time based blind

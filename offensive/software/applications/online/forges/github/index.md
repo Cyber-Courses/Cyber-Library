@@ -1,5 +1,6 @@
 ---
 title: "GitHub: attacking organizations, repositories, Actions, and tokens"
+order: 1
 description: "Offensive techniques against GitHub as a SaaS target: org and repo reconnaissance, secret harvesting from history, Actions workflow injection, GITHUB_TOKEN and PAT abuse, OAuth App and webhook persistence, and self-hosted runner takeover."
 keywords:
   - GitHub

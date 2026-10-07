@@ -1,5 +1,6 @@
 ---
 title: "Detection Analysis: Correlation and Detection Logic"
+order: 2
 description: "How analysis turns collected telemetry into meaningful signals through correlation and detection logic that separates real activity from noise."
 keywords:
   - detection analysis

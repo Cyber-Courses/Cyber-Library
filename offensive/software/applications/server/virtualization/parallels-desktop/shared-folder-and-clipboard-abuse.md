@@ -1,5 +1,6 @@
 ---
 title: "Shared folder and clipboard abuse: escaping Parallels through Tools integration"
+order: 2
 description: "Parallels Tools provides shared folders, a shared clipboard, and drag-and-drop between the guest and the macOS host over Parallels' guest-host communication channels. The host-side handlers parse guest-supplied integration requests, and shared folders expose host paths, so both the request parsing and the shared-folder path handling have produced guest-to-host escapes and host file access."
 keywords:
   - parallels tools

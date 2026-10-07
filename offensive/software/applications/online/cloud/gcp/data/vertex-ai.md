@@ -1,5 +1,6 @@
 ---
 title: "Vertex AI: notebook and training-job service accounts and model theft"
+order: 3
 description: "Attacking Vertex AI: notebook and training-job service accounts, model and dataset theft, and pipeline execution."
 keywords:
   - Vertex AI

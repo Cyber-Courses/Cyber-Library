@@ -1,5 +1,6 @@
 ---
 title: "Management plane: the Xen toolstack and XAPI"
+order: 3
 description: "Xen is managed by a toolstack: xl/libxl on upstream Xen, and XAPI on XenServer and XCP-ng, which adds a pool-wide XML-RPC/JSON-RPC API on port 443. Access to XAPI controls every host and VM in a pool, VM lifecycle, console, disk operations, and host commands, so XAPI credentials, session tokens, or an API flaw give pool-wide control."
 keywords:
   - xapi

@@ -1,5 +1,6 @@
 ---
 title: "Path traversal: reading files outside the served root"
+order: 3
 description: "An HTTP file server that builds a filesystem path from the request without properly canonicalising it allows path traversal: ../ sequences, encoded variants, or absolute paths in the URL or a filename parameter reach files outside the served root. This yields arbitrary file read, recovering configs, credentials, and source at the server process's privilege."
 keywords:
   - path traversal

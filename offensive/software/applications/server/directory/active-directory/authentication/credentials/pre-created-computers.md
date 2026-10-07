@@ -1,5 +1,6 @@
 ---
 title: "Pre-created computer accounts: the default machine password"
+order: 15
 description: "Taking over computer objects that were pre-staged in Active Directory but never joined, whose password defaults to the lowercase computer name, giving a free authenticated computer-account credential and a path into resource-based delegation or shadow credentials."
 keywords:
   - pre-created computer

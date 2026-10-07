@@ -1,5 +1,6 @@
 ---
 title: "Key exchange downgrade: forcing weak SSH key-exchange"
+order: 1
 description: "SSH key exchange establishes the session keys, and a server offering weak methods, small Diffie-Hellman groups (group1/1024-bit), or legacy exchanges, can be negotiated down to them. A positioned attacker who can influence the negotiation or who records the handshake targets these weaker exchanges to attack the resulting session keys."
 keywords:
   - key exchange

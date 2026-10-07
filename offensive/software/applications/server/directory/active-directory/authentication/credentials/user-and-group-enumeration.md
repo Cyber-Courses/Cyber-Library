@@ -1,5 +1,6 @@
 ---
 title: "User and group enumeration: building the principal list"
+order: 7
 description: "Enumerating Active Directory users and groups, from authenticated LDAP reads to unauthenticated RID cycling and username validation over Kerberos, to build the target list for roasting and spraying."
 keywords:
   - user enumeration

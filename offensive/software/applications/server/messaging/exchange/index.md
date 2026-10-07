@@ -1,5 +1,6 @@
 ---
 title: "Microsoft Exchange: attacking the on-premises mail server"
+order: 3
 description: "The on-premises Microsoft Exchange attack surface, organized perimeter to Active Directory: reading the server build from OWA and ECP to pick a chain, user enumeration and spraying, the front-end-to-back-end RCE chains, PrivExchange coercion to AD, mailbox access, client abuse, and mail-flow persistence."
 keywords:
   - Exchange

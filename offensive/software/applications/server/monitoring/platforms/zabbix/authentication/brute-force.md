@@ -1,5 +1,6 @@
 ---
 title: "Brute force: online attacks on the Zabbix login"
+order: 1
 description: "Zabbix validates credentials at the web login and the JSON-RPC API, both scriptable for online brute force. Older versions lack lockout, making guessing practical; newer ones add a configurable lockout. The API is the efficient target, returning a clear success token or an error per attempt, so a wordlist against a known account runs quickly."
 keywords:
   - zabbix brute force

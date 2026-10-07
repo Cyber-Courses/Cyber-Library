@@ -1,5 +1,6 @@
 ---
 title: "Credential hunting: finding passwords, keys, and tokens in shares"
+order: 1
 description: "Share contents are a dense source of credentials: config and script files with embedded passwords, the Group Policy cpassword in SYSVOL, saved private keys and KeePass databases, cloud credential files, and unattend/sysprep answer files. Targeted pattern matching and known-file hunting across spidered shares recover usable credentials."
 keywords:
   - credential hunting

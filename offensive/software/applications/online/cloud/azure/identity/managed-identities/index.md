@@ -1,5 +1,6 @@
 ---
 title: "Managed identities"
+order: 3
 description: "Abusing Azure managed identities: minting tokens for the system-assigned and user-assigned identities bound to compute, functions, and other resources."
 keywords:
   - managed identity

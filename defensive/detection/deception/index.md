@@ -1,5 +1,6 @@
 ---
 title: "Detection Deception: Honeypots, Decoys, and Canaries"
+order: 4
 description: "How deception uses honeypots, decoys, and canary tokens to produce high-confidence signals of intrusion."
 keywords:
   - cyber deception

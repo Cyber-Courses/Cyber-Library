@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass through Oracle injection"
+order: 14
 description: "Bypassing a login whose SQL is built from the username and password fields in Oracle Database, using comment termination and always-true conditions."
 keywords:
   - authentication bypass

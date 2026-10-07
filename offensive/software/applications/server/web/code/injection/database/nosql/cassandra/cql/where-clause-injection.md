@@ -1,5 +1,6 @@
 ---
 title: "WHERE clause injection: breaking out of quoted CQL values"
+order: 3
 description: "Closing a quoted CQL value and appending predicates lets an attacker widen a Cassandra filter, subject to the partition-key constraint that WHERE normally enforces."
 keywords:
   - CQL WHERE injection

@@ -1,5 +1,6 @@
 ---
 title: "Custom Script Extension: code execution through extensions/write"
+order: 2
 description: "Executing code on an Azure VM by writing a Custom Script Extension or VMAccess extension through extensions/write."
 keywords:
   - custom script extension

@@ -1,5 +1,6 @@
 ---
 title: "SNMPv1 and v2c cleartext: capturing the community string"
+order: 2
 description: "SNMPv1 and v2c send the community string in cleartext inside every request and provide no encryption, so a positioned attacker captures the string by sniffing UDP 161 traffic and reads all SNMP data passively. The captured string is then reused directly, and the exposure applies even when a stronger v3 is also configured but v1/v2c remains enabled."
 keywords:
   - snmpv1

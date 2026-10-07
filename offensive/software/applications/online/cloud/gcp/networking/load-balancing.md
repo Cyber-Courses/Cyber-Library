@@ -1,5 +1,6 @@
 ---
 title: "Load balancing: reaching backends through forwarding rules"
+order: 4
 description: "Mapping and reaching backends through GCP load balancers, exposed forwarding rules, and backend services."
 keywords:
   - load balancing

@@ -1,5 +1,6 @@
 ---
 title: "Policy manipulation"
+order: 1
 description: "Granting yourself permissions by editing IAM policy: new default policy versions and attaching or inlining user, group, and role policies."
 keywords:
   - policy manipulation

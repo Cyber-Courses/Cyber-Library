@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: accounts and version from the Zimbra SOAP endpoint"
+order: 1
 description: "Enumerating Zimbra before you hold a token: validating accounts through AuthRequest and login differentials on the public /service/soap endpoint, reading build and configuration from GetInfoRequest and GetVersionInfoRequest, probing autodiscover and /home/ paths, and detecting the admin console on 7071. Worked SOAP envelopes with response interpretation."
 keywords:
   - zimbra enumeration

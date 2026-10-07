@@ -1,5 +1,6 @@
 ---
 title: "NTLM relay: forwarding authentication to act as the victim"
+order: 3
 description: "Forwarding captured or coerced NTLM authentication in real time to a third service (SMB, LDAP, HTTP, AD CS) to act as the victim without knowing the password, and the signing and channel-binding protections that stop it."
 keywords:
   - NTLM relay

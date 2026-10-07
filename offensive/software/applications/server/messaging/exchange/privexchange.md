@@ -1,5 +1,6 @@
 ---
 title: "PrivExchange: coercing Exchange and relaying it to Active Directory"
+order: 4
 description: "Coercing the Exchange machine account to authenticate to an attacker host over EWS push notifications, then relaying that privileged NTLM to LDAP on a domain controller to grant DCSync, because Exchange historically holds WriteDacl over the domain object. Includes the PushSubscription primitive, PetitPotam and PrinterBug alternatives, and the follow-on to Domain Admin."
 keywords:
   - PrivExchange

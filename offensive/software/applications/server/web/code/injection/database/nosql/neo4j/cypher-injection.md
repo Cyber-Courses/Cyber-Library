@@ -1,5 +1,6 @@
 ---
 title: "Cypher injection: untrusted input in string-built Neo4j queries"
+order: 1
 description: "Concatenating user input into MATCH/WHERE clauses lets an attacker escape string literals, flip predicates, and chain Cypher clauses against Neo4j."
 keywords:
   - Cypher injection

@@ -1,5 +1,6 @@
 ---
 title: "Cleartext passwords: capturing the rexec credential"
+order: 2
 description: "rexec sends the username and password in cleartext as part of the execution request, so a positioned attacker captures the credential directly from the traffic. The credential is reusable, and because rexec passes it on every command, repeated captures are trivial wherever the service is used."
 keywords:
   - cleartext password

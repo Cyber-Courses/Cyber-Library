@@ -1,5 +1,6 @@
 ---
 title: "WAF and filter bypass for MySQL injection"
+order: 11
 description: "Reaching MySQL keywords, functions, and catalog tables past signature filters using versioned comments, encoding, alternative objects, and charset tricks."
 keywords:
   - WAF bypass

@@ -1,5 +1,6 @@
 ---
 title: "File wrappers and stream handlers: escalating file operations through engine pseudo-protocols"
+order: 2
 description: "How runtime stream wrappers (mostly PHP's php://, phar://, data://) turn a file read or include into source disclosure, deserialization, and remote code execution."
 keywords:
   - php wrappers

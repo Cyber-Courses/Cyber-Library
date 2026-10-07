@@ -1,5 +1,6 @@
 ---
 title: "Wildcard trust: abusing + + and over-broad r-command entries"
+order: 2
 description: "A + token in .rhosts or hosts.equiv is a wildcard matching any host or any user, so an entry like + + trusts everyone for passwordless access. Over-broad entries, a bare +, a wildcard host, or a netgroup that resolves widely, let an attacker from any (or a spoofed) address log in without a password."
 keywords:
   - wildcard

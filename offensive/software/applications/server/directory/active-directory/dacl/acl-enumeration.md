@@ -1,5 +1,6 @@
 ---
 title: "ACL enumeration: finding abusable access-control entries"
+order: 1
 description: "Enumerating Active Directory object DACLs to find access-control entries a controlled principal can abuse: GenericAll, WriteDacl, WriteOwner, GenericWrite, and the extended rights that lead to privilege escalation."
 keywords:
   - ACL enumeration

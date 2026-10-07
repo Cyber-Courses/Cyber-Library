@@ -1,5 +1,6 @@
 ---
 title: "API authentication bypass: version-specific Zabbix auth flaws"
+order: 5
 description: "Specific Zabbix versions have had authentication-bypass and session-handling flaws in the frontend and API that let an attacker reach authenticated functionality, or act with elevated rights, without valid credentials. These include JSON-RPC and SAML/SSO handling bugs; matching the version to the flaw gives access that chains into the platform's code-execution features."
 keywords:
   - zabbix auth bypass

@@ -1,5 +1,6 @@
 ---
 title: "Container Instances: running a container as an attached identity"
+order: 4
 description: "Abusing Azure Container Instances to run a container as an attached managed identity or read its environment."
 keywords:
   - ACI

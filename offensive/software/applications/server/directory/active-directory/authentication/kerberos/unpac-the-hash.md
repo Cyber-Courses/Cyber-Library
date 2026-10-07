@@ -1,5 +1,6 @@
 ---
 title: "UnPAC-the-hash: recovering the NT hash from PKINIT"
+order: 7
 description: "Recovering an account's NT hash from a PKINIT (certificate) Kerberos authentication by reading the NTLM_SUPPLEMENTAL_CREDENTIAL the KDC returns in the PAC, turning certificate-based access into a reusable hash."
 keywords:
   - UnPAC the hash

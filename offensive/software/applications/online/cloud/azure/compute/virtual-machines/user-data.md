@@ -1,5 +1,6 @@
 ---
 title: "User data: reading cloud-init secrets or writing a boot script"
+order: 4
 description: "Reading Azure VM user data and cloud-init for injected secrets, or writing it to run code at boot."
 keywords:
   - user data

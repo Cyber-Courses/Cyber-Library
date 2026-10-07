@@ -1,5 +1,6 @@
 ---
 title: "Managed accounts: directory-stored account secrets and dMSA abuse"
+order: 5
 description: "Abusing the accounts and passwords Active Directory manages for you: reading group Managed Service Account (gMSA) passwords and LAPS local-administrator passwords from the directory, and the BadSuccessor delegated-MSA privilege escalation on Windows Server 2025."
 keywords:
   - gMSA

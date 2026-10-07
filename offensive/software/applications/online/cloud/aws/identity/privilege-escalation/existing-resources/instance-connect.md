@@ -1,5 +1,6 @@
 ---
 title: "Instance Connect: push a temporary SSH key to a privileged instance"
+order: 2
 description: "ec2-instance-connect:SendSSHPublicKey to push a temporary key to an instance carrying a privileged profile and log in."
 keywords:
   - EC2 Instance Connect

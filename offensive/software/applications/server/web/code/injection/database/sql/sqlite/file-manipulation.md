@@ -1,5 +1,6 @@
 ---
 title: "Writing files through SQLite injection"
+order: 5
 description: "SQLite file write primitives from injection: ATTACH DATABASE to create a file and VACUUM INTO to copy one, and why arbitrary file read is not generally available."
 keywords:
   - ATTACH DATABASE

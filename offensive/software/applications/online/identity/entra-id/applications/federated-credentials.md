@@ -1,5 +1,6 @@
 ---
 title: "Federated credentials: minting tokens from an attacker OIDC issuer"
+order: 5
 description: "Adding a federated identity credential to an app registration to mint tokens from an attacker-controlled OIDC issuer without a secret."
 keywords:
   - federated credentials

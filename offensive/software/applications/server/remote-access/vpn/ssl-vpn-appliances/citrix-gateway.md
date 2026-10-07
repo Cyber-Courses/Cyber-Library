@@ -1,5 +1,6 @@
 ---
 title: "Citrix Gateway: traversal-to-RCE and the Citrix Bleed token disclosure"
+order: 4
 description: "Citrix Gateway and ADC (NetScaler) have had a path-traversal chain giving unauthenticated remote code execution, and the Citrix Bleed memory-disclosure flaw that leaks session tokens from the appliance, letting an attacker hijack authenticated sessions and bypass multi-factor authentication. Both were exploited at scale for initial access."
 keywords:
   - citrix

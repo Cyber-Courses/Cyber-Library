@@ -1,5 +1,6 @@
 ---
 title: "Trust keys and inter-realm tickets"
+order: 4
 description: "Extracting the inter-domain trust key from the trusted-domain object and using it to forge inter-realm referral tickets that traverse an Active Directory trust, then requesting service tickets in the target domain."
 keywords:
   - trust key

@@ -1,5 +1,6 @@
 ---
 title: "SPF: abusing Sender Policy Framework records to spoof the envelope sender"
+order: 1
 description: "Reading a v=spf1 record and its mechanisms and qualifiers to find the gap that authorizes your mail: a missing record, +all or ?all, an over-broad shared-sender include:, a permissive ~all softfail, or a ten-lookup permerror. Includes dig fingerprinting and a worked swaks delivery."
 keywords:
   - SPF

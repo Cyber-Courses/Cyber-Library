@@ -1,5 +1,6 @@
 ---
 title: "Keyword splitting with positional parameters: who$@ami and $0"
+order: 5
 description: "Breaking a blocked keyword by inserting positional-parameter expansions that evaluate to nothing, who$@ami, who${@}ami, and abusing $0 as a shell invocation, so a literal blocklist misses the keyword."
 keywords:
   - command injection

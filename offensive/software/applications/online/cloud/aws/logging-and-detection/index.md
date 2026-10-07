@@ -1,5 +1,6 @@
 ---
 title: "AWS logging and detection"
+order: 8
 description: "Blinding AWS detection: disabling, diverting, and evading CloudTrail, GuardDuty, Config, and CloudWatch to suppress logging and alerting."
 keywords:
   - CloudTrail

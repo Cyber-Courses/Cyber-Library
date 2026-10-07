@@ -1,5 +1,6 @@
 ---
 title: "JSON-RPC parameter structure abuse"
+order: 3
 description: "When params are accepted as an array or an object inconsistently, missing keys coerce to defaults, alternate code paths fire, or lenient parsers leak routing through errors."
 keywords:
   - JSON-RPC params

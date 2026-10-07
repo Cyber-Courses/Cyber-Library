@@ -1,5 +1,6 @@
 ---
 title: "Role assignment write: granting yourself Owner"
+order: 1
 description: "Assigning yourself or a controlled principal Owner or Contributor with Microsoft.Authorization/roleAssignments/write at resource, group, subscription, or management-group scope."
 keywords:
   - roleAssignments write

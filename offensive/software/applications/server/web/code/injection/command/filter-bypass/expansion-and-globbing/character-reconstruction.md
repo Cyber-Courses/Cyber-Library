@@ -1,5 +1,6 @@
 ---
 title: "Command injection filter bypass by character reconstruction"
+order: 5
 description: "Rebuilding forbidden characters like / from environment-variable substrings (${HOME:0:1}), tr translation, and printf, so a filter blocking specific characters never sees them in the request."
 keywords:
   - command injection

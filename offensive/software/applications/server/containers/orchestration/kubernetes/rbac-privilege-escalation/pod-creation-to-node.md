@@ -1,5 +1,6 @@
 ---
 title: "Pod creation to node: scheduling a pod that owns its worker"
+order: 5
 description: "The ability to create pods is close to node root: an attacker schedules a pod that is privileged, mounts the node filesystem with hostPath, or shares host namespaces, then uses it to take over the node and read every pod's secrets. Controllers that create pods (deployments, jobs, daemonsets) grant the same reach indirectly."
 keywords:
   - create pods

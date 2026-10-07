@@ -1,5 +1,6 @@
 ---
 title: "Virtual NICs: escaping ESXi through the e1000 and vmxnet3 adapters"
+order: 3
 description: "ESXi offers the emulated e1000 and the paravirtual vmxnet3 network adapters. The guest driver programs transmit and receive descriptor rings in guest memory that the vmx process reads via DMA to move packets. Flaws in descriptor and ring handling, including the vmxnet3 command interface, give out-of-bounds access in the host process from the guest network stack."
 keywords:
   - vmxnet3

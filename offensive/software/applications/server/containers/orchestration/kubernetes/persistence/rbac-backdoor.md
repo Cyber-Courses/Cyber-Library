@@ -1,5 +1,6 @@
 ---
 title: "RBAC backdoor: a durable identity through bindings"
+order: 4
 description: "An attacker with rights over RBAC creates a binding that grants a controlled service account or user broad, lasting access. Unlike a stolen token, a ClusterRoleBinding persists until someone notices and removes it, survives credential rotation, and can be hidden among legitimate bindings or attached to an innocuous-looking service account."
 keywords:
   - rbac backdoor

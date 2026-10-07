@@ -1,5 +1,6 @@
 ---
 title: "Blind LDAP injection"
+order: 5
 description: "Inferring directory attribute values character by character through LDAP wildcard matching and true/false response differences when no data is reflected."
 keywords:
   - blind LDAP injection

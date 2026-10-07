@@ -1,5 +1,6 @@
 ---
 title: "USB controllers: escaping ESXi through emulated UHCI, EHCI, and XHCI"
+order: 2
 description: "ESXi emulates USB host controllers (UHCI, EHCI, XHCI) whose guest drivers build transfer and queue descriptors in guest memory that the vmx process reads and walks via DMA. Flaws in descriptor-chain parsing, ring handling, or device-request processing give out-of-bounds access in the host process, a guest-to-host escape driven entirely from the guest USB stack."
 keywords:
   - usb controller
