@@ -60,17 +60,21 @@ Security knowledge is scattered across blog posts, slide decks and tool READMEs.
       <br/><b>Explore</b><br/>The whole taxonomy as one interactive map: 8,800+ topics, 17 levels deep, published and planned.
     </td>
     <td width="50%" valign="top">
-      <br/><b>Ask your assistant</b><br/>Add the public MCP server to Claude, ChatGPT, Cursor or any MCP client and search, browse and read the library from your own tools.
-      <br/><br/>
-
-```text
-https://www.cyberlibrary.com/api/mcp
-```
-
-[Setup guide →](https://www.cyberlibrary.com/en/mcp)
+      <a href="https://www.cyberlibrary.com/en/mcp"><img src="assets/screenshots/mcp-dark.png" alt="The MCP server page"></a>
+      <br/><b>Ask your assistant</b><br/>A public, read-only MCP server: Claude, ChatGPT, Cursor or any MCP client can search and read the library.
     </td>
   </tr>
 </table>
+
+## Connect your assistant
+
+No account, no API key. Add the server to Claude Code in one line:
+
+```bash
+claude mcp add --transport http cyber-library https://www.cyberlibrary.com/api/mcp
+```
+
+Any other MCP client takes the same URL, `https://www.cyberlibrary.com/api/mcp`. Setup for each client is on [cyberlibrary.com/mcp](https://www.cyberlibrary.com/en/mcp).
 
 ## Sections
 
