@@ -1,7 +1,6 @@
 ---
-title: Intelligens
-description: Utforskning av intelligens innen cybersikkerhet, inkludert betydning,
-  implementering og strategiske fordeler.
+title: Trusseletterretning
+description: 'Trusseletterretning innen cybersikkerhet: innsamling og analyse av informasjon om trusler for å forutse angrep og styre forsvaret.'
 keywords:
 - cybersikkerhetsetterretning
 - strategisk etterretning
@@ -13,7 +12,7 @@ keywords:
 - intelligenssyklus
 ---
 
-# Intelligens
+# Trusseletterretning
 
 ## Hva er intelligens?
 

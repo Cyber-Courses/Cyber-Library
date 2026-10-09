@@ -1,6 +1,6 @@
 ---
-title: Ujasusi
-description: Uelewa wa ujasusi katika usalama wa mtandao, umuhimu wake, na jinsi unavyotekelezwa.
+title: Ujasusi wa Vitisho
+description: 'Ujasusi wa vitisho katika usalama wa mtandao: kukusanya na kuchambua taarifa za vitisho ili kutabiri mashambulizi na kuongoza ulinzi.'
 keywords:
 - akili ya usalama wa mtandao
 - akili ya kimkakati
@@ -12,7 +12,7 @@ keywords:
 - mzunguko wa akili
 ---
 
-# Ujasusi
+# Ujasusi wa Vitisho
 
 ## Ujasusi ni Nini?
 

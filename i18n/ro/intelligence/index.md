@@ -1,7 +1,6 @@
 ---
-title: Inteligență
-description: Explorarea conceptului de inteligență în securitatea cibernetică, importanța
-  sa și modul de implementare.
+title: Informații despre amenințări
+description: 'Informații despre amenințări în securitatea cibernetică: colectarea și analiza datelor despre amenințări pentru a anticipa atacurile și a orienta apărarea.'
 keywords:
 - inteligență de securitate cibernetică
 - inteligență strategică
@@ -13,7 +12,7 @@ keywords:
 - ciclul inteligenței
 ---
 
-# Inteligență
+# Informații despre amenințări
 
 ## Ce Este Inteligența?
 

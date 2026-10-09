@@ -1,7 +1,6 @@
 ---
-title: Intelligenz
-description: Eine detaillierte Untersuchung der Rolle der Intelligenz in der Cybersicherheit,
-  ihrer Bedeutung und ihrer Implementierung.
+title: Threat Intelligence
+description: 'Threat Intelligence in der Cybersicherheit: Sammlung und Analyse von Bedrohungsdaten, um Angriffe vorherzusehen und die Verteidigung zu steuern.'
 keywords:
 - cybersicherheitsintelligenz
 - Strategische Intelligenz
@@ -13,7 +12,7 @@ keywords:
 - intelligenzzyklus
 ---
 
-# Intelligenz
+# Threat Intelligence
 
 ## Was ist Intelligenz?
 

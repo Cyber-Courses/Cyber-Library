@@ -1,5 +1,5 @@
 ---
-title: Fundação
+title: Fundamentos
 description: Exploração detalhada da evolução da cibersegurança, desde a cultura hacker
   até práticas modernas.
 keywords:
@@ -12,7 +12,7 @@ keywords:
 - elemento humano na segurança cibernética
 ---
 
-# Fundação
+# Fundamentos
 
 ## Introdução
 

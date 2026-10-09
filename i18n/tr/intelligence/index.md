@@ -1,7 +1,6 @@
 ---
-title: Zeka
-description: Siber güvenlikte zeka, bilgi toplama, işleme ve analiz yoluyla siber
-  tehditleri tanımlama, değerlendirme ve hafifletmeyi amaçlar.
+title: Tehdit İstihbaratı
+description: 'Siber güvenlikte tehdit istihbaratı: saldırıları öngörmek ve savunmayı yönlendirmek için tehdit verilerinin toplanması ve analizi.'
 keywords:
 - siber güvenlik istihbaratı
 - stratejik istihbarat
@@ -13,7 +12,7 @@ keywords:
 - istihbarat döngüsü
 ---
 
-# Zeka
+# Tehdit İstihbaratı
 
 ## Zeka Nedir?
 

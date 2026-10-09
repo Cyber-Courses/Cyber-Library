@@ -1,6 +1,6 @@
 ---
-title: Älykkyys
-description: Kyberturvallisuuden älykkyyden merkitys, tärkeys ja toteutus.
+title: Uhkatiedustelu
+description: 'Uhkatiedustelu kyberturvallisuudessa: uhkiin liittyvän tiedon keruu ja analysointi hyökkäysten ennakoimiseksi ja puolustuksen ohjaamiseksi.'
 keywords:
 - kyberturvallisuustiedustelu
 - strateginen tiedustelu
@@ -12,7 +12,7 @@ keywords:
 - älykkyyskierto
 ---
 
-# Älykkyys
+# Uhkatiedustelu
 
 ## Mitä on älykkyys?
 

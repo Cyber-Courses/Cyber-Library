@@ -1,7 +1,6 @@
 ---
-title: Intelligens
-description: Utforskning av intelligens inom cybersäkerhet, dess betydelse och hur
-  det implementeras för att skydda mot cyberhot.
+title: Hotunderrättelser
+description: 'Hotunderrättelser inom cybersäkerhet: insamling och analys av information om hot för att förutse attacker och styra försvaret.'
 keywords:
 - cybersäkerhetsunderrättelser
 - strategiska underrättelser
@@ -13,7 +12,7 @@ keywords:
 - intelligenscykel
 ---
 
-# Intelligens
+# Hotunderrättelser
 
 ## Vad är Intelligens?
 

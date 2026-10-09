@@ -1,7 +1,6 @@
 ---
-title: Inteligjenca
-description: Një eksplorim i inteligjencës në sigurinë kibernetike, rëndësisë së saj
-  dhe mënyrës së zbatimit.
+title: Inteligjenca e kërcënimeve
+description: 'Inteligjenca e kërcënimeve në sigurinë kibernetike: mbledhja dhe analiza e të dhënave për kërcënimet për të parashikuar sulmet dhe për të drejtuar mbrojtjen.'
 keywords:
 - inteligjencën e sigurisë kibernetike
 - inteligjencës strategjike
@@ -13,7 +12,7 @@ keywords:
 - ciklit të inteligjencës
 ---
 
-# Inteligjenca
+# Inteligjenca e kërcënimeve
 
 ## Çfarë Është Inteligjenca?
 

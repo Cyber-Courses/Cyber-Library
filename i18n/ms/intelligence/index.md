@@ -1,7 +1,6 @@
 ---
-title: Kecerdasan
-description: Kecerdasan dalam keselamatan siber melibatkan pengumpulan, pemprosesan,
-  dan analisis maklumat untuk mengenal pasti, menilai, dan mengurangkan ancaman siber.
+title: Perisikan Ancaman
+description: 'Perisikan ancaman dalam keselamatan siber: pengumpulan dan analisis data ancaman untuk menjangka serangan dan memandu pertahanan.'
 keywords:
 - perisikan keselamatan siber
 - kecerdasan strategik
@@ -13,7 +12,7 @@ keywords:
 - kitaran kecerdasan
 ---
 
-# Kecerdasan
+# Perisikan Ancaman
 
 ## Apakah Kecerdasan?
 

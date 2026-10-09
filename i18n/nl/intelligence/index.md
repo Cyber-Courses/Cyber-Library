@@ -1,7 +1,6 @@
 ---
-title: Intelligentie
-description: Een diepgaande verkenning van de rol van intelligentie in cybersecurity,
-  inclusief het belang en de implementatie ervan.
+title: Threat Intelligence
+description: 'Threat intelligence in cybersecurity: het verzamelen en analyseren van dreigingsinformatie om aanvallen te voorzien en de verdediging te sturen.'
 keywords:
 - cyberveiligheidsinformatie
 - strategische intelligentie
@@ -13,7 +12,7 @@ keywords:
 - intelligentie cyclus
 ---
 
-# Intelligentie
+# Threat Intelligence
 
 ## Wat Is Intelligentie?
 

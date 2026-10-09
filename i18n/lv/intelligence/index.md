@@ -1,6 +1,6 @@
 ---
-title: Inteliģence
-description: Izpratne par inteliģenci kiberdrošībā, tās nozīmi un īstenošanu.
+title: Draudu izlūkošana
+description: 'Draudu izlūkošana kiberdrošībā: datu par draudiem vākšana un analīze, lai paredzētu uzbrukumus un virzītu aizsardzību.'
 keywords:
 - kiberdrošības izlūkošana
 - stratēģiskā izlūkošana
@@ -12,7 +12,7 @@ keywords:
 - izlūkošanas cikls
 ---
 
-# Inteliģence
+# Draudu izlūkošana
 
 ## Kas ir Inteliģence?
 

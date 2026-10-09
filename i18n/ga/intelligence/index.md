@@ -1,8 +1,6 @@
 ---
-title: Intleacht i gCibearshlándáil
-description: Fiosraigh an ról ríthábhachtach atá ag intleacht i gcosaint chibearshlándála,
-  lena n-áirítear bailiú, próiseáil, agus anailís faisnéise chun bagairtí a aithint
-  agus a mhaolú.
+title: Faisnéis Bagairtí i gCibearshlándáil
+description: 'Faisnéis bagairtí sa chibearshlándáil: faisnéis faoi bhagairtí a bhailiú agus a anailísiú chun ionsaithe a thuar agus an chosaint a threorú.'
 keywords:
 - faisnéis cibearshlándála
 - faisnéis straitéiseach
@@ -14,7 +12,7 @@ keywords:
 - timthriall faisnéise
 ---
 
-# Intleacht
+# Faisnéis Bagairtí
 
 ## Cad is Intleacht ann?
 

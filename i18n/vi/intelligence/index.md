@@ -1,7 +1,6 @@
 ---
-title: Trí tuệ
-description: Khám phá vai trò của trí tuệ trong an ninh mạng và cách thức triển khai
-  hiệu quả chương trình trí tuệ.
+title: Tình báo mối đe dọa
+description: 'Tình báo mối đe dọa trong an ninh mạng: thu thập và phân tích dữ liệu về mối đe dọa để dự đoán tấn công và định hướng phòng thủ.'
 keywords:
 - tình báo an ninh mạng
 - tình báo chiến lược
@@ -13,7 +12,7 @@ keywords:
 - intelligence cycle
 ---
 
-# Trí tuệ
+# Tình báo mối đe dọa
 
 ## Trí Tuệ Là Gì?
 

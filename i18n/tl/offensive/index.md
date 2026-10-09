@@ -1,6 +1,6 @@
 ---
-title: Nakakasakit
-description: Pag-unawa sa Nakakasakit na Cybersecurity at ang Kahalagahan Nito
+title: Opensiba
+description: 'Pag-unawa sa opensibang cybersecurity at ang kahalagahan nito'
 keywords:
 - nakakasakit na cybersecurity
 - etikal na pag-hack
@@ -12,7 +12,7 @@ keywords:
 - pamamahala ng panganib
 ---
 
-# Nakakasakit
+# Opensiba
 
 ## Ano ang Nakakasakit na Cybersecurity?
 

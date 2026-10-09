@@ -1,6 +1,6 @@
 ---
-title: Greind
-description: Skilgreining, mikilvægi og framkvæmd greindar í netöryggi.
+title: Ógnaupplýsingar
+description: 'Ógnaupplýsingar í netöryggi: söfnun og greining upplýsinga um ógnir til að sjá fyrir árásir og stýra vörnum.'
 keywords:
 - netöryggisvitund
 - stefnumótandi vitund
@@ -12,7 +12,7 @@ keywords:
 - vitundarhringur
 ---
 
-# Greind
+# Ógnaupplýsingar
 
 ## Hvað er Greind?
 

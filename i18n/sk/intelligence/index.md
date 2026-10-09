@@ -1,7 +1,6 @@
 ---
-title: Inteligencia
-description: Podrobný prehľad o úlohe inteligencie v kybernetickej bezpečnosti, vrátane
-  jej dôležitosti a implementácie.
+title: Spravodajstvo o hrozbách
+description: 'Spravodajstvo o hrozbách v kybernetickej bezpečnosti: zber a analýza informácií o hrozbách na predvídanie útokov a usmernenie obrany.'
 keywords:
 - kybernetická bezpečnostná inteligencia
 - strategické spravodajstvo
@@ -13,7 +12,7 @@ keywords:
 - spravodajský cyklus
 ---
 
-# Inteligencia
+# Spravodajstvo o hrozbách
 
 ## Čo je inteligencia?
 

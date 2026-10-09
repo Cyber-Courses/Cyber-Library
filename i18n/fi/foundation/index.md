@@ -1,5 +1,5 @@
 ---
-title: Perusta
+title: Perusteet
 description: Kyberturvallisuuden juuret ovat 1900-luvun lopun hakkerikulttuurissa.
   Heti kun ihmiset alkoivat kokeilla tietokoneita, syntyi halu ymmärtää, muokata ja
   laajentaa teknologian rajoja. Nämä varhaiset hakkerit näkivät itsensä usein digitaalisten
@@ -14,7 +14,7 @@ keywords:
 - inhimillinen elementti kyberturvallisuudessa
 ---
 
-# Perusta
+# Perusteet
 
 ## Johdanto
 
