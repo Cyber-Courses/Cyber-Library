@@ -1,6 +1,6 @@
 ---
-title: Inteligence
-description: Přehled inteligence v kybernetické bezpečnosti, její důležitost a implementace.
+title: Zpravodajství o hrozbách
+description: 'Zpravodajství o hrozbách v kybernetické bezpečnosti: sběr a analýza informací o hrozbách pro předvídání útoků a řízení obrany.'
 keywords:
 - zpravodajství v oblasti kybernetické bezpečnosti
 - strategické zpravodajství
@@ -12,7 +12,7 @@ keywords:
 - zpravodajský cyklus
 ---
 
-# Inteligence
+# Zpravodajství o hrozbách
 
 ## Co je inteligence?
 

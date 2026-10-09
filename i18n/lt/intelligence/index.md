@@ -1,7 +1,6 @@
 ---
-title: Intelektas
-description: Išsamus intelekto vaidmens kibernetinio saugumo srityje tyrimas, apimantis
-  strateginius, operatyvinius ir taktinius aspektus.
+title: Grėsmių žvalgyba
+description: 'Grėsmių žvalgyba kibernetinio saugumo srityje: duomenų apie grėsmes rinkimas ir analizė, siekiant numatyti atakas ir kreipti gynybą.'
 keywords:
 - kibernetinio saugumo žvalgyba
 - strateginė žvalgyba
@@ -13,7 +12,7 @@ keywords:
 - intelekto ciklas
 ---
 
-# Intelektas
+# Grėsmių žvalgyba
 
 ## Kas yra intelektas?
 

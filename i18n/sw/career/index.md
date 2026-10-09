@@ -1,6 +1,6 @@
 ---
-title: Kazi
-description: Jifunze kuhusu safari ya kazi katika usalama wa mtandao, ikijumuisha
+title: Taaluma
+description: Jifunze kuhusu safari ya taaluma katika usalama wa mtandao, ikijumuisha
   wasifu, safari ya kitaaluma, na mazingira ya sekta.
 keywords:
 - kazi ya usalama wa mtandao
@@ -12,7 +12,7 @@ keywords:
 - maendeleo ya kitaaluma
 ---
 
-# Kazi
+# Taaluma
 
 Kazi katika usalama wa mtandao ni safari yenye nguvu iliyojaa fursa kwa wataalamu wa ngazi zote. Kadri ulimwengu wa kidijitali unavyopanuka, mahitaji ya wataalamu wenye ujuzi wa usalama wa mtandao yanaongezeka, na hivyo kuwasilisha soko la ajira lenye kasi na lenye nguvu. Iwe unaanza tu au unatafuta kupanda ngazi, uwanja wa usalama wa mtandao unatoa nafasi kubwa kwa maendeleo ya kibinafsi na kitaaluma.
 

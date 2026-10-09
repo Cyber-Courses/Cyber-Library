@@ -1,5 +1,5 @@
 ---
-title: Offensivo
+title: Offensiva
 description: Esplorazione della cybersecurity offensiva, il suo significato, importanza
   e metodi di implementazione.
 keywords:
@@ -13,7 +13,7 @@ keywords:
 - gestione del rischio
 ---
 
-# Offensivo
+# Offensiva
 
 ## Cos'è la Cybersecurity Offensiva?
 

@@ -1,7 +1,6 @@
 ---
-title: Intelligenza
-description: Esplorazione dettagliata dell'intelligenza nella sicurezza informatica,
-  dalla raccolta di informazioni all'analisi e mitigazione delle minacce.
+title: Threat Intelligence
+description: 'Threat intelligence nella cybersecurity: raccolta e analisi dei dati sulle minacce per anticipare gli attacchi e orientare la difesa.'
 keywords:
 - informazioni sulla sicurezza informatica
 - intelligenza strategica
@@ -13,7 +12,7 @@ keywords:
 - ciclo dell’intelligenza
 ---
 
-# Intelligenza
+# Threat Intelligence
 
 ## Cos'è l'Intelligenza?
 

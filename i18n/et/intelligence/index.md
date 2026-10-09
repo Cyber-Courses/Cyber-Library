@@ -1,7 +1,6 @@
 ---
-title: Intelligentsus
-description: Intelligentsus küberjulgeolekus hõlmab teabe kogumist, töötlemist ja
-  analüüsi, et tuvastada, hinnata ja leevendada küberohte.
+title: Ohuluure
+description: 'Ohuluure küberturvalisuses: ohtude kohta teabe kogumine ja analüüs, et rünnakuid ette näha ja kaitset suunata.'
 keywords:
 - küberturvalisuse luure
 - strateegiline luure
@@ -13,7 +12,7 @@ keywords:
 - luuretsükkel
 ---
 
-# Intelligentsus
+# Ohuluure
 
 ## Mis on intelligentsus?
 

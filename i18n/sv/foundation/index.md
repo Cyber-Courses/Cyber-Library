@@ -1,5 +1,5 @@
 ---
-title: Grundläggande
+title: Grunder
 description: Utforska ursprunget och utvecklingen av cybersäkerhet, hacker-kultur
   och dess betydelse i dagens digitala värld.
 keywords:
@@ -12,7 +12,7 @@ keywords:
 - mänskligt inslag i cybersäkerhet
 ---
 
-# Grundläggande
+# Grunder
 
 ## Introduktion
 

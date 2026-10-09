@@ -1,6 +1,6 @@
 ---
-title: Ulinzi wa Kivita
-description: Ulinzi wa kivita wa mtandao unahusisha kuiga mashambulizi halisi kwa
+title: Usalama wa Kushambulia
+description: Usalama wa mtandao wa kushambulia unahusisha kuiga mashambulizi halisi kwa
   njia ya kimaadili ili kugundua udhaifu kabla ya wahalifu kuweza kuyatumia. Kwa kutenda
   kama wapinzani walioidhinishwa, timu za usalama hufichua sehemu dhaifu katika ulinzi
   wa shirika, kuruhusu masuala hayo kushughulikiwa kwa njia ya utangulizi.…
@@ -15,7 +15,7 @@ keywords:
 - usimamizi wa hatari
 ---
 
-# Ulinzi wa Kivita
+# Mashambulizi
 
 ## Ulinzi wa Kivita wa Mtandao ni Nini?
 

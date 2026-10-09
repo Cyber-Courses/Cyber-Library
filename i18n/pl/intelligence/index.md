@@ -1,7 +1,6 @@
 ---
-title: Inteligencja
-description: Zrozumienie roli inteligencji w cyberbezpieczeństwie, jej znaczenia oraz
-  sposobów implementacji.
+title: Wywiad o zagrożeniach
+description: 'Wywiad o zagrożeniach w cyberbezpieczeństwie: gromadzenie i analiza danych o zagrożeniach w celu przewidywania ataków i ukierunkowania obrony.'
 keywords:
 - wywiad dotyczący cyberbezpieczeństwa
 - inteligencja strategiczna
@@ -13,7 +12,7 @@ keywords:
 - cykl inteligencji
 ---
 
-# Inteligencja
+# Wywiad o zagrożeniach
 
 ## Czym Jest Inteligencja?
 

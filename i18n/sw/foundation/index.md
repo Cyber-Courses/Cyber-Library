@@ -1,5 +1,5 @@
 ---
-title: Msingi
+title: Misingi
 description: Usalama wa mtandao una mizizi yake ya awali katika utamaduni wa wahusika
   wa karne ya 20. Tangu watu walipoanza kujaribu kompyuta, kulikuwa na hamu ya kuelewa,
   kubadilisha, na kusukuma mipaka ya teknolojia. Wahusika hawa wa awali mara nyingi
@@ -14,7 +14,7 @@ keywords:
 - mzingo wa binadamu katika usalama wa mtandao
 ---
 
-# Msingi
+# Misingi
 
 ## Utangulizi
 

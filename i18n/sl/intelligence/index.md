@@ -1,7 +1,6 @@
 ---
-title: Inteligenca
-description: Razumevanje vloge inteligence v kibernetski varnosti, vključno z njenim
-  pomenom in načinom izvajanja.
+title: Obveščevalni podatki
+description: 'Obveščevalni podatki o grožnjah v kibernetski varnosti: zbiranje in analiza podatkov o grožnjah za predvidevanje napadov in usmerjanje obrambe.'
 keywords:
 - kibernetska varnost
 - strateško obveščanje
@@ -13,7 +12,7 @@ keywords:
 - obveščevalni cikel
 ---
 
-# Inteligenca
+# Obveščevalni podatki
 
 ## Kaj je inteligenca?
 

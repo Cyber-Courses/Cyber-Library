@@ -1,7 +1,6 @@
 ---
-title: Inteligencija
-description: 'Razumijevanje inteligencije u sajber sigurnosti: prikupljanje, analiza
-  i primjena za zaštitu od prijetnji.'
+title: Obavještajni podaci
+description: 'Obavještajni podaci o prijetnjama u kibernetičkoj sigurnosti: prikupljanje i analiza podataka o prijetnjama radi predviđanja napada i usmjeravanja odbrane.'
 keywords:
 - obavještajni podaci o sajber sigurnosti
 - strateška inteligencija
@@ -13,7 +12,7 @@ keywords:
 - obavještajni ciklus
 ---
 
-# Inteligencija
+# Obavještajni podaci
 
 ## Šta je inteligencija?
 

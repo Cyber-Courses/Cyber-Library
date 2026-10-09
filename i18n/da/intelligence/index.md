@@ -1,7 +1,6 @@
 ---
-title: Intelligens
-description: En dybdegående udforskning af intelligens inden for cybersikkerhed, herunder
-  dets betydning og implementering.
+title: Trusselsefterretning
+description: 'Trusselsefterretning i cybersikkerhed: indsamling og analyse af data om trusler for at forudse angreb og styre forsvaret.'
 keywords:
 - cybersikkerhedsintelligens
 - strategisk efterretning
@@ -13,7 +12,7 @@ keywords:
 - efterretningscyklus
 ---
 
-# Intelligens
+# Trusselsefterretning
 
 ## Hvad Er Intelligens?
 

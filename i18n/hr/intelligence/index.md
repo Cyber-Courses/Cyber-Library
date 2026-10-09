@@ -1,9 +1,6 @@
 ---
-title: Inteligencija
-description: Inteligencija u kibernetičkoj sigurnosti odnosi se na prikupljanje, obradu
-  i analizu informacija s ciljem identificiranja, procjene i ublažavanja kibernetičkih
-  prijetnji. Obuhvaća više razina kako bi se zadovoljile kratkoročne i dugoročne potrebe,
-  obično poznate kao strateške, operativne i taktičke. Strateška…
+title: Obavještajni podaci
+description: 'Obavještajni podaci o prijetnjama u kibernetičkoj sigurnosti: prikupljanje i analiza podataka o prijetnjama radi predviđanja napada i usmjeravanja obrane.'
 keywords:
 - kibersigurnosna inteligencija
 - strateško izviđanje
@@ -15,7 +12,7 @@ keywords:
 - ciklus izviđanja
 ---
 
-# Inteligencija
+# Obavještajni podaci
 
 ## Što je inteligencija?
 

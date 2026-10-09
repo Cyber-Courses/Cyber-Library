@@ -1,5 +1,5 @@
 ---
-title: Pundasyon
+title: Mga Batayan
 description: Ang cybersecurity ay may pinagmulan sa kultura ng hacker noong huling
   bahagi ng ika-20 siglo. Mula nang magsimulang mag-eksperimento ang mga tao sa mga
   kompyuter, nagkaroon ng pagnanais na maunawaan, baguhin, at itulak ang mga hangganan
@@ -14,7 +14,7 @@ keywords:
 - elemento ng tao sa cybersecurity
 ---
 
-# Pundasyon
+# Mga Batayan
 
 ## Panimula
 

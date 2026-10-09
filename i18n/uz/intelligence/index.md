@@ -1,7 +1,6 @@
 ---
-title: Axborot
-description: Kiberxavfsizlikda axborotning ahamiyati va aqlli tahlilni amalga oshirish
-  usullari.
+title: Tahdidlar razvedkasi
+description: 'Kiberxavfsizlikda tahdidlar razvedkasi: hujumlarni oldindan ko‘rish va himoyani yo‘naltirish uchun tahdidlar haqidagi ma’lumotlarni yig‘ish va tahlil qilish.'
 keywords:
 - kiberxavfsizlik razvedkasi
 - strategik razvedka
@@ -13,7 +12,7 @@ keywords:
 - razvedka aylanishi
 ---
 
-# Axborot
+# Tahdidlar razvedkasi
 
 ## Aqlli Tahlil Nima?
 

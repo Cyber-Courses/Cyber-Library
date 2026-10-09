@@ -1,7 +1,6 @@
 ---
-title: Kecerdasan
-description: Memahami peran kecerdasan dalam keamanan siber dan bagaimana implementasinya
-  dapat meningkatkan strategi keamanan.
+title: Intelijen Ancaman
+description: 'Intelijen ancaman dalam keamanan siber: pengumpulan dan analisis data ancaman untuk mengantisipasi serangan dan mengarahkan pertahanan.'
 keywords:
 - intelijen keamanan siber
 - intelijen strategis
@@ -13,7 +12,7 @@ keywords:
 - siklus intelijen
 ---
 
-# Kecerdasan
+# Intelijen Ancaman
 
 ## Apa Itu Kecerdasan?
 

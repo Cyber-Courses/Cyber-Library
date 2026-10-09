@@ -1,6 +1,6 @@
 ---
-title: Intelligencia
-description: A kiberbiztonsági intelligencia szerepe és fontossága
+title: Fenyegetésfelderítés
+description: 'Fenyegetésfelderítés a kiberbiztonságban: a fenyegetésekre vonatkozó adatok gyűjtése és elemzése a támadások előrejelzéséhez és a védekezés irányításához.'
 keywords:
 - kiberbiztonsági intelligencia
 - stratégiai hírszerzés
@@ -12,7 +12,7 @@ keywords:
 - felderítési ciklus
 ---
 
-# Intelligencia
+# Fenyegetésfelderítés
 
 ## Mi az Intelligencia?
 
