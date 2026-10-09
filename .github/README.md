@@ -1,23 +1,80 @@
 <div align="center">
 
-<a href="https://www.cyberlibrary.com"><img src="assets/header.svg" alt="Cyber Library: learn cybersecurity, from the foundations up." width="100%"></a>
+<a href="https://www.cyberlibrary.com">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg">
+    <img src="assets/logo-light.svg" alt="Cyber Library" width="88">
+  </picture>
+</a>
+
+<h1>Cyber Library</h1>
+
+**Learn cybersecurity, from the foundations up.**<br/>
+A structured, community-maintained knowledge base: six tracks, one tree, from how a network works to how an attacker thinks.
+
+[![Latest release](https://img.shields.io/github/v/release/Cyber-Courses/Cyber-Library?style=flat-square&labelColor=09090b&color=d4d4d8)](https://github.com/Cyber-Courses/Cyber-Library/releases)
+[![Stars](https://img.shields.io/github/stars/Cyber-Courses/Cyber-Library?style=flat-square&labelColor=09090b&color=d4d4d8)](https://github.com/Cyber-Courses/Cyber-Library/stargazers)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-d4d4d8?style=flat-square&labelColor=09090b)](https://github.com/Cyber-Courses/Cyber-Library/wiki)
+[![Website](https://img.shields.io/badge/read-cyberlibrary.com-d4d4d8?style=flat-square&labelColor=09090b)](https://www.cyberlibrary.com)
+[![MCP](https://img.shields.io/badge/MCP-server-d4d4d8?style=flat-square&labelColor=09090b)](https://www.cyberlibrary.com/en/mcp)
+[![Discord](https://img.shields.io/badge/chat-Discord-d4d4d8?style=flat-square&labelColor=09090b)](https://discord.gg/a9XwRKxdHf)
+
+[**Read the library →**](https://www.cyberlibrary.com) &nbsp;·&nbsp; [**Browse the structure**](https://www.cyberlibrary.com/en/structure) &nbsp;·&nbsp; [**Connect your assistant**](https://www.cyberlibrary.com/en/mcp)
 
 <br/>
 
-[![Latest release](https://img.shields.io/github/v/release/Cyber-Courses/Cyber-Library?style=flat-square&labelColor=0c100e&color=34d399)](https://github.com/Cyber-Courses/Cyber-Library/releases)
-[![Stars](https://img.shields.io/github/stars/Cyber-Courses/Cyber-Library?style=flat-square&labelColor=0c100e&color=34d399)](https://github.com/Cyber-Courses/Cyber-Library/stargazers)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-34d399?style=flat-square&labelColor=0c100e)](https://github.com/Cyber-Courses/Cyber-Library/wiki)
-[![Website](https://img.shields.io/badge/read-cyberlibrary.com-34d399?style=flat-square&labelColor=0c100e)](https://www.cyberlibrary.com)
-[![Discord](https://img.shields.io/badge/chat-Discord-34d399?style=flat-square&labelColor=0c100e)](https://discord.gg/a9XwRKxdHf)
-
-**A structured, community-maintained knowledge base for cybersecurity.**<br/>
-Foundations, offensive and defensive practice, governance, intelligence, and careers, in one place.
-
-[**Read the library →**](https://www.cyberlibrary.com)
+<a href="https://www.cyberlibrary.com">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/home-light.png">
+    <img src="assets/screenshots/home-dark.png" alt="The cyberlibrary.com home page: Learn cybersecurity, from the foundations up." width="100%">
+  </picture>
+</a>
 
 </div>
 
----
+## Why it exists
+
+Security knowledge is scattered across blog posts, slide decks and tool READMEs. Cyber Library puts it in one tree, so every technique sits next to the ones that share its mental model, with real commands, the mechanism behind them, and links to primary sources.
+
+- **1,600+ pages, 70 languages.** Plain Markdown, published to [cyberlibrary.com](https://www.cyberlibrary.com).
+- **Structure first.** Every page is planned as a topic in a shared taxonomy before it is written.
+- **Deep, not wide.** Technique pages show the full chain: how it works, how it is exploited, the tools, and the references.
+- **Made for people and for assistants.** Copy any page as Markdown, open it in ChatGPT or Claude, or query the whole library through the [MCP server](https://www.cyberlibrary.com/en/mcp).
+
+## Inside the library
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://www.cyberlibrary.com/en/docs/offensive/software/applications/server/directory/active-directory/dacl/targeted-kerberoasting"><img src="assets/screenshots/article-dark.png" alt="An article: Targeted Kerberoasting"></a>
+      <br/><b>Read</b><br/>Focused articles with runnable commands, a table of contents, and one-click export to Markdown, ChatGPT or Claude.
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://www.cyberlibrary.com"><img src="assets/screenshots/search-dark.png" alt="Search across the library"></a>
+      <br/><b>Search</b><br/>Press <kbd>⌘</kbd> <kbd>K</kbd> anywhere to jump to any of the 1,600+ pages, with its place in the tree.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://www.cyberlibrary.com/en/structure"><img src="assets/screenshots/structure-dark.png" alt="The structure map"></a>
+      <br/><b>Explore</b><br/>The whole taxonomy as one interactive map: 8,800+ topics, 17 levels deep, published and planned.
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://www.cyberlibrary.com/en/mcp"><img src="assets/screenshots/mcp-dark.png" alt="The MCP server page"></a>
+      <br/><b>Ask your assistant</b><br/>A public, read-only MCP server: Claude, ChatGPT, Cursor or any MCP client can search and read the library.
+    </td>
+  </tr>
+</table>
+
+## Connect your assistant
+
+No account, no API key. Add the server to Claude Code in one line:
+
+```bash
+claude mcp add --transport http cyber-library https://www.cyberlibrary.com/api/mcp
+```
+
+Any other MCP client takes the same URL, `https://www.cyberlibrary.com/api/mcp`. Setup for each client is on [cyberlibrary.com/mcp](https://www.cyberlibrary.com/en/mcp).
 
 ## Sections
 
@@ -30,7 +87,7 @@ Foundations, offensive and defensive practice, governance, intelligence, and car
 | [Intelligence](../intelligence) | Threat intelligence and OSINT |
 | [Career](../career) | Roles, skills, certifications, and growth |
 
-The content is plain Markdown, generated from a shared taxonomy and published to [cyberlibrary.com](https://www.cyberlibrary.com). Pages are written in a consistent house style: offensive topics explain the vulnerability and how it is exploited, and link across to the defensive side.
+The content is plain Markdown, generated from a shared taxonomy and published to [cyberlibrary.com](https://www.cyberlibrary.com). Pages are written in a consistent house style: offensive topics explain the vulnerability and how it is exploited, with real commands and references.
 
 ## Browse locally
 
@@ -53,12 +110,17 @@ New pages are tracked as topics in the taxonomy first, then written; see the wik
 ## Star history
 
 <a href="https://www.star-history.com/#Cyber-Courses/Cyber-Library&Date">
-  <img src="https://api.star-history.com/svg?repos=Cyber-Courses/Cyber-Library&type=Date" alt="Star history" width="600">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Cyber-Courses/Cyber-Library&type=Date&theme=dark">
+    <img src="https://api.star-history.com/svg?repos=Cyber-Courses/Cyber-Library&type=Date" alt="Star history" width="600">
+  </picture>
 </a>
 
 ---
 
 <div align="center">
+
+Part of the Cyber family: **[Cyber Library](https://www.cyberlibrary.com)** · **[Cyber CTF](https://www.cyberctf.org)** · **[Cyber Courses](https://www.cybercourses.com)** · **[Cyber Bench](https://www.cyberbench.app)**
 
 Read at **[cyberlibrary.com](https://www.cyberlibrary.com)** · Contribute via the **[wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki)** · Chat on **[Discord](https://discord.gg/a9XwRKxdHf)**
 
