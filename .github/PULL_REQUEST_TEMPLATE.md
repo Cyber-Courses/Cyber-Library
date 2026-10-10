@@ -21,6 +21,10 @@
 - [ ] Payloads and examples are accurate and runnable
 - [ ] This PR targets `dev` (not `main`)
 
+## Contributor agreement
+
+- [ ] I have read and agree to the [Contributor License Agreement](../CLA.md) (first contribution only; the bot will ask you to confirm in a comment)
+
 ## Related issues
 
 <!-- e.g. Closes #123 -->
