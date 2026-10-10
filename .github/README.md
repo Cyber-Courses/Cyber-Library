@@ -23,12 +23,18 @@ A structured, community-maintained knowledge base: six tracks, one tree, from ho
 
 <br/>
 
+⭐ **If the library helps you, star the repo.** Stars help other learners find it.
+
+<br/>
+
 <a href="https://www.cyberlibrary.com">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="assets/screenshots/home-light.png">
-    <img src="assets/screenshots/home-dark.png" alt="The cyberlibrary.com home page: Learn cybersecurity, from the foundations up." width="100%">
+    <source type="image/webp" srcset="assets/demo/demo.webp">
+    <img src="assets/demo/demo.gif" alt="A 30-second tour of cyberlibrary.com: search with Command K, open an article, move through the track bar and sidebar, then expand the structure map." width="100%">
   </picture>
 </a>
+
+<sub>Search with <kbd>⌘</kbd> <kbd>K</kbd>, read an article, move through the tracks and the sidebar, explore the structure map.</sub>
 
 </div>
 
@@ -66,15 +72,33 @@ Security knowledge is scattered across blog posts, slide decks and tool READMEs.
   </tr>
 </table>
 
-## Connect your assistant
+## Use it in your assistant in 30 seconds
 
-No account, no API key. Add the server to Claude Code in one line:
+A public, read-only MCP server. No account, no API key, nothing to run.
+
+**Claude Code**, one line:
 
 ```bash
 claude mcp add --transport http cyber-library https://www.cyberlibrary.com/api/mcp
 ```
 
-Any other MCP client takes the same URL, `https://www.cyberlibrary.com/api/mcp`. Setup for each client is on [cyberlibrary.com/mcp](https://www.cyberlibrary.com/en/mcp).
+**Cursor**: [one-click install](https://cursor.com/install-mcp?name=cyber-library&config=eyJ1cmwiOiJodHRwczovL3d3dy5jeWJlcmxpYnJhcnkuY29tL2FwaS9tY3AifQ%3D%3D), or add this to `.cursor/mcp.json` (Windsurf takes the same block in `mcp_config.json`):
+
+```json
+{ "mcpServers": { "cyber-library": { "url": "https://www.cyberlibrary.com/api/mcp" } } }
+```
+
+**VS Code and GitHub Copilot**: [one-click install](https://vscode.dev/redirect/mcp/install?name=cyber-library&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fwww.cyberlibrary.com%2Fapi%2Fmcp%22%7D), or add this to `.vscode/mcp.json`:
+
+```json
+{ "servers": { "cyber-library": { "type": "http", "url": "https://www.cyberlibrary.com/api/mcp" } } }
+```
+
+**Claude Desktop and claude.ai**: Settings, Connectors, Add custom connector, paste `https://www.cyberlibrary.com/api/mcp`.<br/>
+**ChatGPT**: Settings, Connectors, Advanced, turn on Developer mode, then create a connector with the same URL.<br/>
+**Stdio-only clients**: bridge it with `npx -y mcp-remote https://www.cyberlibrary.com/api/mcp`.
+
+Then ask: *"Explain how Kerberoasting works and link me the page."* Your assistant gets six tools (`search_library`, `get_page`, `list_topics`, `get_outline`, `search_planned_topics`, `get_planned_subtree`) and cites the page URLs. Full setup for every client is on [cyberlibrary.com/mcp](https://www.cyberlibrary.com/en/mcp).
 
 ## Sections
 
@@ -100,6 +124,7 @@ Open the Markdown in your editor, or point your own static-site pipeline at it.
 
 ## Contribute
 
+- **[CONTRIBUTING.md](CONTRIBUTING.md)**: propose a topic, write or fix a page, translate, and how review works. Looking for a first task? See the [good first issues](https://github.com/Cyber-Courses/Cyber-Library/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 - **[Collaboration wiki](https://github.com/Cyber-Courses/Cyber-Library/wiki)**: how to propose and submit content, the writing style guide, and the review flow.
 - **[Content dashboard](https://github.com/orgs/Cyber-Courses/projects/1)**: backlog, in progress, and published work.
 - **Issues**: pick a template under `.github/ISSUE_TEMPLATE/` for a content correction, a new-topic request, a translation issue, a site bug, or a wiki change.
