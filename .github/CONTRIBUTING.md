@@ -126,4 +126,4 @@ Thank you for making security knowledge easier to find.
 
 ## License
 
-By contributing, you agree that your contribution is published under the same [CC BY-NC-SA 4.0](../LICENSE) license as the rest of the library.
+By contributing, you agree that your contribution is published under the same [CC BY-NC-SA 4.0](LICENSE) license as the rest of the library.
