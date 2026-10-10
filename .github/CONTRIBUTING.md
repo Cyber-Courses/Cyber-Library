@@ -123,3 +123,7 @@ Use the [issue templates](https://github.com/Cyber-Courses/Cyber-Library/issues/
 4. **Release.** `dev` is promoted to `main` in a numbered release ([V1.0.x](https://github.com/Cyber-Courses/Cyber-Library/releases)), and the website publishes it.
 
 Thank you for making security knowledge easier to find.
+
+## License
+
+By contributing, you agree that your contribution is published under the same [CC BY-NC-SA 4.0](../LICENSE) license as the rest of the library.

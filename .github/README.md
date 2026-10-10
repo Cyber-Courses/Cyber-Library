@@ -132,6 +132,10 @@ Open the Markdown in your editor, or point your own static-site pipeline at it.
 
 New pages are tracked as topics in the taxonomy first, then written; see the wiki for the full flow.
 
+## License
+
+The content of this repository is published under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE) license (CC BY-NC-SA 4.0). You may read, share and adapt it with attribution, for non-commercial purposes, and under the same terms. Contact us for any commercial use.
+
 ## Star history
 
 <a href="https://www.star-history.com/#Cyber-Courses/Cyber-Library&Date">
