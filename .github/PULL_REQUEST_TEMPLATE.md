@@ -23,7 +23,7 @@
 
 ## Contributor agreement
 
-- [ ] I have read and agree to the [Contributor License Agreement](../CLA.md) (first contribution only; the bot will ask you to confirm in a comment)
+- [ ] I have read and agree to the [Contributor License Agreement](https://github.com/Cyber-Courses/Cyber-Library/blob/main/.github/CLA.md) (first contribution only; the bot will ask you to confirm in a comment)
 
 ## Related issues
 
