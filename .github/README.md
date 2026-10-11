@@ -134,7 +134,7 @@ New pages are tracked as topics in the taxonomy first, then written; see the wik
 
 ## License
 
-The content of this repository is published under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE) license (CC BY-NC-SA 4.0). You may read, share and adapt it with attribution, for non-commercial purposes, and under the same terms. Contact us for any commercial use.
+The content of this repository is published under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](LICENSE) license (CC BY-NC-SA 4.0). You may read, share and adapt it with attribution, for non-commercial purposes, and under the same terms. Contact us for any commercial use. The [license page](https://www.cyberlibrary.com/en/license) explains it in plain words, with how to credit the library, in 70 languages.
 
 ## Star history
 
