@@ -1,5 +1,6 @@
 ---
 title: "Error-based SQL injection in IBM Db2"
+order: 5
 description: "The narrow IBM Db2 error channel: using invalid casts and SIGNAL to leak values where possible, and why boolean or time-based inference is the dependable blind path."
 keywords:
   - error based SQL injection

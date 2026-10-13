@@ -1,5 +1,6 @@
 ---
 title: "Organizations"
+order: 7
 description: "Pivoting across an AWS Organization: assuming the management-created OrganizationAccountAccessRole in member accounts and manipulating service control policies."
 keywords:
   - AWS Organizations

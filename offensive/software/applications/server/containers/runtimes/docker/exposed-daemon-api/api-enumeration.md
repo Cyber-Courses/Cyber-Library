@@ -1,5 +1,6 @@
 ---
 title: "API enumeration: mapping the environment through the daemon"
+order: 4
 description: "Once the Docker API is reachable, its read endpoints map the whole environment before any container is launched: running and stopped containers, their environment variables and labels, images and their histories, networks, volumes, and swarm secrets. This enumeration frequently yields credentials and a quieter path than spawning a new container."
 keywords:
   - docker api

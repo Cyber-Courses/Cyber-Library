@@ -1,5 +1,6 @@
 ---
 title: "data://, php://input, and expect:// wrappers: direct inclusion to RCE"
+order: 4
 description: "Supplying attacker-controlled content straight to a PHP include through the data:// and php://input wrappers, and command execution via expect://, when remote URL inclusion is disabled."
 keywords:
   - data wrapper

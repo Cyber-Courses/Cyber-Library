@@ -1,5 +1,6 @@
 ---
 title: "Network Firewall: finding rule gaps and disabling inspection"
+order: 9
 description: "Enumerating and abusing AWS Network Firewall rule groups and policies to find gaps or disable inspection."
 keywords:
   - Network Firewall

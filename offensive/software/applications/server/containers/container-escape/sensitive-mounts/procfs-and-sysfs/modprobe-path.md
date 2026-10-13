@@ -1,5 +1,6 @@
 ---
 title: "modprobe path: hijacking the kernel module auto-loader"
+order: 1
 description: "The kernel runs the program named in /proc/sys/kernel/modprobe, as root in the host namespaces, whenever it needs to auto-load a module. A container able to write that path points it at a payload and then triggers an auto-load, for example by using an unknown network protocol or filesystem type, causing the kernel to execute the payload on the host."
 keywords:
   - modprobe path

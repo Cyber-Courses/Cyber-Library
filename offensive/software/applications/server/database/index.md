@@ -1,5 +1,6 @@
 ---
 title: "Database"
+order: 2
 description: "Offensive scope for database servers reached as a service: authenticating, enumerating, and escalating inside the engine, executing operating-system commands from it, reading and writing host files, and pivoting across trust links, with Microsoft SQL Server as the AD-integrated flagship."
 keywords:
   - database

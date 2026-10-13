@@ -1,5 +1,6 @@
 ---
 title: "Code execution: running commands through Zabbix"
+order: 4
 description: "Zabbix runs commands as a feature, so an authenticated attacker reaches code execution several ways: item keys like system.run that execute on an agent, global and alert scripts that run on the Zabbix server, direct agent remote commands on 10050, SQL-injection chains in the frontend, and known server vulnerabilities. The server and agents run these with their service privileges."
 keywords:
   - zabbix rce

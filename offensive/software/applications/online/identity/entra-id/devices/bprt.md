@@ -1,5 +1,6 @@
 ---
 title: "BPRT: bulk-enrollment tokens to register devices at scale"
+order: 2
 description: "Abusing a bulk-enrollment provisioning token to register devices and mint primary refresh tokens at scale."
 keywords:
   - BPRT

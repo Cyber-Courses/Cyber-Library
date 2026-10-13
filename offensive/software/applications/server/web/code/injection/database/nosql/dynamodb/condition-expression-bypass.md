@@ -1,5 +1,6 @@
 ---
 title: "DynamoDB condition expression bypass: forcing conditional writes to pass"
+order: 3
 description: "Manipulating ConditionExpression operands so a conditional write guard passes when it should fail, enabling unauthorized create, update, delete, and overwrite of items."
 keywords:
   - condition expression bypass

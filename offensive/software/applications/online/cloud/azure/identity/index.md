@@ -1,5 +1,6 @@
 ---
 title: "Azure identity"
+order: 1
 description: "Abusing the Azure RBAC authorization plane: enumerating role assignments, escalating through role and custom-role writes, elevate-access, and managed-identity assignment, and activating privileged roles through PIM."
 keywords:
   - Azure RBAC

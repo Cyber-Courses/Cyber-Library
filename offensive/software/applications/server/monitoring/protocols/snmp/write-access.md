@@ -1,5 +1,6 @@
 ---
 title: "Write access: reconfiguring a device with a read-write community string"
+order: 4
 description: "A read-write SNMP community string lets an attacker issue snmpset to change device settings: shutting interfaces, altering routes and ARP entries, modifying the system fields, and, on supported devices, triggering a configuration copy to or from TFTP. This ranges from disruption to planting a backdoored configuration, turning a write string into device control."
 keywords:
   - snmpset

@@ -1,5 +1,6 @@
 ---
 title: "Persistence: holding access to a compromised cluster"
+order: 6
 description: "After gaining control, an attacker keeps it by planting mechanisms that survive credential rotation and pod restarts: RBAC bindings granting a durable identity, malicious workloads and cronjobs that re-establish access, static pods the kubelet runs directly, and admission webhooks that inject backdoors or mint credentials on every relevant API request."
 keywords:
   - kubernetes persistence

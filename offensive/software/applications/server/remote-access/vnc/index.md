@@ -1,5 +1,6 @@
 ---
 title: "VNC: attacking Virtual Network Computing"
+order: 6
 description: "VNC shares a graphical desktop over the RFB protocol (typically ports 5900+). Its weaknesses are a short challenge-response password scheme capped at eight characters, servers left with no authentication, cleartext screen and input traffic, a negotiable security type that can be downgraded, and implementation-specific authentication bypasses in RealVNC and TightVNC."
 keywords:
   - vnc

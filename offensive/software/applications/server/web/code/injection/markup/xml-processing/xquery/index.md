@@ -1,5 +1,6 @@
 ---
 title: "XQuery injection"
+order: 3
 description: "String-built XQuery against XML databases lets an attacker rewrite path expressions and predicates, reach the filesystem and network through built-in functions, and read data blindly."
 keywords:
   - XQuery injection

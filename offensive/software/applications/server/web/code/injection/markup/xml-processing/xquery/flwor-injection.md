@@ -1,5 +1,6 @@
 ---
 title: "FLWOR injection: rewriting XQuery iteration and predicates"
+order: 1
 description: "Untrusted input inside for/let/where/order by clauses changes which nodes are iterated and which predicates hold, enabling literal breakout and tautologies."
 keywords:
   - FLWOR injection

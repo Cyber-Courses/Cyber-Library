@@ -1,5 +1,6 @@
 ---
 title: "Instance profile: stealing the EC2 role from the metadata service"
+order: 2
 description: "Harvesting the instance profile's role credentials from the metadata service to act as the EC2 role."
 keywords:
   - instance profile

@@ -1,5 +1,6 @@
 ---
 title: "Command and plugin injection: injecting into Nagios command definitions"
+order: 3
 description: "Nagios runs check and notification commands built from command definitions and macros ($USER1$, $HOSTADDRESS$, $ARG1$). Where an attacker with configuration access, or a value that flows into a macro, can influence the command string, shell metacharacters inject commands that execute on the Nagios server when the check or notification runs."
 keywords:
   - command definition

@@ -1,5 +1,6 @@
 ---
 title: "rlogin: attacking the remote login service"
+order: 4
 description: "rlogin (rlogind on TCP 513) opens an interactive login session, authenticating by the same .rhosts/hosts.equiv host trust as rsh, or falling back to a cleartext password. Attacks are passwordless login through trust abuse, capture of the cleartext password and session, username enumeration from the login behaviour, and session hijacking."
 keywords:
   - rlogin

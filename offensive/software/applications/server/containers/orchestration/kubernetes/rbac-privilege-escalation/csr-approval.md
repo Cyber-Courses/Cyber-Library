@@ -1,5 +1,6 @@
 ---
 title: "CSR approval: minting a privileged client certificate"
+order: 6
 description: "The certificates API issues client certificates signed by the cluster CA. An identity that can create a CertificateSigningRequest and approve it, then have it signed, obtains a client certificate for any username and group it chooses, including system:masters, authenticating to the API server as a cluster admin independent of any token or binding."
 keywords:
   - certificatesigningrequest

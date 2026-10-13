@@ -1,5 +1,6 @@
 ---
 title: "CAP_NET_RAW: sniffing and spoofing from inside the container network"
+order: 7
 description: "CAP_NET_RAW allows creation of raw and packet sockets. It is in the Docker default set, so it is widely available: an attacker uses it to sniff traffic on the container's network, forge ARP and DNS responses to redirect neighbours, and craft arbitrary packets, enabling man-in-the-middle and lateral movement across the container or pod network even without a host escape."
 keywords:
   - cap_net_raw

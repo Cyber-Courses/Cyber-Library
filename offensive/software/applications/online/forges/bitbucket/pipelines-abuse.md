@@ -1,5 +1,6 @@
 ---
 title: "Pipelines abuse"
+order: 2
 description: "Turning a Bitbucket Pipelines build into code execution: triggering bitbucket-pipelines.yml from a branch or pull request you can push, exfiltrating repository and secured variables by defeating log masking, and reaching deployment-environment credentials and OIDC-brokered cloud roles."
 keywords:
   - Bitbucket Pipelines

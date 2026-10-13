@@ -1,5 +1,6 @@
 ---
 title: "Encoding and obfuscation bypass"
+order: 4
 description: "Hiding the payload through runtime hex/ANSI-C decoding and case variation against case-sensitive blocklists."
 keywords:
   - hex encoding

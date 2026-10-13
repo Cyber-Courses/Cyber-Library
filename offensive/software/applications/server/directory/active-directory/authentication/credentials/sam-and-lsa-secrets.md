@@ -1,5 +1,6 @@
 ---
 title: "SAM and LSA secrets: local hashes and cached machine and service secrets"
+order: 2
 description: "Dumping the local SAM database for local-account hashes and the LSA secrets for cached domain credentials, service-account passwords, and the machine account's secret from a host's registry hives."
 keywords:
   - SAM

@@ -1,5 +1,6 @@
 ---
 title: "Device registration: a rogue device for a PRT"
+order: 1
 description: "Registering a rogue device in Entra to obtain a device identity and primary refresh token, satisfying device-based conditional access."
 keywords:
   - device registration

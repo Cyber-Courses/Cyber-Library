@@ -1,5 +1,6 @@
 ---
 title: "Entra devices"
+order: 5
 description: "Abusing Entra device identity: registering or joining rogue devices, bulk-enrollment provisioning tokens, and hybrid-join forgery to obtain primary refresh tokens."
 keywords:
   - device registration

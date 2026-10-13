@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the Hyper-V host"
+order: 4
 description: "A Hyper-V host is a Windows Server (or client) machine, so host access is Windows access: administrative credentials, the management interfaces, or a guest escape landing in the root partition. With it, an attacker controls every VM through Hyper-V management, reads VM disks, injects into guests, and persists on the host like any Windows system."
 keywords:
   - hyper-v host

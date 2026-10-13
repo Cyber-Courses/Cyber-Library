@@ -1,5 +1,6 @@
 ---
 title: "Reconnaissance: enumerating organizations, repositories, and harvesting secrets"
+order: 1
 description: "Mapping a GitHub org's repos, members, and forks through REST and GraphQL, GitHub code search and gists, and harvesting credentials from full clone history, dangling blobs, and pack objects with TruffleHog and Gitleaks."
 keywords:
   - GitHub enumeration

@@ -1,5 +1,6 @@
 ---
 title: "Guest access: B2B guests inside the tenant"
+order: 1
 description: "Abusing B2B guest accounts: low-friction invitation, guest enumeration of the directory, and guest-to-member escalation paths."
 keywords:
   - guest access

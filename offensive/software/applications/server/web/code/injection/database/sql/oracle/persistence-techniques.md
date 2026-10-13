@@ -1,5 +1,6 @@
 ---
 title: "Persistence techniques in Oracle after injection"
+order: 9
 description: "Maintaining access to an Oracle database after a privileged injection using scheduler jobs, triggers, and backdoor procedures and accounts."
 keywords:
   - Oracle persistence

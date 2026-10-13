@@ -1,5 +1,6 @@
 ---
 title: "nginx variable proxy_pass SSRF: user-influenced upstream selection"
+order: 3
 description: "Exploiting nginx proxy_pass built from request data: variable upstreams that disable validation and let an attacker redirect the proxied request to internal services and cloud metadata."
 keywords:
   - proxy_pass ssrf

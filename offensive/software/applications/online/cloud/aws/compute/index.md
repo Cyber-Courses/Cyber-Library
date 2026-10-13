@@ -1,5 +1,6 @@
 ---
 title: "AWS compute"
+order: 3
 description: "Attacking AWS compute: EC2 user data and instance profiles, SSM run command and Session Manager, ECS and EKS containers and ECR images, and the Elastic Beanstalk, Image Builder, App Runner, Batch, and Lightsail runtimes."
 keywords:
   - EC2

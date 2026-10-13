@@ -1,5 +1,6 @@
 ---
 title: "SSH: attacking the Secure Shell service"
+order: 3
 description: "SSH on TCP 22 provides encrypted remote administration, so it resists passive attack but exposes a rich active surface: service and user enumeration, password and key authentication attacks, weak-crypto negotiation and downgrade, host-key and certificate trust abuse for machine-in-the-middle, and tunnelling that turns a single SSH foothold into network pivoting."
 keywords:
   - ssh

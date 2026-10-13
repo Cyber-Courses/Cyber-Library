@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of a VirtualBox virtual machine"
+order: 1
 description: "A VirtualBox guest escapes by corrupting the host VM process that emulates its devices. The reachable surface is the emulated device set: the 3D acceleration path, the audio controllers, the network adapters, and the USB controllers, each parsing guest-driven register writes and DMA structures, plus the HGCM services behind Guest Additions."
 keywords:
   - virtualbox escape

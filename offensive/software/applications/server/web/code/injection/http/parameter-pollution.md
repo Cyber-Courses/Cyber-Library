@@ -1,5 +1,6 @@
 ---
 title: "HTTP parameter pollution (HPP)"
+order: 6
 description: "Supplying duplicate HTTP parameters that different components resolve inconsistently, to bypass validation and WAFs or override values after a check."
 keywords:
   - HTTP parameter pollution

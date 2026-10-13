@@ -1,5 +1,6 @@
 ---
 title: "SCCM reconnaissance: finding the site systems"
+order: 1
 description: "Discovering a Configuration Manager deployment from Active Directory and the network: the System Management container, management points, distribution points, and the site server, using sccmhunter and SharpSCCM before any privileged access."
 keywords:
   - SCCM reconnaissance

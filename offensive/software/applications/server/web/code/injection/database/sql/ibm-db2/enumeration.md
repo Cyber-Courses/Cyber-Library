@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in IBM Db2 injection"
+order: 4
 description: "Orienting an IBM Db2 injection: confirming the engine, reading the service level and special registers, and mapping the schema through the SYSCAT catalog."
 keywords:
   - Db2 fingerprinting

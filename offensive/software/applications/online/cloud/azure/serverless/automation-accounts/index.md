@@ -1,5 +1,6 @@
 ---
 title: "Automation Accounts"
+order: 3
 description: "Abusing Azure Automation Accounts: runbooks and the RunAs account for code execution as a privileged identity, plus hybrid worker reach."
 keywords:
   - Automation Account

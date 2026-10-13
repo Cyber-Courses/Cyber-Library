@@ -1,5 +1,6 @@
 ---
 title: "JSON-RPC procedure name bypass"
+order: 1
 description: "When the method string is mapped to a server procedure through unsafe reflection, case tricks, delimiter smuggling, or prefix stripping, a caller reaches internal or admin methods the allowlist thought it excluded."
 keywords:
   - JSON-RPC method

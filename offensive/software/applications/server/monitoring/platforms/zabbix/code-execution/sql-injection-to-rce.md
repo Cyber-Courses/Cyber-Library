@@ -1,5 +1,6 @@
 ---
 title: "SQL injection to RCE: Zabbix frontend injection chains"
+order: 4
 description: "The Zabbix frontend has had SQL-injection vulnerabilities, some pre-authentication, in parameters that reach database queries unsafely. Beyond extracting data, a Zabbix SQLi recovers session IDs and credentials from the database to gain an authenticated (often admin) session, which then reaches code execution through the platform's script and item features."
 keywords:
   - zabbix sql injection

@@ -1,5 +1,6 @@
 ---
 title: "Password spraying: domain credentials at the perimeter"
+order: 2
 description: "Spraying passwords against internet-facing Exchange endpoints (OWA, EWS, Autodiscover, ActiveSync) to turn a user list into a domain credential from outside, reading 200 versus 401 on EWS, running lockout-aware cadence, and exploiting the endpoints that skip lockout tracking."
 keywords:
   - Exchange password spraying

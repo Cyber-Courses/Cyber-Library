@@ -1,5 +1,6 @@
 ---
 title: "Kerberos relay: forwarding Kerberos authentication"
+order: 10
 description: "Relaying Kerberos authentication with krbrelayx: capturing TGTs through unconstrained delegation, and relaying coerced Kerberos service tickets to LDAP or AD CS when the attacker controls the service name the victim authenticates to."
 keywords:
   - kerberos relay

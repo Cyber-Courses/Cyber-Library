@@ -1,5 +1,6 @@
 ---
 title: "Trust policy: rewrite a role's trust so you can assume it"
+order: 4
 description: "iam:UpdateAssumeRolePolicy to rewrite a role's trust policy so your principal is allowed, then sts:AssumeRole into it."
 keywords:
   - UpdateAssumeRolePolicy

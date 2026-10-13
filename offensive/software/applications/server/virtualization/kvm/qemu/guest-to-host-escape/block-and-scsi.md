@@ -1,5 +1,6 @@
 ---
 title: "Block and SCSI: escaping QEMU through the storage controllers"
+order: 4
 description: "QEMU's storage path spans the emulated IDE and AHCI controllers and the paravirtual virtio-blk and virtio-scsi devices. The guest programs command structures and DMA descriptors that QEMU reads to perform disk I/O, so flaws in command parsing, in AHCI command-list and PRD handling, and in SCSI request processing give out-of-bounds access in the QEMU process."
 keywords:
   - ahci

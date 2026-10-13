@@ -1,5 +1,6 @@
 ---
 title: "Hybrid join: forging a hybrid-joined device identity"
+order: 3
 description: "Forging a hybrid Azure AD join: writing device objects or abusing on-prem sync to create a trusted hybrid-joined device identity."
 keywords:
   - hybrid join

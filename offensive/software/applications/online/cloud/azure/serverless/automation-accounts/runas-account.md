@@ -1,5 +1,6 @@
 ---
 title: "RunAs account: acting as the Automation service principal"
+order: 2
 description: "Abusing the Automation RunAs account and its certificate to act as a privileged service principal."
 keywords:
   - RunAs account

@@ -1,5 +1,6 @@
 ---
 title: "EMR: cluster steps and the instance role"
+order: 10
 description: "Abusing EMR clusters, steps, and the instance role to run code and read data across the cluster."
 keywords:
   - EMR

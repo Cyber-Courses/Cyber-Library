@@ -1,5 +1,6 @@
 ---
 title: "Path traversal and parser confusion in SSRF URLs"
+order: 2
 description: "When the host is fixed but the path is user-controlled, traversal reaches other endpoints on the internal host, and authority/path parser differentials move the effective target past a prefix allowlist."
 keywords:
   - SSRF path traversal

@@ -1,5 +1,6 @@
 ---
 title: "Command execution: obtaining a shell over WinRM"
+order: 3
 description: "Once authenticated, WinRM gives remote command execution through PowerShell Remoting: Evil-WinRM and native PowerShell (Enter-PSSession/Invoke-Command) open an interactive session on the host, typically as an administrator. From there an attacker runs commands, uploads tools, loads in-memory scripts, and dumps credentials, making WinRM a full foothold."
 keywords:
   - command execution

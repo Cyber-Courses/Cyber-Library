@@ -1,5 +1,6 @@
 ---
 title: "Filter and WAF evasion for Oracle injection"
+order: 4
 description: "Evading filters in Oracle injection with inline comments, CHR() string building, concatenation, and case manipulation."
 keywords:
   - WAF bypass

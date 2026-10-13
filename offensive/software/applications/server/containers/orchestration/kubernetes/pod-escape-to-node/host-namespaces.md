@@ -1,5 +1,6 @@
 ---
 title: "Host namespaces: node reach from hostPID, hostNetwork, and hostIPC pods"
+order: 3
 description: "A pod with hostPID, hostNetwork, or hostIPC joins the node's corresponding namespace. hostPID exposes and lets you inject into node processes, hostNetwork reaches node-local services like the kubelet and cloud metadata, and hostIPC exposes node shared memory, each extending a pod toward node and cluster compromise."
 keywords:
   - hostpid

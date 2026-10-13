@@ -1,5 +1,6 @@
 ---
 title: "Cluster enumeration: mapping a Kubernetes cluster from a foothold"
+order: 1
 description: "The first moves after landing in a Kubernetes pod: inventory what the pod already holds (its service-account token, mounted secrets, environment), discover the service-account identity and what it can do against the API server, enumerate services and the pod network, and reach the cloud metadata endpoint for node credentials."
 keywords:
   - kubernetes enumeration

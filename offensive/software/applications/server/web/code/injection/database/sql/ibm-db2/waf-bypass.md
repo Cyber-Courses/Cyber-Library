@@ -1,5 +1,6 @@
 ---
 title: "WAF and filter bypass for IBM Db2 injection"
+order: 6
 description: "Evading filters in IBM Db2 injection with CHR() and CONCAT string building, hex via CAST, inline comments, and case variation."
 keywords:
   - WAF bypass

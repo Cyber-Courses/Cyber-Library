@@ -1,5 +1,6 @@
 ---
 title: "Authentication: attacking SSH login"
+order: 1
 description: "SSH authenticates by password or public key, and both are attack surfaces: default and weak passwords yield to brute force and spraying, exposed or reused private keys authenticate with no password, and keys from broken generators are predictable. The authentication method the server offers per user also shapes which attack applies."
 keywords:
   - ssh authentication

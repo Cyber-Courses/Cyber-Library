@@ -1,5 +1,6 @@
 ---
 title: "Forged tickets: golden, silver, diamond, and sapphire"
+order: 4
 description: "Forging Kerberos tickets from stolen keys: golden tickets from the krbtgt key, silver tickets from a service key, and the diamond and sapphire variants that modify real tickets to evade PAC-based detection."
 keywords:
   - golden ticket

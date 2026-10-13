@@ -1,5 +1,6 @@
 ---
 title: "Keyword splitting with backslash and slash: w\\ho\\am\\i and /bin/c\\at"
+order: 4
 description: "Breaking a blocked keyword with backslash escapes, w\\ho\\am\\i, and inserting redundant slashes into paths, /bin/c\\at, //bin//cat, so the shell normalizes the token and a literal blocklist misses it."
 keywords:
   - command injection

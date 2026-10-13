@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting Cacti"
+order: 4
 description: "Cacti is identified by its web interface under /cacti/ and its version string in the page and changelog, and the version is decisive because its remote-code-execution vulnerabilities are version-specific. Reading the exact build directs the choice of exploit, including whether an unauthenticated command-injection path is present."
 keywords:
   - cacti enumeration

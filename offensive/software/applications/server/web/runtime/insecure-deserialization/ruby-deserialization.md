@@ -1,5 +1,6 @@
 ---
 title: "Ruby deserialization: Marshal and YAML universal gadget chains"
+order: 4
 description: "Exploiting Ruby deserialization: Marshal.load and YAML.load/Psych on untrusted input, and the universal gadget chains that reach code execution without application-specific classes."
 keywords:
   - ruby deserialization

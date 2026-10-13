@@ -1,5 +1,6 @@
 ---
 title: "Newline forging: splitting one log call into two entries with CRLF"
+order: 1
 description: "Injecting CRLF or a bare newline into logged input so a single log statement emits two lines, forging a second log record with attacker-chosen timestamp, severity, source IP, and message."
 keywords:
   - log injection

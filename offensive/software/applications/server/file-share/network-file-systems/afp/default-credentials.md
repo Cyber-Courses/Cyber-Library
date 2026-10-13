@@ -1,5 +1,6 @@
 ---
 title: "Default credentials: weak and vendor accounts on AFP appliances"
+order: 2
 description: "AFP is most often found on NAS appliances that ship with default administrative accounts and weak password policies. Trying vendor default credentials and spraying common passwords against the AFP authentication, or the appliance's web admin, yields authenticated share access and frequently device administration, since the same accounts span both."
 keywords:
   - default credentials

@@ -1,5 +1,6 @@
 ---
 title: "Command injection: smuggling commands into the RESP protocol"
+order: 2
 description: "Unescaped CRLF in user input, or SSRF to a Redis port, lets an attacker append extra RESP commands and reach FLUSHALL, CONFIG, SLAVEOF, and MODULE LOAD."
 keywords:
   - RESP protocol

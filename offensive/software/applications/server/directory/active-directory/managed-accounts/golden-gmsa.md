@@ -1,5 +1,6 @@
 ---
 title: "Golden gMSA: forging managed service account passwords offline"
+order: 4
 description: "Dumping the KDS root key to compute the password of any group Managed Service Account offline and forever, the Golden gMSA attack, a gMSA equivalent of the golden ticket with no way to rotate the underlying secret."
 keywords:
   - golden gMSA

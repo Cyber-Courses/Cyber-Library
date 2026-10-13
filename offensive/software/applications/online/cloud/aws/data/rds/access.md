@@ -1,5 +1,6 @@
 ---
 title: "Access: reaching live RDS instances through exposure and weak auth"
+order: 2
 description: "Reaching RDS instances through publicly-exposed endpoints, weak credentials, or RDS IAM authentication."
 keywords:
   - RDS

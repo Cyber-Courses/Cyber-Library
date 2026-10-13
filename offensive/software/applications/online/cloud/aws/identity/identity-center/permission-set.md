@@ -1,5 +1,6 @@
 ---
 title: "Permission set: granting yourself a role in a target account"
+order: 1
 description: "Assigning or editing an Identity Center permission set to grant yourself a role in a target account."
 keywords:
   - permission set

@@ -1,5 +1,6 @@
 ---
 title: "IIS handlers and web.config: execution mappings, source disclosure, and config abuse"
+order: 3
 description: "Exploiting IIS handler mappings and web.config: extension handlers that execute uploads, source disclosure from missing handlers, and per-directory web.config upload abuse."
 keywords:
   - iis handlers

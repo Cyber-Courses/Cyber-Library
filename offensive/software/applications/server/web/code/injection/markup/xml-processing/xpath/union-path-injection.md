@@ -1,5 +1,6 @@
 ---
 title: "XPath union path injection"
+order: 2
 description: "The | union operator appends arbitrary location paths to a string-built XPath, selecting nodes outside the intended subtree and dumping the whole document."
 keywords:
   - XPath union injection

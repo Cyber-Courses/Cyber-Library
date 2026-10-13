@@ -1,5 +1,6 @@
 ---
 title: "JSON-RPC abuse: method and parameter dispatch"
+order: 4
 description: "JSON-RPC maps a method name and params to a server procedure. The attack surface is how the method string resolves to a function, how params shape is handled, and how batch arrays are authorized."
 keywords:
   - JSON-RPC injection

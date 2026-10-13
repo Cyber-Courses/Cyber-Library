@@ -1,5 +1,6 @@
 ---
 title: "Injection and forgery: forged entries and downstream parser abuse"
+order: 2
 description: "Syslog ingestion trusts message content, so an attacker injects forged entries and, by embedding newlines and delimiters, splits one record into several or breaks field parsing, poisoning SIEM correlation. Where the pipeline feeds logged values into a vulnerable sink, a dashboard, a parser, or a downstream app, injected content also exploits that sink."
 keywords:
   - log injection

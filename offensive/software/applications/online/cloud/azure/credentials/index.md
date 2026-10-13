@@ -1,5 +1,6 @@
 ---
 title: "Azure credentials"
+order: 2
 description: "Harvesting Azure credentials: managed-identity tokens from IMDS, Key Vault secrets and keys, storage account keys, Automation Account assets, and app settings and connection strings."
 keywords:
   - Azure credentials

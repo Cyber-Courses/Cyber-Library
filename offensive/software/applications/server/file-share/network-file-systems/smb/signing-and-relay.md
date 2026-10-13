@@ -1,5 +1,6 @@
 ---
 title: "Signing and relay: SMB message signing weaknesses and NTLM relay"
+order: 2
 description: "SMB signing cryptographically binds a session to its authenticated client; when signing is not required, an attacker relays a victim's NTLM authentication to another server and acts as the victim there. Combined with coercion that forces a target to authenticate, relay turns captured authentication into code execution or privilege on a second host."
 keywords:
   - smb signing

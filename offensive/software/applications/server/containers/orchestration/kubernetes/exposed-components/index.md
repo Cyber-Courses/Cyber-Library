@@ -1,5 +1,6 @@
 ---
 title: "Exposed components: attacking reachable cluster control-plane services"
+order: 2
 description: "Kubernetes clusters run many services that are dangerous when reachable: the API server with anonymous access or an insecure port, the kubelet API on every node, etcd holding all cluster state, the dashboard, cAdvisor and metrics endpoints, leaked kubeconfig files, and legacy Helm Tiller. Each exposed component is a route to secrets, node control, or full cluster compromise."
 keywords:
   - kubernetes exposed

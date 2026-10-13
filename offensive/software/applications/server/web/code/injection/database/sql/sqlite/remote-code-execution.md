@@ -1,5 +1,6 @@
 ---
 title: "Remote code execution through SQLite injection"
+order: 6
 description: "Reaching code execution from SQLite injection via load_extension loading a shared library, and the ATTACH web-shell written to a served directory."
 keywords:
   - load_extension

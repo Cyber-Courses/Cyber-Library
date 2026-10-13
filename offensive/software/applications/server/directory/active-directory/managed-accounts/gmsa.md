@@ -1,5 +1,6 @@
 ---
 title: "gMSA: reading managed service account passwords"
+order: 1
 description: "Recovering a group Managed Service Account password from Active Directory by reading the msDS-ManagedPassword blob, allowed to the principals in msDS-GroupMSAMembership, and deriving the account's NT hash and AES keys offline."
 keywords:
   - gMSA

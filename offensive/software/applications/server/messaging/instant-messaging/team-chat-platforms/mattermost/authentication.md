@@ -1,5 +1,6 @@
 ---
 title: "Authentication"
+order: 2
 description: "Attacking the Mattermost auth layer: POST /api/v4/users/login returns a session in the Token response header and the MMAUTHTOKEN cookie, so spraying is a loop over that endpoint reading the header. Covers session and personal-access-token handling, SSO and MFA gaps, and the /api/v4/users/password/reset flow. Worked login curl reading the Token header, a spray loop, and interpreting 200 versus 401."
 keywords:
   - mattermost login

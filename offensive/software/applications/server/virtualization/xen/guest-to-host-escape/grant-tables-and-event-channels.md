@@ -1,5 +1,6 @@
 ---
 title: "Grant tables and event channels: escaping Xen through the inter-domain machinery"
+order: 2
 description: "Grant tables let a Xen domain share its memory pages with another, and event channels deliver inter-domain signals. The paravirtual drivers rely on both. Flaws in grant map/copy/transfer handling, in reference counting on grant teardown, and in event-channel allocation give cross-domain memory access or hypervisor corruption reachable from a guest."
 keywords:
   - grant tables

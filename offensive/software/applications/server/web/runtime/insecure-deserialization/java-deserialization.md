@@ -1,5 +1,6 @@
 ---
 title: "Java deserialization: readObject gadget chains with ysoserial"
+order: 3
 description: "Exploiting Java deserialization: recognizing the stream, ObjectInputStream.readObject sinks, assembling gadget chains with ysoserial, and common entry points like HTTP parameters, RMI, and JMX."
 keywords:
   - java deserialization

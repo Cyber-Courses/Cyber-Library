@@ -1,5 +1,6 @@
 ---
 title: "Python pickle deserialization: __reduce__ as a direct RCE primitive"
+order: 2
 description: "Exploiting Python deserialization: pickle.loads on untrusted data runs __reduce__ for immediate code execution, plus yaml.load and jsonpickle sinks."
 keywords:
   - python pickle

@@ -1,5 +1,6 @@
 ---
 title: "Directory traversal: escaping the TFTP root"
+order: 2
 description: "A TFTP server is meant to serve only its configured root directory, but implementations that fail to sanitise the requested filename allow path traversal, using ../ sequences or absolute paths, to read and write files anywhere the server process can reach. This turns a device-boot service into arbitrary host file read and, where writable, write."
 keywords:
   - tftp traversal

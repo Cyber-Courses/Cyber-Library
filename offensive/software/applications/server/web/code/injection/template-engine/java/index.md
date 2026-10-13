@@ -1,5 +1,6 @@
 ---
 title: "Java server-side template injection"
+order: 2
 description: "SSTI in Java template engines: FreeMarker's Execute and ObjectConstructor built-ins and Velocity's reflection chain to Runtime.exec."
 keywords:
   - Java SSTI

@@ -1,5 +1,6 @@
 ---
 title: "Backup: restoring recovery points from AWS Backup vaults"
+order: 4
 description: "Reading and restoring recovery points from AWS Backup vaults to recover protected data."
 keywords:
   - AWS Backup

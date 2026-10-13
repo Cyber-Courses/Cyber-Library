@@ -1,5 +1,6 @@
 ---
 title: "nginx alias off-by-slash: traversal into the parent directory"
+order: 1
 description: "Exploiting the classic nginx location/alias off-by-slash: a location prefix without a trailing slash and an alias with one concatenate following characters, letting ../ reach files outside the mapped directory."
 keywords:
   - nginx alias traversal

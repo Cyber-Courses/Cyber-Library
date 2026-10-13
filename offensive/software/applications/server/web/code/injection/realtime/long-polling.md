@@ -1,5 +1,6 @@
 ---
 title: "Long polling"
+order: 3
 description: "Held-open and poll endpoints where JSON notifications, poll query params, and session tokens in the poll URL reach server-side queries and authorization."
 keywords:
   - long polling

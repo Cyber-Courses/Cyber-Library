@@ -1,5 +1,6 @@
 ---
 title: "DSRM: the domain controller's local backdoor account"
+order: 11
 description: "Using the Directory Services Restore Mode local administrator of a domain controller for persistence: recovering its hash and setting DsrmAdminLogonBehavior so the DSRM account can authenticate over the network to the DC."
 keywords:
   - DSRM

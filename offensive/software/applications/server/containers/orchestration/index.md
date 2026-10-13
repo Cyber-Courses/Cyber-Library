@@ -1,5 +1,6 @@
 ---
 title: "Orchestration: attacking the container cluster control plane"
+order: 3
 description: "Attacking the orchestration layer that schedules and manages containers across a fleet of hosts. Kubernetes is the dominant target: enumerating the cluster, reaching exposed components, escalating through RBAC, escaping a pod to its node, moving laterally, and persisting."
 keywords:
   - container orchestration

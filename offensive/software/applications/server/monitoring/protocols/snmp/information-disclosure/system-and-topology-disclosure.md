@@ -1,5 +1,6 @@
 ---
 title: "System and topology disclosure: mapping the network over SNMP"
+order: 1
 description: "The standard MIB-II tables reconstruct the internal network from a single device: interfaces and their addresses, the routing table, and the ARP (IP-to-MAC) table. Walking these on a router or switch maps adjacent subnets, gateways, and live hosts, giving an attacker the internal topology without scanning, from read-only SNMP access."
 keywords:
   - topology

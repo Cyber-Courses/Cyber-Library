@@ -1,5 +1,6 @@
 ---
 title: "QEMU: attacking the device emulator behind KVM"
+order: 1
 description: "QEMU provides the device emulation for KVM virtual machines and underlies most Linux virtualization products. Its offensive surface is the guest-to-host escape through device models, the QMP/HMP monitor control interface, theft of qcow2 disk images and snapshots, and obtaining a shell on the host QEMU runs on. The device-model bugs recur across every KVM-based product."
 keywords:
   - qemu

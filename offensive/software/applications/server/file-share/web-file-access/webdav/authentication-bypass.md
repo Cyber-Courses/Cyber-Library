@@ -1,5 +1,6 @@
 ---
 title: "Authentication bypass: reaching WebDAV verbs past weak auth"
+order: 1
 description: "WebDAV authentication is frequently inconsistent: some verbs are protected while others are not, HTTP verb tampering reaches a protected path through an unchecked method, and weak or default credentials guard the rest. Bypassing or guessing past this access control exposes the write verbs that lead to file planting and code execution."
 keywords:
   - webdav auth

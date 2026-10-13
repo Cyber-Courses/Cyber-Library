@@ -1,5 +1,6 @@
 ---
 title: "SPN discovery: locating service accounts for roasting"
+order: 9
 description: "Finding service principal names in Active Directory to identify kerberoastable accounts: querying servicePrincipalName over LDAP, setspn, and the overlap with high-value service identities."
 keywords:
   - SPN

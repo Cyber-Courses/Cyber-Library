@@ -1,5 +1,6 @@
 ---
 title: "ElastiCache: reading unauthenticated Redis and Memcached"
+order: 7
 description: "Accessing unauthenticated or exposed Redis and Memcached ElastiCache clusters to read cached data."
 keywords:
   - ElastiCache

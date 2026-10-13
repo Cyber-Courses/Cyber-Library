@@ -1,5 +1,6 @@
 ---
 title: "Sender authentication: spoofing past SPF, DKIM, and DMARC"
+order: 1
 description: "How receivers check SPF, DKIM, and DMARC on inbound mail, and how an attacker reads the published records to find the gap that lets a message spoof a target domain in the visible From: header and still pass. Orients the SPF, DKIM, DMARC, and sender-spoofing children."
 keywords:
   - sender authentication

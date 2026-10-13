@@ -1,5 +1,6 @@
 ---
 title: "Host takeover via privileged run: owning the host through a crafted container"
+order: 2
 description: "The decisive step after reaching the Docker API is to run a container that is privileged and bind-mounts the host root filesystem. That container is root on the host by construction, so chroot-ing into the mount, or writing a cron job, SSH key, or SUID binary through it, gives durable host compromise regardless of the current container's own restrictions."
 keywords:
   - privileged container

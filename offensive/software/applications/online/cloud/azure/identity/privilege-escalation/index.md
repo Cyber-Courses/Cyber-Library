@@ -1,5 +1,6 @@
 ---
 title: "Privilege escalation"
+order: 2
 description: "Climbing Azure RBAC: writing role assignments to Owner, crafting permissive custom roles, elevate-access to root, assigning privileged managed identities, and deploying templates that run as a higher identity."
 keywords:
   - Azure privilege escalation

@@ -1,5 +1,6 @@
 ---
 title: "XML and XXE abuse in Oracle injection"
+order: 13
 description: "Abusing Oracle XMLType parsing from an injection to reach XML external entity file read and SSRF, and injecting into XMLQuery and EXTRACTVALUE."
 keywords:
   - XMLType

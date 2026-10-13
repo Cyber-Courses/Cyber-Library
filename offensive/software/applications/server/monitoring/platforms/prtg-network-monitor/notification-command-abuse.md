@@ -1,5 +1,6 @@
 ---
 title: "Notification command abuse: SYSTEM RCE through PRTG notifications"
+order: 2
 description: "PRTG notifications can execute an external program or script when triggered, and the command parameter is attacker-controlled by an authenticated administrator. A crafted parameter injects OS commands that run as the PRTG core service account, Local System, so an admin creates or edits an Execute Program notification and triggers it to gain SYSTEM code execution on the server."
 keywords:
   - prtg notification

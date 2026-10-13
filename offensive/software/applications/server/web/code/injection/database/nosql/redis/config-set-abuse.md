@@ -1,5 +1,6 @@
 ---
 title: "CONFIG SET abuse: writing files to disk for RCE"
+order: 1
 description: "Relocating the Redis dump file with CONFIG SET dir and dbfilename, then SAVE, writes a controlled payload to disk: webshell, authorized_keys, or a cron job."
 keywords:
   - CONFIG SET

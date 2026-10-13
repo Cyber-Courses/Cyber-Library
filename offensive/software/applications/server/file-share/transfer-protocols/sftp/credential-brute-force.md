@@ -1,5 +1,6 @@
 ---
 title: "Credential brute force: password attacks over SSH for SFTP"
+order: 1
 description: "SFTP accounts authenticate through SSH, so password brute force and spraying go against the SSH service. Valid credentials give SFTP file access and, where the account also has a shell, direct command execution. SSH rate limits and key-only configurations shape the attack, favouring low-and-slow spraying of validated usernames with likely passwords."
 keywords:
   - ssh brute force

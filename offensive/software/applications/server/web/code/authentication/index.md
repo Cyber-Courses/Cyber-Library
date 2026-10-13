@@ -1,5 +1,6 @@
 ---
 title: "Attacking authentication in web application code: sessions, tokens, OAuth, SAML, and MFA"
+order: 1
 description: "An offensive guide to breaking how server-side code proves identity (credential, federated, MFA, session, and token handling) with the recon and attack methodology that reaches account takeover."
 keywords:
   - authentication attacks

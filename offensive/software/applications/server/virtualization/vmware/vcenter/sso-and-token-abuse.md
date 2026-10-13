@@ -1,5 +1,6 @@
 ---
 title: "SSO and token abuse: forging vCenter identity through the SSO system"
+order: 2
 description: "vCenter Single Sign-On issues SAML tokens backed by a signing certificate held in the vmdir/VMware Directory and the STS. An attacker who reaches that key material, or the vpxuser and solution-user credentials in the vCenter database, forges or reuses tokens to authenticate as administrator, obtaining full vСenter control without a password."
 keywords:
   - vcenter sso

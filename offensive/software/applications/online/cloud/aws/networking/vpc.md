@@ -1,5 +1,6 @@
 ---
 title: "VPC: pivoting through peering, endpoints, and routing"
+order: 2
 description: "Pivoting through VPC peering, endpoints, and routing to reach internal services and other accounts."
 keywords:
   - VPC

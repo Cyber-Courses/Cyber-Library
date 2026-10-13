@@ -1,5 +1,6 @@
 ---
 title: "CAP_BPF: reading and writing kernel memory through BPF programs"
+order: 8
 description: "CAP_BPF allows loading BPF programs and creating maps. On its own, or combined with CAP_PERFMON or CAP_SYS_ADMIN, it provides a path to read arbitrary kernel memory through bpf_probe_read and, where tracing program types and helpers are reachable, to overwrite kernel data, since BPF programs execute in kernel context shared across all namespaces."
 keywords:
   - cap_bpf

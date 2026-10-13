@@ -1,5 +1,6 @@
 ---
 title: "Token and app-password abuse: reusing leaked Bitbucket Cloud credentials"
+order: 3
 description: "Identifying and reusing leaked Bitbucket Cloud credentials: scoped API tokens, repository/project/workspace access tokens, and OAuth consumers, reading their identity and scope through the 2.0 API, cloning and pushing over git, and minting durable access. Covers why retired app passwords no longer authenticate."
 keywords:
   - Bitbucket API token

@@ -1,5 +1,6 @@
 ---
 title: "Trust abuse: exploiting r-command host trust"
+order: 2
 description: "The r-commands authenticate by host-based trust: .rhosts (per user) and /etc/hosts.equiv (system-wide) grant passwordless access to listed host/user pairs, checked by source address. Attacks are planting a .rhosts entry, abusing a permissive or wildcard trust, exploiting hosts.equiv breadth, and spoofing a trusted source IP, all giving passwordless access across rsh, rlogin, and rexec."
 keywords:
   - trust abuse

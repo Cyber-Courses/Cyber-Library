@@ -1,5 +1,6 @@
 ---
 title: "Secrets Manager: GetSecretValue across stored secrets"
+order: 1
 description: "secretsmanager:GetSecretValue to read stored database passwords, API keys, and other secrets, and listing them across the account."
 keywords:
   - Secrets Manager

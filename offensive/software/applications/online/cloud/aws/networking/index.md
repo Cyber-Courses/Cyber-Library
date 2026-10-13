@@ -1,5 +1,6 @@
 ---
 title: "AWS networking"
+order: 7
 description: "Abusing AWS networking to reach and expose resources: over-permissive security groups, internet-exposed services, VPC reachability and peering, Route53 and CloudFront, dangling-DNS takeover, and the edge and hybrid services that widen access."
 keywords:
   - security group

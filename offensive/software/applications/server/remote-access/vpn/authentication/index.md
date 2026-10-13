@@ -1,5 +1,6 @@
 ---
 title: "Authentication: attacking VPN access control"
+order: 1
 description: "VPNs authenticate with pre-shared keys, username and password, certificates, or a combination, often with MFA layered on. Each is attacked: weak or default PSKs are cracked, passwords are sprayed and stuffed against the portal, and certificates are stolen or their validation bypassed. Valid VPN authentication grants a tunnel into the internal network."
 keywords:
   - vpn authentication

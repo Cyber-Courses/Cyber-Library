@@ -1,5 +1,6 @@
 ---
 title: "Weak and stolen SSH keys: key-based access to SFTP and SSH"
+order: 3
 description: "SSH public-key authentication is the common SFTP access method, and its keys leak: private keys left in shares, backups, and repositories, keys without passphrases, and weak or known-vulnerable keys. A recovered private key authenticates as its owner with no password, and an attacker-controlled key added to authorized_keys is durable access."
 keywords:
   - ssh keys

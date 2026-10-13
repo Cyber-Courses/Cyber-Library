@@ -1,5 +1,6 @@
 ---
 title: "uevent_helper: executing a program on a synthetic device event"
+order: 2
 description: "The legacy hotplug mechanism runs the program in /sys/kernel/uevent_helper, as root in the host namespaces, for every device uevent. A container with sysfs mounted writable sets uevent_helper to a payload and then writes add to a device's uevent file to fire the event immediately, running the payload on the host."
 keywords:
   - uevent_helper

@@ -1,5 +1,6 @@
 ---
 title: "Port forwarding: crossing network boundaries with SSH"
+order: 3
 description: "SSH local (-L) and remote (-R) port forwarding tunnel a TCP service through the SSH connection, letting an attacker reach a service on a network they cannot route to, or expose an attacker-side service on the SSH host's network. This bridges firewalled and segmented boundaries using only an SSH foothold."
 keywords:
   - port forwarding

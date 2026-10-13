@@ -1,5 +1,6 @@
 ---
 title: "Command execution through MSSQL injection"
+order: 2
 description: "Running OS commands from a privileged SQL Server injection with xp_cmdshell, including the correct sp_configure re-enable sequence, plus OLE automation and external scripts."
 keywords:
   - xp_cmdshell

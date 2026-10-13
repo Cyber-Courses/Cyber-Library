@@ -1,5 +1,6 @@
 ---
 title: "Identity pool: credentials for an unauthenticated identity"
+order: 1
 description: "Exchanging an unauthenticated or guest Cognito identity for the identity pool's IAM role credentials."
 keywords:
   - Cognito

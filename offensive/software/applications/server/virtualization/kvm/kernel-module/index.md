@@ -1,5 +1,6 @@
 ---
 title: "Kernel module: attacking the KVM kernel interface"
+order: 2
 description: "The KVM kernel module accelerates guest execution and exposes the /dev/kvm ioctl interface and in-kernel device emulation (such as the local APIC and the coalesced MMIO path). Bugs here run in the host kernel rather than a user-space monitor, so a KVM module flaw is a direct host-kernel compromise, and nested virtualization expands the exposed emulation surface."
 keywords:
   - kvm module

@@ -1,5 +1,6 @@
 ---
 title: "Host user namespace: when container root is host root"
+order: 4
 description: "If a container is not in a separate user namespace, UID 0 inside it is UID 0 on the host, so any capability or file access achieved in the container applies with real host privilege. Sharing or not using a user namespace is what makes the other escape routes yield actual host root rather than a confined, remapped identity."
 keywords:
   - user namespace

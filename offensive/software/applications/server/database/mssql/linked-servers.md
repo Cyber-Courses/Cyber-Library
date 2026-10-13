@@ -1,5 +1,6 @@
 ---
 title: "MSSQL linked servers: querying and executing across trust links"
+order: 4
 description: "Abusing SQL Server linked-server configurations to query and execute on other instances under the link's stored credentials, chaining links for lateral movement and reaching command execution on servers you never authenticated to."
 keywords:
   - linked servers

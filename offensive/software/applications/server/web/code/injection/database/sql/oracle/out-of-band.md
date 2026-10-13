@@ -1,5 +1,6 @@
 ---
 title: "Out-of-band exfiltration from Oracle injection"
+order: 7
 description: "Exfiltrating Oracle data over DNS and HTTP with UTL_INADDR, UTL_HTTP, and HTTPURITYPE, and the 11g+ ACL that gates them."
 keywords:
   - out of band

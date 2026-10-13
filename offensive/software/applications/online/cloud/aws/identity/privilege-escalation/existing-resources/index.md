@@ -1,5 +1,6 @@
 ---
 title: "Existing resources"
+order: 5
 description: "Escalating through resources that already run with a privileged role: updating CloudFormation stacks, Glue dev endpoints, and Lambda code, or minting presigned URLs and EC2 Instance Connect access."
 keywords:
   - UpdateStack

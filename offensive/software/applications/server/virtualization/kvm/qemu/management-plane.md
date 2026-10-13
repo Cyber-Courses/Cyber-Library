@@ -1,5 +1,6 @@
 ---
 title: "Management plane: controlling a QEMU VM through QMP, HMP, and libvirt"
+order: 3
 description: "A running QEMU exposes a monitor, the QEMU Machine Protocol (QMP) and the human monitor (HMP), that can read guest memory, attach devices and disks, migrate the VM, and run commands affecting the host. Reaching a monitor socket, or the libvirt API that fronts it, gives control over the VM and, through features like migration and disk attachment, over host resources."
 keywords:
   - qmp

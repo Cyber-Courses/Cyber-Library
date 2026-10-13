@@ -1,5 +1,6 @@
 ---
 title: "Delimited field injection: breaking CSV, TSV, and key=value log columns"
+order: 2
 description: "Injecting the delimiter or quote character of a structured log format so logged input shifts columns, adds fake fields, or breaks the regex parsers that consume CSV, TSV, and key=value logs downstream."
 keywords:
   - log injection

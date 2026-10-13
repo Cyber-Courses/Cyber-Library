@@ -1,5 +1,6 @@
 ---
 title: "Stacked queries in MSSQL injection"
+order: 8
 description: "Running additional statements after a semicolon in SQL Server injection, which drivers commonly allow, enabling EXEC, DDL, and configuration changes."
 keywords:
   - stacked queries

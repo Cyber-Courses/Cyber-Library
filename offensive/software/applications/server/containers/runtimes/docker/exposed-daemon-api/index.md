@@ -1,5 +1,6 @@
 ---
 title: "Exposed daemon API: controlling Docker over the network"
+order: 1
 description: "The Docker daemon exposes a full control API. When it is bound to a TCP port, reachable without authentication on 2375 or protected only by weak TLS on 2376, anyone who can reach it has root-equivalent control of the host: they enumerate the environment and then launch a privileged container that mounts the host filesystem."
 keywords:
   - docker daemon

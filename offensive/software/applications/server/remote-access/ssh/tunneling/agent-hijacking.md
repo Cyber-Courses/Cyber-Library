@@ -1,5 +1,6 @@
 ---
 title: "Agent hijacking: reusing a forwarded SSH agent"
+order: 4
 description: "SSH agent forwarding exposes a user's agent socket on the remote host so they can authenticate onward without copying keys. An attacker who controls, or has root on, a host where a user forwarded their agent uses that live socket to authenticate as the user to any system their keys unlock, without ever possessing the private key."
 keywords:
   - agent forwarding

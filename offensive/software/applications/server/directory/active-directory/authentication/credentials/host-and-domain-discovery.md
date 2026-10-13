@@ -1,5 +1,6 @@
 ---
 title: "Host and domain discovery: finding domain controllers and naming contexts"
+order: 17
 description: "Discovering the Active Directory domain and forest, locating domain controllers, and reading the LDAP rootDSE and naming contexts that anchor every later query."
 keywords:
   - domain controller discovery

@@ -1,5 +1,6 @@
 ---
 title: "MySQL and MariaDB"
+order: 3
 description: "The offensive surface of MySQL and MariaDB reached as a service: authenticating, writing host files through INTO OUTFILE and reading them with LOAD_FILE, and executing operating-system commands through user-defined functions."
 keywords:
   - MySQL

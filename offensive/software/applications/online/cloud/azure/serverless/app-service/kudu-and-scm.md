@@ -1,5 +1,6 @@
 ---
 title: "Kudu and SCM: a web shell and file access on the app host"
+order: 1
 description: "Using the App Service Kudu and SCM console for a web shell, file access, and environment secrets."
 keywords:
   - Kudu

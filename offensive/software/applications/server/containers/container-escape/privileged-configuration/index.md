@@ -1,5 +1,6 @@
 ---
 title: "Privileged configuration: escaping through over-permissive container settings"
+order: 2
 description: "Container escape through configuration that hands the workload too much: the all-in-one privileged flag, individual dangerous Linux capabilities, direct host device access, a disabled seccomp or AppArmor profile, and a writable cgroup release_agent. Each is a concrete, no-exploit route from inside a container to code execution on the host."
 keywords:
   - privileged container

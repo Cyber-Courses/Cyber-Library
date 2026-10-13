@@ -1,5 +1,6 @@
 ---
 title: "ADIDNS spoofing: adding DNS records to poison name resolution"
+order: 5
 description: "Abusing Active Directory-integrated DNS, where authenticated users can create records, to add a wildcard or targeted record (WPAD, SCCM) that turns the domain's DNS server into an enterprise-wide responder for capturing or relaying authentication."
 keywords:
   - ADIDNS

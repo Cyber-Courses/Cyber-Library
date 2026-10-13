@@ -1,5 +1,6 @@
 ---
 title: "Reconnaissance"
+order: 1
 description: "Enumerating GitLab groups, projects, members, and snippets through the v4 REST and GraphQL APIs, reading accessible CI/CD variables, and harvesting secrets from repository contents, commit history, and job logs with a token or anonymous access."
 keywords:
   - GitLab reconnaissance

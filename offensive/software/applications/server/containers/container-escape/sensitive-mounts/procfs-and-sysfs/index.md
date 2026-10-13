@@ -1,5 +1,6 @@
 ---
 title: "procfs and sysfs: kernel pseudo-files the host executes as root"
+order: 3
 description: "Several files under /proc/sys and /sys are usermode-helper paths or triggers: the host kernel reads them and runs the referenced program as root in the host namespaces, or exposes host memory. When a container has the real host procfs or sysfs mounted writable, writing core_pattern, modprobe, or uevent_helper, or reading kcore, leads straight to the host."
 keywords:
   - procfs sysfs

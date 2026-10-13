@@ -1,5 +1,6 @@
 ---
 title: "VPN: attacking remote-access VPN gateways and clients"
+order: 7
 description: "Remote-access VPNs terminate on internet-facing gateways and authenticate remote users into the internal network, making them a top initial-access target. The surface is authentication (PSKs, passwords, certificates), crypto negotiation and downgrade, service and protocol enumeration, protocol-specific flaws (IPsec/IKE, OpenVPN, PPTP), traffic-handling leaks, and the heavily-exploited SSL-VPN appliance vulnerabilities."
 keywords:
   - vpn

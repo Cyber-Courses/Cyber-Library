@@ -1,5 +1,6 @@
 ---
 title: "Tomcat and Java app servers: AJP, management apps, and path handling"
+order: 5
 description: "Platform misconfigurations in Tomcat and Java application servers: the AJP connector (Ghostcat) file read and inclusion, Manager/Host-Manager deployment to RCE, and path-parameter traversal and security-constraint bypass."
 keywords:
   - tomcat misconfiguration

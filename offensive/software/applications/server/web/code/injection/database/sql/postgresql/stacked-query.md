@@ -1,5 +1,6 @@
 ---
 title: "Stacked queries in PostgreSQL injection"
+order: 7
 description: "Running extra statements after a semicolon in PostgreSQL injection, which many PostgreSQL drivers permit, opening DDL, writes, and COPY from a single injection point."
 keywords:
   - stacked queries

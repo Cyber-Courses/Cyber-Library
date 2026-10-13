@@ -1,5 +1,6 @@
 ---
 title: "CAP_SYS_RAWIO: patching the kernel through raw port and physical memory access"
+order: 6
 description: "CAP_SYS_RAWIO grants ioperm, iopl, and access to /dev/mem, /dev/kmem, and /dev/port. Inside a container that also exposes those device nodes, it lets an attacker read and write physical memory directly, locate kernel structures, and overwrite them to disable protections or elevate a process, bypassing namespace isolation entirely."
 keywords:
   - cap_sys_rawio

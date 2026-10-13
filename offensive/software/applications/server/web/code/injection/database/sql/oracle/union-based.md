@@ -1,5 +1,6 @@
 ---
 title: "Union-based SQL injection in Oracle"
+order: 12
 description: "Using UNION SELECT in Oracle to extract data: the mandatory FROM DUAL, strict type matching, and enumeration through the ALL_ data dictionary views."
 keywords:
   - union based SQL injection

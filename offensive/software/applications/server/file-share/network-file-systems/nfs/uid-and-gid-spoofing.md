@@ -1,5 +1,6 @@
 ---
 title: "UID and GID spoofing: impersonating any user under AUTH_SYS"
+order: 3
 description: "With AUTH_SYS, NFS authorizes access by the numeric UID and GID the client sends, not by any authenticated identity. An attacker who can set their local UID/GID to match a file's owner, by creating a matching local user or mounting as root and switching identity, reads and writes that user's files on the export, impersonating any non-root account."
 keywords:
   - auth_sys

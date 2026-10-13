@@ -1,5 +1,6 @@
 ---
 title: "Backup and temporary files: editor swaps, .bak, and leftover archives"
+order: 3
 description: "Recovering source and secrets from backup and temporary files left in the web root: editor swap files, .bak/~/.old copies, and deployment archives the server serves as static content."
 keywords:
   - backup files

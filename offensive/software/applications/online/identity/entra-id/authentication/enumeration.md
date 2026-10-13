@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: tenant, users, and federation without credentials"
+order: 1
 description: "Enumerating Entra users, tenant details, and federation configuration without credentials: GetCredentialType, OneDrive and autodiscover probing, and AADInternals tenant recon."
 keywords:
   - user enumeration

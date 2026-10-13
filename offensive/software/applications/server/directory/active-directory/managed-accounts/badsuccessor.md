@@ -1,5 +1,6 @@
 ---
 title: "BadSuccessor: dMSA migration abuse on Server 2025"
+order: 3
 description: "Escalating to any account, including Domain Admin, on a Windows Server 2025 domain by creating or editing a delegated Managed Service Account and setting its migration attributes so the KDC builds its PAC from a superseded account's SIDs."
 keywords:
   - BadSuccessor

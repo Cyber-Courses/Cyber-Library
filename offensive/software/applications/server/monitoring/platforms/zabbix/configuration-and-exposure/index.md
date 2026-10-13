@@ -1,5 +1,6 @@
 ---
 title: "Configuration and exposure: Zabbix deployment weaknesses"
+order: 2
 description: "Independent of a single exploit, Zabbix is often deployed insecurely: the web frontend and API exposed to untrusted networks, and over-permissive roles and user groups that grant ordinary accounts the Super-admin or script-execution rights that lead to code execution. These configuration weaknesses widen who can reach the platform and what a given account can do."
 keywords:
   - zabbix exposure

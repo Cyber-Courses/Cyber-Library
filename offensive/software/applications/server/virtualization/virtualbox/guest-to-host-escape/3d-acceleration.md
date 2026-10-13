@@ -1,5 +1,6 @@
 ---
 title: "3D acceleration: escaping VirtualBox through the accelerated-graphics path"
+order: 2
 description: "VirtualBox 3D acceleration exposes a graphics command channel from the guest (via Guest Additions) to the host VM process, historically the Chromium-based OpenGL passthrough and the VMSVGA device. The host parses a guest-controlled command and shader stream, so flaws in that parsing yield out-of-bounds writes in the VM process, one of VirtualBox's most productive escape surfaces."
 keywords:
   - 3d acceleration

@@ -1,5 +1,6 @@
 ---
 title: "Neo4j Cypher injection"
+order: 6
 description: "String-built Cypher against Neo4j graph databases lets an attacker alter MATCH patterns, cross label boundaries, abuse APOC, and infer data blindly."
 keywords:
   - Neo4j

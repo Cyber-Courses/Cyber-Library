@@ -1,5 +1,6 @@
 ---
 title: "Identity Center"
+order: 6
 description: "Abusing AWS IAM Identity Center (SSO): permission-set assignment and the Identity Store to reach accounts across the organization."
 keywords:
   - IAM Identity Center

@@ -1,5 +1,6 @@
 ---
 title: "Edge header trust: forged X-Forwarded and Host accepted as authoritative"
+order: 3
 description: "Exploiting proxy wiring that makes client-supplied X-Forwarded-* and Host headers authoritative at the origin: IP spoofing for access and rate limits, and Host-based routing to internal apps."
 keywords:
   - x-forwarded-for

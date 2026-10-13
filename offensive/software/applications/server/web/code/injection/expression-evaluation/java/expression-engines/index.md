@@ -1,5 +1,6 @@
 ---
 title: "Java expression engines: injection into embedded evaluation libraries"
+order: 3
 description: "Standalone JVM evaluators an application embeds for formulas, rules, and templates, and how attacker-controlled expression text is reached, separated by which engines expose the runtime and which stay sandboxed."
 keywords:
   - expression engine injection

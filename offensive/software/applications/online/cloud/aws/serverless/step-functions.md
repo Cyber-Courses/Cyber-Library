@@ -1,5 +1,6 @@
 ---
 title: "Step Functions: orchestrating privileged actions through a state machine"
+order: 5
 description: "Abusing Step Functions state machines and their execution role to orchestrate privileged actions."
 keywords:
   - Step Functions

@@ -1,5 +1,6 @@
 ---
 title: "Writable share poisoning: planting payloads and credential-coercion files"
+order: 4
 description: "A writable SMB share is an execution and credential-capture primitive. An attacker plants executables or DLLs where they will be run, poisons Office documents and templates users open, and drops SCF and LNK files whose icons force the viewer to authenticate to an attacker host. Write access turns a file server into code execution and captured credentials."
 keywords:
   - writable share

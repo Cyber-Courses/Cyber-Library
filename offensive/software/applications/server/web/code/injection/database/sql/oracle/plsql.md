@@ -1,5 +1,6 @@
 ---
 title: "PL/SQL injection in Oracle"
+order: 8
 description: "Injecting into Oracle PL/SQL: anonymous blocks, dynamic SQL built with EXECUTE IMMEDIATE, and abusing definer-rights procedures to run code as their owner."
 keywords:
   - PL/SQL injection

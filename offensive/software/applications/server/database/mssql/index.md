@@ -1,5 +1,6 @@
 ---
 title: "Microsoft SQL Server"
+order: 1
 description: "The offensive surface of Microsoft SQL Server: authenticating and enumerating, executing OS commands with xp_cmdshell and other sinks, moving laterally over linked servers, escalating through impersonation and TRUSTWORTHY ownership chains, and coercing the service account for NTLM relay."
 keywords:
   - MSSQL

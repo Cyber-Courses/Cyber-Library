@@ -1,5 +1,6 @@
 ---
 title: "SolarWinds Orion: attacking the network management platform"
+order: 8
 description: "SolarWinds Orion is an enterprise network-management platform that polls and manages devices across the estate and stores their credentials. The surface is the web console authentication, the harvested device and network credentials it holds, and the known pre-authentication bypass and remote-code-execution chains in the Orion platform, any of which turns it into broad control of the managed environment."
 keywords:
   - solarwinds

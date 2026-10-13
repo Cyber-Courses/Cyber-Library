@@ -1,5 +1,6 @@
 ---
 title: "File inclusion"
+order: 2
 description: "Dynamic include and require sinks where an attacker-controlled path or URL fragment selects what the interpreter loads, yielding disclosure or code execution."
 keywords:
   - file inclusion

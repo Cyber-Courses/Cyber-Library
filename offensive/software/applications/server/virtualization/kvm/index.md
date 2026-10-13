@@ -1,5 +1,6 @@
 ---
 title: "KVM: attacking the Linux kernel hypervisor and its products"
+order: 7
 description: "KVM turns the Linux kernel into a hypervisor, accelerating VMs while a user-space monitor (QEMU, Firecracker, Cloud Hypervisor) emulates devices. The attack surface spans the KVM kernel module itself, the device-emulating monitors, and the products built on KVM, QEMU-based platforms, Proxmox VE, and Nutanix AHV, each adding its own management plane."
 keywords:
   - kvm

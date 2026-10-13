@@ -1,5 +1,6 @@
 ---
 title: "USB controllers: escaping QEMU through emulated UHCI, EHCI, and XHCI"
+order: 3
 description: "QEMU emulates USB host controllers whose guest drivers build transfer descriptors and rings in guest memory that QEMU walks to perform transfers. Flaws in descriptor-chain parsing, in the XHCI ring and device-context model, and in emulated USB device handling give out-of-bounds access in the QEMU process from the guest USB stack."
 keywords:
   - usb controller

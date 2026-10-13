@@ -1,5 +1,6 @@
 ---
 title: "Spanner: reading databases through spanner.databases access"
+order: 7
 description: "Attacking Cloud Spanner: reading databases through spanner.databases access and session abuse."
 keywords:
   - Cloud Spanner

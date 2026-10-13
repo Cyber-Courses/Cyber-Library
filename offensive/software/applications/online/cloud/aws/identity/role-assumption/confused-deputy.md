@@ -1,5 +1,6 @@
 ---
 title: "Confused deputy: assuming vendor roles without the external ID"
+order: 2
 description: "Abusing a role whose trust policy trusts a third party without an external ID, riding the deputy's access into the account."
 keywords:
   - confused deputy

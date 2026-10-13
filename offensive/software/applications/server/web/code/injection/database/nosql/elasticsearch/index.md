@@ -1,5 +1,6 @@
 ---
 title: "Elasticsearch and OpenSearch injection"
+order: 5
 description: "User input reaching Lucene query_string syntax, the JSON Query DSL body, or Painless scripts reopens injection on Elasticsearch and OpenSearch clusters."
 keywords:
   - Elasticsearch injection

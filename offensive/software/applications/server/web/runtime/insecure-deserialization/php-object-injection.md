@@ -1,5 +1,6 @@
 ---
 title: "PHP object injection: unserialize() magic-method POP chains"
+order: 1
 description: "Exploiting PHP unserialize() on attacker input: crafting serialized objects, driving magic methods (__wakeup, __destruct, __toString) into property-oriented programming chains, and reaching the sink via phar."
 keywords:
   - PHP object injection

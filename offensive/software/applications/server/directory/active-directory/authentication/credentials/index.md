@@ -1,5 +1,6 @@
 ---
 title: "Credentials: dumping, cracking, and guessing Active Directory secrets"
+order: 1
 description: "Obtaining credential material in Active Directory: dumping secrets from LSASS, the SAM, DPAPI, and the NTDS database (including DCSync), cracking the recovered hashes offline, and guessing passwords through spraying."
 keywords:
   - credential dumping

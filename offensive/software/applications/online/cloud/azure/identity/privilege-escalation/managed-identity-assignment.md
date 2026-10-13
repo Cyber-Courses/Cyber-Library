@@ -1,5 +1,6 @@
 ---
 title: "Managed identity assignment: attach a privileged identity and mint its token"
+order: 4
 description: "Attaching a privileged user-assigned managed identity, or enabling a system-assigned one, on a resource you can write to, then minting its token."
 keywords:
   - managed identity

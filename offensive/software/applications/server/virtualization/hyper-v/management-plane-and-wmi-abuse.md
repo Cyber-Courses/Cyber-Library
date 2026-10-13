@@ -1,5 +1,6 @@
 ---
 title: "Management plane and WMI abuse: controlling Hyper-V through its APIs"
+order: 2
 description: "Hyper-V is managed through WMI (the root/virtualization namespace), PowerShell cmdlets, and remote services. An attacker with rights to that management surface controls every VM, creates or modifies VMs to mount host-reachable disks or run payloads, uses PowerShell Direct into guests, and plants WMI event subscriptions as host persistence."
 keywords:
   - hyper-v wmi

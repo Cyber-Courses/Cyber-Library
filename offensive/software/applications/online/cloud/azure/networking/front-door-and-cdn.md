@@ -1,5 +1,6 @@
 ---
 title: "Front Door and CDN: origin exposure and routing abuse"
+order: 5
 description: "Abusing Azure Front Door and CDN: origin exposure, host-header and routing abuse, and dangling endpoints."
 keywords:
   - Front Door

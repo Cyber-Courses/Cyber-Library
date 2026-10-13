@@ -1,5 +1,6 @@
 ---
 title: "Command injection: abusing unsafe rexec command construction"
+order: 1
 description: "rexec executes a command string on the server, and where that string is built from attacker-influenced input by a wrapper, script, or application that calls rexec unsafely, shell metacharacters inject additional commands. This extends a single intended command into arbitrary execution as the account running it."
 keywords:
   - command injection

@@ -1,5 +1,6 @@
 ---
 title: "In-pod enumeration: inventorying what a pod already holds"
+order: 1
 description: "A compromised pod carries its own service-account token, any secrets and configmaps mounted as files or injected as environment variables, and the connection details of the services it talks to. Reading these first frequently yields database credentials, API keys, and a token that authenticates to the Kubernetes API, before any external call is made."
 keywords:
   - pod enumeration

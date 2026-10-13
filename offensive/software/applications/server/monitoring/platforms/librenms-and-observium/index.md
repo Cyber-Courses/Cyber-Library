@@ -1,5 +1,6 @@
 ---
 title: "LibreNMS and Observium: attacking the network monitoring platforms"
+order: 5
 description: "LibreNMS and Observium are PHP network-monitoring platforms that poll devices over SNMP and store their credentials. The surface is the web authentication, the authenticated command-injection paths that reach code execution on the monitoring host, and harvesting the stored SNMP strings and device credentials that give access to the whole monitored network."
 keywords:
   - librenms

@@ -1,5 +1,6 @@
 ---
 title: "Service mesh abuse: turning sidecars and the mesh control plane against traffic"
+order: 3
 description: "A service mesh injects a sidecar proxy into pods and routes traffic through it under a control plane. Attackers abuse this by reading the sidecar's issued identity and certificates, reaching the proxy admin interface, pushing malicious routing or filters through the control plane, and exploiting the mesh's own bypass paths to defeat the authentication and encryption it is meant to add."
 keywords:
   - service mesh

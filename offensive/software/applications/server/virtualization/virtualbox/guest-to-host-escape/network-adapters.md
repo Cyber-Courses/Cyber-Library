@@ -1,5 +1,6 @@
 ---
 title: "Network adapters: escaping VirtualBox through emulated NICs"
+order: 1
 description: "VirtualBox emulates the Intel e1000, the AMD PCnet, and virtio-net adapters, whose guest drivers program descriptor rings the host VM process reads to move packets. Flaws in descriptor handling, in offload and loopback processing, and in the PCnet and e1000 transmit paths give out-of-bounds access in the host process, a recurring VirtualBox escape surface."
 keywords:
   - e1000

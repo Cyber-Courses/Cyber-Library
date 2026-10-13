@@ -1,5 +1,6 @@
 ---
 title: "Cross-tenant access: trusting another tenant's claims"
+order: 2
 description: "Abusing cross-tenant access settings and B2B trust: inbound trust of MFA and compliant-device claims and cross-tenant synchronization."
 keywords:
   - cross-tenant access

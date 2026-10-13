@@ -1,5 +1,6 @@
 ---
 title: "Redfish API: abusing the modern BMC REST API"
+order: 5
 description: "Redfish is the standardised REST API that modern BMCs expose for management. Reached with default or recovered credentials (or an auth flaw), it reads hardware inventory and controls the host: power state, boot device, BMC accounts, and virtual media. It is the clean, scriptable path to the same host-compromising control as legacy IPMI."
 keywords:
   - redfish

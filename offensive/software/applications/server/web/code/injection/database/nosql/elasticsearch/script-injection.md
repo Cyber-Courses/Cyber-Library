@@ -1,5 +1,6 @@
 ---
 title: "Elasticsearch Painless script injection"
+order: 3
 description: "When user input is interpolated into Painless script source in script_fields, script queries, sorts, or updates, an attacker reads arbitrary document data and runs code inside the scripting sandbox."
 keywords:
   - Painless injection

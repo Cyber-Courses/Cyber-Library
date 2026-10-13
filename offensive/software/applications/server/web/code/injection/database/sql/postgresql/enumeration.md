@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in PostgreSQL injection"
+order: 11
 description: "Orienting a PostgreSQL injection: confirming the engine, reading version and current context, and checking whether the role is a superuser."
 keywords:
   - PostgreSQL fingerprinting

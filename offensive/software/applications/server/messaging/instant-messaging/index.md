@@ -1,5 +1,6 @@
 ---
 title: "Instant messaging: attacking chat protocols and team-chat platforms"
+order: 2
 description: "Attacking real-time messaging infrastructure: the open chat protocols with multiple server implementations (IRC, XMPP, Matrix) and the self-hosted team-chat platforms reached as web applications and APIs (Mattermost, Rocket.Chat)."
 keywords:
   - instant messaging

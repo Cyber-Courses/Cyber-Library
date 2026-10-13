@@ -1,5 +1,6 @@
 ---
 title: "POP3: attacking download-only mailbox retrieval"
+order: 3
 description: "Attacking POP3, the download-and-delete mail retrieval protocol on 110 (cleartext/STARTTLS) and 995 (implicit TLS). Covers banner and CAPA enumeration, USER-based username validation, cleartext USER/PASS and APOP authentication, mailbox download with RETR and TOP, and server flaws in qpopper, Courier, and Dovecot."
 keywords:
   - pop3

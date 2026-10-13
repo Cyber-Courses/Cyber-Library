@@ -1,5 +1,6 @@
 ---
 title: "AWS data"
+order: 6
 description: "Attacking AWS data services: RDS snapshots and access, DynamoDB, Redshift, SageMaker, Glue, Athena, Lake Formation, DocumentDB, ElastiCache, EMR, Neptune, Timestream, and Keyspaces."
 keywords:
   - RDS

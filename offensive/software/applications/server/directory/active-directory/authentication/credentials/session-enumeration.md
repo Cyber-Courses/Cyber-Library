@@ -1,5 +1,6 @@
 ---
 title: "Session enumeration: finding where privileged users are logged on"
+order: 19
 description: "Enumerating logged-on sessions and local administrators across an Active Directory domain to find where a target's credentials are available for theft, the data that turns a graph edge into a lateral-movement plan."
 keywords:
   - session enumeration

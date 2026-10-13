@@ -1,5 +1,6 @@
 ---
 title: "Synapse Analytics: pools, pipelines, and the workspace identity"
+order: 4
 description: "Attacking Azure Synapse: SQL and Spark pools, pipelines, and the workspace managed identity."
 keywords:
   - Synapse

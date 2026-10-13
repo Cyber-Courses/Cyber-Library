@@ -1,5 +1,6 @@
 ---
 title: "Token claims: abusing Cognito ID and access token claims"
+order: 3
 description: "Tampering with or abusing Cognito ID and access token claims to assume a more privileged identity."
 keywords:
   - Cognito

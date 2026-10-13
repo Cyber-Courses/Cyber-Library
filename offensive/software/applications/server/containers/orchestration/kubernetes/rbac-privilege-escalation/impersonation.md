@@ -1,5 +1,6 @@
 ---
 title: "Impersonation: acting as another user, group, or service account"
+order: 3
 description: "The impersonate verb lets an identity send requests as a different user, group, or service account via the Impersonate-User and Impersonate-Group headers. An attacker with it impersonates a cluster admin or adds themselves to the system:masters group, gaining that identity's full permissions without changing any binding."
 keywords:
   - impersonate

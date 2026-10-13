@@ -1,5 +1,6 @@
 ---
 title: "Server Operators: reconfiguring a service to run as SYSTEM"
+order: 10
 description: "Abusing membership of the Server Operators group, which can manage services on domain controllers, to reconfigure a service's binary path to a malicious command and start it as LocalSystem."
 keywords:
   - Server Operators

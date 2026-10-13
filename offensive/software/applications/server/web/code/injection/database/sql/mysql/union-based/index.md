@@ -1,5 +1,6 @@
 ---
 title: "Union-based SQL injection in MySQL: column alignment and data extraction"
+order: 10
 description: "Using UNION SELECT in MySQL to append attacker-chosen rows to a query result, from column-count detection through information_schema extraction."
 keywords:
   - union based SQL injection

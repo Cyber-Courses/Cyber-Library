@@ -1,5 +1,6 @@
 ---
 title: "WebSocket injection"
+order: 1
 description: "Abusing WebSocket message handling after the HTTP upgrade, where individual frames drive authorization, routing, and server-side sinks."
 keywords:
   - WebSocket injection

@@ -1,5 +1,6 @@
 ---
 title: "AWS storage"
+order: 4
 description: "Attacking AWS storage: S3 bucket enumeration, public access and bucket-policy and ACL abuse, EBS and EFS data recovery, FSx and Storage Gateway access, and AWS Backup vaults."
 keywords:
   - S3

@@ -1,5 +1,6 @@
 ---
 title: "Cracking: turning recovered hashes into passwords offline"
+order: 5
 description: "Cracking Active Directory credential material offline: NTLM hashes, Kerberos roasting tickets (etype 23 RC4 and etype 17/18 AES), cached domain credentials (DCC2), and NetNTLMv2, with hashcat modes and strategy."
 keywords:
   - hashcat

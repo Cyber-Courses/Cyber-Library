@@ -1,5 +1,6 @@
 ---
 title: "RCE chains: mboximport web shell, memcached injection, ProxyServlet SSRF, and Autodiscover XXE"
+order: 3
 description: "The Zimbra remote code execution chains: the unauthenticated mboximport archive extraction that writes a JSP web shell under the webroot through tar path traversal, the memcached CRLF response injection that forges proxy route and auth entries, the ProxyServlet SSRF reaching the internal admin SOAP to mint an admin token, and the Autodiscover XXE. Worked requests ending in code execution as the zimbra user."
 keywords:
   - zimbra rce

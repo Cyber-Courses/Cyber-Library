@@ -1,5 +1,6 @@
 ---
 title: "Parameter omission in workflows: optional fields that gate authorization, state, or pricing logic"
+order: 3
 description: "Triggering unintended server branches by omitting, nulling, or stripping parameters optional in the schema but used for authorization or workflow gates."
 keywords:
   - parameter omission

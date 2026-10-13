@@ -1,5 +1,6 @@
 ---
 title: "CA configuration: ESC6 and ESC16"
+order: 4
 description: "Abusing enterprise CA configuration flags: EDITF_ATTRIBUTESUBJECTALTNAME2 which lets any request specify its own SAN (ESC6), and a CA that disables the SID security extension for all issued certificates (ESC16)."
 keywords:
   - ESC6

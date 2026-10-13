@@ -1,5 +1,6 @@
 ---
 title: "Python ORM injection"
+order: 2
 description: "Django ORM and SQLAlchemy parameterize ordinary queries, but raw-SQL escape hatches, text clauses, and lookup or filter construction from untrusted input bypass that binding."
 keywords:
   - Python ORM

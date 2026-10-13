@@ -1,5 +1,6 @@
 ---
 title: "Shell protocols: attacking the Berkeley r-commands"
+order: 4
 description: "The Berkeley r-commands, rsh (514), rlogin (513), and rexec (512), provide remote shell, login, and command execution with no encryption and a host-based trust model. Their weaknesses are the .rhosts and hosts.equiv trust that authenticates by source address (spoofable), cleartext credentials and sessions, and command execution through trusted-host relationships."
 keywords:
   - r-commands

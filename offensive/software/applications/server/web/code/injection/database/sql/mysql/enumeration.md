@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in MySQL injection"
+order: 12
 description: "Orienting a MySQL injection: confirming the engine, reading version and current context, and checking the account's privileges before choosing a technique."
 keywords:
   - MySQL fingerprinting

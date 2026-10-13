@@ -1,5 +1,6 @@
 ---
 title: "Detection Collection: Gathering Security Telemetry and Logs"
+order: 3
 description: "How defenders gather telemetry and logs from endpoints, network, identity, and cloud to make adversary activity visible."
 keywords:
   - security telemetry collection

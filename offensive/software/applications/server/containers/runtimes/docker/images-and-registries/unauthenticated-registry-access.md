@@ -1,5 +1,6 @@
 ---
 title: "Unauthenticated registry access: pulling and pushing without credentials"
+order: 5
 description: "A registry that requires no authentication lets an attacker pull every private image, extracting proprietary code and baked-in secrets, and, where writes are also open, push modified images over existing tags. An open registry is both a data-exfiltration source and a supply-chain write primitive."
 keywords:
   - unauthenticated registry

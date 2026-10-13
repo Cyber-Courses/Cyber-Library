@@ -1,5 +1,6 @@
 ---
 title: "API server enumeration: testing what an identity can do"
+order: 2
 description: "With a service-account token, an attacker queries the Kubernetes API server to map permissions and resources. SelfSubjectAccessReview and SelfSubjectRulesReview reveal exactly what the identity may do, and listing secrets, pods, roles, and nodes exposes the cluster's contents and the escalation paths available to that token."
 keywords:
   - kubernetes api

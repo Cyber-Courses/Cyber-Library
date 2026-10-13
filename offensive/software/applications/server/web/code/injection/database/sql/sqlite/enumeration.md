@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in SQLite injection"
+order: 2
 description: "Orienting a SQLite injection: confirming the engine, reading the version, and enumerating tables and columns from sqlite_master's stored CREATE statements."
 keywords:
   - SQLite fingerprinting

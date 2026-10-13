@@ -1,5 +1,6 @@
 ---
 title: "Athena: querying S3 data through the catalog"
+order: 8
 description: "Querying data in S3 through Athena, reaching tables and locations the caller should not see."
 keywords:
   - Athena

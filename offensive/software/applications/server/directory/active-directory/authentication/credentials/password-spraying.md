@@ -1,5 +1,6 @@
 ---
 title: "Password spraying: guessing valid credentials without lockout"
+order: 6
 description: "Guessing Active Directory passwords safely by trying one or a few likely passwords against many accounts, respecting the lockout policy, and using lockout-safe protocols like Kerberos pre-authentication."
 keywords:
   - password spraying

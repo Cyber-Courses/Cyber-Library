@@ -1,5 +1,6 @@
 ---
 title: "Access control in web applications: endpoints, objects, properties, and broken authorization (BOLA/IDOR)"
+order: 3
 description: "Broken access control in server-side web code: endpoint, object, and property scope, plus trust toward headers and upstream systems."
 keywords:
   - access control

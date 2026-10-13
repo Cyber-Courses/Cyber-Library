@@ -1,5 +1,6 @@
 ---
 title: "GraphQL resolver argument forwarding abuse"
+order: 2
 description: "A resolver that passes its GraphQL arguments straight into SQL, a command, a URL, or an internal API turns a schema-validated query into ordinary injection, reached through the resolver and masked by the type system."
 keywords:
   - resolver argument injection

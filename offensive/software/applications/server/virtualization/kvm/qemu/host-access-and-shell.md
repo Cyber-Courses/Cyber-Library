@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the QEMU/KVM host"
+order: 1
 description: "A KVM host is a Linux machine running QEMU processes under libvirt. Host access comes from a guest escape landing in a QEMU process, from libvirt or SSH access, or from host credentials. Because QEMU may run confined by seccomp and a dedicated user, the post-escape step is often a local privilege escalation to full host control over every VM."
 keywords:
   - kvm host

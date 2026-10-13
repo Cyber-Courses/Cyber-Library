@@ -1,5 +1,6 @@
 ---
 title: "Azure networking"
+order: 7
 description: "Attacking Azure networking: network security groups and VNet exposure, private endpoints, DNS takeover, Front Door and CDN, and Bastion."
 keywords:
   - Azure networking

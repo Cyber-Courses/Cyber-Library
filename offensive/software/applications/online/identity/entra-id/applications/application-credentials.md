@@ -1,5 +1,6 @@
 ---
 title: "Application credentials: adding a secret or certificate"
+order: 4
 description: "Adding secrets or certificates to an app or service principal you can write to, then authenticating as that identity with its Graph permissions."
 keywords:
   - application credentials

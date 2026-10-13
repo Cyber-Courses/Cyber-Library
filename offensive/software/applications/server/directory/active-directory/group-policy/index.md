@@ -1,5 +1,6 @@
 ---
 title: "Group Policy: code execution and configuration across the domain"
+order: 3
 description: "Active Directory Group Policy as an attack surface: editing a GPO you can write, linking one to an OU you control, and recovering the credentials left in SYSVOL, to run code on every computer and user the policy applies to."
 keywords:
   - group policy

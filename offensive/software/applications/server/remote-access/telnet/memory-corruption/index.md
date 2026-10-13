@@ -1,5 +1,6 @@
 ---
 title: "Memory corruption: remote code execution in telnetd"
+order: 2
 description: "Telnet server implementations have carried serious memory-corruption vulnerabilities reachable before or during authentication: stack buffer overflows and format-string flaws in option and environment handling. On old Unix telnetd and embedded builds, these give remote code execution, often as root, against a service that predates modern mitigations."
 keywords:
   - telnetd

@@ -1,5 +1,6 @@
 ---
 title: "IIS double-decode and Unicode traversal: multi-stage decoding that smuggles ../"
+order: 2
 description: "Exploiting IIS decoding behavior: double-encoded traversal that resolves to ../ after a second decode, and overlong Unicode slash encodings on legacy IIS, to escape the web root."
 keywords:
   - double decode

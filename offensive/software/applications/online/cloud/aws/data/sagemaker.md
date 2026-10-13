@@ -1,5 +1,6 @@
 ---
 title: "SageMaker: stealing data, models, and the notebook role"
+order: 3
 description: "Abusing SageMaker notebooks, training jobs, and endpoints to steal data, models, and the attached role."
 keywords:
   - SageMaker

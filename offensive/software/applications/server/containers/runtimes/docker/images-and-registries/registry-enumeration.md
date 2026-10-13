@@ -1,5 +1,6 @@
 ---
 title: "Registry enumeration: listing repositories, tags, and manifests"
+order: 4
 description: "The OCI distribution API exposes catalog, tag, and manifest endpoints that reveal what a registry holds. An attacker lists every repository and tag, pulls manifests to map layers, and identifies images likely to contain secrets or to be widely consumed, all before authenticating if the registry allows anonymous reads."
 keywords:
   - docker registry

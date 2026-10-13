@@ -1,5 +1,6 @@
 ---
 title: "MSSQL access: authenticating to the instance"
+order: 2
 description: "Getting an authenticated SQL Server session: SQL logins through default and weak credentials or spraying, Windows and domain authentication, and the role of the public role and guest access as the starting foothold."
 keywords:
   - MSSQL access

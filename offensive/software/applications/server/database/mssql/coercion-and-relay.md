@@ -1,5 +1,6 @@
 ---
 title: "MSSQL coercion and relay: stealing the service account's authentication"
+order: 6
 description: "Using SQL Server procedures like xp_dirtree and xp_fileexist to force the instance to authenticate to an attacker over SMB, capturing or relaying the service account's NetNTLM to escalate across MSSQL instances or into Active Directory."
 keywords:
   - xp_dirtree

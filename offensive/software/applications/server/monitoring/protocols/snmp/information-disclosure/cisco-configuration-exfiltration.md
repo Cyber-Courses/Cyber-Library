@@ -1,5 +1,6 @@
 ---
 title: "Cisco configuration exfiltration: pulling the running config over SNMP"
+order: 2
 description: "With a read-write community string on a Cisco device, the config-copy MIB drives the device to copy its running or startup configuration to an attacker TFTP server. The exfiltrated config contains enabled-secret and user password hashes, SNMP strings, keys, and the full network design, a single SNMP write turning into complete device and credential compromise."
 keywords:
   - cisco config

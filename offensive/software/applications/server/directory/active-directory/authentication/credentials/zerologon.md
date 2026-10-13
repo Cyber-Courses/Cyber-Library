@@ -1,5 +1,6 @@
 ---
 title: "ZeroLogon: resetting the domain controller account over Netlogon"
+order: 13
 description: "Exploiting the Netlogon cryptographic flaw to authenticate to a domain controller as its own machine account without credentials and reset that account's password to empty, then dumping the domain and restoring the password to avoid breaking the DC."
 keywords:
   - ZeroLogon

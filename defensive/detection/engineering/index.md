@@ -1,5 +1,6 @@
 ---
 title: "Detection Engineering: Building and Maintaining Detections"
+order: 6
 description: "How detection engineering designs, tests, and maintains the rules and analytics behind reliable detection, treating detections as code."
 keywords:
   - detection engineering

@@ -1,5 +1,6 @@
 ---
 title: "Custom SSP: logging cleartext credentials on the host"
+order: 12
 description: "Registering a malicious Security Support Provider on a domain controller or server so the authentication subsystem records every logon's cleartext password, including service and machine account passwords, to a local file."
 keywords:
   - custom SSP

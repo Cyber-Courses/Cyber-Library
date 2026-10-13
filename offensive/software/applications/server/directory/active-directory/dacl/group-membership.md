@@ -1,5 +1,6 @@
 ---
 title: "Group membership: joining a privileged group"
+order: 3
 description: "Using AddMember, AddSelf, or GenericWrite over the member attribute of an Active Directory group to add a controlled principal, inheriting the group's rights, including nested-group and primaryGroupID considerations and the Account Operators path."
 keywords:
   - AddMember

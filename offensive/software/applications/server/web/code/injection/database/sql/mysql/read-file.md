@@ -1,5 +1,6 @@
 ---
 title: "Reading server files through MySQL injection with LOAD_FILE"
+order: 7
 description: "Using LOAD_FILE to read files from the database host through a MySQL injection, and the FILE privilege and secure_file_priv conditions that gate it."
 keywords:
   - LOAD_FILE

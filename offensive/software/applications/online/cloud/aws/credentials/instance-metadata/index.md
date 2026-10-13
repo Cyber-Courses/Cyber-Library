@@ -1,5 +1,6 @@
 ---
 title: "Instance metadata"
+order: 2
 description: "Stealing role credentials from the EC2 and ECS instance metadata service: IMDSv1 open access, the IMDSv2 token flow, and reaching 169.254.169.254 through SSRF."
 keywords:
   - IMDS

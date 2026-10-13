@@ -1,5 +1,6 @@
 ---
 title: "IP spoofing: impersonating a trusted source for the r-commands"
+order: 1
 description: "Because r-command trust is checked against the source IP, spoofing the address of a trusted host satisfies the check without controlling it. With an on-path position the attacker sees responses directly; blind, they predict TCP sequence numbers to complete the connection and inject a command, the classic attack against address-based trust."
 keywords:
   - ip spoofing

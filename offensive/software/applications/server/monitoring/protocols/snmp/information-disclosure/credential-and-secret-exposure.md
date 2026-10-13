@@ -1,5 +1,6 @@
 ---
 title: "Credential and secret exposure: keys and credentials in SNMP OIDs"
+order: 4
 description: "SNMP agents expose secrets in both standard and vendor OIDs: other community strings and SNMPv3 user data, wireless (WEP/WPA) keys and VPN pre-shared keys on network gear, and credentials or tokens that applications place in custom enterprise OIDs. A read walk frequently recovers material that unlocks the device and others, beyond the device's own compromise."
 keywords:
   - snmp credentials

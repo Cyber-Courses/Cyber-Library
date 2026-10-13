@@ -1,5 +1,6 @@
 ---
 title: "File read and write: reading sensitive files and writing to TFTP"
+order: 1
 description: "TFTP has no authentication, so any client reads files the server exposes and, where writes are enabled, uploads files. Because TFTP serves device and boot artefacts, reads recover router and phone configs (with credentials), firmware, and PXE files, and writes let an attacker replace a config or boot file that a device will load, influencing or compromising it."
 keywords:
   - tftp read

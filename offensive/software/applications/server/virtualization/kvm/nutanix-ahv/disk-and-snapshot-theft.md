@@ -1,5 +1,6 @@
 ---
 title: "Disk and snapshot theft: taking vdisks from the Nutanix storage fabric"
+order: 4
 description: "Nutanix stores each VM's disks as vdisks in the Acropolis Distributed Storage Fabric, accessed through the Controller VMs. With CVM or Prism access, an attacker clones or snapshots a target vdisk, exports it as an image, and reads the guest filesystem offline, taking any VM's data without entering it, and reads snapshots for point-in-time state."
 keywords:
   - vdisk

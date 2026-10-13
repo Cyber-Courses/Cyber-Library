@@ -1,5 +1,6 @@
 ---
 title: "Cloud Logging: deleting and diverting log sinks"
+order: 1
 description: "Deleting or diverting Cloud Logging sinks and exclusions to drop attacker activity from the logs."
 keywords:
   - Cloud Logging

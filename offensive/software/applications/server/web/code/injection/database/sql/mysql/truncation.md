@@ -1,5 +1,6 @@
 ---
 title: "SQL truncation attacks in MySQL"
+order: 9
 description: "Abusing MySQL string truncation and trailing-space trimming to collide with an existing account such as admin, when strict SQL mode is off."
 keywords:
   - SQL truncation attack

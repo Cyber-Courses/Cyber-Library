@@ -1,5 +1,6 @@
 ---
 title: "Entra groups"
+order: 4
 description: "Taking over Entra security groups to inherit their access: dynamic-membership rule injection, group ownership, and role-assignable groups that grant directory roles."
 keywords:
   - Entra groups

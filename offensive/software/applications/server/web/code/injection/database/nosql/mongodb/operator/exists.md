@@ -1,5 +1,6 @@
 ---
 title: "MongoDB $exists as a boolean oracle for field inference"
+order: 1
 description: "The $exists operator tests whether a field is present, giving a true/false oracle to map document schema and infer data when no rows are reflected."
 keywords:
   - $exists

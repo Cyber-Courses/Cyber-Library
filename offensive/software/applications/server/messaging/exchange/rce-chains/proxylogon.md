@@ -1,5 +1,6 @@
 ---
 title: "ProxyLogon: X-BEResource SSRF to a web shell"
+order: 1
 description: "The pre-authentication Exchange chain that uses the X-BEResource cookie SSRF through the front end to reach the back-end ECP as SYSTEM, authenticates as any mailbox, then abuses the OAB virtual directory ExternalUrl plus ResetOABVirtualDirectory to write an aspx web shell under a web-served path."
 keywords:
   - ProxyLogon

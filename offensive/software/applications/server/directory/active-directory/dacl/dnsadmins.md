@@ -1,5 +1,6 @@
 ---
 title: "DnsAdmins: a DLL loaded into the DNS service as SYSTEM"
+order: 8
 description: "Abusing membership of the DnsAdmins group to load an arbitrary DLL into the Windows DNS service, which runs as SYSTEM on the domain controller, by setting ServerLevelPluginDll and restarting the service."
 keywords:
   - DnsAdmins

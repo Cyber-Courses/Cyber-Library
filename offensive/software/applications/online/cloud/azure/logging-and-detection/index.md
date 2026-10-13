@@ -1,5 +1,6 @@
 ---
 title: "Logging and detection"
+order: 8
 description: "Blinding Azure detection: tampering with the Activity Log, Azure Monitor diagnostic settings, Defender for Cloud, and Sentinel to suppress logging and alerting."
 keywords:
   - Azure logging

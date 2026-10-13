@@ -1,5 +1,6 @@
 ---
 title: "DPAPI secrets: browser, vault, and application credentials"
+order: 3
 description: "Recovering credentials protected by the Windows Data Protection API: saved browser passwords, Windows Credential Manager vaults, RDP and scheduled-task credentials, by decrypting DPAPI blobs with the user or domain master key."
 keywords:
   - DPAPI

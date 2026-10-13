@@ -1,5 +1,6 @@
 ---
 title: "Session hijacking: taking over a live rlogin session"
+order: 2
 description: "An rlogin session is an unencrypted TCP stream authenticated only at setup, so an on-path attacker injects commands into it or takes it over, executing as the logged-in user. This is the classic r-command/Telnet TCP session-hijacking attack, bypassing authentication by riding an established session."
 keywords:
   - session hijacking

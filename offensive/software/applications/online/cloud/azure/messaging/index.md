@@ -1,5 +1,6 @@
 ---
 title: "Azure messaging"
+order: 9
 description: "Abusing Azure messaging: Service Bus and Event Hubs streams, Event Grid routing, and Storage Queues for data capture and injection."
 keywords:
   - Azure messaging

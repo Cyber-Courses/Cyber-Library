@@ -1,5 +1,6 @@
 ---
 title: "Token impersonation: SeImpersonate to SYSTEM"
+order: 14
 description: "Turning the SeImpersonatePrivilege that service accounts hold into SYSTEM by coercing a privileged process to authenticate to a controlled endpoint and stealing its token, the potato family of techniques that bridges a service-account foothold to full local control."
 keywords:
   - SeImpersonatePrivilege

@@ -1,5 +1,6 @@
 ---
 title: "Code and layers: running attacker code under the execution role"
+order: 2
 description: "Reading function source and layers for secrets, and overwriting code or layers to run under the execution role."
 keywords:
   - Lambda

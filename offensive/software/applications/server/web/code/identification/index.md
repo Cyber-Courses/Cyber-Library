@@ -1,5 +1,6 @@
 ---
 title: "Identification: account discovery, enumeration, and identifier exposure in web applications"
+order: 2
 description: "How application behavior reveals which accounts exist, eases credential stuffing, and exposes user identifiers, the pre-authentication recon that feeds account takeover and access-control attacks."
 keywords:
   - account enumeration

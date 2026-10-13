@@ -1,5 +1,6 @@
 ---
 title: "EFS: mounting exposed NFS file systems"
+order: 3
 description: "Mounting exposed EFS file systems through permissive mount-target security groups or file-system policy."
 keywords:
   - EFS

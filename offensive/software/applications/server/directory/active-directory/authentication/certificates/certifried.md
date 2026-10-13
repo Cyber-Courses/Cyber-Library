@@ -1,5 +1,6 @@
 ---
 title: "Certifried: machine certificate for a domain controller's identity"
+order: 7
 description: "Abusing the default machine-account creation right and a weak certificate-to-account mapping by creating a computer, setting its dNSHostName to a domain controller's, and enrolling a machine certificate that authenticates as that DC."
 keywords:
   - Certifried

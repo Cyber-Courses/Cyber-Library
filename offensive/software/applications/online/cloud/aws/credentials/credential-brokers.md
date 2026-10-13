@@ -1,5 +1,6 @@
 ---
 title: "Credential brokers: services that mint credentials for other principals"
+order: 5
 description: "Abusing services that broker credentials to other principals, turning a narrow permission into fresh role or user credentials."
 keywords:
   - credential broker

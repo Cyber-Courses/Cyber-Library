@@ -1,5 +1,6 @@
 ---
 title: "SCCM application deployment: code as SYSTEM across the estate"
+order: 4
 description: "Using Configuration Manager's own deployment features, once you hold the Full Administrator role or equivalent rights, to run applications, scripts, and CMPivot queries as SYSTEM on targeted device collections, turning SCCM into a built-in mass execution platform."
 keywords:
   - SCCM application deployment

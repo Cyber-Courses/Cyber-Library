@@ -1,5 +1,6 @@
 ---
 title: "Traffic handling: VPN leakage and policy gaps"
+order: 5
 description: "Even a cryptographically sound VPN leaks when its traffic handling is misconfigured: DNS queries escaping the tunnel disclose activity and enable redirection, routes that fail to cover intended destinations send traffic in the clear, and split tunneling bridges the client between the protected network and the open internet, a path an attacker on the client's local network exploits."
 keywords:
   - vpn leak

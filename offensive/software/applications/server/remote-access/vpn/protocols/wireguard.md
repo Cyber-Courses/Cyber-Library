@@ -1,5 +1,6 @@
 ---
 title: "WireGuard: static-key management and identity exposure"
+order: 4
 description: "WireGuard's cryptography is modern and sound, so attacks target its key management: recovering the static private keys and pre-shared keys from client and server configuration files, where they sit in cleartext, and the identity exposure from its fixed per-peer key model. A recovered key authenticates the attacker as that peer."
 keywords:
   - wireguard

@@ -1,5 +1,6 @@
 ---
 title: "User pool: self-signup and writable attributes"
+order: 2
 description: "Abusing open user-pool self-signup and writable user attributes to gain or elevate access."
 keywords:
   - Cognito

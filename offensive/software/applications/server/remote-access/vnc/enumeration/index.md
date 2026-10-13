@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting a VNC service"
+order: 3
 description: "VNC enumeration reads the RFB protocol version and the security types the server offers during the unauthenticated handshake, and identifies the implementation (RealVNC, TightVNC, UltraVNC). The security types reveal whether the server requires no authentication or the weak VNC password scheme, and the implementation maps to specific authentication-bypass flaws."
 keywords:
   - vnc enumeration

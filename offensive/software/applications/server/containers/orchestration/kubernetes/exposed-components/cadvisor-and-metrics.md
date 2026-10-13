@@ -1,5 +1,6 @@
 ---
 title: "cAdvisor and metrics: environment and topology leaks from stats endpoints"
+order: 6
 description: "cAdvisor and the various metrics endpoints expose per-container statistics and metadata. Where reachable without authentication, they leak container names, images, labels, and sometimes environment variables and command lines, giving an attacker a map of the cluster's workloads and occasionally secrets passed as container arguments or environment."
 keywords:
   - cadvisor

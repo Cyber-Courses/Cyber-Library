@@ -1,5 +1,6 @@
 ---
 title: "CloudFront: origin and cache behavior abuse"
+order: 4
 description: "Abusing CloudFront distributions, origins, and cache behavior to bypass controls or reach protected origins."
 keywords:
   - CloudFront

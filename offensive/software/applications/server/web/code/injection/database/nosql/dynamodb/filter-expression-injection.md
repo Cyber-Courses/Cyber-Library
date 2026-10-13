@@ -1,5 +1,6 @@
 ---
 title: "DynamoDB filter expression injection: widening Query and Scan result sets"
+order: 2
 description: "When user input shapes a FilterExpression or KeyConditionExpression string (or its ExpressionAttributeNames/Values), an attacker can broaden the predicate and return items outside the intended scope."
 keywords:
   - filter expression injection

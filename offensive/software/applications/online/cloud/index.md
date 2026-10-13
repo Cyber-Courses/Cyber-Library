@@ -1,5 +1,6 @@
 ---
 title: "Cloud"
+order: 1
 description: "Offensive techniques against cloud platforms, organized by provider because each one's identity model, services, APIs, and tooling differ. A cloud account is identities holding permissions over resources, reached through credentials, so attacks revolve around the IAM graph and the control-plane API rather than host exploits."
 keywords:
   - cloud security

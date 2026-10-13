@@ -1,5 +1,6 @@
 ---
 title: "Workstation and Fusion: attacking the VMware desktop hypervisors"
+order: 3
 description: "VMware Workstation (Windows/Linux) and Fusion (macOS) are type-2 hypervisors that run VMs as a vmware-vmx process on the user's host. They share ESXi's device-emulation and GuestRPC code, so the guest-to-host escapes target the same devices, and the shared-folder and drag-and-drop integration features are a prominent escape surface."
 keywords:
   - vmware workstation

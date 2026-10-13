@@ -1,5 +1,6 @@
 ---
 title: "Authority: host and port targeting in SSRF"
+order: 1
 description: "The authority is the host and port a request lands on. Loopback and link-local targets, alternate IP encodings, hostname resolution tricks, and port reach all live here."
 keywords:
   - SSRF authority

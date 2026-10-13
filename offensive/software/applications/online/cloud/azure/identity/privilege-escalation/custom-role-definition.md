@@ -1,5 +1,6 @@
 ---
 title: "Custom role definition: a wildcard role you assign yourself"
+order: 2
 description: "Crafting a custom role carrying Microsoft.Authorization/*/write or wildcard actions through roleDefinitions/write, then self-assigning it."
 keywords:
   - custom role

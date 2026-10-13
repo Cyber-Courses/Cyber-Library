@@ -1,5 +1,6 @@
 ---
 title: "Backups and archives: mining stored systems for offline compromise"
+order: 2
 description: "Shares used as backup targets hold whole systems: VM disk images, database dumps, system-state and registry backups, mailbox exports, and archives. Read access to these lets an attacker reconstruct systems offline, extracting password hashes from registry hives, secrets from database dumps, and files from images, without touching the live systems they came from."
 keywords:
   - backups

@@ -1,5 +1,6 @@
 ---
 title: "WinRM: attacking Windows Remote Management"
+order: 8
 description: "WinRM implements WS-Management on TCP 5985 (HTTP) and 5986 (HTTPS), providing remote command execution on Windows through PowerShell Remoting. The surface is service enumeration, authentication with passwords or NTLM hashes (pass-the-hash), and command execution: valid credentials or a hash for a Remote Management user yield an interactive shell, typically with administrative rights."
 keywords:
   - winrm

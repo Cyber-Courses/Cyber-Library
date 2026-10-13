@@ -1,5 +1,6 @@
 ---
 title: "Administrative units: scoped-role abuse"
+order: 3
 description: "Abusing administrative units: scoped role assignments and restricted-management AU gaps that delegate control over subsets of the directory."
 keywords:
   - administrative units

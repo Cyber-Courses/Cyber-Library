@@ -1,5 +1,6 @@
 ---
 title: "Default credentials: Admin/zabbix and the guest account"
+order: 2
 description: "Zabbix ships with a Super admin account, Admin with the password zabbix, and historically an enabled guest account with no password. These defaults are frequently left unchanged, so trying Admin/zabbix on the web login or the API is the first and highest-yield move, granting full administrative control that leads directly to code execution."
 keywords:
   - admin zabbix

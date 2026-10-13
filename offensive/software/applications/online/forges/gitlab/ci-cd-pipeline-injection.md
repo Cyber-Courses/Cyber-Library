@@ -1,5 +1,6 @@
 ---
 title: "CI/CD pipeline injection"
+order: 2
 description: "Running attacker-controlled script in a GitLab pipeline by pushing a branch or opening a merge request, exfiltrating protected and masked CI/CD variables, and pivoting with the CI_JOB_TOKEN to the API, registry, and other projects on the job-token allowlist."
 keywords:
   - gitlab-ci.yml

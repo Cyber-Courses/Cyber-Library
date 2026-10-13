@@ -1,5 +1,6 @@
 ---
 title: "Base image poisoning: compromising upstream to reach every downstream build"
+order: 6
 description: "Images are built FROM a base image. An attacker who controls or can impersonate a base image, through a compromised upstream repository, a typosquatted name, or a mutable tag they can overwrite, injects code that is inherited by every image built on it, turning one compromise into execution across all downstream builds and deployments."
 keywords:
   - base image

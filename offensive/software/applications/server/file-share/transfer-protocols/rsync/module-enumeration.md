@@ -1,5 +1,6 @@
 ---
 title: "Module enumeration: listing rsync daemon modules and access"
+order: 2
 description: "The rsync daemon lists its modules to any client that asks, revealing the share names and their comments. Probing each module shows whether it requires authentication and whether it is readable or writable, producing the map that directs looting and file-planting against the daemon."
 keywords:
   - rsync modules

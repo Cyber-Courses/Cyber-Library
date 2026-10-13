@@ -1,5 +1,6 @@
 ---
 title: "Data source SSRF and credentials: abusing Grafana's connections"
+order: 3
 description: "Grafana proxies queries to its data sources through the server, which an attacker with access turns into server-side request forgery to reach internal services, and Grafana stores the data-source credentials (encrypted with a key in grafana.ini). Recovering and decrypting those credentials gives direct access to the databases and services Grafana connects to."
 keywords:
   - grafana ssrf

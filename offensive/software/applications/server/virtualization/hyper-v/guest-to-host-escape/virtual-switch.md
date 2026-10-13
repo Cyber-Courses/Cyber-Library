@@ -1,5 +1,6 @@
 ---
 title: "Virtual switch: escaping Hyper-V through the networking datapath"
+order: 1
 description: "The Hyper-V virtual switch forwards VM network traffic in the root partition, with an extensible filter stack and the synthetic and emulated NIC paths feeding it. Guest-controlled packets and the synthetic network VSP requests are parsed there, so flaws in the switch, its extensions, or the network VSP give memory corruption in the root-partition networking stack."
 keywords:
   - hyper-v virtual switch

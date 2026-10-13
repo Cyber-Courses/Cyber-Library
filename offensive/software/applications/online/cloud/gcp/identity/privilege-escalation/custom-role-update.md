@@ -1,5 +1,6 @@
 ---
 title: "Custom role update: add permissions to a role you already hold"
+order: 1
 description: "Adding permissions to a custom role you are already bound to with iam.roles.update, escalating without any new binding."
 keywords:
   - iam.roles.update

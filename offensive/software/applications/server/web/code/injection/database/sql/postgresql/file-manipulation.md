@@ -1,5 +1,6 @@
 ---
 title: "Reading and writing files through PostgreSQL injection"
+order: 4
 description: "File read and write primitives in PostgreSQL injection: pg_read_file, pg_ls_dir, COPY into and out of tables, and large objects, with the roles each requires."
 keywords:
   - pg_read_file

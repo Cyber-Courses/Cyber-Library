@@ -1,5 +1,6 @@
 ---
 title: "Federation"
+order: 4
 description: "Entering AWS through federated identity: SAML and OIDC provider trust, GitHub Actions OIDC, trusted third-party IdPs, and IAM Roles Anywhere certificates."
 keywords:
   - federation

@@ -1,5 +1,6 @@
 ---
 title: "Group Policy Preferences: credentials in SYSVOL"
+order: 4
 description: "Recovering credentials from Group Policy Preferences XML left in SYSVOL: the cpassword field encrypted with Microsoft's published AES key, and autologon credentials, both readable by any domain user and decryptable offline."
 keywords:
   - group policy preferences

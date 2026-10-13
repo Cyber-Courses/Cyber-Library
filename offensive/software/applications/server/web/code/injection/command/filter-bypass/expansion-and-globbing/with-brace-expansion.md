@@ -1,5 +1,6 @@
 ---
 title: "Command injection filter bypass with brace expansion"
+order: 1
 description: "Using Bash brace expansion, {cat,/etc/passwd}, {ls,-la}, to split a command into comma-separated tokens that carry no spaces and no filtered keyword, so a literal blocklist misses the payload."
 keywords:
   - command injection

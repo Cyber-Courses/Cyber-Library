@@ -1,5 +1,6 @@
 ---
 title: "Azure serverless"
+order: 5
 description: "Attacking Azure serverless and automation: Function and Logic App managed identities, Automation Account runbooks and RunAs, App Service Kudu and deployment, and Deployment Scripts."
 keywords:
   - Azure serverless

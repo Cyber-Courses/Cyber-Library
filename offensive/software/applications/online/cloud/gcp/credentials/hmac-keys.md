@@ -1,5 +1,6 @@
 ---
 title: "HMAC keys: minting a Cloud Storage HMAC key for a service account"
+order: 6
 description: "Creating a Cloud Storage HMAC key for a service account with storage.hmacKeys.create to access buckets as that account."
 keywords:
   - HMAC keys

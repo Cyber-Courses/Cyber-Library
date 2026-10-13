@@ -1,5 +1,6 @@
 ---
 title: "Ownership: taking over an app through its owner"
+order: 6
 description: "Abusing app and service-principal ownership: an owner can add credentials and change configuration to take over the application identity."
 keywords:
   - application ownership

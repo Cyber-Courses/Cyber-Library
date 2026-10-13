@@ -1,5 +1,6 @@
 ---
 title: "Out-of-band SQL injection in MySQL"
+order: 6
 description: "Exfiltrating MySQL data over the network with LOAD_FILE and UNC paths when no in-band channel exists, and why MySQL out-of-band is largely Windows-only."
 keywords:
   - out of band injection

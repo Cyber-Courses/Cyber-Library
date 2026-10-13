@@ -1,5 +1,6 @@
 ---
 title: "Threat Hunting: Proactive Hypothesis-Driven Search"
+order: 5
 description: "How threat hunting proactively searches telemetry for adversary activity that automated detection missed, guided by hypotheses."
 keywords:
   - threat hunting

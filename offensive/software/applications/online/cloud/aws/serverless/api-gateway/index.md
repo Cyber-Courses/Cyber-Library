@@ -1,5 +1,6 @@
 ---
 title: "API Gateway"
+order: 3
 description: "Attacking API Gateway: resource-policy exposure, authorizer bypass, and the integration role that backend calls run under."
 keywords:
   - API Gateway

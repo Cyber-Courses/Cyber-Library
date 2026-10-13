@@ -1,5 +1,6 @@
 ---
 title: "Deployment Scripts: running a container as a chosen user-assigned identity"
+order: 5
 description: "Abusing ARM deploymentScripts, which spin up a container running as a chosen user-assigned managed identity."
 keywords:
   - deploymentScripts

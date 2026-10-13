@@ -1,5 +1,6 @@
 ---
 title: "Authentication: attacking Telnet login"
+order: 1
 description: "Telnet authenticates in cleartext with a username and password, and is attacked through vendor default credentials (rampant on devices), servers configured with no authentication or a direct shell, and brute force against the plaintext login. A valid login gives a terminal, often on network equipment or an embedded device with administrative scope."
 keywords:
   - telnet authentication

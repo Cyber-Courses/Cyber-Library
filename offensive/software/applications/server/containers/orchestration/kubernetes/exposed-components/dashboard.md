@@ -1,5 +1,6 @@
 ---
 title: "Dashboard: cluster control through the web UI and its service account"
+order: 3
 description: "The Kubernetes Dashboard acts with its own service account. Older deployments bound that account to cluster-admin and allowed skipping login, so a reachable dashboard gave full cluster control through the browser. Even current deployments are a target when exposed, since the dashboard's service account and any token entered into it drive the API server."
 keywords:
   - kubernetes dashboard

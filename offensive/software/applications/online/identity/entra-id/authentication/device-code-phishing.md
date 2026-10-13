@@ -1,5 +1,6 @@
 ---
 title: "Device code phishing: capturing tokens through the device-code flow"
+order: 3
 description: "Phishing the Entra OAuth device-code flow: delivering a user code to capture a victim's access and refresh tokens with TokenTactics."
 keywords:
   - device code phishing

@@ -1,5 +1,6 @@
 ---
 title: "Dumping SQL Server login password hashes"
+order: 3
 description: "Extracting SQL Server login password hashes from sys.sql_logins for offline cracking, and the older syslogins and sysxlogins sources."
 keywords:
   - password hash dump

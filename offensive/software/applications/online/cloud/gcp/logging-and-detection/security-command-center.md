@@ -1,5 +1,6 @@
 ---
 title: "Security Command Center: muting and disabling findings"
+order: 3
 description: "Muting or disabling Security Command Center findings and sources to suppress alerting."
 keywords:
   - Security Command Center

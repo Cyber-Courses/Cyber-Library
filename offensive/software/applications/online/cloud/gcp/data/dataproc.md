@@ -1,5 +1,6 @@
 ---
 title: "Dataproc: the cluster service account and job submission"
+order: 4
 description: "Attacking Dataproc clusters: the cluster service account, job submission, and access to staged data."
 keywords:
   - Dataproc

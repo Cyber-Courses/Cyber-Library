@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: detecting WinRM and its configuration"
+order: 1
 description: "WinRM is identified by its listeners on 5985 (HTTP) and 5986 (HTTPS), which respond to a WS-Management probe. Enumeration confirms the service, whether HTTP or HTTPS is used, and which authentication methods are allowed, and a credential check reveals whether a given account can actually reach WinRM and whether it has administrative rights."
 keywords:
   - winrm enumeration

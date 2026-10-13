@@ -1,5 +1,6 @@
 ---
 title: "ALLOW FILTERING abuse: forcing full-cluster CQL scans"
+order: 4
 description: "Appending ALLOW FILTERING to an injected CQL query removes the partition-key restriction, letting an attacker scan every node and read rows beyond the intended partition."
 keywords:
   - ALLOW FILTERING

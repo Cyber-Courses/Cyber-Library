@@ -1,5 +1,6 @@
 ---
 title: "Fortinet FortiOS: FortiGate SSL-VPN path traversal and heap RCE"
+order: 1
 description: "Fortinet FortiGate SSL-VPN (FortiOS) has had pre-authentication flaws reached on the web portal: a path-traversal that reads arbitrary files including the session and credential data, and heap buffer overflows giving remote code execution. Both are unauthenticated and have been exploited at scale for initial access into the internal network."
 keywords:
   - fortinet

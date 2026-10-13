@@ -1,5 +1,6 @@
 ---
 title: "Office and template poisoning: execution when a user opens a document"
+order: 2
 description: "Office documents on a writable share execute attacker content when a user opens them: macro-enabled documents run their VBA, and the global and workgroup templates (Normal.dotm, startup folders) run on every launch. Remote-template and external-reference injection additionally pulls attacker content from a server when a benign-looking document opens."
 keywords:
   - macro

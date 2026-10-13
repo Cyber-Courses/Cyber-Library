@@ -1,5 +1,6 @@
 ---
 title: "containerd and CRI-O: attacking the Kubernetes node runtimes"
+order: 3
 description: "containerd and CRI-O are the runtimes that actually run containers under Kubernetes. Their control sockets, if reachable, give node-level container control equivalent to the Docker socket, their clients (ctr, crictl) enumerate everything on the node, and the image-pull credentials they hold unlock private registries."
 keywords:
   - containerd

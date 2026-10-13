@@ -1,5 +1,6 @@
 ---
 title: "Agent remote commands: executing against the Zabbix agent"
+order: 5
 description: "The Zabbix agent on TCP 10050 answers item requests, and where remote commands are permitted it runs system.run directly. An attacker who can reach an agent sends a system.run request with zabbix_get and the command executes on that host as the agent's account, no server or login required, so an exposed, permissively-configured agent is direct code execution."
 keywords:
   - zabbix agent

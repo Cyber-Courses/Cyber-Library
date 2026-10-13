@@ -1,5 +1,6 @@
 ---
 title: "XQuery library function abuse: file read, SSRF, and command execution"
+order: 2
 description: "Reachable built-in and vendor functions like doc(), fn:collection(), fn:unparsed-text(), and BaseX proc:system turn an injection into file read, SSRF, and RCE."
 keywords:
   - XQuery function abuse

@@ -1,5 +1,6 @@
 ---
 title: "Managed identity: minting the function app's token"
+order: 1
 description: "Executing in an Azure Function to mint and use the function app's managed-identity token."
 keywords:
   - Function managed identity

@@ -1,5 +1,6 @@
 ---
 title: "PHP filter chains to RCE: synthesizing a payload from conversion filters"
+order: 2
 description: "Turning a php://filter read primitive into remote code execution by chaining convert.iconv filters to generate arbitrary bytes, without needing any file on disk."
 keywords:
   - php filter chain

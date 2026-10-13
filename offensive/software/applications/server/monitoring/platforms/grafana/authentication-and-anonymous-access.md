@@ -1,5 +1,6 @@
 ---
 title: "Authentication and anonymous access: reaching Grafana"
+order: 1
 description: "Grafana ships with admin/admin and, where configured, allows anonymous access that grants a viewer (or higher) role without login. Default credentials, weak passwords, and an over-permissive anonymous organization role each give access to dashboards and, with enough privilege, to the data sources and their stored credentials."
 keywords:
   - grafana admin

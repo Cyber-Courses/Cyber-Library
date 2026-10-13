@@ -1,5 +1,6 @@
 ---
 title: "Entra tenant"
+order: 6
 description: "Crossing Entra tenant boundaries: B2B guest access and cross-tenant access policies that expose resources to external identities."
 keywords:
   - tenant

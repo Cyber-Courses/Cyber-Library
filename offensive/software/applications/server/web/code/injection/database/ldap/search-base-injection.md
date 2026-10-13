@@ -1,5 +1,6 @@
 ---
 title: "LDAP search base injection"
+order: 3
 description: "Controlling the search base or scope an application passes to an LDAP query so it reads a wider or different partition of the directory than intended."
 keywords:
   - search base injection

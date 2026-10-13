@@ -1,5 +1,6 @@
 ---
 title: "MSSQL enumeration: instances, logins, and privileges"
+order: 1
 description: "Discovering SQL Server instances and versions, enumerating logins, databases, and roles, and establishing exactly which privileges and impersonation rights the current principal holds before attempting execution or escalation."
 keywords:
   - MSSQL enumeration

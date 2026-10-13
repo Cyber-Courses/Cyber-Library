@@ -1,5 +1,6 @@
 ---
 title: "Data Factory: pipelines and linked services as the factory identity"
+order: 3
 description: "Abusing Azure Data Factory: pipelines and linked services that run as the factory's managed identity, and stored connection secrets."
 keywords:
   - Data Factory

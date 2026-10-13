@@ -1,5 +1,6 @@
 ---
 title: "VPC: pivoting through networks, peering, and shared VPC"
+order: 2
 description: "Pivoting through VPC networks, peering, and shared VPC to reach internal instances and services."
 keywords:
   - VPC

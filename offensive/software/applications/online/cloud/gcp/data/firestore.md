@@ -1,5 +1,6 @@
 ---
 title: "Firestore: reading collections through broad IAM and security-rule gaps"
+order: 6
 description: "Attacking Firestore and Datastore: reading and writing collections through broad database IAM or security-rule gaps."
 keywords:
   - Firestore

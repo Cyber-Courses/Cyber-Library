@@ -1,5 +1,6 @@
 ---
 title: "Password spraying: guessing credentials within Smart Lockout"
+order: 2
 description: "Spraying credentials against Entra sign-in endpoints while respecting Smart Lockout: MSOLSpray and AADInternals against Graph, Autologon, and legacy-auth endpoints."
 keywords:
   - password spraying

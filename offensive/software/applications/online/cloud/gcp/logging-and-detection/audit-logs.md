@@ -1,5 +1,6 @@
 ---
 title: "Audit Logs: disabling data-access logging"
+order: 2
 description: "Disabling or narrowing Cloud Audit Logs, especially data-access logs, to hide API calls."
 keywords:
   - Cloud Audit Logs

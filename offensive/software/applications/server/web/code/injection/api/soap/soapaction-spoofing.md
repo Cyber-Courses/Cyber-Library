@@ -1,5 +1,6 @@
 ---
 title: "SOAPAction spoofing"
+order: 1
 description: "When routing or authorization is keyed on the SOAPAction header while execution reads the body's operation, a request authorized for one action runs a different one on a shared endpoint."
 keywords:
   - SOAPAction spoofing

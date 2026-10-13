@@ -1,5 +1,6 @@
 ---
 title: "Webmail: attacking the web front end over an IMAP and SMTP backend"
+order: 3
 description: "Webmail is an HTTP application sitting over an IMAP/SMTP mail store, so it is attacked as a web app (stored XSS in message rendering, SSRF, auth bypass, file write to RCE) and as a reachable mail backend behind it. Fingerprint the product from the login page, then navigate to Roundcube, Horde, or Zimbra."
 keywords:
   - webmail

@@ -1,5 +1,6 @@
 ---
 title: "binfmt_misc: registering an interpreter the kernel invokes for a file format"
+order: 4
 description: "binfmt_misc lets userspace register interpreters for binary formats by writing to /proc/sys/fs/binfmt_misc/register. A container with that interface mounted writable registers an interpreter pointing at its payload, so that when a matching file is executed the kernel runs the interpreter. Useful where the host later executes a matching binary, with important execution-context caveats."
 keywords:
   - binfmt_misc

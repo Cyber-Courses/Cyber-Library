@@ -1,5 +1,6 @@
 ---
 title: "Private endpoints: reaching PaaS over internal addresses"
+order: 3
 description: "Abusing Azure Private Link and private endpoints to reach PaaS resources over internal addresses."
 keywords:
   - private endpoint

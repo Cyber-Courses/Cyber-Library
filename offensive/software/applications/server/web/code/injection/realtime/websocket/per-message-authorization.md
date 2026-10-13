@@ -1,5 +1,6 @@
 ---
 title: "Per-message authorization"
+order: 1
 description: "WebSocket connections authorized only at the handshake, so individual frames are trusted and can act as other users or invoke privileged actions."
 keywords:
   - per-message authorization

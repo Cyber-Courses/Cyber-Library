@@ -1,5 +1,6 @@
 ---
 title: "Shared folder and clipboard abuse: escaping VirtualBox through Guest Additions"
+order: 2
 description: "VirtualBox Guest Additions provide shared folders, a shared clipboard, and drag-and-drop over the Host-Guest Communication Manager (HGCM). The host-side HGCM services parse guest-supplied requests in the VM process, and shared folders expose host paths, so both the HGCM parsing and the shared-folder path handling have yielded guest-to-host escapes and host file access."
 keywords:
   - guest additions

@@ -1,5 +1,6 @@
 ---
 title: "Firecracker: attacking the AWS microVM monitor"
+order: 1
 description: "Firecracker emulates only virtio-block, virtio-net, virtio-vsock, a serial console, and a minimal controller set, and is written in Rust with a seccomp jailer. The guest-to-host surface is those virtio devices and their virtqueue handling; the host side adds the REST control API and the jailer configuration, where misconfiguration or a logic flaw weakens the intended isolation."
 keywords:
   - firecracker

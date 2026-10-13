@@ -1,5 +1,6 @@
 ---
 title: "LAPS: reading local-administrator passwords from the directory"
+order: 2
 description: "Recovering machine local-administrator passwords that LAPS stores in Active Directory: the legacy ms-Mcs-AdmPwd cleartext attribute and the Windows LAPS msLAPS-Password / msLAPS-EncryptedPassword attributes, read over LDAP with a sufficient ACE."
 keywords:
   - LAPS

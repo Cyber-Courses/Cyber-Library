@@ -1,5 +1,6 @@
 ---
 title: "MongoDB array-operator injection with attacker-supplied arrays"
+order: 2
 description: "Injecting $in, $nin, $all, and $elemMatch from attacker-controlled arrays widens matches, enumerates candidate values, and probes array fields."
 keywords:
   - array operators

@@ -1,5 +1,6 @@
 ---
 title: "Enumeration"
+order: 1
 description: "Harvesting a Rocket.Chat server through the REST API and DDP: reading settings.public unauthenticated, paging /api/v1/users.list and /api/v1/channels.list, pulling the directory through /api/v1/spotlight, and calling Meteor DDP methods over the websocket. Worked curl with X-Auth-Token and X-User-Id headers and interpretation of the JSON, with the version read from /api/info."
 keywords:
   - rocket.chat enumeration

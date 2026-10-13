@@ -1,5 +1,6 @@
 ---
 title: "Access tokens: looting cached az and MSAL tokens"
+order: 4
 description: "Looting cached Azure access and refresh tokens from the az cli .azure directory, MSAL caches, and token brokers."
 keywords:
   - access token

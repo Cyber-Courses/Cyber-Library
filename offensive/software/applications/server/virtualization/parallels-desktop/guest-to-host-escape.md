@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of a Parallels virtual machine"
+order: 1
 description: "A Parallels guest escapes by corrupting the host-side Parallels processes that emulate the VM's devices and service the guest-host channels. The reachable surface is the emulated devices, graphics, network, USB, and storage, and the Parallels Tools communication interfaces, with a flaw yielding code execution on the macOS host at the privilege of the Parallels process."
 keywords:
   - parallels escape

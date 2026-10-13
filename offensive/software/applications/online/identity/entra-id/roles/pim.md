@@ -1,5 +1,6 @@
 ---
 title: "PIM: activating eligible privileged roles"
+order: 2
 description: "Abusing Privileged Identity Management: activating eligible roles, exploiting weak activation approval, and standing-eligible assignments for just-in-time escalation."
 keywords:
   - PIM

@@ -1,5 +1,6 @@
 ---
 title: "Unrestricted upload: planting a web shell"
+order: 2
 description: "Defeating extension, Content-Type, and magic-byte checks to store an executable script in a web-served path, then requesting it for remote code execution."
 keywords:
   - unrestricted file upload

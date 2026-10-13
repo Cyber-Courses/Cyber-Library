@@ -1,5 +1,6 @@
 ---
 title: "Lightsail: instances and snapshots outside IAM visibility"
+order: 9
 description: "Abusing Lightsail instances, keys, and snapshots that sit outside the main VPC and IAM visibility."
 keywords:
   - Lightsail

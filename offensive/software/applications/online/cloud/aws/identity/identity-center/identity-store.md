@@ -1,5 +1,6 @@
 ---
 title: "Identity Store: adding users and group membership"
+order: 2
 description: "Abusing the Identity Center Identity Store to add or modify users and group membership and inherit their access."
 keywords:
   - Identity Store

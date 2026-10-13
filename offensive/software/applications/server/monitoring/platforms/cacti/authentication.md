@@ -1,5 +1,6 @@
 ---
 title: "Authentication: the default admin and weak Cacti credentials"
+order: 1
 description: "Cacti installs with a default admin account (admin/admin), and although newer versions force a password change on first login, many instances retain weak or guessable passwords. A web login grants access to the data sources and settings that hold device credentials and to the authenticated vulnerability paths that reach code execution."
 keywords:
   - cacti admin

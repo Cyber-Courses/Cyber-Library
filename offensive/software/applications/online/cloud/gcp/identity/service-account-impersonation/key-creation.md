@@ -1,5 +1,6 @@
 ---
 title: "Key creation: mint a long-lived key for a service account"
+order: 3
 description: "Creating a long-lived JSON key for a target service account with iam.serviceAccountKeys.create for durable access and persistence."
 keywords:
   - serviceAccountKeys.create

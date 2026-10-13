@@ -1,5 +1,6 @@
 ---
 title: "Monitoring: attacking monitoring and observability infrastructure"
+order: 6
 description: "Monitoring systems are a high-value target because they hold credentials for and reach into the whole estate they watch. The area splits into the telemetry protocols (SNMP, syslog, NetFlow/IPFIX) and the platforms that collect and visualize them (Zabbix, Nagios, PRTG, Cacti, LibreNMS, Grafana, Prometheus, SolarWinds), each a path to information, credentials, and code execution."
 keywords:
   - monitoring

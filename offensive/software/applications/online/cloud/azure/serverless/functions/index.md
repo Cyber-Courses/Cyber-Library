@@ -1,5 +1,6 @@
 ---
 title: "Functions"
+order: 1
 description: "Abusing Azure Functions: running as the app's managed identity and recovering function and host keys."
 keywords:
   - Azure Functions

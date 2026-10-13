@@ -1,5 +1,6 @@
 ---
 title: "INSERT-based SQL injection in MySQL"
+order: 5
 description: "Exploiting injection inside a MySQL INSERT statement: leaking data through error functions in VALUES and overwriting rows with ON DUPLICATE KEY UPDATE."
 keywords:
   - INSERT injection

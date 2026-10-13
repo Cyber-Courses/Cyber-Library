@@ -1,5 +1,6 @@
 ---
 title: "Role assumption"
+order: 3
 description: "Assuming AWS IAM roles through sts:AssumeRole: cross-account access and confused-deputy abuse of over-broad trust policies and missing external IDs."
 keywords:
   - AssumeRole

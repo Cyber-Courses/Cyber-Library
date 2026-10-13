@@ -1,5 +1,6 @@
 ---
 title: "Backup Operators: reading NTDS.dit with SeBackupPrivilege"
+order: 9
 description: "Abusing membership of the Backup Operators group, which grants SeBackupPrivilege, to read files past their ACLs and extract NTDS.dit and the SYSTEM hive from a domain controller, yielding every domain hash."
 keywords:
   - Backup Operators

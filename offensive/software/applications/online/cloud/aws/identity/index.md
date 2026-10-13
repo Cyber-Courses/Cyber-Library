@@ -1,5 +1,6 @@
 ---
 title: "AWS identity"
+order: 1
 description: "AWS identity and access attacks: enumerating IAM principals and policies, the full privilege-escalation path catalog, cross-account role assumption and federation, and the Cognito, Identity Center, and Organizations identity layers."
 keywords:
   - IAM

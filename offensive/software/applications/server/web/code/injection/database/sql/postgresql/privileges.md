@@ -1,5 +1,6 @@
 ---
 title: "Enumerating roles and privileges in PostgreSQL injection"
+order: 6
 description: "Reading the current PostgreSQL role, its superuser status, and its grants, to decide whether file and command execution primitives are reachable."
 keywords:
   - PostgreSQL privileges

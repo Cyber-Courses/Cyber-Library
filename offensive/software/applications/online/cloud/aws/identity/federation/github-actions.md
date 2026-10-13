@@ -1,5 +1,6 @@
 ---
 title: "GitHub Actions: assuming roles through a loose OIDC subject"
+order: 3
 description: "Abusing a loosely-scoped GitHub Actions OIDC trust (wildcard subject claim) to assume a role from an attacker-controlled workflow."
 keywords:
   - GitHub Actions

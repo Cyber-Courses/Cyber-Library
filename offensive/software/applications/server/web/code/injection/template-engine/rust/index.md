@@ -1,5 +1,6 @@
 ---
 title: "Rust server-side template injection"
+order: 8
 description: "SSTI in Rust template engines: Tera's runtime-parsed expressions, why compile-time engines are not injectable, and the information-disclosure ceiling Tera's sandbox imposes."
 keywords:
   - Rust SSTI

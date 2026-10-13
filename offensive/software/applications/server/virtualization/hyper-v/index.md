@@ -1,5 +1,6 @@
 ---
 title: "Hyper-V: attacking the Microsoft hypervisor"
+order: 1
 description: "Hyper-V is a type-1 hypervisor where guests communicate with the root partition over VMBus. The guest-to-host escape surface is the synthetic devices and the VMBus channels serviced by the VSPs in the root partition and the worker process, plus the management plane through WMI and PowerShell, and theft of checkpoints and VHD virtual disks."
 keywords:
   - hyper-v

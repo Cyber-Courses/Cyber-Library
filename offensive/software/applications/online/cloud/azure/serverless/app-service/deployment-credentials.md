@@ -1,5 +1,6 @@
 ---
 title: "Deployment credentials: publishing profiles that push code"
+order: 2
 description: "Recovering App Service publishing profiles and deployment credentials to push code and read config."
 keywords:
   - deployment credentials

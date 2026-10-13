@@ -1,5 +1,6 @@
 ---
 title: "Version detection: which SNMP versions an agent accepts"
+order: 1
 description: "An agent may answer SNMPv1, v2c, v3, or several at once, and the version decides the attack. Probing each version and observing which return data, and whether v3 is offered, reveals the exposure: a device still accepting v1/v2c is attackable by community string even if v3 is also configured, which is the common downgrade opportunity."
 keywords:
   - snmp version detection

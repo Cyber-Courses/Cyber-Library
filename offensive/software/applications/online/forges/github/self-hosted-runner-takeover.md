@@ -1,5 +1,6 @@
 ---
 title: "Self-hosted runner takeover: RCE and persistence on CI runner hosts"
+order: 5
 description: "Gaining code execution on non-ephemeral self-hosted GitHub Actions runners through pull request workflows, registering a rogue runner with a leaked registration token, looting the runner work and credential directories, and pivoting into the internal network."
 keywords:
   - self-hosted runner

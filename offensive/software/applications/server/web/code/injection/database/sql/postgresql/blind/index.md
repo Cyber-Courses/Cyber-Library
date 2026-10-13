@@ -1,5 +1,6 @@
 ---
 title: "Boolean-based blind SQL injection in PostgreSQL"
+order: 1
 description: "Inferring PostgreSQL data one character at a time from true/false differences in the response when no rows or errors are reflected."
 keywords:
   - boolean based blind

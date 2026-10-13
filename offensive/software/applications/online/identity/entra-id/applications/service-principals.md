@@ -1,5 +1,6 @@
 ---
 title: "Service principals: hijacking app identities"
+order: 1
 description: "Abusing Entra service principals: enumerating and hijacking app identities, adding credentials, and using highly privileged app roles as a persistence and escalation foothold."
 keywords:
   - service principal

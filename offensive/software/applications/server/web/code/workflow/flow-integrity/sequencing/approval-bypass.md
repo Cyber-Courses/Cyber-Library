@@ -1,5 +1,6 @@
 ---
 title: "Approval bypass in workflows: self-approval, weak approver binding, stale tokens, and segregation-of-duties gaps"
+order: 4
 description: "Circumventing human or system approval steps: weak approver binding, self-approval, stale tokens, or missing segregation of duties in APIs."
 keywords:
   - approval bypass

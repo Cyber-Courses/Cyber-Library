@@ -1,5 +1,6 @@
 ---
 title: "App Service"
+order: 4
 description: "Attacking Azure App Service web apps: the Kudu and SCM console, deployment credentials, and the app's managed identity."
 keywords:
   - App Service

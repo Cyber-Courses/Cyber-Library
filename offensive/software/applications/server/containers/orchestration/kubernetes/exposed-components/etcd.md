@@ -1,5 +1,6 @@
 ---
 title: "etcd: reading the entire cluster state and secrets from the datastore"
+order: 2
 description: "etcd is the key-value store that holds all Kubernetes state, including every secret in clear or trivially decoded form. A reachable etcd without client-certificate authentication, or with leaked peer certificates, lets an attacker read every secret and service-account token in the cluster and write arbitrary objects, which is total cluster compromise."
 keywords:
   - etcd

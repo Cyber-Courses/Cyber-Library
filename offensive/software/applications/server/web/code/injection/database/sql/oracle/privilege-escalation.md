@@ -1,5 +1,6 @@
 ---
 title: "Privilege escalation in Oracle injection"
+order: 10
 description: "Escalating from a low-privileged Oracle schema to DBA through definer-rights package injection, dangerous system privileges, and role abuse."
 keywords:
   - Oracle privilege escalation

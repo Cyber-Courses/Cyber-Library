@@ -1,5 +1,6 @@
 ---
 title: "Community strings: obtaining SNMP access"
+order: 1
 description: "On SNMPv1 and v2c the community string is the only credential: a read string permits querying, a read-write string permits reconfiguration. Strings are obtained the same ways weak credentials always are, by trying the near-universal defaults, guessing weak or predictable values, and brute-forcing with a wordlist, and a working string is the whole access."
 keywords:
   - community string

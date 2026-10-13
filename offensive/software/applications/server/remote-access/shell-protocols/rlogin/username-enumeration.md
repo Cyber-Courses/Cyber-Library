@@ -1,5 +1,6 @@
 ---
 title: "Username enumeration: discovering valid rlogin accounts"
+order: 3
 description: "rlogin's login flow can reveal which usernames are valid: the service's handling of trusted versus untrusted and existing versus non-existent accounts differs, so the prompt behaviour distinguishes real users. A validated user list focuses trust-abuse and password attacks on accounts that exist."
 keywords:
   - username enumeration

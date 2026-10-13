@@ -1,5 +1,6 @@
 ---
 title: "Directory services: attacking Active Directory and LDAP directories"
+order: 3
 description: "Offensive techniques against directory services: the Active Directory attack surface (enumeration, authentication and credential abuse, ACLs, trusts, persistence) and generic LDAP directory attacks."
 keywords:
   - active directory

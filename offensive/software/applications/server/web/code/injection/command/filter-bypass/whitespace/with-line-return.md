@@ -1,5 +1,6 @@
 ---
 title: "Newline injection: using a line return as a command terminator in sh -c"
+order: 2
 description: "Injecting a raw or URL-encoded newline (%0a, \\n) to terminate the intended command and start a new one inside sh -c, bypassing filters that only block ; | &."
 keywords:
   - command injection

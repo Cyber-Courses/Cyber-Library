@@ -1,5 +1,6 @@
 ---
 title: "Logic Apps: calling ARM and Graph as the workflow identity"
+order: 2
 description: "Abusing Azure Logic Apps: adding a workflow step that calls ARM or Graph as the workflow's managed identity, and reading connector credentials."
 keywords:
   - Logic Apps

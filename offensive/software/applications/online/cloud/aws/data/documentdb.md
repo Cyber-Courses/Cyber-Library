@@ -1,5 +1,6 @@
 ---
 title: "DocumentDB: reaching Mongo-compatible clusters through exposure"
+order: 6
 description: "Reaching DocumentDB clusters through exposed endpoints and weak credentials to read Mongo-compatible data."
 keywords:
   - DocumentDB

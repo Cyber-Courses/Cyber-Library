@@ -1,5 +1,6 @@
 ---
 title: "Drizzle operator injection"
+order: 2
 description: "Building a Drizzle where clause by choosing a column or operator from untrusted input, or spreading an untrusted filter, lets a caller change which rows match beyond the intended predicate."
 keywords:
   - Drizzle where

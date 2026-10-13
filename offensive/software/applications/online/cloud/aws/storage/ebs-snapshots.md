@@ -1,5 +1,6 @@
 ---
 title: "EBS snapshots: restoring public or shared block-storage snapshots"
+order: 2
 description: "Finding public or shared EBS snapshots and restoring them to read volumes you were never granted."
 keywords:
   - EBS

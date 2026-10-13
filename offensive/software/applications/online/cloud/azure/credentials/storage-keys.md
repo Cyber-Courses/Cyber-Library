@@ -1,5 +1,6 @@
 ---
 title: "Storage keys: listKeys for full data-plane access"
+order: 3
 description: "Recovering Azure storage account keys through listKeys to gain full data-plane access to blobs, files, tables, and queues."
 keywords:
   - storage account key

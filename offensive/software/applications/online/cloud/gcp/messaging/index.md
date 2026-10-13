@@ -1,5 +1,6 @@
 ---
 title: "GCP messaging"
+order: 9
 description: "Abusing GCP messaging: Pub/Sub topic and subscription access and Cloud Tasks queues for data capture and injection."
 keywords:
   - Pub/Sub

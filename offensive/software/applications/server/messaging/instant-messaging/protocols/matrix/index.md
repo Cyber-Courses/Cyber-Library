@@ -1,5 +1,6 @@
 ---
 title: "Matrix: attacking homeservers over the client-server and federation APIs"
+order: 3
 description: "Matrix homeservers (Synapse, Dendrite, Conduit) expose an HTTP/JSON client-server API on 8008 or 443 and a federation API on 8448, with .well-known delegation pointing clients and servers at the real host. The surface is unauthenticated version and registration probing, open registration and shared-secret admin registration, media-repository SSRF, and federation request abuse."
 keywords:
   - Matrix

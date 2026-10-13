@@ -1,5 +1,6 @@
 ---
 title: "Mutating webhook backdoor: injecting into every matching object"
+order: 6
 description: "A mutating admission webhook rewrites objects as the API server admits them. An attacker who controls one injects a sidecar, volume, or environment into every matching pod, adds credentials or image-pull secrets, or alters security contexts cluster-wide. Because it acts on creation, it backdoors future workloads automatically and persists as long as the configuration exists."
 keywords:
   - mutating webhook

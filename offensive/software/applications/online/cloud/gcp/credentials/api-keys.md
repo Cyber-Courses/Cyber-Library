@@ -1,5 +1,6 @@
 ---
 title: "API keys: creating and listing Google API keys"
+order: 7
 description: "Creating or listing Google API keys with serviceusage.apiKeys.create and list for durable, unscoped API access."
 keywords:
   - API keys

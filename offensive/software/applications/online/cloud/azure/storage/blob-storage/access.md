@@ -1,5 +1,6 @@
 ---
 title: "Access: reading blobs through keys, RBAC, or anonymous access"
+order: 2
 description: "Reading and writing Azure blobs through account keys, RBAC data roles, or misconfigured anonymous access."
 keywords:
   - blob access

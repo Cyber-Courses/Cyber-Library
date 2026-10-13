@@ -1,5 +1,6 @@
 ---
 title: "GitLab"
+order: 2
 description: "Attacking GitLab as a hosted forge: enumerating groups, projects, members, and CI/CD variables through the v4 REST and GraphQL APIs, injecting jobs into .gitlab-ci.yml, taking over shared and Docker-executor runners, abusing personal, project, group, deploy, and CI job tokens, and leveraging published self-managed account-takeover and upload RCE weaknesses."
 keywords:
   - GitLab

@@ -1,5 +1,6 @@
 ---
 title: "Consent phishing: the illicit consent grant"
+order: 2
 description: "Illicit consent grant attacks: luring users or admins into consenting to a malicious OAuth app that captures Graph-scoped tokens and mailbox access."
 keywords:
   - consent phishing

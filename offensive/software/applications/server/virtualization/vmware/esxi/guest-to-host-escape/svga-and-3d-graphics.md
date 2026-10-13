@@ -1,5 +1,6 @@
 ---
 title: "SVGA and 3D graphics: escaping ESXi through the graphics device"
+order: 1
 description: "The VMware SVGA II device exposes a command FIFO and a 3D rendering interface that the guest driver fills with commands and surface definitions. The vmx process parses that guest-controlled stream, including shader and surface operations, so a memory-safety flaw in 3D command handling yields an out-of-bounds write in the host process, a recurring guest-to-host escape."
 keywords:
   - svga

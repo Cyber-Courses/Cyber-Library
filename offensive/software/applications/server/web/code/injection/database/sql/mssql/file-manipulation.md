@@ -1,5 +1,6 @@
 ---
 title: "Reading and writing files through MSSQL injection"
+order: 5
 description: "File read and write primitives in SQL Server injection: OPENROWSET BULK for reads, and xp_cmdshell, OLE streams, and bcp for writes, with the rights each needs."
 keywords:
   - OPENROWSET BULK

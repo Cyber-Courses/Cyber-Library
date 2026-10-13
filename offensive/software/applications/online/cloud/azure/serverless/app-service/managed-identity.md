@@ -1,5 +1,6 @@
 ---
 title: "Managed identity: minting the App Service token"
+order: 3
 description: "Minting the App Service managed-identity token from the app's local identity endpoint."
 keywords:
   - App Service managed identity

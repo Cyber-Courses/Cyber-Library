@@ -1,5 +1,6 @@
 ---
 title: "Backslash-newline line continuation to split a command across lines"
+order: 3
 description: "Using backslash followed by a newline to break a keyword or command across physical lines so a literal blocklist misses it while the shell rejoins and executes it."
 keywords:
   - command injection

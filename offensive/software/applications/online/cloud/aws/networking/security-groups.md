@@ -1,5 +1,6 @@
 ---
 title: "Security groups: finding internet-exposed ports and services"
+order: 1
 description: "Mapping and abusing over-permissive security groups that expose management ports and internal services to the internet."
 keywords:
   - security group

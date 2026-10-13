@@ -1,5 +1,6 @@
 ---
 title: "Intra-forest trusts: crossing domains inside a forest"
+order: 2
 description: "Moving from a child or sibling Active Directory domain to the forest root by injecting a privileged SID into a forged ticket, because intra-forest trusts do not apply SID filtering and the forest, not the domain, is the security boundary."
 keywords:
   - intra-forest trust

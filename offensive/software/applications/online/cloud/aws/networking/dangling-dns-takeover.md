@@ -1,5 +1,6 @@
 ---
 title: "Dangling-DNS takeover: claiming an orphaned record's backing resource"
+order: 5
 description: "Claiming the backing resource of a dangling DNS record (S3, CloudFront, or ELB origin) to take over the subdomain."
 keywords:
   - dangling DNS

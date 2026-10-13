@@ -1,5 +1,6 @@
 ---
 title: "Elasticsearch blind boolean data extraction"
+order: 4
 description: "When only hit-or-no-hit is observable, crafted field conditions on query_string, Query DSL, or script queries let an attacker infer and extract document values character by character."
 keywords:
   - blind injection

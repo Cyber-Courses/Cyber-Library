@@ -1,5 +1,6 @@
 ---
 title: "Pod escape to node: breaking out of a pod onto its worker"
+order: 4
 description: "A pod that is over-privileged escapes to its worker node with no exploit: a privileged pod, a hostPath mount of the node filesystem, shared host namespaces, or access to the kubelet's credentials each give node root. Owning the node then exposes every other pod's secrets and the kubelet credentials that pivot to the cluster."
 keywords:
   - pod escape

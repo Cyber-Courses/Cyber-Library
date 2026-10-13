@@ -1,5 +1,6 @@
 ---
 title: "Phar deserialization: object injection via phar:// on file operations"
+order: 3
 description: "Reaching PHP object injection without an unserialize() call by triggering deserialization of Phar archive metadata when a file function touches a phar:// path."
 keywords:
   - phar deserialization

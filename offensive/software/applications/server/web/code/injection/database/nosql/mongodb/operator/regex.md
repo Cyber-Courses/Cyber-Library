@@ -1,5 +1,6 @@
 ---
 title: "MongoDB $regex for anchored extraction and ReDoS"
+order: 4
 description: "The $regex operator anchors patterns to recover string fields character by character and, with catastrophic patterns, drives regex denial of service."
 keywords:
   - $regex

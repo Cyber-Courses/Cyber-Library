@@ -1,5 +1,6 @@
 ---
 title: "Certificates: abusing AD Certificate Services"
+order: 4
 description: "Abusing Active Directory Certificate Services for authentication and privilege escalation: enrolling for certificates that impersonate privileged accounts, abusing CA configuration and access control, relaying to enrollment, and stealing certificates."
 keywords:
   - AD CS

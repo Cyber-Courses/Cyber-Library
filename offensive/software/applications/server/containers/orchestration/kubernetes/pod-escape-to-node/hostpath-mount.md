@@ -1,5 +1,6 @@
 ---
 title: "hostPath mount: node access through a mounted node directory"
+order: 2
 description: "A pod with a hostPath volume mounts a directory from the worker node into the container. Depending on the path, this exposes the node root filesystem, the kubelet credentials and pod token directories, the container runtime socket, or the host /etc, each giving node compromise without any capability or exploit."
 keywords:
   - hostpath

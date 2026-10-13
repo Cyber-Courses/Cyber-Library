@@ -1,5 +1,6 @@
 ---
 title: "Federation: Workload Identity Federation into a service account"
+order: 4
 description: "Entering GCP through Workload Identity Federation: exchanging an external OIDC or AWS and Azure token for a Google service-account token without a key."
 keywords:
   - workload identity federation

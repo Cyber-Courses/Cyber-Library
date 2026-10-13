@@ -1,5 +1,6 @@
 ---
 title: "Scale sets: run command and extensions across every instance"
+order: 5
 description: "Running commands and extensions across an Azure VM Scale Set to reach every instance and its managed identity."
 keywords:
   - VMSS

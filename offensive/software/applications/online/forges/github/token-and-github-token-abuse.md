@@ -1,5 +1,6 @@
 ---
 title: "Token and GITHUB_TOKEN abuse: turning CI tokens and leaked PATs into pushes and cloud roles"
+order: 3
 description: "Using the Actions GITHUB_TOKEN and its permission scoping, the workflow scope that lets you push malicious pipelines, leaked classic and fine-grained personal access tokens, reading granted scopes from response headers, and trading an OIDC token for a cloud role."
 keywords:
   - GITHUB_TOKEN

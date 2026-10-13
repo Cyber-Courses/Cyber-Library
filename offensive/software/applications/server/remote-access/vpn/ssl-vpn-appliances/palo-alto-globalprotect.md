@@ -1,5 +1,6 @@
 ---
 title: "Palo Alto GlobalProtect: unauthenticated RCE on the gateway"
+order: 3
 description: "Palo Alto GlobalProtect and the PAN-OS management interface have had unauthenticated remote code execution flaws, including command injection reachable on the GlobalProtect portal and gateway. Exploited for initial access, they give code execution as a privileged account on the firewall, which fronts and routes into the internal network."
 keywords:
   - palo alto

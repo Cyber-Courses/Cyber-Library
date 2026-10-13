@@ -1,5 +1,6 @@
 ---
 title: "ViewState deserialization: forging __VIEWSTATE with a leaked machineKey"
+order: 4
 description: "Reaching code execution on Exchange ECP by forging a __VIEWSTATE blob signed with a static or leaked ASP.NET machineKey (validationKey and decryptionKey from web.config), so the ECP app pool deserializes attacker-controlled .NET objects via BinaryFormatter and runs code as the Exchange identity. Uses ysoserial.net to build the payload."
 keywords:
   - ViewState deserialization

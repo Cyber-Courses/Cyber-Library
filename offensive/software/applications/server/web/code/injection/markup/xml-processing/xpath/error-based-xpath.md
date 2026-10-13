@@ -1,5 +1,6 @@
 ---
 title: "Error-based XPath extraction"
+order: 3
 description: "Forcing a cast or type failure in an XPath 2.0 processor embeds node text in the error message, turning a verbose engine into a direct, non-blind extraction channel."
 keywords:
   - error-based XPath

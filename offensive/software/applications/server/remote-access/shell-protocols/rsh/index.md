@@ -1,5 +1,6 @@
 ---
 title: "rsh: attacking the remote shell service"
+order: 5
 description: "rsh (rshd on TCP 514) executes a command or opens a shell on a remote host, authenticating by the host-based trust in .rhosts and /etc/hosts.equiv rather than a password. An attacker abuses that trust, by writing a .rhosts file, exploiting a permissive hosts.equiv, or spoofing a trusted source IP, to run commands with no credential, and intercepts the cleartext session."
 keywords:
   - rsh

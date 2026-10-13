@@ -1,5 +1,6 @@
 ---
 title: "Runner takeover"
+order: 5
 description: "Getting code execution on GitLab runners through a controlled CI job, escaping the Docker executor when it runs privileged or mounts the host socket, reaching co-tenant project data on a shared runner, and registering a rogue runner with a leaked registration token to capture future jobs."
 keywords:
   - GitLab runner

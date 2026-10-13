@@ -1,5 +1,6 @@
 ---
 title: "Mail flow persistence: transport rules, journaling, and forwarding"
+order: 7
 description: "Durable org-wide mail exfiltration from an Exchange-admin context: server-side transport rules that blind-copy all mail to an external address, journal rules that archive a mailbox or scope to an external target, and mailbox-level forwarding with Set-Mailbox and inbox rules, all surviving the victim's password reset."
 keywords:
   - transport rule

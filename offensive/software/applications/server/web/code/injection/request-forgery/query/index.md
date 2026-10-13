@@ -1,5 +1,6 @@
 ---
 title: "Query: parameter-level SSRF allowlist bypasses"
+order: 3
 description: "When the fetched URL is built from query parameters, redirects and parameter pollution defeat an allowlist after it has already approved the request."
 keywords:
   - SSRF query parameter

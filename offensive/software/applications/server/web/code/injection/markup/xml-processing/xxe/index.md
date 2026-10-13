@@ -1,5 +1,6 @@
 ---
 title: "XML external entity injection"
+order: 1
 description: "XML parsers that resolve DTDs and external entities let an attacker read local files, reach internal services, and amplify input into denial of service."
 keywords:
   - XXE

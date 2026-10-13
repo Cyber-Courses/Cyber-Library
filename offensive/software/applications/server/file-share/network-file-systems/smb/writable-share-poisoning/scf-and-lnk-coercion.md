@@ -1,5 +1,6 @@
 ---
 title: "SCF and LNK coercion: forcing authentication when a folder is browsed"
+order: 1
 description: "SCF and LNK files placed on a writable share can reference an icon or target by UNC path on an attacker host. When a user merely browses the folder in Explorer, the client resolves those references and authenticates to the attacker, capturing the NTLM hash or feeding an NTLM relay, with no file opened or executed."
 keywords:
   - scf file

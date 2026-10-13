@@ -1,5 +1,6 @@
 ---
 title: "Anonymous API access: unauthenticated requests the API server honours"
+order: 4
 description: "When the API server runs with anonymous authentication enabled and a binding grants the system:anonymous user or system:unauthenticated group any rights, unauthenticated callers can act. Historically some clusters bound these to powerful roles; even read access to secrets or discovery through an anonymous identity is a foothold with no credential at all."
 keywords:
   - anonymous-auth

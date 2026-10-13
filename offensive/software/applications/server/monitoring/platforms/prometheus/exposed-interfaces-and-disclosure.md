@@ -1,5 +1,6 @@
 ---
 title: "Exposed interfaces and disclosure: reading an open Prometheus"
+order: 1
 description: "Prometheus exposes, without authentication, the list of scrape targets, the full scrape configuration, the runtime flags, and all collected metrics. The targets and config map the internal environment and frequently embed credentials (basic-auth and bearer tokens in scrape configs), and the metrics themselves leak host inventory and secrets placed in labels."
 keywords:
   - prometheus disclosure

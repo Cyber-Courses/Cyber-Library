@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the AHV node and Controller VM"
+order: 1
 description: "An AHV deployment has two shells worth reaching: the AHV hypervisor node itself and the Controller VM that runs the storage fabric and management services. Access comes from a guest escape, node or CVM credentials, or SSH, and the Controller VM is the higher-value target because it mediates storage and control for the node and connects to the cluster."
 keywords:
   - ahv host

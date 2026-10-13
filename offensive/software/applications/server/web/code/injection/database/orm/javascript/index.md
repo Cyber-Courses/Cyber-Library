@@ -1,5 +1,6 @@
 ---
 title: "JavaScript ORM injection"
+order: 1
 description: "Node and TypeScript ORMs (Sequelize, Prisma, Drizzle, TypeORM) parameterize by default, but their raw-query escape hatches and attacker-controlled operator or filter objects reopen SQL injection and query-logic abuse."
 keywords:
   - JavaScript ORM

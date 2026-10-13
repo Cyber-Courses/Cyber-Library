@@ -1,5 +1,6 @@
 ---
 title: "Entra authentication"
+order: 1
 description: "Breaking into an Entra tenant through sign-in: user and tenant enumeration, password spraying, device-code and token phishing, primary refresh tokens, and conditional-access and MFA bypass."
 keywords:
   - Entra authentication

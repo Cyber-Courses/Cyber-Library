@@ -1,5 +1,6 @@
 ---
 title: "Service and network discovery: mapping services, endpoints, and the pod network"
+order: 5
 description: "Kubernetes gives every pod cluster DNS and a flat pod network by default. An attacker resolves service names, lists services and endpoints through the API or DNS, and scans the pod and service CIDRs to find reachable workloads, databases, and internal APIs that are frequently unauthenticated on the assumption that only cluster peers can reach them."
 keywords:
   - kubernetes dns

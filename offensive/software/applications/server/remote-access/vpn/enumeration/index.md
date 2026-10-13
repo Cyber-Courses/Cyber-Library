@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: fingerprinting a VPN endpoint"
+order: 3
 description: "VPN enumeration identifies which VPN protocol and product a gateway runs, from the UDP IKE handshake (IPsec), the PPTP control port, or the SSL-VPN web portal, and extracts version and configuration detail. That identification selects the protocol attack and, for appliances, maps the exact build to its pre-authentication exploits."
 keywords:
   - vpn enumeration

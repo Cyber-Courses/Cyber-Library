@@ -1,5 +1,6 @@
 ---
 title: "API permissions: Microsoft Graph app-role abuse"
+order: 3
 description: "Abusing Microsoft Graph application permissions: leveraging AppRoleAssignment and high-value scopes such as RoleManagement.ReadWrite.Directory to escalate to tenant control."
 keywords:
   - API permissions

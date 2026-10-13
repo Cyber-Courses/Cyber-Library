@@ -1,5 +1,6 @@
 ---
 title: "Windows host information: extended data over SNMP"
+order: 3
 description: "Where the SNMP service is enabled on Windows, the host-resources MIB and the legacy LanMgr MIB expose extended data: local user accounts, running processes, installed software, shares, and listening services. Walking these profiles the host in depth, revealing accounts to target, software to exploit, and the system's role, from a read community string."
 keywords:
   - windows snmp

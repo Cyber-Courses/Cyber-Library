@@ -1,5 +1,6 @@
 ---
 title: "Snapshots: reading a database offline through a shared or public snapshot"
+order: 1
 description: "Sharing or copying RDS snapshots and restoring them into an attacker instance to read the database offline."
 keywords:
   - RDS

@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: NFS exports, options, and mounting"
+order: 1
 description: "NFS enumeration lists the exported paths, the clients allowed to mount them, and, where readable, the export options that decide squashing and access. Mounting an export exposes its files under the client-asserted identity, and the file ownership seen after mounting reveals which UIDs and GIDs to spoof for fuller access."
 keywords:
   - showmount

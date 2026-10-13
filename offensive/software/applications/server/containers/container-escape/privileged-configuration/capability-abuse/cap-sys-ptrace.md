@@ -1,5 +1,6 @@
 ---
 title: "CAP_SYS_PTRACE: injecting code into host processes across a shared PID namespace"
+order: 2
 description: "CAP_SYS_PTRACE allows a container to trace and manipulate processes it can see. Combined with a shared host PID namespace (--pid=host), it lets an attacker attach to a host process, write shellcode into its memory through /proc/pid/mem or PTRACE_POKETEXT, and hijack its execution to run code as that process's user, typically root."
 keywords:
   - cap_sys_ptrace

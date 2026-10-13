@@ -1,5 +1,6 @@
 ---
 title: "NetFlow and IPFIX: attacking network flow telemetry"
+order: 3
 description: "Flow export protocols (NetFlow, sFlow, IPFIX) summarize network conversations and send them to a collector. That data is a map of who talks to whom across the environment, valuable reconnaissance when harvested from an exposed collector, and the unauthenticated export path lets an attacker forge flow records to inject false traffic or mislead monitoring."
 keywords:
   - netflow

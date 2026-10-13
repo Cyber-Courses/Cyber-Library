@@ -1,5 +1,6 @@
 ---
 title: "Directory listing: autoindex and directory browsing as an enumeration source"
+order: 4
 description: "Using server directory listing (Apache autoindex, nginx autoindex, IIS directory browsing) to enumerate files, discover unreferenced content, and locate backups, uploads, and config."
 keywords:
   - directory listing

@@ -1,5 +1,6 @@
 ---
 title: "Lateral movement: spreading across a cluster and into the cloud"
+order: 5
 description: "After a foothold, movement across a Kubernetes cluster follows its trust relationships: a service-account token used against the API server, secrets and tokens stolen from other namespaces, pivoting pod to pod across the flat network, and following a pod's workload identity out into the cloud account. Each step reuses credentials the cluster hands out."
 keywords:
   - lateral movement

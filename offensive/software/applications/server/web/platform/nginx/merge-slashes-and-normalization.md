@@ -1,5 +1,6 @@
 ---
 title: "nginx merge_slashes and normalization: location matching that bypasses rules"
+order: 4
 description: "Exploiting nginx slash and path handling: merge_slashes off, encoded slashes, and prefix-location matching that disagrees with the filesystem or an upstream, bypassing location-based access rules."
 keywords:
   - merge_slashes

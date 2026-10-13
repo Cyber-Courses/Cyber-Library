@@ -1,5 +1,6 @@
 ---
 title: "Trusts: moving across Active Directory domains and forests"
+order: 4
 description: "Active Directory trust relationships as a path between domains and forests: trust keys and inter-realm tickets, SID history inside a forest, and the narrower paths across forest trusts bounded by SID filtering."
 keywords:
   - active directory trusts

@@ -1,5 +1,6 @@
 ---
 title: "SNMP: attacking the Simple Network Management Protocol"
+order: 1
 description: "SNMP on UDP 161 exposes a device's entire state through a tree of OIDs, gated only by a community string on v1 and v2c. The attack surface is obtaining that string (default, weak, brute-forced), walking the agent to disclose system, network, and credential data, exfiltrating device configuration, and, with a read-write string, reconfiguring the device."
 keywords:
   - snmp

@@ -1,5 +1,6 @@
 ---
 title: "Keyword splitting with empty command substitution: who$()ami"
+order: 6
 description: "Breaking a blocked keyword by inserting an empty $() command substitution, who$()ami, so the shell runs nothing, removes it, and reassembles the keyword, bypassing a literal blocklist."
 keywords:
   - command injection

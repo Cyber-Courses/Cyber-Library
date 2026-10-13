@@ -1,5 +1,6 @@
 ---
 title: "Bastion: pivoting into private VMs"
+order: 6
 description: "Abusing Azure Bastion as a pivot into private VMs over RDP and SSH."
 keywords:
   - Bastion

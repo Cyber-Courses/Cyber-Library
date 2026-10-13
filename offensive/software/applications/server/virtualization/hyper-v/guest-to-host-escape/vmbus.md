@@ -1,5 +1,6 @@
 ---
 title: "VMBus: escaping Hyper-V through the channel transport"
+order: 3
 description: "VMBus is the ring-buffer transport that carries all synthetic-device traffic between a Hyper-V guest and the root partition. The guest controls channel setup, GPADL memory registration, and the packets placed in the ring. Flaws in how the root-partition endpoints parse ring packets, channel offers, and GPADL descriptors give memory corruption in the privileged root partition."
 keywords:
   - vmbus

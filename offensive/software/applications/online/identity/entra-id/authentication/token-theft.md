@@ -1,5 +1,6 @@
 ---
 title: "Token theft: harvesting and replaying Entra tokens"
+order: 7
 description: "Harvesting and replaying Entra access and refresh tokens: extraction from disk, browser, and the token cache, and replay with TokenTactics and ROADtools."
 keywords:
   - token theft

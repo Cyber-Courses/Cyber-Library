@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: mapping the vSphere inventory and services"
+order: 1
 description: "With access to vCenter, an attacker enumerates the full inventory through the vSphere API: every ESXi host, virtual machine, datastore, network, and user role. Unauthenticated, the exposed endpoints and version strings identify the build for matching known vulnerabilities. This reconnaissance scopes the estate and selects targets before any destructive action."
 keywords:
   - vcenter enumeration

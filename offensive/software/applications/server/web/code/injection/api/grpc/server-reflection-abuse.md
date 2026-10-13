@@ -1,5 +1,6 @@
 ---
 title: "gRPC server reflection abuse"
+order: 1
 description: "When a gRPC server exposes the reflection service in an environment where it should not, an attacker enumerates every service, method, and message descriptor, turning an opaque binary API into a browsable one."
 keywords:
   - gRPC reflection

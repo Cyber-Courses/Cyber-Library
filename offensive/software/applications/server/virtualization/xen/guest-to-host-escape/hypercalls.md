@@ -1,5 +1,6 @@
 ---
 title: "Hypercalls: escaping Xen through the guest-to-hypervisor interface"
+order: 1
 description: "Hypercalls are the Xen guest's direct calls into the hypervisor, covering memory management, page-table updates, I/O, and more. The hypervisor executes them in its own context with guest-supplied arguments, so a flaw in hypercall argument validation or in the sub-operations (memory, grant, mmu, physdev) corrupts or subverts the hypervisor itself, the most privileged escape target."
 keywords:
   - hypercall

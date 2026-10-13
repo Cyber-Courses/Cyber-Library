@@ -1,5 +1,6 @@
 ---
 title: "Checkpoint and VHD theft: taking Hyper-V virtual disks and saved state"
+order: 3
 description: "Hyper-V stores VM disks as VHD/VHDX files and checkpoints as differencing disks plus saved-state and memory files. With host or share access, an attacker copies these and reads the guest filesystems offline, extracting credentials and data without entering the VM, and reads saved-state memory for live secrets captured at checkpoint time."
 keywords:
   - vhd

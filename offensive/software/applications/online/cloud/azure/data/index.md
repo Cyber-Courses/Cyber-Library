@@ -1,5 +1,6 @@
 ---
 title: "Azure data"
+order: 6
 description: "Attacking Azure data services: SQL Database access, Cosmos DB keys, Data Factory pipelines, Synapse Analytics, and storage tables."
 keywords:
   - Azure data

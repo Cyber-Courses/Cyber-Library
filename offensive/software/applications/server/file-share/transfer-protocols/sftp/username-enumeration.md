@@ -1,5 +1,6 @@
 ---
 title: "Username enumeration: discovering valid SFTP and SSH accounts"
+order: 2
 description: "SSH can leak which usernames are valid through authentication-method differences and, on vulnerable versions, timing side channels. A validated user list focuses password spraying and key attacks against real accounts, and distinguishes SFTP-only accounts from full-shell accounts, which shapes the follow-on from transfer access to command execution."
 keywords:
   - username enumeration

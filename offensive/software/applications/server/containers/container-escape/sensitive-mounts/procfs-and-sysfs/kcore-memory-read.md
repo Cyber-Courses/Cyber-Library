@@ -1,5 +1,6 @@
 ---
 title: "kcore memory read: dumping host kernel memory through /proc/kcore"
+order: 5
 description: "/proc/kcore presents the live kernel's memory as an ELF core file. A container that can read the host's /proc/kcore reads physical and kernel virtual memory, carving out secrets, keys, and credential structures. It is a powerful read primitive that bypasses namespace isolation because kernel memory is a single host-wide resource."
 keywords:
   - proc kcore

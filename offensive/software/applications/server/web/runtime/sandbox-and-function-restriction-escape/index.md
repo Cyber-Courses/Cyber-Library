@@ -1,5 +1,6 @@
 ---
 title: "Sandbox and function restriction escape: defeating runtime containment"
+order: 3
 description: "Escaping runtime-level containment after code execution: PHP disable_functions and open_basedir bypasses, Python sandbox escapes, and Node.js vm escapes."
 keywords:
   - disable_functions bypass

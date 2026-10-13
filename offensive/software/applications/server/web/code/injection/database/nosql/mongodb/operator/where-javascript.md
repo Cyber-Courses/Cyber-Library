@@ -1,5 +1,6 @@
 ---
 title: "MongoDB $where and mapReduce server-side JavaScript injection"
+order: 5
 description: "$where and mapReduce evaluate server-side JavaScript; where enabled, injected JS strings break out of expressions, force always-true conditions, and time out blindly."
 keywords:
   - $where

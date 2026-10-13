@@ -1,5 +1,6 @@
 ---
 title: "Fingerprinting and enumeration in Oracle injection"
+order: 11
 description: "Orienting an Oracle injection: confirming the engine, reading version and session context with SYS_CONTEXT, and listing the current user's privileges."
 keywords:
   - Oracle fingerprinting

@@ -1,5 +1,6 @@
 ---
 title: "Function keys: recovering host and function keys to invoke protected endpoints"
+order: 2
 description: "Recovering Azure Function host and function keys to invoke protected functions and admin endpoints."
 keywords:
   - function keys

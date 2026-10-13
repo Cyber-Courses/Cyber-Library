@@ -1,5 +1,6 @@
 ---
 title: "USB controllers: escaping VirtualBox through emulated OHCI, EHCI, and xHCI"
+order: 3
 description: "VirtualBox emulates OHCI, EHCI, and xHCI USB host controllers whose guest drivers build transfer descriptors and rings in guest memory that the host VM process walks via DMA. Flaws in descriptor-chain and xHCI ring and device-context handling give out-of-bounds access in the host process, a recurring VirtualBox escape surface including at Pwn2Own."
 keywords:
   - usb controller

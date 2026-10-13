@@ -1,5 +1,6 @@
 ---
 title: "Weak cryptography: attacking SSH cipher, MAC, and key-exchange negotiation"
+order: 2
 description: "SSH negotiates its cipher, MAC, and key-exchange algorithms, and a server that still offers weak ones, legacy ciphers, MD5-based or truncated MACs, small Diffie-Hellman groups, lets a positioned attacker select or downgrade to a breakable session. These weaknesses enable decryption or tampering of traffic an attacker can capture or relay."
 keywords:
   - ssh crypto

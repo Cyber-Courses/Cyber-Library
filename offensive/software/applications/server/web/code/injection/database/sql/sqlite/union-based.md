@@ -1,5 +1,6 @@
 ---
 title: "Union-based SQL injection in SQLite"
+order: 7
 description: "Using UNION SELECT in SQLite to extract data, taking advantage of loose typing, and reading the schema and data through sqlite_master."
 keywords:
   - union based SQL injection

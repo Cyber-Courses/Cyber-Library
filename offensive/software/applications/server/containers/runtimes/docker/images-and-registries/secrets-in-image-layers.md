@@ -1,5 +1,6 @@
 ---
 title: "Secrets in image layers: extracting credentials baked into a build"
+order: 1
 description: "Each Dockerfile instruction creates an immutable layer, so a secret added in one step and deleted in a later one still exists in the earlier layer. An attacker unpacks an image's layers and its build history to recover API keys, private keys, and passwords that the author believed were removed, needing only read access to the image."
 keywords:
   - image layers

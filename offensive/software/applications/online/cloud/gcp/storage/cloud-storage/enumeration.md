@@ -1,5 +1,6 @@
 ---
 title: "Enumeration: discovering GCP buckets and readable objects"
+order: 1
 description: "Finding GCP buckets and readable objects through name guessing and listing, with tooling like GCPBucketBrute."
 keywords:
   - bucket enumeration

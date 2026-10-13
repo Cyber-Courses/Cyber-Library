@@ -1,5 +1,6 @@
 ---
 title: "File upload to RCE: turning an upload into code execution"
+order: 2
 description: "An HTTP file server that accepts uploads becomes code execution when an uploaded file is placed where the server interprets it: a script in a web-executable directory, a file whose extension or content-type is mishandled, or an upload combined with traversal to control the destination path. The planted file then runs server-side when requested."
 keywords:
   - file upload

@@ -1,5 +1,6 @@
 ---
 title: "Cloud metadata from pod: reaching node instance credentials"
+order: 4
 description: "A Kubernetes pod on a cloud node can usually reach the instance metadata service at 169.254.169.254 unless it is explicitly blocked. That endpoint returns the node's IAM role credentials, which typically carry far more cloud permission than the pod should have, turning a pod foothold into cloud account access."
 keywords:
   - instance metadata

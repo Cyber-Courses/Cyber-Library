@@ -1,5 +1,6 @@
 ---
 title: "Sequelize injection"
+order: 1
 description: "Injection through concatenated sequelize.query(), identifier interpolation, and attacker-controlled operator objects."
 keywords:
   - Sequelize

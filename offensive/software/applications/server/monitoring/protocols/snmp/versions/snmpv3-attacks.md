@@ -1,5 +1,6 @@
 ---
 title: "SNMPv3 attacks: username enumeration, cracking, and downgrade"
+order: 3
 description: "SNMPv3 adds user authentication and privacy, but it still leaks: the engine-discovery and report exchange confirms whether a username is valid before authentication, enabling user enumeration, and a captured authenticated exchange is cracked offline for weak auth passwords. Where v1/v2c remain enabled, the simplest attack is to downgrade to them entirely."
 keywords:
   - snmpv3

@@ -1,5 +1,6 @@
 ---
 title: "Token and secret theft: harvesting credentials across namespaces"
+order: 1
 description: "Kubernetes secrets hold service-account tokens, registry credentials, TLS keys, and application passwords. An identity that can read secrets, or that reaches them through etcd or node access, harvests them across namespaces to collect tokens for more privileged identities and credentials for backend systems, fuelling further lateral movement."
 keywords:
   - secret theft

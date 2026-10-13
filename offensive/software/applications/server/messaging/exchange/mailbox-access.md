@@ -1,5 +1,6 @@
 ---
 title: "Mailbox access: reading and impersonating every mailbox"
+order: 5
 description: "Post-credential and post-RCE mailbox access on Exchange: EWS ApplicationImpersonation to read any mailbox, the raw EWS FindItem/GetItem SOAP calls, Exchange Management Shell Get-Mailbox and New-MailboxExportRequest to dump a mailbox to PST, and MailSniper self and global mail search for credentials and intel."
 keywords:
   - mailbox access

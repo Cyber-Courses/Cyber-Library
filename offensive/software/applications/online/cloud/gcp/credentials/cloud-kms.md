@@ -1,5 +1,6 @@
 ---
 title: "Cloud KMS: decrypting and signing with key permissions"
+order: 5
 description: "Abusing Cloud KMS permissions to decrypt data or sign as a key with cloudkms.cryptoKeyVersions.useToDecrypt and useToSign."
 keywords:
   - Cloud KMS

@@ -1,5 +1,6 @@
 ---
 title: "WAF: bypassing web ACL rules to reach the application"
+order: 10
 description: "Bypassing AWS WAF rules through encoding, size limits, and rule gaps to reach the protected application."
 keywords:
   - WAF

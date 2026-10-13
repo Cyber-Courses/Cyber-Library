@@ -1,5 +1,6 @@
 ---
 title: "Parallels Desktop: attacking the macOS desktop hypervisor"
+order: 5
 description: "Parallels Desktop runs VMs on macOS, with device emulation and integration services in host-side processes. Guest-to-host escapes target its emulated devices and the Parallels Tools integration, shared folders, clipboard, and drag-and-drop over the Parallels guest-host communication channels. It is a recurring Pwn2Own target on the macOS host."
 keywords:
   - parallels desktop

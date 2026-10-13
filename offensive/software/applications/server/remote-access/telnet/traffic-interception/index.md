@@ -1,5 +1,6 @@
 ---
 title: "Traffic interception: capturing and hijacking cleartext Telnet"
+order: 4
 description: "Telnet is unencrypted, so a positioned attacker reads everything: the login and password, every command typed, and all output, and can hijack the live TCP session to inject commands as the authenticated user. Interception is often the easiest Telnet attack where a network position exists, needing no credential guessing."
 keywords:
   - telnet interception

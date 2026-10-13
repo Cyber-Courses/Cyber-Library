@@ -1,5 +1,6 @@
 ---
 title: "Glue: catalogs, job scripts, and the Glue service role"
+order: 5
 description: "Reading the Glue Data Catalog and job scripts for data locations and secrets, and running jobs under the Glue role."
 keywords:
   - Glue

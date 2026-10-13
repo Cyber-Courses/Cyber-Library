@@ -1,5 +1,6 @@
 ---
 title: "Pivoting through SQL Server linked servers"
+order: 10
 description: "Abusing SQL Server linked servers from an injection: enumerating links, running queries and commands on remote instances with openquery and RPC, and chaining links."
 keywords:
   - linked servers

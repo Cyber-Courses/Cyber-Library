@@ -1,5 +1,6 @@
 ---
 title: "Cross-account: assuming roles that trust another account"
+order: 1
 description: "Abusing IAM role trust policies that name a whole external account or root, letting any principal you hold there assume into the target account."
 keywords:
   - cross-account

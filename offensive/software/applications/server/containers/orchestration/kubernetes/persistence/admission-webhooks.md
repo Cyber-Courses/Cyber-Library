@@ -1,5 +1,6 @@
 ---
 title: "Admission webhooks: intercepting the API request path"
+order: 2
 description: "Validating and mutating admission webhooks are called by the API server for matching object operations. An attacker who can create a webhook configuration inserts themselves into the request path: a validating webhook can exfiltrate every submitted object, including secrets, to an external endpoint, and a mutating webhook can alter objects as they are created, giving both persistence and cluster-wide visibility."
 keywords:
   - admission webhook

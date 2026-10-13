@@ -1,5 +1,6 @@
 ---
 title: "Weak cryptography: VNC transport and security-type weaknesses"
+order: 2
 description: "Standard VNC does not encrypt the session, so screen contents, keystrokes, and the authentication challenge-response cross the network in cleartext. The RFB security-type negotiation can also be downgraded to a weaker or no-auth type, and the encryption some implementations add is often weak or optional, leaving captured VNC traffic and credentials recoverable."
 keywords:
   - vnc encryption

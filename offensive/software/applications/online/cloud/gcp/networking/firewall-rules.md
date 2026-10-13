@@ -1,5 +1,6 @@
 ---
 title: "Firewall rules: opening ingress with compute.firewalls"
+order: 1
 description: "Exposing or reaching workloads by editing VPC firewall rules with compute.firewalls.create or update to open ingress."
 keywords:
   - firewall rules

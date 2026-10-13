@@ -1,5 +1,6 @@
 ---
 title: "nginx misconfiguration: alias, FastCGI, proxy_pass, and slash handling"
+order: 3
 description: "nginx-specific platform misconfigurations: the location/alias off-by-slash traversal, FastCGI/PHP-FPM wiring that executes uploads, variable proxy_pass SSRF, and merge_slashes/normalization gaps."
 keywords:
   - nginx misconfiguration

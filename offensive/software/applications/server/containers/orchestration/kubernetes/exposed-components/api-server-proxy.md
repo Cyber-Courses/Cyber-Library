@@ -1,5 +1,6 @@
 ---
 title: "API server proxy: reaching nodes and services through the control plane"
+order: 7
 description: "The API server can proxy requests to nodes, pods, and services through its proxy subresources. An identity permitted to use them reaches the kubelet on any node and any ClusterIP service, including internal and unauthenticated ones, using the API server as a pivot that bypasses network segmentation between the attacker and those targets."
 keywords:
   - api server proxy

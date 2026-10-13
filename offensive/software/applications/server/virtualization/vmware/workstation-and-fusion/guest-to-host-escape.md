@@ -1,5 +1,6 @@
 ---
 title: "Guest-to-host escape: breaking out of Workstation and Fusion to the host"
+order: 1
 description: "A Workstation or Fusion guest escapes by corrupting the vmware-vmx process that emulates its devices, exactly as on ESXi but landing on the user's desktop host. The same SVGA 3D, USB, NIC, and GuestRPC/VMCI surfaces apply, and code execution in vmware-vmx runs with the privileges of the user or service running the VM."
 keywords:
   - vmware-vmx

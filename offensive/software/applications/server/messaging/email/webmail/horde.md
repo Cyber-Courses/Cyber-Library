@@ -1,5 +1,6 @@
 ---
 title: "Horde: CSRF against admin, preference injection, and image-handler command injection"
+order: 2
 description: "Attacking the Horde Groupware and its IMP webmail: fingerprinting /horde/, cross-site request forgery that adds an administrator or rewrites preferences, injection through the Turba and preferences subsystems, and the Horde_Image convert command injection that reaches code execution on the server."
 keywords:
   - horde webmail

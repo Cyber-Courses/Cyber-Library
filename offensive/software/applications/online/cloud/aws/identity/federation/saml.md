@@ -1,5 +1,6 @@
 ---
 title: "SAML: forging assertions for AssumeRoleWithSAML"
+order: 1
 description: "Forging or replaying SAML assertions trusted by an IAM SAML provider to assume federated roles via AssumeRoleWithSAML."
 keywords:
   - SAML

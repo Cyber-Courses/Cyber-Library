@@ -1,5 +1,6 @@
 ---
 title: "VNet: peering and service endpoints as a pivot"
+order: 2
 description: "Abusing Azure virtual networks: peering, service endpoints, and private access to pivot between subnets and resources."
 keywords:
   - VNet

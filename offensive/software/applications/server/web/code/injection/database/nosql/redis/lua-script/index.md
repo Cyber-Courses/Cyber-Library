@@ -1,5 +1,6 @@
 ---
 title: "Lua script injection"
+order: 3
 description: "Redis runs server-side Lua through the EVAL family, giving an attacker who controls a script body or its arguments a scripting engine inside the database."
 keywords:
   - Redis Lua

@@ -1,5 +1,6 @@
 ---
 title: "Keyword splitting with single quotes: w'h'o'a'm'i"
+order: 2
 description: "Breaking a blocked command keyword with empty single-quote pairs, w'h'o'a'm'i, so the shell strips the quotes and reassembles the word, bypassing a literal blocklist."
 keywords:
   - command injection

@@ -1,5 +1,6 @@
 ---
 title: "Azure storage"
+order: 4
 description: "Attacking Azure storage: blob container enumeration and access, SAS token abuse, disk snapshot theft, and Azure Files shares."
 keywords:
   - Azure storage

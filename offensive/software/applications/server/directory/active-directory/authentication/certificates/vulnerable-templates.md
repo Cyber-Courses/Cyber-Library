@@ -1,5 +1,6 @@
 ---
 title: "Vulnerable templates: ESC1, ESC2, ESC3, ESC13, ESC15"
+order: 1
 description: "Abusing misconfigured AD CS certificate templates to enrol for a certificate that authenticates as a privileged account: enrollee-supplied subject (ESC1), overbroad EKUs (ESC2), enrollment agents (ESC3), OID group links (ESC13), and application-policy injection (ESC15)."
 keywords:
   - ESC1

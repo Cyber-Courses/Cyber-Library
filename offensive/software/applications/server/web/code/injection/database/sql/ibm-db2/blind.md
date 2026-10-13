@@ -1,5 +1,6 @@
 ---
 title: "Boolean-based blind SQL injection in IBM Db2"
+order: 1
 description: "Inferring IBM Db2 data one character at a time from true/false response differences using SUBSTR and ASCII over SYSIBM.SYSDUMMY1."
 keywords:
   - boolean based blind

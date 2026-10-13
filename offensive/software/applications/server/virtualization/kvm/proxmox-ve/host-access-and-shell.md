@@ -1,5 +1,6 @@
 ---
 title: "Host access and shell: execution on the Proxmox node"
+order: 1
 description: "A Proxmox node is a Debian host running the VMs, containers, and management daemons as root. Access comes from a guest or container escape, SSH, or the management API and web shell. With it, an attacker controls every VM and container through qm/pct, reads all disks and backups, and in a cluster reaches the other nodes through the shared corosync-backed configuration."
 keywords:
   - proxmox node

@@ -1,5 +1,6 @@
 ---
 title: "CronJobs: scheduled re-entry into the cluster"
+order: 3
 description: "A CronJob runs a job on a schedule, which an attacker uses for low-footprint persistence: instead of a constantly running backdoor pod, a CronJob materialises briefly at intervals to beacon out, re-plant access, or re-create a deleted binding. Between runs there is no pod to find, making it quieter than a standing workload."
 keywords:
   - cronjob

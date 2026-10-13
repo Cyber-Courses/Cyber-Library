@@ -1,5 +1,6 @@
 ---
 title: "Golden Certificate: forging with the CA private key"
+order: 8
 description: "Stealing an enterprise CA's private key and using it to forge client-authentication certificates for any principal offline, a domain-wide and long-lived persistence primitive analogous to a golden ticket but for AD CS."
 keywords:
   - golden certificate

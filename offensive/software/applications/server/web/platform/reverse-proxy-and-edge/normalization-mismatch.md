@@ -1,5 +1,6 @@
 ---
 title: "Proxy normalization mismatch: path confusion that bypasses access control"
+order: 1
 description: "Exploiting different path canonicalization between a reverse proxy and its origin: encoded slashes, dot-segments, and path parameters that pass an edge allow/deny rule while resolving to a protected path at the origin."
 keywords:
   - path confusion

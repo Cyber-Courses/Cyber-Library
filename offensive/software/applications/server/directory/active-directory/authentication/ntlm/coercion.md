@@ -1,5 +1,6 @@
 ---
 title: "Coercion: forcing privileged machines to authenticate"
+order: 2
 description: "Triggering authentication from Windows machines, especially domain controllers, on demand by invoking RPC and protocol methods (PetitPotam/EFSRPC, PrinterBug/MS-RPRN, DFSCoerce, and WebDAV) to feed capture or relay."
 keywords:
   - coercion

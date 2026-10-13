@@ -1,5 +1,6 @@
 ---
 title: "Image Builder: injecting code into golden AMIs"
+order: 6
 description: "Abusing EC2 Image Builder pipelines and components to inject code into golden AMIs and run under the build role."
 keywords:
   - Image Builder

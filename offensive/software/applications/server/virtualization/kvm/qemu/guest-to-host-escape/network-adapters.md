@@ -1,5 +1,6 @@
 ---
 title: "Network adapters: escaping QEMU through emulated NICs"
+order: 2
 description: "QEMU emulates several NICs, the Realtek rtl8139, Intel e1000/e1000e, and virtio-net, whose transmit and receive paths parse guest-programmed descriptors and packet data. Flaws in descriptor handling, in offload and loopback processing, and in packet reassembly give out-of-bounds access in the QEMU process from the guest network stack."
 keywords:
   - e1000

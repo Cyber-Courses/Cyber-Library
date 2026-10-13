@@ -1,5 +1,6 @@
 ---
 title: "App settings and connection strings: looting Function and Web App config"
+order: 6
 description: "Harvesting app settings, connection strings, and Kudu environment from Function and Web Apps for stored secrets and backend credentials."
 keywords:
   - app settings

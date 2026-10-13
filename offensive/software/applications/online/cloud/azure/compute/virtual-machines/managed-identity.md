@@ -1,5 +1,6 @@
 ---
 title: "Managed identity: stealing the VM identity token from IMDS"
+order: 3
 description: "Stealing the token of a VM's attached managed identity from IMDS to act across the subscription."
 keywords:
   - VM managed identity

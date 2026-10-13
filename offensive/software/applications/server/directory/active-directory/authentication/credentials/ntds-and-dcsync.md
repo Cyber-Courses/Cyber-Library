@@ -1,5 +1,6 @@
 ---
 title: "NTDS and DCSync: extracting every account hash in the domain"
+order: 4
 description: "Obtaining the NTLM hashes of all domain accounts, including krbtgt, by extracting the NTDS.dit database on a domain controller or by abusing directory replication (DCSync) from any host holding the replication right."
 keywords:
   - NTDS.dit

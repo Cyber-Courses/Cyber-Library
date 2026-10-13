@@ -1,5 +1,6 @@
 ---
 title: "Trusted host bypass: passwordless rexec via host trust"
+order: 3
 description: "Where rexecd honours the host-based trust files, or where the related rsh path is reachable, an attacker executes commands with no password by connecting from, or spoofing, a trusted host, or by planting a .rhosts entry. This removes the credential requirement entirely, giving command execution as the target user."
 keywords:
   - trusted host

@@ -1,5 +1,6 @@
 ---
 title: "GCP networking"
+order: 7
 description: "Attacking GCP networking: firewall-rule exposure, VPC reach, Cloud DNS and subdomain takeover, and load-balancer exposure."
 keywords:
   - firewall rules

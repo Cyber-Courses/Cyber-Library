@@ -1,5 +1,6 @@
 ---
 title: "Privileged pod: node takeover from a privileged security context"
+order: 1
 description: "A pod whose container runs with securityContext.privileged: true receives the full capability set, all host devices, and unconfined seccomp and AppArmor, exactly like a privileged container. From it an attacker mounts the node root disk or uses the cgroup release_agent to run code on the node as root, taking over the worker."
 keywords:
   - privileged pod

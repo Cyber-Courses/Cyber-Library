@@ -1,5 +1,6 @@
 ---
 title: "rhosts bypass: passwordless rsh via .rhosts trust"
+order: 4
 description: "The r-commands grant passwordless access when the target user's ~/.rhosts file lists the connecting host and user as trusted. An attacker who can write that file, through another vulnerability, a writable home over NFS, or an existing foothold, adds a trusting entry and then rsh/rlogin in as that user with no password, which is also a durable backdoor."
 keywords:
   - rhosts

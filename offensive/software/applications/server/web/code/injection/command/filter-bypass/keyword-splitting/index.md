@@ -1,5 +1,6 @@
 ---
 title: "Keyword splitting bypass"
+order: 2
 description: "Breaking a blocked keyword into pieces the shell rejoins before execution, quotes, backslashes, empty substitutions, positional parameters."
 keywords:
   - keyword splitting

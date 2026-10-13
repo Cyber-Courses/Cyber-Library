@@ -1,5 +1,6 @@
 ---
 title: "Discovery and methods: finding WebDAV and its enabled verbs"
+order: 4
 description: "WebDAV is detected from the DAV response header and the verbs an OPTIONS request reports. PROPFIND then lists collections and files, and testing PUT reveals whether writes are allowed and which uploaded extensions the server will execute. This enumeration defines exactly which WebDAV attack applies to a target."
 keywords:
   - options

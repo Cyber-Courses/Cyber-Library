@@ -1,5 +1,6 @@
 ---
 title: "Exposed config and dotfiles: .env, config files, and metadata left web-readable"
+order: 5
 description: "Recovering credentials and secrets from configuration and dotfiles served as static content: .env, framework config, .htaccess, CI and editor dotfiles, and cloud metadata files."
 keywords:
   - .env exposure

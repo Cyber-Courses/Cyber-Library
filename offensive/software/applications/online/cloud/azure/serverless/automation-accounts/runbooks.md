@@ -1,5 +1,6 @@
 ---
 title: "Runbooks: code execution as the Automation account identity"
+order: 1
 description: "Writing and starting an Automation runbook that runs as the account's identity for arbitrary code execution."
 keywords:
   - runbook

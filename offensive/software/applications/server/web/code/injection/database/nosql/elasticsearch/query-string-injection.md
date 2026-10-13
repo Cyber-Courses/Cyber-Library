@@ -1,5 +1,6 @@
 ---
 title: "Elasticsearch query_string injection via Lucene syntax"
+order: 1
 description: "When a search term flows unescaped into query_string or simple_query_string, Lucene operators let an attacker retarget fields, flip boolean logic, and widen result sets past intended filters."
 keywords:
   - query_string injection

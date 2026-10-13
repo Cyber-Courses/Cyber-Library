@@ -1,5 +1,6 @@
 ---
 title: "Keys and certificates: extracting and using Key Vault keys"
+order: 2
 description: "Extracting or using Key Vault keys and certificates for decryption, signing, and impersonation."
 keywords:
   - Key Vault
