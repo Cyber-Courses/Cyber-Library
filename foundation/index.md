@@ -1,5 +1,6 @@
 ---
 title: Foundation
+seo_title: Cybersecurity Foundations
 description: Explore the roots of cybersecurity in hacker culture, its evolution into a vital discipline, the ethical debates surrounding hacking, and the critical role of risk management and human behavior.
 keywords:
   - cybersecurity foundation

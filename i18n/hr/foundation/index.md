@@ -1,5 +1,6 @@
 ---
 title: Temelj
+seo_title: Osnove kibernetičke sigurnosti
 description: Kibernetička sigurnost ima svoje najranije korijene u hakerskoj kulturi
   kasnog 20. stoljeća. Od trenutka kada su ljudi počeli eksperimentirati s računalima,
   postojala je želja za razumijevanjem, modificiranjem i pomicanjem granica tehnologije.

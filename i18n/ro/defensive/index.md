@@ -1,5 +1,6 @@
 ---
 title: Defensiv
+seo_title: Securitate defensivă
 description: Explorarea conceptelor și importanței securității cibernetice defensive.
 keywords:
 - securitate cibernetică defensivă

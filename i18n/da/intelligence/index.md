@@ -1,5 +1,6 @@
 ---
 title: Trusselsefterretning
+seo_title: Trusselsefterretning
 description: 'Trusselsefterretning i cybersikkerhed: indsamling og analyse af data om trusler for at forudse angreb og styre forsvaret.'
 keywords:
 - cybersikkerhedsintelligens

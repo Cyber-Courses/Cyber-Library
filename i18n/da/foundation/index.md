@@ -1,5 +1,6 @@
 ---
 title: Fundament
+seo_title: Grundlæggende cybersikkerhed
 description: Cybersikkerhed har sine tidligste rødder i hacker-kulturen fra slutningen
   af det 20. århundrede. Fra det øjeblik, folk begyndte at eksperimentere med computere,
   eksisterede der et ønske om at forstå, modificere og skubbe grænserne for teknologi.

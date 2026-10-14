@@ -1,5 +1,6 @@
 ---
 title: Ofensif
+seo_title: Keamanan ofensif
 description: Keamanan siber ofensif melibatkan simulasi serangan dunia nyata secara
   etis untuk mengungkap kerentanan sebelum aktor jahat dapat mengeksploitasinya. Dengan
   bertindak sebagai penyerang yang berwenang, tim keamanan mengungkap titik lemah

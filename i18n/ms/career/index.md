@@ -1,5 +1,6 @@
 ---
 title: Kerjaya dalam Keselamatan Siber
+seo_title: Kerjaya keselamatan siber
 description: Panduan komprehensif untuk membina kerjaya dalam bidang keselamatan siber,
   termasuk profil, perjalanan, dan landskap industri.
 keywords:

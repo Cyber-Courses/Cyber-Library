@@ -1,5 +1,6 @@
 ---
 title: Gouvernance
+seo_title: Gouvernance de la sécurité
 description: 'Guide sur la gouvernance de la cybersécurité : définition, importance
   et étapes concrètes pour une mise en œuvre efficace.'
 keywords:

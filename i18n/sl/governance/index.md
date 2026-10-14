@@ -1,5 +1,6 @@
 ---
 title: Upravljanje
+seo_title: Upravljanje varnosti
 description: Razumevanje kibernetskega upravljanja, njegovega pomena in izvajanja.
 keywords:
 - upravljanje kibernetske varnosti

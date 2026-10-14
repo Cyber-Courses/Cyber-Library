@@ -1,5 +1,6 @@
 ---
 title: Hücum Kiber Təhlükəsizliyi
+seo_title: Hücum təhlükəsizliyi
 description: Hücum kiber təhlükəsizliyinin əhəmiyyəti və tətbiqi üsulları haqqında
   ətraflı izah.
 keywords:

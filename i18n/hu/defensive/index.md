@@ -1,5 +1,6 @@
 ---
 title: Védekező
+seo_title: Védekező biztonság
 description: A védekező kiberbiztonság egy szisztematikus megközelítés, amelynek célja
   egy szervezet adatai, rendszerei és felhasználói védelme a kiberveszélyekkel szemben.
   Ez magában foglalja a megelőzési, észlelési és reagálási stratégiák integrálását

@@ -1,5 +1,6 @@
 ---
 title: Kariyer
+seo_title: Siber güvenlik kariyeri
 description: Siber güvenlik alanında kariyer, profesyoneller için dinamik bir yolculuktur.
   Bu makale, siber güvenlik kariyerinin profili, yolculuğu ve manzarası hakkında derinlemesine
   bir inceleme sunar.

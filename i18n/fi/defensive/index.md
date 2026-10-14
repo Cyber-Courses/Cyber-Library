@@ -1,5 +1,6 @@
 ---
 title: Defensiivinen kyberturvallisuus
+seo_title: Puolustava tietoturva
 description: Ymmärrä defensiivisen kyberturvallisuuden merkitys ja toteutus organisaatioiden
   suojaamiseksi kyberuhkilta.
 keywords:

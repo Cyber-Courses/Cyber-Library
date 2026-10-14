@@ -1,5 +1,6 @@
 ---
 title: Varnandi
+seo_title: Varnaröryggi
 description: Kynning á varnandi netöryggi, mikilvægi þess og hvernig það er framkvæmt.
 keywords:
 - defensive cybersecurity

@@ -1,5 +1,6 @@
 ---
 title: Styring
+seo_title: Sikkerhedsstyring
 description: En dybdegående guide til cybersikkerhedsstyring, dens betydning og implementering.
 keywords:
 - cybersikkerhedsforvaltning

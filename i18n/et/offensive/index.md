@@ -1,5 +1,6 @@
 ---
 title: Pealetungiv
+seo_title: Ründav turvalisus
 description: Pealetungiv küberturvalisus hõlmab eetilist rünnakute simuleerimist,
   et avastada haavatavusi enne, kui pahatahtlikud osapooled neid ära kasutavad.
 keywords:

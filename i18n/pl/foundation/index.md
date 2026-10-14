@@ -1,5 +1,6 @@
 ---
 title: Podstawy
+seo_title: Podstawy cyberbezpieczeństwa
 description: Cyberbezpieczeństwo ma swoje najwcześniejsze korzenie w kulturze hakerów
   z końca XX wieku. Od momentu, gdy ludzie zaczęli eksperymentować z komputerami,
   istniała chęć zrozumienia, modyfikowania i przekraczania granic technologii. Ci

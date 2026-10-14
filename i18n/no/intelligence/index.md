@@ -1,5 +1,6 @@
 ---
 title: Trusseletterretning
+seo_title: Trusseletterretning
 description: 'Trusseletterretning innen cybersikkerhet: innsamling og analyse av informasjon om trusler for å forutse angrep og styre forsvaret.'
 keywords:
 - cybersikkerhetsetterretning

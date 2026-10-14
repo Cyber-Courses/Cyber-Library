@@ -1,5 +1,6 @@
 ---
 title: Ógnaupplýsingar
+seo_title: Ógnaupplýsingar
 description: 'Ógnaupplýsingar í netöryggi: söfnun og greining upplýsinga um ógnir til að sjá fyrir árásir og stýra vörnum.'
 keywords:
 - netöryggisvitund

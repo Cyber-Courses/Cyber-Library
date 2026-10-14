@@ -1,5 +1,6 @@
 ---
 title: Pamati
+seo_title: Kiberdrošības pamati
 description: Kiberdrošības pirmsākumi meklējami 20. gadsimta beigu hakeru kultūrā.
   No brīža, kad cilvēki sāka eksperimentēt ar datoriem, pastāvēja vēlme izprast, modificēt
   un paplašināt tehnoloģiju robežas. Šie agrīnie hakeri bieži vien uzskatīja sevi

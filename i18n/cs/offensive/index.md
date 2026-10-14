@@ -1,5 +1,6 @@
 ---
 title: Ofenzivní kybernetická bezpečnost
+seo_title: Ofenzivní bezpečnost
 description: Podrobný průzkum ofenzivní kybernetické bezpečnosti, její důležitosti
   a metod implementace.
 keywords:

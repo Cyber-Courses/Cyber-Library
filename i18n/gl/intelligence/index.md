@@ -1,5 +1,6 @@
 ---
 title: Intelixencia
+seo_title: Intelixencia de ameazas
 description: Comprender a intelixencia na ciberseguridade e a súa importancia.
 keywords:
 - intelixencia de ciberseguridade

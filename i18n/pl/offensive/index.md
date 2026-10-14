@@ -1,5 +1,6 @@
 ---
 title: Ofensywne
+seo_title: Bezpieczeństwo ofensywne
 description: Zrozumienie i znaczenie ofensywnego cyberbezpieczeństwa w organizacjach.
 keywords:
 - ofensywne cyberbezpieczeństwo

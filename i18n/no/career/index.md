@@ -1,5 +1,6 @@
 ---
 title: Karriere
+seo_title: Karriere i cybersikkerhet
 description: Utforsk en karriere innen cybersikkerhet med muligheter for personlig
   og profesjonell utvikling.
 keywords:

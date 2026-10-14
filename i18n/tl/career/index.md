@@ -1,5 +1,6 @@
 ---
 title: Karera
+seo_title: Mga karera sa cybersecurity
 description: Isang detalyado at teknikal na paggalugad sa karera sa cybersecurity,
   kabilang ang mga profile, paglalakbay, at tanawin ng industriya.
 keywords:

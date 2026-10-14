@@ -1,5 +1,6 @@
 ---
 title: Quản trị
+seo_title: Quản trị bảo mật
 description: Quản trị an ninh mạng là khung chính sách toàn diện, vai trò và quy trình
   ra quyết định mà một tổ chức thiết lập để quản lý và giảm thiểu rủi ro mạng. Nó
   cung cấp bản thiết kế để tích hợp an ninh mạng vào mọi khía cạnh của doanh nghiệp,

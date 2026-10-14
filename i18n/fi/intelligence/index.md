@@ -1,5 +1,6 @@
 ---
 title: Uhkatiedustelu
+seo_title: Uhkatiedustelu
 description: 'Uhkatiedustelu kyberturvallisuudessa: uhkiin liittyvän tiedon keruu ja analysointi hyökkäysten ennakoimiseksi ja puolustuksen ohjaamiseksi.'
 keywords:
 - kyberturvallisuustiedustelu

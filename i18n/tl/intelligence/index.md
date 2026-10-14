@@ -1,5 +1,6 @@
 ---
 title: Intelligence
+seo_title: Threat intelligence
 description: Pag-unawa sa papel ng intelligence sa cybersecurity at ang kahalagahan
   nito sa pagbuo ng mga estratehiya sa seguridad.
 keywords:

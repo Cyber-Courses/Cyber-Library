@@ -1,5 +1,6 @@
 ---
 title: Inteligentzia
+seo_title: Mehatxuen inteligentzia
 description: Inteligentzia zibersegurtasunean, informazioaren bilketa, prozesamendua
   eta analisia, mehatxuak identifikatzeko, ebaluatzeko eta arintzeko.
 keywords:

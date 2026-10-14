@@ -1,5 +1,6 @@
 ---
 title: Offensiv
+seo_title: Offensiv säkerhet
 description: Utforska offensiv cybersäkerhet och dess betydelse för att identifiera
   och åtgärda sårbarheter.
 keywords:

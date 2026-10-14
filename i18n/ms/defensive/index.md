@@ -1,5 +1,6 @@
 ---
 title: Pertahanan
+seo_title: Keselamatan defensif
 description: Keselamatan siber pertahanan adalah pendekatan sistematik untuk melindungi
   data, sistem, dan pengguna organisasi daripada ancaman siber. Ia melibatkan integrasi
   strategi pencegahan, pengesanan, dan tindak balas untuk meminimumkan kesan aktiviti

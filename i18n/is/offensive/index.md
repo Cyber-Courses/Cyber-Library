@@ -1,5 +1,6 @@
 ---
 title: Sóknaröryggi
+seo_title: Sóknaröryggi
 description: Sóknaröryggi í netöryggi felur í sér siðferðilega hermingu á raunverulegum
   árásum til að afhjúpa veikleika áður en illgjarnir aðilar geta nýtt sér þá. Með
   því að starfa sem heimilaðir andstæðingar afhjúpa öryggisteymi veikleika í vörnum

@@ -1,5 +1,6 @@
 ---
 title: Inteligjenca e kërcënimeve
+seo_title: Inteligjenca e kërcënimeve
 description: 'Inteligjenca e kërcënimeve në sigurinë kibernetike: mbledhja dhe analiza e të dhënave për kërcënimet për të parashikuar sulmet dhe për të drejtuar mbrojtjen.'
 keywords:
 - inteligjencën e sigurisë kibernetike

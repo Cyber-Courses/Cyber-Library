@@ -1,5 +1,6 @@
 ---
 title: Ferill
+seo_title: Starfsferill í netöryggi
 description: Ferill í netöryggi er kraftmikil vegferð sem býður upp á tækifæri fyrir
   fagfólk á öllum stigum. Eftir því sem stafræni heimurinn stækkar eykst eftirspurnin
   eftir hæfum sérfræðingum í netöryggi, sem skapar líflegan og hraðskreiðan vinnumarkað.

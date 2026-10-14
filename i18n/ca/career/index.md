@@ -1,5 +1,6 @@
 ---
 title: Carrera
+seo_title: Carreres en ciberseguretat
 description: Explora les oportunitats professionals en ciberseguretat, un camp dinàmic
   i en creixement.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: Styrning
+seo_title: Säkerhetsstyrning
 description: En omfattande guide till cybersäkerhetsstyrning och dess betydelse för
   organisationer.
 keywords:

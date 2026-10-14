@@ -1,5 +1,6 @@
 ---
 title: Kariera
+seo_title: Kariera w cyberbezpieczeństwie
 description: Dynamiczna podróż w dziedzinie cyberbezpieczeństwa z możliwościami rozwoju
   zawodowego.
 keywords:

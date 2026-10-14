@@ -1,5 +1,6 @@
 ---
 title: Stjórnun
+seo_title: Öryggisstjórnun
 description: Stjórnun netöryggis er alhliða umgjörð af stefnum, hlutverkum og ákvarðanatökuferlum
   sem fyrirtæki setur upp til að stjórna og draga úr netáhættu. Hún veitir leiðbeiningar
   um hvernig netöryggi er samþætt í alla þætti fyrirtækisins, þannig að öryggisátak

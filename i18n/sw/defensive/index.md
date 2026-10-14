@@ -1,5 +1,6 @@
 ---
 title: Ulinzi
+seo_title: Usalama wa kujihami
 description: 'Ulinzi wa Mtandao: Mbinu za Kulinda Data na Mfumo wa Shirika Dhidi ya
   Vitisho vya Mtandao.'
 keywords:

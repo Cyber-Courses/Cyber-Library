@@ -1,5 +1,6 @@
 ---
 title: Karriere
+seo_title: Karrierer i cybersikkerhed
 description: Udforsk en karriere inden for cybersikkerhed, en dynamisk rejse fyldt
   med muligheder for fagfolk på alle niveauer. Lær om profilopbygning, professionel
   progression og det komplekse landskab i denne hurtigt voksende branche.

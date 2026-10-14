@@ -1,5 +1,6 @@
 ---
 title: Phòng thủ
+seo_title: Bảo mật phòng thủ
 description: Tìm hiểu về an ninh mạng phòng thủ, tầm quan trọng và cách thực hiện.
 keywords:
 - phòng thủ an ninh mạng

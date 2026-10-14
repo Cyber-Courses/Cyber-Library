@@ -1,5 +1,6 @@
 ---
 title: Karijera u Kibernetičkoj Sigurnosti
+seo_title: Karijere u kibernetičkoj sigurnosti
 description: Dinamično putovanje u karijeri kibernetičke sigurnosti s mogućnostima
   za profesionalce na svim nivoima.
 keywords:

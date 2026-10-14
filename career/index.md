@@ -1,5 +1,6 @@
 ---
 title: Career
+seo_title: Cybersecurity Careers
 description: A thorough overview of diverse cybersecurity career paths, roles and responsibilities, essential skills, and the value of certifications and academic degrees.
 keywords:
   - cybersecurity career

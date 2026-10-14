@@ -1,5 +1,6 @@
 ---
 title: Grėsmių žvalgyba
+seo_title: Grėsmių žvalgyba
 description: 'Grėsmių žvalgyba kibernetinio saugumo srityje: duomenų apie grėsmes rinkimas ir analizė, siekiant numatyti atakas ir kreipti gynybą.'
 keywords:
 - kibernetinio saugumo žvalgyba

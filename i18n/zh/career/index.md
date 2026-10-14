@@ -1,5 +1,6 @@
 ---
 title: 职业
+seo_title: 网络安全职业
 description: 探索网络安全领域的职业生涯，包括个人发展、职业进步和行业生态系统。
 keywords:
 - 网络安全职业

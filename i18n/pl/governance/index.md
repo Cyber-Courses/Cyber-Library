@@ -1,5 +1,6 @@
 ---
 title: Zarządzanie Cyberbezpieczeństwem
+seo_title: Zarządzanie bezpieczeństwem
 description: Zrozumienie zarządzania cyberbezpieczeństwem i jego znaczenia dla organizacji.
 keywords:
 - zarządzanie cyberbezpieczeństwem

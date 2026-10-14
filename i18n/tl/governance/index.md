@@ -1,5 +1,6 @@
 ---
 title: Pamamahala
+seo_title: Pamamahala ng seguridad
 description: Isang komprehensibong gabay sa pamamahala ng cybersecurity at ang kahalagahan
   nito sa mga organisasyon.
 keywords:

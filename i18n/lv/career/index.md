@@ -1,5 +1,6 @@
 ---
 title: Karjera
+seo_title: Karjera kiberdrošībā
 description: Karjera kiberdrošības jomā piedāvā daudz iespēju profesionāļiem visos
   līmeņos. Uzziniet par profilu, ceļojumu un ainavu šajā dinamiskajā nozarē.
 keywords:

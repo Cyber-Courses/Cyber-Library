@@ -1,5 +1,6 @@
 ---
 title: 威胁情报
+seo_title: 威胁情报
 description: '网络安全中的威胁情报：收集和分析威胁信息，以预判攻击并指导防御。'
 keywords:
 - 网络安全情报

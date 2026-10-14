@@ -1,5 +1,6 @@
 ---
 title: Governance
+seo_title: Security Governance
 description: A comprehensive guide to cybersecurity governance, covering its definition, importance, and practical steps for effective implementation.
 keywords:
   - cybersecurity governance

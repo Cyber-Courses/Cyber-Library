@@ -1,5 +1,6 @@
 ---
 title: Governance
+seo_title: Sicherheits-Governance
 description: Eine umfassende Erklärung der Cybersicherheits-Governance und ihrer Bedeutung
   für Unternehmen.
 keywords:

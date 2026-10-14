@@ -1,5 +1,6 @@
 ---
 title: Defensief
+seo_title: Defensieve beveiliging
 description: Een diepgaande verkenning van defensieve cybersecurity, inclusief methoden
   voor preventie, detectie en respons.
 keywords:

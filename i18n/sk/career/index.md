@@ -1,5 +1,6 @@
 ---
 title: Kariéra
+seo_title: Kariéra v kybernetickej bezpečnosti
 description: Dynamická kariéra v oblasti kybernetickej bezpečnosti s príležitosťami
   pre profesionálov na všetkých úrovniach.
 keywords:

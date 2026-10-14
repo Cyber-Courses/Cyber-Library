@@ -1,5 +1,6 @@
 ---
 title: Karrera
+seo_title: Zibersegurtasuneko karrerak
 description: Zibersegurtasuneko karrera bat aukera dinamikoak eskaintzen ditu profesionalentzat.
 keywords:
 - zibersegurtasun karrera

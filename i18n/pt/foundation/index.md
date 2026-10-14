@@ -1,5 +1,6 @@
 ---
 title: Fundamentos
+seo_title: Fundamentos de cibersegurança
 description: Exploração detalhada da evolução da cibersegurança, desde a cultura hacker
   até práticas modernas.
 keywords:

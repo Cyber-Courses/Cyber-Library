@@ -1,5 +1,6 @@
 ---
 title: Intel·ligència
+seo_title: Intel·ligència d'amenaces
 description: Comprensió de la intel·ligència en ciberseguretat, la seva importància
   i com es duu a terme.
 keywords:

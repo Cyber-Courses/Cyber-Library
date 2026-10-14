@@ -1,5 +1,6 @@
 ---
 title: Offensiv
+seo_title: Sigurtà offensiva
 description: Offensiv tas-cibersigurtà jinvolvi simulazzjoni etika ta' attakki reali
   biex jiġu skoperti vulnerabbiltajiet qabel ma atturi malizzjużi jistgħu jisfruttawhom.
   Billi jaġixxu bħala avversarji awtorizzati, it-timijiet tas-sigurtà jesponu punti

@@ -1,5 +1,6 @@
 ---
 title: Carriera
+seo_title: Carriere nella cybersecurity
 description: Esplora il percorso dinamico di una carriera nella cybersecurity, con
   opportunità di crescita personale e professionale.
 keywords:

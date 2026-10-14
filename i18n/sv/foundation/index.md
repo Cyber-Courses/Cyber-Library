@@ -1,5 +1,6 @@
 ---
 title: Grunder
+seo_title: Grunderna i cybersäkerhet
 description: Utforska ursprunget och utvecklingen av cybersäkerhet, hacker-kultur
   och dess betydelse i dagens digitala värld.
 keywords:

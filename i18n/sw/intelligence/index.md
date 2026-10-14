@@ -1,5 +1,6 @@
 ---
 title: Ujasusi wa Vitisho
+seo_title: Ujasusi wa vitisho
 description: 'Ujasusi wa vitisho katika usalama wa mtandao: kukusanya na kuchambua taarifa za vitisho ili kutabiri mashambulizi na kuongoza ulinzi.'
 keywords:
 - akili ya usalama wa mtandao

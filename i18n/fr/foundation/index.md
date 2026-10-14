@@ -1,5 +1,6 @@
 ---
 title: Fondements
+seo_title: Fondamentaux de la cybersécurité
 description: Explorez les racines de la cybersécurité dans la culture hacker, son
   évolution vers une discipline essentielle, les débats éthiques autour du hacking
   et le rôle central de la gestion des risques et du comportement humain.

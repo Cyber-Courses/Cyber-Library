@@ -1,5 +1,6 @@
 ---
 title: Kariéra
+seo_title: Kariéra v kybernetické bezpečnosti
 description: Kariéra v kybernetické bezpečnosti nabízí dynamickou cestu plnou příležitostí
   pro profesionály na všech úrovních. S rozšiřováním digitálního světa roste poptávka
   po kvalifikovaných odbornících na kybernetickou bezpečnost, což vytváří živý a rychle

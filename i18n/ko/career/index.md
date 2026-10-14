@@ -1,5 +1,6 @@
 ---
 title: 경력
+seo_title: 사이버 보안 커리어
 description: 사이버 보안 경력에 대한 포괄적이고 기술적인 탐구
 keywords:
 - 사이버 보안 경력

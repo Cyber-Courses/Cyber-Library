@@ -1,5 +1,6 @@
 ---
 title: Upravljanje
+seo_title: Upravljanje sigurnošću
 description: Upravljanje kibernetičkom sigurnošću je sveobuhvatan okvir politika,
   uloga i procesa donošenja odluka koje organizacija uspostavlja kako bi upravljala
   i smanjila kibernetičke rizike. Pruža nacrt za integraciju kibernetičke sigurnosti

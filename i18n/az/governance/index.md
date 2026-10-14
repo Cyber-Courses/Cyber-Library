@@ -1,5 +1,6 @@
 ---
 title: İdarəetmə
+seo_title: Təhlükəsizlik idarəetməsi
 description: Kibertəhlükəsizlik idarəetməsi, təşkilatın kibertəhlükələri idarə etmək
   və azaltmaq üçün qurduğu siyasətlər, rollar və qərar qəbul etmə proseslərinin çərçivəsidir.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: Threat Intelligence
+seo_title: Threat intelligence
 description: 'Threat intelligence in cybersecurity: het verzamelen en analyseren van dreigingsinformatie om aanvallen te voorzien en de verdediging te sturen.'
 keywords:
 - cyberveiligheidsinformatie

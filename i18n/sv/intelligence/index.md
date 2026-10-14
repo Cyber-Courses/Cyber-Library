@@ -1,5 +1,6 @@
 ---
 title: Hotunderrättelser
+seo_title: Hotunderrättelser
 description: 'Hotunderrättelser inom cybersäkerhet: insamling och analys av information om hot för att förutse attacker och styra försvaret.'
 keywords:
 - cybersäkerhetsunderrättelser

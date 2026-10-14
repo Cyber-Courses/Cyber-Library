@@ -1,5 +1,6 @@
 ---
 title: Základy
+seo_title: Základy kybernetické bezpečnosti
 description: Kybernetická bezpečnost má své nejranější kořeny v hackerské kultuře
   konce 20. století. Od chvíle, kdy lidé začali experimentovat s počítači, existovala
   touha pochopit, modifikovat a posouvat hranice technologie. Tito raní hackeři se

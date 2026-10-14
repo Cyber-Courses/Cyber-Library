@@ -1,5 +1,6 @@
 ---
 title: Kaitsev
+seo_title: Kaitsev turvalisus
 description: Süstemaatiline lähenemine organisatsiooni andmete, süsteemide ja kasutajate
   kaitsmiseks küberohtude eest.
 keywords:

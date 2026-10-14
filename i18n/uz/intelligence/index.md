@@ -1,5 +1,6 @@
 ---
 title: Tahdidlar razvedkasi
+seo_title: Tahdidlar razvedkasi
 description: 'Kiberxavfsizlikda tahdidlar razvedkasi: hujumlarni oldindan ko‘rish va himoyani yo‘naltirish uchun tahdidlar haqidagi ma’lumotlarni yig‘ish va tahlil qilish.'
 keywords:
 - kiberxavfsizlik razvedkasi

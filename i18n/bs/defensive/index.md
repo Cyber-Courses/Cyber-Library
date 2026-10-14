@@ -1,5 +1,6 @@
 ---
 title: Odbrambena
+seo_title: Odbrambena sigurnost
 description: Sistematski pristup zaštiti podataka, sistema i korisnika organizacije
   od cyber prijetnji.
 keywords:

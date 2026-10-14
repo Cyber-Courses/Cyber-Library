@@ -1,5 +1,6 @@
 ---
 title: Karir
+seo_title: Karier keamanan siber
 description: Karir dalam keamanan siber menawarkan peluang dinamis bagi para profesional
   di semua tingkatan, dengan permintaan yang terus meningkat seiring berkembangnya
   dunia digital.

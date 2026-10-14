@@ -1,5 +1,6 @@
 ---
 title: Ohuluure
+seo_title: Ohuluure
 description: 'Ohuluure küberturvalisuses: ohtude kohta teabe kogumine ja analüüs, et rünnakuid ette näha ja kaitset suunata.'
 keywords:
 - küberturvalisuse luure

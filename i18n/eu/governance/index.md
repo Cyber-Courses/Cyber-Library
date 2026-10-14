@@ -1,5 +1,6 @@
 ---
 title: Gobernantza
+seo_title: Segurtasunaren gobernantza
 description: Zibersegurtasunaren gobernantza erakunde batek ziber-arriskuak kudeatzeko
   eta arintzeko ezartzen duen politikak, rolak eta erabaki-prozesuen esparru integrala
   da. Negozioaren alderdi guztietan zibersegurtasuna integratzeko planoa eskaintzen

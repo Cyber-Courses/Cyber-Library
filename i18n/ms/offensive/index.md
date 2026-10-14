@@ -1,5 +1,6 @@
 ---
 title: Serangan
+seo_title: Keselamatan ofensif
 description: Keselamatan siber serangan melibatkan simulasi serangan dunia nyata secara
   etika untuk mengenal pasti kelemahan sebelum pelaku jahat dapat mengeksploitasinya.
   Dengan bertindak sebagai musuh yang diberi kuasa, pasukan keselamatan mendedahkan

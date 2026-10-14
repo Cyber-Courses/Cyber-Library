@@ -1,5 +1,6 @@
 ---
 title: الحوكمة
+seo_title: حوكمة الأمن
 description: فهم حوكمة الأمن السيبراني وأهميتها وكيفية تنفيذها في المؤسسات.
 keywords:
 - Cybersecurity Governance

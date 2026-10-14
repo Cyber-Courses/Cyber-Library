@@ -1,5 +1,6 @@
 ---
 title: Karriera
+seo_title: Karrieri fiċ-ċibersigurtà
 description: Karriera fis-sigurtà ċibernetika hija vjaġġ dinamiku mimli opportunitajiet
   għal professjonisti f'kull livell. Hekk kif id-dinja diġitali tespandi, id-domanda
   għal esperti tas-sigurtà ċibernetika b'ħiliet tikber b'mod korrispondenti, u tippreżenta

@@ -1,5 +1,6 @@
 ---
 title: Tehdit İstihbaratı
+seo_title: Tehdit istihbaratı
 description: 'Siber güvenlikte tehdit istihbaratı: saldırıları öngörmek ve savunmayı yönlendirmek için tehdit verilerinin toplanması ve analizi.'
 keywords:
 - siber güvenlik istihbaratı

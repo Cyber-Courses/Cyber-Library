@@ -1,5 +1,6 @@
 ---
 title: 거버넌스
+seo_title: 보안 거버넌스
 description: 사이버 보안 거버넌스의 중요성과 구현 방법에 대한 심층적인 기술 설명
 keywords:
 - 사이버 보안 거버넌스

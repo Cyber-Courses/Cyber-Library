@@ -1,5 +1,6 @@
 ---
 title: Difensiva
+seo_title: Sigurtà difensiva
 description: Approċċ sistematiku għas-sigurtà ċibernetika difensiva biex tipproteġi
   d-dejta, is-sistemi, u l-utenti minn theddid ċibernetiku.
 keywords:

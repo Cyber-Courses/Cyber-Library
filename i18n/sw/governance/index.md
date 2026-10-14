@@ -1,5 +1,6 @@
 ---
 title: Utawala
+seo_title: Utawala wa usalama
 description: Utawala wa usalama wa mtandao ni mfumo wa kina wa sera, majukumu, na
   michakato ya maamuzi ambayo shirika huanzisha ili kusimamia na kupunguza hatari
   za mtandao. Inatoa mwongozo wa kuunganisha usalama wa mtandao katika kila kipengele

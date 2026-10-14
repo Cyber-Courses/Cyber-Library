@@ -1,5 +1,6 @@
 ---
 title: Temel
+seo_title: Siber güvenlik temelleri
 description: Siber güvenlik, 20. yüzyılın sonlarındaki hacker kültürüne dayanan köklere
   sahiptir. İnsanlar bilgisayarlarla deney yapmaya başladıkları andan itibaren, teknolojiyi
   anlamak, değiştirmek ve sınırlarını zorlamak için bir arzu vardı. Bu erken dönem

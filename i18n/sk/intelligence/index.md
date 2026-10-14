@@ -1,5 +1,6 @@
 ---
 title: Spravodajstvo o hrozbách
+seo_title: Spravodajstvo o hrozbách
 description: 'Spravodajstvo o hrozbách v kybernetickej bezpečnosti: zber a analýza informácií o hrozbách na predvídanie útokov a usmernenie obrany.'
 keywords:
 - kybernetická bezpečnostná inteligencia

@@ -1,5 +1,6 @@
 ---
 title: Defensiva
+seo_title: Seguridad defensiva
 description: Exploración técnica de la ciberseguridad defensiva, su importancia y
   cómo se implementa.
 keywords:

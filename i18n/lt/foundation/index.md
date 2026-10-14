@@ -1,5 +1,6 @@
 ---
 title: Pagrindai
+seo_title: Kibernetinio saugumo pagrindai
 description: Kibernetinis saugumas savo ištakas sieja su XX a. pabaigos hakerių kultūra.
   Nuo to momento, kai žmonės pradėjo eksperimentuoti su kompiuteriais, atsirado noras
   suprasti, modifikuoti ir išplėsti technologijų ribas. Šie ankstyvieji hakeriai dažnai

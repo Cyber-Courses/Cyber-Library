@@ -1,5 +1,6 @@
 ---
 title: Gobernanza
+seo_title: Gobernanza da seguridade
 description: A gobernanza da ciberseguridade é o marco integral de políticas, roles
   e procesos de toma de decisións que unha organización establece para xestionar e
   mitigar os riscos cibernéticos. Proporciona o plano para integrar a ciberseguridade

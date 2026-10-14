@@ -1,5 +1,6 @@
 ---
 title: Ciberseguretat Defensiva
+seo_title: Seguretat defensiva
 description: Una guia tècnica sobre la ciberseguretat defensiva, incloent la seva
   importància i com implementar-la.
 keywords:

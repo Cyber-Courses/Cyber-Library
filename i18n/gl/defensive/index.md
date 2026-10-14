@@ -1,5 +1,6 @@
 ---
 title: Defensa
+seo_title: Seguridade defensiva
 description: A ciberseguridade defensiva é un enfoque sistemático para protexer os
   datos, sistemas e usuarios dunha organización fronte ás ameazas cibernéticas. Implica
   a integración de estratexias de prevención, detección e resposta para minimizar

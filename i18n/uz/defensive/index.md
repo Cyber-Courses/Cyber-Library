@@ -1,5 +1,6 @@
 ---
 title: Himoya
+seo_title: Himoyaviy xavfsizlik
 description: Himoya kiberxavfsizligi tashkilotning ma'lumotlari, tizimlari va foydalanuvchilarini
   kiber tahdidlardan himoya qilish uchun tizimli yondashuvdir. Bu zararli faoliyatlarning
   ta'sirini minimallashtirish uchun oldini olish, aniqlash va javob berish strategiyalarini

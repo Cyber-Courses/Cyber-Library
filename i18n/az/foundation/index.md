@@ -1,5 +1,6 @@
 ---
 title: Əsaslar
+seo_title: Kibertəhlükəsizlik əsasları
 description: Kiber təhlükəsizliyin kökləri, haker mədəniyyəti, tarix və etika haqqında
   giriş.
 keywords:

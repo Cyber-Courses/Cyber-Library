@@ -1,5 +1,6 @@
 ---
 title: Obrona
+seo_title: Bezpieczeństwo defensywne
 description: Obrona w cyberbezpieczeństwie to systematyczne podejście do ochrony danych,
   systemów i użytkowników organizacji przed zagrożeniami cybernetycznymi. Obejmuje
   integrację strategii zapobiegania, wykrywania i reagowania w celu zminimalizowania

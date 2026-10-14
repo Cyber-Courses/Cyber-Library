@@ -1,5 +1,6 @@
 ---
 title: Ofenzívna
+seo_title: Ofenzívna bezpečnosť
 description: Preskúmanie ofenzívnej kybernetickej bezpečnosti, jej významu a metodík.
 keywords:
 - urážlivú kybernetickú bezpečnosť

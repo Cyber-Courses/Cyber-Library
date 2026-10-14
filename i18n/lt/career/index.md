@@ -1,5 +1,6 @@
 ---
 title: Karjera
+seo_title: Karjera kibernetinio saugumo srityje
 description: Karjera kibernetinio saugumo srityje yra dinamiška kelionė, kupina galimybių
   profesionalams visais lygmenimis.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: Beheer
+seo_title: Sekuriteitsbestuur
 description: Omvattende uiteensetting van kuberveiligheidsbeheer, die belangrikheid
   daarvan, en hoe dit geïmplementeer word.
 keywords:

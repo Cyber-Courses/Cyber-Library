@@ -1,5 +1,6 @@
 ---
 title: Riadenie kybernetickej bezpečnosti
+seo_title: Riadenie bezpečnosti
 description: Podrobný prehľad o riadení kybernetickej bezpečnosti vrátane jeho dôležitosti
   a implementácie.
 keywords:

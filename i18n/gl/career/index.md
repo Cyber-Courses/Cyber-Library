@@ -1,5 +1,6 @@
 ---
 title: Carreira
+seo_title: Carreiras en ciberseguridade
 description: Explora as oportunidades e o desenvolvemento profesional no campo da
   ciberseguridade.
 keywords:

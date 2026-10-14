@@ -1,5 +1,6 @@
 ---
 title: 공격
+seo_title: 공격 보안
 description: 공격적 사이버 보안의 중요성과 구현 방법에 대한 기술적 탐구
 keywords:
 - 공격적인 사이버 보안

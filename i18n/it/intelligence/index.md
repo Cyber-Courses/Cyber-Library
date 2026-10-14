@@ -1,5 +1,6 @@
 ---
 title: Threat Intelligence
+seo_title: Threat intelligence
 description: 'Threat intelligence nella cybersecurity: raccolta e analisi dei dati sulle minacce per anticipare gli attacchi e orientare la difesa.'
 keywords:
 - informazioni sulla sicurezza informatica

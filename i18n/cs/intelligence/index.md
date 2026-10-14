@@ -1,5 +1,6 @@
 ---
 title: Zpravodajství o hrozbách
+seo_title: Zpravodajství o hrozbách
 description: 'Zpravodajství o hrozbách v kybernetické bezpečnosti: sběr a analýza informací o hrozbách pro předvídání útoků a řízení obrany.'
 keywords:
 - zpravodajství v oblasti kybernetické bezpečnosti

@@ -1,5 +1,6 @@
 ---
 title: Amddiffynnol
+seo_title: Diogelwch amddiffynnol
 description: Deall seiberddiogelwch amddiffynnol a'i bwysigrwydd mewn sefydliadau.
 keywords:
 - seiberddiogelwch amddiffynnol

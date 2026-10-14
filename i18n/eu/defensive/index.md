@@ -1,5 +1,6 @@
 ---
 title: Defentsiboa
+seo_title: Segurtasun defentsiboa
 description: Zibersegurtasun defentsiboari buruzko azalpen tekniko eta sakona.
 keywords:
 - defensive cybersecurity

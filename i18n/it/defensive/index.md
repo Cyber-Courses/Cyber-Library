@@ -1,5 +1,6 @@
 ---
 title: Difensiva
+seo_title: Sicurezza difensiva
 description: Esplora la cybersecurity difensiva, la sua importanza e come viene implementata
   per proteggere i dati e i sistemi dalle minacce informatiche.
 keywords:

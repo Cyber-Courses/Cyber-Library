@@ -1,5 +1,6 @@
 ---
 title: Faisnéis Bagairtí i gCibearshlándáil
+seo_title: Faisnéis bagairtí
 description: 'Faisnéis bagairtí sa chibearshlándáil: faisnéis faoi bhagairtí a bhailiú agus a anailísiú chun ionsaithe a thuar agus an chosaint a threorú.'
 keywords:
 - faisnéis cibearshlándála

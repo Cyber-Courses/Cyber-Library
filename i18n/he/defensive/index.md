@@ -1,5 +1,6 @@
 ---
 title: הגנת סייבר
+seo_title: אבטחה הגנתית
 description: 'הבנת הגנת סייבר: חשיבות, תהליכים ודרכים לשיפור ההגנה על נתוני הארגון.'
 keywords:
 - defensive cybersecurity

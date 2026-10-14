@@ -1,5 +1,6 @@
 ---
 title: Défensive
+seo_title: Sécurité défensive
 description: 'Vue d’ensemble pratique de la cybersécurité défensive : renseignement
   sur les menaces, évaluation des vulnérabilités, réponse aux incidents et amélioration
   continue pour la résilience de l’entreprise.'

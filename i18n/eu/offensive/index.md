@@ -1,5 +1,6 @@
 ---
 title: Ofentsiboa
+seo_title: Segurtasun ofentsiboa
 description: Ofentsibako zibersegurtasuna benetako erasoak etikoak diren simulazioak
   egitea da, aktore gaiztoek ustiatu aurretik ahultasunak aurkitzeko. Autorizatutako
   aurkarien moduan jokatuz, segurtasun taldeek erakundearen defentsen puntu ahulak

@@ -1,5 +1,6 @@
 ---
 title: Fondamenti
+seo_title: Fondamenti di cybersecurity
 description: La cybersecurity ha le sue radici più antiche nella cultura hacker della
   fine del XX secolo. Dal momento in cui le persone hanno iniziato a sperimentare
   con i computer, è emerso il desiderio di comprendere, modificare e spingere i confini

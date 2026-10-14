@@ -1,5 +1,6 @@
 ---
 title: Defensiv
+seo_title: Defensiv sikkerhed
 description: En omfattende guide til defensiv cybersikkerhed, dens betydning og implementering.
 keywords:
 - defensiv cybersikkerhed

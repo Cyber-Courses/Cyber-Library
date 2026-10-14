@@ -1,5 +1,6 @@
 ---
 title: Fonaments
+seo_title: Fonaments de ciberseguretat
 description: La ciberseguretat té les seves arrels més primerenques en la cultura
   hacker de finals del segle XX. Des del moment en què les persones van començar a
   experimentar amb els ordinadors, va existir un desig d'entendre, modificar i empènyer

@@ -1,5 +1,6 @@
 ---
 title: Grondslagen van Cyberbeveiliging
+seo_title: Basis van cyberbeveiliging
 description: Een diepgaande verkenning van de oorsprong, geschiedenis en filosofie
   van cyberbeveiliging.
 keywords:

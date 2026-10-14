@@ -1,5 +1,6 @@
 ---
 title: Siber Güvenlik Yönetişimi
+seo_title: Güvenlik yönetişimi
 description: Siber güvenlik yönetişimi, siber riskleri yönetmek ve hafifletmek için
   bir kuruluşun oluşturduğu kapsamlı politika, rol ve karar verme süreçleri çerçevesidir.
 keywords:

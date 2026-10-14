@@ -1,5 +1,6 @@
 ---
 title: Siguria Kibernetike Ofensive
+seo_title: Siguria ofensive
 description: Një eksplorim i thellë i sigurisë kibernetike ofensive, rëndësisë së
   saj dhe metodave të zbatimit.
 keywords:

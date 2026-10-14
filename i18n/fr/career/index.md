@@ -1,5 +1,6 @@
 ---
 title: Carrière
+seo_title: Métiers de la cybersécurité
 description: 'Vue d’ensemble des parcours en cybersécurité : rôles et responsabilités,
   compétences clés, et intérêt des certifications et des diplômes.'
 keywords:

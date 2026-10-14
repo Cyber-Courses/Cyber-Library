@@ -1,5 +1,6 @@
 ---
 title: Nền tảng
+seo_title: Nền tảng an ninh mạng
 description: An ninh mạng có nguồn gốc từ văn hóa hacker cuối thế kỷ 20. Từ khi con
   người bắt đầu thử nghiệm với máy tính, đã tồn tại một mong muốn hiểu, sửa đổi và
   đẩy giới hạn của công nghệ. Những hacker đầu tiên thường tự coi mình là những nhà

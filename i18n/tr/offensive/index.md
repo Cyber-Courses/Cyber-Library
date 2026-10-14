@@ -1,5 +1,6 @@
 ---
 title: Saldırgan
+seo_title: Saldırı güvenliği
 description: Saldırgan siber güvenlik, kötü niyetli aktörler bu açıkları istismar
   etmeden önce gerçek dünya saldırılarını etik bir şekilde simüle ederek zayıf noktaları
   ortaya çıkarmayı içerir. Yetkili rakipler olarak hareket eden güvenlik ekipleri,

@@ -1,5 +1,6 @@
 ---
 title: Grundlagen
+seo_title: Grundlagen der Cybersicherheit
 description: Die Cybersicherheit hat ihre frühesten Wurzeln in der Hacker-Kultur des
   späten 20. Jahrhunderts. Seit dem Moment, als Menschen begannen, mit Computern zu
   experimentieren, bestand der Wunsch, die Technologie zu verstehen, zu modifizieren

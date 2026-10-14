@@ -1,5 +1,6 @@
 ---
 title: Verdedigend
+seo_title: Verdedigende sekuriteit
 description: Verstaan die belangrikheid en implementering van verdedigende kuberveiligheid
   om data en stelsels teen kuberbedreigings te beskerm.
 keywords:
