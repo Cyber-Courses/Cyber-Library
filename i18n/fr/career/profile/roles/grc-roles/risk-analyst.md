@@ -1,0 +1,29 @@
+---
+title: "Analyste des risques : mesurer et communiquer le risque de sécurité"
+description: Un analyste des risques identifie, évalue et hiérarchise les risques liés à la sécurité de l'information afin que l'organisation puisse prendre des décisions éclairées sur les domaines où investir ses défenses.
+keywords:
+  - analyste des risques
+  - évaluation des risques
+  - grc
+  - registre des risques
+  - gestion des risques
+  - carrière en cybersécurité
+---
+
+# Analyste des risques
+
+Un analyste des risques se situe au coeur de la fonction gouvernance, risque et conformité (GRC) d'une organisation, où son travail consiste à comprendre ce qui pourrait mal tourner, avec quelle probabilité et à quel coût si cela se produisait. Plutôt que de configurer des pare-feux ou d'investiguer des alertes, l'analyste des risques travaille un cran au-dessus des contrôles techniques : il identifie les menaces et les vulnérabilités, estime leur impact potentiel sur l'activité et traduit cette analyse en termes sur lesquels les dirigeants et les responsables de risques peuvent agir. Ce rôle existe parce que les ressources de sécurité sont limitées et que les dirigeants ont besoin d'une méthode cohérente et défendable pour décider quels risques atténuer, lesquels transférer par l'assurance ou des contrats, lesquels accepter et lesquels éviter complètement.
+
+Au quotidien, le travail s'organise autour du cycle de vie du risque. Un analyste des risques mène des évaluations de systèmes, de fournisseurs, de projets et de processus, souvent guidé par un cadre établi tel que le NIST Risk Management Framework, l'ISO 27005 ou FAIR pour l'analyse quantitative. Il tient à jour le registre des risques, le catalogue vivant des risques connus de l'organisation avec leur probabilité, leur impact, leurs plans de traitement et leurs responsables. Une grande partie du rôle consiste à mener des entretiens et à collaborer : recueillir le contexte auprès des propriétaires de systèmes, examiner les preuves de contrôle, noter les constats au regard de l'appétence au risque de l'organisation et suivre les actions de remédiation jusqu'à leur clôture. Les analystes préparent également des rapports et des cartes de chaleur pour les comités de gouvernance, appuient les revues de risques liées aux tiers et à la chaîne d'approvisionnement, et aident à quantifier l'exposition lors des audits, des incidents ou des changements majeurs de l'activité comme une migration vers le cloud ou une acquisition.
+
+Le rôle exige un mélange de rigueur analytique et de compétences en communication. Un analyste des risques a besoin d'une culture technique suffisante pour comprendre comment fonctionnent les contrôles et où ils échouent, associée à une bonne maîtrise du contexte métier afin que le risque soit formulé en termes de chiffre d'affaires, d'exploitation et de réputation plutôt qu'en simples décomptes de vulnérabilités. L'aisance avec les cadres et les normes, une écriture claire et la capacité à raisonner sur la probabilité et l'impact sont essentielles, et les méthodes quantitatives sont de plus en plus valorisées pour chiffrer l'exposition en euros. Tout aussi importantes sont les compétences plus humaines de facilitation et de diplomatie, car les analystes doivent remettre en question les hypothèses et presser des interlocuteurs occupés pour obtenir des réponses honnêtes sans devenir conflictuels. Les certifications courantes incluent le CRISC, le CISA et le CISSP plus généraliste, même si un jugement démontré compte souvent plus qu'un quelconque certificat isolé.
+
+Les personnes accèdent au rôle d'analyste des risques par plusieurs voies. Certaines viennent de la sécurité technique ou de l'exploitation informatique et évoluent pour se concentrer sur l'impact métier plutôt que sur la défense opérationnelle ; d'autres viennent de l'audit, de la conformité ou de l'analyse métier générale et approfondissent leurs connaissances en sécurité au fil du temps. Au début, un analyste gère généralement des évaluations individuelles et la tenue du registre sous supervision. Avec l'expérience, il prend en charge des évaluations plus complexes et à plus forts enjeux, encadre les collaborateurs juniors et peut se spécialiser dans des domaines tels que le risque lié aux tiers, les technologies opérationnelles ou la modélisation quantitative. Les perspectives d'évolution mènent vers le poste d'analyste des risques senior ou référent, de responsable des risques, et à terme vers des fonctions comme directeur des risques ou un rôle en appui du responsable de la sécurité des systèmes d'information.
+
+L'analyste des risques travaille aux côtés des autres rôles de la GRC, mais s'en distingue nettement. Là où un analyste de conformité se concentre sur le respect d'obligations réglementaires et contractuelles précises et où un auditeur de sécurité teste de manière indépendante si les contrôles fonctionnent comme prévu, l'analyste des risques s'intéresse à la question plus large de l'exposition et de l'adéquation entre la posture globale de l'organisation et sa tolérance. Un analyste des politiques définit les règles que l'organisation attend d'elle-même, et le responsable du programme GRC coordonne les personnes, les outils et la cadence qui font fonctionner l'ensemble de ces fonctions. En pratique, ces rôles partagent constamment preuves et constats, et un bon analyste des risques comprend suffisamment chacune des disciplines voisines pour relier une lacune de contrôle, une exigence de politique et une décision métier en une seule image cohérente.
+
+## Références
+
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST SP 800-30, Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
+- [ISACA, Certified in Risk and Information Systems Control (CRISC)](https://www.isaca.org/)

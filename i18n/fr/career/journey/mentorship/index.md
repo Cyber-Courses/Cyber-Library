@@ -22,5 +22,5 @@ L'accompagnement, la définition d'objectifs et l'appui à long terme constituen
 
 ## Références
 
-- SANS Institute, Mentoring and Community Resources
-- (ISC)2, Mentorship and Professional Development
+- [SANS Institute, Mentoring and Community Resources](https://www.sans.org/)
+- [(ISC)2, Mentorship and Professional Development](https://www.isc2.org/)

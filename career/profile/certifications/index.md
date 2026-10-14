@@ -22,5 +22,5 @@ Choosing certifications works best when tied to a direction rather than collecte
 
 ## References
 
-- CompTIA, Certification Resources
-- (ISC)2, Certification and Credentialing
+- [CompTIA, Certification Resources](https://www.comptia.org/)
+- [(ISC)2, Certification and Credentialing](https://www.isc2.org/)

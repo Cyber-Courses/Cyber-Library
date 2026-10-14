@@ -22,5 +22,5 @@ Nouer des relations est un jeu de longue haleine. Offrir son aide avant de deman
 
 ## Références
 
-- SANS Institute, Community and Professional Development Resources
-- ISACA, Professional Networking and Chapters
+- [SANS Institute, Community and Professional Development Resources](https://www.sans.org/)
+- [ISACA, Professional Networking and Chapters](https://www.isaca.org/)
