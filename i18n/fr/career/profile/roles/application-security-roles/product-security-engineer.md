@@ -1,0 +1,28 @@
+---
+title: "Ingénieur Sécurité Produit : sécuriser les produits tout au long de leur cycle de vie"
+description: Un rôle consacré à l'intégration de la sécurité dans la conception, le développement et l'exploitation des produits d'une entreprise ainsi que des plateformes sur lesquelles ils fonctionnent.
+keywords:
+  - ingénieur sécurité produit
+  - sécurité applicative
+  - conception sécurisée
+  - modélisation des menaces
+  - ingénierie de la sécurité
+---
+
+# Ingénieur Sécurité Produit
+
+Un Ingénieur Sécurité Produit est responsable de la sécurité des produits d'une entreprise tout au long de leur cycle de vie, depuis les premières phases de conception jusqu'au développement, à la mise en production et à l'exploitation continue. Ce rôle considère la sécurité comme une propriété intrinsèque du produit lui-même plutôt que comme un contrôle appliqué à la fin. En pratique, cela signifie que l'ingénieur est intégré aux équipes produit et aux équipes d'ingénierie, en analysant comment une fonctionnalité pourrait échouer, ce qu'un attaquant pourrait en faire et comment la conception peut rendre des catégories entières de faiblesses improbables ou impossibles. L'accent mis sur le produit en tant que système livré, incluant son architecture, ses dépendances, sa chaîne de build et son environnement d'exécution, est ce qui distingue ce rôle des travaux plus restreints centrés sur l'application.
+
+Au quotidien, un Ingénieur Sécurité Produit examine les propositions d'architecture et de conception, réalise de la modélisation des menaces sur les nouvelles fonctionnalités et collabore avec les développeurs pour résoudre les points de sécurité avant qu'ils n'atteignent les clients. Il contribue à définir des réglages sécurisés par défaut et des modèles réutilisables, tels que des bibliothèques d'authentification, des cadres de contrôle d'accès et des recommandations sur le traitement des entrées, afin que les équipes ne résolvent pas le même problème de manière non sécurisée à chaque fois. Une grande partie du travail est consultative et préventive : participer aux discussions de conception, rédiger des recommandations et répondre aux questions des ingénieurs qui souhaitent construire quelque chose correctement. Le rôle comprend également l'évaluation des composants tiers, le soutien aux investigations d'incidents qui touchent le produit et la mesure du degré d'adoption des pratiques de sécurité au sein des équipes. La communication et l'influence comptent autant que la profondeur technique, car l'ingénieur possède rarement le code et doit convaincre les équipes de prioriser les correctifs.
+
+Ce rôle exige une solide base en génie logiciel combinée à une perspective d'attaquant. Les bons candidats comprennent comment les applications modernes et les plateformes cloud sont construites, savent lire et écrire du code avec aisance dans les langages utilisés par leur entreprise et maîtrisent suffisamment les fondamentaux de la cryptographie, de l'identité, des réseaux et des systèmes d'exploitation pour raisonner sur les frontières de confiance. Tout aussi importante est la capacité à penser en termes de systèmes et à prioriser, car un programme de sécurité produit ne peut pas traiter toutes les faiblesses possibles et doit concentrer les efforts là où le risque est le plus élevé. La familiarité avec les principes de conception sécurisée, les catégories courantes de vulnérabilités et les réalités concrètes de la livraison continue complète le profil que recherchent les équipes de recrutement.
+
+On entre généralement dans la sécurité produit en venant du génie logiciel, de la sécurité applicative ou du test d'intrusion, et parfois de la fiabilité des sites ou de rôles liés aux plateformes. Un parcours en ingénierie offre de la crédibilité auprès des équipes de développement ainsi qu'une intuition de ce qu'il est réaliste de demander comme recommandations, tandis qu'un parcours en test apporte une intuition plus fine de la manière dont les systèmes se brisent. En début de poste, le travail tend à se concentrer sur les revues et les modèles de menaces de fonctionnalités individuelles ; avec l'expérience, les ingénieurs prennent en charge des décisions architecturales plus importantes, façonnent la stratégie de sécurité d'un domaine produit et encadrent d'autres personnes. Les perspectives d'évolution mènent vers des postes d'ingénieur senior et principal, vers l'architecture de sécurité ou vers la direction d'une fonction de sécurité produit.
+
+La sécurité produit chevauche les rôles voisins tout en conservant un centre de gravité distinct. Là où un Ingénieur Sécurité Applicative se concentre sur la détection et la correction des vulnérabilités dans le code applicatif et les services, et où un Relecteur de Code Sécurisé s'attache de près à la justesse du code lui-même, l'Ingénieur Sécurité Produit travaille au niveau de la conception du produit et de sa posture globale. Un Ingénieur DevSecOps se concentre sur la chaîne de livraison et l'automatisation qui impose la sécurité lors de la livraison, et un Security Champion est généralement un développeur qui porte la sensibilisation à la sécurité au sein de sa propre équipe. L'Ingénieur Sécurité Produit collabore souvent avec tous ces profils, en définissant l'orientation de conception et les priorités de risque que les autres contribuent à concrétiser dans le code, l'outillage et la pratique quotidienne.
+
+## Références
+
+- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
+- OWASP Software Assurance Maturity Model (SAMM)
+- SANS Institute, Secure Software Development courses and resources
