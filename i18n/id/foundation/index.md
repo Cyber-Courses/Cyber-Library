@@ -1,5 +1,6 @@
 ---
 title: Dasar
+seo_title: Dasar-dasar keamanan siber
 description: Keamanan siber memiliki akar awalnya dalam budaya peretas pada akhir
   abad ke-20. Sejak orang mulai bereksperimen dengan komputer, ada keinginan untuk
   memahami, memodifikasi, dan mendorong batasan teknologi. Para peretas awal ini sering

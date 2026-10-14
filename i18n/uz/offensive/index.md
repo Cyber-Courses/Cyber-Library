@@ -1,5 +1,6 @@
 ---
 title: Hujumkor
+seo_title: Hujumkor xavfsizlik
 description: Hujumkor kiberxavfsizlik, zararli aktorlar ulardan foydalana olmasdan
   oldin zaifliklarni aniqlash uchun haqiqiy hujumlarni axloqiy ravishda simulyatsiya
   qilishni o'z ichiga oladi. Ruxsat etilgan raqiblar sifatida harakat qilib, xavfsizlik

@@ -1,5 +1,6 @@
 ---
 title: Asas
+seo_title: Asas keselamatan siber
 description: Keselamatan siber mempunyai akar awalnya dalam budaya penggodam pada
   akhir abad ke-20. Sejak orang mula bereksperimen dengan komputer, terdapat keinginan
   untuk memahami, mengubah, dan mendorong batas teknologi. Penggodam awal ini sering

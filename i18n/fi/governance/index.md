@@ -1,5 +1,6 @@
 ---
 title: Kyberturvallisuuden hallinta
+seo_title: Tietoturvan hallinta
 description: Ymmärrä kyberturvallisuuden hallinnan merkitys ja sen toteuttaminen organisaatiossa.
 keywords:
 - kyberturvallisuuden hallinta

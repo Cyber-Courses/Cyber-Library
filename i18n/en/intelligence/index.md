@@ -1,5 +1,6 @@
 ---
 title: Intelligence
+seo_title: Threat Intelligence
 description: A comprehensive overview of cybersecurity intelligence, focusing on its
   strategic, operational, and tactical levels, and how it guides proactive defenses
   and risk management.

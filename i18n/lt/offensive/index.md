@@ -1,5 +1,6 @@
 ---
 title: Ofensyvinė kibernetinė sauga
+seo_title: Puolamasis saugumas
 description: Sužinokite apie ofensyvinę kibernetinę saugą, jos svarbą ir kaip ji įgyvendinama
   siekiant apsaugoti organizacijas nuo kibernetinių grėsmių.
 keywords:

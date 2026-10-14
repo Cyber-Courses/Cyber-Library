@@ -1,5 +1,6 @@
 ---
 title: Governance
+seo_title: Beveiligingsgovernance
 description: Een diepgaande verkenning van cybersecurity governance, het belang ervan
   en de implementatie binnen organisaties.
 keywords:

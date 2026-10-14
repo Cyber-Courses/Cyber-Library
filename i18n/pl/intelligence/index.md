@@ -1,5 +1,6 @@
 ---
 title: Wywiad o zagrożeniach
+seo_title: Wywiad o zagrożeniach
 description: 'Wywiad o zagrożeniach w cyberbezpieczeństwie: gromadzenie i analiza danych o zagrożeniach w celu przewidywania ataków i ukierunkowania obrony.'
 keywords:
 - wywiad dotyczący cyberbezpieczeństwa

@@ -1,5 +1,6 @@
 ---
 title: Offensief
+seo_title: Offensieve beveiliging
 description: Een diepgaande verkenning van offensieve cybersecurity, inclusief het
   belang, de methodologieën en de rol in het versterken van de beveiligingshouding
   van een organisatie.

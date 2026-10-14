@@ -1,5 +1,6 @@
 ---
 title: Küberjulgeoleku juhtimine
+seo_title: Turvalisuse juhtimine
 description: Ülevaade küberjulgeoleku juhtimisest, selle tähtsusest ja rakendamisest
   organisatsioonides.
 keywords:

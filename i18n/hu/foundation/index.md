@@ -1,5 +1,6 @@
 ---
 title: Alapok
+seo_title: Kiberbiztonsági alapok
 description: A kiberbiztonság gyökerei a 20. század végének hacker kultúrájában keresendők.
   Amióta az emberek elkezdtek kísérletezni a számítógépekkel, megjelent az igény a
   technológia megértésére, módosítására és határainak feszegetésére. Ezek a korai

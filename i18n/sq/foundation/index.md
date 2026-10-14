@@ -1,5 +1,6 @@
 ---
 title: Bazat
+seo_title: Bazat e sigurisë kibernetike
 description: Siguria kibernetike ka rrënjët e saj më të hershme në kulturën e hakerëve
   të fundit të shekullit të 20-të. Që nga momenti kur njerëzit filluan të eksperimentojnë
   me kompjuterët, ekzistonte një dëshirë për të kuptuar, modifikuar dhe shtyrë kufijtë

@@ -1,5 +1,6 @@
 ---
 title: Draudu izlūkošana
+seo_title: Draudu izlūkošana
 description: 'Draudu izlūkošana kiberdrošībā: datu par draudiem vākšana un analīze, lai paredzētu uzbrukumus un virzītu aizsardzību.'
 keywords:
 - kiberdrošības izlūkošana

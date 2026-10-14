@@ -1,5 +1,6 @@
 ---
 title: Gobernanza de Ciberseguridad
+seo_title: Gobernanza de la seguridad
 description: Marco integral de políticas y procesos para gestionar riesgos cibernéticos.
 keywords:
 - gobernanza de la ciberseguridad

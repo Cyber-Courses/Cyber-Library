@@ -1,5 +1,6 @@
 ---
 title: Kariera
+seo_title: Kariere v kibernetski varnosti
 description: Dinamična pot v kibernetski varnosti z možnostmi za strokovnjake na vseh
   ravneh.
 keywords:

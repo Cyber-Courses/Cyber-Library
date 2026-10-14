@@ -1,5 +1,6 @@
 ---
 title: Defensive
+seo_title: Defensive Sicherheit
 description: Eine umfassende Erklärung der verteidigenden Cybersicherheit, ihrer Bedeutung
   und ihrer Umsetzung.
 keywords:

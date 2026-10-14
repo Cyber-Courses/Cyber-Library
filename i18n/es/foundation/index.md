@@ -1,5 +1,6 @@
 ---
 title: Fundamentos de la Ciberseguridad
+seo_title: Fundamentos de ciberseguridad
 description: Exploración detallada de la historia, cultura y ética de la ciberseguridad.
 keywords:
 - base de ciberseguridad

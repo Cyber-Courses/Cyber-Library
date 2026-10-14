@@ -1,5 +1,6 @@
 ---
 title: Karyera
+seo_title: Kiberxavfsizlikda karyera
 description: Kiberxavfsizlik sohasida karyera imkoniyatlari va rivojlanish yo‘llari.
 keywords:
 - kiberxavfsizlik karerasi

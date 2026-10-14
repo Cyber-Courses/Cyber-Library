@@ -1,5 +1,6 @@
 ---
 title: Inteligencia
+seo_title: Inteligencia de amenazas
 description: Exploración detallada de la inteligencia en ciberseguridad, su importancia
   y cómo se implementa.
 keywords:

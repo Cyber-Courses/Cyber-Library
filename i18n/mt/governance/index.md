@@ -1,5 +1,6 @@
 ---
 title: Governanza
+seo_title: Governanza tas-sigurtà
 description: Il-governanza tas-sigurtà ċibernetika hija l-qafas komprensiv ta' politiki,
   rwoli, u proċessi ta' teħid ta' deċiżjonijiet li organizzazzjoni tistabbilixxi biex
   timmaniġġja u tnaqqas ir-riskji ċibernetiċi. Dan jipprovdi l-pjan għall-integrazzjoni

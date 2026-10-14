@@ -1,5 +1,6 @@
 ---
 title: Tadbir Urus
+seo_title: Tadbir urus keselamatan
 description: Tadbir urus keselamatan siber adalah rangka kerja menyeluruh yang merangkumi
   dasar, peranan, dan proses membuat keputusan yang ditubuhkan oleh sesebuah organisasi
   untuk mengurus dan mengurangkan risiko siber. Ia menyediakan pelan tindakan untuk

@@ -1,5 +1,6 @@
 ---
 title: Uzbrukuma Kiberdrošība
+seo_title: Uzbrukuma drošība
 description: Izpratne par uzbrukuma kiberdrošību un tās nozīmi organizāciju aizsardzībā
   pret kiberdraudiem.
 keywords:

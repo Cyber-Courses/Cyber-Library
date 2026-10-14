@@ -1,5 +1,6 @@
 ---
 title: Aanvallend
+seo_title: Aanvallende sekuriteit
 description: Verkenning van etiese aanvalsimulasies om kwesbaarhede in kuberveiligheid
   te identifiseer en te versterk.
 keywords:

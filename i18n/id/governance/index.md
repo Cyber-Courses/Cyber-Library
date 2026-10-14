@@ -1,5 +1,6 @@
 ---
 title: Governansi
+seo_title: Tata kelola keamanan
 description: Tata kelola keamanan siber adalah kerangka kerja komprehensif yang terdiri
   dari kebijakan, peran, dan proses pengambilan keputusan yang dibentuk oleh sebuah
   organisasi untuk mengelola dan mengurangi risiko siber. Ini menyediakan cetak biru

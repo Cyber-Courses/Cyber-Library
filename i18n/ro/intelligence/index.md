@@ -1,5 +1,6 @@
 ---
 title: Informații despre amenințări
+seo_title: Informații despre amenințări
 description: 'Informații despre amenințări în securitatea cibernetică: colectarea și analiza datelor despre amenințări pentru a anticipa atacurile și a orienta apărarea.'
 keywords:
 - inteligență de securitate cibernetică

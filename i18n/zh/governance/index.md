@@ -1,5 +1,6 @@
 ---
 title: 治理
+seo_title: 安全治理
 description: 了解网络安全治理的重要性及其实施方法。
 keywords:
 - 网络安全治理

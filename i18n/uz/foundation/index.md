@@ -1,5 +1,6 @@
 ---
 title: Asos
+seo_title: Kiberxavfsizlik asoslari
 description: Kiberxavfsizlikning dastlabki ildizlari 20-asr oxiridagi xakerlar madaniyatiga
   borib taqaladi. Odamlar kompyuterlar bilan tajriba o'tkazishni boshlagan paytdan
   boshlab, texnologiyani tushunish, o'zgartirish va chegaralarni kengaytirishga intilish

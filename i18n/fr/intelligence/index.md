@@ -1,5 +1,6 @@
 ---
 title: Renseignement
+seo_title: Renseignement sur les menaces
 description: 'Vue d’ensemble du renseignement sur les menaces en cybersécurité : niveaux stratégique, opérationnel et tactique, et lien avec la défense proactive et la gestion des risques.'
 keywords:
 - renseignements sur la cybersécurité

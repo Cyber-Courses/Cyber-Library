@@ -1,5 +1,6 @@
 ---
 title: Fondazzjoni
+seo_title: Il-pedamenti taċ-ċibersigurtà
 description: Is-sigurtà ċibernetika għandha l-għeruq tagħha fil-kultura tal-hackers
   tal-aħħar tas-seklu 20. Minn meta n-nies bdew jesperimentaw bil-kompjuters, kien
   hemm xewqa li jifhmu, jimmodifikaw, u jimbuttaw il-konfini tat-teknoloġija. Dawn

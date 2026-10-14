@@ -1,5 +1,6 @@
 ---
 title: Karriere
+seo_title: Karriere in der Cybersicherheit
 description: Eine Karriere in der Cybersicherheit bietet dynamische Möglichkeiten
   für Fachleute auf allen Ebenen. Entdecken Sie die Profile, den Werdegang und die
   Landschaft der Cybersicherheitsbranche.

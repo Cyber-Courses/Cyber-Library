@@ -1,5 +1,6 @@
 ---
 title: Usalama wa Kushambulia
+seo_title: Usalama wa kushambulia
 description: Usalama wa mtandao wa kushambulia unahusisha kuiga mashambulizi halisi kwa
   njia ya kimaadili ili kugundua udhaifu kabla ya wahalifu kuweza kuyatumia. Kwa kutenda
   kama wapinzani walioidhinishwa, timu za usalama hufichua sehemu dhaifu katika ulinzi

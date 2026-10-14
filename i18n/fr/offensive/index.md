@@ -1,5 +1,6 @@
 ---
 title: Offensive
+seo_title: Sécurité offensive
 description: Découvrez comment le hacking éthique, le red teaming, les programmes
   de bug bounty et d’autres techniques de sécurité offensive permettent d’identifier
   et de traiter les vulnérabilités sur les couches physique, réseau, logicielle et

@@ -1,5 +1,6 @@
 ---
 title: Defenzivna Kibernetička Sigurnost
+seo_title: Defenzivna sigurnost
 description: Sustavni pristup zaštiti podataka, sustava i korisnika organizacije od
   kibernetičkih prijetnji.
 keywords:

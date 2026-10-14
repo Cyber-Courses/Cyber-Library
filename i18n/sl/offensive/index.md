@@ -1,5 +1,6 @@
 ---
 title: Ofenzivna Kibernetska Varnost
+seo_title: Ofenzivna varnost
 description: Razumevanje in pomen ofenzivne kibernetske varnosti ter kako se izvaja.
 keywords:
 - žaljiva kibernetska varnost

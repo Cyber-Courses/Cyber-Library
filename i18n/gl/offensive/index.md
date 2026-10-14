@@ -1,5 +1,6 @@
 ---
 title: Ofensiva
+seo_title: Seguridade ofensiva
 description: Exploración técnica da ciberseguridade ofensiva, incluíndo a súa importancia
   e metodoloxías.
 keywords:

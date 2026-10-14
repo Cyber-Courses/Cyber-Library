@@ -1,5 +1,6 @@
 ---
 title: Ofensiva
+seo_title: Seguridad ofensiva
 description: La ciberseguridad ofensiva implica simular éticamente ataques del mundo
   real para descubrir vulnerabilidades antes de que actores maliciosos puedan explotarlas.
   Al actuar como adversarios autorizados, los equipos de seguridad exponen puntos

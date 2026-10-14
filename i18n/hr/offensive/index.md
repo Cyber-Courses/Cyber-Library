@@ -1,5 +1,6 @@
 ---
 title: Ofenzivna Kibernetička Sigurnost
+seo_title: Ofenzivna sigurnost
 description: Razumijevanje ofenzivne kibernetičke sigurnosti, njene važnosti i metoda
   implementacije.
 keywords:

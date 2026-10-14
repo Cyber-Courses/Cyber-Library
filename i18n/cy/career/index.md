@@ -1,5 +1,6 @@
 ---
 title: Gyrfa
+seo_title: Gyrfaoedd seiberddiogelwch
 description: Archwiliad o yrfa mewn seiberddiogelwch, gan gynnwys proffil, taith,
   a thirwedd y diwydiant.
 keywords:

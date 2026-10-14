@@ -1,5 +1,6 @@
 ---
 title: Governance
+seo_title: Governance della sicurezza
 description: Scopri la governance della cybersecurity, la sua importanza e come viene
   implementata.
 keywords:

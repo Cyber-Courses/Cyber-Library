@@ -1,5 +1,6 @@
 ---
 title: Támadó
+seo_title: Támadó biztonság
 description: A támadó kiberbiztonság magában foglalja a valós támadások etikus szimulálását
   annak érdekében, hogy feltárjuk a sebezhetőségeket, mielőtt a rosszindulatú szereplők
   kihasználhatnák azokat. Az engedélyezett ellenfelek szerepét betöltve a biztonsági

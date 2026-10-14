@@ -1,5 +1,6 @@
 ---
 title: Karrier
+seo_title: Kiberbiztonsági karrier
 description: Fedezze fel a kiberbiztonsági karrier lehetőségeit és kihívásait.
 keywords:
 - kiberbiztonsági karrier

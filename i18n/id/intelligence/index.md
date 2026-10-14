@@ -1,5 +1,6 @@
 ---
 title: Intelijen Ancaman
+seo_title: Intelijen ancaman
 description: 'Intelijen ancaman dalam keamanan siber: pengumpulan dan analisis data ancaman untuk mengantisipasi serangan dan mengarahkan pertahanan.'
 keywords:
 - intelijen keamanan siber

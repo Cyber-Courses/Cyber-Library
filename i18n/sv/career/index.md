@@ -1,5 +1,6 @@
 ---
 title: Karriär
+seo_title: Karriär inom cybersäkerhet
 description: Utforska en karriär inom cybersäkerhet, dess möjligheter och landskap.
 keywords:
 - cybersäkerhetskarriär

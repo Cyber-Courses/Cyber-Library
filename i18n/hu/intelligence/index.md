@@ -1,5 +1,6 @@
 ---
 title: Fenyegetésfelderítés
+seo_title: Fenyegetésfelderítés
 description: 'Fenyegetésfelderítés a kiberbiztonságban: a fenyegetésekre vonatkozó adatok gyűjtése és elemzése a támadások előrejelzéséhez és a védekezés irányításához.'
 keywords:
 - kiberbiztonsági intelligencia

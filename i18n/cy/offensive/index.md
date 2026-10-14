@@ -1,5 +1,6 @@
 ---
 title: Seiberddiogelwch Ymosodol
+seo_title: Diogelwch ymosodol
 description: Deall seiberddiogelwch ymosodol, ei bwysigrwydd, a'r dulliau a ddefnyddir
   i'w weithredu yn foesegol.
 keywords:

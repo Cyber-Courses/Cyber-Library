@@ -1,5 +1,6 @@
 ---
 title: Intelligenza
+seo_title: Intelliġenza dwar it-theddid
 description: Esplorazzjoni teknika tal-intelliġenza fis-sigurtà ċibernetika, inklużi
   l-importanza u l-implimentazzjoni tagħha.
 keywords:

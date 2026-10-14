@@ -1,5 +1,6 @@
 ---
 title: Hyökkäävä
+seo_title: Hyökkäävä tietoturva
 description: Hyökkäävä kyberturvallisuus tarkoittaa eettisesti toteutettuja simulaatioita
   todellisista hyökkäyksistä, joiden avulla paljastetaan haavoittuvuuksia ennen kuin
   pahantahtoiset toimijat voivat hyödyntää niitä. Toimimalla valtuutettuina vastustajina,

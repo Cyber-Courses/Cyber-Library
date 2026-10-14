@@ -1,5 +1,6 @@
 ---
 title: Sự nghiệp
+seo_title: Nghề nghiệp an ninh mạng
 description: Khám phá sự nghiệp trong lĩnh vực an ninh mạng với cơ hội phát triển
   cá nhân và chuyên môn.
 keywords:

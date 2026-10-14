@@ -1,5 +1,6 @@
 ---
 title: 방어
+seo_title: 방어 보안
 description: 조직의 데이터를 사이버 위협으로부터 보호하는 체계적인 접근 방식에 대한 설명.
 keywords:
 - 방어적인 사이버 보안

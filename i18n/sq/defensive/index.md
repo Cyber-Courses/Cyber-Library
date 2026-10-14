@@ -1,5 +1,6 @@
 ---
 title: Mbrojtëse
+seo_title: Siguria mbrojtëse
 description: Një qasje sistematike për mbrojtjen e të dhënave, sistemeve dhe përdoruesve
   nga kërcënimet kibernetike.
 keywords:

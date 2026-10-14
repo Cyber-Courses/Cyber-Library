@@ -1,5 +1,6 @@
 ---
 title: Qeverisja
+seo_title: Qeverisja e sigurisë
 description: Qeverisja e sigurisë kibernetike është korniza e plotë e politikave,
   roleve dhe proceseve të vendimmarrjes që një organizatë krijon për të menaxhuar
   dhe zbutur rreziqet kibernetike. Ajo ofron planin për integrimin e sigurisë kibernetike

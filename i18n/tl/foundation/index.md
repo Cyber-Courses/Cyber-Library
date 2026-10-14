@@ -1,5 +1,6 @@
 ---
 title: Mga Batayan
+seo_title: Mga batayan ng cybersecurity
 description: Ang cybersecurity ay may pinagmulan sa kultura ng hacker noong huling
   bahagi ng ika-20 siglo. Mula nang magsimulang mag-eksperimento ang mga tao sa mga
   kompyuter, nagkaroon ng pagnanais na maunawaan, baguhin, at itulak ang mga hangganan

@@ -1,5 +1,6 @@
 ---
 title: Carieră
+seo_title: Cariere în securitatea cibernetică
 description: Explorați o carieră dinamică în domeniul securității cibernetice, cu
   oportunități de dezvoltare personală și profesională.
 keywords:

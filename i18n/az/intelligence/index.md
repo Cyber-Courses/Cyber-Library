@@ -1,5 +1,6 @@
 ---
 title: Kəşfiyyat
+seo_title: Təhdid kəşfiyyatı
 description: Kiber təhlükəsizlikdə kəşfiyyat, kiber təhdidlərin müəyyən edilməsi,
   qiymətləndirilməsi və azaldılması məqsədilə məlumatların toplanması, işlənməsi və
   təhlilidir.

@@ -1,5 +1,6 @@
 ---
 title: Karijera
+seo_title: Karijere u kibernetičkoj sigurnosti
 description: Karijera u kibernetičkoj sigurnosti dinamično je putovanje ispunjeno
   prilikama za profesionalce na svim razinama. Kako se digitalni svijet širi, potražnja
   za vještim stručnjacima za kibernetičku sigurnost raste, stvarajući živopisno i

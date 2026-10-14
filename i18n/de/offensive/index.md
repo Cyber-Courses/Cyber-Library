@@ -1,5 +1,6 @@
 ---
 title: Offensive Cybersicherheit
+seo_title: Offensive Sicherheit
 description: Eine detaillierte Untersuchung der offensiven Cybersicherheit, ihrer
   Bedeutung und ihrer Implementierung.
 keywords:

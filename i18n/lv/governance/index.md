@@ -1,5 +1,6 @@
 ---
 title: Pārvaldība
+seo_title: Drošības pārvaldība
 description: Izpratne par kiberdrošības pārvaldību un tās nozīmi organizācijās.
 keywords:
 - kiberdrošības pārvaldība

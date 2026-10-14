@@ -1,5 +1,6 @@
 ---
 title: Obveščevalni podatki
+seo_title: Obveščanje o grožnjah
 description: 'Obveščevalni podatki o grožnjah v kibernetski varnosti: zbiranje in analiza podatkov o grožnjah za predvidevanje napadov in usmerjanje obrambe.'
 keywords:
 - kibernetska varnost

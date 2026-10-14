@@ -1,5 +1,6 @@
 ---
 title: Gairm
+seo_title: Gairmeacha cibearshlándála
 description: Turas dinimiciúil i gcibearshlándáil le deiseanna do ghairmithe ag gach
   leibhéal.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: Rialachas
+seo_title: Rialachas slándála
 description: Is éard atá i rialachas cibearshlándála ná creat cuimsitheach de bheartais,
   róil, agus próisis cinnteoireachta a bhunaíonn eagraíocht chun rioscaí cibear a
   bhainistiú agus a mhaolú. Soláthraíonn sé an plean le haghaidh comhtháthú cibearshlándála

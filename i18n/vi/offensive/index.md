@@ -1,5 +1,6 @@
 ---
 title: Tấn công
+seo_title: Bảo mật tấn công
 description: An ninh mạng tấn công liên quan đến việc mô phỏng các cuộc tấn công thực
   tế một cách có đạo đức để phát hiện các lỗ hổng trước khi các tác nhân độc hại có
   thể khai thác chúng. Bằng cách hành động như những kẻ thù…

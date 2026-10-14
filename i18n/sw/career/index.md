@@ -1,5 +1,6 @@
 ---
 title: Taaluma
+seo_title: Taaluma za usalama wa mtandao
 description: Jifunze kuhusu safari ya taaluma katika usalama wa mtandao, ikijumuisha
   wasifu, safari ya kitaaluma, na mazingira ya sekta.
 keywords:

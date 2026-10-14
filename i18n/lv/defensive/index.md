@@ -1,5 +1,6 @@
 ---
 title: Aizsardzība
+seo_title: Aizsardzības drošība
 description: Sistemātiska pieeja organizācijas datu, sistēmu un lietotāju aizsardzībai
   pret kiberapdraudējumiem.
 keywords:

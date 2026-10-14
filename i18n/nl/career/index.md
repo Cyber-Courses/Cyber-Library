@@ -1,5 +1,6 @@
 ---
 title: Carrière
+seo_title: Carrières in cyberbeveiliging
 description: Een carrière in cybersecurity biedt dynamische mogelijkheden voor professionals
   op alle niveaus. Ontdek hoe je je profiel kunt begrijpen, je professionele reis
   kunt navigeren en het landschap van de cybersecurity-industrie kunt verkennen.

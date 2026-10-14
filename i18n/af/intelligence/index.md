@@ -1,5 +1,6 @@
 ---
 title: Intelligensie
+seo_title: Bedreigingsintelligensie
 description: Ontdek die rol van intelligensie in kuberveiligheid, insluitend die versameling,
   verwerking en analise van inligting om kuberbedreigings te identifiseer en te versag.
 keywords:

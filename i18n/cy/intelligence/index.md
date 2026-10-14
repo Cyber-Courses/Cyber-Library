@@ -1,5 +1,6 @@
 ---
 title: Cudd-wybodaeth
+seo_title: Cudd-wybodaeth am fygythiadau
 description: 'Cudd-wybodaeth am fygythiadau mewn seiberddiogelwch: casglu a dadansoddi gwybodaeth am fygythiadau i ragweld ymosodiadau a llywio amddiffyn.'
 keywords:
 - cudd - wybodaeth seiberddiogelwch

@@ -1,5 +1,6 @@
 ---
 title: Valdymas
+seo_title: Saugumo valdymas
 description: Sužinokite apie kibernetinio saugumo valdymą, jo svarbą ir kaip jį įgyvendinti
   organizacijoje.
 keywords:

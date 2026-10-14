@@ -1,5 +1,6 @@
 ---
 title: Opensiba
+seo_title: Opensibong seguridad
 description: 'Pag-unawa sa opensibang cybersecurity at ang kahalagahan nito'
 keywords:
 - nakakasakit na cybersecurity

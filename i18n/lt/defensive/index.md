@@ -1,5 +1,6 @@
 ---
 title: Gynybinė kibernetinė sauga
+seo_title: Gynybinis saugumas
 description: Sužinokite apie gynybinės kibernetinės saugos svarbą, metodus ir strategijas,
   skirtas apsaugoti organizacijas nuo kibernetinių grėsmių.
 keywords:

@@ -1,5 +1,6 @@
 ---
 title: Obranná
+seo_title: Defenzivní bezpečnost
 description: Obranná kybernetická bezpečnost je systematický přístup k ochraně dat,
   systémů a uživatelů organizace před kybernetickými hrozbami.
 keywords:

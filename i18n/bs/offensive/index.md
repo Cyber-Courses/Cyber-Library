@@ -1,5 +1,6 @@
 ---
 title: Ofanzivna
+seo_title: Ofanzivna sigurnost
 description: Razumijevanje ofanzivne kibernetičke sigurnosti i njene važnosti
 keywords:
 - uvredljiva kibernetička sigurnost

@@ -1,5 +1,6 @@
 ---
 title: Պաշտպանական
+seo_title: Պաշտպանական անվտանգություն
 description: Պաշտպանական կիբերանվտանգության տեխնիկական բացատրություն և կարևորություն
 keywords:
 - defensive cybersecurity

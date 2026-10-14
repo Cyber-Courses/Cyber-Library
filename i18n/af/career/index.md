@@ -1,5 +1,6 @@
 ---
 title: Loopbaan
+seo_title: Kuberveiligheidsloopbane
 description: Ontdek die dinamiese wêreld van 'n loopbaan in kuberveiligheid, insluitend
   profielontwikkeling, professionele groei, en die kuberveiligheidslandskap.
 keywords:

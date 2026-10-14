@@ -1,5 +1,6 @@
 ---
 title: Grunnlag
+seo_title: Grunnleggende cybersikkerhet
 description: Cybersikkerhet har sine tidligste røtter i hackerkulturen fra slutten
   av det 20. århundre. Fra det øyeblikket folk begynte å eksperimentere med datamaskiner,
   eksisterte det et ønske om å forstå, modifisere og presse grensene for teknologi.

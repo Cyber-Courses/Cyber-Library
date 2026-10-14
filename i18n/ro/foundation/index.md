@@ -1,5 +1,6 @@
 ---
 title: Fundamentele Securității Cibernetice
+seo_title: Fundamentele securității cibernetice
 description: Explorarea originilor, culturii hackerilor și evoluției securității cibernetice.
 keywords:
 - fundația de securitate cibernetică

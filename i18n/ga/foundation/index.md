@@ -1,5 +1,6 @@
 ---
 title: Bunús
+seo_title: Bunús na cibearshlándála
 description: Tuiscint ar an gcultúr hacker agus an stair a bhaineann le cibearshlándáil.
 keywords:
 - bunús cibearshlándála

@@ -1,5 +1,6 @@
 ---
 title: Müdafiə
+seo_title: Müdafiə təhlükəsizliyi
 description: Müdafiə kiber təhlükəsizliyi haqqında ətraflı izah və onun əhəmiyyəti
 keywords:
 - müdafiə kibertəhlükəsizliyi

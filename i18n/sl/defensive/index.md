@@ -1,5 +1,6 @@
 ---
 title: Defenzivna Kibernetska Varnost
+seo_title: Defenzivna varnost
 description: Celovit pregled defenzivne kibernetske varnosti, vključno s pomembnostjo,
   metodami in strategijami za zaščito organizacij pred kibernetskimi grožnjami.
 keywords:

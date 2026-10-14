@@ -1,5 +1,6 @@
 ---
 title: Obavještajni podaci
+seo_title: Obavještajni podaci o prijetnjama
 description: 'Obavještajni podaci o prijetnjama u kibernetičkoj sigurnosti: prikupljanje i analiza podataka o prijetnjama radi predviđanja napada i usmjeravanja odbrane.'
 keywords:
 - obavještajni podaci o sajber sigurnosti

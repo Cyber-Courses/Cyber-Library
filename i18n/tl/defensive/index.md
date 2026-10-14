@@ -1,5 +1,6 @@
 ---
 title: Depensibo
+seo_title: Depensibong seguridad
 description: Isang sistematikong paraan sa pagprotekta ng data, sistema, at mga gumagamit
   mula sa mga banta sa cyberspace.
 keywords:

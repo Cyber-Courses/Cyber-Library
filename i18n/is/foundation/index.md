@@ -1,5 +1,6 @@
 ---
 title: Grunnur
+seo_title: Grunnatriði netöryggis
 description: Netöryggi á rætur sínar að rekja til hakkaramenningar seint á 20. öld.
   Frá því að fólk byrjaði að prófa tölvur var til staðar löngun til að skilja, breyta
   og ýta undir mörk tækninnar. Þessir fyrstu hakkarar sáu sig oft sem landkönnuði

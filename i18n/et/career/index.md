@@ -1,5 +1,6 @@
 ---
 title: Karjäär
+seo_title: Karjäär küberturbes
 description: Küberjulgeoleku karjäär on dünaamiline teekond, mis pakub võimalusi igal
   tasemel professionaalidele. Digimaailma laienedes kasvab vastavalt ka nõudlus oskuslike
   küberjulgeoleku ekspertide järele, pakkudes elavat ja kiiretempolist tööturgu.

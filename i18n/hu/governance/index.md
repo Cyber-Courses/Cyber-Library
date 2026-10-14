@@ -1,5 +1,6 @@
 ---
 title: Irányítás
+seo_title: Biztonsági irányítás
 description: A kiberbiztonsági irányítás az a széleskörű keretrendszer, amely magában
   foglalja a politikákat, szerepeket és döntéshozatali folyamatokat, amelyeket egy
   szervezet azért hoz létre, hogy kezelje és mérsékelje a kiberkockázatokat. Ez biztosítja

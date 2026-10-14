@@ -1,5 +1,6 @@
 ---
 title: Řízení kybernetické bezpečnosti
+seo_title: Řízení bezpečnosti
 description: Komplexní rámec politik, rolí a rozhodovacích procesů pro řízení a zmírňování
   kybernetických rizik v organizaci.
 keywords:

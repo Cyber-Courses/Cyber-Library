@@ -1,5 +1,6 @@
 ---
 title: Perisikan Ancaman
+seo_title: Perisikan ancaman
 description: 'Perisikan ancaman dalam keselamatan siber: pengumpulan dan analisis data ancaman untuk menjangka serangan dan memandu pertahanan.'
 keywords:
 - perisikan keselamatan siber

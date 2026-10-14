@@ -1,5 +1,6 @@
 ---
 title: Defensif
+seo_title: Keamanan defensif
 description: Pendekatan sistematis untuk melindungi data, sistem, dan pengguna organisasi
   dari ancaman siber.
 keywords:

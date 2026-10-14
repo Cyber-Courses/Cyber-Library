@@ -1,5 +1,6 @@
 ---
 title: Cibearshlándáil Ionsaitheach
+seo_title: Slándáil ionsaitheach
 description: Tuiscint ar Chibearshlándáil Ionsaitheach, a thábhacht, agus conas a
   dhéantar í.
 keywords:

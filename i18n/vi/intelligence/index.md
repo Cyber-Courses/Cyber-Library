@@ -1,5 +1,6 @@
 ---
 title: Tình báo mối đe dọa
+seo_title: Tình báo mối đe dọa
 description: 'Tình báo mối đe dọa trong an ninh mạng: thu thập và phân tích dữ liệu về mối đe dọa để dự đoán tấn công và định hướng phòng thủ.'
 keywords:
 - tình báo an ninh mạng

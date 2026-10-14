@@ -1,5 +1,6 @@
 ---
 title: Carrera
+seo_title: Carreras en ciberseguridad
 description: Explora una carrera en ciberseguridad, un campo dinámico con oportunidades
   para el desarrollo personal y profesional.
 keywords:

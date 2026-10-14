@@ -1,5 +1,6 @@
 ---
 title: Grondslag
+seo_title: Kuberveiligheid-grondslae
 description: Die oorsprong van kuberveiligheid en die ontwikkeling daarvan in die
   moderne digitale wêreld.
 keywords:

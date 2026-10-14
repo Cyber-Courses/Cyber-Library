@@ -1,5 +1,6 @@
 ---
 title: Oinarriak
+seo_title: Zibersegurtasunaren oinarriak
 description: Zibersegurtasunaren hastapenak XX. mendearen amaierako hacker kulturaren
   baitan daude. Jendeak ordenagailuekin esperimentatzen hasi zen unetik bertatik,
   teknologiaren mugak ulertu, aldatu eta gainditzeko nahia zegoen. Hasierako hacker

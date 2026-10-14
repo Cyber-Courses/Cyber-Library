@@ -1,5 +1,6 @@
 ---
 title: Offensive
+seo_title: Offensive Security
 description: Discover how ethical hacking, red teaming, bug bounty programs, and other offensive security techniques help identify and address vulnerabilities across physical, network, software, and human layers.
 keywords:
   - offensive cybersecurity

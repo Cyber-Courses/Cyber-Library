@@ -1,5 +1,6 @@
 ---
 title: Defensiva
+seo_title: Segurança defensiva
 description: Uma abordagem sistemática para proteger dados, sistemas e usuários contra
   ameaças cibernéticas.
 keywords:

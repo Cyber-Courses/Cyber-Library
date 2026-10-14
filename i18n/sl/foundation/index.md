@@ -1,5 +1,6 @@
 ---
 title: Temelj
+seo_title: Osnove kibernetske varnosti
 description: Kibernetska varnost ima svoje najzgodnejše korenine v kulturi hekerjev
   iz poznega 20. stoletja. Od trenutka, ko so ljudje začeli eksperimentirati z računalniki,
   je obstajala želja po razumevanju, spreminjanju in premikanju meja tehnologije.

@@ -1,5 +1,6 @@
 ---
 title: Ura
+seo_title: Ura kyberturvallisuudessa
 description: Ura kyberturvallisuudessa on dynaaminen matka, joka tarjoaa mahdollisuuksia
   ammattilaisille kaikilla tasoilla. Kun digitaalinen maailma laajenee, tarve taitaville
   kyberturvallisuuden asiantuntijoille kasvaa vastaavasti, mikä luo elinvoimaiset

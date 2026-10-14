@@ -1,5 +1,6 @@
 ---
 title: Ofensivă
+seo_title: Securitate ofensivă
 description: Explorarea securității cibernetice ofensive pentru descoperirea vulnerabilităților
   și îmbunătățirea protecției organizaționale.
 keywords:

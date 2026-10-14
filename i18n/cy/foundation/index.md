@@ -1,5 +1,6 @@
 ---
 title: Sylfaen
+seo_title: Sylfeini seiberddiogelwch
 description: Mae seiberddiogelwch yn tarddu o ddiwylliant hacwyr diwedd yr 20fed ganrif.
   O'r eiliad y dechreuodd pobl arbrofi gyda chyfrifiaduron, roedd awydd i ddeall,
   addasu, a gwthio ffiniau technoleg. Yn aml, roedd yr hacwyr cynnar hyn yn gweld

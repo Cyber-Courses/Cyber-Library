@@ -1,5 +1,6 @@
 ---
 title: Governança
+seo_title: Governança de segurança
 description: Compreenda a governança de cibersegurança, sua importância e como implementá-la
   eficazmente em sua organização.
 keywords:

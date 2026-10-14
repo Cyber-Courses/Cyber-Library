@@ -1,5 +1,6 @@
 ---
 title: Guvernanța Cibernetică
+seo_title: Guvernanța securității
 description: O explorare detaliată a guvernanței cibernetice, importanța și implementarea
   sa în organizații.
 keywords:

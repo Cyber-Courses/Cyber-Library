@@ -1,5 +1,6 @@
 ---
 title: Cosaint
+seo_title: Slándáil chosantach
 description: Cur síos ar Chibearshlándáil Chosanta agus a thábhacht.
 keywords:
 - cibearshlándáil chosanta
