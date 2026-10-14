@@ -22,6 +22,6 @@ People commonly enter this role from backgrounds in IAM analysis, internal audit
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- NIST Special Publication 800-53, Access Control (AC) and related control families
-- ISACA, Identity and Access Management resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST Special Publication 800-53, Access Control (AC) and related control families](https://csrc.nist.gov/pubs/sp/800/53/r5/final)
+- [ISACA, Identity and Access Management resources](https://www.isaca.org/)

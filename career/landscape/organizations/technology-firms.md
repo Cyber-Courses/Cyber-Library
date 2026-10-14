@@ -24,6 +24,6 @@ Careers inside technology firms tend to grow along two broad tracks, one toward 
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- (ISC)2, Cybersecurity Workforce Study
-- Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Cybersecurity Workforce Study](https://www.isc2.org/)
+- [Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing](https://cloudsecurityalliance.org/)

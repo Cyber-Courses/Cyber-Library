@@ -24,6 +24,6 @@ De nombreux praticiens entretiennent plusieurs relations de long terme en parall
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, career development and mentorship guidance
-- (ISC)2, professional development and member community resources
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, career development and mentorship guidance](https://www.sans.org/)
+- [(ISC)2, professional development and member community resources](https://www.isc2.org/)

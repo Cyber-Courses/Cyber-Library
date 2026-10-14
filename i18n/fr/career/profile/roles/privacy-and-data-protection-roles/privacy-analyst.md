@@ -22,6 +22,6 @@ On entre couramment dans ce domaine à partir de parcours en conformité, en sup
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- International Association of Privacy Professionals (IAPP), Certification and Resource Center
-- ISACA, Data Privacy and Governance Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [International Association of Privacy Professionals (IAPP), Certification and Resource Center](https://iapp.org/)
+- [ISACA, Data Privacy and Governance Resources](https://www.isaca.org/)

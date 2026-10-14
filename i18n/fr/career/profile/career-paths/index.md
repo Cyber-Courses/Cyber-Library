@@ -22,5 +22,5 @@ Planifier un parcours, c'est faire correspondre des objectifs à long terme aux 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- (ISC)2, Career Development Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Career Development Resources](https://www.isc2.org/)

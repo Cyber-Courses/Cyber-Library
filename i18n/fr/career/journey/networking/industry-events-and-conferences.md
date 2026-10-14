@@ -24,5 +24,5 @@ Les événements en présentiel complètent les autres formes de réseautage plu
 
 ## Références
 
-- SANS Institute, Community and Professional Development Resources
-- ISACA, Professional Networking and Chapters
+- [SANS Institute, Community and Professional Development Resources](https://www.sans.org/)
+- [ISACA, Professional Networking and Chapters](https://www.isaca.org/)

@@ -22,6 +22,6 @@ Security architecture is rarely a first job. Most architects arrive after years 
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Certified Information Systems Security Professional and architecture resources
-- SANS Institute, Security Architecture and Engineering Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISC2, Certified Information Systems Security Professional and architecture resources](https://www.isc2.org/)
+- [SANS Institute, Security Architecture and Engineering Resources](https://www.sans.org/)

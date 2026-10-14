@@ -22,5 +22,5 @@ These areas overlap and support each other. Many practitioners begin in one func
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- CompTIA, Cybersecurity Career Pathways
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, Cybersecurity Career Pathways](https://www.comptia.org/)

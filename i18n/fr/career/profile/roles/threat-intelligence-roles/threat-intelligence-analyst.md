@@ -22,6 +22,6 @@ Les personnes entrent couramment dans ce domaine en venant des opérations de s�
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Cyber Threat Intelligence Resources
-- MITRE ATT&CK Framework Documentation
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Threat Intelligence Resources](https://www.sans.org/)
+- [MITRE ATT&CK Framework Documentation](https://attack.mitre.org/)

@@ -24,6 +24,6 @@ Le monde universitaire se tient aux côtés des autres groupes de ce paysage et 
 
 ## Références
 
-- USENIX Security Symposium
-- National Centers of Academic Excellence in Cybersecurity (NSA/CISA)
-- ACM Special Interest Group on Security, Audit and Control (SIGSAC)
+- [USENIX Security Symposium](https://www.usenix.org/conferences/byname/108)
+- [National Centers of Academic Excellence in Cybersecurity (NSA/CISA)](https://www.nsa.gov/academics/centers-of-academic-excellence/)
+- [ACM Special Interest Group on Security, Audit and Control (SIGSAC)](https://www.sigsac.org/)

@@ -22,5 +22,5 @@ Relationship building is a long game. Offering help before asking for it, stayin
 
 ## References
 
-- SANS Institute, Community and Professional Development Resources
-- ISACA, Professional Networking and Chapters
+- [SANS Institute, Community and Professional Development Resources](https://www.sans.org/)
+- [ISACA, Professional Networking and Chapters](https://www.isaca.org/)

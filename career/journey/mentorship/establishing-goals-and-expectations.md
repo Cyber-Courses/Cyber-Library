@@ -21,6 +21,6 @@ This work matters to a security career because the field rewards deliberate dire
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- (ISC)2, Mentorship and Professional Development
-- SANS Institute, Mentoring and Community Resources
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Mentorship and Professional Development](https://www.isc2.org/)
+- [SANS Institute, Mentoring and Community Resources](https://www.sans.org/)

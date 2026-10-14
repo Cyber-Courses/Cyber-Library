@@ -24,6 +24,6 @@ L'amélioration continue des compétences est le moteur des autres aspects de la
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Cyber Security Skills Roadmap
-- (ISC)2, Continuing Professional Education Requirements
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Security Skills Roadmap](https://www.sans.org/)
+- [(ISC)2, Continuing Professional Education Requirements](https://www.isc2.org/)

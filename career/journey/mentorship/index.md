@@ -22,5 +22,5 @@ Guidance, goal setting, and long-term support are the substance of the relations
 
 ## References
 
-- SANS Institute, Mentoring and Community Resources
-- (ISC)2, Mentorship and Professional Development
+- [SANS Institute, Mentoring and Community Resources](https://www.sans.org/)
+- [(ISC)2, Mentorship and Professional Development](https://www.isc2.org/)

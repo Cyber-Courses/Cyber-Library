@@ -22,5 +22,5 @@ Professional communities are where these people gather. Conference circuits, onl
 
 ## References
 
-- SANS Institute, Community Resources
-- ISACA, Chapters and Professional Communities
+- [SANS Institute, Community Resources](https://www.sans.org/)
+- [ISACA, Chapters and Professional Communities](https://www.isaca.org/)

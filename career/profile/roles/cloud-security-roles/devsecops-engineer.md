@@ -22,6 +22,6 @@ People commonly enter the field from software development, site reliability or p
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- NIST Special Publication 800-204C, Implementation of DevSecOps for a Microservices-based Application with Service Mesh
-- SANS Institute, Cloud Security and DevSecOps Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST Special Publication 800-204C, Implementation of DevSecOps for a Microservices-based Application with Service Mesh](https://csrc.nist.gov/pubs/sp/800/204/c/final)
+- [SANS Institute, Cloud Security and DevSecOps Resources](https://www.sans.org/)

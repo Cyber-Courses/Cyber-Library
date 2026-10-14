@@ -22,6 +22,6 @@ People commonly enter the role from system administration, identity and access m
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- NIST Special Publication 800-63, Digital Identity Guidelines
-- SANS Institute, Identity and Access Management Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST Special Publication 800-63, Digital Identity Guidelines](https://csrc.nist.gov/pubs/sp/800/63/4/final)
+- [SANS Institute, Identity and Access Management Resources](https://www.sans.org/)

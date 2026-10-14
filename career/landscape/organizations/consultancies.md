@@ -22,6 +22,6 @@ Within the broader landscape, consultancies sit beside the sibling categories as
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- (ISC)2, Cybersecurity Career Resources
-- SANS Institute, Cybersecurity Careers and Training
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Cybersecurity Career Resources](https://www.isc2.org/)
+- [SANS Institute, Cybersecurity Careers and Training](https://www.sans.org/)

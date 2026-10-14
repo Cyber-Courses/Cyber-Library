@@ -22,6 +22,6 @@ Ce palier convient aux personnes en début de carrière en sécurité : jeunes d
 
 ## Références
 
-- CompTIA, Certification Resources
-- (ISC)2, Certified in Cybersecurity
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
+- [CompTIA, Certification Resources](https://www.comptia.org/)
+- [(ISC)2, Certified in Cybersecurity](https://www.isc2.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)

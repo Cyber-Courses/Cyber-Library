@@ -24,6 +24,6 @@ Par rapport aux rôles voisins, l'architecte de solutions - Sécurité est davan
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- (ISC)2 Certified Cloud Security Professional (CCSP) Certification
-- SANS Institute, Security Architecture resources and curricula
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2 Certified Cloud Security Professional (CCSP) Certification](https://www.isc2.org/)
+- [SANS Institute, Security Architecture resources and curricula](https://www.sans.org/)

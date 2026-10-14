@@ -24,6 +24,6 @@ Il est utile de considérer les organisations professionnelles comme complément
 
 ## Références
 
-- (ISC)2, https://www.isc2.org/
-- ISACA, https://www.isaca.org/
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), https://csrc.nist.gov/pubs/sp/800/181/r1/final
+- [(ISC)2](https://www.isc2.org/)
+- [ISACA](https://www.isaca.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)

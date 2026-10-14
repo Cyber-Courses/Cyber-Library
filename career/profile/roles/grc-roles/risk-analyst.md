@@ -24,6 +24,6 @@ The risk analyst works alongside, but distinctly from, the other GRC roles. Wher
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- NIST SP 800-30, Guide for Conducting Risk Assessments
-- ISACA, Certified in Risk and Information Systems Control (CRISC)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST SP 800-30, Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
+- [ISACA, Certified in Risk and Information Systems Control (CRISC)](https://www.isaca.org/)

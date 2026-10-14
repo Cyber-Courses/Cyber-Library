@@ -22,6 +22,6 @@ The intermediate tier suits practitioners who have moved past their first role a
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- CompTIA, Certification Resources
-- SANS Institute, GIAC Certifications
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, Certification Resources](https://www.comptia.org/)
+- [SANS Institute, GIAC Certifications](https://www.giac.org/)

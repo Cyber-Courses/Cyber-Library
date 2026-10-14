@@ -23,6 +23,6 @@ The most effective use of this tier is deliberate: choosing a specialization tha
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, GIAC Certifications
-- (ISC)2, Certification and Credentialing
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, GIAC Certifications](https://www.giac.org/)
+- [(ISC)2, Certification and Credentialing](https://www.isc2.org/)

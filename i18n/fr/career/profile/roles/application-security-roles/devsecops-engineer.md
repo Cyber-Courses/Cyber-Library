@@ -24,6 +24,6 @@ Ce rôle s'inscrit parmi plusieurs postes voisins de sécurité applicative et s
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- OWASP DevSecOps Guideline
-- SANS Institute, Cloud Security and DevSecOps curriculum
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [OWASP DevSecOps Guideline](https://owasp.org/www-project-devsecops-guideline/)
+- [SANS Institute, Cloud Security and DevSecOps curriculum](https://www.sans.org/)

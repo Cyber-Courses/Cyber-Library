@@ -24,6 +24,6 @@ L'analyse stratégique de la menace côtoie plusieurs rôles voisins et se disti
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Cyber Threat Intelligence course materials
-- U.S. Office of the Director of National Intelligence, Intelligence Community Directive 203 (Analytic Standards)
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Threat Intelligence course materials](https://www.sans.org/)
+- [U.S. Office of the Director of National Intelligence, Intelligence Community Directive 203 (Analytic Standards)](https://www.dni.gov/)

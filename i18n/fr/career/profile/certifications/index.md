@@ -22,5 +22,5 @@ Choisir ses certifications fonctionne mieux lorsqu'elles sont rattachées à une
 
 ## Références
 
-- CompTIA, Certification Resources
-- (ISC)2, Certification and Credentialing
+- [CompTIA, Certification Resources](https://www.comptia.org/)
+- [(ISC)2, Certification and Credentialing](https://www.isc2.org/)

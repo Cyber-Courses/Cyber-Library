@@ -23,6 +23,6 @@ La sécurité produit chevauche les rôles voisins tout en conservant un centre 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- OWASP Software Assurance Maturity Model (SAMM)
-- SANS Institute, Secure Software Development courses and resources
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [OWASP Software Assurance Maturity Model (SAMM)](https://owasp.org/www-project-samm/)
+- [SANS Institute, Secure Software Development courses and resources](https://www.sans.org/)

@@ -21,6 +21,6 @@ People commonly enter incident response from a security operations analyst role,
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- NIST SP 800-61, Computer Security Incident Handling Guide
-- SANS Institute, Digital Forensics and Incident Response resources
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management](https://csrc.nist.gov/pubs/sp/800/61/r3/final)
+- [SANS Institute, Digital Forensics and Incident Response resources](https://www.sans.org/)

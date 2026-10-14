@@ -24,6 +24,6 @@ Le rôle se comprend mieux en le situant par rapport à ses voisins. Un analyste
 
 ## Références
 
-- IAPP, Certified Information Privacy Manager (CIPM) body of knowledge
-- NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management
-- ISO/IEC 27701, Privacy information management systems requirements and guidelines
+- [IAPP, Certified Information Privacy Manager (CIPM) body of knowledge](https://iapp.org/)
+- [NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management](https://www.nist.gov/privacy-framework)
+- [ISO/IEC 27701, Privacy information management systems requirements and guidelines](https://www.iso.org/standard/27701)

@@ -24,6 +24,6 @@ La recherche sur les menaces est proche de plusieurs rôles voisins et en alimen
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology
-- MITRE ATT&CK Framework, The MITRE Corporation
-- SANS Institute, courses and resources on malware analysis and reverse engineering
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [MITRE ATT&CK Framework, The MITRE Corporation](https://attack.mitre.org/)
+- [SANS Institute, courses and resources on malware analysis and reverse engineering](https://www.sans.org/)

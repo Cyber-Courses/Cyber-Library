@@ -22,6 +22,7 @@ People typically reach this role after substantial experience rather than enteri
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- The Open Group, SABSA and TOGAF Architecture Frameworks
-- (ISC)2, CISSP Information Systems Security Architecture Professional (ISSAP)
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [The Open Group, TOGAF Architecture Framework](https://www.opengroup.org/togaf)
+- [SABSA Institute, SABSA Architecture Framework](https://sabsa.org/)
+- [(ISC)2, CISSP Information Systems Security Architecture Professional (ISSAP)](https://www.isc2.org/)

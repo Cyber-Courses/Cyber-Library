@@ -12,7 +12,7 @@ keywords:
 
 # Data Protection Officer
 
-A Data Protection Officer, commonly called a DPO, is a designated individual responsible for overseeing how an organization collects, uses, stores, and shares personal data. The role was formalized in several privacy regimes, most notably the European Union's General Data Protection Regulation, which requires a DPO for public authorities and for organizations whose core activities involve large scale or sensitive processing. Even where not legally mandated, many organizations appoint a DPO to centralize privacy accountability. The position sits at the intersection of law, information security, and business operations, and it is defined by independence: a DPO is expected to advise and monitor without being instructed on how to reach conclusions, and typically reports to the highest level of management.
+A Data Protection Officer, commonly called a DPO, is a designated individual responsible for overseeing how an organization collects, uses, stores, and shares personal data. The role was formalized in several privacy regimes, most notably the European Union's General Data Protection Regulation, which requires a DPO for public authorities and for organizations whose core activities involve large scale, regular and systematic monitoring of individuals or large scale processing of special categories of data or data relating to criminal convictions. Even where not legally mandated, many organizations appoint a DPO to centralize privacy accountability. The position sits at the intersection of law, information security, and business operations, and it is defined by independence: a DPO is expected to advise and monitor without being instructed on how to reach conclusions, and typically reports to the highest level of management.
 
 Day to day, the DPO monitors compliance with applicable data protection laws and internal policies, serves as the point of contact for regulators and for individuals exercising their privacy rights, and advises the organization on obligations such as record keeping, breach notification timelines, and lawful bases for processing. A central responsibility is reviewing and guiding data protection impact assessments, which evaluate the privacy risk of new systems, products, or vendor relationships before they go live. The DPO also maintains the inventory of processing activities, tracks cross border data transfers, and helps coordinate the response when a personal data breach occurs, working alongside security and incident response teams to assess whether notification to authorities or affected individuals is required.
 
@@ -24,6 +24,6 @@ The DPO is distinct from its neighboring roles even though they collaborate clos
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- International Association of Privacy Professionals (IAPP) Resource Center
-- European Data Protection Board, Guidelines on Data Protection Officers
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [International Association of Privacy Professionals (IAPP) Resource Center](https://iapp.org/)
+- [European Data Protection Board, Guidelines on Data Protection Officers](https://www.edpb.europa.eu/)

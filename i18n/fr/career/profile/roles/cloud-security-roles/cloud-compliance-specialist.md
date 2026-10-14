@@ -24,6 +24,6 @@ Le spécialiste travaille aux côtés des autres métiers de la sécurité cloud
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Certified Information Systems Auditor (CISA) resources
-- Cloud Security Alliance, Cloud Controls Matrix and Certificate of Cloud Security Knowledge (CCSK)
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Certified Information Systems Auditor (CISA) resources](https://www.isaca.org/)
+- [Cloud Security Alliance, Cloud Controls Matrix and Certificate of Cloud Security Knowledge (CCSK)](https://cloudsecurityalliance.org/)

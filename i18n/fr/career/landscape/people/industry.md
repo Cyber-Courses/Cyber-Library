@@ -24,6 +24,6 @@ Ce paysage se situe aux côtés de l'Université, de la Communauté et du Secteu
 
 ## Références
 
-- SANS Institute, Reading Room and Research
-- ISACA, Industry News and Professional Resources
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
+- [SANS Institute, Reading Room and Research](https://www.sans.org/)
+- [ISACA, Industry News and Professional Resources](https://www.isaca.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)

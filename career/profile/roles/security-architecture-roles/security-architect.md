@@ -24,6 +24,6 @@ The security architect role connects closely to several neighboring positions. I
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- (ISC)2 CISSP Common Body of Knowledge
-- SANS Institute security architecture and design curriculum
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2 CISSP Common Body of Knowledge](https://www.isc2.org/)
+- [SANS Institute security architecture and design curriculum](https://www.sans.org/)

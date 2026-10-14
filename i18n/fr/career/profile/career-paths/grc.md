@@ -24,6 +24,6 @@ Le GRC se situe à proximité de plusieurs spécialisations voisines sans pour a
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Certified in Risk and Information Systems Control (CRISC) and Certified Information Systems Auditor (CISA)
-- NIST Cybersecurity Framework
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Certified in Risk and Information Systems Control (CRISC) and Certified Information Systems Auditor (CISA)](https://www.isaca.org/)
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)

@@ -24,6 +24,6 @@ Ce domaine est voisin des autres organisations du paysage professionnel sans pou
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- National Institute of Standards and Technology (NIST), Cybersecurity Framework
-- International Organization for Standardization (ISO), ISO/IEC 27001 Information Security Management
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [National Institute of Standards and Technology (NIST), Cybersecurity Framework](https://www.nist.gov/cyberframework)
+- [International Organization for Standardization (ISO), ISO/IEC 27001 Information Security Management](https://www.iso.org/standard/27001)

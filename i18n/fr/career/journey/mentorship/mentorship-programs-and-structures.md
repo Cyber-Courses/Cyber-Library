@@ -22,6 +22,6 @@ Chaque structure comporte des compromis qu'il vaut la peine de peser. Les progra
 
 ## Références
 
-- (ISC)2, Mentorship and Professional Development
-- ISACA, Mentorship and Career Resources
-- SANS Institute, Mentoring and Community Resources
+- [(ISC)2, Mentorship and Professional Development](https://www.isc2.org/)
+- [ISACA, Mentorship and Career Resources](https://www.isaca.org/)
+- [SANS Institute, Mentoring and Community Resources](https://www.sans.org/)

@@ -24,6 +24,6 @@ L'architecte sécurité de domaine se situe entre le vaste et l'opérationnel pa
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- (ISC)2, Information Systems Security Architecture Professional (ISSAP) certification
-- The SABSA Institute, Enterprise Security Architecture framework
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Information Systems Security Architecture Professional (ISSAP) certification](https://www.isc2.org/)
+- [The SABSA Institute, Enterprise Security Architecture framework](https://sabsa.org/)

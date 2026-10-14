@@ -7,14 +7,14 @@ keywords:
   - certification sécurité senior
   - cissp
   - cism
-  - osce
+  - osce3
 ---
 
 # Avancé
 
 Le niveau avancé regroupe les certifications qui se situent au sommet de la plupart des parcours de certification, destinées aux praticiens qui ont largement dépassé les contenus de niveau fondamental et intermédiaire. Ces certifications ne sont pas une introduction à un sujet. Elles supposent plusieurs années de travail concret et demandent au candidat de démontrer soit une large maîtrise de la façon dont la sécurité est gouvernée et conçue à l'échelle d'une organisation, soit une expertise technique approfondie que peu de personnes atteignent. Beaucoup d'entre elles imposent des exigences formelles d'expérience, un parrainage par des pairs ou des examens pratiques exigeants, et plusieurs requièrent une formation continue pour rester valides.
 
-Ce que ce niveau atteste dépend de l'orientation de la certification. Les certifications de management et de gouvernance comme le Certified Information Systems Security Professional (CISSP) de (ISC)2, le Certified Information Security Manager (CISM) et le Certified Information Systems Auditor (CISA) de l'ISACA indiquent qu'une personne sait définir une stratégie, gérer le risque et piloter un programme, et pas seulement manipuler des outils. Les certifications techniques expertes comme l'Offensive Security Certified Expert (OSCE) et l'Offensive Security Exploitation Expert (OSEE), ou le GIAC Security Expert (GSE), attestent de la rigueur et de la capacité à résoudre des problèmes difficiles dans des conditions réalistes. Dans les deux cas, le message commun adressé à un employeur est la maturité : le titulaire a vu suffisamment de situations pour exercer un jugement, et pas seulement suivre une procédure.
+Ce que ce niveau atteste dépend de l'orientation de la certification. Les certifications de management et de gouvernance comme le Certified Information Systems Security Professional (CISSP) de (ISC)2, le Certified Information Security Manager (CISM) et le Certified Information Systems Auditor (CISA) de l'ISACA indiquent qu'une personne sait définir une stratégie, gérer le risque et piloter un programme, et pas seulement manipuler des outils. Les certifications techniques expertes comme l'Offensive Security Certified Expert 3 (OSCE3), qui a remplacé l'OSCE désormais retiré et s'obtient en détenant les certifications OSED, OSEP et OSWE, et l'Offensive Security Exploitation Expert (OSEE), ou le GIAC Security Expert (GSE), attestent de la rigueur et de la capacité à résoudre des problèmes difficiles dans des conditions réalistes. Dans les deux cas, le message commun adressé à un employeur est la maturité : le titulaire a vu suffisamment de situations pour exercer un jugement, et pas seulement suivre une procédure.
 
 Les certifications avancées conviennent aux praticiens expérimentés qui consolident une réputation ou accèdent à de plus grandes responsabilités. Les candidats types incluent les ingénieurs et consultants seniors, les architectes sécurité, les responsables d'équipe et les managers s'orientant vers des rôles tels que consultant principal ou responsable de la sécurité des systèmes d'information. Ce niveau consiste moins à apprendre un sujet pour la première fois qu'à valider une compétence déjà substantielle, ce qui explique pourquoi les titulaires visent souvent ces certifications plusieurs années après le début de leur carrière plutôt qu'à ses débuts.
 
@@ -22,6 +22,6 @@ Il est utile de considérer ce niveau au regard de ses voisins. Les certificatio
 
 ## Références
 
-- (ISC)2, CISSP Certification
-- ISACA, CISM and CISA Certifications
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
+- [(ISC)2, CISSP Certification](https://www.isc2.org/)
+- [ISACA, CISM and CISA Certifications](https://www.isaca.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)

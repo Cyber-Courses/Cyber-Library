@@ -24,6 +24,6 @@ Threat intelligence sits close to several neighboring roles without duplicating 
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Cyber Threat Intelligence Resources
-- MITRE ATT&CK Knowledge Base
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Threat Intelligence Resources](https://www.sans.org/)
+- [MITRE ATT&CK Knowledge Base](https://attack.mitre.org/)

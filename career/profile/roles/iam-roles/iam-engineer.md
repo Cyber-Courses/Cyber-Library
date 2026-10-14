@@ -24,6 +24,6 @@ The IAM engineer works closely with its neighboring roles and is best understood
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology
-- NIST Special Publication 800-63, Digital Identity Guidelines, National Institute of Standards and Technology
-- Identity Management Institute, professional resources on identity and access management practice
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST Special Publication 800-63, Digital Identity Guidelines, National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/63/4/final)
+- [Identity Management Institute, professional resources on identity and access management practice](https://identitymanagementinstitute.org/)

@@ -22,5 +22,5 @@ Engaging with the community is accessible at every level. Many people begin simp
 
 ## References
 
-- OWASP Foundation, Community and Local Chapters
-- SANS Institute, Community Resources
+- [OWASP Foundation, Community and Local Chapters](https://owasp.org/)
+- [SANS Institute, Community Resources](https://www.sans.org/)

@@ -22,6 +22,6 @@ People commonly enter secure code review from software development, bringing the
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- OWASP Code Review Guide
-- SANS Institute, Secure Coding and Application Security Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [OWASP Code Review Guide](https://owasp.org/www-project-code-review-guide/)
+- [SANS Institute, Secure Coding and Application Security Resources](https://www.sans.org/)

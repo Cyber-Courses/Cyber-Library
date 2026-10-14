@@ -24,6 +24,6 @@ The public sphere relates closely to its neighbors without duplicating them. Aca
 
 ## References
 
-- Cybersecurity and Infrastructure Security Agency (CISA)
-- European Union Agency for Cybersecurity (ENISA)
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
+- [Cybersecurity and Infrastructure Security Agency (CISA)](https://www.cisa.gov/)
+- [European Union Agency for Cybersecurity (ENISA)](https://www.enisa.europa.eu/)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)

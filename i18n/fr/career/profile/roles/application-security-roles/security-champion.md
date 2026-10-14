@@ -23,6 +23,6 @@ Le Security Champion s'inscrit aux côtés de plusieurs rôles plus spécialisé
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology
-- OWASP Security Champions Guide, Open Worldwide Application Security Project
-- OWASP Software Assurance Maturity Model (SAMM), Open Worldwide Application Security Project
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [OWASP Security Champions Guide, Open Worldwide Application Security Project](https://owasp.org/www-project-security-champions-guidebook/)
+- [OWASP Software Assurance Maturity Model (SAMM), Open Worldwide Application Security Project](https://owasp.org/www-project-samm/)

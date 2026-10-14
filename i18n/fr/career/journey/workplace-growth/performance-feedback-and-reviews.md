@@ -24,6 +24,6 @@ Abordées de façon délibérée, les évaluations deviennent un outil de planif
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- (ISC)2, Professional Development Resources
-- SANS Institute, Career and Professional Development Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Professional Development Resources](https://www.isc2.org/)
+- [SANS Institute, Career and Professional Development Resources](https://www.sans.org/)

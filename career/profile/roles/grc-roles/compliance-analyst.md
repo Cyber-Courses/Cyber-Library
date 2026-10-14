@@ -24,6 +24,6 @@ The compliance analyst role sits close to several neighbors in the GRC family an
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Certified Information Systems Auditor (CISA) resources
-- NIST Special Publication 800-53, Security and Privacy Controls for Information Systems and Organizations
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Certified Information Systems Auditor (CISA) resources](https://www.isaca.org/)
+- [NIST Special Publication 800-53, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/final)

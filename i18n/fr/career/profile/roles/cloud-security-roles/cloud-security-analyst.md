@@ -22,6 +22,6 @@ On accède couramment à ce rôle en venant des opérations de sécurité, du su
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing
-- SANS Institute, Cloud Security Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing](https://cloudsecurityalliance.org/)
+- [SANS Institute, Cloud Security Resources](https://www.sans.org/)

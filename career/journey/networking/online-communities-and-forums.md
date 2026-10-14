@@ -24,5 +24,5 @@ Online communities complement the other ways practitioners connect rather than r
 
 ## References
 
-- SANS Institute, Community and Professional Development Resources
-- ISACA, Professional Networking and Chapters
+- [SANS Institute, Community and Professional Development Resources](https://www.sans.org/)
+- [ISACA, Professional Networking and Chapters](https://www.isaca.org/)

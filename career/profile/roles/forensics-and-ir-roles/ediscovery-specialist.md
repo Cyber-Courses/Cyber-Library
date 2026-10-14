@@ -24,6 +24,6 @@ Within a forensics and incident response organization, the eDiscovery specialist
 
 ## References
 
-- EDRM (Electronic Discovery Reference Model), https://edrm.net
-- ACEDS (Association of Certified E-Discovery Specialists), https://www.aceds.org
-- The Sedona Conference, Principles and commentary on electronic document production, https://thesedonaconference.org
+- [EDRM (Electronic Discovery Reference Model)](https://edrm.net)
+- [ACEDS (Association of Certified E-Discovery Specialists)](https://www.aceds.org)
+- [The Sedona Conference, Principles and commentary on electronic document production](https://thesedonaconference.org)

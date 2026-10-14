@@ -24,6 +24,6 @@ Threat hunting sits alongside several neighboring defensive roles and overlaps w
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- MITRE ATT&CK (attack.mitre.org)
-- SANS Institute, threat hunting resources and curriculum
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [MITRE ATT&CK (attack.mitre.org)](https://attack.mitre.org/)
+- [SANS Institute, threat hunting resources and curriculum](https://www.sans.org/)

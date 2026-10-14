@@ -24,6 +24,6 @@ Au sein d'une organisation d'investigation numérique et de réponse à incident
 
 ## Références
 
-- EDRM (Electronic Discovery Reference Model), https://edrm.net
-- ACEDS (Association of Certified E-Discovery Specialists), https://www.aceds.org
-- The Sedona Conference, Principles and commentary on electronic document production, https://thesedonaconference.org
+- [EDRM (Electronic Discovery Reference Model)](https://edrm.net)
+- [ACEDS (Association of Certified E-Discovery Specialists)](https://www.aceds.org)
+- [The Sedona Conference, Principles and commentary on electronic document production](https://thesedonaconference.org)

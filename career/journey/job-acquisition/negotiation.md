@@ -23,6 +23,6 @@ Negotiation sits at the end of the job acquisition sequence and depends on the w
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- CompTIA, IT and Cybersecurity Career Resources
-- (ISC)2 Cybersecurity Workforce Study
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, IT and Cybersecurity Career Resources](https://www.comptia.org/)
+- [(ISC)2 Cybersecurity Workforce Study](https://www.isc2.org/)

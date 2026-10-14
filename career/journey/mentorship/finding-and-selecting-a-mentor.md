@@ -24,5 +24,5 @@ This stage sits at the front of the mentoring arc and connects closely to the wo
 
 ## References
 
-- SANS Institute, Mentoring and Community Resources
-- (ISC)2, Mentorship and Professional Development
+- [SANS Institute, Mentoring and Community Resources](https://www.sans.org/)
+- [(ISC)2, Mentorship and Professional Development](https://www.isc2.org/)

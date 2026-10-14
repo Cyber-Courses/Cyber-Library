@@ -24,6 +24,6 @@ Le leadership et le management s'inscrivent aux côtés des autres façons dont 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- (ISC)2, Professional Development and Leadership Resources
-- SANS Institute, Security Leadership and Management Curriculum
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [(ISC)2, Professional Development and Leadership Resources](https://www.isc2.org/)
+- [SANS Institute, Security Leadership and Management Curriculum](https://www.sans.org/)

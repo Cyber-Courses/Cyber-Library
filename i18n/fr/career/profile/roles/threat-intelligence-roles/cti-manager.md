@@ -24,6 +24,6 @@ Le responsable CTI se situe par rapport aux rôles voisins comme la personne qui
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, Cyber Threat Intelligence resources and the FOR578 curriculum
-- MITRE ATT&CK framework documentation
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Threat Intelligence resources and the FOR578 curriculum](https://www.sans.org/)
+- [MITRE ATT&CK framework documentation](https://attack.mitre.org/)

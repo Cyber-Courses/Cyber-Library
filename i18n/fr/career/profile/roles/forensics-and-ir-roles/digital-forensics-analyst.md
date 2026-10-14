@@ -24,6 +24,6 @@ La criminalistique numérique côtoie plusieurs rôles voisins et se distingue p
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- NIST Special Publication 800-86, Guide to Integrating Forensic Techniques into Incident Response
-- SANS Institute, Digital Forensics and Incident Response resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [NIST Special Publication 800-86, Guide to Integrating Forensic Techniques into Incident Response](https://csrc.nist.gov/pubs/sp/800/86/final)
+- [SANS Institute, Digital Forensics and Incident Response resources](https://www.sans.org/)

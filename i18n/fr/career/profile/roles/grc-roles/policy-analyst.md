@@ -22,6 +22,6 @@ Les personnes accèdent généralement à ce rôle depuis un poste GRC ou admini
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- ISACA, Certified Information Security Manager (CISM) resources
-- ISO/IEC 27001, Information security management systems
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Certified Information Security Manager (CISM) resources](https://www.isaca.org/)
+- [ISO/IEC 27001, Information security management systems](https://www.iso.org/standard/27001)

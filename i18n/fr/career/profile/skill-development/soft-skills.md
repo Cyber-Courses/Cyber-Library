@@ -22,5 +22,5 @@ Ces aptitudes s'acquièrent par la pratique et le retour d'expérience plutôt q
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Security Awareness and Professional Development Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Security Awareness and Professional Development Resources](https://www.sans.org/)

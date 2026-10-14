@@ -22,6 +22,6 @@ People commonly enter application security from software engineering, bringing f
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- OWASP Foundation, Application Security Verification Standard
-- SANS Institute, Secure Software Development and Application Security Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [OWASP Foundation, Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [SANS Institute, Secure Software Development and Application Security Resources](https://www.sans.org/)

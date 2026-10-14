@@ -23,6 +23,6 @@ La négociation se situe à la fin de la séquence d'acquisition d'un poste et d
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- CompTIA, IT and Cybersecurity Career Resources
-- (ISC)2 Cybersecurity Workforce Study
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, IT and Cybersecurity Career Resources](https://www.comptia.org/)
+- [(ISC)2 Cybersecurity Workforce Study](https://www.isc2.org/)

@@ -24,6 +24,6 @@ Hands-on experience sits alongside the other areas of skill development and is s
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology
-- CompTIA, career resources and cybersecurity certification guidance
-- SANS Institute, cybersecurity training, ranges, and challenge resources
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, career resources and cybersecurity certification guidance](https://www.comptia.org/)
+- [SANS Institute, cybersecurity training, ranges, and challenge resources](https://www.sans.org/)

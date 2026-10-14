@@ -22,6 +22,6 @@ People commonly enter cloud security from cloud or platform engineering, system 
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing
-- Amazon Web Services, AWS Well-Architected Framework, Security Pillar
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [Cloud Security Alliance, Security Guidance for Critical Areas of Focus in Cloud Computing](https://cloudsecurityalliance.org/)
+- [Amazon Web Services, AWS Well-Architected Framework, Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html)

@@ -22,6 +22,6 @@ On entre généralement dans la sécurité défensive par des postes de support 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Blue Team and Security Operations Resources
-- MITRE ATT&CK Framework
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Blue Team and Security Operations Resources](https://www.sans.org/)
+- [MITRE ATT&CK Framework](https://attack.mitre.org/)

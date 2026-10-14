@@ -22,5 +22,5 @@ Les entreprises de sécurité sont proches de leurs types d'organisations voisin
 
 ## Références
 
-- National Institute of Standards and Technology (NIST), NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, Cybersecurity Career Resources
+- [National Institute of Standards and Technology (NIST), NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cybersecurity Career Resources](https://www.sans.org/)

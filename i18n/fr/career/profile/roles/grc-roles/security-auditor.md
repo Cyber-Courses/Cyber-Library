@@ -24,6 +24,6 @@ L'auditeur se tient proche de ses métiers GRC voisins mais joue un rôle distin
 
 ## Références
 
-- ISACA, Certified Information Systems Auditor (CISA) certification and resources
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- ISO/IEC 27001, Information security management systems
+- [ISACA, Certified Information Systems Auditor (CISA) certification and resources](https://www.isaca.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISO/IEC 27001, Information security management systems](https://www.iso.org/standard/27001)

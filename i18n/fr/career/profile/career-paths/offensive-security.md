@@ -24,6 +24,6 @@ La sécurité offensive se définit par sa relation au versant défensif du doma
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- Offensive Security, Penetration Testing with Kali Linux
-- SANS Institute, Penetration Testing and Ethical Hacking Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [Offensive Security, Penetration Testing with Kali Linux](https://www.offsec.com/)
+- [SANS Institute, Penetration Testing and Ethical Hacking Resources](https://www.sans.org/)

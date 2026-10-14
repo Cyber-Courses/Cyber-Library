@@ -24,5 +24,5 @@ La prise de contact se relie étroitement aux activités voisines sans les rempl
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- CompTIA, IT and Cybersecurity Career Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [CompTIA, IT and Cybersecurity Career Resources](https://www.comptia.org/)

@@ -22,6 +22,6 @@ On accède souvent à ce rôle à partir d'un parcours en support technique, en 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- SANS Institute, Security Operations Center resources
-- CompTIA, Cybersecurity Analyst (CySA+) certification materials
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Security Operations Center resources](https://www.sans.org/)
+- [CompTIA, Cybersecurity Analyst (CySA+) certification materials](https://www.comptia.org/)

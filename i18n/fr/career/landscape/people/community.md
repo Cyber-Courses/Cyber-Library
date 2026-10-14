@@ -22,5 +22,5 @@ S'investir dans la communauté est accessible à tous les niveaux. Beaucoup de g
 
 ## Références
 
-- OWASP Foundation, Community and Local Chapters
-- SANS Institute, Community Resources
+- [OWASP Foundation, Community and Local Chapters](https://owasp.org/)
+- [SANS Institute, Community Resources](https://www.sans.org/)

@@ -22,5 +22,5 @@ Les autorités de normalisation et les instances professionnelles fournissent le
 
 ## Références
 
-- National Institute of Standards and Technology (NIST), Cybersecurity Resources
-- ISACA, Standards and Professional Resources
+- [National Institute of Standards and Technology (NIST), Cybersecurity Resources](https://www.nist.gov/cybersecurity)
+- [ISACA, Standards and Professional Resources](https://www.isaca.org/)

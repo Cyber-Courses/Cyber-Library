@@ -22,6 +22,6 @@ People commonly enter the field from backgrounds in compliance, legal support, s
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- International Association of Privacy Professionals (IAPP), Certification and Resource Center
-- ISACA, Data Privacy and Governance Resources
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [International Association of Privacy Professionals (IAPP), Certification and Resource Center](https://iapp.org/)
+- [ISACA, Data Privacy and Governance Resources](https://www.isaca.org/)

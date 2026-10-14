@@ -24,6 +24,6 @@ Développer cette habitude commence généralement par des routines modestes et 
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, cybersecurity training and research resources
-- (ISC)2, continuing professional education (CPE) requirements and guidance
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, cybersecurity training and research resources](https://www.sans.org/)
+- [(ISC)2, continuing professional education (CPE) requirements and guidance](https://www.isc2.org/)

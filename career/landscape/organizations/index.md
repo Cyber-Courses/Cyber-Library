@@ -22,5 +22,5 @@ Standards authorities and professional bodies provide the field's shared referen
 
 ## References
 
-- National Institute of Standards and Technology (NIST), Cybersecurity Resources
-- ISACA, Standards and Professional Resources
+- [National Institute of Standards and Technology (NIST), Cybersecurity Resources](https://www.nist.gov/cybersecurity)
+- [ISACA, Standards and Professional Resources](https://www.isaca.org/)

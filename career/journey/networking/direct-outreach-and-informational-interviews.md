@@ -22,6 +22,6 @@ This practice complements the other avenues of professional networking rather th
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology
-- SANS Institute, cybersecurity career development and community resources
-- (ISC)2, professional development and member networking guidance
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181), National Institute of Standards and Technology](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, cybersecurity career development and community resources](https://www.sans.org/)
+- [(ISC)2, professional development and member networking guidance](https://www.isc2.org/)

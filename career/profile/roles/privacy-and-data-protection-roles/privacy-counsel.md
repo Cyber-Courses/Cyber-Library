@@ -22,6 +22,6 @@ People usually enter the role after practicing law, often in technology, regulat
 
 ## References
 
-- International Association of Privacy Professionals (IAPP), Privacy Law and Certification Resources
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Data Privacy Governance and Certified Data Privacy Solutions Engineer Resources
+- [International Association of Privacy Professionals (IAPP), Privacy Law and Certification Resources](https://iapp.org/)
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Data Privacy Governance and Certified Data Privacy Solutions Engineer Resources](https://www.isaca.org/)

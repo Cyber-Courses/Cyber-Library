@@ -22,6 +22,6 @@ On accède couramment à ce rôle après avoir exercé comme analyste des risque
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- ISACA, Certified in Risk and Information Systems Control (CRISC) Resources
-- ISACA, COBIT Framework for Governance and Management of Enterprise IT
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [ISACA, Certified in Risk and Information Systems Control (CRISC) Resources](https://www.isaca.org/)
+- [ISACA, COBIT Framework for Governance and Management of Enterprise IT](https://www.isaca.org/)

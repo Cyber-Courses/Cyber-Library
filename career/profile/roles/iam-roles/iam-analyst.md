@@ -22,6 +22,6 @@ People commonly enter the role from a help desk, system administration, or gener
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- ISACA, Certified Identity and Access Manager and related identity governance resources
-- Microsoft Learn, Identity and access management documentation for Microsoft Entra ID
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [Identity Management Institute, Certified Identity and Access Manager and related identity governance resources](https://identitymanagementinstitute.org/)
+- [Microsoft Learn, Identity and access management documentation for Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/)

@@ -24,6 +24,6 @@ Red teaming sits alongside neighboring offensive roles but is distinguished by i
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)
-- MITRE ATT&CK, Adversary Emulation and Red Teaming resources
-- SANS Institute, Red Team Operations and Adversary Emulation course materials
+- [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [MITRE ATT&CK, Adversary Emulation and Red Teaming resources](https://attack.mitre.org/)
+- [SANS Institute, Red Team Operations and Adversary Emulation course materials](https://www.sans.org/)

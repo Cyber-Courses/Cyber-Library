@@ -24,6 +24,6 @@ The Forensics Manager relates closely to the specialists it oversees and partner
 
 ## References
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, Digital Forensics and Incident Response curriculum and GIAC certifications
-- NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Digital Forensics and Incident Response curriculum and GIAC certifications](https://www.giac.org/)
+- [NIST SP 800-86, Guide to Integrating Forensic Techniques into Incident Response](https://csrc.nist.gov/pubs/sp/800/86/final)

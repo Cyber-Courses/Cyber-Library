@@ -24,6 +24,6 @@ Ce rôle est étroitement lié à celui, plus large, d'analyste du renseignement
 
 ## Références
 
-- NICE Workforce Framework for Cybersecurity (NIST SP 800-181)
-- SANS Institute, Cyber Threat Intelligence resources and courses
-- MITRE ATT&CK, adversary tactics and techniques knowledge base
+- [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
+- [SANS Institute, Cyber Threat Intelligence resources and courses](https://www.sans.org/)
+- [MITRE ATT&CK, adversary tactics and techniques knowledge base](https://attack.mitre.org/)
