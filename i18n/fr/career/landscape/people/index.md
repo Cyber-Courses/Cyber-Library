@@ -22,5 +22,5 @@ Les communautés professionnelles sont les lieux où ces personnes se rassemblen
 
 ## Références
 
-- SANS Institute, Community Resources
-- ISACA, Chapters and Professional Communities
+- [SANS Institute, Community Resources](https://www.sans.org/)
+- [ISACA, Chapters and Professional Communities](https://www.isaca.org/)
