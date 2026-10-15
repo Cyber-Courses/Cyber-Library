@@ -11,17 +11,14 @@ keywords:
 
 # Journey
 
-The Journey part of the Career pillar follows how you move through a cybersecurity career over time. It is about the sequence of steps that carry you from a first application to a senior, well connected position, and the practices that keep momentum between each step. Where other parts of this pillar describe the ecosystem or your professional identity, this one focuses on motion: finding work, building relationships, learning from others, and advancing once you are inside an organization.
+The **Journey** area follows how a cybersecurity career unfolds over time, from a first application to a senior, well connected position. Where other parts of the Career pillar describe the ecosystem or your professional identity, this one is about **motion**: finding work, building relationships, learning from others, and advancing once you are inside an organization.
 
-The sections below outline the main stages and habits that shape a security career over the long term.
+## In this section
 
-**Job acquisition** covers the full hiring cycle, including market research to understand demand and pay, writing applications and resumes that pass screening, preparing for technical and behavioral interviews, and negotiating an offer with confidence.
-
-**Networking and community** describes how conferences, local groups, online forums, and open source work connect you with peers who share referrals, knowledge, and opportunities.
-
-**Mentorship** explains how guidance from experienced practitioners accelerates learning, helps you avoid common mistakes, and opens doors that job boards never show.
-
-**Growth within a workplace** looks at earning trust, taking on larger responsibilities, moving across teams, and turning solid performance into promotion and lasting influence.
+- [Job acquisition](job-acquisition/index.md): the full hiring cycle, from researching the market and pay through applications, outreach, interviews, and negotiating an offer.
+- [Networking and community](networking/index.md): how conferences, local groups, online forums, and open contributions connect you with peers who share referrals, knowledge, and opportunities.
+- [Mentorship](mentorship/index.md): how guidance from experienced practitioners speeds up learning, helps you avoid common mistakes, and opens doors that job boards never show.
+- [Workplace growth](workplace-growth/index.md): earning trust, taking on larger responsibilities, moving across teams, and turning solid performance into promotion and influence.
 
 ## References
 

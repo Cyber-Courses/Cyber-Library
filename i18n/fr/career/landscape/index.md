@@ -1,6 +1,6 @@
 ---
-title: Panorama de la cybersécurité, organisations et acteurs du secteur
-description: Vue d'ensemble du panorama de la cybersécurité : éditeurs, prestataires de services, organismes de normalisation et personnalités qui façonnent le secteur.
+title: Panorama de la cybersécurité, organisations et personnes du domaine
+description: Un aperçu du panorama de la cybersécurité, couvrant les éditeurs, les prestataires de services, les organismes de normalisation et les personnes qui façonnent le secteur.
 keywords:
   - panorama de la cybersécurité
   - éditeurs de sécurité
@@ -11,13 +11,12 @@ keywords:
 
 # Panorama
 
-La partie Panorama du pilier Carrière décrit l'écosystème dans lequel vous évoluez en tant que professionnel de la sécurité. Aucune carrière ne se construit en vase clos. Vous travaillez au sein d'un tissu dense d'entreprises qui conçoivent des outils, de cabinets qui fournissent des services, d'organismes qui établissent des normes et de personnes dont les recherches et les écrits façonnent la pensée de tous les autres. Comprendre ce terrain aide à choisir ses employeurs, à évaluer les technologies et à repérer les voix qui méritent d'être suivies.
+Aucune carrière en sécurité ne se déroule de manière isolée. Vous évoluez au sein d'un domaine dense fait d'**organisations** qui conçoivent des outils, fournissent des services et définissent des normes, et parmi des **personnes** dont les travaux de recherche, les écrits et les communautés façonnent la manière dont tous les autres pensent. Lire ce terrain vous aide à choisir vos employeurs, à juger les technologies et à repérer les voix qui méritent d'être suivies.
 
-Les sections ci-dessous cartographient les organisations et les personnes qui donnent sa structure au secteur.
+## Dans cette section
 
-**Les organisations du secteur** regroupent les éditeurs de produits qui conçoivent les logiciels et le matériel sur lesquels s'appuient les équipes, les prestataires de services tels que les cabinets de conseil et les sociétés de sécurité managée qui apportent leur expertise à la demande, et les organismes de normalisation qui publient les référentiels et les spécifications définissant les bonnes pratiques du secteur.
-
-**Les personnes** comprennent les leaders d'opinion dont les conférences et les publications orientent les débats, les communautés qui rassemblent les praticiens autour d'intérêts communs, et les contributeurs clés dont les outils, les recherches et les divulgations font avancer le domaine. Savoir qui ils sont aide à apprendre plus vite, à reconnaître les sources crédibles et à comprendre d'où viennent les idées et les tendances.
+- [Organisations](organizations/index.md) : les éditeurs de produits, les prestataires de services, les organismes de normalisation et les associations professionnelles qui donnent au domaine sa structure institutionnelle.
+- [Personnes](people/index.md) : les leaders d'opinion, les communautés et les contributeurs clés dont les conférences, les outils et les divulgations font avancer le domaine.
 
 ## Références
 

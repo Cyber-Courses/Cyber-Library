@@ -1,6 +1,6 @@
 ---
 title: "Offensive Security Roles: Careers in Adversarial Testing"
-description: "An overview of the professional roles that assess systems from an adversary's perspective to help organizations find and fix weaknesses."
+description: "An overview of the professional roles that assess systems from an adversary's perspective so organizations can find and fix weaknesses."
 keywords:
   - offensive security roles
   - penetration tester
@@ -12,15 +12,22 @@ keywords:
 
 # Offensive Security Roles
 
-Offensive security roles share a common purpose: to evaluate systems, applications, and organizations from the viewpoint of a motivated adversary, then report what they find so defenders can address it. These are constructive professions carried out under authorization and clear rules of engagement. Their value lies not in breaking things but in producing evidence that helps an organization understand and reduce its real exposure.
+Offensive security professionals evaluate systems, applications, and whole organizations from the viewpoint of a motivated adversary, then report what they find so defenders can act. These are constructive careers carried out under authorization and clear rules of engagement, and their value lies in producing evidence that helps an organization understand and reduce its real exposure. The roles below share that purpose but differ in depth, scope, and time horizon, from broad repeatable assessments to narrow research into how a single technology fails.
 
-Although the roles are related, they differ in depth, scope, and time horizon. Some focus on broad, repeatable assessments against defined targets, while others pursue narrow, deep questions about how a single technology can fail. The pages beneath this section describe each role in turn, including its typical responsibilities, the skills it draws on, and how it fits alongside defensive and governance work.
+## What these roles share
 
-The [Penetration Tester](penetration-tester.md) conducts scoped assessments that identify and validate weaknesses within an agreed boundary, producing findings and remediation guidance. The [Red Team Operator](red-team-operator.md) takes a broader, goal-oriented view, emulating realistic adversary behavior to test an organization's detection and response as a whole. The [Purple Team Specialist](purple-team-specialist.md) works at the meeting point of offense and defense, coordinating exercises so that offensive findings translate directly into improved defensive coverage.
+- **Authorized work:** every engagement runs under contract, scope, and rules of engagement, not freelance intrusion.
+- **Defensive intent:** the deliverable is evidence and guidance that defenders and engineers can use, not the compromise itself.
+- **Adversary mindset:** practitioners reason about how attackers think and act, then translate that into findings an organization can prioritize.
+- **Mobility:** careers rarely follow one path, and many practitioners move between these roles as their interests and depth develop.
 
-Two further roles sit closer to research and engineering. The [Vulnerability Researcher](vulnerability-researcher.md) studies software, hardware, and protocols to discover previously unknown weaknesses and understand their root causes, often working through responsible disclosure. The [Exploit Developer](exploit-developer.md) builds reliable proof-of-concept code that demonstrates the practical impact of a weakness, work that supports both testing engagements and defensive research.
+## Roles
 
-Careers in this area rarely follow a single path. Many practitioners move between these roles over time, and the boundaries shift from one organization to another. Reading the individual pages alongside this overview helps a professional see where their interests fit and how the roles complement one another and the wider security program.
+- [Penetration Tester](penetration-tester.md): conducts scoped, time-boxed assessments that find and verify weaknesses within an agreed boundary, then reports remediation guidance.
+- [Red Team Operator](red-team-operator.md): runs goal-based, full-scope campaigns that emulate a realistic adversary to test whether an organization detects and responds.
+- [Purple Team Specialist](purple-team-specialist.md): coordinates collaborative emulation so offensive findings translate directly into improved detection and response coverage.
+- [Vulnerability Researcher](vulnerability-researcher.md): studies software, hardware, and protocols to discover previously unknown flaws and understand their root causes, often through coordinated disclosure.
+- [Exploit Developer](exploit-developer.md): builds reliable proof-of-concept code that demonstrates the practical impact of a weakness, supporting both testing and defensive research.
 
 ## References
 

@@ -12,13 +12,14 @@ keywords:
 
 # Organizations
 
-Organizations form the institutional landscape of cybersecurity. They include the companies that build and sell security products, the firms that deliver services such as testing and incident response, the professional bodies that certify practitioners, and the authorities that publish standards and guidance. Knowing this landscape helps a professional understand where the field's structure and expectations come from.
+Organizations form the institutional landscape of cybersecurity: the companies that build and sell **security products**, the firms that deliver **services** such as testing and incident response, and the authorities that publish the **standards** programs are measured against. For a career, they matter as employers, partners, and sources of authority, and recognizing which ones carry weight in a given specialization helps you make informed choices. Many practitioners move between vendor, consulting, and in-house roles over time, gaining a different perspective at each.
 
-For a security career, organizations matter as employers, partners, and sources of authority. Vendors and service providers create much of the demand for security roles, while standards bodies and professional associations define the frameworks and credentials that shape hiring and practice. Recognizing which organizations carry weight in a given specialization helps a professional make informed choices.
+## In this section
 
-Industry players and service providers range widely. Product vendors focus on areas such as endpoint protection, identity, or network defense, while service firms offer assessments, monitoring, and response. Many practitioners move between vendor, consulting, and in-house roles over a career, gaining different perspectives at each.
-
-Standards authorities and professional bodies provide the field's shared reference points. Organizations that publish frameworks, controls catalogs, and workforce taxonomies give practitioners a common language, and certifying bodies validate skills across employers. Understanding who produces trusted guidance helps a professional evaluate claims and align their work with recognized practice.
+- [Consultancies](consultancies.md): advisory and professional services firms hired to assess, design, and improve a client's security posture.
+- [Security Firms](security-firms.md): companies whose core business is cybersecurity, as product vendors or specialized service providers.
+- [Standards Bodies](standards-bodies.md): the institutions that write and maintain the frameworks, controls, and technical specifications the field adopts.
+- [Technology Firms](technology-firms.md): broad technology companies that employ in-house security teams to protect their products and platforms.
 
 ## References
 

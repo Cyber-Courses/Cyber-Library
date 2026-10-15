@@ -1,26 +1,48 @@
 ---
-title: "Chercheur en menaces : investiguer les capacités des adversaires et le code malveillant"
-description: Un chercheur en menaces étudie les logiciels malveillants, l'infrastructure des attaquants et les techniques des adversaires afin de produire les connaissances techniques dont dépendent les équipes de détection, de renseignement et de défense.
+title: "Chercheur en menaces : enquêter sur les capacités des adversaires et le code malveillant"
+description: "Un chercheur en menaces étudie les logiciels malveillants, l'infrastructure des attaquants et les techniques des adversaires afin de produire la connaissance technique dont dépendent les équipes de détection, de renseignement et de défense."
 keywords:
   - chercheur en menaces
   - analyse de logiciels malveillants
   - rétro-ingénierie
-  - techniques des adversaires
-  - détection (detection engineering)
+  - savoir-faire des adversaires
+  - ingénierie de détection
   - renseignement sur les menaces
 ---
 
 # Chercheur en menaces
 
-Un chercheur en menaces est un spécialiste qui investigue la substance technique des attaques : les logiciels malveillants déployés par les adversaires, l'infrastructure qu'ils construisent, les vulnérabilités qu'ils exploitent et les techniques qu'ils emploient pour obtenir et conserver un accès. Là où un analyste en renseignement sur les menaces se concentre souvent sur le suivi des acteurs, des campagnes et de la vision d'ensemble, le chercheur en menaces travaille au plus près des artefacts eux-mêmes, en décortiquant un échantillon malveillant ou un schéma réseau suspect pour comprendre exactement comment il fonctionne. Le produit de ce travail est une connaissance technique durable : la manière dont une famille de logiciels malveillants se comporte, ce qu'un ensemble d'outils révèle sur ses opérateurs, et quelles caractéristiques observables permettent de reconnaître à nouveau la menace par la suite. Ce rôle existe chez les éditeurs de sécurité, les entreprises d'antivirus et de protection des postes de travail, les grandes équipes de sécurité en entreprise, les CERT nationaux et les groupes de recherche indépendants.
+Les attaques laissent des artefacts, et un **chercheur en menaces** les décortique. Ce spécialiste enquête sur la substance technique d'une intrusion : les logiciels malveillants que déploient les adversaires, l'infrastructure qu'ils construisent, les vulnérabilités qu'ils exploitent et les techniques qu'ils emploient pour obtenir et conserver un accès. Là où un analyste du renseignement sur les menaces suit les acteurs et les campagnes, un chercheur travaille au plus près des artefacts eux-mêmes, produisant une connaissance technique durable : comment se comporte une famille de logiciels malveillants, ce qu'un jeu d'outils révèle de ses opérateurs, et quels traits observables permettent de reconnaître la menace ultérieurement. Le rôle existe chez les éditeurs de sécurité, les entreprises d'antivirus et de protection des terminaux, les grandes équipes de sécurité d'entreprise, les équipes nationales de réponse aux urgences informatiques et les groupes de recherche indépendants.
 
-Le travail au quotidien est centré sur l'analyse. Un chercheur examine le code malveillant pour déterminer ce qu'il fait, comment il communique, comment il persiste et comment il échappe aux défenses, en combinant examen statique, observation dynamique contrôlée dans des environnements isolés et rétro-ingénierie de binaires compilés. En plus des logiciels malveillants, les chercheurs étudient l'infrastructure des attaquants, comme les serveurs de commande et de contrôle et les kits d'hameçonnage, mettent en correspondance les comportements observés avec des cadres tels que MITRE ATT&CK, et condensent leurs constats en indicateurs de compromission et en logiques de détection. Une part importante du métier consiste à écrire : des rapports internes, des signatures de détection, et souvent des articles de blog publics ou des présentations en conférence qui documentent une nouvelle menace et en expliquent l'importance pour les défenseurs. La clarté compte autant que la profondeur technique, car la valeur de la recherche ne se concrétise que lorsque d'autres équipes peuvent agir à partir de ses résultats.
+## Responsabilités
 
-Le rôle exige de solides bases sur le fonctionnement des systèmes sous la surface. L'aisance avec les mécanismes internes des systèmes d'exploitation, les réseaux et au moins un langage de script est indispensable, et les spécialisations plus poussées s'appuient sur l'assembleur, le débogage et les compétences en rétro-ingénierie. Les chercheurs ont besoin de la patience nécessaire pour venir à bout de l'obfuscation et des impasses, de la discipline pour manipuler des logiciels malveillants actifs en toute sécurité, et de la curiosité pour continuer à apprendre à mesure que les techniques des adversaires évoluent. La rigueur analytique est tout aussi importante : la capacité à étayer ses conclusions par des preuves, à reconnaître l'incertitude et à éviter de surinterpréter ce qu'un artefact donné démontre réellement. La communication écrite et orale complète le profil, car une recherche que l'on ne sait pas expliquer a un impact limité.
+- Examiner le code malveillant pour déterminer ce qu'il fait, comment il communique, comment il persiste et comment il échappe aux défenses, à l'aide d'un examen statique, d'une observation dynamique contrôlée dans des environnements isolés et de la rétro-ingénierie de binaires compilés.
+- Étudier l'infrastructure des attaquants, telle que les serveurs de commande et de contrôle et les kits d'hameçonnage.
+- Cartographier le comportement observé sur des cadres de référence comme **MITRE ATT&CK**.
+- Distiller les conclusions en **indicateurs de compromission** et en logique de détection.
+- Rédiger des rapports internes, des signatures de détection et souvent des billets de blog publics ou des conférences qui documentent une nouvelle menace et en expliquent l'importance aux défenseurs.
 
-On entre généralement dans la recherche sur les menaces à partir de parcours techniques voisins plutôt que directement à la sortie des études. Les voies les plus courantes passent par les opérations de sécurité, la réponse aux incidents, l'ingénierie de la détection ou le développement logiciel, où les praticiens acquièrent la connaissance des systèmes et les réflexes d'investigation que le rôle valorise. Certains y arrivent par un fort intérêt pour l'analyse de logiciels malveillants ou la rétro-ingénierie développé à travers des compétitions de type capture-the-flag, des laboratoires personnels et l'étude en autodidacte. L'évolution au sein du domaine tend soit vers une spécialisation plus poussée, par exemple devenir une référence sur une plateforme, une catégorie de logiciels malveillants ou une classe d'acteurs en particulier, soit vers un périmètre plus large consistant à diriger une équipe de recherche, à définir l'agenda de recherche d'un éditeur et à encadrer de nouveaux analystes. Un corpus de travaux publiés et reconnu est souvent ce qui distingue les chercheurs expérimentés.
+## Compétences et profil
 
-La recherche sur les menaces est proche de plusieurs rôles voisins et en alimente beaucoup. Ses constats techniques fournissent la matière première qu'un analyste en renseignement sur les menaces contextualise en suivi d'acteurs et qu'un analyste stratégique des menaces intègre dans des évaluations de plus haut niveau destinées aux dirigeants. Les équipes de détection et de réponse consomment les signatures et les indicateurs comportementaux produits par les chercheurs, et les intervenants en réponse aux incidents s'appuient sur l'analyse de logiciels malveillants au cours d'investigations actives. Le rôle se distingue de ses voisins par la profondeur de son attention portée aux artefacts et aux mécanismes d'une attaque, plutôt qu'à la gestion de programmes de renseignement, à la surveillance de sources clandestines ou à la traduction des menaces en décisions métier. Comprendre où s'arrête la recherche et où commencent ces fonctions adjacentes aide les praticiens à collaborer efficacement et à positionner leur travail là où il est le plus utile.
+- **Profondeur systèmes :** une aisance avec les rouages internes des systèmes d'exploitation, le réseau et au moins un langage de script, avec des spécialisations plus poussées s'appuyant sur l'assembleur, le débogage et la rétro-ingénierie.
+- **Manipulation sûre :** la discipline de travailler avec des logiciels malveillants actifs en toute sécurité et à travers l'obfuscation et les impasses.
+- **Rigueur analytique :** étayer les conclusions par des preuves, reconnaître l'incertitude et ne pas surinterpréter ce qu'un artefact prouve.
+- **Communication :** une clarté à l'écrit et à l'oral, car une recherche qui ne peut être expliquée a un impact limité.
+
+## Accéder au poste
+
+Les personnes y entrent généralement depuis des horizons techniques connexes plutôt que directement à la sortie des études. Les parcours courants passent par les opérations de sécurité, la réponse aux incidents, l'ingénierie de détection ou le développement logiciel, où les praticiens développent la connaissance des systèmes et les réflexes d'investigation que le rôle récompense. D'autres arrivent par un fort intérêt pour l'analyse de logiciels malveillants ou la rétro-ingénierie bâti à travers des compétitions de capture de drapeau, des laboratoires personnels et de l'étude autonome.
+
+## Évolution de carrière
+
+La croissance tend à évoluer vers une spécialisation plus poussée, comme devenir une autorité sur une plateforme, une catégorie de logiciels malveillants ou une classe d'acteurs particulière, ou vers une portée plus large consistant à diriger une équipe de recherche, à façonner l'agenda de recherche d'un éditeur et à accompagner les analystes plus récents. Un corpus de travaux publiés reconnu distingue souvent les chercheurs seniors.
+
+## Rôles associés
+
+- [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : contextualise les conclusions techniques d'un chercheur en suivi d'acteurs.
+- [Analyste stratégique des menaces](strategic-threat-analyst.md) : intègre ces conclusions dans des évaluations de plus haut niveau destinées à la direction.
+- [Analyste du dark web](dark-web-analyst.md) : surveille les sources clandestines plutôt que de disséquer des artefacts.
+- [CTI Manager](cti-manager.md) : dirige le programme de renseignement que la recherche alimente.
 
 ## Références
 

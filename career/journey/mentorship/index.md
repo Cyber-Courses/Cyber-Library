@@ -12,13 +12,20 @@ keywords:
 
 # Mentorship
 
-Mentorship is a relationship in which a more experienced practitioner helps a less experienced one navigate their career. In cybersecurity, it offers something that courses and certifications cannot: contextual judgment drawn from real situations. A good mentor helps a mentee interpret choices, avoid common missteps, and see a path through a field that can feel vast and fast-moving.
+**Mentorship** is a relationship in which a more experienced practitioner helps a less experienced one navigate their career. In cybersecurity it offers something courses and certifications cannot: **contextual judgment** drawn from real situations, so a mentee can interpret choices, avoid common missteps, and see a path through a field that is broad and fast-moving.
 
-Mentorship matters across a security career because the discipline is broad and specializations are many. Deciding whether to pursue defensive operations, governance, architecture, or another direction is easier with guidance from someone who has made similar choices. Mentors also provide honest feedback that is hard to get elsewhere.
+## Why it matters in security
 
-Finding a mentor usually starts with relationships already forming through work, communities, or networking. Rather than asking someone to formally commit, many effective mentorships begin with specific, respectful questions and grow naturally when there is mutual interest. Some organizations and professional bodies also run structured mentoring programs.
+- The discipline is wide and specializations are many, so deciding between defensive operations, governance, architecture, or another direction is easier with guidance from someone who has made similar choices.
+- Mentors give honest feedback on strengths and blind spots that is hard to get elsewhere.
+- Over a career, most practitioners eventually become mentors, sustaining the cycle that transmits tacit knowledge and strengthens the profession.
 
-Guidance, goal setting, and long-term support are the substance of the relationship. A mentor can help a mentee set realistic goals, identify skills to develop, and check progress over time. The relationship often evolves, and many practitioners eventually become mentors themselves, sustaining the cycle that strengthens the profession.
+## In this section
+
+- [Finding and Selecting a Mentor](finding-and-selecting-a-mentor.md): how to identify the right guide and open the relationship with a respectful first ask.
+- [Establishing Goals and Expectations](establishing-goals-and-expectations.md): defining shared goals, boundaries, and working terms at the outset.
+- [Mentorship Programs and Structures](mentorship-programs-and-structures.md): the formal and informal formats through which guidance is organized.
+- [Long-Term Mentoring Relationships](long-term-mentoring-relationships.md): sustaining a mentoring bond across years and roles.
 
 ## References
 

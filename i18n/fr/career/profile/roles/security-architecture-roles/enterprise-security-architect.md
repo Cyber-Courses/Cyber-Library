@@ -1,6 +1,6 @@
 ---
-title: "Architecte sécurité d'entreprise : conception de la sécurité à l'échelle de l'organisation"
-description: "Un rôle senior qui définit et gouverne l'architecture de sécurité couvrant l'ensemble d'une organisation, en alignant les contrôles sur la stratégie métier et le risque."
+title: "Architecte sécurité d'entreprise : la conception de la sécurité à l'échelle de l'organisation"
+description: "Un rôle senior qui définit et gouverne l'architecture de sécurité couvrant une organisation entière, en alignant les contrôles sur la stratégie métier et le risque."
 keywords:
   - architecte sécurité d'entreprise
   - architecture de sécurité
@@ -12,13 +12,38 @@ keywords:
 
 # Architecte sécurité d'entreprise
 
-Un architecte sécurité d'entreprise est un praticien senior qui définit la manière dont la sécurité est structurée à l'échelle de toute une organisation, plutôt qu'au sein d'un système ou d'un projet unique. Le rôle fixe l'état cible de la sécurité, exprimé sous forme de principes, d'architectures de référence et de normes, et veille à ce que les contrôles retenus dans chaque programme s'additionnent pour former un ensemble cohérent et défendable. Là où d'autres architectes se concentrent sur un produit, une plateforme ou un domaine, l'architecte sécurité d'entreprise adopte la vue la plus large, reliant la stratégie métier, l'appétence au risque et les obligations réglementaires aux décisions techniques et organisationnelles qui les mettent en œuvre.
+Là où la plupart des architectes se concentrent sur un produit, une plateforme ou un domaine, l'architecte sécurité d'entreprise adopte la **vue la plus large**. Ce praticien senior définit la manière dont la sécurité est structurée à travers une organisation entière, en fixant l'état cible sous forme de principes, d'architectures de référence et de normes, et en veillant à ce que les contrôles choisis dans les différents programmes forment un **ensemble cohérent et défendable**. Le rôle relie la stratégie métier, l'appétence au risque et les obligations réglementaires aux décisions techniques et organisationnelles qui les concrétisent.
 
-Au quotidien, le travail consiste moins à construire qu'à façonner et à gouverner. Un architecte sécurité d'entreprise élabore et maintient l'architecture de référence de sécurité, examine les initiatives majeures pour confirmer qu'elles s'inscrivent dans le modèle visé, et arbitre les tensions entre conceptions concurrentes afin que l'organisation n'accumule pas des contrôles incohérents ou redondants. Le rôle contribue aux feuilles de route qui éliminent les faiblesses héritées et financent de nouvelles capacités, définit les normes que les architectes de domaine et de solution appliquent dans leurs propres périmètres, et conseille la direction sur les implications de sécurité des grandes décisions telles qu'une migration vers le cloud, une acquisition ou une nouvelle ligne d'activité. Une grande partie de la valeur réside dans la traduction, qui consiste à transformer le risque métier en orientations architecturales claires et à expliquer les compromis techniques aux dirigeants dans des termes qu'ils peuvent évaluer.
+## Responsabilités
 
-Le rôle exige de l'étendue et de l'ancienneté plutôt qu'une spécialisation poussée sur un outil particulier. Un architecte sécurité d'entreprise a besoin d'une bonne maîtrise de la sécurité de l'identité, du réseau, des applications, des données et du cloud, d'une familiarité avec la gestion des risques et la gouvernance, ainsi que d'une aisance avec au moins un cadre d'architecture reconnu tel que SABSA, TOGAF ou les recommandations de l'Open Group que de nombreux programmes adoptent. Tout aussi importants sont le discernement, la communication écrite et la capacité à influencer sans autorité directe, car l'architecte est rarement propriétaire des systèmes concernés et guide plutôt de nombreuses équipes vers une conception commune. L'aisance face à l'ambiguïté et aux horizons de temps longs compte, puisque les décisions d'architecture façonnent l'organisation pour des années.
+- Élaborer et maintenir l'architecture de référence de sécurité de l'organisation.
+- Examiner les initiatives majeures pour confirmer qu'elles cadrent avec le modèle visé, et résoudre les tensions entre conceptions concurrentes afin que les contrôles ne deviennent pas incohérents ou redondants.
+- Contribuer aux feuilles de route qui retirent les faiblesses héritées et financent de nouvelles capacités.
+- Fixer les normes que les architectes de domaine et de solution appliquent dans leurs propres secteurs.
+- Conseiller la direction sur les implications de sécurité de grandes décisions comme une migration vers le cloud, une acquisition ou une nouvelle ligne d'activité.
+- Traduire le risque métier en une orientation architecturale claire et expliquer les arbitrages techniques aux dirigeants dans des termes qu'ils peuvent évaluer.
 
-On accède généralement à ce rôle après une expérience substantielle plutôt que d'y entrer directement. Les parcours courants passent par l'ingénierie de sécurité, l'architecture de solutions ou un rôle d'architecture axé sur un domaine, souvent renforcés par des certifications telles que CISSP, CISSP-ISSAP ou les certifications SABSA, conjuguées à un historique de livraison de systèmes sécurisés à grande échelle. À partir de là, un architecte peut évoluer vers un poste d'architecte en chef, de responsable de l'architecture de sécurité, ou un rôle de direction plus large tel que RSSI, et certains approfondissent plutôt un travail de conseil spécialisé. Le rôle se situe au-dessus et aux côtés de ses voisins : il s'appuie sur l'ingénieur sécurité pour mettre en œuvre les contrôles, confie des problèmes concrets à l'architecte de solutions travaillant sur une initiative donnée, et dépend des architectes sécurité de domaine pour porter ses normes dans des périmètres spécialisés, tandis qu'un architecte sécurité sans le qualificatif « d'entreprise » opère habituellement sur un périmètre plus restreint que le mandat à l'échelle de l'organisation décrit ici.
+## Compétences et profil
+
+- **L'étendue plutôt que la profondeur :** une bonne maîtrise de la sécurité de l'identité, du réseau, des applications, des données et du cloud, davantage valorisée qu'une spécialisation poussée dans un seul outil.
+- **Aisance en gouvernance :** une familiarité avec la gestion des risques et au moins un cadre d'architecture reconnu comme SABSA, TOGAF ou les recommandations de l'Open Group adoptées par de nombreux programmes.
+- **Compétences relationnelles :** le jugement, la communication écrite et la capacité d'influencer sans autorité directe, puisque l'architecte guide de nombreuses équipes plutôt que de posséder les systèmes.
+- **Tempérament :** une aisance face à l'ambiguïté et aux horizons de long terme, car les décisions architecturales façonnent l'organisation pour des années.
+
+## Accéder au poste
+
+Les gens atteignent généralement ce rôle après une expérience substantielle plutôt qu'en y entrant directement. Les parcours courants passent par l'ingénierie de sécurité, l'architecture de solutions ou un rôle d'architecture axé sur un domaine, souvent renforcés par des certifications comme CISSP, CISSP-ISSAP ou les certifications SABSA, ainsi que par un historique de livraison de systèmes sécurisés à grande échelle.
+
+## Évolution de carrière
+
+À partir de là, un architecte peut évoluer vers un poste d'architecte en chef, de responsable de l'architecture de sécurité ou un rôle de direction plus large comme RSSI, et certains approfondissent plutôt vers un travail de conseil spécialisé. Le rôle se situe au-dessus et aux côtés de ses voisins, s'appuyant sur les ingénieurs et les architectes de solution pour réaliser son orientation et sur les architectes de domaine pour porter ses normes dans des secteurs spécialisés.
+
+## Rôles associés
+
+- [Architecte sécurité](security-architect.md) : opère à un périmètre plus étroit que le mandat à l'échelle de l'organisation décrit ici.
+- [Architecte sécurité de domaine](domain-security-architect.md) : porte les normes d'entreprise dans un secteur spécialisé en profondeur.
+- [Solutions Architect - Security](solutions-architect-security.md) : reçoit des problèmes concrets sur une initiative donnée.
+- [Ingénieur sécurité](security-engineer.md) : met en œuvre les contrôles que l'architecture d'entreprise exige.
 
 ## Références
 

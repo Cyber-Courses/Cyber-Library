@@ -1,6 +1,6 @@
 ---
 title: "Threat Researcher: Investigating Adversary Capabilities and Malicious Code"
-description: A threat researcher studies malware, attacker infrastructure, and adversary techniques to produce the technical knowledge that detection, intelligence, and defensive teams depend on.
+description: "A threat researcher studies malware, attacker infrastructure, and adversary techniques to produce the technical knowledge that detection, intelligence, and defensive teams depend on."
 keywords:
   - threat researcher
   - malware analysis
@@ -12,15 +12,37 @@ keywords:
 
 # Threat Researcher
 
-A threat researcher is a specialist who investigates the technical substance of attacks: the malware adversaries deploy, the infrastructure they build, the vulnerabilities they abuse, and the techniques they use to gain and keep access. Where a threat intelligence analyst often focuses on tracking actors, campaigns, and the broader picture, a threat researcher works closer to the artifacts themselves, taking apart a malicious sample or a suspicious network pattern to understand exactly how it functions. The output of this work is durable technical knowledge: how a family of malware behaves, what a toolset reveals about its operators, and which observable traits can be used to recognize the threat again later. This role exists in security vendors, antivirus and endpoint companies, large enterprise security teams, national computer emergency response teams, and independent research groups.
+Attacks leave artifacts, and a **threat researcher** takes them apart. The specialist investigates the technical substance of an intrusion: the malware adversaries deploy, the infrastructure they build, the vulnerabilities they abuse, and the techniques they use to gain and keep access. Where a threat intelligence analyst tracks actors and campaigns, a researcher works closer to the artifacts themselves, producing durable technical knowledge: how a malware family behaves, what a toolset reveals about its operators, and which observable traits recognize the threat again later. The role exists in security vendors, antivirus and endpoint companies, large enterprise security teams, national computer emergency response teams, and independent research groups.
 
-The day-to-day work centers on analysis. A researcher examines malicious code to determine what it does, how it communicates, how it persists, and how it evades defenses, using a combination of static examination, controlled dynamic observation in isolated environments, and reverse engineering of compiled binaries. Alongside malware, researchers study attacker infrastructure such as command-and-control servers and phishing kits, map observed behavior to frameworks like MITRE ATT&CK, and distill findings into indicators of compromise and detection logic. A significant part of the job is writing: internal reports, detection signatures, and often public blog posts or conference talks that document a new threat and explain its significance to defenders. Clarity matters as much as technical depth, because the value of research is realized only when other teams can act on it.
+## Responsibilities
 
-The role calls for a strong foundation in how systems work beneath the surface. Comfort with operating system internals, networking, and at least one scripting language is essential, and deeper specializations draw on assembly, debugging, and reverse engineering skills. Researchers need the patience to work through obfuscation and dead ends, the discipline to handle live malware safely, and the curiosity to keep learning as adversary tradecraft changes. Equally important is analytic rigor: the ability to support conclusions with evidence, acknowledge uncertainty, and avoid overstating what a given artifact proves. Written and verbal communication rounds out the profile, since research that cannot be explained has limited impact.
+- Examine malicious code to determine what it does, how it communicates, how it persists, and how it evades defenses, using static examination, controlled dynamic observation in isolated environments, and reverse engineering of compiled binaries.
+- Study attacker infrastructure such as command-and-control servers and phishing kits.
+- Map observed behavior to frameworks like **MITRE ATT&CK**.
+- Distill findings into **indicators of compromise** and detection logic.
+- Write internal reports, detection signatures, and often public blog posts or conference talks that document a new threat and explain its significance to defenders.
 
-People typically enter threat research from adjacent technical backgrounds rather than directly out of school. Common paths run through security operations, incident response, detection engineering, or software development, where practitioners develop the systems knowledge and investigative instincts the role rewards. Some arrive through a strong interest in malware analysis or reverse engineering built up through capture-the-flag competitions, home labs, and independent study. Growth within the field tends to move toward deeper specialization, such as becoming an authority on a particular platform, malware category, or class of actor, or toward broader scope leading a research team, shaping a vendor's research agenda, and mentoring newer analysts. A well-known body of published work is often what distinguishes senior researchers.
+## Skills and background
 
-Threat research sits close to several neighboring roles and feeds many of them. Its technical findings supply the raw material that a threat intelligence analyst contextualizes into actor tracking and that a strategic threat analyst folds into higher-level assessments for leadership. Detection and response teams consume the signatures and behavioral indicators researchers produce, and incident responders draw on malware analysis during active investigations. The role differs from these neighbors in its depth of focus on the artifacts and mechanics of an attack rather than on managing intelligence programs, monitoring underground sources, or translating threats into business decisions. Understanding where research ends and these adjacent functions begin helps practitioners collaborate effectively and position their work where it does the most good.
+- **Systems depth:** comfort with operating system internals, networking, and at least one scripting language, with deeper specializations drawing on assembly, debugging, and reverse engineering.
+- **Safe handling:** the discipline to work with live malware safely and through obfuscation and dead ends.
+- **Analytic rigor:** supporting conclusions with evidence, acknowledging uncertainty, and not overstating what an artifact proves.
+- **Communication:** written and verbal clarity, since research that cannot be explained has limited impact.
+
+## Getting into the role
+
+People typically enter from adjacent technical backgrounds rather than directly out of school. Common paths run through security operations, incident response, detection engineering, or software development, where practitioners develop the systems knowledge and investigative instincts the role rewards. Others arrive through a strong interest in malware analysis or reverse engineering built up through capture-the-flag competitions, home labs, and independent study.
+
+## Career progression
+
+Growth tends to move toward deeper specialization, such as becoming an authority on a particular platform, malware category, or class of actor, or toward broader scope leading a research team, shaping a vendor's research agenda, and mentoring newer analysts. A well-known body of published work often distinguishes senior researchers.
+
+## Related roles
+
+- [Threat Intelligence Analyst](threat-intelligence-analyst.md): contextualizes a researcher's technical findings into actor tracking.
+- [Strategic Threat Analyst](strategic-threat-analyst.md): folds those findings into higher-level assessments for leadership.
+- [Dark Web Analyst](dark-web-analyst.md): monitors underground sources rather than dissecting artifacts.
+- [CTI Manager](cti-manager.md): directs the intelligence program the research feeds.
 
 ## References
 

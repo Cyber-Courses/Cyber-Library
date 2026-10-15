@@ -1,24 +1,38 @@
 ---
-title: "Architecture de sécurité : concevoir des systèmes sécurisés dès la conception"
-description: "Une voie de spécialisation axée sur la conception des systèmes, des réseaux et des mesures de sécurité afin que la sécurité soit intégrée à leur structure plutôt qu'ajoutée après coup."
+title: "Architecture de sécurité : concevoir des systèmes sûrs par conception"
+description: "Une spécialisation axée sur la conception des systèmes, des réseaux et des contrôles afin que la sécurité soit intégrée à leur structure plutôt qu'ajoutée après coup."
 keywords:
   - architecture de sécurité
   - conception sécurisée
   - modélisation des menaces
-  - mesures de sécurité
+  - contrôles de sécurité
   - architecture de référence
-  - parcours professionnel
+  - parcours de carrière
 ---
 
 # Architecture de sécurité
 
-L'architecture de sécurité est la discipline qui consiste à concevoir la manière dont les systèmes, les réseaux et les mesures de sécurité s'articulent, afin que la protection fasse partie de leur structure plutôt que d'y être greffée plus tard. Un architecte travaille au niveau des plans et des normes, en décidant de la façon dont les frontières de confiance, l'identité, la segmentation, le chiffrement et la supervision doivent être organisés dans un environnement. L'objectif est de faire des choix sécurisés l'option par défaut, de sorte que les équipes qui construisent et exploitent les systèmes héritent d'une protection solide sans avoir à la réinventer à chaque fois. Comme ces décisions façonnent une organisation pendant des années, le poste convient aux personnes capables de raisonner en termes de structure, d'arbitrages et d'horizons lointains.
+L'**architecture de sécurité** est la discipline consistant à concevoir la manière dont les systèmes, les réseaux et les contrôles s'articulent afin que la protection fasse partie de leur structure plutôt qu'une chose rapportée plus tard. Un architecte travaille au niveau des plans et des standards, décidant comment les **frontières de confiance**, l'identité, la segmentation, le chiffrement et la surveillance doivent être agencés à travers un environnement. L'objectif est de faire des choix sûrs la valeur par défaut, afin que les équipes qui construisent et exploitent les systèmes héritent d'une protection saine sans la réinventer à chaque fois. Parce que ces décisions façonnent une organisation pendant des années, le rôle récompense les personnes qui pensent en termes de structure, de compromis et d'horizons lointains.
 
-Au quotidien, le travail consiste moins à manipuler des outils qu'à orienter des décisions. Un architecte examine les systèmes et les changements proposés, modélise les menaces qui comptent pour eux, et définit les mesures et les modèles qui doivent s'appliquer. Une grande partie de la production prend la forme d'architectures de référence, de normes de conception et de principes documentés que d'autres équipes suivent, ainsi que des discussions de revue qui maintiennent les projets réels en cohérence avec ces principes. Un architecte met en balance la sécurité avec le coût, la facilité d'utilisation et la rapidité de livraison, et doit souvent expliquer aux ingénieurs et aux dirigeants pourquoi une conception donnée est solide ou en quoi résident ses risques. L'influence de ce rôle passe par le raisonnement et la persuasion plutôt que par un contrôle direct sur les systèmes.
+## Rôles sur ce parcours
 
-Le poste exige une étendue de connaissances dans de nombreux domaines techniques, associée au discernement nécessaire pour comprendre comment ils interagissent. Un architecte a besoin d'une compréhension pratique des réseaux, des systèmes d'exploitation, des applications, de l'identité et, de plus en plus, des plateformes cloud, ainsi que d'une bonne connaissance des référentiels reconnus et des catalogues de mesures qui donnent aux conceptions un langage commun. Tout aussi importantes sont les compétences que l'on a tendance à sous-estimer : une rédaction claire, la capacité à réaliser des schémas, et l'aptitude à défendre une position dans un débat de conception tout en restant ouvert aux contraintes. Les bons architectes sont à l'aise avec l'ambiguïté et avec la réalité selon laquelle la plupart des décisions sont des arbitrages plutôt que des réponses nettes.
+- [Ingénieur sécurité](../roles/security-architecture-roles/security-engineer.md) : conçoit, construit et maintient les contrôles de sécurité techniques qui protègent les systèmes et l'infrastructure d'une organisation.
+- [Architecte sécurité](../roles/security-architecture-roles/security-architect.md) : transforme les exigences métier et de risque en conception de sécurité structurelle des systèmes, des plateformes et des contrôles.
+- [Architecte sécurité de domaine](../roles/security-architecture-roles/domain-security-architect.md) : porte l'architecture et les contrôles d'un domaine métier, technologique ou fonctionnel spécifique.
+- [Architecte sécurité d'entreprise](../roles/security-architecture-roles/enterprise-security-architect.md) : définit et gouverne l'architecture de sécurité couvrant l'ensemble de l'organisation, en alignant les contrôles sur la stratégie et le risque.
+- [Architecte de solutions pour la sécurité](../roles/security-architecture-roles/solutions-architect-security.md) : intègre les exigences et les contrôles dans la conception d'un produit, d'une plateforme ou d'une solution métier particulière.
 
-L'architecture de sécurité est rarement un premier emploi. La plupart des architectes y arrivent après des années passées dans un domaine opérationnel comme l'ingénierie de la sécurité, l'ingénierie réseau ou système, le développement logiciel ou les opérations défensives, où ils ont acquis la connaissance concrète de la façon dont les systèmes se comportent et défaillent réellement. À partir de là, les praticiens évoluent souvent vers des postes d'architecte senior ou principal, se spécialisent dans un domaine comme l'architecture cloud ou applicative, ou progressent vers l'architecture d'entreprise et des rôles de direction stratégique. Ce poste côtoie ses voisins et s'en nourrit : il s'appuie sur la profondeur opérationnelle de la sécurité applicative et cloud, il est éclairé par les mesures et les obligations que définissent les travaux de gouvernance et de gestion des risques, et il dépend de la conception de l'identité et des accès comme l'un de ses éléments constitutifs centraux.
+## Compétences et certifications
+
+- **Étendue technique :** une compréhension pratique des réseaux, des systèmes d'exploitation, des applications, de l'identité et, de plus en plus, des plateformes cloud, avec le jugement nécessaire pour voir comment ils interagissent.
+- **Référentiels et catalogues :** familiarité avec les référentiels reconnus et les catalogues de contrôles qui donnent aux conceptions un langage commun.
+- **Modélisation des menaces :** raisonner sur les menaces qui comptent pour un système proposé et définir les contrôles et les architectures de référence qui devraient s'appliquer.
+- **Communication :** une rédaction claire, la réalisation de schémas et la capacité de tenir une position dans un débat de conception tout en restant ouvert aux contraintes.
+- **Certifications :** des certifications seniors telles que celles liées aux [ressources d'architecture CISSP et ISC2](https://www.isc2.org/) sont des marqueurs courants de l'étendue que le rôle exige.
+
+## Progresser
+
+L'architecture de sécurité est rarement un premier emploi. La plupart des architectes y arrivent après des années dans un domaine concret tel que l'ingénierie de sécurité, l'ingénierie réseau ou système, le développement logiciel ou les opérations défensives, où ils ont construit une connaissance pratique du comportement et des défaillances des systèmes. À partir de là, les praticiens évoluent vers des rôles d'architecte senior ou principal, se spécialisent dans un domaine tel que l'architecture cloud ou applicative, ou progressent vers l'architecture d'entreprise et le leadership stratégique. Le rôle s'appuie sur la profondeur concrète de la sécurité applicative et de la sécurité du cloud, est éclairé par les contrôles et les obligations que définit le travail de gouvernance et de risque, et dépend de la conception des identités et des accès comme l'un de ses blocs de construction centraux.
 
 ## Références
 

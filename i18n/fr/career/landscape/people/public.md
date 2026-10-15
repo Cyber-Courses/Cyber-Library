@@ -1,6 +1,6 @@
 ---
-title: "Public : les acteurs gouvernementaux et du secteur public en cybersécurité"
-description: "Un panorama des agences gouvernementales, des institutions publiques et des responsables publics qui façonnent la politique, la défense et les pratiques en matière de cybersécurité."
+title: "Secteur public : acteurs gouvernementaux et publics de la cybersécurité"
+description: "Un aperçu des agences gouvernementales, des institutions publiques et des responsables qui façonnent la politique, la défense et la pratique de la cybersécurité."
 keywords:
   - cybersécurité du secteur public
   - agences gouvernementales de sécurité
@@ -10,17 +10,38 @@ keywords:
   - service public
 ---
 
-# Public
+# Secteur public
 
-Le paysage public de la cybersécurité est constitué des gouvernements et des institutions financées par l'impôt qui définissent les politiques, défendent les infrastructures nationales, enquêtent sur la criminalité et servent les citoyens. Ses acteurs comprennent des autorités nationales de cybersécurité telles que la Cybersecurity and Infrastructure Security Agency aux États-Unis, le National Cyber Security Center au Royaume-Uni et l'Agence de l'Union européenne pour la cybersécurité, aux côtés des forces de l'ordre, des organisations de défense et de renseignement, des régulateurs sectoriels et des organismes de normalisation. Les personnes influentes dans cette sphère sont généralement des dirigeants d'agences, des responsables de la sécurité des systèmes d'information au sein des administrations, des procureurs qui poursuivent la cybercriminalité et les responsables qui rédigent les référentiels et les avis que les autres adoptent.
+Le paysage public de la cybersécurité est constitué des gouvernements et des **institutions financées par les contribuables** qui définissent les politiques, défendent les infrastructures nationales, enquêtent sur la criminalité et servent les citoyens. Ses acteurs comprennent les autorités nationales de cybersécurité telles que la Cybersecurity and Infrastructure Security Agency aux États-Unis, le National Cyber Security Center au Royaume-Uni et l'Agence de l'Union européenne pour la cybersécurité, aux côtés des forces de l'ordre, des organisations de défense et de renseignement, des régulateurs sectoriels et des organismes d'élaboration de normes.
 
-Cela compte pour une carrière en sécurité parce que le secteur public fixe une grande partie du socle que tous les autres suivent. Les réglementations, les obligations de signalement, les schémas de certification et les référentiels de contrôle largement utilisés trouvent ici leur origine, et une bonne partie des recommandations les plus faisant autorité dans le domaine est publiée gratuitement par des organismes publics. Suivre les avis nationaux, les référentiels de compétences et les attentes réglementaires fait partie du maintien des compétences dans presque tous les postes, que l'on travaille un jour directement pour un gouvernement ou non.
+## Qui sont les personnes clés
 
-Le travail mené par les acteurs publics se distingue de celui des fournisseurs privés ou des chercheurs universitaires. Les agences émettent des avis de menace et coordonnent la réponse à des incidents qui franchissent les frontières organisationnelles et nationales, font appliquer les lois et les réglementations, pilotent des programmes nationaux de compétences et de certification, et partagent du renseignement avec les opérateurs d'infrastructures critiques. Les personnes occupant ces fonctions se situent souvent à la frontière entre la politique et la pratique technique, traduisant la réalité opérationnelle en règles et retraduisant les règles en recommandations que les défenseurs peuvent mettre en oeuvre.
+- Les **dirigeants d'agences** et les responsables gouvernementaux de la sécurité des systèmes d'information qui fixent le cap de la défense nationale.
+- Les **procureurs** qui poursuivent la cybercriminalité et les enquêteurs qui les appuient.
+- Les responsables qui rédigent les **cadres et avis** que d'autres adoptent dans l'ensemble de l'économie.
 
-Entrer dans le secteur public et y progresser suppose généralement de composer avec un recrutement public structuré, et de nombreux postes exigent des habilitations de sécurité ainsi qu'une volonté de travailler dans un cadre procédural formel. La rémunération y est souvent inférieure à celle de l'industrie privée, mais le travail est porté par une mission et offre une large exposition à des problèmes d'échelle nationale. Les passages entre le service public et les entreprises privées sont courants, et l'expérience acquise dans une fonction gouvernementale, en particulier dans la coordination d'incidents, les politiques publiques ou les forces de l'ordre, pèse d'un poids considérable ailleurs dans le domaine.
+## Ce que font les organismes publics
 
-La sphère publique entretient des liens étroits avec ses voisines sans pour autant les dupliquer. Le monde universitaire fournit la recherche et une grande partie des talents sur lesquels le gouvernement s'appuie ensuite, l'industrie construit et vend les produits que les organismes publics à la fois utilisent et régulent, et les groupes communautaires animent la conversation de terrain. La contribution propre du secteur public consiste à réunir ces parties et à établir les normes, les obligations et les défenses partagées qui tiennent à l'échelle d'une économie entière.
+- Émettre des **avis de menace** et coordonner la réponse aux incidents qui franchissent les frontières organisationnelles et nationales.
+- Faire appliquer les lois et les réglementations, y compris les obligations de signalement et les dispositifs de certification.
+- Gérer des **programmes nationaux de main-d'œuvre et de certification** et partager le renseignement avec les opérateurs d'infrastructures critiques.
+- Se tenir à la frontière entre politique et pratique technique, traduisant la réalité opérationnelle en règles et les règles en recommandations sur lesquelles les défenseurs peuvent agir.
+
+## En quoi cela compte pour une carrière
+
+- Le secteur public définit une grande partie du socle que tous les autres suivent : réglementations, obligations de signalement et cadres de contrôle largement utilisés trouvent ici leur origine.
+- Une grande partie des recommandations les plus faisant autorité du domaine est publiée gratuitement par les organismes gouvernementaux.
+- Suivre les avis nationaux, les référentiels de main-d'œuvre et les attentes réglementaires fait partie du maintien des compétences dans presque tout rôle, que l'on travaille un jour ou non pour un gouvernement.
+
+## Travailler dans le secteur public
+
+- Y entrer et y progresser suppose généralement de naviguer dans un **recrutement public structuré**, et de nombreux postes exigent des habilitations de sécurité et la volonté de travailler dans un cadre de procédures formelles.
+- La rémunération est souvent inférieure à celle du secteur privé, mais le travail est porté par une mission et offre une large exposition à des problèmes d'échelle nationale.
+- Les allers-retours entre service public et entreprises privées sont fréquents, et l'expérience en coordination d'incidents, en politique ou dans les forces de l'ordre pèse considérablement ailleurs.
+
+## Comment cela s'intègre dans le paysage plus large
+
+L'académie fournit la recherche et une grande partie des talents sur lesquels le gouvernement s'appuie ensuite, l'industrie construit et vend les produits que les organismes publics utilisent et régulent à la fois, et les groupes communautaires organisent la conversation de terrain. La contribution propre du secteur public est de réunir ces parties et d'établir les normes, les obligations et les défenses partagées qui tiennent à l'échelle de toute une économie.
 
 ## Références
 

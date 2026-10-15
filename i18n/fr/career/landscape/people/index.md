@@ -1,24 +1,27 @@
 ---
-title: "Les personnes en cybersécurité : leaders d'opinion et communautés professionnelles"
-description: "Un aperçu des personnes influentes et des communautés qui façonnent la profession de la cybersécurité."
+title: "Les acteurs de la cybersécurité : leaders d'opinion et communautés professionnelles"
+description: "Un aperçu des individus et des communautés qui façonnent le métier de la cybersécurité et des sources de leur influence."
 keywords:
-  - personnes en cybersécurité
+  - acteurs de la cybersécurité
   - leaders d'opinion en sécurité
   - communautés professionnelles
-  - personnalités influentes du secteur
+  - influenceurs du secteur
   - chercheurs en sécurité
   - écosystème de la cybersécurité
 ---
 
-# Personnes
+# Les acteurs
 
-Le domaine de la cybersécurité est façonné par les personnes qui y mènent des recherches, construisent, défendent, enseignent et s'organisent. Comprendre ce paysage humain aide un professionnel à savoir quels travaux suivre, quelles communautés rejoindre et d'où proviennent les idées influentes. Les personnes, plus que n'importe quel outil ou éditeur, déterminent la façon dont la discipline évolue.
+La cybersécurité est façonnée par les personnes qui la recherchent, la construisent, la défendent, l'enseignent et l'organisent. Plus que n'importe quel outil ou fournisseur, ce sont les individus et les groupes qu'ils forment qui fixent le cap de la façon dont les défenseurs pensent, et c'est à travers eux que circulent la réputation et le savoir. Savoir quels travaux suivre et quelles **communautés** rejoindre permet à un professionnel de garder le cap au milieu d'un changement constant.
 
-Cela importe pour une carrière en sécurité car la réputation et le savoir circulent par les individus et les groupes. Les leaders d'opinion, qu'il s'agisse de chercheurs publiant de nouvelles découvertes, de praticiens partageant des enseignements opérationnels ou de pédagogues rendant accessibles des sujets complexes, fixent une grande partie de l'agenda sur la façon dont les défenseurs abordent les problèmes. Suivre des voix crédibles permet à un professionnel de garder le cap au milieu d'un changement constant.
+L'influence vient de nombreux horizons : chercheurs universitaires, intervenants en réponse à incident, mainteneurs de logiciels libres, contributeurs aux normes et auteurs qui expliquent clairement le domaine. Aucune liste unique ne les recense tous, et les positions évoluent à mesure que de nouveaux travaux retiennent l'attention, si bien que la qualité et l'intégrité d'une contribution comptent davantage que la seule visibilité.
 
-Les personnalités influentes viennent de nombreux horizons : chercheurs universitaires, intervenants en réponse à incident, mainteneurs de projets open source, contributeurs aux normes et auteurs qui expliquent le domaine avec clarté. Aucune liste unique ne les recense, et l'influence se déplace avec le temps à mesure que de nouveaux travaux attirent l'attention. Évaluer les personnes à la qualité et à l'intégrité de leurs contributions importe davantage qu'à leur seule visibilité.
+## Dans cette section
 
-Les communautés professionnelles sont les lieux où ces personnes se rassemblent. Les circuits de conférences, les forums en ligne, les groupes d'intérêt spécialisés et les sections locales relient les praticiens entre organisations et régions. Participer à ces communautés, même en simple observateur au début, est l'un des moyens les plus directs d'apprendre qui mène des travaux significatifs et de prendre part à la conversation.
+- [Académie](academia.md) : les universités, les chercheurs et les lieux de publication évalués par les pairs qui produisent le savoir fondamental en sécurité.
+- [Communauté](community.md) : les événements, forums et projets de logiciels libres animés par des bénévoles, où les praticiens se rencontrent en dehors de tout employeur.
+- [Industrie](industry.md) : les praticiens commerciaux et les voix influentes au sein des fournisseurs, des sociétés de services et des entreprises.
+- [Secteur public](public.md) : les agences gouvernementales et les responsables qui définissent les politiques, défendent les infrastructures et publient des recommandations faisant autorité.
 
 ## Références
 

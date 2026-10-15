@@ -1,7 +1,7 @@
 ---
 title: Career
 seo_title: Cybersecurity Careers
-description: A thorough overview of diverse cybersecurity career paths, roles and responsibilities, essential skills, and the value of certifications and academic degrees.
+description: An overview of cybersecurity career paths covering professional profile, progression over time, and the surrounding industry landscape.
 keywords:
   - cybersecurity career
   - career paths
@@ -14,17 +14,10 @@ keywords:
 
 # Career
 
-A career in cybersecurity is a dynamic journey filled with opportunities for professionals at all levels. As the digital world expands, the demand for skilled cybersecurity experts grows accordingly presenting a vibrant, fast-paced job market. Whether you are just starting out or looking to advance, the cybersecurity field offers ample space for both personal and professional development.
+Cybersecurity is a broad, fast-moving field where demand for skilled practitioners keeps rising as organizations grow more dependent on digital systems. A **career** here can start from many backgrounds and branch in many directions, which makes it worth approaching deliberately rather than by accident. The Career pillar is organized around three questions: who you are as a professional, how you move forward, and what surrounds you.
 
-### Profile
+## In this section
 
-Understanding your profile is key to building a meaningful career in cybersecurity. The field offers a variety of functional areas where you can grow and thrive. As you gain experience, developing domain expertise and choosing a specialization will help shape your path. Each step forward brings new professional responsibilities and opportunities helping you navigate your journey and define where you want to go in this dynamic industry.
-
-### Journey
-
-Professional progression in cybersecurity is more than just a goal it's a journey of continuous growth. Navigating career steps in this ever-evolving field requires a mix of technical expertise, strategic thinking, and a proactive mindset. By building professional networks and engaging with a vibrant community, individuals open doors to mentorship, collaboration, and new opportunities. Whether you're entering the industry or aiming to specialize further, advancing in the field means staying adaptable, informed, and connected positioning yourself for long-term success.
-
-### Landscape
-
-The cybersecurity landscape is made up of many different players and sectors. Understanding the ecosystem overview helps you see how everything fits together. There are key influential stakeholders like government bodies, private companies, and tech experts who all play a role in shaping the industry. The organizational landscape includes both public and private sectors, each with its own priorities and challenges, but both are essential for creating a safe and secure digital world.
-
+- [Profile](profile/index.md): who you are professionally, covering **roles**, **career paths**, **certifications**, and the **skills** you bring.
+- [Journey](journey/index.md): how practitioners progress over time through **continuous learning**, **professional networks**, and an active **community**.
+- [Landscape](landscape/index.md): the **ecosystem** of stakeholders and sectors, across public and private organizations, that shapes the industry.

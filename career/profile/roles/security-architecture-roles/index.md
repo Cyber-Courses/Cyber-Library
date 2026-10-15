@@ -1,6 +1,6 @@
 ---
 title: "Security Architecture Roles: Careers in Designing Secure Systems"
-description: "An overview of the professional roles that design security into systems, platforms, and enterprise environments so that protection is built in rather than added later."
+description: "An overview of the professional roles that design security into systems, platforms, and enterprise environments so protection is built in rather than added later."
 keywords:
   - security architecture roles
   - security architect
@@ -12,15 +12,22 @@ keywords:
 
 # Security Architecture Roles
 
-Security architecture roles share a common aim: to shape how systems, platforms, and organizations are built so that security is a designed property rather than an afterthought. Practitioners in this area translate business goals, risk appetite, and regulatory obligations into technical structures, standards, and controls that other teams can implement and operate. Their work sits upstream of much hands-on security activity, influencing decisions while they are still inexpensive to change.
+Security architecture roles share one aim: to shape how systems, platforms, and organizations are built so security is a **designed property** rather than an afterthought. Practitioners translate business goals, risk appetite, and regulatory obligations into technical structures, standards, and controls that other teams implement and operate. Their work sits upstream of much hands-on security activity, influencing decisions while they are still inexpensive to change.
 
-Although these roles are related, they differ in scope, altitude, and the horizon over which they work. Some operate at the level of the whole organization and its long-term strategy, while others concentrate on a single technology domain or a specific solution being delivered. The pages beneath this section describe each role in turn, including its typical responsibilities, the knowledge it draws on, and how it connects to engineering, operations, and governance.
+## What these roles share
 
-The [Security Architect](security-architect.md) defines the controls, patterns, and reference designs that keep systems resilient, balancing protection against usability and cost. The [Enterprise Security Architect](enterprise-security-architect.md) works at the broadest level, aligning security strategy, standards, and investment across the organization and its programs. The [Domain Security Architect](domain-security-architect.md) applies this discipline within a particular area, such as cloud, network, identity, or data, developing deep expertise in the risks and safeguards specific to that domain.
+- A design-first posture: deciding how controls fit together before systems are built.
+- Translation of business risk into concrete patterns, standards, and reference designs.
+- Influence over teams they rarely manage, which puts a premium on clear communication.
+- Fluid boundaries, so many practitioners move between engineering and architecture over a career.
 
-Two further roles sit closer to delivery and implementation. The [Security Engineer](security-engineer.md) builds, configures, and maintains the controls and tooling that architecture calls for, turning designs into working, operable systems. The [Solutions Architect](solutions-architect-security.md) specializing in security embeds sound design into individual projects and products, ensuring that each solution meets the organization's requirements as it is delivered.
+## Roles
 
-Careers in this area rarely follow a single track. Many practitioners move between engineering and architecture over time, and the boundaries between these titles vary considerably from one organization to another. Reading the individual pages alongside this overview helps a professional see where their interests fit and how these roles reinforce one another and the wider security program.
+- [Security Architect](security-architect.md): defines the controls, patterns, and reference designs that keep systems resilient, balancing protection against usability and cost.
+- [Enterprise Security Architect](enterprise-security-architect.md): works at the broadest level, aligning security strategy, standards, and investment across the organization and its programs.
+- [Domain Security Architect](domain-security-architect.md): applies the discipline within one area such as cloud, network, identity, or data, with deep expertise in that domain's risks and safeguards.
+- [Security Engineer](security-engineer.md): builds, configures, and maintains the controls and tooling that architecture calls for, turning designs into operable systems.
+- [Solutions Architect - Security](solutions-architect-security.md): embeds sound design into an individual project or product so each solution meets the organization's requirements as it is delivered.
 
 ## References
 

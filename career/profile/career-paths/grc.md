@@ -12,18 +12,31 @@ keywords:
 
 # GRC
 
-GRC stands for governance, risk, and compliance, and as a career path it is the discipline that gives a security program its structure, its priorities, and its accountability. Governance sets the policies, standards, and decision rights that define how an organization expects security to be managed. Risk is the practice of identifying what could go wrong, judging how likely and how damaging it would be, and helping leaders decide what to treat, accept, or transfer. Compliance is the work of meeting obligations that come from regulations, contracts, and recognized frameworks, and of being able to demonstrate that the organization is meeting them. Where many security roles defend systems directly, GRC shapes the environment in which that defense happens.
+**GRC** stands for **governance, risk, and compliance**, the discipline that gives a security program its structure, priorities, and accountability. **Governance** sets the policies, standards, and decision rights that define how security is managed. **Risk** is the practice of identifying what could go wrong, judging how likely and damaging it would be, and helping leaders decide what to treat, accept, or transfer. **Compliance** is the work of meeting obligations from regulations, contracts, and frameworks, and being able to demonstrate it. Where many roles defend systems directly, GRC shapes the environment in which that defense happens.
 
-Day to day, a GRC practitioner writes and maintains security policies, maps the organization's controls to frameworks such as ISO 27001, the NIST Cybersecurity Framework, or SOC 2, and keeps a risk register that reflects the current state of the business. Much of the work is conducted through conversations: interviewing control owners, gathering evidence for an audit, chasing remediation of findings, and translating technical weaknesses into business risk that an executive can weigh. A GRC analyst often coordinates external audits and assessments, reviews the security posture of third-party vendors, and prepares the reporting that boards and regulators expect. The output is rarely a fix applied to a server; it is a decision made, a gap documented, or an obligation satisfied.
+## Roles on this path
 
-The role calls for a particular mix of background and skill. A working knowledge of security controls and common technologies matters, because a practitioner must understand what a control does before judging whether it is adequate, but the defining strengths are analytical and communicative. Careful writing, attention to detail, comfort with frameworks and regulatory language, and the patience to build consensus across departments are central. Good judgment about proportion is essential as well, since the purpose of risk work is to focus effort where it reduces real exposure rather than to pursue compliance for its own sake. Project management ability helps, because audits and assessments run on fixed timelines with many contributors.
+- [Risk Analyst](../roles/grc-roles/risk-analyst.md): identifies, assesses, and prioritizes information security risks so an organization can decide where to invest its defenses.
+- [Compliance Analyst](../roles/grc-roles/compliance-analyst.md): maps controls to regulations, standards, and contracts, then gathers the evidence that proves adherence.
+- [Policy Analyst](../roles/grc-roles/policy-analyst.md): drafts, maintains, and interprets the security policies and standards that turn requirements into clear, enforceable expectations.
+- [Security Auditor](../roles/grc-roles/security-auditor.md): independently examines controls against defined standards and reports on how well they are designed and operating.
+- [GRC Program Manager](../roles/grc-roles/grc-program-manager.md): builds and runs the program that connects governance, risk, and compliance activities into one coherent, measurable effort.
 
-People enter GRC from several directions. Some arrive from audit, legal, or compliance functions and learn the security side; others move from hands-on security operations or system administration and bring technical depth to the policy work; still others start in a junior GRC analyst role straight from study. Growth tends to move from analyst to senior analyst, then to roles such as risk manager, compliance manager, or GRC program lead, and from there toward program ownership or executive positions like chief information security officer, where governance and risk are a large part of the mandate. Relevant certifications often accompany this progression, with credentials such as CISA, CRISC, CISM, and the CISSP commonly recognized.
+## Skills and certifications
 
-GRC sits close to several neighboring specializations without duplicating them. It depends on security architecture to know which controls are feasible and sound, and it relies on domains like cloud security, IAM, and defensive security to implement and operate the controls that governance defines. It overlaps most with privacy and data protection, which applies similar governance and risk methods specifically to personal data and its legal regime. The distinction is one of focus: GRC takes the whole-program view of how security is directed, measured, and held to account, leaving the execution of technical defense to the specialists it coordinates with.
+- **Control literacy:** a working knowledge of security controls and common technologies, so a practitioner understands what a control does before judging whether it is adequate.
+- **Frameworks:** fluency mapping controls to **ISO 27001**, the [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework), and **SOC 2**.
+- **Writing and consensus:** careful writing, attention to detail, comfort with regulatory language, and the patience to build agreement across departments.
+- **Proportion and project management:** focusing effort where it reduces real exposure rather than pursuing compliance for its own sake, and running audits on fixed timelines with many contributors.
+- **Credentials:** [CISA, CRISC, and CISM](https://www.isaca.org/) along with the **CISSP** are commonly recognized.
+
+## How to progress
+
+People enter from several directions: some from audit, legal, or compliance functions who learn the security side; others from hands-on security operations or system administration who bring technical depth to policy work; still others from study straight into a junior analyst role. Growth runs from analyst to senior analyst, then to roles such as risk manager, compliance manager, or GRC program lead, and from there toward program ownership or executive positions like chief information security officer. GRC depends on security architecture to know which controls are feasible, relies on cloud security, IAM, and defensive security to operate the controls it defines, and overlaps most with privacy and data protection, which applies similar methods specifically to personal data.
 
 ## References
 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [ISACA, Certified in Risk and Information Systems Control (CRISC) and Certified Information Systems Auditor (CISA)](https://www.isaca.org/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
+</content>

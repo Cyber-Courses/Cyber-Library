@@ -1,6 +1,6 @@
 ---
 title: "Application Security Engineer: Building Security Into Software"
-description: "A role that embeds security into how software is designed, built, and shipped, helping development teams prevent and remediate vulnerabilities throughout the delivery lifecycle."
+description: "A role that embeds security into how software is designed, built, and shipped so development teams can prevent and remediate vulnerabilities across the delivery lifecycle."
 keywords:
   - application security engineer
   - secure software development
@@ -12,13 +12,38 @@ keywords:
 
 # Application Security Engineer
 
-An application security engineer is a security professional who works to ensure that software is designed, built, and released with security as a built-in property rather than an afterthought. The role sits between development teams and the broader security organization, translating security requirements into practical guidance that engineers can apply and helping those teams find and fix weaknesses before software reaches production. Where a penetration tester assesses a finished system from the outside, an application security engineer is engaged throughout the software development lifecycle, shaping how an application is constructed in the first place.
+An **application security engineer** makes security a built-in property of software rather than a check applied at the end. The role sits between development teams and the broader security organization, turning security requirements into guidance engineers can act on. Unlike a penetration tester who assesses a finished system from the outside, an application security engineer is engaged throughout the **software development lifecycle**, shaping how an application is constructed in the first place.
 
-Day to day, the work spans several recurring activities. An application security engineer reviews designs and conducts threat modeling to anticipate how a feature could be abused, examines code and findings to confirm which issues are genuine and material, and selects, tunes, and operates the automated testing that runs alongside the build pipeline, including static analysis, dependency scanning, and dynamic testing. A large part of the job is triage and prioritization: distinguishing noise from real risk, explaining the practical impact of a vulnerability, and working with developers to confirm that fixes are correct and durable. The engineer also maintains the standards, libraries, and secure defaults that make the safe path the easy path for the teams they support.
+## Responsibilities
 
-The role calls for a blend of software and security knowledge that is hard to fake. A solid grounding in how modern applications are built, including web frameworks, APIs, authentication and authorization, data handling, and cloud services, lets the engineer reason about where things go wrong and whether a proposed fix actually holds. On top of that sits familiarity with common vulnerability classes, secure design principles, and widely used references such as the OWASP catalog. Just as important are the professional qualities that make the technical work land: clear writing, patience in explaining risk to engineers who do not specialize in security, and the judgment to weigh a finding against the cost and feasibility of remediation.
+- Review designs and run **threat modeling** to anticipate how a feature could be abused before it is built.
+- Examine code and scan findings to confirm which issues are genuine, material risks.
+- Select, tune, and operate automated testing alongside the build pipeline, including **static analysis**, dependency scanning, and dynamic testing.
+- Triage and prioritize: separate noise from real risk and explain the practical impact of a vulnerability.
+- Work with developers to confirm that fixes are correct and durable.
+- Maintain the standards, libraries, and secure defaults that make the safe path the easy path.
 
-People commonly enter application security from software engineering, bringing firsthand experience of how code is written and shipped, or from a security testing background, bringing an eye for how systems fail. Many build credibility by contributing secure code, studying vulnerability patterns, and practicing on deliberately vulnerable applications before taking on a dedicated appsec role. With experience, an engineer may grow into senior and principal positions that set direction for an organization's secure development program, specialize in areas such as cloud or API security, or move into leadership. The role shares a border with several neighbors: the secure code reviewer concentrates on close reading of source code, the product security engineer owns security across a specific product or its full stack, the DevSecOps engineer focuses on embedding security controls into automated delivery infrastructure, and the security champion is a developer within a team who carries security practices into everyday work. An application security engineer frequently collaborates with all of them while keeping the broad mandate of making the software itself more secure.
+## Skills and background
+
+- **Software foundations:** how modern applications are built, including web frameworks, APIs, authentication and authorization, data handling, and cloud services, so the engineer can reason about where things go wrong.
+- **Security knowledge:** familiarity with common vulnerability classes, secure design principles, and widely used references such as the OWASP catalog.
+- **Remediation judgment:** the ability to weigh a finding against the cost and feasibility of fixing it, and to confirm a proposed fix actually holds.
+- **Communication:** clear writing and patience in explaining risk to engineers who do not specialize in security.
+
+## Getting into the role
+
+Many engineers enter from software development, bringing firsthand experience of how code is written and shipped, while others arrive from a security testing background with an eye for how systems fail. A common way to build credibility is to contribute secure code, study vulnerability patterns, and practice on deliberately vulnerable applications before taking on a dedicated appsec role.
+
+## Career progression
+
+With experience, an application security engineer can grow into senior and principal positions that set direction for an organization's secure development program, specialize in areas such as cloud or API security, or move into leadership. The role shares a border with the secure code reviewer, product security engineer, DevSecOps engineer, and security champion, and an application security engineer frequently collaborates with all of them while keeping the broad mandate of making the software itself more secure.
+
+## Related roles
+
+- [Secure Code Reviewer](secure-code-reviewer.md): concentrates on close reading of source code, where the application security engineer owns a wider testing and tooling program.
+- [Product Security Engineer](product-security-engineer.md): owns security across a specific product and its full stack rather than working across many teams.
+- [DevSecOps Engineer](devsecops-engineer.md): focuses on embedding security controls into automated delivery infrastructure.
+- [Security Champion](security-champion.md): a developer within a team who carries security practices into everyday work.
 
 ## References
 

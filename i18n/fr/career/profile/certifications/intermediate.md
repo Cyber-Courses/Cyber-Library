@@ -1,27 +1,42 @@
 ---
-title: "Intermédiaire : le palier de certification de mi-carrière"
-description: "Le palier de certifications en cybersécurité qui valide une compétence appliquée et propre à un rôle, entre les accréditations fondamentales et avancées."
+title: "Niveau intermédiaire : le niveau de certification de milieu de carrière"
+description: "Le niveau de certification qui valide une compétence appliquée et propre à un poste, entre les accréditations fondamentales et avancées."
 keywords:
   - certifications intermédiaires
-  - accréditations de mi-carrière
+  - accréditations de milieu de carrière
   - compétences de sécurité appliquées
   - cysa+
   - giac
   - sscp
 ---
 
-# Intermédiaire
+# Niveau intermédiaire
 
-Le palier intermédiaire regroupe les certifications qui se situent entre les accréditations fondamentales, de niveau débutant, et les accréditations avancées ou spécialisées obtenues plus tard dans une carrière. Là où une certification de niveau débutant confirme qu'une personne comprend les concepts et le vocabulaire de base, une certification intermédiaire vise à démontrer qu'un professionnel sait appliquer ces connaissances à un travail concret. Ces accréditations supposent généralement un ou deux ans d'expérience pratique, et beaucoup d'examens proposent des questions fondées sur des scénarios ou des tâches pratiques plutôt qu'une simple restitution. Le palier atteste d'une compétence dans un domaine de pratique défini, et pas seulement d'une familiarité avec celui-ci.
+Entre le niveau fondamental et les accréditations avancées ou spécialisées obtenues plus tard se situe le niveau intermédiaire. Là où une certification de niveau débutant confirme que quelqu'un comprend les concepts et le vocabulaire essentiels, une certification intermédiaire montre qu'un professionnel sait **appliquer** ces connaissances à un travail réel. Ces examens supposent généralement un à deux ans d'expérience pratique, et beaucoup présentent des questions fondées sur des scénarios ou des tâches concrètes plutôt qu'une simple restitution.
 
-Plusieurs certifications bien connues y figurent couramment. Le CySA+ (Cybersecurity Analyst) et le PenTest+ de CompTIA s'adressent aux analystes et aux testeurs qui maîtrisent déjà les bases et doivent désormais démontrer une compétence opérationnelle. Le SSCP (Systems Security Certified Practitioner) de (ISC)2 concerne les personnes chargées de la mise en œuvre, qui administrent les contrôles de sécurité au quotidien. De nombreuses certifications GIAC du SANS Institute, telles que la GCIH (Certified Incident Handler) ou la GSEC (Security Essentials), occupent elles aussi ce terrain intermédiaire, tout comme le Certified Ethical Hacker de l'EC-Council. Il s'agit d'exemples représentatifs plutôt que d'une liste fixe ou d'un ordre imposé, et la frontière entre les paliers reste informelle ; une accréditation qu'un employeur considère comme intermédiaire, un autre peut la voir comme un point de départ.
+## Ce qui change à ce niveau
 
-Ce que ces certifications signalent aux employeurs, c'est que leur titulaire peut se voir confier des tâches substantielles, souvent sans supervision, au sein d'une spécialité : trier des alertes, mener une évaluation dont le périmètre est défini, répondre à un incident courant ou maintenir un ensemble de contrôles. Elles tendent à correspondre à des fonctions professionnelles précises, ce qui en fait un repère commode lors du recrutement et dans la définition des exigences d'un rôle. Elles ne revendiquent pas l'étendue de jugement ni la portée de leadership qu'affirment les accréditations de gestion avancées, et elles vont rarement aussi loin que les accréditations spécialisées dans un domaine unique et restreint.
+Le signal passe de la connaissance à une **compétence démontrée** dans un domaine de pratique défini. La frontière entre les niveaux reste toutefois informelle : une accréditation qu'un employeur considère comme intermédiaire, un autre peut la voir comme un point de départ. Ce niveau décrit ce qu'une personne sait faire, et pas seulement ce qu'elle sait.
 
-Le palier intermédiaire convient aux praticiens qui ont dépassé leur premier poste et souhaitent formaliser les compétences qu'ils utilisent en pratique, ainsi qu'aux personnes qui arrivent à la sécurité depuis un domaine technique adjacent, comme l'administration de systèmes ou de réseaux, qui apportent une expérience pertinente et veulent une accréditation qui la reflète. Les professionnels abordent généralement ce palier après avoir bâti un socle, que ce soit par une certification de niveau débutant, un diplôme ou du temps passé sur le terrain, et ils s'en servent souvent pour ancrer un passage vers une spécialité définie. À partir de là, certains visent la profondeur d'une accréditation spécialisée tandis que d'autres s'orientent vers l'étendue et l'ancienneté que représentent les certifications avancées. Lu en parallèle des pages Niveau débutant, Avancé et Spécialisé, ce palier marque le moment où une certification commence à décrire ce qu'une personne sait faire plutôt que seulement ce qu'elle sait.
+## Accréditations couramment placées ici
+
+- **CompTIA CySA+ (Cybersecurity Analyst)** et **PenTest+** s'adressent aux analystes et aux testeurs qui maîtrisent les bases et doivent désormais démontrer une compétence opérationnelle.
+- La **(ISC)2 SSCP (Systems Security Certified Practitioner)** s'adresse aux personnes qui mettent en œuvre et administrent les contrôles de sécurité au quotidien.
+- De nombreuses certifications **GIAC** du SANS Institute, telles que **GCIH (Certified Incident Handler)** ou **GSEC (Security Essentials)**, occupent cet espace intermédiaire.
+- L'**EC-Council Certified Ethical Hacker** se situe également ici.
+
+Ce sont des exemples représentatifs plutôt qu'une liste figée ou un ordre obligatoire.
+
+## Ce qu'elle signale aux employeurs
+
+Une accréditation intermédiaire indique à un employeur que son titulaire peut se voir confier des tâches substantielles, souvent sans supervision, au sein d'une spécialité : trier des alertes, mener une évaluation délimitée, répondre à un incident courant ou maintenir un ensemble de contrôles. Ces certifications tendent à correspondre à des fonctions précises, ce qui en fait un repère utile dans le recrutement et dans la définition des exigences d'un poste. Elles ne revendiquent pas l'étendue de jugement qu'affirment les accréditations de management avancées, et elles vont rarement aussi loin que les accréditations spécialisées dans un unique domaine étroit.
+
+## Qui la vise
+
+Ce niveau convient aux praticiens qui ont dépassé leur premier poste et veulent formaliser les compétences qu'ils utilisent en pratique, ainsi qu'aux personnes qui entrent dans la sécurité depuis un domaine technique voisin, tel que l'administration systèmes ou réseau, et qui apportent une expérience pertinente. Les professionnels y parviennent généralement après avoir bâti un socle grâce à une certification de niveau débutant, un diplôme ou du temps sur le terrain, et s'en servent souvent pour ancrer un passage vers une spécialité définie. À partir de là, certains visent la profondeur d'une accréditation spécialisée tandis que d'autres progressent vers la séniorité que représentent les certifications avancées.
 
 ## Références
 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
-- [CompTIA, Certification Resources](https://www.comptia.org/)
-- [SANS Institute, GIAC Certifications](https://www.giac.org/)
+- [CompTIA, ressources de certification](https://www.comptia.org/)
+- [SANS Institute, certifications GIAC](https://www.giac.org/)

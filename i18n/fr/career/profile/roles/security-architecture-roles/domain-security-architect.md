@@ -1,6 +1,6 @@
 ---
-title: "Architecte sécurité de domaine : architecture de sécurité au sein d'un domaine défini"
-description: Un architecte sécurité responsable de l'architecture et des contrôles d'un domaine métier, technologique ou fonctionnel spécifique au sein d'un programme de sécurité plus large.
+title: "Architecte sécurité de domaine : l'architecture de sécurité au sein d'un domaine défini"
+description: Un architecte sécurité qui prend en charge l'architecture et les contrôles d'un domaine métier, technologique ou fonctionnel précis au sein d'un programme de sécurité plus vaste.
 keywords:
   - architecte sécurité de domaine
   - architecture de sécurité
@@ -12,15 +12,38 @@ keywords:
 
 # Architecte sécurité de domaine
 
-Un architecte sécurité de domaine est un professionnel de l'architecture de sécurité responsable de la conception, des standards et de la posture de contrôle d'un périmètre défini de l'organisation plutôt que de l'entreprise dans son ensemble. Un domaine peut être organisé autour d'un champ technologique tel que le cloud, l'identité, le réseau ou les données, autour d'une fonction métier telle que les paiements ou la production industrielle, ou encore autour d'une ligne de produits ou d'une plateforme. Dans ces limites, l'architecte traduit la stratégie de sécurité de l'entreprise en architectures de référence, modèles de conception et exigences de contrôle concrets sur lesquels les équipes d'ingénierie et de livraison peuvent s'appuyer. Ce rôle existe parce que les programmes de grande ampleur ne peuvent pas être couverts avec suffisamment de profondeur par des généralistes seuls ; c'est la maîtrise approfondie d'un domaine qui maintient les décisions d'architecture justes et défendables à mesure que les systèmes se spécialisent.
+Un architecte sécurité de domaine prend en charge la conception, les normes et la posture de contrôle pour **une tranche définie** d'une organisation plutôt que pour l'entreprise dans son ensemble. Cette tranche peut être un domaine technologique comme le cloud, l'identité, le réseau ou les données, une fonction métier comme les paiements ou la production, ou encore une seule gamme de produits ou plateforme. Le rôle existe parce que les grands programmes ne peuvent pas être couverts avec suffisamment de profondeur par les seuls généralistes : la **profondeur de domaine** est ce qui garde les décisions d'architecture justes et défendables à mesure que les systèmes se spécialisent.
 
-Au quotidien, le travail combine conception, revue et conseil. Un architecte sécurité de domaine produit et maintient les architectures de référence et les modèles de sécurité du domaine, définit les exigences de contrôle que les projets doivent satisfaire, et examine les conceptions proposées pour vérifier leur alignement avec la politique de sécurité, les obligations réglementaires et l'appétence au risque de l'organisation. Il collabore étroitement avec les équipes d'ingénierie, les responsables produit et les fonctions risque et conformité, agissant souvent comme autorité d'approbation ou comme réviseur clé au sein d'un comité d'architecture pour tout ce qui touche à son domaine. Une grande partie de la valeur réside dans l'explicitation des arbitrages : mettre en balance le coût et la friction d'un contrôle avec le risque qu'il réduit, et documenter la justification afin que les décisions restent compréhensibles par la suite. Le rôle relève davantage du conseil et de l'établissement de standards que de la mise en oeuvre opérationnelle, même si la crédibilité dépend d'une bonne compréhension de la façon dont les systèmes du domaine sont réellement construits et exploités.
+## Responsabilités
 
-Le poste exige une véritable expertise dans au moins un domaine, associée à des bases solides en fondamentaux de sécurité tels que la modélisation des menaces, la cryptographie, la gestion des identités et des accès, la conception de réseaux sécurisés et les cadres de conformité pertinents. Un architecte sécurité de domaine doit être capable de lire et de critiquer des conceptions techniques, de communiquer clairement aussi bien avec les ingénieurs qu'avec les parties prenantes métier, et de raisonner sur le risque en termes métier. De solides compétences en communication écrite sont importantes, car les architectures de référence et les standards sont des livrables durables sur lesquels d'autres s'appuient sans que leur auteur soit présent. Parmi les certifications courantes dans ce domaine figurent la CISSP et sa concentration axée sur l'architecture, l'ISSAP, la SABSA pour la méthode d'architecture d'entreprise et de domaine, la TOGAF pour une pratique d'architecture plus large, ainsi que des certifications propres à un domaine telles que les spécialisations en sécurité des fournisseurs cloud pour un domaine cloud.
+- Produire et maintenir des **architectures de référence** et des motifs de sécurité pour le domaine.
+- Définir les exigences de contrôle que les projets du domaine doivent satisfaire.
+- Examiner les conceptions proposées pour s'assurer de leur alignement avec la politique, les obligations réglementaires et l'appétence au risque de l'organisation.
+- Faire office d'autorité d'approbation ou de relecteur clé au sein d'un comité de revue d'architecture pour tout ce qui touche au domaine.
+- S'associer avec les équipes d'ingénierie, les responsables produit et les fonctions de risque et de conformité.
+- Rendre les arbitrages explicites, en pesant le coût et la friction d'un contrôle par rapport au risque qu'il réduit, et en documentant la justification pour que les décisions restent claires par la suite.
 
-La plupart des professionnels accèdent à ce rôle après plusieurs années passées à un poste d'ingénierie de sécurité, d'infrastructure ou de sécurité applicative, où ils ont acquis l'expertise pratique que le titre présuppose. Un parcours courant mène de l'ingénieur à l'ingénieur senior puis à l'architecte de domaine, la transition se marquant par le passage de la construction et de l'exploitation des contrôles à la définition de la façon dont ils devraient être construits à travers de nombreuses équipes. À partir de là, les architectes élargissent souvent leur périmètre vers le rôle d'architecte sécurité d'entreprise, qui assure la coordination entre les domaines et fixe l'orientation à l'échelle du programme, ou approfondissent davantage leur domaine selon une filière de spécialiste principal ou distingué. Certains s'orientent vers des fonctions de direction de la sécurité une fois qu'ils ont démontré leur capacité à aligner l'architecture sur la stratégie de l'organisation.
+## Compétences et profil
 
-L'architecte sécurité de domaine se situe entre le vaste et l'opérationnel parmi les rôles voisins. Comparé à l'architecte sécurité et à l'architecte sécurité d'entreprise, l'architecte de domaine est délibérément plus restreint et plus approfondi, responsable d'un seul champ plutôt que de l'ensemble du parc. Comparé à un ingénieur sécurité, qui met en oeuvre, exploite et ajuste les contrôles, l'architecte de domaine définit l'état cible et les standards vers lesquels les ingénieurs construisent. Un architecte de solutions pour la sécurité se concentre généralement sur la définition d'un projet ou d'une solution client spécifique, tandis que l'architecte de domaine maintient les modèles et standards réutilisables dont héritent de nombreuses solutions de ce type. Ces rôles se chevauchent et collaborent en permanence, et dans les organisations plus petites une seule personne peut en couvrir plusieurs.
+- **Profondeur de domaine :** une véritable expertise dans au moins un domaine, car la crédibilité repose sur la compréhension de la manière dont les systèmes du domaine sont réellement construits et exploités.
+- **Fondamentaux de sécurité :** modélisation des menaces, cryptographie, gestion des identités et des accès, conception de réseaux sécurisés et cadres de conformité pertinents.
+- **Communication :** de solides compétences rédactionnelles, car les architectures de référence et les normes sont des artefacts durables sur lesquels d'autres s'appuient sans la présence de l'auteur, ainsi que la capacité de raisonner sur le risque en termes métier.
+- **Certifications :** CISSP et sa concentration en architecture ISSAP, SABSA pour la méthode d'entreprise et de domaine, TOGAF pour une pratique d'architecture plus large, et des certifications spécifiques au domaine comme les spécialités de sécurité des fournisseurs cloud.
+
+## Accéder au poste
+
+La plupart des gens y parviennent après plusieurs années dans un poste d'ingénierie de sécurité, d'infrastructure ou de sécurité applicative, où ils ont acquis la profondeur pratique que le titre suppose. Un parcours courant va d'ingénieur à ingénieur senior puis à architecte de domaine, la transition étant marquée par un passage de la construction et de l'exploitation des contrôles à la définition de la manière dont ils devraient être construits à travers de nombreuses équipes.
+
+## Évolution de carrière
+
+À partir de là, les architectes élargissent souvent leur champ vers le rôle d'architecte d'entreprise, qui coordonne les domaines et fixe l'orientation à l'échelle du programme, ou approfondissent davantage vers une filière de spécialiste principal ou distingué au sein de leur domaine. Certains s'orientent vers un poste de direction de la sécurité une fois qu'ils ont démontré leur capacité à aligner l'architecture sur la stratégie organisationnelle.
+
+## Rôles associés
+
+- [Architecte sécurité d'entreprise](enterprise-security-architect.md) : coordonne les domaines et fixe la stratégie que ce rôle applique localement.
+- [Architecte sécurité](security-architect.md) : travaille sur l'ensemble du parc plutôt que de prendre en charge un seul domaine en profondeur.
+- [Ingénieur sécurité](security-engineer.md) : met en œuvre, exploite et ajuste les contrôles que l'architecte de domaine définit.
+- [Solutions Architect - Security](solutions-architect-security.md) : façonne une solution particulière qui hérite des motifs réutilisables du domaine.
 
 ## Références
 
