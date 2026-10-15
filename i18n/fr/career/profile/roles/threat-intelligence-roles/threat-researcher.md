@@ -42,7 +42,7 @@ La croissance tend à évoluer vers une spécialisation plus poussée, comme dev
 - [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : contextualise les conclusions techniques d'un chercheur en suivi d'acteurs.
 - [Analyste stratégique des menaces](strategic-threat-analyst.md) : intègre ces conclusions dans des évaluations de plus haut niveau destinées à la direction.
 - [Analyste du dark web](dark-web-analyst.md) : surveille les sources clandestines plutôt que de disséquer des artefacts.
-- [CTI Manager](cti-manager.md) : dirige le programme de renseignement que la recherche alimente.
+- [Responsable CTI](cti-manager.md) : dirige le programme de renseignement que la recherche alimente.
 
 ## Références
 

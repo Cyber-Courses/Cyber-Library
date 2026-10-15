@@ -40,7 +40,7 @@ La croissance mène vers la direction d'un programme de renseignement ou vers un
 
 ## Rôles associés
 
-- [CTI Manager](cti-manager.md) : dirige et contrôle le travail de l'analyste plutôt que de le produire lui-même.
+- [Responsable CTI](cti-manager.md) : dirige et contrôle le travail de l'analyste plutôt que de le produire lui-même.
 - [Chercheur en menaces](threat-researcher.md) : va plus en profondeur dans la substance technique des logiciels malveillants et des outils que l'analyste contextualise.
 - [Analyste du dark web](dark-web-analyst.md) : se concentre sur un domaine de collecte spécialisé que l'analyste exploite plus largement.
 - [Analyste stratégique des menaces](strategic-threat-analyst.md) : travaille sur un horizon plus long et à une altitude plus élevée que le suivi à court terme de l'analyste.

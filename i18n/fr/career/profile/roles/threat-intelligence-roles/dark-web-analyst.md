@@ -43,7 +43,7 @@ La progression peut mener vers des postes d'analyste senior, une spécialisation
 - [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : travaille sur un éventail de sources de collecte et de besoins plus large que ce domaine spécialisé.
 - [Chercheur en menaces](threat-researcher.md) : réalise l'étude plus approfondie des acteurs et des campagnes qu'alimentent les signaux clandestins de l'analyste.
 - [Analyste stratégique des menaces](strategic-threat-analyst.md) : cadre le risque pour la direction à partir d'une matière première comme celle-ci.
-- [CTI Manager](cti-manager.md) : dirige le programme et ses priorités de collecte.
+- [Responsable CTI](cti-manager.md) : dirige le programme et ses priorités de collecte.
 
 ## Références
 

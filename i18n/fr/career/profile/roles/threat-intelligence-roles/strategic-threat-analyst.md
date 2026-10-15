@@ -42,7 +42,7 @@ La croissance tend à évoluer de la contribution à des évaluations sous super
 - [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : travaille plus près du terrain sur les campagnes, les acteurs et les indicateurs qui éclairent la défense à court terme.
 - [Chercheur en menaces](threat-researcher.md) : va plus en profondeur dans la substance technique sur laquelle s'appuie l'évaluation stratégique.
 - [Analyste du dark web](dark-web-analyst.md) : surveille les communautés clandestines pour en tirer des signaux que la vision stratégique intègre.
-- [CTI Manager](cti-manager.md) : dirige la fonction de renseignement et ses équipes plutôt que de produire une analyse stratégique en tant que contributeur individuel.
+- [Responsable CTI](cti-manager.md) : dirige la fonction de renseignement et ses équipes plutôt que de produire une analyse stratégique en tant que contributeur individuel.
 
 ## Références
 

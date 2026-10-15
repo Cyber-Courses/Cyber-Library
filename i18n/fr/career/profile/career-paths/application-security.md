@@ -20,7 +20,7 @@ La **sécurité applicative**, généralement abrégée en **AppSec**, est la sp
 - [Ingénieur DevSecOps](../roles/application-security-roles/devsecops-engineer.md) : intègre les contrôles, les tests et les garde-fous directement dans les chaînes de livraison afin que les équipes livrent en toute sécurité et rapidement.
 - [Ingénieur en sécurité produit](../roles/application-security-roles/product-security-engineer.md) : intègre la sécurité dans la conception, le développement et l'exploitation des produits d'une entreprise et des plateformes sur lesquelles ils reposent.
 - [Relecteur de code sécurisé](../roles/application-security-roles/secure-code-reviewer.md) : examine le code source des applications pour détecter les faiblesses et orienter les développeurs vers des implémentations plus sûres avant la mise en production.
-- [Security Champion](../roles/application-security-roles/security-champion.md) : un développeur au sein d'une équipe produit qui promeut les pratiques sécurisées et fait le lien avec l'organisation centrale de sécurité.
+- [Champion de la sécurité](../roles/application-security-roles/security-champion.md) : un développeur au sein d'une équipe produit qui promeut les pratiques sécurisées et fait le lien avec l'organisation centrale de sécurité.
 
 ## Compétences et certifications
 

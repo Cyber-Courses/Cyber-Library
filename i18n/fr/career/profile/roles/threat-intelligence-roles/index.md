@@ -24,7 +24,7 @@ Bien que ces métiers soient liés, ils diffèrent par leur **portée**, leur **
 ## Rôles
 
 - [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : se situe au cœur de la pratique quotidienne, en collectant et en évaluant l'information, en enrichissant les alertes et les investigations, et en produisant des rapports opportuns pour les équipes opérationnelles.
-- [CTI Manager](cti-manager.md) : dirige une fonction de renseignement, en définissant les priorités de collecte, en fixant les besoins avec les parties prenantes et en veillant à ce que la production atteigne les bons publics sous une forme exploitable.
+- [Responsable CTI](cti-manager.md) : dirige une fonction de renseignement, en définissant les priorités de collecte, en fixant les besoins avec les parties prenantes et en veillant à ce que la production atteigne les bons publics sous une forme exploitable.
 - [Chercheur en menaces](threat-researcher.md) : travaille avec une plus grande profondeur technique, en analysant les logiciels malveillants, les outils et le comportement des acteurs afin de documenter les techniques et de reconnaître les menaces ultérieurement.
 - [Analyste du dark web](dark-web-analyst.md) : surveille les forums clandestins, les places de marché et les sites de fuites pour faire remonter les premiers signaux d'exposition, toujours dans le respect des limites légales et éthiques.
 - [Analyste stratégique des menaces](strategic-threat-analyst.md) : prend du recul par rapport aux incidents individuels pour relier les événements géopolitiques, les tendances sectorielles et les motivations des acteurs aux risques auxquels l'organisation est confrontée.

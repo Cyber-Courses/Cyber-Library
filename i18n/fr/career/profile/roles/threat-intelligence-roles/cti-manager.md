@@ -1,8 +1,8 @@
 ---
-title: "CTI Manager : responsable d'une fonction de renseignement sur les cybermenaces"
-description: "Un CTI Manager dirige une équipe de renseignement sur les cybermenaces, aligne la collecte et l'analyse sur le risque organisationnel et traduit la connaissance des menaces en décisions pour des publics techniques et dirigeants."
+title: "Responsable CTI : diriger une fonction de renseignement sur les cybermenaces"
+description: "Un responsable CTI dirige une équipe de renseignement sur les cybermenaces, aligne la collecte et l'analyse sur le risque organisationnel et traduit la connaissance des menaces en décisions pour des publics techniques et dirigeants."
 keywords:
-  - cti manager
+  - responsable cti
   - renseignement sur les menaces
   - leadership en sécurité
   - programme de renseignement
@@ -10,9 +10,9 @@ keywords:
   - paysage des menaces
 ---
 
-# CTI Manager
+# Responsable CTI
 
-Le **CTI Manager**, ou Cyber Threat Intelligence Manager, dirige la fonction chargée de comprendre les adversaires, les campagnes et les techniques qui menacent une organisation. Le poste se situe là où l'analyse rencontre le management : plutôt que de produire lui-même l'essentiel du renseignement, le manager définit l'orientation du programme, détermine ce que l'équipe collecte et pourquoi, et veille à ce que la connaissance qui en résulte parvienne aux personnes capables d'agir. Le renseignement sur les menaces ne crée de la valeur que lorsqu'il est priorisé, digne de confiance et relié aux décisions, et ce lien se fait rarement sans une personne responsable de l'ensemble de la chaîne, du besoin jusqu'à la livraison.
+Le **responsable CTI**, ou Cyber Threat Intelligence Manager, dirige la fonction chargée de comprendre les adversaires, les campagnes et les techniques qui menacent une organisation. Le poste se situe là où l'analyse rencontre le management : plutôt que de produire lui-même l'essentiel du renseignement, le manager définit l'orientation du programme, détermine ce que l'équipe collecte et pourquoi, et veille à ce que la connaissance qui en résulte parvienne aux personnes capables d'agir. Le renseignement sur les menaces ne crée de la valeur que lorsqu'il est priorisé, digne de confiance et relié aux décisions, et ce lien se fait rarement sans une personne responsable de l'ensemble de la chaîne, du besoin jusqu'à la livraison.
 
 ## Responsabilités
 
