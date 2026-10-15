@@ -1,43 +1,26 @@
 ---
-title: Profil
-description: Rôles, parcours, compétences et certifications dans les profils de cybersécurité.
+title: Profil professionnel en cybersécurité, rôles, parcours et compétences
+description: Un aperçu du profil professionnel en cybersécurité, couvrant les rôles, les parcours de carrière, les certifications et le développement des compétences.
 keywords:
-- rôles en matière de cybersécurité
-- cheminements de carrière
-- développement des compétences
-- certifications en cybersécurité
-- carrière en sécurité
-- rôles de débutant
-- rôles de niveau intermédiaire
-- postes de niveau supérieur
-- compétences techniques
-- parcours managériaux
+  - rôles en cybersécurité
+  - parcours de carrière en sécurité
+  - certifications en sécurité
+  - compétences en cybersécurité
+  - spécialisation en sécurité
 ---
 
 # Profil
 
-Comprendre votre profil en cybersécurité est essentiel : cela permet de situer où vous en êtes dans votre parcours et où vous souhaitez aller. Un profil combine vos compétences actuelles, votre expérience, vos centres d'intérêt et vos objectifs ; il sert de feuille de route pour aligner vos choix de carrière avec les rôles, certifications et opportunités de développement qui vous correspondent. En identifiant votre profil, technique, managérial ou hybride, vous pouvez décider de façon éclairée des parcours de formation, de l'acquisition de compétences et des postes qui valorisent au mieux vos forces et vos ambitions. Cette clarté favorise votre progression personnelle et augmente votre attractivité pour les employeurs qui recherchent des talents bien alignés dans un domaine complexe et en évolution rapide.
+Votre **profil** est votre identité de travail en sécurité : le rôle que vous occupez, le parcours que vous suivez, les titres que vous détenez et les compétences que vous apportez. Là où le Parcours suit le mouvement dans le temps et où le Paysage cartographie l'écosystème environnant, le Profil consiste à vous définir et à vous développer en tant que praticien afin que vos forces correspondent au travail que vous recherchez. Les sections ci-dessous présentent les éléments constitutifs du profil.
 
-## Parcours professionnels variés
+## Ce que vous trouverez
 
-La cybersécurité recouvre un large éventail de spécialisations, ce qui permet d'aligner votre parcours sur vos intérêts, vos compétences et vos ambitions. Les postes d'entrée peuvent porter sur des notions fondamentales : surveillance des systèmes, gestion d'incidents élémentaires, etc. Les fonctions plus avancées exigent souvent une expertise technique poussée, tests d'intrusion, ingénierie inverse, réponse à des incidents complexes, pour n'en citer que quelques exemples. En explorant ces voies, vous pouvez repérer les opportunités qui correspondent le mieux à vos aspirations.
+- [Rôles et domaines fonctionnels](roles/index.md) : les métiers distincts du domaine, des **opérations de sécurité** et de la **réponse aux incidents** aux **tests offensifs**, à la **gouvernance** et à l'**architecture**, chacun avec son travail quotidien et ses attentes propres.
+- [Parcours de carrière et filières de spécialisation](career-paths/index.md) : comment les rôles s'enchaînent dans le temps, comment un **socle généraliste** peut se ramifier en une expertise approfondie, et comment les personnes évoluent entre les directions **techniques** et de **leadership**.
+- [Certifications et accréditations](certifications/index.md) : les qualifications du secteur qui **valident les connaissances**, facilitent le filtrage à l'embauche et témoignent d'un engagement envers une spécialisation.
+- [Développement des compétences](skill-development/index.md) : les **aptitudes techniques** qui sous-tendent le travail et les **compétences humaines**, comme la communication et le jugement, qui déterminent jusqu'où ces aptitudes vous mènent.
 
-Pour un guide détaillé des parcours, consultez [Parcours de carrière en cybersécurité](career/profile/career_paths).
+## Références
 
-## Rôles et responsabilités
-
-À mesure que la cybersécurité se structure, les postes se spécialisent. Chaque rôle a des responsabilités et des exigences de compétences bien définies, ce qui facilite la planification de votre évolution. Comprendre ces responsabilités, de l'administration de la sécurité à l'analyse des menaces, aide à identifier les capacités à développer et les directions possibles.
-
-Pour plus de détails sur les rôles, voir [Rôles en cybersécurité](career/profile/roles).
-
-## Compétences
-
-Les compétences jouent un rôle central dans une carrière réussie en cybersécurité. Les compétences techniques sont indispensables pour exécuter efficacement les tâches de sécurité ; les compétences transversales le sont tout autant pour collaborer avec les collègues, dialoguer avec les parties prenantes et résoudre des problèmes complexes. En combinant les deux, vous vous positionnez comme un professionnel complet, capable de naviguer dans les défis variés du paysage de la cybersécurité.
-
-Pour approfondir le développement des compétences, voir [Développement des compétences en cybersécurité](career/profile/skill_development).
-
-## Certifications et diplômes
-
-Outre les compétences, les certifications et les diplômes universitaires sont des atouts qui peuvent renforcer vos perspectives de carrière. Les certifications attestent de votre expertise dans des domaines précis de la cybersécurité ; les diplômes offrent une compréhension plus large des concepts et principes fondateurs. En poursuivant des certifications et des cursus pertinents, vous démontrez votre engagement envers le développement professionnel et vous ouvrez de nouvelles opportunités.
-
-Pour plus de détails sur les certifications, voir [Certifications en cybersécurité](career/profile/certifications).
+- [NICE Workforce Framework for Cybersecurity](https://niccs.cisa.gov/workforce-development/nice-framework)
+- [NIST National Initiative for Cybersecurity Education](https://www.nist.gov/itl/applied-cybersecurity/nice)

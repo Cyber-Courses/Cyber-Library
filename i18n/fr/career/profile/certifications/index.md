@@ -2,8 +2,8 @@
 title: "Certifications en cybersécurité : accréditation, reconnaissance et validation"
 description: "Comment les certifications valident les connaissances et signalent une spécialisation tout au long d'une carrière en sécurité."
 keywords:
-  - certifications en cybersécurité
-  - titres de sécurité
+  - certifications cybersécurité
+  - accréditations de sécurité
   - reconnaissance du secteur
   - validation des compétences
   - certification professionnelle
@@ -12,15 +12,28 @@ keywords:
 
 # Certifications
 
-Les certifications sont des titres formels qui valident les connaissances d'un professionnel dans un domaine défini de la sécurité. Elles offrent un signal commun que les employeurs, les clients et les pairs peuvent reconnaître, et elles fournissent un moyen structuré de confirmer que quelqu'un a étudié un corpus de connaissances selon un standard connu. Dans un domaine comptant de nombreux praticiens autodidactes, les certifications aident à établir une base commune.
+Les certifications sont des accréditations formelles qui valident les connaissances d'un professionnel dans un domaine défini de la sécurité. Elles offrent aux employeurs, aux clients et aux pairs un signal commun, et elles proposent une manière structurée de confirmer que quelqu'un a étudié un ensemble de connaissances selon un standard reconnu. Dans un domaine qui compte de nombreux praticiens autodidactes, elles aident à établir un **socle** partagé, mais elles complètent l'expérience de terrain plutôt que de la remplacer.
 
-Au sein d'une carrière en sécurité, les certifications remplissent plusieurs fonctions. Elles peuvent aider un débutant à démontrer des connaissances fondamentales, aider un spécialiste à montrer sa profondeur dans un domaine particulier et, dans certains cas, satisfaire les exigences de postes ou de contrats spécifiques. Elles complètent plutôt qu'elles ne remplacent l'expérience de terrain, qui demeure la preuve la plus solide de la compétence.
+Au sein d'une carrière, les certifications remplissent plusieurs fonctions : elles aident un débutant à démontrer des connaissances fondamentales, aident un spécialiste à faire valoir sa profondeur dans un domaine, et satisfont parfois aux exigences de certains postes ou contrats. Cette section les organise en quatre niveaux afin que vous puissiez voir où se situe une accréditation donnée et ce qu'elle est censée prouver.
 
-Des exemples bien connus illustrent l'éventail. CompTIA Security+ est souvent utilisée comme titre généraliste d'entrée de gamme, l'Offensive Security Certified Professional (OSCP) se concentre sur les compétences offensives de terrain, et le Certified Information Systems Security Professional (CISSP) de (ISC)2 vise les praticiens expérimentés en couvrant l'étendue de la gestion et de la gouvernance. Ce sont des exemples, et non une séquence obligatoire, et le bon choix dépend des objectifs de chacun.
+## Dans cette section
 
-Choisir ses certifications fonctionne mieux lorsqu'elles sont rattachées à une orientation plutôt que collectionnées pour elles-mêmes. Il est utile d'observer quels titres apparaissent dans les offres d'emploi visées, de peser le temps et le coût impliqués et de les mettre en balance avec l'expérience pratique. Utilisées avec discernement, les certifications soutiennent une carrière ; elles ne se substituent pas à une réelle compétence.
+- [Niveau débutant](entry-level.md) : le niveau fondamental qui valide des connaissances de base larges pour les débutants, comme **CompTIA Security+**.
+- [Niveau intermédiaire](intermediate.md) : une compétence appliquée et propre à un poste pour les praticiens ayant dépassé leur premier emploi.
+- [Niveau avancé](advanced.md) : des accréditations de niveau senior qui signalent une maîtrise de la gouvernance ou une expertise technique approfondie, comme le **CISSP** de (ISC)2.
+- [Niveau spécialisé](specialized.md) : une profondeur dans un seul domaine, comme la sécurité du cloud, l'investigation numérique ou les tests offensifs avec l'**OSCP**.
+
+## Comment choisir
+
+Les certifications sont plus utiles lorsqu'elles sont liées à une orientation plutôt que collectionnées pour elles-mêmes. Quelques vérifications pratiques aident :
+
+- Observez quelles accréditations apparaissent réellement dans les offres d'emploi que vous visez.
+- Mettez en balance le temps et le coût de chaque examen avec ce qu'il prouvera.
+- Équilibrez une certification avec l'expérience pratique, qui demeure la preuve la plus solide de la capacité.
+
+Les exemples ci-dessus sont des illustrations, et non une séquence obligatoire. Le bon choix dépend de vos objectifs.
 
 ## Références
 
-- [CompTIA, Certification Resources](https://www.comptia.org/)
-- [(ISC)2, Certification and Credentialing](https://www.isc2.org/)
+- [CompTIA, ressources de certification](https://www.comptia.org/)
+- [(ISC)2, certification et accréditation](https://www.isc2.org/)

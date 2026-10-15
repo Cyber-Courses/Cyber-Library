@@ -1,31 +1,23 @@
 ---
 title: Carrière
-seo_title: Métiers de la cybersécurité
-description: 'Vue d'ensemble des parcours en cybersécurité : rôles et responsabilités,
-  compétences clés, et intérêt des certifications et des diplômes.'
+seo_title: Les carrières en cybersécurité
+description: Un aperçu des parcours de carrière en cybersécurité couvrant le profil professionnel, l'évolution dans le temps et le paysage sectoriel environnant.
 keywords:
-- carrière en cybersécurité
-- cheminements de carrière
-- rôles et responsabilités
-- compétences techniques et générales
-- attestations
-- diplômes universitaires
-- développement professionnel
+  - carrière en cybersécurité
+  - parcours de carrière
+  - rôles et responsabilités
+  - compétences techniques et humaines
+  - certifications
+  - diplômes universitaires
+  - développement professionnel
 ---
 
 # Carrière
 
-Une carrière en cybersécurité est un parcours dynamique, avec des opportunités pour des professionnels de tous niveaux. À mesure que le monde numérique s'étend, la demande d'experts qualifiés augmente, offrant un marché de l'emploi vivant et exigeant. Que vous débutiez ou cherchiez à progresser, le domaine laisse une large place au développement personnel et professionnel.
+La cybersécurité est un domaine vaste et en évolution rapide, où la demande de praticiens qualifiés ne cesse de croître à mesure que les organisations deviennent plus dépendantes des systèmes numériques. Une **carrière** dans ce domaine peut partir de nombreux horizons et se ramifier dans de nombreuses directions, ce qui justifie de l'aborder de manière réfléchie plutôt que par hasard. Le pilier Carrière s'organise autour de trois questions : qui vous êtes en tant que professionnel, comment vous progressez et ce qui vous entoure.
 
-### Profil
+## Dans cette section
 
-Comprendre votre profil est essentiel pour construire une carrière significative en cybersécurité. Le métier recouvre de nombreux domaines fonctionnels où vous pouvez évoluer et vous épanouir. Au fil de l'expérience, développer une expertise métier et choisir une spécialisation aide à tracer votre voie. Chaque étape apporte de nouvelles responsabilités et de nouvelles opportunités, et vous aide à orienter votre parcours dans une industrie en constante évolution.
-
-### Parcours
-
-La progression professionnelle en cybersécurité n'est pas qu'un objectif : c'est un parcours de croissance continue. Avancer dans ce domaine en mutation exige à la fois expertise technique, vision stratégique et état d'esprit proactif. En construisant un réseau professionnel et en s'impliquant dans une communauté active, on ouvre la porte au mentorat, à la collaboration et à de nouvelles opportunités. Que vous entriez dans le secteur ou visiez une spécialisation plus poussée, progresser signifie rester adaptable, informé et connecté, et se positionner pour une réussite durable.
-
-### Paysage
-
-L'écosystème de la cybersécurité rassemble de nombreux acteurs et secteurs. Comprendre cette vue d'ensemble aide à voir comment les pièces s'assemblent. Des parties prenantes influentes, administrations, entreprises privées, experts techniques, façonnent toutes l'industrie. Le paysage organisationnel couvre secteurs public et privé, chacun avec ses priorités et ses défis, mais les deux sont indispensables à un monde numérique sûr et résilient.
-
+- [Profil](profile/index.md) : qui vous êtes professionnellement, en couvrant les **rôles**, les **parcours de carrière**, les **certifications** et les **compétences** que vous apportez.
+- [Parcours](journey/index.md) : comment les praticiens progressent au fil du temps grâce à l'**apprentissage continu**, aux **réseaux professionnels** et à une **communauté** active.
+- [Paysage](landscape/index.md) : l'**écosystème** des parties prenantes et des secteurs, à travers les organisations publiques et privées, qui façonne l'industrie.

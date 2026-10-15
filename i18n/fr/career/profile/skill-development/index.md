@@ -1,24 +1,32 @@
 ---
-title: "Développement des compétences en cybersécurité : technique, relationnel et apprentissage continu"
-description: "Comment les professionnels de la sécurité développent leurs compétences techniques, leurs compétences relationnelles et leur expérience pratique au fil du temps."
+title: "Le développement des compétences en cybersécurité : technique, humain et apprentissage continu"
+description: "Comment les professionnels de la sécurité construisent leur maîtrise technique, leurs compétences humaines et leur expérience pratique tout au long d'une carrière."
 keywords:
   - développement des compétences en cybersécurité
   - maîtrise technique
-  - compétences relationnelles
+  - compétences humaines
   - apprentissage continu
   - expérience pratique
-  - développement professionnel
+  - évolution professionnelle
 ---
 
 # Développement des compétences
 
-Le développement des compétences est l'effort délibéré et continu pour acquérir et affiner les aptitudes qu'exige une carrière en sécurité. Parce que le domaine change sans cesse, les compétences ne sont jamais achevées. Traiter le développement comme une pratique continue plutôt que comme une étape ponctuelle est l'une des habitudes qui caractérisent les praticiens accomplis.
+Le développement des compétences est l'effort délibéré et continu visant à construire et à affiner les capacités qu'exige une carrière en sécurité. Parce que le domaine évolue sans cesse, le travail n'est jamais terminé : considérer la progression comme une **pratique continue** plutôt que comme une étape ponctuelle est l'une des habitudes qui caractérisent les praticiens accomplis. Les pages ci-dessous décomposent cette pratique en quatre domaines qui se renforcent mutuellement.
 
-La maîtrise technique en est le socle. Elle englobe la compréhension du fonctionnement des systèmes, des réseaux et des applications, de la manière dont ils défaillent et dont ils sont défendus. Acquérir cette profondeur demande de la pratique concrète : configurer des outils, analyser des données réelles et résoudre des problèmes jusqu'à ce que les concepts sous-jacents deviennent intuitifs plutôt que mémorisés.
+## Dans cette section
 
-Les compétences relationnelles pèsent davantage que les débutants ne l'imaginent souvent. Le travail en sécurité implique d'expliquer le risque à des non-spécialistes, de rédiger des rapports clairs, de collaborer entre équipes et de garder son calme pendant les incidents. La capacité à communiquer ses constats dans un langage simple distingue fréquemment celles et ceux qui progressent de celles et ceux qui restent cantonnés à des rôles étroitement techniques.
+- [Compétences techniques](technical-skills.md) : la connaissance appliquée de la manière dont les systèmes fonctionnent, échouent et sont défendus, des réseaux et des systèmes d'exploitation jusqu'au scripting et aux outils de sécurité.
+- [Compétences humaines](soft-skills.md) : les capacités de communication, de collaboration et de jugement qui transforment des constats techniques en actions à travers les équipes.
+- [Expérience pratique](hands-on-experience.md) : le travail concret, les laboratoires, les compétitions et les postes encadrés qui convertissent les connaissances en compétences démontrables.
+- [Apprentissage continu](continuous-learning.md) : l'habitude de renouveler ses connaissances et son jugement pour que l'expertise reste à jour à mesure que la technologie et les menaces évoluent.
 
-L'apprentissage continu et l'expérience pratique relient le tout. Lire la recherche récente, s'entraîner dans des laboratoires et des exercices, contribuer à des projets et réfléchir à son travail réel se cumulent avec le temps. Beaucoup de professionnels maintiennent un mélange d'apprentissage structuré et d'exploration autonome, et ils reviennent périodiquement aux fondamentaux. Une pratique régulière et honnête, plus que n'importe quel cours isolé, produit une compétence durable.
+## Comment ces domaines s'articulent
+
+- Les **compétences techniques** et les **compétences humaines** désignent ce qu'un professionnel sait faire à un instant donné.
+- L'**expérience pratique** est le lieu où ces compétences se construisent et se prouvent sur des systèmes réels.
+- L'**apprentissage continu** empêche ces trois domaines de vieillir et indique vers quelles nouvelles compétences se diriger ensuite.
+- Une pratique régulière et honnête, plus que n'importe quel cours ou certification isolé, produit une capacité durable.
 
 ## Références
 

@@ -1,10 +1,10 @@
 ---
-title: "Responsable CTI : dirigeant d'une fonction de renseignement sur les cybermenaces"
-description: Un responsable CTI dirige une équipe de renseignement sur les cybermenaces, aligne la collecte et l'analyse sur le risque de l'organisation et traduit la connaissance de la menace en décisions destinées aussi bien aux publics techniques qu'à la direction.
+title: "Responsable CTI : diriger une fonction de renseignement sur les cybermenaces"
+description: "Un responsable CTI dirige une équipe de renseignement sur les cybermenaces, aligne la collecte et l'analyse sur le risque organisationnel et traduit la connaissance des menaces en décisions pour des publics techniques et dirigeants."
 keywords:
   - responsable cti
   - renseignement sur les menaces
-  - leadership en securite
+  - leadership en sécurité
   - programme de renseignement
   - gestion des parties prenantes
   - paysage des menaces
@@ -12,15 +12,38 @@ keywords:
 
 # Responsable CTI
 
-Un responsable CTI, ou responsable du renseignement sur les cybermenaces, dirige la fonction chargée de comprendre les adversaires, les campagnes et les techniques qui menacent une organisation. Le rôle se situe au point où l'analyse rencontre le management. Plutôt que de produire lui-même l'essentiel du renseignement, le responsable définit l'orientation du programme, précise ce que l'équipe collecte et pourquoi, et veille à ce que les enseignements obtenus parviennent aux personnes capables d'agir. Ce poste est important car le renseignement sur les menaces n'a de valeur que lorsqu'il est priorisé, fiable et relié aux décisions, et ce lien se fait rarement sans quelqu'un de responsable de l'ensemble de la chaîne, du besoin jusqu'à la diffusion.
+Le **responsable CTI**, ou Cyber Threat Intelligence Manager, dirige la fonction chargée de comprendre les adversaires, les campagnes et les techniques qui menacent une organisation. Le poste se situe là où l'analyse rencontre le management : plutôt que de produire lui-même l'essentiel du renseignement, le manager définit l'orientation du programme, détermine ce que l'équipe collecte et pourquoi, et veille à ce que la connaissance qui en résulte parvienne aux personnes capables d'agir. Le renseignement sur les menaces ne crée de la valeur que lorsqu'il est priorisé, digne de confiance et relié aux décisions, et ce lien se fait rarement sans une personne responsable de l'ensemble de la chaîne, du besoin jusqu'à la livraison.
 
-Au quotidien, le travail mêle gestion de programme, contrôle de la qualité analytique et communication. Un responsable CTI définit les besoins prioritaires en renseignement avec des parties prenantes telles que le SOC, la réponse à incident, la gestion des vulnérabilités et la direction générale, puis organise la collecte et l'analyse de l'équipe en fonction de ces besoins. Il relit les produits finis pour en vérifier l'exactitude et la clarté, gère les relations avec les fournisseurs de renseignement et les communautés de partage d'information, et supervise les plateformes et les flux dont l'équipe dépend. Une grande partie du rôle consiste à informer les autres, d'une mise à jour tactique pour les défenseurs à une évaluation stratégique pour les dirigeants ou le conseil d'administration, et à adapter le message pour que chaque public comprenne ce qu'une menace donnée signifie pour lui. La gestion du budget, le recrutement, l'accompagnement des analystes et la mesure de l'impact réel du programme sur la réduction du risque complètent les responsabilités.
+## Responsabilités
 
-Le rôle exige une base solide en analyse de renseignement, associée au discernement nécessaire pour encadrer des personnes et représenter la fonction auprès de l'ensemble de l'entreprise. Les bons candidats maîtrisent le cycle du renseignement, les référentiels courants sur les adversaires comme MITRE ATT&CK, et la façon dont le renseignement tactique, opérationnel et stratégique diffère par sa finalité et son public. Les compétences plus relationnelles sont tout aussi importantes : écrire clairement, gérer des priorités concurrentes et s'adresser avec crédibilité aussi bien à des ingénieurs qu'à des dirigeants. Une connaissance pratique des opérations de sécurité, de la réponse à incident et de la posture de risque propre à l'organisation aide le responsable à garder le programme ancré dans les besoins de l'entreprise plutôt que dans une activité de menace intéressante mais sans pertinence.
+- Définir les **besoins prioritaires en renseignement** avec les parties prenantes telles que le centre des opérations de sécurité, la réponse aux incidents, la gestion des vulnérabilités et la direction.
+- Organiser la collecte et l'analyse de l'équipe en fonction de ces besoins.
+- Relire les produits finalisés pour en vérifier l'exactitude et la clarté avant leur diffusion.
+- Gérer les relations avec les fournisseurs de renseignement et les communautés de partage d'information, et superviser les plateformes et les flux dont dépend l'équipe.
+- Informer un éventail de publics, depuis une mise à jour tactique pour les défenseurs jusqu'à une évaluation stratégique pour les dirigeants ou le conseil d'administration, en adaptant le message à ce que la menace signifie pour chacun.
+- Gérer le budget, recruter, accompagner les analystes et mesurer si le programme réduit réellement le risque.
 
-La plupart des personnes accèdent à ce rôle après plusieurs années comme analyste du renseignement sur les menaces ou dans une discipline étroitement liée comme la réponse à incident ou les opérations de sécurité, où elles développent les réflexes analytiques et la connaissance du domaine dont dépend le poste. La progression passe généralement par la prise en charge d'un domaine de collecte, la conduite de projets et l'accompagnement progressif d'analystes plus juniors avant d'encadrer formellement une équipe. À partir du poste de responsable CTI, les trajectoires courantes incluent un rôle de direction au niveau d'une organisation plus large de renseignement ou de détection, une évolution vers la gestion globale d'un programme de sécurité, ou une voie spécialisée comme analyste principal ou conseiller pour les organisations qui privilégient une expertise pointue plutôt que le management d'équipe.
+## Compétences et profil
 
-Le responsable CTI se situe par rapport aux rôles voisins comme la personne qui dirige et intègre leur travail plutôt que de le dupliquer. Les analystes du renseignement sur les menaces et les analystes stratégiques de la menace produisent les évaluations tactiques et stratégiques que le responsable priorise et contrôle, les chercheurs en menaces apportent l'investigation technique approfondie sur les logiciels malveillants et l'outillage des adversaires, et les analystes du dark web contribuent par une collecte spécialisée issue de sources fermées et criminelles. La contribution distincte du responsable est l'orchestration et la responsabilité : décider ce sur quoi la fonction doit se concentrer, s'assurer que la production est solide et fournie en temps voulu, et faire en sorte que le renseignement change ce que l'organisation fait réellement pour se défendre.
+- **Socle en renseignement :** maîtrise du cycle du renseignement, des cadres de référence sur les adversaires tels que **MITRE ATT&CK**, et de la façon dont les renseignements tactique, opérationnel et stratégique diffèrent par leur finalité et leur public.
+- **Leadership :** gérer des priorités concurrentes et représenter la fonction auprès de l'ensemble de l'entreprise.
+- **Communication :** écrire clairement et s'exprimer de façon crédible auprès des ingénieurs comme des dirigeants.
+- **Contexte métier :** connaissance pratique des opérations de sécurité, de la réponse aux incidents et de la posture de risque propre à l'organisation, afin de maintenir le programme ancré dans les besoins de l'entreprise.
+
+## Accéder au poste
+
+La plupart des personnes accèdent à ce rôle après plusieurs années comme analyste du renseignement sur les menaces ou dans une discipline étroitement liée telle que la réponse aux incidents ou les opérations de sécurité, où elles développent les réflexes analytiques et la connaissance du domaine dont dépend le poste. La progression passe généralement par la prise en charge d'un domaine de collecte, la conduite de projets et l'accompagnement d'analystes plus juniors avant de gérer formellement une équipe.
+
+## Évolution de carrière
+
+Les trajectoires courantes à partir de là incluent un poste de direction supervisant une organisation de renseignement ou de détection plus large, une évolution vers la gestion globale d'un programme de sécurité, ou une voie spécialisée comme analyste principal ou conseiller pour les organisations qui privilégient l'expertise approfondie à l'encadrement d'équipe.
+
+## Rôles associés
+
+- [Analyste du renseignement sur les menaces](threat-intelligence-analyst.md) : produit les évaluations tactiques que le manager priorise et contrôle.
+- [Analyste stratégique des menaces](strategic-threat-analyst.md) : fournit les évaluations de long terme que le manager intègre pour la direction.
+- [Chercheur en menaces](threat-researcher.md) : apporte l'investigation technique approfondie des logiciels malveillants et des outils des adversaires.
+- [Analyste du dark web](dark-web-analyst.md) : contribue par une collecte spécialisée issue de sources fermées et criminelles.
 
 ## Références
 

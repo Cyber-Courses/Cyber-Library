@@ -1,6 +1,6 @@
 ---
 title: "Le mentorat en cybersécurité : trouver un accompagnement et fixer des objectifs à long terme"
-description: "Comment le mentorat soutient une carrière en sécurité grâce à l'accompagnement, à la définition d'objectifs et à un appui professionnel durable."
+description: "Comment le mentorat soutient une carrière en sécurité par l'accompagnement, la définition d'objectifs et un appui professionnel durable."
 keywords:
   - mentorat en cybersécurité
   - trouver un mentor
@@ -10,15 +10,22 @@ keywords:
   - développement de carrière en sécurité
 ---
 
-# Mentorat
+# Le mentorat
 
-Le mentorat est une relation dans laquelle un praticien plus expérimenté aide un praticien moins expérimenté à naviguer dans sa carrière. En cybersécurité, il offre quelque chose que les cours et les certifications ne peuvent apporter : un jugement contextuel tiré de situations réelles. Un bon mentor aide son mentoré à interpréter ses choix, à éviter les faux pas courants et à discerner une trajectoire dans un domaine qui peut sembler vaste et en évolution rapide.
+Le **mentorat** est une relation dans laquelle un praticien plus expérimenté aide un praticien moins expérimenté à orienter sa carrière. En cybersécurité, il offre quelque chose que les formations et les certifications ne peuvent pas apporter : un **jugement contextuel** issu de situations réelles, afin qu'un mentoré puisse interpréter ses choix, éviter les erreurs courantes et entrevoir un chemin dans un domaine vaste et en évolution rapide.
 
-Le mentorat compte tout au long d'une carrière en sécurité, car la discipline est large et les spécialisations nombreuses. Décider de s'orienter vers les opérations défensives, la gouvernance, l'architecture ou une autre voie est plus facile avec les conseils de quelqu'un qui a fait des choix similaires. Les mentors offrent aussi un retour honnête difficile à obtenir ailleurs.
+## Pourquoi c'est important en sécurité
 
-Trouver un mentor commence généralement par des relations qui se nouent déjà au travail, au sein de communautés ou par le réseautage. Plutôt que de demander à quelqu'un de s'engager formellement, beaucoup de relations de mentorat efficaces débutent par des questions précises et respectueuses et se développent naturellement lorsqu'il existe un intérêt mutuel. Certaines organisations et instances professionnelles mènent également des programmes de mentorat structurés.
+- La discipline est large et les spécialisations nombreuses ; choisir entre les opérations défensives, la gouvernance, l'architecture ou une autre voie est plus facile avec l'accompagnement de quelqu'un qui a fait des choix similaires.
+- Les mentors donnent un retour honnête sur les forces et les angles morts, un retour difficile à obtenir ailleurs.
+- Au fil d'une carrière, la plupart des praticiens finissent par devenir mentors à leur tour, entretenant le cycle qui transmet le savoir tacite et renforce la profession.
 
-L'accompagnement, la définition d'objectifs et l'appui à long terme constituent la substance de la relation. Un mentor peut aider son mentoré à fixer des objectifs réalistes, à repérer les compétences à développer et à suivre ses progrès dans le temps. La relation évolue souvent, et de nombreux praticiens finissent par devenir eux-mêmes mentors, perpétuant ainsi le cycle qui renforce la profession.
+## Dans cette section
+
+- [Trouver et choisir un mentor](finding-and-selecting-a-mentor.md) : comment identifier le bon guide et ouvrir la relation par une première demande respectueuse.
+- [Définir des objectifs et des attentes](establishing-goals-and-expectations.md) : fixer dès le départ des objectifs communs, des limites et des modalités de travail.
+- [Programmes et structures de mentorat](mentorship-programs-and-structures.md) : les formats formels et informels à travers lesquels l'accompagnement s'organise.
+- [Les relations de mentorat à long terme](long-term-mentoring-relationships.md) : entretenir un lien de mentorat au fil des années et des postes.
 
 ## Références
 

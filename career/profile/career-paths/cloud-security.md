@@ -1,6 +1,6 @@
 ---
 title: "Cloud Security: Securing Cloud Platforms and Workloads"
-description: "A cybersecurity specialization focused on protecting the configuration, identity, data, and workloads that run on public and hybrid cloud platforms."
+description: "A specialization focused on protecting the configuration, identity, data, and workloads that run on public and hybrid cloud platforms."
 keywords:
   - cloud security
   - cloud security engineer
@@ -12,13 +12,27 @@ keywords:
 
 # Cloud Security
 
-Cloud security is the specialization concerned with protecting systems, data, and services that run on public, private, and hybrid cloud platforms such as Amazon Web Services, Microsoft Azure, and Google Cloud. It exists because cloud environments change the shape of the problem: infrastructure is defined in software, provisioned on demand, and governed by the provider's shared responsibility model, which splits accountability between what the provider secures and what the customer must secure. Practitioners in this track translate established security principles into the specific controls, identities, and configurations that keep fast-moving cloud estates safe. As organizations migrate core workloads to the cloud, the specialization has become one of the most sought-after paths in the field.
+Running systems on platforms such as Amazon Web Services, Microsoft Azure, and Google Cloud changes the shape of the security problem: infrastructure is defined in software, provisioned on demand, and split by the provider's **shared responsibility model** between what the provider secures and what the customer must. **Cloud security** is the specialization that translates established security principles into the specific controls, identities, and configurations that keep fast-moving cloud estates safe. As organizations migrate core workloads to the cloud, it has become one of the most sought-after paths in the field.
 
-Day-to-day work centers on designing and maintaining secure configurations across accounts and subscriptions, and on catching the misconfigurations that are a leading cause of cloud incidents. A cloud security engineer reviews identity and access policies for least privilege, hardens networking and storage settings, manages encryption and key handling, and defines guardrails that let development teams move quickly without drifting outside approved patterns. Much of the work is expressed as code: policies, infrastructure templates, and automated checks that run in deployment pipelines. Practitioners also monitor posture through cloud-native and third-party tooling, triage alerts about risky changes, and partner with engineering teams to remediate issues and embed security earlier in the delivery process.
+## Roles on this path
 
-The role calls for a solid grounding in general security concepts combined with genuine fluency in how at least one major cloud platform works. Useful background includes identity and access management, networking, operating systems, and automation or scripting, along with comfort reading and writing infrastructure as code. Because cloud security sits close to engineering culture, collaboration and clear communication matter as much as technical depth; the aim is to enable teams rather than to block them. Familiarity with containers, orchestration, and continuous delivery is increasingly expected, as is an understanding of compliance frameworks and how they map onto cloud controls.
+- [Cloud Security Engineer](../roles/cloud-security-roles/cloud-security-engineer.md): designs, builds, and operates the controls that keep cloud infrastructure, services, and workloads secure.
+- [Cloud Security Analyst](../roles/cloud-security-roles/cloud-security-analyst.md): monitors and assesses cloud environments, turning platform signals into clear risk findings and remediation guidance.
+- [Cloud Security Architect](../roles/cloud-security-roles/cloud-security-architect.md): defines the security design, controls, and guardrails that keep cloud platforms safe as they are built and scaled.
+- [Cloud Compliance Specialist](../roles/cloud-security-roles/cloud-compliance-specialist.md): maps regulatory obligations and control frameworks onto cloud environments and demonstrates that those controls hold over time.
+- [DevSecOps Engineer](../roles/application-security-roles/devsecops-engineer.md): integrates security into delivery pipelines so cloud native teams ship securely at speed.
 
-People commonly enter cloud security from cloud or platform engineering, system administration, DevOps, or a broader security operations background, bringing an understanding of how cloud systems are actually built and run. Many strengthen their standing with vendor certifications such as the cloud providers' security specialty credentials or vendor-neutral options, paired with hands-on practice in personal or lab accounts. With experience, a practitioner may grow into senior engineering, cloud security architecture, or leadership of a cloud security program. The specialization borders several neighbors: it draws heavily on identity and access management, overlaps with application security where cloud-native development is concerned, informs security architecture at the design stage, and feeds detection and response work when cloud incidents occur.
+## Skills and certifications
+
+- **Platform fluency:** genuine depth in how at least one major cloud platform works, on top of a solid grounding in general security concepts.
+- **Core domains:** identity and access management, networking, operating systems, and automation or scripting.
+- **Infrastructure as code:** comfort reading and writing policies, templates, and automated checks that run in deployment pipelines.
+- **Modern delivery:** familiarity with containers, orchestration, and continuous delivery, plus how compliance frameworks map onto cloud controls.
+- **Credentials:** cloud providers' security specialty credentials or vendor-neutral options, strengthened by hands-on practice in personal or lab accounts; guidance such as the [AWS Well-Architected Framework Security Pillar](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html) and [Cloud Security Alliance](https://cloudsecurityalliance.org/) material gives the work structure.
+
+## How to progress
+
+People commonly enter from cloud or platform engineering, system administration, DevOps, or a broader security operations background, bringing an understanding of how cloud systems are actually built and run. With experience, a practitioner moves into senior engineering, cloud security architecture, or leadership of a cloud security program. The specialization draws heavily on identity and access management, overlaps with application security where cloud native development is concerned, informs security architecture at the design stage, and feeds detection and response work when cloud incidents occur.
 
 ## References
 

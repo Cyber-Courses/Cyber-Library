@@ -1,6 +1,6 @@
 ---
 title: "IAM Roles: Careers in Identity and Access Management"
-description: "An overview of the professional roles that design, operate, and govern how identities are managed and how access to systems and data is granted and controlled."
+description: "An overview of the professional roles that design, operate, and govern how identities are managed and how access to systems and data is controlled."
 keywords:
   - iam roles
   - identity and access management
@@ -12,15 +12,21 @@ keywords:
 
 # IAM Roles
 
-Identity and access management roles share a common concern: ensuring that the right people and systems have the right access to the right resources at the right time, and no more. This discipline sits at the center of modern security programs because most controls ultimately depend on knowing who is acting and what they are permitted to do. The pages beneath this section describe the professions that build, run, and oversee the identity fabric of an organization.
+Identity and access management roles share a single concern: making sure the right people and systems hold the right access to the right resources at the right time, and no more. Because most security controls ultimately depend on knowing who is acting and what they are permitted to do, this discipline sits at the center of modern security programs. The roles below build, run, and oversee the identity fabric an organization relies on.
 
-Although these roles are closely related, they differ in altitude and emphasis. Some are operational and hands-on, resolving access requests and tuning controls day to day, while others are strategic, shaping the standards and designs that everyone else works within. Reading the individual pages alongside this overview helps a professional see where a given role fits and how the roles depend on one another.
+## What these roles share
 
-The [IAM Analyst](iam-analyst.md) works at the operational core, handling joiner, mover, and leaver processes, reviewing access, and supporting users while keeping records accurate. The [IAM Engineer](iam-engineer.md) builds and maintains the systems that make this possible, integrating applications with identity providers, configuring single sign-on and multifactor authentication, and automating provisioning. The [IAM Architect](iam-architect.md) takes the longest view, defining the target state, selecting technologies, and ensuring that identity design aligns with the wider security and business strategy.
+- A focus on **identity as the control plane**, where access decisions, not network perimeters, increasingly define the security boundary.
+- A common vocabulary of authentication, authorization, directories, federation, and least privilege.
+- A spectrum from hands-on operations through engineering and governance to long-range architecture, so practitioners often move between them as experience grows.
 
-Two further roles concentrate on specialized aspects of the discipline. The [Access Governance Specialist](access-governance-specialist.md) focuses on entitlements, certification campaigns, segregation of duties, and the evidence that access remains appropriate and compliant over time. The [PAM Specialist](pam-specialist.md) concentrates on privileged access management, protecting the high-value administrative and service accounts whose misuse would cause the most harm.
+## Roles
 
-Careers in this area rarely follow a single path. Many practitioners begin in an operational role and move toward engineering, governance, or architecture as their experience grows, and the boundaries between these titles vary from one organization to another. Understanding the general shape of each role helps a professional plan their learning and see how identity work connects to the broader security program.
+- [IAM Analyst](iam-analyst.md): operates the program day to day, handling joiner, mover, and leaver processes, access requests, and reviews.
+- [IAM Engineer](iam-engineer.md): builds and automates the identity platform, integrating applications, single sign-on, and provisioning.
+- [IAM Architect](iam-architect.md): defines the target state, selects technologies, and keeps identity design aligned with security and business strategy.
+- [Access Governance Specialist](access-governance-specialist.md): oversees entitlements through certification campaigns, segregation of duties, and compliance evidence.
+- [PAM Specialist](pam-specialist.md): secures privileged accounts and credentials, the high-value access whose misuse would cause the most harm.
 
 ## References
 

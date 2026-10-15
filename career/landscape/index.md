@@ -11,13 +11,12 @@ keywords:
 
 # Landscape
 
-The Landscape part of the Career pillar describes the ecosystem you work within as a security professional. No career happens in isolation. You operate inside a dense field of companies that build tools, firms that deliver services, bodies that set standards, and individuals whose research and writing shape how everyone else thinks. Understanding this terrain helps you choose employers, evaluate technologies, and find the voices worth following.
+No security career happens in isolation. You work inside a dense field of **organizations** that build tools, deliver services, and set standards, and among **people** whose research, writing, and communities shape how everyone else thinks. Reading this terrain helps you choose employers, judge technologies, and find the voices worth following.
 
-The sections below map the organizations and the people that give the field its structure.
+## In this section
 
-**The organizations in the field** span product vendors who build the software and hardware teams rely on, service providers such as consultancies and managed security firms who deliver expertise on demand, and standards bodies who publish the frameworks and specifications that define good practice across the industry.
-
-**The people** include thought leaders whose talks and publications set the agenda, communities that gather practitioners around shared interests, and key contributors whose tools, research, and disclosures move the field forward. Knowing who they are helps you learn faster, recognize credible sources, and understand where ideas and trends originate.
+- [Organizations](organizations/index.md): the product vendors, service providers, standards bodies, and professional associations that give the field its institutional structure.
+- [People](people/index.md): the thought leaders, communities, and key contributors whose talks, tools, and disclosures move the field forward.
 
 ## References
 

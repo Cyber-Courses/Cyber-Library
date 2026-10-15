@@ -1,29 +1,51 @@
 ---
-title: "Threat Hunter : spécialiste de la détection proactive des adversaires"
-description: Un professionnel de la sécurité qui recherche de manière proactive, au sein des réseaux et des systèmes, les menaces qui échappent aux défenses automatisées, en formulant des hypothèses sur le comportement des adversaires et en les validant à partir de la télémétrie.
+title: "Chasseur de menaces : spécialiste de la détection proactive des adversaires"
+description: "Un chasseur de menaces recherche de manière proactive, dans les réseaux et les systèmes, les menaces qui échappent aux défenses automatisées, en formulant des hypothèses sur le comportement des adversaires et en les confrontant à la télémétrie."
 keywords:
-  - threat hunting
+  - chasse aux menaces
   - sécurité défensive
-  - detection engineering
+  - ingénierie de détection
   - comportement des adversaires
-  - télémétrie des endpoints
+  - télémétrie des terminaux
   - mitre att&ck
 ---
 
-# Threat Hunter
+# Chasseur de menaces
 
-Un Threat Hunter est un professionnel de la sécurité défensive qui recherche de manière proactive, au sein des réseaux, des endpoints et des journaux d'une organisation, toute activité malveillante ayant échappé à la détection automatisée. Plutôt que d'attendre qu'une alerte se déclenche, le hunter part du principe qu'un adversaire compétent peut déjà être présent et cherche à confirmer ou à infirmer cette hypothèse. Le rôle repose sur le postulat que les outils basés sur les signatures et les alertes pilotées par des règles ne peuvent pas tout détecter, et que la curiosité humaine, nourrie par la connaissance des méthodes des attaquants, peut mettre au jour des intrusions que les défenses laissent passer. Le threat hunting a son importance dans une carrière en sécurité, car il développe une compréhension analytique approfondie de la manière dont les adversaires opèrent réellement et transforme cette compréhension en améliorations durables de la couverture de détection d'une organisation.
+Plutôt que d'attendre qu'une alerte se déclenche, un **chasseur de menaces** part du principe qu'un adversaire compétent est peut-être déjà présent et s'attache à prouver ou à réfuter cette hypothèse. Le rôle repose sur un postulat simple : les outils basés sur les signatures et l'alerte pilotée par des règles ne peuvent pas tout attraper, et la curiosité humaine éclairée par la connaissance du savoir-faire des attaquants peut faire émerger des intrusions que les défenses manquent. Chaque chasse développe aussi une compréhension analytique approfondie de la manière dont les adversaires opèrent et la transforme en améliorations durables de la couverture de détection d'une organisation.
 
-Au quotidien, un Threat Hunter formule des hypothèses et les teste à partir de données. Une hypothèse peut être construite autour d'une technique d'adversaire spécifique, d'un schéma d'authentification suspect ou de l'utilisation anormale d'un outil d'administration légitime. Le hunter interroge ensuite la télémétrie des solutions de détection et de réponse sur les endpoints, les enregistrements de flux réseau, les journaux d'authentification et les pistes d'audit du cloud afin de rechercher des éléments qui étayent ou réfutent l'idée. Le travail alterne entre des hunts structurés, pilotés par des cadres tels que MITRE ATT&CK, et une analyse plus exploratoire déclenchée par de nouveaux renseignements sur les menaces ou par une observation inexpliquée. Lorsqu'un hunt révèle une activité réellement malveillante, le hunter la transmet à la réponse à incident pour le confinement et la remédiation. Tout aussi important, le hunter documente ce qui a été appris afin qu'un hunt réussi devienne une nouvelle règle de détection, comblant ainsi la lacune qui avait permis à l'activité de passer inaperçue.
+## Responsabilités
 
-Le rôle exige un mélange de rigueur analytique et d'une large aisance technique. Les bons hunters comprennent le fonctionnement interne des systèmes d'exploitation, les sources de journalisation courantes, et la façon dont un comportement administratif normal se distingue d'un détournement de ces mêmes outils. Ils sont à l'aise pour écrire des requêtes dans des langages propres à chaque plateforme, pour travailler avec de grands volumes de données et pour raisonner statistiquement sur ce qui est rare, attendu ou anormal dans un environnement donné. La connaissance des tactiques, techniques et procédures des adversaires, généralement structurée par le cadre ATT&CK, donne de la structure à la recherche. Les compétences plus humaines sont tout aussi précieuses : une communication écrite claire, une prise de notes méthodique et l'honnêteté intellectuelle d'abandonner une hypothèse lorsque les données ne la soutiennent pas. Un hunter incapable d'expliquer ses conclusions de manière convaincante aux intervenants et à la direction apporte moins de valeur que l'analyse elle-même ne le laisserait penser.
+- Formuler des **hypothèses**, articulées autour d'une technique d'adversaire précise, d'un schéma d'authentification suspect ou d'un usage anormal d'un outil d'administration légitime.
+- Tester chaque hypothèse en interrogeant la télémétrie de détection et de réponse sur les terminaux, les enregistrements de flux réseau, les journaux d'authentification et les pistes d'audit du cloud.
+- Mener des chasses structurées guidées par des cadres tels que **MITRE ATT&CK**, aux côtés d'une analyse exploratoire suscitée par du renseignement sur les menaces récent.
+- Transmettre l'activité malveillante confirmée à la réponse à incident pour confinement et correction.
+- Convertir ce qu'une chasse révèle en une nouvelle règle de détection, comblant la faille qui a laissé l'activité passer inaperçue.
 
-La plupart des personnes arrivent au threat hunting après avoir construit des bases dans les opérations défensives, et rares sont celles qui commencent directement ici. Un parcours courant mène de la surveillance et du tri des alertes vers le travail d'investigation, où l'analyste acquiert la connaissance de l'environnement et la familiarité avec les outils dont dépend le hunting. L'expérience en detection engineering, en investigation numérique (forensics) ou en renseignement sur les menaces constitue également une voie d'accès naturelle, puisque chacune de ces disciplines alimente les hypothèses que poursuit un hunter. L'évolution dans ce rôle tend à aller vers une plus grande autonomie et une plus grande influence : définir la stratégie d'un programme de hunting, encadrer les analystes plus récents, construire des outils et des contenus de détection réutilisables, et traduire les résultats des hunts en améliorations mesurables de la couverture. Les hunters expérimentés façonnent souvent la manière dont toute une organisation de sécurité priorise ses efforts de détection.
+## Compétences et profil
 
-Le threat hunting côtoie plusieurs rôles défensifs voisins et recoupe chacun d'eux à ses frontières. Là où un analyste SOC répond aux alertes au fur et à mesure qu'elles arrivent, le hunter travaille en amont de l'alerte, à la recherche de ce qu'aucune règle n'a encore signalé. Là où un intervenant en réponse à incident pilote le confinement et la restauration une fois qu'une intrusion confirmée est en cours, le hunter met plus souvent l'intrusion au jour en premier lieu, puis soutient la réponse en apportant du contexte. Un analyste de malwares dissèque un artefact malveillant précis pour en comprendre les capacités, tandis que le hunter utilise cette compréhension, conjuguée à un renseignement plus large, pour rechercher ce comportement à travers l'ensemble de l'environnement. En pratique, ces rôles collaborent étroitement, et de nombreux professionnels de la sécurité passent de l'un à l'autre au cours de leur carrière.
+- **Connaissance de l'environnement :** les rouages internes des systèmes d'exploitation, les sources de journalisation courantes, et la manière dont le comportement administratif normal diffère de l'abus des mêmes outils.
+- **Aisance avec les données :** écrire des requêtes dans des langages propres à chaque plateforme, travailler avec de grands volumes de données et raisonner sur ce qui est rare, attendu ou hors de propos.
+- **Savoir-faire des adversaires :** une familiarité avec les tactiques, techniques et procédures, généralement organisées via le cadre ATT&CK, pour donner une structure à la recherche.
+- **Honnêteté intellectuelle :** la discipline d'abandonner une hypothèse lorsque les données ne la soutiennent pas.
+- **Communication :** des constats écrits clairs et des notes méthodiques, afin que les intervenants et la direction puissent agir sur ce qu'une chasse révèle.
+
+## Accéder au poste
+
+Peu de personnes débutent directement ici ; la plupart arrivent après avoir bâti des fondations dans les opérations défensives. Un parcours courant va de la surveillance et du triage des alertes vers le travail d'investigation, où un analyste développe la connaissance de l'environnement et la familiarité avec les outils dont dépend la chasse. L'expérience en ingénierie de détection, en investigation numérique ou en renseignement sur les menaces est aussi une rampe d'accès naturelle, puisque chacune alimente les hypothèses qu'un chasseur poursuit.
+
+## Évolution de carrière
+
+La progression va vers davantage d'autonomie et d'influence : définir la stratégie d'un programme de chasse, encadrer les analystes plus récents, construire de l'outillage et du contenu de détection réutilisables, et traduire les résultats des chasses en améliorations mesurables de la couverture. Les chasseurs seniors façonnent souvent la manière dont toute une organisation de sécurité priorise ses efforts de détection.
+
+## Rôles associés
+
+- [Analyste SOC](soc-analyst.md) : répond aux alertes à mesure qu'elles arrivent, là où le chasseur travaille en amont de l'alerte, cherchant ce qu'aucune règle n'a encore signalé.
+- [Analyste de malwares](malware-analyst.md) : décortique un artefact précis, tandis que le chasseur se sert de cette compréhension pour rechercher le comportement à travers l'environnement.
+- [Intervenant en réponse à incident](../forensics-and-ir-roles/incident-responder.md) : dirige le confinement et la reprise une fois une intrusion confirmée, souvent une intrusion que le chasseur a fait émerger en premier lieu.
 
 ## Références
 
 - [NICE Workforce Framework for Cybersecurity (NIST SP 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [MITRE ATT&CK (attack.mitre.org)](https://attack.mitre.org/)
-- [SANS Institute, threat hunting resources and curriculum](https://www.sans.org/)
+- [SANS Institute, ressources et cursus sur la chasse aux menaces](https://www.sans.org/)

@@ -1,8 +1,8 @@
 ---
 title: "Métiers de la GRC : carrières en gouvernance, risque et conformité"
-description: "Un aperçu des métiers qui alignent la sécurité sur la tolérance au risque, les politiques et les obligations réglementaires de l'organisation."
+description: "Un panorama des métiers de la gouvernance, du risque et de la conformité qui alignent un programme de sécurité sur les obligations, la politique et la tolérance au risque d'une organisation."
 keywords:
-  - métiers grc
+  - métiers de la grc
   - analyste des risques
   - analyste conformité
   - auditeur de sécurité
@@ -12,15 +12,22 @@ keywords:
 
 # Métiers de la GRC
 
-Les métiers de la gouvernance, du risque et de la conformité relient un programme de sécurité aux décisions, aux obligations et à la tolérance au risque de l'organisation dans son ensemble. Là où les métiers techniques se concentrent sur la configuration et la défense des systèmes, les métiers de la GRC s'attachent aux questions qui se situent au-dessus de la technologie : ce que l'organisation est tenue de faire, ce qu'elle a choisi de faire, le niveau de risque qu'elle est prête à accepter, et si les contrôles qu'elle affiche fonctionnent réellement comme décrit. Le travail est rigoureux, fondé sur des preuves et étroitement lié aux attentes métier et juridiques.
+Les métiers de la gouvernance, du risque et de la conformité relient un programme de sécurité aux décisions, aux obligations et à la tolérance au risque de l'organisation dans son ensemble. Là où les métiers techniques configurent et défendent les systèmes, les **métiers de la GRC** travaillent à un niveau situé au-dessus de la technologie : ce que l'organisation est tenue de faire, ce qu'elle a choisi de faire, le niveau de risque qu'elle acceptera, et si les contrôles qu'elle affiche fonctionnent réellement comme décrit. Le travail est mesuré, fondé sur des preuves, et étroitement lié aux attentes métier et juridiques.
 
-Bien que ces métiers partagent un vocabulaire commun fait de référentiels, de contrôles et de risque, ils diffèrent par leurs priorités et leurs activités quotidiennes. Certains se concentrent sur l'analyse et la priorisation de l'exposition, d'autres sur l'interprétation des exigences externes, et d'autres encore sur la coordination de programmes entre de nombreuses équipes. Les pages situées sous cette section décrivent chaque métier tour à tour, en précisant ses responsabilités habituelles, les compétences qu'il mobilise et la façon dont il s'articule avec les activités de sécurité opérationnelle et offensive.
+## Ce que ces rôles ont en commun
 
-L'[analyste des risques](risk-analyst.md) identifie, évalue et priorise les risques auxquels une organisation est confrontée, aidant les dirigeants à décider où investir et quoi accepter. L'[analyste conformité](compliance-analyst.md) suit les obligations issues des réglementations, des contrats et des normes, puis s'emploie à démontrer que l'organisation les respecte. L'[analyste des politiques](policy-analyst.md) élabore et maintient les politiques et normes internes qui traduisent ces obligations et ces décisions de risque en attentes claires pour le personnel.
+- Un vocabulaire commun de **référentiels, de contrôles et de risque** tiré de normes telles qu'ISO/IEC 27001 et la famille NIST.
+- Une priorité donnée à la **documentation et aux preuves** plutôt qu'à l'exploitation directe des systèmes.
+- Une collaboration permanente avec l'ingénierie, le juridique, l'audit et la direction.
+- Des parcours de carrière qui circulent librement entre l'analyse, la politique, l'audit et la gestion de programme.
 
-Deux autres métiers sont centrés sur la vérification et la coordination. L'[auditeur de sécurité](security-auditor.md) examine de manière indépendante si les contrôles existent et fonctionnent comme prévu, produisant des constats objectifs qui éclairent à la fois la direction et les parties prenantes externes. Le [responsable de programme GRC](grc-program-manager.md) organise ces activités en un programme cohérent, en alignant les calendriers, les responsables et le reporting afin que les efforts de gouvernance, de risque et de conformité se renforcent mutuellement plutôt que de fonctionner en silos.
+## Rôles
 
-Les carrières dans ce domaine suivent rarement une voie unique. De nombreux praticiens évoluent au fil du temps entre l'analyse, les politiques, l'audit et la gestion de programme, et les frontières entre ces métiers varient d'une organisation à l'autre. Lire les pages individuelles en parallèle de cet aperçu aide un professionnel à voir où se situent ses centres d'intérêt et comment les métiers se relient au programme de sécurité dans son ensemble.
+- [Analyste des risques](risk-analyst.md) : identifie, évalue et hiérarchise les risques auxquels une organisation est exposée afin que les dirigeants puissent décider où investir et ce qu'ils acceptent.
+- [Analyste conformité](compliance-analyst.md) : suit les obligations issues des réglementations, des contrats et des normes, puis démontre que l'organisation y répond.
+- [Analyste des politiques](policy-analyst.md) : élabore et maintient les politiques et normes internes qui traduisent les obligations et les décisions de risque en attentes claires pour le personnel.
+- [Auditeur de sécurité](security-auditor.md) : examine de manière indépendante si les contrôles existent et fonctionnent comme prévu, en produisant des constats objectifs pour la direction et les parties prenantes externes.
+- [Responsable de programme GRC](grc-program-manager.md) : organise ces activités en un programme cohérent, en alignant les calendriers, les responsables et le reporting entre les équipes.
 
 ## Références
 
