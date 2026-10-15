@@ -1,5 +1,5 @@
 ---
-title: "Data Protection Officer: Privacy Accountability and Oversight"
+title: "Data Protection Officer: Independent Privacy Oversight"
 description: A designated role that independently oversees an organization's compliance with data protection law and advises on the lawful, ethical handling of personal data.
 keywords:
   - data protection officer
@@ -12,7 +12,7 @@ keywords:
 
 # Data Protection Officer
 
-A **Data Protection Officer** (DPO) is a designated individual accountable for how an organization collects, uses, stores, and shares personal data. The role was formalized by several privacy regimes, most notably the European Union's **General Data Protection Regulation**, which mandates a DPO for public authorities and for organizations whose core activities involve large scale, regular and systematic monitoring of individuals or large scale processing of special categories of data. Its defining feature is **independence**: a DPO advises and monitors without being told how to reach conclusions and typically reports to the highest level of management.
+A **Data Protection Officer** (DPO) is a designated individual who independently oversees and advises on how an organization collects, uses, stores, and shares personal data. Accountability for compliance stays with the organization acting as controller or processor; the DPO advises and monitors rather than carrying that responsibility, and cannot be held personally responsible for the organization's compliance. The role was formalized by several privacy regimes, most notably the European Union's **General Data Protection Regulation**, which mandates a DPO for public authorities and for organizations whose core activities involve large scale, regular and systematic monitoring of individuals, or large scale processing of special categories of data or of personal data relating to criminal convictions and offenses. Its defining feature is **independence**: a DPO advises and monitors without being told how to reach conclusions and typically reports to the highest level of management.
 
 ## Responsibilities
 
@@ -36,7 +36,7 @@ People reach the DPO position after building experience in privacy, compliance, 
 
 ## Career progression
 
-A DPO may broaden into a chief privacy officer or wider data governance leadership role, or specialize deeply in a regulated sector such as healthcare, finance, or public administration. The accountability the role carries for an organization's overall privacy posture makes it a natural stepping stone toward executive oversight of both privacy and data governance.
+A DPO may broaden into a chief privacy officer or wider data governance leadership role, or specialize deeply in a regulated sector such as healthcare, finance, or public administration. The breadth of oversight the role carries across an organization's privacy posture makes it a natural stepping stone toward executive leadership of both privacy and data governance.
 
 ## Related roles
 

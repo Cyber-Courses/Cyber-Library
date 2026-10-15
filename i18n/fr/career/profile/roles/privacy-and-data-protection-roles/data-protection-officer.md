@@ -1,5 +1,5 @@
 ---
-title: "Délégué à la protection des données : responsabilité et supervision de la vie privée"
+title: "Délégué à la protection des données : supervision indépendante de la vie privée"
 description: Un rôle désigné qui supervise de manière indépendante la conformité d'une organisation au droit de la protection des données et conseille sur le traitement licite et éthique des données personnelles.
 keywords:
   - délégué à la protection des données
@@ -12,7 +12,7 @@ keywords:
 
 # Délégué à la protection des données
 
-Un **délégué à la protection des données** (DPO) est une personne désignée, responsable de la manière dont une organisation collecte, utilise, stocke et partage les données personnelles. Le rôle a été formalisé par plusieurs régimes de protection de la vie privée, notamment le **Règlement général sur la protection des données** de l'Union européenne, qui impose un DPO aux autorités publiques et aux organisations dont les activités de base impliquent un suivi régulier et systématique à grande échelle des personnes ou le traitement à grande échelle de catégories particulières de données. Sa caractéristique déterminante est l'**indépendance** : un DPO conseille et contrôle sans que l'on puisse lui dicter comment parvenir à ses conclusions, et il rend généralement compte au plus haut niveau de la direction.
+Un **délégué à la protection des données** (DPO) est une personne désignée qui supervise de manière indépendante la façon dont une organisation collecte, utilise, stocke et partage les données personnelles, et qui conseille à ce sujet. La responsabilité de la conformité incombe à l'organisation en tant que responsable du traitement ou sous-traitant ; le DPO conseille et contrôle sans porter cette responsabilité, et ne peut être tenu personnellement responsable de la conformité de l'organisation. Le rôle a été formalisé par plusieurs régimes de protection de la vie privée, notamment le **Règlement général sur la protection des données** de l'Union européenne, qui impose un DPO aux autorités publiques et aux organisations dont les activités de base impliquent un suivi régulier et systématique à grande échelle des personnes, ou le traitement à grande échelle de catégories particulières de données ou de données relatives à des condamnations pénales et à des infractions. Sa caractéristique déterminante est l'**indépendance** : un DPO conseille et contrôle sans que l'on puisse lui dicter comment parvenir à ses conclusions, et il rend généralement compte au plus haut niveau de la direction.
 
 ## Responsabilités
 
@@ -36,7 +36,7 @@ Les personnes accèdent au poste de DPO après avoir acquis de l'expérience en 
 
 ## Évolution de carrière
 
-Un DPO peut élargir son rôle vers celui de directeur de la vie privée ou un rôle plus vaste de direction de la gouvernance des données, ou se spécialiser en profondeur dans un secteur réglementé tel que la santé, la finance ou l'administration publique. La responsabilité que porte ce rôle quant à la posture globale de l'organisation en matière de vie privée en fait un tremplin naturel vers une supervision exécutive à la fois de la vie privée et de la gouvernance des données.
+Un DPO peut élargir son rôle vers celui de directeur de la vie privée ou un rôle plus vaste de direction de la gouvernance des données, ou se spécialiser en profondeur dans un secteur réglementé tel que la santé, la finance ou l'administration publique. L'ampleur de la supervision que porte ce rôle sur la posture globale de l'organisation en matière de vie privée en fait un tremplin naturel vers une direction exécutive à la fois de la vie privée et de la gouvernance des données.
 
 ## Rôles associés
 
