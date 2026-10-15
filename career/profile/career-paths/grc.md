@@ -39,4 +39,3 @@ People enter from several directions: some from audit, legal, or compliance func
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [ISACA, Certified in Risk and Information Systems Control (CRISC) and Certified Information Systems Auditor (CISA)](https://www.isaca.org/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
-</content>

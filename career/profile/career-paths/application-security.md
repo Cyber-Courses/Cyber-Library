@@ -39,4 +39,3 @@ Most people arrive from software engineering, from quality or test engineering, 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [OWASP Foundation, Application Security Verification Standard and Top Ten](https://owasp.org/www-project-application-security-verification-standard/)
 - [SANS Institute, Secure Software Development and Application Security Resources](https://www.sans.org/)
-</content>

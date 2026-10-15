@@ -39,4 +39,3 @@ People commonly enter from a security operations center, from systems or network
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [NIST Special Publication 800-61 Revision 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management](https://csrc.nist.gov/pubs/sp/800/61/r3/final)
 - [SANS Institute, Digital Forensics and Incident Response Resources](https://www.sans.org/)
-</content>

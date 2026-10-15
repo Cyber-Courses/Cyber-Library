@@ -39,4 +39,3 @@ People commonly enter from system administration, help desk and directory suppor
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [NIST Special Publication 800-63-4, Digital Identity Guidelines](https://pages.nist.gov/800-63-4/)
 - [ISACA, Identity and Access Management Resources](https://www.isaca.org/)
-</content>

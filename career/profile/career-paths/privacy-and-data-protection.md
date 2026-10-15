@@ -39,4 +39,3 @@ People enter from several directions: some from legal, compliance, or audit back
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [NIST Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management](https://www.nist.gov/privacy-framework)
 - [International Association of Privacy Professionals (IAPP), Certification and Resource Library](https://iapp.org/)
-</content>

@@ -31,5 +31,3 @@ A **career path** is the long-term direction a professional takes through the fi
 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [(ISC)2, Career Development Resources](https://www.isc2.org/)
-</content>
-</invoke>

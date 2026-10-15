@@ -38,4 +38,3 @@ People commonly enter through help desk, system administration, or network roles
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
 - [SANS Institute, Blue Team and Security Operations Resources](https://www.sans.org/)
 - [MITRE ATT&CK Framework](https://attack.mitre.org/)
-</content>
