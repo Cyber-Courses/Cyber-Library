@@ -42,7 +42,7 @@ Les gens atteignent généralement ce rôle après une expérience substantielle
 
 - [Architecte sécurité](security-architect.md) : opère à un périmètre plus étroit que le mandat à l'échelle de l'organisation décrit ici.
 - [Architecte sécurité de domaine](domain-security-architect.md) : porte les normes d'entreprise dans un secteur spécialisé en profondeur.
-- [Solutions Architect - Security](solutions-architect-security.md) : reçoit des problèmes concrets sur une initiative donnée.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : reçoit des problèmes concrets sur une initiative donnée.
 - [Ingénieur sécurité](security-engineer.md) : met en œuvre les contrôles que l'architecture d'entreprise exige.
 
 ## Références

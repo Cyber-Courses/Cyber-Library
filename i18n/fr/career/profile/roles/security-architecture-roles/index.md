@@ -7,7 +7,7 @@ keywords:
   - architecte sécurité d'entreprise
   - architecte sécurité de domaine
   - ingénieur sécurité
-  - solutions architect security
+  - architecte de solutions sécurité
 ---
 
 # Métiers de l'architecture de sécurité
@@ -27,7 +27,7 @@ Les métiers de l'architecture de sécurité partagent un même objectif : faço
 - [Architecte sécurité d'entreprise](enterprise-security-architect.md) : travaille au niveau le plus large, en alignant la stratégie, les normes et les investissements de sécurité à l'échelle de l'organisation et de ses programmes.
 - [Architecte sécurité de domaine](domain-security-architect.md) : applique la discipline au sein d'un seul domaine comme le cloud, le réseau, l'identité ou les données, avec une expertise approfondie des risques et des protections propres à ce domaine.
 - [Ingénieur sécurité](security-engineer.md) : construit, configure et maintient les contrôles et les outils que l'architecture exige, transformant les conceptions en systèmes exploitables.
-- [Solutions Architect - Security](solutions-architect-security.md) : intègre une conception solide dans un projet ou un produit particulier afin que chaque solution réponde aux exigences de l'organisation au moment de sa livraison.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : intègre une conception solide dans un projet ou un produit particulier afin que chaque solution réponde aux exigences de l'organisation au moment de sa livraison.
 
 ## Références
 

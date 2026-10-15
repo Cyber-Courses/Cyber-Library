@@ -43,7 +43,7 @@ La plupart des gens y parviennent après plusieurs années dans un poste d'ingé
 - [Architecte sécurité d'entreprise](enterprise-security-architect.md) : coordonne les domaines et fixe la stratégie que ce rôle applique localement.
 - [Architecte sécurité](security-architect.md) : travaille sur l'ensemble du parc plutôt que de prendre en charge un seul domaine en profondeur.
 - [Ingénieur sécurité](security-engineer.md) : met en œuvre, exploite et ajuste les contrôles que l'architecte de domaine définit.
-- [Solutions Architect - Security](solutions-architect-security.md) : façonne une solution particulière qui hérite des motifs réutilisables du domaine.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : façonne une solution particulière qui hérite des motifs réutilisables du domaine.
 
 ## Références
 

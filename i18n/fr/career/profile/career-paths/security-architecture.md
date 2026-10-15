@@ -20,7 +20,7 @@ L'**architecture de sécurité** est la discipline consistant à concevoir la ma
 - [Architecte sécurité](../roles/security-architecture-roles/security-architect.md) : transforme les exigences métier et de risque en conception de sécurité structurelle des systèmes, des plateformes et des contrôles.
 - [Architecte sécurité de domaine](../roles/security-architecture-roles/domain-security-architect.md) : porte l'architecture et les contrôles d'un domaine métier, technologique ou fonctionnel spécifique.
 - [Architecte sécurité d'entreprise](../roles/security-architecture-roles/enterprise-security-architect.md) : définit et gouverne l'architecture de sécurité couvrant l'ensemble de l'organisation, en alignant les contrôles sur la stratégie et le risque.
-- [Architecte de solutions pour la sécurité](../roles/security-architecture-roles/solutions-architect-security.md) : intègre les exigences et les contrôles dans la conception d'un produit, d'une plateforme ou d'une solution métier particulière.
+- [Architecte de solutions - Sécurité](../roles/security-architecture-roles/solutions-architect-security.md) : intègre les exigences et les contrôles dans la conception d'un produit, d'une plateforme ou d'une solution métier particulière.
 
 ## Compétences et certifications
 

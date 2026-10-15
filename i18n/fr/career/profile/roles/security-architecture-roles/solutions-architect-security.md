@@ -1,8 +1,8 @@
 ---
-title: "Solutions Architect - Security : concevoir des solutions sécurisées pour des initiatives métier précises"
-description: Un solutions architect pour la sécurité intègre les exigences et les contrôles dans la conception d'un produit, d'une plateforme ou d'une solution métier particuliers afin qu'elle réponde à la fois aux objectifs fonctionnels et aux attentes en matière de risque.
+title: "Architecte de solutions - Sécurité : concevoir des solutions sécurisées pour des initiatives métier précises"
+description: Un architecte de solutions pour la sécurité intègre les exigences et les contrôles dans la conception d'un produit, d'une plateforme ou d'une solution métier particuliers afin qu'elle réponde à la fois aux objectifs fonctionnels et aux attentes en matière de risque.
 keywords:
-  - solutions architect
+  - architecte de solutions
   - architecture de sécurité
   - conception sécurisée
   - sécurité cloud
@@ -10,9 +10,9 @@ keywords:
   - contrôles de sécurité
 ---
 
-# Solutions Architect - Security
+# Architecte de solutions - Sécurité
 
-Un solutions architect pour la sécurité conçoit la sécurité d'**une solution particulière**, un produit, une application, une plateforme ou une initiative métier définis, plutôt que l'architecture de l'organisation dans son ensemble. Là où un architecte d'entreprise ou de domaine travaille au niveau des normes larges et des modèles de référence, ce rôle opère au plus près d'un **effort de livraison unique** et traduit ces normes en une conception concrète et constructible. Il associe une compréhension de la manière dont les systèmes sont réellement construits à la discipline consistant à réfléchir aux menaces, aux contrôles et aux arbitrages avant que le code et l'infrastructure ne soient engagés.
+Un architecte de solutions pour la sécurité conçoit la sécurité d'**une solution particulière**, un produit, une application, une plateforme ou une initiative métier définis, plutôt que l'architecture de l'organisation dans son ensemble. Là où un architecte d'entreprise ou de domaine travaille au niveau des normes larges et des modèles de référence, ce rôle opère au plus près d'un **effort de livraison unique** et traduit ces normes en une conception concrète et constructible. Il associe une compréhension de la manière dont les systèmes sont réellement construits à la discipline consistant à réfléchir aux menaces, aux contrôles et aux arbitrages avant que le code et l'infrastructure ne soient engagés.
 
 ## Responsabilités
 
@@ -37,12 +37,12 @@ Les gens entrent le plus souvent après plusieurs années comme ingénieur sécu
 
 ## Évolution de carrière
 
-Avec l'expérience, un solutions architect peut évoluer vers des rôles d'architecture plus larges couvrant de nombreux systèmes, approfondir un domaine technique particulier, ou prendre la direction d'une fonction d'ingénierie de sécurité. Le poste récompense la curiosité pour la manière dont les choses sont construites et la volonté de continuer à apprendre à mesure que les plateformes et les menaces évoluent.
+Avec l'expérience, un architecte de solutions peut évoluer vers des rôles d'architecture plus larges couvrant de nombreux systèmes, approfondir un domaine technique particulier, ou prendre la direction d'une fonction d'ingénierie de sécurité. Le poste récompense la curiosité pour la manière dont les choses sont construites et la volonté de continuer à apprendre à mesure que les plateformes et les menaces évoluent.
 
 ## Rôles associés
 
 - [Architecte sécurité](security-architect.md) : fixe les normes et les architectures de référence que ce rôle applique à une initiative unique.
-- [Architecte sécurité d'entreprise](enterprise-security-architect.md) : définit l'intention à l'échelle de l'organisation que le solutions architect transforme en une conception constructible.
+- [Architecte sécurité d'entreprise](enterprise-security-architect.md) : définit l'intention à l'échelle de l'organisation que l'architecte de solutions transforme en une conception constructible.
 - [Architecte sécurité de domaine](domain-security-architect.md) : prend en charge un secteur spécialisé à travers l'organisation, plus large dans ce domaine que ce rôle borné à un projet.
 - [Ingénieur sécurité](security-engineer.md) : construit, configure et exploite les contrôles qu'une solution exige.
 

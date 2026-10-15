@@ -43,7 +43,7 @@ Avec l'expérience, un ingénieur sécurité peut évoluer vers des postes senio
 
 - [Architecte sécurité](security-architect.md) : spécifie les conceptions et les contrôles que ce rôle transforme en systèmes opérationnels.
 - [Architecte sécurité de domaine](domain-security-architect.md) : définit l'état cible vers lequel les ingénieurs construisent dans un secteur spécialisé.
-- [Solutions Architect - Security](solutions-architect-security.md) : conçoit une solution particulière que l'ingénieur met ensuite en œuvre.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : conçoit une solution particulière que l'ingénieur met ensuite en œuvre.
 - [Analyste SOC](../defensive-security-roles/soc-analyst.md) : surveille et trie les signaux que produisent les contrôles mis en place.
 
 ## Références

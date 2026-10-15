@@ -43,7 +43,7 @@ La progression s'oriente généralement vers des responsabilités plus larges : 
 - [Architecte sécurité d'entreprise](enterprise-security-architect.md) : adopte la vue à l'échelle de l'organisation que nourrit un architecte sécurité généraliste.
 - [Architecte sécurité de domaine](domain-security-architect.md) : prend en charge un secteur spécialisé en profondeur plutôt que l'ensemble du parc.
 - [Ingénieur sécurité](security-engineer.md) : met en œuvre et exploite les contrôles qu'un architecte spécifie.
-- [Solutions Architect - Security](solutions-architect-security.md) : intègre des recommandations de conception dans un projet ou une mission client particulier.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : intègre des recommandations de conception dans un projet ou une mission client particulier.
 
 ## Références
 
