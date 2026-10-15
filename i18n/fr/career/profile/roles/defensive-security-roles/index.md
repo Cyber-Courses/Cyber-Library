@@ -1,29 +1,36 @@
 ---
-title: "Les métiers de la sécurité défensive : carrières dans la détection et la réponse"
-description: "Un panorama des métiers qui surveillent, investiguent et répondent aux menaces pour maintenir la résilience des organisations face aux attaques."
+title: "Métiers de la sécurité défensive : carrières dans la détection et la réponse"
+description: "Un panorama des métiers de la blue team qui surveillent, investiguent et répondent aux menaces pour maintenir la résilience des organisations face aux attaques."
 keywords:
   - métiers de la sécurité défensive
-  - analyste soc
-  - intervenant en réponse à incident
-  - analyste de maliciels
-  - chasseur de menaces
   - blue team
+  - analyste SOC
+  - analyste de malwares
+  - chasseur de menaces
+  - détection et réponse
 ---
 
-# Les métiers de la sécurité défensive
+# Métiers de la sécurité défensive
 
-Les métiers de la sécurité défensive partagent une finalité commune : détecter les activités malveillantes, comprendre ce qu'elles signifient et limiter les dommages qu'elles peuvent causer. Souvent regroupés sous l'appellation de travail de blue team, ces métiers veillent sur les systèmes et les données d'une organisation, en transformant des signaux bruts en décisions éclairées. Leur valeur réside dans une vigilance continue et une analyse rigoureuse, afin que les menaces soient repérées tôt et traitées avant qu'elles ne s'aggravent.
+Les métiers de la sécurité défensive, souvent regroupés sous le terme de travail de **blue team**, partagent un même objectif : détecter l'activité malveillante, comprendre ce qu'elle signifie et limiter les dommages qu'elle peut causer. Ces professionnels veillent sur les systèmes et les données d'une organisation, transformant la télémétrie brute en décisions éclairées afin que les menaces soient repérées tôt et traitées avant qu'elles ne s'aggravent. Ce qui les distingue les uns des autres, c'est le tempo et la profondeur, de la surveillance continue à l'investigation approfondie du code hostile, jusqu'à la recherche délibérée de menaces qu'aucun outil n'a signalées.
 
-Bien que ces métiers soient liés, ils diffèrent par leur rythme, leur profondeur et les questions qu'ils posent. Certains se concentrent sur la surveillance continue et l'évaluation initiale, d'autres sur l'investigation approfondie d'un événement confirmé, et d'autres encore sur l'étude minutieuse de code hostile ou la recherche délibérée de menaces que les outils automatisés ont laissé passer. Les pages regroupées sous cette section décrivent chaque métier à tour de rôle, notamment ses responsabilités habituelles, les compétences sur lesquelles il s'appuie et la façon dont il s'articule avec le travail offensif et la gouvernance.
+## Ce que ces rôles ont en commun
 
-L'[analyste SOC](soc-analyst.md) travaille en première ligne du centre des opérations de sécurité : il surveille les alertes, trie les activités suspectes et fait remonter ce qui mérite un examen plus poussé. L'[intervenant en réponse à incident](incident-responder.md) prend le relais lorsqu'un événement est confirmé, en coordonnant l'investigation, le confinement et la restauration qui rétablissent le fonctionnement normal et permettent de tirer des enseignements pour l'avenir. Les deux métiers reposent sur une communication claire et un bon jugement sous la pression du temps.
+- **Une vigilance constante :** la valeur vient d'une attention disciplinée dans la durée, et non de coups d'éclat ponctuels.
+- **Un jugement fondé sur les preuves :** les décisions reposent sur des journaux, de la télémétrie et des artefacts plutôt que sur des intuitions.
+- **Une communication claire :** les constats ne sont utiles que si les intervenants et la direction peuvent agir en conséquence.
+- **Un langage commun du comportement des attaquants :** des cadres tels que MITRE ATT&CK permettent à ces métiers de décrire et de transmettre leurs constats de manière cohérente.
 
-Deux autres métiers relèvent de l'analyse spécialisée. L'[analyste de maliciels](malware-analyst.md) examine les logiciels hostiles pour comprendre leur comportement, leurs capacités et leurs indicateurs, produisant des connaissances qui affinent la détection et orientent la réponse. Le [chasseur de menaces](threat-hunter.md) recherche de manière proactive, au sein d'un environnement, les signes d'une compromission que les contrôles existants n'ont pas signalée, en formulant des hypothèses à partir du renseignement du moment et en les confrontant aux données disponibles.
+## Rôles
 
-Les carrières dans ce domaine suivent rarement une voie unique. De nombreux praticiens débutent au centre des opérations de sécurité et évoluent vers l'investigation, l'analyse ou la chasse aux menaces à mesure que leurs centres d'intérêt se précisent, et les frontières entre ces métiers varient d'une organisation à l'autre. Lire les pages individuelles en complément de ce panorama aide un professionnel à voir où se situent ses points forts et comment ces métiers se renforcent mutuellement et soutiennent l'ensemble du programme de sécurité.
+- [Analyste SOC](soc-analyst.md) : surveille les alertes en première ligne du centre des opérations de sécurité, trie l'activité suspecte et fait remonter ce qui mérite un examen plus approfondi.
+- [Analyste de malwares](malware-analyst.md) : décortique les logiciels hostiles pour comprendre leur comportement, leurs capacités et leurs indicateurs, produisant des connaissances qui affinent la détection et orientent la réponse.
+- [Chasseur de menaces](threat-hunter.md) : recherche de manière proactive, dans un environnement, les compromissions que les contrôles existants ont manquées, en formulant des hypothèses à partir du renseignement du moment et en les confrontant aux données.
+
+Les carrières dans ce domaine suivent rarement un parcours unique. Beaucoup de praticiens débutent au centre des opérations de sécurité et évoluent vers l'analyse ou la chasse à mesure que leurs centres d'intérêt se développent, et les incidents confirmés sont transmis à l'[intervenant en réponse à incident](../forensics-and-ir-roles/incident-responder.md), qui coordonne le confinement et la reprise. Les frontières entre tous ces rôles varient d'une organisation à l'autre.
 
 ## Références
 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
-- [SANS Institute, Blue Team and Digital Forensics and Incident Response Curriculum](https://www.sans.org/)
+- [SANS Institute, cursus Blue Team et Digital Forensics and Incident Response](https://www.sans.org/)
 - [CompTIA, Cybersecurity Career Pathways](https://www.comptia.org/)

@@ -1,24 +1,46 @@
 ---
-title: "Candidatures : postuler aux postes en sécurité"
-description: "L'étape d'une recherche d'emploi en cybersécurité où un candidat rassemble et soumet un CV, une lettre de motivation et les pièces justificatives pour des postes précis."
+title: "Candidatures : se présenter pour des postes en sécurité"
+description: "Rassembler et soumettre un CV, une lettre de motivation et les pièces justificatives pour des postes précis en cybersécurité."
 keywords:
   - candidatures en sécurité
-  - cv cybersécurité
+  - CV cybersécurité
   - lettre de motivation
   - système de suivi des candidatures
-  - candidature personnalisée
-  - portfolio professionnel
+  - candidature adaptée
+  - portfolio de carrière
 ---
 
 # Candidatures
 
-Une candidature est la démarche formelle qu'un candidat entreprend pour un poste de sécurité précis, généralement un CV accompagné d'une lettre de motivation et de toutes les pièces justificatives demandées par l'offre. C'est le moment où une recherche d'emploi devient concrète, transformant l'intérêt et la préparation en un dossier que l'employeur peut évaluer. Au sein de la recherche d'emploi, les candidatures se situent entre l'étude du marché et les échanges directs avec les interlocuteurs, et elles portent tout le poids d'une bonne première impression auprès des équipes de recrutement, qui examinent souvent bien plus de dossiers qu'elles ne peuvent en recevoir en entretien.
+Une **candidature** est la soumission formelle qu'un candidat effectue pour un poste précis en sécurité, généralement un CV accompagné d'une lettre de motivation et des pièces justificatives demandées par une annonce. C'est le moment où une recherche d'emploi devient concrète, transformant l'intérêt et la préparation en un dossier qu'un employeur peut évaluer. Dans l'accès à l'emploi, elle se situe entre l'étude du marché et les échanges directs avec les personnes, et elle porte le poids d'une première impression auprès d'équipes de recrutement qui examinent bien plus de dossiers qu'elles ne peuvent en recevoir en entretien.
 
-Le fond d'une bonne candidature repose sur l'adéquation et les preuves. Un CV pour un poste de sécurité doit relier l'expérience du candidat aux responsabilités énoncées dans l'offre, en s'appuyant sur des réalisations concrètes plutôt que sur des affirmations générales. Les certifications pertinentes, la pratique concrète, les laboratoires personnels, les résultats aux épreuves de capture the flag, les contributions open source et les expériences antérieures constituent autant de preuves qu'un candidat est capable de faire ce que le poste exige. Comme de nombreuses organisations acheminent les candidatures via un système de suivi des candidatures, les dossiers sont aussi d'abord lus pour leurs mots-clés et leur structure. Une mise en forme claire et un vocabulaire qui reprend celui de l'offre aident donc un bon candidat à parvenir jusqu'à un relecteur humain plutôt qu'à être écarté trop tôt.
+## Ce qui fait la force d'une candidature
 
-La personnalisation est ce qui distingue une candidature efficace d'un envoi de masse. Adapter un CV et une lettre de motivation à chaque offre, mettre en avant les compétences les plus importantes pour l'équipe concernée et nommer précisément le poste et l'employeur témoignent d'un intérêt sincère et font gagner du temps aux relecteurs. Cela demande plus de temps par candidature, mais produit systématiquement de meilleurs taux de réponse que l'envoi d'un document identique partout. Pour les postes de sécurité en particulier, démontrer son discernement, une communication soignée et une compréhension du contexte défensif ou offensif dans lequel évolue l'employeur peut compter autant qu'une liste d'outils.
+Le cœur d'une bonne candidature, c'est l'**adéquation et les preuves**.
 
-Les candidats progressent généralement dans l'exercice de la candidature par itération. Les premiers envois apprennent ce qui suscite des réponses et ce qui n'en suscite pas, et tenir un registre des endroits et des dates de candidature aide à gérer les relances et à éviter les doublons. Au fil d'une carrière, la candidature devient une tâche plus légère à mesure que le parcours d'un professionnel parle de lui-même et que les recommandations prennent une part croissante de la charge, même si la rigueur consistant à présenter clairement des preuves pertinentes ne disparaît jamais tout à fait. Les candidatures s'articulent étroitement avec les étapes voisines d'une recherche : l'étude de marché oriente le choix des postes à viser, la prise de contact peut révéler des opportunités et apporter une recommandation qui renforce un dossier, les entretiens prolongent les affirmations formulées dans une candidature, et la négociation intervient une fois qu'une offre est sur la table.
+- Reliez votre expérience aux responsabilités que mentionne une annonce, en vous appuyant sur des réalisations concrètes plutôt que sur des affirmations générales.
+- Étayez vos affirmations par des preuves : **certifications** pertinentes, pratique concrète, **labos personnels**, résultats en capture-the-flag, contributions ouvertes et travaux antérieurs.
+- Montrez votre jugement et une communication soignée, qui, pour des postes en sécurité, peuvent compter autant qu'une liste d'outils.
+
+## Passer le système de suivi des candidatures
+
+De nombreuses organisations acheminent les dossiers via un **système de suivi des candidatures** avant qu'une personne ne les lise.
+
+- Adoptez une mise en forme claire et une structure de sections qu'un logiciel peut analyser.
+- Reprenez le vocabulaire de l'annonce afin que les mots-clés pertinents soient présents sans remplissage.
+- Gardez le document propre et standard pour qu'un bon candidat parvienne à un relecteur humain plutôt que d'être écarté trop tôt.
+
+## S'adapter à chaque annonce
+
+L'adaptation est ce qui distingue une candidature efficace d'un envoi de masse.
+
+- Ajustez le CV et la lettre de motivation pour chaque annonce, en mettant en avant les compétences qui comptent le plus pour cette équipe.
+- Nommez le poste et l'employeur précis pour signaler un intérêt sincère et épargner des efforts aux relecteurs.
+- Acceptez que cela demande plus de temps par candidature ; cela produit systématiquement de meilleurs taux de réponse qu'un document identique envoyé partout.
+
+## Progresser avec le temps
+
+Les candidats s'améliorent dans l'exercice de la candidature par l'itération. Les premiers envois enseignent ce qui suscite des réponses et ce qui n'en suscite pas, et un relevé des endroits et dates où l'on a postulé aide à gérer les relances et à éviter les doublons. Au fil d'une carrière, la tâche s'allège à mesure qu'un parcours parle de lui-même et que les recommandations prennent une part plus importante, même si la discipline consistant à présenter clairement des preuves pertinentes ne disparaît jamais tout à fait. Les candidatures s'appuient sur leurs voisines : la [recherche](research.md) détermine quels postes viser, la [prise de contact](outreach.md) peut apporter une recommandation qui renforce un dossier, les [entretiens](interviews.md) s'appuient sur les affirmations d'une candidature, et la [négociation](negotiation.md) suit une offre.
 
 ## Références
 

@@ -1,26 +1,27 @@
 ---
-title: "Les organisations en cybersécurité : acteurs du secteur, fournisseurs et organismes de normalisation"
-description: "Un aperçu des organisations qui façonnent la cybersécurité, des fournisseurs de services aux autorités de normalisation."
+title: "Les organisations de la cybersécurité : acteurs du secteur, prestataires et organismes de normalisation"
+description: "Un aperçu des organisations qui façonnent la cybersécurité, des prestataires de services aux autorités de normalisation."
 keywords:
   - organisations de cybersécurité
   - éditeurs de sécurité
   - autorités de normalisation
   - acteurs du secteur
-  - fournisseurs de services
-  - instances professionnelles
+  - prestataires de services
+  - organismes professionnels
 ---
 
 # Organisations
 
-Les organisations constituent le paysage institutionnel de la cybersécurité. Elles comprennent les entreprises qui conçoivent et vendent des produits de sécurité, les sociétés qui fournissent des services tels que les tests et la réponse à incident, les instances professionnelles qui certifient les praticiens, et les autorités qui publient normes et recommandations. Connaître ce paysage aide un professionnel à comprendre d'où viennent la structure et les attentes du domaine.
+Les organisations constituent le paysage institutionnel de la cybersécurité : les entreprises qui conçoivent et vendent des **produits de sécurité**, les sociétés qui fournissent des **services** tels que les tests et la réponse à incident, et les autorités qui publient les **normes** au regard desquelles les programmes sont évalués. Pour une carrière, elles comptent en tant qu'employeurs, partenaires et sources d'autorité, et savoir reconnaître celles qui font autorité dans une spécialisation donnée vous aide à faire des choix éclairés. De nombreux praticiens passent au fil du temps d'un poste chez un éditeur à un poste en cabinet de conseil ou en interne, acquérant une perspective différente à chaque étape.
 
-Pour une carrière en sécurité, les organisations comptent en tant qu'employeurs, partenaires et sources d'autorité. Les éditeurs et les fournisseurs de services créent une grande partie de la demande en postes de sécurité, tandis que les organismes de normalisation et les associations professionnelles définissent les référentiels et les titres qui façonnent le recrutement et la pratique. Reconnaître quelles organisations font autorité dans une spécialisation donnée aide un professionnel à faire des choix éclairés.
+## Dans cette section
 
-Les acteurs du secteur et les fournisseurs de services couvrent un large éventail. Les éditeurs de produits se concentrent sur des domaines tels que la protection des postes de travail, l'identité ou la défense réseau, tandis que les sociétés de services proposent évaluations, supervision et réponse. De nombreux praticiens passent, au cours d'une carrière, entre des postes chez un éditeur, en conseil et en interne, acquérant des perspectives différentes à chaque fois.
-
-Les autorités de normalisation et les instances professionnelles fournissent les points de repère partagés du domaine. Les organisations qui publient référentiels, catalogues de mesures de sécurité et taxonomies des métiers donnent aux praticiens un langage commun, et les organismes de certification valident les compétences auprès des employeurs. Comprendre qui produit des recommandations de confiance aide un professionnel à évaluer les affirmations et à aligner son travail sur la pratique reconnue.
+- [Cabinets de conseil](consultancies.md) : des sociétés de conseil et de services professionnels engagées pour évaluer, concevoir et améliorer la posture de sécurité d'un client.
+- [Sociétés de sécurité](security-firms.md) : des entreprises dont le cœur de métier est la cybersécurité, en tant qu'éditeurs de produits ou prestataires de services spécialisés.
+- [Organismes de normalisation](standards-bodies.md) : les institutions qui rédigent et maintiennent les cadres, les mesures de contrôle et les spécifications techniques que le domaine adopte.
+- [Entreprises technologiques](technology-firms.md) : des entreprises technologiques généralistes qui emploient des équipes de sécurité internes pour protéger leurs produits et leurs plateformes.
 
 ## Références
 
-- [National Institute of Standards and Technology (NIST), Cybersecurity Resources](https://www.nist.gov/cybersecurity)
-- [ISACA, Standards and Professional Resources](https://www.isaca.org/)
+- [National Institute of Standards and Technology (NIST), ressources en cybersécurité](https://www.nist.gov/cybersecurity)
+- [ISACA, normes et ressources professionnelles](https://www.isaca.org/)

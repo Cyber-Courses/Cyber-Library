@@ -1,6 +1,6 @@
 ---
-title: "Métiers de la sécurité offensive : carrières dans les tests adverses"
-description: "Un aperçu des métiers qui consistent à évaluer les systèmes du point de vue d'un adversaire afin d'aider les organisations à identifier et corriger leurs faiblesses."
+title: "Métiers de la sécurité offensive : des carrières dans les tests adverses"
+description: "Un panorama des métiers qui évaluent les systèmes du point de vue d'un adversaire afin que les organisations puissent détecter et corriger leurs faiblesses."
 keywords:
   - métiers de la sécurité offensive
   - testeur d'intrusion
@@ -12,18 +12,25 @@ keywords:
 
 # Métiers de la sécurité offensive
 
-Les métiers de la sécurité offensive partagent un objectif commun : évaluer les systèmes, les applications et les organisations du point de vue d'un adversaire motivé, puis rendre compte de ce qui est découvert afin que les défenseurs puissent y remédier. Ce sont des professions constructives, exercées sous autorisation et dans le cadre de règles d'engagement claires. Leur valeur ne réside pas dans le fait de casser des choses, mais dans la production de preuves qui aident une organisation à comprendre et à réduire son exposition réelle.
+Les professionnels de la sécurité offensive évaluent les systèmes, les applications et des organisations entières du point de vue d'un adversaire motivé, puis rapportent leurs constats afin que les défenseurs puissent agir. Ce sont des carrières constructives menées sous autorisation et selon des règles d'engagement claires, et leur valeur réside dans la production de preuves qui aident une organisation à comprendre et à réduire son exposition réelle. Les rôles ci-dessous partagent cette finalité mais diffèrent par la profondeur, la portée et l'horizon temporel, depuis des évaluations larges et reproductibles jusqu'à des recherches pointues sur la manière dont une seule technologie échoue.
 
-Bien que ces métiers soient liés, ils diffèrent par leur profondeur, leur portée et leur horizon temporel. Certains se concentrent sur des évaluations larges et reproductibles menées contre des cibles définies, tandis que d'autres explorent des questions étroites et approfondies sur la manière dont une technologie donnée peut défaillir. Les pages regroupées sous cette section décrivent chaque métier tour à tour, y compris ses responsabilités habituelles, les compétences qu'il mobilise et la façon dont il s'articule avec les activités de défense et de gouvernance.
+## Ce que ces rôles ont en commun
 
-Le [testeur d'intrusion](penetration-tester.md) mène des évaluations cadrées qui identifient et valident les faiblesses au sein d'un périmètre convenu, en produisant des constats et des recommandations de remédiation. L'[opérateur red team](red-team-operator.md) adopte une vision plus large et orientée vers un objectif, en reproduisant un comportement adverse réaliste afin de tester la détection et la réponse d'une organisation dans son ensemble. Le [spécialiste purple team](purple-team-specialist.md) travaille au point de rencontre entre l'offensive et la défense, en coordonnant des exercices pour que les constats offensifs se traduisent directement par une meilleure couverture défensive.
+- **Un travail autorisé :** chaque engagement se déroule sous contrat, dans un périmètre défini et selon des règles d'engagement, et non comme une intrusion sauvage.
+- **Une intention défensive :** le livrable est constitué de preuves et de recommandations utilisables par les défenseurs et les ingénieurs, et non de la compromission elle-même.
+- **Un état d'esprit adverse :** les praticiens raisonnent sur la façon dont les attaquants pensent et agissent, puis traduisent cela en constats qu'une organisation peut prioriser.
+- **La mobilité :** les carrières suivent rarement un chemin unique, et de nombreux praticiens passent d'un rôle à l'autre à mesure que leurs centres d'intérêt et leur expertise se développent.
 
-Deux autres métiers se rapprochent davantage de la recherche et de l'ingénierie. Le [chercheur en vulnérabilités](vulnerability-researcher.md) étudie les logiciels, le matériel et les protocoles afin de découvrir des faiblesses jusque-là inconnues et d'en comprendre les causes profondes, souvent dans le cadre d'une divulgation responsable. Le [développeur d'exploits](exploit-developer.md) conçoit du code de preuve de concept fiable qui démontre l'impact concret d'une faiblesse, un travail qui soutient à la fois les missions de test et la recherche défensive.
+## Rôles
 
-Les carrières dans ce domaine suivent rarement un chemin unique. De nombreux professionnels passent d'un métier à l'autre au fil du temps, et les frontières se déplacent d'une organisation à l'autre. Lire les pages individuelles en complément de cet aperçu aide un professionnel à voir où se situent ses centres d'intérêt et comment les métiers se complètent mutuellement ainsi qu'au sein du programme de sécurité plus large.
+- [Testeur d'intrusion](penetration-tester.md) : mène des évaluations cadrées et limitées dans le temps qui détectent et vérifient les faiblesses à l'intérieur d'un périmètre convenu, puis rapporte des recommandations de correction.
+- [Opérateur red team](red-team-operator.md) : conduit des campagnes orientées objectif et à périmètre complet qui émulent un adversaire réaliste afin de tester la capacité d'une organisation à détecter et à répondre.
+- [Spécialiste purple team](purple-team-specialist.md) : coordonne une émulation collaborative pour que les constats offensifs se traduisent directement en une meilleure couverture de détection et de réponse.
+- [Chercheur en vulnérabilités](vulnerability-researcher.md) : étudie les logiciels, le matériel et les protocoles pour découvrir des failles jusque-là inconnues et comprendre leurs causes profondes, souvent dans le cadre d'une divulgation coordonnée.
+- [Développeur d'exploits](exploit-developer.md) : construit un code de preuve de concept fiable qui démontre l'impact concret d'une faiblesse, au service à la fois des tests et de la recherche défensive.
 
 ## Références
 
 - [NICE Workforce Framework for Cybersecurity (NIST Special Publication 800-181)](https://csrc.nist.gov/pubs/sp/800/181/r1/final)
-- [Offensive Security, Penetration Testing with Kali Linux Course Materials](https://www.offsec.com/)
-- [SANS Institute, Offensive Operations Curriculum](https://www.sans.org/)
+- [Offensive Security, supports de cours Penetration Testing with Kali Linux](https://www.offsec.com/)
+- [SANS Institute, cursus Offensive Operations](https://www.sans.org/)

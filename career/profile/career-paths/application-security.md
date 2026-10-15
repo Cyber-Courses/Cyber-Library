@@ -1,6 +1,6 @@
 ---
 title: "Application Security: Securing Software Across the Development Lifecycle"
-description: "A specialization that builds security into software, finding and preventing weaknesses in applications across design, development, and deployment."
+description: "A specialization that builds security into software, finding and preventing weaknesses across design, development, and deployment."
 keywords:
   - application security
   - appsec
@@ -12,13 +12,27 @@ keywords:
 
 # Application Security
 
-Application Security, often shortened to AppSec, is the specialization concerned with making software itself resistant to attack. Rather than defending the network around an application or responding after an incident, practitioners work to ensure that the code, its dependencies, and the way it is built and deployed do not introduce weaknesses in the first place. The domain matters because applications hold and process the data organizations most want to protect, and because a single flaw in widely used software can expose an entire business. As companies ship software continuously, AppSec has become one of the fastest growing and most sought after tracks in a security career.
+**Application security**, usually shortened to **AppSec**, is the specialization that makes software itself resistant to attack. Rather than defending the network around an application or cleaning up after an incident, practitioners ensure the code, its dependencies, and the way it is built and shipped do not introduce weaknesses in the first place. Because applications hold the data organizations most want to protect, and because a single flaw in widely used software can expose an entire business, AppSec has become one of the fastest growing tracks in the field.
 
-Day to day, an application security professional partners closely with software engineering teams. The work includes threat modeling new features to reason about how they could be abused, reviewing code and architecture for recurring classes of weakness such as injection or broken access control, and running and tuning the tooling that scans code and dependencies for known problems. Much of the role is building security into the development pipeline so that checks happen automatically and early, triaging the findings those checks produce, and helping developers understand and fix what matters while filtering out noise. Communicating risk in terms engineers can act on, and doing so without slowing delivery to a halt, is as central to the job as the technical analysis itself.
+## Roles on this path
 
-The role calls for a genuine understanding of how software is written, which is why many practitioners come from a development background. Fluency in one or more programming languages, familiarity with web and API fundamentals, and comfort with version control, build systems, and continuous integration are all expected. On top of that, an application security specialist needs knowledge of common weakness taxonomies and secure design principles, the judgment to prioritize findings by real impact, and the interpersonal skill to influence teams that do not report to them. Frameworks such as the OWASP projects and secure development lifecycle models give the work a shared vocabulary and structure.
+- [Application Security Engineer](../roles/application-security-roles/application-security-engineer.md): embeds security into how software is designed, built, and shipped so teams prevent and remediate vulnerabilities across delivery.
+- [DevSecOps Engineer](../roles/application-security-roles/devsecops-engineer.md): integrates controls, testing, and guardrails directly into delivery pipelines so teams ship securely at speed.
+- [Product Security Engineer](../roles/application-security-roles/product-security-engineer.md): builds security into the design, development, and operation of a company's products and the platforms they run on.
+- [Secure Code Reviewer](../roles/application-security-roles/secure-code-reviewer.md): examines application source code to find weaknesses and guide developers toward safer implementations before release.
+- [Security Champion](../roles/application-security-roles/security-champion.md): a developer inside a product team who promotes secure practices and bridges to the central security organization.
 
-People typically enter the field from software engineering, from quality or test engineering, or from a broader security role that touched on code. Hands-on practice, deliberate study of common vulnerability classes, and recognized credentials help newcomers establish credibility. With experience, an AppSec engineer can grow into senior and lead positions that set standards and run a secure development program across many teams, or specialize further in areas like product security, cloud native application protection, or secure architecture. The domain sits close to several siblings: it shares offensive technique with Offensive Security and depends on Security Architecture for sound design, while it hands verified risk to the broader defensive program and informs the controls that Cloud Security teams enforce.
+## Skills and certifications
+
+- **Software fluency:** real understanding of how software is written, with one or more programming languages and comfort with web and API fundamentals.
+- **Build and delivery:** version control, build systems, and continuous integration, so security checks can run automatically and early in the pipeline.
+- **Weakness taxonomies:** common classes such as injection and broken access control, framed by the [OWASP](https://owasp.org/www-project-application-security-verification-standard/) projects including the Application Security Verification Standard and Top Ten.
+- **Secure design:** threat modeling and secure development lifecycle (SDLC) principles that reason about how a feature could be abused.
+- **Prioritization and influence:** the judgment to rank findings by real impact and the interpersonal skill to persuade teams that do not report to you.
+
+## How to progress
+
+Most people arrive from software engineering, from quality or test engineering, or from a broader security role that touched on code. Hands-on practice, deliberate study of common vulnerability classes, and recognized credentials help newcomers establish credibility. With experience, an AppSec engineer grows into senior and lead positions that set standards and run a secure development program across many teams, or specializes further in product security, cloud native application protection, or secure architecture. The domain shares offensive technique with offensive security, depends on security architecture for sound design, hands verified risk to the broader defensive program, and informs the controls cloud security teams enforce.
 
 ## References
 

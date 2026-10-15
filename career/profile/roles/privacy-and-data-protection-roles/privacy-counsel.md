@@ -12,13 +12,37 @@ keywords:
 
 # Privacy Counsel
 
-Privacy counsel is a lawyer who advises an organization on the laws and regulations that govern how personal data is collected, used, shared, and retained. The role sits at the point where legal obligation meets technical and operational reality, interpreting statutes such as the General Data Protection Regulation, the California Consumer Privacy Act, and sector-specific rules, and explaining what they require in terms the business can act on. Within a security career, privacy counsel matters because many security controls, incident obligations, and data handling decisions carry legal consequences, and the role supplies the authoritative reading of what the law demands.
+**Privacy counsel** is a lawyer who advises an organization on the laws governing how personal data is collected, used, shared, and retained. The role interprets statutes such as the **General Data Protection Regulation**, the **California Consumer Privacy Act**, and sector-specific rules, then explains what they require in terms the business can act on. Because many security controls, incident duties, and data handling decisions carry legal consequences, privacy counsel supplies the authoritative reading of what the law actually demands.
 
-Day to day, the work is a mix of advisory, review, and negotiation. Privacy counsel reviews new products, features, and data flows to judge whether they are lawful and what safeguards they require, drafts and negotiates data processing agreements and vendor contracts, and advises on cross-border transfers and the mechanisms that make them defensible. When a security incident involves personal data, counsel assesses notification duties to regulators and affected individuals and helps shape the organization's response within statutory deadlines. Much of the value lies in reducing legal ambiguity to clear, documented positions that engineers, security teams, and executives can rely on.
+## Responsibilities
 
-The role calls for a qualified legal background, typically a law degree and a license to practice, combined with genuine fluency in privacy and data protection law. Beyond legal knowledge, strong privacy counsel understands enough about systems, data architecture, and security practice to give advice that holds up in implementation rather than guidance that cannot be built. The work rewards careful reasoning, precise writing, and the judgment to weigh legal risk against business goals. Because privacy law changes often and varies by jurisdiction, the role demands continual study and the ability to reconcile conflicting obligations across regions.
+- Review new products, features, and data flows to judge whether they are lawful and what safeguards they require.
+- Draft and negotiate **data processing agreements** and vendor contracts.
+- Advise on cross-border transfers and the mechanisms that make them defensible.
+- Assess notification duties to regulators and affected individuals when a security incident involves personal data, and help shape the response within statutory deadlines.
+- Reduce legal ambiguity to clear, documented positions that engineers, security teams, and executives can rely on.
 
-People usually enter the role after practicing law, often in technology, regulatory, or commercial fields, and then specializing in privacy, sometimes supported by credentials such as those offered by the International Association of Privacy Professionals. From there, privacy counsel can grow into senior or lead counsel positions, broaden into general technology and regulatory practice, or move toward executive legal roles that own privacy strategy across the organization. The role works alongside the data protection officer, whose duties are often defined by statute and center on independent oversight, while privacy counsel provides legal advocacy and interpretation for the organization itself. It also partners closely with the privacy program manager, who runs the operational program, and with privacy engineers and analysts, who build and assess the controls that put legal requirements into practice.
+## Skills and background
+
+- **Legal qualification:** a law degree and a license to practice, combined with genuine fluency in privacy and data protection law.
+- **Technical awareness:** enough understanding of systems, data architecture, and security practice to give advice that holds up in implementation rather than guidance that cannot be built.
+- **Reasoning and writing:** careful analysis, precise drafting, and the judgment to weigh legal risk against business goals.
+- **Continual study:** the discipline to track frequent changes in privacy law and reconcile conflicting obligations across jurisdictions.
+
+## Getting into the role
+
+Privacy counsel usually enter after practicing law, often in technology, regulatory, or commercial fields, and then specializing in privacy. Credentials such as those offered by the **International Association of Privacy Professionals** help formalize the specialization, though the qualifying requirement remains the legal license and practice experience behind it.
+
+## Career progression
+
+From here, privacy counsel can grow into senior or lead counsel positions, broaden into general technology and regulatory practice, or move toward executive legal roles that own privacy strategy across the organization. Deep sector focus, such as health or financial services, is another common direction as regulatory complexity rewards specialization.
+
+## Related roles
+
+- [Data Protection Officer](data-protection-officer.md): holds a statutory, independent oversight mandate, where counsel provides legal advocacy for the organization itself.
+- [Privacy Program Manager](privacy-program-manager.md): runs the operational program that counsel's advice is built into.
+- [Privacy Engineer](privacy-engineer.md): builds the controls that put legal requirements into practice.
+- [Privacy Analyst](privacy-analyst.md): assesses practices and documents the risk that counsel evaluates legally.
 
 ## References
 

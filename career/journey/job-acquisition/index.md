@@ -12,13 +12,22 @@ keywords:
 
 # Job Acquisition
 
-Job acquisition is the process of moving from interest in a security role to a signed offer. It covers exploring the market, tailoring applications, reaching out to people who can help, preparing for interviews, and negotiating terms. For anyone building a cybersecurity career, this is a recurring activity rather than a one-time event, since the field rewards people who change roles to broaden their experience.
+**Job acquisition** is the process of moving from interest in a security role to a signed offer. It covers exploring the market, tailoring applications, reaching out to people who can help, preparing for interviews, and settling terms. For a cybersecurity career this is a recurring activity rather than a one-time event, because the field rewards people who change roles to broaden their experience.
 
-Market exploration comes first. Reviewing job postings, following which skills employers ask for, and noting how roles are titled helps a candidate understand where their background fits. This research shapes a focused application rather than a scattered one, and it often reveals adjacent roles worth considering.
+## In this section
 
-Applications and outreach work together. A resume and cover note that map directly to a posting improve the odds of a response, while thoughtful outreach to recruiters, hiring managers, or current employees can surface roles that are never advertised. Referrals carry particular weight in security hiring.
+- [Research](research.md): studying the market, employers, and roles so later effort is aimed rather than scattered.
+- [Applications](applications.md): assembling and submitting a resume, cover note, and supporting materials for specific roles.
+- [Outreach](outreach.md): contacting recruiters, hiring managers, and practitioners to surface openings and earn referrals.
+- [Interviews](interviews.md): meeting employers to assess technical ability, judgment, and mutual fit across several rounds.
+- [Negotiation](negotiation.md): evaluating and agreeing on compensation and employment terms once an offer arrives.
 
-Interview preparation and negotiation close the process. Security interviews often mix behavioral questions with technical scenarios, so practicing clear explanations of past work matters. Once an offer arrives, understanding typical compensation ranges and asking professionally for appropriate terms is a normal and expected step.
+## How the stages fit together
+
+- **Research comes first** and shapes a focused search instead of a scattered one, often revealing adjacent roles worth considering.
+- **Applications and outreach work in parallel:** a tailored resume improves the odds of a response, while outreach can surface roles that are never advertised.
+- **Referrals carry particular weight** in security hiring, where trust is central.
+- **Interviews and negotiation close the process,** building on the claims an application makes and the market understanding gathered earlier.
 
 ## References
 

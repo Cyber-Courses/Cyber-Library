@@ -1,26 +1,48 @@
 ---
-title: "Événements et conférences du secteur : réseautage et apprentissage en présentiel dans la sécurité"
-description: "Comment les conférences de sécurité, les meetups et les événements du secteur aident les praticiens à apprendre, à nouer des relations et à bâtir une réputation professionnelle."
+title: "Événements et conférences du secteur : réseautage et apprentissage en présentiel en sécurité"
+description: "Comment les conférences de sécurité, les rencontres et les événements du secteur aident les praticiens à apprendre, à nouer des relations et à bâtir une réputation."
 keywords:
   - conférences de sécurité
   - événements du secteur
-  - meetups cybersécurité
+  - rencontres de cybersécurité
   - réseautage professionnel
-  - présentations en conférence
+  - interventions en conférence
   - communauté de la sécurité
 ---
 
 # Événements et conférences du secteur
 
-Les événements et conférences du secteur sont des rassemblements organisés où les praticiens de la sécurité se rencontrent en personne pour apprendre, partager leurs recherches et nouer des relations. Ils vont des grandes conférences annuelles telles que DEF CON, Black Hat, RSA Conference et les événements régionaux BSides, jusqu'aux réunions de chapitres locaux, aux groupes d'utilisateurs d'éditeurs et aux meetups informels. Chacun se situe à un point différent d'un spectre qui va d'une programmation commerciale large à un contenu technique et communautaire étroitement ciblé, et la plupart des praticiens assistent à un mélange des deux au cours d'une année.
+Les événements du secteur sont des rassemblements organisés où les praticiens de la sécurité se rencontrent en personne pour apprendre, partager leurs recherches et nouer des relations. Ils comptent pour une carrière parce qu'ils condensent des mois de construction informelle de relations en quelques journées intenses : les conversations de couloir, les pauses entre ateliers et les repas partagés créent le **contact imprévu** qui mène aux recommandations, à la collaboration et au mentorat, tandis que le programme technique maintient les participants à jour sur les menaces et les outils émergents.
 
-Ces événements comptent pour une carrière en sécurité parce qu'ils condensent des mois de création informelle de relations en quelques jours concentrés. Les conversations de couloir, les pauses entre ateliers et les repas partagés créent le type de contact imprévu qui mène à des recommandations d'emploi, à des collaborations et à du mentorat. Le programme technique maintient les participants au fait des menaces émergentes, des techniques défensives et de l'outillage, souvent des mois avant que les mêmes contenus n'atteignent une publication plus large. Pour beaucoup de praticiens, une conférence est aussi l'endroit où des connaissances en ligne abstraites deviennent de véritables relations professionnelles.
+## Types d'événements
 
-Tirer de la valeur d'un événement dépend moins de la présence que de l'implication. Examiner le programme à l'avance, choisir quelques présentations qui correspondent au travail actuel ou aux objectifs d'apprentissage, et laisser de la place à la conversation tendent à produire de meilleurs résultats que d'essayer de tout voir. Les villages, les compétitions capture-the-flag et les ateliers pratiques récompensent directement la participation, et se porter volontaire pour aider à organiser un événement est l'un des moyens les plus rapides de rencontrer les organisateurs et les habitués. Le suivi par la suite, tant que les noms et les conversations sont encore frais, est ce qui transforme une brève présentation en un contact durable.
+- Les grandes conférences annuelles telles que **DEF CON**, **Black Hat** et **RSA Conference**.
+- Les événements **BSides**, régionaux et portés par la communauté.
+- Les réunions de sections locales, les groupes d'utilisateurs d'éditeurs et les rencontres informelles.
 
-La participation peut s'approfondir avec le temps, du simple participant au contributeur. Proposer une présentation ou un atelier, présenter des recherches originales ou aider à organiser un événement local accroît la visibilité et témoigne d'un investissement réel dans la communauté. Beaucoup de praticiens commencent par intervenir dans de plus petites conférences régionales, où la barrière à l'acceptation est plus basse et le public bienveillant, avant de proposer leur candidature à de plus grands événements. Le coût et les déplacements peuvent être de véritables obstacles, mais les tarifs étudiants, les bourses, les parcours de bénévolat et le nombre croissant d'événements régionaux gratuits ou peu coûteux rendent la participation en présentiel plus accessible qu'il n'y paraît au premier abord.
+Ils se situent sur un éventail allant d'une programmation commerciale large à un contenu technique et communautaire très ciblé, et la plupart des praticiens en fréquentent un mélange au fil d'une année.
 
-Les événements en présentiel complètent les autres formes de réseautage plutôt que de les remplacer. Les communautés et forums en ligne entretiennent les relations entre les événements et font émerger les personnes qui valent la peine d'être rencontrées, les organisations professionnelles offrent une structure tout au long de l'année et des chapitres locaux qui hébergent ou parrainent souvent des rassemblements, et la prise de contact directe transforme une présentation faite en conférence en une conversation ciblée. Considérés ensemble, ces canaux se renforcent mutuellement, les événements servant de moments où des liens lâches deviennent des relations professionnelles solides.
+## Tirer parti d'un événement
+
+La valeur dépend moins de la présence que de l'**engagement**.
+
+- Consultez le programme à l'avance et choisissez quelques interventions qui correspondent à votre travail actuel ou à vos objectifs d'apprentissage.
+- Laissez de la place à la conversation plutôt que de chercher à tout voir.
+- Participez aux **villages**, aux compétitions capture-the-flag et aux ateliers pratiques, qui récompensent directement la participation.
+- Proposez-vous comme bénévole pour aider à faire tourner l'événement, l'un des moyens les plus rapides de rencontrer les organisateurs et les habitués.
+- Faites un suivi peu après, tant que les noms et les conversations sont encore frais, pour transformer une mise en relation en un contact durable.
+
+## Du participant au contributeur
+
+La participation peut s'approfondir avec le temps. Proposer une intervention ou un atelier, présenter des recherches originales ou aider à organiser un événement local accroît la visibilité et témoigne d'un véritable investissement dans la communauté. De nombreux praticiens commencent par intervenir dans de plus petites conférences régionales, où l'acceptation est plus facile et le public bienveillant, avant de proposer leurs travaux à de plus grandes tribunes.
+
+## Coût et accès
+
+Le coût et les déplacements peuvent constituer de réels obstacles, mais les **tarifs étudiants**, les bourses, les parcours de bénévolat et le nombre croissant d'événements régionaux gratuits ou peu coûteux rendent la participation en présentiel plus accessible qu'elle n'y paraît.
+
+## Comment cela s'articule avec le reste du réseautage
+
+Les événements en présentiel complètent les autres canaux. Les [communautés en ligne](online-communities-and-forums.md) entretiennent les relations entre deux événements, les [organisations professionnelles](professional-organizations.md) offrent une structure tout au long de l'année et des sections qui organisent souvent des rassemblements, et le [démarchage direct](direct-outreach-and-informational-interviews.md) transforme une mise en relation en conférence en une conversation ciblée.
 
 ## Références
 

@@ -1,6 +1,6 @@
 ---
-title: "Métiers de l'architecture de sécurité : concevoir des systèmes sécurisés"
-description: "Un panorama des métiers qui intègrent la sécurité dès la conception des systèmes, des plateformes et des environnements d'entreprise, afin que la protection soit pensée dès l'origine plutôt qu'ajoutée après coup."
+title: "Métiers de l'architecture de sécurité : des carrières pour concevoir des systèmes sûrs"
+description: "Un panorama des métiers professionnels qui intègrent la sécurité dès la conception des systèmes, des plateformes et des environnements d'entreprise, afin que la protection soit intégrée dès le départ plutôt qu'ajoutée après coup."
 keywords:
   - métiers de l'architecture de sécurité
   - architecte sécurité
@@ -12,15 +12,22 @@ keywords:
 
 # Métiers de l'architecture de sécurité
 
-Les métiers de l'architecture de sécurité partagent un objectif commun : façonner la manière dont les systèmes, les plateformes et les organisations sont construits pour que la sécurité soit une propriété conçue et non une réflexion après coup. Les praticiens de ce domaine traduisent les objectifs métier, l'appétit pour le risque et les obligations réglementaires en structures techniques, normes et mesures de sécurité que les autres équipes peuvent mettre en oeuvre et exploiter. Leur travail se situe en amont d'une grande partie de l'activité opérationnelle de sécurité et influence les décisions tant qu'elles sont encore peu coûteuses à modifier.
+Les métiers de l'architecture de sécurité partagent un même objectif : façonner la manière dont les systèmes, les plateformes et les organisations sont construits pour que la sécurité soit une **propriété conçue** plutôt qu'une réflexion de dernière minute. Les praticiens traduisent les objectifs métier, l'appétence au risque et les obligations réglementaires en structures techniques, normes et contrôles que d'autres équipes mettent en œuvre et exploitent. Leur travail se situe en amont de la plupart des activités opérationnelles de sécurité, influençant les décisions tant qu'elles sont encore peu coûteuses à modifier.
 
-Bien que ces métiers soient liés, ils diffèrent par leur périmètre, leur niveau d'intervention et l'horizon sur lequel ils agissent. Certains interviennent à l'échelle de l'organisation tout entière et de sa stratégie de long terme, tandis que d'autres se concentrent sur un seul domaine technologique ou sur une solution précise en cours de livraison. Les pages qui suivent dans cette section décrivent chaque métier tour à tour, avec ses responsabilités habituelles, les connaissances sur lesquelles il s'appuie et la façon dont il se rattache à l'ingénierie, à l'exploitation et à la gouvernance.
+## Ce que ces rôles ont en commun
 
-L'[architecte sécurité](security-architect.md) définit les mesures de sécurité, les modèles et les architectures de référence qui maintiennent la résilience des systèmes, en équilibrant la protection avec la facilité d'usage et le coût. L'[architecte sécurité d'entreprise](enterprise-security-architect.md) travaille au niveau le plus large et aligne la stratégie de sécurité, les normes et les investissements à l'échelle de l'organisation et de ses programmes. L'[architecte sécurité de domaine](domain-security-architect.md) applique cette discipline à un périmètre particulier, comme le cloud, le réseau, l'identité ou les données, en développant une expertise approfondie des risques et des parades propres à ce domaine.
+- Une posture axée sur la conception : décider de l'agencement des contrôles avant que les systèmes ne soient construits.
+- La traduction du risque métier en motifs, normes et conceptions de référence concrets.
+- Une influence sur des équipes qu'ils encadrent rarement, ce qui place la communication claire au premier plan.
+- Des frontières mouvantes, si bien que de nombreux praticiens passent de l'ingénierie à l'architecture au fil de leur carrière.
 
-Deux autres métiers se situent plus près de la livraison et de la mise en oeuvre. L'[ingénieur sécurité](security-engineer.md) construit, configure et maintient les mesures de sécurité et les outils requis par l'architecture, transformant les conceptions en systèmes fonctionnels et exploitables. L'[architecte de solutions](solutions-architect-security.md) spécialisé en sécurité intègre une conception solide dans les projets et les produits individuels, en veillant à ce que chaque solution réponde aux exigences de l'organisation au fur et à mesure de sa livraison.
+## Rôles
 
-Les carrières dans ce domaine suivent rarement une voie unique. De nombreux praticiens passent de l'ingénierie à l'architecture au fil du temps, et les frontières entre ces intitulés varient considérablement d'une organisation à l'autre. Lire les pages individuelles en parallèle de ce panorama aide un professionnel à voir où se situent ses centres d'intérêt et comment ces métiers se renforcent mutuellement et consolident le programme de sécurité dans son ensemble.
+- [Architecte sécurité](security-architect.md) : définit les contrôles, les motifs et les conceptions de référence qui maintiennent la résilience des systèmes, en équilibrant protection, facilité d'usage et coût.
+- [Architecte sécurité d'entreprise](enterprise-security-architect.md) : travaille au niveau le plus large, en alignant la stratégie, les normes et les investissements de sécurité à l'échelle de l'organisation et de ses programmes.
+- [Architecte sécurité de domaine](domain-security-architect.md) : applique la discipline au sein d'un seul domaine comme le cloud, le réseau, l'identité ou les données, avec une expertise approfondie des risques et des protections propres à ce domaine.
+- [Ingénieur sécurité](security-engineer.md) : construit, configure et maintient les contrôles et les outils que l'architecture exige, transformant les conceptions en systèmes exploitables.
+- [Architecte de solutions - Sécurité](solutions-architect-security.md) : intègre une conception solide dans un projet ou un produit particulier afin que chaque solution réponde aux exigences de l'organisation au moment de sa livraison.
 
 ## Références
 

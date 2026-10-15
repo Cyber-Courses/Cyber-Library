@@ -1,6 +1,6 @@
 ---
 title: "GRC Roles: Careers in Governance, Risk, and Compliance"
-description: "An overview of the professional roles that align security with organizational risk tolerance, policy, and regulatory obligations."
+description: "An overview of the governance, risk, and compliance roles that align a security program with an organization's obligations, policy, and risk tolerance."
 keywords:
   - grc roles
   - risk analyst
@@ -12,15 +12,22 @@ keywords:
 
 # GRC Roles
 
-Governance, risk, and compliance roles connect a security program to the decisions, obligations, and risk tolerance of the wider organization. Where technical roles focus on configuring and defending systems, GRC roles focus on the questions that sit above the technology: what the organization is required to do, what it has chosen to do, how much risk it is willing to accept, and whether its stated controls actually operate as described. The work is measured, evidence driven, and closely tied to business and legal expectations.
+Governance, risk, and compliance roles connect a security program to the decisions, obligations, and risk tolerance of the wider organization. Where technical roles configure and defend systems, **GRC roles** work a layer above the technology: what the organization is required to do, what it has chosen to do, how much risk it will accept, and whether its stated controls actually operate as described. The work is measured, evidence driven, and tied closely to business and legal expectations.
 
-Although these roles share a common vocabulary of frameworks, controls, and risk, they differ in emphasis and daily activity. Some concentrate on analyzing and prioritizing exposure, others on interpreting external requirements, and others on coordinating programs across many teams. The pages beneath this section describe each role in turn, including its typical responsibilities, the skills it draws on, and how it fits alongside operational and offensive security work.
+## What these roles share
 
-The [Risk Analyst](risk-analyst.md) identifies, assesses, and prioritizes the risks an organization faces, helping leaders decide where to invest and what to accept. The [Compliance Analyst](compliance-analyst.md) tracks obligations arising from regulations, contracts, and standards, then works to demonstrate that the organization meets them. The [Policy Analyst](policy-analyst.md) develops and maintains the internal policies and standards that translate those obligations and risk decisions into clear expectations for staff.
+- A common vocabulary of **frameworks, controls, and risk** drawn from standards such as ISO/IEC 27001 and the NIST family.
+- Emphasis on **documentation and evidence** over hands-on system operation.
+- Constant collaboration with engineering, legal, audit, and management.
+- Career paths that cross freely between analysis, policy, audit, and program management.
 
-Two further roles center on verification and coordination. The [Security Auditor](security-auditor.md) independently examines whether controls exist and function as intended, producing objective findings that inform both management and external stakeholders. The [GRC Program Manager](grc-program-manager.md) organizes these activities into a coherent program, aligning schedules, owners, and reporting so that governance, risk, and compliance efforts reinforce one another rather than operate in isolation.
+## Roles
 
-Careers in this area rarely follow a single path. Many practitioners move between analysis, policy, audit, and program management over time, and the boundaries between these roles vary from one organization to another. Reading the individual pages alongside this overview helps a professional see where their interests fit and how the roles connect to the broader security program.
+- [Risk Analyst](risk-analyst.md): identifies, assesses, and prioritizes the risks an organization faces so leaders can decide where to invest and what to accept.
+- [Compliance Analyst](compliance-analyst.md): tracks obligations from regulations, contracts, and standards, then demonstrates that the organization meets them.
+- [Policy Analyst](policy-analyst.md): develops and maintains the internal policies and standards that turn obligations and risk decisions into clear expectations for staff.
+- [Security Auditor](security-auditor.md): independently examines whether controls exist and function as intended, producing objective findings for management and external stakeholders.
+- [GRC Program Manager](grc-program-manager.md): organizes these activities into one coherent program, aligning schedules, owners, and reporting across teams.
 
 ## References
 

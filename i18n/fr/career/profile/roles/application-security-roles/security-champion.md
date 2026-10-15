@@ -1,25 +1,48 @@
 ---
-title: "Security Champion : relais de la sécurité au sein du développement"
-description: Un Security Champion est un développeur ou un ingénieur au sein d'une équipe produit qui promeut les pratiques sécurisées et sert de relais local vers l'organisation centrale de sécurité.
+title: "Champion de la sécurité : défenseur intégré du développement sécurisé"
+description: "Un développeur ou ingénieur au sein d'une équipe produit qui promeut les bonnes pratiques de sécurité et sert de pont local vers l'organisation de sécurité centrale."
 keywords:
-  - security champion
+  - champion de la sécurité
   - sécurité applicative
   - développement sécurisé
   - culture devsecproduct
   - programme de champions
 ---
 
-# Security Champion
+# Champion de la sécurité
 
-Un Security Champion est un membre d'une équipe de développement ou produit qui endosse un rôle de promotion de la sécurité, en agissant comme point de contact local entre cette équipe et l'organisation centrale de sécurité. Il ne s'agit généralement pas d'un poste dédié à temps plein, mais d'une extension d'un rôle d'ingénierie, de qualité ou produit, le plus souvent formalisée dans le cadre d'un programme de security champions de l'entreprise. La logique sous-jacente est une question d'échelle : les équipes de sécurité sont presque toujours bien plus réduites que la population d'ingénieurs qu'elles accompagnent, si bien qu'intégrer des relais compétents au sein de chaque équipe étend la portée de la sécurité et rapproche le jugement du lieu où les décisions de code et de conception sont réellement prises.
+Un **champion de la sécurité** est un membre d'une équipe de développement ou de produit qui assume la promotion de la sécurité dans le cadre de son rôle, en agissant comme point de contact local entre cette équipe et l'organisation de sécurité centrale. Le poste n'est généralement pas un emploi dédié à plein temps mais une extension d'un rôle d'ingénierie, de qualité ou de produit, le plus souvent formalisé par un **programme de champions de la sécurité** de l'entreprise. La logique est celle du passage à l'échelle : les équipes de sécurité sont presque toujours bien plus réduites que la population d'ingénieurs qu'elles soutiennent, aussi l'intégration de défenseurs compétents au sein de chaque équipe étend la portée de la sécurité et rapproche le jugement du lieu où se prennent les décisions de code et de conception.
 
-Au quotidien, un Security Champion maintient la sécurité visible dans le rythme ordinaire du travail de son équipe. Il soulève les considérations de sécurité lors des discussions de conception et de la planification des sprints, aide à trier les résultats des scanners automatisés afin que les développeurs ne soient pas submergés par le bruit, et répond aux questions courantes qui, autrement, s'accumuleraient auprès de l'équipe centrale. Il anime souvent les sessions de modélisation des menaces pour les nouvelles fonctionnalités, suit la remédiation des problèmes connus et aide son équipe à comprendre et à adopter des valeurs par défaut, des bibliothèques et des modèles sécurisés. Un champion fait également circuler l'information dans les deux sens, en portant les politiques, les évolutions d'outillage et le renseignement sur les menaces de l'organisation de sécurité vers l'équipe, et en remontant les points de friction et les contraintes pratiques de l'équipe. Le rôle repose délibérément sur l'influence plutôt que sur l'autorité, de sorte que la persuasion, la patience et la crédibilité auprès des pairs comptent autant que la profondeur technique.
+## Responsabilités
 
-Le profil adapté au rôle est celui d'un développeur ou d'un ingénieur en activité qui bénéficie déjà de la confiance de son équipe et éprouve un véritable intérêt pour la sécurité, plutôt qu'un spécialiste de la sécurité parachuté de l'extérieur. Parmi les compétences utiles figurent une solide maîtrise de la pile technologique de l'équipe, une familiarité avec les classes de faiblesses courantes telles que celles cataloguées par l'OWASP, une aisance à lire les sorties des scanners et à raisonner sur le risque, ainsi qu'une bonne communication. Une expertise offensive poussée n'est pas requise ; ce qui importe davantage, c'est la capacité à reconnaître quand une situation justifie l'attention d'un spécialiste et à traduire les préoccupations de sécurité dans des termes qui parlent à ses collègues ingénieurs. De nombreuses organisations soutiennent les champions par des formations ciblées, une communauté de pratique, une reconnaissance et du temps dédié, car un programme sans investissement réel a tendance à s'essouffler.
+- Soulever les considérations de sécurité lors des discussions de conception et de la planification des sprints.
+- Aider à trier les détections des scanners automatisés afin que les développeurs ne soient pas submergés par le bruit.
+- Répondre aux questions courantes qui autrement s'accumuleraient auprès de l'équipe centrale.
+- Piloter les sessions de **modélisation des menaces** pour les nouvelles fonctionnalités et suivre la correction des problèmes connus.
+- Aider l'équipe à comprendre et adopter les valeurs par défaut sécurisées, les bibliothèques et les modèles.
+- Faire circuler l'information dans les deux sens : porter les politiques, les changements d'outillage et le renseignement sur les menaces dans l'équipe, et faire remonter les points de friction et les contraintes de l'équipe.
 
-On accède généralement au rôle en se portant volontaire ou en étant désigné au sein d'un poste d'ingénierie existant, puis en progressant grâce aux formations du programme et à une exposition concrète à de vrais résultats et incidents. Avec le temps, un champion approfondit ses connaissances en sécurité et peut étendre son influence à plusieurs équipes ou accompagner de nouveaux champions. Cette expérience constitue une voie d'accès éprouvée vers un métier dédié à la sécurité, et les champions évoluent fréquemment vers des postes de spécialiste une fois qu'ils décident de faire de la sécurité leur priorité.
+## Compétences et profil
 
-Le Security Champion s'inscrit aux côtés de plusieurs rôles plus spécialisés de la sécurité applicative et se comprend mieux par contraste avec eux. Là où un Application Security Engineer est responsable de l'outillage et de la défense à l'échelle du programme sur de nombreuses équipes, où un Secure Code Reviewer se concentre sur la détection de failles dans le code source, où un Product Security Engineer est responsable de la sécurité d'une ligne de produits précise, et où un DevSecOps Engineer intègre des contrôles de sécurité dans les pipelines et l'infrastructure, le champion se définit quant à lui par le fait d'être un membre d'équipe en activité qui porte la sécurité dans le développement quotidien. Les champions sont le complément local, à temps partiel, qui rend ces fonctions centralisées efficaces à grande échelle, et la relation est symbiotique : les spécialistes donnent la direction et apportent la profondeur, tandis que les champions apportent la portée, le contexte et une présence durable au sein de chaque équipe.
+- **Connaissance de la pile :** une bonne maîtrise de la pile technologique de l'équipe.
+- **Culture de la sécurité :** familiarité avec les classes de failles courantes comme celles cataloguées par OWASP, et aisance à lire les résultats des scanners et à raisonner sur le risque.
+- **Jugement :** la capacité de reconnaître quand quelque chose justifie l'attention d'un spécialiste, plutôt qu'une expertise offensive approfondie.
+- **Communication :** persuasion, patience et crédibilité auprès des pairs, car le rôle repose sur l'influence plutôt que sur l'autorité.
+
+## Accéder au poste
+
+On entre généralement en se portant volontaire ou en étant désigné au sein d'un poste d'ingénierie existant, puis on progresse grâce à la formation du programme et à une exposition pratique à de vraies détections et à de vrais incidents. Le profil qui convient au rôle est un développeur ou un ingénieur en activité qui a déjà la confiance de son équipe et un intérêt sincère pour la sécurité, plutôt qu'un spécialiste parachuté de l'extérieur. De nombreuses organisations soutiennent les champions par une formation ciblée, une communauté de pratique, une reconnaissance et du temps dédié, car un programme sans investissement réel tend à s'éteindre.
+
+## Évolution de carrière
+
+Avec le temps, un champion approfondit ses connaissances en sécurité et peut élargir son influence à plusieurs équipes ou encadrer de nouveaux champions. L'expérience est une voie d'accès bien rodée vers un travail dédié à la sécurité, et les champions passent fréquemment à des rôles de spécialiste une fois qu'ils décident de faire de la sécurité leur priorité.
+
+## Rôles associés
+
+- [Ingénieur en sécurité applicative](application-security-engineer.md) : pilote l'outillage et la défense au niveau du programme sur de nombreuses équipes.
+- [Relecteur de code sécurisé](secure-code-reviewer.md) : se concentre sur la détection des failles dans le code source.
+- [Ingénieur en sécurité produit](product-security-engineer.md) : prend en charge la sécurité d'une gamme de produits spécifique.
+- [Ingénieur DevSecOps](devsecops-engineer.md) : intègre les contrôles de sécurité dans les chaînes et l'infrastructure.
 
 ## Références
 

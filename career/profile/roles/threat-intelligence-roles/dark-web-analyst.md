@@ -12,15 +12,38 @@ keywords:
 
 # Dark Web Analyst
 
-A Dark Web Analyst is a cyber threat intelligence specialist who focuses on the hidden and restricted corners of the internet where criminal activity is organized, discussed, and monetized. The role centers on collecting and interpreting information from dark web marketplaces, invitation-only forums, encrypted messaging channels, paste sites, and data leak repositories. The goal is not simply to browse these spaces but to turn observed activity into intelligence that helps an organization understand who might target it, what methods are being traded or discussed, and whether its data, credentials, or brand have already been exposed. Analysts in this role typically sit within a threat intelligence or security operations team and feed their findings to defenders, incident responders, and fraud or brand protection functions.
+Criminal activity is organized, discussed, and monetized in the hidden and restricted corners of the internet, and a **Dark Web Analyst** is the cyber threat intelligence specialist who watches them. The role centers on collecting and interpreting information from dark web marketplaces, invitation-only forums, encrypted messaging channels, paste sites, and data leak repositories. The aim is not to browse but to turn observed activity into intelligence: who might target the organization, what methods are being traded or discussed, and whether its data, credentials, or brand have already been exposed. Analysts usually sit within a threat intelligence or security operations team and feed findings to defenders, incident responders, and fraud or brand protection functions.
 
-Day to day, the work involves maintaining visibility into a curated set of sources, tracking threat actors and the aliases they use, and recognizing when chatter signals a meaningful change in risk. An analyst might identify leaked employee credentials being offered for sale, spot a ransomware group naming the organization on a leak site, follow discussion of a newly traded access method, or assess whether an actor advertising network access is credible. Much of the discipline lies in verification and context. Underground sources are full of exaggeration, resale of stale data, and outright fabrication, so a capable analyst corroborates claims, judges the reliability of a seller or forum member, and communicates confidence levels honestly rather than raising alarms over unverified posts. Findings are documented in intelligence reports, alerts, and briefings tailored to the audience that will act on them.
+## Responsibilities
 
-The role calls for strong analytical judgment, patience, and disciplined research habits, along with a solid grounding in how cybercrime economies and threat actor operations function. Reading comprehension across multiple languages, or close work with linguists and translation tools, is often valuable because these communities operate globally. Analysts rely on operational security practices and dedicated, isolated research environments to observe sources safely and lawfully, and they must stay within legal and ethical boundaries: the job is observation and analysis, not participation in or facilitation of criminal transactions. Emotional resilience matters as well, since the material encountered can be disturbing. Familiarity with intelligence frameworks, structured analytic techniques, and clear writing rounds out the profile.
+- Maintain visibility into a curated set of sources and track threat actors and the aliases they use.
+- Recognize when chatter signals a meaningful change in risk, such as leaked employee credentials offered for sale or a ransomware group naming the organization on a leak site.
+- Follow discussion of newly traded access methods and assess whether an actor advertising network access is credible.
+- Verify and contextualize claims, since underground sources are full of exaggeration, resale of stale data, and outright fabrication.
+- Communicate **confidence levels** honestly rather than raising alarms over unverified posts.
+- Document findings in intelligence reports, alerts, and briefings tailored to the audience that will act on them.
 
-People commonly enter this role from a background in threat intelligence, security operations, open source intelligence research, fraud investigation, or law enforcement, and many bring language skills or regional expertise that make certain communities accessible. Early responsibilities tend to emphasize monitoring and reporting under supervision, with growing autonomy to run investigations, build source coverage, and track specific actors over time. Progression can lead toward senior analyst positions, specialization in a particular criminal ecosystem or threat type, or movement into broader intelligence, investigations, or management tracks.
+## Skills and background
 
-This role is closely related to the broader Threat Intelligence Analyst, who works across a wider range of collection sources and intelligence requirements, and it feeds the deeper actor and campaign study done by a Threat Researcher. Where a Strategic Threat Analyst frames risk for leadership and a CTI Manager directs the program and its priorities, the Dark Web Analyst concentrates on a specialized collection domain, supplying the underground visibility that those neighboring roles depend on.
+- **Research discipline:** strong analytical judgment, patience, and a solid grounding in how cybercrime economies and threat actor operations function.
+- **Language reach:** reading comprehension across multiple languages, or close work with linguists and translation tools, since these communities operate globally.
+- **Operational security:** dedicated, isolated research environments and lawful, ethical conduct; the job is observation and analysis, never participation in or facilitation of criminal transactions.
+- **Resilience and structure:** emotional resilience for disturbing material, plus familiarity with intelligence frameworks, structured analytic techniques, and clear writing.
+
+## Getting into the role
+
+People commonly enter from threat intelligence, security operations, open source intelligence research, fraud investigation, or law enforcement, and many bring language skills or regional expertise that make certain communities accessible. Early responsibilities emphasize monitoring and reporting under supervision, with growing autonomy to run investigations, build source coverage, and track specific actors over time.
+
+## Career progression
+
+Progression can lead toward senior analyst positions, specialization in a particular criminal ecosystem or threat type, or movement into broader intelligence, investigations, or management tracks.
+
+## Related roles
+
+- [Threat Intelligence Analyst](threat-intelligence-analyst.md): works across a wider range of collection sources and requirements than this specialized domain.
+- [Threat Researcher](threat-researcher.md): performs the deeper actor and campaign study the analyst's underground signals feed.
+- [Strategic Threat Analyst](strategic-threat-analyst.md): frames risk for leadership using raw material like this.
+- [CTI Manager](cti-manager.md): directs the program and its collection priorities.
 
 ## References
 

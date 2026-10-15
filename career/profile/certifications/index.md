@@ -12,13 +12,26 @@ keywords:
 
 # Certifications
 
-Certifications are formal credentials that validate a professional's knowledge in a defined area of security. They offer a common signal that employers, clients, and peers can recognize, and they provide a structured way to confirm that someone has studied a body of material to a known standard. In a field with many self-taught practitioners, certifications help establish a shared baseline.
+Certifications are formal credentials that validate a professional's knowledge in a defined area of security. They give employers, clients, and peers a common signal, and they offer a structured way to confirm that someone has studied a body of material to a known standard. In a field with many self-taught practitioners, they help establish a shared **baseline**, but they complement hands-on experience rather than replacing it.
 
-Within a security career, certifications serve several purposes. They can help a newcomer demonstrate foundational knowledge, help a specialist show depth in a particular domain, and in some cases satisfy requirements for specific roles or contracts. They complement rather than replace hands-on experience, which remains the strongest evidence of ability.
+Within a career, certifications serve several purposes: they help a newcomer demonstrate foundational knowledge, help a specialist show depth in a domain, and sometimes satisfy requirements for specific roles or contracts. This section organizes them into four tiers so you can see where a given credential fits and what it is meant to prove.
 
-Well-known examples illustrate the range. CompTIA Security+ is often used as a broad entry-level credential, the Offensive Security Certified Professional (OSCP) focuses on hands-on offensive skills, and the Certified Information Systems Security Professional (CISSP) from (ISC)2 targets experienced practitioners covering management and governance breadth. These are examples, not a required sequence, and the right choice depends on a person's goals.
+## In this section
 
-Choosing certifications works best when tied to a direction rather than collected for their own sake. It helps to look at which credentials appear in target job postings, weigh the time and cost involved, and balance them against practical experience. Used thoughtfully, certifications support a career; they do not substitute for real competence.
+- [Entry-Level](entry-level.md): the foundational tier that validates broad baseline knowledge for newcomers, such as **CompTIA Security+**.
+- [Intermediate](intermediate.md): applied, role-specific competence for practitioners past their first job.
+- [Advanced](advanced.md): senior credentials that signal governance breadth or deep technical mastery, such as the **CISSP** from (ISC)2.
+- [Specialized](specialized.md): depth in a single domain, such as cloud security, forensics, or offensive testing with the **OSCP**.
+
+## How to choose
+
+Certifications work best when tied to a direction rather than collected for their own sake. A few practical checks help:
+
+- Look at which credentials actually appear in the job postings you are targeting.
+- Weigh the time and cost of each exam against what it will prove.
+- Balance a certification against practical experience, which remains the strongest evidence of ability.
+
+The examples above are illustrations, not a required sequence. The right choice depends on your goals.
 
 ## References
 

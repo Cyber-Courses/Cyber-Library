@@ -1,24 +1,31 @@
 ---
-title: "Métiers de la cybersécurité : SOC, réponse à incident, offensif, GRC et architecture"
-description: "Un aperçu des grands domaines fonctionnels de la cybersécurité et du travail que chaque métier implique."
+title: "Rôles en cybersécurité : SOC, réponse aux incidents, offensif, GRC et architecture"
+description: "Un aperçu des principaux domaines fonctionnels de la cybersécurité et du travail que recouvre chaque catégorie de rôle."
 keywords:
-  - métiers de la cybersécurité
+  - rôles en cybersécurité
   - analyste SOC
-  - réponse à incident
-  - métiers GRC
+  - réponse aux incidents
+  - rôles GRC
   - architecture de sécurité
   - fonctions des métiers de la sécurité
 ---
 
-# Métiers
+# Rôles
 
-La cybersécurité n'est pas un métier unique mais un ensemble de domaines fonctionnels distincts, chacun avec son propre centre de gravité et son travail quotidien. Comprendre ces métiers aide un professionnel à trouver où s'inscrivent ses intérêts et ses forces, et cela clarifie la manière dont les différentes parties d'un programme de sécurité dépendent les unes des autres.
+La cybersécurité n'est pas un seul métier mais un ensemble de **domaines fonctionnels**, chacun avec son propre centre d'intérêt, son travail quotidien et ses attentes. Regrouper les rôles de cette manière aide un professionnel à trouver où ses intérêts et ses forces s'inscrivent, et cela montre comment les différentes parties d'un programme de sécurité dépendent les unes des autres. De nombreux praticiens débutent dans un domaine et en traversent plusieurs au cours d'une carrière, et les frontières entre eux varient d'une organisation à l'autre.
 
-Le travail au sein d'un centre des opérations de sécurité, souvent la porte d'entrée pour beaucoup, est centré sur la surveillance, la détection et le tri des activités suspectes. La réponse à incident prolonge cela par une investigation et une remise en état coordonnées lorsqu'un problème survient, exigeant une analyse posée sous pression. Les deux demandent un souci du détail et une communication solide.
+## Catégories de rôles
 
-Les métiers offensifs, comme le test d'intrusion et le red teaming, évaluent les défenses en examinant les systèmes du point de vue d'un adversaire et en rapportant les constats afin qu'ils puissent être corrigés. Les métiers de la gouvernance, du risque et de la conformité (GRC) se concentrent sur la politique, l'évaluation des risques et l'alignement sur les réglementations et les normes, reliant la sécurité aux attentes métier et juridiques. L'architecture de sécurité conçoit les systèmes et les mesures de protection de sorte que la protection soit intégrée dès le départ plutôt qu'ajoutée après coup.
-
-Ces domaines se recoupent et se soutiennent mutuellement. De nombreux praticiens débutent dans une fonction et en traversent plusieurs au cours d'une carrière, et les frontières entre elles varient selon l'organisation. Connaître la forme générale de chaque métier aide un professionnel à planifier son apprentissage, à choisir une orientation et à comprendre comment son travail se rattache au programme dans son ensemble.
+- [Rôles de sécurité défensive](defensive-security-roles/index.md) : le travail d'équipe bleue qui surveille, investigue et répond aux menaces, avec l'**analyste SOC** comme point d'entrée courant.
+- [Rôles de sécurité offensive](offensive-security-roles/index.md) : les **tests adverses** autorisés, comme les tests d'intrusion et le red teaming, qui mettent au jour les faiblesses pour que les défenseurs puissent les corriger.
+- [Rôles de forensique et de réponse aux incidents](forensics-and-ir-roles/index.md) : l'investigation et la réponse qui reconstituent ce qui s'est passé, préservent les **preuves** et coordonnent la remédiation.
+- [Rôles de renseignement sur les menaces](threat-intelligence-roles/index.md) : l'analyse centrée sur l'adversaire qui transforme des données éparses en **renseignement finalisé** pour les défenseurs et les décideurs.
+- [Rôles de sécurité applicative](application-security-roles/index.md) : l'intégration de la sécurité dans les logiciels au plus près des équipes d'ingénierie, de la conception au développement et à la mise en production.
+- [Rôles de sécurité du cloud](cloud-security-roles/index.md) : la protection des données, des charges de travail et de l'infrastructure dans le cloud public, privé et hybride selon le **modèle de responsabilité partagée**.
+- [Rôles d'architecture de sécurité](security-architecture-roles/index.md) : la conception des systèmes et des contrôles pour que la protection soit une **propriété conçue** plutôt qu'une réflexion après coup.
+- [Rôles IAM](iam-roles/index.md) : la gestion des identités et des accès pour que les bonnes personnes et les bons systèmes disposent du bon accès au bon moment, et pas davantage.
+- [Rôles GRC](grc-roles/index.md) : le travail de gouvernance, de risque et de conformité qui aligne la sécurité sur les obligations, la politique et la **tolérance au risque**.
+- [Rôles de confidentialité et de protection des données](privacy-and-data-protection-roles/index.md) : la sauvegarde des **données personnelles** dans le respect du droit de la vie privée, comme le RGPD, et des bonnes pratiques.
 
 ## Références
 

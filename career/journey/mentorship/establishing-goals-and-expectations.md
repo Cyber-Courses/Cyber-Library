@@ -11,13 +11,36 @@ keywords:
 
 # Establishing Goals and Expectations
 
-Establishing goals and expectations is the early work of defining what a mentorship is meant to accomplish and how the two people will work together. It is the conversation that turns a willing mentor and an interested mentee into a relationship with purpose. Without it, meetings drift toward whatever is on the mentee's mind that week, and both people can quietly grow uncertain about whether the arrangement is worth their time. Setting terms at the outset gives the relationship a center to return to.
+Early in a mentorship, the two people define what it is meant to accomplish and how they will work together. This conversation turns a willing mentor and an interested mentee into a relationship with purpose. Without it, meetings drift toward whatever is on the mentee's mind that week, and both people can quietly doubt whether the arrangement is worth their time.
 
-Goals in a security context are usually a mix of concrete and developmental. A mentee might want to move from a help desk role into a security operations center within a year, prepare for a specific certification, build confidence presenting findings to non-technical stakeholders, or decide between a defensive and an offensive specialization. Good goals are specific enough to show progress and honest about the mentee's starting point. They also belong to the mentee; the mentor's job is to help shape and pressure-test them, not to impose a path that mirrors their own career.
+## Setting goals that belong to the mentee
 
-Expectations cover the practical and relational terms that goals alone do not. These include how often the two will meet and through what channel, who is responsible for scheduling and for bringing an agenda, how quickly messages between sessions should be answered, and what topics are in or out of scope. They also cover confidentiality, since a mentee may share frustrations about an employer or doubts about their own ability, and the boundary that separates mentoring from managing. A mentor advises and reflects; they do not evaluate performance, intervene in workplace disputes, or promise job referrals. Naming these limits early prevents disappointment later.
+Goals in security are usually a mix of concrete and developmental, for example:
 
-This work matters to a security career because the field rewards deliberate direction over accumulated activity. Practitioners can spend years collecting certifications and tools without a clear sense of where they are heading. A mentorship with agreed goals converts that effort into a trajectory, and agreed expectations keep the relationship healthy enough to last long enough to help. Goals and expectations are not set once and forgotten. They are revisited as the mentee progresses, circumstances change, or a goal is reached, and the periodic review is itself a useful habit that mentees carry into the rest of their careers.
+- Moving from a help desk role into a security operations center within a year.
+- Preparing for a specific certification.
+- Building confidence presenting findings to non-technical stakeholders.
+- Deciding between a defensive and an offensive specialization.
+
+Good goals are **specific enough to show progress** and honest about the mentee's starting point. They belong to the mentee; the mentor's job is to help shape and pressure-test them, not to impose a path that mirrors their own career.
+
+## Agreeing on expectations
+
+Expectations cover the practical and relational terms that goals alone do not:
+
+- How often the two will meet and through what channel.
+- Who is responsible for scheduling and for bringing an agenda.
+- How quickly messages between sessions should be answered.
+- What topics are in or out of scope.
+- **Confidentiality**, since a mentee may share frustrations about an employer or doubts about their own ability.
+
+## The boundary between mentoring and managing
+
+A mentor advises and reflects; they do not evaluate performance, intervene in workplace disputes, or promise job referrals. Naming these limits early prevents disappointment later.
+
+## Revisiting over time
+
+Goals and expectations are not set once and forgotten. They are revisited as the mentee progresses, circumstances change, or a goal is reached. This periodic review is itself a useful habit that mentees carry into the rest of their careers, converting accumulated activity into a deliberate trajectory.
 
 ## References
 

@@ -6,21 +6,29 @@ keywords:
   - cloud security engineer
   - cloud security architect
   - cloud compliance specialist
-  - devsecops engineer
   - cloud security analyst
+  - cloud governance
 ---
 
 # Cloud Security Roles
 
-Cloud security roles share a common purpose: to protect the data, workloads, and infrastructure that organizations run on public, private, and hybrid cloud platforms. As computing has shifted from on-premises data centers to providers such as Amazon Web Services, Microsoft Azure, and Google Cloud, the responsibility for security has become shared between the provider and the customer. These roles exist to manage the customer's side of that responsibility, applying established security principles to environments defined largely by software, identity, and configuration rather than physical hardware.
+Cloud security roles share a common purpose: to protect the data, workloads, and infrastructure that organizations run on public, private, and hybrid cloud platforms such as Amazon Web Services, Microsoft Azure, and Google Cloud. As computing has shifted from on-premises data centers to these providers, responsibility for security has become shared between provider and customer, and these roles manage the customer's side of that bargain. They apply established security principles to environments defined largely by software, identity, and configuration rather than physical hardware.
 
-Although the roles are related, they differ in focus, altitude, and the balance of engineering, analysis, and governance they involve. Some are hands-on and operational, while others are strategic or concerned mainly with regulatory obligations. The pages beneath this section describe each role in turn, including its typical responsibilities, the skills it draws on, and how it connects to the wider security program and to engineering teams.
+## What these roles share
 
-The [Cloud Security Engineer](cloud-security-engineer.md) builds and maintains the controls that keep cloud environments secure, working directly with identity systems, network configuration, encryption, and automation. The [Cloud Security Analyst](cloud-security-analyst.md) focuses on monitoring, investigation, and response, interpreting logs and alerts from cloud-native telemetry to detect and understand suspicious activity. The [Cloud Security Architect](cloud-security-architect.md) takes a broader, longer-term view, designing secure patterns and reference designs that shape how an organization adopts cloud services across many teams.
+- A **shared responsibility model** that fixes which duties belong to the provider and which to the organization.
+- Environments defined and changed through code, so controls are written, versioned, and automated rather than wired by hand.
+- A reliance on identity, configuration, and logging as the primary levers of security.
+- Frequent collaboration across engineering, operations, and governance, with boundaries that vary from one organization to another.
 
-Two further roles sit closer to governance and development. The [Cloud Compliance Specialist](cloud-compliance-specialist.md) maps regulatory and contractual requirements onto cloud controls, helping the organization demonstrate that its environments meet standards such as SOC 2, ISO 27001, or sector-specific regulations. The [DevSecOps Engineer](devsecops-engineer.md) works at the meeting point of development, operations, and security, embedding automated checks and guardrails into the pipelines that deliver cloud applications so that security keeps pace with rapid release cycles.
+## Roles
 
-Careers in this area rarely follow a single path. Many practitioners arrive from general infrastructure, software engineering, or security operations backgrounds, and the boundaries between these roles vary from one organization to another. Reading the individual pages alongside this overview helps a professional see where their interests fit and how the roles complement one another and the broader security and engineering functions.
+- [Cloud Security Engineer](cloud-security-engineer.md): builds and operates the controls that keep cloud environments secure, working directly with identity, networking, encryption, and automation.
+- [Cloud Security Analyst](cloud-security-analyst.md): monitors, investigates, and reports on cloud posture, turning native telemetry into prioritized risk findings.
+- [Cloud Security Architect](cloud-security-architect.md): designs the secure patterns and guardrails that shape how an organization adopts cloud services across many teams.
+- [Cloud Compliance Specialist](cloud-compliance-specialist.md): maps regulatory and contractual requirements onto cloud controls and demonstrates that standards such as SOC 2 and ISO 27001 are met.
+
+A closely related role, the [DevSecOps Engineer](../application-security-roles/devsecops-engineer.md), works at the meeting point of development, operations, and security, embedding automated checks and guardrails into the pipelines that deliver cloud applications. It is documented under application security roles, but it collaborates with every role above.
 
 ## References
 

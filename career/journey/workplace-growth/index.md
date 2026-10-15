@@ -1,6 +1,6 @@
 ---
 title: "Workplace Growth in Cybersecurity: Advancement, Performance, and Leadership"
-description: "How security professionals advance within a role, strengthen skills, perform well, and find leadership opportunities."
+description: "How security professionals advance within a role by strengthening skills, performing visibly well, moving between teams, and stepping into leadership."
 keywords:
   - cybersecurity career advancement
   - workplace growth
@@ -12,13 +12,14 @@ keywords:
 
 # Workplace Growth
 
-Workplace growth is how a security professional advances and expands their impact within an organization over time. It includes taking on harder problems, strengthening skills, performing visibly well, and stepping into leadership opportunities as they appear. Unlike changing jobs, this growth happens in place and compounds through sustained contribution.
+Workplace growth is how a security professional advances and expands their impact inside one organization over time, without changing employers. It compounds through sustained contribution: taking on harder problems, **strengthening skills**, performing visibly well, moving between teams, and stepping into **leadership opportunities** as they appear. Because security roles deepen with experience and the field moves quickly, the people who keep learning and make their work legible tend to earn access to larger responsibilities.
 
-Within a security career, growth matters because the field moves quickly and roles deepen with experience. An analyst who consistently delivers reliable work, learns new tooling, and understands the business context of security decisions becomes more valuable and earns access to more significant responsibilities.
+## In this section
 
-Skill enhancement is a steady part of this. Security work rewards people who keep pace with new threats, platforms, and defensive techniques. Growth often comes from volunteering for unfamiliar projects, documenting lessons learned, and turning incidents into durable improvements for the team.
-
-Performance and leadership go together. Doing strong work is necessary, but making that work visible through clear communication, mentoring newer colleagues, and improving shared processes marks someone as ready for more. Leadership opportunities may be formal, such as managing a team, or informal, such as owning a program or guiding technical direction. Both paths are legitimate ways to grow.
+- [Continuous Skill Enhancement](continuous-skill-enhancement.md): the ongoing practice of maintaining and expanding capability so your knowledge keeps pace with changing threats and platforms.
+- [Internal Mobility](internal-mobility.md): moving into a new role, team, or specialization within your current employer rather than leaving to grow.
+- [Leadership and Management Opportunities](leadership-and-management-opportunities.md): the formal and informal paths to guiding people, programs, and technical direction.
+- [Performance Feedback and Reviews](performance-feedback-and-reviews.md): the reviews and ongoing feedback that measure contribution and guide what you do next.
 
 ## References
 

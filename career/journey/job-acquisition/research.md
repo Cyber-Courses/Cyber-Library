@@ -1,6 +1,6 @@
 ---
 title: "Research: Investigating the Market Before You Apply"
-description: "The practice of studying employers, roles, and the security job market so that applications and conversations are focused and well informed."
+description: "Studying employers, roles, and the security job market so applications and conversations stay focused and well informed."
 keywords:
   - cybersecurity job search
   - employer research
@@ -12,15 +12,35 @@ keywords:
 
 # Research
 
-Research is the groundwork a candidate does before applying for a security position: studying the job market, specific employers, and the roles themselves so that later effort is aimed rather than scattered. In job acquisition it comes first, informing the applications, outreach, interviews, and negotiation that follow. Good research turns a vague ambition to "work in cybersecurity" into a concrete picture of which teams, titles, and organizations fit a person's background and goals.
+**Research** is the groundwork a candidate does before applying for a security position: studying the job market, specific employers, and the roles themselves so that later effort is aimed rather than scattered. It comes first in job acquisition and feeds the applications, outreach, interviews, and negotiation that follow. Done well, it turns a vague ambition to "work in cybersecurity" into a concrete picture of which teams, titles, and organizations fit a person's background and goals.
 
-Market research looks across the field. It means reading job postings closely to learn how roles are titled and grouped, which certifications and tools employers ask for, and how responsibilities differ between a security analyst, an engineer, and an architect. Tracking these patterns over time reveals where demand is growing, which skills recur across listings, and which adjacent roles a candidate might reasonably target. It also helps calibrate expectations about seniority, since the same title can mean very different things at a startup and at a large enterprise.
+## Market research
 
-Employer research narrows the focus to specific organizations. A candidate learns what the company does, how it makes money, and where security sits in the business, whether as a cost center, a product feature, or a regulatory obligation. Public sources such as the company's engineering blog, conference talks by its staff, published security advisories, and news about breaches or funding all signal the maturity of its program and the problems its team is solving. Understanding whether a role supports an internal security function or a security product shapes both fit and the questions worth asking.
+Reading across the field shows where a candidate's background actually fits.
 
-Role research connects a posting to the reality of the work. Beyond the listed duties, it helps to understand who the position reports to, which teams it collaborates with, and whether it is building something new or maintaining something established. Informational conversations with people doing similar jobs, professional communities, and salary surveys fill gaps that postings leave out, including typical compensation ranges and day-to-day expectations. This grounding lets a candidate decide where to invest effort and gives them specific, credible material to draw on when they move into outreach and interviews.
+- Read job postings closely to learn how roles are **titled and grouped**, and which certifications and tools recur.
+- Compare how responsibilities differ between a security **analyst**, an **engineer**, and an **architect**.
+- Track patterns over time to see where demand is growing and which adjacent roles are reasonable targets.
+- Calibrate expectations about seniority, since the same title can mean very different things at a startup and at a large enterprise.
 
-Treated well, research is continuous rather than a single step. The notes a candidate gathers about employers, hiring patterns, and compensation remain useful across an entire career, since security professionals change roles often and return to the market more than once. Keeping a simple record of what was learned turns each search into preparation for the next.
+## Employer research
+
+Narrowing to specific organizations tells a candidate what the work would really be like.
+
+- Learn what the company does, how it makes money, and whether security is treated as a **cost center**, a **product feature**, or a **regulatory obligation**.
+- Read public signals of program maturity: the engineering blog, conference talks by staff, published security advisories, and news about breaches or funding.
+- Decide whether the role supports an **internal security function** or a **security product**, which shapes both fit and the questions worth asking.
+
+## Role research
+
+A posting is only the starting point for understanding the job.
+
+- Find out who the position reports to, which teams it collaborates with, and whether it builds something new or maintains something established.
+- Use **informational conversations**, professional communities, and salary surveys to fill gaps that postings leave out, including typical pay ranges and daily expectations.
+
+## Keep it continuous
+
+The notes a candidate gathers about employers, hiring patterns, and compensation stay useful across a career, since security professionals change roles often and return to the market more than once. A simple running record turns each search into preparation for the next.
 
 ## References
 
