@@ -38,7 +38,7 @@ Les acteurs de la menace sont couramment regroupés selon qui ils sont et ce qui
 | Cybercriminels | L'argent | Moyenne à élevée, souvent achetée ou louée | Rançongiciels, fraude, vol de données revendables |
 | Acteurs étatiques | Espionnage, sabotage, avantage stratégique pour un gouvernement | Élevée : financement, temps, outils sur mesure | Intrusions longues et discrètes visant l'administration, la défense et les infrastructures critiques |
 | Hacktivistes | Une cause politique ou sociale | Faible à moyenne | Défacement de sites web, fuites, perturbations calées sur l'actualité |
-| Initiés | Rancœur, argent ou simple négligence | Un accès légitime, qui compte souvent plus que la compétence | Détournement d'accès par des employés et prestataires actuels ou anciens |
+| Initiés malveillants | Rancœur, argent ou contrainte | Un accès légitime, qui compte souvent plus que la compétence | Détournement d'accès par des employés et prestataires actuels ou anciens |
 | Amateurs de sensations et passionnés | Curiosité, réputation, le défi en lui-même | Très variable | Sondage de systèmes exposés, intrusions ponctuelles médiatisées |
 
 Des catalogues publics comme la liste des Groups de MITRE ATT&CK recensent des acteurs nommés au sein de ces familles, ainsi que les techniques que chacun a été observé utiliser.

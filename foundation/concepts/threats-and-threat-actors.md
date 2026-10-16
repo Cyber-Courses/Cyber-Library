@@ -38,7 +38,7 @@ Threat actors are commonly grouped by who they are and what drives them. The bou
 | Cybercriminals | Money | Moderate to high, often bought or rented | Ransomware, fraud, theft of data they can sell |
 | Nation-state actors | Espionage, sabotage, strategic advantage for a government | High: funding, time, custom tooling | Long, quiet intrusions into government, defense, and critical infrastructure |
 | Hacktivists | A political or social cause | Low to moderate | Website defacement, leaks, disruption timed to events |
-| Insiders | Grievance, money, or simply carelessness | Legitimate access, which often outweighs skill | Misuse of access by current or former employees and contractors |
+| Malicious insiders | Grievance, money, or coercion | Legitimate access, which often outweighs skill | Misuse of access by current or former employees and contractors |
 | Thrill seekers and hobbyists | Curiosity, reputation, the challenge itself | Varies widely | Probing exposed systems, publicized one-off intrusions |
 
 Public catalogs such as MITRE ATT&CK's Groups list track specific named actors within these families and the techniques each has been observed using.

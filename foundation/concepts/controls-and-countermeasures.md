@@ -40,7 +40,7 @@ Most programs need all three rows, because a policy without technical enforcemen
 
 Consider an employee whose laptop is taken from a car. No single control decides the outcome; the layers do.
 
-- **Full-disk encryption** (preventive, technical) keeps the files unreadable to the thief.
+- **Full-disk encryption** (preventive, technical) keeps the files unreadable if the laptop was powered off or securely locked when taken; on a device left on and unlocked, the volume is already decrypted.
 - **Multi-factor authentication and short session lifetimes** (preventive, technical): MFA stops the thief from starting a fresh login with any password found on the device, while sessions already open in the browser stay usable only until they expire or are revoked.
 - **A clear reporting procedure** (administrative) gets the loss reported the same day.
 - **Sign-in monitoring** (detective, technical) flags any attempt to use the device's credentials from an unfamiliar location.
