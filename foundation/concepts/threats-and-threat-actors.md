@@ -1,74 +1,68 @@
 ---
 title: "Threats and Threat Actors: Who Attacks and Why"
-description: "What a threat is in security terms, the kinds of actors behind threats, and the motivations and capabilities that shape how they behave."
+description: "What a threat is, the kinds of actors behind them, and the motivations and capabilities that make a threat real rather than hypothetical."
 keywords:
-  - threats
-  - threat actors
+  - threat
+  - threat actor
   - threat modeling
   - adversary motivation
-  - attacker capabilities
+  - attacker capability
   - cyber threat intelligence
 ---
 
 # Threats and threat actors
 
-**A threat** is any circumstance or event with the potential to harm an asset by exploiting a vulnerability. A **threat actor** is the person, group, or entity that carries out, or intends to carry out, that harm. Keeping these two ideas distinct is useful: a threat describes what could go wrong, while the actor describes who would make it happen and why. Together they help you reason about not just whether a weakness exists, but whether anyone is motivated and able to use it.
+**A threat is any circumstance or event with the potential to harm a system**, and a threat actor is the person or group that would make it happen. Security work starts here, because you cannot defend against danger you have not named. A threat is not the weakness itself and not the damage itself; it is the possibility that sits between them, waiting on someone with a reason to act.
 
-## A threat needs something to harm and a way in
+## A threat is not a weakness or a loss
 
-A threat only matters in relation to something worth protecting (an [asset](assets-and-attack-surface.md)) and a weakness that lets harm occur (a [vulnerability](vulnerabilities-and-exploits.md)). Remove either one and the threat has nothing to act on.
+These three ideas are easy to blur, so it helps to pull them apart:
 
-Two examples show the chain:
+- A **threat** is the potential for harm, such as "an attacker could encrypt our files for ransom."
+- A [vulnerability](vulnerabilities-and-exploits.md) is the flaw that would let it succeed, such as an unpatched server.
+- The **harm** is the realized loss, measured against the [CIA triad](cia-triad.md): data disclosed, altered, or made unavailable.
 
-1. **Flooding and a data center.** The servers inside have value, and the building can take on water. The flood is the threat, the servers are the asset, the low-lying site is the weakness.
-2. **Phishing and an employee account.** People can be tricked, and an account, once stolen, grants access to something useful. The phishing email is the threat, the account and what it unlocks are the asset, human trust is the weakness.
+A threat with no matching weakness stays hypothetical. A weakness that no actor cares to exploit stays dormant. For a deliberate attack, risk appears only when both line up over an [asset](assets-and-attack-surface.md) worth something. Non-adversarial threats break that pattern: a power cut, a fire, a failed disk, or an accidental deletion can harm the same asset with no attacker and no exploited weakness at all, which is why risk assessments weigh accidents and the environment alongside hostile actors.
 
-What the threat ultimately puts at risk is the confidentiality, integrity, or availability of that asset, as described in the [CIA triad](cia-triad.md).
+## The actors, sorted by what drives them
 
-## Threats with no adversary behind them
+Who is behind a threat shapes everything about how it behaves: how patient they are, how much they will spend, and what they are willing to break. Threat intelligence groups actors less by their tools than by their motive.
 
-Not every threat comes from a hostile actor. Security distinguishes between **deliberate** threats, such as an intruder, and **accidental or environmental** ones: a power outage, a hardware failure, a storm, or an honest mistake by an employee. NIST's risk assessment guidance treats these as separate threat source categories alongside adversarial ones, because they call for different questions. An adversary adapts to your defenses; a failing disk does not. The rest of this page focuses on the deliberate side, where a threat actor is involved.
+| Actor | What they want | Typical capability |
+| --- | --- | --- |
+| Cybercriminals | Money, through fraud, theft, or ransom | Moderate to high; often buy tools and access |
+| Nation-state groups | Espionage, sabotage, strategic advantage | Very high; patient, well funded, custom tooling |
+| Hacktivists | Attention for a cause | Low to moderate; favor disruption and leaks |
+| Malicious insiders | Grievance or profit | Variable, but start with legitimate access |
+| Opportunists | Whatever is easy, including bragging rights | Low; rely on known flaws and automation |
 
-## Five families of threat actors
+The careless insider is a reminder that not every actor is hostile. An employee who emails a spreadsheet to the wrong address is still a source of harm your defenses must account for.
 
-Threat actors are commonly grouped by who they are and what drives them. The boundaries blur in practice (a state may tolerate or hire criminals, an insider may be recruited by an outsider), but the families are a useful starting point.
+## Capability, intent, and opportunity
 
-| Actor | Typical motivation | Typical capability | What it often looks like |
-|---|---|---|---|
-| Cybercriminals | Money | Moderate to high, often bought or rented | Ransomware, fraud, theft of data they can sell |
-| Nation-state actors | Espionage, sabotage, strategic advantage for a government | High: funding, time, custom tooling | Long, quiet intrusions into government, defense, and critical infrastructure |
-| Hacktivists | A political or social cause | Low to moderate | Website defacement, leaks, disruption timed to events |
-| Malicious insiders | Grievance, money, or coercion | Legitimate access, which often outweighs skill | Misuse of access by current or former employees and contractors |
-| Thrill seekers and hobbyists | Curiosity, reputation, the challenge itself | Varies widely | Probing exposed systems, publicized one-off intrusions |
+For a threat to be credible, three conditions have to hold at once. Analysts sometimes call this the threat triangle:
 
-Public catalogs such as MITRE ATT&CK's Groups list track specific named actors within these families and the techniques each has been observed using.
+1. **Capability.** The actor has the skills, tools, or resources to carry the attack out.
+2. **Intent.** The actor has a reason to target you rather than someone else.
+3. **Opportunity.** A reachable weakness exists for them to use.
 
-## Motivation, capability, opportunity
+Defenders rarely change an adversary's capability or intent. What they can shrink is opportunity, which is why so much of security is about closing openings before anyone with a motive finds them.
 
-Two dimensions describe any actor:
+## Following a ransomware crew
 
-- **Motivation** is why they act: money, information, disruption, ideology, or ego.
-- **Capability** is what they can actually do, shaped by skill, funding, time, and tools.
+Watch how the pieces combine in one common pattern:
 
-A highly motivated but unskilled actor is a different problem than a patient, well-funded one. Analysts often add a third factor, **opportunity**: the access or exposure an actor needs to act at all.
+1. **Motive.** A criminal group wants payment, so any organization that cannot afford downtime is a target.
+2. **Entry.** They phish an employee, exploiting the cheapest opportunity rather than the fanciest flaw.
+3. **Spread.** With one foothold, they move through the network toward valuable data.
+4. **Leverage.** In modern double-extortion attacks they exfiltrate the data first, breaking confidentiality, then encrypt the systems to break availability, so a victim with good backups still faces the threat of a leak.
 
-Reducing any of the three lowers risk, but defenders rarely influence the first two. You cannot make a criminal less interested in money or a government less well funded. Opportunity is different: patching, reducing exposed services, and limiting access through [controls and countermeasures](controls-and-countermeasures.md) all shrink it directly.
-
-## One exposed server, three different attackers
-
-Picture a small company running an unpatched, internet-facing file server. Three actors could reach it, and each corrects a common assumption.
-
-- **The automated scanner.** A criminal group's tooling sweeps the internet for that exact flaw and drops ransomware on every match. Nobody chose this company; it was simply reachable and unpatched. "We are too small to be a target" fails because much crime is opportunistic and automated.
-- **The organized crew.** The access is sold by one specialist to another who handles extortion, while a third negotiates payment. Most threat actors are not lone geniuses but organized groups with specialized roles, shared tools, and even support services.
-- **The departing administrator.** A contractor whose account was never disabled copies the server's contents before leaving. Insiders, and plain accidents, account for a large share of real incidents, so focusing only on outsiders leaves a gap.
-
-The same weakness, three very different actors: understanding who might use a vulnerability, and why, is what turns a list of flaws into a prioritized risk picture.
+At each step, a [control](controls-and-countermeasures.md) could have removed the opportunity: training against phishing, [least privilege](../principles/least-privilege.md) to limit the spread, and offline backups to blunt the ransom. The actor's motive never changed; the defenders simply gave it nowhere to land.
 
 ## References
 
-- [NIST Glossary: Threat](https://csrc.nist.gov/glossary/term/threat)
-- [NIST Glossary: Threat Actor](https://csrc.nist.gov/glossary/term/threat_actor)
 - [NIST SP 800-30 Rev. 1, Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
-- [MITRE ATT&CK: Groups](https://attack.mitre.org/groups/)
-- [CISA: Cyber Threats and Advisories](https://www.cisa.gov/topics/cyber-threats-and-advisories)
-- [ENISA: Threats and Trends](https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends)
+- [MITRE ATT&CK Groups](https://attack.mitre.org/groups/)
+- [CISA, Cyber Threats and Advisories](https://www.cisa.gov/topics/cyber-threats-and-advisories)
+- [ENISA Threat Landscape](https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends)
+- [Verizon Data Breach Investigations Report (DBIR)](https://www.verizon.com/business/resources/reports/dbir/)

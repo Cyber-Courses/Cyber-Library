@@ -1,75 +1,56 @@
 ---
 title: "Zero Trust: Verify Every Request, Trust No Location"
-description: "The security model that treats no network location or identity as implicitly trustworthy and verifies every request before granting access."
+description: "Zero trust is a security model that treats no network location or identity as implicitly trusted and verifies every request before granting access."
 keywords:
   - zero trust
   - zero trust architecture
   - never trust always verify
-  - identity verification
+  - policy enforcement point
   - microsegmentation
-  - continuous authentication
+  - continuous verification
 ---
 
 # Zero trust
 
-**Zero trust** is a security model built on a single rule: no user, device, or network location is trusted by default, and every request to access a resource must be verified before it is allowed. Its slogan is "never trust, always verify." Instead of asking "is this connection coming from inside our network?", a zero trust system asks "who is this, what device are they on, what are they asking for, and does that make sense right now?" and it asks that question again for every request.
+**Zero trust** is a security model that grants no automatic trust based on where a request comes from. Being inside the corporate network, on a company laptop, or behind the firewall earns nothing on its own. Every attempt to reach a resource is treated as if it came from an open, hostile network and must prove its identity, its device posture, and its right to that specific resource before access is allowed. The phrase that captures it is "never trust, always verify."
 
-## The castle and moat that stopped holding
+## The perimeter model it replaced
 
-Traditional enterprise security drew a hard line around the corporate network. A firewall guarded the edge, and anything inside the perimeter was treated as safe while anything outside was treated as hostile. Once a user or a machine got past the moat, it could usually reach most internal systems.
+For decades, enterprise security worked like a castle and moat. A firewall guarded the edge, everything outside was hostile, and everything inside was treated as safe. The flaw was structural: once an attacker got past the moat with one stolen password or one infected laptop, they inherited the network's trust and could move sideways to almost anything.
 
-That model assumed people, applications, and data all lived in the same building. Remote work, cloud services, SaaS applications, and mobile devices broke that assumption: resources now sit across offices, homes, and multiple clouds, and a firewall at the edge cannot protect what lies outside it. The model also failed on its own terms, because a single stolen credential or compromised laptop on the inside inherited the trust of the whole network and could roam freely.
+Remote work, cloud services, and personal devices then dissolved the moat entirely, because the people and data no longer sat in one building. The term "zero trust" was popularized by Forrester analyst John Kindervag around 2010, and Google's BeyondCorp project, published from 2014 onward, proved it at scale by moving access decisions off the network and onto individual users and devices.
 
-The idea of removing implicit trust took shape in response. Forrester analyst John Kindervag popularized the term "zero trust" around 2010, and Google's BeyondCorp project, described publicly in 2014, showed it working at scale: Google moved access controls off the network perimeter and onto individual users and devices, so employees could work from untrusted networks without a traditional VPN.
+## NIST's three logical components
 
-## Anatomy of a single access decision
+NIST Special Publication 800-207 describes zero trust architecture as a split between a control plane that decides and a data plane that enforces. Three logical components carry the model:
 
-The clearest way to see zero trust is to follow one request. Suppose an engineer opens the internal payroll dashboard from a laptop at a coffee shop.
+| Component | Role |
+|---|---|
+| Policy Engine | Weighs identity, device state, and context, then decides to grant, deny, or revoke access |
+| Policy Administrator | Executes the decision by opening or closing the communication path |
+| Policy Enforcement Point | Sits in front of the resource and lets nothing through until the path is opened |
 
-1. **The request reaches an enforcement point, not the application.** A policy enforcement point (a gateway, proxy, or agent) sits in front of the payroll app. Nothing reaches the app directly, and being on a particular network grants nothing.
-2. **Identity is proven.** The engineer authenticates, typically with multi-factor authentication. The service that will answer, and any service it calls, authenticates too.
-3. **The device is examined.** Is this a managed laptop? Is its operating system patched, its disk encrypted, its endpoint protection running? A valid user on a compromised device is still a risk.
-4. **Context is weighed.** Location, time of day, and behavior are compared with what is normal for this user. Logging in from two continents within an hour, for example, raises the risk score.
-5. **The policy engine decides, for this request only.** It checks whether this identity, on this device, in this context, should reach this specific resource. Engineers may not need payroll data at all, so following [least privilege](least-privilege.md) the answer may simply be no.
-6. **Trust keeps being reassessed.** If access is granted, it is scoped to what the request needs, and the session is re-evaluated as conditions change. If the device falls out of compliance or behavior turns anomalous mid-session, access can be cut.
+The subject is not one gateway but this decision loop, run for every request rather than once at login.
 
-NIST SP 800-207 names the core logical components in this flow: the **policy engine** makes the decision, the **policy administrator** carries it out by opening or closing the path, and the **policy enforcement point** sits in the data path and actually allows or blocks the traffic. The underlying mechanics of steps 2 and 5 are covered in [authentication and authorization](authentication-and-authorization.md).
+## Verifying a single request
 
-## The signals behind "verify"
+Follow an engineer opening an internal payroll dashboard from a coffee shop.
 
-"Verify" means more than checking a password. A zero trust policy combines several kinds of evidence, each of which catches something the others miss.
+1. The request hits a policy enforcement point, never the application directly. Sitting on any particular network grants nothing.
+2. Identity is proven, usually with multi-factor authentication, drawing on [authentication and authorization](authentication-and-authorization.md).
+3. The device is checked: is it managed, patched, and free of known compromise?
+4. The policy engine scores the full context and grants access to that one resource, for that one session, at the minimum level needed, applying [least privilege](least-privilege.md).
+5. The session is continuously re-evaluated. If the device falls out of compliance or the behavior turns anomalous, access is revoked mid-session.
 
-| Signal | What is checked | What it catches |
-|---|---|---|
-| Identity | Who the user or service is, proven with strong, usually multi-factor, authentication | Guessed or phished passwords used alone |
-| Device posture | Patch level, encryption, management status, endpoint protection | A legitimate user on an infected or unmanaged machine |
-| Context and behavior | Location, time, request patterns compared with a baseline | Stolen sessions and credentials used in unusual ways |
-| Resource sensitivity | How critical the requested data or system is | Low-assurance access to high-value targets |
+## The price of removing implicit trust
 
-Two structural techniques make these checks meaningful. **Microsegmentation** divides the network into small zones so that reaching one system does not grant reach to the rest, which is what keeps an attacker who gets in from finding many places to go. **Continuous evaluation** means trust is never a one-time stamp at login: it is reassessed throughout the session. Together they turn zero trust into a breach containment strategy, adding identity-based layers on top of the network and host controls described in [defense in depth](defense-in-depth.md).
+Zero trust is not free. Every request now carries the cost of a policy lookup, which adds latency and makes the policy engine a critical dependency: if it is slow or offline, legitimate work stalls. Strong identity and device signals must exist and stay accurate, or decisions are made on bad data. Done poorly, the enforcement points become a new perimeter in disguise.
 
-## From NIST guidance to a federal deadline
-
-Zero trust moved from vendor vocabulary to formal guidance through a short sequence of U.S. government documents:
-
-- **August 2020: NIST SP 800-207.** NIST published *Zero Trust Architecture*, which defines the concept, sets out its tenets, and describes deployment models. It remains the most cited reference definition.
-- **January 2022: OMB M-22-09.** The Office of Management and Budget directed federal civilian agencies to adopt a zero trust strategy, with specific goals for identity, devices, networks, applications, and data to be met by the end of fiscal year 2024.
-- **April 2023: CISA Zero Trust Maturity Model 2.0.** CISA organized the work into five pillars (identity, devices, networks, applications and workloads, and data) plus three cross-cutting capabilities (visibility and analytics, automation and orchestration, and governance). Each pillar is graded across four stages: traditional, initial, advanced, and optimal.
-
-The maturity model matters beyond government because it frames zero trust as a journey measured pillar by pillar, not a switch an organization flips. Many private companies and other governments use it as a roadmap.
-
-## Where zero trust programs stall
-
-- **Buying a box labeled "zero trust."** Zero trust is an architecture and a mindset, not a single product that can be purchased and switched on. Tools help, but only inside a design that removes implicit trust everywhere.
-- **Stopping at the login.** Verifying identity once and then trusting the whole session quietly reintroduces the implicit trust the model is meant to remove.
-- **Checking the user but not the device.** Strong authentication from a compromised or unpatched machine still hands an attacker a way in.
-- **Adding friction without thought.** Controls that interrupt users constantly push them toward workarounds, undermining the security they were meant to add. Good designs keep checks invisible when risk is low and step up only when it rises.
-- **Retrofitting instead of designing in.** Verify-first assumptions are far easier to build into new systems than to bolt onto legacy applications that expect a trusted internal network, which is why zero trust pairs naturally with [security by design](security-by-design.md).
+It also does not replace other defenses. Narrowing each session to one resource shrinks the reachable [attack surface](../concepts/assets-and-attack-surface.md), and zero trust pairs with [defense in depth](defense-in-depth.md) rather than substituting for it, while detailed per-request logs feed [accountability](accountability.md).
 
 ## References
 
 - [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
-- [NIST Glossary: Zero Trust](https://csrc.nist.gov/glossary/term/zero_trust)
-- [CISA: Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model)
-- [OMB M-22-09, Moving the U.S. Government Toward Zero Trust Cybersecurity Principles](https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf)
-- [Google Research: BeyondCorp, A New Approach to Enterprise Security (2014)](https://research.google/pubs/beyondcorp-a-new-approach-to-enterprise-security/)
+- [NIST SP 1800-35, Implementing a Zero Trust Architecture](https://www.nccoe.nist.gov/projects/implementing-zero-trust-architecture)
+- [CISA Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model)
+- [BeyondCorp: A New Approach to Enterprise Security](https://research.google/pubs/pub43231/)

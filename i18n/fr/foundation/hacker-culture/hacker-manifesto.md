@@ -1,61 +1,55 @@
 ---
-title: "Manifeste du hacker : l'essai de The Mentor de 1986"
-description: "Le court essai de 1986 signé The Mentor qui a saisi l'éthique de la curiosité et de l'accès au cœur de la culture hacker naissante."
+title: "Manifeste du hacker : la conscience d'un hacker"
+description: "L'essai de 1986 de The Mentor, 'The Conscience of a Hacker', et l'éthique de curiosité et d'accès qu'il a su capturer pour la culture hacker des débuts."
 keywords:
   - manifeste du hacker
   - the mentor
   - conscience d'un hacker
-  - phrack
+  - magazine phrack
+  - curiosité et accès
   - éthique hacker
-  - culture hacker
 ---
 
 # Manifeste du hacker
 
-**Le Manifeste du hacker** est un court essai de Loyd Blankenship, un hacker connu sous le pseudonyme The Mentor. Son véritable titre est "The Conscience of a Hacker" ("La conscience d'un hacker"). En quelques centaines de mots, il soutenait que le moteur du hacking n'était ni le vol ni le vandalisme, mais la curiosité, et qu'obtenir l'accès aux systèmes était une manière d'apprendre comment le monde fonctionne réellement. Il est devenu l'un des textes les plus cités de la [culture hacker](index.md).
+**Le Manifeste du hacker** est un court essai écrit en 1986 par Loyd Blankenship sous le pseudonyme The Mentor, dont le titre exact est "The Conscience of a Hacker" (La conscience d'un hacker). En moins de mille mots, il soutenait que le hacking était motivé par la curiosité plutôt que par la cupidité ou la malveillance, et que pénétrer dans un système était un moyen d'apprendre comment le monde fonctionnait réellement. Il demeure l'un des textes les plus cités de la culture hacker, et aussi l'un des plus débattus.
 
-## Une arrestation, un magazine par modem et une échéance
+## Écrit peu après mon arrestation
 
-L'essai s'ouvre sur une préface d'une ligne : "Ce qui suit a été écrit peu après mon arrestation." Blankenship l'a daté du 8 janvier 1986. Il était alors actif dans la scène hacker, notamment au sein du groupe Legion of Doom, et il a plus tard résumé son arrestation simplement : il s'était trouvé "dans un ordinateur où je n'aurais pas dû être."
+L'essai porte en lui son propre contexte dès sa première ligne : "Ce qui suit a été écrit peu après mon arrestation." Blankenship l'a daté du 8 janvier 1986, dans la foulée de son interpellation après avoir été pris, comme il l'a dit plus tard, dans "un ordinateur où je n'aurais pas dû me trouver." Plutôt qu'une défense juridique, il a produit un texte rhétorique destiné au grand public.
 
-Le texte n'a atteint ses lecteurs que plusieurs mois plus tard. Il a paru comme fichier 3 sur 10 dans Phrack, Volume 1, Numéro 7, publié le 25 septembre 1986. Phrack était un magazine underground diffusé via les bulletin board systems (BBS), ces messageries accessibles par modem où circulait une grande partie des premiers écrits hacker. Ses éditeurs avaient besoin de contenu pour ce numéro, et Blankenship a expliqué qu'il voulait corriger l'image publique des hackers laissée par le film *WarGames* de 1983 : des adolescents capables de déclencher une guerre nucléaire par accident.
+Il est parvenu aux lecteurs par l'intermédiaire de Phrack, un magazine électronique underground qui circulait entre les systèmes de babillards électroniques (BBS), les serveurs accessibles par ligne téléphonique où circulait l'essentiel des premiers écrits hackers. Le manifeste a paru comme le troisième fichier du septième numéro de Phrack, le 25 septembre 1986. Blankenship a déclaré qu'il voulait réagir contre l'image des hackers laissée par le film *WarGames* de 1983, dans lequel un adolescent curieux manque de déclencher un lancement nucléaire.
 
-## Lecture passage par passage
+## L'argument de la curiosité et de l'accès
 
-L'essai est construit comme une série de courtes scènes, chacune close par le même refrain méprisant du monde adulte : "Ils sont tous pareils."
+Le texte est écrit comme une succession de courtes scènes, chacune se terminant par le verdict du monde adulte : "Ils sont tous pareils." Un élève qui s'ennuie et connaît déjà la leçon découvre une machine qui "fait ce que je veux qu'elle fasse" ; à travers la ligne téléphonique, il trouve une communauté qu'il connaît "même si je ne les ai jamais rencontrés." L'argument se transforme alors en accusation, pour atteindre la phrase dont la plupart des gens se souviennent : "Mon crime est celui de la curiosité."
 
-1. **Les gros titres.** Il s'ouvre sur des articles de presse évoquant un adolescent arrêté pour délit informatique, et demande si quelqu'un a jamais regardé "derrière les yeux du hacker."
-2. **La salle de classe.** Le narrateur s'ennuie pendant des leçons qu'il comprend déjà et se voit catalogué comme élève médiocre ou tricheur.
-3. **L'ordinateur.** Il découvre une machine qui "fait ce que je veux qu'elle fasse." Si elle échoue, c'est sa propre erreur, et non parce que la machine ne l'aime pas. L'ordinateur est présenté comme la première autorité juste de sa vie.
-4. **Le BBS.** Par la ligne téléphonique, il atteint un BBS et une communauté : "Je connais tout le monde ici... même si je ne les ai jamais rencontrés."
-5. **Le réquisitoire.** Le ton se fait accusateur. "Nous explorons... et vous nous traitez de criminels." La société, dit-il, fabrique des bombes et mène des guerres, mais ce sont les hackers qu'elle traite de criminels. Le point culminant est la phrase que la plupart des gens retiennent : "Mon crime est celui de la curiosité."
+Deux convictions sous-tendent cette phrase, et elles constituent le coeur de ce que l'on entend par éthique hacker :
 
-La dernière phrase retourne le refrain contre le lecteur : "Vous pouvez arrêter cet individu, mais vous ne pouvez pas tous nous arrêter... après tout, nous sommes tous pareils."
+- **La curiosité est un motif, pas un prétexte.** Le désir de comprendre un système est traité comme légitime en soi.
+- **L'accès est la manière d'apprendre.** L'école servait de la "nourriture pour bébé" tandis que le réseau offrait du "steak", si bien que rejoindre la machine était présenté comme la voie honnête vers le savoir.
 
-## Les thèses, et les objections qu'elles rencontrent aujourd'hui
+## Là où un lecteur moderne émet des réserves
 
-| Ce qu'affirme l'essai | Comment il le formule | L'objection d'un lecteur moderne |
-|---|---|---|
-| C'est la curiosité, pas la malveillance, qui anime le hacking | "Mon crime est celui de la curiosité" | Le motif n'efface pas le préjudice : une intrusion peut nuire à des personnes et à des systèmes, quelle que soit l'intention |
-| L'accès est un moyen d'apprendre | L'école servait de la "bouillie pour bébé" quand le réseau offrait du "steak" | On peut apprendre sans pénétrer des systèmes qui ne nous appartiennent pas, dans des laboratoires, des compétitions capture-the-flag et des tests autorisés |
-| Juger l'acte, pas l'étiquette | Les hackers sont traités de criminels tandis que les guerres et les mensonges échappent à tout examen | Comparer le hacking à des torts plus graves ne le rend pas légal |
-| Les hackers forment une seule communauté | "Nous existons sans couleur de peau, sans nationalité, sans préjugé religieux" | La scène était loin de cet idéal, et ce "nous" parlait pour certains membres plus que pour d'autres |
-| Payer les services est facultatif | Utiliser un service "sans payer ce qui pourrait coûter trois fois rien" | C'est une justification de la fraude téléphonique, la partie du texte qui a le plus mal vieilli |
+Le manifeste est une protestation, non un code de conduite, et c'est pourquoi les praticiens de la sécurité le lisent aujourd'hui d'un oeil critique. La tension la plus vive tient au fait que la curiosité, aussi sincère soit-elle, n'efface pas le préjudice qu'une intrusion peut causer.
 
-L'essai est une protestation, pas un programme. Il ne propose aucune règle de conduite responsable, ce qui explique pourquoi il se lit mieux à la lumière des débats ultérieurs sur les [chapeaux blancs, noirs et gris](white-black-and-grey-hats.md), où c'est l'autorisation, et non le motif, qui est devenue la ligne de partage.
+| L'affirmation de l'essai | Ce que répond un lecteur moderne |
+|---|---|
+| La curiosité justifie l'acte | Le motif n'annule pas les dommages causés à des systèmes et à des personnes réels |
+| L'accès est le seul moyen d'apprendre | Les laboratoires, les épreuves capture-the-flag et les tests autorisés enseignent les mêmes compétences en toute légalité |
+| "Vous nous traitez de criminels" est injuste | C'est l'autorisation, et non une étiquette hostile, qui distingue un test sanctionné d'une intrusion non sollicitée ; qu'un acte soit un crime dépend ensuite de la conduite et du droit local |
 
-## Du fichier de BBS à la référence culturelle
+Ce dernier point est celui où le manifeste rejoint le vocabulaire ultérieur des [chapeaux blancs, noirs et gris](white-black-and-grey-hats.md), qui a remplacé le motif par la permission comme ligne de partage.
 
-Le manifeste s'est diffusé bien au-delà de Phrack. Il a été reproduit partout sur le web naissant, cité dans le film *Hackers* de 1995, et imprimé sur des affiches et des T-shirts. Blankenship l'a lu à voix haute lors de la conférence H2K2 (Hackers on Planet Earth) en 2002.
+## La postérité d'un fichier texte
 
-L'histoire de son auteur a aussi alimenté un combat plus large. Blankenship est allé travailler pour Steve Jackson Games, et en 1990 le Secret Service américain a perquisitionné l'entreprise et saisi son manuscrit de *GURPS Cyberpunk*. Cette perquisition, qui s'inscrivait dans une vaste offensive contre les hackers, a conduit à la création de l'Electronic Frontier Foundation (EFF), dont le procès a contribué à établir que les e-mails stockés méritent une protection juridique.
+Un fichier destiné à quelques milliers d'utilisateurs de modem est devenu un repère culturel. Il a été reproduit sur le web des débuts, cité dans le film *Hackers* de 1995, et lu à voix haute par Blankenship lors d'une conférence hacker en 2002. Sa propre histoire a aussi compté : une descente des services secrets américains en 1990, liée à son activité, a contribué à inspirer la fondation de l'Electronic Frontier Foundation.
 
-Aujourd'hui, l'essai se lit comme un document historique : une fenêtre sur la manière dont une génération de hackers se percevait, et non un permis d'intrusion dans les systèmes. Son éloge de l'exploration renvoie aux [origines](origins.md) plus anciennes du hacking et à la [curiosité qui nourrit l'innovation](curiosity-and-innovation.md). Ses valeurs ont nourri l'[éthique hacker et ses sous-cultures](subcultures-and-values.md), et le travail de sécurité moderne canalise la même impulsion vers des formes légales comme les tests autorisés, les programmes de bug bounty et la divulgation responsable.
+Lu aujourd'hui, le manifeste est un document historique, une fenêtre sur la manière dont une génération se percevait. Sa célébration de l'exploration renvoie aux [origines](origins.md) du hacking et à la [curiosité qui nourrit l'innovation](curiosity-and-innovation.md), tandis que sa voix communautaire a alimenté plus largement l'[éthique hacker et les sous-cultures](subcultures-and-values.md). La même impulsion survit aujourd'hui sous une forme licite, à travers les programmes de bug bounty, les tests autorisés et la divulgation responsable.
 
 ## Références
 
-- [Phrack, Volume 1, Issue 7, Phile 3: The Conscience of a Hacker (Hacker's Manifesto)](https://phrack.org/issues/7/hackers-manifesto.html)
-- [Wikipédia : Hacker Manifesto](https://en.wikipedia.org/wiki/Hacker_Manifesto)
-- [Hackaday: Hacking and Philosophy, The Mentor's Manifesto](https://hackaday.com/2013/11/04/hacking-and-philosophy-the-mentors-manifesto/)
+- [Phrack, Volume 1, Issue 7, Phile 3: The Conscience of a Hacker](https://phrack.org/issues/7/hackers-manifesto.html)
 - [EFF: A History of Protecting Freedom Where Law and Technology Collide](https://www.eff.org/about/history)
 - [The Jargon File: hacker ethic](http://www.catb.org/jargon/html/H/hacker-ethic.html)
+- [Wikipedia: Hacker Manifesto](https://en.wikipedia.org/wiki/Hacker_Manifesto)

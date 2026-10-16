@@ -1,62 +1,49 @@
 ---
-title: "Responsabilité : relier les actions aux identités responsables"
-description: "Le principe de sécurité selon lequel chaque action significative peut être reliée à une identité responsable grâce à une journalisation fiable et à la non-répudiation."
+title: "Responsabilité : relier chaque action à une identité responsable"
+description: "Le principe de sécurité selon lequel chaque action significative peut être rattachée à une identité responsable grâce à une journalisation fiable et à la non-répudiation."
 keywords:
   - responsabilité
   - journalisation d'audit
   - non-répudiation
   - traçabilité
-  - attribution
+  - signatures numériques
   - principes de sécurité
 ---
 
 # Responsabilité
 
-**La responsabilité** est la propriété selon laquelle chaque action significative dans un système peut être reliée à l'identité qui en est responsable. Elle repose sur une identification fiable, des enregistrements dignes de confiance de ce qui s'est passé, et une intégrité suffisante de ces enregistrements pour qu'un acteur ne puisse pas nier de façon plausible ce qu'il a fait. Là où l'authentification répond à "qui êtes-vous" et l'autorisation à "que pouvez-vous faire", la responsabilité répond à "qui a fait cela, et pouvons-nous le prouver". Elle transforme un système opaque en quelque chose qui peut être examiné, expliqué et, si nécessaire, utilisé comme preuve.
+La **responsabilité** (accountability) est la propriété selon laquelle toute action significative dans un système peut être rattachée à l'identité qui en est responsable, avec des preuves suffisamment solides pour résister à l'examen. L'authentification établit qui est un acteur et l'autorisation décide ce qu'il peut faire ; la responsabilité enregistre ce qu'il a réellement fait, de sorte que le système puisse répondre plus tard à la question "qui a fait cela, et pouvons-nous le prouver ?" Sans elle, une violation, une erreur ou un litige devient un jeu de devinettes.
 
-## La chaîne qui relie une action à une identité responsable
+## Ce qu'apportent respectivement la journalisation, l'audit et la non-répudiation
 
-La responsabilité se comprend mieux comme une chaîne. Chaque maillon doit tenir, sinon la question "qui a fait cela ?" se termine par une supposition.
+Ces trois termes sont souvent employés de façon approximative, mais ils décrivent des niveaux de preuve différents, chacun s'appuyant sur le précédent.
 
-1. **Une identité unique agit.** Chaque personne et chaque service dispose de son propre compte, de sorte qu'aucune action ne se cache derrière une connexion partagée. Ce maillon repose sur [l'authentification et l'autorisation](authentication-and-authorization.md) : le système doit savoir qui est l'acteur et ce qu'il était autorisé à faire.
-2. **L'action est enregistrée.** La journalisation d'audit capture les événements pertinents pour la sécurité, tels que les connexions, les changements de permissions et l'accès à des enregistrements sensibles, avec un horodatage et l'identité à l'origine de l'action.
-3. **L'enregistrement est protégé.** Un stockage en ajout seul, une collecte centralisée à l'écart des systèmes surveillés et une rétention contrôlée empêchent que les enregistrements soient modifiés ou supprimés après coup.
-4. **Quelqu'un le lit.** Les journaux sont agrégés et analysés afin que les activités inhabituelles soient remarquées plutôt qu'enfouies.
-
-## Une trace concrète : qui a supprimé la table des clients ?
-
-Imaginons qu'une base de données de production perde une table de clients tard un vendredi soir. Avec un dispositif de responsabilité en place, l'enquête se déroule ainsi :
-
-- Le journal d'audit de la base de données montre une instruction `DROP TABLE` à 22 h 14, émise par le compte `j.martin`, et non par une connexion générique `dbadmin`.
-- Le journal du fournisseur d'identité montre que `j.martin` s'est connecté à 22 h 09 avec une authentification multifacteur depuis un ordinateur portable connu de l'entreprise.
-- Comme les deux systèmes synchronisent leurs horloges sur la même source de temps, les deux événements s'alignent dans le bon ordre.
-- Les journaux étaient transmis en temps réel vers un stockage central que les administrateurs de bases de données ne peuvent pas modifier, de sorte que l'enregistrement est bien celui écrit à 22 h 14.
-
-L'enquête dispose désormais d'un point de départ concret : un seul compte dont il faut expliquer l'activité, et des preuves difficiles à falsifier. Cela identifie toutefois un compte, pas une personne : un ordinateur volé, des identifiants dérobés ou une session détournée produiraient les mêmes entrées, si bien que les enquêteurs recoupent avec d'autres éléments avant d'attribuer la suppression à la personne derrière `j.martin`. Qu'une seule de ces conditions disparaisse, et la trace s'effondre. Un compte administrateur partagé signifie que n'importe qui aurait pu le faire. Des horloges non synchronisées signifient que la connexion et la suppression pourraient ne même pas sembler liées. Des journaux stockés sur le même serveur auraient pu être effacés en même temps que la table.
-
-## Là où la chaîne se rompt
-
-| Maillon faible | Effet sur l'attribution | Remède habituel |
+| Mécanisme | Ce qu'il produit | Ce qu'il ne peut toujours pas faire |
 |---|---|---|
-| Comptes partagés ou génériques | N'importe quelle action peut appartenir à plusieurs personnes | Un compte par personne et par service ; accès négocié par un intermédiaire pour les tâches à privilèges |
-| Journaux non protégés | Un attaquant ou un acteur interne peut modifier ou supprimer les preuves | Transférer les journaux hors de l'hôte vers un stockage en ajout seul et à accès contrôlé |
-| Dérive d'horloge entre les systèmes | L'ordre réel des événements ne peut pas être reconstitué | Synchroniser chaque système sur une source de temps commune et fiable |
-| Tout journaliser sans plan | Les signaux utiles sont noyés dans le bruit, et les coûts de stockage et de confidentialité augmentent | Décider quels événements comptent, et les journaliser de manière cohérente |
-| Journaux que personne n'examine | Les abus sont enregistrés mais jamais remarqués | Agrégation centralisée avec alertes et examen périodique |
+| Journalisation | Un enregistrement horodaté indiquant qu'une identité a effectué une action | Prouver que l'enregistrement n'a pas été modifié par la suite |
+| Audit | L'examen indépendant des enregistrements collectés pour établir ce qui s'est réellement passé | Empêcher l'acteur d'affirmer que le compte n'était pas le sien |
+| Non-répudiation | Une preuve cryptographique liant un acteur précis à l'action | Aider si la clé de signature de l'acteur a été volée |
 
-Restreindre les accès aide également : avec le [moindre privilège](least-privilege.md), moins de personnes peuvent effectuer une action sensible donnée, si bien que l'ensemble des acteurs plausibles est réduit avant même d'ouvrir les journaux.
+Une simple entrée de journal est une affirmation ; l'audit l'examine et la corrobore ; la non-répudiation la rend difficile à nier. Chaque couche coûte davantage à construire, c'est pourquoi la plupart des systèmes journalisent tout, auditent le sous-ensemble pertinent pour la sécurité, et réservent la non-répudiation aux actes à fort enjeu tels que les contrats, les paiements et les publications de code.
 
-## Non-répudiation : faire tenir l'enregistrement en cas de litige
+## Retracer un virement frauduleux
 
-Une entrée de journal ordinaire indique qu'un compte a fait quelque chose. La non-répudiation va plus loin et rend difficile pour l'acteur de le nier ultérieurement. Le NIST la décrit comme l'assurance que l'expéditeur d'une information reçoit une preuve de remise et que le destinataire reçoit une preuve de l'identité de l'expéditeur, de sorte qu'aucun des deux ne puisse nier par la suite avoir traité l'information.
+Supposons qu'une équipe financière découvre qu'un paiement non autorisé a quitté le compte de l'entreprise. La responsabilité transforme cette alerte en une piste que l'enquêteur peut suivre :
 
-Les signatures numériques sont l'outil habituel. Seul le détenteur d'une clé privée peut produire une signature valide, et n'importe quel tiers peut la vérifier avec la clé publique correspondante. Les horodatages cryptographiques ajoutent la preuve du moment où quelque chose a été signé. Ensemble, ils lient une action à un acteur d'une manière qui résiste à un désaccord, ce qui compte pour les contrats, les approbations financières et les publications de code. La garantie ne vaut que ce que vaut la protection de la clé privée : une clé volée permet à quelqu'un d'autre de signer au nom de son propriétaire.
+1. **Le système de paiement journalise le virement**, en enregistrant le montant, le bénéficiaire, l'heure et le compte `a.osei` qui l'a approuvé, plutôt qu'un identifiant partagé `finance`.
+2. **Le journal du fournisseur d'identité** montre que `a.osei` s'est authentifié avec une clé matérielle quelques minutes plus tôt, depuis un pays inhabituel.
+3. **Les horloges concordent**, car chaque système se synchronise sur la même source de temps de confiance, de sorte que la connexion et l'approbation s'enchaînent dans le bon ordre.
+4. **L'approbation portait une signature numérique**, de sorte que l'acteur ne peut pas prétendre de façon crédible que quelqu'un a fabriqué la requête en son nom.
 
-## Pourquoi les organisations y investissent
+La piste pointe désormais vers un compte et un instant précis. Notez ce qu'elle ne prouve pas encore : les entrées identifient un compte, pas une personne, de sorte que des identifiants volés ou une session détournée auraient exactement la même apparence. Supprimez un seul maillon, comme un identifiant partagé ou des journaux stockés sur le serveur compromis lui-même, et la piste s'effondre en un haussement d'épaules.
 
-Une responsabilité solide modifie les comportements avant même que quoi que ce soit ne tourne mal : les gens agissent différemment lorsqu'ils savent que leurs actions sont attribuées et enregistrées. Quand un problème survient, elle permet la détection et l'investigation plutôt qu'un jeu de devinettes. Elle sert aussi la conformité, puisque de nombreuses réglementations et normes exigent qu'une organisation puisse démontrer qui a accédé à des données sensibles et quand ; la famille de contrôles AU (Audit and Accountability) du NIST SP 800-53 est une référence courante.
+## La tension avec la confidentialité et la minimisation des données
 
-La responsabilité coûte le moins cher lorsqu'elle est planifiée tôt. Décider quels événements journaliser, où ils sont envoyés et comment ils sont protégés fait partie de la [sécurité dès la conception](security-by-design.md), et les architectures fondées sur le [Zero Trust](zero-trust.md) produisent naturellement les enregistrements par requête dont dépend l'attribution.
+La responsabilité pousse à enregistrer davantage ; une bonne pratique de confidentialité pousse à enregistrer moins. La solution n'est pas de tout journaliser "au cas où". Cela gonfle le stockage, noie les signaux réels dans le bruit, et transforme les pistes d'audit en un jeu de données sensible à part entière, une cible tentante et une charge de conformité. La discipline de la [minimisation](minimization.md) s'applique ici aussi : décidez à l'avance quels événements sont pertinents pour la sécurité, capturez-les de façon cohérente, protégez-les, et fixez une durée de conservation qui serve l'enquête et la réglementation sans tout thésauriser. Un accès restreint selon le [moindre privilège](least-privilege.md) allège le compromis, car moins de personnes peuvent effectuer une action sensible, de sorte que la liste des acteurs plausibles est courte avant même d'ouvrir un seul journal.
+
+## Où elle renforce les autres principes
+
+La responsabilité repose sur l'[authentification et l'autorisation](authentication-and-authorization.md), puisqu'une piste n'est digne de confiance que dans la mesure où le sont les identités qu'elle nomme. Elle est la moins coûteuse lorsqu'elle est planifiée dès le départ, ce qui en fait une préoccupation de la [sécurité dès la conception](security-by-design.md) plutôt qu'un ajout tardif, et les architectures fondées sur le [zero trust](zero-trust.md) émettent naturellement les enregistrements par requête dont dépend l'attribution.
 
 ## Références
 
@@ -64,5 +51,5 @@ La responsabilité coûte le moins cher lorsqu'elle est planifiée tôt. Décide
 - [NIST Glossary: Non-repudiation](https://csrc.nist.gov/glossary/term/non_repudiation)
 - [NIST SP 800-53 Rev. 5, Security and Privacy Controls (AU Audit and Accountability)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - [NIST SP 800-92, Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
-- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [ISO/IEC 27001 Information Security Management](https://www.iso.org/standard/27001)

@@ -1,71 +1,62 @@
 ---
-title: "CIA Triad: Confidentiality, Integrity, and Availability"
-description: "The three security properties, confidentiality, integrity, and availability, that together define what it means for a system and its data to be secure."
+title: "CIA Triad: The Three Properties of a Secure System"
+description: "Confidentiality, integrity, and availability are the three properties that together define what it means for a system and its data to be secure."
 keywords:
   - cia triad
   - confidentiality
   - integrity
   - availability
   - security properties
-  - information security
+  - dad triad
 ---
 
 # CIA triad
 
-**The CIA triad** names the three properties that security is meant to protect: confidentiality, integrity, and availability. It is the oldest and most widely used model for thinking about what "secure" actually means. Rather than treating security as a single quality, the triad breaks it into three distinct goals, so that a control, a risk, or an incident can be described in terms of which property it affects. When people say a system has been compromised, they almost always mean that one or more of these three properties has failed.
+**The CIA triad** splits the vague goal of "security" into three concrete properties worth protecting: confidentiality, integrity, and availability. Its value is that it gives every control, risk, and incident a precise label. Instead of saying a system was "hacked," you can say which of the three properties failed, and that single distinction usually decides how you respond.
 
-## Three questions to ask of any asset
+## Confidentiality, integrity, and availability, one at a time
 
-Each property answers a different question about a piece of information or a system. The [assets](assets-and-attack-surface.md) you protect are worth protecting precisely because a "no" to one of these questions would hurt.
+Each letter answers a different question about a piece of data or a service. A property only matters because a "no" to its question would cause real harm to the [assets](assets-and-attack-surface.md) you depend on.
 
-| Property | The question it asks | What a failure looks like | Controls that serve it |
-| --- | --- | --- | --- |
-| Confidentiality | Can only the right people read it? | A breach exposes customer records | Encryption, access controls, authentication |
-| Integrity | Is it accurate, and would we know if it changed? | A bank balance is tampered with, a configuration file is silently edited | Checksums, digital signatures, version history |
-| Availability | Can authorized users reach it when they need it? | Ransomware or a denial-of-service attack takes a service offline | Redundancy, backups, capacity planning |
+| Property | The question it answers | Served by |
+| --- | --- | --- |
+| Confidentiality | Can only authorized people read it? | Encryption, access control, authentication |
+| Integrity | Is it accurate, and would we notice a change? | Message authentication codes (MACs), digital signatures, change logs |
+| Availability | Can the right people reach it when needed? | Redundancy, backups, capacity planning |
 
-US federal law, as quoted in FIPS 199, gives the formal versions. Confidentiality means "preserving authorized restrictions on information access and disclosure." Integrity means "guarding against improper information modification or destruction," and explicitly includes non-repudiation and authenticity. Availability means "ensuring timely and reliable access to and use of information."
+The three are independent: a system can be perfectly confidential yet constantly offline, or highly available yet full of silently altered records.
 
-## How each property breaks
+## The DAD triad: how each property fails
 
-The failures are worth studying separately, because they come from different [threats](threats-and-threat-actors.md) and call for different [controls](controls-and-countermeasures.md).
+Every property has a matching failure, and together they form what is sometimes called the DAD triad. Naming the failure points you toward the [controls](controls-and-countermeasures.md) that prevent it.
 
-- **Confidentiality breaks by disclosure.** Stolen credentials, a misconfigured storage bucket, an insider copying files, or traffic sent unencrypted over a network. The data is still there and still correct, but someone who should not have it now does, and that cannot be undone.
-- **Integrity breaks by unauthorized or undetected change.** An attacker editing records, malware altering a binary, or a bug corrupting a database. The danger is often that nobody notices: a reader must be able to trust that data is what it claims to be, and silent tampering destroys that trust.
-- **Availability breaks by denial.** A flood of traffic, encrypted files held for ransom, a deleted backup, or simply a power failure. Security is not only about locking things down: data no one can reach is worthless to the people who depend on it.
+- **Disclosure** breaks confidentiality. Stolen credentials, a public storage bucket, or traffic sent in the clear. The data is unchanged and still present, but someone who should not see it now does, and that cannot be taken back.
+- **Alteration** breaks integrity. An attacker edits a record, malware patches a binary, or a bug corrupts a table. The real danger is the version nobody notices.
+- **Destruction** (or denial) breaks availability. Ransomware encryption, a flood of traffic, a deleted backup, or a power cut. Data no one can reach is worthless to the people who need it. Modern ransomware often also breaks confidentiality, exfiltrating the data before encrypting it so operators can threaten to leak it.
 
-A single [vulnerability](vulnerabilities-and-exploits.md) is usually rated by which of these it lets an attacker break, and how badly.
+Most [vulnerabilities](vulnerabilities-and-exploits.md) are scored by which of these three they let an attacker achieve, and how severely.
 
-## One ransomware incident, read three ways
+## One build server, three ways to abuse it
 
-Consider a clinic hit by modern "double extortion" ransomware. The attackers first copy patient files to their own servers, then encrypt everything on the clinic's network.
+Picture an attacker who gains access to a company's software build server. A single foothold threatens all three properties at once:
 
-1. **Availability fails most visibly.** Staff cannot open schedules or patient charts, and appointments are canceled.
-2. **Confidentiality has already failed.** The exfiltrated records are now in criminal hands, and the threat to publish them is the second lever of extortion. Restoring from backup does not fix this.
-3. **Integrity is now in doubt.** Even after recovery, the clinic must ask whether any records were altered while the attackers had access. Without trustworthy logs or signed backups, it may not be able to answer.
+1. **Against confidentiality,** they copy the source code and the signing keys stored alongside it.
+2. **Against integrity,** they slip a backdoor into the next release, which ships to every customer carrying a valid signature.
+3. **Against availability,** they wipe the pipeline on the way out, halting all future builds.
 
-Describing the incident this way shows why "we restored the systems" is not the same as "we recovered." Each property needs its own response.
+The same intrusion reads as a leak, a tampering, and an outage depending on which property you examine. That is why "we rebuilt the server" rarely means the incident is over.
 
-## Where the three pull against each other
+## When the three properties pull apart
 
-The goals often conflict, and naming them makes the trade-offs visible.
+The goals routinely conflict, and the triad makes those trade-offs explicit rather than accidental. Strong encryption raises confidentiality but can destroy availability if a key is lost. Extra backup copies raise availability but multiply the places confidential data can leak. There is no fixed ranking: medical records weight confidentiality and integrity highest, while a public status page lives or dies by availability. Layering safeguards, as in [defense in depth](../principles/defense-in-depth.md), is how teams serve more than one property without betting everything on a single measure.
 
-- Encrypting data and requiring strong authentication raises confidentiality but can reduce availability if a key is lost or a login fails.
-- Keeping many backup copies improves availability but creates more places where confidential data might leak.
-- Locking records so they cannot be changed protects integrity but can get in the way of legitimate updates.
+## What the three letters leave out
 
-There is no universal ranking. Medical records demand strong confidentiality and integrity; a public status page demands availability above all, since its content is meant to be seen by everyone. FIPS 199 formalizes this weighting: US federal agencies rate the potential impact of losing each property separately, as low, moderate, or high, and choose their safeguards accordingly.
-
-## Beyond the three letters
-
-The most common mistake is to equate security with confidentiality, keeping secrets secret, and to forget that a corrupted or unreachable system is just as much a security failure. The opposite mistake is to treat the triad as the whole picture. It is a foundation, not a complete framework.
-
-Later models add properties the three letters do not fully capture. **Authenticity** asks whether data or a user is genuine. **Accountability** asks whether actions can be traced to whoever performed them (see [accountability](../principles/accountability.md)). **Non-repudiation** asks whether someone can later deny having sent a message or approved a transaction. Some definitions, including the one in US federal law, fold authenticity and non-repudiation into integrity; others list them as separate goals.
+The triad is a foundation, not a complete model. It says little about **authenticity** (is this data or user genuine?), **non-repudiation** (can someone later deny an action?), or [accountability](../principles/accountability.md) (can an action be traced to whoever took it?). Some standards fold these into integrity; others list them separately. Treat CIA as the first vocabulary you reach for, not the last.
 
 ## References
 
 - [NIST SP 800-12 Rev. 1, An Introduction to Information Security](https://csrc.nist.gov/pubs/sp/800/12/r1/final)
 - [FIPS 199, Standards for Security Categorization of Federal Information and Information Systems](https://csrc.nist.gov/pubs/fips/199/final)
 - [NIST Glossary: Confidentiality](https://csrc.nist.gov/glossary/term/confidentiality)
-- [NIST Glossary: Integrity](https://csrc.nist.gov/glossary/term/integrity)
 - [ISO/IEC 27000, Information security management systems overview and vocabulary](https://www.iso.org/standard/73906.html)

@@ -1,74 +1,57 @@
 ---
 title: "Mauvaise configuration : quand un logiciel sûr est déployé de façon non sécurisée"
-description: "L'écart entre une conception sûre et un déploiement sûr, où les paramètres par défaut et de petites négligences ouvrent discrètement la porte aux attaquants."
+description: "La mauvaise configuration est l'écart entre une conception sécurisée et un déploiement sécurisé, où les réglages par défaut et de petits oublis créent discrètement des ouvertures pour les attaquants."
 keywords:
   - mauvaise configuration
-  - mauvaise configuration de sécurité
-  - paramètres par défaut
-  - durcissement
+  - configuration de sécurité défaillante
+  - réglages par défaut
   - valeurs par défaut sécurisées
-  - gestion de la configuration
+  - dérive de configuration
+  - référentiel de durcissement
 ---
 
 # Mauvaise configuration
 
-**La mauvaise configuration** est l'écart entre un système qui pourrait être sûr et un système qui l'est réellement, créé lorsqu'un logiciel est déployé avec des valeurs par défaut faibles, des fonctionnalités inutiles ou des paramètres qui n'ont jamais été renforcés. Le code peut être solide et la conception robuste, et pourtant le système en fonctionnement expose quand même des données ou des accès parce que quelqu'un a laissé un paramètre à sa valeur d'usine, a sauté une étape ou n'a pas compris ce que contrôlait une option. C'est systématiquement l'une des causes profondes les plus fréquentes des violations de données, et elle se situe largement du côté humain de la sécurité, car elle découle de décisions et de négligences de déploiement. Un éditeur qui livre une valeur par défaut dangereuse commet une [erreur de conception](design-and-development-errors.md) qui touche chaque installation ; la mauvaise configuration, c'est l'exploitant qui accepte cette valeur, ou qui s'écarte d'une base sécurisée, dans un déploiement donné.
+La **mauvaise configuration** est la distance entre un système qui pourrait être sécurisé et celui qui l'est réellement, ouverte lorsqu'un logiciel est déployé avec des valeurs par défaut faibles, des fonctionnalités inutilisées laissées actives, ou des réglages qui n'ont jamais été resserrés. Le code peut être solide et la conception peut être robuste, et pourtant le système en fonctionnement laisse quand même fuir des données ou distribue des accès parce que quelqu'un a conservé une valeur d'usine, sauté une étape de durcissement, ou n'a pas compris ce qu'une option contrôlait. C'est l'une des causes profondes les plus fréquentes des véritables compromissions, et elle relève du facteur humain de la sécurité parce qu'elle naît de choix de déploiement plutôt que de défauts du logiciel lui-même.
 
-## Un code solide, des paramètres dangereux
+## Du code correct, des réglages qui ne le sont pas
 
-Un produit peut réussir toutes les revues de code et pourtant être livré dans un état dangereux. C'est la ligne qui sépare la mauvaise configuration des [erreurs de conception et de développement](design-and-development-errors.md) : pour une erreur de conception, le correctif est une nouvelle version du logiciel ; pour une mauvaise configuration, le correctif est un changement dans la façon dont le logiciel existant est paramétré.
+La façon la plus claire de comprendre la mauvaise configuration est de dire ce qu'elle n'est pas. Une [erreur de conception et de développement](design-and-development-errors.md) réside dans le logiciel, donc le correctif est une nouvelle version. Une mauvaise configuration réside dans la manière dont un produit existant et correct a été paramétré, donc le correctif est un réglage modifié, et non un correctif logiciel.
 
-L'écart est large, car les systèmes modernes comptent des milliers de paramètres ajustables à travers les systèmes d'exploitation, les bases de données, les services cloud et les applications, et une seule valeur erronée peut réduire à néant une sécurité par ailleurs solide. Il se cache aussi très bien. Un système mal configuré fonctionne généralement sans problème pour les utilisateurs normaux, personne ne se plaint donc, et le problème reste invisible jusqu'à ce qu'une personne malveillante parte à sa recherche.
+L'écart est large pour deux raisons. Les systèmes modernes exposent des milliers d'options ajustables à travers les systèmes d'exploitation, les bases de données, les services cloud et les applications, et une seule valeur erronée peut annuler tout le reste. Le problème se dissimule aussi très bien : un système mal configuré fonctionne généralement très bien pour les utilisateurs ordinaires, donc personne ne se plaint, et l'ouverture reste invisible jusqu'à ce que quelqu'un parte à sa recherche.
 
-## Quatre façons dont un paramètre devient erroné
+## Comment un réglage finit par être erroné
 
-La plupart des mauvais paramètres arrivent par l'une de ces voies :
+La plupart des mauvais réglages surviennent par l'une de quatre voies :
 
-1. **Il n'a jamais été modifié.** Le fournisseur l'a livré ouvert ou avec un mot de passe connu, et l'installateur a accepté les valeurs par défaut.
-2. **Il a été assoupli pour faire fonctionner quelque chose.** Une autorisation a été élargie ou une vérification désactivée lors d'un dépannage ou sous la pression d'une échéance, et n'a jamais été rétablie.
-3. **Personne ne comprenait ce qu'il faisait.** Une option au nom obscur ou à l'effet de bord caché a été réglée sans connaître son impact sur la sécurité.
-4. **Il a dérivé.** Le système a été durci une fois, puis des modifications manuelles, des mises à niveau et de nouveaux composants l'ont lentement éloigné de cette référence.
+1. **Il n'a jamais été modifié.** Le produit a été livré ouvert, ou avec un mot de passe connu, et la personne qui l'a installé a accepté les valeurs par défaut.
+2. **Il a été relâché pour faire fonctionner quelque chose.** Une permission a été élargie ou une vérification désactivée pendant un dépannage, puis jamais rétablie.
+3. **Personne ne l'a compris.** Une option au nom peu clair ou à l'effet secondaire enfoui a été définie sans que personne ne connaisse son impact sur la sécurité.
+4. **Il a dérivé.** Un système durci une fois s'est lentement éloigné de ce référentiel à mesure que les mises à niveau, les correctifs manuels et les nouveaux composants s'accumulaient.
 
-La première voie explique pourquoi l'initiative Secure by Design de la CISA pousse les fournisseurs à livrer des produits verrouillés par défaut, afin que l'état sûr soit celui que les clients obtiennent sans rien faire.
+## Ce qu'un réglage relâché livre
 
-## Ce qu'expose la mauvaise valeur
+Le coût d'une valeur erronée est concret. Quelques cas courants :
 
-| Paramètre laissé erroné | Ce qu'obtient un attaquant |
+| Réglage laissé erroné | Ce que gagne un attaquant |
 |---|---|
-| Identifiants par défaut (admin/admin, mots de passe fournis par le fournisseur) | Une connexion directe à une console d'administration ou à un équipement |
-| Compartiments de stockage, bases de données ou partages de fichiers publics | Le téléchargement massif de données, souvent repérées par des scanners automatisés |
-| Applications d'exemple, modes de débogage, listage de répertoires, services inutilisés | Des chemins de code et des fichiers supplémentaires qui élargissent la [surface d'attaque](../concepts/assets-and-attack-surface.md) |
-| Chiffrement disponible mais non activé | Des données lisibles en transit ou au repos |
-| Messages d'erreur verbeux et traces d'exécution | Une carte des composants internes et de leurs versions |
-| Paramètres hérités non sécurisés conservés pour la compatibilité ascendante | D'anciens protocoles et options plus faibles vers lesquels un attaquant peut forcer une rétrogradation |
-| Comptes disposant de plus de droits que leur fonction ne l'exige | Une petite compromission qui en devient une grande (voir [Moindre privilège](../principles/least-privilege.md)) |
+| Identifiants par défaut ou fournis par l'éditeur | Une connexion directe à une console d'administration |
+| Buckets de stockage ou bases de données publics | Téléchargement massif de données, souvent repéré par des scanners |
+| Mode débogage, applications d'exemple, listage de répertoires | Chemins de code supplémentaires qui élargissent la [surface d'attaque](../concepts/assets-and-attack-surface.md) |
+| Messages d'erreur verbeux | Chemins internes, versions et traces de pile qui facilitent l'étape suivante |
 
-Aucune de ces failles ne nécessite d'outillage particulier pour être exploitée. C'est pourquoi la mauvaise configuration occupe une place si élevée dans les données du secteur : dans l'OWASP Top 10:2025, Security Misconfiguration est passée de la cinquième à la deuxième place, et l'OWASP indique que toutes les applications testées en présentaient une forme ou une autre.
+## Sécurisé par défaut et qui en porte le fardeau
 
-## Le point de vue des équipes rouges et bleues
+La première voie, la valeur par défaut non modifiée, explique pourquoi l'initiative Secure by Design de la CISA demande aux éditeurs de livrer des produits verrouillés dès la sortie de la boîte, afin que l'état sûr soit celui que les clients obtiennent gratuitement. Cela recadre la responsabilité : lorsque la valeur par défaut n'est pas sûre, l'éditeur a pris une décision de conception qui pèse sur chaque installation. Lorsque la valeur par défaut est sûre, la mauvaise configuration devient une question plus étroite d'opérateurs qui s'en éloignent, ce qui s'accorde naturellement avec la [sécurité dès la conception](../principles/security-by-design.md).
 
-En 2023, la NSA et la CISA ont publié les dix mauvaises configurations que leurs équipes rouges et bleues rencontraient le plus souvent dans les grandes organisations. La liste s'ouvre sur les configurations par défaut des logiciels et des applications, suivies de la séparation inadéquate des privilèges utilisateur et administrateur, et comprend aussi une surveillance insuffisante du réseau interne, l'absence de segmentation réseau, une mauvaise gestion des correctifs, une MFA faible ou mal configurée, des contrôles d'accès insuffisants sur les partages réseau et une mauvaise hygiène des identifiants.
+## Là où elle rencontre les autres défaillances humaines
 
-Deux leçons se dégagent. D'abord, il ne s'agit pas de faiblesses exotiques : ce sont les paramètres de routine que les équipes débordées remettent à plus tard. Ensuite, le cloud les fait mal passer à l'échelle, puisqu'un seul modèle ou paramètre par défaut erroné peut être copié sur des centaines de ressources en quelques secondes, transformant une simple négligence en exposition à l'échelle de toute l'organisation.
-
-## Garder une configuration fiable dans la durée
-
-Le durcissement n'est pas une tâche ponctuelle, car les configurations dérivent. Une approche durable traite les paramètres comme quelque chose à définir, vérifier et élaguer en continu :
-
-- **Partir d'un état verrouillé.** Privilégiez les systèmes livrés avec des valeurs par défaut sécurisées, et traitez chaque paramètre assoupli comme un choix délibéré et documenté. C'est le volet configuration de la [sécurité dès la conception](../principles/security-by-design.md).
-- **Mesurer par rapport à une référence.** Appliquez des guides de durcissement reconnus, tels que les CIS Benchmarks ou le NIST SP 800-123 pour les serveurs, plutôt que de vous fier à votre mémoire.
-- **Définir les paramètres sous forme de code.** Déployez à partir de modèles révisés afin que la même référence vérifiée soit appliquée à chaque fois, et qu'une correction du modèle corrige chaque copie.
-- **Faire relire les changements par une seconde personne.** La séparation des tâches permet de détecter les erreurs de bonne foi avant qu'elles n'atteignent la production.
-- **Détecter les dérives.** L'analyse de configuration et de posture fait remonter les paramètres risqués et les changements non approuvés avant que les attaquants ne les trouvent.
-- **Supprimer ce que vous n'utilisez pas.** Désactiver les fonctionnalités, comptes et services inutilisés réduit la surface d'attaque et le nombre de paramètres susceptibles d'être mal réglés.
-
-Les outils ont leurs limites : les administrateurs doivent encore savoir reconnaître une option dangereuse lorsqu'ils en voient une, et c'est là qu'interviennent la [formation et la sensibilisation](training-and-awareness.md). Comme les raccourcis du quotidien décrits dans [comportement et mauvais usage des utilisateurs](user-behavior-and-misuse.md), la mauvaise configuration crée des ouvertures sans aucun bug logiciel, et un seul mauvais paramètre peut discrètement compromettre la confidentialité, l'intégrité et la disponibilité décrites dans la [Triade CIA](../concepts/cia-triad.md).
+La mauvaise configuration est rarement isolée. Elle fait souvent suite au [comportement des utilisateurs et aux usages abusifs](user-behavior-and-misuse.md), comme lorsqu'un contournement précipité relâche discrètement un contrôle, et elle est atténuée par la [formation et la sensibilisation](training-and-awareness.md) qui apprennent aux opérateurs à remettre en question une valeur par défaut plutôt que de l'accepter.
 
 ## Références
 
-- [OWASP Top 10:2025, A02 Security Misconfiguration](https://owasp.org/Top10/2025/A02_2025-Security_Misconfiguration/)
-- [NSA et CISA : Top Ten Cybersecurity Misconfigurations (AA23-278A)](https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-278a)
-- [MITRE CWE-16: Configuration](https://cwe.mitre.org/data/definitions/16.html)
-- [NIST SP 800-123, Guide to General Server Security](https://csrc.nist.gov/pubs/sp/800/123/final)
-- [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks)
-- [CISA: Secure by Design](https://www.cisa.gov/securebydesign)
+- [OWASP Top 10: A05:2021 Security Misconfiguration](https://owasp.org/Top10/A05_2021-Security_Misconfiguration/)
+- [NIST SP 800-53 Rev. 5 (Configuration Management family)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- [CISA Secure by Design](https://www.cisa.gov/securebydesign)
+- [CWE-1188: Initialization of a Resource with an Insecure Default](https://cwe.mitre.org/data/definitions/1188.html)
+- [NIST SP 800-123: Guide to General Server Security](https://csrc.nist.gov/pubs/sp/800/123/final)

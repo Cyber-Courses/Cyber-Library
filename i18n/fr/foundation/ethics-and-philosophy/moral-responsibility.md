@@ -1,68 +1,59 @@
 ---
-title: "Responsabilité morale : le devoir qui accompagne le pouvoir sur les systèmes"
-description: "L'obligation que les praticiens de la sécurité ont envers les utilisateurs, les organisations et le public, parce que leur travail leur confère un véritable pouvoir sur des systèmes qui affectent la vie des gens."
+title: "La responsabilité morale : le devoir qui accompagne le pouvoir sur les systèmes"
+description: "La responsabilité morale est le devoir que les praticiens ont envers les utilisateurs, les organisations et le public lorsqu'ils détiennent un pouvoir sur des systèmes que d'autres ne peuvent ni voir, ni inspecter, ni consentir."
 keywords:
   - responsabilité morale
-  - éthique de la sécurité
-  - responsabilité professionnelle
+  - éthique professionnelle
   - devoir de diligence
-  - pratique responsable
-  - éthique de la technologie
+  - bien public
+  - code d'éthique de l'acm
+  - éthique de la sécurité
 ---
 
-# Responsabilité morale
+# La responsabilité morale
 
-**La responsabilité morale** est le devoir qu'un praticien porte parce que son travail lui confère un pouvoir sur des systèmes dont d'autres personnes dépendent. Quelqu'un qui peut lire une base de données, corriger un serveur ou décider du moment de divulguer une faille fait des choix qui vont bien au-delà de son propre écran. Ces choix touchent des utilisateurs qui n'ont jamais consenti au risque, des organisations qui ont confié un accès au praticien, et un public qui vit avec les conséquences. Plus une personne détient de capacités, plus ce devoir devient lourd.
+**La responsabilité morale est le devoir qu'un praticien porte parce que ses décisions atteignent des personnes qui n'y ont jamais consenti et qui souvent n'en ont jamais connaissance.** Un ingénieur sécurité qui affaiblit une valeur par défaut, un chercheur qui publie un exploit, ou un administrateur qui retarde un correctif agit au nom des utilisateurs, d'un employeur et d'un public plus large qui n'est pas dans la pièce. Détenir un pouvoir sur un système n'est pas neutre. Cela crée des obligations qui survivent à n'importe quelle tâche isolée, et cela rend le praticien comptable des conséquences qu'il déclenche, même lorsqu'aucune règle n'a été enfreinte.
 
-## Contrôle et connaissance : les deux conditions
+## L'asymétrie qui crée le devoir
 
-Depuis Aristote, les philosophes rattachent la responsabilité à deux conditions : une personne doit avoir un certain **contrôle** sur ce qu'elle fait, et elle doit **savoir**, ou pouvoir savoir, ce qu'elle fait et ce que cela peut provoquer. Le travail de sécurité remplit ces deux conditions de manière particulièrement forte, ce qui explique pourquoi le devoir pèse ici plus lourd que dans la plupart des métiers.
+Les transactions ordinaires supposent une égalité approximative : les deux parties peuvent inspecter ce à quoi elles s'engagent. Le travail de sécurité brise cette hypothèse. Les personnes concernées par un choix de conception ne peuvent généralement pas lire le code, ne peuvent pas voir les journaux, et ne peuvent pas juger si un risque a été bien géré. Elles dépendent de quelqu'un qu'elles ne rencontreront jamais.
 
-| Condition | Ce qu'elle demande | Pourquoi les praticiens de la sécurité la remplissent |
-| --- | --- | --- |
-| Contrôle | La personne aurait-elle pu agir autrement ? | Un accès privilégié signifie qu'un seul administrateur peut exposer ou protéger des millions d'enregistrements, et qu'un chercheur décide du sort d'une faiblesse qu'il a découverte. |
-| Connaissance | La personne comprenait-elle le résultat probable ? | L'expertise supprime l'excuse de l'ignorance : un professionnel qui comprend le risque est responsable d'une manière qu'un profane ne l'est pas. |
+Ce pouvoir à sens unique est la raison pour laquelle la compétence seule ne suffit pas. Là où un utilisateur ne peut pas se protéger lui-même, la personne qui le peut a le devoir d'agir dans son intérêt, et non simplement dans la limite de ses droits. Avoir la permission d'agir, l'objet de [l'autorisation et le consentement](authorization-and-consent.md), détermine si un acte est autorisé ; cela ne détermine pas s'il était juste.
 
-Une caractéristique supplémentaire aiguise ce devoir : **le préjudice est souvent invisible pour celui qui agit.** La personne affectée par un enregistrement divulgué ou une suppression négligente est rarement présente lorsque la décision est prise, si bien que le praticien doit délibérément la garder à l'esprit. Se voir confier les clés d'un système est une forme de confiance, et pas seulement un fait technique.
+## Répondre avant et après les faits
 
-## Quatre habitudes qui portent le devoir
+Les philosophes divisent la responsabilité en deux directions, et les deux lient le praticien à la fois.
 
-La responsabilité morale se manifeste rarement par un grand geste. Elle vit dans des décisions de jugement ordinaires, et chacune des habitudes ci-dessous a une façon reconnaissable d'échouer.
+| Direction | La question qu'elle pose | Ce à quoi cela ressemble en pratique |
+|---|---|---|
+| Tournée vers l'avenir | Que suis-je obligé de faire ou d'empêcher ? | Choisir une valeur par défaut sûre, divulguer une faille, refuser de livrer une faiblesse connue |
+| Tournée vers le passé | Qui doit répondre de ce qui s'est déjà produit ? | Assumer une violation, expliquer une décision, accepter les retombées d'un raccourci |
 
-1. **Devoir de diligence.** Traiter les données et les accès avec la prudence que le propriétaire attendrait, même lorsque personne ne regarde. L'échec ressemble à la copie d'une base de données de production sur un ordinateur portable "juste pour tester un truc".
-2. **Divulgation honnête.** Signaler rapidement les failles, les incidents et les erreurs, y compris les siennes. L'échec ressemble à la correction discrète d'une erreur de configuration que l'on a soi-même causée, sans jamais mentionner la période d'exposition.
-3. **Action proportionnée.** N'utiliser que l'accès et la force qu'une tâche exige, et s'arrêter une fois le travail terminé. L'échec ressemble à un testeur d'intrusion qui pivote vers des systèmes hors du périmètre convenu simplement parce qu'il le pouvait. La question de savoir si vous étiez autorisé à agir tout court relève de [l'autorisation et du consentement](authorization-and-consent.md).
-4. **Assumer les conséquences.** Assumer le résultat d'une décision plutôt que de se cacher derrière une politique ou un ordre. L'échec ressemble à "je n'ai fait qu'exécuter le script qu'on m'a donné".
+Le devoir tourné vers l'avenir est le plus lourd en sécurité, car la plupart des préjudices sont évitables avant de survenir. Un praticien ne peut pas attendre un incident pour découvrir qu'il était responsable depuis le début.
 
-Ces habitudes correspondent aux codes professionnels. Le Code d'éthique de l'(ISC)2 s'ouvre sur le principe de "protéger la société, le bien commun, la confiance publique nécessaire et l'infrastructure", et les codes de l'ACM et de l'IEEE demandent de même à leurs membres de placer l'intérêt public au-dessus de la commodité ou de la pression de l'employeur.
+## Ce que le code de l'ACM place en premier
 
-## Des mains nombreuses, personne de responsable
+Les codes professionnels transforment ce devoir abstrait en un ordre hiérarchisé. Le Code d'éthique de l'ACM s'ouvre en demandant aux professionnels de l'informatique de "contribuer à la société et au bien-être humain" et d'"éviter les préjudices", et il affirme que le bien public est la préoccupation centrale de tout travail informatique professionnel. Les codes de l'IEEE et de l'(ISC)2 font écho à la même priorité : lorsque les intérêts d'un employeur, d'un client et du public entrent en collision, le public passe en premier.
 
-Les systèmes modernes sont construits et exploités par des équipes, des fournisseurs et des sous-traitants, et la responsabilité peut se diluer au point que personne ne la ressent. C'est ce qu'on appelle le **problème des mains nombreuses** : lorsque de nombreuses personnes contribuent à un résultat, il devient difficile de dire qui était responsable de quoi. Helen Nissenbaum l'a identifié en 1996 comme l'un des principaux obstacles à la responsabilité en informatique.
+C'est ici que se rencontrent l'intention, la conséquence et les valeurs concurrentes. Les bonnes intentions ne libèrent pas du devoir si le résultat prévisible est un préjudice, et une instruction licite de la part d'un employeur ne l'emporte pas sur l'obligation envers les personnes en aval.
 
-Le cas classique est celui du Therac-25, un appareil de radiothérapie dont les défauts logiciels ont contribué à une série de surdosages massifs au milieu des années 1980. Les développeurs, les testeurs, le fabricant et les opérateurs détenaient chacun une part de l'échec, et le choix d'aucune personne ne l'explique à lui seul. En sécurité, le même schéma apparaît lorsqu'une faiblesse connue reste des mois dans un backlog parce que chaque équipe suppose qu'une autre en est propriétaire. La réponse pratique consiste à désigner un responsable pour chaque risque et à traiter "ce n'est pas mon composant" comme une question à résoudre, et non comme une conclusion.
+## Une faille que vous êtes le seul à connaître
 
-## Quand l'employeur veut le silence : un scénario de divulgation
+Considérez comment le devoir mord dans un moment unique et courant. Vous trouvez une vulnérabilité grave dans un produit sur lequel des millions de personnes comptent.
 
-Prenons une ingénieure qui découvre qu'un service exposé aux clients divulgue les informations de compte d'autres clients. La direction lui demande de garder le silence jusqu'à la prochaine version trimestrielle, dans trois mois.
+1. **La capacité est neutre.** La même découverte peut être discrètement transformée en arme ou signalée de manière responsable. La connaissance est une [connaissance à double usage](dual-use-knowledge.md) ; ce que vous devez est décidé par ce que vous faites ensuite.
+2. **Le devoir tourné vers l'avenir s'active.** Vous êtes désormais l'un des rares à pouvoir empêcher un préjudice, ce qui signifie que le silence est lui-même un choix aux conséquences.
+3. **La redevabilité suit le choix.** Que vous coordonniez la divulgation, vendiez la faille ou la publiiez publiquement, vous devrez répondre de qui a été blessé et de qui a été protégé.
 
-- **L'attrait de la loyauté.** Elle doit à son employeur un service diligent et compétent, et une annonce publique prématurée pourrait offrir une carte aux attaquants avant qu'un correctif n'existe.
-- **L'attrait du public.** Chaque jour de silence laisse les utilisateurs exposés à un risque qu'ils ignorent et contre lequel ils ne peuvent pas se défendre. Ses codes d'éthique placent leur intérêt en premier.
-- **Le coût de chaque voie.** Agir sur un risque connu peut en soi causer un préjudice, et attendre aussi. L'inaction est également un choix, et elle porte un poids moral.
+Aucune règle externe n'impose l'étape deux ou trois. La force provient de la position dans laquelle vous vous trouvez, et non d'une politique.
 
-Une voie défendable se situe généralement entre le silence et la fuite publique : insister en interne pour obtenir un correctif urgent, documenter le risque et qui l'a accepté, et en cas d'échec, recourir à un canal structuré tel que le processus de divulgation coordonnée géré par la CISA, qui existe précisément pour corriger les failles avant que les détails ne soient rendus publics. La même tension entre protéger les personnes et les exposer apparaît dans [sécurité contre vie privée](security-versus-privacy.md), et la question de savoir quelle part de pouvoir sur autrui un praticien devrait détenir dès le départ est abordée dans [liberté contre contrôle](freedom-versus-control.md).
+## Là où la responsabilité devient redevabilité
 
-## Les ordres ne transfèrent pas la responsabilité
-
-Suivre des instructions ne fait pas passer le poids moral sur celui qui les a données. Un ordre légal peut tout de même être la mauvaise chose à faire, et "on me l'a demandé" explique un choix sans l'excuser. Cela compte surtout pour les praticiens dont les compétences sont à double tranchant : l'expertise qui renforce un système peut aussi être retournée contre lui, comme l'explore [la connaissance à double usage](dual-use-knowledge.md), si bien que la personne qui détient cette expertise ne peut pas confier entièrement à quelqu'un d'autre la décision de son usage.
-
-Il n'existe aucune formule qui résolve ces conflits proprement. La responsabilité morale, c'est la volonté de peser honnêtement les prétentions concurrentes et de répondre de son choix.
+La responsabilité morale est le devoir lui-même ; la [redevabilité](../principles/accountability.md) est la machinerie, telle que les journaux, la propriété et la revue, qui permet de retracer une décision jusqu'à une personne et de la faire répondre. La responsabilité est aussi ce qui demeure lorsque les réponses faciles s'épuisent : lorsque protéger un groupe en expose un autre, le praticien ne peut échapper à la pesée, une tension explorée dans [sécurité contre vie privée](security-versus-privacy.md). Le devoir ne disparaît pas parce qu'un choix est difficile ; ce sont précisément les choix difficiles qu'il existe pour gouverner.
 
 ## Références
 
-- [(ISC)2 Code of Ethics](https://www.isc2.org/ethics)
 - [ACM Code of Ethics and Professional Conduct](https://www.acm.org/code-of-ethics)
 - [IEEE Code of Ethics](https://www.ieee.org/about/corporate/governance/p7-8.html)
+- [(ISC)2 Code of Ethics](https://www.isc2.org/ethics)
 - [Stanford Encyclopedia of Philosophy: Moral Responsibility](https://plato.stanford.edu/entries/moral-responsibility/)
-- [Stanford Encyclopedia of Philosophy: Computing and Moral Responsibility](https://plato.stanford.edu/entries/computing-responsibility/)
-- [CISA: Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)

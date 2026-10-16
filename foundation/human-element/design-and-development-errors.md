@@ -1,73 +1,53 @@
 ---
-title: "Design and development errors: flaws built into the system"
-description: "Security weaknesses introduced while a system is designed and built, from flawed logic and weak defaults to overlooked edge cases."
+title: "Design and Development Errors: Weaknesses Built Into Software"
+description: "Mistakes introduced when systems are built, from flawed logic to overlooked edge cases, that become security weaknesses long before anyone deploys the code."
 keywords:
   - design and development errors
-  - software security flaws
-  - secure design
-  - edge cases
-  - input validation
+  - software weaknesses
   - secure coding
+  - design flaws
+  - input validation
+  - common weakness enumeration
 ---
 
 # Design and development errors
 
-**Design and development errors** are the security weaknesses baked into a system while it is being planned and built, before anyone misuses it or misconfigures it in production. They are not mistakes of operation; they are mistakes of construction. A flawed assumption in an architecture diagram, a piece of logic that handles the common case but not the strange one, or a convenient default that leaves a door open all become part of the shipped product and travel with it to every install.
+**Design and development errors** are the security weaknesses baked into software while it is being built, before anyone installs, configures, or misuses it. They are the part of the human element that lives in source code and architecture diagrams: a developer who trusts input that should be checked, an architect who decides to store passwords in plain text, or a team that never considered what happens when a number grows larger than the space reserved for it. Unlike a bad setting, which an operator can change, these errors travel with the software itself, so fixing one means shipping a new version.
 
-## Flaws in the blueprint versus bugs in the code
+## Design flaws versus coding bugs
 
-It helps to separate two layers where builders go wrong:
+Two very different mistakes hide under the same label, and they are worth separating because they are caught and fixed in different ways.
 
-- **Design flaws** live in the plan. The system was never meant to check something it should have checked, such as whether the person resetting a password actually owns the account. OWASP puts it bluntly: an insecure design cannot be fixed by a perfect implementation, because the missing control was never specified.
-- **Implementation bugs** live in the code. The design was sound, but a developer forgot a length check, compared strings the wrong way, or pasted user input into a database query.
+| | Where it lives | Example | How it is fixed |
+|---|---|---|---|
+| Design flaw | In the plan, before code is written | Trusting data from the browser; no authentication on an admin endpoint | Rethink the architecture |
+| Coding bug | In the implementation of a sound plan | Off-by-one loop; a missing length check; a forgotten null test | Patch the specific line |
 
-The distinction matters because the remedies differ. A bug can often be patched in a few lines. A flaw, such as trusting input that should never be trusted, usually means reworking how components talk to each other, which is slow and risky once the product is in customers' hands.
+A design flaw can pass every code review because each individual line is correct; the mistake is in the shape of the system, not the syntax. A coding bug is the opposite: the plan was fine, but one step was implemented wrong. Both end up as the same thing to an attacker, an opening, which is why they are grouped together here.
 
-Both kinds share one property that sets them apart from [misconfiguration](misconfiguration.md) or [user misuse](user-behavior-and-misuse.md): they ship with the product. One weak default or logic error reaches every customer who runs the code, so a single mistake is multiplied across the whole user base.
+## MITRE's catalog of weaknesses
 
-## Six assumptions that turn into weaknesses
+The industry keeps a shared vocabulary for these errors in the Common Weakness Enumeration (CWE), a community catalog maintained by MITRE. A weakness is the underlying type of mistake, such as improper input validation or out-of-bounds write; a vulnerability is a specific instance of that weakness in a real product. MITRE publishes a yearly list of the most dangerous software weaknesses, and the same patterns dominate it year after year: injection, memory handling errors, and missing or broken access checks. The repetition is the point. These are not rare, clever mistakes but the same handful of oversights made again and again.
 
-Most construction errors start as a reasonable-sounding assumption that nobody wrote down or challenged.
+## Walking through a missed input check
 
-| Error | What the builder assumed | What actually happens |
-| --- | --- | --- |
-| Missing or weak input validation | Data arrives in the expected shape and size | Malformed or hostile input slips through and reaches logic that cannot handle it |
-| Overlooked edge cases | Values will be ordinary | Empty fields, huge numbers, concurrent requests or unusual character encodings behave in ways no one tested |
-| Insecure defaults | Users will harden the product after install | Open permissions, a sample password or disabled encryption stay that way, because most users never change them |
-| Flawed trust between components | The internal service calling me is friendly | A compromise in one component spreads freely to every component that trusts it |
-| Homegrown authentication logic | Login and sessions are simple enough to write ourselves | Custom code mishandles expiry, comparison or error states while looking correct |
-| Mixing data and instructions | User text is just data | Text pasted directly into a query or command changes what the program does |
+Consider a web form that looks up a customer by account number.
 
-MITRE's Common Weakness Enumeration catalogs hundreds of these patterns in detail and is the usual vocabulary for naming them precisely.
+1. **The assumption.** The developer expects a number and writes code that trusts the field to contain one.
+2. **The reality.** A user, or an attacker, types something that is not a plain number, such as database commands or an unexpectedly long string.
+3. **The error.** Because nothing validates the input before it is used, that text is handed straight to the database or copied into memory that was never sized for it.
+4. **The result.** The system leaks records, crashes, or runs instructions the designer never intended.
 
-## A password reset feature, built four ways wrong
+Nothing here required a sophisticated exploit. The weakness was simply the absence of a check that should have been there, decided when the code was written.
 
-Consider a single feature to see how both layers of error stack up. A team needs to let users reset forgotten passwords.
+## Catching errors before the code ships
 
-1. **The design flaw.** The spec says "user enters their email, then chooses a new password on the next screen." Nothing ties the second screen to proof of email ownership, so anyone who knows an address can take over the account. No amount of careful coding fixes this; the step is missing from the plan.
-2. **The edge case.** After the design is corrected to email a reset link, the token never expires and is not invalidated after use. An old link found in a mailbox months later still works.
-3. **The implementation slip.** The token is generated with a predictable value, because the convenient random function in the language was not designed for security. An attacker can guess valid tokens.
-4. **The injection bug.** The email lookup builds its database query by concatenating the submitted address, so a crafted "email" rewrites the query.
-
-Each step is a different kind of error, introduced at a different moment, and each would have been far cheaper to catch on paper or in review than after release, when it becomes a patch cycle, a coordinated disclosure and often an incident.
-
-## Catching errors at the stage they are made
-
-The most effective defenses line up with the stages where errors enter, an idea at the heart of [security by design](../principles/security-by-design.md) and of CISA's Secure by Design initiative, which asks manufacturers to own the security outcomes of what they ship.
-
-- **While designing: threat model.** Ask what could go wrong while the design is still a diagram and changes cost a conversation. This is where the missing ownership check in the reset example gets caught.
-- **While choosing building blocks: reuse proven components.** Prefer well-reviewed libraries for authentication, cryptography and parsing over writing your own.
-- **While writing code: validate at every boundary.** Treat all external data as untrusted, check it against a strict expected format, and keep data separate from instructions (for example, parameterized queries).
-- **While packaging: ship secure defaults.** Turn on the safest configuration out of the box and make users opt into anything riskier.
-- **Before release: test for abuse, not only use.** Combine code review, static analysis and tests that deliberately feed the system bad, oversized and unexpected input.
-
-People make these errors, so people are also part of the fix: developers who know the common weakness patterns are far less likely to introduce them (see [training and awareness](training-and-awareness.md)). And because some errors will always slip through, [least privilege](../principles/least-privilege.md) limits how much damage any single flaw can do.
+Because these errors ship inside the product, the cheapest place to remove them is early. Thinking about threats during design, reviewing code with a second set of eyes, and testing for the known weakness patterns all catch mistakes before release; this is the same reasoning behind [security by design](../principles/security-by-design.md). What slips through becomes the next team's problem: an insecure default that ships in the product is itself a design error that belongs here, while an operator who later leaves that setting wrong creates [misconfiguration](misconfiguration.md), and a confusing interface pushes people toward the shortcuts covered in [user behavior and misuse](user-behavior-and-misuse.md). Developers also have to recognize a dangerous pattern to avoid writing it, which is why secure coding belongs in [training and awareness](training-and-awareness.md).
 
 ## References
 
-- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
-- [OWASP Top Ten 2021, A04: Insecure Design](https://owasp.org/Top10/A04_2021-Insecure_Design/)
 - [MITRE CWE: Common Weakness Enumeration](https://cwe.mitre.org/)
-- [NIST SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final)
-- [CISA: Secure by Design](https://www.cisa.gov/securebydesign)
-- [OWASP Cheat Sheet Series: Input Validation](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
+- [MITRE CWE Top 25 Most Dangerous Software Weaknesses](https://cwe.mitre.org/top25/)
+- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+- [NIST SP 800-218, Secure Software Development Framework](https://csrc.nist.gov/pubs/sp/800/218/final)
+- [OWASP Secure Coding Practices Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)

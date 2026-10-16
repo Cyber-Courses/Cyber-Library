@@ -1,66 +1,60 @@
 ---
 title: "Subcultures and values: the social fabric of hacking"
-description: "The groups, norms, and shared ideals that bind the hacking community together across its many branches."
+description: "The groups, norms, and shared ideals that bind the hacking community across its many branches."
 keywords:
   - hacker subcultures
-  - hacker values
   - hacker ethic
-  - hacker community
+  - hacker values
   - free software movement
   - open source culture
+  - hacker community
 ---
 
 # Subcultures and values
 
-**Hacker culture** is not one community but many overlapping ones, held together by a loose set of shared ideals rather than a single organization or rulebook. From the university labs of the 1960s through the home-computer boom of the 1970s-1980s and into today's global networks, people who call themselves hackers have passed down values about curiosity, openness, and craftsmanship. Those values shape how the groups behave, even when the groups disagree with one another.
+**Hacking has never been a single community.** It is a family of overlapping groups, from university researchers to free-software activists to security professionals, that share a loose set of ideals rather than a charter or a membership roll. What holds them together is a culture of curiosity, openness, and skill-based respect, passed down from one generation of machines to the next. The groups argue constantly, yet they recognize each other as kin because they inherited the same values.
 
-## Six tenets written down after the fact
+## Steven Levy's hacker ethic
 
-The earliest recognizable hacker culture grew out of academic computing, especially the Tech Model Railroad Club and the Artificial Intelligence Laboratory at MIT in the late 1950s and 1960s (the setting described in [Origins](origins.md)). Nobody there wrote a charter. The norms were lived, not codified, until journalist Steven Levy interviewed the participants and published *Hackers: Heroes of the Computer Revolution* in 1984. He distilled what he heard into the "hacker ethic":
+Nobody sat down to write those values. They were lived at places like the Tech Model Railroad Club and the Artificial Intelligence Laboratory at MIT, the setting described in [Origins](origins.md), and only named later. In 1984 the journalist Steven Levy interviewed those early programmers and distilled what he heard into what he called the "hacker ethic." Its core claims were blunt:
 
-1. Access to computers, and to anything that teaches how the world works, should be unlimited and total ("the hands-on imperative").
-2. All information should be free.
-3. Mistrust authority and promote decentralization.
-4. Hackers should be judged by their hacking, not by degrees, age, race, or position.
-5. You can create art and beauty on a computer.
-6. Computers can change your life for the better.
+- Access to computers, and to anything that teaches how the world works, should be unlimited.
+- All information should be free.
+- Mistrust authority; favor decentralization.
+- Judge a hacker by the work, not by degrees, age, or position.
+- Beauty and play belong in code; an elegant trick is itself a "hack."
 
-Read together, these tenets describe a culture of **curiosity and mastery** (understanding a system from the inside), **sharing** (code and documentation passed around freely), **reputation earned by skill** rather than titles, and **creative play**, where an elegant or funny solution is itself called a "hack." The drive behind the first item is explored further in [Curiosity and innovation](curiosity-and-innovation.md).
+Read together, these describe a culture that rewards mastery earned in the open and treats sharing as a default rather than a favor. The pull behind the first claim is explored in [Curiosity and innovation](curiosity-and-innovation.md).
 
-## One ethic, many branches
+## A family tree, not a membership roster
 
-As computing spread, the ethic traveled into new settings, and each group kept the parts that fit its own work.
+As computing spread, the ethic traveled with it, and each setting kept the parts that fit its work. The branches below are relatives, not rivals, though they often disagree about what "free" should mean.
 
-| Branch | Where and when it took root | What it emphasizes |
+| Branch | Where it took root | What it emphasizes |
 |---|---|---|
-| Lab hackers | MIT TMRC and AI Lab, late 1950s-1960s | Playful mastery of shared machines, code passed freely between users |
-| Hobbyists | Homebrew Computer Club and similar groups, from 1975 | Bringing computing to individuals; members swapped designs, and the Apple I was first shown there |
-| Free software | GNU Project (announced 1983) | Software freedom as a moral right for every user |
-| Open source | Open Source Initiative, founded 1998 | The practical, business-friendly case for shared source code |
-| Security researchers | Phone and network explorers, later professional research | Finding how systems fail and reporting it |
-| Demoscene and makers | Home-computer scene of the 1980s onward; hardware tinkerers | Craft, showmanship, building physical and visual things |
+| Lab hackers | MIT TMRC and AI Lab, 1950s-1960s | Playful mastery of shared machines |
+| Hobbyists | Homebrew Computer Club, from 1975 | Putting computing in individual hands |
+| Free software | GNU Project, announced 1983 | Software freedom as a user's moral right |
+| Open source | Open Source Initiative, 1998 | The practical, business-friendly case for shared code |
+| Security researchers | Phone and network explorers onward | Learning how systems fail, then reporting it |
 
-The split between the two software movements shows how one value can be read differently. The Free Software Foundation frames sharing as an ethical obligation, defined by four user freedoms. The founders of the Open Source Initiative, Eric Raymond and Bruce Perens, chose a new label in 1998 to make the same practice persuasive to companies on practical grounds.
+## When "all information should be free" meets privacy
 
-## Where the line between exploring and breaking falls
+The ethic's most quoted line is also its most contested, because a community built on openness still has to draw lines. Consider a researcher who finds a flaw in a hospital's software:
 
-The ethic's most contested idea is item 3, distrust of authority. Rules that block learning or access are routinely questioned, but responsible subcultures draw clear ethical lines about what may be done with that skepticism.
+1. The openness instinct says publish everything at once so defenders and the public can see the danger.
+2. The duty-of-care instinct says a public release before a fix would hand the flaw to attackers and endanger patients.
+3. The compromise the culture settled on is coordinated disclosure: tell the vendor first, give a deadline, then go public.
 
-- **Hacker versus cracker.** The Jargon File and Raymond's essay *How To Become A Hacker* insist that hackers build things and crackers break them; the IETF's RFC 1392 glossary records both the positive sense of "hacker" and the separate "cracker" for those who break into systems.
-- **The benign intruder debate.** The Jargon File notes a second, more controversial version of the ethic: that exploring a system is acceptable as long as nothing is stolen, damaged, or disclosed. Many hackers reject this, comparing unauthorized entry to breaking and entering.
-- **Who gets to decide.** These disagreements underlie the vocabulary of [white, black, and grey hats](white-black-and-grey-hats.md), and the defiant tone of texts like the [Hacker Manifesto](hacker-manifesto.md) shows how the "mistrust authority" tenet sounded from the outside of the system.
+That same tension, who may act on a system and with whose permission, is what sorts practitioners in [White, black, and grey hats](white-black-and-grey-hats.md). The values do not resolve the conflict by themselves; they give the community a shared vocabulary for arguing it out.
 
-## What the wider industry inherited
+## Carrying the values forward
 
-Hacker values quietly shape the modern technology world. Open source software, now the foundation of most internet infrastructure, is a direct product of the sharing ethic. Responsible disclosure practices, bug bounties, and the professional field of security testing grew from the research subcultures, which turned "find the flaw and explain how to fix it" into a career.
-
-For a learner, knowing these branches makes the community easier to read. It explains why some hackers defend open access while others focus on defense, and it separates the ethic of building and protecting systems from the activity of attacking them.
+These ideals outlived the labs because people kept restating them for new eras. The clearest example is [The Hacker Manifesto](hacker-manifesto.md), written in 1986, which turned the ethic's defiance into a widely copied declaration of identity. Whenever a group debates what counts as a legitimate hack, it is really debating which inherited value wins this time.
 
 ## References
 
-- [Steven Levy, Hackers: Heroes of the Computer Revolution](https://www.stevenlevy.com/hackers-heroes-of-the-computer-revolution)
-- [The Jargon File: hacker ethic](http://www.catb.org/jargon/html/H/hacker-ethic.html)
-- [Eric S. Raymond, How To Become A Hacker](http://www.catb.org/~esr/faqs/hacker-howto.html)
-- [GNU Project: The Free Software Definition](https://www.gnu.org/philosophy/free-sw.html)
-- [Open Source Initiative: History of the OSI](https://opensource.org/history)
-- [IETF RFC 1392: Internet Users' Glossary (definition of hacker)](https://www.rfc-editor.org/rfc/rfc1392)
+- [Steven Levy, Hackers: Heroes of the Computer Revolution](https://www.oreilly.com/library/view/hackers/9781449393748/)
+- [GNU Project, The GNU Manifesto](https://www.gnu.org/gnu/manifesto.html)
+- [Open Source Initiative, History of the OSI](https://opensource.org/history)
+- [CISA, Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)

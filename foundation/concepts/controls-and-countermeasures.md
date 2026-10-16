@@ -1,68 +1,63 @@
 ---
-title: "Controls and countermeasures: How defenses reduce risk"
-description: "The safeguards that organizations put in place to prevent, detect, and recover from security events, grouped as preventive, detective, and corrective controls."
+title: "Controls and Countermeasures: Preventive, Detective, and Corrective"
+description: "How preventive, detective, and corrective controls work together to reduce risk, and the different forms a single safeguard can take."
 keywords:
   - security controls
   - countermeasures
   - preventive controls
   - detective controls
   - corrective controls
-  - defense in depth
+  - compensating controls
 ---
 
 # Controls and countermeasures
 
-**A control** is any safeguard or measure put in place to reduce security risk, whether by lowering the chance that something bad happens or by limiting the damage when it does. The term countermeasure is used almost interchangeably, though it often emphasizes a response aimed at a specific threat. Controls are the practical answer to risk: once an organization knows which [assets](assets-and-attack-surface.md) it is protecting and which [threats](threats-and-threat-actors.md) could reach them, controls are the actions it takes to tip the odds in its favor.
+**A control** is any safeguard or measure put in place to reduce risk to an asset, and a **countermeasure** is the same idea named from the attacker's side: a response aimed at a specific threat. The two words are used almost interchangeably. What matters is the job they do. A control does not make a weakness disappear; it lowers the chance that the weakness is exploited, the damage if it is, or the time before anyone notices. Security is the practice of choosing a sensible set of these measures and arranging them so they reinforce each other.
 
-## Before, during, after: the timing of a control
+## Prevent, detect, correct
 
-The most common way to classify a control is by where it acts on the timeline of a security event.
+The most useful way to sort controls is by when they act relative to an incident. Each function answers a different question, and a serious defense needs all three.
 
-1. **Preventive controls act before the event** and try to stop it from happening at all. Access permissions, strong authentication, encryption, firewalls, and security awareness training all lower the likelihood that an attack succeeds.
-2. **Detective controls act while it unfolds** by revealing that something has happened or is happening. Logging and monitoring, intrusion detection systems, audits, and alerts on unusual activity do not block anything, but they shorten the time an event goes unnoticed.
-3. **Corrective controls act afterward** to limit the damage and restore normal operation. Backups and restore procedures, incident response plans, patching, and failover systems belong here.
+| Function | Question it answers | Examples |
+| --- | --- | --- |
+| Preventive | How do we stop it from happening? | Access controls, encryption, firewalls, input validation, staff training |
+| Detective | How do we know it is happening or has happened? | Logging, intrusion detection, file-integrity monitoring, audits |
+| Corrective | How do we recover once it has? | Backups and restores, patching, incident response, isolating a host |
 
-A single technology can fill more than one role. A backup system is corrective when you restore from it, while the monitoring that confirms each backup actually ran is detective.
+A fourth function, **deterrent**, discourages an actor before they try (visible cameras, warning banners, the prospect of prosecution). Prevention is never perfect, which is exactly why detective and corrective controls exist: they assume some attacks will get through and shorten the time an attacker stays unnoticed and unchecked.
 
-## Who or what enforces it
+## Administrative, technical, physical
 
-A second classification ignores timing and asks what kind of mechanism carries the control. Crossing the two views gives a simple grid that helps spot empty cells in a security program:
+The function above says what a control does; a second axis says how it is built. The same goal can be met in any of these forms, and mature programs combine them rather than leaning on one.
 
-| | Preventive | Detective | Corrective |
-|---|---|---|---|
-| **Technical (logical)**, enforced by systems | Multi-factor authentication, encryption | Intrusion detection, log monitoring | Automated failover, restore from backup |
-| **Administrative**, policies, procedures and training | Acceptable use policy, awareness training | Periodic access reviews, audits | Incident response plan |
-| **Physical**, protecting the tangible world | Locks, badge readers | Surveillance cameras | Spare hardware, alternate site |
+- **Administrative** controls are policies, procedures, and training: the rules people are expected to follow, such as an access-review policy or a clean-desk rule.
+- **Technical** (or logical) controls are enforced by hardware or software: a password requirement, disk encryption, a network segmentation rule.
+- **Physical** controls act on the tangible world: locked doors, badge readers, cable locks, secure disposal of drives.
 
-Most programs need all three rows, because a policy without technical enforcement is easy to ignore, and a locked door does nothing against a stolen password.
+Locking a server room (physical), requiring a login (technical), and forbidding shared accounts in policy (administrative) can all serve the same aim of keeping the wrong people away from a machine.
 
-## One stolen laptop, several layers
+## When the primary control cannot be used
 
-Consider an employee whose laptop is taken from a car. No single control decides the outcome; the layers do.
+Sometimes the recommended control is impossible, too costly, or breaks something. A **compensating control** is a deliberate substitute that provides comparable protection by another route. If an old system cannot support multi-factor login, placing it on an isolated network segment and watching its logs closely can cover much of the same risk. Compensating controls are legitimate, but they are a trade, not a free pass: each one should be documented, and its weaker coverage understood, rather than quietly accepted.
 
-- **Full-disk encryption** (preventive, technical) keeps the files unreadable if the laptop was powered off or securely locked when taken; on a device left on and unlocked, the volume is already decrypted.
-- **Multi-factor authentication and short session lifetimes** (preventive, technical): MFA stops the thief from starting a fresh login with any password found on the device, while sessions already open in the browser stay usable only until they expire or are revoked.
-- **A clear reporting procedure** (administrative) gets the loss reported the same day.
-- **Sign-in monitoring** (detective, technical) flags any attempt to use the device's credentials from an unfamiliar location.
-- **Remote wipe and session revocation** (corrective, technical) cut the device off, and **synchronized backups** (corrective) let the employee resume work on a replacement.
+## A stolen laptop, control by control
 
-If encryption had been missing, detection and revocation would still limit the harm. This overlap is the idea behind [defense in depth](../principles/defense-in-depth.md): a gap in one layer is covered by another.
+Picture an employee's laptop taken from a car. Follow the controls in order:
 
-## Deciding which controls earn their place
+1. **Preventive.** Full-disk encryption means that while the laptop stays powered off, the thief sees only ciphertext, so the data stays confidential even though the hardware is gone.
+2. **Detective.** The employee reports the loss and device-management logs confirm the laptop has not checked in, flagging it as missing.
+3. **Corrective.** Administrators revoke its credentials and issue a remote wipe, and the user restores their files from backup onto a replacement.
 
-Risk never drops to zero, so the goal is an acceptable level of risk at a reasonable cost, not perfect protection. Choosing controls means weighing how likely and how severe each threat is against what each safeguard costs to build, run, and live with. Controls are largely chosen to close the [weaknesses that exploits target](vulnerabilities-and-exploits.md) and to protect the confidentiality, integrity, and availability described by the [CIA triad](cia-triad.md).
+No single measure handled the incident. The encryption bought time, the reporting and logs caught it, and the wipe and restore closed it out.
 
-Three beliefs regularly lead programs astray:
+## How controls connect to risk and defense
 
-- **"More controls always mean more security."** Overlapping or poorly chosen controls add cost and complexity without reducing meaningful risk, and they can frustrate users into working around them.
-- **"Prevention is enough."** Prevention eventually fails, so detection and recovery are what keep a failure from becoming a disaster.
-- **"Once deployed, a control keeps working."** Controls decay as systems, threats, and staff change. They must be tested, reviewed, and updated to stay effective, which is why NIST pairs its SP 800-53 control catalog with a companion guide, SP 800-53A, on how to assess each control.
+Controls exist to protect the confidentiality, integrity, and availability named in the [CIA triad](cia-triad.md), by shrinking the opportunity available to the [threats and threat actors](threats-and-threat-actors.md) that target an organization. Each control addresses one or more [vulnerabilities and exploits](vulnerabilities-and-exploits.md), and layering independent controls so that one failing does not expose everything is the principle of [defense in depth](../principles/defense-in-depth.md).
 
 ## References
 
+- [NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - [NIST Glossary: Security Control](https://csrc.nist.gov/glossary/term/security_control)
 - [NIST Glossary: Countermeasures](https://csrc.nist.gov/glossary/term/countermeasures)
-- [NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
-- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
-- [ISO/IEC 27002, Information Security Controls](https://www.iso.org/standard/75652.html)
-- [CISA: Cyber Essentials](https://www.cisa.gov/resources-tools/resources/cyber-essentials)
+- [CIS Critical Security Controls](https://www.cisecurity.org/controls)
+- [ISO/IEC 27002, Information security controls](https://www.iso.org/standard/75652.html)

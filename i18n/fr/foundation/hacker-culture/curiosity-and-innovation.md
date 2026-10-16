@@ -1,63 +1,56 @@
 ---
-title: "Curiosité et innovation : le moteur de la tradition hacker"
-description: "Comment le besoin de comprendre et de détourner les systèmes a produit une grande partie des technologies qui définissent l'informatique moderne."
+title: "Curiosité et innovation : comment l'exploration a construit l'informatique moderne"
+description: "Comment la volonté de comprendre et de détourner les systèmes a produit une grande partie de l'informatique moderne, et pourquoi ce même instinct est au coeur du travail de sécurité."
 keywords:
-  - curiosité des hackers
-  - innovation en informatique
-  - éthique hacker
+  - curiosité du hacker
+  - détournement de la technologie
+  - histoire de l'innovation informatique
   - bricolage et exploration
-  - open source
-  - histoire du hacking
+  - découverte de vulnérabilités
+  - éthique hacker
 ---
 
 # Curiosité et innovation
 
-**La curiosité est la plus ancienne valeur de la culture hacker**, plus ancienne que tout manifeste, toute étiquette ou toute définition juridique. Bien avant que le mot "hacker" ne porte la moindre connotation criminelle, il désignait une personne qui voulait comprendre comment un système fonctionnait de l'intérieur, et qui considérait ce savoir comme quelque chose à étendre, partager et reconstruire. Le schéma se répète au fil des décennies : une personne rencontre une machine, refuse d'accepter les limites qu'on lui prête, et en explorant ces limites produit quelque chose que personne n'avait prévu.
+**La curiosité est l'instinct fondateur de la culture hacker**, l'impulsion d'ouvrir un système, de comprendre comment il se comporte réellement, puis de le pousser au-delà de ce que ses concepteurs avaient prévu. Le schéma qui en résulte est remarquablement constant au fil des décennies : quelqu'un rencontre une machine, refuse d'accepter ses limites annoncées, et en testant ces limites produit quelque chose que personne n'avait conçu pour elle. Une grande partie de ce que nous appelons aujourd'hui l'informatique moderne a commencé exactement ainsi, comme un effet secondaire de personnes explorant pour le plaisir de comprendre.
 
-## Des câblages à relais au PDP-1
+## Ce que "hack" signifiait avant de signifier crime
 
-Le mot remonte au Tech Model Railroad Club (TMRC) du MIT, à la fin des années 1950. Les membres qui entretenaient le réseau ferroviaire miniature du club, piloté par un système complexe de relais, employaient le mot "hack" pour désigner un travail astucieux et ludique, réalisé pour le plaisir et non pour une note ou un salaire. L'histoire complète des débuts de cette culture est racontée dans [Origines](origins.md).
+Le mot précède sa réputation criminelle de plusieurs décennies. Au MIT, à la fin des années 1950, les membres du Tech Model Railroad Club utilisaient "hack" pour désigner un travail astucieux et ludique fait pour lui-même, pas pour une note ou un salaire. Le Jargon File, le dictionnaire de longue date de la communauté, définit encore un hacker d'abord comme "une personne qui aime explorer les détails des systèmes programmables et la manière d'étendre leurs capacités". Le crime apparaît très loin dans cette liste de sens, et le sens le plus ancien est de la pure curiosité. L'histoire complète de l'origine de cette attitude est racontée dans [Origines](origins.md).
 
-Lorsque certains de ces étudiants ont eu accès aux premiers ordinateurs du MIT, d'abord le TX-0 puis un PDP-1 de DEC, cet état d'esprit est passé du câblage au code. Des enseignants comme Jack Dennis leur laissaient une grande liberté sur les machines, et c'est cette liberté d'expérimenter qui a transformé une habitude de club en tradition informatique.
+## Le geste de détournement, en quatre inventions
 
-## Trois projets que personne n'avait commandés
+La preuve la plus claire que la curiosité est le moteur de l'innovation est ce qu'elle produit lorsque personne n'a commandé de produit. Chacune des inventions suivantes est partie d'une question sur un système existant, pas d'un cahier des charges :
 
-La preuve la plus claire que la curiosité alimente l'innovation se trouve dans ce qu'elle a produit alors que personne ne réclamait de produit. Chacun de ces projets a commencé par une question, et non par un cahier des charges.
+| Système | Conçu pour | Ce que la curiosité en a fait |
+| --- | --- | --- |
+| Le PDP-1 du MIT | Exécuter des programmes de laboratoire | Spacewar! (1962), l'un des premiers jeux vidéo influents |
+| La recherche informatique des Bell Labs | Soutenir le travail interne | Unix et le langage C, ancêtres de Linux, macOS et Android |
+| Le logiciel hôte d'ARPANET | Connecter des ordinateurs de recherche | Le processus ouvert des RFC qui régit encore les standards d'Internet |
+| Le partage de documents du CERN | Organiser les articles de physique | Le World Wide Web |
 
-| Projet | Lieu et époque | La question de départ | Ce qu'il est devenu |
-| --- | --- | --- | --- |
-| Spacewar! | MIT, PDP-1, 1961 à 1962 | Ce petit ordinateur pouvait-il faire tourner un jeu à deux joueurs, en temps réel, avec de la physique ? | L'un des premiers jeux vidéo influents, utilisé par DEC pour faire la démonstration de la machine |
-| Unix et C | Bell Labs, 1969 à 1973 | À quoi ressemblerait un système d'exploitation plus simple et plus agréable ? | L'ancêtre de Linux, des BSD, de macOS, d'iOS et d'Android, qui équipent aujourd'hui la plupart des serveurs et des téléphones |
-| Les RFC et les protocoles de l'ARPANET | UCLA et d'autres sites de l'ARPANET, à partir de 1969 | Comment les hôtes de ce nouveau réseau devaient-ils communiquer entre eux ? | Une méthode ouverte et publique d'élaboration des standards qui régit encore Internet |
+Dans chaque ligne, le résultat a dépassé ce que quiconque avait d'abord imaginé, tantôt en étant orienté vers un objectif entièrement nouveau, comme le PDP-1 devenu un jeu, tantôt en atteignant un public bien plus vaste que celui pour lequel il avait été conçu, comme le Web. C'est cela, le geste d'exploration : une chose fabriquée ou sondée pour une raison devient la plus importante pour une autre, et la surprise devient la véritable contribution.
 
-Le cas de l'ARPANET illustre la dimension de partage de la curiosité. La RFC 1 de Steve Crocker (avril 1969) était explicitement une "request for comments", une demande de commentaires : un brouillon proposé ouvertement pour que d'autres puissent l'améliorer, plutôt qu'une spécification achevée imposée d'en haut.
+## Comment un "et si ?" devient un rapport de bug
 
-## Les convictions de la génération du TMRC
+Le même réflexe alimente la recherche en sécurité. Trouver une faille avant un attaquant, c'est de la curiosité appliquée, et cela suit généralement un chemin court :
 
-Steven Levy, qui a écrit sur ces programmeurs du MIT dans *Hackers: Heroes of the Computer Revolution* (1984), a condensé leurs règles tacites sous le nom d'"éthique hacker". Plusieurs de ses principes sont de la curiosité érigée en règle :
+1. **La question.** Un chercheur se demande ce qu'un système fait d'une entrée que son concepteur n'avait jamais anticipée.
+2. **L'expérience.** Il envoie cette entrée inattendue et observe attentivement, au sein d'un système qu'il est autorisé à tester.
+3. **La surprise.** Le système se comporte d'une manière que personne n'avait conçue, révélant une faiblesse.
+4. **La divulgation.** La découverte est signalée afin qu'elle puisse être corrigée, plutôt qu'exploitée en silence.
 
-- **L'impératif de la pratique.** On comprend un système en le démontant et en travaillant directement avec lui, pas seulement en lisant ce que ses concepteurs en disent.
-- **Toute information doit être libre.** Le savoir se démultiplie lorsqu'il circule ; les techniques, le code source et les découvertes se transmettent donc plutôt que de s'accumuler jalousement.
-- **Juger les hackers sur leur travail.** Une bonne solution tient par ses propres mérites, et non par les diplômes, l'âge ou le statut.
-- **Les ordinateurs peuvent créer de l'art et de la beauté, et changer la vie en mieux.** Un code élégant mérite d'être recherché pour lui-même.
+Un testeur qui ne vérifie que le comportement promis par le manuel manquera presque tout ce qui compte. La curiosité est ce qui transforme une liste de contrôle en une véritable enquête.
 
-Sous tous ces principes repose une idée que les personnes décrites par Levy formulaient rarement de façon explicite : aucune conception n'est définitive, et chaque outil est une invitation à en construire une meilleure version. La manière dont ces valeurs se sont ensuite réparties entre des communautés distinctes fait l'objet de [Sous-cultures et valeurs](subcultures-and-values.md).
+## La même question, deux destinations
 
-## Le réflexe du détournement en sécurité
-
-Le détournement est le cœur pratique de la curiosité hacker : une technologie conçue dans un but est orientée vers un autre, et l'usage inattendu compte souvent plus que l'usage prévu. Un jeu devient une démonstration commerciale ; une expérience de laboratoire devient un système d'exploitation qui fait tourner une grande partie du monde.
-
-Ce même réflexe anime aujourd'hui les logiciels open source et une grande partie du monde des start-up, et il est central dans la recherche en sécurité. Se demander "que peut faire d'autre cette entrée ?" ou "que se passe-t-il si j'envoie quelque chose que le concepteur n'avait jamais prévu ?" est précisément la façon dont les chercheurs trouvent les failles avant les attaquants. Un testeur qui ne vérifie que le comportement prévu d'un système passera à côté de l'essentiel.
-
-## Quand la curiosité a besoin d'une autorisation
-
-La curiosité, en elle-même, est neutre. La question qui conduit un chercheur à signaler une faille peut conduire quelqu'un d'autre à l'exploiter, et c'est pourquoi la voix de cette tradition s'est toujours accompagnée d'une réflexion éthique, comme dans le [Manifeste du hacker](hacker-manifesto.md). Ce qui sépare le travail constructif du préjudice n'est pas le degré de curiosité, mais le fait d'explorer avec une autorisation et avec considération pour les personnes qui dépendent du système. Cette distinction est à la base des catégories décrites dans [Chapeaux blancs, noirs et gris](white-black-and-grey-hats.md).
+La curiosité elle-même est neutre. La question qui conduit une personne à rédiger un rapport de bug en conduit une autre à s'introduire par effraction, et c'est pourquoi la tradition hacker a toujours associé l'exploration à un débat sur l'éthique, exploré dans [savoir à double usage](../ethics-and-philosophy/dual-use-knowledge.md). Ce qui sépare la construction du préjudice n'est pas le degré de curiosité d'une personne, mais le fait qu'elle explore avec autorisation et avec un souci pour les gens qui dépendent du système. C'est exactement cette ligne que les catégories de [Chapeaux blancs, noirs et gris](white-black-and-grey-hats.md) tentent de tracer, et les valeurs qui se sont développées autour d'elle font l'objet de [Sous-cultures et valeurs](subcultures-and-values.md).
 
 ## Références
 
-- [Steven Levy, Hackers: Heroes of the Computer Revolution, chapitres 1 et 2 (Project Gutenberg)](https://www.gutenberg.org/ebooks/729)
 - [The Jargon File : entrée "hacker"](http://www.catb.org/jargon/html/H/hacker.html)
+- [Steven Levy, Hackers: Heroes of the Computer Revolution (Project Gutenberg)](https://www.gutenberg.org/ebooks/729)
 - [Computer History Museum : Spacewar! sur le PDP-1](https://www.computerhistory.org/pdp-1/spacewar/)
 - [Dennis M. Ritchie : The Development of the C Language (Nokia Bell Labs)](https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html)
-- [RFC 1 : Host Software, Steve Crocker (1969)](https://www.rfc-editor.org/rfc/rfc1)
-- [Internet Society : Brief History of the Internet](https://www.internetsociety.org/internet/history-internet/brief-history-internet/)
+- [RFC 1: Host Software, Steve Crocker (1969)](https://www.rfc-editor.org/rfc/rfc1)
+- [CERN : A short history of the Web](https://home.cern/science/computing/birth-web/short-history-web)

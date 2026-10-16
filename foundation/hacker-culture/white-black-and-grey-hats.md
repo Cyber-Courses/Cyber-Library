@@ -1,68 +1,55 @@
 ---
-title: "White, black, and grey hats: Classifying hackers by intent"
-description: "A framework that sorts security practitioners by their intent and authorization rather than by their technical skill."
+title: "White, black, and grey hats: intent and authorization, not skill"
+description: "A guide to the color-coded labels that sort hackers by whether they have permission and what they intend, rather than by how skilled they are."
 keywords:
   - white hat
   - black hat
   - grey hat
   - ethical hacking
-  - hacker ethics
-  - authorization
+  - authorization and intent
+  - hacker classification
 ---
 
 # White, black, and grey hats
 
-**The hat colors** are a shorthand for sorting people who break into systems by two things that technical skill alone cannot capture: their intent and their authorization. A white hat, a black hat, and a grey hat may use the exact same tools and techniques. What separates them is whether they have permission to act, and whether they aim to protect or to harm. The metaphor borrows from formulaic Western films, where heroes wore white hats and villains wore black ones.
+**White, black, and grey hats** are labels that sort people who probe or break into computer systems by two things: whether they have permission to be there, and what they intend to do once they are. They say nothing about talent. A criminal intruder and a hired security tester can run the exact same tools; the hat describes which side of a line each one stands on.
 
-## Two questions that decide the color
+## From Western films to security jargon
 
-Every classification comes down to two questions asked about the same activity:
+The color metaphor is older than computing. In early American Western films, the hero often wore a white hat and the villain a black one, a visual shorthand so an audience could tell them apart at a glance. Security culture borrowed the image because it captured the thing that mattered: moral stance, not ability. The labels attached themselves to the hacker identity as that identity spread, a story traced in [Origins](origins.md) and across the branches described in [Subcultures and values](subcultures-and-values.md).
 
-1. **Did the system owner authorize it?** A contract, a defined scope, a published disclosure policy, or a bug bounty's terms all count as permission. Curiosity, good intentions, or the fact that a system was easy to reach do not.
-2. **What was the access meant to achieve?** Finding and fixing weaknesses points one way; theft, disruption, extortion, or personal gain point the other.
+## The line is authorization, not skill
 
-Crossing the two answers gives the familiar categories:
+Because a white hat and a black hat may use identical techniques, skill cannot separate them. Two questions do. First, authorization: were they invited, under a contract, a bug bounty scope, or explicit permission? Second, intent: did they mean to strengthen the system or to exploit it? The grey hat sits in the uncomfortable gap where one answer is missing.
 
-| | Protective intent | Harmful or self-serving intent |
-| --- | --- | --- |
-| **Authorized** | White hat: penetration testers, security researchers, and in-house defenders working under a contract, a scope, or a disclosure policy | Contradictory by definition: authorization covers specific work, so an insider or contractor who abuses legitimate access to steal or sabotage has moved into the unauthorized row |
-| **Unauthorized** | Grey hat: probes a system without permission, then reports the flaw rather than exploiting it | Black hat: intrusion for gain, disruption, or other harm, which is what most people mean by "cybercrime" |
+| Hat | Authorization | Intent | Typical role |
+|---|---|---|---|
+| White | Yes, within an agreed scope | Improve the system's security | Penetration tester, bug bounty researcher |
+| Black | None | Personal gain, disruption, or harm | Criminal intruder |
+| Grey | None, or ambiguous | Often to expose a flaw, not to profit | Uninvited researcher who reports what they find |
 
-The lesson the table makes visible is that authorization, not capability, is the dividing line. The same scan that is a paid service in one context can be an offense in another, which is why the [authorization and consent](../ethics-and-philosophy/authorization-and-consent.md) question matters more than any tool. It is also a direct illustration of [dual-use knowledge](../ethics-and-philosophy/dual-use-knowledge.md): the skill itself carries no color.
+The grey hat is defined by contradiction: good intent paired with no permission. That mix is why the category is debated rather than celebrated.
 
-## From "hacker" to hats: how the labels arose
+## One flaw, three responses
 
-The language of hats grew out of the hacker community's long struggle over what the word "hacker" should mean. In the early decades of computing, a hacker was simply a skilled and curious programmer, the identity traced in [Origins](origins.md) and celebrated in the [Hacker Manifesto](hacker-manifesto.md). As break-ins and computer crime entered the public eye during the 1980s and 1990s, the press increasingly used "hacker" to mean "criminal," and many practitioners wanted a way to separate honest security work from malicious intrusion.
+Imagine someone notices that a hospital's patient portal leaks records through a predictable web address. The same discovery branches three ways:
 
-The color labels offered that separation, borrowing the costume code of Westerns. Their meanings have drifted, though. The Jargon File records "gray hat" as an occasional term for people with cracker skills operating within the law, for example in security evaluations, which is closer to today's white hat. The modern sense of grey hat, someone who acts without permission but means well, came later. By the time commercial penetration testing and bug bounty programs matured in the 2000s, "white hat" had become a recognized professional identity rather than just slang.
+1. **White hat.** The finder was already engaged to test the portal, or submits through an open bug bounty program. They document the flaw, report it privately, and let the hospital fix it before any details are public.
+2. **Black hat.** The finder harvests the records to sell or to extort the hospital. The act is unauthorized and the intent is harm.
+3. **Grey hat.** The finder was never invited but means no harm. They confirm the flaw and email the hospital, or post a redacted warning. The intent leans ethical, yet accessing the records without permission may still break the law.
 
-## Cases that refuse to fit one color
+Only the first path keeps both answers clean. The third shows how good intentions do not erase the authorization problem, a tension examined in [authorization and consent](../ethics-and-philosophy/authorization-and-consent.md).
 
-The two-question model is a simplification, and the hard cases show where it strains:
+## Where the colors blur
 
-- **The unsolicited bug report.** A researcher notices a flaw in a public website, confirms it without permission, and emails the owner. The intent is protective, but the access was not authorized, so the act sits squarely in grey territory and its legal outcome depends on the jurisdiction and the owner's reaction.
-- **The tester who drifts out of scope.** A hired penetration tester follows a promising lead onto a system the contract did not cover. The person is a white hat by profession, yet that specific access was unauthorized.
-- **"Research" used as leverage.** Someone finds a vulnerability and asks for payment in exchange for keeping quiet. Calling it research does not change the color: the U.S. Department of Justice explicitly cites discovering vulnerabilities in order to extort their owners as an example of activity that is not in good faith.
-- **The authorized insider who causes harm.** Permission alone does not make an act white hat. An employee who uses legitimate access to steal data has authorization but harmful intent.
+The hats are best read as descriptions of acts, not permanent identities. A professional tester who stays strictly in scope at work might, on their own time, poke at a site uninvited and drift into grey. Terms like "red team" and "blue team" describe cooperating roles inside an authorized exercise and sit apart from this scale entirely.
 
-These cases are why the community treats the colors as a vocabulary for discussion rather than a legal verdict. The norms that give them weight are explored further in [Subcultures and values](subcultures-and-values.md).
-
-## Paths that turn grey into white
-
-Much of modern security practice exists to give skilled, curious people a lawful route, the same drive described in [Curiosity and innovation](curiosity-and-innovation.md):
-
-- **Coordinated vulnerability disclosure.** Programs such as the process run by CISA give researchers a defined channel to report flaws and a predictable sequence for fixes and publication.
-- **Bug bounties and safe harbor terms.** By publishing a scope and promising not to pursue good-faith reporters, an organization converts would-be grey hat probing into authorized work.
-- **Prosecution policy.** In May 2022 the U.S. Department of Justice announced that good-faith security research should not be charged under the Computer Fraud and Abuse Act, defining it as access solely for testing, investigating, or correcting a security flaw in a way designed to avoid harm. This guides federal prosecutors only: it grants no permission, creates no enforceable right, and leaves civil and state law untouched.
-- **Professional titles.** "Ethical hacker" and "security researcher" are now mainstream job titles built directly on the white hat idea, and NIST describes penetration testing as testing that mimics real-world attacks under defined conditions.
-
-Many legal disputes still turn on whether access was authorized, which is exactly the gap the grey hat label names. Bounty and disclosure terms close that gap by making permission explicit before anyone starts probing; prosecution policy and job titles only shape how the work is perceived and charged.
+The labels also carry the field's long argument over whether unauthorized curiosity is ever justified, the same defiance voiced in the [Hacker Manifesto](hacker-manifesto.md). For a learner, the useful takeaway is simple: do not judge a hacker by the sophistication of what they did, but by whether they were allowed to do it and why they did it.
 
 ## References
 
-- [EFF: Coders' Rights Project](https://www.eff.org/issues/coders)
-- [NIST Glossary: Penetration Testing](https://csrc.nist.gov/glossary/term/penetration_testing)
-- [CISA: Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
-- [U.S. Department of Justice: New Policy for Charging Cases under the Computer Fraud and Abuse Act (2022)](https://www.justice.gov/opa/pr/department-justice-announces-new-policy-charging-cases-under-computer-fraud-and-abuse-act)
-- [The Jargon File: entry for "black hat"](http://www.catb.org/jargon/html/B/black-hat.html)
-- [The Jargon File: entry for "hacker"](http://www.catb.org/jargon/html/H/hacker.html)
+- [The Jargon File: cracker](http://www.catb.org/jargon/html/C/cracker.html)
+- [Eric S. Raymond, How To Become A Hacker](http://www.catb.org/~esr/faqs/hacker-howto.html)
+- [NIST SP 800-115, Technical Guide to Information Security Testing and Assessment](https://csrc.nist.gov/pubs/sp/800/115/final)
+- [CISA Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+- [IETF RFC 1392: Internet Users' Glossary](https://www.rfc-editor.org/rfc/rfc1392)

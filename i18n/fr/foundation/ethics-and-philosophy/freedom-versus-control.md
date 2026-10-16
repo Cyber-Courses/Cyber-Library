@@ -1,65 +1,64 @@
 ---
-title: "Liberté contre contrôle : la tension fondamentale du travail de sécurité"
-description: "Comment les praticiens de la sécurité mettent en balance l'accès ouvert, l'autonomie et la libre circulation de l'information avec les restrictions et la supervision qu'exige la protection."
+title: "Liberté contre contrôle : l'arbitrage central de la sécurité"
+description: "Comment le travail de sécurité met en balance l'accès ouvert et l'autonomie individuelle face aux restrictions et à la surveillance qu'impose la protection."
 keywords:
   - liberté contre contrôle
-  - accès ouvert
-  - compromis de sécurité
-  - autonomie et supervision
-  - liberté de l'information
-  - éthique de la sécurité
+  - liberté négative et positive
+  - arbitrages de sécurité
+  - restrictions d'accès
+  - autonomie et surveillance
+  - cliquet du contrôle
 ---
 
 # Liberté contre contrôle
 
-**Chaque décision de sécurité trace une ligne** entre ce que les personnes sont libres de faire et ce que le système les empêche de faire. L'accès ouvert, l'autonomie et la libre circulation de l'information rendent les systèmes utiles, accueillants et innovants. Le contrôle, sous la forme de restrictions, de surveillance et de filtrage, les rend plus sûrs. Les deux tirent en sens opposés, et aucun réglage ne satisfait les deux à la fois. Apprendre à reconnaître cette tension, plutôt que de prétendre qu'un camp l'emporte toujours, est une compétence fondamentale pour quiconque travaille dans la sécurité.
+**La liberté et le contrôle sont deux biens, et le travail de sécurité dépense l'un pour acheter l'autre.** Les gens veulent des systèmes ouverts, utilisables et à l'abri du regard de l'exploitant ; ces mêmes systèmes doivent résister aux usages abusifs, ce qui implique de restreindre les actions, de surveiller l'activité et de retirer des décisions aux mains des individus. Presque chaque choix de sécurité se situe quelque part sur la ligne qui sépare ces deux biens, et aucun point de cette ligne n'est exempt de coût.
 
-## Le prix de chaque garde-fou
+## La liberté négative et positive, appliquée à un réseau
 
-La sécurité existe pour protéger les personnes et les données, mais la protection est rarement gratuite. Chaque garde-fou consomme quelque chose auquel l'utilisateur tient, et il est utile de nommer ce coût explicitement :
+Le philosophe Isaiah Berlin, dans sa conférence de 1958 "Deux conceptions de la liberté", a divisé la liberté en deux types. La *liberté négative* est la liberté à l'égard de toute ingérence : personne ne vous empêche d'agir. La *liberté positive* est la liberté de réellement accomplir quelque chose : disposer de la capacité et des conditions pour bien agir.
 
-| Contrôle | Ce qu'il protège | Ce qu'il coûte |
-| --- | --- | --- |
-| Une authentification | Le compte et ses données | De la friction à chaque visite |
-| Un filtre de contenu | Les utilisateurs et les machines, contre les logiciels malveillants | Du travail légitime bloqué par erreur |
-| La journalisation et la surveillance | La capacité à repérer les intrus | La vie privée des utilisateurs ordinaires, dont les actions sont aussi enregistrées |
-| Un circuit d'approbation | Les systèmes, contre les changements risqués | La rapidité, puisque les changements honnêtes attendent aussi longtemps que les dangereux |
+La sécurité touche aux deux, et les deux peuvent pointer dans des directions opposées :
 
-Internet lui-même a été conçu pour faire circuler l'information librement, et une grande partie de sa valeur vient encore de cette ouverture. Le contrôle est souvent ce que l'on ajoute ensuite, et quelqu'un le paie toujours en commodité, en vie privée ou en autonomie.
+- Un gestionnaire de mots de passe obligatoire, des mises à jour forcées et des ports USB bloqués **réduisent la liberté négative**. L'utilisateur subit une ingérence.
+- Les mêmes mesures peuvent **élargir la liberté positive**. Un réseau qui n'est pas constamment compromis est un réseau que les gens peuvent effectivement utiliser pour faire leur travail.
 
-## Trois endroits où la ligne ne cesse de bouger
+Les cas difficiles sont ceux où protéger la liberté positive d'une personne exige de porter atteinte à la liberté négative d'une autre. "Plus de sécurité" est rarement un gain net ; c'est généralement un transfert.
 
-**Facilité d'usage contre verrouillage.** Les équipes ajustent sans cesse le degré de rigueur d'un système. Des règles trop souples invitent aux abus ; des règles trop strictes poussent les utilisateurs vers des contournements moins sûrs que le comportement qu'ils remplacent. Le National Cyber Security Centre britannique le souligne à propos des politiques de mots de passe : des règles trop complexes conduisent les gens à réutiliser leurs mots de passe, à les noter de façon peu sûre ou à en choisir de prévisibles. Saltzer et Schroeder ont nommé l'idée sous-jacente dès 1975, sous le terme d'"acceptabilité psychologique" : une protection ne fonctionne que si les personnes peuvent l'appliquer couramment et correctement.
+## Le cadran, pas l'interrupteur
 
-**Transparence contre secret.** Publier le fonctionnement d'une défense invite à un examen qui la renforce, mais peut aussi fournir une carte aux attaquants. Le dissimuler protège la conception tout en affaiblissant la confiance et l'examen du public. Le principe de "conception ouverte" de Saltzer et Schroeder penche du côté de la transparence : un mécanisme ne doit pas dépendre de l'ignorance des attaquants, mais seulement de clés ou de mots de passe plus faciles à protéger. La même ouverture qui diffuse le savoir défensif diffuse aussi les moyens d'attaquer, ce qui est le sujet du [savoir à double usage](dual-use-knowledge.md).
+Traiter la liberté et le contrôle comme un tout ou rien masque le vrai travail, qui consiste à choisir un réglage. La même ressource peut se situer en des points très différents selon qui la détient et pourquoi.
 
-**Autonomie individuelle contre sécurité collective.** La liberté d'une seule personne d'installer n'importe quel logiciel ou de partager n'importe quel fichier peut exposer tous ceux qui partagent le réseau. Restreindre cette liberté protège le groupe, mais traite chacun de ses membres comme un risque potentiel.
+| Réglage | Liberté privilégiée | Contrôle privilégié |
+|---|---|---|
+| Accès par défaut | Ouvert sauf restriction | Refusé sauf autorisation |
+| Surveillance | Journaux réduits au minimum | Activité enregistrée en détail |
+| Exceptions | L'utilisateur peut s'auto-approuver | Chaque demande est examinée |
+| Partage du savoir | Publié ouvertement | Partagé selon le besoin d'en connaître |
 
-## Un cas concret : verrouiller les ordinateurs portables du bureau
+La plupart des techniques de sécurité sont un déplacement délibéré sur l'une de ces lignes, et non un saut jusqu'à l'extrémité de toutes.
 
-Prenons une petite entreprise qui décide, après une alerte aux logiciels malveillants, d'empêcher ses employés d'installer eux-mêmes des logiciels.
+## Faire monter le cadran d'un réseau de campus
 
-1. **Le contrôle.** Seule l'équipe informatique peut installer des applications. Le risque qu'un utilisateur télécharge un outil malveillant chute fortement.
-2. **Le premier coût.** Un graphiste a besoin d'un utilitaire de polices pour une échéance client et attend deux jours l'approbation. Le travail ralentit et la frustration monte.
-3. **Le contournement.** Certains employés commencent à travailler sur leurs ordinateurs personnels ou dans des outils web non vérifiés que l'équipe informatique ne voit pas du tout. Les données que la règle devait protéger se trouvent désormais dans un endroit moins sûr.
-4. **L'ajustement.** L'équipe informatique publie une liste d'outils préapprouvés que chacun peut installer, conserve l'examen manuel pour tout le reste et s'engage à répondre dans la journée. La liberté est en partie rétablie, et le contrôle couvre toujours les cas les plus risqués.
+Prenons l'exemple d'une université qui ajoute des contrôles à un réseau de recherche après un incident.
 
-Ni la politique ouverte d'origine ni le verrouillage strict n'étaient la bonne réponse. Le réglage viable est venu de l'observation de la manière dont les gens réagissaient réellement, et d'ajustements faits avec eux.
+1. **Départ.** N'importe quel membre peut connecter n'importe quel appareil et atteindre n'importe quel système. Liberté maximale, assurance minimale.
+2. **Premier tour.** Les appareils doivent être enregistrés et corrigés avant de rejoindre le réseau. Un gain clair en matière de sécurité ; une petite taxe sur l'autonomie.
+3. **Deuxième tour.** L'accès est accordé par rôle et expire, appliquant le [moindre privilège](../principles/least-privilege.md). Les chercheurs déposent désormais des demandes qu'ils avaient l'habitude de sauter.
+4. **Dépassement.** La journalisation complète des frappes au clavier est ajoutée "par précaution". La protection augmente légèrement ; la confiance et le moral chutent fortement.
 
-## Qui trace la ligne
+L'étape quatre montre pourquoi la destination importe : au-delà d'un certain point, chaque nouvelle restriction achète peu de sécurité et dépense beaucoup de bonne volonté.
 
-Les zones véritablement contestées sont celles où des personnes raisonnables ne sont pas d'accord, et elles portent surtout sur l'autorité plutôt que sur la technologie :
+## Le cliquet, et la tension sous d'autres noms
 
-- **Qui décide.** Un contrôle qui semble protecteur pour un administrateur peut ressembler à de la surveillance pour la personne observée. La légitimité dépend du consentement et de qui détient l'autorité pour fixer les limites, la question explorée dans [autorisation et consentement](authorization-and-consent.md). Lorsque c'est la surveillance elle-même qui pose problème, la tension se resserre en [sécurité contre vie privée](security-versus-privacy.md).
-- **Les réglages par défaut portent des valeurs.** La plupart des gens ne modifient jamais les réglages par défaut, de sorte que livrer un système ouvert ou verrouillé décide discrètement de l'équilibre pour des millions de personnes.
-- **Le contrôle peut survivre à sa raison d'être.** Les restrictions ajoutées face à une menace réelle ont tendance à rester bien après la disparition de la menace, s'accumulant jusqu'à former des systèmes sûrs mais hostiles aux personnes qui s'y trouvent.
+Les contrôles ont une qualité de cliquet : ils sont faciles à ajouter après un incident et politiquement difficiles à retirer, de sorte que les systèmes dérivent vers le contrôle à moins que quelqu'un ne plaide pour le camp de la liberté. Nommer à voix haute les valeurs concurrentes est ce qui maintient le cadran honnête.
 
-Le but n'est pas de maximiser le contrôle ou la liberté, mais de faire ce compromis de manière délibérée, visible et avec les personnes qu'il concerne. Décider où tracer la ligne est un acte éthique dont le praticien répond, ce qui le relie directement à la [responsabilité morale](moral-responsibility.md).
+Cette même tension réapparaît dans toute la fondation sous d'autres étiquettes. C'est la [sécurité contre la vie privée](security-versus-privacy.md) lorsque le contrôle en question est la surveillance, et c'est l'[autorisation et le consentement](authorization-and-consent.md) lorsque la question est de savoir qui peut tracer la ligne et si les gouvernés y ont consenti. Elle façonne aussi le [savoir à double usage](dual-use-knowledge.md), où restreindre l'information pour prévenir un préjudice restreint aussi les défenseurs qui en ont besoin.
 
 ## Références
 
-- [NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- [Isaiah Berlin, *Liberty* (comprenant "Two Concepts of Liberty"), Oxford University Press](https://global.oup.com/academic/product/liberty-9780199249893)
+- [NIST SP 800-53 Rev. 5, Security and Privacy Controls (famille Access Control)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - [Saltzer and Schroeder, The Protection of Information in Computer Systems (1975)](https://www.cs.virginia.edu/~evans/cs551/saltzer/)
-- [UK National Cyber Security Centre : Password policy, updating your approach](https://www.ncsc.gov.uk/collection/passwords/updating-your-approach)
-- [Electronic Frontier Foundation : Surveillance Self-Defense](https://ssd.eff.org/)
-- [Electronic Frontier Foundation : Privacy](https://www.eff.org/issues/privacy)
+- [NIST SP 800-37 Rev. 2, Risk Management Framework](https://csrc.nist.gov/pubs/sp/800/37/r2/final)
+- [EFF, Surveillance Self-Defense](https://ssd.eff.org/)

@@ -1,68 +1,58 @@
 ---
-title: "Minimisation : ne garder que le strict nécessaire"
-description: "Le principe de sécurité consistant à réduire les données, les accès et la surface d'attaque pour qu'un système ne détienne et n'expose que ce dont il a réellement besoin."
+title: "Minimisation : garder moins, exposer moins, perdre moins"
+description: "Le principe de sécurité qui consiste à réduire les données, les accès et la surface d'attaque au strict nécessaire pour un système."
 keywords:
   - minimisation
   - minimisation des données
   - réduction de la surface d'attaque
-  - fonctionnalité minimale
-  - protection de la vie privée dès la conception
-  - principes de sécurité
+  - moindre fonctionnalité
+  - conservation des données
+  - principe de minimisation
 ---
 
 # Minimisation
 
-**La minimisation** est la pratique consistant à garder un système aussi réduit que possible tout en lui permettant de remplir sa fonction : moins de données stockées, moins d'accès accordés, et moins de fonctionnalités, d'interfaces et de composants exposés. Le raisonnement est direct. Ce qu'un système ne détient pas ne peut pas être volé, ce qu'il n'expose pas ne peut pas être attaqué, et ce qu'il ne permet pas ne peut pas être détourné. La minimisation se retrouve dans tout le travail de sécurité et de protection de la vie privée, depuis la réglementation sur la protection des données qui impose de ne collecter que ce qui est nécessaire jusqu'aux guides de durcissement qui suppriment les services inutilisés d'un serveur.
+**La minimisation est la discipline qui consiste à ne garder que ce dont on a besoin.** Chaque enregistrement qu'un système stocke, chaque porte qu'il laisse ouverte et chaque fonctionnalité qu'il livre est une chose qui peut être volée, détournée ou retournée contre vous. Le principe affirme que la version la plus sûre de chacun de ces éléments est celle qui n'existe pas : un système doit donc être réduit au minimum qui lui permet encore de faire son travail.
 
-## Trois choses à réduire
+## Les trois choses qu'il vaut la peine de minimiser
 
-La minimisation est une seule idée appliquée à trois types d'"éléments" différents. Chacun a sa propre question directrice et ses propres mesures habituelles.
+La minimisation n'est pas une règle unique mais la même idée appliquée à trois types d'excès différents. Chacun a son propre responsable et son propre critère.
 
-| Ce que l'on réduit | La question à se poser | Mesures habituelles |
-| --- | --- | --- |
-| **Données** | Cette finalité a-t-elle réellement besoin de ce champ, et pour combien de temps ? | Ne collecter que les champs requis, fixer des durées de conservation, supprimer ou anonymiser une fois la finalité atteinte, et n'archiver que pour une finalité distincte et documentée |
-| **Fonctionnalités** | Ce service, ce protocole, ce compte ou ce paquet doit-il vraiment être actif ? | Désinstaller les logiciels inutilisés, désactiver le code d'exemple et les fonctions de débogage, supprimer les comptes par défaut |
-| **Exposition** | Qui a besoin d'atteindre cette interface, et depuis où ? | Fermer les ports inutilisés, publier l'ensemble le plus restreint d'API et de points de terminaison, garder les systèmes internes hors du réseau public |
+| Ce que vous minimisez | La question à poser | Ce qui le réduit |
+|---|---|---|
+| Données | Avons-nous vraiment besoin de collecter et de conserver cet enregistrement ? | Collecte ciblée, courtes durées de conservation, suppression par défaut |
+| Accès | Qui et quoi peut atteindre ceci, et pour combien de temps ? | Moindre privilège, identifiants à portée limitée, autorisations limitées dans le temps |
+| Surface d'attaque | Ce port, ce service ou cette fonctionnalité est-il réellement utilisé ? | Désactivation des fonctions inutilisées, suppression du code mort et des anciens systèmes |
 
-Le bénéfice diffère légèrement pour chacun. Moins de données signifie qu'une compromission expose moins : une base de données qui ne conserve que les enregistrements actuels et nécessaires divulgue bien moins qu'une base qui détient des années de données personnelles inutilisées. Moins de fonctionnalités et moins d'exposition signifient une surface d'attaque plus petite, car chaque port ouvert, paquet installé, point de terminaison d'API et fonctionnalité activée est une voie d'entrée potentielle. Les trois réduisent le coût et la complexité, puisqu'il y a moins de choses à corriger, surveiller, sauvegarder et comprendre.
+La ligne relative aux accès fait l'objet de son propre principe. Cette page se concentre sur les deux éléments faciles à négliger : les données que vous détenez et la surface que vous exposez.
 
-## Se demander "en avons-nous besoin ?" tout au long du cycle de vie des données
+## "Tout collecter" contre "collecter ce dont on a besoin"
 
-La minimisation des données n'est pas une décision unique prise au moment de la collecte. La même question revient à chaque étape que traverse une donnée :
+La minimisation des données a une filiation juridique autant que sécuritaire. Le droit de la vie privée la formule directement : le Règlement général sur la protection des données de l'Union européenne exige que les données personnelles soient "adéquates, pertinentes et limitées à ce qui est nécessaire" au regard de la finalité pour laquelle elles ont été collectées. Le cadre des États-Unis reprend cette idée ; les recommandations du NIST en matière de vie privée considèrent la minimisation de ce qui est collecté et conservé comme un moyen essentiel de réduire le risque.
 
-1. **Collecte.** Ne recueillir que les champs dont le traitement a véritablement besoin. Résister au champ "au cas où il servirait plus tard" ; il devient un passif bien avant de devenir utile.
-2. **Utilisation et accès.** Donner à chaque personne et à chaque service l'accès à la portion de données la plus étroite qu'exige sa tâche, afin que même un accès accordé atteigne le moins de choses possible.
-3. **Stockage.** Privilégier les formes qui contiennent moins : stocker une valeur dérivée ou un identifiant tronqué plutôt que l'original complet lorsque cela suffit.
-4. **Partage et copie.** Chaque export, flux d'analyse ou intégration tierce est une nouvelle copie qui doit être minimisée à part entière.
-5. **Suppression.** Décider dès la conception quand les données seront supprimées et construire le mécanisme qui s'en charge. Des données collectées sans plan de suppression ne font que s'accumuler.
+La tension est réelle. Les équipes produit et analytique ont une tendance naturelle à "tout collecter", car des données qui existent aujourd'hui pourraient être utiles demain. La minimisation s'y oppose par un calcul simple : des données que vous n'avez jamais collectées ne peuvent pas fuiter, et des données que vous avez supprimées dans les temps ne sont pas dans la fuite. Un calendrier de conservation, où les enregistrements expirent automatiquement à moins qu'il y ait une raison de les garder, transforme ce principe en routine plutôt qu'en promesse.
 
-## Où se cachent les copies et fonctionnalités superflues
+## Réduire la surface d'attaque
 
-Les systèmes deviennent rarement surchargés à cause d'une seule grande décision. Ils grossissent par des habitudes et des canaux secondaires qui échappent à la revue appliquée à la conception principale :
+La surface d'attaque est la somme de tous les points où un acteur extérieur pourrait tenter d'entrer : ports réseau ouverts, services en cours d'exécution, API exposées, champs de saisie, paquets installés et comptes utilisateurs. Sa minimisation est souvent appelée principe de moindre fonctionnalité, et le NIST SP 800-53 le nomme directement (contrôle CM-7) : configurer les systèmes pour qu'ils ne fournissent que les capacités essentielles et désactiver le reste.
 
-- **Les réglages par défaut qui collectent tout :** les équipes recueillent des données par défaut, en supposant que plus est toujours mieux, et constituent un stock qu'elles n'utilisent jamais mais qu'elles doivent tout de même protéger.
-- **Les copies fantômes :** les sauvegardes, journaux, exports et pipelines d'analyse dupliquent discrètement des données sensibles en dehors des systèmes qui avaient été soigneusement minimisés.
-- **La conservation oubliée :** les stocks continuent de grossir parce qu'aucune tâche ne supprime jamais rien.
-- **La prolifération des fonctionnalités en production :** des modules optionnels, des points de terminaison de débogage et du code d'exemple sont livrés activés parce que personne ne les a désactivés.
+La partie la plus dangereuse de la surface d'attaque est généralement celle dont personne ne se souvient. Un serveur de test, un ancien sous-domaine ou une page d'administration par défaut jamais désactivée reste sans surveillance et sans correctifs, offrant une voie d'entrée discrète.
 
-Une base de données principale minimisée protège peu si un fichier journal nocturne contient les mêmes enregistrements en intégralité. C'est souvent en examinant ces canaux secondaires que la véritable réduction se produit.
+## Cas pratique : le sous-domaine oublié
 
-## De la réglementation aux référentiels de durcissement
+1. **Il est construit.** Une équipe met en place `beta.example.com` pour une démonstration, le fait pointer vers un hébergeur cloud et le charge d'une copie des données de production.
+2. **Il est laissé à l'abandon.** La démonstration se termine. L'enregistrement DNS demeure, l'hôte continue d'exécuter une ancienne version logicielle, et personne ne l'ajoute à la liste des correctifs ou de la surveillance.
+3. **Il est découvert.** Un attaquant qui analyse les domaines de l'entreprise trouve l'hôte oublié, exploite le service non corrigé et atteint les données d'exemple, qui se révèlent être de véritables enregistrements de clients.
+4. **Ce que la minimisation aurait changé.** La copie des données n'aurait jamais dû exister (minimisation des données) ; l'hôte aurait dû être démantelé à la fin de la démonstration (surface d'attaque) ; et rien sur celui-ci n'aurait dû détenir d'identifiants de production (moindre privilège).
 
-La minimisation est inscrite à la fois dans le droit de la protection de la vie privée et dans les catalogues de contrôles de sécurité, ce qui explique en partie qu'elle apparaisse dans des contextes si différents :
+## Là où la minimisation renforce les autres
 
-- **Droit de la protection de la vie privée.** Le Règlement général sur la protection des données de l'UE (RGPD) exige, à l'article 5, que les données personnelles soient "adéquates, pertinentes et limitées à ce qui est nécessaire" au regard des finalités (minimisation des données) et conservées pas plus longtemps que nécessaire (limitation de la conservation). Des exigences similaires existent dans de nombreuses autres juridictions et constituent un élément central de la protection de la vie privée dès la conception.
-- **Contrôles de sécurité.** NIST SP 800-53 comprend le contrôle CM-7, Least Functionality, qui demande aux organisations de configurer les systèmes pour qu'ils ne fournissent que les capacités essentielles et d'interdire ou de restreindre les fonctions, ports, protocoles et services inutiles.
-- **Analyse de la surface d'attaque.** Des guides tels que l'OWASP Attack Surface Analysis Cheat Sheet considèrent la cartographie puis la réduction des points d'entrée comme une partie courante de la sécurité applicative.
-
-## La minimisation aux côtés des autres principes
-
-La minimisation fonctionne rarement seule. Le [moindre privilège](least-privilege.md) applique aux permissions le même raisonnement que la minimisation applique aux données et à la surface d'attaque, et les deux sont généralement conçus ensemble. Dans une stratégie de [défense en profondeur](defense-in-depth.md), un système plus réduit donne à chaque couche moins de choses à protéger et moins de brèches à couvrir. La minimisation est aussi l'un des tout premiers choix faits dans le cadre de la [sécurité dès la conception](security-by-design.md), car retirer un composant après coup est bien plus difficile que de ne jamais l'ajouter. Enfin, le [Zero Trust](zero-trust.md) la complète : limiter ce qui est exposé va naturellement de pair avec la vérification de chaque requête au regard du plus petit accès nécessaire. Pour la notion plus large de ce qu'un attaquant peut atteindre, voir [actifs et surface d'attaque](../concepts/assets-and-attack-surface.md).
+La minimisation est la partenaire discrète de plusieurs principes. Le [moindre privilège](least-privilege.md) applique la même logique aux permissions, en réduisant les accès plutôt que les données ou la surface. Une surface d'attaque plus réduite laisse à la [défense en profondeur](defense-in-depth.md) moins de brèches à couvrir, et elle soutient directement le [zero trust](zero-trust.md), qui suppose que tout service exposé peut être sondé. Décider de ce qu'il ne faut pas construire dès le départ est un geste central de la [sécurité dès la conception](security-by-design.md).
 
 ## Références
 
-- [NIST SP 800-53 Rev. 5, Security and Privacy Controls (CM-7 Least Functionality)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
-- [NIST Glossary: Attack Surface](https://csrc.nist.gov/glossary/term/attack_surface)
-- [OWASP: Attack Surface Analysis Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html)
-- [Règlement (UE) 2016/679, Règlement général sur la protection des données (EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
-- [UK Information Commissioner's Office : principe de minimisation des données](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/)
+- [GDPR Article 5: Principles relating to processing of personal data](https://gdpr-info.eu/art-5-gdpr/)
+- [NIST SP 800-53 Rev. 5 (CM-7 Least Functionality)](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
+- [NIST Privacy Framework](https://www.nist.gov/privacy-framework)
+- [OWASP Cheat Sheet: Attack Surface Analysis](https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html)
+- [CISA: Secure by Design](https://www.cisa.gov/securebydesign)

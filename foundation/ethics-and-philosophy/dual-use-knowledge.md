@@ -1,63 +1,53 @@
 ---
-title: "Dual-use knowledge: the same skill defends and attacks"
-description: "Information and technique in security that can defend or harm depending on who holds it and why they are using it."
+title: "Dual-use knowledge: the same skill that defends can harm"
+description: "Dual-use knowledge is information or technique that can defend or harm depending on who holds it and why they use it."
 keywords:
   - dual-use knowledge
   - dual-use technology
+  - coordinated vulnerability disclosure
+  - security through obscurity
   - offensive security
-  - responsible disclosure
-  - security research ethics
-  - knowledge and harm
+  - export controls
 ---
 
 # Dual-use knowledge
 
-**Dual-use knowledge** is information or technique that can defend or harm depending on who holds it and why. The same understanding that lets a defender find and fix a weakness lets an attacker find and exploit it. The knowledge itself is neutral. Its effect comes from intent, context, and consequence, which is why questions of [moral responsibility](moral-responsibility.md) and [authorization and consent](authorization-and-consent.md) sit so close to this topic.
+**Dual-use knowledge is information or skill that protects and endangers with equal ease, so its moral weight sits not in the knowledge but in the hand that holds it.** Learning how a lock is picked teaches you both to defeat it and to choose a better one. In security almost every capability is built this way: the understanding that lets a defender find a flaw is the same understanding that lets an attacker reach it.
 
-## One skill, two directions
+## The export-control origin of a loaded term
 
-Almost every core security skill has a mirror image. The technique does not change between the two columns; only the holder, the target, and the permission do.
+The phrase "dual-use" did not start with computers. It comes from arms control, where a dual-use good is a technology, such as a centrifuge, a chemical precursor, or a strain of pathogen, with both civilian and military uses. The Wassenaar Arrangement, a multilateral export-control regime founded in 1996, exists to track such goods as they cross borders. In 2013 its control list was expanded to cover the systems and tools used to build, command, and deliver "intrusion software," an attempt to treat such surveillance and intrusion toolkits like weapons, though the exploit payloads themselves fell outside the control. The reaction from researchers was immediate: the same code a government might buy for surveillance is what a defender uses to test and patch, so a rule written to stop one blocks the other. The episode showed how hard the category is to regulate when the item is knowledge rather than hardware.
 
-| Skill | Defensive use | Offensive use |
+## The same technique in two hands
+
+No column below holds a different skill. Port scanning is port scanning. What changes is who runs it, against what, and with whose permission.
+
+| Technique | In a defender's hands | In an attacker's hands |
 | --- | --- | --- |
-| Network mapping and port scanning | An administrator inventories exposed services | An intruder looks for an entry point |
-| Exploit development | A tester proves a flaw is real so it gets fixed, and defenders write detections for it | An attacker turns the flaw into access |
-| Reverse engineering malware | An analyst extracts indicators and builds signatures | A criminal studies a rival's code to reuse its tricks |
-| Password cracking | An auditor measures how weak an organization's passwords are | A thief recovers credentials from a stolen database |
-| Phishing techniques | A security team runs awareness simulations | A fraudster steals logins |
+| Vulnerability research | Finds flaws so they can be fixed | Finds flaws so they can be exploited |
+| Exploit code | Proves a risk is real and seeds detections | Turns a flaw into working intrusion |
+| Reverse engineering | Extracts malware indicators | Copies a rival's methods to reuse them |
+| Credential testing | Measures how weak passwords are | Steals account access |
 
-## Why defense cannot avoid learning attack
+Because the skill never shifts, the whole question collapses onto permission and purpose, which is why [authorization and consent](authorization-and-consent.md) carries so much weight in this field.
 
-You cannot defend against a technique you do not understand. Threat models, red teaming, detection rules, and patches all require knowing how a system breaks, so the field depends on people building, sharing, and publishing offensive knowledge.
+## Walking a vulnerability to the public
 
-Openness is also how the field improves. Public research, shared tooling, and disclosed flaws raise everyone's baseline, and a defender working alone would always be a step behind attackers who share freely among themselves. The cost is that the audience cannot be chosen: a conference talk, a blog post, or a released tool reaches defenders and attackers alike.
+Consider a researcher who finds a serious flaw in widely used software. The finding is now dual-use in the sharpest sense, and what happens next decides who it helps.
 
-## Levers for releasing what you know
+1. **Hoard it.** Kept private or sold, the flaw serves whoever holds it and no one else, and the public stays exposed without knowing.
+2. **Coordinate disclosure.** The researcher tells the vendor first, agrees on a timeline, and waits for a fix before details go public. Defenders gain; attackers are delayed.
+3. **Publish in full.** Releasing everything at once arms defenders and attackers in the same instant, on the theory that public pressure forces a faster repair.
 
-Practitioners manage dual-use knowledge through norms and judgment rather than a single rule. The main levers, roughly from individual choice to state policy:
+There is no path that helps only the good actors. That absence is the defining problem of the field.
 
-1. **Coordinated disclosure.** A researcher reports a flaw to the vendor and allows time for a fix before publishing details. Some teams set fixed deadlines; Google Project Zero, for example, uses a "90+30" policy: vendors get 90 days to fix a flaw, details follow 30 days after a patch ships (or at the 90-day mark if none does), and flaws already exploited in the wild get a 7-day deadline.
-2. **Proof-of-concept restraint.** Demonstrating that a weakness exists without shipping a turnkey weapon for it.
-3. **Tooling with guardrails.** Offensive frameworks exist openly, but their authors document legitimate use and legal boundaries.
-4. **Export controls.** Some capabilities are treated as controlled goods. In 2013 the Wassenaar Arrangement, a multilateral export control regime for conventional arms and dual-use goods and technologies, added certain intrusion software to its control lists.
+## Why secrecy is not a safe default
 
-## Worked case: a flaw in a router nobody patches
-
-A researcher finds a remote takeover flaw in a home router whose manufacturer has stopped supporting it. Each option carries a cost:
-
-- **Report and wait.** The vendor may never answer, so waiting protects no one and leaves owners unaware.
-- **Publish full details.** Owners and internet providers learn they must replace or isolate the device, but attackers get a recipe at the same moment.
-- **Publish a warning without technical detail.** This lowers the risk of copycats, yet makes it harder for defenders to write detections or confirm exposure.
-- **Sell the finding.** Selling capability is lawful in many places, but the buyer may be a security team, a government, or a broker, and the seller rarely controls where it ends up.
-
-The case shows where reasonable people disagree. Detail helps defenders act fast and attackers act faster. Disclosure deadlines assume vendors can and will patch, which is not always true for critical infrastructure or abandoned software. And restricting the knowledge entirely can chill legitimate research without stopping determined adversaries who ignore the rules, a theme explored further in [freedom versus control](freedom-versus-control.md). The same double edge appears in [security versus privacy](security-versus-privacy.md), where one monitoring capability serves both protection and intrusion.
-
-There is no setting that makes knowledge safe. The responsibility sits with how it is shared and used, not with pretending it could be unknown.
+The tempting response is simply to lock the knowledge away. History cuts against it. Keeping methods secret, the posture known as security through obscurity, tends to shelter attackers who will rediscover the flaw anyway while leaving honest defenders blind. Open knowledge is uncomfortable but usually safer, a judgment that runs straight into [freedom versus control](freedom-versus-control.md) and the broader weighing in [security versus privacy](security-versus-privacy.md). Deciding where that line falls, and answering for the result, is a matter of [moral responsibility](moral-responsibility.md), not a rule anyone can hand you.
 
 ## References
 
-- [CISA: Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
-- [FIRST Guidelines and Practices for Multi-Party Vulnerability Coordination and Disclosure](https://www.first.org/global/sigs/vulnerability-coordination/multiparty/guidelines-v1.1)
-- [Google Project Zero: Vulnerability Disclosure Policy](https://googleprojectzero.blogspot.com/p/vulnerability-disclosure-policy.html)
-- [The Wassenaar Arrangement: Control Lists](https://www.wassenaar.org/control-lists/)
-- [Wikipedia: Dual-use technology](https://en.wikipedia.org/wiki/Dual-use_technology)
+- [The Wassenaar Arrangement](https://www.wassenaar.org/)
+- [ISO/IEC 29147:2018, Vulnerability disclosure](https://www.iso.org/standard/72311.html)
+- [CISA Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+- [EFF Coders' Rights Project](https://www.eff.org/issues/coders-rights)

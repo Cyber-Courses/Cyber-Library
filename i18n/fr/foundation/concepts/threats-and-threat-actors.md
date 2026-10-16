@@ -1,74 +1,68 @@
 ---
 title: "Menaces et acteurs de la menace : qui attaque et pourquoi"
-description: "Ce qu'est une menace au sens de la sécurité, les types d'acteurs à l'origine des menaces, et les motivations et capacités qui façonnent leur comportement."
+description: "Ce qu'est une menace, les types d'acteurs qui se cachent derrière, et les motivations et capacités qui rendent une menace réelle plutôt qu'hypothétique."
 keywords:
-  - menaces
-  - acteurs de la menace
+  - menace
+  - acteur de la menace
   - modélisation des menaces
-  - motivation des adversaires
-  - capacités des attaquants
+  - motivation de l'adversaire
+  - capacité de l'attaquant
   - renseignement sur les cybermenaces
 ---
 
 # Menaces et acteurs de la menace
 
-**Une menace** est toute circonstance ou tout événement susceptible de nuire à un actif en exploitant une vulnérabilité. Un **acteur de la menace** est la personne, le groupe ou l'entité qui cause, ou a l'intention de causer, ce préjudice. Il est utile de bien distinguer ces deux notions : la menace décrit ce qui pourrait mal tourner, tandis que l'acteur décrit qui le provoquerait et pourquoi. Ensemble, elles permettent de se demander non seulement si une faiblesse existe, mais aussi si quelqu'un est motivé et capable de l'exploiter.
+**Une menace est toute circonstance ou tout événement susceptible de nuire à un système**, et un acteur de la menace est la personne ou le groupe qui la concrétiserait. Le travail de sécurité commence ici, car on ne peut pas se défendre contre un danger que l'on n'a pas nommé. Une menace n'est ni la faiblesse elle-même ni le dommage lui-même ; c'est la possibilité qui se situe entre les deux, attendant quelqu'un qui aurait une raison d'agir.
 
-## Une menace a besoin d'une cible et d'un point d'entrée
+## Une menace n'est ni une faiblesse ni une perte
 
-Une menace n'a d'importance qu'au regard de quelque chose qui mérite d'être protégé (un [actif](assets-and-attack-surface.md)) et d'une faiblesse qui permet au préjudice de se produire (une [vulnérabilité](vulnerabilities-and-exploits.md)). Supprimez l'un ou l'autre, et la menace n'a plus de prise.
+Ces trois notions sont faciles à confondre, il est donc utile de les distinguer :
 
-Deux exemples illustrent cet enchaînement :
+- Une **menace** est le potentiel de dommage, par exemple "un attaquant pourrait chiffrer nos fichiers contre une rançon".
+- Une [vulnérabilité](vulnerabilities-and-exploits.md) est la faille qui lui permettrait de réussir, comme un serveur non corrigé.
+- Le **dommage** est la perte réalisée, mesurée à l'aune de la [triade CIA](cia-triad.md) : des données divulguées, altérées ou rendues indisponibles.
 
-1. **Une inondation et un centre de données.** Les serveurs qu'il abrite ont de la valeur, et le bâtiment peut être inondé. L'inondation est la menace, les serveurs sont l'actif, l'implantation en zone basse est la faiblesse.
-2. **L'hameçonnage et le compte d'un employé.** Les gens peuvent être trompés, et un compte, une fois dérobé, donne accès à quelque chose d'utile. Le courriel d'hameçonnage est la menace, le compte et ce qu'il permet d'ouvrir sont l'actif, la confiance humaine est la faiblesse.
+Une menace sans faiblesse correspondante reste hypothétique. Une faiblesse qu'aucun acteur ne se soucie d'exploiter reste dormante. Pour une attaque délibérée, le risque n'apparaît que lorsque les deux coïncident sur un [actif](assets-and-attack-surface.md) qui a de la valeur. Les menaces non adverses brisent ce schéma : une coupure de courant, un incendie, une panne de disque ou une suppression accidentelle peuvent nuire au même actif sans aucun attaquant ni aucune faiblesse exploitée, et c'est pourquoi les évaluations de risque pèsent les accidents et l'environnement au même titre que les acteurs hostiles.
 
-Ce que la menace met finalement en péril, c'est la confidentialité, l'intégrité ou la disponibilité de cet actif, telles que décrites par la [Triade CIA](cia-triad.md).
+## Les acteurs, classés selon ce qui les motive
 
-## Des menaces sans adversaire
+Celui qui se cache derrière une menace détermine tout de son comportement : à quel point il est patient, combien il est prêt à dépenser et ce qu'il est prêt à briser. Le renseignement sur la menace regroupe les acteurs moins selon leurs outils que selon leur motif.
 
-Toutes les menaces ne proviennent pas d'un acteur hostile. La sécurité distingue les menaces **délibérées**, comme un intrus, des menaces **accidentelles ou environnementales** : une coupure de courant, une panne matérielle, une tempête ou une erreur de bonne foi d'un employé. Les recommandations du NIST en matière d'appréciation des risques les traitent comme des catégories de sources de menace distinctes des sources adverses, car elles appellent des questions différentes. Un adversaire s'adapte à vos défenses ; un disque défaillant, non. La suite de cette page porte sur le versant délibéré, celui où intervient un acteur de la menace.
+| Acteur | Ce qu'ils veulent | Capacité typique |
+| --- | --- | --- |
+| Cybercriminels | De l'argent, par la fraude, le vol ou la rançon | Modérée à élevée ; achètent souvent outils et accès |
+| Groupes étatiques | Espionnage, sabotage, avantage stratégique | Très élevée ; patients, bien financés, outillage sur mesure |
+| Hacktivistes | De l'attention pour une cause | Faible à modérée ; privilégient la perturbation et les fuites |
+| Initiés malveillants | Rancune ou profit | Variable, mais partent d'un accès légitime |
+| Opportunistes | Tout ce qui est facile, y compris la vantardise | Faible ; s'appuient sur des failles connues et l'automatisation |
 
-## Cinq familles d'acteurs de la menace
+L'initié négligent rappelle que tout acteur n'est pas hostile. Un employé qui envoie par courriel un tableur à la mauvaise adresse reste une source de dommage dont vos défenses doivent tenir compte.
 
-Les acteurs de la menace sont couramment regroupés selon qui ils sont et ce qui les motive. Dans la pratique, les frontières sont floues (un État peut tolérer ou employer des criminels, un initié peut être recruté par un acteur externe), mais ces familles constituent un point de départ utile.
+## Capacité, intention et opportunité
 
-| Acteur | Motivation typique | Capacité typique | Manifestations fréquentes |
-|---|---|---|---|
-| Cybercriminels | L'argent | Moyenne à élevée, souvent achetée ou louée | Rançongiciels, fraude, vol de données revendables |
-| Acteurs étatiques | Espionnage, sabotage, avantage stratégique pour un gouvernement | Élevée : financement, temps, outils sur mesure | Intrusions longues et discrètes visant l'administration, la défense et les infrastructures critiques |
-| Hacktivistes | Une cause politique ou sociale | Faible à moyenne | Défacement de sites web, fuites, perturbations calées sur l'actualité |
-| Initiés malveillants | Rancœur, argent ou contrainte | Un accès légitime, qui compte souvent plus que la compétence | Détournement d'accès par des employés et prestataires actuels ou anciens |
-| Amateurs de sensations et passionnés | Curiosité, réputation, le défi en lui-même | Très variable | Sondage de systèmes exposés, intrusions ponctuelles médiatisées |
+Pour qu'une menace soit crédible, trois conditions doivent être réunies en même temps. Les analystes appellent parfois cela le triangle de la menace :
 
-Des catalogues publics comme la liste des Groups de MITRE ATT&CK recensent des acteurs nommés au sein de ces familles, ainsi que les techniques que chacun a été observé utiliser.
+1. **Capacité.** L'acteur dispose des compétences, des outils ou des ressources pour mener l'attaque à bien.
+2. **Intention.** L'acteur a une raison de vous cibler vous plutôt que quelqu'un d'autre.
+3. **Opportunité.** Une faiblesse accessible existe, qu'il peut exploiter.
 
-## Motivation, capacité, opportunité
+Les défenseurs modifient rarement la capacité ou l'intention d'un adversaire. Ce qu'ils peuvent réduire, c'est l'opportunité, et c'est pourquoi une grande partie de la sécurité consiste à fermer les ouvertures avant que quiconque ayant un motif ne les trouve.
 
-Deux dimensions décrivent tout acteur :
+## Suivre un groupe de ransomware
 
-- La **motivation** est la raison pour laquelle il agit : l'argent, l'information, la perturbation, l'idéologie ou l'ego.
-- La **capacité** est ce qu'il peut réellement faire, en fonction de ses compétences, de son financement, de son temps et de ses outils.
+Observez comment les pièces s'assemblent dans un schéma courant :
 
-Un acteur très motivé mais peu compétent pose un problème différent de celui d'un acteur patient et bien financé. Les analystes ajoutent souvent un troisième facteur, l'**opportunité** : l'accès ou l'exposition dont un acteur a besoin pour pouvoir agir.
+1. **Motif.** Un groupe criminel veut un paiement, de sorte que toute organisation qui ne peut pas se permettre une interruption de service devient une cible.
+2. **Entrée.** Ils piègent un employé par phishing, exploitant l'opportunité la moins coûteuse plutôt que la faille la plus sophistiquée.
+3. **Propagation.** Avec un seul point d'appui, ils progressent dans le réseau vers des données de valeur.
+4. **Levier.** Dans les attaques modernes à double extorsion, ils exfiltrent d'abord les données, brisant la confidentialité, puis chiffrent les systèmes pour briser la disponibilité, de sorte qu'une victime disposant de bonnes sauvegardes reste confrontée à la menace d'une fuite.
 
-Réduire l'un de ces trois facteurs diminue le risque, mais les défenseurs ont rarement prise sur les deux premiers. On ne peut pas rendre un criminel moins intéressé par l'argent, ni un gouvernement moins bien financé. L'opportunité, en revanche, est différente : appliquer les correctifs, réduire les services exposés et limiter les accès grâce aux [contrôles et contre-mesures](controls-and-countermeasures.md) la réduisent directement.
-
-## Un serveur exposé, trois attaquants différents
-
-Imaginez une petite entreprise qui exploite un serveur de fichiers non corrigé et exposé sur Internet. Trois acteurs pourraient l'atteindre, et chacun remet en cause une idée reçue.
-
-- **Le scanner automatisé.** Les outils d'un groupe criminel balaient Internet à la recherche de cette faille précise et déposent un rançongiciel sur chaque cible trouvée. Personne n'a choisi cette entreprise ; elle était simplement accessible et non corrigée. L'idée "nous sommes trop petits pour être une cible" ne tient pas, car une grande partie de la criminalité est opportuniste et automatisée.
-- **L'équipe organisée.** L'accès est revendu par un spécialiste à un autre qui se charge de l'extorsion, tandis qu'un troisième négocie le paiement. La plupart des acteurs de la menace ne sont pas des génies solitaires, mais des groupes organisés avec des rôles spécialisés, des outils partagés et même des services d'assistance.
-- **L'administrateur sur le départ.** Un prestataire dont le compte n'a jamais été désactivé copie le contenu du serveur avant de partir. Les initiés, et les simples accidents, représentent une large part des incidents réels : se concentrer uniquement sur les acteurs externes laisse donc une lacune.
-
-Une même faiblesse, trois acteurs très différents : comprendre qui pourrait exploiter une vulnérabilité, et pourquoi, c'est ce qui transforme une liste de failles en une vision des risques hiérarchisée.
+À chaque étape, un [contrôle](controls-and-countermeasures.md) aurait pu supprimer l'opportunité : une sensibilisation contre le phishing, le [moindre privilège](../principles/least-privilege.md) pour limiter la propagation, et des sauvegardes hors ligne pour atténuer la rançon. Le motif de l'acteur n'a jamais changé ; les défenseurs ne lui ont simplement laissé nulle part où atterrir.
 
 ## Références
 
-- [NIST Glossary: Threat](https://csrc.nist.gov/glossary/term/threat)
-- [NIST Glossary: Threat Actor](https://csrc.nist.gov/glossary/term/threat_actor)
 - [NIST SP 800-30 Rev. 1, Guide for Conducting Risk Assessments](https://csrc.nist.gov/pubs/sp/800/30/r1/final)
-- [MITRE ATT&CK: Groups](https://attack.mitre.org/groups/)
-- [CISA: Cyber Threats and Advisories](https://www.cisa.gov/topics/cyber-threats-and-advisories)
-- [ENISA: Threats and Trends](https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends)
+- [MITRE ATT&CK Groups](https://attack.mitre.org/groups/)
+- [CISA, Cyber Threats and Advisories](https://www.cisa.gov/topics/cyber-threats-and-advisories)
+- [ENISA Threat Landscape](https://www.enisa.europa.eu/topics/cyber-threats/threats-and-trends)
+- [Verizon Data Breach Investigations Report (DBIR)](https://www.verizon.com/business/resources/reports/dbir/)

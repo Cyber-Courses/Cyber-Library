@@ -1,75 +1,56 @@
 ---
-title: "Zero Trust : vérifier chaque requête, ne faire confiance à aucun emplacement"
-description: "Le modèle de sécurité qui ne considère aucun emplacement réseau ni aucune identité comme digne de confiance par défaut et qui vérifie chaque requête avant d'accorder l'accès."
+title: "Zero trust : vérifier chaque requête, ne faire confiance à aucun emplacement"
+description: "Le zero trust est un modèle de sécurité qui ne considère aucun emplacement réseau ni aucune identité comme implicitement fiable et qui vérifie chaque requête avant d'accorder l'accès."
 keywords:
   - zero trust
   - architecture zero trust
   - ne jamais faire confiance toujours vérifier
-  - vérification d'identité
+  - point d'application des politiques
   - microsegmentation
-  - authentification continue
+  - vérification continue
 ---
 
 # Zero trust
 
-**Le zero trust** est un modèle de sécurité fondé sur une règle unique : aucun utilisateur, aucun appareil et aucun emplacement réseau n'est digne de confiance par défaut, et chaque requête d'accès à une ressource doit être vérifiée avant d'être autorisée. Sa devise est "ne jamais faire confiance, toujours vérifier". Au lieu de se demander "cette connexion provient-elle de notre réseau interne ?", un système zero trust se demande "qui est-ce, sur quel appareil, que demande-t-il, et cela a-t-il du sens en ce moment ?", et il repose cette question à chaque requête.
+Le **zero trust** est un modèle de sécurité qui n'accorde aucune confiance automatique en fonction de la provenance d'une requête. Se trouver à l'intérieur du réseau de l'entreprise, sur un ordinateur portable professionnel ou derrière le pare-feu ne vaut rien en soi. Chaque tentative d'accès à une ressource est traitée comme si elle provenait d'un réseau ouvert et hostile et doit prouver son identité, l'état de son appareil et son droit à cette ressource précise avant que l'accès ne soit autorisé. La formule qui le résume est "ne jamais faire confiance, toujours vérifier".
 
-## Le château fort et ses douves ne tiennent plus
+## Le modèle de périmètre qu'il a remplacé
 
-La sécurité d'entreprise traditionnelle traçait une frontière nette autour du réseau de l'organisation. Un pare-feu gardait la bordure : tout ce qui se trouvait à l'intérieur du périmètre était considéré comme sûr, tout ce qui se trouvait à l'extérieur comme hostile. Une fois les douves franchies, un utilisateur ou une machine pouvait généralement atteindre la plupart des systèmes internes.
+Pendant des décennies, la sécurité des entreprises a fonctionné comme un château entouré de douves. Un pare-feu gardait la frontière, tout ce qui se trouvait à l'extérieur était hostile et tout ce qui se trouvait à l'intérieur était considéré comme sûr. Le défaut était structurel : une fois qu'un attaquant franchissait les douves avec un mot de passe volé ou un ordinateur portable infecté, il héritait de la confiance du réseau et pouvait se déplacer latéralement vers presque tout.
 
-Ce modèle supposait que les personnes, les applications et les données se trouvaient toutes dans le même bâtiment. Le télétravail, les services cloud, les applications SaaS et les appareils mobiles ont rendu cette hypothèse caduque : les ressources sont désormais réparties entre bureaux, domiciles et plusieurs clouds, et un pare-feu en bordure ne peut pas protéger ce qui se trouve en dehors de lui. Le modèle échouait aussi selon ses propres critères, car un seul identifiant volé ou un seul ordinateur portable compromis à l'intérieur héritait de la confiance accordée à tout le réseau et pouvait y circuler librement.
+Le télétravail, les services cloud et les appareils personnels ont ensuite entièrement dissous les douves, car les personnes et les données ne se trouvaient plus dans un seul bâtiment. Le terme "zero trust" a été popularisé par John Kindervag, analyste chez Forrester, vers 2010, et le projet BeyondCorp de Google, publié à partir de 2014, l'a prouvé à grande échelle en déplaçant les décisions d'accès du réseau vers les utilisateurs et les appareils individuels.
 
-L'idée de supprimer la confiance implicite est née en réaction. L'analyste de Forrester John Kindervag a popularisé le terme "zero trust" vers 2010, et le projet BeyondCorp de Google, décrit publiquement en 2014, en a démontré le fonctionnement à grande échelle : Google a déplacé les contrôles d'accès du périmètre réseau vers les utilisateurs et les appareils eux-mêmes, permettant aux employés de travailler depuis des réseaux non fiables sans VPN traditionnel.
+## Les trois composants logiques du NIST
 
-## Anatomie d'une décision d'accès
+La publication spéciale NIST 800-207 décrit l'architecture zero trust comme une séparation entre un plan de contrôle qui décide et un plan de données qui applique. Trois composants logiques portent le modèle :
 
-La meilleure façon de comprendre le zero trust est de suivre une requête. Imaginons qu'une ingénieure ouvre le tableau de bord interne de la paie depuis un ordinateur portable, dans un café.
+| Composant | Rôle |
+|---|---|
+| Moteur de politiques | Pèse l'identité, l'état de l'appareil et le contexte, puis décide d'accorder, de refuser ou de révoquer l'accès |
+| Administrateur de politiques | Exécute la décision en ouvrant ou en fermant le chemin de communication |
+| Point d'application des politiques | Se place devant la ressource et ne laisse rien passer tant que le chemin n'est pas ouvert |
 
-1. **La requête atteint un point d'application, pas l'application elle-même.** Un point d'application des politiques (une passerelle, un proxy ou un agent) se place devant l'application de paie. Rien n'atteint l'application directement, et le fait d'être sur un réseau particulier n'accorde rien.
-2. **L'identité est prouvée.** L'ingénieure s'authentifie, généralement avec une authentification multifacteur. Le service qui va répondre, ainsi que tout service qu'il appelle, s'authentifie également.
-3. **L'appareil est examiné.** S'agit-il d'un ordinateur géré ? Son système d'exploitation est-il à jour, son disque chiffré, sa protection des terminaux active ? Un utilisateur légitime sur un appareil compromis reste un risque.
-4. **Le contexte est évalué.** L'emplacement, l'heure et le comportement sont comparés à ce qui est habituel pour cet utilisateur. Se connecter depuis deux continents en moins d'une heure, par exemple, augmente le score de risque.
-5. **Le moteur de politiques décide, pour cette requête uniquement.** Il vérifie si cette identité, sur cet appareil, dans ce contexte, doit accéder à cette ressource précise. Les ingénieurs n'ont peut-être aucun besoin des données de paie, et en vertu du [moindre privilège](least-privilege.md), la réponse peut tout simplement être non.
-6. **La confiance est réévaluée en permanence.** Si l'accès est accordé, il est limité à ce dont la requête a besoin, et la session est réévaluée à mesure que les conditions changent. Si l'appareil cesse d'être conforme ou si le comportement devient anormal en cours de session, l'accès peut être coupé.
+Le sujet n'est pas une passerelle unique mais cette boucle de décision, exécutée pour chaque requête plutôt qu'une seule fois à la connexion.
 
-Le NIST SP 800-207 nomme les composants logiques centraux de ce flux : le **moteur de politiques** (policy engine) prend la décision, l'**administrateur de politiques** (policy administrator) l'exécute en ouvrant ou en fermant le chemin, et le **point d'application des politiques** (policy enforcement point) se situe sur le chemin des données et autorise ou bloque effectivement le trafic. Les mécanismes sous-jacents des étapes 2 et 5 sont détaillés dans [authentification et autorisation](authentication-and-authorization.md).
+## Vérifier une requête unique
 
-## Les signaux derrière "vérifier"
+Suivons une ingénieure qui ouvre un tableau de bord interne de paie depuis un café.
 
-"Vérifier" ne se limite pas à contrôler un mot de passe. Une politique zero trust combine plusieurs types d'éléments de preuve, chacun détectant ce que les autres manquent.
+1. La requête atteint un point d'application des politiques, jamais l'application directement. Se trouver sur un réseau particulier n'accorde rien.
+2. L'identité est prouvée, généralement par une authentification multifacteur, en s'appuyant sur l'[authentification et autorisation](authentication-and-authorization.md).
+3. L'appareil est vérifié : est-il géré, à jour de ses correctifs et exempt de compromission connue ?
+4. Le moteur de politiques évalue l'ensemble du contexte et accorde l'accès à cette seule ressource, pour cette seule session, au niveau minimal nécessaire, en appliquant le [moindre privilège](least-privilege.md).
+5. La session est réévaluée en continu. Si l'appareil cesse d'être conforme ou si le comportement devient anormal, l'accès est révoqué en cours de session.
 
-| Signal | Ce qui est vérifié | Ce qu'il détecte |
-|---|---|---|
-| Identité | Qui est l'utilisateur ou le service, prouvé par une authentification forte, généralement multifacteur | Des mots de passe devinés ou hameçonnés utilisés seuls |
-| Posture de l'appareil | Niveau de correctifs, chiffrement, statut de gestion, protection des terminaux | Un utilisateur légitime sur une machine infectée ou non gérée |
-| Contexte et comportement | Emplacement, heure, schémas de requêtes comparés à une référence | Des sessions et des identifiants volés utilisés de façon inhabituelle |
-| Sensibilité de la ressource | Le degré de criticité des données ou du système demandés | Un accès à faible niveau d'assurance à des cibles de grande valeur |
+## Le prix de la suppression de la confiance implicite
 
-Deux techniques structurelles donnent tout leur sens à ces contrôles. La **microsegmentation** divise le réseau en petites zones, de sorte qu'atteindre un système ne permet pas d'atteindre le reste : c'est ce qui empêche un attaquant qui parvient à entrer de trouver de nombreux endroits où aller. L'**évaluation continue** signifie que la confiance n'est jamais un tampon unique apposé à la connexion : elle est réévaluée tout au long de la session. Ensemble, elles font du zero trust une stratégie de confinement des brèches, en ajoutant des couches fondées sur l'identité par-dessus les contrôles réseau et hôte décrits dans [défense en profondeur](defense-in-depth.md).
+Le zero trust n'est pas gratuit. Chaque requête porte désormais le coût d'une consultation de politique, ce qui ajoute de la latence et fait du moteur de politiques une dépendance critique : s'il est lent ou hors ligne, le travail légitime s'arrête. Des signaux d'identité et d'appareil robustes doivent exister et rester exacts, sinon les décisions sont prises sur de mauvaises données. Mal mené, les points d'application deviennent un nouveau périmètre déguisé.
 
-## Des recommandations du NIST à une échéance fédérale
-
-Le zero trust est passé du vocabulaire des fournisseurs à un cadre formel au travers d'une courte série de documents du gouvernement américain :
-
-- **Août 2020 : NIST SP 800-207.** Le NIST a publié *Zero Trust Architecture*, qui définit le concept, en énonce les principes et décrit des modèles de déploiement. Il reste la définition de référence la plus citée.
-- **Janvier 2022 : OMB M-22-09.** L'Office of Management and Budget a demandé aux agences fédérales civiles d'adopter une stratégie zero trust, avec des objectifs précis concernant les identités, les appareils, les réseaux, les applications et les données, à atteindre d'ici la fin de l'exercice budgétaire 2024.
-- **Avril 2023 : CISA Zero Trust Maturity Model 2.0.** La CISA a organisé le travail en cinq piliers (identité, appareils, réseaux, applications et charges de travail, données) et trois capacités transversales (visibilité et analyse, automatisation et orchestration, gouvernance). Chaque pilier est évalué selon quatre stades : traditionnel, initial, avancé et optimal.
-
-Le modèle de maturité dépasse le cadre gouvernemental, car il présente le zero trust comme un parcours mesuré pilier par pilier, et non comme un interrupteur qu'une organisation actionnerait. De nombreuses entreprises privées et d'autres gouvernements l'utilisent comme feuille de route.
-
-## Là où les programmes zero trust s'enlisent
-
-- **Acheter une boîte étiquetée "zero trust".** Le zero trust est une architecture et un état d'esprit, pas un produit unique que l'on achète et que l'on active. Les outils aident, mais seulement au sein d'une conception qui supprime partout la confiance implicite.
-- **S'arrêter à la connexion.** Vérifier l'identité une seule fois puis faire confiance à toute la session réintroduit discrètement la confiance implicite que le modèle est censé supprimer.
-- **Vérifier l'utilisateur mais pas l'appareil.** Une authentification forte depuis une machine compromise ou non mise à jour offre toujours une porte d'entrée à un attaquant.
-- **Ajouter de la friction sans réfléchir.** Des contrôles qui interrompent sans cesse les utilisateurs les poussent vers des contournements, sapant la sécurité qu'ils étaient censés apporter. Les bonnes conceptions rendent les vérifications invisibles quand le risque est faible et ne se renforcent que lorsqu'il augmente.
-- **Rafistoler au lieu de concevoir.** Les hypothèses de vérification préalable sont bien plus faciles à intégrer dans de nouveaux systèmes qu'à greffer sur des applications héritées qui supposent un réseau interne de confiance, ce qui explique pourquoi le zero trust s'associe naturellement à la [sécurité dès la conception](security-by-design.md).
+Il ne remplace pas non plus les autres défenses. Restreindre chaque session à une seule ressource réduit la [surface d'attaque](../concepts/assets-and-attack-surface.md) accessible, et le zero trust se combine avec la [défense en profondeur](defense-in-depth.md) au lieu de s'y substituer, tandis que des journaux détaillés par requête alimentent la [responsabilité](accountability.md).
 
 ## Références
 
 - [NIST SP 800-207, Zero Trust Architecture](https://csrc.nist.gov/pubs/sp/800/207/final)
-- [NIST Glossary: Zero Trust](https://csrc.nist.gov/glossary/term/zero_trust)
-- [CISA: Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model)
-- [OMB M-22-09, Moving the U.S. Government Toward Zero Trust Cybersecurity Principles](https://www.whitehouse.gov/wp-content/uploads/2022/01/M-22-09.pdf)
-- [Google Research: BeyondCorp, A New Approach to Enterprise Security (2014)](https://research.google/pubs/beyondcorp-a-new-approach-to-enterprise-security/)
+- [NIST SP 1800-35, Implementing a Zero Trust Architecture](https://www.nccoe.nist.gov/projects/implementing-zero-trust-architecture)
+- [CISA Zero Trust Maturity Model](https://www.cisa.gov/zero-trust-maturity-model)
+- [BeyondCorp: A New Approach to Enterprise Security](https://research.google/pubs/pub43231/)

@@ -1,68 +1,63 @@
 ---
-title: "Mesures et contre-mesures : comment les défenses réduisent le risque"
-description: "Les protections que les organisations mettent en place pour prévenir, détecter et se rétablir après un incident de sécurité, regroupées en mesures préventives, détectives et correctives."
+title: "Contrôles et contre-mesures : préventifs, détectifs et correctifs"
+description: "Comment les contrôles préventifs, détectifs et correctifs fonctionnent ensemble pour réduire le risque, et les différentes formes qu'une même protection peut prendre."
 keywords:
-  - mesures de sécurité
+  - contrôles de sécurité
   - contre-mesures
-  - mesures préventives
-  - mesures détectives
-  - mesures correctives
-  - défense en profondeur
+  - contrôles préventifs
+  - contrôles détectifs
+  - contrôles correctifs
+  - contrôles compensatoires
 ---
 
-# Mesures et contre-mesures
+# Contrôles et contre-mesures
 
-**Une mesure** est toute protection ou disposition mise en place pour réduire le risque de sécurité, que ce soit en diminuant la probabilité qu'un événement fâcheux survienne ou en limitant les dégâts lorsqu'il se produit. Le terme contre-mesure est employé de façon presque interchangeable, même s'il met souvent l'accent sur une réponse visant une menace précise. Les mesures sont la réponse concrète au risque : une fois qu'une organisation sait quels [actifs](assets-and-attack-surface.md) elle protège et quelles [menaces](threats-and-threat-actors.md) pourraient les atteindre, les mesures sont les actions qu'elle entreprend pour faire pencher les probabilités en sa faveur.
+**Un contrôle** est toute protection ou mesure mise en place pour réduire le risque pesant sur un actif, et une **contre-mesure** est la même idée nommée du point de vue de l'attaquant : une réponse visant une menace précise. Les deux termes sont employés de façon presque interchangeable. Ce qui compte, c'est le rôle qu'ils jouent. Un contrôle ne fait pas disparaître une faiblesse ; il réduit la probabilité qu'elle soit exploitée, les dommages si elle l'est, ou le délai avant que quelqu'un s'en aperçoive. La sécurité, c'est l'art de choisir un ensemble sensé de ces mesures et de les agencer pour qu'elles se renforcent mutuellement.
 
-## Avant, pendant, après : le moment où agit une mesure
+## Prévenir, détecter, corriger
 
-La façon la plus courante de classer une mesure consiste à regarder à quel moment elle intervient dans le déroulement d'un événement de sécurité.
+La manière la plus utile de classer les contrôles est selon le moment où ils agissent par rapport à un incident. Chaque fonction répond à une question différente, et une défense sérieuse a besoin des trois.
 
-1. **Les mesures préventives agissent avant l'événement** et cherchent à l'empêcher purement et simplement. Les autorisations d'accès, l'authentification forte, le chiffrement, les pare-feu et la sensibilisation à la sécurité réduisent tous la probabilité qu'une attaque réussisse.
-2. **Les mesures détectives agissent pendant qu'il se déroule** en révélant que quelque chose s'est produit ou est en train de se produire. La journalisation et la surveillance, les systèmes de détection d'intrusion, les audits et les alertes sur les activités inhabituelles ne bloquent rien, mais ils raccourcissent le temps pendant lequel un événement passe inaperçu.
-3. **Les mesures correctives agissent après coup** pour limiter les dégâts et rétablir le fonctionnement normal. Les sauvegardes et les procédures de restauration, les plans de réponse aux incidents, l'application de correctifs et les systèmes de bascule relèvent de cette catégorie.
+| Fonction | Question à laquelle elle répond | Exemples |
+| --- | --- | --- |
+| Préventive | Comment empêcher que cela arrive ? | Contrôles d'accès, chiffrement, pare-feu, validation des entrées, formation du personnel |
+| Détective | Comment savoir que cela se produit ou s'est produit ? | Journalisation, détection d'intrusion, surveillance de l'intégrité des fichiers, audits |
+| Corrective | Comment se rétablir une fois que c'est arrivé ? | Sauvegardes et restaurations, application de correctifs, réponse aux incidents, isolement d'un hôte |
 
-Une même technologie peut remplir plusieurs rôles. Un système de sauvegarde est correctif lorsque vous en restaurez le contenu, tandis que la surveillance qui confirme que chaque sauvegarde s'est réellement exécutée est détective.
+Une quatrième fonction, **dissuasive**, décourage un acteur avant qu'il ne tente quelque chose (caméras visibles, bannières d'avertissement, perspective de poursuites judiciaires). La prévention n'est jamais parfaite, et c'est précisément pour cela que les contrôles détectifs et correctifs existent : ils partent du principe que certaines attaques passeront et raccourcissent le temps pendant lequel un attaquant reste inaperçu et incontrôlé.
 
-## Qui ou quoi l'applique
+## Administratifs, techniques, physiques
 
-Une seconde classification ignore le moment et s'intéresse au type de mécanisme qui porte la mesure. Croiser les deux points de vue donne une grille simple qui aide à repérer les cases vides d'un programme de sécurité :
+La fonction ci-dessus indique ce que fait un contrôle ; un second axe indique comment il est bâti. Un même objectif peut être atteint sous chacune de ces formes, et les programmes matures les combinent plutôt que de s'appuyer sur une seule.
 
-| | Préventive | Détective | Corrective |
-|---|---|---|---|
-| **Technique (logique)**, appliquée par les systèmes | Authentification multifacteur, chiffrement | Détection d'intrusion, surveillance des journaux | Bascule automatique, restauration depuis une sauvegarde |
-| **Administrative**, politiques, procédures et formations | Charte d'utilisation acceptable, sensibilisation | Revues périodiques des accès, audits | Plan de réponse aux incidents |
-| **Physique**, protection du monde tangible | Serrures, lecteurs de badges | Caméras de surveillance | Matériel de rechange, site de secours |
+- Les contrôles **administratifs** sont des politiques, des procédures et des formations : les règles que les personnes sont censées suivre, comme une politique de revue des accès ou une règle de bureau propre.
+- Les contrôles **techniques** (ou logiques) sont imposés par le matériel ou le logiciel : une exigence de mot de passe, le chiffrement de disque, une règle de segmentation réseau.
+- Les contrôles **physiques** agissent sur le monde tangible : portes verrouillées, lecteurs de badges, câbles antivol, destruction sécurisée des disques.
 
-La plupart des programmes ont besoin des trois lignes, car une politique sans application technique est facile à ignorer, et une porte verrouillée ne fait rien contre un mot de passe volé.
+Verrouiller une salle serveurs (physique), exiger une authentification (technique) et interdire les comptes partagés par une politique (administratif) peuvent tous servir le même objectif : tenir les mauvaises personnes à l'écart d'une machine.
 
-## Un ordinateur portable volé, plusieurs couches
+## Quand le contrôle principal ne peut pas être utilisé
 
-Prenons le cas d'un employé dont l'ordinateur portable est dérobé dans sa voiture. Aucune mesure ne décide seule de l'issue ; ce sont les couches qui le font.
+Parfois, le contrôle recommandé est impossible, trop coûteux, ou casse quelque chose. Un **contrôle compensatoire** est un substitut délibéré qui offre une protection comparable par une autre voie. Si un ancien système ne peut pas prendre en charge l'authentification multifacteur, le placer sur un segment de réseau isolé et surveiller ses journaux de près peut couvrir une grande partie du même risque. Les contrôles compensatoires sont légitimes, mais ils constituent un compromis, pas un laissez-passer : chacun doit être documenté, et sa couverture plus faible comprise, plutôt que silencieusement acceptée.
 
-- **Le chiffrement intégral du disque** (préventif, technique) rend les fichiers illisibles si l'ordinateur était éteint ou verrouillé de façon sûre au moment du vol ; sur un appareil laissé allumé et déverrouillé, le volume est déjà déchiffré.
-- **L'authentification multifacteur et des durées de session courtes** (préventives, techniques) : la MFA empêche le voleur d'ouvrir une nouvelle connexion avec un mot de passe trouvé sur l'appareil, tandis que les sessions déjà ouvertes dans le navigateur ne restent utilisables que jusqu'à leur expiration ou leur révocation.
-- **Une procédure de signalement claire** (administrative) permet de déclarer la perte le jour même.
-- **La surveillance des connexions** (détective, technique) signale toute tentative d'utiliser les identifiants de l'appareil depuis un lieu inhabituel.
-- **L'effacement à distance et la révocation des sessions** (correctifs, techniques) coupent l'appareil, et **les sauvegardes synchronisées** (correctives) permettent à l'employé de reprendre son travail sur une machine de remplacement.
+## Un ordinateur portable volé, contrôle par contrôle
 
-Si le chiffrement avait fait défaut, la détection et la révocation limiteraient tout de même les dégâts. Ce chevauchement est l'idée qui sous-tend la [défense en profondeur](../principles/defense-in-depth.md) : une faille dans une couche est couverte par une autre.
+Imaginez l'ordinateur portable d'un employé dérobé dans une voiture. Suivez les contrôles dans l'ordre :
 
-## Décider quelles mesures méritent leur place
+1. **Préventif.** Le chiffrement intégral du disque fait que, tant que l'ordinateur reste éteint, le voleur ne voit que du texte chiffré, de sorte que les données restent confidentielles même si le matériel a disparu.
+2. **Détectif.** L'employé signale la perte et les journaux de gestion des appareils confirment que l'ordinateur ne s'est pas reconnecté, le signalant comme manquant.
+3. **Correctif.** Les administrateurs révoquent ses identifiants et déclenchent un effacement à distance, et l'utilisateur restaure ses fichiers depuis une sauvegarde sur un appareil de remplacement.
 
-Le risque ne tombe jamais à zéro, aussi l'objectif est-il un niveau de risque acceptable à un coût raisonnable, et non une protection parfaite. Choisir des mesures, c'est mettre en balance la probabilité et la gravité de chaque menace avec ce que coûte chaque protection à construire, à exploiter et à supporter au quotidien. Les mesures sont en grande partie choisies pour combler les [faiblesses que visent les exploits](vulnerabilities-and-exploits.md) et pour protéger la confidentialité, l'intégrité et la disponibilité décrites par la [triade CIA](cia-triad.md).
+Aucune mesure isolée n'a géré l'incident. Le chiffrement a gagné du temps, le signalement et les journaux l'ont détecté, et l'effacement et la restauration l'ont clôturé.
 
-Trois croyances égarent régulièrement les programmes de sécurité :
+## Comment les contrôles se relient au risque et à la défense
 
-- **"Plus de mesures signifie toujours plus de sécurité."** Des mesures redondantes ou mal choisies ajoutent du coût et de la complexité sans réduire de risque significatif, et elles peuvent pousser des utilisateurs excédés à les contourner.
-- **"La prévention suffit."** La prévention finit toujours par échouer, et ce sont la détection et la récupération qui empêchent un échec de tourner au désastre.
-- **"Une fois déployée, une mesure continue de fonctionner."** Les mesures se dégradent à mesure que les systèmes, les menaces et le personnel évoluent. Elles doivent être testées, revues et mises à jour pour rester efficaces, c'est pourquoi le NIST accompagne son catalogue de mesures SP 800-53 d'un guide complémentaire, SP 800-53A, consacré à l'évaluation de chaque mesure.
+Les contrôles existent pour protéger la confidentialité, l'intégrité et la disponibilité nommées dans la [triade CIA](cia-triad.md), en réduisant les occasions offertes aux [menaces et acteurs de menace](threats-and-threat-actors.md) qui ciblent une organisation. Chaque contrôle traite une ou plusieurs [vulnérabilités et exploits](vulnerabilities-and-exploits.md), et superposer des contrôles indépendants de sorte que la défaillance de l'un n'expose pas tout est le principe de la [défense en profondeur](../principles/defense-in-depth.md).
 
 ## Références
 
+- [NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
 - [NIST Glossary: Security Control](https://csrc.nist.gov/glossary/term/security_control)
 - [NIST Glossary: Countermeasures](https://csrc.nist.gov/glossary/term/countermeasures)
-- [NIST SP 800-53 Rev. 5, Security and Privacy Controls for Information Systems and Organizations](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final)
-- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
-- [ISO/IEC 27002, Information Security Controls](https://www.iso.org/standard/75652.html)
-- [CISA: Cyber Essentials](https://www.cisa.gov/resources-tools/resources/cyber-essentials)
+- [CIS Critical Security Controls](https://www.cisecurity.org/controls)
+- [ISO/IEC 27002, Information security controls](https://www.iso.org/standard/75652.html)

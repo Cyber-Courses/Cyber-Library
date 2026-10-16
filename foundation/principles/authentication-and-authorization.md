@@ -1,73 +1,60 @@
 ---
 title: "Authentication and Authorization: Proving Identity, Then Granting Access"
-description: "The paired security functions that first establish who a principal is and then decide what that principal is permitted to do."
+description: "The paired security processes that first establish who a principal is and then decide what that principal is permitted to do."
 keywords:
-  - authentication
-  - authorization
+  - authentication and authorization
+  - authentication factors
   - access control
   - identity verification
-  - multi-factor authentication
-  - security principles
+  - broken access control
+  - confused deputy
 ---
 
 # Authentication and authorization
 
-**Authentication and authorization** are two distinct steps that work together to control access. Authentication answers the question "who are you?" by verifying that a principal (a user, service, or device) is who it claims to be. Authorization answers the separate question "what may you do?" by deciding which actions and resources that verified principal is allowed to reach. The order matters: a system establishes identity first, then applies the rules that govern what that identity can touch. Blurring the two, or skipping one, is a common source of serious security failures.
+**Authentication and authorization are two separate decisions that happen in sequence, and confusing them is one of the oldest sources of security bugs.** Authentication answers "who are you?" by verifying that a principal (a user, service, or device) is who it claims to be. Authorization answers "what are you allowed to do?" by deciding whether that verified principal may perform a specific action on a specific resource. The first establishes identity; the second gates access.
 
-## Two questions, two different failures
+## Two questions, asked in order
 
-A useful picture is a building: authentication is the front door that keeps unknown or impersonated people out, and authorization is the set of locked hallways that keeps a verified visitor from wandering into rooms that are none of their business. Because the two steps answer different questions, they also break in different ways, and confusing them leads to fixing the wrong problem.
+For anything gated by identity, the order is fixed: a system must know who a principal is before it can sensibly decide what that principal may do, so authentication comes first and authorization follows. Not everything is gated that way, though. A public page can be read with no identity at all, and a request can be denied outright without authenticating anyone; it is only when access depends on who you are that authentication has to come first. The two are often shortened to "authN" and "authZ" to keep them distinct in speech and in code.
 
-| | Authentication | Authorization |
+A useful test: authentication asks whether you are who you claim, and the check is the same no matter what you go on to do; authorization asks whether your established identity may take a specific action on a specific resource, so its answer varies with the resource, the action, and often the identity itself. Deciding that Alice may export payroll while Bob may not is authorization, not authentication, even though the outcome changes with who logged in. A valid login that then reaches someone else's records is likewise an authorization failure, not an authentication one, even though both happened in the same request.
+
+## The three factors of proof
+
+Authentication rests on evidence the claimant can produce. These fall into three classic categories, and combining categories is what makes multi-factor authentication strong.
+
+| Factor | What it is | Examples |
 |---|---|---|
-| Question | Who is making this request? | Is this principal allowed to do this, to this resource? |
-| Typical evidence | Passwords, tokens, passkeys, biometrics | Roles, attributes, ownership, policy rules |
-| What a failure looks like | An attacker logs in with a guessed, phished, or reused password | An ordinary user reads an administrator's records |
-| What it enables | Accountability and meaningful audit logs | Least privilege in practice |
+| Something you know | A secret held in memory | Password, PIN, passphrase |
+| Something you have | A physical or cryptographic token | Security key, phone app, smart card |
+| Something you are | A biometric trait | Fingerprint, face, iris |
 
-Stolen credentials and broken access checks are among the most frequent and damaging weaknesses in modern systems. OWASP ranks Broken Access Control first in its Top 10 for web applications, in both the 2021 and 2025 editions.
+Two passwords are not multi-factor, because they draw on the same category and fall to the same theft. A password plus a hardware key resists an attacker who has only phished the password.
 
-## Proving identity: factors and how they are defeated
+## Walking through a single sign-in
 
-Authentication evidence is traditionally grouped into three factors. Each has its own weak spot, which is why combining them matters.
+Consider a user opening an internal dashboard:
 
-- **Something you know:** passwords and PINs. They can be guessed, phished, or leaked from one service and replayed on another when people reuse them.
-- **Something you have:** hardware tokens, authenticator apps, or passkeys bound to a device. They resist remote guessing, but the device can be lost or the user tricked into approving a login.
-- **Something you are:** fingerprints, faces, and other biometrics. They are convenient, but they cannot be changed if compromised, so they usually unlock a local key rather than travel over the network.
+1. **Claim.** The browser presents a username and asks to log in.
+2. **Authenticate.** The server checks the password hash, then prompts for a one-time code from the user's phone. Both factors pass, so identity is established.
+3. **Issue proof.** The server hands back a signed session token that encodes the verified identity.
+4. **Authorize.** When the user clicks "export payroll," the server reads the token's identity, looks up that user's roles, and finds no finance permission. The request is denied.
 
-**Multi-factor authentication** combines two or more of these so that one stolen secret is not enough to impersonate someone. **Federated identity and single sign-on** move the work to a trusted identity provider: it authenticates the user once, and relying applications accept its signed assertion instead of each keeping its own password database.
+Steps 1 to 3 are authentication; step 4 is authorization. A system can get the login perfectly right and still leak data if step 4 is weak.
 
-## Deciding access: from roles to policies
+## The confused deputy and broken access control
 
-Once identity is established, authorization rules must be written in a form people can maintain and review. Three families of models are common:
+The most common failures sit in authorization. **Broken access control** means the server trusts the client to stay inside its lane: changing an ID in a URL reaches another account's data because the server authenticated the session but never re-checked ownership. The **confused deputy** is subtler: a trusted program is tricked into using its own higher privileges for a less privileged caller, because it acts on its own authority instead of carrying over and constraining the caller's. The two differ in cause, broken access control fails to re-check a session while the confused deputy fails to pass along the caller's limited authority, but both let through an action the requester's own permissions would have refused.
 
-1. **Role-based access control (RBAC):** permissions attach to roles such as "billing clerk" or "auditor", and users receive roles. Simple to reason about, but roles tend to multiply over time.
-2. **Attribute-based access control (ABAC):** decisions weigh attributes of the user, the resource, and the context (department, data classification, time of day).
-3. **Policy-based access control:** rules are expressed as centrally managed policies, evaluated by a decision engine and applied consistently across services.
+## Where it connects to the other principles
 
-Whatever the model, enforcement belongs on the server and runs for every request. The user interface can hide a button for convenience, but it is never the place where access is actually decided. Authorization is also the layer where [least privilege](least-privilege.md) becomes real: each identity receives only what its task requires.
-
-## Tracing one request: "show invoice 1042"
-
-Consider a signed-in user, Alice, whose browser asks an accounting app for invoice 1042. Following the request step by step shows where each check belongs and what goes wrong when one is missing.
-
-1. **Alice's session token arrives.** The server validates it and concludes "this is Alice." That is authentication, and it is only as strong as the login behind it: if Alice reused a password that leaked elsewhere, an attacker can simply log in as her and receive a perfectly valid token of their own.
-2. **The server looks up invoice 1042.** Knowing who Alice is says nothing yet about whether this invoice is hers.
-3. **The ownership check.** The server must confirm that invoice 1042 belongs to Alice's account, or that her role permits viewing it. Skipping this step is a broken object-level check: by changing the number in the URL, Alice could read every customer's invoices (an insecure direct object reference).
-4. **The action check.** Viewing and deleting are different permissions. A system that only hides the "delete" button, while leaving the delete endpoint callable, has gatekept on the client side.
-5. **The decision is logged against Alice's identity.** This is what makes [accountability](accountability.md) possible: a log entry is only meaningful when it is tied to a reliably authenticated principal.
-
-The scenario also exposes a quieter failure: **stale permissions**. If Alice moved from billing to marketing last quarter and her old role was never removed, every check above still passes, correctly applying rules that should no longer exist.
-
-## Checking again on every request
-
-Modern architectures push both steps further from a one-time login. [Zero trust](zero-trust.md) treats every request as untrusted and re-verifies identity and permissions rather than relying on network location, and [defense in depth](defense-in-depth.md) treats identity and access checks as one layer among several, so that a single failure does not expose the whole system. Note that "authorization" also has a legal and ethical sense, the permission to test or access a system at all, which is covered in [authorization and consent](../ethics-and-philosophy/authorization-and-consent.md).
+Authorization is the point where [least privilege](least-privilege.md) is actually enforced, request by request. [Zero trust](zero-trust.md) refuses to treat one successful login as lasting permission and re-verifies each request instead. And because authentication binds actions to a named identity, it is the foundation for [accountability](accountability.md): logs are only meaningful when you can trust who performed each action.
 
 ## References
 
-- [NIST SP 800-63-4 Digital Identity Guidelines](https://pages.nist.gov/800-63-4/)
-- [NIST Glossary: Authentication](https://csrc.nist.gov/glossary/term/authentication)
-- [OWASP Top 10:2025, A01 Broken Access Control](https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/)
+- [NIST SP 800-63B, Digital Identity Guidelines: Authentication](https://pages.nist.gov/800-63-3/sp800-63b.html)
+- [OWASP Top 10: A01 Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
-- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [NIST Glossary: Authentication](https://csrc.nist.gov/glossary/term/authentication)
 - [MITRE CWE-862: Missing Authorization](https://cwe.mitre.org/data/definitions/862.html)

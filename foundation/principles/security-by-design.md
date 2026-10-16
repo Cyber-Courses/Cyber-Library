@@ -1,83 +1,65 @@
 ---
 title: "Security by Design: Building Protection in From the Start"
-description: "The principle that security should be planned into a system's architecture from the beginning rather than added after it is built."
+description: "The practice of planning security into a system's architecture from the first design decisions rather than adding it after the system already works."
 keywords:
   - security by design
   - secure by design
   - threat modeling
+  - shift left security
   - secure development lifecycle
-  - security architecture
-  - default security
+  - secure by default
 ---
 
 # Security by design
 
-**Security by design** means treating protection as a core requirement of a system from its earliest planning stages, rather than as a feature bolted on once the system already works. When security is considered alongside functionality, performance, and cost, the resulting architecture tends to be simpler, cheaper to defend, and far less brittle than one patched after release. The idea is closely tied to the related goal of being secure by default, where a system ships in its safest configuration and leaves users protected without extra effort.
+**Security by design** is the practice of treating protection as a requirement that shapes a system from its first design decisions, not a layer added once the system already runs. When security is weighed alongside features, performance, and cost from the start, the architecture that results is usually simpler to defend and far less brittle than one patched after release. The opposite habit, shipping first and securing later, tends to leave gaps that are expensive to close and easy for an attacker to find.
 
-## The 1975 design principles behind the idea
+## Shifting left: when the decisions get made
 
-The notion is older than the modern slogan. In 1975, Jerome Saltzer and Michael Schroeder published "The Protection of Information in Computer Systems," which set out design principles for protection mechanisms. Several of them read today as the core of security by design:
+Most of a system's security is determined long before anyone writes exploit code against it. Choices about trust boundaries, data flows, default settings, and who can talk to what are made during design, and they are hard to reverse once code, data, and users depend on them. "Shifting left" means pulling security activity toward the earlier, cheaper end of the development timeline:
 
-| Saltzer and Schroeder principle | What it asks of the designer |
-| --- | --- |
-| Economy of mechanism | Keep the design small and simple so it can actually be reviewed. |
-| Fail-safe defaults | Base access on explicit permission; the default answer is "no." |
-| Complete mediation | Check every access to every object, not just the first one. |
-| Open design | Do not rely on the secrecy of the design itself for protection. |
-| Least privilege | Give each program and user only the rights the task needs. |
-| Psychological acceptability | Make the secure path easy, or people will route around it. |
+- **Requirements.** Security goals are written down as acceptance criteria, not wishes.
+- **Design.** Architecture is reviewed for weak trust boundaries before implementation.
+- **Build and test.** Automated checks catch regressions while a fix is still a small change.
 
-None of these can be added cleanly to a finished system. A sprawling codebase cannot be made economical after the fact, and an access model that allows by default cannot be flipped to deny by default without breaking things that came to depend on it.
+The point is not to do security work once, early, and stop. It is to make the earliest decisions the load-bearing ones.
 
-## Decisions that are cheap early and costly late
+## Threat modeling before the first line of code
 
-Fixing a flaw grows more expensive and disruptive the later it is found. A weakness caught in a design review can be redrawn on a whiteboard; the same weakness discovered in production may require emergency patches, downtime, and incident response. The choices below are the ones where that gap is widest:
+The core design-time activity is threat modeling: a structured look at what you are building, what can go wrong, and what you will do about it. A simple version answers four questions, often attributed to the team behind Microsoft's Security Development Lifecycle:
 
-- **Trust boundaries.** Deciding which components trust each other, and where input must be validated, shapes every interface that follows.
-- **Data flows.** Where sensitive data travels and where it is stored determines what must be encrypted, logged, and protected.
-- **Authentication and access model.** How identities are established and permissions granted is woven through the whole system and is painful to reverse.
-- **Attack surface.** Every feature, port, and service that ships becomes something an attacker can target and something the team must maintain.
+1. **What are we building?** A diagram of components, data stores, and the trust boundaries between them.
+2. **What can go wrong?** Spoofing, tampering, information disclosure, and similar failure categories, walked through boundary by boundary.
+3. **What are we going to do about it?** A mitigation for each threat worth addressing.
+4. **Did we do a good job?** A review that checks the model against the system actually built.
 
-Many serious vulnerabilities come from architectural choices like these, not from coding slips, and no amount of later testing can fully undo a weak foundation.
+Because it works on diagrams, threat modeling can expose a flawed trust assumption weeks before that assumption becomes code.
 
-## Walking a feature through a secure design
+## The rising cost of a late fix
 
-Consider a team adding a "share document by link" feature to a web application. Applying security by design looks roughly like this:
+Studies of software defects have repeatedly found the same shape: the later a flaw is caught, the more it costs to remove, because more work has been built on top of it.
 
-1. **Model the threats before writing code.** The team asks what it is protecting (private documents), who might attack it (anyone who obtains or guesses a link), and how (enumerating links, reusing old ones, forwarding them).
-2. **Choose the safe default.** Links are created private to named recipients; public links are an option the owner must deliberately turn on.
-3. **Shrink the surface.** Links are long and random, expire after a set time, and grant read access only, so the feature exposes nothing it does not need.
-4. **Fail closed.** If the permission service is unreachable, the link returns an error instead of serving the document.
-5. **Keep checking through the lifecycle.** The design is reviewed, the code is analyzed and tested against the threat model, and the threats are revisited when the feature changes.
+| Stage flaw is caught | What a fix touches | Relative cost |
+|---|---|---|
+| Design | A diagram or a decision | Lowest |
+| Development | Code not yet shipped | Low |
+| Testing | Code plus test suites | Moderate |
+| Production | Live systems, data, and users | Highest |
 
-Step 5 is what a secure development lifecycle formalizes: security tasks such as design review, code analysis, and testing are built into each phase of development rather than saved for the end.
+A missing authorization check is a one-line note in a design review and a coordinated incident response once it is live. Security by design tries to catch it while it is still the one-line note.
 
-## Secure by default and the shift to vendor responsibility
+## Secure by design is not the same as secure by default
 
-Being secure by default is the part of the principle users feel directly. Systems start in a locked-down state, with risky features off until a user deliberately enables them. The opposite is a system that ships with sample passwords, open permissions, or verbose error messages and stays exposed until someone manually hardens it.
+The two ideas are often paired but are distinct. Secure by design is about the process, building protection in deliberately. Secure by default is about the shipped result: the product's out-of-the-box configuration is its safe one, so a user is protected without having to find and flip security switches. A system can be thoughtfully designed yet ship wide open, and the modern expectation, pushed by bodies like CISA, is that vendors deliver both.
 
-In April 2023, the US Cybersecurity and Infrastructure Security Agency (CISA) and partner agencies from several countries published joint guidance urging software manufacturers to adopt secure by design and secure by default practices. Its three principles push responsibility away from customers and toward vendors:
+## Where it leans on the other principles
 
-- **Take ownership of customer security outcomes**, rather than leaving hardening to the people who buy the product.
-- **Embrace radical transparency and accountability**, for example by being open about vulnerabilities and how they are handled.
-- **Lead from the top**, so that security is a business priority set by executives, not only a task for engineers.
-
-## Signs security was bolted on afterward
-
-A system built without security by design tends to show recognizable symptoms:
-
-- **Security is a final checkpoint.** A review just before launch is the only control, when the architecture is already fixed and hard to change.
-- **Trust is assumed, not designed.** Internal networks, client software, or input from other components are treated as safe, which leaves no defense when that assumption fails.
-- **Hardening is the customer's job.** The product only becomes safe after someone follows a long configuration guide.
-- **No one can explain the whole system.** Features and integrations have piled up until no one can reason about how it behaves under attack.
-
-Security by design is also the stage where other principles get decided. It plans the layered controls that [defense in depth](defense-in-depth.md) relies on, settles who gets what access under [least privilege](least-privilege.md), and makes the reduction of data and attack surface described in [minimization](minimization.md) a deliberate choice. [Zero trust](zero-trust.md) is a modern architecture that applies the same thinking by removing implicit trust from the start.
+Security by design is a frame that other principles fill in. A sound design assumes no single control is perfect and layers them, which is [defense in depth](defense-in-depth.md). It grants each component only what it needs, applying [least privilege](least-privilege.md), and it collects only the data it truly requires through [minimization](minimization.md). Deciding trust at design time rather than inheriting it from the network is the heart of [zero trust](zero-trust.md).
 
 ## References
 
 - [Saltzer and Schroeder, The Protection of Information in Computer Systems (1975)](https://www.cs.virginia.edu/~evans/cs551/saltzer/)
-- [CISA: Secure by Design](https://www.cisa.gov/securebydesign)
-- [CISA: Principles and Approaches for Secure by Design Software](https://www.cisa.gov/resources-tools/resources/secure-by-design)
+- [CISA, Secure by Design](https://www.cisa.gov/securebydesign)
+- [Microsoft Security Development Lifecycle (SDL) Practices](https://www.microsoft.com/en-us/securityengineering/sdl/practices)
+- [OWASP Developer Guide: Secure Design Principles](https://owasp.org/www-project-developer-guide/)
 - [NIST SP 800-160 Vol. 1, Engineering Trustworthy Secure Systems](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final)
-- [OWASP: Secure Product Design Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Product_Design_Cheat_Sheet.html)
-- [OWASP: Threat Modeling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html)

@@ -1,63 +1,53 @@
 ---
-title: "Connaissance à double usage : la même compétence défend et attaque"
-description: "En sécurité, une information ou une technique peut défendre ou nuire selon qui la détient et dans quel but elle est utilisée."
+title: "Connaissance à double usage : la compétence qui défend est celle qui nuit"
+description: "La connaissance à double usage est une information ou une technique qui peut défendre ou nuire selon qui la détient et pourquoi il l'utilise."
 keywords:
   - connaissance à double usage
   - technologie à double usage
+  - divulgation coordonnée des vulnérabilités
+  - sécurité par l'obscurité
   - sécurité offensive
-  - divulgation responsable
-  - éthique de la recherche en sécurité
-  - connaissance et préjudice
+  - contrôles à l'exportation
 ---
 
 # Connaissance à double usage
 
-**La connaissance à double usage** est une information ou une technique qui peut défendre ou nuire selon qui la détient et pourquoi. La même compréhension qui permet à un défenseur de trouver et de corriger une faiblesse permet à un attaquant de la trouver et de l'exploiter. La connaissance elle-même est neutre. Son effet provient de l'intention, du contexte et des conséquences, ce qui explique pourquoi les questions de [responsabilité morale](moral-responsibility.md) et d'[autorisation et consentement](authorization-and-consent.md) sont si proches de ce sujet.
+**La connaissance à double usage est une information ou une compétence qui protège et qui met en danger avec la même facilité, de sorte que son poids moral ne réside pas dans la connaissance mais dans la main qui la détient.** Apprendre comment crocheter une serrure vous enseigne à la fois à la déjouer et à en choisir une meilleure. En sécurité, presque chaque capacité est construite ainsi : la compréhension qui permet à un défenseur de trouver une faille est la même que celle qui permet à un attaquant de l'atteindre.
 
-## Une compétence, deux directions
+## L'origine d'un terme chargé dans le contrôle à l'exportation
 
-Presque chaque compétence fondamentale en sécurité possède son reflet. La technique ne change pas d'une colonne à l'autre ; seuls changent celui qui la détient, la cible et la permission.
+L'expression "double usage" n'est pas née avec les ordinateurs. Elle vient du contrôle des armements, où un bien à double usage est une technologie, comme une centrifugeuse, un précurseur chimique ou une souche de pathogène, ayant à la fois des usages civils et militaires. L'Arrangement de Wassenaar, un régime multilatéral de contrôle à l'exportation fondé en 1996, existe pour suivre ces biens lorsqu'ils franchissent les frontières. En 2013, sa liste de contrôle a été élargie pour couvrir les systèmes et outils servant à produire, commander et livrer des "logiciels d'intrusion", une tentative de traiter ces boîtes à outils de surveillance et d'intrusion comme des armes, même si les charges d'exploit elles-mêmes restaient hors du champ du contrôle. La réaction des chercheurs fut immédiate : le même code qu'un gouvernement pourrait acheter à des fins de surveillance est celui qu'un défenseur utilise pour tester et corriger, de sorte qu'une règle écrite pour arrêter l'un bloque l'autre. L'épisode a montré à quel point la catégorie est difficile à réguler quand l'objet est de la connaissance plutôt que du matériel.
 
-| Compétence | Usage défensif | Usage offensif |
+## La même technique dans deux mains
+
+Aucune colonne ci-dessous ne contient une compétence différente. Le balayage de ports reste du balayage de ports. Ce qui change, c'est qui l'exécute, contre quoi, et avec la permission de qui.
+
+| Technique | Dans les mains d'un défenseur | Dans les mains d'un attaquant |
 | --- | --- | --- |
-| Cartographie réseau et scan de ports | Un administrateur inventorie les services exposés | Un intrus cherche un point d'entrée |
-| Développement d'exploits | Un testeur prouve qu'une faille est réelle pour qu'elle soit corrigée, et les défenseurs écrivent des détections pour elle | Un attaquant transforme la faille en accès |
-| Rétro-ingénierie de logiciels malveillants | Un analyste extrait des indicateurs et construit des signatures | Un criminel étudie le code d'un rival pour en réutiliser les astuces |
-| Cassage de mots de passe | Un auditeur mesure la faiblesse des mots de passe d'une organisation | Un voleur récupère des identifiants dans une base de données dérobée |
-| Techniques d'hameçonnage | Une équipe de sécurité mène des simulations de sensibilisation | Un fraudeur vole des identifiants de connexion |
+| Recherche de vulnérabilités | Trouve les failles pour qu'elles soient corrigées | Trouve les failles pour qu'elles soient exploitées |
+| Code d'exploit | Prouve qu'un risque est réel et amorce des détections | Transforme une faille en intrusion opérationnelle |
+| Rétro-ingénierie | Extrait des indicateurs de maliciels | Copie les méthodes d'un rival pour les réutiliser |
+| Test d'identifiants | Mesure la faiblesse des mots de passe | Vole l'accès à un compte |
 
-## Pourquoi la défense ne peut éviter d'apprendre l'attaque
+Parce que la compétence ne change jamais, toute la question se réduit à la permission et à l'intention, raison pour laquelle [l'autorisation et le consentement](authorization-and-consent.md) pèsent tant dans ce domaine.
 
-On ne peut pas se défendre contre une technique que l'on ne comprend pas. Les modèles de menaces, le red teaming, les règles de détection et les correctifs exigent tous de savoir comment un système se brise, de sorte que le domaine dépend de personnes qui construisent, partagent et publient des connaissances offensives.
+## Mener une vulnérabilité jusqu'au public
 
-L'ouverture est aussi ce qui fait progresser le domaine. La recherche publique, l'outillage partagé et les failles divulguées élèvent le niveau de référence de tous, et un défenseur travaillant seul aurait toujours un temps de retard sur des attaquants qui partagent librement entre eux. Le prix à payer est que l'on ne choisit pas son public : une conférence, un billet de blog ou un outil publié atteint aussi bien les défenseurs que les attaquants.
+Prenez un chercheur qui découvre une faille grave dans un logiciel largement utilisé. La découverte est désormais à double usage au sens le plus aigu, et ce qui se passe ensuite décide qui elle aide.
 
-## Leviers pour diffuser ce que l'on sait
+1. **La thésauriser.** Gardée secrète ou vendue, la faille sert uniquement celui qui la détient, et le public reste exposé sans le savoir.
+2. **Coordonner la divulgation.** Le chercheur prévient d'abord l'éditeur, convient d'un calendrier et attend un correctif avant que les détails ne deviennent publics. Les défenseurs y gagnent ; les attaquants sont retardés.
+3. **Publier intégralement.** Tout publier d'un coup arme défenseurs et attaquants au même instant, selon la théorie que la pression publique force une réparation plus rapide.
 
-Les praticiens gèrent la connaissance à double usage par des normes et du discernement plutôt que par une règle unique. Les principaux leviers, en allant à peu près du choix individuel à la politique d'État :
+Il n'existe aucune voie qui n'aide que les acteurs bienveillants. Cette absence est le problème qui définit le domaine.
 
-1. **Divulgation coordonnée.** Un chercheur signale une faille au fournisseur et lui laisse le temps de la corriger avant d'en publier les détails. Certaines équipes fixent des délais stricts ; Google Project Zero, par exemple, applique une politique "90+30" : les fournisseurs disposent de 90 jours pour corriger une faille, les détails sont publiés 30 jours après la sortie du correctif (ou au bout des 90 jours s'il n'y en a pas), et les failles déjà exploitées dans la nature ont un délai de 7 jours.
-2. **Retenue sur la preuve de concept.** Démontrer qu'une faiblesse existe sans livrer une arme clé en main pour l'exploiter.
-3. **Outillage avec garde-fous.** Les cadriciels offensifs existent ouvertement, mais leurs auteurs documentent l'usage légitime et les limites légales.
-4. **Contrôles à l'exportation.** Certaines capacités sont traitées comme des biens contrôlés. En 2013, l'Arrangement de Wassenaar, un régime multilatéral de contrôle des exportations d'armes conventionnelles et de biens et technologies à double usage, a ajouté certains logiciels d'intrusion à ses listes de contrôle.
+## Pourquoi le secret n'est pas une valeur par défaut sûre
 
-## Cas pratique : une faille dans un routeur que personne ne corrige
-
-Un chercheur découvre une faille permettant la prise de contrôle à distance d'un routeur domestique dont le fabricant a cessé le support. Chaque option a un coût :
-
-- **Signaler et attendre.** Le fournisseur risque de ne jamais répondre ; attendre ne protège alors personne et laisse les propriétaires dans l'ignorance.
-- **Publier tous les détails.** Les propriétaires et les fournisseurs d'accès apprennent qu'ils doivent remplacer ou isoler l'appareil, mais les attaquants obtiennent une recette au même moment.
-- **Publier un avertissement sans détail technique.** Cela réduit le risque d'imitateurs, mais complique la tâche des défenseurs qui doivent écrire des détections ou confirmer leur exposition.
-- **Vendre la découverte.** Vendre une capacité est licite dans bien des endroits, mais l'acheteur peut être une équipe de sécurité, un gouvernement ou un courtier, et le vendeur maîtrise rarement où elle finit.
-
-Ce cas montre où des personnes raisonnables ne sont pas d'accord. Le détail aide les défenseurs à agir vite et les attaquants à agir plus vite encore. Les délais de divulgation supposent que les fournisseurs peuvent et veulent corriger, ce qui n'est pas toujours vrai pour les infrastructures critiques ou les logiciels abandonnés. Et restreindre entièrement la connaissance peut dissuader la recherche légitime sans arrêter les adversaires déterminés qui ignorent les règles, un thème approfondi dans [liberté contre contrôle](freedom-versus-control.md). La même ambivalence apparaît dans [sécurité contre vie privée](security-versus-privacy.md), où une même capacité de surveillance sert à la fois la protection et l'intrusion.
-
-Il n'existe aucun réglage qui rende la connaissance inoffensive. La responsabilité tient à la manière dont elle est partagée et utilisée, non au fait de prétendre qu'elle pourrait rester inconnue.
+La réponse tentante est simplement de verrouiller la connaissance. L'histoire va à l'encontre de ce choix. Garder les méthodes secrètes, la posture connue sous le nom de sécurité par l'obscurité, tend à abriter les attaquants qui redécouvriront la faille de toute façon tout en laissant aveugles les défenseurs honnêtes. La connaissance ouverte est inconfortable mais généralement plus sûre, un jugement qui se heurte directement à [la liberté face au contrôle](freedom-versus-control.md) et à la pesée plus large dans [la sécurité face à la vie privée](security-versus-privacy.md). Décider où se situe cette ligne, et répondre du résultat, relève de la [responsabilité morale](moral-responsibility.md), et non d'une règle que quiconque peut vous remettre.
 
 ## Références
 
-- [CISA: Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
-- [FIRST Guidelines and Practices for Multi-Party Vulnerability Coordination and Disclosure](https://www.first.org/global/sigs/vulnerability-coordination/multiparty/guidelines-v1.1)
-- [Google Project Zero: Vulnerability Disclosure Policy](https://googleprojectzero.blogspot.com/p/vulnerability-disclosure-policy.html)
-- [The Wassenaar Arrangement: Control Lists](https://www.wassenaar.org/control-lists/)
-- [Wikipédia : Technologie à double usage](https://en.wikipedia.org/wiki/Dual-use_technology)
+- [The Wassenaar Arrangement](https://www.wassenaar.org/)
+- [ISO/IEC 29147:2018, Vulnerability disclosure](https://www.iso.org/standard/72311.html)
+- [CISA Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+- [EFF Coders' Rights Project](https://www.eff.org/issues/coders-rights)
