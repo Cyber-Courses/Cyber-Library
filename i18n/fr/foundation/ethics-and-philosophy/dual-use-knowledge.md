@@ -36,7 +36,7 @@ L'ouverture est aussi ce qui fait progresser le domaine. La recherche publique, 
 
 Les praticiens gèrent la connaissance à double usage par des normes et du discernement plutôt que par une règle unique. Les principaux leviers, en allant à peu près du choix individuel à la politique d'État :
 
-1. **Divulgation coordonnée.** Un chercheur signale une faille au fournisseur et lui laisse le temps de la corriger avant d'en publier les détails. Certaines équipes fixent des délais stricts ; Google Project Zero, par exemple, accorde 90 jours aux fournisseurs pour publier un correctif, puis rend la faille publique.
+1. **Divulgation coordonnée.** Un chercheur signale une faille au fournisseur et lui laisse le temps de la corriger avant d'en publier les détails. Certaines équipes fixent des délais stricts ; Google Project Zero, par exemple, applique une politique "90+30" : les fournisseurs disposent de 90 jours pour corriger une faille, les détails sont publiés 30 jours après la sortie du correctif (ou au bout des 90 jours s'il n'y en a pas), et les failles déjà exploitées dans la nature ont un délai de 7 jours.
 2. **Retenue sur la preuve de concept.** Démontrer qu'une faiblesse existe sans livrer une arme clé en main pour l'exploiter.
 3. **Outillage avec garde-fous.** Les cadriciels offensifs existent ouvertement, mais leurs auteurs documentent l'usage légitime et les limites légales.
 4. **Contrôles à l'exportation.** Certaines capacités sont traitées comme des biens contrôlés. En 2013, l'Arrangement de Wassenaar, un régime multilatéral de contrôle des exportations d'armes conventionnelles et de biens et technologies à double usage, a ajouté certains logiciels d'intrusion à ses listes de contrôle.

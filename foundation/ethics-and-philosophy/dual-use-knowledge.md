@@ -36,7 +36,7 @@ Openness is also how the field improves. Public research, shared tooling, and di
 
 Practitioners manage dual-use knowledge through norms and judgment rather than a single rule. The main levers, roughly from individual choice to state policy:
 
-1. **Coordinated disclosure.** A researcher reports a flaw to the vendor and allows time for a fix before publishing details. Some teams set fixed deadlines; Google Project Zero, for example, gives vendors 90 days to ship a patch and then publishes.
+1. **Coordinated disclosure.** A researcher reports a flaw to the vendor and allows time for a fix before publishing details. Some teams set fixed deadlines; Google Project Zero, for example, uses a "90+30" policy: vendors get 90 days to fix a flaw, details follow 30 days after a patch ships (or at the 90-day mark if none does), and flaws already exploited in the wild get a 7-day deadline.
 2. **Proof-of-concept restraint.** Demonstrating that a weakness exists without shipping a turnkey weapon for it.
 3. **Tooling with guardrails.** Offensive frameworks exist openly, but their authors document legitimate use and legal boundaries.
 4. **Export controls.** Some capabilities are treated as controlled goods. In 2013 the Wassenaar Arrangement, a multilateral export control regime for conventional arms and dual-use goods and technologies, added certain intrusion software to its control lists.

@@ -40,7 +40,7 @@ A single [vulnerability](vulnerabilities-and-exploits.md) is usually rated by wh
 
 Consider a clinic hit by modern "double extortion" ransomware. The attackers first copy patient files to their own servers, then encrypt everything on the clinic's network.
 
-1. **Availability fails first and most visibly.** Staff cannot open schedules or patient charts, and appointments are canceled.
+1. **Availability fails most visibly.** Staff cannot open schedules or patient charts, and appointments are canceled.
 2. **Confidentiality has already failed.** The exfiltrated records are now in criminal hands, and the threat to publish them is the second lever of extortion. Restoring from backup does not fix this.
 3. **Integrity is now in doubt.** Even after recovery, the clinic must ask whether any records were altered while the attackers had access. Without trustworthy logs or signed backups, it may not be able to answer.
 

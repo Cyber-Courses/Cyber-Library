@@ -46,7 +46,7 @@ Consider a single feature to see how both layers of error stack up. A team needs
 
 1. **The design flaw.** The spec says "user enters their email, then chooses a new password on the next screen." Nothing ties the second screen to proof of email ownership, so anyone who knows an address can take over the account. No amount of careful coding fixes this; the step is missing from the plan.
 2. **The edge case.** After the design is corrected to email a reset link, the token never expires and is not invalidated after use. An old link found in a mailbox months later still works.
-3. **The weak default.** The token is generated with a predictable value, because the convenient random function in the language was not designed for security. An attacker can guess valid tokens.
+3. **The implementation slip.** The token is generated with a predictable value, because the convenient random function in the language was not designed for security. An attacker can guess valid tokens.
 4. **The injection bug.** The email lookup builds its database query by concatenating the submitted address, so a crafted "email" rewrites the query.
 
 Each step is a different kind of error, introduced at a different moment, and each would have been far cheaper to catch on paper or in review than after release, when it becomes a patch cycle, a coordinated disclosure and often an incident.

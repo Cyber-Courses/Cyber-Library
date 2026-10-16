@@ -40,7 +40,7 @@ Une [vulnérabilité](vulnerabilities-and-exploits.md) est généralement évalu
 
 Prenons une clinique frappée par un rançongiciel moderne à "double extorsion". Les attaquants copient d'abord les dossiers des patients sur leurs propres serveurs, puis chiffrent tout ce qui se trouve sur le réseau de la clinique.
 
-1. **La disponibilité tombe en premier, et de la façon la plus visible.** Le personnel ne peut plus ouvrir les plannings ni les dossiers des patients, et les rendez-vous sont annulés.
+1. **La disponibilité tombe de la façon la plus visible.** Le personnel ne peut plus ouvrir les plannings ni les dossiers des patients, et les rendez-vous sont annulés.
 2. **La confidentialité a déjà été compromise.** Les dossiers exfiltrés sont désormais entre les mains de criminels, et la menace de les publier constitue le second levier de l'extorsion. La restauration depuis une sauvegarde n'y change rien.
 3. **L'intégrité est désormais mise en doute.** Même après la reprise, la clinique doit se demander si des dossiers ont été modifiés pendant que les attaquants avaient accès au réseau. Sans journaux fiables ni sauvegardes signées, elle pourrait être incapable de répondre.
 

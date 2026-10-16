@@ -46,7 +46,7 @@ Prenons une seule fonctionnalité pour voir comment les deux niveaux d'erreur s'
 
 1. **La faille de conception.** La spécification indique : "l'utilisateur saisit son adresse e-mail, puis choisit un nouveau mot de passe sur l'écran suivant". Rien ne lie le second écran à une preuve de possession de l'adresse e-mail, de sorte que quiconque connaît une adresse peut prendre le contrôle du compte. Aucun codage soigneux ne peut corriger cela : l'étape manque dans le plan.
 2. **Le cas limite.** Une fois la conception corrigée pour envoyer un lien de réinitialisation par e-mail, le jeton n'expire jamais et n'est pas invalidé après usage. Un vieux lien retrouvé dans une boîte de réception des mois plus tard fonctionne toujours.
-3. **La valeur par défaut fragile.** Le jeton est généré avec une valeur prévisible, car la fonction aléatoire pratique du langage n'a pas été conçue pour la sécurité. Un attaquant peut deviner des jetons valides.
+3. **L'erreur d'implémentation.** Le jeton est généré avec une valeur prévisible, car la fonction aléatoire pratique du langage n'a pas été conçue pour la sécurité. Un attaquant peut deviner des jetons valides.
 4. **Le bogue d'injection.** La recherche de l'adresse e-mail construit sa requête de base de données en concaténant l'adresse soumise, si bien qu'un "e-mail" forgé réécrit la requête.
 
 Chaque étape correspond à un type d'erreur différent, introduit à un moment différent, et chacune aurait coûté bien moins cher à détecter sur le papier ou en revue qu'après la mise en production, où elle se transforme en cycle de correctifs, en divulgation coordonnée et souvent en incident.
