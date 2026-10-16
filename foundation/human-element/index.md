@@ -15,15 +15,13 @@ Technology rarely fails on its own. Behind most security incidents stands a pers
 
 The topics below describe the main ways people shape outcomes.
 
-**Human error in design and development** looks at the mistakes introduced when systems are built, from flawed logic to overlooked edge cases.
+**[Design and development errors](design-and-development-errors.md)** look at the mistakes introduced when systems are built, from flawed logic to overlooked edge cases.
 
-**Misconfiguration** covers the gap between a secure design and a secure deployment, where defaults and oversights create openings.
+**[Misconfiguration](misconfiguration.md)** covers the gap between a secure design and a secure deployment, where defaults and oversights create openings.
 
-**User behavior and misuse** examines how everyday choices, shortcuts, and habits expose systems to risk.
+**[User behavior and misuse](user-behavior-and-misuse.md)** examines how everyday choices, shortcuts, and habits expose systems to risk.
 
-**Lack of training and awareness** addresses the knowledge gap that leaves people unable to recognize threats.
-
-**Humans as the root cause behind most incidents** ties these threads together and explains why culture and education matter as much as technology.
+**[Training and awareness](training-and-awareness.md)** address the knowledge gap that leaves people unable to recognize threats.
 
 ## References
 

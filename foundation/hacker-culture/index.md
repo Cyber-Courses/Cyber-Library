@@ -16,15 +16,15 @@ Hacking began as a mindset long before it became a headline. At its root it desc
 
 The topics below map the landscape.
 
-**Origins of hacking** follow the movement from early computer labs and phone systems to the broad community it is today.
+**[Origins](origins.md)** follow the movement from early computer labs and phone systems to the broad community it is today.
 
-**The Hacker Manifesto** captures an early statement of curiosity, access, and rebellion that still resonates.
+**[Hacker Manifesto](hacker-manifesto.md)** captures an early statement of curiosity, access, and rebellion that still resonates.
 
-**The white/black/grey hat distinction** separates practitioners by intent and authorization rather than by skill.
+**[White, black, and grey hats](white-black-and-grey-hats.md)** separate practitioners by intent and authorization rather than by skill.
 
-**Hacking as curiosity and innovation** highlights the creative drive that produced much of today's technology.
+**[Curiosity and innovation](curiosity-and-innovation.md)** highlight the creative drive that produced much of today's technology.
 
-**Hacker subcultures and shared values** explore the groups, norms, and ideals that bind the community together.
+**[Subcultures and values](subcultures-and-values.md)** explore the groups, norms, and ideals that bind the community together.
 
 ## References
 

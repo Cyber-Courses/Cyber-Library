@@ -15,15 +15,15 @@ Security work carries weight. The same skills that protect a network can comprom
 
 The topics below introduce the core debates.
 
-**Moral responsibility in security** examines the duty practitioners owe to users, organizations, and the wider public when they discover or wield power over systems.
+**[Moral responsibility](moral-responsibility.md)** examines the duty practitioners owe to users, organizations, and the wider public when they discover or wield power over systems.
 
-**Ethical hacking principles and authorization** cover the rules that separate legitimate testing from intrusion, with explicit permission at the center.
+**[Authorization and consent](authorization-and-consent.md)** cover the rules that separate legitimate testing from intrusion, with explicit permission at the center.
 
-**Balancing security against privacy** looks at how protective measures can collide with individual rights.
+**[Security versus privacy](security-versus-privacy.md)** looks at how protective measures can collide with individual rights.
 
-**Freedom versus control** weighs open access and autonomy against the restrictions that security often requires.
+**[Freedom versus control](freedom-versus-control.md)** weighs open access and autonomy against the restrictions that security often requires.
 
-**Dual-use knowledge** considers information that can defend or harm depending on who holds it and why.
+**[Dual-use knowledge](dual-use-knowledge.md)** considers information that can defend or harm depending on who holds it and why.
 
 ## References
 
