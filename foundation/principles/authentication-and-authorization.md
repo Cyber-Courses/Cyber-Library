@@ -51,7 +51,7 @@ Whatever the model, enforcement belongs on the server and runs for every request
 
 Consider a signed-in user, Alice, whose browser asks an accounting app for invoice 1042. Following the request step by step shows where each check belongs and what goes wrong when one is missing.
 
-1. **Alice's session token arrives.** The server validates it and concludes "this is Alice." That is authentication, and it is only as strong as the login behind it: a single reused password makes it easy to forge.
+1. **Alice's session token arrives.** The server validates it and concludes "this is Alice." That is authentication, and it is only as strong as the login behind it: if Alice reused a password that leaked elsewhere, an attacker can simply log in as her and receive a perfectly valid token of their own.
 2. **The server looks up invoice 1042.** Knowing who Alice is says nothing yet about whether this invoice is hers.
 3. **The ownership check.** The server must confirm that invoice 1042 belongs to Alice's account, or that her role permits viewing it. Skipping this step is a broken object-level check: by changing the number in the URL, Alice could read every customer's invoices (an insecure direct object reference).
 4. **The action check.** Viewing and deleting are different permissions. A system that only hides the "delete" button, while leaving the delete endpoint callable, has gatekept on the client side.

@@ -51,7 +51,7 @@ Quel que soit le modèle, l'application des règles se fait côté serveur et s'
 
 Prenons une utilisatrice connectée, Alice, dont le navigateur demande la facture 1042 à une application de comptabilité. Suivre la requête étape par étape montre où chaque contrôle doit se trouver et ce qui se passe lorsque l'un d'eux manque.
 
-1. **Le jeton de session d'Alice arrive.** Le serveur le valide et conclut "c'est Alice". C'est l'authentification, et elle n'est jamais plus solide que la connexion qui l'a précédée : un simple mot de passe réutilisé permet facilement de la falsifier.
+1. **Le jeton de session d'Alice arrive.** Le serveur le valide et conclut "c'est Alice". C'est l'authentification, et elle n'est jamais plus solide que la connexion qui l'a précédée : si Alice a réutilisé un mot de passe qui a fuité ailleurs, un attaquant peut simplement se connecter à sa place et recevoir un jeton parfaitement valide.
 2. **Le serveur recherche la facture 1042.** Savoir qui est Alice ne dit encore rien sur le fait que cette facture lui appartienne.
 3. **Le contrôle de propriété.** Le serveur doit confirmer que la facture 1042 appartient au compte d'Alice, ou que son rôle l'autorise à la consulter. Omettre cette étape constitue un contrôle défaillant au niveau des objets : en modifiant le numéro dans l'URL, Alice pourrait lire les factures de tous les clients (une référence directe non sécurisée à un objet, ou IDOR).
 4. **Le contrôle de l'action.** Consulter et supprimer sont des permissions différentes. Un système qui se contente de masquer le bouton "supprimer" tout en laissant le point d'accès de suppression appelable n'a filtré l'accès que côté client.

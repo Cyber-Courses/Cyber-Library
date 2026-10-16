@@ -41,7 +41,7 @@ La plupart des programmes ont besoin des trois lignes, car une politique sans ap
 Prenons le cas d'un employé dont l'ordinateur portable est dérobé dans sa voiture. Aucune mesure ne décide seule de l'issue ; ce sont les couches qui le font.
 
 - **Le chiffrement intégral du disque** (préventif, technique) rend les fichiers illisibles pour le voleur.
-- **Un gestionnaire de mots de passe et l'authentification multifacteur** (préventifs, techniques) font que les sessions enregistrées ne suffisent pas à ouvrir les comptes de l'entreprise.
+- **L'authentification multifacteur et des durées de session courtes** (préventives, techniques) : la MFA empêche le voleur d'ouvrir une nouvelle connexion avec un mot de passe trouvé sur l'appareil, tandis que les sessions déjà ouvertes dans le navigateur ne restent utilisables que jusqu'à leur expiration ou leur révocation.
 - **Une procédure de signalement claire** (administrative) permet de déclarer la perte le jour même.
 - **La surveillance des connexions** (détective, technique) signale toute tentative d'utiliser les identifiants de l'appareil depuis un lieu inhabituel.
 - **L'effacement à distance et la révocation des sessions** (correctifs, techniques) coupent l'appareil, et **les sauvegardes synchronisées** (correctives) permettent à l'employé de reprendre son travail sur une machine de remplacement.

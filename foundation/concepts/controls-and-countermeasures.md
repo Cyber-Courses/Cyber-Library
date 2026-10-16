@@ -41,7 +41,7 @@ Most programs need all three rows, because a policy without technical enforcemen
 Consider an employee whose laptop is taken from a car. No single control decides the outcome; the layers do.
 
 - **Full-disk encryption** (preventive, technical) keeps the files unreadable to the thief.
-- **A password manager and multi-factor authentication** (preventive, technical) mean that saved sessions alone do not open company accounts.
+- **Multi-factor authentication and short session lifetimes** (preventive, technical): MFA stops the thief from starting a fresh login with any password found on the device, while sessions already open in the browser stay usable only until they expire or are revoked.
 - **A clear reporting procedure** (administrative) gets the loss reported the same day.
 - **Sign-in monitoring** (detective, technical) flags any attempt to use the device's credentials from an unfamiliar location.
 - **Remote wipe and session revocation** (corrective, technical) cut the device off, and **synchronized backups** (corrective) let the employee resume work on a replacement.
