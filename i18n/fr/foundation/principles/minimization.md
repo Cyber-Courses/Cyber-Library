@@ -20,7 +20,7 @@ La minimisation est une seule idée appliquée à trois types d'"éléments" dif
 
 | Ce que l'on réduit | La question à se poser | Mesures habituelles |
 | --- | --- | --- |
-| **Données** | Cette finalité a-t-elle réellement besoin de ce champ, et pour combien de temps ? | Ne collecter que les champs requis, fixer des durées de conservation, supprimer ou archiver une fois la finalité atteinte |
+| **Données** | Cette finalité a-t-elle réellement besoin de ce champ, et pour combien de temps ? | Ne collecter que les champs requis, fixer des durées de conservation, supprimer ou anonymiser une fois la finalité atteinte, et n'archiver que pour une finalité distincte et documentée |
 | **Fonctionnalités** | Ce service, ce protocole, ce compte ou ce paquet doit-il vraiment être actif ? | Désinstaller les logiciels inutilisés, désactiver le code d'exemple et les fonctions de débogage, supprimer les comptes par défaut |
 | **Exposition** | Qui a besoin d'atteindre cette interface, et depuis où ? | Fermer les ports inutilisés, publier l'ensemble le plus restreint d'API et de points de terminaison, garder les systèmes internes hors du réseau public |
 

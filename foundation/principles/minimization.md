@@ -20,7 +20,7 @@ Minimization is one idea applied to three different kinds of "stuff." Each has i
 
 | What you shrink | The question to ask | Typical measures |
 | --- | --- | --- |
-| **Data** | Does this purpose actually need this field, and for how long? | Collect only required fields, set retention periods, delete or archive when the purpose is served |
+| **Data** | Does this purpose actually need this field, and for how long? | Collect only required fields, set retention periods, delete or anonymize when the purpose is served, keeping archives only for a separate, documented purpose |
 | **Functionality** | Does this service, protocol, account, or package need to be running? | Uninstall unused software, disable sample code and debug features, remove default accounts |
 | **Exposure** | Who needs to reach this interface, and from where? | Close unused ports, publish the narrowest set of APIs and endpoints, keep internal systems off the public network |
 
