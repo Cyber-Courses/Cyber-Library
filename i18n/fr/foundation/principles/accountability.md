@@ -32,7 +32,7 @@ Imaginons qu'une base de données de production perde une table de clients tard 
 - Comme les deux systèmes synchronisent leurs horloges sur la même source de temps, les deux événements s'alignent dans le bon ordre.
 - Les journaux étaient transmis en temps réel vers un stockage central que les administrateurs de bases de données ne peuvent pas modifier, de sorte que l'enregistrement est bien celui écrit à 22 h 14.
 
-L'enquête dispose désormais d'un point de départ concret : une seule personne à interroger, et des preuves difficiles à contester. Qu'une seule de ces conditions disparaisse, et la trace s'effondre. Un compte administrateur partagé signifie que n'importe qui aurait pu le faire. Des horloges non synchronisées signifient que la connexion et la suppression pourraient ne même pas sembler liées. Des journaux stockés sur le même serveur auraient pu être effacés en même temps que la table.
+L'enquête dispose désormais d'un point de départ concret : un seul compte dont il faut expliquer l'activité, et des preuves difficiles à falsifier. Cela identifie toutefois un compte, pas une personne : un ordinateur volé, des identifiants dérobés ou une session détournée produiraient les mêmes entrées, si bien que les enquêteurs recoupent avec d'autres éléments avant d'attribuer la suppression à la personne derrière `j.martin`. Qu'une seule de ces conditions disparaisse, et la trace s'effondre. Un compte administrateur partagé signifie que n'importe qui aurait pu le faire. Des horloges non synchronisées signifient que la connexion et la suppression pourraient ne même pas sembler liées. Des journaux stockés sur le même serveur auraient pu être effacés en même temps que la table.
 
 ## Là où la chaîne se rompt
 

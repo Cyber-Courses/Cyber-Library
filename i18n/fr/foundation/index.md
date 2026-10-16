@@ -26,17 +26,25 @@ La culture hacker a émergé à une époque où l'accès aux ressources informat
 
 Malgré les éléments plus sombres qui ont émergé, l'héritage plus large de cette communauté est manifeste dans le domaine actuel de la cybersécurité. Les programmes de bug bounty, les collaborations open source et les compétitions de hacking éthique puisent tous dans l'esprit d'exploration des hackers. De nombreux professionnels de la sécurité adhèrent encore à ces valeurs, mettant leur créativité à profit pour découvrir des vulnérabilités et renforcer la protection des systèmes au bénéfice de tous.
 
+Explorer la section : [La culture hacker](hacker-culture/index.md).
+
 ## Concepts
 
 Avant qu'une technique quelconque ne prenne sens, le domaine a besoin d'un vocabulaire commun : ce que nous protégeons, qui pourrait l'attaquer, comment les attaquants s'introduisent et ce que nous faisons pour y remédier. Les actifs, la surface d'attaque, les menaces, les acteurs malveillants, les vulnérabilités, les exploits et les contrôles en sont les éléments de base, et la triade CIA (confidentialité, intégrité et disponibilité) définit ce que signifie réellement être en sécurité. Ces termes se combinent pour former l'idée unique que sert le reste de la bibliothèque : le risque.
+
+Explorer la section : [Concepts](concepts/index.md).
 
 ## Principes
 
 Une poignée d'idées durables guide la manière dont les systèmes devraient être conçus, défendus et exploités, quelle que soit la technologie en jeu. La défense en profondeur, le moindre privilège, le zero trust, l'authentification et l'autorisation, la responsabilité, la sécurité dès la conception et la minimisation reviennent dans presque tous les contrôles et décisions du domaine. Les apprendre tôt donne au reste de la bibliothèque un cadre de référence commun.
 
+Explorer la section : [Principes](principles/index.md).
+
 ## Histoire
 
 L'histoire de la cybersécurité est étroitement liée à l'évolution de la technologie informatique. À mesure que les ordinateurs se sont répandus dans les entreprises, les administrations et la vie personnelle, le besoin de protéger les données et les systèmes contre les accès non autorisés est devenu plus pressant. Le domaine de la cybersécurité a émergé en réponse à ces défis, en s'appuyant sur un ensemble varié de disciplines, dont l'informatique, la cryptographie et la gestion des risques.
+
+Explorer la section : [Histoire](history/index.md).
 
 ## Éthique et philosophie
 
@@ -44,11 +52,15 @@ Au fil des années, des perspectives contrastées sur le hacking ont nourri d'in
 
 Les professionnels modernes de la cybersécurité équilibrent les exigences de la vie privée, des libertés individuelles et de la sécurité publique. Les lignes directrices du hacking éthique, les cadres réglementaires et l'exigence d'une autorisation appropriée reflètent la reconnaissance par le domaine à la fois du risque et de la responsabilité morale. Cette philosophie en constante évolution encourage les individus à utiliser leurs compétences à des fins constructives, guidés par des obligations légales et des normes éthiques.
 
+Explorer la section : [Éthique et philosophie](ethics-and-philosophy/index.md).
+
 ## Finalité
 
 La cybersécurité a dépassé le cercle des amateurs de technologie pour devenir une pratique essentielle à toute organisation et à toute personne connectée à Internet. À mesure que les systèmes et les données sont devenus indispensables au commerce, à la santé, à l'éducation et à l'administration, les dommages potentiels des cyberattaques ont considérablement augmenté. Ce qui débutait comme un intérêt de niche constitue aujourd'hui un cadre essentiel pour protéger les actifs vitaux et le bien-être des personnes.
 
 Adopter une posture proactive en matière de sécurité ne protège pas seulement contre les menaces immédiates, mais favorise aussi un environnement propice à l'innovation. Les entreprises peuvent adopter de nouvelles technologies en toute confiance, sachant que des mesures de cybersécurité robustes sont en place. Sécuriser les réseaux et les terminaux est fondamental pour la continuité des activités, garantissant le bon déroulement des opérations quotidiennes même face aux dangers numériques émergents.
+
+Explorer la section : [Finalité](purpose/index.md).
 
 ## Risque et confiance
 
@@ -56,8 +68,12 @@ La sophistication croissante des cybermenaces a hissé la cybersécurité à un 
 
 La confiance sous-tend presque tous les aspects du monde en ligne. Les interactions, les transactions et le partage de données reposent sur la foi dans les systèmes qui transmettent et stockent l'information. Chaque mesure de sécurité vise à préserver cette confiance en garantissant l'intégrité des données et en empêchant les accès non autorisés. Dès l'instant où la confiance est compromise, les relations numériques qui alimentent les entreprises et la communication personnelle sont gravement menacées.
 
+Explorer la section : [Risque et confiance](risk-and-trust/index.md).
+
 ## Le facteur humain
 
 L'humain demeure la plus grande variable de la cybersécurité. Bien que les machines et les logiciels se comportent selon la logique et les règles qui leur sont programmées, les personnes peuvent commettre des erreurs ou agir avec malveillance d'une manière que la technologie seule ne peut pas entièrement prévoir. De l'oubli d'appliquer un correctif au clic sur un lien de phishing, les erreurs humaines sont à l'origine de nombreuses violations parmi les plus importantes.
 
 Remédier à ces problèmes passe souvent par des formations régulières, des politiques claires et une culture qui valorise les comportements soucieux de la sécurité. Des campagnes de sensibilisation bien conçues et des programmes d'éducation des utilisateurs réduisent la probabilité de faux pas accidentels. Lorsque les gens comprennent à la fois les conséquences potentielles et les bonnes pratiques d'un comportement sécurisé, les organisations peuvent mieux se protéger contre des menaces qu'aucun correctif logiciel ne peut à lui seul résoudre.
+
+Explorer la section : [Le facteur humain](human-element/index.md).

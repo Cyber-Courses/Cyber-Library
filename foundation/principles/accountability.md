@@ -32,7 +32,7 @@ Imagine a production database loses a customer table late on a Friday. With acco
 - Because both systems synchronize their clocks against the same time source, the two events line up in the right order.
 - The logs were shipped in real time to a central store the database administrators cannot modify, so the record is the same one written at 22:14.
 
-The investigation now has a concrete starting point: a single person to talk to, and evidence that is hard to dispute. Remove any one of those conditions and the trace collapses. A shared admin account means anyone could have done it. Unsynchronized clocks mean the login and the deletion may not even appear to be related. Logs stored on the same server could have been wiped along with the table.
+The investigation now has a concrete starting point: one account to explain and evidence that is hard to tamper with. That still identifies an account, not a person: a stolen laptop, stolen credentials, or a hijacked session would produce the same entries, so investigators corroborate with other evidence before attributing the deletion to the human behind `j.martin`. Remove any one of those conditions and the trace collapses. A shared admin account means anyone could have done it. Unsynchronized clocks mean the login and the deletion may not even appear to be related. Logs stored on the same server could have been wiped along with the table.
 
 ## Where the chain breaks
 
