@@ -12,7 +12,7 @@ keywords:
 
 # Misconfiguration
 
-**Misconfiguration** is the gap between a system that could be secure and one that actually is, created when software is deployed with weak defaults, unnecessary features, or settings that were never tightened. The code may be sound and the design may be strong, yet the running system still exposes data or access because someone left a setting at its factory value, skipped a step, or did not understand what an option controlled. It is consistently one of the most common root causes of breaches, and it sits squarely on the human side of security because it stems from decisions and oversights, not from a flaw in the software itself.
+**Misconfiguration** is the gap between a system that could be secure and one that actually is, created when software is deployed with weak defaults, unnecessary features, or settings that were never tightened. The code may be sound and the design may be strong, yet the running system still exposes data or access because someone left a setting at its factory value, skipped a step, or did not understand what an option controlled. It is consistently one of the most common root causes of breaches, and it sits largely on the human side of security because it stems from deployment decisions and oversights. A vendor that ships an unsafe default has made a [design error](design-and-development-errors.md) affecting every installation; misconfiguration is the operator accepting that default, or drifting away from a secure baseline, in a specific deployment.
 
 ## Sound code, unsafe settings
 

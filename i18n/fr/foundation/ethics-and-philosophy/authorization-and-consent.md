@@ -21,7 +21,7 @@ Imaginez deux personnes qui lancent exactement le même scan de ports et la mêm
 | | Testeur autorisé | Personne sans autorisation |
 |---|---|---|
 | Statut juridique | Travail licite encadré par un accord signé | Infraction probable au regard des lois sur l'usage abusif de l'informatique |
-| Responsabilité | Protégé par le contrat, dans les limites de ses termes | Personnellement exposé pour chaque action menée |
+| Responsabilité | Encadrée par l'accord et le droit applicable, sans être effacée | Personnellement exposé pour chaque action menée |
 | Traçabilité | Le propriétaire sait ce qui a été convenu, par qui et quand | Le propriétaire l'apprend par des alertes, s'il l'apprend un jour |
 | Autonomie du propriétaire | Respectée : le propriétaire a choisi d'être testé | Bafouée : quelqu'un a décidé à sa place |
 

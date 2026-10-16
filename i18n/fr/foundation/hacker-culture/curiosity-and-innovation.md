@@ -27,7 +27,7 @@ La preuve la plus claire que la curiosité alimente l'innovation se trouve dans 
 | Projet | Lieu et époque | La question de départ | Ce qu'il est devenu |
 | --- | --- | --- | --- |
 | Spacewar! | MIT, PDP-1, 1961 à 1962 | Ce petit ordinateur pouvait-il faire tourner un jeu à deux joueurs, en temps réel, avec de la physique ? | L'un des premiers jeux vidéo influents, utilisé par DEC pour faire la démonstration de la machine |
-| Unix et C | Bell Labs, 1969 à 1973 | À quoi ressemblerait un système d'exploitation plus simple et plus agréable ? | L'ancêtre de la plupart des systèmes d'exploitation de serveurs, d'ordinateurs de bureau et de mobiles utilisés aujourd'hui |
+| Unix et C | Bell Labs, 1969 à 1973 | À quoi ressemblerait un système d'exploitation plus simple et plus agréable ? | L'ancêtre de Linux, des BSD, de macOS, d'iOS et d'Android, qui équipent aujourd'hui la plupart des serveurs et des téléphones |
 | Les RFC et les protocoles de l'ARPANET | UCLA et d'autres sites de l'ARPANET, à partir de 1969 | Comment les hôtes de ce nouveau réseau devaient-ils communiquer entre eux ? | Une méthode ouverte et publique d'élaboration des standards qui régit encore Internet |
 
 Le cas de l'ARPANET illustre la dimension de partage de la curiosité. La RFC 1 de Steve Crocker (avril 1969) était explicitement une "request for comments", une demande de commentaires : un brouillon proposé ouvertement pour que d'autres puissent l'améliorer, plutôt qu'une spécification achevée imposée d'en haut.

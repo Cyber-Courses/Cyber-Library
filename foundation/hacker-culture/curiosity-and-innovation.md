@@ -27,7 +27,7 @@ The clearest evidence that curiosity drives innovation is what it produced when 
 | Project | Where and when | The question behind it | What it became |
 | --- | --- | --- | --- |
 | Spacewar! | MIT, PDP-1, 1961 to 1962 | Could this small computer run a real-time, two-player game with physics? | One of the first influential video games, used by DEC to demonstrate the machine |
-| Unix and C | Bell Labs, 1969 to 1973 | What would a simpler, more pleasant operating system look like? | The ancestor of most server, desktop, and mobile operating systems in use today |
+| Unix and C | Bell Labs, 1969 to 1973 | What would a simpler, more pleasant operating system look like? | The ancestor of Linux, the BSDs, macOS, iOS, and Android, which run most servers and phones today |
 | RFCs and ARPANET protocols | UCLA and other ARPANET sites, from 1969 | How should hosts on this new network talk to each other? | An open, public way of drafting standards that still governs the internet |
 
 The ARPANET case shows the sharing side of curiosity. Steve Crocker's RFC 1 (April 1969) was explicitly a "request for comments": a draft offered openly so others could improve it, rather than a finished specification handed down.

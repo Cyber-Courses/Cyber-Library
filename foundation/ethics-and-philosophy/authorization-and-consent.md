@@ -21,7 +21,7 @@ Picture two people running the identical port scan and password-spraying attempt
 | | Tester with authorization | Person without it |
 |---|---|---|
 | Legal standing | Lawful work under a signed agreement | A likely offense under computer-misuse laws |
-| Liability | Shielded by the contract, within its terms | Personally exposed for every action taken |
+| Liability | Governed by the agreement and applicable law, not erased by it | Personally exposed for every action taken |
 | Record | Owner knows what was agreed, by whom, and when | Owner learns about it from alerts, if at all |
 | Owner's autonomy | Respected: the owner chose to be tested | Overridden: someone decided for them |
 
