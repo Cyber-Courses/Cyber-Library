@@ -12,7 +12,7 @@ keywords:
 
 # Autorisation et consentement
 
-**L'autorisation est la permission explicite qui transforme un acte autrement hostile en un acte légitime.** La même technique, comme scanner un réseau, casser un mot de passe ou exploiter une faille, relève soit du travail professionnel de sécurité, soit du délit, et la différence réside rarement dans la technique elle-même. Elle réside dans le fait que le propriétaire du système a accepté, au préalable et par écrit, de laisser quelqu'un agir contre lui. Le consentement est le fondement éthique et juridique sur lequel repose chaque praticien.
+**L'autorisation est la permission explicite qui transforme un acte autrement hostile en un acte légitime.** La même technique, comme scanner un réseau, casser un mot de passe ou exploiter une faille, peut relever du travail professionnel de sécurité ou d'une infraction, et la différence réside rarement dans la technique elle-même. Elle réside dans le fait que le propriétaire du système a accepté, au préalable et par écrit, de laisser quelqu'un agir contre lui. Qu'un acte non autorisé constitue réellement un délit dépend du comportement en cause et du droit applicable (un simple scan de services publics n'est pas traité comme le cassage d'un mot de passe), mais l'exigence éthique d'obtenir une permission, elle, ne change pas. Le consentement est le fondement éthique et juridique sur lequel repose chaque praticien.
 
 ## Même scan, deux actes différents
 

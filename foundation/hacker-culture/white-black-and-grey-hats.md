@@ -25,10 +25,10 @@ Crossing the two answers gives the familiar categories:
 
 | | Protective intent | Harmful or self-serving intent |
 | --- | --- | --- |
-| **Authorized** | White hat: penetration testers, security researchers, and in-house defenders working under a contract, a scope, or a disclosure policy | Rare in theory, but real: an insider or contractor who abuses legitimate access |
+| **Authorized** | White hat: penetration testers, security researchers, and in-house defenders working under a contract, a scope, or a disclosure policy | Contradictory by definition: authorization covers specific work, so an insider or contractor who abuses legitimate access to steal or sabotage has moved into the unauthorized row |
 | **Unauthorized** | Grey hat: probes a system without permission, then reports the flaw rather than exploiting it | Black hat: intrusion for gain, disruption, or other harm, which is what most people mean by "cybercrime" |
 
-The lesson the table makes visible is that authorization, not capability, is the dividing line. The same scan that is a paid service in one context is a crime in another, which is why the [authorization and consent](../ethics-and-philosophy/authorization-and-consent.md) question matters more than any tool. It is also a direct illustration of [dual-use knowledge](../ethics-and-philosophy/dual-use-knowledge.md): the skill itself carries no color.
+The lesson the table makes visible is that authorization, not capability, is the dividing line. The same scan that is a paid service in one context can be an offense in another, which is why the [authorization and consent](../ethics-and-philosophy/authorization-and-consent.md) question matters more than any tool. It is also a direct illustration of [dual-use knowledge](../ethics-and-philosophy/dual-use-knowledge.md): the skill itself carries no color.
 
 ## From "hacker" to hats: how the labels arose
 
@@ -53,10 +53,10 @@ Much of modern security practice exists to give skilled, curious people a lawful
 
 - **Coordinated vulnerability disclosure.** Programs such as the process run by CISA give researchers a defined channel to report flaws and a predictable sequence for fixes and publication.
 - **Bug bounties and safe harbor terms.** By publishing a scope and promising not to pursue good-faith reporters, an organization converts would-be grey hat probing into authorized work.
-- **Prosecution policy.** In May 2022 the U.S. Department of Justice announced that good-faith security research should not be charged under the Computer Fraud and Abuse Act, defining it as access solely for testing, investigating, or correcting a security flaw in a way designed to avoid harm.
+- **Prosecution policy.** In May 2022 the U.S. Department of Justice announced that good-faith security research should not be charged under the Computer Fraud and Abuse Act, defining it as access solely for testing, investigating, or correcting a security flaw in a way designed to avoid harm. This guides federal prosecutors only: it grants no permission, creates no enforceable right, and leaves civil and state law untouched.
 - **Professional titles.** "Ethical hacker" and "security researcher" are now mainstream job titles built directly on the white hat idea, and NIST describes penetration testing as testing that mimics real-world attacks under defined conditions.
 
-Many legal disputes still turn on whether access was authorized, which is exactly the gap the grey hat label names. Each of these mechanisms narrows that gap by making permission explicit before anyone starts probing.
+Many legal disputes still turn on whether access was authorized, which is exactly the gap the grey hat label names. Bounty and disclosure terms close that gap by making permission explicit before anyone starts probing; prosecution policy and job titles only shape how the work is perceived and charged.
 
 ## References
 

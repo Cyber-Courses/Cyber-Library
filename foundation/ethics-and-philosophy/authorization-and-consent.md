@@ -12,7 +12,7 @@ keywords:
 
 # Authorization and consent
 
-**Authorization is the explicit permission that turns an otherwise hostile act into a legitimate one.** The same technique, such as scanning a network, cracking a password, or exploiting a flaw, is either professional security work or a crime, and the difference is rarely in the technique itself. It is in whether the owner of the system agreed, in advance and in writing, to let someone act against it. Consent is the ethical and legal ground every practitioner stands on.
+**Authorization is the explicit permission that turns an otherwise hostile act into a legitimate one.** The same technique, such as scanning a network, cracking a password, or exploiting a flaw, can be professional security work or an offense, and the difference is rarely in the technique itself. It is in whether the owner of the system agreed, in advance and in writing, to let someone act against it. Whether an unauthorized act is actually a crime depends on the conduct and the applicable law (a light scan of public services is treated very differently from cracking a password), but the ethical requirement to obtain permission does not change. Consent is the ethical and legal ground every practitioner stands on.
 
 ## Same scan, two different acts
 

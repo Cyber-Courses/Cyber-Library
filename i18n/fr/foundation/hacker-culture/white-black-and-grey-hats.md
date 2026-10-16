@@ -25,10 +25,10 @@ Le croisement des deux réponses donne les catégories bien connues :
 
 | | Intention protectrice | Intention nuisible ou intéressée |
 | --- | --- | --- |
-| **Autorisé** | Chapeau blanc : testeurs d'intrusion, chercheurs en sécurité et défenseurs internes travaillant dans le cadre d'un contrat, d'un périmètre ou d'une politique de divulgation | Rare en théorie, mais bien réel : un employé interne ou un prestataire qui abuse d'un accès légitime |
+| **Autorisé** | Chapeau blanc : testeurs d'intrusion, chercheurs en sécurité et défenseurs internes travaillant dans le cadre d'un contrat, d'un périmètre ou d'une politique de divulgation | Contradictoire par définition : l'autorisation couvre un travail précis, si bien qu'un employé interne ou un prestataire qui abuse d'un accès légitime pour voler ou saboter bascule dans la ligne non autorisée |
 | **Non autorisé** | Chapeau gris : sonde un système sans permission, puis signale la faille au lieu de l'exploiter | Chapeau noir : intrusion à des fins de gain, de perturbation ou d'autres préjudices, ce que la plupart des gens appellent la "cybercriminalité" |
 
-La leçon que le tableau rend visible est que c'est l'autorisation, et non la capacité, qui constitue la ligne de partage. Le même scan qui est un service payant dans un contexte est un délit dans un autre, et c'est pourquoi la question de l'[autorisation et du consentement](../ethics-and-philosophy/authorization-and-consent.md) compte davantage que n'importe quel outil. C'est aussi une illustration directe des [connaissances à double usage](../ethics-and-philosophy/dual-use-knowledge.md) : la compétence elle-même n'a pas de couleur.
+La leçon que le tableau rend visible est que c'est l'autorisation, et non la capacité, qui constitue la ligne de partage. Le même scan qui est un service payant dans un contexte peut constituer une infraction dans un autre, et c'est pourquoi la question de l'[autorisation et du consentement](../ethics-and-philosophy/authorization-and-consent.md) compte davantage que n'importe quel outil. C'est aussi une illustration directe des [connaissances à double usage](../ethics-and-philosophy/dual-use-knowledge.md) : la compétence elle-même n'a pas de couleur.
 
 ## Du "hacker" aux chapeaux : la naissance des étiquettes
 
@@ -53,10 +53,10 @@ Une grande partie de la pratique moderne de la sécurité existe pour offrir aux
 
 - **La divulgation coordonnée des vulnérabilités.** Des programmes comme le processus géré par la CISA offrent aux chercheurs un canal défini pour signaler les failles et une séquence prévisible pour les correctifs et la publication.
 - **Les bug bounties et les clauses de safe harbor.** En publiant un périmètre et en s'engageant à ne pas poursuivre les personnes qui signalent de bonne foi, une organisation transforme ce qui aurait été un sondage de chapeau gris en travail autorisé.
-- **La politique de poursuites.** En mai 2022, le département de la Justice des États-Unis a annoncé que la recherche en sécurité de bonne foi ne devait pas faire l'objet de poursuites au titre du Computer Fraud and Abuse Act, en la définissant comme un accès effectué uniquement pour tester, examiner ou corriger une faille de sécurité, d'une manière conçue pour éviter tout préjudice.
+- **La politique de poursuites.** En mai 2022, le département de la Justice des États-Unis a annoncé que la recherche en sécurité de bonne foi ne devait pas faire l'objet de poursuites au titre du Computer Fraud and Abuse Act, en la définissant comme un accès effectué uniquement pour tester, examiner ou corriger une faille de sécurité, d'une manière conçue pour éviter tout préjudice. Cette politique oriente seulement les procureurs fédéraux : elle n'accorde aucune permission, ne crée aucun droit opposable et laisse intact le droit civil comme celui des États.
 - **Les titres professionnels.** "Hacker éthique" et "chercheur en sécurité" sont désormais des intitulés de poste courants, bâtis directement sur l'idée du chapeau blanc, et le NIST décrit les tests d'intrusion comme des tests qui reproduisent des attaques réelles dans des conditions définies.
 
-De nombreux litiges juridiques dépendent encore de la question de savoir si l'accès était autorisé, ce qui correspond exactement à l'écart que désigne l'étiquette de chapeau gris. Chacun de ces mécanismes réduit cet écart en rendant la permission explicite avant que quiconque ne commence à sonder.
+De nombreux litiges juridiques dépendent encore de la question de savoir si l'accès était autorisé, ce qui correspond exactement à l'écart que désigne l'étiquette de chapeau gris. Les conditions des bug bounties et des politiques de divulgation comblent cet écart en rendant la permission explicite avant que quiconque ne commence à sonder ; la politique de poursuites et les titres professionnels ne font qu'influencer la façon dont ce travail est perçu et poursuivi.
 
 ## Références
 
