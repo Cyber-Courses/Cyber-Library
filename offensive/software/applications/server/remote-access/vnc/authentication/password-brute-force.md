@@ -1,6 +1,6 @@
 ---
 title: "Password brute force: attacking the VNC password scheme"
-description: "The classic VNC authentication is a DES challenge-response over a password truncated to eight characters. It is brute-forced online against the server, and, more powerfully, cracked offline from a single captured challenge-response pair, because the short password space and known algorithm make offline recovery fast."
+description: "Classic VNC Authentication uses a DES challenge-response and, in compatible implementations, only the first eight password bytes. Captured exchanges permit offline candidate testing, while online guessing depends on server controls; recovery cost still depends on password distribution and cracking resources."
 keywords:
   - vnc brute force
   - des challenge
@@ -11,7 +11,7 @@ keywords:
 
 # Password brute force
 
-VNC's standard authentication (security type 2) is a challenge-response: the server sends a 16-byte challenge, the client encrypts it with DES keyed by the password (truncated to eight characters, with a quirk that reverses the bit order of each key byte), and returns the result. Two attacks follow. Online brute force tries passwords against the server directly. More powerfully, capturing one challenge-response pair (by sniffing or MITM) allows offline cracking: the password space is tiny (eight characters, and the algorithm is known), so a wordlist or brute force recovers the password quickly without touching the server again.
+VNC Authentication (security type 2) is a challenge-response: the server sends a 16-byte challenge and the client returns a DES-based response derived from the password. In classic compatible implementations, only the first eight password bytes are significant. Online guessing submits candidates to the server and is subject to its delay, rejection, and logging behavior. A captured challenge-response pair permits candidates to be tested offline, avoiding further server interaction, but it does not guarantee quick recovery: cost depends on password choice, candidate strategy, character set, and available hardware.
 
 ```bash
 # online brute force
@@ -19,15 +19,15 @@ nmap -p5900 --script vnc-brute --script-args passdb=rockyou.txt <target>
 hydra -P rockyou.txt vnc://<target>
 # offline: capture the challenge + response (sniff/MITM), then crack
 #   VNC auth is a known DES-challenge format; feed challenge+response to a cracker
-#   (the 8-char cap and reversed-bit key make the keyspace small and fast to search)
+#   prioritize evidence-based candidate lists; exhaustive recovery may remain costly
 ```
 
 ## Exploitation notes
 
-- The eight-character truncation is the decisive weakness: only the first eight characters are keyed, so the effective space is small and wordlists are highly effective; longer passwords add nothing beyond eight bytes.
-- Offline cracking from a captured challenge-response is quiet and fast, and avoids online lockout/logging; a single sniffed authentication (the traffic is otherwise cleartext) yields the pair, see [cleartext transmission](../weak-cryptography/cleartext-transmission.md).
+- In compatible implementations, bytes after the eighth do not strengthen VNC Authentication, but an eight-byte maximum does not make every possible password easy to recover.
+- Offline candidate testing avoids server-side throttling and additional authentication logs; recovery speed still depends on the candidate space. See [cleartext transmission](../weak-cryptography/cleartext-transmission.md) for transport context.
 - Online brute force works where you cannot capture, but VNC servers may limit or delay attempts; keep lists short given the 8-char cap.
-- A cracked password is reusable across VNC endpoints and sometimes other services; the recovered desktop access is interactive control of the target.
+- Test recovered credentials only where reuse is in scope; reuse across endpoints is an operational possibility, not a protocol property.
 
 ## Tools
 

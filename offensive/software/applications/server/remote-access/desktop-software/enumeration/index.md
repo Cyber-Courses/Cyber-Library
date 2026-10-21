@@ -1,22 +1,22 @@
 ---
 title: "Enumeration: detecting remote-desktop software and version"
-description: "Remote-desktop tools are detected by their characteristic local listening ports and relay traffic, TeamViewer on 5938, AnyDesk on 7070, and others, and by client artefacts on a host. Identifying the product and its version selects the authentication attack and maps the client to its known product exploits."
+description: "Remote-desktop tools are detected reliably through endpoint inventory and process, file, service, registry, DNS, proxy, or outbound-connection telemetry. Relay destination ports alone are not sufficient to identify an installed product."
 keywords:
   - service detection
   - version detection
   - port 5938
-  - port 7070
+  - port 6568
   - fingerprint
 ---
 
 # Enumeration
 
-Enumerating these tools identifies which product is present and its version, which drives both the authentication attack and the product-exploit choice. Detection is by the characteristic ports the clients use, TeamViewer on TCP 5938 (falling back to 443/80), AnyDesk on 7070, Splashtop and others on their own, and by the vendor relay traffic, plus client artefacts (processes, installed files, registry) on a host you can inspect. Version detection then matters because these products patch frequently and many attacks (brute-force feasibility, specific exploits) are version-dependent.
+Enumerating these tools identifies which product is present and its version, which drives configuration review and advisory matching. Endpoint evidence such as processes, services, installed files, package inventory, registry entries, and application data is authoritative. Network evidence comes from outbound connections, DNS, proxy, and firewall logs for vendor relay infrastructure. TeamViewer normally connects outward on TCP/UDP 5938 with fallbacks to TCP 443 or 80; AnyDesk uses outbound TCP 80, 443, or 6568 and UDP 50001–50003 for local discovery. These destination ports are not general inbound service fingerprints.
 
 ```bash
-nmap -p5938,7070,6568,443 -sV <target>         # TeamViewer, AnyDesk, Splashtop, relay
 # on a host: identify the client and version from processes/installed files
 tasklist | findstr /i 'teamviewer anydesk splashtop'    # Windows
+# from network telemetry, correlate destinations and process identity rather than scanning ports
 ```
 
 ## Subtopics
@@ -26,5 +26,5 @@ tasklist | findstr /i 'teamviewer anydesk splashtop'    # Windows
 
 ## References
 
-- [TeamViewer ports](https://www.teamviewer.com/en/)
-- [AnyDesk ports](https://anydesk.com/en/)
+- [TeamViewer ports](https://www.teamviewer.com/en-us/global/support/knowledge-base/teamviewer-remote/troubleshooting/ports-used-by-teamviewer/)
+- [AnyDesk firewall requirements](https://support.anydesk.com/firewall)

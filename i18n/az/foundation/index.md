@@ -27,7 +27,7 @@ Haker mədəniyyəti, hesablama resurslarına girişin məhdud və tez-tez böy�
 
 Ortaya çıxan qaranlıq elementlərə baxmayaraq, icmanın daha geniş irsi bu günün kiber təhlükəsizlik sahəsində aydın görünür. Hata mükafatları, açıq mənbə əməkdaşlıqları və etik hakerlik yarışmaları hamısı kəşfiyyat ruhundan bəhrələnir. Bir çox təhlükəsizlik mütəxəssisi hələ də bu dəyərləri qəbul edir, yaradıcılığı istifadə edərək zəiflikləri aşkar edir və sistem qorunmalarını hamının xeyrinə artırır.
 
-# Tarix
+## Tarix
 
 Kiber təhlükəsizliyin tarixi hesablama texnologiyasının təkamülü ilə sıx bağlıdır. Kompüterlər iş, hökumət və şəxsi həyatda daha geniş yayıldıqca, məlumatları və sistemləri icazəsiz girişdən qorumaq ehtiyacı daha təcili oldu. Kiber təhlükəsizlik sahəsi bu problemlərə cavab olaraq ortaya çıxdı və kompüter elmi, kriptoqrafiya və risk idarəçiliyi daxil olmaqla müxtəlif fənlərdən bəhrələndi.
 

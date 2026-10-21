@@ -30,7 +30,7 @@ Kultura hakerów wyłoniła się w czasach, gdy dostęp do zasobów komputerowyc
 
 Pomimo ciemniejszych elementów, które się pojawiły, szersze dziedzictwo społeczności jest widoczne w dzisiejszej dziedzinie cyberbezpieczeństwa. Programy nagród za błędy, współpraca open-source i konkursy etycznego hakowania czerpią z ducha eksploracji hakerów. Wielu specjalistów ds. bezpieczeństwa nadal przyjmuje te wartości, wykorzystując kreatywność do odkrywania luk w zabezpieczeniach i wzmacniania ochrony systemów dla dobra wszystkich.
 
-# Historia
+## Historia
 
 Historia cyberbezpieczeństwa jest nierozerwalnie związana z ewolucją technologii komputerowej. W miarę jak komputery stawały się coraz bardziej powszechne w biznesie, rządzie i życiu osobistym, potrzeba ochrony danych i systemów przed nieautoryzowanym dostępem stawała się coraz pilniejsza. Dziedzina cyberbezpieczeństwa wyłoniła się w odpowiedzi na te wyzwania, czerpiąc z różnorodnych dyscyplin, w tym informatyki, kryptografii i zarządzania ryzykiem.
 

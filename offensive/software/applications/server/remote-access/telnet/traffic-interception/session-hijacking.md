@@ -11,7 +11,7 @@ keywords:
 
 # Session hijacking
 
-Telnet authenticates only at login; thereafter the session is just an unencrypted TCP stream with no per-packet authentication. An on-path attacker therefore hijacks it: by injecting crafted TCP segments with the correct sequence numbers (observable because the traffic is cleartext), they insert commands into the stream that the server executes as the already-authenticated user, or desynchronise and take the session over entirely. This bypasses the login completely, the attacker never needs the password, they ride a session someone else authenticated, and runs with that user's privileges.
+After login, Telnet application data is carried over a TCP stream without application-level integrity protection. An active on-path attacker who can observe the current sequence state and inject packets may insert data that the server processes in the authenticated session or may desynchronise the legitimate client. Plaintext makes observing the interaction easier, but the attack additionally requires live packet-injection capability; a saved capture alone is insufficient.
 
 ```bash
 # on-path position to the Telnet session (ARP/route)

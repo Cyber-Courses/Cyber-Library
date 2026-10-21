@@ -29,7 +29,7 @@ La cultura hacker va sorgir en una època en què l'accés als recursos informà
 
 Malgrat els elements més obscurs que van sorgir, l'herència més àmplia de la comunitat és evident en el domini actual de la ciberseguretat. Les recompenses per errors, les col·laboracions de codi obert i les competicions d'hacking ètic beuen de l'esperit explorador dels hackers. Molts professionals de la seguretat encara abracen aquests valors, aprofitant la creativitat per descobrir vulnerabilitats i millorar les proteccions del sistema en benefici de tots.
 
-# Història
+## Història
 
 La història de la ciberseguretat està entrellaçada amb l'evolució de la tecnologia informàtica. A mesura que els ordinadors es van fer més prevalents en els negocis, el govern i la vida personal, la necessitat de protegir les dades i els sistemes de l'accés no autoritzat es va fer més urgent. El camp de la ciberseguretat va sorgir en resposta a aquests desafiaments, basant-se en un conjunt divers de disciplines, incloent la informàtica, la criptografia i la gestió de riscos.
 

@@ -1,7 +1,7 @@
 ---
 title: "Enumeration: fingerprinting a VNC service"
 order: 3
-description: "VNC enumeration reads the RFB protocol version and the security types the server offers during the unauthenticated handshake, and identifies the implementation (RealVNC, TightVNC, UltraVNC). The security types reveal whether the server requires no authentication or the weak VNC password scheme, and the implementation maps to specific authentication-bypass flaws."
+description: "VNC enumeration records the RFB protocol version and advertised security types, then uses extensions, behavior, and endpoint evidence to estimate the implementation. Security types describe available mechanisms but do not alone prove product identity or vulnerability."
 keywords:
   - vnc enumeration
   - rfb version
@@ -12,7 +12,7 @@ keywords:
 
 # Enumeration
 
-VNC's handshake is informative before any authentication: the server announces its RFB protocol version and the list of security types it supports, and the implementation can be fingerprinted from version strings and behaviour. The security-type list is the key finding, it shows whether the server offers "None" (no authentication), the weak VNC DES password scheme, or vendor schemes, and the implementation (RealVNC, TightVNC, UltraVNC) maps to known authentication-bypass vulnerabilities, so enumeration directs the whole attack.
+VNC's handshake exposes useful information before authentication. The server first announces its RFB protocol version; after the client replies, security negotiation identifies the types the server supports. The list can show `None`, legacy VNC Authentication, TLS, VeNCrypt, SASL, or vendor extensions. These values describe available mechanisms and can suggest an implementation, but exact product and version identification normally requires corroborating endpoint, package, service, or firmware evidence. Match vulnerabilities only after that identification is sufficiently reliable.
 
 ```bash
 nmap -p5900 --script vnc-info <target>         # RFB version + supported security types

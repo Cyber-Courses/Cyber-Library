@@ -31,7 +31,7 @@ Hacker kultura baliabide informatikoetarako sarbidea mugatua eta askotan erakund
 
 Sortu ziren elementu ilunagoak gorabehera, komunitatearen ondare zabalagoa gaur egungo zibersegurtasun arloan agerikoa da. Akats sariak, kode irekiko lankidetzak eta hacking etikoaren lehiaketek esplorazio espiritu hackerra dute oinarri. Segurtasun profesional askok balio horiek oraindik ere besarkatzen dituzte, sormena baliatuz ahultasunak aurkitzeko eta sistemaren babesak hobetzeko guztion onurarako.
 
-# Historia
+## Historia
 
 Zibersegurtasunaren historia konputazio teknologiaren eboluzioarekin lotuta dago. Ordenagailuak negozio, gobernu eta bizitza pertsonalean gero eta ohikoagoak bihurtu ziren heinean, datuak eta sistemak baimenik gabeko sarbideetatik babesteko beharra gero eta premiazkoagoa bihurtu zen. Zibersegurtasunaren arloa erronka horiei erantzuteko sortu zen, diziplina anitzetatik abiatuta, informatika, kriptografia eta arriskuen kudeaketa barne.
 

@@ -1,6 +1,6 @@
 ---
 title: "Banner grabbing: SSH version and implementation disclosure"
-description: "An SSH server announces its protocol version and software in a cleartext banner before authentication, for example SSH-2.0-OpenSSH_8.9p1 Ubuntu. That string identifies the implementation, version, and often the OS/distribution, mapping the service directly to its known vulnerabilities and shaping the user-enumeration and exploit choices."
+description: "An SSH server sends a cleartext identification string before key exchange. It can suggest the protocol, implementation, and package lineage, but it is self-reported and does not by itself establish the installed build, operating system, or patch status."
 keywords:
   - ssh banner
   - version detection
@@ -11,7 +11,7 @@ keywords:
 
 # Banner grabbing
 
-The first thing an SSH server sends, before any authentication and in cleartext, is its identification banner: a line like `SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4`. That single string gives the protocol version, the implementation (OpenSSH, Dropbear, libssh, a vendor stack), the exact software version, and frequently the OS or distribution packaging. It is the anchor for everything else: the version maps to the implementation's known vulnerabilities, distinguishes OpenSSH from Dropbear (common on embedded devices, with its own bugs), and tells you which user-enumeration and exploit techniques apply to this build.
+Before key exchange, an SSH server sends a cleartext identification string such as `SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4`. The protocol field is meaningful, while the software comment is implementation-controlled: it may be customized, suppressed, vendor-modified, or associated with a distribution that backports fixes. Treat it as a fingerprinting hint. Confirm the actual package build and compare it with the applicable vendor advisory before assigning vulnerability status.
 
 ```bash
 # grab the banner several ways
@@ -24,12 +24,12 @@ for h in $(cat hosts.txt); do echo "$h $(echo | nc -w2 $h 22 | head -1)"; done
 
 ## Exploitation notes
 
-- The implementation and version are the key facts: OpenSSH, Dropbear, libssh, and vendor forks have distinct vulnerability histories, and the exact version maps to specific advisories (user-enumeration flaws, auth bypasses, memory-corruption bugs).
-- Distribution strings (Ubuntu, Debian backport suffixes) refine the patch level, since distributions backport fixes without changing the upstream version number.
-- Dropbear banners indicate an embedded/IoT device, pointing toward [default credentials](../authentication/default-credentials.md) and device-specific issues.
-- The banner is cleartext and pre-auth, so this costs nothing and is the first step; feed the version into a vulnerability lookup and the implementation into the right user-enumeration method.
+- The string can distinguish likely implementations such as OpenSSH, Dropbear, or libssh, but compatible and vendor-modified stacks may present custom values.
+- Distribution suffixes can identify package lineage; use the distribution's package changelog or security advisory because fixes may be backported without changing the upstream version component.
+- A Dropbear banner identifies the SSH implementation, not the device category, firmware state, or presence of default credentials.
+- Use the banner to choose what to verify, not as sole evidence that a CVE applies.
 
 ## References
 
-- [HackTricks: SSH banner](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh)
 - [OpenSSH release notes (version mapping)](https://www.openssh.com/releasenotes.html)
+- [OpenSSH portable notes on vendor modifications](https://www.openssh.com/portable.html)

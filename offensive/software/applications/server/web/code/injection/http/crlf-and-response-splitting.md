@@ -7,7 +7,7 @@ keywords:
   - response splitting
   - header injection
   - Set-Cookie injection
-  - %0d%0a
+  - "%0d%0a"
 ---
 
 # CRLF and response splitting
@@ -40,5 +40,5 @@ The major caveat is that most modern servers and HTTP libraries reject or strip 
 
 ## References
 
-- PortSwigger Web Security Academy: HTTP response header injection
-- OWASP Testing Guide: Testing for HTTP Splitting/Smuggling
+- [PortSwigger: HTTP response header injection](https://portswigger.net/kb/issues/00200200_http-response-header-injection)
+- [OWASP Web Security Testing Guide: HTTP response splitting](https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/07-Injection/15-HTTP_Response_Splitting/)

@@ -28,7 +28,7 @@ rsh -l victim <target> id
 - The precondition is a write to the target's `.rhosts`; pair with any home-directory write primitive (an [NFS UID-spoof write](../../../file-share/network-file-systems/nfs/uid-and-gid-spoofing.md), a writable share, or a foothold), which is exactly why writable home directories are dangerous with r-commands enabled.
 - `+ +` is the maximal entry (any host, any user); a targeted `host user` entry is stealthier.
 - This is both access and persistence: the planted trust survives and grants passwordless re-entry until the file is cleaned.
-- The same `.rhosts` mechanism serves rsh, rlogin, and rexec; see [rhosts write](../trust-abuse/rhosts-write.md) for the write technique in the trust-abuse view.
+- The same `.rhosts` mechanism serves `rsh` and `rlogin`, but not password-based `rexec`; see [rhosts write](../trust-abuse/rhosts-write.md) for the write technique in the trust-abuse view.
 
 ## References
 

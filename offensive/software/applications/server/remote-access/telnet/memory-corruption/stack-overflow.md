@@ -1,34 +1,33 @@
 ---
-title: "Stack overflow: buffer overflows in telnetd"
-description: "telnetd has carried stack buffer overflows in its handling of Telnet options and protocol data, notably the encryption-option and telrcv code paths, reachable pre-authentication. On old Unix and embedded builds without stack protections, a crafted option sequence overflows a fixed buffer to execute code as root."
+title: "Encryption-key overflow: CVE-2011-4862 in affected telnetd implementations"
+description: "CVE-2011-4862 was a pre-authentication buffer overflow in the Telnet encryption-option code used by specific FreeBSD and related telnetd implementations. An overlong encryption key could enable code execution with the daemon's privileges; encryption support alone does not establish vulnerability."
 keywords:
-  - stack overflow
+  - buffer overflow
   - telnetd
-  - telrcv
+  - CVE-2011-4862
   - encryption option
   - rce
 ---
 
-# Stack overflow
+# Encryption-key overflow
 
-The Telnet server's parsing of protocol data and options has produced stack buffer overflows, where a fixed-size buffer is filled from attacker-controlled input without a bound. The best-known class is in the encryption-option handling and the `telrcv` input path, reachable before authentication, where an oversized or crafted option sequence overruns a stack buffer. On the old Unix `telnetd` and embedded builds that still run Telnet, which commonly lack stack canaries, non-executable stacks, and ASLR, this overflow is turned into reliable remote code execution, and because `telnetd` runs as root, the result is root.
+CVE-2011-4862 was a buffer overflow in `libtelnet/encrypt.c` used by specific BSD-derived Telnet daemons. The affected code copied a client-supplied encryption key into a fixed-size buffer without validating its length. Because this option was processed before authentication, a remote unauthenticated attacker could execute code with the privileges of the daemon, which was commonly root. The advisory covered named versions of FreeBSD and related Heimdal, MIT Kerberos applications, and GNU inetutils code; it was not a generic flaw in every Telnet server or embedded implementation.
 
 ```bash
-# fingerprint the telnetd build to match the specific overflow
-nc <target> 23; nmap -p23 -sV <target>
-# the exploit sends crafted Telnet option/negotiation data that overflows a stack
-# buffer in the pre-auth parsing; on no-mitigation targets, overwrite the return
-# address to shellcode/ROP. Build-specific offsets; match version to the advisory.
+# identify the service and whether it supports the relevant encryption option
+nmap -p23 -sV --script telnet-encryption <target>
+# support is only a lead: confirm an affected product/version against the advisory
 ```
 
 ## Exploitation notes
 
-- The high-value property is pre-authentication reach and root privilege: the vulnerable parsing runs before login and `telnetd` is root, so success is unauthenticated root.
-- Legacy Unix and embedded devices are the realistic targets because they lack modern mitigations; a modern, mitigated telnetd is far harder and these specific bugs are patched.
-- Exploitation is build-specific (offsets, buffer sizes); fingerprint the exact implementation and version and match the advisory.
-- Device telnetd (BusyBox and vendor forks) have their own overflow history; treat embedded Telnet as a prime candidate.
+- The vulnerable encryption-key handling runs before authentication; successful exploitation inherits the daemon's privileges.
+- `telnet-encryption` detects option support only. Nmap explicitly states that the script does not test for CVE-2011-4862.
+- Confirm the exact implementation and version through inventory, package data, or vendor evidence; a banner may be insufficient.
+- Do not extend this CVE to BusyBox or vendor forks without evidence that they contain the affected code.
 
 ## References
 
-- [Historic telnetd encryption-option overflow advisories](https://www.cve.org/)
-- [HackTricks: Telnet](https://book.hacktricks.xyz/network-services-pentesting/pentesting-telnet)
+- [FreeBSD-SA-11:08.telnetd](https://www.freebsd.org/security/advisories/FreeBSD-SA-11:08.telnetd.asc)
+- [CVE-2011-4862](https://nvd.nist.gov/vuln/detail/CVE-2011-4862)
+- [Nmap telnet-encryption](https://nmap.org/nsedoc/scripts/telnet-encryption.html)

@@ -31,5 +31,6 @@ rlogin -l victim <target>          # now no password
 
 ## References
 
-- [man 5 rhosts](https://man7.org/linux/man-pages/man5/rhosts.5.html)
+- [Linux rcmd/ruserok authentication routines](https://man7.org/linux/man-pages/man3/rcmd.3.html)
+- [Linux-PAM pam_rhosts](https://man7.org/linux/man-pages/man8/pam_rhosts.8.html)
 - [HackTricks: rlogin](https://book.hacktricks.xyz/network-services-pentesting/pentesting-rlogin)

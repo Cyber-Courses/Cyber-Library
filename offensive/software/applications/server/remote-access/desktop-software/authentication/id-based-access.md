@@ -1,6 +1,6 @@
 ---
-title: "ID-based access: enumerating and targeting device IDs"
-description: "Remote-desktop tools address each machine by a numeric device ID, and connecting needs the ID plus a password. Because IDs are allocated from a predictable space, an attacker enumerates valid IDs and pairs them with password guessing or stolen passwords. Historically, weak ID-to-session binding and predictable IDs made brute-forcing the ID-plus-password combination practical."
+title: "ID-based access: identifiers are addressing, not authentication"
+description: "Remote-desktop products use a device ID to address a connection, but the ID is not an authentication secret. Access still depends on the product's password, account, approval, certificate, allowlist, and policy controls; enumeration feasibility must be established for a specific product and version."
 keywords:
   - device id
   - teamviewer id
@@ -11,23 +11,20 @@ keywords:
 
 # ID-based access
 
-Products like TeamViewer and AnyDesk identify each installation by a numeric ID, and a remote connection is established by supplying that ID and the corresponding password. The ID is the addressing, and its properties shape the attack: IDs are drawn from a bounded, often sequential-ish space, so valid installations can be enumerated, and an attacker pairs a discovered ID with password guessing or a stolen/leaked password to connect. The strength of the binding between ID and session password matters, where it was weak or the ID space predictable, brute-forcing the ID-and-password combination at scale was practical, and mass campaigns have abused reused passwords across enumerated IDs.
+Products such as TeamViewer and AnyDesk use a device ID to address a connection. The ID is not intended to be a secret, but knowing it does not itself grant access: the product can additionally require a session or unattended password, account authorization, user approval, allowlist rules, multifactor controls, and device identity checks. AnyDesk, for example, links an ID to a client-certificate fingerprint. Claims that IDs can be enumerated or brute-forced must therefore be supported for the exact product, service behavior, and version rather than inferred from the identifier being numeric.
 
 ```bash
-# IDs are numeric and enumerable; connections pair ID + password
-# an attacker sweeps candidate IDs and attempts known/weak passwords against each
-#   (automated against the client/relay connection flow)
-# combine with leaked ID:password pairs (from breaches/stealer logs) for direct connects
+# collect an ID from authorized inventory, support records, or endpoint configuration
+# then assess the actual access policy: password, approval, account assignment, and allowlist
 ```
 
 ## Exploitation notes
 
-- The ID is addressing, not a secret; security rests on the password, so the real attack is the ID enumeration plus a password source (guessing, reuse, or leaked pairs), see [weak passwords](weak-passwords.md).
-- Infostealer logs and breach data frequently contain ID-and-password pairs for these tools, making many "connects" direct replays rather than brute force.
-- Historically weak ID-to-session binding and rate limiting let attackers brute-force the combination; vendors have tightened this, so current practicality depends on the product version and its protections.
+- Treat an exposed ID as targeting information, not a credential. Review every authentication and authorization control protecting the connection, see [weak passwords](weak-passwords.md).
+- Credential or configuration material recovered from a host may include an ID, but whether it includes a reusable password depends on the product, version, and storage design.
+- Do not claim large-scale ID enumeration without a reproducible product-specific method and evidence that the relay permits it.
 - A connected session is interactive control of the remote machine as its logged-in user; unattended-access configs make this reachable at any time, see [unattended access](unattended-access.md).
 
 ## References
 
-- [TeamViewer ID and connection model](https://www.teamviewer.com/en/)
-- [HackTricks](https://book.hacktricks.xyz/)
+- [AnyDesk client fingerprint](https://support.anydesk.com/fingerprint)

@@ -1,31 +1,30 @@
 ---
 title: "Memory corruption: remote code execution in telnetd"
 order: 2
-description: "Telnet server implementations have carried serious memory-corruption vulnerabilities reachable before or during authentication: stack buffer overflows and format-string flaws in option and environment handling. On old Unix telnetd and embedded builds, these give remote code execution, often as root, against a service that predates modern mitigations."
+description: "Specific Telnet server implementations have carried serious memory-corruption vulnerabilities. CVE-2011-4862 affected named BSD-derived telnetd implementations that supported the encryption option and allowed pre-authentication code execution with the daemon's privileges."
 keywords:
   - telnetd
   - buffer overflow
-  - format string
+  - CVE-2011-4862
   - pre-auth rce
   - memory corruption
 ---
 
 # Memory corruption
 
-Beyond its protocol weaknesses, the Telnet server code itself has a long history of memory-corruption bugs, and because `telnetd` often runs as root and predates modern exploit mitigations (especially on legacy Unix and embedded builds), these yield remote code execution with high privilege. The classic classes are stack buffer overflows in option and environment handling (the `telrcv`/encryption-option code paths) and format-string flaws, several reachable pre-authentication. An exposed old `telnetd` is therefore not just a weak login but a direct RCE target once fingerprinted.
+Beyond its protocol weaknesses, particular Telnet server implementations have contained memory-corruption vulnerabilities. One well-documented example is CVE-2011-4862 in the encryption-option code shared by affected FreeBSD, Heimdal, MIT Kerberos applications, and GNU inetutils releases. An unauthenticated client could supply an overlong encryption key that was copied into a fixed-size buffer, enabling code execution with the daemon's privileges. Exposure to Telnet or support for encryption does not by itself prove vulnerability: identify the implementation and affected version before drawing that conclusion.
 
 ```bash
 # fingerprint the telnetd implementation/version (banner, option negotiation)
 nc <target> 23; nmap -p23 -sV <target>
-# match the build to the applicable advisory: stack overflow vs format string
+# compare the implementation and version with a specific vendor advisory
 ```
 
 ## Subtopics
 
-- **[Stack overflow](stack-overflow.md)**: buffer overflows in option/environment handling.
-- **[Format string](format-string.md)**: format-string flaws in telnetd.
+- **[Encryption-key buffer overflow](stack-overflow.md)**: CVE-2011-4862 in affected BSD-derived telnetd code.
 
 ## References
 
-- [HackTricks: Telnet](https://book.hacktricks.xyz/network-services-pentesting/pentesting-telnet)
-- [Historic telnetd advisories](https://www.cve.org/)
+- [FreeBSD-SA-11:08.telnetd](https://www.freebsd.org/security/advisories/FreeBSD-SA-11:08.telnetd.asc)
+- [Nmap telnet-encryption](https://nmap.org/nsedoc/scripts/telnet-encryption.html)

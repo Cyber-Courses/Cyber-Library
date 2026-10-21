@@ -1,32 +1,32 @@
 ---
-title: "Session replay: replaying captured r-command sessions"
-description: "Because the r-commands authenticate only at setup and carry sessions in cleartext, an attacker who captures the traffic can hijack the live TCP session to inject commands as the authenticated user, and in some cases replay captured exchanges. This executes commands without defeating authentication, riding a session someone else established."
+title: "Live session hijacking: injecting into an established r-command stream"
+description: "An on-path attacker who observes an active, unencrypted r-command connection may inject correctly sequenced TCP data as the authenticated user. This is live TCP session hijacking, not replay of a saved exchange into a new connection."
 keywords:
-  - session replay
+  - session hijacking
   - tcp hijacking
   - command injection
   - rsh
   - rlogin
 ---
 
-# Session replay
+# Live session hijacking
 
-The r-commands authenticate only during connection setup, after which the session is an unauthenticated cleartext TCP stream. An attacker who captures or sits on that stream exploits this two ways. The direct and reliable one is live session hijacking: reading the cleartext stream to learn the TCP sequence/ack state and injecting segments carrying commands the server executes as the authenticated user. The second is replay of captured exchanges where the server does not prevent it. Both execute commands without defeating authentication, by riding a session another party established, and a single injected command can plant durable trust.
+The r-commands authenticate during connection setup and then exchange application data over unencrypted TCP streams. An attacker who remains on path can observe the current TCP sequence, acknowledgement, and window state and attempt to inject data into a live connection. What that input means depends on the service: an `rlogin` session normally feeds an interactive shell, whereas an `rsh` or `rexec` primary stream feeds stdin to the command selected during setup. Injected text becomes a new shell command only when that active process interprets shell syntax. Forged bytes also advance one endpoint's sequence space, so continued control requires suppressing or rewriting competing traffic, translating sequence numbers, or accepting desynchronization. A saved packet capture cannot simply be replayed as a fresh authenticated connection because a new connection has different TCP state and must authenticate independently.
 
 ```bash
-# live hijack: on-path, read seq/ack from the cleartext stream, inject a command
-#   e.g. append trust so later access needs no interception
-#   echo "+ +" >> ~/.rhosts
+# live hijack: on-path, read seq/ack/window state and inject protocol-appropriate input
+# in rlogin or an existing interactive shell, that input may be a shell command;
+# in a fixed rsh/rexec command, it is only stdin for the already-running process
 # classic tools (Hunt, Juggernaut) automated rsh/rlogin TCP hijacking; modern
 # exploitation crafts the injection segments directly from the observed stream.
 ```
 
 ## Exploitation notes
 
-- Live hijacking is the practical form: inject one command (plant `.rhosts`, add a user, start a reverse shell) into the established session, running as the authenticated user, often administrative on legacy Unix.
-- A quiet single-command injection is preferred over a full takeover, which desynchronises and may alert the user.
-- It needs only an on-path position and the cleartext stream, no credential or trust; it is the active counterpart to [command interception](command-interception.md) and the same technique as [rlogin session hijacking](../rlogin/session-hijacking.md) and Telnet.
-- The shared cleartext, setup-only-authentication design across rsh/rlogin/rexec is the root cause enabling all interception and replay.
+- Live hijacking can supply input as the authenticated user, but command execution depends on the active process. Planting `.rhosts` directly requires an interactive shell or another command interpreter.
+- A single injection is not inherently quiet: unless subsequent traffic is adjusted or suppressed, forged bytes desynchronize the legitimate endpoint and can expose the attack.
+- It requires an active on-path position, visibility into the current stream state, and the ability to inject packets; a passive capture obtained after the connection closes is insufficient.
+- It is the active counterpart to [command interception](command-interception.md) and the same class of technique as [rlogin session hijacking](../rlogin/session-hijacking.md) and classic Telnet hijacking.
 
 ## References
 

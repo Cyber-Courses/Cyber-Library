@@ -1,30 +1,32 @@
 ---
-title: "Traffic interception: capturing and replaying cleartext r-commands"
+title: "Traffic interception: capturing and hijacking cleartext r-commands"
 order: 1
-description: "The r-commands encrypt nothing, so a positioned attacker captures the passwords rexec/rlogin send, every command and its output, and whole sessions. The cleartext, setup-only-authenticated streams can be hijacked to inject commands and replayed, giving credentials, data, and execution without defeating authentication."
+description: "The r-commands encrypt nothing, so a positioned attacker can capture rexec and rlogin passwords, commands, output, and interactive sessions. A live cleartext stream may also be hijacked through valid TCP injection; an old capture cannot simply be replayed as a new authenticated session."
 keywords:
   - traffic interception
   - cleartext
   - password sniffing
   - command capture
-  - session replay
+  - session hijacking
 ---
 
 # Traffic interception
 
-None of the r-commands encrypt their traffic, so an on-path attacker reads everything they carry: the cleartext passwords that rexec and password-fallback rlogin send, every command executed and its full output, and complete interactive sessions. Beyond passive capture, the streams are authenticated only at setup, so they can be hijacked to inject commands as the authenticated user, and captured sessions can be replayed. Interception is frequently the easiest attack on legacy r-command deployments because it needs no credential guessing or trust manipulation, only a position on the network.
+None of the r-commands encrypt their traffic, so an on-path attacker can read what they carry: the cleartext passwords sent by `rexec` and password-fallback `rlogin`, commands and output, and complete interactive sessions. Beyond passive capture, an attacker who remains on path may inject correctly sequenced data into a live TCP stream after authentication. A saved TCP exchange cannot simply be replayed as a new authenticated session because a new connection has different TCP state and must satisfy the service's authentication again.
 
 ```bash
-# capture across the r-command ports
-tcpdump -i eth0 -A 'port 512 or port 513 or port 514' -w rcmds.pcap
-tshark -r rcmds.pcap -q -z follow,tcp,ascii,0
+# capture all TCP traffic for the target so negotiated secondary streams are included
+tcpdump -i eth0 -w rcmds.pcap 'tcp and host <target>'
+# enumerate streams before following the relevant service and secondary connections
+tshark -r rcmds.pcap -q -z conv,tcp
+tshark -r rcmds.pcap -q -z follow,tcp,ascii,<stream-number>
 ```
 
 ## Subtopics
 
 - **[Password sniffing](password-sniffing.md)**: capturing credentials from the cleartext exchange.
 - **[Command interception](command-interception.md)**: reading commands and output in transit.
-- **[Session replay](session-replay.md)**: replaying captured r-command sessions.
+- **[Live session hijacking](session-replay.md)**: injecting correctly sequenced data into an established connection.
 
 ## References
 

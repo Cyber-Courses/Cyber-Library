@@ -30,7 +30,7 @@ Hacker-kulturen opstod i en æra, hvor adgangen til computerressourcer var begr�
 
 På trods af de mørkere elementer, der opstod, er samfundets bredere arv tydelig i dagens cybersikkerhedsområde. Bug bounties, open-source samarbejder og etiske hackingkonkurrencer trækker alle på hackerens ånd af udforskning. Mange sikkerhedsprofessionelle omfavner stadig disse værdier og udnytter kreativitet til at afdække sårbarheder og forbedre systembeskyttelser til gavn for alle.
 
-# Historie
+## Historie
 
 Cybersikkerhedens historie er sammenflettet med udviklingen af computerteknologi. Efterhånden som computere blev mere udbredte i erhvervslivet, regeringen og privatlivet, blev behovet for at beskytte data og systemer mod uautoriseret adgang mere presserende. Cybersikkerhedsområdet opstod som svar på disse udfordringer og trak på en mangfoldig række af discipliner, herunder datalogi, kryptografi og risikostyring.
 

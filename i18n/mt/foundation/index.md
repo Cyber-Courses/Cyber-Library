@@ -29,7 +29,7 @@ Il-kultura tal-hackers ħarġet fi żmien meta l-aċċess għal riżorsi tal-kom
 
 Minkejja l-elementi aktar skuri li ħarġu, il-wirt usa' tal-komunità huwa evidenti fid-dominju tas-sigurtà ċibernetika tal-lum. Premji għal bugs, kollaborazzjonijiet open-source, u kompetizzjonijiet ta' hacking etiku kollha jieħdu ispirazzjoni mill-ispirtu tal-hackers ta' esplorazzjoni. Ħafna professjonisti tas-sigurtà għadhom jħaddnu dawn il-valuri, jużaw il-kreattività biex jikxfu vulnerabbiltajiet u jtejbu l-protezzjonijiet tas-sistema għall-benefiċċju ta' kulħadd.
 
-# Storja
+## Storja
 
 L-istorja tas-sigurtà ċibernetika hija marbuta mal-evoluzzjoni tat-teknoloġija tal-kompjuter. Hekk kif il-kompjuters saru aktar prevalenti fin-negozju, fil-gvern, u fil-ħajja personali, il-ħtieġa li jiġu protetti d-dejta u s-sistemi minn aċċess mhux awtorizzat saret aktar urġenti. Il-qasam tas-sigurtà ċibernetika ħareġ bħala risposta għal dawn l-isfidi, billi ħa ispirazzjoni minn sett divers ta' dixxiplini, inklużi x-xjenza tal-kompjuter, il-kriptografija, u l-ġestjoni tar-riskju.
 

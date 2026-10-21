@@ -29,7 +29,7 @@ Hakkaramenning kom fram á tímum þegar aðgangur að tölvuauðlindum var takm
 
 Þrátt fyrir dekkri þætti sem komu fram, er breiðari arfleifð samfélagsins augljós í netöryggissviðinu í dag. Gallaumbætur, samvinna um opinn hugbúnað og siðferðileg hakkkeppni draga öll á hakkaraanda könnunar. Margir öryggissérfræðingar taka enn við þessum gildum, nýta sköpunargáfu til að finna veikleika og bæta kerfisvernd til hagsbóta fyrir alla.
 
-# Saga
+## Saga
 
 Saga netöryggis er samofin þróun tölvutækni. Eftir því sem tölvur urðu algengari í viðskiptum, stjórnvöldum og einkalífi, varð þörfin fyrir að vernda gögn og kerfi frá óviðkomandi aðgangi brýnni. Netöryggissviðið kom fram sem svar við þessum áskorunum, dró á fjölbreyttan hóp greina, þar á meðal tölvunarfræði, dulmálafræði og áhættustjórnun.
 

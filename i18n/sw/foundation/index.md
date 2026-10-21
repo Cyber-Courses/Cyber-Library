@@ -29,7 +29,7 @@ Utamaduni wa wahusika ulijitokeza katika enzi ambapo upatikanaji wa rasilimali z
 
 Licha ya vipengele vya giza vilivyojitokeza, urithi mpana wa jamii hii unaonekana katika uwanja wa usalama wa mtandao wa leo. Zawadi za bug, ushirikiano wa chanzo wazi, na mashindano ya udukuzi wa kimaadili yote yanachota roho ya utafiti ya wahusika. Wataalamu wengi wa usalama bado wanakumbatia maadili haya, wakitumia ubunifu kugundua udhaifu na kuboresha ulinzi wa mfumo kwa manufaa ya wote.
 
-# Historia
+## Historia
 
 Historia ya usalama wa mtandao inahusishwa na mabadiliko ya teknolojia ya kompyuta. Kadiri kompyuta zilivyokuwa za kawaida katika biashara, serikali, na maisha ya kibinafsi, hitaji la kulinda data na mifumo dhidi ya upatikanaji usioidhinishwa lilikuwa la dharura zaidi. Uwanja wa usalama wa mtandao ulijitokeza kujibu changamoto hizi, ukichota kutoka kwenye seti mbalimbali za taaluma, ikijumuisha sayansi ya kompyuta, kriptografia, na usimamizi wa hatari.
 

@@ -26,7 +26,7 @@ Cultura hackerilor a apărut într-o eră în care accesul la resursele de calcu
 
 În ciuda elementelor mai întunecate care au apărut, moștenirea mai largă a comunității este evidentă în domeniul securității cibernetice de astăzi. Programele de recompensare a bug-urilor, colaborările open-source și competițiile de hacking etic se bazează toate pe spiritul de explorare al hackerilor. Mulți profesioniști în securitate încă îmbrățișează aceste valori, folosind creativitatea pentru a descoperi vulnerabilități și a îmbunătăți protecțiile sistemelor în beneficiul tuturor.
 
-# Istorie
+## Istorie
 
 Istoria securității cibernetice este împletită cu evoluția tehnologiei de calcul. Pe măsură ce computerele au devenit mai răspândite în afaceri, guvern și viața personală, nevoia de a proteja datele și sistemele de accesul neautorizat a devenit mai urgentă. Domeniul securității cibernetice a apărut ca răspuns la aceste provocări, bazându-se pe un set divers de discipline, inclusiv știința calculatoarelor, criptografia și managementul riscurilor.
 

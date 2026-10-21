@@ -1,6 +1,6 @@
 ---
-title: "Certificate validation bypass: abusing certificate-based SSH trust"
-description: "Certificate-based SSH replaces per-host known_hosts pinning with a CA that signs host and user certificates. Weaknesses, a compromised or over-scoped CA key, missing principal and validity checks, accepting self-signed or wrong-CA certificates, let an attacker present a trusted host certificate for machine-in-the-middle or forge user certificates for authentication."
+title: "Certificate trust abuse: compromised and over-broad SSH CAs"
+description: "Certificate-based SSH can replace per-host known_hosts pinning with a host CA and authorize users through a user CA. Compromise or over-broad trust of a signing key lets an attacker forge certificates only in the roles and scopes where that CA is trusted."
 keywords:
   - ssh certificate
   - ca key
@@ -9,14 +9,14 @@ keywords:
   - trust
 ---
 
-# Certificate validation bypass
+# Certificate trust abuse
 
-Larger SSH deployments replace per-host `known_hosts` management with certificates: a certificate authority signs host certificates (so clients trust any host whose key the CA signed) and user certificates (so servers accept any user whose key the CA signed, within stated principals and validity). This scales trust but concentrates it in the CA, and weaknesses in the model or its validation are the attack surface. A compromised or over-scoped CA signing key lets an attacker mint trusted host certificates (for MITM) or user certificates (for authentication); and clients or servers that fail to check principals, validity windows, or the correct CA accept certificates they should reject.
+Larger SSH deployments can use certificates in two distinct trust roles. Clients trust configured host CAs to authenticate servers, while servers trust configured user CAs—such as those listed by `TrustedUserCAKeys`—to authenticate users within the permitted principals and validity period. This scales trust but concentrates risk in each CA. A compromised or over-broad host CA can enable host impersonation where clients trust it; a compromised or over-broad user CA can enable authentication where servers trust it. One signing key enables both attacks only when its public key has deliberately been trusted in both roles.
 
 ```bash
 # inspect a certificate's scope and validity
 ssh-keygen -L -f id_ed25519-cert.pub           # principals, validity, CA, options
-# with a compromised CA signing key, mint a host cert for MITM or a user cert for auth
+# with the relevant compromised CA key, mint a cert for the role where that CA is trusted
 ssh-keygen -s ca_key -I attacker -h -n <target-hostname> host_key.pub          # host cert
 ssh-keygen -s ca_key -I attacker -n root -V +1d user_key.pub                   # user cert as root
 ssh -i user_key -o CertificateFile=user_key-cert.pub root@<target>
@@ -24,9 +24,9 @@ ssh -i user_key -o CertificateFile=user_key-cert.pub root@<target>
 
 ## Exploitation notes
 
-- The CA signing key is the crown jewel: possession lets you forge both host certificates (present a trusted key for [SSH MITM](ssh-mitm.md)) and user certificates (authenticate as any principal the server accepts), so hunt for the CA key as you would any high-value private key.
-- Validation gaps enable attacks without the CA key: a server not enforcing the `principals` list, ignoring the validity window, or trusting the wrong CA accepts certificates it should not; test with a certificate that is out of principal or expired.
-- User certificates forged for a privileged principal (`root`, an admin account) are direct authentication, bounded only by what the server's `TrustedUserCAKeys`/principals allow.
+- CA signing keys are high-value secrets, but their impact follows their configured role: a host CA trusted by clients can sign host certificates for [SSH MITM](ssh-mitm.md), and a user CA trusted by servers can sign user certificates for authentication.
+- Over-broad CA distribution or principal policy expands that impact. Assess which clients trust each host CA and which servers trust each user CA instead of assuming a signing key is accepted everywhere or for both certificate types.
+- A user certificate for a privileged principal (`root`, an admin account) succeeds only when the target server trusts its signing CA and the principal satisfies the effective `TrustedUserCAKeys`, `AuthorizedPrincipalsFile`, or authorized-key policy.
 - `ssh-keygen -L` reveals a certificate's principals, validity, and options, the facts that determine whether a given certificate is accepted where.
 
 ## References

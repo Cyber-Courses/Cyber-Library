@@ -26,7 +26,7 @@ La cultura hacker surgió en una era cuando el acceso a los recursos informátic
 
 A pesar de los elementos más oscuros que surgieron, el legado más amplio de la comunidad es evidente en el dominio de la ciberseguridad actual. Las recompensas por errores, las colaboraciones de código abierto y las competiciones de hacking ético se basan en el espíritu explorador del hacker. Muchos profesionales de la seguridad aún abrazan estos valores, aprovechando la creatividad para descubrir vulnerabilidades y mejorar las protecciones del sistema en beneficio de todos.
 
-# Historia
+## Historia
 
 La historia de la ciberseguridad está entrelazada con la evolución de la tecnología informática. A medida que las computadoras se volvieron más comunes en los negocios, el gobierno y la vida personal, la necesidad de proteger los datos y sistemas del acceso no autorizado se volvió más urgente. El campo de la ciberseguridad surgió en respuesta a estos desafíos, basándose en un conjunto diverso de disciplinas, incluyendo la informática, la criptografía y la gestión de riesgos.
 

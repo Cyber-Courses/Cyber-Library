@@ -30,7 +30,7 @@ Hackerská kultura vznikla v době, kdy byl přístup k výpočetním zdrojům o
 
 Navzdory temnějším prvkům, které se objevily, je širší odkaz komunity patrný v dnešní oblasti kybernetické bezpečnosti. Bug bounty, open-source spolupráce a soutěže v etickém hackování čerpají z hackerského ducha objevování. Mnoho bezpečnostních profesionálů stále přijímá tyto hodnoty, využívá kreativitu k odhalování zranitelností a zlepšování ochrany systémů pro dobro všech.
 
-# Historie
+## Historie
 
 Historie kybernetické bezpečnosti je propojena s vývojem výpočetní technologie. Jak se počítače staly běžnějšími v podnikání, vládě a osobním životě, potřeba chránit data a systémy před neoprávněným přístupem se stala naléhavější. Oblast kybernetické bezpečnosti vznikla jako reakce na tyto výzvy, čerpající z různorodé sady disciplín, včetně informatiky, kryptografie a řízení rizik.
 

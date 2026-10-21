@@ -1,7 +1,7 @@
 ---
 title: "BMC default credentials: shipped admin logins on management controllers"
 order: 3
-description: "Baseboard management controllers ship with well-known default credentials, ADMIN/ADMIN on many Supermicro boards, root/calvin on Dell iDRAC, and vendor equivalents, that are rarely changed because the BMC is on a separate management network. These defaults grant full administrative control of the host's power, console, and virtual media."
+description: "Some baseboard management controllers and legacy configurations use well-known default credentials, while newer products commonly ship with unique per-device passwords. An unchanged administrative default can grant control of host power, console, and virtual media."
 keywords:
   - bmc default credentials
   - idrac root calvin
@@ -12,23 +12,23 @@ keywords:
 
 # BMC default credentials
 
-BMCs ship with fixed default credentials, and they are changed far less often than OS or application passwords because the management controller lives on a separate network administrators consider private and forget about. The defaults are well known per vendor: `root`/`calvin` on Dell iDRAC, `ADMIN`/`ADMIN` on many Supermicro boards, `Administrator` with a per-device password on HPE iLO (sometimes printed on a pull-tab and left unchanged), and others. Trying these grants full administrative control of the controller, and therefore of the host's power, physical console, and virtual media, so a reachable BMC with default credentials is a complete server compromise.
+Older BMCs and legacy factory configurations often use fixed default credentials, and those credentials may persist because the management controller is treated as isolated infrastructure. Defaults vary by vendor, product generation, and ordering option. Dell's legacy iDRAC configuration uses `root`/`calvin`, but current PowerEdge systems normally ship with a unique generated password unless the legacy option was selected. Other vendors likewise use either model-specific fixed defaults or per-device credentials printed on a label. Successful authentication with an unchanged administrative default can grant control of host power, physical console, and virtual media.
 
 ```bash
-# identify the BMC vendor, then try its documented defaults over IPMI and the web UI
-ipmitool -I lanplus -H <bmc> -U root -P calvin user list          # Dell iDRAC default
+# identify the vendor and generation, then test its documented default policy
+ipmitool -I lanplus -H <bmc> -U root -P calvin user list          # legacy-configured Dell iDRAC
 ipmitool -I lanplus -H <bmc> -U ADMIN -P ADMIN user list          # common Supermicro default
 curl -sk https://<bmc>/ | grep -iE 'idrac|ilo|supermicro'         # fingerprint for the web UI
 ```
 
 ## Exploitation notes
 
-- Fingerprint the vendor first (web UI, IPMI device ID), then try that vendor's documented defaults; `root`/`calvin` (Dell), `ADMIN`/`ADMIN` (Supermicro) are the highest-yield.
+- Fingerprint the vendor and generation first, then consult that product's documented factory policy. Treat `root`/`calvin` as a Dell legacy option rather than a universal current default.
 - The BMC being on a "private" management network is why defaults persist; once you reach that network (a flat segment, a jump host, a VLAN hop), defaults are the easiest path.
 - Default admin access yields power control, KVM console, and virtual media, enough to boot an attacker image and own the OS, see [iDRAC and iLO](idrac-and-ilo.md).
 - Combine with [RAKP hash disclosure](ipmi-rakp-hash-disclosure.md) (which often recovers exactly these default passwords) and [cipher 0](ipmi-cipher-0-bypass.md) where defaults were changed.
 
 ## References
 
-- [Dell iDRAC default credentials](https://www.dell.com/support/)
+- [Dell iDRAC default username and password guidance](https://www.dell.com/support/kbdoc/en-us/000133536/dell-poweredge-what-is-the-default-username-and-password-for-idrac)
 - [HackTricks: IPMI/BMC](https://book.hacktricks.xyz/network-services-pentesting/623-udp-ipmi)

@@ -11,7 +11,7 @@ keywords:
 
 # Weak TLS and certificate validation
 
-FTPS's security is only as good as its TLS, and several common weaknesses undo it for an attacker with a network position. A server offering obsolete TLS versions or weak ciphers can be forced into a breakable session. A client that does not verify the server certificate accepts an attacker's certificate, enabling a straightforward man-in-the-middle. And explicit FTPS that permits a plaintext fallback (or whose `AUTH TLS` can be stripped) lets a downgrade attack return the session to cleartext. Any of these recovers the credentials and file data that FTPS is supposed to encrypt.
+FTPS's security is only as good as its TLS and the policies enforced by both endpoints. Obsolete TLS versions and weak ciphers expand the attack surface, but server support alone does not mean an attacker can force or decrypt a session. A client that does not verify the server certificate can accept an attacker's certificate, enabling a man-in-the-middle from a suitable network position. Explicit FTPS begins in cleartext; suppressing or rejecting `AUTH TLS` causes exposure only when the client tolerates continuing without TLS. These are distinct findings with different prerequisites and impact.
 
 ```bash
 # assess the server's TLS posture
@@ -27,10 +27,11 @@ openssl s_client -connect <target>:990 | openssl x509 -noout -issuer -subject
 
 - The attack needs a network position (on-path or via name-resolution poisoning); from there, a client that skips certificate validation is trivially intercepted with an attacker-presented certificate.
 - Explicit FTPS (`AUTH TLS` on 21) is the more interceptable variant because the session begins in cleartext; stripping or denying the TLS upgrade keeps it plaintext if the client tolerates it.
-- Weak-cipher or obsolete-protocol acceptance enables decrypting an otherwise-TLS session; `ssl-enum-ciphers` grades what the server allows.
+- Weak-cipher or obsolete-protocol acceptance is a configuration finding; `ssl-enum-ciphers` grades what the server allows, but practical decryption depends on the negotiated suite and the requirements of its known attacks.
 - The payoff is the same as plain FTP interception, captured credentials (often reusable system accounts) and file contents; the FTP-level issues (anonymous, brute force) remain regardless of TLS.
 
 ## References
 
 - [RFC 4217: securing FTP with TLS](https://datatracker.ietf.org/doc/html/rfc4217)
+- [RFC 8996: deprecating TLS 1.0 and TLS 1.1](https://www.rfc-editor.org/rfc/rfc8996.html)
 - [nmap ssl-enum-ciphers](https://nmap.org/nsedoc/scripts/ssl-enum-ciphers.html)

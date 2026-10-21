@@ -27,7 +27,7 @@ De hackercultuur ontstond in een tijdperk waarin toegang tot computerbronnen bep
 
 Ondanks de donkere elementen die naar voren kwamen, is de bredere erfenis van de gemeenschap duidelijk zichtbaar in het huidige cyberbeveiligingsdomein. Bug bounties, open-source samenwerkingen en ethische hackwedstrijden putten allemaal uit de hackergeest van verkenning. Veel beveiligingsprofessionals omarmen nog steeds deze waarden en benutten creativiteit om kwetsbaarheden te ontdekken en systeembeveiligingen te verbeteren ten behoeve van iedereen.
 
-# Geschiedenis
+## Geschiedenis
 
 De geschiedenis van cyberbeveiliging is verweven met de evolutie van computertoepassingen. Naarmate computers meer aanwezig werden in het bedrijfsleven, de overheid en het persoonlijke leven, werd de noodzaak om gegevens en systemen te beschermen tegen ongeautoriseerde toegang steeds dringender. Het vakgebied van cyberbeveiliging ontstond als reactie op deze uitdagingen en putte uit een diverse reeks disciplines, waaronder informatica, cryptografie en risicomanagement.
 
