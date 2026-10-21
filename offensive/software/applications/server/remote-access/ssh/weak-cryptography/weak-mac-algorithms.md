@@ -1,7 +1,7 @@
 ---
-title: "Weak MAC algorithms: broken SSH integrity protection"
+title: "Weak SSH MAC algorithms: legacy integrity protection"
 order: 2
-description: "SSH protects each packet with a message authentication code, and servers that offer weak MACs, MD5-based, 96-bit truncated, or non-encrypt-then-MAC modes, weaken the integrity guarantee. A positioned attacker exploits weak or truncated MACs to tamper with or forge packets, undermining the protection that prevents session manipulation."
+description: "Identifying legacy SSH MAC algorithms, understanding what their negotiation does and does not prove, and distinguishing cryptographic deprecation from a practical session attack."
 keywords:
   - weak mac
   - hmac-md5
@@ -12,7 +12,9 @@ keywords:
 
 # Weak MAC algorithms
 
-SSH appends a message authentication code (MAC) to every packet so tampering is detected. The strength of that guarantee depends on the negotiated MAC, and old servers offer weak ones: MD5-based MACs (`hmac-md5`), 96-bit truncated MACs (`hmac-*-96`), and MACs used in the weaker encrypt-and-MAC (rather than encrypt-then-MAC, `*-etm`) construction. Weak or truncated MACs reduce the work to forge or tamper with packets, so a positioned attacker uses them to manipulate the session, undermining the integrity protection that otherwise blocks injection and modification attacks.
+SSH appends a message authentication code (MAC) to each protected packet so tampering is detected. Old servers may still offer MD5-based MACs (`hmac-md5`), 96-bit truncated MACs (`hmac-*-96`), or the original encrypt-and-MAC construction instead of encrypt-then-MAC (`*-etm`). These choices are legacy, but negotiation alone is not proof that an attacker can forge packets or manipulate a session.
+
+A valid 96-bit tag still requires an infeasible online guessing effort in the absence of a separate weakness, and collision attacks against bare MD5 do not directly become HMAC forgeries. The practical finding is obsolete cryptographic configuration, reduced security margin, and exposure to protocol or implementation attacks that may depend on the original MAC construction. A session-compromise claim needs a named attack with matching cipher, MAC, implementation, and network-position preconditions.
 
 ```bash
 # which MACs are offered?
@@ -24,10 +26,10 @@ ssh -o MACs=hmac-sha1-96 user@<target>        # 96-bit truncated
 
 ## Exploitation notes
 
-- The offered `mac_algorithms` list flags the weakness: `hmac-md5*`, any `*-96` truncation, and the absence of `-etm` (encrypt-then-MAC) variants indicate weaker integrity.
-- Truncated and MD5 MACs lower the effort to forge a valid tag for tampered ciphertext; combined with a weak CBC cipher and an on-path position, this enables session manipulation rather than only passive observation.
-- Like the cipher and KEX weaknesses, weak MACs mainly matter to an attacker who can capture or relay the traffic; they also fingerprint an outdated SSH build.
-- These three weak-crypto pages compound: a server offering weak MACs, CBC ciphers, and small KEX groups is a candidate for cryptographic session attacks and for SSH machine-in-the-middle, see [SSH MITM](../mitm-and-trust/ssh-mitm.md).
+- Treat `hmac-md5*`, `hmac-*-96`, and a lack of `*-etm` options as legacy-configuration evidence, not automatic exploitation evidence.
+- Confirm which MAC the client and server actually negotiate. An offered legacy algorithm is lower severity when both peers select a modern alternative.
+- Record the cipher, key exchange, implementation, and version before assessing impact. Some attacks depend on a particular combination rather than the MAC in isolation.
+- An on-path attacker still has to defeat SSH host authentication or exploit a separate protocol or implementation flaw. Merely relaying traffic does not reveal the session keys or permit a valid MAC forgery.
 
 ## References
 

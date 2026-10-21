@@ -1,7 +1,7 @@
 ---
 title: "rexec: attacking the remote execution service"
 order: 3
-description: "rexec (rexecd on TCP 512) executes a command on a remote host, authenticating with a username and password sent in cleartext, and can also honour host trust. Attacks are capturing the cleartext credential, abusing trusted-host relationships for passwordless execution, and command injection where the executed command is built unsafely."
+description: "rexec (rexecd on TCP 512) executes a command on a remote host using a username and password sent in cleartext. Attacks include capturing those credentials and abusing unsafe command construction; .rhosts and hosts.equiv belong to rsh/rlogin, not rexec authentication."
 keywords:
   - rexec
   - rexecd
@@ -12,18 +12,19 @@ keywords:
 
 # rexec
 
-`rexec` executes a command on a remote host via `rexecd` on TCP 512. Unlike rsh, it was designed around a username/password, sent in cleartext, and some implementations also honour the host-based trust files. The attacks follow from those two facts. The cleartext credential is captured by a positioned attacker. Trusted-host relationships, where honoured, give passwordless command execution just as with rsh. And where the server or a wrapper builds the executed command from attacker-influenced input unsafely, command injection extends what runs. A successful rexec runs a command as the authenticated user.
+`rexec` executes a command on a remote host via `rexecd` on TCP 512. It authenticates with a username and password sent in cleartext, so a positioned attacker can capture reusable credentials. Where a server or wrapper constructs the executed command unsafely from attacker-influenced input, command injection can extend what runs. A successful request executes as the authenticated user. Unlike `rsh` and `rlogin`, `rexec` does not authenticate through `~/.rhosts` or `/etc/hosts.equiv`.
 
 ```bash
-# run a command with credentials (sent in cleartext)
-rexec -l <user> -p <password> <target> id
+# run a command and let the client obtain credentials interactively or from its configured source
+# the password is still sent unencrypted; passing it with -p may also expose it in the local process list
+rexec -l <user> <target> id
 nmap -p512 -sV <target>
 ```
 
 ## Subtopics
 
 - **[Cleartext passwords](cleartext-passwords.md)**: capturing the rexec credential.
-- **[Trusted host bypass](trusted-host-bypass.md)**: passwordless execution via host trust.
+- **[Trusted-host distinction](trusted-host-bypass.md)**: why rsh/rlogin host trust is a separate service path, not a rexec bypass.
 - **[Command injection](command-injection.md)**: abusing unsafe command construction.
 
 ## References

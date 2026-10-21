@@ -1,7 +1,7 @@
 ---
 title: "Shell protocols: attacking the Berkeley r-commands"
 order: 4
-description: "The Berkeley r-commands, rsh (514), rlogin (513), and rexec (512), provide remote shell, login, and command execution with no encryption and a host-based trust model. Their weaknesses are the .rhosts and hosts.equiv trust that authenticates by source address (spoofable), cleartext credentials and sessions, and command execution through trusted-host relationships."
+description: "The Berkeley r-commands, rsh (514), rlogin (513), and rexec (512), provide legacy remote shell, login, and command execution without encryption. rsh and rlogin can use spoofable host trust, while rexec sends a username and password in cleartext."
 keywords:
   - r-commands
   - rsh
@@ -12,7 +12,7 @@ keywords:
 
 # Shell protocols
 
-The Berkeley r-commands are a family of legacy Unix remote-access services: `rsh` (remote shell, TCP 514), `rlogin` (remote login, TCP 513), and `rexec` (remote execution, TCP 512). They predate SSH and share two fatal weaknesses. First, no encryption: credentials, commands, and sessions travel in cleartext. Second, a host-based trust model, `.rhosts` and `/etc/hosts.equiv` files that grant passwordless access based on the client's source IP and username, which is authentication by spoofable network identity. The attack surface is therefore trust abuse (forging or planting trust to get passwordless shells), cleartext interception, and the per-command execution paths.
+The Berkeley r-commands are a family of legacy Unix remote-access services: `rsh` (remote shell, TCP 514), `rlogin` (remote login, TCP 513), and `rexec` (remote execution, TCP 512). They predate SSH and provide no transport encryption, so credentials, commands, output, and interactive sessions exposed by each protocol travel in cleartext. Their authentication models differ: `rsh` and `rlogin` can use `~/.rhosts` and `/etc/hosts.equiv` to grant passwordless access based on the client's host and username, whereas `rexec` sends a username and password with the request. The attack surface therefore includes host-trust abuse against `rsh` and `rlogin`, traffic interception across all three services, and service-specific execution paths.
 
 ```bash
 nmap -p512,513,514 -sV <target>                # rexec, rlogin, rsh
@@ -24,8 +24,8 @@ nmap -p512,513,514 -sV <target>                # rexec, rlogin, rsh
 - **[rsh](rsh/index.md)**: remote shell on 514 and its trust abuse.
 - **[rlogin](rlogin/index.md)**: remote login on 513.
 - **[rexec](rexec/index.md)**: remote execution on 512.
-- **[Trust abuse](trust-abuse/index.md)**: .rhosts and hosts.equiv exploitation across the r-commands.
-- **[Traffic interception](traffic-interception/index.md)**: cleartext capture and replay.
+- **[Trust abuse](trust-abuse/index.md)**: `.rhosts` and `hosts.equiv` exploitation against rsh and rlogin.
+- **[Traffic interception](traffic-interception/index.md)**: cleartext capture and live-session hijacking.
 
 ## References
 

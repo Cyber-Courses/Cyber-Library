@@ -1,6 +1,6 @@
 ---
 title: "Command interception: reading Telnet commands and output in transit"
-description: "Beyond the login, a Telnet session's entire contents, the commands the user runs and the server's output, cross the network in cleartext. A positioned attacker reconstructs the full session from the traffic, capturing configuration, secondary credentials entered during the session, command results, and sensitive data the user views."
+description: "When Telnet encryption is not active, commands and server output cross the network in plaintext. A positioned attacker can reconstruct that stream and recover configuration, command results, and secrets entered during the session."
 keywords:
   - command interception
   - session capture
@@ -11,11 +11,11 @@ keywords:
 
 # Command interception
 
-Password sniffing captures the login; command interception captures everything after it. Since the whole Telnet session is cleartext, an attacker on the path reconstructs the complete interaction: every command the user runs, the server's full output, any secondary credentials typed during the session (an `enable` password on a router, a `su`/`sudo` password, credentials for another system), and all data the user views. This often yields more than the login itself, because operators run privileged commands and enter further secrets inside the session.
+When the Telnet stream remains plaintext, command interception exposes the interaction after login: commands, server output, secondary credentials typed during the session, and data viewed by the operator. A positioned attacker can reconstruct both directions of the TCP stream. If Telnet encryption or another protective transport is active, the capture does not reveal this application data directly.
 
 ```bash
 # capture and reconstruct the full session
-tcpdump -i eth0 -A port 23 -w telnet.pcap
+tcpdump -i eth0 -w telnet.pcap port 23
 # Wireshark Follow TCP Stream shows the entire session (commands + output)
 tshark -r telnet.pcap -q -z follow,tcp,ascii,0
 ```

@@ -1,7 +1,7 @@
 ---
-title: "Key exchange downgrade: forcing weak SSH key-exchange"
+title: "Legacy SSH key exchange negotiation"
 order: 1
-description: "SSH key exchange establishes the session keys, and a server offering weak methods, small Diffie-Hellman groups (group1/1024-bit), or legacy exchanges, can be negotiated down to them. A positioned attacker who can influence the negotiation or who records the handshake targets these weaker exchanges to attack the resulting session keys."
+description: "Identifying SSH servers that accept legacy key exchanges, distinguishing client-selected negotiation from an active downgrade, and scoping the risk of small Diffie-Hellman groups."
 keywords:
   - key exchange
   - diffie-hellman
@@ -10,26 +10,29 @@ keywords:
   - kex
 ---
 
-# Key exchange downgrade
+# Legacy key exchange
 
-The SSH key exchange (KEX) derives the symmetric session keys and authenticates the server's host key. Its strength depends on the method negotiated: modern curve-based exchanges are strong, but servers that still offer `diffie-hellman-group1-sha1` (a fixed 1024-bit group) or other legacy KEX present a weaker target. Because both sides pick from offered lists, a server advertising weak groups can end up using them, and a positioned attacker who influences the negotiated algorithm set, or who simply records a handshake that used a weak group, attacks the key agreement to recover or weaken the session keys.
+The SSH key exchange (KEX) derives the symmetric session keys and authenticates the server's host key. Servers may still accept `diffie-hellman-group1-sha1` (a fixed 1024-bit group), SHA-1-based exchanges, or undersized group-exchange parameters for compatibility with old clients. A session is exposed to those weaknesses only when the client actually negotiates the legacy method.
+
+SSH protects the negotiation against a transparent on-path downgrade. The server signs an exchange hash that includes both peers' complete `SSH_MSG_KEXINIT` payloads, so removing stronger algorithms from either list invalidates host authentication. An active attacker cannot simply rewrite the lists and force a weak KEX unless host-key verification is bypassed or a separate implementation flaw breaks that binding.
 
 ```bash
 # which KEX methods does the server offer?
 nmap -p22 --script ssh2-enum-algos <target> | grep -A15 kex_algorithms
-# force a weak KEX to confirm the server accepts it
+# request a legacy KEX to confirm the server accepts it
 ssh -o KexAlgorithms=diffie-hellman-group1-sha1 user@<target>
 ssh -o KexAlgorithms=diffie-hellman-group-exchange-sha1 user@<target>
 ```
 
 ## Exploitation notes
 
-- The signal is the server's offered `kex_algorithms`: presence of `group1` (1024-bit), SHA-1-based exchanges, or the GEX with small group sizes marks a weak negotiation that can be forced.
-- A 1024-bit fixed group is within reach of well-resourced precomputation attacks against the shared parameters; the practical impact is enabling decryption of a captured session that used it.
-- This pairs with a capture or on-path position: forcing or observing a weak KEX is the groundwork for attacking the session, rather than a standalone break.
-- The broader weakness set (ciphers, MACs) compounds this; a server offering weak KEX usually offers weak ciphers and MACs too.
+- Enumerating `kex_algorithms` identifies legacy support. It does not show which method normal clients negotiate.
+- Forcing `KexAlgorithms` in your own client confirms server acceptance and creates a controlled legacy session; it does not reproduce an unauthenticated network downgrade.
+- A captured session is only a candidate for a group attack when it actually used the weak method. Assess the exact group, implementation, and attack cost before claiming recoverable session keys.
+- A successful active downgrade additionally requires failed host-key verification or a separate protocol or implementation vulnerability.
 
 ## References
 
 - [RFC 4253: key exchange](https://datatracker.ietf.org/doc/html/rfc4253)
+- [RFC 9142: SSH key exchange recommendations](https://datatracker.ietf.org/doc/html/rfc9142)
 - [Logjam and weak DH groups](https://weakdh.org/)

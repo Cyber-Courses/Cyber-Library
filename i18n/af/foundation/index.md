@@ -27,7 +27,7 @@ Hacker-kultuur het ontstaan in 'n era toe toegang tot rekenaarhulpbronne beperk 
 
 Ten spyte van die donkerder elemente wat na vore gekom het, is die gemeenskap se breër nalatenskap duidelik in vandag se kuberveiligheidsdomein. Foutbelonings, oopbron-samewerkings en etiese hacking-kompetisies trek almal op die hacker-gees van verkenning. Baie sekuriteitsprofessionals omarm steeds hierdie waardes en gebruik kreatiwiteit om kwesbaarhede op te spoor en stelselbeskerming te verbeter tot voordeel van almal.
 
-# Geskiedenis
+## Geskiedenis
 
 Die geskiedenis van kuberveiligheid is verweef met die evolusie van rekenaartegnologie. Soos rekenaars meer algemeen in besigheid, regering en persoonlike lewe geword het, het die behoefte om data en stelsels teen ongemagtigde toegang te beskerm dringender geword. Die veld van kuberveiligheid het ontstaan in reaksie op hierdie uitdagings, en het geput uit 'n diverse stel dissiplines, insluitend rekenaarwetenskap, kriptografie en risikobestuur.
 

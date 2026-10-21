@@ -14,10 +14,8 @@ keywords:
 RDP's transport security varies, and the weak configurations enable machine-in-the-middle. Legacy "native RDP security" uses RC4 with a design weakness that allowed a classic RDP MITM (the server's public key is not authenticated, so an attacker interposes). The modern option is TLS, but it is frequently weakened: default self-signed certificates that clients are trained to accept, obsolete protocol versions, and weak cipher suites. Either way, a positioned attacker who exploits native-security's lack of server authentication, or a client that does not verify the TLS certificate, interposes to capture credentials and the session.
 
 ```bash
-# determine the security layer and TLS posture
+# determine which RDP security layers and encryption levels the server accepts
 nmap -p3389 --script rdp-enum-encryption <target>      # native RDP security vs TLS/CredSSP
-nmap -p3389 --script ssl-enum-ciphers <target>         # weak ciphers/protocols if TLS
-openssl s_client -connect <target>:3389 -starttls rdp 2>/dev/null | openssl x509 -noout -issuer -subject
 # with an on-path position, run an RDP MITM that presents a substitute cert/key
 #   (tools like Seth automate RDP downgrade + MITM against native security / unverified TLS)
 ```

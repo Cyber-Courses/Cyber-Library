@@ -14,8 +14,9 @@ keywords:
 DejaBlue is the collective label for a group of RDP vulnerabilities disclosed after BlueKeep that extended the pre-authentication, wormable RCE risk to newer Windows versions (the Windows 8/10 and Server 2012/2016/2019 range), which BlueKeep did not affect. They sit in the RDP protocol handling and, like BlueKeep, are reachable before authentication on hosts where Network Level Authentication is not enforced, so an unauthenticated attacker against an in-range, unpatched, NLA-off host gains code execution. The set closed the gap that left modern Windows exposed to the same class of attack.
 
 ```bash
-# identify exposure: affected newer build + NLA off
-nmap -p3389 --script rdp-ntlm-info,rdp-enum-encryption <target>   # build + NLA status
+# collect build information when CredSSP responds and enumerate accepted security layers
+nmap -p3389 --script rdp-ntlm-info,rdp-enum-encryption <target>
+# CredSSP support alone does not establish that NLA is required
 # exploitation matches the specific DejaBlue variant and build; the preconditions
 # (unpatched in-range build, NLA not required) are the same as BlueKeep.
 ```

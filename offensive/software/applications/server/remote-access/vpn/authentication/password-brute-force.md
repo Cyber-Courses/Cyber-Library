@@ -27,7 +27,7 @@ hydra -L users.txt -p 'Spring2025!' <target> https-post-form \
 - Spray one password across validated users to stay under lockout, and stuff breached/infostealer pairs separately; VPN portals are a top stuffing target because they accept reused corporate credentials.
 - Derive usernames and the password policy from other enumeration (the directory, OSINT, portal error differences); match the username format the portal expects (UPN, `DOMAIN\user`, or bare).
 - The login endpoint and failure signal are product-specific (FortiGate `/remote/logincheck`, others differ); fingerprint the appliance first, see [banner grabbing](../enumeration/banner-grabbing.md).
-- A valid credential without MFA is a full tunnel; where MFA is enforced, note auth paths that may skip it (legacy IKE XAUTH, specific portals) and the [appliance exploits](../ssl-vpn-appliances/index.md) that bypass auth entirely.
+- A valid password establishes one accepted factor. Confirm MFA, device-posture, group, and route policy before reporting tunnel access; assess legacy paths and [appliance exploits](../ssl-vpn-appliances/index.md) separately.
 
 ## Tools
 

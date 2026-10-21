@@ -1,7 +1,7 @@
 ---
-title: "Command injection: abusing unsafe rexec command construction"
+title: "Unsafe wrapper construction: command injection through rexec integrations"
 order: 1
-description: "rexec executes a command string on the server, and where that string is built from attacker-influenced input by a wrapper, script, or application that calls rexec unsafely, shell metacharacters inject additional commands. This extends a single intended command into arbitrary execution as the account running it."
+description: "Command injection is not a rexec protocol flaw. It can occur when a wrapper builds a rexec command from attacker-controlled input and invokes a shell, allowing metacharacters to alter either the local invocation or the remote command string."
 keywords:
   - command injection
   - rexec
@@ -10,25 +10,27 @@ keywords:
   - rce
 ---
 
-# Command injection
+# Unsafe wrapper construction
 
-rexec runs a command string on the target, and command injection arises not in the protocol itself but wherever something builds that string from attacker-influenced input without sanitisation. Management scripts, web front-ends, and applications that shell out to rexec (or to the server-side command) by concatenating user input are the vulnerable layer: injecting shell metacharacters (`;`, `|`, `` ` ``, `$()`) into a parameter that lands in the executed command appends attacker commands, which run as the account executing them. This turns one intended operation into arbitrary command execution.
+`rexec` is designed to execute the authenticated user's supplied command, so arbitrary remote command execution with valid credentials is expected behavior rather than command injection. A separate injection vulnerability can arise when a wrapper, web front-end, or management script concatenates attacker-controlled input into a shell command that invokes `rexec`. Depending on where quoting fails, metacharacters may execute locally in the wrapper's context or become part of the remote command string.
 
 ```bash
-# where an app/script passes user input into a rexec'd command unsafely:
-#   intended:  rexec ... host "report <USERINPUT>"
-#   injected:  USERINPUT = "x; id; cat /etc/passwd"
-rexec -l user -p pass <target> 'report x; id; cat /etc/passwd'
-# or server-side, where rexecd runs a command that itself concatenates attacker data
-#   supply metacharacters in the field that reaches the shell
+# vulnerable wrapper pattern: attacker-controlled $report_name is concatenated
+# into a command interpreted by a shell
+run_report() {
+  report_name=$1
+  sh -c "rexec -l report -p \"$REXEC_PASSWORD\" server 'report $report_name'"
+}
+# input such as: daily'; id; #
+# can terminate the quoted argument and add a local command in the wrapper's context
 ```
 
 ## Exploitation notes
 
-- The flaw is in the caller, not rexecd: look for scripts, cron jobs, or applications that construct a rexec (or server-side) command from parameters you control, and inject shell metacharacters into those parameters.
+- The flaw is in the caller, not `rexecd`: first establish that attacker input reaches a shell-interpreted wrapper without correct argument separation or escaping.
 - Injected commands run as whatever account performs the execution, which for automated management tooling is often privileged.
 - This is the same injection class as any unsafe shell-command construction; rexec is simply the sink. Confirm whether a shell interprets the string (metacharacters only help if a shell parses them).
-- Combine with [cleartext capture](cleartext-passwords.md) (to get the credential the wrapper uses) or [trust](trusted-host-bypass.md) to reach the injectable path.
+- [Cleartext capture](cleartext-passwords.md) may expose credentials used by the wrapper, but possessing valid credentials and choosing a remote command is normal `rexec` use, not proof of injection.
 
 ## References
 

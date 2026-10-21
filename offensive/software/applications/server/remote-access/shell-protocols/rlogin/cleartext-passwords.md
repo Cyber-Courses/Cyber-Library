@@ -1,7 +1,7 @@
 ---
 title: "Cleartext passwords: capturing the rlogin login"
 order: 1
-description: "When host trust does not apply, rlogin falls back to a password prompt sent in cleartext. A positioned attacker captures the username and password directly from the traffic, and the entire interactive session along with it, yielding a reusable credential with no guessing and nothing logged as a failed attempt."
+description: "When automatic host-trust authentication fails, rlogind may invoke a login flow over its unencrypted terminal stream. If that flow requests a password, a positioned attacker can capture the credential and the interactive session directly from the traffic."
 keywords:
   - cleartext password
   - rlogin
@@ -12,11 +12,11 @@ keywords:
 
 # Cleartext passwords
 
-If the host-trust check does not grant access, `rlogin` prompts for a password, and like everything in the r-commands that password crosses the network unencrypted. An attacker on the path captures the username and password straight from the stream, plus the full interactive session that follows. This gives a reusable credential with none of the noise of brute force, no failed-login records, no lockout, and the captured account is typically reused across the legacy environment where r-commands persist.
+If automatic host-trust authentication fails, traditional `rlogind` invokes the configured login program over its unencrypted pseudo-terminal. The resulting authentication flow is implementation- and policy-dependent: it may request a password, use another PAM mechanism, or reject access. When a password is requested, an attacker on the path can capture the username and password from the stream, along with the interactive session that follows. Passive capture avoids failed guesses and lockouts, but the credential's validity and reuse remain limited by the target's account policy.
 
 ```bash
 # capture the cleartext rlogin login and session
-tcpdump -i eth0 -A port 513 -w rlogin.pcap
+tcpdump -i eth0 -w rlogin.pcap port 513
 tshark -r rlogin.pcap -q -z follow,tcp,ascii,0     # reassemble login + session
 ```
 
@@ -24,8 +24,8 @@ tshark -r rlogin.pcap -q -z follow,tcp,ascii,0     # reassemble login + session
 
 - Capture beats guessing: a sniffed rlogin login yields the exact credential quietly, so prefer it wherever an on-path position exists, the same reasoning as Telnet password sniffing.
 - The whole session is captured too, exposing commands, output, and any secondary credentials entered, see [command/session capture](../traffic-interception/index.md).
-- The credential is typically reusable on other legacy hosts and sometimes other services; test it broadly.
-- Needs an on-path/tap position; combine with trust abuse (which needs no password at all) depending on whether trust or a password is in use.
+- The credential may be reused elsewhere only if accounts or passwords are shared; assess that possibility solely within the authorized scope rather than assuming reuse.
+- Needs an on-path/tap position and a target login flow that actually requests a password; combine with trust abuse depending on the authentication path in use.
 
 ## References
 

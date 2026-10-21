@@ -1,7 +1,7 @@
 ---
-title: "Telnet: attacking the unencrypted terminal protocol"
+title: "Telnet: attacking a typically plaintext terminal protocol"
 order: 5
-description: "Telnet on TCP 23 provides remote terminal access with no encryption, so credentials, commands, and output cross the network in cleartext. Its surface is weak authentication (defaults, no-auth, brute force), a verbose banner that discloses the OS, memory-corruption RCE in old telnetd implementations, and interception of the cleartext session for credentials and hijacking."
+description: "Telnet on TCP 23 is plaintext by default, so credentials, commands, and output are exposed unless an encryption extension is successfully negotiated. Its surface includes weak authentication, information disclosure, implementation-specific vulnerabilities, and interception of plaintext sessions."
 keywords:
   - telnet
   - port 23
@@ -12,7 +12,7 @@ keywords:
 
 # Telnet
 
-Telnet is a remote-terminal protocol on TCP 23 with no encryption whatsoever: the login, the password, every command, and all output travel in cleartext. It persists on legacy systems, network equipment, and IoT devices. The attack surface is accordingly broad: weak authentication (vendor defaults, no authentication, and brute force against the plaintext login), an often-verbose banner that discloses the OS and device, memory-corruption remote code execution in old `telnetd` implementations, and, because the channel is cleartext, straightforward interception of credentials, commands, and even live session hijacking for a positioned attacker.
+Telnet is a remote-terminal protocol commonly exposed on TCP 23. Its default data stream is plaintext, so the login, password, commands, and output are visible to a positioned observer. Extensions such as the Telnet ENCRYPT option exist, but support and successful negotiation must be verified and the historic algorithms are not a substitute for SSH. Telnet persists on legacy systems, network equipment, and IoT devices, where its attack surface includes weak authentication, verbose identification, implementation-specific vulnerabilities, and interception or live hijacking of sessions that remain plaintext.
 
 ```bash
 nmap -p23 -sV --script telnet-ntlm-info,telnet-encryption <target>
@@ -29,4 +29,5 @@ nc <target> 23                                 # banner and login prompt
 ## References
 
 - [RFC 854 (Telnet protocol)](https://datatracker.ietf.org/doc/html/rfc854)
+- [RFC 2946 (Telnet Data Encryption Option)](https://datatracker.ietf.org/doc/html/rfc2946)
 - [HackTricks: Telnet (23)](https://book.hacktricks.xyz/network-services-pentesting/pentesting-telnet)

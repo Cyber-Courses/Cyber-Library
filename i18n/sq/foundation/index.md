@@ -29,7 +29,7 @@ Kultura e hakerëve u shfaq në një epokë kur qasja në burimet kompjuterike i
 
 Pavarësisht elementeve më të errëta që u shfaqën, trashëgimia më e gjerë e komunitetit është e dukshme në domenin e sotëm të sigurisë kibernetike. Shpërblimet për gjetjen e gabimeve, bashkëpunimet me burim të hapur dhe garat e hakimit etik të gjitha bazohen në shpirtin eksplorues të hakerëve. Shumë profesionistë të sigurisë ende përqafojnë këto vlera, duke përdorur kreativitetin për të zbuluar dobësi dhe për të përmirësuar mbrojtjet e sistemit për përfitimin e të gjithëve.
 
-# Historia
+## Historia
 
 Historia e sigurisë kibernetike është e ndërthurur me evolucionin e teknologjisë kompjuterike. Ndërsa kompjuterët u bënë më të përhapur në biznes, qeveri dhe jetën personale, nevoja për të mbrojtur të dhënat dhe sistemet nga qasja e paautorizuar u bë më urgjente. Fusha e sigurisë kibernetike u shfaq si përgjigje ndaj këtyre sfidave, duke u mbështetur në një grup të larmishëm disiplinash, duke përfshirë shkencën kompjuterike, kriptografinë dhe menaxhimin e rrezikut.
 

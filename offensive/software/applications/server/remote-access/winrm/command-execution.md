@@ -1,7 +1,7 @@
 ---
 title: "Command execution: obtaining a shell over WinRM"
 order: 3
-description: "Once authenticated, WinRM gives remote command execution through PowerShell Remoting: Evil-WinRM and native PowerShell (Enter-PSSession/Invoke-Command) open an interactive session on the host, typically as an administrator. From there an attacker runs commands, uploads tools, loads in-memory scripts, and dumps credentials, making WinRM a full foothold."
+description: "An account authorized for a PowerShell Remoting endpoint can execute the commands that endpoint and the account's operating-system privileges permit. Administrative impact must be established separately rather than inferred from a successful WinRM session."
 keywords:
   - command execution
   - evil-winrm
@@ -12,7 +12,7 @@ keywords:
 
 # Command execution
 
-WinRM's purpose is remote management, so authenticated access is remote command execution. The attacker-friendly client is Evil-WinRM, which opens an interactive PowerShell session and adds conveniences (file upload/download, in-memory script and .NET assembly loading); native Windows tooling (`Enter-PSSession`, `Invoke-Command`) does the same from a Windows attack host. Because WinRM access is usually administrative, the session is a privileged foothold: run commands, stage tools, load offensive scripts in memory to avoid touching disk, and dump credentials for further lateral movement.
+WinRM's purpose is remote management, but authentication alone is not authorization to every PowerShell endpoint or command. Evil-WinRM can open an interactive session and add file-transfer and script-loading conveniences; native Windows tooling (`Enter-PSSession`, `Invoke-Command`) provides equivalent remoting primitives. The session runs under the authenticated user's context. Its impact depends on that account's groups, token, local access controls, and the selected session configuration; constrained or JEA endpoints may expose only a limited command set.
 
 ```bash
 # interactive shell (password or hash)
@@ -26,15 +26,16 @@ Invoke-Command -ComputerName <target> -Credential <cred> -ScriptBlock { whoami }
 
 ## Exploitation notes
 
-- The session is typically admin (WinRM access requires it or Remote Management Users), so command execution is a privileged foothold; confirm with `whoami /groups` and move to credential dumping and persistence.
-- Evil-WinRM's in-memory load (`Invoke-Binary`, script loading) runs tooling without writing to disk, reducing artefacts; use it for offensive scripts and assemblies.
+- Establish privilege explicitly with `whoami`, `whoami /groups`, and allowed-command testing. Membership in Remote Management Users permits configured remote-management access but does not make the account an administrator.
+- Evil-WinRM supports in-memory script and assembly loading, but whether loaded code can perform a sensitive action still depends on the session language mode and the user's permissions.
 - WinRM is logged (PowerShell and WSMan event logs); it is operationally quieter than some execution methods but not invisible, so expect session and script-block logging.
-- From the shell, pivot as usual: dump LSASS/SAM for more hashes (feeding more [pass-the-hash](authentication.md) to other hosts), read files, and establish persistence.
+- From an administrative session, credential access and persistence may be possible; from a standard or constrained session, enumerate the accessible files, commands, and endpoint configuration without assuming those capabilities.
 
 ## Tools
 
 - [Evil-WinRM](https://github.com/Hackplayers/evil-winrm)
 - [PowerShell Remoting](https://learn.microsoft.com/en-us/powershell/scripting/learn/remoting/running-remote-commands)
+- [PowerShell Remoting security considerations](https://learn.microsoft.com/en-us/powershell/scripting/security/remoting/winrm-security)
 
 ## References
 

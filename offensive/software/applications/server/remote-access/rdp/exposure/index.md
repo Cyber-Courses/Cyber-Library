@@ -11,14 +11,14 @@ keywords:
 
 # Exposure
 
-RDP's biggest real-world risk is simple exposure: organizations publish 3389 to the internet for convenience, and those endpoints are perpetually scanned, brute-forced, and credential-stuffed, making exposed RDP a top ransomware initial-access vector. Exposure analysis has two parts: finding the internet-facing endpoints (directly or via search engines like Shodan), and assessing the transport security, because a host using legacy native RDP security or weak TLS is additionally open to machine-in-the-middle and session decryption, which compounds the already-high credential and pre-auth exposure.
+RDP's biggest real-world risk is simple exposure: organizations publish 3389 to the internet for convenience, and those endpoints are perpetually scanned, brute-forced, and credential-stuffed, making exposed RDP a top ransomware initial-access vector. Exposure analysis has two parts: finding the internet-facing endpoints (directly or via search engines like Shodan), and assessing the transport security. Legacy native RDP security lacks robust server authentication, while TLS deployments remain vulnerable to interception when clients do not validate the server certificate; these weaknesses compound the already-high credential and pre-auth exposure.
 
 ```bash
 # find exposed RDP
 nmap -p3389 --open <range>
 # search-engine discovery: shodan "port:3389", masscan for breadth
 # assess transport
-nmap -p3389 --script rdp-enum-encryption,ssl-enum-ciphers <target>
+nmap -p3389 --script rdp-enum-encryption <target>
 ```
 
 ## Subtopics

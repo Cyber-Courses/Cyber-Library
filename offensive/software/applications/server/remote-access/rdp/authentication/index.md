@@ -1,6 +1,6 @@
 ---
 title: "Authentication: attacking RDP login"
-description: "RDP authenticates with Windows credentials, so it is a brute-force, password-spray, and credential-stuffing target, and a prime landing point for reused and breached passwords. Network Level Authentication changes where credentials are checked but not whether they can be guessed. Valid RDP credentials give an interactive desktop, often with local or domain privilege."
+description: "RDP authenticates with Windows credentials, so it is a target for guessing and credential reuse. Network Level Authentication changes when credentials are checked but does not prevent guessing. A successful login has the authenticated account's existing rights; administrative access and credential reuse must be established separately."
 keywords:
   - rdp authentication
   - brute force
@@ -11,7 +11,7 @@ keywords:
 
 # Authentication
 
-RDP logs in with Windows credentials (local or domain), which makes it a direct target for guessing and reuse attacks and one of the most common ways stolen or sprayed credentials turn into interactive access. Brute force and spraying work against the logon, credential stuffing replays breached username/password pairs, and Network Level Authentication (NLA) only moves the check earlier (into CredSSP) rather than preventing guessing. A valid credential yields a full interactive desktop, frequently with administrative or domain rights, so RDP authentication is a high-value, high-frequency attack surface, subject to Windows account lockout.
+RDP logs in with Windows credentials (local or domain), which makes it a direct target for guessing and reuse attacks. Brute force and spraying work against the logon, credential stuffing replays breached username/password pairs, and Network Level Authentication (NLA) moves the check earlier into CredSSP rather than preventing guessing. A successful login creates an interactive session under that account's existing local and domain permissions. Ordinary members of Remote Desktop Users can be authorized to connect without being administrators, so administrative rights and reuse on other systems must be tested separately.
 
 ```bash
 # spray/guess against RDP, respecting lockout (domain\user forms from enumeration)

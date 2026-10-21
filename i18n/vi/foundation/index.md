@@ -29,7 +29,7 @@ Văn hóa hacker nổi lên trong một thời đại khi quyền truy cập và
 
 Mặc dù có những yếu tố tối tăm đã xuất hiện, di sản rộng lớn hơn của cộng đồng này vẫn rõ ràng trong lĩnh vực an ninh mạng ngày nay. Các chương trình săn lỗi, hợp tác mã nguồn mở, và các cuộc thi hacking đạo đức đều dựa trên tinh thần khám phá của hacker. Nhiều chuyên gia an ninh vẫn ôm ấp những giá trị này, sử dụng sự sáng tạo để phát hiện lỗ hổng và tăng cường bảo vệ hệ thống vì lợi ích của tất cả.
 
-# Lịch sử
+## Lịch sử
 
 Lịch sử của an ninh mạng gắn liền với sự phát triển của công nghệ máy tính. Khi máy tính trở nên phổ biến hơn trong kinh doanh, chính phủ và cuộc sống cá nhân, nhu cầu bảo vệ dữ liệu và hệ thống khỏi truy cập trái phép trở nên cấp bách hơn. Lĩnh vực an ninh mạng đã xuất hiện để đáp ứng những thách thức này, dựa trên một tập hợp đa dạng các ngành, bao gồm khoa học máy tính, mật mã học và quản lý rủi ro.
 

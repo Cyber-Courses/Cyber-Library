@@ -1,6 +1,6 @@
 ---
 title: "Algorithm enumeration: detecting SSH weak-crypto exposure"
-description: "An SSH server advertises its supported key-exchange, host-key, cipher, and MAC algorithms during the unauthenticated handshake. Enumerating and grading them reveals whether the server offers weak or legacy options, which both fingerprints an outdated build and identifies the concrete downgrade and weak-crypto attacks available against it."
+description: "An SSH server advertises key-exchange, host-key, cipher, and MAC algorithms before authentication. Offered legacy choices are configuration findings; practical impact depends on client overlap, the negotiated result, attacker position, and the prerequisites of a named weakness."
 keywords:
   - algorithm enumeration
   - ssh2-enum-algos
@@ -11,12 +11,12 @@ keywords:
 
 # Algorithm enumeration
 
-Part of the SSH handshake, sent before authentication, is each side's list of supported algorithms for key exchange, host-key signature, encryption, and MAC. Reading the server's lists tells you exactly what it will accept, and grading them against modern baselines identifies weak or legacy options. This serves two purposes: it fingerprints the age and configuration of the server (old builds offer broad legacy sets), and it enumerates the specific weak-crypto attacks available, since you cannot force an algorithm the server does not offer.
+During the SSH handshake, each side advertises supported algorithms for key exchange, host-key signatures, encryption, and integrity. The server list identifies what it may accept and supports configuration review, but an offered legacy option does not prove exploitation. A connection uses the first mutually supported choice according to SSH negotiation rules. Assess client overlap, the algorithm actually negotiated, attacker position, key sizes and parameters, and the prerequisites and impact of a named cryptographic weakness.
 
 ```bash
 # enumerate the four algorithm lists the server offers
 nmap -p22 --script ssh2-enum-algos <target>
-# interpret: look for weak entries in each list
+# identify legacy entries for policy review
 #   kex:     diffie-hellman-group1-sha1, *-sha1, small GEX groups
 #   cipher:  *-cbc, arcfour*, 3des, des
 #   mac:     hmac-md5*, *-96 (truncated), non -etm
@@ -26,10 +26,10 @@ ssh -vv user@<target> 2>&1 | grep -iE 'kex:|cipher:|mac:'   # what gets negotiat
 
 ## Exploitation notes
 
-- Map each offered list to its weakness: `group1`/SHA-1 KEX to [key exchange downgrade](../weak-cryptography/key-exchange-downgrade.md), `-cbc`/`arcfour`/`3des` to [weak ciphers](../weak-cryptography/weak-ciphers.md), `hmac-md5`/`-96` to [weak MAC algorithms](../weak-cryptography/weak-mac-algorithms.md).
+- Map each offered list to its legacy category: `group1`/SHA-1 KEX to [legacy key exchange](../weak-cryptography/key-exchange-downgrade.md), `-cbc`/`arcfour`/`3des` to [weak ciphers](../weak-cryptography/weak-ciphers.md), and `hmac-md5`/`-96` to [weak MAC algorithms](../weak-cryptography/weak-mac-algorithms.md). Then determine what a real client negotiates before assigning session impact.
 - `ssh-dss` (DSA) host keys and SHA-1-only `ssh-rsa` indicate an old server; DSA is disabled in modern OpenSSH, so its presence is a strong age signal.
-- You can only attack algorithms the server offers, so this enumeration is the prerequisite that turns the weak-crypto pages from theory into a concrete target list.
-- A fully modern algorithm set (curve25519 KEX, ChaCha20/AES-GCM ciphers, ETM MACs) means the crypto surface is closed; pivot to authentication and implementation vulnerabilities instead.
+- Server support is only one prerequisite: the client must also accept the option, and many weaknesses require an on-path position or additional conditions.
+- A modern advertised set reduces legacy-algorithm exposure but does not close every cryptographic risk; implementation defects, randomness, key handling, parameter validation, and host-key trust remain separate concerns.
 
 ## Tools
 
@@ -39,4 +39,4 @@ ssh -vv user@<target> 2>&1 | grep -iE 'kex:|cipher:|mac:'   # what gets negotiat
 ## References
 
 - [RFC 4253: algorithm negotiation](https://datatracker.ietf.org/doc/html/rfc4253)
-- [ssh-audit hardening guides](https://www.ssh-audit.com/)
+- [OpenSSH legacy options](https://www.openssh.com/legacy.html)

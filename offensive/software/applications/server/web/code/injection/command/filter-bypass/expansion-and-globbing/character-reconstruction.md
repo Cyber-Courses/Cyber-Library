@@ -55,7 +55,7 @@ Here the request contains underscores, not slashes; `tr` performs the substituti
 
 ```
 cat $(printf '\57')etc$(printf '\57')passwd   # \57 is octal for "/"
-printf '\x2f'                                  # hex for "/"
+printf '\x2f'                                  # hex for "/" in Bash and some other implementations
 ```
 
 Bash ANSI-C quoting does the same inline, with no external binary:
@@ -79,8 +79,8 @@ Each slash, each space, and each keyword fragment is produced by the shell, leav
 
 ## Operational notes
 
-- Substring expansion `${VAR:0:1}` and `$'\xNN'` ANSI-C quoting are **Bash** features; `tr`/`printf` work in any POSIX shell (subject to those binaries not themselves being filtered).
-- Choose a source variable guaranteed to be present, `HOME`, `PATH`, and `PWD` reliably start with `/`.
+- Substring expansion `${VAR:0:1}` and `$'\xNN'` ANSI-C quoting are **Bash** features. `tr` and octal `printf` escapes are broadly portable; hexadecimal `printf` escapes depend on the shell or utility implementation.
+- Inspect variable values before choosing a source character. `HOME`, `PATH`, and `PWD` can be unset, reassigned, relative, or begin with a non-slash component; none is a guaranteed slash source in an arbitrary command-execution context.
 - The method reconstructs **characters**; combine it with brace/glob/variable techniques when whole command names are also filtered.
 
 ## Tools

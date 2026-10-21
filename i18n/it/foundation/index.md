@@ -29,7 +29,7 @@ La cultura hacker è emersa in un'epoca in cui l'accesso alle risorse informatic
 
 Nonostante gli elementi più oscuri che sono emersi, l'eredità più ampia della comunità è evidente nel dominio della cybersecurity odierna. Bug bounty, collaborazioni open-source e competizioni di hacking etico attingono tutti allo spirito esplorativo degli hacker. Molti professionisti della sicurezza abbracciano ancora questi valori, sfruttando la creatività per scoprire vulnerabilità e migliorare le protezioni dei sistemi a beneficio di tutti.
 
-# Storia
+## Storia
 
 La storia della cybersecurity è intrecciata con l'evoluzione della tecnologia informatica. Con la crescente diffusione dei computer nel mondo degli affari, del governo e della vita personale, la necessità di proteggere dati e sistemi da accessi non autorizzati è diventata più urgente. Il campo della cybersecurity è emerso in risposta a queste sfide, attingendo a un insieme diversificato di discipline, tra cui informatica, crittografia e gestione del rischio.
 

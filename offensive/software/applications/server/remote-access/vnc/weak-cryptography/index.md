@@ -1,7 +1,7 @@
 ---
-title: "Weak cryptography: VNC transport and security-type weaknesses"
+title: "Transport security: VNC security types and encryption"
 order: 2
-description: "Standard VNC does not encrypt the session, so screen contents, keystrokes, and the authentication challenge-response cross the network in cleartext. The RFB security-type negotiation can also be downgraded to a weaker or no-auth type, and the encryption some implementations add is often weak or optional, leaving captured VNC traffic and credentials recoverable."
+description: "Standard VNC does not encrypt the session, so screen contents, keystrokes, and the authentication challenge-response cross the network in cleartext. When a server offers weak and strong RFB security types together, the unauthenticated selection may also permit downgrade to a weak type."
 keywords:
   - vnc encryption
   - cleartext
@@ -10,13 +10,13 @@ keywords:
   - weak crypto
 ---
 
-# Weak cryptography
+# Transport security
 
-Base VNC has no transport encryption: the RFB session, framebuffer updates (the screen), client input (keystrokes and mouse), and even the authentication challenge-response travel in cleartext. A positioned attacker therefore reads the desktop and captures the authentication material. On top of that, the security type is negotiated and can be downgraded to a weaker or no-authentication option, and the encryption that some implementations bolt on (vendor schemes, VeNCrypt/TLS) is often weak, optional, or not verified, so it frequently fails to protect the session in practice.
+The `None` and VNC Authentication security types send subsequent RFB protocol data without encryption. Other registered or vendor mechanisms can add TLS, SASL protection, RSA-AES, SSH tunneling, or other security properties. Determine exposure from the type and subtype selected for the actual session, including certificate or peer validation where applicable. When a server offers both protected and cleartext types, unauthenticated negotiation may permit an on-path attacker to steer a compatible client toward a weaker type the server already accepts; a server offering only protected types is not bypassed by inventing another selection.
 
 ```bash
-# confirm the session is cleartext (no VeNCrypt/TLS security type)
-nmap -p5900 --script vnc-info <target>         # security types; absence of VeNCrypt(19) => cleartext
+# inventory advertised security types; this alone does not prove which type a session uses
+nmap -p5900 --script vnc-info <target>
 tcpdump -i eth0 -w vnc.pcap port 5900          # capture for analysis
 ```
 
@@ -28,5 +28,5 @@ tcpdump -i eth0 -w vnc.pcap port 5900          # capture for analysis
 
 ## References
 
-- [RFC 6143: security types](https://datatracker.ietf.org/doc/html/rfc6143)
-- [HackTricks: VNC](https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc)
+- [RFC 6143: security types](https://datatracker.ietf.org/doc/html/rfc6143#section-7.2)
+- [Maintained RFB protocol specification](https://github.com/rfbproto/rfbproto/blob/master/rfbproto.rst)

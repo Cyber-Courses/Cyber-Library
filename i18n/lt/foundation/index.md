@@ -29,7 +29,7 @@ Hakerių kultūra atsirado laikotarpiu, kai prieiga prie kompiuterinių ištekli
 
 Nepaisant atsiradusių tamsesnių elementų, bendruomenės platesnis palikimas akivaizdus šiandieninėje kibernetinio saugumo srityje. Klaidos premijos, atvirojo kodo bendradarbiavimai ir etinio hakerių konkursai visi remiasi hakerių tyrinėjimo dvasia. Daugelis saugumo specialistų vis dar laikosi šių vertybių, naudodamiesi kūrybiškumu, kad atskleistų pažeidžiamumus ir pagerintų sistemų apsaugą visų labui.
 
-# Istorija
+## Istorija
 
 Kibernetinio saugumo istorija yra glaudžiai susijusi su kompiuterinių technologijų evoliucija. Kai kompiuteriai tapo labiau paplitę versle, vyriausybėje ir asmeniniame gyvenime, poreikis apsaugoti duomenis ir sistemas nuo neleistinos prieigos tapo skubesnis. Kibernetinio saugumo sritis atsirado kaip atsakas į šiuos iššūkius, remdamasi įvairiomis disciplinomis, įskaitant kompiuterių mokslą, kriptografiją ir rizikos valdymą.
 

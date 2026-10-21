@@ -1,6 +1,6 @@
 ---
 title: "Key exchange downgrade: weak VPN key-exchange groups"
-description: "VPNs negotiating weak key-exchange parameters, small Diffie-Hellman groups (768/1024-bit) or legacy IKE groups, let a positioned or well-resourced attacker attack the key agreement. Forcing or observing a weak group enables precomputation attacks against the shared parameters and decryption of the session keys derived from them."
+description: "VPNs that negotiate small Diffie-Hellman groups, such as legacy IKE groups 1 and 2, use key-exchange parameters below current recommendations. A well-resourced attacker may benefit from precomputation against widely reused finite-field groups, but offering a group alone does not prove that an attacker can force its selection."
 keywords:
   - key exchange
   - diffie-hellman
@@ -11,24 +11,25 @@ keywords:
 
 # Key exchange downgrade
 
-A VPN derives its session keys through a key exchange, and weak parameters make that agreement attackable. IPsec/IKE negotiates a Diffie-Hellman group from the offered transforms, and gateways that still offer small groups (DH group 1 = 768-bit, group 2 = 1024-bit) are exposed: these groups are within reach of precomputation attacks against their fixed shared parameters (the Logjam class), after which individual key exchanges using them are broken relatively cheaply. A downgrade, forcing or the gateway simply accepting a small group, drops the session to this attackable level, and the derived session keys (and thus the tunnel) fall with it.
+A VPN derives its session keys through a key exchange, and undersized parameters reduce the security margin of that agreement. IPsec/IKE can negotiate finite-field Diffie-Hellman groups from the configured proposals; group 1 uses a 768-bit modulus and group 2 uses a 1024-bit modulus, both below current recommendations. Widely reused finite-field groups can make large precomputation efforts more valuable, but acceptance of a weak group is not equivalent to a practical session compromise. In IKEv2, the subsequent `IKE_AUTH` exchange authenticates the initial negotiation, so an unauthenticated attacker cannot simply rewrite the proposal and complete a silent downgrade.
 
 ```bash
 # which DH groups does the IKE gateway offer?
 ike-scan -M <target>                            # transform output includes the DH group
 #   group 1 (768) / group 2 (1024) => small, precomputation-vulnerable
-# force a small group to confirm acceptance, or observe a handshake that used one;
-# attacking the fixed 1024-bit group parameters (Logjam-style) then breaks the exchange
+# confirm whether a configured client actually negotiates a legacy group
+# distinguish an offered proposal from the transform selected in a completed exchange
 ```
 
 ## Exploitation notes
 
-- Offered DH groups 1 and 2 (768/1024-bit) are the finding; their fixed parameters are susceptible to a one-time precomputation that then cheaply breaks any exchange using them, so a gateway accepting them is attackable by a well-resourced adversary.
-- Downgrade applies where the gateway accepts a weak group alongside strong ones; an attacker forces the weak selection or waits for a client that negotiates it.
-- This attacks the key agreement itself (yielding the session keys), distinct from [weak ciphers](weak-ciphers.md) which attack the bulk encryption; both end in decryptable tunnel traffic.
-- Pair with a capture position; the practical payoff is decrypting a captured tunnel that used the weak group.
+- Offering groups 1 or 2 is a configuration finding because these groups are below current recommendations; record separately whether a client actually selects one in a completed exchange.
+- Do not report an active downgrade solely from the proposal list. IKEv2 authenticates the initial exchange during `IKE_AUTH`; forcing a different group requires a separate protocol or implementation weakness, or control of a client that willingly negotiates it.
+- Precomputation against a reused finite-field group is a resource-intensive threat model, not a generic guarantee that every observed 1024-bit exchange can be cheaply broken.
+- This concerns the key agreement, distinct from [weak ciphers](weak-ciphers.md), which govern bulk encryption. State the adversary position, resources, negotiated group, and evidence when assessing practical impact.
 
 ## References
 
 - [Logjam / weak Diffie-Hellman](https://weakdh.org/)
 - [NIST SP 800-77: IKE groups](https://csrc.nist.gov/pubs/sp/800/77/r1/final)
+- [RFC 7296: IKEv2](https://www.rfc-editor.org/rfc/rfc7296.html)

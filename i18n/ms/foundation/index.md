@@ -30,7 +30,7 @@ Budaya penggodam muncul dalam era apabila akses kepada sumber pengkomputeran ada
 
 Walaupun elemen yang lebih gelap muncul, warisan lebih luas komuniti ini jelas dalam domain keselamatan siber hari ini. Ganjaran pepijat, kolaborasi sumber terbuka, dan pertandingan penggodaman etika semuanya menarik pada semangat penggodam untuk penerokaan. Ramai profesional keselamatan masih memeluk nilai-nilai ini, menggunakan kreativiti untuk mengenal pasti kelemahan dan meningkatkan perlindungan sistem untuk manfaat semua.
 
-# Sejarah
+## Sejarah
 
 Sejarah keselamatan siber berkait rapat dengan evolusi teknologi pengkomputeran. Apabila komputer menjadi lebih lazim dalam perniagaan, kerajaan, dan kehidupan peribadi, keperluan untuk melindungi data dan sistem daripada akses tanpa kebenaran menjadi lebih mendesak. Bidang keselamatan siber muncul sebagai tindak balas kepada cabaran ini, menarik dari pelbagai disiplin, termasuk sains komputer, kriptografi, dan pengurusan risiko.
 

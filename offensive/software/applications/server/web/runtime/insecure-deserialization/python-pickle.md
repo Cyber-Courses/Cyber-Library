@@ -45,7 +45,7 @@ Recognize pickle on the wire by its opcodes and trailing `.` (protocol 0 is ASCI
 
 - **`jsonpickle.decode`** reconstructs Python objects from JSON that carries `py/object` and `py/reduce` keys, giving the same `__reduce__` primitive through a JSON-looking payload.
 
-- **`numpy.load(allow_pickle=True)`, `pandas.read_pickle`, `joblib.load`, and `torch.load`** deserialize with `pickle` under the hood, so loading an untrusted `.npy`/`.pkl`/model file is the same primitive.
+- **`numpy.load(allow_pickle=True)`, `pandas.read_pickle`, and `joblib.load`** deserialize with `pickle` under the hood, so loading an untrusted `.npy` or `.pkl` file reaches the same primitive. **`torch.load`** also uses a pickle-based format, but its behavior is version and option dependent. PyTorch 2.6 and later default to the restricted `weights_only=True` unpickler when no custom `pickle_module` is supplied. Arbitrary object loading remains dangerous on older versions and when callers set `weights_only=False`, provide a custom pickle module, or allowlist unsafe globals. Restricted loading narrows code-execution risk but does not make an untrusted checkpoint harmless: denial of service and malformed-data risks remain.
 
 ## Exploitation notes
 
@@ -59,5 +59,6 @@ Recognize pickle on the wire by its opcodes and trailing `.` (protocol 0 is ASCI
 
 ## References
 
-- Python manual: pickle (security warning)
-- PortSwigger Web Security Academy: Insecure deserialization
+- [Python documentation: pickle security warning](https://docs.python.org/3/library/pickle.html)
+- [PyTorch serialization semantics](https://docs.pytorch.org/docs/stable/notes/serialization.html)
+- [PortSwigger Web Security Academy: Insecure deserialization](https://portswigger.net/web-security/deserialization)

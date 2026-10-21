@@ -29,7 +29,7 @@ Hacker kültürü, bilgi işlem kaynaklarına erişimin sınırlı ve genellikle
 
 Ortaya çıkan karanlık unsurlara rağmen, topluluğun daha geniş mirası, bugünün siber güvenlik alanında belirgindir. Hata ödülleri, açık kaynak işbirlikleri ve etik hackleme yarışmaları, keşif ruhunu yansıtır. Birçok güvenlik uzmanı hala bu değerleri benimseyerek, yaratıcılığı kullanarak zayıf noktaları ortaya çıkarır ve herkesin yararına sistem korumalarını geliştirir.
 
-# Tarihçe
+## Tarihçe
 
 Siber güvenliğin tarihi, bilgi işlem teknolojisinin evrimiyle iç içe geçmiştir. Bilgisayarlar iş dünyasında, hükümette ve kişisel yaşamda daha yaygın hale geldikçe, verileri ve sistemleri yetkisiz erişimden koruma ihtiyacı daha acil hale geldi. Siber güvenlik alanı, bu zorluklara yanıt olarak ortaya çıktı ve bilgisayar bilimi, kriptografi ve risk yönetimi gibi çeşitli disiplinlerden yararlandı.
 

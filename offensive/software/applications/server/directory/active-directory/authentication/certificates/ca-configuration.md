@@ -30,10 +30,10 @@ Note the SID security extension complicates naive ESC6 on patched domains: where
 
 ## ESC16: security extension disabled on the CA
 
-ESC16 is the CA-wide version of [ESC9](certificate-mapping.md): the CA is configured to **omit the SID security extension** from every certificate it issues (the extension OID is in the CA's disabled-extensions list). As with ESC9, this only yields impersonation where the DC still permits weak mapping (`StrongCertificateBindingEnforcement` at `0` or `1`); under full enforcement (`2`) a certificate without the SID binding is rejected. On a weakly-mapping DC the UPN-swap impersonation then works against the whole CA rather than a single template:
+ESC16 is the CA-wide version of [ESC9](certificate-mapping.md): the CA is configured to **omit the SID security extension** from every certificate it issues (the extension OID is in the CA's disabled-extensions list). This only yields Kerberos impersonation where the domain controller still permits weak mapping. Values `0` and `1` of `StrongCertificateBindingEnforcement` historically allowed that fallback, but updated domain controllers entered full enforcement in 2025 and no longer support the compatibility override after the September 9, 2025 update. Under full enforcement, a certificate without a strong mapping is rejected. On a legacy or unpatched weakly-mapping DC, the UPN-swap impersonation can apply across the whole CA rather than one template:
 
 ```bash
-# Enrol after setting a controlled account's UPN to the victim; the issued cert
+# Enroll after setting a controlled account's UPN to the victim; the issued cert
 # lacks the SID binding, so it maps to the victim by UPN
 certipy account update -u user@example.local -p pass -user puppet -upn administrator@example.local
 certipy req -u puppet@example.local -p pass2 -ca <ca> -template User
@@ -43,15 +43,16 @@ certipy req -u puppet@example.local -p pass2 -ca <ca> -template User
 
 - ESC6 is a one-flag path to Domain Admin across all client-auth templates, which is why it is high-value when `certipy find` reports it.
 - ESC6 set via ESC7 requires a **CA service restart** to take effect, which is noisy and may need the CA host; weigh it against quieter template paths.
-- ESC16 turns every certificate into an ESC9 candidate, so it is as severe as a domain-wide mapping failure; pair with any enrolment right and a writable UPN.
+- ESC16 turns every certificate into an ESC9 candidate, so it is as severe as a domain-wide mapping failure; pair with any enrollment right and a writable UPN.
 
 ## Tools
 
-- **Certipy** (`req`, `ca`, `account update`): enrol with a chosen SAN, toggle CA flags (with ESC7), and UPN-swap.
+- **Certipy** (`req`, `ca`, `account update`): enroll with a chosen SAN, toggle CA flags (with ESC7), and UPN-swap.
 - **certutil** (`-setreg`): native reading/setting of CA policy flags.
 
 ## References
 
 - [SpecterOps: Certified Pre-Owned (ESC6)](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
 - [Certipy (ly4k)](https://github.com/ly4k/Certipy)
+- [Microsoft KB5014754: certificate-based authentication changes](https://support.microsoft.com/en-us/servicing/os/windows-server/2022/05/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers)
 - [Microsoft: Active Directory Certificate Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/)

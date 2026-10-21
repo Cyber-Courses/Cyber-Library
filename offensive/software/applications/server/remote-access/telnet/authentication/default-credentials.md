@@ -17,7 +17,6 @@ Telnet is now mostly a device protocol, and devices ship with fixed default cred
 # identify the device (banner), then try its documented defaults + generics
 nc <target> 23
 hydra -C iot-default-combos.txt telnet://<target>     # user:pass combo list
-nxc telnet <target> -u defaults_u.txt -p defaults_p.txt --no-bruteforce   # paired
 ```
 
 ## Exploitation notes

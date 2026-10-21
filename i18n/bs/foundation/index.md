@@ -29,7 +29,7 @@ Hakerska kultura pojavila se u eri kada je pristup računalnim resursima bio ogr
 
 Unatoč mračnijim elementima koji su se pojavili, šire nasljeđe zajednice očito je u današnjem području kibernetičke sigurnosti. Nagrade za pronalaženje grešaka, suradnje na otvorenom kodu i natjecanja u etičkom hakiranju sve crpe inspiraciju iz hakerskog duha istraživanja. Mnogi stručnjaci za sigurnost i dalje prihvaćaju ove vrijednosti, koristeći kreativnost za otkrivanje ranjivosti i poboljšanje zaštite sustava na dobrobit svih.
 
-# Povijest
+## Povijest
 
 Povijest kibernetičke sigurnosti isprepletena je s evolucijom računalne tehnologije. Kako su računala postajala sve prisutnija u poslovanju, vladi i osobnom životu, potreba za zaštitom podataka i sustava od neovlaštenog pristupa postajala je sve hitnija. Područje kibernetičke sigurnosti pojavilo se kao odgovor na ove izazove, oslanjajući se na raznoliku skupinu disciplina, uključujući računalne znanosti, kriptografiju i upravljanje rizicima.
 

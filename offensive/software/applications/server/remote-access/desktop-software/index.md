@@ -1,7 +1,7 @@
 ---
 title: "Desktop software: attacking third-party remote-desktop tools"
 order: 1
-description: "Third-party remote-desktop products, TeamViewer, AnyDesk, Chrome Remote Desktop, Splashtop, and similar, provide remote control outside the OS's native RDP/VNC. The surface is their ID-and-password or unattended-access model, weak and default passwords, internet and relay exposure, insecure defaults, and product-specific authentication-bypass and code-execution flaws."
+description: "Third-party remote-desktop products provide remote control outside native RDP or VNC. Review endpoint inventory, relay reachability, product-specific authentication and authorization controls, client configuration, and precisely scoped vendor advisories."
 keywords:
   - teamviewer
   - anydesk
@@ -12,19 +12,20 @@ keywords:
 
 # Desktop software
 
-Alongside the OS-native remote-access protocols, organizations and individuals run third-party remote-desktop products, TeamViewer, AnyDesk, Chrome Remote Desktop, Splashtop, LogMeIn, and others, that provide remote control through the vendor's own client, often via a cloud relay that works through NAT and firewalls. That design shifts the attack surface: access is keyed on a device ID plus a password (or unattended-access password), the clients listen locally and connect out to relays, and the products have their own authentication and code-execution vulnerabilities. The surface is the ID/password and unattended-access model, weak and default passwords, internet and relay exposure, insecure default settings, and named product exploits.
+Alongside the OS-native remote-access protocols, organizations and individuals run third-party remote-desktop products, TeamViewer, AnyDesk, Chrome Remote Desktop, Splashtop, LogMeIn, and others, that provide remote control through the vendor's own client, often via a cloud relay that works through NAT and firewalls. That design shifts the attack surface: access is keyed on a device ID plus a password, account assignment, or an unattended-access policy; clients normally initiate outbound connections to vendor infrastructure; and product-specific vulnerabilities affect particular versions. The surface includes access-control configuration, weak or exposed credentials, relay reachability, and named product advisories.
 
 ```bash
-# detect common clients by their characteristic local/relay ports
-nmap -p5938,7070,443 -sV <target>              # TeamViewer 5938, AnyDesk 7070, relays on 443
+# endpoint inventory is authoritative; relay traffic is normally outbound
+tasklist | findstr /i 'teamviewer anydesk splashtop logmein'
+netstat -ano | findstr /r ":5938 :6568 :443 :80"
 ```
 
 ## Subtopics
 
 - **[Enumeration](enumeration/index.md)**: detecting the product and version.
 - **[Authentication](authentication/index.md)**: ID-based access, unattended access, and weak passwords.
-- **[Exposure](exposure/index.md)**: internet exposure and insecure defaults.
-- **[Known product exploits](known-product-exploits/index.md)**: TeamViewer and AnyDesk vulnerabilities.
+- **[Exposure](exposure/index.md)**: external reachability and incoming-session configuration.
+- **[Known product issues](known-product-exploits/index.md)**: version-specific advisories and documented security incidents.
 
 ## References
 

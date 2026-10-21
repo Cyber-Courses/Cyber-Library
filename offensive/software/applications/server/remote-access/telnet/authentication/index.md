@@ -1,7 +1,7 @@
 ---
 title: "Authentication: attacking Telnet login"
 order: 1
-description: "Telnet authenticates in cleartext with a username and password, and is attacked through vendor default credentials (rampant on devices), servers configured with no authentication or a direct shell, and brute force against the plaintext login. A valid login gives a terminal, often on network equipment or an embedded device with administrative scope."
+description: "Telnet commonly authenticates with a username and password over a plaintext session unless an encryption extension is negotiated. Attacks include vendor defaults, services with no authentication, and online password guessing."
 keywords:
   - telnet authentication
   - default credentials
@@ -12,19 +12,18 @@ keywords:
 
 # Authentication
 
-Telnet's authentication is a cleartext username/password exchange, and it falls three ways. Default credentials are endemic on the devices that still run Telnet, routers, switches, cameras, printers, IoT, so the documented vendor pair often works. Some servers require no authentication, dropping straight to a shell or menu. And the plaintext login is brute-forceable, bounded mainly by the device's (often absent) rate limiting. A successful login yields a terminal, frequently on equipment where that terminal is administrative (an enable-capable router, a root BusyBox shell).
+Telnet commonly carries its username/password exchange in plaintext unless an encryption extension is successfully negotiated. Authentication fails in three common ways: a device retains vendor defaults, a service requires no authentication and drops directly to a shell or menu, or an online password attack succeeds against weak credentials. A valid login yields a terminal whose privileges depend on the particular device and account.
 
 ```bash
 nc <target> 23        # try default/no-auth first
 hydra -L users.txt -P passwords.txt telnet://<target> -t 4
-nxc telnet <target> -u users.txt -p passwords.txt 2>/dev/null
 ```
 
 ## Subtopics
 
 - **[Default credentials](default-credentials.md)**: vendor and factory Telnet logins.
 - **[No authentication](no-authentication.md)**: servers that drop to a shell without a password.
-- **[Password brute force](password-brute-force.md)**: online attacks on the plaintext login.
+- **[Password brute force](password-brute-force.md)**: online attacks against weak login credentials.
 
 ## References
 

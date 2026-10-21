@@ -72,8 +72,8 @@ Explorer la section : [Risque et confiance](risk-and-trust/index.md).
 
 ## Le facteur humain
 
-L'humain demeure la plus grande variable de la cybersécurité. Bien que les machines et les logiciels se comportent selon la logique et les règles qui leur sont programmées, les personnes peuvent commettre des erreurs ou agir avec malveillance d'une manière que la technologie seule ne peut pas entièrement prévoir. De l'oubli d'appliquer un correctif au clic sur un lien de phishing, les erreurs humaines sont à l'origine de nombreuses violations parmi les plus importantes.
+Les résultats en matière de sécurité découlent de l’interaction entre les personnes, la technologie, les processus et les incitations organisationnelles. Les personnes peuvent commettre des erreurs ou agir avec malveillance, mais les systèmes déterminent aussi si une erreur se transforme en violation. Parmi les exemples figurent l’application tardive de correctifs, le succès d’un hameçonnage, les privilèges excessifs et les processus qui rendent inutilement difficile un comportement sûr.
 
-Remédier à ces problèmes passe souvent par des formations régulières, des politiques claires et une culture qui valorise les comportements soucieux de la sécurité. Des campagnes de sensibilisation bien conçues et des programmes d'éducation des utilisateurs réduisent la probabilité de faux pas accidentels. Lorsque les gens comprennent à la fois les conséquences potentielles et les bonnes pratiques d'un comportement sécurisé, les organisations peuvent mieux se protéger contre des menaces qu'aucun correctif logiciel ne peut à lui seul résoudre.
+Pour y remédier, il faut souvent une formation régulière, des politiques claires et une culture qui valorise des comportements soucieux de la sécurité. Des campagnes de sensibilisation bien conçues et des programmes d’éducation des utilisateurs réduisent le risque d’égarements involontaires. Lorsque chacun comprend à la fois les conséquences possibles et les bonnes pratiques, les organisations se protègent mieux contre des menaces qu’aucun correctif logiciel ne suffit à éliminer seul.
 
 Explorer la section : [Le facteur humain](human-element/index.md).

@@ -1,7 +1,7 @@
 ---
 title: "rsh: attacking the remote shell service"
 order: 5
-description: "rsh (rshd on TCP 514) executes a command or opens a shell on a remote host, authenticating by the host-based trust in .rhosts and /etc/hosts.equiv rather than a password. An attacker abuses that trust, by writing a .rhosts file, exploiting a permissive hosts.equiv, or spoofing a trusted source IP, to run commands with no credential, and intercepts the cleartext session."
+description: "rsh (rshd on TCP 514) executes a command or opens a shell on a remote host. Traditional rshd requires a privileged client source port, validates host and user identity, and consults .rhosts or /etc/hosts.equiv rather than requesting a password. Attacks abuse that trust or intercept the cleartext exchange."
 keywords:
   - rsh
   - rshd
@@ -12,7 +12,7 @@ keywords:
 
 # rsh
 
-`rsh` runs a command (or an interactive shell) on a remote host via `rshd` on TCP 514. Its authentication is host-based: the server checks whether the connecting source IP and username are trusted via the target user's `~/.rhosts` or the system-wide `/etc/hosts.equiv`, and if so, grants access with no password. This design is the whole vulnerability. An attacker who can make the server trust them, by writing a `.rhosts` entry, abusing a permissive `hosts.equiv`, or spoofing a trusted source address, runs commands as the target user with no credential, and because the channel is cleartext, any real session is also interceptable.
+`rsh` runs a command (or an interactive shell) on a remote host via `rshd` on TCP 514. Traditional implementations first require a client source port in the privileged 512–1023 range, may verify that reverse and forward hostname resolution agree, retrieve the remote username, requested local account, and command, and then evaluate `~/.rhosts` or `/etc/hosts.equiv` through `ruserok`. A matching trust rule grants access without a password. An attacker who satisfies that complete protocol and trust decision—by controlling a trusted identity, planting an acceptable `.rhosts`, abusing a permissive `hosts.equiv`, or performing a protocol-correct spoofing attack—can run commands as the target user. The resulting streams are unencrypted and therefore interceptable.
 
 ```bash
 # if trusted (or trust is permissive), run commands with no password

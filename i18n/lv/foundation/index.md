@@ -29,7 +29,7 @@ Hakeru kultūra radās laikā, kad piekļuve datoru resursiem bija ierobežota u
 
 Neskatoties uz tumšākajiem elementiem, kas parādījās, kopienas plašākais mantojums ir redzams mūsdienu kiberdrošības jomā. Kļūdu atlīdzības, atvērtā koda sadarbības un ētiskās hakeru sacensības visas balstās uz hakeru izpētes garu. Daudzi drošības profesionāļi joprojām pieņem šīs vērtības, izmantojot radošumu, lai atklātu ievainojamības un uzlabotu sistēmu aizsardzību visu labā.
 
-# Vēsture
+## Vēsture
 
 Kiberdrošības vēsture ir cieši saistīta ar datoru tehnoloģijas attīstību. Kā datori kļuva izplatītāki biznesā, valdībā un personīgajā dzīvē, nepieciešamība aizsargāt datus un sistēmas no nesankcionētas piekļuves kļuva arvien steidzamāka. Kiberdrošības joma radās, reaģējot uz šiem izaicinājumiem, balstoties uz dažādām disciplīnām, tostarp datorzinātnēm, kriptogrāfiju un riska pārvaldību.
 

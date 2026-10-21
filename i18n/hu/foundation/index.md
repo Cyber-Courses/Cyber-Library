@@ -29,7 +29,7 @@ A hacker kultúra egy olyan korszakban alakult ki, amikor a számítástechnikai
 
 Annak ellenére, hogy sötétebb elemek is megjelentek, a közösség szélesebb öröksége ma is nyilvánvaló a kiberbiztonság területén. A hibavadászatok, nyílt forráskódú együttműködések és etikus hackelési versenyek mind a felfedezés hacker szelleméből táplálkoznak. Sok biztonsági szakember még mindig magáénak vallja ezeket az értékeket, kreativitásukat kihasználva a sebezhetőségek feltárására és a rendszer védelmének javítására mindenki javára.
 
-# Történelem
+## Történelem
 
 A kiberbiztonság története szorosan összefonódik a számítástechnika fejlődésével. Ahogy a számítógépek egyre elterjedtebbé váltak az üzleti életben, a kormányzatban és a személyes életben, az adatok és rendszerek jogosulatlan hozzáférés elleni védelmének szükségessége egyre sürgetőbbé vált. A kiberbiztonság területe ezekre a kihívásokra válaszul alakult ki, különféle tudományágakat ötvözve, beleértve a számítástechnikát, a kriptográfiát és a kockázatkezelést.
 

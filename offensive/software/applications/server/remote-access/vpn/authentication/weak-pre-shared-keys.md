@@ -27,7 +27,7 @@ psk-crack -b 8 psk.hash                          # brute force up to length 8
 - Aggressive mode is the enabler: it emits the PSK-derived hash to an unauthenticated initiator, so `ike-scan -A -P` captures it and `psk-crack` recovers a weak key offline; main mode does not leak this, so check which modes the gateway offers.
 - Default PSKs (vendor defaults, documentation examples, obvious strings) and short keys fall quickly; seed the wordlist with organisation-specific terms.
 - The PSK authenticates the tunnel but many deployments add XAUTH (a username/password) as a second factor; recover the PSK first, then attack XAUTH ([password brute force](password-brute-force.md)).
-- A recovered PSK plus XAUTH yields a full tunnel into the internal network; see [IPsec IKE](../protocols/ipsec-ike.md) for the aggressive-mode mechanics.
+- A recovered PSK plus valid XAUTH credentials may satisfy the configured IKE authentication stages; confirm any additional policy, posture, and route restrictions before claiming internal access. See [IPsec IKE](../protocols/ipsec-ike.md) for the aggressive-mode mechanics.
 
 ## Tools
 

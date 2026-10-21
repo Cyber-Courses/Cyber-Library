@@ -29,7 +29,7 @@ Hackerkulturen oppstod i en tid da tilgangen til databehandlingsressurser var be
 
 Til tross for de mørkere elementene som dukket opp, er fellesskapets bredere arv tydelig i dagens cybersikkerhetsdomene. Feilbelønningsprogrammer, samarbeid om åpen kildekode og etiske hackerkonkurranser trekker alle på hackerens utforskningsånd. Mange sikkerhetsprofesjonelle omfavner fortsatt disse verdiene, og utnytter kreativitet for å avdekke sårbarheter og forbedre systembeskyttelsen til fordel for alle.
 
-# Historie
+## Historie
 
 Historien om cybersikkerhet er sammenvevd med utviklingen av datateknologi. Etter hvert som datamaskiner ble mer utbredt i næringsliv, myndigheter og privatliv, ble behovet for å beskytte data og systemer mot uautorisert tilgang mer presserende. Feltet cybersikkerhet oppstod som svar på disse utfordringene, og trakk på et mangfoldig sett av disipliner, inkludert informatikk, kryptografi og risikostyring.
 

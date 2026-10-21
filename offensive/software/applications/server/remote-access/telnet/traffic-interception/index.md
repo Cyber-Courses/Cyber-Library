@@ -1,7 +1,7 @@
 ---
 title: "Traffic interception: capturing and hijacking cleartext Telnet"
 order: 4
-description: "Telnet is unencrypted, so a positioned attacker reads everything: the login and password, every command typed, and all output, and can hijack the live TCP session to inject commands as the authenticated user. Interception is often the easiest Telnet attack where a network position exists, needing no credential guessing."
+description: "A Telnet session that has not negotiated encryption exposes its login, commands, and output to a positioned attacker. An active on-path attacker may also attempt to inject correctly sequenced data into the live TCP connection."
 keywords:
   - telnet interception
   - cleartext
@@ -12,11 +12,11 @@ keywords:
 
 # Traffic interception
 
-Because Telnet encrypts nothing, an attacker with a network position gets everything for free: the username and password as they are typed at login, every command the user runs, and all the server's output. Beyond passive capture, the unauthenticated, unencrypted TCP session can be hijacked, injecting commands that execute as the already-authenticated user. Where a capture or on-path position exists, interception is usually the easiest and quietest Telnet attack, bypassing authentication entirely.
+When Telnet does not negotiate its encryption extension or run through another protective transport, an attacker with a network position can read the username, password, commands, and output. An active on-path attacker who can observe and inject correctly sequenced TCP data may also attempt to hijack the established session. Confirm that the data stream is plaintext before treating passive capture as credential or content disclosure.
 
 ```bash
 # capture Telnet from an on-path position
-tcpdump -i eth0 -A port 23 -w telnet.pcap
+tcpdump -i eth0 -w telnet.pcap port 23
 # follow the TCP stream to read credentials, commands, and output
 ```
 
@@ -28,5 +28,6 @@ tcpdump -i eth0 -A port 23 -w telnet.pcap
 
 ## References
 
-- [RFC 854 (Telnet, no encryption)](https://datatracker.ietf.org/doc/html/rfc854)
+- [RFC 854 (Telnet)](https://datatracker.ietf.org/doc/html/rfc854)
+- [RFC 2946 (Telnet Data Encryption Option)](https://datatracker.ietf.org/doc/html/rfc2946)
 - [HackTricks: Telnet](https://book.hacktricks.xyz/network-services-pentesting/pentesting-telnet)

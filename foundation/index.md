@@ -72,7 +72,7 @@ Explore the section: [Risk and Trust](risk-and-trust/index.md).
 
 ## Human Element
 
-Humans remain the single greatest variable in cybersecurity. Although machines and software behave according to the logic and rules programmed into them, people can make mistakes or act with malice in ways that technology alone cannot fully predict. From forgetting to apply patches to clicking on phishing links, human errors cause many of the most significant breaches.
+Security outcomes emerge from the interaction between people, technology, processes, and organizational incentives. People can make mistakes or act with malice, but systems also determine whether one mistake becomes a breach. Examples include delayed patching, successful phishing, excessive privileges, and workflows that make secure behavior unnecessarily difficult.
 
 Addressing these issues often involves regular training, clear policies, and a culture that values security-conscious behavior. Well-designed awareness campaigns and user education programs reduce the likelihood of accidental missteps. When people understand both the potential consequences and the best practices for secure behavior, organizations can better protect themselves against threats that no software patch alone can fix.
 
