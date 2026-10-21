@@ -1,6 +1,6 @@
 ---
-title: "Internet exposure: remote-desktop reachability through vendor relays"
-description: "Because remote-desktop tools connect out to a vendor relay, every running client is reachable from the internet without an inbound port, so the machine is exposed wherever the attacker can reach the relay. Combined with an enumerable ID and a weak or leaked password, this makes any installed client a remotely-connectable target."
+title: "External reachability: remote-desktop vendor relays"
+description: "Vendor relays can provide an external connection path without a conventional inbound port. Actual reachability and access depend on client state, outbound network access, incoming-session policy, approval or unattended-access configuration, authentication, allowlists, and other controls."
 keywords:
   - internet exposure
   - relay
@@ -9,24 +9,27 @@ keywords:
   - connectable
 ---
 
-# Internet exposure
+# External reachability
 
-The relay architecture that makes these tools convenient also makes them broadly exposed. A client connects outward to the vendor's relay and waits, so an attacker who knows the device ID and password connects through that same relay from anywhere, without the target having any inbound port open. The machine is therefore effectively internet-reachable for remote control the moment the client runs, regardless of firewalls or NAT. Combined with [enumerable IDs](../authentication/id-based-access.md) and [weak or leaked passwords](../authentication/weak-passwords.md), this means any installed client is a remotely-connectable target, which is why these tools are a common initial-access and persistence vector, including for scam and ransomware operations.
+Relay-based remote-desktop products commonly establish outbound connections to vendor infrastructure, so a session may be brokered without a conventional inbound port on the endpoint. That architecture can create an external access path through NAT, but it does not make every running client remotely controllable. The client must reach the relay and permit the requested incoming session, and the operator must satisfy the configured approval, authentication, allowlist, account, device-trust, and permission requirements. Egress filtering, DNS or proxy policy, application control, conditional access, and self-hosted or on-premises designs can further restrict the path.
 
 ```bash
-# the machine need not be internet-facing: the client reaches out to the relay,
-# and the attacker connects via the relay using ID + password from anywhere.
-# target sources: enumerated IDs, and ID:password pairs from breaches/stealer logs.
+# review endpoint and network evidence together
+# - is the client or service running?
+# - can it reach the vendor relay through DNS, proxy, and firewall policy?
+# - which incoming-session and authorization controls apply?
 ```
 
 ## Exploitation notes
 
-- The relay model defeats network segmentation as a control: a client on an internal machine is still reachable for remote control from the internet via the relay, so "not internet-facing" is not protection for these tools.
-- The practical requirement is the ID plus password; infostealer logs commonly supply both for a specific victim, making exposure directly exploitable without scanning.
-- This underlies the scam/support-fraud and ransomware use of these tools: a running client plus a socially-engineered or leaked password is remote control.
-- Pair with [insecure defaults](insecure-defaults.md) (unattended access, weak policy) that make the reachable client open to connect.
+- Network segmentation and egress controls remain relevant because they can limit which endpoints communicate with public relay infrastructure.
+- A device ID identifies a destination but does not authenticate a connection; review the controls described in [ID-based access](../authentication/id-based-access.md).
+- Interactive sessions require user acceptance under applicable policy, while unattended sessions require their configured authentication and authorization controls.
+- Pair reachability analysis with [configuration review](insecure-defaults.md) rather than inferring access from installation or relay traffic alone.
 
 ## References
 
-- [TeamViewer / AnyDesk relay connectivity](https://www.teamviewer.com/en/)
-- [CISA: remote access software abuse](https://www.cisa.gov/news-events/cybersecurity-advisories)
+- [TeamViewer ports and URLs](https://www.teamviewer.com/en-us/global/support/knowledge-base/teamviewer-remote/troubleshooting/ports-used-by-teamviewer/)
+- [TeamViewer restrict access](https://community.teamviewer.com/English/kb/articles/108687-restrict-access)
+- [AnyDesk firewall requirements](https://support.anydesk.com/firewall)
+- [AnyDesk interactive access](https://support.anydesk.com/docs/interactive-access)

@@ -17,7 +17,7 @@ A surprising number of Telnet services require no authentication: embedded devic
 nc <target> 23        # connect; a shell/menu with no login prompt => no auth
 # some accept any user, empty password:
 (printf 'anyuser\n\n'; sleep 1; printf 'id\n') | nc <target> 23
-# scan a range for open/no-auth telnet
+# discover open Telnet services; this does not test whether authentication is enforced
 nmap -p23 --open <range>
 ```
 

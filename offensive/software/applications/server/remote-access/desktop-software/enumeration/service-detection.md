@@ -1,35 +1,35 @@
 ---
-title: "Service detection: identifying remote-desktop software by port and traffic"
-description: "Each remote-desktop product uses characteristic ports and relay endpoints, TeamViewer on 5938 (then 443/80), AnyDesk on 7070, Splashtop on its own ports, so scanning and traffic analysis identify which is running. On a host, processes, installed files, and registry keys confirm the product and point to its stored configuration and credentials."
+title: "Service detection: identifying remote-desktop software on hosts and networks"
+description: "Endpoint artifacts provide the strongest evidence of installed remote-desktop software. DNS, proxy, firewall, and process-aware connection telemetry can identify outbound relay use, but scanning common destination ports does not generally detect these clients."
 keywords:
   - service detection
   - port 5938
-  - port 7070
+  - port 6568
   - relay
   - client artefacts
 ---
 
 # Service detection
 
-Identifying which remote-desktop product is present comes from two angles. On the network, the clients use characteristic ports, TeamViewer prefers TCP 5938 and falls back to 443/80, AnyDesk uses 7070 (and relays over 443), Splashtop and others use their own, so a targeted scan plus observation of connections to the vendor's relay infrastructure reveals the product. On a host you can inspect, the running processes, installed program files, and registry/app-data entries name the product precisely and point to where its configuration and any stored credentials live, which matters for unattended-password recovery.
+Identifying which remote-desktop product is present comes from two angles. On a host, processes, services, installed files, package inventory, registry entries, and application-data directories name the product precisely. On the network, DNS, proxy, firewall, and process-aware connection telemetry can reveal outbound communication with vendor infrastructure. TeamViewer normally requires no inbound port and initiates outbound connections on 5938, 443, or 80. AnyDesk documents outbound TCP 80, 443, and 6568, plus UDP 50001–50003 for local discovery. Because several products share common destinations such as TCP 443, port numbers alone are not conclusive.
 
 ```bash
-# network detection
-nmap -p5938,7070,6568,443,80 -sV <target>
-# connections to vendor relays indicate the product even when local ports are filtered
 # host artefacts (Windows)
 tasklist | findstr /i 'teamviewer anydesk splashtop logmein'
 dir "%APPDATA%\AnyDesk" "%ProgramData%\TeamViewer" 2>nul
+# network telemetry: correlate vendor domains/destinations with the originating process
+netstat -ano | findstr /r ":5938 :6568 :443 :80"
 ```
 
 ## Exploitation notes
 
-- The characteristic ports and relay destinations identify the product even behind NAT, because the client connects outward to the vendor relay; watch for those connections where inbound ports are filtered.
-- On a host, the product's app-data/registry location is also where its configuration and unattended credentials are stored, so service detection feeds [unattended-access](../authentication/unattended-access.md) credential recovery.
+- Inbound scans usually do not identify relay-based clients. An explicitly enabled LAN-listening mode is a separate configuration that must be verified before treating an open port as a product fingerprint.
+- Application-data and registry locations expose configuration and identifiers; do not assume they contain a recoverable plaintext unattended password.
 - Multiple tools are often installed (a managed one plus a user-installed one); enumerate all, as a forgotten or shadow install may be the weakest.
 - The identified product plus its [version](version-detection.md) selects the authentication attack and the applicable [product exploit](../known-product-exploits/index.md).
 
 ## References
 
-- [TeamViewer / AnyDesk port documentation](https://www.teamviewer.com/en/)
+- [TeamViewer ports](https://www.teamviewer.com/en-us/global/support/knowledge-base/teamviewer-remote/troubleshooting/ports-used-by-teamviewer/)
+- [AnyDesk firewall requirements](https://support.anydesk.com/firewall)
 - [HackTricks](https://book.hacktricks.xyz/)

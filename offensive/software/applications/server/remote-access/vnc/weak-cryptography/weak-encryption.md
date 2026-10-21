@@ -1,6 +1,6 @@
 ---
 title: "Weak encryption: VNC optional and weak encryption modes"
-description: "Where VNC implementations add encryption, it is often weak or optional: proprietary schemes with small or fixed keys, outdated TLS in VeNCrypt configurations, and encryption the server offers but does not require. These leave the session recoverable to a capturing attacker or downgradable, falling short of the protection their presence implies."
+description: "VNC encryption depends on implementation and configuration. VeNCrypt can provide TLS, while deployments that also offer cleartext security types, use obsolete TLS settings, or fail to validate certificates retain avoidable interception risks."
 keywords:
   - weak encryption
   - venCrypt
@@ -11,24 +11,22 @@ keywords:
 
 # Weak encryption
 
-Because base VNC is cleartext, implementations added encryption, but it frequently falls short. Some vendor schemes use small or fixed keys or proprietary algorithms of dubious strength. VeNCrypt wraps VNC in TLS, but deployments use outdated TLS versions, weak ciphers, or unverified self-signed certificates, so a positioned attacker still intercepts. And crucially, encryption is often offered but not required, so a client (or a forced downgrade) can select a cleartext or weak type instead. The presence of an encryption option does not mean the session is actually protected.
+Because base VNC is cleartext, implementations have added several security types, including VeNCrypt, which negotiates a TLS-protected stream after the initial RFB and VeNCrypt handshakes. Protection depends on the selected subtype, TLS policy, and client certificate validation. A deployment that offers both encrypted and cleartext security types permits clients to choose the weaker option and may expose the unauthenticated selection to an on-path downgrade. The presence of an encryption option therefore does not prove that every session uses it.
 
 ```bash
 # what encryption/security types are offered, and are they required?
 nmap -p5900 --script vnc-info <target>         # VeNCrypt(19)/vendor types present?
-# VeNCrypt wraps TLS: assess it like any TLS endpoint
-openssl s_client -connect <target>:5900 2>/dev/null | head   # (after the RFB/VeNCrypt negotiation)
-# if encryption is optional, select/force a cleartext or weak type instead
+# compare the complete list: VeNCrypt alongside None/VNC Auth means encryption is optional
 ```
 
 ## Exploitation notes
 
-- The key question is whether encryption is required or merely offered; an optional scheme is bypassed by choosing a weaker type, see [security type downgrade](security-type-downgrade.md).
-- VeNCrypt/TLS is only as strong as its configuration and certificate validation; weak ciphers or an unverified self-signed cert let a positioned attacker MITM, as with any weak TLS.
-- Proprietary vendor encryption with fixed or small keys offers little real protection; treat it as obfuscation and attempt capture/decryption.
+- The key question is whether encryption is required or merely offered; when a weaker type is also offered, a client can select it and an on-path attacker may attempt a [security-type downgrade](security-type-downgrade.md).
+- A generic `openssl s_client` connection to port 5900 cannot assess VeNCrypt because TLS begins only after RFB version, security-type, VeNCrypt-version, and subtype negotiation. Use a VeNCrypt-aware client and inspect its certificate and TLS diagnostics.
+- VeNCrypt/TLS is only as strong as its TLS configuration and certificate validation; accepting an untrusted certificate enables interception from a suitable network position.
 - Where no effective encryption is in force, the session is as exposed as [cleartext transmission](cleartext-transmission.md).
 
 ## References
 
-- [VeNCrypt and RFB security types](https://datatracker.ietf.org/doc/html/rfc6143#section-7.1.2)
+- [RFB protocol and VeNCrypt security types](https://github.com/rfbproto/rfbproto/blob/master/rfbproto.rst)
 - [HackTricks: VNC](https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc)

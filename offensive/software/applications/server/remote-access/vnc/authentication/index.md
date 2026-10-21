@@ -1,7 +1,7 @@
 ---
 title: "Authentication: attacking VNC access control"
 order: 1
-description: "VNC access control is frequently weak: servers run with no authentication, with vendor or guessable passwords, or with the classic VNC scheme whose eight-character DES password is brute-forceable. Specific implementations add outright authentication bypasses. Gaining access yields a full interactive desktop on the target."
+description: "VNC authentication depends on the security types and implementation in use. Review whether None or legacy VNC Authentication is enabled, assess password policy and rate limiting, and match implementation vulnerabilities to a named advisory and affected version."
 keywords:
   - vnc authentication
   - no authentication
@@ -12,7 +12,7 @@ keywords:
 
 # Authentication
 
-VNC authentication is weak in several independent ways, and any one gives a full interactive desktop. Servers are commonly left with the "None" security type (no authentication). The classic VNC password scheme is a DES challenge-response over a password truncated to eight characters, which is brute-forceable online and crackable offline from a captured challenge, and such passwords are often vendor defaults or trivial. And particular implementations (RealVNC, TightVNC) have had authentication bypasses that skip the check entirely. The payoff is the same regardless: interactive control of the remote desktop.
+RFB supports multiple security types, and implementations add further authentication mechanisms. A server offering `None` permits a connection without RFB authentication. Legacy VNC Authentication uses a DES challenge-response and, in implementations that follow the classic scheme, uses only the first eight password bytes. Online guessing depends on password quality and server-side attempt controls; a captured challenge-response permits offline verification of candidates. Implementation vulnerabilities must be tied to an exact advisory, such as CVE-2006-2369 in RealVNC 4.1.0 and 4.1.1, rather than inferred from the product family.
 
 ```bash
 vncviewer <target>::5900                       # prompts (or not) depending on security type
@@ -25,7 +25,7 @@ nmap -p5900 --script vnc-info,realvnc-auth-bypass <target>
 - **[Default passwords](default-passwords.md)**: vendor and guessable VNC passwords.
 - **[Password brute force](password-brute-force.md)**: online and offline attacks on the VNC password.
 - **[RealVNC auth bypass](realvnc-auth-bypass.md)**: the RealVNC security-type bypass.
-- **[TightVNC bypass](tightvnc-bypass.md)**: TightVNC authentication flaws.
+- **[TightVNC advisory assessment](tightvnc-bypass.md)**: requiring evidence for version-specific claims.
 
 ## References
 

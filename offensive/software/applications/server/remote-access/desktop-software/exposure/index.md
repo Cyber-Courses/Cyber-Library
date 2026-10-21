@@ -1,6 +1,6 @@
 ---
-title: "Exposure: internet-facing and insecurely-configured remote-desktop tools"
-description: "Remote-desktop tools reach machines through vendor relays, so they work from anywhere, which combined with weak or default configuration exposes those machines broadly. The surface is internet-reachable installations discoverable through enumeration, and insecure defaults, enabled unattended access, weak password policy, no allowlist, that leave a client open to connection."
+title: "Exposure: externally reachable and insecurely configured remote-desktop tools"
+description: "Many remote-desktop products use outbound connections to vendor relay infrastructure. Whether an endpoint accepts an external session still depends on service state, egress reachability, incoming-session policy, interactive approval, unattended-access configuration, authentication, allowlists, and other controls."
 keywords:
   - exposure
   - internet-facing
@@ -11,14 +11,14 @@ keywords:
 
 # Exposure
 
-By design these tools connect through the vendor's cloud relay, so any installed client is reachable from anywhere the attacker can reach that relay, which effectively means the internet, without the machine itself being directly internet-facing. That reach, combined with weak configuration, is the exposure. The two aspects are internet-reachable installations (any running client with a known ID and a weak/leaked password is connectable from outside) and insecure defaults, unattended access enabled, weak or no password policy, no connection allowlist or approval requirement, that leave the client open. The relay model means "internal only" is not a real boundary for these tools.
+Many remote-desktop products initiate outbound connections to vendor infrastructure, allowing sessions without exposing a conventional inbound listening port. This creates an externally mediated access path when the client is running, can reach the service, and is configured to accept the requested connection. Interactive approval, unattended-access state, passwords or account assignment, multifactor authentication, allowlists, permission profiles, conditional-access policy, and network egress controls can all affect whether the path is usable. Review relay reachability and client authorization together rather than treating installation alone as internet exposure.
 
 ## Subtopics
 
-- **[Internet exposure](internet-exposure.md)**: reachability through the vendor relay.
-- **[Insecure defaults](insecure-defaults.md)**: configurations that leave a client open.
+- **[External reachability](internet-exposure.md)**: relay-mediated connectivity and its control points.
+- **[Insecure configuration](insecure-defaults.md)**: settings that weaken incoming-session authorization.
 
 ## References
 
-- [TeamViewer / AnyDesk connectivity model](https://www.teamviewer.com/en/)
-- [HackTricks](https://book.hacktricks.xyz/)
+- [TeamViewer ports and URLs](https://www.teamviewer.com/en-us/global/support/knowledge-base/teamviewer-remote/troubleshooting/ports-used-by-teamviewer/)
+- [AnyDesk firewall requirements](https://support.anydesk.com/firewall)

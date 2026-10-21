@@ -14,16 +14,19 @@ keywords:
 Every r-command exchange carries its payload in cleartext: for rsh/rexec the command and arguments and their output, and for rlogin the whole interactive session. A positioned attacker reconstructs all of it, learning exactly what was executed, seeing the results, and capturing any sensitive data or secondary credentials that pass through (a command that prints a config with secrets, a `su`/`sudo` password typed in an rlogin session, data read from files). This frequently yields more than a captured login, because administrative commands and their output expose the systems and secrets the operator was working with.
 
 ```bash
-# capture and reconstruct the command/output content
-tcpdump -i eth0 -A 'port 513 or port 514' -w content.pcap
-tshark -r content.pcap -q -z follow,tcp,ascii,0     # command (c->s) and output (s->c)
+# capture all TCP traffic for the target so negotiated secondary streams are included
+tcpdump -i eth0 -w content.pcap 'tcp and host <target>'
+# enumerate streams, identify the service connection and any negotiated stderr connection,
+# then follow each relevant stream by its actual tcp.stream number
+tshark -r content.pcap -q -z conv,tcp
+tshark -r content.pcap -q -z follow,tcp,ascii,<stream-number>
 ```
 
 ## Exploitation notes
 
 - Content capture often beats the login: executed commands and their output reveal configuration, secrets printed to the terminal, and secondary credentials entered mid-session.
-- For rsh/rexec the key direction is client-to-server (the command) and server-to-client (the output); for rlogin reconstruct the full bidirectional session.
-- This is passive and quiet; pair with [password sniffing](password-sniffing.md) from the same capture for credentials plus content, and with [session replay](session-replay.md) or hijacking for active use.
+- For rsh/rexec the initial connection carries the request, stdin, and stdout, while a negotiated secondary connection may carry stderr and signals. For rlogin reconstruct the full bidirectional terminal session.
+- This is passive and quiet; pair with [password sniffing](password-sniffing.md) from the same capture for credentials plus content, and with [live session hijacking](session-replay.md) for active use.
 - Needs an on-path/tap position; legacy r-command segments are typically flat and easily intercepted.
 
 ## References

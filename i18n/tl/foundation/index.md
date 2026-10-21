@@ -29,7 +29,7 @@ Ang kultura ng hacker ay lumitaw sa isang panahon kung saan ang pag-access sa mg
 
 Sa kabila ng mas madidilim na elemento na lumitaw, ang mas malawak na pamana ng komunidad ay maliwanag sa kasalukuyang domain ng cybersecurity. Ang mga bug bounties, open-source na kolaborasyon, at mga kumpetisyon sa etikal na hacking ay lahat ay kumukuha sa espiritu ng hacker ng paggalugad. Maraming mga propesyonal sa seguridad ang patuloy na yumayakap sa mga halagang ito, ginagamit ang pagkamalikhain upang matuklasan ang mga kahinaan at pahusayin ang mga proteksyon ng sistema para sa kapakinabangan ng lahat.
 
-# Kasaysayan
+## Kasaysayan
 
 Ang kasaysayan ng cybersecurity ay nakaugnay sa ebolusyon ng teknolohiyang kompyuter. Habang ang mga kompyuter ay naging mas laganap sa negosyo, gobyerno, at personal na buhay, ang pangangailangan na protektahan ang datos at mga sistema mula sa hindi awtorisadong pag-access ay naging mas agarang. Ang larangan ng cybersecurity ay lumitaw bilang tugon sa mga hamong ito, kumukuha mula sa iba't ibang hanay ng mga disiplina, kabilang ang agham ng kompyuter, kriptograpiya, at pamamahala ng panganib.
 

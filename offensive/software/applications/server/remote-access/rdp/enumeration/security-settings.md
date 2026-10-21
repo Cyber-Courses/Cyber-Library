@@ -17,8 +17,7 @@ How an RDP host is configured determines which attacks are even possible, so enu
 # security layer, encryption level, and NLA requirement
 nmap -p3389 --script rdp-enum-encryption <target>
 #   reports: Security layer (RDP/SSL/CredSSP/Hybrid), Encryption level, NLA supported/required
-# inspect the TLS certificate (host identity, validity, key strength)
-openssl s_client -connect <target>:3389 -starttls rdp 2>/dev/null | openssl x509 -noout -subject -dates
+# inspect certificate warnings and identity through an RDP-aware client during an authorized connection
 ```
 
 ## Exploitation notes

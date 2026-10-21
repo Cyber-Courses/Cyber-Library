@@ -1,6 +1,6 @@
 ---
 title: "Version detection: determining the remote-desktop client version"
-description: "The client version decides which attacks apply: brute-force feasibility (vendors added rate-limiting over time), stored-credential recoverability (storage formats changed), and the specific product vulnerabilities a build is exposed to. Version is read from the client UI, installed files, registry, or handshake, and matched to known advisories."
+description: "Determine the installed remote-desktop product, platform, edition, and complete version from reliable endpoint evidence, then compare them with the exact affected and fixed releases in a named vendor advisory or CVE."
 keywords:
   - version detection
   - client version
@@ -11,24 +11,23 @@ keywords:
 
 # Version detection
 
-Version is decisive for these products because so much changed across releases. Vendors added connection rate-limiting and lockout after mass account-takeover campaigns, so whether online [password brute force](../authentication/weak-passwords.md) is feasible depends on the version. The format and recoverability of stored credentials (for [unattended access](../authentication/unattended-access.md)) changed across versions. And each product's specific authentication-bypass and code-execution vulnerabilities apply only to particular builds. Version is read from the client UI/About, the installed binary's metadata, registry/app-data, or in some cases the connection handshake, then matched to advisories.
+Product vulnerabilities and security behavior vary by platform, edition, configuration, and release. Obtain the complete installed version from the application's About view, package inventory, binary metadata, or another documented endpoint source. Then match it to a named vendor advisory or CVE, preserving the advisory's prerequisites and impact. A port number or generic relay connection does not establish a client version, and an undocumented handshake inference should not be treated as an exact fingerprint.
 
-```bash
-# host: read the client version from binary metadata / registry
-(Get-Item 'C:\Program Files\TeamViewer\TeamViewer.exe').VersionInfo.ProductVersion   # PowerShell
-reg query 'HKLM\SOFTWARE\WOW6432Node\TeamViewer' /v Version 2>nul
-# AnyDesk version from its binary or app-data
-# match the build to the vendor advisory for the applicable exploit
+```powershell
+# Windows: read version metadata from installed binaries
+(Get-Item 'C:\Program Files\TeamViewer\TeamViewer.exe').VersionInfo.ProductVersion
+(Get-Item 'C:\Program Files (x86)\AnyDesk\AnyDesk.exe').VersionInfo.ProductVersion
+# adjust paths to the installation, and verify the result against the application UI
 ```
 
 ## Exploitation notes
 
-- The version gates practicality: an old build may allow online brute force that a current one rate-limits, and may store unattended credentials in a recoverable form that newer versions protect.
-- Map the build to product advisories for the [known exploits](../known-product-exploits/index.md) (auth bypass, RCE); these are version-specific.
-- Where you only have network access, handshake/relay behaviour may hint at the version; on a host, binary metadata and registry give it exactly.
+- Record the product, operating system, architecture, edition, and full version because advisories may distinguish among them.
+- Map the build to a specific entry in the [known product issues](../known-product-exploits/index.md); do not convert an authorization flaw or credential-coercion issue into a generic bypass or RCE.
+- If only network telemetry is available, report the product indication and uncertainty rather than inventing a precise version.
 - Combine with [service detection](service-detection.md) to complete the fingerprint before choosing the attack.
 
 ## References
 
-- [TeamViewer release/security notes](https://www.teamviewer.com/en/trust-center/security/)
-- [AnyDesk security advisories](https://anydesk.com/en/security)
+- [TeamViewer security bulletins](https://www.teamviewer.com/en/resources/trust-center/security-bulletins/)
+- [AnyDesk security](https://anydesk.com/en/security)

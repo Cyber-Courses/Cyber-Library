@@ -1,6 +1,6 @@
 ---
 title: "Weak ciphers: legacy and broken VPN cipher negotiation"
-description: "VPN gateways offering legacy ciphers, single or triple DES, RC4, or export-grade suites, let a positioned attacker negotiate or downgrade to encryption weak enough to decrypt captured tunnel traffic. IPsec exposes this through its offered transform sets and TLS-based VPNs through their cipher suites."
+description: "VPN gateways that permit legacy ciphers, single or triple DES, RC4, or export-grade suites can establish sessions with obsolete protection. Offered and negotiated algorithms should be distinguished, and practical impact depends on the cipher and attack conditions."
 keywords:
   - weak cipher
   - 3des
@@ -11,7 +11,7 @@ keywords:
 
 # Weak ciphers
 
-A VPN that still offers weak encryption undermines its own confidentiality. In IPsec the gateway advertises transform sets, and acceptance of DES, 3DES, or weak modes lets a session use breakable encryption. In TLS-based VPNs (SSL-VPN portals, SSTP, OpenVPN-over-TLS) weak cipher suites (RC4, export grade, 64-bit block ciphers vulnerable to birthday attacks) do the same. A positioned attacker who captures the tunnel, or who forces the negotiation toward the weak option, can then decrypt or weaken the traffic the VPN is meant to protect.
+A VPN that still offers weak encryption can establish sessions with obsolete protection. In IPsec the gateway advertises transform sets, while TLS-based VPNs advertise cipher suites. DES, 3DES, RC4, export-grade suites, and other legacy choices should be removed, but an offered algorithm is not necessarily the one a client negotiates and does not by itself demonstrate a forced downgrade. Confirm the selected algorithm and describe its specific exposure: for example, SWEET32-style attacks against 64-bit block ciphers require a large volume of traffic under the same keys, whereas export-grade and RC4 attacks have different prerequisites.
 
 ```bash
 # IPsec: which transforms are offered (look for DES/3DES, weak hashes)
@@ -23,9 +23,9 @@ nmap -p443 --script ssl-enum-ciphers <target>        # flags RC4, 3DES, export, 
 
 ## Exploitation notes
 
-- The offered transform sets (IPsec) and cipher suites (TLS VPNs) are the evidence; DES/3DES, RC4, and export-grade acceptance mark a gateway whose traffic is attackable with capture.
-- 64-bit block ciphers (DES/3DES) are vulnerable to birthday-bound collision attacks on long-lived tunnels (the SWEET32 class), relevant because VPN tunnels carry large volumes over long sessions.
-- Weak crypto matters to an attacker who can capture or sit on the tunnel; combine with a capture position, and with [key-exchange downgrade](key-exchange-downgrade.md) which attacks the key agreement itself.
+- Offered transform sets and cipher suites establish server support; capture a completed negotiation to show what a representative client actually selects.
+- 64-bit block ciphers such as 3DES are vulnerable to birthday-bound collision attacks on long-lived, high-volume sessions (the SWEET32 class); their presence does not make an arbitrary short capture immediately decryptable.
+- Protocol negotiation is authenticated when the handshake completes successfully. Claim a forced downgrade only when a separate fallback, protocol, or implementation weakness supports it.
 - Even where decryption is impractical, weak-cipher support fingerprints an old gateway likely vulnerable to the [appliance](../ssl-vpn-appliances/index.md) or protocol flaws.
 
 ## References

@@ -29,7 +29,7 @@ Ymddangosodd diwylliant hacwyr mewn cyfnod pan oedd mynediad at adnoddau cyfrifi
 
 Er gwaethaf yr elfennau tywyllach a ddaeth i'r amlwg, mae etifeddiaeth ehangach y gymuned yn amlwg ym maes seiberddiogelwch heddiw. Mae gwobrau byg, cydweithrediadau ffynhonnell agored, a chystadlaethau hacio moesegol i gyd yn tynnu ar ysbryd archwilio hacwyr. Mae llawer o weithwyr proffesiynol diogelwch yn dal i gofleidio'r gwerthoedd hyn, gan ddefnyddio creadigrwydd i ddatgelu bregusrwydd a gwella amddiffyniadau system er budd pawb.
 
-# Hanes
+## Hanes
 
 Mae hanes seiberddiogelwch wedi'i gydblethu â datblygiad technoleg cyfrifiadurol. Wrth i gyfrifiaduron ddod yn fwy cyffredin mewn busnes, llywodraeth, a bywyd personol, daeth yr angen i ddiogelu data a systemau rhag mynediad heb awdurdod yn fwy brys. Daeth maes seiberddiogelwch i'r amlwg mewn ymateb i'r heriau hyn, gan dynnu ar set amrywiol o ddisgyblaethau, gan gynnwys gwyddoniaeth gyfrifiadurol, cryptograffeg, a rheoli risg.
 

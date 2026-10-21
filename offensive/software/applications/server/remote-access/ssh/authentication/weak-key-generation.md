@@ -1,6 +1,6 @@
 ---
 title: "Weak key generation: predictable SSH keys from broken generators"
-description: "SSH keys generated with insufficient entropy or by flawed tooling are predictable or factorable, so the private key can be derived without stealing it. The Debian OpenSSL entropy flaw produced a small, enumerable keyspace whose keys are brute-forced against authorized_keys, and low-entropy embedded devices and shared-factory keys repeat keys across units."
+description: "Flawed random-number generation can create predictable SSH keys, as in CVE-2008-0166 on affected Debian-derived systems. Distinguish user keys, which authorize clients, from host keys, which identify servers, and distinguish obsolete key sizes from keys that are practically factorable."
 keywords:
   - weak key
   - debian openssl
@@ -11,25 +11,22 @@ keywords:
 
 # Weak key generation
 
-Public-key authentication assumes the private key cannot be derived, but keys generated badly break that assumption. The archetype is the Debian OpenSSL entropy flaw: for a period, keys generated on affected systems drew from a tiny entropy pool, so only a few hundred thousand distinct keys per type/size existed, and the entire set was precomputed. Any public key from an affected system is matched to its private key by table lookup. Beyond that, embedded and IoT devices with poor entropy at first boot generate predictable keys, and many ship identical factory keys across all units, so recovering one device's key opens every peer.
+CVE-2008-0166 was caused by a Debian-specific change that made OpenSSL-generated key material predictable in affected releases. Debian required regeneration of both weak OpenSSH user keys and host keys and added blacklist detection. The consequences differ: a recovered user private key may authenticate to accounts that trust it, while a recovered host private key can support server impersonation or attacks on host identity. Other low-entropy or duplicated-device-key findings require product- and firmware-specific evidence.
 
 ```bash
-# identify the key type/size in use (from a captured public key or host key)
+# identify key type and size
 ssh-keygen -lf authorized_keys                 # fingerprint and bit length
-# Debian weak keys: match a target public key against the precomputed set
-#   download the known weak-key set for the type/size, grep the target's blob
-grep -f <(cut -d' ' -f2 target.pub) debian_ssh_rsa_2048/*.pub   # find the matching private key
-# then authenticate with the recovered private key
-ssh -i debian_ssh_rsa_2048/<match> user@<target>
-# embedded/shared factory keys: extract from one device's firmware, reuse on peers
+# on systems retaining Debian's blacklist utility, check keys against known weak sets
+ssh-vulnkey target.pub
+# interpret a match according to whether target.pub is a user or host key
 ```
 
 ## Exploitation notes
 
-- The Debian weak-key case is a lookup, not a crack: precomputed key sets exist, so a public key (host key or an `authorized_keys` entry) from an affected system directly yields the private key.
-- Short or legacy keys (512/1024-bit RSA, DSA) are additionally weak to factoring or inherent flaws; `ssh-keygen -lf` reveals the size to judge this.
-- Embedded devices often reuse one factory key across an entire product line; extracting it from firmware (or one unit) authenticates to all of them, and the same key frequently serves as both host key and a trusted client key.
-- This complements [Public key exposure](public-key-exposure.md): there you steal the key, here you derive or reuse it; both end in authenticating as the owner.
+- Known CVE-2008-0166 public keys can be compared with precomputed weak-key sets; impact then depends on how that key is used and trusted.
+- RSA keys below 2048 bits are obsolete under current security-strength guidance, but that does not mean an arbitrary 1024-bit RSA modulus is presently practical to factor.
+- DSA has separate algorithm and parameter concerns; identify the exact problem instead of treating every legacy DSA key as factorable.
+- Repeated embedded-device keys are a product-specific finding. A duplicated host key affects server identity; a duplicated authorized client key can affect login authorization.
 
 ## Tools
 
@@ -39,4 +36,5 @@ ssh -i debian_ssh_rsa_2048/<match> user@<target>
 ## References
 
 - [Debian OpenSSL predictable PRNG advisory](https://www.debian.org/security/2008/dsa-1571)
-- [HackTricks: SSH weak keys](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh)
+- [Debian OpenSSH advisory](https://lists.debian.org/debian-security-announce/2008/msg00153.html)
+- [NIST cryptographic algorithm transition guidance](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program/validation-notes)

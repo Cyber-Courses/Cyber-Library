@@ -1,7 +1,7 @@
 ---
-title: "WireGuard: static-key management and identity exposure"
+title: "WireGuard: static-key management and identity considerations"
 order: 4
-description: "WireGuard's cryptography is modern and sound, so attacks target its key management: recovering the static private keys and pre-shared keys from client and server configuration files, where they sit in cleartext, and the identity exposure from its fixed per-peer key model. A recovered key authenticates the attacker as that peer."
+description: "WireGuard attacks primarily target static private keys and optional pre-shared keys stored in configuration or active interface state. The handshake hides static public-key identity from passive observers unless relevant long-term key material is later compromised."
 keywords:
   - wireguard
   - static key
@@ -12,7 +12,7 @@ keywords:
 
 # WireGuard
 
-WireGuard is deliberately minimal and cryptographically sound, so there is no protocol-level crypto attack of the kind that afflicts PPTP or aggressive-mode IKE; it even stays silent to unauthenticated probes. The attack surface is therefore key management. WireGuard authenticates peers with static Curve25519 key pairs and an optional pre-shared key, and these live in cleartext in configuration files (`wg0.conf`, client `.conf` files) and in the running configuration. Recovering a peer's private key (and the PSK, if used) from a config, backup, or device lets the attacker stand up a peer with that identity and connect. The fixed-key model also means a peer's public key is a persistent identity that reveals who is connecting.
+WireGuard is deliberately minimal and uses modern cryptography, so the primary attack surface is key management. WireGuard authenticates peers with static Curve25519 key pairs and an optional pre-shared key; deployments commonly store these values in configuration files (`wg0.conf`, client `.conf` files) and active interface state. Recovering a peer's private key, plus its pre-shared key when configured, can let an attacker impersonate that peer. The fixed public key is a persistent configured identity, but WireGuard encrypts the initiator's static public key during the handshake, so a passive observer does not ordinarily learn it. If the responder's private key is later compromised, recorded historical handshakes can be associated with initiator identities, although past tunnel data retains forward secrecy.
 
 ```bash
 # recover keys from configuration (cleartext)
@@ -33,4 +33,5 @@ wg showconf wg0
 ## References
 
 - [WireGuard protocol and configuration](https://www.wireguard.com/)
+- [WireGuard known limitations: identity-hiding forward secrecy](https://www.wireguard.com/known-limitations/)
 - [wg(8) and wg-quick](https://man7.org/linux/man-pages/man8/wg.8.html)

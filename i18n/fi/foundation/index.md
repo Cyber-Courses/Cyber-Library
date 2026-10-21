@@ -29,7 +29,7 @@ Hakkerikulttuuri syntyi aikana, jolloin pääsy tietokoneisiin oli rajallista ja
 
 Huolimatta esiin nousseista synkemmistä elementeistä, yhteisön laajempi perintö näkyy nykypäivän kyberturvallisuuden alalla. Bug bounty -ohjelmat, avoimen lähdekoodin yhteistyöt ja eettiset hakkerointikilpailut kaikki ammentavat hakkeroinnin tutkimushengestä. Monet turvallisuusalan ammattilaiset omaksuvat yhä nämä arvot, hyödyntäen luovuutta haavoittuvuuksien löytämiseksi ja järjestelmien suojauksen parantamiseksi kaikkien hyödyksi.
 
-# Historia
+## Historia
 
 Kyberturvallisuuden historia on kietoutunut yhteen tietotekniikan kehityksen kanssa. Kun tietokoneet yleistyivät liiketoiminnassa, hallituksessa ja henkilökohtaisessa elämässä, tarve suojata tietoja ja järjestelmiä luvattomalta pääsyltä kasvoi kiireellisemmäksi. Kyberturvallisuuden ala syntyi vastauksena näihin haasteisiin, hyödyntäen monenlaisia tieteenaloja, kuten tietojenkäsittelytiedettä, salausoppia ja riskienhallintaa.
 

@@ -1,6 +1,6 @@
 ---
 title: "Cleartext transmission: reading the unencrypted VNC session"
-description: "Standard VNC sends the framebuffer, input events, and the authentication challenge-response without encryption. A positioned attacker captures the traffic to reconstruct the remote screen, recover keystrokes including typed passwords, and extract the challenge-response pair for offline cracking of the VNC password."
+description: "RFB sessions using None or VNC Authentication send subsequent protocol data without encryption. An on-path capture can expose framebuffer updates, input events, and, for VNC Authentication, the challenge-response exchange; protected security types require separate analysis."
 keywords:
   - cleartext
   - framebuffer capture
@@ -11,7 +11,7 @@ keywords:
 
 # Cleartext transmission
 
-Without an encrypting security type (VeNCrypt/TLS), a VNC session is entirely in the clear on the wire. For an attacker with a capture position this yields three things: the framebuffer updates, which reconstruct the remote desktop image the user sees; the client input events, which include every keystroke, so passwords typed into the session are captured; and the authentication handshake, whose challenge and response can be lifted for offline cracking of the short VNC password. A single captured session can thus give both the content and the credential.
+When a session selects `None` or VNC Authentication, subsequent RFB protocol data is unencrypted. An on-path capture can expose framebuffer updates and client input events; the VNC Authentication exchange also exposes the challenge and response for offline candidate testing. Practical reconstruction depends on the encodings, extensions, and completeness of the capture. Do not infer cleartext merely because VeNCrypt is absent: TLS, SASL, RSA-AES, Secure Tunnel, Integrated SSH, and vendor mechanisms may provide other forms of protection.
 
 ```bash
 # capture VNC traffic from an on-path position
@@ -23,12 +23,13 @@ tcpdump -i eth0 -w vnc.pcap port 5900
 
 ## Exploitation notes
 
-- Three distinct wins from one capture: screen reconstruction (what the user is doing), keystroke recovery (passwords and commands they type), and the challenge-response pair for [offline password cracking](../authentication/password-brute-force.md).
-- Capturing keystrokes often yields credentials to other systems that the user types into the VNC session, beyond the VNC password itself.
+- A complete cleartext capture may permit screen reconstruction and recovery of client input events, subject to the negotiated encodings and extensions.
+- VNC Authentication challenge-response data permits [offline candidate testing](../authentication/password-brute-force.md), but does not guarantee password recovery.
 - The attack needs an on-path position (ARP/DNS/route) or a tap; VNC over a flat LAN is readily intercepted.
-- The defense is tunnelling VNC (SSH/VPN) or using VeNCrypt/TLS; the absence of an encrypting security type in enumeration confirms the session is exposed.
+- Confirm the selected security type and its effective protection. TLS, VeNCrypt, SASL, RSA-AES, SSH, VPN, or another authenticated encrypted transport may protect the session.
 
 ## References
 
-- [RFC 6143: no-encryption default](https://datatracker.ietf.org/doc/html/rfc6143)
-- [HackTricks: VNC sniffing](https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc)
+- [RFC 6143: None](https://datatracker.ietf.org/doc/html/rfc6143#section-7.2.1)
+- [RFC 6143: VNC Authentication](https://datatracker.ietf.org/doc/html/rfc6143#section-7.2.2)
+- [Maintained RFB security types](https://github.com/rfbproto/rfbproto/blob/master/rfbproto.rst)

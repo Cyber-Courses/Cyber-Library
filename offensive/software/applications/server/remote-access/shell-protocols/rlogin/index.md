@@ -1,7 +1,7 @@
 ---
 title: "rlogin: attacking the remote login service"
 order: 4
-description: "rlogin (rlogind on TCP 513) opens an interactive login session, authenticating by the same .rhosts/hosts.equiv host trust as rsh, or falling back to a cleartext password. Attacks are passwordless login through trust abuse, capture of the cleartext password and session, username enumeration from the login behaviour, and session hijacking."
+description: "rlogin (rlogind on TCP 513) opens an unencrypted interactive login session. Traditional rlogind checks for a privileged client source port and .rhosts/hosts.equiv trust, then may invoke the system login flow when automatic authentication fails. Attacks include trust abuse, traffic capture, and TCP session hijacking."
 keywords:
   - rlogin
   - rlogind
@@ -12,7 +12,7 @@ keywords:
 
 # rlogin
 
-`rlogin` opens an interactive login session on a remote host via `rlogind` on TCP 513. It authenticates the same way as rsh, host-based trust through `~/.rhosts` and `/etc/hosts.equiv`, and falls back to a cleartext password prompt when trust does not apply. The attacks follow: passwordless login by abusing or planting trust, capture of the cleartext password and the entire session when a password is used, username enumeration from how the login responds, and hijacking the live cleartext session. Because it grants an interactive shell, a successful rlogin is a direct foothold.
+`rlogin` opens an interactive login session on a remote host via `rlogind` on TCP 513. Traditional implementations require the client connection to originate from a privileged port in the 512–1023 range, then evaluate host-based trust through `~/.rhosts` and `/etc/hosts.equiv`. If automatic authentication fails, `rlogind` may invoke the configured login program over the same unencrypted terminal stream; whether that flow requests a password, uses another PAM mechanism, or rejects access depends on the target. The attacks follow: passwordless login by abusing or planting trust, capture of credentials and session data when an unencrypted login flow is used, implementation-dependent username enumeration, and hijacking the live TCP session. Because it grants an interactive shell, a successful rlogin is a direct foothold.
 
 ```bash
 # trusted login (no password) or password login

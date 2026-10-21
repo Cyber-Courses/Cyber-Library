@@ -1,7 +1,7 @@
 ---
 title: "WinRM: attacking Windows Remote Management"
 order: 8
-description: "WinRM implements WS-Management on TCP 5985 (HTTP) and 5986 (HTTPS), providing remote command execution on Windows through PowerShell Remoting. The surface is service enumeration, authentication with passwords or NTLM hashes (pass-the-hash), and command execution: valid credentials or a hash for a Remote Management user yield an interactive shell, typically with administrative rights."
+description: "WinRM implements WS-Management on TCP 5985 (HTTP) and 5986 (HTTPS), providing remote management through PowerShell Remoting. Successful authentication can yield a shell under the account's existing privileges, subject to endpoint authorization and session constraints."
 keywords:
   - winrm
   - ws-management
@@ -12,7 +12,7 @@ keywords:
 
 # WinRM
 
-WinRM (Windows Remote Management) is Microsoft's implementation of the WS-Management protocol, listening on TCP 5985 (HTTP) and 5986 (HTTPS), and it is the transport behind PowerShell Remoting. It is a prime lateral-movement and remote-execution target on Windows networks: with valid credentials (or an NT hash, since WinRM supports NTLM authentication and therefore pass-the-hash) for a member of the Remote Management Users group or a local admin, an attacker gets an interactive PowerShell session on the host, usually with administrative privileges. The surface is enumerating the service, obtaining and using credentials or hashes, and the command execution itself.
+WinRM (Windows Remote Management) is Microsoft's implementation of the WS-Management protocol, listening on TCP 5985 (HTTP) and 5986 (HTTPS), and it is a transport behind PowerShell Remoting. It is a useful lateral-movement and remote-execution target on Windows networks when an account is authorized for a session endpoint. Passwords and, where NTLM is enabled, NT hashes may authenticate the connection. The resulting session runs in the authenticated user's context and remains subject to operating-system permissions and endpoint restrictions; successful remoting does not itself grant administrator rights.
 
 ```bash
 nmap -p5985,5986 -sV <target>

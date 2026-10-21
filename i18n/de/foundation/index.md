@@ -30,7 +30,7 @@ Die Hacker-Kultur entstand in einer Zeit, als der Zugang zu Computerressourcen b
 
 Trotz der dunkleren Elemente, die auftauchten, ist das breitere Erbe der Gemeinschaft im heutigen Bereich der Cybersicherheit offensichtlich. Bug-Bounty-Programme, Open-Source-Kollaborationen und ethische Hacking-Wettbewerbe greifen alle auf den Hacker-Geist der Erkundung zurück. Viele Sicherheitsexperten umarmen immer noch diese Werte und nutzen Kreativität, um Schwachstellen aufzudecken und den Schutz von Systemen zum Vorteil aller zu verbessern.
 
-# Geschichte
+## Geschichte
 
 Die Geschichte der Cybersicherheit ist eng mit der Entwicklung der Computertechnologie verbunden. Als Computer im Geschäftsleben, in der Regierung und im Privatleben immer häufiger wurden, wuchs das Bedürfnis, Daten und Systeme vor unbefugtem Zugriff zu schützen, immer dringlicher. Das Feld der Cybersicherheit entstand als Reaktion auf diese Herausforderungen und stützt sich auf eine vielfältige Reihe von Disziplinen, darunter Informatik, Kryptographie und Risikomanagement.
 

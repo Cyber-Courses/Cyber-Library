@@ -1,7 +1,7 @@
 ---
 title: "IPMI RAKP hash disclosure: pre-auth password-hash retrieval"
 order: 2
-description: "The IPMI 2.0 RAKP authentication exchange returns a salted HMAC of the requested user's password before authentication completes, by design. An attacker requests the exchange for a username and receives a crackable hash, so any BMC speaking IPMI 2.0 leaks a password hash for every account to an unauthenticated attacker for offline cracking."
+description: "The IPMI 2.0 RAKP authentication exchange can return a password-keyed HMAC for a valid account before authentication completes. Exposed implementations may therefore let an unauthenticated attacker test likely usernames, capture RAKP material, and attempt offline password recovery."
 keywords:
   - rakp
   - ipmi 2.0
@@ -12,7 +12,7 @@ keywords:
 
 # IPMI RAKP hash disclosure
 
-The flaw here is in the IPMI 2.0 specification itself, not a given implementation. The RAKP (RMCP+ Authenticated Key-Exchange Protocol) handshake has the BMC return, in RAKP message 2, a salted HMAC computed over the requested user's password, before the client has proven anything. So an attacker who initiates the exchange for a username receives a hash of that account's password and cracks it offline. Because it is specification-mandated, essentially every BMC speaking IPMI 2.0 is affected: an unauthenticated attacker retrieves a crackable password hash for root and any other account, and weak BMC passwords (common) fall quickly.
+The weakness follows from the IPMI 2.0 RAKP (RMCP+ Authenticated Key-Exchange Protocol) design. During authentication, a BMC can return a password-keyed HMAC in RAKP message 2 before the client has authenticated. Against an exposed implementation, an attacker requests an exchange for candidate account names and captures the material for valid accounts, then tests password candidates offline. The result depends on the BMC exposing RMCP+, accepting the requested authentication exchange, and the supplied username identifying a valid account; it should not be described as guaranteed leakage for every account on every IPMI 2.0 device.
 
 ```bash
 # retrieve the RAKP hash for a user and crack it offline
@@ -25,8 +25,8 @@ hashcat -m 7300 ipmi_rakp.hashes wordlist.txt
 
 ## Exploitation notes
 
-- This is pre-authentication and specification-level, so it applies to almost all IPMI 2.0 BMCs; the attacker needs only to know or guess usernames (`root`, `ADMIN`, `admin` are near-universal) to request their hashes.
-- The retrieved value is a salted HMAC crackable offline (hashcat mode 7300); BMC passwords are frequently defaults or weak, so cracking commonly succeeds.
+- This is a pre-authentication, protocol-design weakness, but retrieval still depends on the implementation, exposed IPMI channel, and a valid account name. Test likely vendor defaults and an authorized username list rather than assuming `root` or `ADMIN` exists.
+- The retrieved RAKP exchange material contains a password-keyed HMAC suitable for offline guessing with hashcat mode 7300; success then depends on password strength and the candidate set.
 - A cracked BMC password gives authenticated administrative control of the controller (power, console, virtual media), the same impact as the cipher 0 bypass but via a recovered credential.
 - Enumerate usernames first (defaults and any disclosed); combine with [BMC default credentials](bmc-default-credentials.md) (the cracked password is often a default anyway) and [cipher 0](ipmi-cipher-0-bypass.md).
 

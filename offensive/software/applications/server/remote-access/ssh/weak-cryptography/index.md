@@ -24,7 +24,7 @@ ssh -c aes128-cbc -o MACs=hmac-md5 user@<target>
 
 ## Subtopics
 
-- **[Key exchange downgrade](key-exchange-downgrade.md)**: forcing weak or small key-exchange groups.
+- **[Legacy key exchange](key-exchange-downgrade.md)**: identifying accepted weak or small groups without confusing client-selected negotiation with an active downgrade.
 - **[Weak ciphers](weak-ciphers.md)**: legacy and CBC-mode cipher weaknesses.
 - **[Weak MAC algorithms](weak-mac-algorithms.md)**: broken or truncated integrity protection.
 

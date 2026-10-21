@@ -30,7 +30,7 @@ Häkkerikultuur tekkis ajal, mil juurdepääs arvutusressurssidele oli piiratud 
 
 Hoolimata tumedamatest elementidest, mis esile kerkisid, on kogukonna laiem pärand tänapäeva küberjulgeoleku valdkonnas ilmne. Vigade avastamise preemiad, avatud lähtekoodiga koostöö ja eetilised häkkimisvõistlused ammutavad kõik häkkeri avastamise vaimust. Paljud turvalisuse spetsialistid omaks võtavad endiselt neid väärtusi, kasutades loovust haavatavuste avastamiseks ja süsteemikaitse tugevdamiseks kõigi hüvanguks.
 
-# Ajalugu
+## Ajalugu
 
 Küberjulgeoleku ajalugu on tihedalt seotud arvutitehnoloogia arenguga. Kuna arvutid muutusid äris, valitsuses ja isiklikus elus levinumaks, muutus andmete ja süsteemide kaitsmise vajadus volitamata juurdepääsu eest üha pakilisemaks. Küberjulgeoleku valdkond tekkis vastusena nendele väljakutsetele, tuginedes mitmekesisele distsipliinide kogumile, sealhulgas arvutiteadus, krüptograafia ja riskijuhtimine.
 

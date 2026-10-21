@@ -1,7 +1,7 @@
 ---
 title: "Enumeration: fingerprinting an SSH service"
 order: 3
-description: "SSH enumeration gathers what directs every later attack: the version banner that identifies the implementation and its vulnerabilities, the offered algorithms that reveal weak-crypto exposure, the host-key fingerprint, and valid usernames. None requires authentication, and the results select which authentication, crypto, or exploit path applies."
+description: "SSH enumeration records the self-reported identification string, advertised algorithms, and host keys. Authentication-method and username probes begin authentication exchanges, may be logged, and provide configuration- or version-specific evidence rather than universal account validation."
 keywords:
   - ssh enumeration
   - banner
@@ -12,20 +12,22 @@ keywords:
 
 # Enumeration
 
-Before attacking SSH, enumerate it: the version banner names the implementation and build (mapping to known vulnerabilities), the offered key-exchange, cipher, and MAC algorithms reveal weak-crypto exposure, the host-key fingerprint identifies the server (and enables trust attacks), and valid usernames focus credential attacks. All of this is unauthenticated, and each result points at a specific follow-on: a vulnerable version to exploit, weak algorithms to target, or a user list to spray.
+SSH exposes an identification string before key exchange and advertises algorithm lists during negotiation. These can suggest an implementation, package lineage, and transport configuration, while host-key fingerprints help correlate endpoints. They do not prove patch status or a practical cryptographic attack. Authentication-method and username probes go further: they initiate authentication, are likely to be logged, and must use an explicit username. Username validation requires a documented implementation- and version-specific signal.
 
 ```bash
-nmap -p22 -sV --script ssh2-enum-algos,ssh-hostkey,ssh-auth-methods <target>
+nmap -p22 -sV --script ssh2-enum-algos,ssh-hostkey <target>
+# intrusive: begins authentication for the supplied identity
+nmap -p22 --script ssh-auth-methods --script-args 'ssh.user=<user>' <target>
 nc <target> 22                                 # raw banner
 ```
 
 ## Subtopics
 
-- **[Banner grabbing](banner-grabbing.md)**: version and implementation disclosure.
+- **[Banner grabbing](banner-grabbing.md)**: self-reported version and implementation hints.
 - **[Algorithm enumeration](algorithm-enumeration.md)**: offered crypto and weak-option detection.
-- **[User enumeration](user-enumeration.md)**: discovering valid usernames.
+- **[User enumeration](user-enumeration.md)**: version-specific account-disclosure behavior.
 
 ## References
 
-- [HackTricks: SSH enumeration](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh)
-- [nmap SSH scripts](https://nmap.org/nsedoc/)
+- [Nmap ssh-auth-methods](https://nmap.org/nsedoc/scripts/ssh-auth-methods.html)
+- [Nmap ssh2-enum-algos](https://nmap.org/nsedoc/scripts/ssh2-enum-algos.html)

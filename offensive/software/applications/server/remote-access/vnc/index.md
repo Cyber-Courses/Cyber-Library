@@ -1,7 +1,7 @@
 ---
 title: "VNC: attacking Virtual Network Computing"
 order: 6
-description: "VNC shares a graphical desktop over the RFB protocol (typically ports 5900+). Its weaknesses are a short challenge-response password scheme capped at eight characters, servers left with no authentication, cleartext screen and input traffic, a negotiable security type that can be downgraded, and implementation-specific authentication bypasses in RealVNC and TightVNC."
+description: "VNC shares a graphical desktop over RFB, commonly on TCP 5900 plus the display number. Security depends on the selected RFB security type, implementation, version, password policy, transport protection, and server configuration."
 keywords:
   - vnc
   - rfb protocol
@@ -12,7 +12,7 @@ keywords:
 
 # VNC
 
-VNC (Virtual Network Computing) shares a graphical desktop over the Remote Framebuffer (RFB) protocol, usually on TCP 5900 and up (display N on 5900+N). Its security is weak by design and by deployment. The classic VNC authentication is a DES challenge-response using a password truncated to eight characters, trivial to brute force or crack from a captured challenge. Many servers run with no authentication at all. The screen contents and keystrokes travel in cleartext unless tunnelled. The RFB security type is negotiated and can be downgraded. And specific implementations (RealVNC, TightVNC) have shipped outright authentication bypasses.
+VNC (Virtual Network Computing) shares a graphical desktop using the Remote Framebuffer (RFB) protocol, commonly on TCP 5900 plus the display number. RFB supports multiple security types, and implementations add further extensions. `None` and legacy VNC Authentication do not encrypt subsequent protocol data; the latter uses a DES challenge-response and only the first eight password bytes. Other types can add TLS, SASL, RSA-AES, SSH, or vendor-specific protection. Evaluate the security types actually offered and selected, the password and access policy, and the exact implementation and version. Treat vulnerabilities as advisory-specific findings, such as CVE-2006-2369 in RealVNC 4.1.0–4.1.1.
 
 ```bash
 nmap -p5900-5902 --script vnc-info,vnc-title,realvnc-auth-bypass <target>
@@ -22,10 +22,10 @@ vncviewer <target>::5900                       # connect to test auth/no-auth
 ## Subtopics
 
 - **[Enumeration](enumeration/index.md)**: RFB version, security types, and implementation.
-- **[Authentication](authentication/index.md)**: no-auth, defaults, brute force, and bypasses.
-- **[Weak cryptography](weak-cryptography/index.md)**: cleartext, weak encryption, and downgrade.
+- **[Authentication](authentication/index.md)**: security types, legacy passwords, configuration, and advisory-specific bypasses.
+- **[Transport security](weak-cryptography/index.md)**: selected cleartext or protected modes and conditional downgrade risk.
 
 ## References
 
 - [RFC 6143 (RFB protocol)](https://datatracker.ietf.org/doc/html/rfc6143)
-- [HackTricks: VNC (5900)](https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc)
+- [Maintained RFB protocol specification](https://github.com/rfbproto/rfbproto/blob/master/rfbproto.rst)

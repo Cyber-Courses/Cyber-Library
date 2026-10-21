@@ -1,6 +1,6 @@
 ---
 title: "Unattended access: abusing always-on remote-desktop access"
-description: "Unattended access lets a remote-desktop tool be connected to at any time without a user present, authenticated by a fixed unattended password. When that password is weak, default, reused, or recovered from the client's stored configuration, an attacker connects to the machine whenever they like, gaining persistent interactive control with no one aware."
+description: "Unattended access permits authorized connections without a user present. Its controls vary by product and can include passwords, account assignment, MFA, allowlists, and managed-device trust; local configuration should not be assumed to expose a reusable password."
 keywords:
   - unattended access
   - unattended password
@@ -11,20 +11,18 @@ keywords:
 
 # Unattended access
 
-Unattended access is the feature that makes these tools a remote-administration backbone: it allows connecting to a machine at any time, with no user present to approve or read out a session password, authenticated instead by a fixed unattended-access password configured on the client. For an attacker this is standing, persistent control if they obtain that password, which they do by guessing it (often weak or reused), finding it set to a default, or recovering it from the client's stored configuration on a machine they already touched. Once held, the attacker connects whenever they choose and controls the machine interactively, and this is also a stealthy persistence mechanism.
+Unattended access allows an authorized operator to connect while no user is present to approve the session. Depending on the product and policy, authentication may use a configured password, an assigned account, multifactor authentication, allowlists, or managed-device trust. An attacker who obtains valid reusable authentication material may gain standing access, but configuration files and registry keys do not necessarily contain a recoverable password; storage and protection must be assessed for the exact product and version.
 
 ```bash
-# the unattended password is stored client-side; recover it where you have local access
-#   TeamViewer/AnyDesk store configuration (and in some versions recoverable secrets)
-#   in the registry / app data; dump and decrypt per the product's storage
-reg query 'HKLM\SOFTWARE\WOW6432Node\TeamViewer' 2>/dev/null       # (example location)
-# with the unattended ID + password, connect at will from the attacker client
+# inventory TeamViewer configuration; this does not itself recover a password
+reg query 'HKLM\SOFTWARE\WOW6432Node\TeamViewer' 2>/dev/null
+# review account assignment, unattended-access policy, allowlists, and MFA separately
 ```
 
 ## Exploitation notes
 
-- Unattended access turns the tool into a durable backdoor: a recovered or weak unattended password grants connection at any time, so it is both access and persistence, quieter than planting new tooling.
-- The unattended password is stored on the client; where you already have local access (even briefly), recovering it from the product's configuration/registry gives durable remote re-entry, sometimes recoverable in plaintext-equivalent form depending on the version.
+- Valid reusable unattended-access material can provide durable remote entry, but actual access remains subject to the product's account, approval, allowlist, and multifactor policies.
+- Local configuration is useful for inventorying IDs and policy. Claim password recovery only when a documented, version-specific storage weakness or credential-extraction method applies.
 - Weak or default unattended passwords are guessable directly; reuse means a password found elsewhere may be the unattended one.
 - This is the highest-value authentication outcome because it is standing access; combine with [weak passwords](weak-passwords.md) and [ID-based access](id-based-access.md) to reach it.
 

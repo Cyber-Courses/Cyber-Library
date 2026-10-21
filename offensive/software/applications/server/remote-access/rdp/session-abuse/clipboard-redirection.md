@@ -1,6 +1,6 @@
 ---
 title: "Clipboard redirection: capturing data through the RDP clipboard channel"
-description: "RDP's clipboard-redirection virtual channel syncs the clipboard between client and server for convenience. An attacker who controls either end monitors and captures the synced clipboard, which routinely carries passwords copied from managers, tokens, and sensitive text, and can inject content, turning a shared clipboard into a data-theft and influence channel."
+description: "RDP's clipboard-redirection virtual channel synchronizes a client's clipboard with a specific remote session. An attacker executing within that session, or controlling its client endpoint, can monitor or replace redirected clipboard content when the channel is enabled."
 keywords:
   - clipboard redirection
   - cliprdr
@@ -11,12 +11,11 @@ keywords:
 
 # Clipboard redirection
 
-RDP synchronises the clipboard between the client and the remote session over the `cliprdr` virtual channel, so a copy on one side is available on the other. That convenience is a data channel an attacker abuses from whichever end they control. Monitoring the synced clipboard captures what users copy, which very often includes passwords pasted from a password manager, API tokens, one-time codes, and sensitive text, and the channel is bidirectional, so an attacker can also inject clipboard content to influence what a user pastes. On a compromised terminal server, or a malicious RDP endpoint a user connects to, the clipboard becomes a theft and manipulation surface.
+RDP synchronizes the clipboard between one client connection and its remote session over the `cliprdr` virtual channel. Code executing in that interactive session can read or replace its clipboard, potentially exposing passwords, API tokens, one-time codes, or sensitive text copied through the channel. The scope matters: clipboard redirection is session-bound. Compromising a terminal server does not make every user's redirected clipboard visible to a single process; the attacker needs execution in, or control of, each target session. A malicious RDP endpoint can likewise observe the clipboard redirected by the client connected to it.
 
 ```bash
-# on a controlled RDP host/session, poll the clipboard for secrets
-# (PowerShell in the session)
-while ($true) { Get-Clipboard; Start-Sleep -Seconds 2 }     # capture what users copy
+# run inside the specific interactive session whose clipboard is being assessed
+while ($true) { Get-Clipboard; Start-Sleep -Seconds 2 }
 # a malicious RDP server/endpoint can likewise log the cliprdr channel contents
 # injection: set the clipboard to attacker content the user may paste
 Set-Clipboard -Value 'attacker-controlled'
@@ -24,9 +23,9 @@ Set-Clipboard -Value 'attacker-controlled'
 
 ## Exploitation notes
 
-- Password managers encourage copy-paste of credentials, so a monitored RDP clipboard is a reliable credential source; poll it on a host where users have sessions, or on a malicious endpoint they connect to.
+- Clipboard contents can include credentials or tokens, but `Get-Clipboard` observes the clipboard of the session in which the process runs, not every session on the host.
 - Injection is the subtler abuse: replacing clipboard content (for example swapping a pasted command or a cryptocurrency address) manipulates what the user acts on.
-- This requires control of one end of the session; on a compromised terminal server you read every user's clipboard, and a rogue RDP destination reads the connecting client's.
+- This requires control of the relevant session or client endpoint. To target another logged-on user on a session host, first obtain execution in or control of that user's session.
 - Clipboard redirection is enabled by default in many configurations; its presence is part of the session's device-redirection surface alongside [drive redirection](drive-redirection.md).
 
 ## References

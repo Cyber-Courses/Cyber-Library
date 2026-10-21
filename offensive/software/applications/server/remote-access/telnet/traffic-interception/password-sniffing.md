@@ -1,6 +1,6 @@
 ---
 title: "Password sniffing: capturing Telnet credentials from the wire"
-description: "The Telnet login is cleartext, so a positioned attacker captures the username and password directly from the traffic, with no guessing and nothing logged on the server. Keystrokes are sent character by character, so the credential is reassembled from the stream, and the captured account is typically reusable."
+description: "When Telnet encryption is not negotiated, a positioned attacker can reconstruct the username and password from the TCP stream. Verify that the session is plaintext before assuming its credentials are exposed."
 keywords:
   - password sniffing
   - cleartext credentials
@@ -11,14 +11,14 @@ keywords:
 
 # Password sniffing
 
-Telnet transmits the login in cleartext, so capturing a real authentication yields the exact credential with no brute force and no failed-login noise on the server. The one wrinkle is that Telnet sends input character by character (and the server often echoes it), so the username and password appear as a stream of single bytes that must be reassembled, which standard tools do automatically. A sniffed Telnet credential is the quietest way to obtain access, and the account is usually administrative on the device and reused elsewhere.
+When the Telnet data stream remains plaintext, capturing a real authentication can reveal the credential without password guessing or failed-login noise. Interactive input often appears as small segments or individual characters, so the client-to-server stream must be reconstructed. If the ENCRYPT option or another protective transport is active, this technique does not expose the plaintext password.
 
 ```bash
 # capture and reassemble a Telnet login from an on-path position
 tcpdump -i eth0 -A port 23
 # Wireshark: Follow TCP Stream reconstructs the full login (and session)
-# scripted extraction of credentials from a pcap
-tshark -r telnet.pcap -Y 'telnet' -T fields -e telnet.data | tr -d '\n'
+# reconstruct the first TCP stream from a pcap; select the relevant stream number
+tshark -r telnet.pcap -q -z follow,tcp,ascii,0
 ```
 
 ## Exploitation notes

@@ -1,6 +1,6 @@
 ---
 title: "Implementation detection: identifying the VNC server product"
-description: "VNC implementations, RealVNC, TightVNC, UltraVNC, TigerVNC, and the platform servers, differ in supported security types, extensions, and version strings, and each has distinct vulnerabilities. Fingerprinting the implementation from the offered security types and behaviour maps the target to its known authentication-bypass and memory-corruption flaws."
+description: "RFB security types, extensions, banners, and behavior can suggest a VNC implementation, but shared extensions are not definitive product identity. Corroborate network hints with endpoint, package, or service evidence before matching a named advisory."
 keywords:
   - realvnc
   - tightvnc
@@ -11,24 +11,24 @@ keywords:
 
 # Implementation detection
 
-The RFB protocol is standard, but implementations diverge in the security types and extensions they offer and in their version strings, and those differences carry vulnerability. RealVNC, TightVNC, UltraVNC, TigerVNC, and the macOS/embedded servers each support different authentication schemes (the Tight security type and its sub-types, VeNCrypt, vendor schemes) and have their own bug histories, notably authentication-bypass flaws in RealVNC and TightVNC. Identifying the implementation narrows the attack to that product's known issues.
+RFB implementations differ in supported security types, extensions, default settings, and version reporting. Those traits can suggest RealVNC, TightVNC, UltraVNC, TigerVNC, a platform server, or an embedded fork, but compatible products can implement the same registered type. Treat network observations as fingerprinting evidence with stated confidence. Where possible, corroborate them with process names, package inventory, binary metadata, service definitions, or appliance firmware information before matching a named advisory.
 
 ```bash
 # the offered security types and extensions fingerprint the implementation
 nmap -p5900 --script vnc-info <target>         # security types hint at Tight/UltraVNC/VeNCrypt
 # behaviour and version strings distinguish products; vendor security types:
 #   16 = Tight (TightVNC/TurboVNC), 17 = Ultra, 19 = VeNCrypt, 2 = standard VNC auth
-# a connecting client that negotiates Tight sub-auth reveals TightVNC-family servers
+# shared extensions are hints; confirm product and version through endpoint evidence
 ```
 
 ## Exploitation notes
 
-- Map the implementation to its flaws: RealVNC has a known security-type-handling authentication bypass, and TightVNC has had authentication and memory-safety issues; identifying the product selects which [bypass](../authentication/index.md) to try.
-- The offered security types are the main signal: the Tight (16) and Ultra (17) types indicate those families, VeNCrypt (19) indicates TLS-wrapped VNC, and only standard type 2 suggests a basic server.
-- Embedded and appliance VNC (on IoT, KVM-over-IP, industrial devices) often runs old, vulnerable builds with default or no passwords; the implementation and version flag these.
-- Pair with the [RFB version](banner-grabbing.md) to complete the fingerprint before attacking.
+- Registered types such as Tight (16), Ultra (17), TLS (18), and VeNCrypt (19) are useful hints, not proof of a particular product or vulnerable build.
+- A server offering only VNC Authentication (2) is not necessarily a specific "basic" implementation; many products retain compatibility with it.
+- Record the complete product, platform, and version before evaluating an advisory such as [CVE-2006-2369](../authentication/realvnc-auth-bypass.md).
+- Pair network observations with the [RFB version](banner-grabbing.md) and endpoint evidence, preserving uncertainty when exact identification is unavailable.
 
 ## References
 
-- [RFB security types registry](https://datatracker.ietf.org/doc/html/rfc6143#section-7.1.2)
-- [HackTricks: VNC implementations](https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc)
+- [Maintained RFB security-type registry](https://github.com/rfbproto/rfbproto/blob/master/rfbproto.rst)
+- [Nmap vnc-info](https://nmap.org/nsedoc/scripts/vnc-info.html)

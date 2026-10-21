@@ -30,7 +30,7 @@ Hekerska kultura se je pojavila v obdobju, ko je bil dostop do računalniških v
 
 Kljub temnejšim elementom, ki so se pojavili, je širša zapuščina skupnosti očitna v današnjem področju kibernetske varnosti. Nagrade za odkrivanje napak, sodelovanja pri odprtokodnih projektih in tekmovanja v etičnem hekanju vse črpajo iz hekerskega duha raziskovanja. Mnogi strokovnjaki za varnost še vedno sprejemajo te vrednote, saj uporabljajo ustvarjalnost za odkrivanje ranljivosti in izboljšanje zaščite sistemov v korist vseh.
 
-# Zgodovina
+## Zgodovina
 
 Zgodovina kibernetske varnosti je prepletena z razvojem računalniške tehnologije. Ko so računalniki postali bolj razširjeni v poslovnem, vladnem in osebnem življenju, je potreba po zaščiti podatkov in sistemov pred nepooblaščenim dostopom postala bolj nujna. Področje kibernetske varnosti se je pojavilo kot odgovor na te izzive, črpajoč iz različnih disciplin, vključno z računalništvom, kriptografijo in upravljanjem tveganj.
 

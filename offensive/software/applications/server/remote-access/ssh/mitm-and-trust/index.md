@@ -1,7 +1,7 @@
 ---
 title: "MITM and trust: abusing SSH host-key and certificate trust"
 order: 4
-description: "SSH authenticates the server by its host key, trusted on first use and pinned in known_hosts, or signed by a CA for certificate-based SSH. Where that trust is weak, users who ignore host-key warnings, clients set to accept any key, or certificate validation flaws, a positioned attacker performs a machine-in-the-middle to capture credentials and hijack the session."
+description: "SSH authenticates the server by its host key, trusted on first use and pinned in known_hosts, or signed by a CA for certificate-based SSH. Where that trust is weak, a positioned attacker can perform a machine-in-the-middle attack to capture passwords, observe or alter sessions, and abuse explicitly forwarded agents."
 keywords:
   - ssh mitm
   - host key
@@ -12,7 +12,7 @@ keywords:
 
 # MITM and trust
 
-SSH resists machine-in-the-middle only because the client verifies the server's host key: on first connection the key is recorded in `known_hosts` (trust on first use), and later connections must match or the client warns. Certificate-based SSH replaces this with a CA that signs host keys. The attack surface is where that trust is weak: users conditioned to accept host-key-changed warnings, clients configured to accept any key (`StrictHostKeyChecking no`), fresh connections with no pinned key yet, and flaws in certificate validation. A positioned attacker exploits these to interpose, presenting their own host key, decrypting the session, capturing the password or key, and relaying to the real server.
+SSH resists machine-in-the-middle attacks because the client verifies the server's host key: on first connection the key may be recorded in `known_hosts` (trust on first use), and later connections must match. Certificate-based SSH replaces per-host pinning with trust in a CA that signs host keys. The attack surface is where that trust is weak: a client configured to accept unknown or changed keys, a first connection whose fingerprint is not verified out of band, a poisoned `known_hosts`, or compromise of a trusted host CA. A positioned attacker can then interpose, present a substitute host key, capture password authentication, and observe or alter the plaintext session. Public-key authentication does not transmit the private key; onward use of that identity requires another capability, such as access to an explicitly forwarded agent.
 
 ```bash
 # position (ARP/DNS/route) + an SSH MITM proxy that presents a substitute host key
@@ -23,7 +23,7 @@ SSH resists machine-in-the-middle only because the client verifies the server's 
 
 - **[Known-hosts bypass](known-hosts-bypass.md)**: defeating trust-on-first-use and key pinning.
 - **[SSH MITM](ssh-mitm.md)**: interposing to capture credentials and hijack the session.
-- **[Certificate validation bypass](certificate-validation-bypass.md)**: abusing certificate-based SSH trust.
+- **[Certificate trust abuse](certificate-validation-bypass.md)**: abusing compromised or over-broad certificate-authority trust.
 
 ## References
 

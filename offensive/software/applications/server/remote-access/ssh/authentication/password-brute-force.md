@@ -1,6 +1,6 @@
 ---
 title: "Password brute force: online password attacks against SSH"
-description: "Where SSH permits password authentication, it is a brute-force and password-spray target. Success gives a shell as the account, frequently reusable elsewhere. SSH rate limiting, per-connection auth-try limits, and key-only configurations shape the attack, favouring slow spraying of validated usernames with context-derived passwords over fast brute force."
+description: "Where the effective SSH policy permits password authentication, authorized testing can assess password quality and attempt controls. Method availability may vary by user and source, while MaxAuthTries, MaxStartups, PerSourcePenalties, and external controls affect online attempts."
 keywords:
   - ssh brute force
   - password spray
@@ -11,11 +11,13 @@ keywords:
 
 # Password brute force
 
-When `PasswordAuthentication` is enabled, SSH logins can be guessed online. The practical attack is shaped by SSH's defenses: `MaxAuthTries` limits attempts per connection, `MaxStartups` throttles concurrent handshakes, and fail2ban-style tools block offending IPs, so a fast, broad brute force is noisy and self-defeating. A slow spray, one or a few likely passwords across a validated user list, is the effective approach, and any valid credential is prime reuse material because SSH accounts are real system accounts.
+When the effective server policy permits password authentication for a particular user and source, an authorized assessment can test password quality and resistance to online guessing. `MaxAuthTries` limits attempts per connection, `MaxStartups` limits concurrent unauthenticated connections, and current OpenSSH versions can apply per-source penalties; external monitoring or blocking may add further controls. A valid password still may not provide a shell when another authentication method is required, the account is restricted, or the server forces a command.
 
 ```bash
-# confirm password auth is offered before spraying
-ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no user@<target> 2>&1 | head -1
+# inspect the methods reported for this user and source without prompting
+ssh -vvv -o BatchMode=yes -o PreferredAuthentications=password \
+  -o PubkeyAuthentication=no user@<target> true 2>&1 \
+  | sed -n 's/^debug1: Authentications that can continue: //p'
 # spray one password across users (quiet), stop on success, few threads
 hydra -L users.txt -p 'Autumn2025!' ssh://<target> -t 4 -f
 nxc ssh <target> -u users.txt -p 'Autumn2025!'          # marks shell vs no-shell on hit
@@ -25,10 +27,10 @@ hydra -l admin -P top-passwords.txt ssh://<target> -t 4 -f
 
 ## Exploitation notes
 
-- Check `PasswordAuthentication` first; many servers are key-only (password auth disabled), in which case pivot to the key routes rather than guessing.
+- Check the effective method chain first. A globally enabled `PasswordAuthentication` setting does not prove that it applies to every user or that password alone is sufficient.
 - Keep threads low and the password list short and contextual: SSH logs every failure, `MaxAuthTries` closes the connection after a few tries, and IP-blocking tools react to bursts.
 - Validate usernames first ([User enumeration](../enumeration/user-enumeration.md)) so attempts land on real accounts; derive passwords from the organisation (season/year, company name, breached creds) rather than a generic giant wordlist.
-- Any working SSH credential is likely reused; test it against other hosts and services immediately. NetExec marks whether the account gets a shell or is confined.
+- Treat credential reuse as a separate, authorized hypothesis. A successful authentication may still be restricted to a subsystem, forced command, or non-interactive account.
 
 ## Tools
 
@@ -37,5 +39,5 @@ hydra -l admin -P top-passwords.txt ssh://<target> -t 4 -f
 
 ## References
 
-- [OpenSSH sshd_config: MaxAuthTries, PasswordAuthentication](https://man.openbsd.org/sshd_config)
-- [HackTricks: SSH brute force](https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh)
+- [OpenSSH sshd_config](https://man.openbsd.org/sshd_config)
+- [OpenSSH ssh_config](https://man.openbsd.org/ssh_config)

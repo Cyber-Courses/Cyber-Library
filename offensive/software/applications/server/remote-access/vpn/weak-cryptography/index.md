@@ -1,7 +1,7 @@
 ---
 title: "Weak cryptography: VPN cipher and key-exchange weaknesses"
 order: 2
-description: "VPN gateways that negotiate weak ciphers or key-exchange parameters, legacy ciphers, small Diffie-Hellman groups, SHA-1, let a positioned attacker select or downgrade to breakable crypto. This enables decryption of captured tunnel traffic or attacks on the key agreement, undermining the confidentiality the VPN exists to provide."
+description: "VPN gateways that negotiate weak ciphers or key-exchange parameters, legacy ciphers, small Diffie-Hellman groups, or SHA-1 can expose compatible clients to obsolete cryptography. This weakens the tunnel and may enable protocol-specific attacks under the conditions required by the negotiated algorithm."
 keywords:
   - vpn crypto
   - cipher
@@ -12,7 +12,7 @@ keywords:
 
 # Weak cryptography
 
-A VPN's whole purpose is confidentiality, so its negotiated cryptography is the target. Gateways that still offer weak options, legacy ciphers (DES/3DES, RC4), small Diffie-Hellman groups (768/1024-bit), or SHA-1 integrity, give a positioned attacker a breakable session: the negotiation can land on, or be downgraded to, the weak option, after which captured tunnel traffic is decryptable or the key agreement is attackable. This matters most for IPsec/IKE (where transform sets are explicitly offered) and for TLS-based VPNs with weak cipher suites, and it compounds the authentication and protocol weaknesses.
+A VPN's whole purpose is confidentiality, so its negotiated cryptography matters. Gateways that still offer legacy ciphers (DES/3DES or RC4), small Diffie-Hellman groups (768/1024-bit), or SHA-1 integrity permit compatible clients to establish tunnels with obsolete protection. Offering a weak option is evidence of insecure configuration, but it does not by itself prove that an unauthenticated attacker can force a downgrade: IKE and TLS authenticate their completed negotiations. Determine which algorithms a real client negotiates, then assess the algorithm-specific attack conditions, such as the traffic volume required by a 64-bit block-cipher attack or the resources required to attack a finite-field DH group.
 
 ```bash
 # IKE transform sets offered (weak DH groups, DES/3DES, SHA-1?)

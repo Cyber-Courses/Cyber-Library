@@ -30,7 +30,7 @@ Budaya peretas muncul pada era ketika akses ke sumber daya komputasi terbatas da
 
 Meskipun elemen gelap yang muncul, warisan komunitas yang lebih luas terlihat dalam domain keamanan siber saat ini. Hadiah bug, kolaborasi sumber terbuka, dan kompetisi peretasan etis semuanya mengambil semangat eksplorasi peretas. Banyak profesional keamanan masih merangkul nilai-nilai ini, memanfaatkan kreativitas untuk menemukan kerentanan dan meningkatkan perlindungan sistem demi kepentingan semua orang.
 
-# Sejarah
+## Sejarah
 
 Sejarah keamanan siber terkait erat dengan evolusi teknologi komputasi. Ketika komputer menjadi lebih umum dalam bisnis, pemerintahan, dan kehidupan pribadi, kebutuhan untuk melindungi data dan sistem dari akses tidak sah menjadi semakin mendesak. Bidang keamanan siber muncul sebagai respons terhadap tantangan ini, menarik dari berbagai disiplin ilmu, termasuk ilmu komputer, kriptografi, dan manajemen risiko.
 

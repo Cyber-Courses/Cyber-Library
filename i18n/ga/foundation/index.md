@@ -26,7 +26,7 @@ Tháinig cultúr hacker chun cinn in am nuair a bhí rochtain ar acmhainní río
 
 In ainneoin na ngnéithe dorcha a tháinig chun cinn, tá oidhreacht níos leithne an phobail le feiceáil i réimse na cibearshlándála inniu. Tarraingíonn duaiseanna fabhtanna, comhoibrithe foinse oscailte, agus comórtais hacking eiticiúla ar spiorad taiscéalaíochta an hacker. Glacann go leor gairmithe slándála fós leis na luachanna seo, ag baint úsáide as cruthaitheacht chun leochaileachtaí a nochtadh agus cosaintí córais a fheabhsú ar mhaithe le gach duine.
 
-# Stair
+## Stair
 
 Tá stair na cibearshlándála fite fuaite le forbairt na teicneolaíochta ríomhaireachta. De réir mar a d’éirigh ríomhairí níos coitianta i ngnó, rialtas, agus saol pearsanta, d’éirigh an gá le sonraí agus córais a chosaint ar rochtain neamhúdaraithe níos práinní. Tháinig an réimse cibearshlándála chun cinn mar fhreagra ar na dúshláin seo, ag tarraingt ar shraith éagsúil disciplíní, lena n-áirítear eolaíocht ríomhaireachta, cripteagrafaíocht, agus bainistíocht riosca.
 

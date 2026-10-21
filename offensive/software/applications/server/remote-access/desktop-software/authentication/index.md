@@ -1,6 +1,6 @@
 ---
 title: "Authentication: attacking remote-desktop software access control"
-description: "Third-party remote-desktop tools authenticate by a device ID plus a session or unattended-access password. The weaknesses are guessable or brute-forceable IDs and passwords, unattended-access configurations that allow passwordless or weak-password connection at any time, and reused or default passwords. Gaining access yields interactive control of the remote machine as its logged-in user."
+description: "Third-party remote-desktop tools use a device ID for addressing and product-specific controls for authentication and authorization. Review passwords, account assignment, user approval, allowlists, multifactor authentication, and unattended-access policy without treating the ID itself as a credential."
 keywords:
   - id-based access
   - unattended access
@@ -11,12 +11,12 @@ keywords:
 
 # Authentication
 
-These products authenticate a connection with a device identifier (the TeamViewer/AnyDesk ID) and a password, either a one-time session password shown to the present user or a configured unattended-access password for connecting without anyone at the keyboard. The attack surface follows. IDs are numeric and, combined with weak passwords, brute-forceable. Unattended access, set up for convenience, lets an attacker connect at any time, and where its password is weak, default, or absent, that is standing remote control. And passwords are reused and weak like any others. Success is full interactive control of the remote machine as its logged-in user, often with whatever privileges that user holds.
+These products use a device identifier to address a connection and then apply product-specific authentication and authorization controls. Depending on the deployment, those controls may include a temporary or unattended password, account assignment, user approval, allowlists, multifactor authentication, and managed-device identity. The ID is targeting information rather than proof of access. Review the complete policy, including whether unattended access is enabled and whether any reusable authentication material is weak or exposed. A successful connection operates within the permissions granted by the product and the current operating-system session.
 
 ## Subtopics
 
-- **[ID-based access](id-based-access.md)**: enumerating and targeting device IDs.
-- **[Unattended access](unattended-access.md)**: abusing always-on passwordless or weak-password access.
+- **[ID-based access](id-based-access.md)**: separating device addressing from authentication.
+- **[Unattended access](unattended-access.md)**: reviewing always-on access controls and reusable authentication material.
 - **[Weak passwords](weak-passwords.md)**: guessing session and unattended passwords.
 
 ## References

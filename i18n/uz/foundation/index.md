@@ -29,7 +29,7 @@ Xakerlar madaniyati hisoblash resurslariga kirish cheklangan va ko'pincha yirik 
 
 Paydo bo'lgan qorong'u elementlarga qaramay, jamoaning kengroq merosi bugungi kiberxavfsizlik sohasida yaqqol ko'rinib turibdi. Xatolar uchun mukofotlar, ochiq manba hamkorliklari va axloqiy xakerlik musobaqalari barchasi xakerlar kashfiyoti ruhidan ilhom oladi. Ko'plab xavfsizlik mutaxassislari hali ham ushbu qadriyatlarni qabul qilib, barchaning manfaatlari uchun zaifliklarni aniqlash va tizim himoyalarini kuchaytirish uchun ijodkorlikdan foydalanadilar.
 
-# Tarix
+## Tarix
 
 Kiberxavfsizlik tarixi hisoblash texnologiyasining rivojlanishi bilan chambarchas bog'liq. Kompyuterlar biznes, hukumat va shaxsiy hayotda keng tarqalgan sari, ma'lumotlar va tizimlarni ruxsatsiz kirishdan himoya qilish zarurati yanada dolzarb bo'ldi. Kiberxavfsizlik sohasi ushbu muammolarga javoban paydo bo'ldi va kompyuter fanlari, kriptografiya va xavf-xatarlarni boshqarish kabi turli fanlardan foydalanildi.
 
