@@ -17,18 +17,19 @@ Older BMCs and legacy factory configurations often use fixed default credentials
 ```bash
 # identify the vendor and generation, then test its documented default policy
 ipmitool -I lanplus -H <bmc> -U root -P calvin user list          # legacy-configured Dell iDRAC
-ipmitool -I lanplus -H <bmc> -U ADMIN -P ADMIN user list          # common Supermicro default
-curl -sk https://<bmc>/ | grep -iE 'idrac|ilo|supermicro'         # fingerprint for the web UI
+ipmitool -I lanplus -H <bmc> -U ADMIN -P ADMIN user list          # legacy Supermicro systems only
+curl -sS --cacert <ca.pem> https://<bmc>/ | grep -iE 'idrac|ilo|supermicro'
 ```
 
 ## Exploitation notes
 
 - Fingerprint the vendor and generation first, then consult that product's documented factory policy. Treat `root`/`calvin` as a Dell legacy option rather than a universal current default.
 - The BMC being on a "private" management network is why defaults persist; once you reach that network (a flat segment, a jump host, a VLAN hop), defaults are the easiest path.
-- Default admin access yields power control, KVM console, and virtual media, enough to boot an attacker image and own the OS, see [iDRAC and iLO](idrac-and-ilo.md).
-- Combine with [RAKP hash disclosure](ipmi-rakp-hash-disclosure.md) (which often recovers exactly these default passwords) and [cipher 0](ipmi-cipher-0-bypass.md) where defaults were changed.
+- An unchanged administrative default may provide power, console, boot, and virtual-media privileges. Whether those capabilities lead to OS compromise depends on the account role and controls such as Secure Boot, disk encryption, and boot policy; see [iDRAC and iLO](idrac-and-ilo.md).
+- [RAKP hash disclosure](ipmi-rakp-hash-disclosure.md) can enable offline guessing of any weak password. [Cipher 0](ipmi-cipher-0-bypass.md) is a separate configuration weakness: its presence and impact depend on cipher-suite acceptance and the valid account's channel privilege, not on whether its password is a factory default.
 
 ## References
 
 - [Dell iDRAC default username and password guidance](https://www.dell.com/support/kbdoc/en-us/000133536/dell-poweredge-what-is-the-default-username-and-password-for-idrac)
+- [Supermicro BMC unique password policy](https://www.supermicro.com/en/support/BMC_Unique_Password)
 - [HackTricks: IPMI/BMC](https://book.hacktricks.xyz/network-services-pentesting/623-udp-ipmi)

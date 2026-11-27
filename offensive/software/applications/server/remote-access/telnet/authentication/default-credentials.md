@@ -1,6 +1,6 @@
 ---
 title: "Default credentials: vendor and factory Telnet logins"
-description: "Telnet survives mainly on devices, routers, switches, cameras, printers, and IoT, that ship with fixed default credentials users rarely change. Trying the device's documented defaults, and generic pairs like root:root and admin:admin, is the highest-yield Telnet attack, and the accounts are typically administrative on the device."
+description: "Telnet remains present on some network equipment, embedded systems, and legacy hosts. After identifying the exact product and firmware, an assessor can check whether its documented factory credentials still work and then verify the account's actual privileges."
 keywords:
   - default credentials
   - telnet
@@ -11,20 +11,20 @@ keywords:
 
 # Default credentials
 
-Telnet is now mostly a device protocol, and devices ship with fixed default credentials that are documented, widely known, and seldom changed. So the first and highest-yield Telnet attack is trying defaults: generic pairs (`root:root`, `admin:admin`, `root:<vendor>`, blank passwords) and the specific documented credentials for the identified device. These accounts are usually administrative, an enable-capable network account or a root shell on embedded Linux, so a default-credential hit is typically full device control, and mass IoT compromises have been built on exactly this.
+Telnet remains present on some network equipment, embedded systems, and legacy hosts. Factory credential policy varies by vendor, model, firmware, provisioning option, and product age: some systems used fixed defaults, others require first-boot setup or ship with unique credentials. Identify the product before testing a documented factory credential. A successful login establishes only that the credential works; determine the account's actual role and whether an additional enable or privilege step is required before describing its impact.
 
 ```bash
-# identify the device (banner), then try its documented defaults + generics
+# identify the device, then test only documented defaults that apply to it
 nc <target> 23
-hydra -C iot-default-combos.txt telnet://<target>     # user:pass combo list
+hydra -C product-default-combos.txt telnet://<target> # authorized user:pass list
 ```
 
 ## Exploitation notes
 
-- Fingerprint the device first ([banner](../enumeration/banner-grabbing.md)); defaults are vendor/model-specific, so identification turns guessing into a lookup, and generic pairs cover the rest.
-- Use paired combo lists (documented user:pass) rather than full cross-products for speed and quiet; IoT default lists (as used by Telnet-spreading worms) are highly effective.
-- The accounts are commonly administrative, so success is device control (config change, firmware, often a root shell), not a low-privilege foothold.
-- Blank or empty passwords are a frequent device default; test them explicitly.
+- Fingerprint the device first ([banner](../enumeration/banner-grabbing.md)); a default applies only when its vendor, model, firmware, and provisioning assumptions match the target.
+- Prefer a short, evidence-based set of documented pairs to generic credential lists. This reduces lockouts, noise, and false assumptions about current products.
+- Verify authorization after login. A Telnet account may open a restricted menu or unprivileged CLI, require an enable step, or map to an administrative or root context.
+- Test a blank password only when product documentation or observed configuration makes it a supported candidate.
 
 ## References
 

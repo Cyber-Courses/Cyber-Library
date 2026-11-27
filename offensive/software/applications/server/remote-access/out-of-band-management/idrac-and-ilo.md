@@ -1,7 +1,7 @@
 ---
 title: "iDRAC and iLO: Dell and HPE controller exploits and virtual media"
 order: 4
-description: "Dell iDRAC and HPE iLO are the vendor BMC stacks, and both have had serious flaws: authentication bypasses and remote code execution reachable on the management interface. Beyond exploits, their legitimate virtual-media and console features let an attacker with access mount an attacker ISO and boot the host from it, compromising the OS directly."
+description: "Dell iDRAC and HPE iLO are vendor BMC stacks with version-specific security advisories. Accounts with the necessary virtual-media, boot, and system-control privileges may be able to mount an image and boot the host from it, subject to platform security controls."
 keywords:
   - idrac
   - ilo
@@ -12,12 +12,12 @@ keywords:
 
 # iDRAC and iLO
 
-Dell iDRAC and HPE iLO are the vendor management controllers built on the BMC, and they are attacked two ways. First, product vulnerabilities: both have had authentication-bypass and remote-code-execution flaws reachable on the management web interface and APIs (iLO notably had an authentication bypass allowing unauthenticated admin access, and iDRAC has had unauthenticated RCE), so fingerprinting the controller and firmware version maps it to its exploit. Second, and independent of any bug, their legitimate features are themselves the weapon: with administrative access (from defaults, cracked IPMI hashes, or an exploit), the virtual-media feature mounts an attacker-supplied ISO and the controller boots the host from it, giving direct compromise of the server's OS.
+Dell iDRAC and HPE iLO are vendor management-controller stacks built around a BMC. They present two distinct assessment paths. First, both vendors publish version-specific advisories for their management interfaces and APIs, so identify the exact controller model and firmware before determining whether an issue applies. Second, legitimate remote-management features can be abused after obtaining a role with the required privileges. Virtual-media access, boot configuration, and system-control or power privileges may allow an operator to attach an image and attempt to boot the host from it. Success and impact depend on the assigned role, firmware policy, Secure Boot, disk encryption, and the ability to reboot or otherwise change the boot flow.
 
 ```bash
 # fingerprint the controller and firmware
-curl -sk https://<bmc>/ | grep -iE 'idrac|integrated lights-out|ilo'
-curl -sk https://<bmc>/redfish/v1/ | grep -i 'Model\|FirmwareVersion'
+curl -sS --cacert <ca.pem> https://<bmc>/ | grep -iE 'idrac|integrated lights-out|ilo'
+curl -sS --cacert <ca.pem> https://<bmc>/redfish/v1/ | grep -i 'Model\|FirmwareVersion'
 # match firmware to the advisory for an auth-bypass/RCE (version-specific)
 # with admin access: mount attacker media and boot the host from it
 #   iDRAC/iLO virtual media -> attach ISO (SMB/HTTP/local) -> set one-time boot -> power cycle
@@ -25,12 +25,13 @@ curl -sk https://<bmc>/redfish/v1/ | grep -i 'Model\|FirmwareVersion'
 
 ## Exploitation notes
 
-- Two distinct paths: a product exploit (auth bypass or RCE, version-specific, fingerprint the firmware and match the advisory) gives controller access without credentials; and legitimate virtual-media/console abuse, once you have admin access by any means, compromises the host OS.
-- Virtual media is the decisive feature: mounting an attacker ISO and setting a one-time boot lets the server boot into attacker-controlled code (a live OS to read/modify the disk, reset local admin, or implant), bypassing all OS-level defenses.
+- Two distinct paths require separate evidence: a version-specific product vulnerability may provide some form of controller access, while legitimate console or virtual-media abuse requires an authenticated role with the corresponding privileges. Do not infer administrator access or host compromise from a vulnerable version alone.
+- Virtual media plus boot and system-control privileges may let the server start attacker-controlled code. Secure Boot, firmware restrictions, disk encryption, and unavailable reboot control can prevent or materially limit access to the installed OS and its data.
 - The console (KVM) additionally gives interactive access to the running OS and its login screen, useful with other credential attacks.
-- Controller admin access comes from [defaults](bmc-default-credentials.md), [cracked RAKP hashes](ipmi-rakp-hash-disclosure.md), [cipher 0](ipmi-cipher-0-bypass.md), or an exploit; any of them plus virtual media is full host compromise.
+- Controller access can come from [defaults](bmc-default-credentials.md), [recovered RAKP credentials](ipmi-rakp-hash-disclosure.md), [cipher 0](ipmi-cipher-0-bypass.md), or a product vulnerability. Verify the effective role and each required privilege rather than treating every controller session as equivalent to full host control.
 
 ## References
 
 - [Dell iDRAC security advisories](https://www.dell.com/support/security/)
+- [Dell iDRAC user roles and privileges](https://www.dell.com/support/manuals/en-rs/idrac9-lifecycle-controller-v5.x-series/idrac9_5.00.00.00_ug/idrac-user-roles-and-privileges?guid=guid-d2ed6a79-c1b0-4342-93d1-22c731f6e087&lang=en-us)
 - [HPE iLO security advisories](https://support.hpe.com/)
