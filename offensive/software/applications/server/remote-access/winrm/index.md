@@ -12,11 +12,11 @@ keywords:
 
 # WinRM
 
-WinRM (Windows Remote Management) is Microsoft's implementation of the WS-Management protocol, listening on TCP 5985 (HTTP) and 5986 (HTTPS), and it is a transport behind PowerShell Remoting. It is a useful lateral-movement and remote-execution target on Windows networks when an account is authorized for a session endpoint. Passwords and, where NTLM is enabled, NT hashes may authenticate the connection. The resulting session runs in the authenticated user's context and remains subject to operating-system permissions and endpoint restrictions; successful remoting does not itself grant administrator rights.
+WinRM (Windows Remote Management) is Microsoft's implementation of the WS-Management protocol. WinRM 2.0 commonly listens on TCP 5985 (HTTP) and 5986 (HTTPS), though administrators can configure other ports, and it is a transport behind PowerShell Remoting. It is a useful lateral-movement and remote-execution target on Windows networks when an account is authorized for a session endpoint. Passwords and, when Negotiate selects NTLM, compatible pass-the-hash tooling may authenticate the connection. The resulting session runs in the authenticated user's context and remains subject to operating-system permissions and endpoint restrictions; successful remoting does not itself grant administrator rights.
 
 ```bash
 nmap -p5985,5986 -sV <target>
-nxc winrm <target> -u user -p 'pass'           # validates creds and flags Pwn3d! (admin)
+nxc winrm <target> -u user -p 'pass'           # test access; verify the resulting token in-session
 ```
 
 ## Subtopics

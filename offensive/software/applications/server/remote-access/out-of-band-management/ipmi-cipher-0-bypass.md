@@ -29,7 +29,7 @@ ipmitool -I lanplus -C 0 -H <bmc> -U root -P '' chassis power cycle  # control t
 
 - `-C 0` selects cipher zero in ipmitool. The password can be arbitrary, but the username must identify a valid account and its configured channel privilege determines which commands succeed.
 - User creation and other administrative operations require a valid account with sufficient privilege; cipher-zero acceptance alone does not guarantee administrator access.
-- Administrative BMC control means host power, boot-device selection, console, and virtual media, enough to boot the server from an attacker image and compromise the OS, see [iDRAC and iLO](idrac-and-ilo.md) for the virtual-media step.
+- If the account and channel grant the relevant IPMI operations, cipher-zero access may provide power or boot-device control that assists further host attacks. Console and virtual-media access are often exposed through separate vendor interfaces and privileges, so do not infer them from cipher-zero acceptance alone; see [iDRAC and iLO](idrac-and-ilo.md).
 - This is an authentication bypass over UDP 623. Its demonstrated impact should be based on the privileges of the valid account used during the test.
 
 ## Tools

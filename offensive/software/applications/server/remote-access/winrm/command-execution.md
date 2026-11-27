@@ -28,7 +28,7 @@ Invoke-Command -ComputerName <target> -Credential <cred> -ScriptBlock { whoami }
 
 - Establish privilege explicitly with `whoami`, `whoami /groups`, and allowed-command testing. Membership in Remote Management Users permits configured remote-management access but does not make the account an administrator.
 - Evil-WinRM supports in-memory script and assembly loading, but whether loaded code can perform a sensitive action still depends on the session language mode and the user's permissions.
-- WinRM is logged (PowerShell and WSMan event logs); it is operationally quieter than some execution methods but not invisible, so expect session and script-block logging.
+- WinRM and PowerShell remoting can generate WSMan, PowerShell operational, module, transcription, and script-block records, but the exact evidence depends on Windows version and enabled audit policies. Do not assume script-block logging is active without checking policy and collected event channels.
 - From an administrative session, credential access and persistence may be possible; from a standard or constrained session, enumerate the accessible files, commands, and endpoint configuration without assuming those capabilities.
 
 ## Tools

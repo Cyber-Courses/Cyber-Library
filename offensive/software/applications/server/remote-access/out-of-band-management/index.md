@@ -1,7 +1,7 @@
 ---
 title: "Out-of-band management: attacking server BMCs below the OS"
 order: 9
-description: "Out-of-band management gives remote control of a server's hardware independent of its OS, through the baseboard management controller (BMC) speaking IPMI and vendor stacks (iDRAC, iLO) with the Redfish API. The surface is devastating: IPMI's cipher 0 and RAKP flaws, near-universal default credentials, and vendor exploits grant power, console, and virtual-media control that compromises the host OS."
+description: "Out-of-band management gives remote control of a server's hardware independent of its OS through a baseboard management controller (BMC). Exposed legacy protocols, unchanged credentials, vulnerable firmware, and overly privileged accounts can grant power, console, boot, or virtual-media control and create a path to host compromise."
 keywords:
   - out-of-band management
   - bmc
@@ -12,11 +12,11 @@ keywords:
 
 # Out-of-band management
 
-Out-of-band management controls a server's hardware remotely and independently of its operating system, through a baseboard management controller (BMC): a small always-on computer on the motherboard with its own network interface, reachable whether or not the host OS is running. BMCs speak IPMI and the vendor stacks (Dell iDRAC, HPE iLO) and expose the Redfish REST API. The security is notoriously poor, and the impact is total: a BMC controls host power, the physical console (KVM), and virtual media (mounting an attacker ISO), so compromising it compromises the host itself, below and around any OS defense. The surface is IPMI's protocol flaws, pervasive default credentials, and vendor controller exploits.
+Out-of-band management controls a server's hardware remotely and independently of its operating system through a baseboard management controller (BMC): a small, always-on computer on the motherboard with its own network interface, reachable whether or not the host OS is running. Depending on vendor, generation, and configuration, a BMC may expose IPMI, a vendor interface such as Dell iDRAC or HPE iLO, and Redfish. Compromise is high impact because sufficiently privileged accounts can control host power, the console (KVM), boot settings, and virtual media. Turning that access into host compromise still depends on the granted privileges and platform controls such as boot policy, Secure Boot, and disk encryption. The attack surface includes the RAKP protocol-design weakness, deployments that permit cipher suite zero, unchanged credentials, vulnerable firmware, and overly broad network exposure.
 
 ```bash
 nmap -sU -p623 --script ipmi-version,ipmi-cipher-zero <target>   # IPMI/BMC on UDP 623
-curl -sk https://<bmc>/redfish/v1/                               # Redfish API
+curl -sS --cacert <ca.pem> https://<bmc>/redfish/v1/             # Redfish API
 ```
 
 ## Subtopics

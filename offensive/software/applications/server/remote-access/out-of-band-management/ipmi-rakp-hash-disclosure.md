@@ -18,8 +18,7 @@ The weakness follows from the IPMI 2.0 RAKP (RMCP+ Authenticated Key-Exchange Pr
 # retrieve the RAKP hash for a user and crack it offline
 #   Metasploit module automates the RAKP exchange and outputs a hash
 #   auxiliary/scanner/ipmi/ipmi_dumphashes  (RHOSTS, USER_FILE)
-# the output is a crackable format:
-#   <user>:<16-byte salt/exchange data>:<HMAC>  -> feed to hashcat mode 7300 (IPMI2 RAKP)
+# save the module's hashcat-compatible output, then use IPMI2 RAKP mode 7300
 hashcat -m 7300 ipmi_rakp.hashes wordlist.txt
 ```
 
@@ -27,8 +26,8 @@ hashcat -m 7300 ipmi_rakp.hashes wordlist.txt
 
 - This is a pre-authentication, protocol-design weakness, but retrieval still depends on the implementation, exposed IPMI channel, and a valid account name. Test likely vendor defaults and an authorized username list rather than assuming `root` or `ADMIN` exists.
 - The retrieved RAKP exchange material contains a password-keyed HMAC suitable for offline guessing with hashcat mode 7300; success then depends on password strength and the candidate set.
-- A cracked BMC password gives authenticated administrative control of the controller (power, console, virtual media), the same impact as the cipher 0 bypass but via a recovered credential.
-- Enumerate usernames first (defaults and any disclosed); combine with [BMC default credentials](bmc-default-credentials.md) (the cracked password is often a default anyway) and [cipher 0](ipmi-cipher-0-bypass.md).
+- A recovered password provides authenticated access bounded by that account's role and channel privilege. Confirm effective permissions rather than assuming administrative power, console, or virtual-media access.
+- Test authorized candidate usernames and passwords; relate the result to [BMC default credentials](bmc-default-credentials.md) and [cipher 0](ipmi-cipher-0-bypass.md) without assuming the weaknesses coexist.
 
 ## Tools
 

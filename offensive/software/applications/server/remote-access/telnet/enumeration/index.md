@@ -1,7 +1,7 @@
 ---
 title: "Enumeration: fingerprinting a Telnet service"
 order: 3
-description: "Telnet enumeration reads the service banner and login prompt, which are often verbose, disclosing the operating system, device model, and software version, and sometimes a pre-login warning or configuration detail. That identification maps the target to default credentials and to the telnetd memory-corruption flaws it may carry."
+description: "Telnet enumeration records protocol negotiation, any service banner, and the login prompt. These may reveal product or operating-system clues, but exact model, version, credentials, and vulnerability status require corroboration."
 keywords:
   - telnet enumeration
   - banner
@@ -12,7 +12,7 @@ keywords:
 
 # Enumeration
 
-Telnet is talkative: on connect it typically presents a banner and a login prompt, and both frequently disclose the operating system, device vendor and model, and software version, with some systems adding pre-login messages that reveal configuration or purpose. This identification drives the follow-on, the device and OS map directly to known default credentials and to the `telnetd` implementation's memory-corruption vulnerabilities, and the login-prompt format itself can leak OS specifics useful for fingerprinting.
+A Telnet connection may present protocol negotiation, a banner, and a login prompt. Those responses can reveal an operating-system family, device vendor, model, software version, or operational purpose, but many are generic, suppressed, or customized. Treat banner-derived identity as a hypothesis to corroborate with other authorized evidence. An exact product and version can guide a check of applicable credential policy and vendor advisories; it does not by itself prove that a default credential works or that a vulnerability is present.
 
 ```bash
 nc <target> 23                                 # banner + login prompt
